@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "BottomSheet",
+        "repositoryURL": "https://github.com/weitieda/bottom-sheet",
+        "state": {
+          "branch": null,
+          "revision": "1a63cc3d68573e2b8c7d5e65ec2e15c49c2c2aef",
+          "version": "1.0.5"
+        }
+      },
+      {
+        "package": "PopupView",
+        "repositoryURL": "https://github.com/exyte/PopupView",
+        "state": {
+          "branch": null,
+          "revision": "fd37cca19583f784288dc3f1d22e9c5c69d6fd68",
+          "version": "0.0.10"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

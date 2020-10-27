@@ -1,0 +1,1011 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		523A86242542B67900ADFE25 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
+		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
+		523A86332542CC6E00ADFE25 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
+		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
+		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
+		5245F889253FE702002E8B53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F888253FE702002E8B53 /* ContentView.swift */; };
+		5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */; };
+		5245F88E253FE705002E8B53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5245F88D253FE705002E8B53 /* Assets.xcassets */; };
+		5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5245F890253FE705002E8B53 /* Preview Assets.xcassets */; };
+		5245F894253FE705002E8B53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5245F892253FE705002E8B53 /* LaunchScreen.storyboard */; };
+		5245F89F253FE706002E8B53 /* Mestika_DashboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F89E253FE706002E8B53 /* Mestika_DashboardTests.swift */; };
+		5245F8AA253FE706002E8B53 /* Mestika_DashboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F8A9253FE706002E8B53 /* Mestika_DashboardUITests.swift */; };
+		5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F8BD253FE9FC002E8B53 /* BottomNavigationView.swift */; };
+		52468AB825412475007518AE /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AB725412475007518AE /* Color+Extensions.swift */; };
+		52468ABF254136A4007518AE /* GridMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468ABE254136A4007518AE /* GridMenuView.swift */; };
+		52468AC72541694F007518AE /* ListRekeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AC62541694F007518AE /* ListRekeningView.swift */; };
+		52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468ACB25416D59007518AE /* ListEwalletView.swift */; };
+		52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AD025416FB1007518AE /* ListContactTransferOnUs.swift */; };
+		52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AD62541727B007518AE /* ContactTransferOnUs.swift */; };
+		52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468ADF254177E6007518AE /* Substring+Extensions.swift */; };
+		52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AE7254179CE007518AE /* ListPromoForYouView.swift */; };
+		52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AEC25417B3B007518AE /* ListPurchasePaymentView.swift */; };
+		52468AF225417B60007518AE /* PurchasePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AF125417B60007518AE /* PurchasePayment.swift */; };
+		52468AF725418024007518AE /* VoucherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52468AF625418024007518AE /* VoucherView.swift */; };
+		524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524745F52547C547001F43C5 /* ListFavoritePurchasePaymentView.swift */; };
+		524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524745FE2547C588001F43C5 /* PurchasePaymentFavorite.swift */; };
+		524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524746032547C900001F43C5 /* ListFavoriteTransactionView.swift */; };
+		524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247460F2547CA51001F43C5 /* FavoriteTransferScreen.swift */; };
+		524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524746172547D157001F43C5 /* ListAllFavoriteTransactionView.swift */; };
+		524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524746222547E6BF001F43C5 /* LastFavoriteTransferScreen.swift */; };
+		524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524746272547F6EC001F43C5 /* LastTransaction.swift */; };
+		5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247463425480047001F43C5 /* ListLastTransactionView.swift */; };
+		5247463F2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247463E2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift */; };
+		5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247464525480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift */; };
+		5247465325480BBC001F43C5 /* LastPurchasePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247465225480BBC001F43C5 /* LastPurchasePayment.swift */; };
+		5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247465A25480C3A001F43C5 /* ListLastPurchasePaymentView.swift */; };
+		5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247466225481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift */; };
+		52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D5D254026BD0094B758 /* DashboardTabs.swift */; };
+		52474D632540276A0094B758 /* TransferTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D622540276A0094B758 /* TransferTabs.swift */; };
+		52474D68254028350094B758 /* FavoriteTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D67254028350094B758 /* FavoriteTabs.swift */; };
+		52474D79254028CD0094B758 /* AccountTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D78254028CD0094B758 /* AccountTabs.swift */; };
+		52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */; };
+		525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */; };
+		525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */; };
+		525DB51025467BAB00D48075 /* NumPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50F25467BAB00D48075 /* NumPadView.swift */; };
+		525DB5152546828100D48075 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB5142546828100D48075 /* String+Extensions.swift */; };
+		525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB5192546829700D48075 /* Int+Extensions.swift */; };
+		525DB51F2546869B00D48075 /* PinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB51E2546869B00D48075 /* PinView.swift */; };
+		525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB5232546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift */; };
+		525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB5282546B16A00D48075 /* PopOverFavoriteView.swift */; };
+		525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB52D2546C29700D48075 /* TransferOnUsDetailsInformation.swift */; };
+		52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3485725426D6800F08F37 /* SideMenuContent.swift */; };
+		52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3486025426E0D00F08F37 /* SidemenuView.swift */; };
+		52C348692542701500F08F37 /* SidemenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348682542701500F08F37 /* SidemenuCell.swift */; };
+		52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348712542878700F08F37 /* ListTransactionFavoriteView.swift */; };
+		52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3487E254287B800F08F37 /* TransactionFavorit.swift */; };
+		52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C34887254288D000F08F37 /* TransferOnUsScreen.swift */; };
+		52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3489025428CB000F08F37 /* NavigationConfigurator.swift */; };
+		52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348992542ACC500F08F37 /* ListBankAccountView.swift */; };
+		52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348A12542ACF400F08F37 /* BankAccount.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5245F89B253FE706002E8B53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5245F879253FE702002E8B53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5245F880253FE702002E8B53;
+			remoteInfo = "Mestika Dashboard";
+		};
+		5245F8A6253FE706002E8B53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5245F879253FE702002E8B53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5245F880253FE702002E8B53;
+			remoteInfo = "Mestika Dashboard";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
+		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5245F884253FE702002E8B53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5245F886253FE702002E8B53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5245F888253FE702002E8B53 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5245F88B253FE702002E8B53 /* Mestika_Dashboard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mestika_Dashboard.xcdatamodel; sourceTree = "<group>"; };
+		5245F88D253FE705002E8B53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5245F890253FE705002E8B53 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5245F893253FE705002E8B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5245F895253FE705002E8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5245F89A253FE706002E8B53 /* Mestika DashboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mestika DashboardTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5245F89E253FE706002E8B53 /* Mestika_DashboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mestika_DashboardTests.swift; sourceTree = "<group>"; };
+		5245F8A0253FE706002E8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5245F8A5253FE706002E8B53 /* Mestika DashboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mestika DashboardUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5245F8A9253FE706002E8B53 /* Mestika_DashboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mestika_DashboardUITests.swift; sourceTree = "<group>"; };
+		5245F8AB253FE706002E8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5245F8BD253FE9FC002E8B53 /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
+		52468AB725412475007518AE /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		52468ABE254136A4007518AE /* GridMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridMenuView.swift; sourceTree = "<group>"; };
+		52468AC62541694F007518AE /* ListRekeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRekeningView.swift; sourceTree = "<group>"; };
+		52468ACB25416D59007518AE /* ListEwalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEwalletView.swift; sourceTree = "<group>"; };
+		52468AD025416FB1007518AE /* ListContactTransferOnUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContactTransferOnUs.swift; sourceTree = "<group>"; };
+		52468AD62541727B007518AE /* ContactTransferOnUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTransferOnUs.swift; sourceTree = "<group>"; };
+		52468ADF254177E6007518AE /* Substring+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Substring+Extensions.swift"; sourceTree = "<group>"; };
+		52468AE7254179CE007518AE /* ListPromoForYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPromoForYouView.swift; sourceTree = "<group>"; };
+		52468AEC25417B3B007518AE /* ListPurchasePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPurchasePaymentView.swift; sourceTree = "<group>"; };
+		52468AF125417B60007518AE /* PurchasePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePayment.swift; sourceTree = "<group>"; };
+		52468AF625418024007518AE /* VoucherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoucherView.swift; sourceTree = "<group>"; };
+		524745F52547C547001F43C5 /* ListFavoritePurchasePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFavoritePurchasePaymentView.swift; sourceTree = "<group>"; };
+		524745FE2547C588001F43C5 /* PurchasePaymentFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePaymentFavorite.swift; sourceTree = "<group>"; };
+		524746032547C900001F43C5 /* ListFavoriteTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFavoriteTransactionView.swift; sourceTree = "<group>"; };
+		5247460F2547CA51001F43C5 /* FavoriteTransferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTransferScreen.swift; sourceTree = "<group>"; };
+		524746172547D157001F43C5 /* ListAllFavoriteTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllFavoriteTransactionView.swift; sourceTree = "<group>"; };
+		524746222547E6BF001F43C5 /* LastFavoriteTransferScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFavoriteTransferScreen.swift; sourceTree = "<group>"; };
+		524746272547F6EC001F43C5 /* LastTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTransaction.swift; sourceTree = "<group>"; };
+		5247463425480047001F43C5 /* ListLastTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLastTransactionView.swift; sourceTree = "<group>"; };
+		5247463E2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePurchasePaymentScreen.swift; sourceTree = "<group>"; };
+		5247464525480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAllFavoritePurchasePaymentView.swift; sourceTree = "<group>"; };
+		5247465225480BBC001F43C5 /* LastPurchasePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastPurchasePayment.swift; sourceTree = "<group>"; };
+		5247465A25480C3A001F43C5 /* ListLastPurchasePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLastPurchasePaymentView.swift; sourceTree = "<group>"; };
+		5247466225481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFavoritePurchasePaymentScreen.swift; sourceTree = "<group>"; };
+		52474D5D254026BD0094B758 /* DashboardTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabs.swift; sourceTree = "<group>"; };
+		52474D622540276A0094B758 /* TransferTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTabs.swift; sourceTree = "<group>"; };
+		52474D67254028350094B758 /* FavoriteTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTabs.swift; sourceTree = "<group>"; };
+		52474D78254028CD0094B758 /* AccountTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTabs.swift; sourceTree = "<group>"; };
+		52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTransactionTabs.swift; sourceTree = "<group>"; };
+		525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsConfirmationScreen.swift; sourceTree = "<group>"; };
+		525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsPinConfirmationScreen.swift; sourceTree = "<group>"; };
+		525DB50F25467BAB00D48075 /* NumPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadView.swift; sourceTree = "<group>"; };
+		525DB5142546828100D48075 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		525DB5192546829700D48075 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		525DB51E2546869B00D48075 /* PinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinView.swift; sourceTree = "<group>"; };
+		525DB5232546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsSuccessInformationScreen.swift; sourceTree = "<group>"; };
+		525DB5282546B16A00D48075 /* PopOverFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverFavoriteView.swift; sourceTree = "<group>"; };
+		525DB52D2546C29700D48075 /* TransferOnUsDetailsInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsDetailsInformation.swift; sourceTree = "<group>"; };
+		52C3485725426D6800F08F37 /* SideMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContent.swift; sourceTree = "<group>"; };
+		52C3486025426E0D00F08F37 /* SidemenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuView.swift; sourceTree = "<group>"; };
+		52C348682542701500F08F37 /* SidemenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuCell.swift; sourceTree = "<group>"; };
+		52C348712542878700F08F37 /* ListTransactionFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionFavoriteView.swift; sourceTree = "<group>"; };
+		52C3487E254287B800F08F37 /* TransactionFavorit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFavorit.swift; sourceTree = "<group>"; };
+		52C34887254288D000F08F37 /* TransferOnUsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsScreen.swift; sourceTree = "<group>"; };
+		52C3489025428CB000F08F37 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
+		52C348992542ACC500F08F37 /* ListBankAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBankAccountView.swift; sourceTree = "<group>"; };
+		52C348A12542ACF400F08F37 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5245F87E253FE702002E8B53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				523A86242542B67900ADFE25 /* PopupView in Frameworks */,
+				523A86332542CC6E00ADFE25 /* BottomSheet in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5245F897253FE706002E8B53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5245F8A2253FE706002E8B53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		523A86282542BE8600ADFE25 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				523A86292542BE9600ADFE25 /* ModalOverlay.swift */,
+				525DB50F25467BAB00D48075 /* NumPadView.swift */,
+				525DB51E2546869B00D48075 /* PinView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5245F878253FE702002E8B53 = {
+			isa = PBXGroup;
+			children = (
+				5245F883253FE702002E8B53 /* Mestika Dashboard */,
+				5245F89D253FE706002E8B53 /* Mestika DashboardTests */,
+				5245F8A8253FE706002E8B53 /* Mestika DashboardUITests */,
+				5245F882253FE702002E8B53 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5245F882253FE702002E8B53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5245F881253FE702002E8B53 /* Mestika Dashboard.app */,
+				5245F89A253FE706002E8B53 /* Mestika DashboardTests.xctest */,
+				5245F8A5253FE706002E8B53 /* Mestika DashboardUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5245F883253FE702002E8B53 /* Mestika Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				52474D822540320D0094B758 /* Extensions */,
+				5245F888253FE702002E8B53 /* ContentView.swift */,
+				5245F8BA253FE818002E8B53 /* UI */,
+				5245F884253FE702002E8B53 /* AppDelegate.swift */,
+				5245F886253FE702002E8B53 /* SceneDelegate.swift */,
+				5245F88D253FE705002E8B53 /* Assets.xcassets */,
+				5245F892253FE705002E8B53 /* LaunchScreen.storyboard */,
+				5245F895253FE705002E8B53 /* Info.plist */,
+				5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */,
+				5245F88F253FE705002E8B53 /* Preview Content */,
+			);
+			path = "Mestika Dashboard";
+			sourceTree = "<group>";
+		};
+		5245F88F253FE705002E8B53 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5245F890253FE705002E8B53 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5245F89D253FE706002E8B53 /* Mestika DashboardTests */ = {
+			isa = PBXGroup;
+			children = (
+				5245F89E253FE706002E8B53 /* Mestika_DashboardTests.swift */,
+				5245F8A0253FE706002E8B53 /* Info.plist */,
+			);
+			path = "Mestika DashboardTests";
+			sourceTree = "<group>";
+		};
+		5245F8A8253FE706002E8B53 /* Mestika DashboardUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5245F8A9253FE706002E8B53 /* Mestika_DashboardUITests.swift */,
+				5245F8AB253FE706002E8B53 /* Info.plist */,
+			);
+			path = "Mestika DashboardUITests";
+			sourceTree = "<group>";
+		};
+		5245F8BA253FE818002E8B53 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				523A86282542BE8600ADFE25 /* Components */,
+				52468ABC25413604007518AE /* Views */,
+				5245F8BB253FE821002E8B53 /* Screen */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		5245F8BB253FE821002E8B53 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				5247460E2547CA38001F43C5 /* Favorite */,
+				52C34886254288BD00F08F37 /* Transfer */,
+				5245F8BC253FE82E002E8B53 /* Dashboard */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		5245F8BC253FE82E002E8B53 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				5245F8BD253FE9FC002E8B53 /* BottomNavigationView.swift */,
+				52474D5D254026BD0094B758 /* DashboardTabs.swift */,
+				52474D622540276A0094B758 /* TransferTabs.swift */,
+				52474D67254028350094B758 /* FavoriteTabs.swift */,
+				52474D78254028CD0094B758 /* AccountTabs.swift */,
+				52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		52468ABC25413604007518AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				524745F42547C52E001F43C5 /* Favorite */,
+				52C348702542876F00F08F37 /* Transfer */,
+				52C3485F25426DFF00F08F37 /* Sidemenu */,
+				52468ABD2541360C007518AE /* Dashboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		52468ABD2541360C007518AE /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				52468AD525417238007518AE /* BindingModel */,
+				52468ABE254136A4007518AE /* GridMenuView.swift */,
+				52468AC62541694F007518AE /* ListRekeningView.swift */,
+				52468ACB25416D59007518AE /* ListEwalletView.swift */,
+				52468AD025416FB1007518AE /* ListContactTransferOnUs.swift */,
+				52468AE7254179CE007518AE /* ListPromoForYouView.swift */,
+				52468AEC25417B3B007518AE /* ListPurchasePaymentView.swift */,
+				52468AF625418024007518AE /* VoucherView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		52468AD525417238007518AE /* BindingModel */ = {
+			isa = PBXGroup;
+			children = (
+				52468AD62541727B007518AE /* ContactTransferOnUs.swift */,
+				52468AF125417B60007518AE /* PurchasePayment.swift */,
+				52C3485725426D6800F08F37 /* SideMenuContent.swift */,
+			);
+			path = BindingModel;
+			sourceTree = "<group>";
+		};
+		524745F42547C52E001F43C5 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				524746442548071F001F43C5 /* Favorite Purchase Payment */,
+				5247464325480704001F43C5 /* Favorite Transfer */,
+				524745FD2547C561001F43C5 /* BindingModel */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		524745FD2547C561001F43C5 /* BindingModel */ = {
+			isa = PBXGroup;
+			children = (
+				524745FE2547C588001F43C5 /* PurchasePaymentFavorite.swift */,
+				524746272547F6EC001F43C5 /* LastTransaction.swift */,
+				5247465225480BBC001F43C5 /* LastPurchasePayment.swift */,
+			);
+			path = BindingModel;
+			sourceTree = "<group>";
+		};
+		5247460E2547CA38001F43C5 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				5247463A25480527001F43C5 /* Favorite Purchase Payment */,
+				5247463925480511001F43C5 /* Favorite Transfer */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		5247463925480511001F43C5 /* Favorite Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				524746222547E6BF001F43C5 /* LastFavoriteTransferScreen.swift */,
+				5247460F2547CA51001F43C5 /* FavoriteTransferScreen.swift */,
+			);
+			path = "Favorite Transfer";
+			sourceTree = "<group>";
+		};
+		5247463A25480527001F43C5 /* Favorite Purchase Payment */ = {
+			isa = PBXGroup;
+			children = (
+				5247463E2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift */,
+				5247466225481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift */,
+			);
+			path = "Favorite Purchase Payment";
+			sourceTree = "<group>";
+		};
+		5247464325480704001F43C5 /* Favorite Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				524746172547D157001F43C5 /* ListAllFavoriteTransactionView.swift */,
+				524746032547C900001F43C5 /* ListFavoriteTransactionView.swift */,
+				5247463425480047001F43C5 /* ListLastTransactionView.swift */,
+			);
+			path = "Favorite Transfer";
+			sourceTree = "<group>";
+		};
+		524746442548071F001F43C5 /* Favorite Purchase Payment */ = {
+			isa = PBXGroup;
+			children = (
+				524745F52547C547001F43C5 /* ListFavoritePurchasePaymentView.swift */,
+				5247464525480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift */,
+				5247465A25480C3A001F43C5 /* ListLastPurchasePaymentView.swift */,
+			);
+			path = "Favorite Purchase Payment";
+			sourceTree = "<group>";
+		};
+		52474D822540320D0094B758 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				52468AB725412475007518AE /* Color+Extensions.swift */,
+				52468ADF254177E6007518AE /* Substring+Extensions.swift */,
+				52C3489025428CB000F08F37 /* NavigationConfigurator.swift */,
+				525DB5142546828100D48075 /* String+Extensions.swift */,
+				525DB5192546829700D48075 /* Int+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		52C3485F25426DFF00F08F37 /* Sidemenu */ = {
+			isa = PBXGroup;
+			children = (
+				52C3486025426E0D00F08F37 /* SidemenuView.swift */,
+				52C348682542701500F08F37 /* SidemenuCell.swift */,
+			);
+			path = Sidemenu;
+			sourceTree = "<group>";
+		};
+		52C348702542876F00F08F37 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				52C3487C2542879D00F08F37 /* BindingModel */,
+				52C348712542878700F08F37 /* ListTransactionFavoriteView.swift */,
+				52C348992542ACC500F08F37 /* ListBankAccountView.swift */,
+				525DB5282546B16A00D48075 /* PopOverFavoriteView.swift */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+		52C3487C2542879D00F08F37 /* BindingModel */ = {
+			isa = PBXGroup;
+			children = (
+				52C3487E254287B800F08F37 /* TransactionFavorit.swift */,
+				52C348A12542ACF400F08F37 /* BankAccount.swift */,
+			);
+			path = BindingModel;
+			sourceTree = "<group>";
+		};
+		52C34886254288BD00F08F37 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				52C34887254288D000F08F37 /* TransferOnUsScreen.swift */,
+				525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */,
+				525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */,
+				525DB5232546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift */,
+				525DB52D2546C29700D48075 /* TransferOnUsDetailsInformation.swift */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5245F880253FE702002E8B53 /* Mestika Dashboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5245F8AE253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika Dashboard" */;
+			buildPhases = (
+				5245F87D253FE702002E8B53 /* Sources */,
+				5245F87E253FE702002E8B53 /* Frameworks */,
+				5245F87F253FE702002E8B53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mestika Dashboard";
+			packageProductDependencies = (
+				523A86232542B67900ADFE25 /* PopupView */,
+				523A86322542CC6E00ADFE25 /* BottomSheet */,
+			);
+			productName = "Mestika Dashboard";
+			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5245F899253FE706002E8B53 /* Mestika DashboardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5245F8B1253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika DashboardTests" */;
+			buildPhases = (
+				5245F896253FE706002E8B53 /* Sources */,
+				5245F897253FE706002E8B53 /* Frameworks */,
+				5245F898253FE706002E8B53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5245F89C253FE706002E8B53 /* PBXTargetDependency */,
+			);
+			name = "Mestika DashboardTests";
+			productName = "Mestika DashboardTests";
+			productReference = 5245F89A253FE706002E8B53 /* Mestika DashboardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5245F8A4253FE706002E8B53 /* Mestika DashboardUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5245F8B4253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika DashboardUITests" */;
+			buildPhases = (
+				5245F8A1253FE706002E8B53 /* Sources */,
+				5245F8A2253FE706002E8B53 /* Frameworks */,
+				5245F8A3253FE706002E8B53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5245F8A7253FE706002E8B53 /* PBXTargetDependency */,
+			);
+			name = "Mestika DashboardUITests";
+			productName = "Mestika DashboardUITests";
+			productReference = 5245F8A5253FE706002E8B53 /* Mestika DashboardUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5245F879253FE702002E8B53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					5245F880253FE702002E8B53 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					5245F899253FE706002E8B53 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 5245F880253FE702002E8B53;
+					};
+					5245F8A4253FE706002E8B53 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 5245F880253FE702002E8B53;
+					};
+				};
+			};
+			buildConfigurationList = 5245F87C253FE702002E8B53 /* Build configuration list for PBXProject "Mestika Dashboard" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5245F878253FE702002E8B53;
+			packageReferences = (
+				523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */,
+				523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
+			);
+			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5245F880253FE702002E8B53 /* Mestika Dashboard */,
+				5245F899253FE706002E8B53 /* Mestika DashboardTests */,
+				5245F8A4253FE706002E8B53 /* Mestika DashboardUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5245F87F253FE702002E8B53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5245F894253FE705002E8B53 /* LaunchScreen.storyboard in Resources */,
+				5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */,
+				5245F88E253FE705002E8B53 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5245F898253FE706002E8B53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5245F8A3253FE706002E8B53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5245F87D253FE702002E8B53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
+				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
+				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
+				52474D79254028CD0094B758 /* AccountTabs.swift in Sources */,
+				523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */,
+				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
+				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
+				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
+				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
+				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
+				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
+				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
+				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
+				52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */,
+				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
+				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
+				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
+				5247463F2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift in Sources */,
+				525DB51F2546869B00D48075 /* PinView.swift in Sources */,
+				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
+				52468AF225417B60007518AE /* PurchasePayment.swift in Sources */,
+				5247465325480BBC001F43C5 /* LastPurchasePayment.swift in Sources */,
+				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
+				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
+				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
+				525DB5152546828100D48075 /* String+Extensions.swift in Sources */,
+				52C348692542701500F08F37 /* SidemenuCell.swift in Sources */,
+				52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */,
+				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
+				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
+				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
+				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
+				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
+				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
+				525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */,
+				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
+				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
+				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
+				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
+				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
+				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
+				52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */,
+				52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */,
+				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,
+				524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */,
+				52468AF725418024007518AE /* VoucherView.swift in Sources */,
+				5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */,
+				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
+				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
+				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
+				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
+				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
+				52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5245F896253FE706002E8B53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5245F89F253FE706002E8B53 /* Mestika_DashboardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5245F8A1253FE706002E8B53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5245F8AA253FE706002E8B53 /* Mestika_DashboardUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5245F89C253FE706002E8B53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5245F880253FE702002E8B53 /* Mestika Dashboard */;
+			targetProxy = 5245F89B253FE706002E8B53 /* PBXContainerItemProxy */;
+		};
+		5245F8A7253FE706002E8B53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5245F880253FE702002E8B53 /* Mestika Dashboard */;
+			targetProxy = 5245F8A6253FE706002E8B53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5245F892253FE705002E8B53 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5245F893253FE705002E8B53 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5245F8AC253FE706002E8B53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5245F8AD253FE706002E8B53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5245F8AF253FE706002E8B53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
+				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-Dashboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5245F8B0253FE706002E8B53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
+				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-Dashboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5245F8B2253FE706002E8B53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				INFOPLIST_FILE = "Mestika DashboardTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-DashboardTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mestika Dashboard.app/Mestika Dashboard";
+			};
+			name = Debug;
+		};
+		5245F8B3253FE706002E8B53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				INFOPLIST_FILE = "Mestika DashboardTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-DashboardTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mestika Dashboard.app/Mestika Dashboard";
+			};
+			name = Release;
+		};
+		5245F8B5253FE706002E8B53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				INFOPLIST_FILE = "Mestika DashboardUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-DashboardUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mestika Dashboard";
+			};
+			name = Debug;
+		};
+		5245F8B6253FE706002E8B53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				INFOPLIST_FILE = "Mestika DashboardUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-DashboardUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mestika Dashboard";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5245F87C253FE702002E8B53 /* Build configuration list for PBXProject "Mestika Dashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5245F8AC253FE706002E8B53 /* Debug */,
+				5245F8AD253FE706002E8B53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5245F8AE253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika Dashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5245F8AF253FE706002E8B53 /* Debug */,
+				5245F8B0253FE706002E8B53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5245F8B1253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika DashboardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5245F8B2253FE706002E8B53 /* Debug */,
+				5245F8B3253FE706002E8B53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5245F8B4253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika DashboardUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5245F8B5253FE706002E8B53 /* Debug */,
+				5245F8B6253FE706002E8B53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.10;
+			};
+		};
+		523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weitieda/bottom-sheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		523A86232542B67900ADFE25 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+		523A86322542CC6E00ADFE25 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
+			productName = BottomSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5245F88B253FE702002E8B53 /* Mestika_Dashboard.xcdatamodel */,
+			);
+			currentVersion = 5245F88B253FE702002E8B53 /* Mestika_Dashboard.xcdatamodel */;
+			path = Mestika_Dashboard.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5245F879253FE702002E8B53 /* Project object */;
+}
