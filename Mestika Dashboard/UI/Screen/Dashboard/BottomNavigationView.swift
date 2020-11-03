@@ -10,6 +10,7 @@ import SwiftUI
 struct BottomNavigationView: View {
     
     @State private var showingSlideMenu = false
+    @State private var showingSettingMenu = false
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
@@ -18,6 +19,7 @@ struct BottomNavigationView: View {
     var body: some View {
         ZStack {
             VStack {
+                appbar
                 TabView {
                     DashboardTabs()
                         .tabItem {
@@ -45,7 +47,7 @@ struct BottomNavigationView: View {
                             Text("Favorit")
                         }.tag(4)
                     
-                    AccountTabs()
+                    AccountTabs(showingSettingMenu: self.$showingSettingMenu)
                         .tabItem {
                             Image("ic_akun")
                                 .renderingMode(.template)
@@ -53,15 +55,32 @@ struct BottomNavigationView: View {
                         }.tag(5)
                 }
             }
-            .navigationBarHidden(true)
+            
+            if (showingSettingMenu) {
+                ModalOverlay(tapAction: { withAnimation { self.showingSettingMenu = false } })
+                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            }
+            
+            if showingSettingMenu {
+                withAnimation {
+                    PopoverSettingsView()
+                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
+                        .transition(.move(edge: .trailing))
+                }
+            }
         }
+        .navigationBarHidden(true)
     }
     
     var appbar: some View {
-        HStack {
-            Spacer()
-            navBarItem
+        VStack {
+            HStack {
+                Spacer()
+                navBarItem
+            }
         }
+        .padding(.top, 30)
+        .padding(.bottom, 10)
     }
     
     var navBarItem: some View {
@@ -74,12 +93,19 @@ struct BottomNavigationView: View {
                 Image("ic_qrcode")
             })
         }
+        .padding(.horizontal)
     }
     
 }
 
-struct BottomNavigationView_Previews: PreviewProvider {
+class BottomNavigationView_Previews: PreviewProvider {
     static var previews: some View {
         BottomNavigationView()
     }
+
+    #if DEBUG
+    @objc class func injected() {
+        UIApplication.shared.windows.first?.rootViewController = UIHostingController(rootView: BottomNavigationView())
+    }
+    #endif
 }

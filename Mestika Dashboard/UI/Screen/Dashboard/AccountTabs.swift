@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AccountTabs: View {
     
-    @State private var showPopover: Bool = false
+    @Binding var showingSettingMenu : Bool
     @State var username: String = "Example User"
     
     var body: some View {
@@ -25,15 +25,6 @@ struct AccountTabs: View {
                         
                         ListHistoryTransferView()
                         ListHistoryTransactionView()
-                    }
-                    
-                    if self.showPopover {
-                        ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
-                            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                    }
-                    
-                    if showPopover {
-                        PopoverSettingsView()
                     }
                 }
             })
@@ -54,7 +45,7 @@ struct AccountTabs: View {
                 
                 Button(action: {
                     withAnimation(.easeIn) {
-                        self.showPopover.toggle()
+                        self.showingSettingMenu = true
                     }
                 }, label: {
                     Image("ic_settings")
@@ -140,6 +131,6 @@ struct AccountTabs: View {
 
 struct AccountTabs_Previews: PreviewProvider {
     static var previews: some View {
-        AccountTabs()
+        AccountTabs(showingSettingMenu: .constant(false))
     }
 }

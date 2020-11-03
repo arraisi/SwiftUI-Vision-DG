@@ -9,11 +9,13 @@ import SwiftUI
 
 struct NumPadView: View {
     
-    var value : String
-    @Binding var password : String
-    @Binding var key : String
-    @Binding var unlocked : Bool
-    @Binding var wrongPass : Bool
+    var value: String
+    @Binding var password: String
+    @Binding var key: String
+    @Binding var unlocked: Bool
+    @Binding var wrongPass: Bool
+    
+    @Binding var keyDeleteColor: Color
     
     var body: some View {
         Button(action: setPassword, label: {
@@ -21,7 +23,7 @@ struct NumPadView: View {
                 if value.count > 1{
                     Image(systemName: "delete.left.fill")
                         .font(.system(size: 24))
-                        .foregroundColor(.white)
+                        .foregroundColor(self.keyDeleteColor)
                         .frame(width: 60, height: 60)
                     
                 } else {
@@ -85,7 +87,7 @@ struct NumPadView: View {
 #if DEBUG
 struct NumPadView_Previews: PreviewProvider {
     static var previews: some View {
-        NumPadView(value: "", password: .constant(""), key: .constant(""), unlocked: .constant(false), wrongPass: .constant(false))
+        NumPadView(value: "", password: .constant(""), key: .constant(""), unlocked: .constant(false), wrongPass: .constant(false), keyDeleteColor: .constant(Color.white))
     }
 }
 #endif

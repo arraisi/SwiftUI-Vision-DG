@@ -43,13 +43,21 @@ struct ContentView: View {
     var body: some View {
 //        BottomNavigationView()
         NavigationView {
-            BottomNavigationView()
+            ZStack {
+                Color(hex: "#F6F8FB")
+                BottomNavigationView()
+            }
+            .edgesIgnoringSafeArea(.top)
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+class ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+
+    @objc class func injected() {
+        UIApplication.shared.windows.first?.rootViewController = UIHostingController(rootView: ContentView())
     }
 }

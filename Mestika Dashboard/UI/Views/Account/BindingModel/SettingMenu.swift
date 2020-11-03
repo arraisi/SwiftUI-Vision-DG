@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct SettingMenu: Identifiable, Hashable {
+struct SettingMenu: Identifiable {
     var id: Int
     var namaMenu: String
 }

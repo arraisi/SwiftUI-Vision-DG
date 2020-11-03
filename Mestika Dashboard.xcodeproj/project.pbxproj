@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		523A86242542B67900ADFE25 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
-		523A86332542CC6E00ADFE25 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
 		5245F889253FE702002E8B53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F888253FE702002E8B53 /* ContentView.swift */; };
@@ -82,6 +80,17 @@
 		52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3489025428CB000F08F37 /* NavigationConfigurator.swift */; };
 		52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348992542ACC500F08F37 /* ListBankAccountView.swift */; };
 		52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348A12542ACF400F08F37 /* BankAccount.swift */; };
+		52DA207F255105FF00CC048A /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
+		52DA2080255105FF00CC048A /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
+		52DA20852551069C00CC048A /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20842551069C00CC048A /* Statement.swift */; };
+		52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */; };
+		52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */; };
+		52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20982551156400CC048A /* FormInputOldPinScreen.swift */; };
+		52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA209D25511A9F00CC048A /* FormInputNewPinScreen.swift */; };
+		52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20A225511F8600CC048A /* FormInputResetPinScreen.swift */; };
+		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
+		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
+		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +190,15 @@
 		52C3489025428CB000F08F37 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		52C348992542ACC500F08F37 /* ListBankAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBankAccountView.swift; sourceTree = "<group>"; };
 		52C348A12542ACF400F08F37 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
+		52DA20842551069C00CC048A /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
+		52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputOldPasswordScreen.swift; sourceTree = "<group>"; };
+		52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordScreen.swift; sourceTree = "<group>"; };
+		52DA20982551156400CC048A /* FormInputOldPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputOldPinScreen.swift; sourceTree = "<group>"; };
+		52DA209D25511A9F00CC048A /* FormInputNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputNewPinScreen.swift; sourceTree = "<group>"; };
+		52DA20A225511F8600CC048A /* FormInputResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetPinScreen.swift; sourceTree = "<group>"; };
+		52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResetPinScreen.swift; sourceTree = "<group>"; };
+		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
+		6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStatementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,8 +206,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				523A86242542B67900ADFE25 /* PopupView in Frameworks */,
-				523A86332542CC6E00ADFE25 /* BottomSheet in Frameworks */,
+				52DA207F255105FF00CC048A /* PopupView in Frameworks */,
+				52DA2080255105FF00CC048A /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +464,7 @@
 		526B657A254FB20800C13C36 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				52DA208A25510C4200CC048A /* ChangePasswordPinMenu */,
 				526B6601254FF9FC00C13C36 /* StatementScreen.swift */,
 				526B6606254FFA4600C13C36 /* CardManagementScreen.swift */,
 				526B660B254FFA7900C13C36 /* TransactionFeesScreen.swift */,
@@ -463,6 +482,7 @@
 				526B658D254FBADC00C13C36 /* ListMySavingsView.swift */,
 				526B6597254FBF1400C13C36 /* ListHistoryTransferView.swift */,
 				526B65F7254FF1BC00C13C36 /* PopoverSettingsView.swift */,
+				6122B5164BC001B572462BCE /* Statement */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -474,6 +494,7 @@
 				526B6592254FBAF100C13C36 /* MySavings.swift */,
 				526B659C254FC05300C13C36 /* HistoryTransfer.swift */,
 				526B661A254FFB0500C13C36 /* SettingMenu.swift */,
+				52DA20842551069C00CC048A /* Statement.swift */,
 			);
 			path = BindingModel;
 			sourceTree = "<group>";
@@ -517,6 +538,52 @@
 				525DB52D2546C29700D48075 /* TransferOnUsDetailsInformation.swift */,
 			);
 			path = Transfer;
+			sourceTree = "<group>";
+		};
+		52DA208A25510C4200CC048A /* ChangePasswordPinMenu */ = {
+			isa = PBXGroup;
+			children = (
+				52DA20A92551217200CC048A /* ResetPin */,
+				52DA20A82551216200CC048A /* ChangePin */,
+				52DA20A72551215200CC048A /* ChangePassword */,
+			);
+			path = ChangePasswordPinMenu;
+			sourceTree = "<group>";
+		};
+		52DA20A72551215200CC048A /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */,
+				52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */,
+			);
+			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		52DA20A82551216200CC048A /* ChangePin */ = {
+			isa = PBXGroup;
+			children = (
+				52DA20982551156400CC048A /* FormInputOldPinScreen.swift */,
+				52DA209D25511A9F00CC048A /* FormInputNewPinScreen.swift */,
+			);
+			path = ChangePin;
+			sourceTree = "<group>";
+		};
+		52DA20A92551217200CC048A /* ResetPin */ = {
+			isa = PBXGroup;
+			children = (
+				52DA20A225511F8600CC048A /* FormInputResetPinScreen.swift */,
+				52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */,
+				52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */,
+			);
+			path = ResetPin;
+			sourceTree = "<group>";
+		};
+		6122B5164BC001B572462BCE /* Statement */ = {
+			isa = PBXGroup;
+			children = (
+				6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */,
+			);
+			path = Statement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -664,6 +731,7 @@
 				523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */,
 				526B660C254FFA7900C13C36 /* TransactionFeesScreen.swift in Sources */,
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
+				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
@@ -673,6 +741,7 @@
 				526B6607254FFA4600C13C36 /* CardManagementScreen.swift in Sources */,
 				526B65F8254FF1BC00C13C36 /* PopoverSettingsView.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
+				52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */,
 				526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */,
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
 				52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */,
@@ -682,6 +751,7 @@
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
 				5247463F2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift in Sources */,
 				525DB51F2546869B00D48075 /* PinView.swift in Sources */,
+				52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */,
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
 				52468AF225417B60007518AE /* PurchasePayment.swift in Sources */,
 				5247465325480BBC001F43C5 /* LastPurchasePayment.swift in Sources */,
@@ -706,8 +776,12 @@
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
 				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
+				52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */,
+				52DA20852551069C00CC048A /* Statement.swift in Sources */,
 				526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */,
+				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
+				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */,
 				526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */,
@@ -722,9 +796,11 @@
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
+				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
 				52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */,
+				6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

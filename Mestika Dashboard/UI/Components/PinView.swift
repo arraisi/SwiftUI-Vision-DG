@@ -9,18 +9,20 @@ import SwiftUI
 
 struct PinView: View {
     
-    var index : Int
-    @Binding var password : String
+    var index: Int
+    @Binding var password: String
+    @Binding var emptyColor: Color
+    @Binding var fillColor: Color
     
     var body: some View {
         ZStack{
             Circle()
-                .stroke(Color.white, lineWidth: 2)
+                .fill(self.emptyColor)
                 .frame(width: 15, height: 15)
             
             if password.count > index{
                 Circle()
-                    .fill(Color.white)
+                    .fill(self.fillColor)
                     .frame(width: 15, height: 15)
             }
         }
@@ -29,6 +31,6 @@ struct PinView: View {
 
 struct PinView_Previews: PreviewProvider {
     static var previews: some View {
-        PinView(index: 0, password: .constant(""))
+        PinView(index: 0, password: .constant(""), emptyColor: .constant(Color.white), fillColor: .constant(Color.white))
     }
 }

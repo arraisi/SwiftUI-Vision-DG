@@ -31,86 +31,99 @@ struct PopoverSettingsView: View {
     var body: some View {
         VStack {
             VStack {
-                List {
-                    ForEach(_listMenu, id: \.self) { item in
-                        VStack {
-                            if (item.id == 1) {
-                                NavigationLink(destination: CardManagementScreen(), label: {
-                                    Text(item.namaMenu)
-                                        .fontWeight(.light)
-                                        .frame(height: CGFloat(self.textHeight))
-                                        .foregroundColor(Color(hex: "#002251"))
-                                })
-                            }
-
-                            if (item.id == 2) {
-                                NavigationLink(destination: StatementScreen(), label: {
-                                    Text(item.namaMenu)
-                                            .fontWeight(.light)
-                                            .frame(height: CGFloat(self.textHeight))
-                                            .foregroundColor(Color(hex: "#002251"))
-                                })
-                            }
-
-                            if (item.id == 3) {
-                                NavigationLink(destination: TransactionFeesScreen(), label: {
-                                    Text(item.namaMenu)
-                                            .fontWeight(.light)
-                                            .frame(height: CGFloat(self.textHeight))
-                                            .foregroundColor(Color(hex: "#002251"))
-                                })
-                            }
-
-                            if (item.id == 4) {
-                                HStack {
-
-                                    Toggle(isOn: $isFingerprint) {
-                                        Text(item.namaMenu)
-                                            .fontWeight(.light)
-                                            .frame(height: CGFloat(self.textHeight))
-                                            .foregroundColor(Color(hex: "#002251"))
-                                    }
-
-                                }
-                            }
-
-                            if (item.id == 5) {
-                                NavigationLink(destination: LanguageSettingScreen(), label: {
-                                    Text(item.namaMenu)
-                                            .fontWeight(.light)
-                                            .frame(height: CGFloat(self.textHeight))
-                                            .foregroundColor(Color(hex: "#002251"))
-                                })
-                            }
-
-                            if (item.id == 6) {
-                                NavigationLink(destination: ChangePasswordOrPinSettingScreen(), label: {
-                                    Text(item.namaMenu)
-                                            .fontWeight(.light)
-                                            .frame(height: CGFloat(self.textHeight))
-                                            .foregroundColor(Color(hex: "#002251"))
-                                })
-                            }
-
-                            if (item.id == 7) {
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                    Text(item.namaMenu)
-                                        .fontWeight(.light)
-                                        .frame(height: CGFloat(self.textHeight))
-                                        .foregroundColor(Color(hex: "#002251"))
-                                })
-                            }
-                        }
-                        .padding(.vertical, 10)
-                    }
+                HStack {
+                    NavigationLink(destination: CardManagementScreen(), label: {
+                        Text("Manajemen Kartu")
+                            .fontWeight(.light)
+                            .frame(height: CGFloat(self.textHeight))
+                            .foregroundColor(Color(hex: "#002251"))
+                    })
+                    .padding(.leading)
+                    
+                    Spacer()
                 }
-                .frame(height: CGFloat(_listMenu.count) * CGFloat(self.listRowHeight))
+                .padding(.vertical)
+                
+                HStack {
+                    NavigationLink(destination: StatementScreen(), label: {
+                        Text("e-Statement")
+                            .fontWeight(.light)
+                            .frame(height: CGFloat(self.textHeight))
+                            .foregroundColor(Color(hex: "#002251"))
+                    })
+                    .padding(.leading)
+                    
+                    Spacer()
+                }
+                .padding(.vertical)
+                
+                HStack {
+                    NavigationLink(destination: TransactionFeesScreen(), label: {
+                        Text("Biaya Transaksi")
+                            .fontWeight(.light)
+                            .frame(height: CGFloat(self.textHeight))
+                            .foregroundColor(Color(hex: "#002251"))
+                    })
+                    .padding(.leading)
+                    
+                    Spacer()
+                }
+                .padding(.vertical)
+                
+                HStack {
+                    Toggle(isOn: $isFingerprint) {
+                        Text("Aktifasi Fingerprint")
+                            .fontWeight(.light)
+                            .frame(height: CGFloat(self.textHeight))
+                            .foregroundColor(Color(hex: "#002251"))
+                    }
+                    .padding(.horizontal)
+                }
+                
+                HStack {
+                    NavigationLink(destination: LanguageSettingScreen(), label: {
+                        Text("Pengaturan Bahasa")
+                            .fontWeight(.light)
+                            .frame(height: CGFloat(self.textHeight))
+                            .foregroundColor(Color(hex: "#002251"))
+                    })
+                    .padding(.leading)
+                    
+                    Spacer()
+                }
+                .padding(.vertical)
+                
+                HStack {
+                    NavigationLink(destination: ChangePasswordOrPinSettingScreen(), label: {
+                        Text("Ubah Password / PIN")
+                            .fontWeight(.light)
+                            .frame(height: CGFloat(self.textHeight))
+                            .foregroundColor(Color(hex: "#002251"))
+                    })
+                    .padding(.leading)
+                    
+                    Spacer()
+                }
+                .padding(.vertical)
+                
+                HStack {
+                    Button(action: {}, label: {
+                        Text("Sign Out")
+                            .fontWeight(.light)
+                            .frame(height: CGFloat(self.textHeight))
+                            .foregroundColor(Color(hex: "#002251"))
+                    })
+                    .padding(.leading)
+                    
+                    Spacer()
+                }
+                .padding(.vertical)
             }
             .frame(width: .infinity, alignment: .top)
             .background(Color.white)
             .cornerRadius(radius: 15, corners: [.topLeft, .bottomLeft])
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
-            .padding(.top, 60)
+            .padding(.top, 130)
             .padding(.leading, UIScreen.main.bounds.width / 4)
             
             Spacer()

@@ -34,7 +34,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                     
                     HStack(spacing: 10){
                         ForEach(0..<6, id: \.self){index in
-                            PinView(index: index, password: $password)
+                            PinView(index: index, password: $password, emptyColor: .constant(Color(hex: "#ADAEB0")), fillColor: .constant(Color.white))
                         }
                     }
                     .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
@@ -51,12 +51,16 @@ struct TransferOnUsPinConfirmationScreen: View {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
                         
                         ForEach(1...9,id: \.self) { value in
-                            NumPadView(value: "\(value)",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword)
+                            NumPadView(value: "\(value)",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white))
                         }
                         
-                        NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword)
+                        NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white))
+                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                            .hidden()
                         
-                        NumPadView(value: "0", password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword)
+                        NumPadView(value: "0", password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white))
+                        
+                        NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white))
                     }
                     .padding(.bottom)
                     .padding(.horizontal, 30)
