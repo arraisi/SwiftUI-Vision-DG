@@ -58,6 +58,21 @@
 		525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB5232546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift */; };
 		525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB5282546B16A00D48075 /* PopOverFavoriteView.swift */; };
 		525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB52D2546C29700D48075 /* TransferOnUsDetailsInformation.swift */; };
+		526B6581254FB72300C13C36 /* HistoryTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6580254FB72300C13C36 /* HistoryTransaction.swift */; };
+		526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6588254FB7AA00C13C36 /* ListHistoryTransactionView.swift */; };
+		526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B658D254FBADC00C13C36 /* ListMySavingsView.swift */; };
+		526B6593254FBAF100C13C36 /* MySavings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6592254FBAF100C13C36 /* MySavings.swift */; };
+		526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6597254FBF1400C13C36 /* ListHistoryTransferView.swift */; };
+		526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B659C254FC05300C13C36 /* HistoryTransfer.swift */; };
+		526B65F8254FF1BC00C13C36 /* PopoverSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B65F7254FF1BC00C13C36 /* PopoverSettingsView.swift */; };
+		526B65FD254FF4C300C13C36 /* CornerRadius+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B65FC254FF4C300C13C36 /* CornerRadius+Extensions.swift */; };
+		526B6602254FF9FC00C13C36 /* StatementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6601254FF9FC00C13C36 /* StatementScreen.swift */; };
+		526B6607254FFA4600C13C36 /* CardManagementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6606254FFA4600C13C36 /* CardManagementScreen.swift */; };
+		526B660C254FFA7900C13C36 /* TransactionFeesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B660B254FFA7900C13C36 /* TransactionFeesScreen.swift */; };
+		526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */; };
+		526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */; };
+		526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B661A254FFB0500C13C36 /* SettingMenu.swift */; };
+		52702E3E254857A800CC0304 /* GreetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52702E3D254857A800CC0304 /* GreetScreen.swift */; };
 		52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3485725426D6800F08F37 /* SideMenuContent.swift */; };
 		52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3486025426E0D00F08F37 /* SidemenuView.swift */; };
 		52C348692542701500F08F37 /* SidemenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348682542701500F08F37 /* SidemenuCell.swift */; };
@@ -142,6 +157,21 @@
 		525DB5232546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsSuccessInformationScreen.swift; sourceTree = "<group>"; };
 		525DB5282546B16A00D48075 /* PopOverFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverFavoriteView.swift; sourceTree = "<group>"; };
 		525DB52D2546C29700D48075 /* TransferOnUsDetailsInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsDetailsInformation.swift; sourceTree = "<group>"; };
+		526B6580254FB72300C13C36 /* HistoryTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransaction.swift; sourceTree = "<group>"; };
+		526B6588254FB7AA00C13C36 /* ListHistoryTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHistoryTransactionView.swift; sourceTree = "<group>"; };
+		526B658D254FBADC00C13C36 /* ListMySavingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMySavingsView.swift; sourceTree = "<group>"; };
+		526B6592254FBAF100C13C36 /* MySavings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySavings.swift; sourceTree = "<group>"; };
+		526B6597254FBF1400C13C36 /* ListHistoryTransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHistoryTransferView.swift; sourceTree = "<group>"; };
+		526B659C254FC05300C13C36 /* HistoryTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransfer.swift; sourceTree = "<group>"; };
+		526B65F7254FF1BC00C13C36 /* PopoverSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverSettingsView.swift; sourceTree = "<group>"; };
+		526B65FC254FF4C300C13C36 /* CornerRadius+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CornerRadius+Extensions.swift"; sourceTree = "<group>"; };
+		526B6601254FF9FC00C13C36 /* StatementScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementScreen.swift; sourceTree = "<group>"; };
+		526B6606254FFA4600C13C36 /* CardManagementScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagementScreen.swift; sourceTree = "<group>"; };
+		526B660B254FFA7900C13C36 /* TransactionFeesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFeesScreen.swift; sourceTree = "<group>"; };
+		526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingScreen.swift; sourceTree = "<group>"; };
+		526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordOrPinSettingScreen.swift; sourceTree = "<group>"; };
+		526B661A254FFB0500C13C36 /* SettingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenu.swift; sourceTree = "<group>"; };
+		52702E3D254857A800CC0304 /* GreetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetScreen.swift; sourceTree = "<group>"; };
 		52C3485725426D6800F08F37 /* SideMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContent.swift; sourceTree = "<group>"; };
 		52C3486025426E0D00F08F37 /* SidemenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuView.swift; sourceTree = "<group>"; };
 		52C348682542701500F08F37 /* SidemenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuCell.swift; sourceTree = "<group>"; };
@@ -266,8 +296,7 @@
 		5245F8BB253FE821002E8B53 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				5247460E2547CA38001F43C5 /* Favorite */,
-				52C34886254288BD00F08F37 /* Transfer */,
+				5247466A254818BB001F43C5 /* Register */,
 				5245F8BC253FE82E002E8B53 /* Dashboard */,
 			);
 			path = Screen;
@@ -276,6 +305,9 @@
 		5245F8BC253FE82E002E8B53 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				526B657A254FB20800C13C36 /* Account */,
+				5247460E2547CA38001F43C5 /* Favorite */,
+				52C34886254288BD00F08F37 /* Transfer */,
 				5245F8BD253FE9FC002E8B53 /* BottomNavigationView.swift */,
 				52474D5D254026BD0094B758 /* DashboardTabs.swift */,
 				52474D622540276A0094B758 /* TransferTabs.swift */,
@@ -289,6 +321,7 @@
 		52468ABC25413604007518AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				526B657E254FB70200C13C36 /* Account */,
 				524745F42547C52E001F43C5 /* Favorite */,
 				52C348702542876F00F08F37 /* Transfer */,
 				52C3485F25426DFF00F08F37 /* Sidemenu */,
@@ -389,6 +422,14 @@
 			path = "Favorite Purchase Payment";
 			sourceTree = "<group>";
 		};
+		5247466A254818BB001F43C5 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				52702E3D254857A800CC0304 /* GreetScreen.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
 		52474D822540320D0094B758 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,8 +438,44 @@
 				52C3489025428CB000F08F37 /* NavigationConfigurator.swift */,
 				525DB5142546828100D48075 /* String+Extensions.swift */,
 				525DB5192546829700D48075 /* Int+Extensions.swift */,
+				526B65FC254FF4C300C13C36 /* CornerRadius+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		526B657A254FB20800C13C36 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				526B6601254FF9FC00C13C36 /* StatementScreen.swift */,
+				526B6606254FFA4600C13C36 /* CardManagementScreen.swift */,
+				526B660B254FFA7900C13C36 /* TransactionFeesScreen.swift */,
+				526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */,
+				526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		526B657E254FB70200C13C36 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				526B657F254FB70800C13C36 /* BindingModel */,
+				526B6588254FB7AA00C13C36 /* ListHistoryTransactionView.swift */,
+				526B658D254FBADC00C13C36 /* ListMySavingsView.swift */,
+				526B6597254FBF1400C13C36 /* ListHistoryTransferView.swift */,
+				526B65F7254FF1BC00C13C36 /* PopoverSettingsView.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		526B657F254FB70800C13C36 /* BindingModel */ = {
+			isa = PBXGroup;
+			children = (
+				526B6580254FB72300C13C36 /* HistoryTransaction.swift */,
+				526B6592254FBAF100C13C36 /* MySavings.swift */,
+				526B659C254FC05300C13C36 /* HistoryTransfer.swift */,
+				526B661A254FFB0500C13C36 /* SettingMenu.swift */,
+			);
+			path = BindingModel;
 			sourceTree = "<group>";
 		};
 		52C3485F25426DFF00F08F37 /* Sidemenu */ = {
@@ -585,15 +662,21 @@
 				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
 				52474D79254028CD0094B758 /* AccountTabs.swift in Sources */,
 				523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */,
+				526B660C254FFA7900C13C36 /* TransactionFeesScreen.swift in Sources */,
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
+				526B6581254FB72300C13C36 /* HistoryTransaction.swift in Sources */,
+				526B6607254FFA4600C13C36 /* CardManagementScreen.swift in Sources */,
+				526B65F8254FF1BC00C13C36 /* PopoverSettingsView.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
+				526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */,
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
 				52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */,
+				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
@@ -605,32 +688,41 @@
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
+				526B6602254FF9FC00C13C36 /* StatementScreen.swift in Sources */,
 				525DB5152546828100D48075 /* String+Extensions.swift in Sources */,
 				52C348692542701500F08F37 /* SidemenuCell.swift in Sources */,
 				52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */,
 				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
+				52702E3E254857A800CC0304 /* GreetScreen.swift in Sources */,
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
 				525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */,
+				526B65FD254FF4C300C13C36 /* CornerRadius+Extensions.swift in Sources */,
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
 				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
+				526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
+				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */,
+				526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */,
+				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,
 				52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */,
 				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,
 				524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */,
+				526B6593254FBAF100C13C36 /* MySavings.swift in Sources */,
 				52468AF725418024007518AE /* VoucherView.swift in Sources */,
 				5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
+				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
 				52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */,
 			);

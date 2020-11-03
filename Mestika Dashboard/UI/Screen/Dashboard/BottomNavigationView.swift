@@ -16,46 +16,44 @@ struct BottomNavigationView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                VStack {
-                    TabView {
-                        DashboardTabs()
-                            .tabItem {
-                                Image("ic_dashboard")
-                                    .renderingMode(.template)
-                                Text("Dashboard")
-                            }.tag(1)
-                        
-                        TransferTabs()
-                            .tabItem {
-                                Image("ic_transfer")
-                                    .renderingMode(.template)
-                                Text("Transfer")
-                            }.tag(2)
-                        
-                        PaymentTransactionTabs()
-                            .tabItem {
-                                Image("ic_floating")
-                            }.tag(3)
-                        
-                        FavoriteTabs()
-                            .tabItem {
-                                Image("ic_favorit")
-                                    .renderingMode(.template)
-                                Text("Favorit")
-                            }.tag(4)
-                        
-                        AccountTabs()
-                            .tabItem {
-                                Image("ic_akun")
-                                    .renderingMode(.template)
-                                Text("Akun")
-                            }.tag(5)
-                    }
+        ZStack {
+            VStack {
+                TabView {
+                    DashboardTabs()
+                        .tabItem {
+                            Image("ic_dashboard")
+                                .renderingMode(.template)
+                            Text("Dashboard")
+                        }.tag(1)
+                    
+                    TransferTabs()
+                        .tabItem {
+                            Image("ic_transfer")
+                                .renderingMode(.template)
+                            Text("Transfer")
+                        }.tag(2)
+                    
+                    PaymentTransactionTabs()
+                        .tabItem {
+                            Image("ic_floating")
+                        }.tag(3)
+                    
+                    FavoriteTabs()
+                        .tabItem {
+                            Image("ic_favorit")
+                                .renderingMode(.template)
+                            Text("Favorit")
+                        }.tag(4)
+                    
+                    AccountTabs()
+                        .tabItem {
+                            Image("ic_akun")
+                                .renderingMode(.template)
+                            Text("Akun")
+                        }.tag(5)
                 }
-                .navigationBarHidden(true)
             }
+            .navigationBarHidden(true)
         }
     }
     

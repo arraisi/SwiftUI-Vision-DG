@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ModalOverlay: View {
-    var color = Color.black.opacity(0.4)
+    var color = Color.black.opacity(0.6)
     var tapAction: (() -> Void)? = nil
     
     var body: some View {
