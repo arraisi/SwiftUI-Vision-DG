@@ -24,10 +24,12 @@ struct ListPurchasePaymentView: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                     
                     Text("Pembelian dan Pembayaran berbagai macam produk.")
                         .font(.caption)
                         .fontWeight(.ultraLight)
+                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 }
                 .padding(.leading, 20)
                 
@@ -60,6 +62,7 @@ struct ListPurchasePaymentView: View {
                 DatePicker("", selection: self.$date, in: ...Date(), displayedComponents: .date)
                     .labelsHidden()
             }
+            .padding(.horizontal)
             .padding(.bottom, 20)
             
             List {

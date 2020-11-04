@@ -14,9 +14,15 @@ struct AccountTabs: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "#F6F8FB")
+//            Color(hex: "#F6F8FB")
             
             ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+                
+                GeometryReader { geometry in
+                    Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                        .frame(height: 0)
+                }
+                
                 ZStack {
                     VStack {
                         profileInfo
@@ -30,7 +36,6 @@ struct AccountTabs: View {
             })
             .navigationBarHidden(true)
         }
-        .edgesIgnoringSafeArea(.top)
     }
     
     var profileInfo: some View {

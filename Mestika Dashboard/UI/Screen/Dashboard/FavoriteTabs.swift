@@ -9,23 +9,24 @@ import SwiftUI
 
 struct FavoriteTabs: View {
     var body: some View {
-        ZStack {
-            Color(hex: "#F6F8FB")
+        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
             
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
-                VStack {
-                    titleInfo
-                    
-                    ListFavoritePurchasePaymentView()
-                        .padding(.bottom)
-                    
-                    ListFavoriteTransactionView()
-                        .padding(.bottom)
-                }
-            })
-            .navigationBarHidden(true)
-        }
-        .edgesIgnoringSafeArea(.top)
+            GeometryReader { geometry in
+                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                    .frame(height: 0)
+            }
+            
+            VStack {
+                titleInfo
+                
+                ListFavoritePurchasePaymentView()
+                    .padding(.bottom)
+                
+                ListFavoriteTransactionView()
+                    .padding(.bottom)
+            }
+        })
+        .navigationBarHidden(true)
     }
     
     // MARK: -USERNAME INFO VIEW
@@ -39,6 +40,7 @@ struct FavoriteTabs: View {
                 Text("Berikut merupakan daftar-daftar transaksi yang telah anda simpan ke dalam menu favorit")
                     .font(.subheadline)
                     .foregroundColor(.gray)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             Spacer()
             

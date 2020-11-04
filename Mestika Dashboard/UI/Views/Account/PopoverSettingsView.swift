@@ -123,7 +123,7 @@ struct PopoverSettingsView: View {
             .background(Color.white)
             .cornerRadius(radius: 15, corners: [.topLeft, .bottomLeft])
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
-            .padding(.top, 130)
+            .padding(.top, 170)
             .padding(.leading, UIScreen.main.bounds.width / 4)
             
             Spacer()

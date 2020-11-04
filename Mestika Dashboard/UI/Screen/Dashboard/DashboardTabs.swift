@@ -12,35 +12,37 @@ struct DashboardTabs: View {
     @State var username: String = "Example User"
     
     var body: some View {
-        ZStack {
-            Color(hex: "#F6F8FB")
+        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
             
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
-                VStack {
-                    usernameInfo
-                    menuGrid
-                    
-                    ListRekeningView()
-                        .padding(.top, 30)
-                    
-                    ListEwalletView()
-                        .padding(.top, 30)
-                    
-                    ListContactTransferOnUs()
-                        .padding(.top, 30)
-                    
-                    ListPromoForYouView()
-                        .padding(.top, 30)
-                    
-                    ListPurchasePaymentView()
-                        .padding(.top, 30)
-                    
-                    VoucherView()
-                        .padding(.top, 30)
-                    Spacer()
-                }
-            })
-        }
+            GeometryReader { geometry in
+                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                    .frame(height: 0)
+            }
+            
+            VStack {
+                usernameInfo
+                menuGrid
+                
+                ListRekeningView()
+                    .padding(.top, 30)
+                
+                ListEwalletView()
+                    .padding(.top, 30)
+                
+                ListContactTransferOnUs()
+                    .padding(.top, 30)
+                
+                ListPromoForYouView()
+                    .padding(.top, 30)
+                
+                ListPurchasePaymentView()
+                    .padding(.top, 30)
+                
+                VoucherView()
+                    .padding(.top, 50)
+            }
+        })
+        .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
     }
     
@@ -115,7 +117,7 @@ struct DashboardTabs: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
-
+        
     }
 }
 
