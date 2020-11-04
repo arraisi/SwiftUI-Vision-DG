@@ -28,6 +28,7 @@ struct ListContactTransferOnUs: View {
                     Text("Transfer uang ke sesama nasabah Bank Mestika atau ke nasabah Bank Lain kini lebih mudah dan cepat.")
                         .font(.caption)
                         .fontWeight(.ultraLight)
+                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 }
                 .padding(.leading, 20)
                 

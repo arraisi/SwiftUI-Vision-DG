@@ -9,21 +9,22 @@ import SwiftUI
 
 struct TransferTabs: View {
     var body: some View {
-        ZStack {
-            Color(hex: "#F6F8FB")
+        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
             
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
-                VStack {
-                    titleInfo
-                    buttonLink
+            GeometryReader { geometry in
+                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                    .frame(height: 0)
+            }
+            
+            VStack {
+                titleInfo
+                buttonLink
 
-                    ListTransactionFavoriteView()
-                        .padding(.bottom)
-                }
-            })
-            .navigationBarHidden(true)
-        }
-        .edgesIgnoringSafeArea(.top)
+                ListTransactionFavoriteView()
+                    .padding(.bottom)
+            }
+        })
+        .navigationBarHidden(true)
     }
     
     // MARK: -USERNAME INFO VIEW
