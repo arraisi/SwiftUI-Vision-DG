@@ -45,7 +45,7 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 Color(hex: "#F6F8FB")
-                LoginScreen()
+                BottomNavigationView()
             }
             .edgesIgnoringSafeArea(.top)
         }

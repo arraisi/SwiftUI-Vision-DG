@@ -104,11 +104,9 @@
 		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
-		C092ABF02553B3CF0051CE3E /* KartuKu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* KartuKu.swift */; };
+		C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* MyCard.swift */; };
 		C092ABF92553B4BF0051CE3E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABF82553B4BF0051CE3E /* Data.swift */; };
-		C092ABFF2553B5850051CE3E /* kartuKuData.json in Resources */ = {isa = PBXBuildFile; fileRef = C092ABFE2553B5850051CE3E /* kartuKuData.json */; };
-		C0A4F966255273D900566A11 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F965255273D900566A11 /* SnapCarouselView.swift */; };
-		C0A4F974255274AF00566A11 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F973255274AF00566A11 /* Card.swift */; };
+		C092ABFF2553B5850051CE3E /* myCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = C092ABFE2553B5850051CE3E /* myCardData.json */; };
 		C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9872552896200566A11 /* DetailKartuTidakAktifView.swift */; };
 		C0A4F99625528C0700566A11 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F98D25528C0600566A11 /* Montserrat-SemiBold.ttf */; };
 		C0A4F99725528C0700566A11 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F98E25528C0600566A11 /* Montserrat-Thin.ttf */; };
@@ -124,6 +122,7 @@
 		C0D7B5CF2552ACEB009C3976 /* ActivationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* ActivationCardView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* VerificationOTPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* VerificationOTPCardView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* VerificationCVVCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* VerificationCVVCardView.swift */; };
+		C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB90D22553D7E2004DBCF5 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -245,11 +244,9 @@
 		52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResetPinScreen.swift; sourceTree = "<group>"; };
 		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
 		6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStatementView.swift; sourceTree = "<group>"; };
-		C092ABEF2553B3CF0051CE3E /* KartuKu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKu.swift; sourceTree = "<group>"; };
+		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
 		C092ABF82553B4BF0051CE3E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		C092ABFE2553B5850051CE3E /* kartuKuData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kartuKuData.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
-		C0A4F965255273D900566A11 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
-		C0A4F973255274AF00566A11 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		C092ABFE2553B5850051CE3E /* myCardData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myCardData.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
 		C0A4F9872552896200566A11 /* DetailKartuTidakAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuTidakAktifView.swift; sourceTree = "<group>"; };
 		C0A4F98D25528C0600566A11 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		C0A4F98E25528C0600566A11 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
@@ -265,6 +262,7 @@
 		C0D7B5CE2552ACEB009C3976 /* ActivationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationCardView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* VerificationOTPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationOTPCardView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* VerificationCVVCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCVVCardView.swift; sourceTree = "<group>"; };
+		C0EB90D22553D7E2004DBCF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,9 +298,9 @@
 				523A86292542BE9600ADFE25 /* ModalOverlay.swift */,
 				525DB50F25467BAB00D48075 /* NumPadView.swift */,
 				525DB51E2546869B00D48075 /* PinView.swift */,
-				C0A4F965255273D900566A11 /* SnapCarouselView.swift */,
 				C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */,
 				525FA10E25525DA8007EADCB /* OffsetKey.swift */,
+				C0EB90D22553D7E2004DBCF5 /* CardView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -373,7 +371,6 @@
 		5245F8BA253FE818002E8B53 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C0A4F9722552748900566A11 /* Models */,
 				523A86282542BE8600ADFE25 /* Components */,
 				5245F8BB253FE821002E8B53 /* Screen */,
 				52468ABC25413604007518AE /* Views */,
@@ -415,7 +412,6 @@
 				525FA1132552898A007EADCB /* PaymentTransaction */,
 				526B657E254FB70200C13C36 /* Account */,
 				524745F42547C52E001F43C5 /* Favorite */,
-				C0A4F95C2552734A00566A11 /* KartuKu */,
 				52C348702542876F00F08F37 /* Transfer */,
 				52C3485F25426DFF00F08F37 /* Sidemenu */,
 				52468ABD2541360C007518AE /* Dashboard */,
@@ -427,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				52468AD525417238007518AE /* BindingModel */,
+				C0A4F95C2552734A00566A11 /* CardManagement */,
 				52468ABE254136A4007518AE /* GridMenuView.swift */,
 				52468AC62541694F007518AE /* ListRekeningView.swift */,
 				52468ACB25416D59007518AE /* ListEwalletView.swift */,
@@ -695,46 +692,30 @@
 			path = Statement;
 			sourceTree = "<group>";
 		};
-		C092ABF42553B4AB0051CE3E /* KartuKu */ = {
-			isa = PBXGroup;
-			children = (
-				C092ABF82553B4BF0051CE3E /* Data.swift */,
-				C092ABEF2553B3CF0051CE3E /* KartuKu.swift */,
-			);
-			path = KartuKu;
-			sourceTree = "<group>";
-		};
 		C092ABFD2553B51B0051CE3E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				C0A4F98C25528BF200566A11 /* fonts */,
-				C092ABFE2553B5850051CE3E /* kartuKuData.json */,
+				C092ABF82553B4BF0051CE3E /* Data.swift */,
+				C092ABFE2553B5850051CE3E /* myCardData.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		C0A4F95C2552734A00566A11 /* KartuKu */ = {
+		C0A4F95C2552734A00566A11 /* CardManagement */ = {
 			isa = PBXGroup;
 			children = (
 				C0A4F97B2552874900566A11 /* BindingModel */,
 				C0A4F9872552896200566A11 /* DetailKartuTidakAktifView.swift */,
 				C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */,
 			);
-			path = KartuKu;
-			sourceTree = "<group>";
-		};
-		C0A4F9722552748900566A11 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C0A4F973255274AF00566A11 /* Card.swift */,
-				C092ABF42553B4AB0051CE3E /* KartuKu */,
-			);
-			path = Models;
+			path = CardManagement;
 			sourceTree = "<group>";
 		};
 		C0A4F97B2552874900566A11 /* BindingModel */ = {
 			isa = PBXGroup;
 			children = (
+				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
 			);
 			path = BindingModel;
 			sourceTree = "<group>";
@@ -878,7 +859,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0A4F99A25528C0700566A11 /* Montserrat-Regular.ttf in Resources */,
-				C092ABFF2553B5850051CE3E /* kartuKuData.json in Resources */,
+				C092ABFF2553B5850051CE3E /* myCardData.json in Resources */,
 				C0A4F99E25528C0700566A11 /* Montserrat-ExtraLight.ttf in Resources */,
 				C0A4F99925528C0700566A11 /* Montserrat-Light.ttf in Resources */,
 				C0A4F99725528C0700566A11 /* Montserrat-Thin.ttf in Resources */,
@@ -921,6 +902,7 @@
 				523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */,
 				526B660C254FFA7900C13C36 /* TransactionFeesScreen.swift in Sources */,
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
+				C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
@@ -932,7 +914,6 @@
 				525950222553E03000C8CA5D /* ForgotPasswordOtpScreen.swift in Sources */,
 				C0D7B5CF2552ACEB009C3976 /* ActivationCardView.swift in Sources */,
 				526B6581254FB72300C13C36 /* HistoryTransaction.swift in Sources */,
-				C0A4F966255273D900566A11 /* SnapCarouselView.swift in Sources */,
 				526B6607254FFA4600C13C36 /* CardManagementScreen.swift in Sources */,
 				526B65F8254FF1BC00C13C36 /* PopoverSettingsView.swift in Sources */,
 				525FA115255289B0007EADCB /* GridMenuManyUsedView.swift in Sources */,
@@ -974,7 +955,6 @@
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
-				C0A4F974255274AF00566A11 /* Card.swift in Sources */,
 				525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */,
 				526B65FD254FF4C300C13C36 /* CornerRadius+Extensions.swift in Sources */,
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
@@ -994,7 +974,7 @@
 				52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */,
 				526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */,
 				525FA10F25525DA8007EADCB /* OffsetKey.swift in Sources */,
-				C092ABF02553B3CF0051CE3E /* KartuKu.swift in Sources */,
+				C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */,
 				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,
 				525950252553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift in Sources */,
 				52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */,

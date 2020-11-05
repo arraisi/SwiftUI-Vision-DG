@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct DetailKartuAktifView: View {
+    var data: MyCard
     var body: some View {
         VStack(alignment: .center, spacing: 15) {
             
-            ForEach(0..<5) {i in
+            ForEach(0..<data.details.count) {i in
                 HStack {
                     Image("ic_credit_card")
                         .resizable()
@@ -19,15 +20,17 @@ struct DetailKartuAktifView: View {
                         .colorInvert()
                     
                     VStack(alignment: .leading){
-                        Text("Kartu Rekening Tidak Aktif")
+                        Text(data.details[i].name)
                             .font(.custom("Montserrat-SemiBold", size: 15))
                             .foregroundColor(Color(hex: "#232175"))
                         
                         
-                        Text("Aktifkan terlebih dahulu kartu Anda untuk melihat pengaturan.")
+                        Text(data.details[i].description)
                             .font(.custom("Montserrat-Light", size: 10))
                             .foregroundColor(Color(hex: "#232175"))
                     }
+                    
+                    Spacer()
                 }
             }
         }
@@ -40,6 +43,6 @@ struct DetailKartuAktifView: View {
 
 struct DetailKartuAktifView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailKartuAktifView()
+        DetailKartuAktifView(data: myCardData[0])
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let kartuKuData: [KartuKu] = load("kartuKuData.json")
+let myCardData: [MyCard] = load("myCardData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
