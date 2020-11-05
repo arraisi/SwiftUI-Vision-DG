@@ -47,6 +47,14 @@
 		52474D68254028350094B758 /* FavoriteTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D67254028350094B758 /* FavoriteTabs.swift */; };
 		52474D79254028CD0094B758 /* AccountTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D78254028CD0094B758 /* AccountTabs.swift */; };
 		52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */; };
+		5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordScreen.swift */; };
+		525950202553E03000C8CA5D /* FormInputAtmActivationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950182553E03000C8CA5D /* FormInputAtmActivationScreen.swift */; };
+		525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */; };
+		525950222553E03000C8CA5D /* ForgotPasswordOtpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501A2553E03000C8CA5D /* ForgotPasswordOtpScreen.swift */; };
+		525950232553E03000C8CA5D /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501B2553E03000C8CA5D /* ForgotPasswordScreen.swift */; };
+		525950242553E03000C8CA5D /* FormInputPasswordForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501C2553E03000C8CA5D /* FormInputPasswordForgotPasswordScreen.swift */; };
+		525950252553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501D2553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift */; };
+		525950262553E03000C8CA5D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501E2553E03000C8CA5D /* LoginScreen.swift */; };
 		525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */; };
 		525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */; };
 		525DB51025467BAB00D48075 /* NumPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50F25467BAB00D48075 /* NumPadView.swift */; };
@@ -76,14 +84,6 @@
 		526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */; };
 		526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B661A254FFB0500C13C36 /* SettingMenu.swift */; };
 		52702E3E254857A800CC0304 /* GreetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52702E3D254857A800CC0304 /* GreetScreen.swift */; };
-		5295B29F2553C8C400C3382D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B29E2553C8C400C3382D /* LoginScreen.swift */; };
-		5295B2AB2553C8E900C3382D /* FormInputAtmActivationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B2A42553C8E800C3382D /* FormInputAtmActivationScreen.swift */; };
-		5295B2AC2553C8E900C3382D /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B2A52553C8E800C3382D /* ForgotPasswordScreen.swift */; };
-		5295B2AD2553C8E900C3382D /* ForgotPasswordOtpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B2A62553C8E800C3382D /* ForgotPasswordOtpScreen.swift */; };
-		5295B2AE2553C8E900C3382D /* FormInputAtmForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B2A72553C8E800C3382D /* FormInputAtmForgotPasswordScreen.swift */; };
-		5295B2AF2553C8E900C3382D /* FormInputNewPasswordForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B2A82553C8E900C3382D /* FormInputNewPasswordForgotPasswordScreen.swift */; };
-		5295B2B02553C8E900C3382D /* FormInputPasswordForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B2A92553C8E900C3382D /* FormInputPasswordForgotPasswordScreen.swift */; };
-		5295B2B12553C8E900C3382D /* FormInputRekeningForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B2AA2553C8E900C3382D /* FormInputRekeningForgotPasswordScreen.swift */; };
 		52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3485725426D6800F08F37 /* SideMenuContent.swift */; };
 		52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3486025426E0D00F08F37 /* SidemenuView.swift */; };
 		52C348692542701500F08F37 /* SidemenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348682542701500F08F37 /* SidemenuCell.swift */; };
@@ -190,6 +190,14 @@
 		52474D67254028350094B758 /* FavoriteTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTabs.swift; sourceTree = "<group>"; };
 		52474D78254028CD0094B758 /* AccountTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTabs.swift; sourceTree = "<group>"; };
 		52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTransactionTabs.swift; sourceTree = "<group>"; };
+		525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordForgotPasswordScreen.swift; sourceTree = "<group>"; };
+		525950182553E03000C8CA5D /* FormInputAtmActivationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmActivationScreen.swift; sourceTree = "<group>"; };
+		525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmForgotPasswordScreen.swift; sourceTree = "<group>"; };
+		5259501A2553E03000C8CA5D /* ForgotPasswordOtpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordOtpScreen.swift; sourceTree = "<group>"; };
+		5259501B2553E03000C8CA5D /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
+		5259501C2553E03000C8CA5D /* FormInputPasswordForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputPasswordForgotPasswordScreen.swift; sourceTree = "<group>"; };
+		5259501D2553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputRekeningForgotPasswordScreen.swift; sourceTree = "<group>"; };
+		5259501E2553E03000C8CA5D /* LoginScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsConfirmationScreen.swift; sourceTree = "<group>"; };
 		525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsPinConfirmationScreen.swift; sourceTree = "<group>"; };
 		525DB50F25467BAB00D48075 /* NumPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadView.swift; sourceTree = "<group>"; };
@@ -219,14 +227,6 @@
 		526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordOrPinSettingScreen.swift; sourceTree = "<group>"; };
 		526B661A254FFB0500C13C36 /* SettingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenu.swift; sourceTree = "<group>"; };
 		52702E3D254857A800CC0304 /* GreetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetScreen.swift; sourceTree = "<group>"; };
-		5295B29E2553C8C400C3382D /* LoginScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginScreen.swift; path = ../../../../../../../.Trash/Login/LoginScreen.swift; sourceTree = "<group>"; };
-		5295B2A42553C8E800C3382D /* FormInputAtmActivationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormInputAtmActivationScreen.swift; path = ../../../../../../../../.Trash/Login/ForgotPassword/FormInputAtmActivationScreen.swift; sourceTree = "<group>"; };
-		5295B2A52553C8E800C3382D /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordScreen.swift; path = ../../../../../../../../.Trash/Login/ForgotPassword/ForgotPasswordScreen.swift; sourceTree = "<group>"; };
-		5295B2A62553C8E800C3382D /* ForgotPasswordOtpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordOtpScreen.swift; path = ../../../../../../../../.Trash/Login/ForgotPassword/ForgotPasswordOtpScreen.swift; sourceTree = "<group>"; };
-		5295B2A72553C8E800C3382D /* FormInputAtmForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormInputAtmForgotPasswordScreen.swift; path = ../../../../../../../../.Trash/Login/ForgotPassword/FormInputAtmForgotPasswordScreen.swift; sourceTree = "<group>"; };
-		5295B2A82553C8E900C3382D /* FormInputNewPasswordForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormInputNewPasswordForgotPasswordScreen.swift; path = ../../../../../../../../.Trash/Login/ForgotPassword/FormInputNewPasswordForgotPasswordScreen.swift; sourceTree = "<group>"; };
-		5295B2A92553C8E900C3382D /* FormInputPasswordForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormInputPasswordForgotPasswordScreen.swift; path = ../../../../../../../../.Trash/Login/ForgotPassword/FormInputPasswordForgotPasswordScreen.swift; sourceTree = "<group>"; };
-		5295B2AA2553C8E900C3382D /* FormInputRekeningForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormInputRekeningForgotPasswordScreen.swift; path = ../../../../../../../../.Trash/Login/ForgotPassword/FormInputRekeningForgotPasswordScreen.swift; sourceTree = "<group>"; };
 		52C3485725426D6800F08F37 /* SideMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContent.swift; sourceTree = "<group>"; };
 		52C3486025426E0D00F08F37 /* SidemenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuView.swift; sourceTree = "<group>"; };
 		52C348682542701500F08F37 /* SidemenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuCell.swift; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 		5245F8BB253FE821002E8B53 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				5295B29D2553C88B00C3382D /* Login */,
+				525950152553E03000C8CA5D /* Login */,
 				5247466A254818BB001F43C5 /* Register */,
 				5245F8BC253FE82E002E8B53 /* Dashboard */,
 			);
@@ -536,6 +536,30 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		525950152553E03000C8CA5D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				525950162553E03000C8CA5D /* ForgotPassword */,
+				5259501E2553E03000C8CA5D /* LoginScreen.swift */,
+			);
+			name = Login;
+			path = ../../../../../../Desktop/Login;
+			sourceTree = "<group>";
+		};
+		525950162553E03000C8CA5D /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordScreen.swift */,
+				525950182553E03000C8CA5D /* FormInputAtmActivationScreen.swift */,
+				525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */,
+				5259501A2553E03000C8CA5D /* ForgotPasswordOtpScreen.swift */,
+				5259501B2553E03000C8CA5D /* ForgotPasswordScreen.swift */,
+				5259501C2553E03000C8CA5D /* FormInputPasswordForgotPasswordScreen.swift */,
+				5259501D2553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
 		525FA1132552898A007EADCB /* PaymentTransaction */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,29 +606,6 @@
 				52DA20842551069C00CC048A /* Statement.swift */,
 			);
 			path = BindingModel;
-			sourceTree = "<group>";
-		};
-		5295B29D2553C88B00C3382D /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				5295B2A32553C8DA00C3382D /* ForgotPassword */,
-				5295B29E2553C8C400C3382D /* LoginScreen.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		5295B2A32553C8DA00C3382D /* ForgotPassword */ = {
-			isa = PBXGroup;
-			children = (
-				5295B2A62553C8E800C3382D /* ForgotPasswordOtpScreen.swift */,
-				5295B2A52553C8E800C3382D /* ForgotPasswordScreen.swift */,
-				5295B2A42553C8E800C3382D /* FormInputAtmActivationScreen.swift */,
-				5295B2A72553C8E800C3382D /* FormInputAtmForgotPasswordScreen.swift */,
-				5295B2A82553C8E900C3382D /* FormInputNewPasswordForgotPasswordScreen.swift */,
-				5295B2A92553C8E900C3382D /* FormInputPasswordForgotPasswordScreen.swift */,
-				5295B2AA2553C8E900C3382D /* FormInputRekeningForgotPasswordScreen.swift */,
-			);
-			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
 		52C3485F25426DFF00F08F37 /* Sidemenu */ = {
@@ -913,14 +914,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5295B2AF2553C8E900C3382D /* FormInputNewPasswordForgotPasswordScreen.swift in Sources */,
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
 				52474D79254028CD0094B758 /* AccountTabs.swift in Sources */,
 				523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */,
 				526B660C254FFA7900C13C36 /* TransactionFeesScreen.swift in Sources */,
-				5295B2AC2553C8E900C3382D /* ForgotPasswordScreen.swift in Sources */,
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
@@ -929,8 +928,8 @@
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
 				C092ABF92553B4BF0051CE3E /* Data.swift in Sources */,
-				5295B2AD2553C8E900C3382D /* ForgotPasswordOtpScreen.swift in Sources */,
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
+				525950222553E03000C8CA5D /* ForgotPasswordOtpScreen.swift in Sources */,
 				C0D7B5CF2552ACEB009C3976 /* ActivationCardView.swift in Sources */,
 				526B6581254FB72300C13C36 /* HistoryTransaction.swift in Sources */,
 				C0A4F966255273D900566A11 /* SnapCarouselView.swift in Sources */,
@@ -942,20 +941,22 @@
 				526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */,
 				C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */,
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
-				5295B2AE2553C8E900C3382D /* FormInputAtmForgotPasswordScreen.swift in Sources */,
 				C0D7B5DB2552AF43009C3976 /* VerificationOTPCardView.swift in Sources */,
 				52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */,
+				525950262553E03000C8CA5D /* LoginScreen.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
 				5247463F2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift in Sources */,
 				525DB51F2546869B00D48075 /* PinView.swift in Sources */,
+				525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */,
 				52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */,
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
 				52468AF225417B60007518AE /* PurchasePayment.swift in Sources */,
 				5247465325480BBC001F43C5 /* LastPurchasePayment.swift in Sources */,
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
+				525950242553E03000C8CA5D /* FormInputPasswordForgotPasswordScreen.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
@@ -977,15 +978,14 @@
 				525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */,
 				526B65FD254FF4C300C13C36 /* CornerRadius+Extensions.swift in Sources */,
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
-				5295B2B02553C8E900C3382D /* FormInputPasswordForgotPasswordScreen.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
 				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
-				5295B2B12553C8E900C3382D /* FormInputRekeningForgotPasswordScreen.swift in Sources */,
 				52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */,
 				52DA20852551069C00CC048A /* Statement.swift in Sources */,
 				526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */,
+				525950232553E03000C8CA5D /* ForgotPasswordScreen.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
@@ -996,6 +996,7 @@
 				525FA10F25525DA8007EADCB /* OffsetKey.swift in Sources */,
 				C092ABF02553B3CF0051CE3E /* KartuKu.swift in Sources */,
 				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,
+				525950252553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift in Sources */,
 				52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */,
 				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,
 				524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */,
@@ -1004,15 +1005,15 @@
 				5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
+				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordScreen.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
+				525950202553E03000C8CA5D /* FormInputAtmActivationScreen.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
-				5295B2AB2553C8E900C3382D /* FormInputAtmActivationScreen.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
 				52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */,
 				6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */,
-				5295B29F2553C8C400C3382D /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
