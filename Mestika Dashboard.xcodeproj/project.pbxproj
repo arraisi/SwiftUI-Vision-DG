@@ -570,8 +570,8 @@
 			isa = PBXGroup;
 			children = (
 				52DA208A25510C4200CC048A /* ChangePasswordPinMenu */,
-				526B6601254FF9FC00C13C36 /* StatementScreen.swift */,
 				C0D7B5D92552AF25009C3976 /* CardManagement */,
+				526B6601254FF9FC00C13C36 /* StatementScreen.swift */,
 				526B660B254FFA7900C13C36 /* TransactionFeesScreen.swift */,
 				526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */,
 				526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */,
