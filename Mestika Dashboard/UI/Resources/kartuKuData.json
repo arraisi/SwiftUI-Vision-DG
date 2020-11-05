@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "imageName": "rekening-card-3",
+        "activeStatus": "Twentynine Palms",
+        "isShow": "California",
+        
+        "details": [
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "imageName": "rekening-card-4",
+        "activeStatus": "Twentynine Palms",
+        "isShow": "California",
+        
+        "details": [
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "imageName": "rekening-card-5",
+        "activeStatus": "Twentynine Palms",
+        "isShow": "California",
+        
+        "details": [
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "imageName": "rekening-card-6",
+        "activeStatus": "Twentynine Palms",
+        "isShow": "California",
+        
+        "details": [
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            },
+            {
+                "name": "Riwayat Transaksi",
+                "description": "Riwayat transaksi kamu...",
+            }
+        ]
+    },
+]

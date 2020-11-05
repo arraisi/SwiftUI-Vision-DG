@@ -8,13 +8,7 @@
 import SwiftUI
 
 struct CardManagementScreen: View {
-    @State var kartuKuData = [
-        Card(id: 0, imageName: "rekening-card-3", name: "KARTU 1", description: "KARTU 1", activeStatus: false, isShow: false),
-        Card(id: 1, imageName: "rekening-card-4", name: "KARTU 2", description: "KARTU 2", activeStatus: true, isShow: false),
-        Card(id: 2, imageName: "rekening-card-5", name: "KARTU 3", description: "KARTU 1", activeStatus: false, isShow: false),
-        Card(id: 3, imageName: "rekening-card-6", name: "KARTU 4", description: "KARTU 2", activeStatus: false, isShow: false)
-    ]
-    
+    @State var data = kartuKuData
     @State var kartuIndex: Int = 0
     
     var body: some View {
@@ -22,7 +16,7 @@ struct CardManagementScreen: View {
             Color(hex: "#F6F8FB")
             
             VStack() {
-                SnapCarouselView(itemWidth: 236, itemHeight: 197, itemGapHeight: 15, data: $kartuKuData) { (index) in
+                SnapCarouselView(itemWidth: 236, itemHeight: 197, itemGapHeight: 15, data: $data) { (index) in
                     
                     kartuIndex = index
                 }
