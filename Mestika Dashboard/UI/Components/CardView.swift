@@ -9,6 +9,11 @@ import SwiftUI
 
 struct CardView: View {
     var background: Image
+    var rekeningName: String
+    var saldo: String
+    var rekeningNumber: String
+    var activeStatus: Bool
+    
     var body: some View {
         ZStack {
             background
@@ -24,7 +29,7 @@ struct CardView: View {
                 .padding(.bottom, 20)
                 
                 HStack{
-                    Text("Rekening Utama")
+                    Text(rekeningName)
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Regular", size: 12))
                     Spacer()
@@ -35,14 +40,17 @@ struct CardView: View {
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Bold", size: 20))
                     
-                    Text("12.000.000")
+                    Text(saldo)
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Bold", size: 30))
                     Spacer()
                 }
                 
                 HStack{
-                    Text("**** 1234")
+                    Text("****")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-Regular", size: 12))
+                    Text(rekeningNumber)
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Regular", size: 12))
                     Spacer()
@@ -50,9 +58,16 @@ struct CardView: View {
                 
                 HStack{
                     Spacer()
-                    Text("Aktif")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-Regular", size: 12))
+                    if activeStatus {
+                        Text("Aktif")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-Regular", size: 12))
+                    }
+                    else {
+                        Text("Tidak Aktif")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-Regular", size: 12))
+                    }
                 }
                 .padding(.top, 20)
                 
@@ -66,6 +81,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(background: Image("card_bg"))
+        CardView(background: Image("card_bg"), rekeningName: "Rekening Utama", saldo: "12.000.000", rekeningNumber: "1234", activeStatus: true)
     }
 }
