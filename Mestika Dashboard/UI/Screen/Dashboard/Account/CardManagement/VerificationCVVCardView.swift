@@ -27,9 +27,13 @@ struct VerificationCVVCardView: View {
     @State var showingModal = false
     
     @State var falseCount = 0
+    @State var showDashboard = false
     
     var body: some View {
         ZStack {
+            Color(hex: "#F6F8FB")
+                .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 
                 VStack(alignment: .leading, spacing: 20) {
@@ -90,14 +94,14 @@ struct VerificationCVVCardView: View {
                 Spacer()
             }
             .padding(.horizontal, 30)
-            .padding(.top, 140)
+            .padding(.top, 35)
             
             // Background Color When Modal Showing
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    .edgesIgnoringSafeArea(.all)
             }
         }
-        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("Aktifkan Kartu")
         .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             createBottomFloater()
@@ -116,58 +120,39 @@ struct VerificationCVVCardView: View {
             .padding(.top, 10)
             
             HStack {
-                if falseCount < 3 {
-                    Text("KODE CVV SALAH")
-                        .font(.custom("Montserrat-Bold", size: 18))
-                        .foregroundColor(Color(hex: "#F32424"))
-                }
-                else {
-                    Text("KODE CVV SALAH 3 KALI")
-                        .font(.custom("Montserrat-Bold", size: 18))
-                        .foregroundColor(Color(hex: "#F32424"))
-                }
+                Text(falseCount < 3 ? "KODE CVV SALAH":"KODE CVV SALAH 3 KALI")
+                    .font(.custom("Montserrat-Bold", size: 18))
+                    .foregroundColor(Color(hex: "#F32424"))
                 Spacer()
             }
             
             HStack {
-                if falseCount < 3 {
-                    Text("3 digit nomor terakhir dibelakang kartu ATM Anda tidak sesuai dengan nomor kartu yang terdaftar.")
-                        .font(.custom("Montserrat-Light", size: 12))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fixedSize(horizontal: false, vertical: true)}
-                else {
-                    Text("Kode CVV yang Anda masukkan salah, Kesempatan Anda telah habis, Silahkan kembali mencoba lagi Besok.")
-                        .font(.custom("Montserrat-Light", size: 12))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+                Text(falseCount < 3 ? "3 digit nomor terakhir dibelakang kartu ATM Anda tidak sesuai dengan nomor kartu yang terdaftar." : "Kode CVV yang Anda masukkan salah, Kesempatan Anda telah habis, Silahkan kembali mencoba lagi Besok.")
+                    .font(.custom("Montserrat-Light", size: 12))
+                    .foregroundColor(Color(hex: "#232175"))
                 Spacer()
             }
             
-            if falseCount < 3 {
-                Button(action: {
+            NavigationLink(destination: BottomNavigationView(), isActive: $showDashboard) {
+                Text("")
+            }
+            
+            Button(action: {
+                if falseCount < 3 {
                     self.showingModal.toggle()
-                }, label: {
-                    Text("MASUKAN KEMBALI NOMOR KARTU")
-                        .font(.custom("Montserrat-SemiBold", size: 12))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                })
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.top, 15)
+                } else {
+                    self.showDashboard = true
+                }
+            }) {
+                Text(falseCount < 3 ? "MASUKAN KEMBALI NOMOR KARTU":"KEMBALI KE HALAMAN UTAMA")
+                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+                
             }
-            else {
-                NavigationLink(destination: BottomNavigationView(), label: {
-                    Text("KEMBALI KE HALAMAN UTAMA")
-                        .font(.custom("Montserrat-SemiBold", size: 12))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                })
-                .background(Color(hex: "#232175"))
-                .cornerRadius(12)
-                .padding(.top, 15)
-            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.top, 15)
         }
         .padding(25)
         .frame(width: UIScreen.main.bounds.width - 60)

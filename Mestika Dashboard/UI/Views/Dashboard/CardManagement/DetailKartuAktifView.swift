@@ -35,10 +35,9 @@ struct DetailKartuAktifView: View {
                 }
             }
         }
+        .padding(.top, 15)
         .padding(30)
-        .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color.white)
-        .cornerRadius(25)
     }
 }
 

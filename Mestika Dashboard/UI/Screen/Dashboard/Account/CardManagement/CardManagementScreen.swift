@@ -29,7 +29,7 @@ struct CardManagementScreen: View {
                 // MARK: - CAROUSEL
                 VStack{
                     
-                    HStack(spacing: itemWidth * 0.09){
+                    HStack(spacing: itemWidth * 0.08){
                         
                         ForEach(data){card in
                             CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
@@ -60,17 +60,20 @@ struct CardManagementScreen: View {
                 .padding(.vertical,25)
                 .onAppear {
                     
-                    self.firstOffset = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.08)) / 2) : 0)
+                    self.firstOffset = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.1)) / 2) : 0)
                     
                     self.data[0].isShow = true
                 }
-                
                 if !data[Int(self.count)].activeStatus {
                     DetailKartuTidakAktifView()
+                        .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                        .frame(width: UIScreen.main.bounds.width - 60)
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                 }
                 else {
                     DetailKartuAktifView(data: data[Int(self.count)])
+                        .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                        .frame(width: UIScreen.main.bounds.width - 60)
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                 }
                 

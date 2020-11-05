@@ -39,13 +39,13 @@ struct VerificationOTPCardView: View {
         ZStack(alignment: .top) {
             Image("bg_blue")
                 .resizable()
+                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
                 Text("VERIFIKASI KODE OTP")
                     .font(.custom("Montserrat-Bold", size: 24))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 20)
                     .padding(.bottom, 10)
                     .padding(.horizontal, 20)
                     .fixedSize(horizontal: false, vertical: true)
@@ -54,9 +54,8 @@ struct VerificationOTPCardView: View {
                 Spacer()
             }
             .padding(.horizontal, 30)
-            .padding(.top, 140)
+            .padding(.top, 35)
         }
-        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("Aktifkan Kartu")
     }
     

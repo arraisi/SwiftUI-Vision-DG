@@ -16,6 +16,7 @@ struct ActivationCardView: View {
         ZStack(alignment: .top) {
             Image("bg_blue")
                 .resizable()
+                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
                 Text("INPUT DATA ATM")
@@ -61,10 +62,9 @@ struct ActivationCardView: View {
                     .padding(.top, 20)
             }
             .padding(.horizontal, 30)
-            .padding(.top, 140)
+            .padding(.top, 35)
         }
-        .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("Aktivasi Kartu ATM Baru")
+        .navigationBarTitle("Aktivasi Kartu ATM Baru", displayMode: .inline)
     }
 }
 

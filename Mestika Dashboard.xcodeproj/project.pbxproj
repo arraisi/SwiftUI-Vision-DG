@@ -104,6 +104,7 @@
 		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
+		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
 		C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* MyCard.swift */; };
 		C092ABF92553B4BF0051CE3E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABF82553B4BF0051CE3E /* Data.swift */; };
 		C092ABFF2553B5850051CE3E /* myCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = C092ABFE2553B5850051CE3E /* myCardData.json */; };
@@ -244,6 +245,7 @@
 		52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResetPinScreen.swift; sourceTree = "<group>"; };
 		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
 		6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStatementView.swift; sourceTree = "<group>"; };
+		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
 		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
 		C092ABF82553B4BF0051CE3E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C092ABFE2553B5850051CE3E /* myCardData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myCardData.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
@@ -301,6 +303,7 @@
 				C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */,
 				525FA10E25525DA8007EADCB /* OffsetKey.swift */,
 				C0EB90D22553D7E2004DBCF5 /* CardView.swift */,
+				C04B958A255450D0006690C2 /* PopUpBubble.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
+				C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */,
 				525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */,
 				526B65FD254FF4C300C13C36 /* CornerRadius+Extensions.swift in Sources */,
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,

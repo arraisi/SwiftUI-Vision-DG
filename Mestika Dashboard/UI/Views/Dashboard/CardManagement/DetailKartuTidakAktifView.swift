@@ -41,7 +41,7 @@ struct DetailKartuTidakAktifView: View {
                 label: {
                     Text("AKTIFKAN KARTU-KU")
                         .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 16))
+                        .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 40)
                 })
                 .frame(height: 50)
@@ -49,18 +49,16 @@ struct DetailKartuTidakAktifView: View {
                 .cornerRadius(12)
             
         }
-        .padding(.top, 20)
-        .padding(20)
-        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.top, 45)
+        .padding(30)
         .background(Color.white)
-        .cornerRadius(25)
     }
 }
 
 struct DetailKartuTidakAktifView_Previews: PreviewProvider {
     static var previews: some View {
         DetailKartuTidakAktifView()
-            .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width-60, height: 400))
+            .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width, height: 400))
             .environment(\.colorScheme, .dark)
     }
 }
