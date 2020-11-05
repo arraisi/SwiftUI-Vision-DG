@@ -14,9 +14,14 @@ struct CardView: View {
     var rekeningNumber: String
     var activeStatus: Bool
     
+    var cardWidth: CGFloat
+    var cardHeight: CGFloat
+    
     var body: some View {
         ZStack {
             background
+                .resizable()
+                .frame(width: cardWidth, height: cardHeight)
             
             VStack(){
                 
@@ -26,7 +31,7 @@ struct CardView: View {
                         .frame(width: 30, height: 30, alignment: .center)
                     Spacer()
                 }
-                .padding(.bottom, 20)
+                .padding(.vertical, 10)
                 
                 HStack{
                     Text(rekeningName)
@@ -61,26 +66,26 @@ struct CardView: View {
                     if activeStatus {
                         Text("Aktif")
                             .foregroundColor(.white)
-                            .font(.custom("Montserrat-Regular", size: 12))
+                            .font(.custom("Montserrat-SemiBold", size: 10))
                     }
                     else {
                         Text("Tidak Aktif")
                             .foregroundColor(.white)
-                            .font(.custom("Montserrat-Regular", size: 12))
+                            .font(.custom("Montserrat-SemiBold", size: 10))
                     }
                 }
-                .padding(.top, 20)
+                .padding(.top)
                 
                 Spacer()
             }
             .padding()
         }
-        .frame(width: 315, height: 194, alignment: .center)
+        .frame(width: cardWidth, height: cardHeight, alignment: .center)
     }
 }
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(background: Image("card_bg"), rekeningName: "Rekening Utama", saldo: "12.000.000", rekeningNumber: "1234", activeStatus: true)
+        CardView(background: Image("card_bg"), rekeningName: "Rekening Utama", saldo: "12.000.000", rekeningNumber: "1234", activeStatus: true, cardWidth: 315, cardHeight: 197)
     }
 }

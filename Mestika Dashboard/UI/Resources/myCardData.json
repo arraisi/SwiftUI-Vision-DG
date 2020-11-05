@@ -1,6 +1,9 @@
 [
     {
         "id": 1,
+        "rekeningName": "Rekening 1",
+        "saldo": "10.000.000",
+        "rekeningNumber": "1234",
         "imageName": "rekening-card-3",
         "activeStatus": false,
         "isShow": false,
@@ -22,6 +25,9 @@
     },
     {
         "id": 2,
+        "rekeningName": "Rekening 2",
+        "saldo": "15.000.000",
+        "rekeningNumber": "1234",
         "imageName": "rekening-card-4",
         "activeStatus": true,
         "isShow": false,
@@ -43,6 +49,9 @@
     },
     {
         "id": 3,
+        "rekeningName": "Rekening 3",
+        "saldo": "20.000.000",
+        "rekeningNumber": "1234",
         "imageName": "rekening-card-5",
         "activeStatus": false,
         "isShow": false,
@@ -64,6 +73,9 @@
     },
     {
         "id": 4,
+        "rekeningName": "Rekening 4",
+        "saldo": "25.000.000",
+        "rekeningNumber": "1234",
         "imageName": "rekening-card-6",
         "activeStatus": false,
         "isShow": false,

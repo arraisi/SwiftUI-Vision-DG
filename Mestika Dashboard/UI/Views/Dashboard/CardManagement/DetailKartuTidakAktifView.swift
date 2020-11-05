@@ -12,10 +12,7 @@ struct DetailKartuTidakAktifView: View {
         VStack(alignment: .center, spacing: 20) {
             
             HStack {
-                Image("ic_credit_card")
-                    .resizable()
-                    .frame(width: 70, height: 70)
-                    .colorInvert()
+                Image("credit-card-locked")
                 
                 Spacer()
             }
@@ -50,7 +47,7 @@ struct DetailKartuTidakAktifView: View {
                 .cornerRadius(12)
             
         }
-        .padding(.top, 40)
+        .padding(.top, 30)
         .padding(30)
         .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color.white)

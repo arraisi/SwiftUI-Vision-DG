@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct CardManagementScreen: View {
+    
     @State var data = myCardData
     
+    /* CAROUSEL VARIABLES */
     @State var firstOffset : CGFloat = 0
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
     
+    /* CARD VARIABLES */
     let itemWidth:CGFloat = 236
     let itemHeight:CGFloat = 197
     let itemGapHeight:CGFloat = 15
@@ -29,9 +32,7 @@ struct CardManagementScreen: View {
                     HStack(spacing: itemWidth * 0.09){
                         
                         ForEach(data){card in
-                            Image(card.imageName)
-                                .resizable()
-                                .frame(width: itemWidth, height: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                            CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
                                 .offset(x: self.offset)
                                 .highPriorityGesture(
                                     
