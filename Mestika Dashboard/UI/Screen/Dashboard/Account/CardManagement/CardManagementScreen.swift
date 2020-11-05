@@ -8,33 +8,68 @@
 import SwiftUI
 
 struct CardManagementScreen: View {
-    @State var data = [
-    Card(id: 0, imageName: "rekening-card-3", name: "KARTU 1", description: "KARTU 1", activeStatus: false, isShow: false),
-    Card(id: 1, imageName: "rekening-card-4", name: "KARTU 2", description: "KARTU 2", activeStatus: true, isShow: false),
-    Card(id: 2, imageName: "rekening-card-5", name: "KARTU 3", description: "KARTU 1", activeStatus: false, isShow: false),
-    Card(id: 3, imageName: "rekening-card-6", name: "KARTU 4", description: "KARTU 2", activeStatus: false, isShow: false)
-]
-
-    @State var kartuIndex: Int = 0
+    @State var data = myCardData
+    
+    @State var firstOffset : CGFloat = 0
+    @State var offset : CGFloat = 0
+    @State var count : CGFloat = 0
+    
+    let itemWidth:CGFloat = 236
+    let itemHeight:CGFloat = 197
+    let itemGapHeight:CGFloat = 15
     
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
             
             VStack() {
-                SnapCarouselView(itemWidth: 236, itemHeight: 197, itemGapHeight: 15, data: $data) { (index) in
+                // MARK: - CAROUSEL
+                VStack{
                     
-                    kartuIndex = index
+                    HStack(spacing: itemWidth * 0.09){
+                        
+                        ForEach(data){card in
+                            Image(card.imageName)
+                                .resizable()
+                                .frame(width: itemWidth, height: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                .offset(x: self.offset)
+                                .highPriorityGesture(
+                                    
+                                    DragGesture()
+                                        .onChanged({ (value) in
+                                            
+                                            if value.translation.width > 0 {
+                                                self.offset = value.location.x
+                                            }
+                                            else{
+                                                self.offset = value.location.x - self.itemWidth
+                                            }
+                                            
+                                        })
+                                        .onEnded(onDragEnded)
+                                )
+                        }
+                    }
+                    .frame(width: itemWidth)
+                    .offset(x: self.firstOffset)
                 }
+                .edgesIgnoringSafeArea(.bottom)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                 .padding(.vertical,40)
+                .animation(.spring())
+                .onAppear {
+                    
+                    self.firstOffset = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.08)) / 2) : 0)
+                    
+                    self.data[0].isShow = true
+                }
                 
-                if !kartuKuData[kartuIndex].activeStatus {
-                    DetailKartuTidakAktifView(kartu: data[kartuIndex])
+                if !data[Int(self.count)].activeStatus {
+                    DetailKartuTidakAktifView()
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                 }
                 else {
-                    DetailKartuAktifView()
+                    DetailKartuAktifView(data: data[Int(self.count)])
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                 }
                 
@@ -45,6 +80,47 @@ struct CardManagementScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("Kartu-Ku", displayMode: .inline)
+    }
+    
+    // MARK: - ON DRAG ENDED
+    private func onDragEnded(value: DragGesture.Value) {
+        if value.translation.width > 0 {
+            // dragThreshold -> distance of drag to next item
+            if value.translation.width > 5 && Int(self.count) != 0 {
+                
+                self.count -= 1
+                self.updateHeight(value: Int(self.count))
+                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+            }
+            else{
+                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+            }
+            
+        }
+        else{
+            // dragThreshold -> distance of drag to next item
+            if -value.translation.width > 5 && Int(self.count) !=  (self.data.count - 1){
+                
+                self.count += 1
+                self.updateHeight(value: Int(self.count))
+                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+            }
+            else{
+                
+                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+            }
+            
+        }
+    }
+    
+    // MARK: - UPDATE HEIGHT
+    private func updateHeight(value : Int){
+        
+        for i in 0..<data.count{
+            data[i].isShow = false
+        }
+        
+        data[value].isShow = true
     }
 }
 

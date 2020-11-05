@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct KartuKu: Hashable, Codable, Identifiable {
+struct MyCard: Hashable, Codable, Identifiable {
     
     var id : Int
     var imageName : String
     var activeStatus : Bool
     var isShow : Bool
-    fileprivate var details: [DetailKartuKu]
+    var details: [MyCardDetail]
     
 }
 
-struct DetailKartuKu: Hashable, Codable {
-    var name: Double
-    var description: Double
+struct MyCardDetail: Hashable, Codable {
+    var name: String
+    var description: String
 }

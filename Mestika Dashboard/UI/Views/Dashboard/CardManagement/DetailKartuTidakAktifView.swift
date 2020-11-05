@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct DetailKartuTidakAktifView: View {
-    
-    var kartu: Card
-    
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             
@@ -24,7 +21,7 @@ struct DetailKartuTidakAktifView: View {
             }
             
             HStack {
-                Text("\(kartu.name) Rekening Tidak Aktif")
+                Text("Kartu Rekening Tidak Aktif")
                     .font(.custom("Montserrat-SemiBold", size: 15))
                     .foregroundColor(Color(hex: "#232175"))
                 
@@ -63,7 +60,7 @@ struct DetailKartuTidakAktifView: View {
 
 struct DetailKartuTidakAktifView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailKartuTidakAktifView(kartu: Card(id: 0, imageName: "rekening-card-3", name: "KARTU 1", description: "KARTU 1", activeStatus: false, isShow: false))
+        DetailKartuTidakAktifView()
             .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width-60, height: 400))
     }
 }
