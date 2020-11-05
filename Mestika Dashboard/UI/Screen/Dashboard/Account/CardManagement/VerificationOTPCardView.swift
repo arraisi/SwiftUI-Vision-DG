@@ -108,8 +108,8 @@ struct VerificationOTPCardView: View {
                 destination: VerificationCVVCardView(),
                 label: {
                     
-                    Text("Masukkan Kode OTP")
-                        .font(.custom("Montserrat-SemiBold", size: 14))
+                    Text("MASUKAN KODE OTP")
+                        .font(.custom("Montserrat-SemiBold", size: 16))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 })

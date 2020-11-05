@@ -371,6 +371,7 @@
 		5245F8BA253FE818002E8B53 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C04B421F25540FB000DDE4C7 /* Models */,
 				523A86282542BE8600ADFE25 /* Components */,
 				5245F8BB253FE821002E8B53 /* Screen */,
 				52468ABC25413604007518AE /* Views */,
@@ -691,6 +692,30 @@
 			path = Statement;
 			sourceTree = "<group>";
 		};
+		C04B421F25540FB000DDE4C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C04B422025540FDC00DDE4C7 /* Dashboard */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C04B422025540FDC00DDE4C7 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				C04B422125540FE800DDE4C7 /* CardManagement */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		C04B422125540FE800DDE4C7 /* CardManagement */ = {
+			isa = PBXGroup;
+			children = (
+				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
+			);
+			path = CardManagement;
+			sourceTree = "<group>";
+		};
 		C092ABFD2553B51B0051CE3E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,19 +729,10 @@
 		C0A4F95C2552734A00566A11 /* CardManagement */ = {
 			isa = PBXGroup;
 			children = (
-				C0A4F97B2552874900566A11 /* BindingModel */,
 				C0A4F9872552896200566A11 /* DetailKartuTidakAktifView.swift */,
 				C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */,
 			);
 			path = CardManagement;
-			sourceTree = "<group>";
-		};
-		C0A4F97B2552874900566A11 /* BindingModel */ = {
-			isa = PBXGroup;
-			children = (
-				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
-			);
-			path = BindingModel;
 			sourceTree = "<group>";
 		};
 		C0A4F98C25528BF200566A11 /* fonts */ = {
