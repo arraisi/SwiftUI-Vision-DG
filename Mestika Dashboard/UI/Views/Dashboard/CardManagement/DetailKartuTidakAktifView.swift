@@ -19,27 +19,29 @@ struct DetailKartuTidakAktifView: View {
             
             HStack {
                 Text("Kartu Rekening Tidak Aktif")
-                    .font(.custom("Montserrat-SemiBold", size: 15))
+                    .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 Spacer()
             }
             
             HStack {
                 Text("Aktifkan terlebih dahulu kartu Anda untuk melihat pengaturan.")
-                    .font(.custom("Montserrat-Light", size: 10))
+                    .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(Color(hex: "#232175"))
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 Spacer()
             }
-            .padding(.bottom, 30)
+            .padding(.bottom, 20)
             
             NavigationLink(
                 destination: ActivationCardView(),
                 label: {
                     Text("AKTIFKAN KARTU-KU")
                         .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .font(.custom("Montserrat-SemiBold", size: 16))
                         .frame(maxWidth: .infinity, maxHeight: 40)
                 })
                 .frame(height: 50)
@@ -47,8 +49,8 @@ struct DetailKartuTidakAktifView: View {
                 .cornerRadius(12)
             
         }
-        .padding(.top, 30)
-        .padding(30)
+        .padding(.top, 20)
+        .padding(20)
         .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color.white)
         .cornerRadius(25)
@@ -59,5 +61,6 @@ struct DetailKartuTidakAktifView_Previews: PreviewProvider {
     static var previews: some View {
         DetailKartuTidakAktifView()
             .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width-60, height: 400))
+            .environment(\.colorScheme, .dark)
     }
 }

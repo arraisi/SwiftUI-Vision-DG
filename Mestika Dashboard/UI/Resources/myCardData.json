@@ -11,15 +11,27 @@
         "details": [
             {
                 "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "description": "Riwayat transaksi penggunaan kartu",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "e-Statement",
+                "description": "Laporan Keuangan Bulanan",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "Limit Transaksi",
+                "description": "Atur limit transaksi kartu",
+            },
+            {
+                "name": "Pengaturan PIN ATM",
+                "description": "Ubah PIN ATM / Reset PIN ATM",
+            },
+            {
+                "name": "Blokir Kartu",
+                "description": "Blokir kartu sementara",
+            },
+            {
+                "name": "Kartu Rusak",
+                "description": "Laporkan kerusakan kartu",
             }
         ]
     },
@@ -35,15 +47,27 @@
         "details": [
             {
                 "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "description": "Riwayat transaksi penggunaan kartu",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "e-Statement",
+                "description": "Laporan Keuangan Bulanan",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "Limit Transaksi",
+                "description": "Atur limit transaksi kartu",
+            },
+            {
+                "name": "Pengaturan PIN ATM",
+                "description": "Ubah PIN ATM / Reset PIN ATM",
+            },
+            {
+                "name": "Blokir Kartu",
+                "description": "Blokir kartu sementara",
+            },
+            {
+                "name": "Kartu Rusak",
+                "description": "Laporkan kerusakan kartu",
             }
         ]
     },
@@ -59,15 +83,27 @@
         "details": [
             {
                 "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "description": "Riwayat transaksi penggunaan kartu",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "e-Statement",
+                "description": "Laporan Keuangan Bulanan",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "Limit Transaksi",
+                "description": "Atur limit transaksi kartu",
+            },
+            {
+                "name": "Pengaturan PIN ATM",
+                "description": "Ubah PIN ATM / Reset PIN ATM",
+            },
+            {
+                "name": "Blokir Kartu",
+                "description": "Blokir kartu sementara",
+            },
+            {
+                "name": "Kartu Rusak",
+                "description": "Laporkan kerusakan kartu",
             }
         ]
     },
@@ -83,15 +119,27 @@
         "details": [
             {
                 "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "description": "Riwayat transaksi penggunaan kartu",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "e-Statement",
+                "description": "Laporan Keuangan Bulanan",
             },
             {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi kamu...",
+                "name": "Limit Transaksi",
+                "description": "Atur limit transaksi kartu",
+            },
+            {
+                "name": "Pengaturan PIN ATM",
+                "description": "Ubah PIN ATM / Reset PIN ATM",
+            },
+            {
+                "name": "Blokir Kartu",
+                "description": "Blokir kartu sementara",
+            },
+            {
+                "name": "Kartu Rusak",
+                "description": "Laporkan kerusakan kartu",
             }
         ]
     },

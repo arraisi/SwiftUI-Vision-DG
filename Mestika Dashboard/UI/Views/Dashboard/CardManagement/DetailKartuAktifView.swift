@@ -14,20 +14,21 @@ struct DetailKartuAktifView: View {
             
             ForEach(0..<data.details.count) {i in
                 HStack {
-                    Image("ic_credit_card")
+                    Image("ic_list")
                         .resizable()
                         .frame(width: 25, height: 25)
-                        .colorInvert()
                     
                     VStack(alignment: .leading){
                         Text(data.details[i].name)
                             .font(.custom("Montserrat-SemiBold", size: 15))
-                            .foregroundColor(Color(hex: "#232175"))
+                            .fixedSize(horizontal: false, vertical: true)
+//                            .foregroundColor(Color(hex: "#232175"))
                         
                         
                         Text(data.details[i].description)
                             .font(.custom("Montserrat-Light", size: 10))
-                            .foregroundColor(Color(hex: "#232175"))
+                            .fixedSize(horizontal: false, vertical: true)
+//                            .foregroundColor(Color(hex: "#232175"))
                     }
                     
                     Spacer()
