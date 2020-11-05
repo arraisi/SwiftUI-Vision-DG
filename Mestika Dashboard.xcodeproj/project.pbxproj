@@ -539,8 +539,7 @@
 				525950162553E03000C8CA5D /* ForgotPassword */,
 				5259501E2553E03000C8CA5D /* LoginScreen.swift */,
 			);
-			name = Login;
-			path = ../../../../../../Desktop/Login;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		525950162553E03000C8CA5D /* ForgotPassword */ = {
