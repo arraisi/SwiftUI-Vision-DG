@@ -7,33 +7,6 @@
         "imageName": "rekening-card-3",
         "activeStatus": false,
         "isShow": false,
-        
-        "details": [
-            {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi penggunaan kartu",
-            },
-            {
-                "name": "e-Statement",
-                "description": "Laporan Keuangan Bulanan",
-            },
-            {
-                "name": "Limit Transaksi",
-                "description": "Atur limit transaksi kartu",
-            },
-            {
-                "name": "Pengaturan PIN ATM",
-                "description": "Ubah PIN ATM / Reset PIN ATM",
-            },
-            {
-                "name": "Blokir Kartu",
-                "description": "Blokir kartu sementara",
-            },
-            {
-                "name": "Kartu Rusak",
-                "description": "Laporkan kerusakan kartu",
-            }
-        ]
     },
     {
         "id": 2,
@@ -43,33 +16,6 @@
         "imageName": "rekening-card-4",
         "activeStatus": true,
         "isShow": false,
-        
-        "details": [
-            {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi penggunaan kartu",
-            },
-            {
-                "name": "e-Statement",
-                "description": "Laporan Keuangan Bulanan",
-            },
-            {
-                "name": "Limit Transaksi",
-                "description": "Atur limit transaksi kartu",
-            },
-            {
-                "name": "Pengaturan PIN ATM",
-                "description": "Ubah PIN ATM / Reset PIN ATM",
-            },
-            {
-                "name": "Blokir Kartu",
-                "description": "Blokir kartu sementara",
-            },
-            {
-                "name": "Kartu Rusak",
-                "description": "Laporkan kerusakan kartu",
-            }
-        ]
     },
     {
         "id": 3,
@@ -79,33 +25,6 @@
         "imageName": "rekening-card-5",
         "activeStatus": false,
         "isShow": false,
-        
-        "details": [
-            {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi penggunaan kartu",
-            },
-            {
-                "name": "e-Statement",
-                "description": "Laporan Keuangan Bulanan",
-            },
-            {
-                "name": "Limit Transaksi",
-                "description": "Atur limit transaksi kartu",
-            },
-            {
-                "name": "Pengaturan PIN ATM",
-                "description": "Ubah PIN ATM / Reset PIN ATM",
-            },
-            {
-                "name": "Blokir Kartu",
-                "description": "Blokir kartu sementara",
-            },
-            {
-                "name": "Kartu Rusak",
-                "description": "Laporkan kerusakan kartu",
-            }
-        ]
     },
     {
         "id": 4,
@@ -115,32 +34,5 @@
         "imageName": "rekening-card-6",
         "activeStatus": false,
         "isShow": false,
-        
-        "details": [
-            {
-                "name": "Riwayat Transaksi",
-                "description": "Riwayat transaksi penggunaan kartu",
-            },
-            {
-                "name": "e-Statement",
-                "description": "Laporan Keuangan Bulanan",
-            },
-            {
-                "name": "Limit Transaksi",
-                "description": "Atur limit transaksi kartu",
-            },
-            {
-                "name": "Pengaturan PIN ATM",
-                "description": "Ubah PIN ATM / Reset PIN ATM",
-            },
-            {
-                "name": "Blokir Kartu",
-                "description": "Blokir kartu sementara",
-            },
-            {
-                "name": "Kartu Rusak",
-                "description": "Laporkan kerusakan kartu",
-            }
-        ]
     },
 ]

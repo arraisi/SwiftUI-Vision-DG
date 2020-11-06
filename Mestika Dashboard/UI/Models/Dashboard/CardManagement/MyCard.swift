@@ -16,11 +16,5 @@ struct MyCard: Hashable, Codable, Identifiable {
     var imageName : String
     var activeStatus : Bool
     var isShow : Bool
-    var details: [MyCardDetail]
     
-}
-
-struct MyCardDetail: Hashable, Codable {
-    var name: String
-    var description: String
 }

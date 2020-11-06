@@ -8,35 +8,130 @@
 import SwiftUI
 
 struct DetailKartuAktifView: View {
+    
     var data: MyCard
+    
     var body: some View {
-        VStack(alignment: .center, spacing: 15) {
+        VStack(alignment: .center, spacing: 25) {
             
-            ForEach(0..<data.details.count) {i in
-                HStack {
-                    Image("ic_list")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                    
-                    VStack(alignment: .leading){
-                        Text(data.details[i].name)
-                            .font(.custom("Montserrat-SemiBold", size: 15))
-                            .fixedSize(horizontal: false, vertical: true)
-//                            .foregroundColor(Color(hex: "#232175"))
-                        
-                        
-                        Text(data.details[i].description)
-                            .font(.custom("Montserrat-Light", size: 10))
-                            .fixedSize(horizontal: false, vertical: true)
-//                            .foregroundColor(Color(hex: "#232175"))
+            NavigationLink(
+                destination: Text("Riwayat Transaksi"),
+                label: {
+                    HStack{
+                        Image("ic_list")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        VStack(alignment: .leading){
+                            Text("Riwayat Transaksi")
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                            
+                            
+                            Text("Riwayat transaksi pengunaan kartu")
+                                .font(.custom("Montserrat-Light", size: 10))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                        }
+                        Spacer()
                     }
-                    
-                    Spacer()
-                }
-            }
+                })
+            
+            NavigationLink(
+                destination: Text("e-Statement"),
+                label: {
+                    HStack{
+                        Image("ic_list")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        VStack(alignment: .leading){
+                            Text("e-Statement")
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                            
+                            
+                            Text("Laporan keuangan bulanan")
+                                .font(.custom("Montserrat-Light", size: 10))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                        }
+                        Spacer()
+                    }
+                })
+            
+            NavigationLink(
+                destination: LimitCardView(card: data),
+                label: {
+                    HStack{
+                        Image("ic_list")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        VStack(alignment: .leading){
+                            Text("Limit Transaksi")
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                            
+                            
+                            Text("Atur limit transaksi kartu")
+                                .font(.custom("Montserrat-Light", size: 10))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                        }
+                        Spacer()
+                    }
+                })
+            
+            NavigationLink(
+                destination: Text("Pengaturan PIN ATM"),
+                label: {
+                    HStack{
+                        Image("ic_list")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        VStack(alignment: .leading){
+                            Text("Pengaturan PIN ATM")
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                            
+                            
+                            Text("Ubah PIN ATM / Reset PIN ATM")
+                                .font(.custom("Montserrat-Light", size: 10))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                        }
+                        Spacer()
+                    }
+                })
+            
+            NavigationLink(
+                destination: Text("Blokir Kartu"),
+                label: {
+                    HStack{
+                        Image("ic_list")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        VStack(alignment: .leading){
+                            Text("Pengaturan PIN ATM")
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                            
+                            
+                            Text("Blokir kartu sementara")
+                                .font(.custom("Montserrat-Light", size: 10))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                        }
+                        Spacer()
+                    }
+                })
         }
-        .padding(.top, 15)
-        .padding(30)
+        .padding(.top, 25)
+        .padding(.bottom, 10)
+        .padding(20)
         .background(Color.white)
     }
 }

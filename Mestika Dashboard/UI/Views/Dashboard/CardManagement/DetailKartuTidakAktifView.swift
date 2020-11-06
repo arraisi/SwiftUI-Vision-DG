@@ -34,7 +34,7 @@ struct DetailKartuTidakAktifView: View {
                 
                 Spacer()
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 10)
             
             NavigationLink(
                 destination: ActivationCardView(),
@@ -49,8 +49,8 @@ struct DetailKartuTidakAktifView: View {
                 .cornerRadius(12)
             
         }
-        .padding(.top, 45)
-        .padding(30)
+        .padding(.top, 35)
+        .padding(20)
         .background(Color.white)
     }
 }

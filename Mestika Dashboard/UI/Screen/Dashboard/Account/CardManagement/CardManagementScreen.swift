@@ -21,74 +21,76 @@ struct CardManagementScreen: View {
     let itemGapHeight:CGFloat = 10
     
     var body: some View {
-        ZStack {
-            Color(hex: "#F6F8FB")
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack() {
-                // MARK: - CAROUSEL
-                VStack{
-                    
-                    HStack(spacing: itemWidth * 0.08){
+        ScrollView(.vertical, showsIndicators: false) {
+            ZStack {
+                Color(hex: "#F6F8FB")
+                
+                VStack() {
+                    // MARK: - CAROUSEL
+                    VStack{
                         
-                        ForEach(data){card in
-                            CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
-                                .offset(x: self.offset)
-                                .highPriorityGesture(
-                                    
-                                    DragGesture()
-                                        .onChanged({ (value) in
-                                            
-                                            if value.translation.width > 0 {
-                                                self.offset = value.location.x
-                                            }
-                                            else{
-                                                self.offset = value.location.x - self.itemWidth
-                                            }
-                                            
-                                        })
-                                        .onEnded(onDragEnded)
-                                )
+                        HStack(spacing: itemWidth * 0.08){
+                            
+                            ForEach(data){card in
+                                CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                    .offset(x: self.offset)
+                                    .highPriorityGesture(
+                                        
+                                        DragGesture()
+                                            .onChanged({ (value) in
+                                                
+                                                if value.translation.width > 0 {
+                                                    self.offset = value.location.x
+                                                }
+                                                else{
+                                                    self.offset = value.location.x - self.itemWidth
+                                                }
+                                                
+                                            })
+                                            .onEnded(onDragEnded)
+                                    )
+                            }
                         }
+                        .frame(width: itemWidth)
+                        .offset(x: self.firstOffset)
                     }
-                    .frame(width: itemWidth)
-                    .offset(x: self.firstOffset)
-                }
-                .edgesIgnoringSafeArea(.bottom)
-                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                .animation(.spring())
-                .padding(.vertical,25)
-                .onAppear {
+                    .edgesIgnoringSafeArea(.bottom)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .animation(.spring())
+                    .padding(.vertical,25)
+                    .onAppear {
+                        
+                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.2)) / 2) : 0)
+                        
+                        self.data[0].isShow = true
+                    }
+                    if !data[Int(self.count)].activeStatus {
+                        DetailKartuTidakAktifView()
+                            .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                            .frame(width: UIScreen.main.bounds.width - 60)
+                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    }
+                    else {
+                        DetailKartuAktifView(data: data[Int(self.count)])
+                            .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                            .frame(width: UIScreen.main.bounds.width - 60)
+                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    }
                     
-                    self.firstOffset = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.1)) / 2) : 0)
-                    
-                    self.data[0].isShow = true
+                    Spacer()
                 }
-                if !data[Int(self.count)].activeStatus {
-                    DetailKartuTidakAktifView()
-                        .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                        .frame(width: UIScreen.main.bounds.width - 60)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                }
-                else {
-                    DetailKartuAktifView(data: data[Int(self.count)])
-                        .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                        .frame(width: UIScreen.main.bounds.width - 60)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                }
-                
-                Spacer()
-                
             }
+            .navigationBarTitle("Kartu-Ku", displayMode: .inline)
         }
-        .navigationBarTitle("Kartu-Ku", displayMode: .inline)
+        .background(Color(hex: "#F6F8FB")
+                        .edgesIgnoringSafeArea(.all))
     }
     
     // MARK: - ON DRAG ENDED
     private func onDragEnded(value: DragGesture.Value) {
         if value.translation.width > 0 {
             // dragThreshold -> distance of drag to next item
-            if value.translation.width > 5 && Int(self.count) != 0 {
+            if value.translation.width > self.itemWidth / 4 && Int(self.count) != 0 {
                 
                 self.count -= 1
                 self.updateHeight(value: Int(self.count))
@@ -101,7 +103,7 @@ struct CardManagementScreen: View {
         }
         else{
             // dragThreshold -> distance of drag to next item
-            if -value.translation.width > 5 && Int(self.count) !=  (self.data.count - 1){
+            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.data.count - 1){
                 
                 self.count += 1
                 self.updateHeight(value: Int(self.count))
