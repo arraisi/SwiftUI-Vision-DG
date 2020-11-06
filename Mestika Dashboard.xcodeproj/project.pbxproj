@@ -105,7 +105,6 @@
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
 		C00702B52554E2B60089DBD1 /* LimitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702B42554E2B60089DBD1 /* LimitCardView.swift */; };
-		C00702BA2554F4EF0089DBD1 /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702B92554F4EF0089DBD1 /* NavigationBarModifier.swift */; };
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
@@ -250,7 +249,6 @@
 		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
 		6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStatementView.swift; sourceTree = "<group>"; };
 		C00702B42554E2B60089DBD1 /* LimitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitCardView.swift; sourceTree = "<group>"; };
-		C00702B92554F4EF0089DBD1 /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
 		C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithToolBarKeyBoard.swift; sourceTree = "<group>"; };
 		C00702C6255531280089DBD1 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
 		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
@@ -543,7 +541,6 @@
 				525DB5142546828100D48075 /* String+Extensions.swift */,
 				525DB5192546829700D48075 /* Int+Extensions.swift */,
 				526B65FC254FF4C300C13C36 /* CornerRadius+Extensions.swift */,
-				C00702B92554F4EF0089DBD1 /* NavigationBarModifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -939,7 +936,6 @@
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
-				C00702BA2554F4EF0089DBD1 /* NavigationBarModifier.swift in Sources */,
 				C092ABF92553B4BF0051CE3E /* Data.swift in Sources */,
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
 				525950222553E03000C8CA5D /* ForgotPasswordOtpScreen.swift in Sources */,
