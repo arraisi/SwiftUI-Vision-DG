@@ -45,7 +45,8 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 Color(hex: "#F6F8FB")
-                BottomNavigationView()
+                RegisterView()
+                    .navigationBarHidden(true)
             }
             .edgesIgnoringSafeArea(.top)
         }

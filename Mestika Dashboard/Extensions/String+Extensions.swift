@@ -18,4 +18,16 @@ extension String {
         }
         return result
     }
+    
+    func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
+        var chars = Array(myString)
+        if chars.count > 5 {
+            for data in index {
+                chars[data] = newChar
+            }
+        }
+
+        let modifiedString = String(chars)
+        return modifiedString
+    }
 }

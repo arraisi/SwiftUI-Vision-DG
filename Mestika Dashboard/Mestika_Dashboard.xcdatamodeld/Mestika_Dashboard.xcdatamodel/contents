@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="annualGrossIncome" optional="YES" attributeType="String"/>
+        <attribute name="companyAddress" optional="YES" attributeType="String"/>
+        <attribute name="companyBusinessField" optional="YES" attributeType="String"/>
+        <attribute name="companyKecamatan" optional="YES" attributeType="String"/>
+        <attribute name="companyKelurahan" optional="YES" attributeType="String"/>
+        <attribute name="companyName" optional="YES" attributeType="String"/>
+        <attribute name="companyPhoneNumber" optional="YES" attributeType="String"/>
+        <attribute name="companyPostalCode" optional="YES" attributeType="String"/>
+        <attribute name="correspondenceAddress" optional="YES" attributeType="String"/>
+        <attribute name="correspondenceKecamatan" optional="YES" attributeType="String"/>
+        <attribute name="correspondenceKelurahan" optional="YES" attributeType="String"/>
+        <attribute name="correspondencePostalCode" optional="YES" attributeType="String"/>
+        <attribute name="correspondenceRt" optional="YES" attributeType="String"/>
+        <attribute name="correspondenceRw" optional="YES" attributeType="String"/>
+        <attribute name="deviceId" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="funderName" optional="YES" attributeType="String"/>
+        <attribute name="funderOccupation" optional="YES" attributeType="String"/>
+        <attribute name="funderRelation" optional="YES" attributeType="String"/>
+        <attribute name="hasNoNpwp" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasOtherSourceOfIncome" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageKtp" optional="YES" attributeType="String"/>
+        <attribute name="imageNpwp" optional="YES" attributeType="String"/>
+        <attribute name="imageSelfie" optional="YES" attributeType="String"/>
+        <attribute name="imageSignature" optional="YES" attributeType="String"/>
+        <attribute name="isAddressEqualToDukcapil" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isAgreeTnc" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isAgreetoShare" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isWni" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="monthlyDepositAmount" optional="YES" attributeType="String"/>
+        <attribute name="monthlyDepositFrequency" optional="YES" attributeType="String"/>
+        <attribute name="monthlyWithdrawalAmount" optional="YES" attributeType="String"/>
+        <attribute name="monthlyWithdrawalFrequency" optional="YES" attributeType="String"/>
+        <attribute name="nik" optional="YES" attributeType="String"/>
+        <attribute name="occupation" optional="YES" attributeType="String"/>
+        <attribute name="otherSourceOfIncome" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="pin" optional="YES" attributeType="String"/>
+        <attribute name="position" optional="YES" attributeType="String"/>
+        <attribute name="productName" optional="YES" attributeType="String"/>
+        <attribute name="purposeOfAccountOpening" optional="YES" attributeType="String"/>
+        <attribute name="relativeRelationship" optional="YES" attributeType="String"/>
+        <attribute name="relativesAddress" optional="YES" attributeType="String"/>
+        <attribute name="relativesKecamatan" optional="YES" attributeType="String"/>
+        <attribute name="relativesKelurahan" optional="YES" attributeType="String"/>
+        <attribute name="relativesName" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="relativesPhoneNumber" optional="YES" attributeType="String"/>
+        <attribute name="relativesPostalCode" optional="YES" attributeType="String"/>
+        <attribute name="sourcOfFunds" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="838"/>
+    </elements>
 </model>
