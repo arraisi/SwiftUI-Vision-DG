@@ -499,8 +499,9 @@
 				C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */,
 				C00702C6255531280089DBD1 /* DismissingKeyboard.swift */,
 			);
-			path = Components;
-			sourceTree = "<group>";
+			name = Components;
+			path = "Mestika Dashboard/UI/Components";
+			sourceTree = SOURCE_ROOT;
 		};
 		5245F878253FE702002E8B53 = {
 			isa = PBXGroup;
@@ -731,8 +732,9 @@
 				52ADFF622557DFDB00A1001F /* RegisterView.swift */,
 				52ADFF792557DFDB00A1001F /* Validation Form */,
 			);
-			path = Register;
-			sourceTree = "<group>";
+			name = Register;
+			path = "Mestika Dashboard/UI/Screen/Register";
+			sourceTree = SOURCE_ROOT;
 		};
 		52474D822540320D0094B758 /* Extensions */ = {
 			isa = PBXGroup;
@@ -895,24 +897,26 @@
 				52ADFEB82557DA0700A1001F /* KeyboardGuardian.swift */,
 			);
 			name = Utils;
-			path = UI/Utils;
-			sourceTree = "<group>";
+			path = "Mestika Dashboard/UI/Utils";
+			sourceTree = SOURCE_ROOT;
 		};
 		52ADFEC42557DA3700A1001F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				52ADFEC52557DA3700A1001F /* SliderAssetsViewModel.swift */,
 			);
-			path = ViewModel;
-			sourceTree = "<group>";
+			name = ViewModel;
+			path = "Mestika Dashboard/UI/ViewModel";
+			sourceTree = SOURCE_ROOT;
 		};
 		52ADFEC62557DA3700A1001F /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				52ADFEC72557DA3700A1001F /* AssetsService.swift */,
 			);
-			path = Services;
-			sourceTree = "<group>";
+			name = Services;
+			path = "Mestika Dashboard/UI/Services";
+			sourceTree = SOURCE_ROOT;
 		};
 		52ADFEE22557DBB500A1001F /* Register */ = {
 			isa = PBXGroup;
@@ -1068,8 +1072,9 @@
 				52ADFE7C2557D99F00A1001F /* Registrasi */,
 				C04B422025540FDC00DDE4C7 /* Dashboard */,
 			);
-			path = Models;
-			sourceTree = "<group>";
+			name = Models;
+			path = "Mestika Dashboard/UI/Models";
+			sourceTree = SOURCE_ROOT;
 		};
 		C04B422025540FDC00DDE4C7 /* Dashboard */ = {
 			isa = PBXGroup;

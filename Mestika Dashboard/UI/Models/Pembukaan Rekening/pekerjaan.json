@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Pejabat Pemerintah"
+    },
+    {
+        "id": 2,
+        "name": "Parpol"
+    },
+    {
+        "id": 3,
+        "name": "Pegawai Swasta"
+    },
+    {
+        "id": 4,
+        "name": "Wirausaha"
+    },
+    {
+        "id": 5,
+        "name": "Pegawai Negeri"
+    },
+    {
+        "id": 6,
+        "name": "Pegawai BUMN / BUMD"
+    },
+    {
+        "id": 7,
+        "name": "Polisi"
+    },
+    {
+        "id": 8,
+        "name": "Militer"
+    },
+    {
+        "id": 9,
+        "name": "Pensiunan"
+    }
+]

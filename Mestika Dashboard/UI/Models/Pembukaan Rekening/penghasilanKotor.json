@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "< Rp. 5 Juta"
+    },
+    {
+        "id": 2,
+        "name": "Rp. 5 Juta - 10 Juta"
+    },
+    {
+        "id": 3,
+        "name": "Rp. 10 Juta - 20 Juta"
+    },
+    {
+        "id": 4,
+        "name": "Rp. 20 Juta - 100 Juta"
+    },
+    {
+        "id": 5,
+        "name": "> 100 Juta"
+    }
+]

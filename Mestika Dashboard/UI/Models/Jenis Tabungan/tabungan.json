@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "namaTabungan": "Nama Tabungan 1",
+        "kartu": "Saving Image"
+    },
+    {
+        "id": 2,
+        "namaTabungan": "Nama Tabungan 2",
+        "kartu": "Saving Image"
+    },
+    {
+        "id": 3,
+        "namaTabungan": "Nama Tabungan 3",
+        "kartu": "Saving Image"
+    }
+]
