@@ -9,11 +9,17 @@ import SwiftUI
 
 struct ConfirmationPINView: View {
     
-    @State var pin = ""
     @AppStorage("lock_Password") var key = "123456"
+    
+    @State var pin = ""
     @State var unLocked = false
     @State var wrongPin = false
+    
     var nextView: AnyView
+    
+    /* Boolean for Show Modal */
+    @State var showingModal = false
+//    @State var falseCount = 0
     
     var body: some View {
         ZStack {
@@ -72,16 +78,68 @@ struct ConfirmationPINView: View {
                 .padding(.bottom)
                 .padding(.horizontal, 30)
             }
+            
+            // Background Color When Modal Showing
+            if self.showingModal {
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
         }
         .navigationBarTitle("Reset PIN Transaksi", displayMode: .inline)
         .navigationBarItems(trailing: NavigationLink(destination: CardManagementScreen(), label: {
             Text("Cancel")
         }))
+        .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            createBottomFloater()
+        }
+    }
+    
+    // MARK: - BOTTOM FLOATER FOR MESSAGE
+    func createBottomFloater() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                
+                Image(systemName: "xmark.circle")
+                    .resizable()
+                    .frame(width: 40, height: 40, alignment: .center)
+                    .foregroundColor(Color(hex: "#F32424"))
+                
+                
+                Text("PIN ATM Salah")
+                    .font(.custom("Montserrat-Bold", size: 18))
+                    .foregroundColor(Color(hex: "#F32424"))
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+            }
+            .padding(.top, 25)
+            
+            HStack {
+                Text("PIN ATM Anda telah salah 3 kali, silahkan ulangi lagi minggu depan.")
+                    .font(.custom("Montserrat-Light", size: 12))
+                    .foregroundColor(Color(hex: "#232175"))
+                Spacer()
+            }
+            
+            NavigationLink(destination: BottomNavigationView()) {
+                Text("Kembali ke Halaman Utama")
+                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.top, 15)
+        }
+        .padding(25)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
 struct ConfirmationPINView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationPINView(pin: "", key: "", nextView: AnyView(CardManagementScreen()))
+        ConfirmationPINView(key: "", pin: "", nextView: AnyView(CardManagementScreen()))
     }
 }

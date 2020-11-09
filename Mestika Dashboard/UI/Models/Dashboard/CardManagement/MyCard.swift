@@ -15,6 +15,7 @@ struct MyCard: Hashable, Codable, Identifiable {
     var rekeningNumber: String
     var imageName : String
     var activeStatus : Bool
+    var blocked : Bool
     var isShow : Bool
     
 }

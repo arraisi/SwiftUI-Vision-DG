@@ -32,7 +32,7 @@ struct CardManagementScreen: View {
                         HStack(spacing: itemWidth * 0.08){
                             
                             ForEach(cards){card in
-                                CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
                                     .offset(x: self.offset)
                                     .highPriorityGesture(
                                         
@@ -60,7 +60,7 @@ struct CardManagementScreen: View {
                     .padding(.vertical,25)
                     .onAppear {
                         
-                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.2)) / 2) : 0)
+                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.1)) / 2) : 0)
                         
                         self.cards[0].isShow = true
                     }

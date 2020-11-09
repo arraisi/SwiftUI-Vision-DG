@@ -27,7 +27,7 @@ struct LimitCardView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 
                 VStack {
-                    CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202)
+                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202)
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     
                     VStack(alignment: .leading, spacing: 30, content: {
@@ -96,7 +96,7 @@ struct LimitCardView: View {
                         }
                         
                         NavigationLink(
-                            destination: ConfirmationPINView(pin: "", key: "123456", nextView: AnyView(LimitCardView(card: card, showingModal: true))),
+                            destination: ConfirmationPINView(key: "123456", pin: "", nextView: AnyView(LimitCardView(card: card, showingModal: true))),
                             label: {
                                 Text("SIMPAN PERUBAHAN")
                                     .foregroundColor(.white)
@@ -164,14 +164,7 @@ struct LimitCardView: View {
             
             HStack {
                 
-                //                if !unlocked {
-                //                    Image(systemName: "xmark.circle")
-                //                        .resizable()
-                //                        .frame(width: 40, height: 40, alignment: .center)
-                //                        .foregroundColor(Color(hex: "#F32424"))
-                //                }
-                
-                Text("Aktifasi Kartu ATM Anda Telah Berhasil")
+                Text("Perubahan Limit Transaksi Kartu Anda Telah Berhasil di Simpan.")
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -207,6 +200,6 @@ extension NumberFormatter {
 
 struct LimitCardView_Previews: PreviewProvider {
     static var previews: some View {
-        LimitCardView(card: myCardData[1])
+        LimitCardView(card: myCardData[0])
     }
 }

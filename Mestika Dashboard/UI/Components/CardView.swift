@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct CardView: View {
-    var background: Image
-    var rekeningName: String
-    var saldo: String
-    var rekeningNumber: String
-    var activeStatus: Bool
+    var card: MyCard
     
     var cardWidth: CGFloat
     var cardHeight: CGFloat
     
     var body: some View {
         ZStack {
-            background
+            Image(card.imageName)
                 .resizable()
                 .frame(width: cardWidth, height: cardHeight)
             
@@ -34,7 +30,7 @@ struct CardView: View {
                 .padding(.vertical, 10)
                 
                 HStack{
-                    Text(rekeningName)
+                    Text(card.rekeningName)
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Regular", size: 12))
                     Spacer()
@@ -45,7 +41,7 @@ struct CardView: View {
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Bold", size: 20))
                     
-                    Text(saldo)
+                    Text(card.saldo)
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Bold", size: 30))
                     Spacer()
@@ -55,7 +51,7 @@ struct CardView: View {
                     Text("****")
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Regular", size: 12))
-                    Text(rekeningNumber)
+                    Text(card.rekeningNumber)
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-Regular", size: 12))
                     Spacer()
@@ -63,7 +59,12 @@ struct CardView: View {
                 
                 HStack{
                     Spacer()
-                    if activeStatus {
+                    if card.blocked {
+                        Text("Blokir Sementara")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 10))
+                    }
+                    else if card.activeStatus {
                         Text("Aktif")
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 10))
@@ -86,6 +87,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(background: Image("card_bg"), rekeningName: "Rekening Utama", saldo: "12.000.000", rekeningNumber: "1234", activeStatus: true, cardWidth: 315, cardHeight: 197)
+        CardView(card: myCardData[1], cardWidth: 315, cardHeight: 197)
     }
 }
