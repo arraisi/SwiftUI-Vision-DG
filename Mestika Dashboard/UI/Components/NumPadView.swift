@@ -71,7 +71,6 @@ struct NumPadView: View {
                                     wrongPass = false
                                 }
                                 else{
-                                    
                                     wrongPass = true
                                     password.removeAll()
                                 }

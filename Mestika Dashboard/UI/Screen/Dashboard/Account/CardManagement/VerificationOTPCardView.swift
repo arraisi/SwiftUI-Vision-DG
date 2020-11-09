@@ -9,6 +9,9 @@ import SwiftUI
 
 struct VerificationOTPCardView: View {
     
+    var otp = "123456"
+    var card: MyCard
+    
     /*
      Variable PIN OTP
      */
@@ -103,10 +106,19 @@ struct VerificationOTPCardView: View {
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
             
-            NavigationLink(
-                destination: VerificationCVVCardView(),
+            NavigationLink(destination: VerificationCVVCardView(card: card), isActive: $isOtpValid) {
+                Text("")
+            }
+            
+            Button(
+                action: {
+                    if pin == otp {
+                        isOtpValid.toggle()
+                    } else {
+                        pin = ""
+                    }
+                },
                 label: {
-                    
                     Text("MASUKAN KODE OTP")
                         .font(.custom("Montserrat-SemiBold", size: 16))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -117,26 +129,10 @@ struct VerificationOTPCardView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 30)
                 .padding(.bottom, 10)
-            
-//            Button(action: {
-//
-//                showingModal.toggle()
-//
-//            }, label: {
-//
-//                Text("Masukkan Kode OTP")
-//                    .font(.custom("Montserrat-SemiBold", size: 14))
-//                    .foregroundColor(Color(hex: "#2334D0"))
-//                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-//            })
-//            .background(Color.white)
-//            .cornerRadius(12)
-//            .padding(.horizontal, 20)
-//            .padding(.top, 30)
-//            .padding(.bottom, 10)
         }
         .frame(width: UIScreen.main.bounds.width - 30)
     }
+    
     // MARK: - PIN DOTS
     private var pinDots: some View {
         HStack {
@@ -198,6 +194,6 @@ struct VerificationOTPCardView: View {
 
 struct VerificationOTPCardView_Previews: PreviewProvider {
     static var previews: some View {
-        VerificationOTPCardView()
+        VerificationOTPCardView(card: myCardData[0])
     }
 }

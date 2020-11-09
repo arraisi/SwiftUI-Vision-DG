@@ -208,6 +208,7 @@
 		C0A4F99E25528C0700566A11 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */; };
 		C0A4F9AC25529A9700566A11 /* ArrowDownShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */; };
 		C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */; };
+		C0C68E6E2558E19A0010E1EE /* ConfirmationPINView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* ConfirmationPINView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* ActivationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* ActivationCardView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* VerificationOTPCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* VerificationOTPCardView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* VerificationCVVCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* VerificationCVVCardView.swift */; };
@@ -437,6 +438,7 @@
 		C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowDownShape.swift; sourceTree = "<group>"; };
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
+		C0C68E6D2558E19A0010E1EE /* ConfirmationPINView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPINView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* ActivationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationCardView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* VerificationOTPCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationOTPCardView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* VerificationCVVCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCVVCardView.swift; sourceTree = "<group>"; };
@@ -611,7 +613,6 @@
 		52468ABC25413604007518AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				52ADFEE22557DBB500A1001F /* Register */,
 				52C3485F25426DFF00F08F37 /* Sidemenu */,
 				52468ABD2541360C007518AE /* Dashboard */,
 			);
@@ -626,7 +627,6 @@
 				524745F42547C52E001F43C5 /* Favorite */,
 				52C348702542876F00F08F37 /* Transfer */,
 				52468AD525417238007518AE /* BindingModel */,
-				C0A4F95C2552734A00566A11 /* CardManagement */,
 				52468ABE254136A4007518AE /* GridMenuView.swift */,
 				52468AC62541694F007518AE /* ListRekeningView.swift */,
 				52468ACB25416D59007518AE /* ListEwalletView.swift */,
@@ -800,6 +800,7 @@
 		526B657E254FB70200C13C36 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				C0A4F95C2552734A00566A11 /* CardManagement */,
 				526B657F254FB70800C13C36 /* BindingModel */,
 				526B6588254FB7AA00C13C36 /* ListHistoryTransactionView.swift */,
 				526B658D254FBADC00C13C36 /* ListMySavingsView.swift */,
@@ -917,13 +918,6 @@
 			name = Services;
 			path = "Mestika Dashboard/UI/Services";
 			sourceTree = SOURCE_ROOT;
-		};
-		52ADFEE22557DBB500A1001F /* Register */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Register;
-			sourceTree = "<group>";
 		};
 		52ADFF5B2557DFDB00A1001F /* Personal Identity */ = {
 			isa = PBXGroup;
@@ -1135,6 +1129,7 @@
 				C0D7B5DA2552AF43009C3976 /* VerificationOTPCardView.swift */,
 				C0D7B5E22552B1B7009C3976 /* VerificationCVVCardView.swift */,
 				C00702B42554E2B60089DBD1 /* LimitCardView.swift */,
+				C0C68E6D2558E19A0010E1EE /* ConfirmationPINView.swift */,
 			);
 			path = CardManagement;
 			sourceTree = "<group>";
@@ -1443,6 +1438,7 @@
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
 				52ADFF402557DE6000A1001F /* SnapCarouselView.swift in Sources */,
+				C0C68E6E2558E19A0010E1EE /* ConfirmationPINView.swift in Sources */,
 				C0D7B5E32552B1B7009C3976 /* VerificationCVVCardView.swift in Sources */,
 				52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */,
 				526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */,

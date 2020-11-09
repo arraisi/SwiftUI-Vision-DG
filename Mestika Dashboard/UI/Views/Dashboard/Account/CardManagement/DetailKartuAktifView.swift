@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailKartuAktifView: View {
     
-    var data: MyCard
+    var card: MyCard
     
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
@@ -61,7 +61,7 @@ struct DetailKartuAktifView: View {
                 })
             
             NavigationLink(
-                destination: LimitCardView(card: data),
+                destination: LimitCardView(card: card),
                 label: {
                     HStack{
                         Image("ic_list")
@@ -138,7 +138,7 @@ struct DetailKartuAktifView: View {
 
 struct DetailKartuAktifView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailKartuAktifView(data: myCardData[0])
+        DetailKartuAktifView(card: myCardData[0])
             .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width-60, height: 400))
     }
 }

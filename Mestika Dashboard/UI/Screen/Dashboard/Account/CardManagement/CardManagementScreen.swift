@@ -10,7 +10,7 @@ import SwiftUI
 struct CardManagementScreen: View {
     
     /* Carousel Variables */
-    @State var data = myCardData
+    @State var cards = myCardData
     @State var firstOffset : CGFloat = 0
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
@@ -31,7 +31,7 @@ struct CardManagementScreen: View {
                         
                         HStack(spacing: itemWidth * 0.08){
                             
-                            ForEach(data){card in
+                            ForEach(cards){card in
                                 CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
                                     .offset(x: self.offset)
                                     .highPriorityGesture(
@@ -60,18 +60,18 @@ struct CardManagementScreen: View {
                     .padding(.vertical,25)
                     .onAppear {
                         
-                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.2)) / 2) : 0)
+                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.2)) / 2) : 0)
                         
-                        self.data[0].isShow = true
+                        self.cards[0].isShow = true
                     }
-                    if !data[Int(self.count)].activeStatus {
-                        DetailKartuTidakAktifView()
+                    if !cards[Int(self.count)].activeStatus {
+                        DetailKartuTidakAktifView(card: cards[Int(self.count)])
                             .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 60)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     }
                     else {
-                        DetailKartuAktifView(data: data[Int(self.count)])
+                        DetailKartuAktifView(card: cards[Int(self.count)])
                             .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 60)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
@@ -103,7 +103,7 @@ struct CardManagementScreen: View {
         }
         else{
             // dragThreshold -> distance of drag to next item
-            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.data.count - 1){
+            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.cards.count - 1){
                 
                 self.count += 1
                 self.updateHeight(value: Int(self.count))
@@ -121,10 +121,10 @@ struct CardManagementScreen: View {
     private func updateHeight(value : Int){
         
         for i in 0..<data.count{
-            data[i].isShow = false
+            cards[i].isShow = false
         }
         
-        data[value].isShow = true
+        cards[value].isShow = true
     }
 }
 
