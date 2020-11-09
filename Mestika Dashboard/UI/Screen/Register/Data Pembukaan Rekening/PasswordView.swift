@@ -27,15 +27,15 @@ struct PasswordView: View {
         ZStack(alignment: .top) {
             Color(hex: "#232175")
             
-//            VStack {
-//
-//                Spacer()
-//                Rectangle()
-//                    .fill(Color.white)
-//                    .frame(height: 45 / 100 * UIScreen.main.bounds.height)
-//                    .cornerRadius(radius: 25.0, corners: .topLeft)
-//                    .cornerRadius(radius: 25.0, corners: .topRight)
-//            }
+            VStack {
+
+                Spacer()
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(height: 45 / 100 * UIScreen.main.bounds.height)
+                    .cornerRadius(radius: 25.0, corners: .topLeft)
+                    .cornerRadius(radius: 25.0, corners: .topRight)
+            }
             
             ScrollView {
                 VStack {
@@ -212,17 +212,16 @@ struct PasswordView: View {
                         .padding(.top, 25)
                         
                     }
+                    .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
                     .padding(.bottom, 25)
                 }
+                .KeyboardAwarePadding()
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        
-        
     }
 }
 

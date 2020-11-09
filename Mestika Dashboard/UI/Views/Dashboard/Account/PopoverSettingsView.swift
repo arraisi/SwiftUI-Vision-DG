@@ -121,10 +121,10 @@ struct PopoverSettingsView: View {
             }
             .frame(width: .infinity, alignment: .top)
             .background(Color.white)
-            .cornerRadius(radius: 15, corners: [.topLeft, .bottomLeft])
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
             .padding(.top, 170)
             .padding(.leading, UIScreen.main.bounds.width / 4)
+            .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
             
             Spacer()
         }

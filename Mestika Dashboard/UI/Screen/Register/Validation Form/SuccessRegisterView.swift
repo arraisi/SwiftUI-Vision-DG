@@ -235,7 +235,7 @@ struct SuccessRegisterView: View {
                 ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()

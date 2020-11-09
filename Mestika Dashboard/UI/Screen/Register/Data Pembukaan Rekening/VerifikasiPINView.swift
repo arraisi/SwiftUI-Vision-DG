@@ -144,9 +144,10 @@ struct VerifikasiPINView: View {
                         
                         
                     }
+                    .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
                     .padding(.bottom, 25)
                 }
-                
+                .KeyboardAwarePadding()
             }
             
             if self.showingModal {
@@ -155,7 +156,6 @@ struct VerifikasiPINView: View {
             
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
