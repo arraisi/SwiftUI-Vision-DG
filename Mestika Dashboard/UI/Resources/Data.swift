@@ -8,6 +8,7 @@
 import SwiftUI
 
 let myCardData: [MyCard] = load("myCardData.json")
+let savingTypeData: [SavingType] = load("savingTypeData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

@@ -39,111 +39,113 @@ struct VerifikasiPINView: View {
         ZStack(alignment: .top) {
             Color(hex: "#232175")
             
-            VStack {
-                
-                Spacer()
-                Rectangle()
-                    .fill(Color.white)
-                    .frame(height: 45 / 100 * UIScreen.main.bounds.height)
-                    .cornerRadius(radius: 25.0, corners: .topLeft)
-                    .cornerRadius(radius: 25.0, corners: .topRight)
-            }
+//            VStack {
+//
+//                Spacer()
+//                Rectangle()
+//                    .fill(Color.white)
+//                    .frame(height: 45 / 100 * UIScreen.main.bounds.height)
+//                    .cornerRadius(radius: 25.0, corners: .topLeft)
+//                    .cornerRadius(radius: 25.0, corners: .topRight)
+//            }
             
             VStack {
-                // Title
-                Text("DATA PEMBUKAAN REKENING")
-                    .font(.custom("Montserrat-ExtraBold", size: 24))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 60)
-                    .padding(.vertical, 45)
-                    .padding(.horizontal, 40)
-                
-                // Content
-                ZStack {
+                ScrollView {
+                    // Title
+                    Text("DATA PEMBUKAAN REKENING")
+                        .font(.custom("Montserrat-ExtraBold", size: 24))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 60)
+                        .padding(.vertical, 45)
+                        .padding(.horizontal, 40)
                     
-                    // Forms
+                    // Content
                     ZStack {
                         
-                        VStack{
-                            LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom)
-                        }
-                        .cornerRadius(25.0)
-                        .padding(.horizontal, 70)
-                        
-                        VStack{
-                            LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom)
-                        }
-                        .cornerRadius(25.0)
-                        .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 5, y: -2)
-                        .padding(.horizontal, 50)
-                        .padding(.top, 10)
-                        
-                    }
-                    
-                    VStack {
-                        Spacer()
-                        
-                        // Sub title
-                        Text("Masukan Kembali \nPIN Transaksi Baru Anda")
-                            .font(.custom("Montserrat-SemiBold", size: 18))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 20)
-                            .padding(.top, 20)
-                        
-                        Text("Pin ini digunakan untuk setiap kegiatan transaksi keuangan")
-                            .font(.custom("Montserrat-Regular", size: 8))
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 20)
-                            .padding(.top, 3)
-                            .padding(.bottom, 20)
-                        
+                        // Forms
                         ZStack {
-                            pinDots
-                            backgroundField
+                            
+                            VStack{
+                                LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom)
+                            }
+                            .cornerRadius(25.0)
+                            .padding(.horizontal, 70)
+                            
+                            VStack{
+                                LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom)
+                            }
+                            .cornerRadius(25.0)
+                            .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 5, y: -2)
+                            .padding(.horizontal, 50)
+                            .padding(.top, 10)
+                            
                         }
                         
                         VStack {
-                            NavigationLink(destination: Term_ConditionView().environmentObject(registerData), isActive: self.$isPinValid) {
-                                Text("")
+                            Spacer()
+                            
+                            // Sub title
+                            Text("Masukan Kembali \nPIN Transaksi Baru Anda")
+                                .font(.custom("Montserrat-SemiBold", size: 18))
+                                .foregroundColor(Color(hex: "#232175"))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 20)
+                            
+                            Text("Pin ini digunakan untuk setiap kegiatan transaksi keuangan")
+                                .font(.custom("Montserrat-Regular", size: 8))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 3)
+                                .padding(.bottom, 20)
+                            
+                            ZStack {
+                                pinDots
+                                backgroundField
                             }
-                        }
-                        
-                        Button(action: {
-                            print(pin)
-                            print(registerData.pin)
-                            if (pin == self.registerData.pin) {
-                                self.isPinValid = true
-                            } else {
-                                print("Not Valid")
-                                showingModal.toggle()
+                            
+                            VStack {
+                                NavigationLink(destination: Term_ConditionView().environmentObject(registerData), isActive: self.$isPinValid) {
+                                    Text("")
+                                }
                             }
-                        }) {
-                            Text("Simpan PIN Transaksi")
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            
+                            Button(action: {
+                                print(pin)
+                                print(registerData.pin)
+                                if (pin == self.registerData.pin) {
+                                    self.isPinValid = true
+                                } else {
+                                    print("Not Valid")
+                                    showingModal.toggle()
+                                }
+                            }) {
+                                Text("Simpan PIN Transaksi")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            }
+                            .frame(height: 50)
+                            .background(Color(hex: !disableForm ? "#CBD1D9" : "#2334D0"))
+                            .cornerRadius(12)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 25)
+                            .disabled(!disableForm)
+                            
+                            Spacer()
+                            
                         }
-                        .frame(height: 50)
-                        .background(Color(hex: !disableForm ? "#CBD1D9" : "#2334D0"))
-                        .cornerRadius(12)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 25)
-                        .disabled(!disableForm)
+                        .background(Color(.white))
+                        .cornerRadius(25.0)
+                        .shadow(color: Color(hex: "#D6DAF0"), radius: 5)
+                        .padding(.horizontal, 30)
+                        .padding(.top, 25)
                         
-                        Spacer()
                         
                     }
-                    .background(Color(.white))
-                    .cornerRadius(25.0)
-                    .shadow(color: Color(hex: "#D6DAF0"), radius: 5)
-                    .padding(.horizontal, 30)
-                    .padding(.top, 25)
-                    
-                    
+                    .padding(.bottom, 25)
                 }
-                .padding(.bottom, 25)
                 
             }
             
@@ -152,7 +154,7 @@ struct VerifikasiPINView: View {
             }
             
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
