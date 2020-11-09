@@ -127,7 +127,7 @@ struct VerificationAddressView: View {
                 .background(Color.white)
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
     }
 }

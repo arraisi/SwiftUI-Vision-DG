@@ -101,9 +101,8 @@ struct SavingSelectionModalView: View {
                     .padding(.horizontal, 15)
                     .fixedSize(horizontal: false, vertical: true)
                 }
+                .frame(height: 250)
             }
-            
-            Spacer()
             
             NavigationLink(destination: PersonalIdentityView().environmentObject(registerData)) {
                 Text("Pilih Tabungan ini")
@@ -129,6 +128,7 @@ struct SavingSelectionModalView: View {
             .padding(.bottom, 10)
             .padding(.top, 5)
         }
+        .frame(width: UIScreen.main.bounds.width - 40)
     }
 }
 

@@ -120,7 +120,7 @@ struct Term_ConditionView: View {
                         .disabled(!isChecked)
                         
                     }
-                    .frame(width: UIScreen.main.bounds.width - 30, height: 400)
+                    .frame(width: UIScreen.main.bounds.width - 30, height: 600)
                     .background(Color.white)
                     .cornerRadius(15)
                     .shadow(radius: 30)
@@ -130,7 +130,7 @@ struct Term_ConditionView: View {
                 .padding(.bottom, 35)
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         
     }

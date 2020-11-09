@@ -116,64 +116,58 @@ struct PersonalIdentityView: View {
                 Color(hex: "#F6F8FB")
             }
             
-            VStack {
-                appbar
-                    .padding(.top, 45)
-                    .padding(.horizontal, 30)
-                
-                ScrollView(showsIndicators: false) {
-                    ZStack {
-                        VStack {
-                            Color(hex: "#232175")
-                                .frame(height: 300)
-                            Color(hex: "#F6F8FB")
-                        }
-                        
-                        VStack {
-                            Text("Identitas Diri")
-                                .font(.title2)
-                                .foregroundColor(Color(hex: "#F6F8FB"))
-                                .fontWeight(.bold)
-                                .padding(.horizontal, 20)
-                            Text("Silihkan isi dan lengkapi data identitas Anda")
-                                .font(.caption)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(Color(hex: "#F6F8FB"))
-                                .padding(.top, 5)
-                                .padding(.bottom, 70)
-                                .padding(.horizontal, 20)
-                            
-                            photoKTPForm
-                                .padding(.bottom, 60)
-                            photoPersonalForm
-                                .padding(.bottom, 20)
-                            photoSignatureForm
-                                .hidden()
-                            photoNPWPForm
-                            
-                            NavigationLink(destination: EmailVerificationView().environmentObject(registerData)) {
-                                Text("Lanjut Pembukaan Rekening Baru")
-                                    .foregroundColor(.white)
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                    .font(.system(size: 13))
-                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                            }
-                            .background(Color(hex: "#232175"))
-                            .cornerRadius(12)
-//                            .padding(.horizontal, 5)
-                            .padding(.top, 60)
-                            .padding(.bottom, 20)
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 65)
-                        .padding(.bottom, 35)
+            ScrollView(showsIndicators: false) {
+                ZStack {
+                    VStack {
+                        Color(hex: "#232175")
+                            .frame(height: 300)
+                        Color(hex: "#F6F8FB")
                     }
+                    
+                    VStack {
+                        Text("Identitas Diri")
+                            .font(.title2)
+                            .foregroundColor(Color(hex: "#F6F8FB"))
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 20)
+                        Text("Silihkan isi dan lengkapi data identitas Anda")
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color(hex: "#F6F8FB"))
+                            .padding(.top, 5)
+                            .padding(.bottom, 70)
+                            .padding(.horizontal, 20)
+                        
+                        photoKTPForm
+                            .padding(.bottom, 60)
+                        photoPersonalForm
+                            .padding(.bottom, 20)
+                        photoSignatureForm
+                            .hidden()
+                        photoNPWPForm
+                        
+                        NavigationLink(destination: EmailVerificationView().environmentObject(registerData)) {
+                            Text("Lanjut Pembukaan Rekening Baru")
+                                .foregroundColor(.white)
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        }
+                        .background(Color(hex: "#232175"))
+                        .cornerRadius(12)
+//                            .padding(.horizontal, 5)
+                        .padding(.top, 60)
+                        .padding(.bottom, 20)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 140)
+                    .padding(.bottom, 35)
                 }
             }
             .KeyboardAwarePadding()
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        .navigationBarHidden(true)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onAppear {
             print(recognizedText.value)
             
@@ -208,33 +202,6 @@ struct PersonalIdentityView: View {
             }), ActionSheet.Button.cancel()])
         }
     }
-    
-    var appbar: some View {
-        HStack {
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.white)
-            }
-            Spacer()
-            logo
-            Spacer()
-        }
-    }
-    
-    var logo: some View {
-        HStack(alignment: .center, spacing: .none) {
-            Image("Logo M")
-                .resizable()
-                .frame(width: 25, height: 25)
-            Text("BANK MESTIKA")
-                .foregroundColor(.white)
-                .font(.system(size: 20))
-                .bold()
-        }
-    }
-    
     
     var photoKTPForm: some View {
         VStack {

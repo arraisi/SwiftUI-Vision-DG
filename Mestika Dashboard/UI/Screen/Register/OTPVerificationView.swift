@@ -55,7 +55,7 @@ struct OTPVerificationView: View {
     
     // MARK: -MAIN CONTENT
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             VStack {
                 Color(hex: "#232175")
                     .frame(height: 300)
@@ -115,7 +115,7 @@ struct OTPVerificationView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    NavigationLink(destination: ChooseSavingsView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    NavigationLink(destination: ChooseTypeSavingScreen().environmentObject(registerData), isActive: self.$isOtpValid) {
                         Text("")
                     }
                     
@@ -157,6 +157,7 @@ struct OTPVerificationView: View {
             .background(Color.white)
             .cornerRadius(15)
             .shadow(radius: 30)
+            .padding(.top, 120)
             
             if self.showingOtpIncorect {
                 ModalOverlay(tapAction: { withAnimation { self.showingOtpIncorect = false } })

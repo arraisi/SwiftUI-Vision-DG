@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "tabunganName": "Tabungan A",
+        "rekeningNumber": "1234",
+        "imageName": "Saving Image",
+        "isShow": false,
+    },
+    {
+        "id": 2,
+        "tabunganName": "Tabungan B",
+        "rekeningNumber": "1234",
+        "imageName": "Saving Image",
+        "isShow": false,
+    },
+    {
+        "id": 3,
+        "tabunganName": "Tabungan C",
+        "rekeningNumber": "1234",
+        "imageName": "Saving Image",
+        "isShow": false,
+    },
+]
+

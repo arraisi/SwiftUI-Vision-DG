@@ -85,9 +85,6 @@
 		526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B661A254FFB0500C13C36 /* SettingMenu.swift */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
-		52ADFE902557D99F00A1001F /* tabungan.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE732557D99E00A1001F /* tabungan.json */; };
-		52ADFE912557D99F00A1001F /* JenisTabunganData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE742557D99E00A1001F /* JenisTabunganData.swift */; };
-		52ADFE922557D99F00A1001F /* JenisTabungan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE752557D99F00A1001F /* JenisTabungan.swift */; };
 		52ADFE932557D99F00A1001F /* masterData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE772557D99F00A1001F /* masterData.json */; };
 		52ADFE942557D99F00A1001F /* MasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE782557D99F00A1001F /* MasterModel.swift */; };
 		52ADFE952557D99F00A1001F /* MasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE792557D99F00A1001F /* MasterData.swift */; };
@@ -156,7 +153,6 @@
 		52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF752557DFDB00A1001F /* VerifikasiPINView.swift */; };
 		52ADFF9F2557DFDC00A1001F /* PenghasilanKotorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF762557DFDB00A1001F /* PenghasilanKotorView.swift */; };
 		52ADFFA02557DFDC00A1001F /* PhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF772557DFDB00A1001F /* PhoneVerificationView.swift */; };
-		52ADFFA12557DFDC00A1001F /* ChooseSavingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF782557DFDB00A1001F /* ChooseSavingsView.swift */; };
 		52ADFFA22557DFDC00A1001F /* SuccessRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF7A2557DFDB00A1001F /* SuccessRegisterView.swift */; };
 		52ADFFA32557DFDC00A1001F /* Term&ConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF7B2557DFDB00A1001F /* Term&ConditionView.swift */; };
 		52ADFFA42557DFDC00A1001F /* VerificationPINView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */; };
@@ -169,6 +165,11 @@
 		52ADFFAB2557DFDC00A1001F /* OTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF832557DFDC00A1001F /* OTPVerificationView.swift */; };
 		52ADFFAC2557DFDC00A1001F /* DetailKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */; };
 		52ADFFAD2557DFDC00A1001F /* RegisterProvisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF852557DFDC00A1001F /* RegisterProvisionView.swift */; };
+		52BF57CF2558E34100F009B5 /* ChooseTypeSavingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */; };
+		52BF57D42558E57D00F009B5 /* savingTypeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52BF57D32558E57D00F009B5 /* savingTypeData.json */; };
+		52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57DC2558E67900F009B5 /* CardTypeSavingView.swift */; };
+		52BF57E32558E81F00F009B5 /* SavingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57E22558E81F00F009B5 /* SavingType.swift */; };
+		52BF57EB2558F06A00F009B5 /* DetailsTypeSavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57EA2558F06A00F009B5 /* DetailsTypeSavingView.swift */; };
 		52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3485725426D6800F08F37 /* SideMenuContent.swift */; };
 		52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3486025426E0D00F08F37 /* SidemenuView.swift */; };
 		52C348692542701500F08F37 /* SidemenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348682542701500F08F37 /* SidemenuCell.swift */; };
@@ -317,9 +318,6 @@
 		526B661A254FFB0500C13C36 /* SettingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenu.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
-		52ADFE732557D99E00A1001F /* tabungan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tabungan.json; sourceTree = "<group>"; };
-		52ADFE742557D99E00A1001F /* JenisTabunganData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JenisTabunganData.swift; sourceTree = "<group>"; };
-		52ADFE752557D99F00A1001F /* JenisTabungan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JenisTabungan.swift; sourceTree = "<group>"; };
 		52ADFE772557D99F00A1001F /* masterData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masterData.json; sourceTree = "<group>"; };
 		52ADFE782557D99F00A1001F /* MasterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterModel.swift; sourceTree = "<group>"; };
 		52ADFE792557D99F00A1001F /* MasterData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterData.swift; sourceTree = "<group>"; };
@@ -388,7 +386,6 @@
 		52ADFF752557DFDB00A1001F /* VerifikasiPINView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifikasiPINView.swift; sourceTree = "<group>"; };
 		52ADFF762557DFDB00A1001F /* PenghasilanKotorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PenghasilanKotorView.swift; sourceTree = "<group>"; };
 		52ADFF772557DFDB00A1001F /* PhoneVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationView.swift; sourceTree = "<group>"; };
-		52ADFF782557DFDB00A1001F /* ChooseSavingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSavingsView.swift; sourceTree = "<group>"; };
 		52ADFF7A2557DFDB00A1001F /* SuccessRegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessRegisterView.swift; sourceTree = "<group>"; };
 		52ADFF7B2557DFDB00A1001F /* Term&ConditionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Term&ConditionView.swift"; sourceTree = "<group>"; };
 		52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationPINView.swift; sourceTree = "<group>"; };
@@ -401,6 +398,11 @@
 		52ADFF832557DFDC00A1001F /* OTPVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPVerificationView.swift; sourceTree = "<group>"; };
 		52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailKartuATMView.swift; sourceTree = "<group>"; };
 		52ADFF852557DFDC00A1001F /* RegisterProvisionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterProvisionView.swift; sourceTree = "<group>"; };
+		52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTypeSavingScreen.swift; sourceTree = "<group>"; };
+		52BF57D32558E57D00F009B5 /* savingTypeData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = savingTypeData.json; sourceTree = "<group>"; };
+		52BF57DC2558E67900F009B5 /* CardTypeSavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeSavingView.swift; sourceTree = "<group>"; };
+		52BF57E22558E81F00F009B5 /* SavingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingType.swift; sourceTree = "<group>"; };
+		52BF57EA2558F06A00F009B5 /* DetailsTypeSavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTypeSavingView.swift; sourceTree = "<group>"; };
 		52C3485725426D6800F08F37 /* SideMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContent.swift; sourceTree = "<group>"; };
 		52C3486025426E0D00F08F37 /* SidemenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuView.swift; sourceTree = "<group>"; };
 		52C348682542701500F08F37 /* SidemenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuCell.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 		52468ABC25413604007518AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				52BF57D82558E66600F009B5 /* Register */,
 				52C3485F25426DFF00F08F37 /* Sidemenu */,
 				52468ABD2541360C007518AE /* Dashboard */,
 			);
@@ -718,7 +721,6 @@
 		5247466A254818BB001F43C5 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				52ADFF782557DFDB00A1001F /* ChooseSavingsView.swift */,
 				52ADFF642557DFDB00A1001F /* Data Pembukaan Rekening */,
 				52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */,
 				52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */,
@@ -731,6 +733,7 @@
 				52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */,
 				52ADFF622557DFDB00A1001F /* RegisterView.swift */,
 				52ADFF792557DFDB00A1001F /* Validation Form */,
+				52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */,
 			);
 			name = Register;
 			path = "Mestika Dashboard/UI/Screen/Register";
@@ -821,16 +824,6 @@
 				52DA20842551069C00CC048A /* Statement.swift */,
 			);
 			path = BindingModel;
-			sourceTree = "<group>";
-		};
-		52ADFE722557D99E00A1001F /* Jenis Tabungan */ = {
-			isa = PBXGroup;
-			children = (
-				52ADFE732557D99E00A1001F /* tabungan.json */,
-				52ADFE742557D99E00A1001F /* JenisTabunganData.swift */,
-				52ADFE752557D99F00A1001F /* JenisTabungan.swift */,
-			);
-			path = "Jenis Tabungan";
 			sourceTree = "<group>";
 		};
 		52ADFE762557D99F00A1001F /* Master */ = {
@@ -967,6 +960,23 @@
 			path = "Validation Form";
 			sourceTree = "<group>";
 		};
+		52BF57D82558E66600F009B5 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				52BF57DC2558E67900F009B5 /* CardTypeSavingView.swift */,
+				52BF57EA2558F06A00F009B5 /* DetailsTypeSavingView.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		52BF57E12558E80700F009B5 /* SavingType */ = {
+			isa = PBXGroup;
+			children = (
+				52BF57E22558E81F00F009B5 /* SavingType.swift */,
+			);
+			path = SavingType;
+			sourceTree = "<group>";
+		};
 		52C3485F25426DFF00F08F37 /* Sidemenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1059,7 +1069,6 @@
 			children = (
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52ADFEAC2557D9A800A1001F /* SliderAssetsResponse.swift */,
-				52ADFE722557D99E00A1001F /* Jenis Tabungan */,
 				52ADFE7A2557D99F00A1001F /* Login */,
 				52ADFE762557D99F00A1001F /* Master */,
 				52ADFE842557D99F00A1001F /* Pembukaan Rekening */,
@@ -1073,6 +1082,7 @@
 		C04B422025540FDC00DDE4C7 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* CardManagement */,
 			);
 			path = Dashboard;
@@ -1092,6 +1102,7 @@
 				C0A4F98C25528BF200566A11 /* fonts */,
 				C092ABF82553B4BF0051CE3E /* Data.swift */,
 				C092ABFE2553B5850051CE3E /* myCardData.json */,
+				52BF57D32558E57D00F009B5 /* savingTypeData.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1259,10 +1270,10 @@
 				52ADFE9D2557D99F00A1001F /* pekerjaan.json in Resources */,
 				52ADFEA42557D99F00A1001F /* perkiraanPenarikan.json in Resources */,
 				52ADFE9F2557D99F00A1001F /* penghasilanKotor.json in Resources */,
-				52ADFE902557D99F00A1001F /* tabungan.json in Resources */,
 				52ADFEA62557D99F00A1001F /* sumberPendapatanLainnya.json in Resources */,
 				5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */,
 				52ADFEA22557D99F00A1001F /* sumberPenyandangDana.json in Resources */,
+				52BF57D42558E57D00F009B5 /* savingTypeData.json in Resources */,
 				52ADFEA72557D99F00A1001F /* besarPerkiraanSetoran.json in Resources */,
 				C0A4F99C25528C0700566A11 /* Montserrat-Medium.ttf in Resources */,
 				52ADFE9E2557D99F00A1001F /* besarPerkiraanPenarikan.json in Resources */,
@@ -1342,6 +1353,7 @@
 				526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */,
 				C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */,
 				52ADFF982557DFDC00A1001F /* InformasiPerusahaanView.swift in Sources */,
+				52BF57EB2558F06A00F009B5 /* DetailsTypeSavingView.swift in Sources */,
 				52ADFF172557DCE400A1001F /* LoadingIndicator.swift in Sources */,
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
 				C0D7B5DB2552AF43009C3976 /* VerificationOTPCardView.swift in Sources */,
@@ -1351,7 +1363,6 @@
 				525950262553E03000C8CA5D /* LoginScreen.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
 				52ADFEF42557DC5C00A1001F /* CheckBoxGroup.swift in Sources */,
-				52ADFFA12557DFDC00A1001F /* ChooseSavingsView.swift in Sources */,
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
@@ -1412,7 +1423,6 @@
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
 				52ADFF4A2557DE8000A1001F /* TabItemView.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
-				52ADFE912557D99F00A1001F /* JenisTabunganData.swift in Sources */,
 				52ADFE9B2557D99F00A1001F /* DetailJenisATMData.swift in Sources */,
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */,
@@ -1426,13 +1436,13 @@
 				52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */,
 				52DA20852551069C00CC048A /* Statement.swift in Sources */,
 				526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */,
+				52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */,
 				525950232553E03000C8CA5D /* ForgotPasswordScreen.swift in Sources */,
 				52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */,
 				52ADFFAA2557DFDC00A1001F /* RegisterRekeningCardView.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
-				52ADFE922557D99F00A1001F /* JenisTabungan.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* PilihDesainATMView.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
@@ -1440,6 +1450,7 @@
 				52ADFF402557DE6000A1001F /* SnapCarouselView.swift in Sources */,
 				C0C68E6E2558E19A0010E1EE /* ConfirmationPINView.swift in Sources */,
 				C0D7B5E32552B1B7009C3976 /* VerificationCVVCardView.swift in Sources */,
+				52BF57E32558E81F00F009B5 /* SavingType.swift in Sources */,
 				52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */,
 				526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */,
 				52ADFF862557DFDC00A1001F /* EmailConfirmationView.swift in Sources */,
@@ -1458,6 +1469,7 @@
 				52468AF725418024007518AE /* VoucherView.swift in Sources */,
 				52ADFF082557DCAD00A1001F /* InfiniteCarousellView.swift in Sources */,
 				5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */,
+				52BF57CF2558E34100F009B5 /* ChooseTypeSavingScreen.swift in Sources */,
 				52ADFFA42557DFDC00A1001F /* VerificationPINView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,

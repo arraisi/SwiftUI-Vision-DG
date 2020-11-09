@@ -116,10 +116,10 @@ struct KeluargaTerdekat: View {
                         }
                         
                     }
+                    .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
                     .padding(.bottom, 25)
                     
                 }
-                .padding(.bottom, 0.1)
                 .KeyboardAwarePadding()
             }
             
@@ -128,8 +128,10 @@ struct KeluargaTerdekat: View {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
             }
         }
-        .edgesIgnoringSafeArea(.top)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .edgesIgnoringSafeArea(.all)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
         }
