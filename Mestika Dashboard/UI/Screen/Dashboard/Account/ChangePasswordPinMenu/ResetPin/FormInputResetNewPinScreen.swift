@@ -15,90 +15,147 @@ struct FormInputResetNewPinScreen: View {
     @State private var showPassword: Bool = false
     @State private var showConfirmPassword: Bool = false
     
+    /* Boolean for Show Modal */
+    @State var showingModal = false
+    
     var body: some View {
-        VStack {
-            Text("MASUKKAN PIN TRANSAKSI BARU")
-                .font(.title2)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .foregroundColor(Color(hex: "#2334D0"))
-            
-            Text("Silahkan masukkan PIN transaksi baru Anda")
-                .font(.subheadline)
-                .fontWeight(.light)
-                .foregroundColor(Color(hex: "#002251"))
-                .padding(.top, 5)
-            
+        ZStack {
             VStack {
+                Text("MASUKKAN PIN \nTRANSAKSI BARU")
+                    .font(.custom("Montserrat-SemiBold", size: 24))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color(hex: "#2334D0"))
+                
+                Text("Silahkan masukkan PIN transaksi baru Anda")
+                    .font(.custom("Montserrat-Regular", size: 12))
+                    .foregroundColor(Color(hex: "#002251"))
+                    .padding(.top, 5)
+                
                 VStack {
-                    HStack {
-                        if (showPassword) {
-                            TextField("PIN baru Anda", text: self.$passwordCtrl)
-                        } else {
-                            SecureField("PIN baru Anda", text: self.$passwordCtrl)
+                    VStack {
+                        HStack {
+                            if (showPassword) {
+                                TextField("PIN baru Anda", text: self.$passwordCtrl)
+                                    .font(.custom("Montserrat-Light", size: 14))
+                            } else {
+                                SecureField("PIN baru Anda", text: self.$passwordCtrl)
+                                    .font(.custom("Montserrat-Light", size: 14))
+                            }
+                            
+                            Button(action: {
+                                self.showPassword.toggle()
+                            }, label: {
+                                Text("show")
+                                    .foregroundColor(Color(hex: "#3756DF"))
+                                    .font(.custom("Montserrat-Light", size: 10))
+                            })
                         }
+                        .frame(height: 25)
+                        .padding(.vertical, 10)
                         
-                        Button(action: {
-                            self.showPassword.toggle()
-                        }, label: {
-                            Text("show")
-                                .foregroundColor(Color(hex: "#3756DF"))
-                                .fontWeight(.light)
-                        })
-                    }
-                    .frame(height: 25)
-                    .padding(.vertical, 10)
-                    
-                    Divider()
-                    
-                    HStack {
-                        if (showConfirmPassword) {
-                            TextField("Confirm PIN", text: self.$confirmPasswordCtrl)
-                        } else {
-                            SecureField("Confirm PIN", text: self.$confirmPasswordCtrl)
+                        Divider()
+                        
+                        HStack {
+                            if (showConfirmPassword) {
+                                TextField("Confirm PIN", text: self.$confirmPasswordCtrl)
+                                    .font(.custom("Montserrat-Light", size: 14))
+                            } else {
+                                SecureField("Confirm PIN", text: self.$confirmPasswordCtrl)
+                                    .font(.custom("Montserrat-Light", size: 14))
+                            }
+                            
+                            Button(action: {
+                                self.showConfirmPassword.toggle()
+                            }, label: {
+                                Text("show")
+                                    .foregroundColor(Color(hex: "#3756DF"))
+                                    .font(.custom("Montserrat-Light", size: 10))
+                            })
                         }
-                        
-                        Button(action: {
-                            self.showConfirmPassword.toggle()
-                        }, label: {
-                            Text("show")
-                                .foregroundColor(Color(hex: "#3756DF"))
-                                .fontWeight(.light)
-                        })
+                        .frame(height: 25)
+                        .padding(.vertical, 10)
                     }
-                    .frame(height: 25)
-                    .padding(.vertical, 10)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                 }
                 .padding()
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                
+                Spacer()
+                
+                VStack {
+                    Button(action: {
+                        self.showingModal.toggle()
+                    }, label: {
+                        Text("Simpan PIN Transaksi Baru")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 16))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        
+                    })
+                    .background(Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 10)
+                }
+                .padding(.bottom, 20)
+                
             }
-            .padding()
+            .padding(.top, 60)
+            .navigationBarTitle("Reset PIN Transaksi", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {}, label: {
+                Text("Cancel")
+            }))
             
-            Spacer()
-            
-            VStack {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Simpan PIN Transaksi Baru")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    
-                })
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.leading, 20)
-                .padding(.trailing, 10)
+            // Background Color When Modal Showing
+            if self.showingModal {
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    .edgesIgnoringSafeArea(.all)
             }
-            .padding(.bottom, 20)
             
         }
-        .padding(.top, 60)
-        .navigationBarTitle("Reset PIN Transaksi", displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {}, label: {
-            Text("Cancel")
-        }))
+        .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            createBottomFloater()
+        }
+    }
+    
+    // MARK: - BOTTOM FLOATER FOR MESSAGE
+    func createBottomFloater() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Image("ic_check")
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                Spacer()
+            }
+            .padding(.top, 10)
+            
+            HStack {
+                
+                Text("PIN Transaksi Baru Telah Berhasil di Simpan.")
+                    .font(.custom("Montserrat-Bold", size: 18))
+                    .foregroundColor(Color(hex: "#2334D0"))
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+            }
+            .padding(.top, 25)
+            
+            NavigationLink(destination: BottomNavigationView()) {
+                Text("KEMBALI")
+                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+                
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.top, 15)
+        }
+        .padding(25)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

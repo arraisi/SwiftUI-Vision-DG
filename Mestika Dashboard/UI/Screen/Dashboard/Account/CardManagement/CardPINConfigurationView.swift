@@ -59,9 +59,7 @@ struct CardPINConfigurationView: View {
                         
                         Divider()
                         
-                        Button(action: {
-                            
-                        }, label: {
+                        NavigationLink(destination: FormInputResetPinScreen(unLocked: unLocked), label: {
                             HStack{
                                 Text("Lupa PIN Transaksi Anda")
                                     .font(.custom("Montserrat-Medium", size: 15))

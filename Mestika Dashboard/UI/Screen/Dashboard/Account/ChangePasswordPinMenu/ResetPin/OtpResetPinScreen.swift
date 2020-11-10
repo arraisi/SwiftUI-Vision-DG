@@ -32,13 +32,11 @@ struct OtpResetPinScreen: View {
             
             VStack {
                 Text("MASUKKAN KODE OTP")
-                    .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
                 Text("Kami telah mengirimkan OTP ke no. telepon Anda")
-                    .font(.subheadline)
-                    .fontWeight(.light)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
                 
@@ -71,8 +69,7 @@ struct OtpResetPinScreen: View {
                 .padding(.top, 5)
                 
                 Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
-                    .font(.subheadline)
-                    .fontWeight(.light)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 30)
@@ -83,12 +80,11 @@ struct OtpResetPinScreen: View {
                 Spacer()
                 
                 VStack {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    NavigationLink(destination: FormInputResetNewPinScreen(), label: {
                         Text("Reset PIN Transaksi")
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            .font(.custom("Montserrat-SemiBold", size: 16))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         
                     })
                     .background(Color(hex: "#2334D0"))
