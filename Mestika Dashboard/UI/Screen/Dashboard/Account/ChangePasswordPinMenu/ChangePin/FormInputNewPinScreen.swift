@@ -18,13 +18,11 @@ struct FormInputNewPinScreen: View {
     var body: some View {
         VStack {
             Text("MASUKKAN PIN BARU")
-                .font(.title2)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.custom("Montserrat-SemiBold", size: 24))
                 .foregroundColor(Color(hex: "#2334D0"))
             
             Text("Silahkan masukkan PIN transaksi baru Anda")
-                .font(.subheadline)
-                .fontWeight(.light)
+                .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(Color(hex: "#002251"))
                 .padding(.top, 5)
             
@@ -33,8 +31,10 @@ struct FormInputNewPinScreen: View {
                     HStack {
                         if (showPassword) {
                             TextField("PIN baru Anda", text: self.$passwordCtrl)
+                                .font(.custom("Montserrat-Light", size: 14))
                         } else {
                             SecureField("PIN baru Anda", text: self.$passwordCtrl)
+                                .font(.custom("Montserrat-Light", size: 14))
                         }
                         
                         Button(action: {
@@ -42,7 +42,7 @@ struct FormInputNewPinScreen: View {
                         }, label: {
                             Text("show")
                                 .foregroundColor(Color(hex: "#3756DF"))
-                                .fontWeight(.light)
+                                .font(.custom("Montserrat-Light", size: 10))
                         })
                     }
                     .frame(height: 25)
@@ -53,8 +53,10 @@ struct FormInputNewPinScreen: View {
                     HStack {
                         if (showConfirmPassword) {
                             TextField("Confirm PIN", text: self.$confirmPasswordCtrl)
+                                .font(.custom("Montserrat-Light", size: 14))
                         } else {
                             SecureField("Confirm PIN", text: self.$confirmPasswordCtrl)
+                                .font(.custom("Montserrat-Light", size: 14))
                         }
                         
                         Button(action: {
@@ -62,7 +64,7 @@ struct FormInputNewPinScreen: View {
                         }, label: {
                             Text("show")
                                 .foregroundColor(Color(hex: "#3756DF"))
-                                .fontWeight(.light)
+                                .font(.custom("Montserrat-Light", size: 10))
                         })
                     }
                     .frame(height: 25)
@@ -71,19 +73,18 @@ struct FormInputNewPinScreen: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(15)
-                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
             }
             .padding()
             
             Spacer()
             
             VStack {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {}, label: {
                     Text("Simpan PIN Transaksi Baru")
                         .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        .font(.custom("Montserrat-SemiBold", size: 16))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     
                 })
                 .background(Color(hex: "#2334D0"))

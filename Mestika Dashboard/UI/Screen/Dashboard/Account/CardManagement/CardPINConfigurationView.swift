@@ -11,6 +11,12 @@ struct CardPINConfigurationView: View {
     
     var card: MyCard
     
+    @AppStorage("lock_Password") var key = "123456"
+    
+    @State var pin = ""
+    @State var unLocked = false
+    @State var wrongPin = false
+    
     /* Boolean for Show Modal */
     @State var showingModal = false
     
@@ -25,7 +31,7 @@ struct CardPINConfigurationView: View {
                     
                     VStack(alignment: .leading, spacing: 15, content: {
                         
-                        NavigationLink(destination: CardPINPreviousView(key: "123456", pin: "", nextView: AnyView(CardPINConfigurationView(card: card))), label: {
+                        NavigationLink(destination: FormInputOldPinScreen(unLocked: unLocked), label: {
                             HStack{
                                 Text("Ubah PIN ATM Anda")
                                     .font(.custom("Montserrat-Medium", size: 15))

@@ -84,7 +84,7 @@ struct DetailKartuAktifView: View {
                 })
             
             NavigationLink(
-                destination: Text("Pengaturan PIN ATM"),
+                destination: CardPINConfigurationView(card: card),
                 label: {
                     HStack{
                         Image("ic_list")

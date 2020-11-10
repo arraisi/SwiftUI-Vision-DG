@@ -222,7 +222,7 @@
 		C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */; };
 		C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB90D22553D7E2004DBCF5 /* CardView.swift */; };
 		C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */; };
-		C0FE1E33255A50B300B3AAE0 /* CardPINPreviousView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E32255A50B300B3AAE0 /* CardPINPreviousView.swift */; };
+		C0FE1E3E255A67D400B3AAE0 /* NumbersPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -462,7 +462,7 @@
 		C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCVVVerificationView.swift; sourceTree = "<group>"; };
 		C0EB90D22553D7E2004DBCF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPINConfigurationView.swift; sourceTree = "<group>"; };
-		C0FE1E32255A50B300B3AAE0 /* CardPINPreviousView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPINPreviousView.swift; sourceTree = "<group>"; };
+		C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersPadView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1151,6 +1151,7 @@
 			children = (
 				C0A4F9872552896200566A11 /* DetailKartuTidakAktifView.swift */,
 				C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */,
+				C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */,
 			);
 			path = CardManagement;
 			sourceTree = "<group>";
@@ -1183,7 +1184,6 @@
 				C0B347CA25593688000754C4 /* CardDamageView.swift */,
 				C0B347D22559422B000754C4 /* CardBlockView.swift */,
 				C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */,
-				C0FE1E32255A50B300B3AAE0 /* CardPINPreviousView.swift */,
 			);
 			path = CardManagement;
 			sourceTree = "<group>";
@@ -1512,6 +1512,7 @@
 				525950252553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift in Sources */,
 				52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */,
 				52ADFFA92557DFDC00A1001F /* IncomingVideoCallView.swift in Sources */,
+				C0FE1E3E255A67D400B3AAE0 /* NumbersPadView.swift in Sources */,
 				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,
 				524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */,
 				526B6593254FBAF100C13C36 /* MySavings.swift in Sources */,
@@ -1522,7 +1523,6 @@
 				52ADFFA42557DFDC00A1001F /* VerificationPINView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
-				C0FE1E33255A50B300B3AAE0 /* CardPINPreviousView.swift in Sources */,
 				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordScreen.swift in Sources */,
 				52ADFEBC2557DA0700A1001F /* RecognizedText.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
