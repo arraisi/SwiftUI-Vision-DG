@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LimitCardView: View {
-    var card: MyCard
     
     @State var limitPerTransaksi: Double = 50000000
     @State var limitPerHari: Double = 20000000
@@ -18,116 +17,176 @@ struct LimitCardView: View {
     
     @State private var keyboardOffset: CGFloat = 0
     
+    var card: MyCard
+    
+    /* Boolean for Show Modal */
+    @State var showingModal = false
+    
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            
-            VStack {
-                CardView(background: Image("card_bg"), rekeningName: card.rekeningName, saldo: card.saldo, rekeningNumber: card.rekeningNumber, activeStatus: card.activeStatus, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+        ZStack {
+            ScrollView(.vertical, showsIndicators: false) {
                 
-                VStack(alignment: .leading, spacing: 30, content: {
+                VStack {
+                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202)
+                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     
-                    Text("Limit Kartu")
-                        .font(.custom("Montserrat-SemiBold", size: 15))
-                    
-                    // Limit per Transaksi
-                    VStack(alignment: .leading) {
-                        Text("per Transaksi (Debit Card)")
-                            .font(.custom("Montserrat-Light", size: 10))
-                        HStack(alignment:.top){
-                            Text("Rp.")
-                                .font(.custom("Montserrat-Bold", size: 20))
-                                .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                            
-                            TextField("", value: $limitPerTransaksi,
-                                      formatter: NumberFormatter.decimal) { (value) in
-                                print("onChange : \(value)")
-                            } onCommit: {
-                                print("onCommit : \(limitPerTransaksi)")
+                    VStack(alignment: .leading, spacing: 30, content: {
+                        
+                        Text("Limit Kartu")
+                            .font(.custom("Montserrat-SemiBold", size: 15))
+                        
+                        // Limit per Transaksi
+                        VStack(alignment: .leading) {
+                            Text("per Transaksi (Debit Card)")
+                                .font(.custom("Montserrat-Light", size: 10))
+                            HStack(alignment:.top){
+                                Text("Rp.")
+                                    .font(.custom("Montserrat-Bold", size: 20))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                                 
-                            }.keyboardType(.decimalPad)
-                            .font(.custom("Montserrat-Bold", size: 30))
+                                TextField("", value: $limitPerTransaksi,
+                                          formatter: NumberFormatter.decimal) { (value) in
+                                    print("onChange : \(value)")
+                                } onCommit: {
+                                    print("onCommit : \(limitPerTransaksi)")
+                                    
+                                }.keyboardType(.decimalPad)
+                                .font(.custom("Montserrat-Bold", size: 30))
+                                .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                            }
+                            Divider()
+                            HStack {
+                                Text("Maximal limit per Transaksi")
+                                    .font(.custom("Montserrat-Light", size: 8))
+                                Text("Rp. 50.000.000,-")
+                                    .font(.custom("Montserrat-SemiBold", size: 8))
+                            }
                             .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                         }
-                        Divider()
-                        HStack {
-                            Text("Maximal limit per Transaksi")
-                                .font(.custom("Montserrat-Light", size: 8))
-                            Text("Rp. 50.000.000,-")
-                                .font(.custom("Montserrat-SemiBold", size: 8))
-                        }
-                        .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                    }
-                    
-                    // Maximal limit penarikan per Hari
-                    VStack(alignment: .leading) {
                         
-                        Text("per Transaksi (Debit Card)")
-                            .font(.custom("Montserrat-Light", size: 10))
-                        HStack(alignment:.top){
-                            Text("Rp.")
-                                .font(.custom("Montserrat-Bold", size: 20))
-                                .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+                        // Maximal limit penarikan per Hari
+                        VStack(alignment: .leading) {
                             
-                            TextField("", value: $limitPerHari,
-                                      formatter: NumberFormatter.decimal) { (value) in
+                            Text("per Transaksi (Debit Card)")
+                                .font(.custom("Montserrat-Light", size: 10))
+                            HStack(alignment:.top){
+                                Text("Rp.")
+                                    .font(.custom("Montserrat-Bold", size: 20))
+                                    .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
                                 
-                                print("onChange : \(value)")
-                            } onCommit: {
-                                print("onCommit : \(limitPerTransaksi)")
-                                
-                            }.keyboardType(.decimalPad)
-                            .font(.custom("Montserrat-Bold", size: 30))
+                                TextField("", value: $limitPerHari,
+                                          formatter: NumberFormatter.decimal) { (value) in
+                                    
+                                    print("onChange : \(value)")
+                                } onCommit: {
+                                    print("onCommit : \(limitPerTransaksi)")
+                                    
+                                }.keyboardType(.decimalPad)
+                                .font(.custom("Montserrat-Bold", size: 30))
+                                .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+                            }
+                            Divider()
+                            HStack {
+                                Text("Maximal limit penarikan harian")
+                                    .font(.custom("Montserrat-Light", size: 8))
+                                Text("Rp. 20.000.000,-")
+                                    .font(.custom("Montserrat-SemiBold", size: 8))
+                            }
                             .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
                         }
-                        Divider()
-                        HStack {
-                            Text("Maximal limit penarikan harian")
-                                .font(.custom("Montserrat-Light", size: 8))
-                            Text("Rp. 20.000.000,-")
-                                .font(.custom("Montserrat-SemiBold", size: 8))
-                        }
-                        .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
-                    }
-                    
-                    Button(action: {
                         
-                    }, label: {
-                        Text("SIMPAN PERUBAHAN")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, maxHeight: 50)
+                        NavigationLink(
+                            destination: ConfirmationPINView(key: "123456", pin: "", nextView: AnyView(LimitCardView(card: card, showingModal: true))),
+                            label: {
+                                Text("SIMPAN PERUBAHAN")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                    .frame(maxWidth: .infinity, maxHeight: 50)
+                            })
+                            .frame(height: 50)
+                            .background(Color(hex: "#2334D0"))
+                            .cornerRadius(12)
                     })
-                    .frame(height: 50)
-                    .background(Color(hex: "#2334D0"))
-                    .cornerRadius(12)
-                })
-                .padding(20)
-                .padding(.top, 20)
-                .background(Color.white)
-                .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                .padding(30)
+                    .padding(20)
+                    .padding(.top, 20)
+                    .background(Color.white)
+                    .clipShape(PopupBubble(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .padding(30)
+                }
+                .padding(.top, 30)
+                .padding(.bottom, self.keyboardOffset)
+                .animation(.spring())
                 
             }
-            .padding(.top, 30)
-            .padding(.bottom, self.keyboardOffset)
-            .animation(.spring())
-        }
-        .modifier(DismissingKeyboard())
-        .navigationBarTitle("Limit Kartu", displayMode: .inline)
-        .background(Color(hex: "#F6F8FB")
-                        .edgesIgnoringSafeArea(.all))
-        .onAppear{
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notif) in
-                let value = notif.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-                let height = value.height
-                self.keyboardOffset = height
+            .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
+            .modifier(DismissingKeyboard())
+            .navigationBarTitle("Limit Kartu", displayMode: .inline)
+            .navigationBarItems(trailing:  NavigationLink(destination: CardManagementScreen(), label: {
+                Text("Cancel")
+            }))
+            .onAppear{
+                
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notif) in
+                    let value = notif.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                    let height = value.height
+                    self.keyboardOffset = height
+                }
+                
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (notif) in
+                    self.keyboardOffset = 0
+                }
+                
             }
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (notif) in
-                self.keyboardOffset = 0
+            
+            // Background Color When Modal Showing
+            if self.showingModal {
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    .edgesIgnoringSafeArea(.all)
             }
+            
         }
+        .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            createBottomFloater()
+        }
+    }
+    
+    // MARK: - BOTTOM FLOATER FOR MESSAGE
+    func createBottomFloater() -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Image("ic_check")
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                Spacer()
+            }
+            .padding(.top, 10)
+            
+            HStack {
+                
+                Text("Perubahan Limit Transaksi Kartu Anda Telah Berhasil di Simpan.")
+                    .font(.custom("Montserrat-Bold", size: 18))
+                    .foregroundColor(Color(hex: "#2334D0"))
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+            }
+            .padding(.top, 25)
+            
+            NavigationLink(destination: BottomNavigationView()) {
+                Text("KEMBALI")
+                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+                
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.top, 15)
+        }
+        .padding(25)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
@@ -141,6 +200,6 @@ extension NumberFormatter {
 
 struct LimitCardView_Previews: PreviewProvider {
     static var previews: some View {
-        LimitCardView(card: myCardData[1])
+        LimitCardView(card: myCardData[0])
     }
 }

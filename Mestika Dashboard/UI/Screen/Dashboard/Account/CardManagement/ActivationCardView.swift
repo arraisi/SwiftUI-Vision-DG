@@ -9,8 +9,14 @@ import SwiftUI
 
 struct ActivationCardView: View {
     
+    @AppStorage("lock_Password") var key = "123456"
+    
     @State var atmNumber: String = ""
     @State var pin: String = ""
+    
+    @State var nextView: Bool = false
+    
+    var card: MyCard
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -34,6 +40,7 @@ struct ActivationCardView: View {
                 TextField("Masukan nomor ATM Anda", text: $atmNumber, onEditingChanged: { changed in
                     print("\($atmNumber)")
                 })
+                .keyboardType(.numberPad)
                 .frame(height: 50)
                 .font(.custom("Montserrat-Regular", size: 14))
                 .padding(.horizontal)
@@ -43,23 +50,32 @@ struct ActivationCardView: View {
                 TextField("Masukan PIN ATM Anda", text: $pin, onEditingChanged: { changed in
                     print("\($pin)")
                 })
+                .keyboardType(.numberPad)
                 .frame(height: 50)
                 .font(.custom("Montserrat-Regular", size: 14))
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(15)
                 
-                NavigationLink(
-                    destination: VerificationOTPCardView(),
-                    label: {
-                        Text("AKTIVASI KARTU ATM BARU")
-                            .font(.custom("Montserrat-Bold", size: 14))
-                            .foregroundColor(Color(hex: "#2334D0"))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    })
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .padding(.top, 20)
+                NavigationLink(destination: VerificationOTPCardView(card: card), isActive: $nextView) {
+                    Text("")
+                }
+                
+                Button(action: {
+                    if atmNumber != "" && pin == key {
+                        nextView.toggle()
+                    } else {
+                        pin = ""
+                    }
+                }, label: {
+                    Text("AKTIVASI KARTU ATM BARU")
+                        .font(.custom("Montserrat-Bold", size: 14))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                })
+                .background(Color.white)
+                .cornerRadius(12)
+                .padding(.top, 20)
             }
             .padding(.horizontal, 30)
             .padding(.top, 35)
@@ -70,6 +86,6 @@ struct ActivationCardView: View {
 
 struct ActivationATMView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivationCardView()
+        ActivationCardView(card: myCardData[0])
     }
 }

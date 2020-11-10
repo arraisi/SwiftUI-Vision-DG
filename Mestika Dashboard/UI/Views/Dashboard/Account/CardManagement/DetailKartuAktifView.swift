@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailKartuAktifView: View {
     
-    var data: MyCard
+    var card: MyCard
     
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
@@ -61,7 +61,7 @@ struct DetailKartuAktifView: View {
                 })
             
             NavigationLink(
-                destination: LimitCardView(card: data),
+                destination: LimitCardView(card: card),
                 label: {
                     HStack{
                         Image("ic_list")
@@ -107,14 +107,14 @@ struct DetailKartuAktifView: View {
                 })
             
             NavigationLink(
-                destination: Text("Blokir Kartu"),
+                destination: BlockCardView(card: card),
                 label: {
                     HStack{
                         Image("ic_list")
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text("Pengaturan PIN ATM")
+                            Text("Blokir Kartu")
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
@@ -128,6 +128,30 @@ struct DetailKartuAktifView: View {
                         Spacer()
                     }
                 })
+            
+            NavigationLink(
+                destination: DamageCardView(card: card),
+                label: {
+                    HStack{
+                        Image("ic_list")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        VStack(alignment: .leading){
+                            Text("Kartu Rusak")
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                            
+                            
+                            Text("Laporkan kerusakan kartu")
+                                .font(.custom("Montserrat-Light", size: 10))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                        }
+                        Spacer()
+                    }
+                })
+            
         }
         .padding(.top, 25)
         .padding(.bottom, 10)
@@ -138,7 +162,7 @@ struct DetailKartuAktifView: View {
 
 struct DetailKartuAktifView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailKartuAktifView(data: myCardData[0])
+        DetailKartuAktifView(card: myCardData[0])
             .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width-60, height: 400))
     }
 }

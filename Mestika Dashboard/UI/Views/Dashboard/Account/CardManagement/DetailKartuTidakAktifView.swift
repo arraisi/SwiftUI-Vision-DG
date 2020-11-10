@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct DetailKartuTidakAktifView: View {
+    
+    var card: MyCard
+    
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             
@@ -37,7 +40,7 @@ struct DetailKartuTidakAktifView: View {
             .padding(.bottom, 10)
             
             NavigationLink(
-                destination: ActivationCardView(),
+                destination: ActivationCardView(card: card),
                 label: {
                     Text("AKTIFKAN KARTU-KU")
                         .foregroundColor(.white)
@@ -57,7 +60,7 @@ struct DetailKartuTidakAktifView: View {
 
 struct DetailKartuTidakAktifView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailKartuTidakAktifView()
+        DetailKartuTidakAktifView(card: myCardData[0])
             .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width, height: 400))
             .environment(\.colorScheme, .dark)
     }
