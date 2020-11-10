@@ -13,11 +13,13 @@ class OtpService {
     
     static let shared = OtpService()
     
-    func getRequestOtp(completion: @escaping(Result<OtpResponse?, NetworkError>) -> Void) {
+    func getRequestOtp(otpRequest: OtpRequest, completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
         
-        guard let url = URL.urlForSliderAssets() else {
+        guard let url = URL.urlGetRequestOtp() else {
             return completion(.failure(.badUrl))
         }
+        
+//        let body = "destination=\(otpRequest.destination)&type=\(otpRequest.type)"
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -28,6 +30,10 @@ class OtpService {
             
             guard let data = data, error == nil else {
                 return completion(.failure(.noData))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
             }
             
             let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)

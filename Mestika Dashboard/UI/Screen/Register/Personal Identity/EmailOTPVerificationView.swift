@@ -8,35 +8,44 @@
 import SwiftUI
 
 struct EmailOTPVerificationView: View {
-    @EnvironmentObject var registerData: RegistrasiModel
     
-    /*
-     Variable PIN OTP
-     */
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var registerData: RegistrasiModel
+    @ObservedObject private var otpVM = OtpViewModel()
+    
+    /* Variable PIN OTP */
     var maxDigits: Int = 6
     @State var pin: String = ""
     @State var showPin = true
     @State var isDisabled = false
     
-    /*
-     Variable Validation
-     */
+    /* Variable Validation */
     @State var isOtpValid = false
     @State var isResendOtpDisabled = true
     
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    /*
-     Boolean for Show Modal
-     */
+    /* Boolean for Show Modal */
     @State var showingModal = false
+    @State private var showingAlert: Bool = false
     
     var disableForm: Bool {
         pin.count < 6
     }
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    func getOTP() {
+        self.otpVM.otpRequest { success in
+            if success {
+                print(self.otpVM.isLoading)
+                print(self.otpVM.code)
+                self.showingAlert = true
+            }
+            
+            self.showingAlert = true
+        }
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -76,13 +85,15 @@ struct EmailOTPVerificationView: View {
                     Button(action: {
                         print("-> Resend OTP")
                         self.timeRemaining = 60
+                        
+                        getOTP()
                     }) {
                         Text("Resend OTP")
                             .font(.caption2)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
-                    .disabled(isResendOtpDisabled)
+//                    .disabled(isResendOtpDisabled)
                     
                     Text("(00:\(timeRemaining))")
                         .font(.caption2)
@@ -105,7 +116,7 @@ struct EmailOTPVerificationView: View {
                     
                     Button(action: {
                         print(pin)
-                        if (pin == "111111") {
+                        if (pin == self.otpVM.code) {
                             self.isOtpValid = true
                         } else {
                             print("Not Valid")
@@ -141,6 +152,7 @@ struct EmailOTPVerificationView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .onAppear(perform: getOTP)
         .onReceive(timer) { time in
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
@@ -148,6 +160,13 @@ struct EmailOTPVerificationView: View {
             
             if self.timeRemaining < 1 {
                 isResendOtpDisabled = false
+            }
+        }
+        .alert(isPresented: $showingAlert) {
+            if (self.otpVM.code.isEmpty) {
+                return Alert(title: Text("Message Error"), message: Text("No OTP Code"), dismissButton: .default(Text("Oke")))
+            } else {
+                return Alert(title: Text("OTP Code"), message: Text(self.otpVM.code), dismissButton: .default(Text("Oke")))
             }
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
@@ -201,7 +220,7 @@ struct EmailOTPVerificationView: View {
     
     private func getImageName(at index: Int) -> String {
         if index >= self.pin.count {
-            return ""
+            return "•"
         }
         
         if self.showPin {

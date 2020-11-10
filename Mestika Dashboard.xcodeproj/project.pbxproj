@@ -167,6 +167,7 @@
 		52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AE1A6F255A3D9A00B011B7 /* OtpResponse.swift */; };
 		52AE1A75255A3E7800B011B7 /* OtpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AE1A74255A3E7800B011B7 /* OtpViewModel.swift */; };
 		52AE1A81255A425100B011B7 /* OtpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AE1A80255A425100B011B7 /* OtpService.swift */; };
+		52AE1A8C255A448100B011B7 /* OtpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AE1A8B255A448100B011B7 /* OtpRequest.swift */; };
 		52BF57CF2558E34100F009B5 /* ChooseTypeSavingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */; };
 		52BF57D42558E57D00F009B5 /* savingTypeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52BF57D32558E57D00F009B5 /* savingTypeData.json */; };
 		52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57DC2558E67900F009B5 /* CardTypeSavingView.swift */; };
@@ -406,6 +407,7 @@
 		52AE1A6F255A3D9A00B011B7 /* OtpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResponse.swift; sourceTree = "<group>"; };
 		52AE1A74255A3E7800B011B7 /* OtpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewModel.swift; sourceTree = "<group>"; };
 		52AE1A80255A425100B011B7 /* OtpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpService.swift; sourceTree = "<group>"; };
+		52AE1A8B255A448100B011B7 /* OtpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpRequest.swift; sourceTree = "<group>"; };
 		52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTypeSavingScreen.swift; sourceTree = "<group>"; };
 		52BF57D32558E57D00F009B5 /* savingTypeData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = savingTypeData.json; sourceTree = "<group>"; };
 		52BF57DC2558E67900F009B5 /* CardTypeSavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeSavingView.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 		5245F883253FE702002E8B53 /* Mestika Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				C04B421F25540FB000DDE4C7 /* Models */,
 				C092ABFD2553B51B0051CE3E /* Resources */,
 				52ADFEC62557DA3700A1001F /* Services */,
 				52ADFEB22557DA0700A1001F /* Utils */,
@@ -589,7 +592,6 @@
 		5245F8BA253FE818002E8B53 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C04B421F25540FB000DDE4C7 /* Models */,
 				523A86282542BE8600ADFE25 /* Components */,
 				5245F8BB253FE821002E8B53 /* Screen */,
 				52468ABC25413604007518AE /* Views */,
@@ -964,6 +966,7 @@
 			children = (
 				52ADFE7D2557D99F00A1001F /* PilihATM */,
 				52ADFE832557D99F00A1001F /* RegistrasiModel.swift */,
+				52AE1A8B255A448100B011B7 /* OtpRequest.swift */,
 			);
 			path = BindingModel;
 			sourceTree = "<group>";
@@ -1106,7 +1109,7 @@
 				52AE1A6F255A3D9A00B011B7 /* OtpResponse.swift */,
 			);
 			name = Models;
-			path = "Mestika Dashboard/UI/Models";
+			path = "Mestika Dashboard/Models";
 			sourceTree = SOURCE_ROOT;
 		};
 		C04B422025540FDC00DDE4C7 /* Dashboard */ = {
@@ -1363,6 +1366,7 @@
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
+				52AE1A8C255A448100B011B7 /* OtpRequest.swift in Sources */,
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
