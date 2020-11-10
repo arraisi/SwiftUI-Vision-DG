@@ -35,7 +35,9 @@ struct GridMenuAllPaymentPurchaseView: View {
             
             LazyVGrid(columns: gridItems, alignment: .center, spacing: 20) {
                 VStack {
-                    Button(action: {}, label: {
+                    NavigationLink(
+                        destination: PaymentPLNScreen(),
+                        label: {
                         VStack {
                             EmptyView()
                         }

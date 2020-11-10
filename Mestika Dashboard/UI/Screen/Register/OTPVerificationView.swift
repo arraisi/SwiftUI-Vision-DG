@@ -8,49 +8,51 @@
 import SwiftUI
 
 struct OTPVerificationView: View {
-    /*
-     Environtment Object
-     */
+    
+    /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    /*
-     Variable PIN OTP
-     */
+    /* Variable PIN OTP */
     var maxDigits: Int = 6
     @State var pin: String = ""
     @State var showPin = true
     @State var isDisabled = false
     
-    /*
-     Variable Validation
-     */
+    /* Variable Validation */
     @State var isOtpValid = false
     @State var otpInvalidCount = 0
     @State var isResendOtpDisabled = true
     
-    /*
-     Data Binding
-     */
+    /* Data Binding */
     @Binding var rootIsActive : Bool
+    @ObservedObject private var otpVM = OtpViewModel()
     
-    /*
-     Timer
-     */
+    /* Timer */
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timers = Timer.publish(every: 1000, on: .main, in: .common).autoconnect()
     
-    /*
-     Boolean for Show Modal
-     */
+    /* Boolean for Show Modal */
     @State var showingOtpIncorect = false
     @State var showingOtpInvalid = false
+    @State private var showingAlert: Bool = false
     
-    /*
-     Disabled Form
-     */
+    /* Disabled Form */
     var disableForm: Bool {
         pin.count < 6
+    }
+    
+    func getOTP() {
+        self.otpVM.otpRequest { success in
+            if success {
+                print(self.otpVM.isLoading)
+                print(self.otpVM.code)
+                self.showingAlert = true
+            }
+            
+            self.showingAlert = true
+        }
     }
     
     // MARK: -MAIN CONTENT
@@ -79,7 +81,7 @@ struct OTPVerificationView: View {
                     .padding(.bottom, 20)
                     .padding(.horizontal, 20)
                     .fixedSize(horizontal: false, vertical: true)
-            
+                
                 ZStack {
                     pinDots
                     backgroundField
@@ -91,6 +93,8 @@ struct OTPVerificationView: View {
                     
                     Button(action: {
                         print("-> Resend OTP")
+                        getOTP()
+                        
                         self.timeRemaining = 60
                     }) {
                         Text("Resend OTP")
@@ -98,7 +102,7 @@ struct OTPVerificationView: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
-                    .disabled(isResendOtpDisabled)
+                    //                    .disabled(isResendOtpDisabled)
                     
                     Text("(00:\(timeRemaining))")
                         .font(.caption2)
@@ -122,12 +126,12 @@ struct OTPVerificationView: View {
                     Button(action: {
                         print(pin)
                         
-                        if (pin == "111111" && otpInvalidCount < 5) {
+                        if (pin == self.otpVM.code && otpInvalidCount < 5) {
                             print("OTP CORRECT")
                             self.isOtpValid = true
                         }
                         
-                        if (pin != "111111" && otpInvalidCount <= 4) {
+                        if (pin != self.otpVM.code && otpInvalidCount <= 4) {
                             print("OTP INCORRECT")
                             self.otpInvalidCount += 1
                             print("\(self.otpInvalidCount)")
@@ -167,11 +171,12 @@ struct OTPVerificationView: View {
                 ModalOverlay(tapAction: { withAnimation { self.showingOtpInvalid = false } })
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .onAppear(perform: getOTP)
         .onReceive(timer) { time in
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
@@ -179,6 +184,13 @@ struct OTPVerificationView: View {
             
             if self.timeRemaining < 1 {
                 isResendOtpDisabled = false
+            }
+        }
+        .alert(isPresented: $showingAlert) {
+            if (self.otpVM.code.isEmpty) {
+                return Alert(title: Text("Message Error"), message: Text("No OTP Code"), dismissButton: .default(Text("Oke")))
+            } else {
+                return Alert(title: Text("OTP Code"), message: Text(self.otpVM.code), dismissButton: .default(Text("Oke")))
             }
         }
         .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
@@ -216,15 +228,15 @@ struct OTPVerificationView: View {
         })
         
         return TextField("", text: boundPin, onCommit: submitPin)
-           .accentColor(.clear)
-           .foregroundColor(.clear)
-           .keyboardType(.numberPad)
-           .disabled(isDisabled)
+            .accentColor(.clear)
+            .foregroundColor(.clear)
+            .keyboardType(.numberPad)
+            .disabled(isDisabled)
     }
     
     private func submitPin() {
         if pin.count == maxDigits {
-           isDisabled = true
+            isDisabled = true
         }
         
         if pin.count > maxDigits {
@@ -252,7 +264,7 @@ struct OTPVerificationView: View {
                 chars[data] = newChar
             }
         }
-
+        
         let modifiedString = String(chars)
         return modifiedString
     }

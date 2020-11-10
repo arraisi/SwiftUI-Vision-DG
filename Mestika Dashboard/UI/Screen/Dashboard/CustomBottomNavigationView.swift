@@ -18,8 +18,12 @@ struct CustomBottomNavigationView: View {
                 self.selected = 0
                 
             }) {
-                Image("ic_dashboard")
-                    .renderingMode(.template)
+                VStack {
+                    Image("ic_dashboard")
+                        .renderingMode(.template)
+//                    Text("Dashboard")
+//                        .font(.caption2)
+                }
                 
             }.foregroundColor(self.selected == 0 ? .blue : .gray)
             
@@ -30,8 +34,13 @@ struct CustomBottomNavigationView: View {
                 self.selected = 1
                 
             }) {
-                Image("ic_transfer")
-                    .renderingMode(.template)
+                VStack {
+                    Image("ic_transfer")
+                        .renderingMode(.template)
+//                    Text("Transfer")
+//                        .font(.caption2)
+                }
+                
             }.foregroundColor(self.selected == 1 ? .blue : .gray)
             
             
@@ -41,8 +50,14 @@ struct CustomBottomNavigationView: View {
                 self.selected = 2
                 
             }) {
-                Image("ic_favorit")
-                    .renderingMode(.template)
+                
+                VStack {
+                    Image("ic_favorit")
+                        .renderingMode(.template)
+//                    Text("Favorit")
+//                        .font(.caption2)
+                }
+                
             }.foregroundColor(self.selected == 2 ? .blue : .gray)
             .offset(x: -10)
             
@@ -52,8 +67,14 @@ struct CustomBottomNavigationView: View {
             Button(action: {
                 self.selected = 3
             }) {
-                Image("ic_akun")
-                    .renderingMode(.template)
+                
+                VStack {
+                    Image("ic_akun")
+                        .renderingMode(.template)
+//                    Text("Akun")
+//                        .font(.caption2)
+                }
+                
             }.foregroundColor(self.selected == 3 ? .blue : .gray)
         }
     }
