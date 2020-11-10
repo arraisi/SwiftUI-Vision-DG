@@ -34,7 +34,6 @@ struct RegisterView: View {
     @ObservedObject var assetsSliderVM = SliderAssetsSummaryViewModel()
     
     var registerData = RegistrasiModel()
-    var loginData = LoginBindingModel()
     
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>

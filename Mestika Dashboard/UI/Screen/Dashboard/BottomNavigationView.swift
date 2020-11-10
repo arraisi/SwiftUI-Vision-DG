@@ -34,11 +34,11 @@ struct BottomNavigationView: View {
                 }
                 
                 if (selected == 1) {
-                    FavoriteTabs()
+                    TransferTabs()
                 }
                 
                 if (selected == 2) {
-                    TransferTabs()
+                    FavoriteTabs()
                 }
                 
                 if (selected == 3) {
