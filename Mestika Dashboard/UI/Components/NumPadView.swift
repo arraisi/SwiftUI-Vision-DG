@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NumPadView: View {
     
-    var value: String
+    var value: String = "1"
     @Binding var password: String
     @Binding var key: String
     @Binding var unlocked: Bool

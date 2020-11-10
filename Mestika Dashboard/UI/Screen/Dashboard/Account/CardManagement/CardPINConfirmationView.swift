@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ConfirmationPINView: View {
+struct CardPINConfirmationView: View {
     
     @AppStorage("lock_Password") var key = "123456"
     
@@ -34,7 +34,7 @@ struct ConfirmationPINView: View {
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("Silahkan masukkan PIN transaksi lama Anda")
+                Text("Silahkan masukkan PIN ATM Anda")
                     .font(.subheadline)
                     .fontWeight(.light)
                     .foregroundColor(Color(hex: "#002251"))
@@ -138,8 +138,8 @@ struct ConfirmationPINView: View {
     }
 }
 
-struct ConfirmationPINView_Previews: PreviewProvider {
+struct CardPINConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationPINView(key: "", pin: "", nextView: AnyView(CardManagementScreen()))
+        CardPINConfirmationView(key: "", pin: "", nextView: AnyView(CardManagementScreen()))
     }
 }

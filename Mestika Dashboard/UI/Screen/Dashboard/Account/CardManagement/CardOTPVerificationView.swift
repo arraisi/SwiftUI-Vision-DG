@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VerificationOTPCardView: View {
+struct CardOTPVerificationView: View {
     
     var otp = "123456"
     var card: MyCard
@@ -106,7 +106,7 @@ struct VerificationOTPCardView: View {
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
             
-            NavigationLink(destination: VerificationCVVCardView(card: card), isActive: $isOtpValid) {
+            NavigationLink(destination: CardCVVVerificationView(card: card), isActive: $isOtpValid) {
                 Text("")
             }
             
@@ -192,8 +192,8 @@ struct VerificationOTPCardView: View {
     }
 }
 
-struct VerificationOTPCardView_Previews: PreviewProvider {
+struct CardOTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        VerificationOTPCardView(card: myCardData[0])
+        CardOTPVerificationView(card: myCardData[0])
     }
 }

@@ -61,7 +61,7 @@ struct DetailKartuAktifView: View {
                 })
             
             NavigationLink(
-                destination: LimitCardView(card: card),
+                destination: CardLimitView(card: card),
                 label: {
                     HStack{
                         Image("ic_list")
@@ -107,7 +107,7 @@ struct DetailKartuAktifView: View {
                 })
             
             NavigationLink(
-                destination: BlockCardView(card: card),
+                destination: CardBlockView(card: card),
                 label: {
                     HStack{
                         Image("ic_list")
@@ -130,7 +130,7 @@ struct DetailKartuAktifView: View {
                 })
             
             NavigationLink(
-                destination: DamageCardView(card: card),
+                destination: CardDamageView(card: card),
                 label: {
                     HStack{
                         Image("ic_list")

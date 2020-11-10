@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BlockCardView: View {
+struct CardBlockView: View {
     
     var card: MyCard
     
@@ -38,20 +38,24 @@ struct BlockCardView: View {
                             .lineSpacing(10)
                         
                         NavigationLink(
-                            destination: ConfirmationPINView(key: "123456", pin: "", nextView: AnyView(BlockCardView(card: card, showingModal: true))),
+                            destination: CardPINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardBlockView(card: card, showingModal: true))),
                             isActive: $showConfirmationPIN,
                             label: {})
                         
-                        Button (action: {self.showConfirmationPIN.toggle()},
-                            label: {
-                                Text(card.blocked ? "BUKA BLOKIR KARTU" : "BLOKIR KARTU")
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .frame(maxWidth: .infinity, maxHeight: 50)
-                            })
-                            .frame(height: 50)
-                            .background(Color(hex: "#2334D0"))
-                            .cornerRadius(12)
+                        
+                        Button (action: {
+                            
+                            card.blocked ? self.showConfirmationPIN.toggle() : self.showingModal.toggle()
+                            
+                        }, label: {
+                            Text(card.blocked ? "BUKA BLOKIR KARTU" : "BLOKIR KARTU")
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, maxHeight: 50)
+                        })
+                        .frame(height: 50)
+                        .background(Color(hex: "#2334D0"))
+                        .cornerRadius(12)
                     }
                     .padding(20)
                     .padding(.top, 20)
@@ -101,7 +105,7 @@ struct BlockCardView: View {
             .padding(.top, 25)
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text(card.blocked ? "KEMBALI":"KEMBALI KE KARTU-KU")
+                Text("KEMBALI")
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -119,8 +123,8 @@ struct BlockCardView: View {
     }
 }
 
-struct BlockCardView_Previews: PreviewProvider {
+struct CardBlockView_Previews: PreviewProvider {
     static var previews: some View {
-        BlockCardView(card: myCardData[0])
+        CardBlockView(card: myCardData[0])
     }
 }
