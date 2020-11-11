@@ -10,29 +10,30 @@ import SwiftUI
 struct ScanKTPView: View {
     
     /*
+     Environtment Object
+     */
+    @EnvironmentObject var registerData: RegistrasiModel
+    
+    /*
      Recognized Nomor Induk Ktp
      */
     @ObservedObject var recognizedText: RecognizedText = RecognizedText()
-    @State var imageKTP: Image? = nil
-    @State var nik: String = ""
+    @Binding var imageKTP: Image?
+//    @State var nik: String = ""
     @State var isEditNik: Bool = false
     
-    let formIndex: Int
-    let callback: (Int)->()
+    @Binding var formShowed: Bool
+    @Binding var nextFormShowed: Bool
     
-    /*
-     Fungsi untuk Toggle CheckBox NIK
-     */
-    func toggleEditNik() {
-        isEditNik = !isEditNik
-    }
+    // input : nextFormIndex, nik, isEditNik
+//    let callback: (String)->()
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("")
             Text("Mohon siapkan terlebih dahulu \nKartu Tanda Penduduk (KTP) Anda")
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
+                .foregroundColor(.black)
                 .padding(.vertical, 15)
             
             ZStack {
@@ -58,11 +59,12 @@ struct ScanKTPView: View {
                     .foregroundColor(imageKTP == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
-                    )
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
+//                    )
                 
             }
+            .foregroundColor(.black)
             .background(Color(hex: imageKTP == nil ? "#2334D0" : "#FFFFFF"))
             .cornerRadius(12)
             //            .padding(.horizontal, 30)
@@ -73,11 +75,13 @@ struct ScanKTPView: View {
                 Text("Nomor Kartu Tanda Penduduk")
                     .multilineTextAlignment(.leading)
                     .font(.custom("Montserrat-SemiBold", size: 10))
+                    .foregroundColor(.black)
                 //                    .padding(.horizontal, 30)
                 
-                TextField("No. KTP (Otomatis terisi)", text: $nik)
+                TextField("No. KTP (Otomatis terisi)", text: $registerData.nik)
                     .frame(height: 10)
                     .font(.custom("Montserrat-SemiBold", size: 12))
+                    .foregroundColor(.black)
                     .padding()
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
@@ -95,25 +99,31 @@ struct ScanKTPView: View {
                     .padding(.top, 5)
                     .fixedSize(horizontal: false, vertical: true)
                 }
+                .padding(.bottom, 15)
                 
                 if (imageKTP != nil) {
                     
                     Button(action: {
-                        callback(formIndex+1)
+                        if isEditNik {
+//                            self.callback(nik)
+                            self.formShowed.toggle()
+                            self.nextFormShowed.toggle()
+                            self.registerData.fotoKTP = self.imageKTP!
+                        }
                     }) {
                         Text("Simpan")
                             .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .font(.system(size: 13))
+                            .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
-                    .padding(.top, 30)
+                    .padding(.top, 15)
                     
                 } else { EmptyView() }
                 
             }
+            .navigationBarHidden(true)
         }
         .padding(.bottom, 15)
         .onAppear {
@@ -125,12 +135,19 @@ struct ScanKTPView: View {
                 print(matched)
                 
                 if matched.count != 0 {
-                    self.nik = matched[0]
+                    self.registerData.nik = matched[0]
                     _ = retrieveImage(forKey: "ktp")
                 }
                 
             }
         }
+    }
+    
+    /*
+     Fungsi untuk Toggle CheckBox NIK
+     */
+    func toggleEditNik() {
+        isEditNik = !isEditNik
     }
     
     /*
@@ -142,6 +159,7 @@ struct ScanKTPView: View {
             print(image)
             
             imageKTP = Image(uiImage: image)
+            self.registerData.fotoKTP = imageKTP!
             return image
         }
         
@@ -169,8 +187,6 @@ struct ScanKTPView: View {
 
 struct ScanKTPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanKTPView(formIndex: 1) { (nextFormIndex) in
-            
-        }
+        ScanKTPView(imageKTP: Binding.constant(Image("card_bg")), formShowed: Binding.constant(true), nextFormShowed: Binding.constant(false)).environmentObject(RegistrasiModel())
     }
 }

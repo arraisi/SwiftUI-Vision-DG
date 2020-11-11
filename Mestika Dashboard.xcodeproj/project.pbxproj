@@ -219,11 +219,14 @@
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
+		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
+		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
 		C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0884939255BC12E00E2F927 /* ScanKTPView.swift */; };
 		C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* MyCard.swift */; };
 		C092ABF92553B4BF0051CE3E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABF82553B4BF0051CE3E /* Data.swift */; };
 		C092ABFF2553B5850051CE3E /* myCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = C092ABFE2553B5850051CE3E /* myCardData.json */; };
+		C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */; };
 		C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9872552896200566A11 /* DetailKartuTidakAktifView.swift */; };
 		C0A4F99625528C0700566A11 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F98D25528C0600566A11 /* Montserrat-SemiBold.ttf */; };
 		C0A4F99725528C0700566A11 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F98E25528C0600566A11 /* Montserrat-Thin.ttf */; };
@@ -482,11 +485,14 @@
 		C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithToolBarKeyBoard.swift; sourceTree = "<group>"; };
 		C00702C6255531280089DBD1 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
 		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
+		C0587B7B255BED2600F82D9D /* SelfieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieView.swift; sourceTree = "<group>"; };
+		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
 		C0884939255BC12E00E2F927 /* ScanKTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanKTPView.swift; sourceTree = "<group>"; };
 		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
 		C092ABF82553B4BF0051CE3E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		C092ABFE2553B5850051CE3E /* myCardData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myCardData.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormIdentitasDiriView.swift; sourceTree = "<group>"; };
 		C0A4F9872552896200566A11 /* DetailKartuTidakAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuTidakAktifView.swift; sourceTree = "<group>"; };
 		C0A4F98D25528C0600566A11 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		C0A4F98E25528C0600566A11 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
@@ -1017,6 +1023,7 @@
 				52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */,
 				52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */,
 				52ADFF602557DFDB00A1001F /* Coordinator.swift */,
+				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
 			);
 			path = "Personal Identity";
 			sourceTree = "<group>";
@@ -1074,6 +1081,8 @@
 				52BF57DC2558E67900F009B5 /* CardTypeSavingView.swift */,
 				52BF57EA2558F06A00F009B5 /* DetailsTypeSavingView.swift */,
 				C0884939255BC12E00E2F927 /* ScanKTPView.swift */,
+				C0587B7B255BED2600F82D9D /* SelfieView.swift */,
+				C075137A255C19A900BB75D8 /* ScanNPWPView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -1540,6 +1549,7 @@
 				52ADFF8F2557DFDC00A1001F /* KeluargaTerdekat.swift in Sources */,
 				52ADFEBE2557DA0700A1001F /* UIImage+Utils.swift in Sources */,
 				C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */,
+				C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,
 				52ADFF9A2557DFDC00A1001F /* SumberDanaView.swift in Sources */,
@@ -1558,6 +1568,7 @@
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				5290A154255BCB0F0090F788 /* FormBesarPerkiraanPenarikanDanaNasabahScreen.swift in Sources */,
 				525FA11D25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift in Sources */,
+				C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */,
 				5290A186255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
@@ -1618,6 +1629,7 @@
 				52ADFF212557DD0400A1001F /* RadioButtonGroup.swift in Sources */,
 				52ADFF452557DE7300A1001F /* SUImagePickerView.swift in Sources */,
 				C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */,
+				C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */,
 				525FA10F25525DA8007EADCB /* OffsetKey.swift in Sources */,
 				C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */,
 				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,

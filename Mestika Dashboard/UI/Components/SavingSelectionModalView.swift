@@ -104,7 +104,7 @@ struct SavingSelectionModalView: View {
                 .frame(height: 250)
             }
             
-            NavigationLink(destination: PersonalIdentityView().environmentObject(registerData)) {
+            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
                 Text("Pilih Tabungan ini")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
