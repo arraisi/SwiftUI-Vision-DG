@@ -19,7 +19,7 @@ class TextFieldManager: ObservableObject {
     }
 }
 
-struct VerificationCVVCardView: View {
+struct CardCVVVerificationView: View {
     
     @ObservedObject var cvv = TextFieldManager()
     
@@ -187,8 +187,8 @@ extension View {
 }
 #endif
 
-struct VerificationCVVCardView_Previews: PreviewProvider {
+struct CardCVVVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        VerificationCVVCardView(card: myCardData[0])
+        CardCVVVerificationView(card: myCardData[0])
     }
 }

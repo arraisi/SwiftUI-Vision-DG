@@ -18,19 +18,17 @@ struct FormInputOldPinScreen: View {
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 Spacer(minLength: 0)
                 
                 Text("MASUKKAN PIN LAMA")
-                    .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
                 Text("Silahkan masukkan PIN transaksi lama Anda")
-                    .font(.subheadline)
-                    .fontWeight(.light)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
                 
@@ -49,6 +47,12 @@ struct FormInputOldPinScreen: View {
                 
                 Spacer(minLength: 0)
                 
+                NavigationLink(
+                    destination: FormInputNewPinScreen(),
+                    isActive: $unLocked,
+                    label: {
+                        Text("")
+                    })
                 
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
                     
@@ -57,7 +61,7 @@ struct FormInputOldPinScreen: View {
                     }
                     
                     NumPadView(value: "delete.fill", password: $pin, key: $key, unlocked: $unLocked, wrongPass: $wrongPin, keyDeleteColor: .constant(Color(hex: "#2334D0")))
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .disabled(true)
                         .hidden()
                     
                     NumPadView(value: "0", password: $pin, key: $key, unlocked: $unLocked, wrongPass: $wrongPin, keyDeleteColor: .constant(Color(hex: "#2334D0")))

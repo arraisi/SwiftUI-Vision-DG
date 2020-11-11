@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LimitCardView: View {
+struct CardLimitView: View {
     
     @State var limitPerTransaksi: Double = 50000000
     @State var limitPerHari: Double = 20000000
@@ -96,7 +96,7 @@ struct LimitCardView: View {
                         }
                         
                         NavigationLink(
-                            destination: ConfirmationPINView(key: "123456", pin: "", nextView: AnyView(LimitCardView(card: card, showingModal: true))),
+                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
                             label: {
                                 Text("SIMPAN PERUBAHAN")
                                     .foregroundColor(.white)
@@ -198,8 +198,8 @@ extension NumberFormatter {
     }
 }
 
-struct LimitCardView_Previews: PreviewProvider {
+struct CardLimitView_Previews: PreviewProvider {
     static var previews: some View {
-        LimitCardView(card: myCardData[0])
+        CardLimitView(card: myCardData[0])
     }
 }

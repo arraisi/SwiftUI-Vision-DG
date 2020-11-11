@@ -24,13 +24,11 @@ struct FormInputResetPinScreen: View {
                 Spacer(minLength: 0)
                 
                 Text("MASUKKAN PIN ATM")
-                    .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("Silahkan masukkan PIN transaksi lama Anda")
-                    .font(.subheadline)
-                    .fontWeight(.light)
+                Text("Silahkan masukkan PIN ATM Anda")
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
                 
@@ -49,6 +47,12 @@ struct FormInputResetPinScreen: View {
                 
                 Spacer(minLength: 0)
                 
+                NavigationLink(
+                    destination: OtpResetPinScreen(),
+                    isActive: $unLocked,
+                    label: {
+                        Text("")
+                    })
                 
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
                     

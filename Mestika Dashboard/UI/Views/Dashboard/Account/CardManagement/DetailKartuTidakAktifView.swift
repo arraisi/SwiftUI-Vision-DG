@@ -40,7 +40,7 @@ struct DetailKartuTidakAktifView: View {
             .padding(.bottom, 10)
             
             NavigationLink(
-                destination: ActivationCardView(card: card),
+                destination: CardActivationView(card: card),
                 label: {
                     Text("AKTIFKAN KARTU-KU")
                         .foregroundColor(.white)

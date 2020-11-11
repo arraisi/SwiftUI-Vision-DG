@@ -1,13 +1,13 @@
 //
-//  OtpResetPinScreen.swift
+//  OtpChangePinAtmView.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 03/11/20.
+//  Created by Abdul R. Arraisi on 11/11/20.
 //
 
 import SwiftUI
 
-struct OtpResetPinScreen: View {
+struct OtpChangePinAtmView: View {
     
     var maxDigits: Int = 6
     @State private var pin: String = ""
@@ -25,6 +25,8 @@ struct OtpResetPinScreen: View {
         pin.count < 6
     }
     
+    var nextView: AnyView
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -32,13 +34,11 @@ struct OtpResetPinScreen: View {
             
             VStack {
                 Text("MASUKKAN KODE OTP")
-                    .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
                 Text("Kami telah mengirimkan OTP ke no. telepon Anda")
-                    .font(.subheadline)
-                    .fontWeight(.light)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
                 
@@ -71,32 +71,56 @@ struct OtpResetPinScreen: View {
                 .padding(.top, 5)
                 
                 Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
-                    .font(.subheadline)
-                    .fontWeight(.light)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 30)
                     .padding(.bottom, 20)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 30)
                     .fixedSize(horizontal: false, vertical: true)
+                
+                NavigationLink(destination: AnyView(nextView), label: {
+                    Text("Reset PIN Transaksi")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 16))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(30)
                 
                 Spacer()
                 
-                VStack {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                        Text("Reset PIN Transaksi")
-                            .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                HStack {
+                    VStack(alignment: .leading, spacing: 15) {
                         
-                    })
-                    .background(Color(hex: "#2334D0"))
-                    .cornerRadius(12)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("No. telepon Anda berubah?")
+                                .font(.custom("Montserrat-Regular", size: 9))
+                            Button(action: {
+                                
+                            }, label: {
+                                Text("Input No. Telepon Baru Anda")
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                            })
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Ganti cara validasi?")
+                                .font(.custom("Montserrat-Regular", size: 9))
+                            Button(action: {
+                                
+                            }, label: {
+                                Text("Kirim Kode/Link Verifikasi melalui Email")
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                            })
+                        }
+                    }
+                    
+                    Spacer()
                 }
-                .padding(.bottom, 20)
+                .padding(30)
             }
             .padding(.top, 60)
             .onReceive(timer) { time in
@@ -172,8 +196,8 @@ struct OtpResetPinScreen: View {
     
 }
 
-struct OtpResetPinScreen_Previews: PreviewProvider {
+struct OtpChangePinAtmView_Previews: PreviewProvider {
     static var previews: some View {
-        OtpResetPinScreen()
+        OtpChangePinAtmView(nextView: AnyView(FormNewPinAtmView(showingModal: true)))
     }
 }

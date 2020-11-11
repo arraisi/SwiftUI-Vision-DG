@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DamageCardView: View {
+struct CardDamageView: View {
     
     var card: MyCard
     
@@ -59,7 +59,7 @@ struct DamageCardView: View {
                         }
                         
                         NavigationLink(
-                            destination: ConfirmationPINView(key: "123456", pin: "", nextView: AnyView(DamageCardView(card: card, showingModal: true))),
+                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardDamageView(card: card, showingModal: true))),
                             isActive: $showConfirmationPIN,
                             label: {})
                         
@@ -155,8 +155,8 @@ struct DamageCardView: View {
     }
 }
 
-struct DamageCardView_Previews: PreviewProvider {
+struct CardDamageView_Previews: PreviewProvider {
     static var previews: some View {
-        DamageCardView(card: myCardData[0])
+        CardDamageView(card: myCardData[0])
     }
 }

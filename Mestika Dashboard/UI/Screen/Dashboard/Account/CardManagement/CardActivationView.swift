@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActivationCardView: View {
+struct CardActivationView: View {
     
     @AppStorage("lock_Password") var key = "123456"
     
@@ -57,7 +57,7 @@ struct ActivationCardView: View {
                 .background(Color.white)
                 .cornerRadius(15)
                 
-                NavigationLink(destination: VerificationOTPCardView(card: card), isActive: $nextView) {
+                NavigationLink(destination: CardOTPVerificationView(card: card), isActive: $nextView) {
                     Text("")
                 }
                 
@@ -84,8 +84,8 @@ struct ActivationCardView: View {
     }
 }
 
-struct ActivationATMView_Previews: PreviewProvider {
+struct CardActivationView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivationCardView(card: myCardData[0])
+        CardActivationView(card: myCardData[0])
     }
 }
