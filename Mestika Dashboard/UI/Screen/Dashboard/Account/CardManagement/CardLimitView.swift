@@ -96,7 +96,7 @@ struct CardLimitView: View {
                         }
                         
                         NavigationLink(
-                            destination: CardPINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
+                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
                             label: {
                                 Text("SIMPAN PERUBAHAN")
                                     .foregroundColor(.white)

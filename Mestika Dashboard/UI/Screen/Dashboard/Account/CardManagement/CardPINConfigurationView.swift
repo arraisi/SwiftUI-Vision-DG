@@ -31,7 +31,7 @@ struct CardPINConfigurationView: View {
                     
                     VStack(alignment: .leading, spacing: 15, content: {
                         
-                        NavigationLink(destination: FormInputOldPinScreen(unLocked: unLocked), label: {
+                        NavigationLink(destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(FormNewPinAtmView())), label: {
                             HStack{
                                 Text("Ubah PIN ATM Anda")
                                     .font(.custom("Montserrat-Medium", size: 15))
@@ -44,9 +44,7 @@ struct CardPINConfigurationView: View {
                         
                         Divider()
                         
-                        Button(action: {
-                            
-                        }, label: {
+                        NavigationLink(destination: FormInputOldPinScreen(unLocked: unLocked), label: {
                             HStack{
                                 Text("Ubah PIN Transaksi Anda")
                                     .font(.custom("Montserrat-Medium", size: 15))
@@ -59,7 +57,7 @@ struct CardPINConfigurationView: View {
                         
                         Divider()
                         
-                        NavigationLink(destination: FormInputResetPinScreen(unLocked: unLocked), label: {
+                        NavigationLink(destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(OtpResetPinScreen())), label: {
                             HStack{
                                 Text("Lupa PIN Transaksi Anda")
                                     .font(.custom("Montserrat-Medium", size: 15))

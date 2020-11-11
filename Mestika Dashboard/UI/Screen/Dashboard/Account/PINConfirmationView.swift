@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CardPINConfirmationView: View {
+struct PINConfirmationView: View {
     
     @AppStorage("lock_Password") var key = "123456"
     
@@ -126,8 +126,8 @@ struct CardPINConfirmationView: View {
     }
 }
 
-struct CardPINConfirmationView_Previews: PreviewProvider {
+struct PINConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        CardPINConfirmationView(key: "", pin: "", nextView: AnyView(CardManagementScreen()))
+        PINConfirmationView(key: "", pin: "", nextView: AnyView(CardManagementScreen()))
     }
 }

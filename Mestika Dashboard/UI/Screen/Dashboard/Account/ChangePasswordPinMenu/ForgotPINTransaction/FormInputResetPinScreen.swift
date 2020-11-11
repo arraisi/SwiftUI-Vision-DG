@@ -27,7 +27,7 @@ struct FormInputResetPinScreen: View {
                     .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("Silahkan masukkan PIN transaksi lama Anda")
+                Text("Silahkan masukkan PIN ATM Anda")
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)

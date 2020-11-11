@@ -59,7 +59,7 @@ struct CardDamageView: View {
                         }
                         
                         NavigationLink(
-                            destination: CardPINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardDamageView(card: card, showingModal: true))),
+                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardDamageView(card: card, showingModal: true))),
                             isActive: $showConfirmationPIN,
                             label: {})
                         

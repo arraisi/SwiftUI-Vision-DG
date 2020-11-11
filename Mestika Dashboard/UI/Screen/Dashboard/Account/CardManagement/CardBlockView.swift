@@ -38,7 +38,7 @@ struct CardBlockView: View {
                             .lineSpacing(10)
                         
                         NavigationLink(
-                            destination: CardPINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardBlockView(card: card, showingModal: true))),
+                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardBlockView(card: card, showingModal: true))),
                             isActive: $showConfirmationPIN,
                             label: {})
                         
