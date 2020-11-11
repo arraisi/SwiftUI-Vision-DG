@@ -19,14 +19,14 @@ struct ScanKTPView: View {
      */
     @ObservedObject var recognizedText: RecognizedText = RecognizedText()
     @Binding var imageKTP: Image?
-//    @State var nik: String = ""
-    @State var isEditNik: Bool = false
-    
     @Binding var formShowed: Bool
     @Binding var nextFormShowed: Bool
+    @Binding var confirmNik: Bool
+    
+    @State var isValidKTP: Bool = false
     
     // input : nextFormIndex, nik, isEditNik
-//    let callback: (String)->()
+    //    let callback: (String)->()
     
     var body: some View {
         VStack(alignment: .center) {
@@ -59,9 +59,9 @@ struct ScanKTPView: View {
                     .foregroundColor(imageKTP == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
-//                    )
+                //                    .overlay(
+                //                        RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
+                //                    )
                 
             }
             .foregroundColor(.black)
@@ -86,11 +86,11 @@ struct ScanKTPView: View {
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
                     //                    .padding(.horizontal, 30)
-                    .disabled(!isEditNik)
+                    .disabled(!confirmNik)
                 
-                Button(action: toggleEditNik) {
+                Button(action: toggleConfirmNik) {
                     HStack(alignment: .top) {
-                        Image(systemName: isEditNik ? "checkmark.square": "square")
+                        Image(systemName: confirmNik ? "checkmark.square": "square")
                         Text("* Periksa kembali dan pastikan Nomor Kartu Tanda Penduduk (KTP) Anda telah sesuai")
                             .font(.custom("Montserrat-Regular", size: 8))
                             .foregroundColor(Color(hex: "#707070"))
@@ -104,8 +104,8 @@ struct ScanKTPView: View {
                 if (imageKTP != nil) {
                     
                     Button(action: {
-                        if isEditNik {
-//                            self.callback(nik)
+                        if confirmNik && registerData.nik != "" && isValidKTP {
+                            //                            self.callback(nik)
                             self.formShowed.toggle()
                             self.nextFormShowed.toggle()
                             self.registerData.fotoKTP = self.imageKTP!
@@ -132,13 +132,20 @@ struct ScanKTPView: View {
             if (recognizedText.value != "-") {
                 print("scan value : \(recognizedText.value)")
                 let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
-                print(matched)
+                print("matched value : \(matched)")
+                print("recognizedText.value value : \(recognizedText.value)")
                 
                 if matched.count != 0 {
                     self.registerData.nik = matched[0]
-                    _ = retrieveImage(forKey: "ktp")
                 }
                 
+                if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
+                    self.isValidKTP = true
+                } else {
+                    self.isValidKTP = false
+                }
+                
+                _ = retrieveImage(forKey: "ktp")
             }
         }
     }
@@ -146,8 +153,8 @@ struct ScanKTPView: View {
     /*
      Fungsi untuk Toggle CheckBox NIK
      */
-    func toggleEditNik() {
-        isEditNik = !isEditNik
+    func toggleConfirmNik() {
+        confirmNik = !confirmNik
     }
     
     /*
@@ -187,6 +194,6 @@ struct ScanKTPView: View {
 
 struct ScanKTPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanKTPView(imageKTP: Binding.constant(Image("card_bg")), formShowed: Binding.constant(true), nextFormShowed: Binding.constant(false)).environmentObject(RegistrasiModel())
+        ScanKTPView(imageKTP: Binding.constant(Image("card_bg")), formShowed: Binding.constant(true), nextFormShowed: Binding.constant(false), confirmNik: Binding.constant(false)).environmentObject(RegistrasiModel())
     }
 }

@@ -20,9 +20,10 @@ struct FormIdentitasDiriView: View {
     @State private var shouldPresentMaskSelfieCamera = false
     
     @State private var formKTP: Bool = true
+    @State private var confirmNik: Bool = false
     @State private var formSelfie: Bool = false
     @State private var formNPWP: Bool = false
-    
+    @State private var alreadyHaveNpwp: Bool = false
     
     @State var imageKTP: Image?
     @State var imageSelfie: Image?
@@ -56,7 +57,7 @@ struct FormIdentitasDiriView: View {
                 // Form KTP
                 VStack {
                     DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
-                        ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, formShowed: $formKTP, nextFormShowed: $formSelfie)
+                        ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, formShowed: $formKTP, nextFormShowed: $formSelfie, confirmNik: $confirmNik)
                     }
                     .foregroundColor(.black)
                     .padding(.horizontal, 25)
@@ -84,7 +85,7 @@ struct FormIdentitasDiriView: View {
                 // Form NPWP
                 VStack {
                     DisclosureGroup("NPWP Anda", isExpanded: $formNPWP) {
-                        ScanNPWPView(registerData: _registerData, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formNPWP)
+                        ScanNPWPView(registerData: _registerData, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formNPWP)
                     }
                     .foregroundColor(.black)
                     .padding(.horizontal, 25)

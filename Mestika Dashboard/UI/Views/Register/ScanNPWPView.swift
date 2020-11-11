@@ -15,8 +15,7 @@ struct ScanNPWPView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
 //    @State var npwp: String = ""
-    @State var alreadyHaveNpwp: Bool = true
-    
+    @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
     @Binding var shouldPresentActionScheet : Bool
     @Binding var showMaskingCamera: Bool
@@ -124,7 +123,7 @@ struct ScanNPWPView: View {
 
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanNPWPView(imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true))
+        ScanNPWPView(alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true))
             .environmentObject(RegistrasiModel())
     }
 }
