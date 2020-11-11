@@ -318,7 +318,7 @@ struct PersonalIdentityView: View {
                     
                     if (imageKTP != nil) {
                         Button(action: {
-                            if imageKTPValid {
+                            if imageKTPValid && isEditNik {
                                 self.collapsedFormKTP.toggle()
                                 self.collapsedFormPersonal.toggle()
                                 self.registerData.fotoKTP = self.imageKTP!
