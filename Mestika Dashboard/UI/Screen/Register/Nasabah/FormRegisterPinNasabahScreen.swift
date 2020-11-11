@@ -1,13 +1,13 @@
 //
-//  VerifikasiPINView.swift
-//  Bank Mestika
+//  FormRegisterPinNasabahScreen.swift
+//  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 08/10/20.
+//  Created by Prima Jatnika on 11/11/20.
 //
 
 import SwiftUI
 
-struct VerifikasiPINView: View {
+struct FormRegisterPinNasabahScreen: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
     /*
@@ -17,16 +17,6 @@ struct VerifikasiPINView: View {
     @State var pin: String = ""
     @State var showPin = true
     @State var isDisabled = false
-    
-    /*
-     Variable Validation
-     */
-    @State var isPinValid = false
-    
-    /*
-     Boolean for Show Modal
-     */
-    @State var showingModal = false
     
     var disableForm: Bool {
 //        pin.count < 6
@@ -39,15 +29,15 @@ struct VerifikasiPINView: View {
         ZStack(alignment: .top) {
             Color(hex: "#232175")
             
-//            VStack {
-//
-//                Spacer()
-//                Rectangle()
-//                    .fill(Color.white)
-//                    .frame(height: 45 / 100 * UIScreen.main.bounds.height)
-//                    .cornerRadius(radius: 25.0, corners: .topLeft)
-//                    .cornerRadius(radius: 25.0, corners: .topRight)
-//            }
+            VStack {
+
+                Spacer()
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(height: 45 / 100 * UIScreen.main.bounds.height)
+                    .cornerRadius(radius: 25.0, corners: .topLeft)
+                    .cornerRadius(radius: 25.0, corners: .topRight)
+            }
             
             VStack {
                 ScrollView {
@@ -86,9 +76,10 @@ struct VerifikasiPINView: View {
                             Spacer()
                             
                             // Sub title
-                            Text("Masukan Kembali \nPIN Transaksi Baru Anda")
+                            Text("Masukan PIN \nTransaksi Baru Anda")
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.semibold)
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 20)
@@ -105,35 +96,23 @@ struct VerifikasiPINView: View {
                                 backgroundField
                             }
                             
-                            VStack {
-                                NavigationLink(destination: Term_ConditionView().environmentObject(registerData), isActive: self.$isPinValid) {
-                                    Text("")
-                                }
-                            }
-                            
-                            Button(action: {
-                                print(pin)
-                                print(registerData.pin)
-                                if (pin == self.registerData.pin) {
-                                    self.isPinValid = true
-                                } else {
-                                    print("Not Valid")
-                                    showingModal.toggle()
-                                }
-                            }) {
-                                Text("Simpan PIN Transaksi")
+                            NavigationLink(destination: FormRegisterVerificationPinScreen().environmentObject(registerData), label:{
+                                
+                                Text("Konfirmasi PIN Transaksi")
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                            }
+                                    .frame(maxWidth: .infinity, maxHeight: 40)
+                                
+                            })
                             .frame(height: 50)
                             .background(Color(hex: !disableForm ? "#CBD1D9" : "#2334D0"))
                             .cornerRadius(12)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 25)
                             .disabled(!disableForm)
-                            
-                            Spacer()
+                            .onAppear {
+                                self.registerData.pin = pin
+                            }
                             
                         }
                         .background(Color(.white))
@@ -142,25 +121,19 @@ struct VerifikasiPINView: View {
                         .padding(.horizontal, 30)
                         .padding(.top, 25)
                         
-                        
                     }
                     .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
                     .padding(.bottom, 25)
                 }
                 .KeyboardAwarePadding()
             }
-            
-            if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
-            }
-            
         }
         .edgesIgnoringSafeArea(.all)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            createBottomFloater()
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
         }
         
     }
@@ -192,21 +165,23 @@ struct VerifikasiPINView: View {
         })
         
         return TextField("", text: boundPin, onCommit: submitPin)
-           .accentColor(.clear)
-           .foregroundColor(.clear)
-           .keyboardType(.numberPad)
-           .disabled(isDisabled)
+            .accentColor(.clear)
+            .foregroundColor(.clear)
+            .keyboardType(.numberPad)
+            .disabled(isDisabled)
     }
     
     private func submitPin() {
         if pin.count == maxDigits {
-           isDisabled = true
+            isDisabled = true
         }
         
         if pin.count > maxDigits {
             pin = String(pin.prefix(maxDigits))
             submitPin()
         }
+        
+        registerData.pin = pin
     }
     
     private func isPINValidated(with pin: String) -> Bool {
@@ -231,51 +206,10 @@ struct VerifikasiPINView: View {
         
         return ""
     }
-    
-    /*
-     Fuction for Create Bottom Floater (Modal)
-     */
-    func createBottomFloater() -> some View {
-        VStack(alignment: .leading) {
-            Image(systemName: "xmark.octagon.fill")
-                .resizable()
-                .frame(width: 65, height: 65)
-                .foregroundColor(.red)
-                .padding(.top, 20)
-            
-            Text("PIN tidak sama")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.system(size: 22))
-                .foregroundColor(Color(hex: "#232175"))
-                .padding([.bottom, .top], 20)
-            
-            Text("PIN Transaksi yang anda masukan tidak sama dengan awal, silahkan masukan kembali")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.system(size: 16))
-                .foregroundColor(Color(hex: "#232175"))
-                .padding(.bottom, 30)
-            
-            Button(action: {}) {
-                Text("Kembali")
-                    .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 12))
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-            }
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            
-            Text("")
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-    }
 }
 
-struct VerifikasiPINView_Previews: PreviewProvider {
+struct FormRegisterPinNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        VerifikasiPINView().environmentObject(RegistrasiModel())
+        FormRegisterPinNasabahScreen().environmentObject(RegistrasiModel())
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PasswordView: View {
+    
     @EnvironmentObject var registerData: RegistrasiModel
     
     @State var password: String = ""
