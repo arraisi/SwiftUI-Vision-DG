@@ -66,7 +66,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
             
             VStack(alignment: .center) {
                 Text("Kami telah mengirimkan OTP ke No. \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
-                    .font(.subheadline)
+                    .font(.title3)
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)

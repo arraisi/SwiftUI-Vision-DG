@@ -36,7 +36,7 @@ struct FormEmailReVerificationNasabahScreen: View {
             
             VStack(alignment: .center) {
                 Text("Verifikasi Ulang Email")
-                    .font(.subheadline)
+                    .font(.title3)
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)
                     .padding(.top, 20)

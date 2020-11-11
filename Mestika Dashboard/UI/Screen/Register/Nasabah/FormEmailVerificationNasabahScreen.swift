@@ -35,8 +35,8 @@ struct FormEmailVerificationNasabahScreen: View {
             }
             
             VStack(alignment: .center) {
-                Text("Email Verification")
-                    .font(.subheadline)
+                Text("Verifikasi Email")
+                    .font(.title3)
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)
                     .padding(.top, 20)

@@ -29,7 +29,7 @@ struct FormRegisterPasswordNasabahScreen: View {
             Color(hex: "#232175")
             
             VStack {
-
+                
                 Spacer()
                 Rectangle()
                     .fill(Color.white)
@@ -182,7 +182,7 @@ struct FormRegisterPasswordNasabahScreen: View {
                                         }.padding(.leading, 15)
                                     }
                                 }
-                                    .padding(.vertical, 10)
+                                .padding(.vertical, 10)
                                 
                             }
                             .frame(width: UIScreen.main.bounds.width - 100)
