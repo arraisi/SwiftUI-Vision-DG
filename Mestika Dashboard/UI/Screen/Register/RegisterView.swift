@@ -29,7 +29,8 @@ struct RegisterView: View {
     /* For Check Internet Connection */
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.aple.com")
     
-    @State var isActive : Bool = false
+    @State var isActiveForNonNasabahPage : Bool = false
+    @State var isActiveForNasabahPage : Bool = false
     @State var isActiveRoot : Bool = false
     @ObservedObject var assetsSliderVM = SliderAssetsSummaryViewModel()
     
@@ -148,7 +149,7 @@ struct RegisterView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: RegisterProvisionView(rootIsActive: self.$isActive).environmentObject(registerData)) {
+            NavigationLink(destination: RegisterProvisionView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData)) {
                 Text("Tidak, Saya Tidak Memiliki")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -159,13 +160,15 @@ struct RegisterView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            Button(action: {}) {
-                Text("Ya, Saya Memiliki")
-                    .foregroundColor(.black)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 12))
-                    .frame(maxWidth: .infinity, maxHeight: 40)
-            }
+            NavigationLink(
+                destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData),
+                label: {
+                    Text("Ya, Saya Memiliki")
+                        .foregroundColor(.black)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 12))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                })
             .padding(.bottom, 30)
             .cornerRadius(12)
         }

@@ -1,13 +1,13 @@
 //
-//  FormPasswordView.swift
-//  Bank Mestika
+//  FormRegisterPasswordNasabahScreen.swift
+//  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 04/10/20.
+//  Created by Prima Jatnika on 11/11/20.
 //
 
 import SwiftUI
 
-struct PasswordView: View {
+struct FormRegisterPasswordNasabahScreen: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
@@ -190,7 +190,7 @@ struct PasswordView: View {
                             .cornerRadius(15)
                             .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                             
-                            NavigationLink(destination: PINView().environmentObject(registerData), label:{
+                            NavigationLink(destination: FormRegisterPinNasabahScreen().environmentObject(registerData), label:{
                                 
                                 Text("Berikutnya")
                                     .foregroundColor(.white)
@@ -226,8 +226,8 @@ struct PasswordView: View {
     }
 }
 
-struct PasswordView_Previews: PreviewProvider {
+struct FormRegisterPasswordNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView().environmentObject(RegistrasiModel())
+        FormRegisterPasswordNasabahScreen().environmentObject(RegistrasiModel())
     }
 }

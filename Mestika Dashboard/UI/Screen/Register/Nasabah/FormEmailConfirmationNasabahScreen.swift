@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct EmailConfirmationView: View {
+struct FormEmailConfirmationNasabahScreen: View {
     
     @State var email: String = "admin@mestika.com"
     
+    @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack(alignment: .top) {
@@ -21,53 +22,22 @@ struct EmailConfirmationView: View {
             }
             
             VStack {
-                appbar
-                    .padding(.top, 45)
-                    .padding(.horizontal, 30)
-                
                 VStack {
                     cardForm
                     Spacer()
                 }
                 .padding(.horizontal, 30)
-                .padding(.top, 35)
+                .padding(.top, 100)
                 .padding(.bottom, 35)
             }
         }
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
 
     }
-    
-    var appbar: some View {
-            HStack {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "arrow.left")
-                        .foregroundColor(.white)
-                }
-                Spacer()
-                logo
-                Spacer()
-            }
-        }
-        
-        var logo: some View {
-            HStack(alignment: .center, spacing: .none) {
-                Image("Logo M")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                Text("BANK MESTIKA")
-                    .foregroundColor(.white)
-                    .font(.system(size: 20))
-                    .bold()
-            }
-        }
-
     
     var cardForm: some View {
         VStack(alignment: .leading) {
@@ -93,7 +63,7 @@ struct EmailConfirmationView: View {
                 .padding(.horizontal, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            TextField("Masukan alamat email anda", text: $email)
+            TextField("Masukan alamat email anda", text: $registerData.email)
                 .frame(height: 30)
                 .font(.subheadline)
                 .padding()
@@ -101,6 +71,7 @@ struct EmailConfirmationView: View {
                 .cornerRadius(15)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
+                .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             
             Text("Tidak menerima email?.")
                 .font(.caption)
@@ -110,12 +81,16 @@ struct EmailConfirmationView: View {
                 .padding(.horizontal, 20)
             
             HStack {
-                Text("Kirim Kembali Email Verifikasi.")
-                    .font(.subheadline)
-                    .bold()
-                    .foregroundColor(Color(hex: "#232175"))
-                    .multilineTextAlignment(.leading)
-                    .padding(.horizontal, 20)
+                NavigationLink(
+                    destination: FormEmailReVerificationNasabahScreen().environmentObject(registerData),
+                    label: {
+                        Text("Kirim Kembali Email Verifikasi.")
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundColor(Color(hex: "#232175"))
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal, 20)
+                    })
             }
             
             Text("Alamat email salah?.")
@@ -142,8 +117,8 @@ struct EmailConfirmationView: View {
     }
 }
 
-struct EmailConfirmationView_Previews: PreviewProvider {
+struct FormEmailConfirmationNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        EmailConfirmationView()
+        FormEmailConfirmationNasabahScreen().environmentObject(RegistrasiModel())
     }
 }
