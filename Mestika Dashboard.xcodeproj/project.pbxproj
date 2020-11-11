@@ -731,19 +731,9 @@
 		5247466A254818BB001F43C5 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				52ADFF642557DFDB00A1001F /* Data Pembukaan Rekening */,
-				52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */,
-				52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */,
-				52ADFF832557DFDC00A1001F /* OTPVerificationView.swift */,
-				52ADFF5B2557DFDB00A1001F /* Personal Identity */,
-				52ADFF772557DFDB00A1001F /* PhoneVerificationView.swift */,
-				52ADFF612557DFDB00A1001F /* PilihDesainATMView.swift */,
-				52ADFF632557DFDB00A1001F /* PilihJenisATMView.swift */,
-				52ADFF852557DFDC00A1001F /* RegisterProvisionView.swift */,
-				52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */,
+				5290A120255BBEBD0090F788 /* Nasabah */,
 				52ADFF622557DFDB00A1001F /* RegisterView.swift */,
-				52ADFF792557DFDB00A1001F /* Validation Form */,
-				52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */,
+				5290A119255BBE1B0090F788 /* NonNasabah */,
 			);
 			name = Register;
 			path = "Mestika Dashboard/UI/Screen/Register";
@@ -835,6 +825,32 @@
 				52DA20842551069C00CC048A /* Statement.swift */,
 			);
 			path = BindingModel;
+			sourceTree = "<group>";
+		};
+		5290A119255BBE1B0090F788 /* NonNasabah */ = {
+			isa = PBXGroup;
+			children = (
+				52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */,
+				52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */,
+				52ADFF832557DFDC00A1001F /* OTPVerificationView.swift */,
+				52ADFF772557DFDB00A1001F /* PhoneVerificationView.swift */,
+				52ADFF612557DFDB00A1001F /* PilihDesainATMView.swift */,
+				52ADFF632557DFDB00A1001F /* PilihJenisATMView.swift */,
+				52ADFF852557DFDC00A1001F /* RegisterProvisionView.swift */,
+				52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */,
+				52ADFF792557DFDB00A1001F /* Validation Form */,
+				52ADFF5B2557DFDB00A1001F /* Personal Identity */,
+				52ADFF642557DFDB00A1001F /* Data Pembukaan Rekening */,
+			);
+			path = NonNasabah;
+			sourceTree = "<group>";
+		};
+		5290A120255BBEBD0090F788 /* Nasabah */ = {
+			isa = PBXGroup;
+			children = (
+				52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */,
+			);
+			path = Nasabah;
 			sourceTree = "<group>";
 		};
 		52ADFE762557D99F00A1001F /* Master */ = {
