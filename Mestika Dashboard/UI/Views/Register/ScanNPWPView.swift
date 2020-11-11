@@ -19,6 +19,7 @@ struct ScanNPWPView: View {
     
     @Binding var imageNPWP: Image?
     @Binding var shouldPresentActionScheet : Bool
+    @Binding var showMaskingCamera: Bool
     @Binding var formShowed: Bool
     
     var body: some View {
@@ -48,6 +49,7 @@ struct ScanNPWPView: View {
             )
             
             Button(action: {
+                self.showMaskingCamera = false
                 self.shouldPresentActionScheet.toggle()
             }) {
                 Text(imageNPWP == nil ? "Ambil Foto NPWP" : "Ganti Foto Lain")
@@ -122,7 +124,7 @@ struct ScanNPWPView: View {
 
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanNPWPView(imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), formShowed: Binding.constant(true))
+        ScanNPWPView(imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true))
             .environmentObject(RegistrasiModel())
     }
 }

@@ -84,14 +84,11 @@ struct FormIdentitasDiriView: View {
                 // Form NPWP
                 VStack {
                     DisclosureGroup("NPWP Anda", isExpanded: $formNPWP) {
-                        ScanNPWPView(registerData: _registerData, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, formShowed: $formNPWP)
+                        ScanNPWPView(registerData: _registerData, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formNPWP)
                     }
                     .foregroundColor(.black)
                     .padding(.horizontal, 25)
                     .padding(.vertical)
-                    .onAppear(){
-                        self.shouldPresentMaskSelfieCamera = false
-                    }
                 }
                 .background(Color.white)
                 .cornerRadius(15)
@@ -129,6 +126,7 @@ struct FormIdentitasDiriView: View {
                     self.shouldPresentImagePicker = true
                     self.shouldPresentCamera = true
                 }), ActionSheet.Button.default(Text("Photo Library"), action: {
+                    self.shouldPresentMaskSelfieCamera = false
                     self.shouldPresentImagePicker = true
                     self.shouldPresentCamera = false
                 }), ActionSheet.Button.cancel()])
