@@ -139,12 +139,15 @@ struct PersonalIdentityView: View {
                             .padding(.horizontal, 20)
                         
                         photoKTPForm
-                            .padding(.bottom, 60)
+                            .padding(.bottom, 20)
                         photoPersonalForm
                             .padding(.bottom, 20)
-                        photoSignatureForm
-                            .hidden()
+                        //                            .background(Color.red)
+                        //                        photoSignatureForm
+                        //                            .hidden()
+                        //                            .background(Color.red)
                         photoNPWPForm
+                        //                            .background(Color.green)
                         
                         NavigationLink(destination: EmailVerificationView().environmentObject(registerData)) {
                             Text("Lanjut Pembukaan Rekening Baru")
@@ -155,12 +158,12 @@ struct PersonalIdentityView: View {
                         }
                         .background(Color(hex: "#232175"))
                         .cornerRadius(12)
-//                            .padding(.horizontal, 5)
+                        //                            .padding(.horizontal, 5)
                         .padding(.top, 60)
                         .padding(.bottom, 20)
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 140)
+                    .padding(.top, 100)
                     .padding(.bottom, 35)
                 }
             }
@@ -173,10 +176,15 @@ struct PersonalIdentityView: View {
             
             if (recognizedText.value != "-") {
                 let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
-                print(matched)
-                
-                self.nik = matched[0]
-                retrieveImage(forKey: "ktp")
+                print("|| * value recognizedText.value => \(recognizedText.value)")
+                print("|| * value matched => \(matched)")
+//                if string.contains("Swift") {
+//                    print("exists")
+//                }
+                if matched.count != 0 {
+                    self.nik = matched[0]
+                    _ = retrieveImage(forKey: "ktp")
+                }
                 
             }
         }
@@ -449,105 +457,105 @@ struct PersonalIdentityView: View {
     }
     
     var photoSignatureForm: some View {
-            VStack {
-                Button(
-                    action: { self.collapsedFormSignature.toggle() },
-                    label: {
-                        HStack {
-                            Text("Silahkan Foto Tanda Tangan Anda")
-                                .font(.body)
-                                .foregroundColor(collapsedFormSignature ? Color(hex: "#2334D0") : .white)
-                                .fontWeight(.semibold)
-                            
-                            Spacer()
-                            
-                            if (imageSignature != nil) {
-                                Image(systemName: "checkmark.circle")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(collapsedFormSignature ? Color(hex: "#2334D0") : .white)
-                            } else { EmptyView() }
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                        .padding(.horizontal, 10)
-                        .background(collapsedFormSignature ? Color(hex: "#F6F8FB") : Color(hex: "#2334D0"))
-                    }
-                )
-                .buttonStyle(PlainButtonStyle())
-                
-                VStack(alignment: .center) {
-                    Text("")
-                    Text("Ambil foto atau gambar tanda tangan Anda")
-                        .multilineTextAlignment(.center)
-                        .font(.caption)
-                        .frame(maxWidth: .infinity)
-                        .padding([.bottom], 15)
-                        .padding(.horizontal, 20)
-                    
-                    ZStack {
-                        Image("ic_camera")
-                        VStack {
-                            imageSignature?
+        VStack {
+            Button(
+                action: { self.collapsedFormSignature.toggle() },
+                label: {
+                    HStack {
+                        Text("Silahkan Foto Tanda Tangan Anda")
+                            .font(.body)
+                            .foregroundColor(collapsedFormSignature ? Color(hex: "#2334D0") : .white)
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        if (imageSignature != nil) {
+                            Image(systemName: "checkmark.circle")
                                 .resizable()
-                                .frame(maxWidth: 350, maxHeight: 200)
-                                .cornerRadius(10)
-                        }
-                        .frame(maxWidth: 350, minHeight: 200, maxHeight: 200)
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(collapsedFormSignature ? Color(hex: "#2334D0") : .white)
+                        } else { EmptyView() }
                     }
-                    .frame(minWidth: 0, maxWidth: 350, minHeight: 200, maxHeight: 200)
-                    .background(Color(hex: "#F5F5F5"))
-                    .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.2))
-                    )
-                    .padding(.horizontal, 15)
-                    
+                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    .padding(.horizontal, 10)
+                    .background(collapsedFormSignature ? Color(hex: "#F6F8FB") : Color(hex: "#2334D0"))
+                }
+            )
+            .buttonStyle(PlainButtonStyle())
+            
+            VStack(alignment: .center) {
+                Text("")
+                Text("Ambil foto atau gambar tanda tangan Anda")
+                    .multilineTextAlignment(.center)
+                    .font(.caption)
+                    .frame(maxWidth: .infinity)
+                    .padding([.bottom], 15)
+                    .padding(.horizontal, 20)
+                
+                ZStack {
+                    Image("ic_camera")
+                    VStack {
+                        imageSignature?
+                            .resizable()
+                            .frame(maxWidth: 350, maxHeight: 200)
+                            .cornerRadius(10)
+                    }
+                    .frame(maxWidth: 350, minHeight: 200, maxHeight: 200)
+                }
+                .frame(minWidth: 0, maxWidth: 350, minHeight: 200, maxHeight: 200)
+                .background(Color(hex: "#F5F5F5"))
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.2))
+                )
+                .padding(.horizontal, 15)
+                
+                Button(action: {
+                    self.showCaptureSignature.toggle()
+                }) {
+                    Text(imageSignature == nil ? "Ambil Gambar Tanda Tangan" : "Ganti Foto Lain")
+                        .foregroundColor(imageSignature == nil ? .white : Color(hex: "#2334D0"))
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
+                        )
+                }
+                .background(Color(hex: imageSignature == nil ? "#2334D0" : "#FFFFFF"))
+                .cornerRadius(12)
+                .padding(.horizontal, 20)
+                .padding([.top, .bottom], 15)
+                
+                if (imageSignature != nil) {
                     Button(action: {
-                        self.showCaptureSignature.toggle()
+                        self.collapsedFormSignature.toggle()
+                        self.collapsedFormNPWP.toggle()
+                        
+                        self.registerData.fotoTandaTangan = self.imageSignature!
                     }) {
-                        Text(imageSignature == nil ? "Ambil Gambar Tanda Tangan" : "Ganti Foto Lain")
-                            .foregroundColor(imageSignature == nil ? .white : Color(hex: "#2334D0"))
+                        Text("Simpan")
+                            .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
-                            )
                     }
-                    .background(Color(hex: imageSignature == nil ? "#2334D0" : "#FFFFFF"))
+                    .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
-                    .padding([.top, .bottom], 15)
-                    
-                    if (imageSignature != nil) {
-                        Button(action: {
-                            self.collapsedFormSignature.toggle()
-                            self.collapsedFormNPWP.toggle()
-                            
-                            self.registerData.fotoTandaTangan = self.imageSignature!
-                        }) {
-                            Text("Simpan")
-                                .foregroundColor(.white)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        }
-                        .background(Color(hex: "#2334D0"))
-                        .cornerRadius(12)
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 15)
-                    } else { EmptyView() }
-                }
-                .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, minHeight: 0, maxHeight: collapsedFormSignature ? 0 : .none)
-                .clipped()
-                .animation(.easeOut)
-                .transition(.slide)
+                    .padding(.bottom, 15)
+                } else { EmptyView() }
             }
-            .background(Color.white)
-            .cornerRadius(15)
-            .shadow(radius: 4)
+            .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, minHeight: 0, maxHeight: collapsedFormSignature ? 0 : .none)
+            .clipped()
+            .animation(.easeOut)
+            .transition(.slide)
         }
-
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(radius: 4)
+    }
+    
     
     var photoNPWPForm: some View {
         VStack {

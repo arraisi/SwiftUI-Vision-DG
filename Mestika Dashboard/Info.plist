@@ -20,6 +20,24 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Requires access to the camera</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need use to get data.</string>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-Black.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-ExtraBold.ttf</string>
+		<string>Montserrat-ExtraLight.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Montserrat-Thin.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -58,23 +76,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSFaceIDUsageDescription</key>
-	<string>We need use to get data.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Montserrat-Black.ttf</string>
-		<string>Montserrat-Bold.ttf</string>
-		<string>Montserrat-ExtraBold.ttf</string>
-		<string>Montserrat-ExtraLight.ttf</string>
-		<string>Montserrat-Light.ttf</string>
-		<string>Montserrat-Medium.ttf</string>
-		<string>Montserrat-Regular.ttf</string>
-		<string>Montserrat-SemiBold.ttf</string>
-		<string>Montserrat-Thin.ttf</string>
-	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Requires access to the camera</string>
-	<key>NSFileProviderDomainUsageDescription</key>
-	<string></string>
 </dict>
 </plist>

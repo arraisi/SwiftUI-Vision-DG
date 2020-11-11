@@ -30,7 +30,7 @@ struct OtpChangePinAtmView: View {
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 Text("MASUKKAN KODE OTP")
