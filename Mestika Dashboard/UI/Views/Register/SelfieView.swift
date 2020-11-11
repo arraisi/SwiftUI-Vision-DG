@@ -51,7 +51,7 @@ struct SelfieView: View {
             Button(action: {
                 print("ON TAP SELFIE")
                 self.shouldPresentActionScheet.toggle()
-                self.showMaskingCamera.toggle()
+                self.showMaskingCamera = true
             }, label: {
                 Text(imageSelfie == nil ? "Ambil Gambar Selfie" : "Ganti Foto Lain")
                     .foregroundColor(imageSelfie == nil ? .white : Color(hex: "#2334D0"))
@@ -76,7 +76,7 @@ struct SelfieView: View {
                     if imageSelfie != nil {
                         self.formShowed.toggle()
                         self.nextFormShowed.toggle()
-                        self.showMaskingCamera.toggle()
+                        self.showMaskingCamera = false
                         
                         self.registerData.fotoSelfie = self.imageSelfie!
                     }

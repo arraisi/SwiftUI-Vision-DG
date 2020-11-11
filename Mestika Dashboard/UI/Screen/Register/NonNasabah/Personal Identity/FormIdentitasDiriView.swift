@@ -89,6 +89,9 @@ struct FormIdentitasDiriView: View {
                     .foregroundColor(.black)
                     .padding(.horizontal, 25)
                     .padding(.vertical)
+                    .onAppear(){
+                        self.shouldPresentMaskSelfieCamera = false
+                    }
                 }
                 .background(Color.white)
                 .cornerRadius(15)
