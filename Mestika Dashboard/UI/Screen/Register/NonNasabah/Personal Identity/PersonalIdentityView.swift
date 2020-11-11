@@ -28,6 +28,8 @@ struct PersonalIdentityView: View {
     @State var imageSignature: Image? = nil
     @State var imageNPWP: Image? = nil
     
+    @State var imageKTPValid: Bool = false
+    
     @State private var shouldPresentImagePicker = false
     @State private var shouldPresentActionScheet = false
     @State private var shouldPresentCamera = false
@@ -178,9 +180,10 @@ struct PersonalIdentityView: View {
                 let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
                 print("|| * value recognizedText.value => \(recognizedText.value)")
                 print("|| * value matched => \(matched)")
-//                if string.contains("Swift") {
-//                    print("exists")
-//                }
+                if recognizedText.value.contains("Berlaku Hingga") &&  recognizedText.value.contains("PROVINSI") &&  recognizedText.value.contains("KOTA") {
+                    print("|| ***** exists ***** ||")
+                    self.imageKTPValid.toggle()
+                }
                 if matched.count != 0 {
                     self.nik = matched[0]
                     _ = retrieveImage(forKey: "ktp")
@@ -315,11 +318,13 @@ struct PersonalIdentityView: View {
                     
                     if (imageKTP != nil) {
                         Button(action: {
-                            self.collapsedFormKTP.toggle()
-                            self.collapsedFormPersonal.toggle()
-                            self.registerData.fotoKTP = self.imageKTP!
-                            self.registerData.nik = self.nik
-                            self.ktpIsSubmited = true
+                            if imageKTPValid {
+                                self.collapsedFormKTP.toggle()
+                                self.collapsedFormPersonal.toggle()
+                                self.registerData.fotoKTP = self.imageKTP!
+                                self.registerData.nik = self.nik
+                                self.ktpIsSubmited = true
+                            }
                         }) {
                             Text("Simpan")
                                 .foregroundColor(.white)
