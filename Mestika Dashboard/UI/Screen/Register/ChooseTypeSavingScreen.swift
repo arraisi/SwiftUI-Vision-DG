@@ -17,8 +17,8 @@ struct ChooseTypeSavingScreen: View {
     @State var count : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = 236
-    let itemHeight:CGFloat = 197
+    let itemWidth:CGFloat = 170
+    let itemHeight:CGFloat = 150
     let itemGapHeight:CGFloat = 10
     
     @State var showingModal = false
@@ -35,7 +35,7 @@ struct ChooseTypeSavingScreen: View {
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(hex: "#232175"))
                     .padding(.horizontal, 15)
-                    .padding(.top, 20)
+                    .padding(.top, 40)
                 
                 // MARK: - CAROUSEL
                 VStack{
@@ -111,72 +111,12 @@ struct ChooseTypeSavingScreen: View {
                 .padding(.horizontal, 15)
                 .foregroundColor(Color(hex: "#5A6876"))
             
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false) {
-                HStack(alignment: .top) {
-                    Text("01")
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                        .font(.caption)
-                        .foregroundColor(Color(hex: "#5A6876"))
-                }
-                .padding(.top, 5)
-                .padding(.horizontal, 15)
-                
-                HStack(alignment: .top) {
-                    Text("02")
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                        .font(.caption)
-                        .foregroundColor(Color(hex: "#5A6876"))
-                }
-                .padding(.top, 5)
-                .padding(.horizontal, 15)
-                
-                HStack(alignment: .top) {
-                    Text("03")
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                        .font(.caption)
-                        .foregroundColor(Color(hex: "#5A6876"))
-                }
-                .padding(.top, 5)
-                .padding(.horizontal, 15)
-                
-                HStack(alignment: .top) {
-                    Text("04")
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                        .font(.caption)
-                        .foregroundColor(Color(hex: "#5A6876"))
-                }
-                .padding(.top, 5)
-                .padding(.horizontal, 15)
-                
-                HStack(alignment: .top) {
-                    Text("05")
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                        .font(.caption)
-                        .foregroundColor(Color(hex: "#5A6876"))
-                }
-                .padding(.top, 5)
-                .padding(.horizontal, 15)
-            }
-            .frame(height: 250)
+            EmptyView()
+                .frame(height: 150)
             
-            Button(action: {
-                showingModal.toggle()
-            }) {
+            NavigationLink(destination:
+                PersonalIdentityView().environmentObject(registerData)
+            ) {
                 Text("Pilih Tabungan ini")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

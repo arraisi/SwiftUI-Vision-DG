@@ -176,8 +176,6 @@
 		52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57F6255927E300F009B5 /* PaymentPLNScreen.swift */; };
 		52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF58022559346B00F009B5 /* ListLastPaymentPlnView.swift */; };
 		52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3485725426D6800F08F37 /* SideMenuContent.swift */; };
-		52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3486025426E0D00F08F37 /* SidemenuView.swift */; };
-		52C348692542701500F08F37 /* SidemenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348682542701500F08F37 /* SidemenuCell.swift */; };
 		52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348712542878700F08F37 /* ListTransactionFavoriteView.swift */; };
 		52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3487E254287B800F08F37 /* TransactionFavorit.swift */; };
 		52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C34887254288D000F08F37 /* TransferOnUsScreen.swift */; };
@@ -416,8 +414,6 @@
 		52BF57F6255927E300F009B5 /* PaymentPLNScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPLNScreen.swift; sourceTree = "<group>"; };
 		52BF58022559346B00F009B5 /* ListLastPaymentPlnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLastPaymentPlnView.swift; sourceTree = "<group>"; };
 		52C3485725426D6800F08F37 /* SideMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContent.swift; sourceTree = "<group>"; };
-		52C3486025426E0D00F08F37 /* SidemenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuView.swift; sourceTree = "<group>"; };
-		52C348682542701500F08F37 /* SidemenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidemenuCell.swift; sourceTree = "<group>"; };
 		52C348712542878700F08F37 /* ListTransactionFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionFavoriteView.swift; sourceTree = "<group>"; };
 		52C3487E254287B800F08F37 /* TransactionFavorit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFavorit.swift; sourceTree = "<group>"; };
 		52C34887254288D000F08F37 /* TransferOnUsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsScreen.swift; sourceTree = "<group>"; };
@@ -631,7 +627,6 @@
 			isa = PBXGroup;
 			children = (
 				52BF57D82558E66600F009B5 /* Register */,
-				52C3485F25426DFF00F08F37 /* Sidemenu */,
 				52468ABD2541360C007518AE /* Dashboard */,
 			);
 			path = Views;
@@ -1011,15 +1006,6 @@
 			children = (
 			);
 			path = BindingModel;
-			sourceTree = "<group>";
-		};
-		52C3485F25426DFF00F08F37 /* Sidemenu */ = {
-			isa = PBXGroup;
-			children = (
-				52C3486025426E0D00F08F37 /* SidemenuView.swift */,
-				52C348682542701500F08F37 /* SidemenuCell.swift */,
-			);
-			path = Sidemenu;
 			sourceTree = "<group>";
 		};
 		52C348702542876F00F08F37 /* Transfer */ = {
@@ -1439,7 +1425,6 @@
 				52ADFE952557D99F00A1001F /* MasterData.swift in Sources */,
 				525DB5152546828100D48075 /* String+Extensions.swift in Sources */,
 				52ADFFA22557DFDC00A1001F /* SuccessRegisterView.swift in Sources */,
-				52C348692542701500F08F37 /* SidemenuCell.swift in Sources */,
 				52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */,
 				C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */,
 				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
@@ -1493,7 +1478,6 @@
 				C0C68E6E2558E19A0010E1EE /* ConfirmationPINView.swift in Sources */,
 				C0D7B5E32552B1B7009C3976 /* VerificationCVVCardView.swift in Sources */,
 				52BF57E32558E81F00F009B5 /* SavingType.swift in Sources */,
-				52C3486125426E0D00F08F37 /* SidemenuView.swift in Sources */,
 				526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */,
 				52ADFF862557DFDC00A1001F /* EmailConfirmationView.swift in Sources */,
 				52ADFFA52557DFDC00A1001F /* InterviewRegistrationView.swift in Sources */,
@@ -1696,14 +1680,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				DEVELOPMENT_TEAM = H9UB4842E4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-Dashboard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mltp.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1717,14 +1701,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = RPKUZP5NC7;
+				DEVELOPMENT_TEAM = H9UB4842E4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tabeldata.Mestika-Dashboard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mltp.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
