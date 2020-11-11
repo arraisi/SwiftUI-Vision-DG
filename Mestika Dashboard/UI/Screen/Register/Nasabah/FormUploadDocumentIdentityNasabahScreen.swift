@@ -174,8 +174,10 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                 let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
                 print(matched)
                 
-                self.nik = matched[0]
-                retrieveImage(forKey: "ktp")
+                if matched.count > 0 {
+                    self.nik = matched[0]
+                    _ = retrieveImage(forKey: "ktp")
+                }
                 
             }
         }
