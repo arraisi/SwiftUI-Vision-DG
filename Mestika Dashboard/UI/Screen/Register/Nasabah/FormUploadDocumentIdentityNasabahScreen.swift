@@ -12,164 +12,134 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
      Environtment Object
      */
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    /*
-     Recognized Nomor Induk Ktp
-     */
-    @ObservedObject var recognizedText: RecognizedText = RecognizedText()
-    
-    @State var nik: String = ""
-    @State var npwp: String = ""
-    @State var imageKTP: Image? = nil
-    @State var imageSelfie: Image? = nil
-    @State var imageSignature: Image? = nil
-    @State var imageNPWP: Image? = nil
     
     @State var imageKTPValid: Bool = false
     
     @State private var shouldPresentImagePicker = false
     @State private var shouldPresentActionScheet = false
     @State private var shouldPresentCamera = false
+    @State private var shouldPresentMaskSelfieCamera = false
     
-    @State var showCaptureSignature: Bool = false
+    @State private var formKTP: Bool = true
+    @State private var confirmNik: Bool = false
+    @State private var formSelfie: Bool = false
+    @State private var formNPWP: Bool = false
+    @State private var alreadyHaveNpwp: Bool = false
+    @State private var npwp: String = ""
     
-    @State private var collapsedFormKTP: Bool = false
-    @State private var collapsedFormPersonal: Bool = true
-    @State private var collapsedFormSignature: Bool = true
-    @State private var collapsedFormNPWP: Bool = true
+    @State private var imageKTP: Image?
+    @State private var imageSelfie: Image?
+    @State private var imageNPWP: Image?
     
-    @State private var ktpIsSubmited = false
-    @State private var selfieIsSubmited = false
-    @State private var npwpIsSubmited = false
+    @State private var nextViewActive = false
     
-    @State var isEditNik: Bool = false
-    @State var hasNoNpwp: Bool = false
-    
-    /*
-     Fungsi untuk Toggle CheckBox NIK
-     */
-    func toggleEditNik() {
-        isEditNik = !isEditNik
-    }
-    
-    /*
-     Fungsi untuk Toggle Mempunyai NPWP
-     */
-    func toggleHasNpwp() {
-        hasNoNpwp = !hasNoNpwp
-        
-        if (!hasNoNpwp) {
-            self.registerData.hasNoNpwp = hasNoNpwp
-        }
-    }
-    
-    /*
-     Fungsi untuk Simpan Gambar ke Local Storage
-     */
-    private func store(imgStore: Image, forKey key: String) {
-        let image: UIImage = imgStore.asUIImage()
-        
-        if let pngRepresentation = image.pngData() {
-            UserDefaults.standard.set(pngRepresentation, forKey: key)
-        }
-    }
-    
-    /*
-     Fungsi untuk ambil Gambar dari Local Storage
-     */
-    private func retrieveImage(forKey key: String) -> UIImage? {
-        if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
-           let image = UIImage(data: imageData) {
-            print(image)
-            
-            imageKTP = Image(uiImage: image)
-            return image
-        }
-        
-        return nil
-    }
-    
-    /*
-     Fungsi Regex NIK
-     */
-    func matches(for regex: String, in text: String) -> [String] {
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: text,
-                                        range: NSRange(text.startIndex..., in: text))
-            return results.map {
-                String(text[Range($0.range, in: text)!])
-            }
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
-        }
-    }
-    
-    // MARK: -MAIN CONTENT
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                Color(hex: "#232175")
-                    .frame(height: 300)
-                Color(hex: "#F6F8FB")
-            }
-            
-            ScrollView(showsIndicators: false) {
-                ZStack {
-                    VStack {
-                        Color(hex: "#232175")
-                            .frame(height: 300)
-                        Color(hex: "#F6F8FB")
-                    }
+        
+        ScrollView {
+            ZStack {
+                VStack {
+                    Color(hex: "#232175")
+                        .frame(height: 200)
+                    Color(hex: "#F6F8FB")
+                }
+                
+                // content here
+                VStack {
+                    Text("Identitas Diri")
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#F6F8FB"))
+                        .padding([.top], 60)
+                        .padding([.horizontal], 30)
                     
+                    Text("Silihkan isi dan lengkapi data identitas Anda")
+                        .font(.custom("Montserrat-Regular", size: 12))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color(hex: "#F6F8FB"))
+                        .padding(.top, 5)
+                        .padding([.horizontal], 30)
+                    
+                    // Form KTP
                     VStack {
-                        Text("Identitas Diri")
-                            .font(.title2)
-                            .foregroundColor(Color(hex: "#F6F8FB"))
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 20)
-                        Text("Silihkan isi dan lengkapi data identitas Anda")
-                            .font(.caption)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Color(hex: "#F6F8FB"))
-                            .padding(.top, 5)
-                            .padding(.bottom, 70)
-                            .padding(.horizontal, 20)
-                        
-                        photoKTPForm
-                            .padding(.bottom, 20)
-                        photoPersonalForm
-                            .padding(.bottom, 20)
-                        //                            .background(Color.red)
-                        //                        photoSignatureForm
-                        //                            .hidden()
-                        //                            .background(Color.red)
-                        photoNPWPForm
-                        //                            .background(Color.green)
-                        
-                        NavigationLink(destination: FormEmailVerificationNasabahScreen().environmentObject(registerData)) {
-                            Text("Lanjut Pembukaan Rekening Baru")
-                                .foregroundColor(.white)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
+                            ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, formShowed: $formKTP, nextFormShowed: $formSelfie, confirmNik: $confirmNik)
                         }
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 25)
+                        .padding(.vertical)
+                    }
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .padding([.horizontal, .top], 30)
+                    .padding([.top], 30)
+                    
+                    // Form Selfie
+                    VStack {
+                        DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: $formSelfie) {
+                            SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formSelfie, nextFormShowed: $formNPWP)
+                        }
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 25)
+                        .padding(.vertical)
+                    }
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .padding([.horizontal, .top], 30)
+                    
+                    // Form NPWP
+                    VStack {
+                        DisclosureGroup("Masukkan NPWP Anda", isExpanded: $formNPWP) {
+                            ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formNPWP)
+                        }
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 25)
+                        .padding(.vertical)
+                    }
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .padding([.horizontal, .top], 30)
+                    
+                    NavigationLink(
+                        destination: FormEmailVerificationNasabahScreen().environmentObject(registerData),
+                        isActive: $nextViewActive,
+                        label: {
+                            Button(action: {
+                                
+                                self.registerData.npwp = self.npwp
+                                
+                                if imageKTP != nil
+                                    && registerData.nik != ""
+                                    && confirmNik
+                                    && (registerData.npwp != "" || imageNPWP != nil)
+                                    && imageSelfie != nil {
+                                    
+                                    self.nextViewActive.toggle()
+                                    
+                                }
+                                
+                            }, label: {
+                                Text("Lanjut Pembukaan Rekening Baru")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Montserrat-SemiBold", size: 16))
+                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                            })
+                        })
                         .background(Color(hex: "#232175"))
                         .cornerRadius(12)
-                        //                            .padding(.horizontal, 5)
-                        .padding(.top, 60)
-                        .padding(.bottom, 20)
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 100)
-                    .padding(.bottom, 35)
+                        .padding(30)
                 }
             }
-            .KeyboardAwarePadding()
+            
         }
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .background(
+            VStack {
+                Color(hex: "#232175").edgesIgnoringSafeArea(.all)
+                    .frame(height: UIScreen.main.bounds.height/3)
+                Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all)
+            }
+        )
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onAppear {
             print(recognizedText.value)
@@ -191,9 +161,9 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
         }
         .sheet(isPresented: $shouldPresentImagePicker) {
             ZStack {
-                SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: collapsedFormPersonal ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker)
+                SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker)
                 
-                if self.shouldPresentCamera {
+                if self.shouldPresentMaskSelfieCamera {
                     Image("pattern_selfie_white")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -206,6 +176,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                 self.shouldPresentImagePicker = true
                 self.shouldPresentCamera = true
             }), ActionSheet.Button.default(Text("Photo Library"), action: {
+                self.shouldPresentMaskSelfieCamera = false
                 self.shouldPresentImagePicker = true
                 self.shouldPresentCamera = false
             }), ActionSheet.Button.cancel()])
@@ -689,9 +660,6 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
             .animation(.easeOut)
             .transition(.slide)
         }
-        .background(Color.white)
-        .cornerRadius(15)
-        .shadow(radius: 4)
     }
 }
 

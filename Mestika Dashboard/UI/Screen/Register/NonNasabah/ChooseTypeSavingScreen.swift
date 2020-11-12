@@ -115,7 +115,7 @@ struct ChooseTypeSavingScreen: View {
                 .frame(height: 150)
             
             NavigationLink(destination:
-                PersonalIdentityView().environmentObject(registerData)
+                FormIdentitasDiriView().environmentObject(registerData)
             ) {
                 Text("Pilih Tabungan ini")
                     .foregroundColor(.white)

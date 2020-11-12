@@ -54,5 +54,6 @@ class RegistrasiModel: ObservableObject {
     @Published var fotoSelfie: Image = Image("")
     @Published var fotoTandaTangan: Image = Image("")
     @Published var fotoNPWP: Image = Image("")
+    @Published var npwp = ""
     @Published var hasNoNpwp: Bool = false
 }
