@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FormUploadDocumentIdentityNasabahScreen: View {
-    
     /*
      Environtment Object
      */

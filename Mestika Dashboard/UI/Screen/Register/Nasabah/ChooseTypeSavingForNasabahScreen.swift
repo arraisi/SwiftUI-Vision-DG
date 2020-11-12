@@ -30,11 +30,11 @@ struct ChooseTypeSavingForNasabahScreen: View {
             
             VStack() {
                 Text("Pilih Jenis Tabungan Anda")
-                    .font(.subheadline)
+                    .font(.title3)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(hex: "#232175"))
                     .padding(.horizontal, 15)
-                    .padding(.top, 40)
+                    .padding(.top, 60)
                 
                 // MARK: - CAROUSEL
                 VStack{

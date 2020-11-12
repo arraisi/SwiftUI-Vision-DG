@@ -1,5 +1,5 @@
 //
-//  FormPerkiraanSetoranNasabahScreen.swift
+//  FormSumberPenyandangDanaNasabahScreen.swift
 //  Mestika Dashboard
 //
 //  Created by Prima Jatnika on 11/11/20.
@@ -7,21 +7,19 @@
 
 import SwiftUI
 
-struct FormPerkiraanSetoranNasabahScreen: View {
+struct FormSumberPenyandangDanaNasabahScreen: View {
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var editMode: EditMode = .inactive
-    
-    let perkiraanSetoran: [MasterModel] = load("perkiraanSetoran.json")
+    let sumberPenyandangDana: [MasterModel] = load("sumberPenyandangDana.json")
     
     var body: some View {
-        
-        ZStack(alignment: .top) {
-            
+        ZStack{
             Color(hex: "#232175")
             
             VStack {
+                
                 Spacer()
                 Rectangle()
                     .fill(Color.white)
@@ -31,6 +29,11 @@ struct FormPerkiraanSetoranNasabahScreen: View {
             }
             
             VStack {
+                
+                CustomNavigationBarView(presentationMode: _presentationMode)
+                    .padding(.top, 45)
+                    .padding(.horizontal, 30)
+                
                 ScrollView {
                     
                     // Title
@@ -38,7 +41,7 @@ struct FormPerkiraanSetoranNasabahScreen: View {
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 60)
+                        .padding(.top, 30)
                         .padding(.vertical, 45)
                         .padding(.horizontal, 40)
                     
@@ -67,26 +70,25 @@ struct FormPerkiraanSetoranNasabahScreen: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Berapa Kali Perkiraan Setoran Dana Dalam Sebulan")
+                                Text("Sumber Penyandang Dana")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
-                                    .multilineTextAlignment(.center)
-                                    .padding(.horizontal, 40)
+                                    .padding(.horizontal, 20)
                                     .padding(.vertical, 30)
                                 
                                 // Forms input
                                 ZStack {
                                     
                                     RadioButtonGroup(
-                                        items: perkiraanSetoran,
-                                        selectedId: $registerData.perkiraanSetoranId) { selected in
+                                        items: sumberPenyandangDana,
+                                        selectedId: $registerData.sumberPenyandangDanaId) { selected in
                                         
-                                        if let i = perkiraanSetoran.firstIndex(where: { $0.id == selected }) {
-                                            print(perkiraanSetoran[i])
-                                            registerData.perkiraanSetoran = perkiraanSetoran[i].name
+                                        if let i = sumberPenyandangDana.firstIndex(where: { $0.id == selected }) {
+                                            print(sumberPenyandangDana[i])
+                                            registerData.sumberPenyandangDana = sumberPenyandangDana[i].name
                                         }
                                         
-                                        print("Selected is: \(registerData.perkiraanSetoran)")
+                                        print("Selected is: \(registerData.sumberPenyandangDana)")
                                         
                                     }
                                     .padding()
@@ -98,36 +100,20 @@ struct FormPerkiraanSetoranNasabahScreen: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 // Button
-                                if (editMode == .inactive) {
-                                    NavigationLink(destination: FormBesarPerkiraanSetoranNasabahScreen().environmentObject(registerData)) {
-                                        
-                                        Text("Berikutnya")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    }
-                                    .disabled(registerData.perkiraanSetoranId == 0)
-                                    .frame(height: 50)
-                                    .background(registerData.perkiraanSetoranId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
-                                } else {
-                                    NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData)) {
-                                        
-                                        Text("Simpan")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    }
-                                    .frame(height: 50)
-                                    .background(Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
-                                }
+                                NavigationLink(destination: FormPenghasilanKotorNasabahScreen().environmentObject(registerData), label:{
+                                    
+                                    Text("Berikutnya")
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                    
+                                })
+                                .disabled(registerData.sumberPenyandangDanaId == 0)
+                                .frame(height: 50)
+                                .background(registerData.sumberPenyandangDanaId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 25)
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -143,15 +129,17 @@ struct FormPerkiraanSetoranNasabahScreen: View {
                 }
                 .padding(.bottom, 0.1)
                 .KeyboardAwarePadding()
+                
             }
         }
-        .edgesIgnoringSafeArea(.top)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
+        
     }
 }
 
-struct FormPerkiraanSetoranNasabahScreen_Previews: PreviewProvider {
+struct FormSumberPenyandangDanaNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormPerkiraanSetoranNasabahScreen().environmentObject(RegistrasiModel())
+        FormSumberPenyandangDanaNasabahScreen().environmentObject(RegistrasiModel())
     }
 }

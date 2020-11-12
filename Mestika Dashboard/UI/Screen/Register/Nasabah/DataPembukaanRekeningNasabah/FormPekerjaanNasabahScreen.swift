@@ -100,7 +100,7 @@ struct FormPekerjaanNasabahScreen: View {
                                 // Button
                                 if (editMode == .inactive) {
                                     if registerData.pekerjaanId == 9 {
-                                        NavigationLink(destination: SumberPenyandangDanaView().environmentObject(registerData)) {
+                                        NavigationLink(destination: FormSumberPenyandangDanaNasabahScreen().environmentObject(registerData)) {
                                             
                                             Text("Berikutnya")
                                                 .foregroundColor(.white)

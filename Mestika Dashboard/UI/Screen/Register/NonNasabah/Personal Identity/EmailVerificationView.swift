@@ -50,7 +50,7 @@ struct EmailVerificationView: View {
                 
                 TextField("Masukan alamat email anda", text: $email, onEditingChanged: { (isChanged) in
                     if !isChanged {
-                        if self.textFieldValidatorEmail(self.email) {
+                        if (self.textFieldValidatorEmail(self.email) && self.email.count > 8)  {
                             self.isEmailValid = true
                             self.registerData.email = email
                         } else {
@@ -64,8 +64,19 @@ struct EmailVerificationView: View {
                 .padding()
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(15)
-                .padding(.vertical, 10)
+                .padding(.top, 20)
                 .padding(.horizontal, 20)
+                
+                HStack {
+                    Text("*Email harus lebih dari 8 karakter")
+                        .font(.caption2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 30)
+                .padding(.bottom, 10)
                 
                 NavigationLink(destination: EmailOTPVerificationView().environmentObject(registerData)) {
                     Text("Verifikasi Email")

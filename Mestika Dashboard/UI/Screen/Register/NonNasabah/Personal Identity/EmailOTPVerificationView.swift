@@ -55,7 +55,7 @@ struct EmailOTPVerificationView: View {
             }
             
             VStack(alignment: .center) {
-                Text("Kami telah mengirimkan OTP ke \(replace(myString: registerData.email, [6, 7, 8, 9], "x"))")
+                Text("Kami telah mengirimkan OTP ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
                     .font(.subheadline)
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)

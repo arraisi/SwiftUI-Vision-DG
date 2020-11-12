@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct JenisNoKartu {
     var jenis: String
@@ -23,13 +24,18 @@ struct RegisterRekeningCardView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
     @State var jenisKartuCtrl: String = ""
-    @State var noKartu: String = ""
+    @State var noKartuCtrl: String = ""
     
     /* Data Binding */
     @Binding var rootIsActive : Bool
     
     /* Modal Boolean */
     @State var showingModal = false
+    
+    /* Disabled Form */
+    var disableForm: Bool {
+        noKartuCtrl.count < 6
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -54,6 +60,7 @@ struct RegisterRekeningCardView: View {
                         .foregroundColor(Color(hex: "#5A6876"))
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
+                        .padding(.bottom, 20)
                         .padding(.horizontal, 50)
                     
                     HStack {
@@ -61,9 +68,11 @@ struct RegisterRekeningCardView: View {
                             .font(.subheadline)
                             .frame(height: 36)
                             .padding(.leading, 20)
+                            .disabled(true)
                         
                         Button(action:{
                             showingModal.toggle()
+                            print("click")
                         }, label: {
                             Image(systemName: "chevron.down")
                                 .font(Font.system(size: 20))
@@ -77,7 +86,7 @@ struct RegisterRekeningCardView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 10)
                     
-                    TextField("Masukan no kartu", text: $noKartu)
+                    TextField("Masukan no kartu", text: $noKartuCtrl)
                         .frame(height: 10)
                         .font(.subheadline)
                         .keyboardType(.numberPad)
@@ -103,16 +112,18 @@ struct RegisterRekeningCardView: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, maxHeight: 40)
                         })
-                        .background(Color(hex: "#2334D0"))
+                        .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
+                        .disabled(disableForm)
                     
                 }
                 .frame(width: UIScreen.main.bounds.width - 30)
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(radius: 30)
+                
                 Spacer()
             }
             .padding(.horizontal, 30)
@@ -124,14 +135,14 @@ struct RegisterRekeningCardView: View {
                     .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }
         }
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupJenisKartu()
-        }
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.easeIn, closeOnTapOutside: true) {
+            popupJenisKartu()
+        }
     }
     
     func popupJenisKartu() -> some View {
@@ -153,7 +164,7 @@ struct RegisterRekeningCardView: View {
                 Button(action:{
                     print("cari jenis")
                 }, label: {
-                    Image(systemName: "location.viewfinder")
+                    Image(systemName: "magnifyingglass")
                         .font(Font.system(size: 20))
                         .foregroundColor(Color(hex: "#707070"))
                 })

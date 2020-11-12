@@ -85,7 +85,7 @@ struct FormEmailConfirmationNasabahScreen: View {
                     destination: FormEmailReVerificationNasabahScreen().environmentObject(registerData),
                     label: {
                         Text("Kirim Kembali Email Verifikasi.")
-                            .font(.subheadline)
+                            .font(.caption)
                             .bold()
                             .foregroundColor(Color(hex: "#232175"))
                             .multilineTextAlignment(.leading)
@@ -102,7 +102,7 @@ struct FormEmailConfirmationNasabahScreen: View {
             
             HStack {
                 Text("Rubah Alamat Email")
-                    .font(.subheadline)
+                    .font(.caption)
                     .bold()
                     .foregroundColor(Color(hex: "#232175"))
                     .multilineTextAlignment(.leading)
