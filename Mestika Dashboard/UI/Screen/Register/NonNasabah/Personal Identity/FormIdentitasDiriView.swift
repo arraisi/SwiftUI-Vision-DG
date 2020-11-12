@@ -14,23 +14,36 @@ struct FormIdentitasDiriView: View {
      Environtment Object
      */
     @EnvironmentObject var registerData: RegistrasiModel
+    /*
+     Recognized Nomor Induk Ktp
+     */
+    @ObservedObject var recognizedText: RecognizedText = RecognizedText()
+    /*
+     KTP
+     */
+    @State private var formKTP: Bool = true
+    @State private var imageKTP: Image?
+    @State private var confirmImageKTP: Bool = false
+    @State private var nik: String = ""
+    @State private var confirmNik: Bool = false
+    /*
+     Selfie
+     */
+    @State private var formSelfie: Bool = false
+    @State private var imageSelfie: Image?
+    @State private var shouldPresentMaskSelfieCamera = false
+    /*
+     NPWP
+     */
+    @State private var formNPWP: Bool = false
+    @State private var imageNPWP: Image?
+    @State private var npwp: String = ""
+    @State private var alreadyHaveNpwp: Bool = false
+    
     
     @State private var shouldPresentImagePicker = false
     @State private var shouldPresentActionScheet = false
     @State private var shouldPresentCamera = false
-    @State private var shouldPresentMaskSelfieCamera = false
-    
-    @State private var formKTP: Bool = true
-    @State private var confirmNik: Bool = false
-    @State private var formSelfie: Bool = false
-    @State private var formNPWP: Bool = false
-    @State private var alreadyHaveNpwp: Bool = false
-    @State private var npwp: String = ""
-    
-    @State private var imageKTP: Image?
-    @State private var imageSelfie: Image?
-    @State private var imageNPWP: Image?
-    
     @State private var nextViewActive = false
     
     var body: some View {
@@ -61,7 +74,15 @@ struct FormIdentitasDiriView: View {
                     // Form KTP
                     VStack {
                         DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
-                            ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, formShowed: $formKTP, nextFormShowed: $formSelfie, confirmNik: $confirmNik)
+//                            ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, formShowed: $formKTP, nextFormShowed: $formSelfie, confirmNik: $confirmNik, confirmImageKTP: $confirmImageKTP)
+                            
+                            ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, confirmNik: $confirmNik) {
+                                if confirmImageKTP {
+                                    
+                                    self.formKTP = false
+                                    self.formSelfie = true
+                                }
+                            }
                         }
                         .foregroundColor(.black)
                         .padding(.horizontal, 25)
@@ -143,7 +164,35 @@ struct FormIdentitasDiriView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .sheet(isPresented: $shouldPresentImagePicker) {
             ZStack {
-                SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker)
+                if formKTP {
+                    
+                    ScanningView(recognizedText: $recognizedText.value)
+                        .onDisappear(perform: {
+                            if (recognizedText.value != "-") {
+                                print("scan value : \(recognizedText.value)")
+                                let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
+                                print("matched value : \(matched)")
+                                print("recognizedText.value value : \(recognizedText.value)")
+                                
+                                if matched.count != 0 {
+                                    self.nik = matched[0]
+                                }
+                                
+                                if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
+                                    self.confirmImageKTP = true
+                                    print("1. self.confirmImageKTP \(self.confirmImageKTP)")
+                                } else {
+                                    self.confirmImageKTP = false
+                                    print("2. self.confirmImageKTP \(self.confirmImageKTP)")
+                                }
+                                
+                                _ = retrieveImage(forKey: "ktp")
+                            }
+                        })
+                }
+                else {
+                    SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker)
+                }
                 
                 if self.shouldPresentMaskSelfieCamera {
                     Image("pattern_selfie_white")
@@ -162,6 +211,39 @@ struct FormIdentitasDiriView: View {
                 self.shouldPresentImagePicker = true
                 self.shouldPresentCamera = false
             }), ActionSheet.Button.cancel()])
+        }
+    }
+    
+    /*
+     Fungsi untuk ambil Gambar dari Local Storage
+     */
+    private func retrieveImage(forKey key: String) -> UIImage? {
+        if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
+           let image = UIImage(data: imageData) {
+            print(image)
+            
+            self.imageKTP = Image(uiImage: image)
+            self.registerData.fotoKTP = imageKTP!
+            return image
+        }
+        
+        return nil
+    }
+    
+    /*
+     Fungsi Regex NIK
+     */
+    func matches(for regex: String, in text: String) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: text,
+                                        range: NSRange(text.startIndex..., in: text))
+            return results.map {
+                String(text[Range($0.range, in: text)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
         }
     }
 }
