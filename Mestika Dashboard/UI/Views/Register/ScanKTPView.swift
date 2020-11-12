@@ -24,6 +24,7 @@ struct ScanKTPView: View {
     @Binding var confirmNik: Bool
     
     @State var isValidKTP: Bool = false
+    @State var nik: String = ""
     
     // input : nextFormIndex, nik, isEditNik
     //    let callback: (String)->()
@@ -78,14 +79,16 @@ struct ScanKTPView: View {
                     .foregroundColor(.black)
                 //                    .padding(.horizontal, 30)
                 
-                TextField("No. KTP (Otomatis terisi)", text: $registerData.nik)
+                TextField("No. KTP (Otomatis terisi)", text: $nik)
                     .frame(height: 10)
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                     .padding()
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
-                    //                    .padding(.horizontal, 30)
+                    .onReceive(nik.publisher.collect()) {
+                        self.nik = String($0.prefix(16))
+                    }
                     .disabled(!confirmNik)
                 
                 Button(action: toggleConfirmNik) {
@@ -105,7 +108,7 @@ struct ScanKTPView: View {
                     
                     Button(action: {
                         if confirmNik && registerData.nik != "" && isValidKTP {
-                            //                            self.callback(nik)
+                            self.registerData.nik = nik
                             self.formShowed.toggle()
                             self.nextFormShowed.toggle()
                             self.registerData.fotoKTP = self.imageKTP!
@@ -136,7 +139,7 @@ struct ScanKTPView: View {
                 print("recognizedText.value value : \(recognizedText.value)")
                 
                 if matched.count != 0 {
-                    self.registerData.nik = matched[0]
+                    self.nik = matched[0]
                 }
                 
                 if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
