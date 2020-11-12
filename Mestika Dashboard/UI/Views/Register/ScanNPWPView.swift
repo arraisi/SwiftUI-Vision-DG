@@ -14,7 +14,7 @@ struct ScanNPWPView: View {
      */
     @EnvironmentObject var registerData: RegistrasiModel
     
-//    @State var npwp: String = ""
+    @Binding var npwp: String
     @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
     @Binding var shouldPresentActionScheet : Bool
@@ -68,13 +68,16 @@ struct ScanNPWPView: View {
                     .font(.custom("Montserrat-SemiBold", size: 10))
                     .foregroundColor(.black)
                 
-                TextField("No. NPWP", text: $registerData.npwp)
+                TextField("No. NPWP", text: $npwp)
                     .frame(height: 10)
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                     .padding()
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .onReceive(npwp.publisher.collect()) {
+                        self.npwp = String($0.prefix(5))
+                    }
                     .disabled(!alreadyHaveNpwp)
                 
                 Button(action: toggleHasNpwp) {
@@ -95,6 +98,9 @@ struct ScanNPWPView: View {
                         self.formShowed.toggle()
                         
                         self.registerData.fotoNPWP = self.imageNPWP!
+                        self.registerData.npwp = npwp
+                        
+                        print("REGISTER DATA NPWP : \(self.registerData.npwp)")
                     }) {
                         Text("Simpan")
                             .foregroundColor(.white)
@@ -123,7 +129,7 @@ struct ScanNPWPView: View {
 
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanNPWPView(alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true))
+        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true))
             .environmentObject(RegistrasiModel())
     }
 }

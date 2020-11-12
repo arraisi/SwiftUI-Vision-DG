@@ -35,8 +35,7 @@ struct SelfieView: View {
                 VStack {
                     imageSelfie?
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 350, height: 200)
+                        .frame(maxWidth: 350, maxHeight: 200)
                         .cornerRadius(10)
                 }
                 .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)

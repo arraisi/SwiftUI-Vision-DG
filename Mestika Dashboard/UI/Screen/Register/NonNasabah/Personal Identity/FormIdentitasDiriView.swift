@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FormIdentitasDiriView: View {
     
@@ -24,10 +25,13 @@ struct FormIdentitasDiriView: View {
     @State private var formSelfie: Bool = false
     @State private var formNPWP: Bool = false
     @State private var alreadyHaveNpwp: Bool = false
+    @State private var npwp: String = ""
     
-    @State var imageKTP: Image?
-    @State var imageSelfie: Image?
-    @State var imageNPWP: Image?
+    @State private var imageKTP: Image?
+    @State private var imageSelfie: Image?
+    @State private var imageNPWP: Image?
+    
+    @State private var nextViewActive = false
     
     var body: some View {
         
@@ -85,8 +89,8 @@ struct FormIdentitasDiriView: View {
                     
                     // Form NPWP
                     VStack {
-                        DisclosureGroup("NPWP Anda", isExpanded: $formNPWP) {
-                            ScanNPWPView(registerData: _registerData, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formNPWP)
+                        DisclosureGroup("Masukkan NPWP Anda", isExpanded: $formNPWP) {
+                            ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formNPWP)
                         }
                         .foregroundColor(.black)
                         .padding(.horizontal, 25)
@@ -97,16 +101,34 @@ struct FormIdentitasDiriView: View {
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .padding([.horizontal, .top], 30)
                     
-                    // Button Lanjut
-                    NavigationLink(destination: EmailVerificationView().environmentObject(registerData)) {
-                        Text("Lanjut Pembukaan Rekening Baru")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 16))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    }
-                    .background(Color(hex: "#232175"))
-                    .cornerRadius(12)
-                    .padding(30)
+                    NavigationLink(
+                        destination: EmailVerificationView().environmentObject(registerData),
+                        isActive: $nextViewActive,
+                        label: {
+                            Button(action: {
+                                
+                                self.registerData.npwp = self.npwp
+                                
+                                if imageKTP != nil
+                                    && registerData.nik != ""
+                                    && confirmNik
+                                    && (registerData.npwp != "" || imageNPWP != nil)
+                                    && imageSelfie != nil {
+                                    
+                                    self.nextViewActive.toggle()
+                                    
+                                }
+                                
+                            }, label: {
+                                Text("Lanjut Pembukaan Rekening Baru")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Montserrat-SemiBold", size: 16))
+                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                            })
+                        })
+                        .background(Color(hex: "#232175"))
+                        .cornerRadius(12)
+                        .padding(30)
                 }
             }
             
