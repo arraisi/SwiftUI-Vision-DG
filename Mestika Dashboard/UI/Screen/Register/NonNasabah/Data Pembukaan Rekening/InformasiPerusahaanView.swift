@@ -21,10 +21,12 @@ struct InformasiPerusahaanView: View {
     @State var namaPerusahaan: String = ""
     @State var alamatPerusahaan: String = ""
     @State var kelurahan: String = ""
-    @State var noTlpPerusahaan: String = ""
     @State var kodePos : String = ""
     @State var kecamatan : String = ""
     @State var location : String = ""
+    
+    @State var noTlpPerusahaan: String = ""
+    @State var nextViewActive: Bool = false
     
     let cities:[Address] = [
         .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: ""),
@@ -109,20 +111,29 @@ struct InformasiPerusahaanView: View {
                                 .cornerRadius(15)
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
-                                NavigationLink(destination: PenghasilanKotorView().environmentObject(registerData), label:{
-                                    
-                                    Text("Berikutnya")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .frame(maxWidth: .infinity, maxHeight: 40)
-                                    
-                                })
-                                .disabled(isValid())
-                                .frame(height: 50)
-                                .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                .cornerRadius(12)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 25)
+                                NavigationLink(
+                                    destination: PenghasilanKotorView().environmentObject(registerData),
+                                    isActive: $nextViewActive,
+                                    label: {
+                                        Button(action: {
+                                            
+                                            self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
+                                            
+                                            self.nextViewActive = true
+                                            
+                                        }, label: {
+                                            Text("Berikutnya")
+                                                .foregroundColor(.white)
+                                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                        })
+                                    })
+                                    .disabled(isValid())
+                                    .frame(height: 50)
+                                    .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -171,7 +182,7 @@ struct InformasiPerusahaanView: View {
         if registerData.kecamatan == "" {
             return true
         }
-        if registerData.noTeleponPerusahaan == "" {
+        if noTlpPerusahaan == "" {
             return true
         }
         return false
@@ -254,8 +265,11 @@ struct InformasiPerusahaanView: View {
                     Divider()
                         .frame(height: 30)
                     
-                    TextField("No. Telepon", text: $registerData.noTeleponPerusahaan) {change in
+                    TextField("No. Telepon", text: $noTlpPerusahaan) {change in
                     } onCommit: {
+                    }
+                    .onReceive(noTlpPerusahaan.publisher.collect()) {
+                        self.noTlpPerusahaan = String($0.prefix(12))
                     }
                     .keyboardType(.numberPad)
                     .font(Font.system(size: 14))

@@ -78,6 +78,7 @@ struct ScanKTPView: View {
                     .padding()
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .keyboardType(.numberPad)
                     .onReceive(nik.publisher.collect()) {
                         self.nik = String($0.prefix(16))
                     }

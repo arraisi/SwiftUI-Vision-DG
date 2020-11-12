@@ -75,6 +75,7 @@ struct ScanNPWPView: View {
                     .padding()
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .keyboardType(.numberPad)
                     .onReceive(npwp.publisher.collect()) {
                         self.npwp = String($0.prefix(15))
                     }

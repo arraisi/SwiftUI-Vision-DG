@@ -15,6 +15,8 @@ struct KeluargaTerdekat: View {
     @State var selectionID : Int = 0
     @State var location : String = ""
     @State var showingModal = false
+    @State var noTelepon: String = ""
+    @State var nextViewActive: Bool = false
     
     let cities:[Address] = [
         .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Selatan"),
@@ -91,13 +93,22 @@ struct KeluargaTerdekat: View {
                                 .cornerRadius(15)
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
-                                    NavigationLink(destination: PasswordView().environmentObject(registerData), label:{
-                                        
-                                        Text("Berikutnya")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
+                                NavigationLink(
+                                    destination: PasswordView().environmentObject(registerData),
+                                    isActive: $nextViewActive,
+                                    label: {
+                                        Button(action: {
+                                            
+                                            self.registerData.noTeleponPerusahaan = self.noTelepon
+                                            
+                                            self.nextViewActive = true
+                                            
+                                        }, label: {
+                                            Text("Berikutnya")
+                                                .foregroundColor(.white)
+                                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                        })
                                     })
                                     .disabled(isValid())
                                     .frame(height: 50)
@@ -105,6 +116,7 @@ struct KeluargaTerdekat: View {
                                     .cornerRadius(12)
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 25)
+                                
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -157,7 +169,7 @@ struct KeluargaTerdekat: View {
         if registerData.kelurahanKeluarga == "" {
             return true
         }
-        if registerData.noTlpKeluarga == ""  {
+        if noTelepon == ""  {
             return true
         }
         return false
@@ -258,8 +270,11 @@ struct KeluargaTerdekat: View {
                     Divider()
                         .frame(height: 30)
                     
-                    TextField("No. Telepon", text: $registerData.noTlpKeluarga) {change in
+                    TextField("No. Telepon", text: $noTelepon) {change in
                     } onCommit: {
+                    }
+                    .onReceive(noTelepon.publisher.collect()) {
+                        self.noTelepon = String($0.prefix(12))
                     }
                     .keyboardType(.numberPad)
                     .font(Font.system(size: 14))

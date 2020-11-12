@@ -18,7 +18,7 @@ struct PhoneVerificationView: View {
     
     /* Disabled Form */
     var disableForm: Bool {
-        phoneNumber.count < 11
+        phoneNumber.count < 10
     }
     
     /* Data Binding */
@@ -63,6 +63,9 @@ struct PhoneVerificationView: View {
                         print("Commited")
                         self.registerData.noTelepon = "0" + phoneNumber
                     })
+                    .onReceive(phoneNumber.publisher.collect()) {
+                        self.phoneNumber = String($0.prefix(11))
+                    }
                     .keyboardType(.numberPad)
                 }
                 .frame(height: 20)

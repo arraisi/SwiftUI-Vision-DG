@@ -133,7 +133,7 @@ struct FormIdentitasDiriView: View {
                                 if imageKTP != nil
                                     && registerData.nik != ""
                                     && confirmNik
-                                    && (registerData.npwp != "" || imageNPWP != nil)
+                                    && (registerData.npwp != "" || imageNPWP != nil || !alreadyHaveNpwp)
                                     && imageSelfie != nil {
                                     
                                     self.nextViewActive.toggle()
