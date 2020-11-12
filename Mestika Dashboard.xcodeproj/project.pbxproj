@@ -788,8 +788,8 @@
 			isa = PBXGroup;
 			children = (
 				5290A120255BBEBD0090F788 /* Nasabah */,
-				52ADFF622557DFDB00A1001F /* RegisterView.swift */,
 				5290A119255BBE1B0090F788 /* NonNasabah */,
+				52ADFF622557DFDB00A1001F /* RegisterView.swift */,
 			);
 			name = Register;
 			path = "Mestika Dashboard/UI/Screen/Register";
