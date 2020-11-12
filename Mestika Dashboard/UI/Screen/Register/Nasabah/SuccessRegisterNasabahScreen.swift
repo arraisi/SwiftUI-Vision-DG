@@ -74,6 +74,7 @@ struct SuccessRegisterNasabahScreen: View {
                             .font(.subheadline)
                             .frame(height: 36)
                             .padding(.leading, 20)
+                            .disabled(true)
                         
                         Button(action:{
                             showingModalTanggal.toggle()
@@ -96,6 +97,7 @@ struct SuccessRegisterNasabahScreen: View {
                             .font(.subheadline)
                             .frame(height: 36)
                             .padding(.leading, 20)
+                            .disabled(true)
                         
                         Button(action:{
                             showingModalJam.toggle()

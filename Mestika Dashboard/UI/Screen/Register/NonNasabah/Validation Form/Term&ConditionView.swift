@@ -120,7 +120,7 @@ struct Term_ConditionView: View {
                         .disabled(!isChecked)
                         
                     }
-                    .frame(width: UIScreen.main.bounds.width - 30, height: 600)
+                    .frame(width: UIScreen.main.bounds.width - 30, height: 500)
                     .background(Color.white)
                     .cornerRadius(15)
                     .shadow(radius: 30)

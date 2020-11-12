@@ -82,6 +82,7 @@ struct SuccessRegisterView: View {
                             .font(.subheadline)
                             .frame(height: 36)
                             .padding(.leading, 20)
+                            .disabled(true)
                         
                         Button(action:{
                             showingModalTanggal.toggle()
@@ -104,6 +105,7 @@ struct SuccessRegisterView: View {
                             .font(.subheadline)
                             .frame(height: 36)
                             .padding(.leading, 20)
+                            .disabled(true)
                         
                         Button(action:{
                             showingModalJam.toggle()

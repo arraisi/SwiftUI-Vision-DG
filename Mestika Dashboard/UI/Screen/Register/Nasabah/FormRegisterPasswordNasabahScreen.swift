@@ -17,10 +17,13 @@ struct FormRegisterPasswordNasabahScreen: View {
     @State private var securedPassword: Bool = true
     @State private var securedConfirmation: Bool = true
     
+    @State private var showingModal: Bool = false
+    @State private var activeRoute: Bool = false
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var disableForm: Bool {
-        password != confirmationPassword || password.count < 6
+        password.isEmpty || confirmationPassword.isEmpty || password.count < 6 || confirmationPassword.count < 6
     }
     
     var body: some View {
@@ -190,20 +193,35 @@ struct FormRegisterPasswordNasabahScreen: View {
                             .cornerRadius(15)
                             .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                             
-                            NavigationLink(destination: FormRegisterPinNasabahScreen().environmentObject(registerData), label:{
-                                
-                                Text("Berikutnya")
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .frame(maxWidth: .infinity, maxHeight: 40)
-                                
-                            })
-                            .frame(height: 50)
-                            .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
-                            .cornerRadius(12)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 25)
-                            .disabled(disableForm)
+                            NavigationLink(
+                                destination: FormRegisterPinNasabahScreen().environmentObject(registerData),
+                                isActive: $activeRoute,
+                                label: {
+                                    Text("")
+                                }
+                            )
+                            
+                            Button(
+                                action: {
+                                    if (password != confirmationPassword) {
+                                        self.showingModal.toggle()
+                                    } else {
+                                        self.activeRoute = true
+                                    }
+                                },
+                                label:{
+                                    Text("Berikutnya")
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                    
+                                })
+                                .frame(height: 50)
+                                .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 25)
+                                .disabled(disableForm)
                             
                         }
                         .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -218,11 +236,51 @@ struct FormRegisterPasswordNasabahScreen: View {
                 }
                 .KeyboardAwarePadding()
             }
+            
+            if self.showingModal {
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+            }
         }
         .edgesIgnoringSafeArea(.all)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            bottomMessagePasswordIncorrect()
+        }
+    }
+    
+    // MARK: -BOTTOM MESSAGE OTP IN CORRECT
+    func bottomMessagePasswordIncorrect() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Password tidak sama, silahkan ketik ulang")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {}) {
+                Text("Kembali")
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

@@ -22,6 +22,7 @@ struct VerifikasiPINView: View {
      Variable Validation
      */
     @State var isPinValid = false
+    @State var activeRoute = false
     
     /*
      Boolean for Show Modal
@@ -106,7 +107,7 @@ struct VerifikasiPINView: View {
                             }
                             
                             VStack {
-                                NavigationLink(destination: Term_ConditionView().environmentObject(registerData), isActive: self.$isPinValid) {
+                                NavigationLink(destination: Term_ConditionView().environmentObject(registerData), isActive: self.$activeRoute) {
                                     Text("")
                                 }
                             }
@@ -114,11 +115,17 @@ struct VerifikasiPINView: View {
                             Button(action: {
                                 print(pin)
                                 print(registerData.pin)
-                                if (pin == self.registerData.pin) {
+                                
+                                if (pin.count == 6) {
                                     self.isPinValid = true
-                                } else {
-                                    print("Not Valid")
+                                }
+                                
+                                if (pin != self.registerData.pin) {
                                     showingModal.toggle()
+                                }
+                                
+                                if (pin == self.registerData.pin) {
+                                    activeRoute = true
                                 }
                             }) {
                                 Text("Simpan PIN Transaksi")
@@ -222,7 +229,7 @@ struct VerifikasiPINView: View {
     
     private func getImageName(at index: Int) -> String {
         if index >= self.pin.count {
-            return ""
+            return "•"
         }
         
         if self.showPin {
