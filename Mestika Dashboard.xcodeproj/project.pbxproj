@@ -244,6 +244,7 @@
 		C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */; };
 		C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */; };
+		C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB654C255E4D81009ADFFE /* DbViewModel.swift */; };
 		C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB90D22553D7E2004DBCF5 /* CardView.swift */; };
 		C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */; };
 		C0FE1E3E255A67D400B3AAE0 /* NumbersPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */; };
@@ -508,6 +509,7 @@
 		C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOTPVerificationView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCVVVerificationView.swift; sourceTree = "<group>"; };
 		C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormNewPinAtmView.swift; sourceTree = "<group>"; };
+		C0EB654C255E4D81009ADFFE /* DbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbViewModel.swift; sourceTree = "<group>"; };
 		C0EB90D22553D7E2004DBCF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPINConfigurationView.swift; sourceTree = "<group>"; };
 		C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersPadView.swift; sourceTree = "<group>"; };
@@ -644,7 +646,7 @@
 			isa = PBXGroup;
 			children = (
 				C04B421F25540FB000DDE4C7 /* Models */,
-				C0E3D28F255E434F0072EB26 /* View Models */,
+				C0EB654B255E4D67009ADFFE /* View Models */,
 				C01C67A4255E38180019D06F /* Views */,
 				52468ABC25413604007518AE /* Support Views */,
 			);
@@ -1275,13 +1277,6 @@
 			path = CardManagement;
 			sourceTree = "<group>";
 		};
-		C0E3D28F255E434F0072EB26 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Models";
-			sourceTree = "<group>";
-		};
 		C0E7B3FE255B4765003D278B /* ChangePINATM */ = {
 			isa = PBXGroup;
 			children = (
@@ -1289,6 +1284,14 @@
 				C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */,
 			);
 			path = ChangePINATM;
+			sourceTree = "<group>";
+		};
+		C0EB654B255E4D67009ADFFE /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0EB654C255E4D81009ADFFE /* DbViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1480,6 +1483,7 @@
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
 				52ADFFAD2557DFDC00A1001F /* RegisterProvisionView.swift in Sources */,
+				C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */,
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
 				C092ABF92553B4BF0051CE3E /* Data.swift in Sources */,
 				5290A125255BBFAC0090F788 /* RegisterNasabahPhoneOTPScreen.swift in Sources */,
