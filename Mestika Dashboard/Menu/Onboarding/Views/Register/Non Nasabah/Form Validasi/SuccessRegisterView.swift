@@ -47,6 +47,10 @@ struct SuccessRegisterView: View {
         .init(tanggal: "02/09/2020")
     ]
     
+    var disableForm: Bool {
+        tanggalWawancara.isEmpty || pilihJam.isEmpty
+    }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack(alignment: .top) {
@@ -194,11 +198,12 @@ struct SuccessRegisterView: View {
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     }
-                    .background(Color(hex: "#2334D0"))
+                    .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                     .padding(.bottom, 5)
+                    .disabled(disableForm)
                     
                     Group {
                         Button(action : {}) {
