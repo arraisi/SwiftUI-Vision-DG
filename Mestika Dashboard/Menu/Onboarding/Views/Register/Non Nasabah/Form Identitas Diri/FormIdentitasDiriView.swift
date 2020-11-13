@@ -75,8 +75,9 @@ struct FormIdentitasDiriView: View {
                     VStack {
                         DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
                             ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, confirmNik: $confirmNik) {
+                                print("SIMPAN KTP")
                                 if confirmImageKTP {
-                                    
+                                    print("SIMPAN KTP")
                                     self.formKTP = false
                                     self.formSelfie = true
                                 }
