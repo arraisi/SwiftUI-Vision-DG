@@ -644,7 +644,7 @@
 			isa = PBXGroup;
 			children = (
 				C04B421F25540FB000DDE4C7 /* Models */,
-				52ADFEC42557DA3700A1001F /* View Models */,
+				C0E3D28F255E434F0072EB26 /* View Models */,
 				C01C67A4255E38180019D06F /* Views */,
 				52468ABC25413604007518AE /* Support Views */,
 			);
@@ -941,14 +941,6 @@
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
-			sourceTree = SOURCE_ROOT;
-		};
-		52ADFEC42557DA3700A1001F /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "View Models";
-			path = "Mestika Dashboard/Dashboard/View Models";
 			sourceTree = SOURCE_ROOT;
 		};
 		52ADFEC62557DA3700A1001F /* Services */ = {
@@ -1281,6 +1273,13 @@
 				C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */,
 			);
 			path = CardManagement;
+			sourceTree = "<group>";
+		};
+		C0E3D28F255E434F0072EB26 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		C0E7B3FE255B4765003D278B /* ChangePINATM */ = {
