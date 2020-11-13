@@ -24,7 +24,7 @@ var data = [
     )
 ]
 
-struct RegisterView: View {
+struct WelcomeView: View {
     
     /* For Check Internet Connection */
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.aple.com")
@@ -73,7 +73,7 @@ struct RegisterView: View {
             createBottomFloater()
         }
         .navigationBarHidden(true)
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .edgesIgnoringSafeArea(.all)
     }
     
     var header: some View {
@@ -181,7 +181,7 @@ struct RegisterView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView()
+        WelcomeView()
     }
 }
 
