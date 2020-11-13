@@ -69,6 +69,7 @@
 		525FA115255289B0007EADCB /* GridMenuManyUsedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525FA114255289B0007EADCB /* GridMenuManyUsedView.swift */; };
 		525FA11D25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525FA11C25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift */; };
 		525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525FA129255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift */; };
+		5264ADF6255E75BD000565D5 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264ADF5255E75BD000565D5 /* ErrorResponse.swift */; };
 		526B1FE9255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B1FE8255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift */; };
 		526B6581254FB72300C13C36 /* HistoryTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6580254FB72300C13C36 /* HistoryTransaction.swift */; };
 		526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6588254FB7AA00C13C36 /* ListHistoryTransactionView.swift */; };
@@ -336,6 +337,7 @@
 		525FA114255289B0007EADCB /* GridMenuManyUsedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridMenuManyUsedView.swift; sourceTree = "<group>"; };
 		525FA11C25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridMenuAllPaymentPurchaseView.swift; sourceTree = "<group>"; };
 		525FA129255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLastPurchasePaymentTransactionView.swift; sourceTree = "<group>"; };
+		5264ADF5255E75BD000565D5 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		526B1FE8255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSumberPenyandangDanaNasabahScreen.swift; sourceTree = "<group>"; };
 		526B6580254FB72300C13C36 /* HistoryTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransaction.swift; sourceTree = "<group>"; };
 		526B6588254FB7AA00C13C36 /* ListHistoryTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHistoryTransactionView.swift; sourceTree = "<group>"; };
@@ -1155,6 +1157,7 @@
 				52AE1A8B255A448100B011B7 /* OtpRequest.swift */,
 				52ADFEAC2557D9A800A1001F /* SliderAssetsResponse.swift */,
 				52AE1A6F255A3D9A00B011B7 /* OtpResponse.swift */,
+				5264ADF5255E75BD000565D5 /* ErrorResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1641,6 +1644,7 @@
 				C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */,
 				C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */,
 				525FA10F25525DA8007EADCB /* OffsetKey.swift in Sources */,
+				5264ADF6255E75BD000565D5 /* ErrorResponse.swift in Sources */,
 				C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */,
 				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,
 				525950252553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift in Sources */,

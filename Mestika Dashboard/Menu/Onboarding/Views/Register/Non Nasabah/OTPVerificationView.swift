@@ -31,7 +31,6 @@ struct OTPVerificationView: View {
     /* Timer */
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    let timers = Timer.publish(every: 1000, on: .main, in: .common).autoconnect()
     
     /* Boolean for Show Modal */
     @State var showingOtpIncorect = false
@@ -44,7 +43,10 @@ struct OTPVerificationView: View {
     }
     
     func getOTP() {
-        self.otpVM.otpRequest { success in
+        self.otpVM.otpRequest(
+            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+        ) { success in
+            
             if success {
                 print(self.otpVM.isLoading)
                 print(self.otpVM.code)
@@ -125,6 +127,7 @@ struct OTPVerificationView: View {
                     
                     Button(action: {
                         print(pin)
+                        print(self.otpVM.code)
                         
                         if (pin == self.otpVM.code && otpInvalidCount < 5) {
                             print("OTP CORRECT")
@@ -188,9 +191,19 @@ struct OTPVerificationView: View {
         }
         .alert(isPresented: $showingAlert) {
             if (self.otpVM.code.isEmpty) {
-                return Alert(title: Text("Message Error"), message: Text("No OTP Code"), dismissButton: .default(Text("Oke")))
+                return Alert(
+                    title: Text("Message Error"),
+                    message: Text("No OTP Code"),
+                    dismissButton: .default(Text("Oke"))
+                )
             } else {
-                return Alert(title: Text("OTP Code"), message: Text(self.otpVM.code), dismissButton: .default(Text("Oke")))
+                return Alert(
+                    title: Text("OTP Code"),
+                    message: Text(self.otpVM.code),
+                    dismissButton: .default(Text("Oke"), action: {
+                        pin = self.otpVM.code
+                    })
+                )
             }
         }
         .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {

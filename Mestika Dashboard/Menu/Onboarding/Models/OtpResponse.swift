@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OtpResponse: Decodable {
+class OtpResponse: ErrorResponse, Decodable {
     var destination: String?
     var reference: String?
     var code: String?
