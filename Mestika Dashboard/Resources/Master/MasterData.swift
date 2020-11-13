@@ -7,4 +7,4 @@
 
 import SwiftUI
 
-let masterData: [MasterModel] = load("masterData.json")
+

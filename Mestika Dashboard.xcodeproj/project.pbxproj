@@ -112,10 +112,7 @@
 		52ADFE942557D99F00A1001F /* MasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE782557D99F00A1001F /* MasterModel.swift */; };
 		52ADFE952557D99F00A1001F /* MasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE792557D99F00A1001F /* MasterData.swift */; };
 		52ADFE972557D99F00A1001F /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE7E2557D99F00A1001F /* CardModel.swift */; };
-		52ADFE982557D99F00A1001F /* JenisATMData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE7F2557D99F00A1001F /* JenisATMData.swift */; };
 		52ADFE992557D99F00A1001F /* DetailJenisATMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE802557D99F00A1001F /* DetailJenisATMModel.swift */; };
-		52ADFE9A2557D99F00A1001F /* DesainATMData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE812557D99F00A1001F /* DesainATMData.swift */; };
-		52ADFE9B2557D99F00A1001F /* DetailJenisATMData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE822557D99F00A1001F /* DetailJenisATMData.swift */; };
 		52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE832557D99F00A1001F /* RegistrasiModel.swift */; };
 		52ADFE9D2557D99F00A1001F /* pekerjaan.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE852557D99F00A1001F /* pekerjaan.json */; };
 		52ADFE9E2557D99F00A1001F /* besarPerkiraanPenarikan.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE862557D99F00A1001F /* besarPerkiraanPenarikan.json */; };
@@ -150,9 +147,9 @@
 		52ADFF452557DE7300A1001F /* SUImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF442557DE7300A1001F /* SUImagePickerView.swift */; };
 		52ADFF4A2557DE8000A1001F /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF492557DE8000A1001F /* TabItemView.swift */; };
 		52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF4E2557DED900A1001F /* TextRecognizer.swift */; };
-		52ADFF542557DEEA00A1001F /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInputView.swift */; };
+		52ADFF542557DEEA00A1001F /* TextFieldWithPickerAsInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInput.swift */; };
 		52ADFF862557DFDC00A1001F /* FormEmailConfirmationNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5C2557DFDB00A1001F /* FormEmailConfirmationNasabahScreen.swift */; };
-		52ADFF872557DFDC00A1001F /* PersonalIdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5D2557DFDB00A1001F /* PersonalIdentityView.swift */; };
+		52ADFF872557DFDC00A1001F /* PersonalIdentityViewUnused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5D2557DFDB00A1001F /* PersonalIdentityViewUnused.swift */; };
 		52ADFF882557DFDC00A1001F /* EmailOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */; };
 		52ADFF892557DFDC00A1001F /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */; };
 		52ADFF8A2557DFDC00A1001F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF602557DFDB00A1001F /* Coordinator.swift */; };
@@ -381,10 +378,7 @@
 		52ADFE782557D99F00A1001F /* MasterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterModel.swift; sourceTree = "<group>"; };
 		52ADFE792557D99F00A1001F /* MasterData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterData.swift; sourceTree = "<group>"; };
 		52ADFE7E2557D99F00A1001F /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
-		52ADFE7F2557D99F00A1001F /* JenisATMData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JenisATMData.swift; sourceTree = "<group>"; };
 		52ADFE802557D99F00A1001F /* DetailJenisATMModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJenisATMModel.swift; sourceTree = "<group>"; };
-		52ADFE812557D99F00A1001F /* DesainATMData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesainATMData.swift; sourceTree = "<group>"; };
-		52ADFE822557D99F00A1001F /* DetailJenisATMData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJenisATMData.swift; sourceTree = "<group>"; };
 		52ADFE832557D99F00A1001F /* RegistrasiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrasiModel.swift; sourceTree = "<group>"; };
 		52ADFE852557D99F00A1001F /* pekerjaan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pekerjaan.json; sourceTree = "<group>"; };
 		52ADFE862557D99F00A1001F /* besarPerkiraanPenarikan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = besarPerkiraanPenarikan.json; sourceTree = "<group>"; };
@@ -419,9 +413,9 @@
 		52ADFF442557DE7300A1001F /* SUImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SUImagePickerView.swift; sourceTree = "<group>"; };
 		52ADFF492557DE8000A1001F /* TabItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
 		52ADFF4E2557DED900A1001F /* TextRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
-		52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
+		52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInput.swift; sourceTree = "<group>"; };
 		52ADFF5C2557DFDB00A1001F /* FormEmailConfirmationNasabahScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEmailConfirmationNasabahScreen.swift; sourceTree = "<group>"; };
-		52ADFF5D2557DFDB00A1001F /* PersonalIdentityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalIdentityView.swift; sourceTree = "<group>"; };
+		52ADFF5D2557DFDB00A1001F /* PersonalIdentityViewUnused.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalIdentityViewUnused.swift; sourceTree = "<group>"; };
 		52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailOTPVerificationView.swift; sourceTree = "<group>"; };
 		52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
 		52ADFF602557DFDB00A1001F /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -549,7 +543,7 @@
 		523A86282542BE8600ADFE25 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInputView.swift */,
+				52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInput.swift */,
 				52ADFF4E2557DED900A1001F /* TextRecognizer.swift */,
 				52ADFF492557DE8000A1001F /* TabItemView.swift */,
 				52ADFF442557DE7300A1001F /* SUImagePickerView.swift */,
@@ -576,7 +570,7 @@
 				C00702C6255531280089DBD1 /* DismissingKeyboard.swift */,
 			);
 			name = Components;
-			path = "Mestika Dashboard/UI/Components";
+			path = "Mestika Dashboard/Components";
 			sourceTree = SOURCE_ROOT;
 		};
 		5245F878253FE702002E8B53 = {
@@ -602,12 +596,11 @@
 		5245F883253FE702002E8B53 /* Mestika Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				523A86282542BE8600ADFE25 /* Components */,
 				52474D822540320D0094B758 /* Extensions */,
-				C04B421F25540FB000DDE4C7 /* Models */,
-				52ADFEC42557DA3700A1001F /* ViewModel */,
-				5245F8BA253FE818002E8B53 /* UI */,
+				C01C679F255E36BC0019D06F /* Authentication */,
+				5245F8BC253FE82E002E8B53 /* Dashboard */,
 				C092ABFD2553B51B0051CE3E /* Resources */,
-				52ADFEC62557DA3700A1001F /* Services */,
 				52ADFEB22557DA0700A1001F /* Utils */,
 				5245F884253FE702002E8B53 /* AppDelegate.swift */,
 				5245F886253FE702002E8B53 /* SceneDelegate.swift */,
@@ -647,54 +640,18 @@
 			path = "Mestika DashboardUITests";
 			sourceTree = "<group>";
 		};
-		5245F8BA253FE818002E8B53 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				523A86282542BE8600ADFE25 /* Components */,
-				5245F8BB253FE821002E8B53 /* Screen */,
-				52468ABC25413604007518AE /* Views */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		5245F8BB253FE821002E8B53 /* Screen */ = {
-			isa = PBXGroup;
-			children = (
-				525950152553E03000C8CA5D /* Login */,
-				5247466A254818BB001F43C5 /* Register */,
-				5245F8BC253FE82E002E8B53 /* Dashboard */,
-			);
-			path = Screen;
-			sourceTree = "<group>";
-		};
 		5245F8BC253FE82E002E8B53 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				52BF57F52559279100F009B5 /* PaymentTransaction */,
-				526B657A254FB20800C13C36 /* Account */,
-				5247460E2547CA38001F43C5 /* Favorite */,
-				52C34886254288BD00F08F37 /* Transfer */,
-				5245F8BD253FE9FC002E8B53 /* BottomNavigationView.swift */,
-				52474D5D254026BD0094B758 /* DashboardTabs.swift */,
-				52474D622540276A0094B758 /* TransferTabs.swift */,
-				52474D67254028350094B758 /* FavoriteTabs.swift */,
-				52474D78254028CD0094B758 /* AccountTabs.swift */,
-				52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */,
-				525FA10925524F29007EADCB /* CustomBottomNavigationView.swift */,
+				C04B421F25540FB000DDE4C7 /* Models */,
+				52ADFEC42557DA3700A1001F /* View Models */,
+				C01C67A4255E38180019D06F /* Views */,
+				52468ABC25413604007518AE /* Support Views */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
-		52468ABC25413604007518AE /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				52BF57D82558E66600F009B5 /* Register */,
-				52468ABD2541360C007518AE /* Dashboard */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		52468ABD2541360C007518AE /* Dashboard */ = {
+		52468ABC25413604007518AE /* Support Views */ = {
 			isa = PBXGroup;
 			children = (
 				525FA1132552898A007EADCB /* PaymentTransaction */,
@@ -710,7 +667,7 @@
 				52468AEC25417B3B007518AE /* ListPurchasePaymentView.swift */,
 				52468AF625418024007518AE /* VoucherView.swift */,
 			);
-			path = Dashboard;
+			path = "Support Views";
 			sourceTree = "<group>";
 		};
 		52468AD525417238007518AE /* BindingModel */ = {
@@ -795,10 +752,10 @@
 			children = (
 				52ADFF622557DFDB00A1001F /* WelcomeView.swift */,
 				5290A120255BBEBD0090F788 /* Nasabah */,
-				5290A119255BBE1B0090F788 /* NonNasabah */,
+				5290A119255BBE1B0090F788 /* Non Nasabah */,
 			);
 			name = Register;
-			path = "Mestika Dashboard/UI/Screen/Register";
+			path = "Mestika Dashboard/Authentication/Views/Register";
 			sourceTree = SOURCE_ROOT;
 		};
 		52474D822540320D0094B758 /* Extensions */ = {
@@ -819,13 +776,13 @@
 		525950152553E03000C8CA5D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				525950162553E03000C8CA5D /* ForgotPassword */,
+				525950162553E03000C8CA5D /* Forgot Password */,
 				5259501E2553E03000C8CA5D /* LoginScreen.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
 		};
-		525950162553E03000C8CA5D /* ForgotPassword */ = {
+		525950162553E03000C8CA5D /* Forgot Password */ = {
 			isa = PBXGroup;
 			children = (
 				525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordScreen.swift */,
@@ -836,7 +793,7 @@
 				5259501C2553E03000C8CA5D /* FormInputPasswordForgotPasswordScreen.swift */,
 				5259501D2553E03000C8CA5D /* FormInputRekeningForgotPasswordScreen.swift */,
 			);
-			path = ForgotPassword;
+			path = "Forgot Password";
 			sourceTree = "<group>";
 		};
 		525FA1132552898A007EADCB /* PaymentTransaction */ = {
@@ -890,7 +847,7 @@
 			path = BindingModel;
 			sourceTree = "<group>";
 		};
-		5290A119255BBE1B0090F788 /* NonNasabah */ = {
+		5290A119255BBE1B0090F788 /* Non Nasabah */ = {
 			isa = PBXGroup;
 			children = (
 				52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */,
@@ -901,17 +858,17 @@
 				52ADFF632557DFDB00A1001F /* PilihJenisATMView.swift */,
 				52ADFF852557DFDC00A1001F /* RegisterProvisionView.swift */,
 				52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */,
-				52ADFF792557DFDB00A1001F /* Validation Form */,
-				52ADFF5B2557DFDB00A1001F /* Identitas Diri */,
+				52ADFF792557DFDB00A1001F /* Form Validasi */,
+				52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */,
 				52ADFF642557DFDB00A1001F /* Data Pembukaan Rekening */,
 			);
-			path = NonNasabah;
+			path = "Non Nasabah";
 			sourceTree = "<group>";
 		};
 		5290A120255BBEBD0090F788 /* Nasabah */ = {
 			isa = PBXGroup;
 			children = (
-				5290A140255BC9670090F788 /* DataPembukaanRekeningNasabah */,
+				5290A140255BC9670090F788 /* Pembukaan Rekening */,
 				52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */,
 				5290A124255BBFAC0090F788 /* RegisterNasabahPhoneOTPScreen.swift */,
 				5290A129255BC5930090F788 /* ChooseTypeSavingForNasabahScreen.swift */,
@@ -929,7 +886,7 @@
 			path = Nasabah;
 			sourceTree = "<group>";
 		};
-		5290A140255BC9670090F788 /* DataPembukaanRekeningNasabah */ = {
+		5290A140255BC9670090F788 /* Pembukaan Rekening */ = {
 			isa = PBXGroup;
 			children = (
 				5290A141255BC9900090F788 /* FormTujuanPembukaanRekeningNasabahScreen.swift */,
@@ -945,29 +902,17 @@
 				5290A176255BCD5E0090F788 /* FormDataKeluargaTerdekatNasabahScreen.swift */,
 				526B1FE8255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift */,
 			);
-			path = DataPembukaanRekeningNasabah;
+			path = "Pembukaan Rekening";
 			sourceTree = "<group>";
 		};
 		52ADFE762557D99F00A1001F /* Master */ = {
 			isa = PBXGroup;
 			children = (
-				52ADFE772557D99F00A1001F /* masterData.json */,
+				C092ABF82553B4BF0051CE3E /* Data.swift */,
 				52ADFE782557D99F00A1001F /* MasterModel.swift */,
 				52ADFE792557D99F00A1001F /* MasterData.swift */,
 			);
 			path = Master;
-			sourceTree = "<group>";
-		};
-		52ADFE7D2557D99F00A1001F /* PilihATM */ = {
-			isa = PBXGroup;
-			children = (
-				52ADFE7E2557D99F00A1001F /* CardModel.swift */,
-				52ADFE7F2557D99F00A1001F /* JenisATMData.swift */,
-				52ADFE802557D99F00A1001F /* DetailJenisATMModel.swift */,
-				52ADFE812557D99F00A1001F /* DesainATMData.swift */,
-				52ADFE822557D99F00A1001F /* DetailJenisATMData.swift */,
-			);
-			path = PilihATM;
 			sourceTree = "<group>";
 		};
 		52ADFE842557D99F00A1001F /* Pembukaan Rekening */ = {
@@ -992,21 +937,18 @@
 			isa = PBXGroup;
 			children = (
 				52ADFEB52557DA0700A1001F /* RecognizedText.swift */,
-				52ADFEB72557DA0700A1001F /* UIImage+Utils.swift */,
 				52ADFEB82557DA0700A1001F /* KeyboardGuardian.swift */,
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
 			sourceTree = SOURCE_ROOT;
 		};
-		52ADFEC42557DA3700A1001F /* ViewModel */ = {
+		52ADFEC42557DA3700A1001F /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				52ADFEC52557DA3700A1001F /* SliderAssetsViewModel.swift */,
-				52AE1A74255A3E7800B011B7 /* OtpViewModel.swift */,
 			);
-			name = ViewModel;
-			path = "Mestika Dashboard/ViewModel";
+			name = "View Models";
+			path = "Mestika Dashboard/Dashboard/View Models";
 			sourceTree = SOURCE_ROOT;
 		};
 		52ADFEC62557DA3700A1001F /* Services */ = {
@@ -1016,19 +958,19 @@
 				52AE1A80255A425100B011B7 /* OtpService.swift */,
 			);
 			name = Services;
-			path = "Mestika Dashboard/Services";
+			path = "Mestika Dashboard/Authentication/Services";
 			sourceTree = SOURCE_ROOT;
 		};
-		52ADFF5B2557DFDB00A1001F /* Identitas Diri */ = {
+		52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */ = {
 			isa = PBXGroup;
 			children = (
-				52ADFF5D2557DFDB00A1001F /* PersonalIdentityView.swift */,
+				52ADFF5D2557DFDB00A1001F /* PersonalIdentityViewUnused.swift */,
+				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
 				52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */,
 				52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */,
 				52ADFF602557DFDB00A1001F /* Coordinator.swift */,
-				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
 			);
-			path = "Identitas Diri";
+			path = "Form Identitas Diri";
 			sourceTree = "<group>";
 		};
 		52ADFF642557DFDB00A1001F /* Data Pembukaan Rekening */ = {
@@ -1053,7 +995,7 @@
 			path = "Data Pembukaan Rekening";
 			sourceTree = "<group>";
 		};
-		52ADFF792557DFDB00A1001F /* Validation Form */ = {
+		52ADFF792557DFDB00A1001F /* Form Validasi */ = {
 			isa = PBXGroup;
 			children = (
 				52ADFF7A2557DFDB00A1001F /* SuccessRegisterView.swift */,
@@ -1064,23 +1006,12 @@
 				52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */,
 				52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */,
 			);
-			path = "Validation Form";
-			sourceTree = "<group>";
-		};
-		52AE1A7C255A3F6100B011B7 /* BindingModel */ = {
-			isa = PBXGroup;
-			children = (
-				52ADFE832557D99F00A1001F /* RegistrasiModel.swift */,
-				52AE1A8B255A448100B011B7 /* OtpRequest.swift */,
-			);
-			path = BindingModel;
+			path = "Form Validasi";
 			sourceTree = "<group>";
 		};
 		52BF57D82558E66600F009B5 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				52AE1A7C255A3F6100B011B7 /* BindingModel */,
-				52ADFE7D2557D99F00A1001F /* PilihATM */,
 				52BF57DC2558E67900F009B5 /* CardTypeSavingView.swift */,
 				52BF57EA2558F06A00F009B5 /* DetailsTypeSavingView.swift */,
 				C0884939255BC12E00E2F927 /* ScanKTPView.swift */,
@@ -1201,44 +1132,112 @@
 			path = Statement;
 			sourceTree = "<group>";
 		};
-		C04B421F25540FB000DDE4C7 /* Models */ = {
+		C01C679F255E36BC0019D06F /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				C04B422025540FDC00DDE4C7 /* Dashboard */,
-				52ADFEAB2557D9A800A1001F /* Card.swift */,
+				C01C67A0255E36F20019D06F /* Models */,
+				C01C67A1255E37140019D06F /* View Models */,
+				C01C67A2255E37350019D06F /* Views */,
+				C01C67A3255E37890019D06F /* Support Views */,
+				52ADFEC62557DA3700A1001F /* Services */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		C01C67A0255E36F20019D06F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				52ADFE7E2557D99F00A1001F /* CardModel.swift */,
+				52ADFE802557D99F00A1001F /* DetailJenisATMModel.swift */,
+				52ADFE832557D99F00A1001F /* RegistrasiModel.swift */,
+				52AE1A8B255A448100B011B7 /* OtpRequest.swift */,
 				52ADFEAC2557D9A800A1001F /* SliderAssetsResponse.swift */,
 				52AE1A6F255A3D9A00B011B7 /* OtpResponse.swift */,
 			);
-			name = Models;
-			path = "Mestika Dashboard/Models";
-			sourceTree = SOURCE_ROOT;
-		};
-		C04B422025540FDC00DDE4C7 /* Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-				52BF57E12558E80700F009B5 /* SavingType */,
-				C04B422125540FE800DDE4C7 /* CardManagement */,
-			);
-			path = Dashboard;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		C04B422125540FE800DDE4C7 /* CardManagement */ = {
+		C01C67A1255E37140019D06F /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				52ADFEB72557DA0700A1001F /* UIImage+Utils.swift */,
+				52ADFEC52557DA3700A1001F /* SliderAssetsViewModel.swift */,
+				52AE1A74255A3E7800B011B7 /* OtpViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		C01C67A2255E37350019D06F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				525950152553E03000C8CA5D /* Login */,
+				5247466A254818BB001F43C5 /* Register */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C01C67A3255E37890019D06F /* Support Views */ = {
+			isa = PBXGroup;
+			children = (
+				52BF57D82558E66600F009B5 /* Register */,
+			);
+			path = "Support Views";
+			sourceTree = "<group>";
+		};
+		C01C67A4255E38180019D06F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				52BF57F52559279100F009B5 /* PaymentTransaction */,
+				526B657A254FB20800C13C36 /* Account */,
+				5247460E2547CA38001F43C5 /* Favorite */,
+				52C34886254288BD00F08F37 /* Transfer */,
+				5245F8BD253FE9FC002E8B53 /* BottomNavigationView.swift */,
+				52474D5D254026BD0094B758 /* DashboardTabs.swift */,
+				52474D622540276A0094B758 /* TransferTabs.swift */,
+				52474D67254028350094B758 /* FavoriteTabs.swift */,
+				52474D78254028CD0094B758 /* AccountTabs.swift */,
+				52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */,
+				525FA10925524F29007EADCB /* CustomBottomNavigationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C01C67A6255E3A890019D06F /* json */ = {
+			isa = PBXGroup;
+			children = (
+				52ADFE842557D99F00A1001F /* Pembukaan Rekening */,
+				C092ABFE2553B5850051CE3E /* myCardData.json */,
+				52BF57D32558E57D00F009B5 /* savingTypeData.json */,
+				52ADFE772557D99F00A1001F /* masterData.json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		C04B421F25540FB000DDE4C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				52ADFEAB2557D9A800A1001F /* Card.swift */,
+				52BF57E12558E80700F009B5 /* SavingType */,
+				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
+			);
+			name = Models;
+			path = "Mestika Dashboard/Dashboard/Models";
+			sourceTree = SOURCE_ROOT;
+		};
+		C04B422125540FE800DDE4C7 /* Kartu-Ku */ = {
 			isa = PBXGroup;
 			children = (
 				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
 			);
-			path = CardManagement;
+			path = "Kartu-Ku";
 			sourceTree = "<group>";
 		};
 		C092ABFD2553B51B0051CE3E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				52ADFE762557D99F00A1001F /* Master */,
-				52ADFE842557D99F00A1001F /* Pembukaan Rekening */,
+				C01C67A6255E3A890019D06F /* json */,
 				C0A4F98C25528BF200566A11 /* fonts */,
-				C092ABF82553B4BF0051CE3E /* Data.swift */,
-				C092ABFE2553B5850051CE3E /* myCardData.json */,
-				52BF57D32558E57D00F009B5 /* savingTypeData.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1460,7 +1459,6 @@
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				52ADFF8D2557DFDC00A1001F /* PilihJenisATMView.swift in Sources */,
 				5290A16D255BCCDC0090F788 /* FormPenghasilanKotorNasabahScreen.swift in Sources */,
-				52ADFE982557D99F00A1001F /* JenisATMData.swift in Sources */,
 				52ADFF8E2557DFDC00A1001F /* BesarPerkiraanPenarikanView.swift in Sources */,
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,
@@ -1518,7 +1516,7 @@
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
 				C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */,
 				52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */,
-				52ADFF542557DEEA00A1001F /* TextFieldWithPickerAsInputView.swift in Sources */,
+				52ADFF542557DEEA00A1001F /* TextFieldWithPickerAsInput.swift in Sources */,
 				52ADFF8C2557DFDC00A1001F /* WelcomeView.swift in Sources */,
 				525950262553E03000C8CA5D /* LoginScreen.swift in Sources */,
 				C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */,
@@ -1545,7 +1543,6 @@
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
 				525950242553E03000C8CA5D /* FormInputPasswordForgotPasswordScreen.swift in Sources */,
 				C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */,
-				52ADFE9A2557D99F00A1001F /* DesainATMData.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				52ADFEAE2557D9A800A1001F /* SliderAssetsResponse.swift in Sources */,
 				52ADFF9F2557DFDC00A1001F /* PenghasilanKotorView.swift in Sources */,
@@ -1581,7 +1578,7 @@
 				52ADFF8A2557DFDC00A1001F /* Coordinator.swift in Sources */,
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
 				52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */,
-				52ADFF872557DFDC00A1001F /* PersonalIdentityView.swift in Sources */,
+				52ADFF872557DFDC00A1001F /* PersonalIdentityViewUnused.swift in Sources */,
 				5290A190255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift in Sources */,
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
@@ -1595,7 +1592,6 @@
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
 				52ADFF4A2557DE8000A1001F /* TabItemView.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
-				52ADFE9B2557D99F00A1001F /* DetailJenisATMData.swift in Sources */,
 				5290A15E255BCBFC0090F788 /* FormBesarPerkiraanSetoranNasabahScreen.swift in Sources */,
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */,
