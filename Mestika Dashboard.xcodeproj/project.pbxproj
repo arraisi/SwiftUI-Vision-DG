@@ -598,10 +598,9 @@
 		5245F883253FE702002E8B53 /* Mestika Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				C00AC548255E50F0005D67C0 /* Onboarding */,
-				5245F8BC253FE82E002E8B53 /* Dashboard */,
 				523A86282542BE8600ADFE25 /* Components */,
 				52474D822540320D0094B758 /* Extensions */,
+				C00AC552255E52E2005D67C0 /* Menu */,
 				C092ABFD2553B51B0051CE3E /* Resources */,
 				52ADFEB22557DA0700A1001F /* Utils */,
 				5245F884253FE702002E8B53 /* AppDelegate.swift */,
@@ -924,7 +923,7 @@
 				52AE1A80255A425100B011B7 /* OtpService.swift */,
 			);
 			name = Services;
-			path = "Mestika Dashboard/Onboarding/Services";
+			path = "Mestika Dashboard/Menu/Onboarding/Services";
 			sourceTree = SOURCE_ROOT;
 		};
 		52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */ = {
@@ -1138,6 +1137,15 @@
 			path = "Non Nasabah";
 			sourceTree = "<group>";
 		};
+		C00AC552255E52E2005D67C0 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C00AC548255E50F0005D67C0 /* Onboarding */,
+				5245F8BC253FE82E002E8B53 /* Dashboard */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		C01C67A0255E36F20019D06F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1214,7 +1222,7 @@
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
 			);
 			name = Models;
-			path = "Mestika Dashboard/Dashboard/Models";
+			path = "Mestika Dashboard/Menu/Dashboard/Models";
 			sourceTree = SOURCE_ROOT;
 		};
 		C04B422125540FE800DDE4C7 /* Kartu-Ku */ = {
