@@ -64,7 +64,7 @@ struct PhoneVerificationView: View {
                         self.registerData.noTelepon = "0" + phoneNumber
                     })
                     .onReceive(phoneNumber.publisher.collect()) {
-                        self.phoneNumber = String($0.prefix(11))
+                        self.phoneNumber = String($0.prefix(12))
                     }
                     .keyboardType(.numberPad)
                 }

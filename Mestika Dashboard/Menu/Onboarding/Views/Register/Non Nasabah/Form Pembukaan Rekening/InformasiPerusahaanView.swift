@@ -1,37 +1,54 @@
 //
-//  KeluargaTerdekat.swift
+//  FormInformasiPerusahaanView.swift
 //  Bank Mestika
 //
-//  Created by Abdul R. Arraisi on 12/10/20.
+//  Created by Abdul R. Arraisi on 28/09/20.
 //
 
 import SwiftUI
 
-struct KeluargaTerdekat: View {
+struct Address {
+    var city: String
+    var kodePos: String
+    var kecamatan: String
+    var kelurahan: String
+}
+
+struct InformasiPerusahaanView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var selectionID : Int = 0
+    @State var namaPerusahaan: String = ""
+    @State var alamatPerusahaan: String = ""
+    @State var kelurahan: String = ""
+    @State var kodePos : String = ""
+    @State var kecamatan : String = ""
     @State var location : String = ""
-    @State var showingModal = false
-    @State var noTelepon: String = ""
+    
+    @State var noTlpPerusahaan: String = ""
     @State var nextViewActive: Bool = false
     
     let cities:[Address] = [
-        .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Selatan"),
-        .init(city: "Jakarta Barat", kodePos: "14012", kecamatan: "Jakarta Barat", kelurahan: "Barat"),
-        .init(city: "Jakarta Timur", kodePos: "14012", kecamatan: "Jakarta Timur", kelurahan: "Timur"),
-        .init(city: "Jakarta Utara", kodePos: "14012", kecamatan: "Jakarta Utara", kelurahan: "Utara")
+        .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: ""),
+        .init(city: "Jakarta Barat", kodePos: "14012", kecamatan: "Jakarta Barat", kelurahan: ""),
+        .init(city: "Jakarta Timur", kodePos: "14012", kecamatan: "Jakarta Timur", kelurahan: ""),
+        .init(city: "Jakarta Utara", kodePos: "14012", kecamatan: "Jakarta Utara", kelurahan: "")
     ]
     
+    /*
+     Boolean for Show Modal
+     */
+    @State var showingModal = false
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
+        
         ZStack(alignment: .top) {
-            
             Color(hex: "#232175")
             
             VStack {
+                
                 Spacer()
                 Rectangle()
                     .fill(Color.white)
@@ -52,6 +69,7 @@ struct KeluargaTerdekat: View {
                         .padding(.vertical, 45)
                         .padding(.horizontal, 40)
                     
+                    // Content
                     ZStack {
                         
                         // Forms
@@ -76,7 +94,7 @@ struct KeluargaTerdekat: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Data Keluarga Terdekat Anda")
+                                Text("Masukan Informasi Perusahaan")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .padding(.horizontal, 20)
@@ -94,12 +112,12 @@ struct KeluargaTerdekat: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 NavigationLink(
-                                    destination: PasswordView().environmentObject(registerData),
+                                    destination: PenghasilanKotorView().environmentObject(registerData),
                                     isActive: $nextViewActive,
                                     label: {
                                         Button(action: {
                                             
-                                            self.registerData.noTeleponPerusahaan = self.noTelepon
+                                            self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
                                             
                                             self.nextViewActive = true
                                             
@@ -117,7 +135,6 @@ struct KeluargaTerdekat: View {
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 25)
                                 
-                                
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                             .cornerRadius(25.0)
@@ -133,6 +150,7 @@ struct KeluargaTerdekat: View {
                     
                 }
                 .KeyboardAwarePadding()
+                
             }
             
             // Background Color When Modal Showing
@@ -147,65 +165,44 @@ struct KeluargaTerdekat: View {
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
         }
+        
     }
     
     // MARK : - Check form is fill
     func isValid() -> Bool {
-        if registerData.hubunganKekerabatan == "" || registerData.hubunganKekerabatan == nil {
+        if registerData.namaPerusahaan == "" {
             return true
         }
-        if registerData.namaKeluarga == "" {
+        if registerData.alamatPerusahaan == "" {
             return true
         }
-        if registerData.alamatKeluarga == "" {
+        if registerData.kodePos == "" {
             return true
         }
-        if registerData.kodePosKeluarga == "" {
+        if registerData.kecamatan == "" {
             return true
         }
-        if registerData.kecamatanKeluarga == "" {
-            return true
-        }
-        if registerData.kelurahanKeluarga == "" {
-            return true
-        }
-        if noTelepon == ""  {
+        if noTlpPerusahaan.count < 10 {
             return true
         }
         return false
     }
     
     // MARK: - Form Group
-    
     var cardForm: some View {
         
         VStack(alignment: .leading) {
-            Group {
-                
-                Text("Hubungan Kekerabatan")
-                    .font(Font.system(size: 10))
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color(hex: "#707070"))
-                    .multilineTextAlignment(.leading)
-                
-                TextFieldWithPickerAsInput(data: ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"], placeholder: "Hubungan kekerabatan", selectionIndex: $selectionID, text: $registerData.hubunganKekerabatan)
-                    .frame(height: 36)
-                    .font(Font.system(size: 14))
-                    .padding(.horizontal)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                
-            }
             
-            LabelTextField(value: $registerData.namaKeluarga, label: "Nama", placeHolder: "Nama") { (change) in
-                
+            LabelTextField(value: $registerData.namaPerusahaan, label: "Nama Perusahaan", placeHolder: "Nama Perusahaan"){ (Bool) in
+                print("on edit")
             } onCommit: {
-                
+                print("on commit")
             }
+            .padding(.horizontal, 20)
             
             Group {
                 
-                Text("Alamat")
+                Text("Alamat Perusahaan")
                     .font(Font.system(size: 10))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -213,7 +210,7 @@ struct KeluargaTerdekat: View {
                 
                 HStack {
                     
-                    TextField("Alamat", text: $registerData.alamatKeluarga) { changed in
+                    TextField("Alamat Perusahaan", text: $registerData.alamatPerusahaan) { changed in
                     } onCommit: {
                     }
                     .font(Font.system(size: 14))
@@ -233,28 +230,25 @@ struct KeluargaTerdekat: View {
                 .cornerRadius(10)
                 
             }
+            .padding(.horizontal, 20)
             
-            LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos") { (change) in
-                
+            LabelTextField(value: $registerData.kodePos, label: "Kode Pos", placeHolder: "Kode Pos") { (Bool) in
+                print("on edit")
             } onCommit: {
-                
+                print("on commit")
             }
+            .padding(.horizontal, 20)
             
-            LabelTextField(value: $registerData.kecamatanKeluarga, label: "Kecamatan", placeHolder: "Kecamatan") { (change) in
-                
+            LabelTextField(value: $registerData.kecamatan, label: "Kecamatan", placeHolder: "Kecamatan") { (Bool) in
+                print("on edit")
             } onCommit: {
-                
+                print("on commit")
             }
-            
-            LabelTextField(value: $registerData.kelurahanKeluarga, label: "Kelurahan", placeHolder: "Kelurahan") { (change) in
-                
-            } onCommit: {
-                
-            }
+            .padding(.horizontal, 20)
             
             Group {
                 
-                Text("No. Telepon")
+                Text("No. Telepon Perusahaan")
                     .font(Font.system(size: 10))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -270,11 +264,11 @@ struct KeluargaTerdekat: View {
                     Divider()
                         .frame(height: 30)
                     
-                    TextField("No. Telepon", text: $noTelepon) {change in
+                    TextField("No. Telepon", text: $noTlpPerusahaan) {change in
                     } onCommit: {
                     }
-                    .onReceive(noTelepon.publisher.collect()) {
-                        self.noTelepon = String($0.prefix(12))
+                    .onReceive(noTlpPerusahaan.publisher.collect()) {
+                        self.noTlpPerusahaan = String($0.prefix(12))
                     }
                     .keyboardType(.numberPad)
                     .font(Font.system(size: 14))
@@ -285,9 +279,9 @@ struct KeluargaTerdekat: View {
                 .cornerRadius(10)
                 
             }
+            .padding(.horizontal, 20)
             
         }
-        .padding(.horizontal, 20)
     }
     
     // MARK: -Fuction for Create Bottom Floater (Modal)
@@ -332,12 +326,9 @@ struct KeluargaTerdekat: View {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
                     print(cities[index])
-                    registerData.alamatKeluarga = cities[index].city
-                    registerData.kodePosKeluarga = cities[index].kodePos
-                    registerData.kecamatanKeluarga = cities[index].kecamatan
-                    registerData.kelurahanKeluarga = cities[index].kelurahan
-                    
-                    //                    registerData.alamatKeluarga = alamatKeluarga
+                    registerData.alamatPerusahaan = cities[index].city
+                    registerData.kodePos = cities[index].kodePos
+                    registerData.kecamatan = cities[index].kecamatan
                     self.showingModal.toggle()
                 })
                 
@@ -352,11 +343,10 @@ struct KeluargaTerdekat: View {
         .background(Color.white)
         .cornerRadius(20)
     }
-    
 }
 
-struct KeluargaTerdekat_Previews: PreviewProvider {
+struct FormInformasiPerusahaanView_Previews: PreviewProvider {
     static var previews: some View {
-        KeluargaTerdekat().environmentObject(RegistrasiModel())
+        InformasiPerusahaanView().environmentObject(RegistrasiModel())
     }
 }

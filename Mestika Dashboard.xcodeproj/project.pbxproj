@@ -769,8 +769,8 @@
 		525950152553E03000C8CA5D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				525950162553E03000C8CA5D /* Forgot Password */,
 				5259501E2553E03000C8CA5D /* LoginScreen.swift */,
+				525950162553E03000C8CA5D /* Forgot Password */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -940,7 +940,7 @@
 			path = "Form Identitas Diri";
 			sourceTree = "<group>";
 		};
-		52ADFF642557DFDB00A1001F /* Data Pembukaan Rekening */ = {
+		52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */ = {
 			isa = PBXGroup;
 			children = (
 				52ADFF652557DFDB00A1001F /* BesarPerkiraanPenarikanView.swift */,
@@ -959,7 +959,7 @@
 				52ADFF752557DFDB00A1001F /* VerifikasiPINView.swift */,
 				52ADFF762557DFDB00A1001F /* PenghasilanKotorView.swift */,
 			);
-			path = "Data Pembukaan Rekening";
+			path = "Form Pembukaan Rekening";
 			sourceTree = "<group>";
 		};
 		52ADFF792557DFDB00A1001F /* Form Validasi */ = {
@@ -1134,7 +1134,7 @@
 				52BF57CE2558E34100F009B5 /* ChooseTypeSavingScreen.swift */,
 				52ADFF792557DFDB00A1001F /* Form Validasi */,
 				52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */,
-				52ADFF642557DFDB00A1001F /* Data Pembukaan Rekening */,
+				52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */,
 			);
 			path = "Non Nasabah";
 			sourceTree = "<group>";
@@ -1847,14 +1847,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1870,7 +1870,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
