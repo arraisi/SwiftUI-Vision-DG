@@ -16,17 +16,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_blue" translatesAutoresizingMaskIntoConstraints="NO" id="PzP-I5-CCS">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_blue" translatesAutoresizingMaskIntoConstraints="NO" id="PzP-I5-CCS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash" translatesAutoresizingMaskIntoConstraints="NO" id="wY2-ME-QlS">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="1CI-ZM-ZyM"/>
+                                    <constraint firstAttribute="height" constant="128" id="XNY-Pi-NNe"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="PzP-I5-CCS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2i8-3B-UNe"/>
+                            <constraint firstItem="PzP-I5-CCS" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="2i8-3B-UNe"/>
                             <constraint firstItem="PzP-I5-CCS" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="H6j-NK-bfd"/>
-                            <constraint firstItem="PzP-I5-CCS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RdT-er-yrD"/>
+                            <constraint firstItem="wY2-ME-QlS" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="KvD-NX-Kkk"/>
+                            <constraint firstItem="PzP-I5-CCS" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="RdT-er-yrD"/>
                             <constraint firstAttribute="bottom" secondItem="PzP-I5-CCS" secondAttribute="bottom" id="bvZ-w3-qu4"/>
+                            <constraint firstItem="wY2-ME-QlS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dvV-Fc-9xb"/>
+                            <constraint firstItem="wY2-ME-QlS" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hEc-Ng-u5d"/>
+                            <constraint firstItem="wY2-ME-QlS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="n6f-ft-T1O"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,6 +48,7 @@
     </scenes>
     <resources>
         <image name="bg_blue" width="375" height="812"/>
+        <image name="ic_splash" width="81" height="59.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
