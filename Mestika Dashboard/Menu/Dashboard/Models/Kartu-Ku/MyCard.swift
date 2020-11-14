@@ -17,5 +17,14 @@ struct MyCard: Hashable, Codable, Identifiable {
     var activeStatus : Bool
     var blocked : Bool
     var isShow : Bool
+    var limits : [MyCardLimit]
+    
+}
+
+struct MyCardLimit: Hashable, Codable, Identifiable {
+    
+    var id : Int
+    var title: String
+    var value: String
     
 }

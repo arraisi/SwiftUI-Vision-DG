@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ForgotPasswordOtpScreen: View {
+struct OtpVerificationForgotPasswordView: View {
     
     var maxDigits: Int = 6
     @State private var pin: String = ""
@@ -176,6 +176,6 @@ struct ForgotPasswordOtpScreen: View {
 
 struct ForgotPasswordOtpScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPasswordOtpScreen()
+        OtpVerificationForgotPasswordView()
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormInputPasswordForgotPasswordScreen: View {
+struct FormPasswordVerificationForgotPasswordView: View {
     
     @State private var oldPasswordCtrl = ""
     @State private var showPassword: Bool = false
@@ -59,7 +59,7 @@ struct FormInputPasswordForgotPasswordScreen: View {
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: FormInputRekeningForgotPasswordScreen(), label: {
+                    NavigationLink(destination: FormNoRekeningPinForgotPasswordScreen(), label: {
                         Text("MASUKKAN PASSWORD")
                             .foregroundColor(Color(hex: "#2334D0"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -86,6 +86,6 @@ struct FormInputPasswordForgotPasswordScreen: View {
 
 struct FormInputPasswordForgotPasswordScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputPasswordForgotPasswordScreen()
+        FormPasswordVerificationForgotPasswordView()
     }
 }

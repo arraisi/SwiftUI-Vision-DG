@@ -177,9 +177,7 @@ struct SuccessRegisterNasabahScreen: View {
                             .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                     }
                     
-                    Button(action : {
-                        showingModal.toggle()
-                    }) {
+                    NavigationLink(destination : PilihJenisATMView()) {
                         Text("Buat Janji")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -193,7 +191,9 @@ struct SuccessRegisterNasabahScreen: View {
                     .padding(.bottom, 5)
                     
                     Group {
-                        Button(action : {}) {
+                        Button(action : {
+                            self.showingModal.toggle()
+                        }) {
                             Text("Batalkan Permohonan")
                                 .foregroundColor(Color(hex: "#707070"))
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
