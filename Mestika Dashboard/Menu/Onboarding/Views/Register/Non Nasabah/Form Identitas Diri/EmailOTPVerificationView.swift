@@ -35,7 +35,10 @@ struct EmailOTPVerificationView: View {
     }
     
     func getOTP() {
-        self.otpVM.otpRequest { success in
+        self.otpVM.otpRequest(
+            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+        ) { success in
+            
             if success {
                 print(self.otpVM.isLoading)
                 print(self.otpVM.code)

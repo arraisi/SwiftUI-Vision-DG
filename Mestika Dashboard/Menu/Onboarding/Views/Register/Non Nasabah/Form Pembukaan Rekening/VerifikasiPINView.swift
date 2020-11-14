@@ -30,8 +30,8 @@ struct VerifikasiPINView: View {
     @State var showingModal = false
     
     var disableForm: Bool {
-//        pin.count < 6
-        isPINValidated(with: pin)
+        pin.count < 6
+//        isPINValidated(with: pin)
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -116,17 +116,24 @@ struct VerifikasiPINView: View {
                                 print(pin)
                                 print(registerData.pin)
                                 
-                                if (pin.count == 6) {
-                                    self.isPinValid = true
-                                }
-                                
                                 if (pin != self.registerData.pin) {
+                                    
                                     showingModal.toggle()
+                                    
+                                } else if (isPINValidated(with: pin)) {
+                                    
+                                    activeRoute = true
+                                    
+                                } else if (!isPINValidated(with: pin)) {
+                                    
+                                    self.showingModal.toggle()
+                                    
                                 }
                                 
                                 if (pin == self.registerData.pin) {
                                     activeRoute = true
                                 }
+                                
                             }) {
                                 Text("Simpan PIN Transaksi")
                                     .foregroundColor(.white)
@@ -134,11 +141,11 @@ struct VerifikasiPINView: View {
                                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                             }
                             .frame(height: 50)
-                            .background(Color(hex: !disableForm ? "#CBD1D9" : "#2334D0"))
+                            .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                             .cornerRadius(12)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 25)
-                            .disabled(!disableForm)
+                            .disabled(disableForm)
                             
                             Spacer()
                             

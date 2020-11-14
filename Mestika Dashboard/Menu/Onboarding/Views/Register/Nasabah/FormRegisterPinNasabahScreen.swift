@@ -10,17 +10,20 @@ import SwiftUI
 struct FormRegisterPinNasabahScreen: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
-    /*
-     Variable PIN OTP
-     */
+    /* Variable PIN OTP */
     var maxDigits: Int = 6
     @State var pin: String = ""
     @State var showPin = true
     @State var isDisabled = false
     
+    @State var activeRoute = false
+    
+    /* Boolean for Show Modal */
+    @State var showingModal = false
+    
     var disableForm: Bool {
-//        pin.count < 6
-        isPINValidated(with: pin)
+        pin.count < 6
+//        isPINValidated(with: pin)
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -96,24 +99,39 @@ struct FormRegisterPinNasabahScreen: View {
                                 backgroundField
                             }
                             
-                            NavigationLink(destination: FormRegisterVerificationPinScreen().environmentObject(registerData), label:{
-                                
-                                Text("Konfirmasi PIN Transaksi")
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .frame(maxWidth: .infinity, maxHeight: 40)
-                                
-                            })
-                            .frame(height: 50)
-                            .background(Color(hex: !disableForm ? "#CBD1D9" : "#2334D0"))
-                            .cornerRadius(12)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 25)
-                            .disabled(!disableForm)
-                            .onAppear {
-                                self.registerData.pin = pin
-                            }
+                            NavigationLink(
+                                destination: FormRegisterVerificationPinScreen().environmentObject(registerData),
+                                isActive: self.$activeRoute,
+                                label: {}
+                            )
                             
+                            Button(
+                                action: {
+                                    print(pin)
+                                    
+                                    if (isPINValidated(with: pin)) {
+                                        activeRoute = true
+                                    }
+                                    
+                                    if (!isPINValidated(with: pin)) {
+                                        self.showingModal.toggle()
+                                    }
+                                },
+                                label: {
+                                    Text("Konfirmasi PIN Transaksi")
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                            })
+                                .frame(height: 50)
+                                .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 25)
+                                .disabled(disableForm)
+                                .onAppear {
+                                    self.registerData.pin = pin
+                                }
                         }
                         .background(Color(.white))
                         .cornerRadius(25.0)
@@ -127,13 +145,18 @@ struct FormRegisterPinNasabahScreen: View {
                 }
                 .KeyboardAwarePadding()
             }
+            
+            if self.showingModal {
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+            }
+            
         }
         .edgesIgnoringSafeArea(.all)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .onTapGesture() {
-            UIApplication.shared.endEditing()
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessage()
         }
         
     }
@@ -206,6 +229,41 @@ struct FormRegisterPinNasabahScreen: View {
         
         return ""
     }
+    
+
+    // MARK:- CREATE POPUP MESSAGE
+    func popupMessage() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("PIN terdiri dari 6 karakter, tidak boleh berurutan dari 6 angka yang sama")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {}) {
+                Text("Kembali")
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
 }
 
 struct FormRegisterPinNasabahScreen_Previews: PreviewProvider {
