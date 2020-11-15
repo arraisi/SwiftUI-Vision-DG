@@ -16,6 +16,16 @@ struct LoginScreen: View {
     @State private var passwordCtrl = ""
     @State private var showPassword: Bool = false
     
+    /* GET DEVICE ID */
+    var deviceId = UIDevice.current.identifierForVendor?.uuidString
+    
+    /* CORE DATA */
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    var user: FetchedResults<User>
+    
+    /* Boolean for Show Modal */
+    @State var showingModal = false
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
@@ -66,17 +76,29 @@ struct LoginScreen: View {
                 .padding()
                 
                 HStack {
-                    NavigationLink(destination: BottomNavigationView(), isActive: self.$isActiveRoute) {
-                        Text("LOGIN APPS")
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    }
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
+                    
+                    Button(
+                        action: {
+                            login()
+                        },
+                        label: {
+                            Text("LOGIN APPS")
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    })
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 10)
+                    
+                    NavigationLink(
+                        destination: BottomNavigationView(),
+                        isActive: self.$isActiveRoute,
+                        label: {}
+                    )
+                  
                     
                     Button(action: {
                         authenticate()
@@ -117,6 +139,31 @@ struct LoginScreen: View {
             }
             .padding(.top, 60)
             .navigationBarHidden(true)
+            
+            if self.showingModal {
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    .edgesIgnoringSafeArea(.all)
+            }
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessage()
+        }
+    }
+    
+    func login() {
+        if (deviceId == user.last?.deviceId && passwordCtrl == user.last?.password) {
+            
+            print("DATA READY")
+            isActiveRoute = true
+            
+        } else {
+            
+            print("NO DATA")
+            showingModal.toggle()
+            
         }
     }
     
@@ -141,6 +188,45 @@ struct LoginScreen: View {
                 }
             }
         }
+    }
+    
+    // MARK:- POPUP MESSAGE
+    func popupMessage() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Password salah")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Text("Silahkan masukkan password anda dengan benar, atau login dengan cara lain.")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {}) {
+                Text("Kembali")
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

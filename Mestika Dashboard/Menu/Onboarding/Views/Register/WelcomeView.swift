@@ -32,9 +32,13 @@ struct WelcomeView: View {
     @State var isActiveForNonNasabahPage : Bool = false
     @State var isActiveForNasabahPage : Bool = false
     @State var isActiveRoot : Bool = false
+    @State var isActiveRootLogin : Bool = false
     @ObservedObject var assetsSliderVM = SliderAssetsSummaryViewModel()
     
     var registerData = RegistrasiModel()
+    var loginData = LoginBindingModel()
+    var deviceId = UIDevice.current.identifierForVendor?.uuidString
+    @State private var isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
     
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
@@ -42,11 +46,17 @@ struct WelcomeView: View {
     
     /* Boolean for Show Modal & Alert */
     @State var showingModal = false
+    @State var showingModalRegistered = false
     @State var showAlert = false
     
     /* Variable for Image Carousel */
     @State var menu = 0
     @State var page = 0
+    
+    /* Disabled Form */
+    var hiddenRegisterForm: Bool {
+        user.last?.deviceId == self.deviceId
+    }
     
     var body: some View {
         ZStack {
@@ -65,15 +75,29 @@ struct WelcomeView: View {
                     .padding(.horizontal, 30)
             }
             
-            if self.showingModal {
+            if self.showingModal || self.showingModalRegistered {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
             }
+        }
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea(.all)
+        .onAppear() {
+            print("APPEAR")
+            getUserDetails()
+            
+            for data in user {
+                print(data.deviceId)
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            return Alert(title: Text("Message"), message: Text("New User Success Registered"), dismissButton: .default(Text("Oke")))
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }
-        .navigationBarHidden(true)
-        .edgesIgnoringSafeArea(.all)
+        .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageSuccess()
+        }
     }
     
     var header: some View {
@@ -105,6 +129,7 @@ struct WelcomeView: View {
     
     var footerBtn: some View {
         VStack {
+            
             Button(action : {
                 showingModal.toggle()
             }) {
@@ -127,6 +152,51 @@ struct WelcomeView: View {
             }
             .cornerRadius(12)
         }
+    }
+    
+    // MARK: -Popup Message Success (Modal)
+    func popupMessageSuccess() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_highfive")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text("REGISTRASI BERHASIL")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Permohonan Pembukaan Rekening Anda telah disetujui. Silahkan login untuk pertama kali.")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            NavigationLink(
+                destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData),
+                isActive: self.$isActiveRootLogin,
+                label: {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     // MARK: -Create Bottom Floater (Modal)
@@ -169,13 +239,20 @@ struct WelcomeView: View {
                         .font(.system(size: 12))
                         .frame(maxWidth: .infinity, maxHeight: 40)
                 })
-            .padding(.bottom, 30)
-            .cornerRadius(12)
+                .padding(.bottom, 30)
+                .cornerRadius(12)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    func getUserDetails() {
+        if (user.last?.deviceId == deviceId && isFirstLogin) {
+            //            showAlert.toggle()
+            showingModalRegistered.toggle()
+        }
     }
 }
 

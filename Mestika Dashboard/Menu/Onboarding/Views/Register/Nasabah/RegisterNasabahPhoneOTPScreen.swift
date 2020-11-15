@@ -31,7 +31,6 @@ struct RegisterNasabahPhoneOTPScreen: View {
     /* Timer */
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    let timers = Timer.publish(every: 1000, on: .main, in: .common).autoconnect()
     
     /* Boolean for Show Modal */
     @State var showingOtpIncorect = false

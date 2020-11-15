@@ -36,6 +36,10 @@ extension URL {
          return URL(string: "https://my-json-server.typicode.com/primajatnika271995/dummy-json/assets-landing")
     }
     
+    static func urlRegister() -> URL? {
+        return URL(string: "http://192.168.0.4:8765/api/v1.0/user")
+    }
+    
     static func urlOTP() -> URL? {
         return URL(string: "http://159.65.2.90:8765/api/v1.0/otp")
     }

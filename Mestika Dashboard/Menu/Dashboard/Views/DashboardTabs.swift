@@ -9,6 +9,10 @@ import SwiftUI
 
 struct DashboardTabs: View {
     
+    /* CORE DATA */
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    var user: FetchedResults<User>
+    
     @State var username: String = "Example User"
     
     var body: some View {
@@ -44,6 +48,9 @@ struct DashboardTabs: View {
         })
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
+        .onAppear {
+            username = (user.last?.firstName)!
+        }
     }
     
     // MARK: -USERNAME INFO VIEW

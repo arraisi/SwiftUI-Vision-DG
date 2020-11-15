@@ -13,31 +13,21 @@ struct VerificationRegisterDataView: View {
     
     @State var image: Image? = nil
     
-    private func retrieveImage(forKey key: String) -> UIImage? {
-        if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
-           let image = UIImage(data: imageData) {
-            return image
-        }
-        
-        return nil
-    }
-    
-    func saveUserToCoreData()  {
-        let data = User(context: managedObjectContext)
-        data.deviceId = "123456789"
-        data.nik = self.registerData.nik
-        data.email = self.registerData.email
-        data.phone = self.registerData.noTelepon
-        
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Error saving managed object context: \(error)")
-        }
-    }
-    
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State private var nextRoute: Bool = false
+    
+    @ObservedObject private var userRegisterVM = UserRegistrationViewModel()
+    
+    /* GET DEVICE ID */
+    var deviceId = UIDevice.current.identifierForVendor?.uuidString
+    
+    /* CORE DATA */
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    var user: FetchedResults<User>
+    
+    @State private var showingAlert: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -351,30 +341,87 @@ struct VerificationRegisterDataView: View {
                 }
                 
                 VStack {
-                    
                     Button(action: {
+                        
                         saveUserToCoreData()
-                    }) {
-                        NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)) {
-                            Text("Submit Data")
-                                .foregroundColor(.white)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        }
-                    }
+                        
+                    }, label: {
+                        Text("Submit Data")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    })
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 100)
                     .padding(.top, 10)
                     .padding(.bottom, 20)
+
+                    NavigationLink(
+                            destination: SuccessRegisterView().environmentObject(registerData),
+                            isActive: self.$nextRoute,
+                            label: {}
+                    )
                 }
                 .background(Color.white)
             }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .alert(isPresented: $showingAlert) {
+            return Alert(title: Text("Message"), message: Text("GAGAL MENDAFTAR"), dismissButton: .default(Text("Oke")))
+        }
         
+    }
+    
+    private func retrieveImage(forKey key: String) -> UIImage? {
+        if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
+           let image = UIImage(data: imageData) {
+            return image
+        }
+        
+        return nil
+    }
+    
+    /* Save User To Core Data */
+    func saveUserToCoreData()  {
+        
+        if (user.isEmpty) {
+            print("------SAVE TO CORE DATA-------")
+            
+            let data = User(context: managedObjectContext)
+            data.deviceId = UIDevice.current.identifierForVendor?.uuidString
+            data.nik = self.registerData.nik
+            data.email = self.registerData.email
+            data.phone = self.registerData.noTelepon
+            data.pin = self.registerData.pin
+            data.password = self.registerData.password
+            data.firstName = "Stevia"
+            data.lastName = "R"
+            data.email = self.registerData.email
+            
+            nextRoute = true
+            
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                print("Error saving managed object context: \(error)")
+            }
+        } else {
+            
+            print("GAGAL MENDAFTAR")
+            showingAlert = true
+        }
+    }
+    
+    /* Save User To DB */
+    func saveUserToDb() {
+        self.userRegisterVM.userRegistration() { success in
+            if success {
+                print("SUCCESS")
+            }
+        }
     }
 }
 

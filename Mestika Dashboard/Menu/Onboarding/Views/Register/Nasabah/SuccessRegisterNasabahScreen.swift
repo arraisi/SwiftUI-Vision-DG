@@ -251,9 +251,7 @@ struct SuccessRegisterNasabahScreen: View {
         }
     }
     
-    /*
-     Fuction for Create Bottom Floater (Modal)
-     */
+    /* Fuction for Create Bottom Floater (Modal) */
     func createBottomFloater() -> some View {
         VStack(alignment: .leading) {
             Image("Logo M")
@@ -293,7 +291,6 @@ struct SuccessRegisterNasabahScreen: View {
     }
     
     // MARK: -Fuction for Create Bottom Floater (Modal)
-    
     func createBottomFloaterJam() -> some View {
         VStack {
             HStack {
@@ -350,8 +347,7 @@ struct SuccessRegisterNasabahScreen: View {
         .cornerRadius(20)
     }
     
-    // MARK: -Fuction for Create Bottom Floater (Modal)
-    
+    // MARK: -Fuction for Create Bottom Floater (Modal
     func createBottomFloaterTanggal() -> some View {
         VStack {
             HStack {
