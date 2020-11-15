@@ -16,9 +16,10 @@ struct CardManagementScreen: View {
     @State var count : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = 236
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 140 // 100 is amount padding left and right
     let itemHeight:CGFloat = 197
     let itemGapHeight:CGFloat = 10
+    let itemGapWidth:CGFloat = 0.14
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -29,10 +30,10 @@ struct CardManagementScreen: View {
                     // MARK: - CAROUSEL
                     VStack{
                         
-                        HStack(spacing: itemWidth * 0.08){
+                        HStack(spacing: itemWidth * itemGapWidth){
                             
                             ForEach(cards){card in
-                                CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: true)
                                     .offset(x: self.offset)
                                     .highPriorityGesture(
                                         
@@ -60,7 +61,7 @@ struct CardManagementScreen: View {
                     .padding(.vertical,25)
                     .onAppear {
                         
-                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.1)) / 2) : 0)
+                        self.firstOffset = ((self.itemWidth + (itemWidth*itemGapWidth)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.3)) / 2) : 0)
                         
                         self.cards[0].isShow = true
                     }
@@ -94,10 +95,10 @@ struct CardManagementScreen: View {
                 
                 self.count -= 1
                 self.updateHeight(value: Int(self.count))
-                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
             }
             else{
-                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
             }
             
         }
@@ -107,11 +108,11 @@ struct CardManagementScreen: View {
                 
                 self.count += 1
                 self.updateHeight(value: Int(self.count))
-                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
             }
             else{
                 
-                self.offset = -((self.itemWidth + (itemWidth*0.08)) * self.count)
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
             }
             
         }

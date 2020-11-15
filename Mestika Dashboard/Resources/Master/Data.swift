@@ -31,6 +31,27 @@ let detailJenisATMData: [[DetailATM]] = [[
     .init(id: 3, title: "Transfer ke Bank Lain", value: "Rp. 15.000.000,-"),
     .init(id: 4, title: "Payment", value: "Rp. 10.000.000,-"),
     .init(id: 5, title: "Purchase", value: "Rp. 15.000.000,-"),
+],
+[
+    .init(id: 1, title: "Penarikan Harian", value: "Rp. 5.000.000,-"),
+    .init(id: 2, title: "Transfer Antar Sesama Bank Mestika", value: "Rp. 50.000.000,-"),
+    .init(id: 3, title: "Transfer ke Bank Lain", value: "Rp. 15.000.000,-"),
+    .init(id: 4, title: "Payment", value: "Rp. 10.000.000,-"),
+    .init(id: 5, title: "Purchase", value: "Rp. 15.000.000,-"),
+],
+[
+    .init(id: 1, title: "Penarikan Harian", value: "Rp. 5.000.000,-"),
+    .init(id: 2, title: "Transfer Antar Sesama Bank Mestika", value: "Rp. 50.000.000,-"),
+    .init(id: 3, title: "Transfer ke Bank Lain", value: "Rp. 15.000.000,-"),
+    .init(id: 4, title: "Payment", value: "Rp. 10.000.000,-"),
+    .init(id: 5, title: "Purchase", value: "Rp. 15.000.000,-"),
+],
+[
+    .init(id: 1, title: "Penarikan Harian", value: "Rp. 5.000.000,-"),
+    .init(id: 2, title: "Transfer Antar Sesama Bank Mestika", value: "Rp. 50.000.000,-"),
+    .init(id: 3, title: "Transfer ke Bank Lain", value: "Rp. 15.000.000,-"),
+    .init(id: 4, title: "Payment", value: "Rp. 10.000.000,-"),
+    .init(id: 5, title: "Purchase", value: "Rp. 15.000.000,-"),
 ]]
 
 let myCardData: [MyCard] = load("myCardData.json")

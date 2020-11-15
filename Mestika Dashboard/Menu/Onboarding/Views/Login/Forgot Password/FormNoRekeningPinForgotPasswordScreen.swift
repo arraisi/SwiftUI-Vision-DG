@@ -1,5 +1,5 @@
 //
-//  ForgotPasswordScreen.swift
+//  FormInputRekeningForgotPasswordScreen.swift
 //  Mestika Dashboard
 //
 //  Created by Prima Jatnika on 05/11/20.
@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct ForgotPasswordScreen: View {
+struct FormNoRekeningPinForgotPasswordScreen: View {
     
-    @State private var phoneNumberCtrl = ""
+    @State private var atmNumberCtrl = ""
+    @State private var pinAtmCtrl = ""
+    @State private var showPassword: Bool = false
     
     var body: some View {
         ZStack {
@@ -18,56 +20,48 @@ struct ForgotPasswordScreen: View {
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
             VStack {
-                Text("VERIFIKASI NO. HP ANDA")
+                Text("INPUT NO REKENING / KTP")
                     .font(.title2)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.white)
                 
-                Text("Silahkan Masukkan Nomor Handphone Anda")
+                Text("Masukkan nomor rekening / KTP dan PIN Transaksi Anda.")
                     .font(.subheadline)
                     .fontWeight(.light)
+                    .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(.top, 5)
+                    .padding(.horizontal)
                 
-                HStack {
+                VStack {
                     HStack {
-                        Image("indo_flag")
-                        Text("+62 ")
-                            .font(.system(size: 12))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        TextField("Masukkan nomor rekening / KTP", text: self.$atmNumberCtrl)
                     }
-                    
-                    Divider()
-                        .frame(height: 20)
-                    
-                    TextField("Phone Number", text: $phoneNumberCtrl, onEditingChanged: { changed in
-                        print("\($phoneNumberCtrl)")
-                    })
-                    .keyboardType(.numberPad)
+                    .frame(height: 25)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
                 }
-                .frame(height: 20)
-                .font(.subheadline)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(15)
-                .padding(.top, 20)
                 .padding()
                 
-                Text("Pastikan nomor handphone Anda telah sesuai sebelum melanjutkan ketahap berikutnya.")
-                    .font(.subheadline)
-                    .fontWeight(.light)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 30)
-                    .padding(.bottom, 20)
-                    .padding(.horizontal, 20)
-                    .fixedSize(horizontal: false, vertical: true)
+                VStack {
+                    HStack {
+                        TextField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
+                    }
+                    .frame(height: 25)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                }
+                .padding(.horizontal)
                 
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: ForgotPasswordScreen(), label: {
-                        Text("MASUKKAN NO. HP ANDA")
+                    NavigationLink(destination: LoginScreen(), label: {
+                        Text("KONFIRMASI DATA")
                             .foregroundColor(Color(hex: "#232175"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
@@ -80,6 +74,7 @@ struct ForgotPasswordScreen: View {
                     .padding(.trailing, 10)
                 }
                 .padding(.bottom, 20)
+                
             }
             .padding(.top, 60)
         }
@@ -90,8 +85,8 @@ struct ForgotPasswordScreen: View {
     }
 }
 
-struct ForgotPasswordScreen_Previews: PreviewProvider {
+struct FormInputRekeningForgotPasswordScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPasswordScreen()
+        FormNoRekeningPinForgotPasswordScreen()
     }
 }

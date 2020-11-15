@@ -20,7 +20,7 @@ struct CardBlockView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 
                 VStack {
-                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202)
+                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202, showContent: true)
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     
                     VStack(alignment: .leading, spacing: 25) {

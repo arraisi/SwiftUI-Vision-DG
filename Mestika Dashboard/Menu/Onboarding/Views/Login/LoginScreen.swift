@@ -66,7 +66,7 @@ struct LoginScreen: View {
                     .cornerRadius(15)
                     .shadow(color: Color.gray.opacity(0.3), radius: 10)
                     
-                    NavigationLink(destination: ForgotPasswordScreen(), label: {
+                    NavigationLink(destination: PhoneNumberVerificationForgotPasswordView(), label: {
                         Text("Forgot Password?")
                             .font(.subheadline)
                             .fontWeight(.bold)

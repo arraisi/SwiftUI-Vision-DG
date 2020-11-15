@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormInputAtmActivationScreen: View {
+struct FormInputAtmPinForgotPasswordView: View {
     
     @State private var atmNumberCtrl = ""
     @State private var pinAtmCtrl = ""
@@ -87,6 +87,6 @@ struct FormInputAtmActivationScreen: View {
 
 struct FormInputAtmActivationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputAtmActivationScreen()
+        FormInputAtmPinForgotPasswordView()
     }
 }

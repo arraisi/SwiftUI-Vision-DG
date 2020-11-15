@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormInputNewPasswordForgotPasswordScreen: View {
+struct FormInputNewPasswordForgotPasswordView: View {
     
     @State private var passwordCtrl = ""
     @State private var confirmPasswordCtrl = ""
@@ -85,7 +85,7 @@ struct FormInputNewPasswordForgotPasswordScreen: View {
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: FormInputPasswordForgotPasswordScreen(), label: {
+                    NavigationLink(destination: FormPasswordVerificationForgotPasswordView(), label: {
                         Text("Simpan Password Baru")
                             .foregroundColor(Color(hex: "#2334D0"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -112,6 +112,6 @@ struct FormInputNewPasswordForgotPasswordScreen: View {
 
 struct FormInputNewPasswordForgotPasswordScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputNewPasswordForgotPasswordScreen()
+        FormInputNewPasswordForgotPasswordView()
     }
 }
