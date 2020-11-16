@@ -49,7 +49,11 @@ struct DashboardTabs: View {
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
         .onAppear {
-            username = (user.last?.email)!
+            if ((user.last?.email) != nil) {
+                username = (user.last?.email)!
+            } else {
+                username = "Example"
+            }
         }
     }
     
