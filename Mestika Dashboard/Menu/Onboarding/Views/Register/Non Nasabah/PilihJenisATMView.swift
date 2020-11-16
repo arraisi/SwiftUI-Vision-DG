@@ -76,7 +76,7 @@ struct PilihJenisATMView: View {
                     }
                 }
             }
-            .navigationBarTitle("Kartu-Ku", displayMode: .inline)
+//            .navigationBarTitle("Kartu-Ku", displayMode: .inline)
             .background(Color(hex: "#F6F8FB")
                         .edgesIgnoringSafeArea(.all))
         }

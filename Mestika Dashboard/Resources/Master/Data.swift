@@ -8,14 +8,14 @@
 import SwiftUI
 
 let cardData: [CardModel] = [
-    .init(id: 0, name: "Diamond", description: "", image: Image("atm_diamond")),
-    .init(id: 1, name: "Pearl", description: "", image: Image("atm_pearl"))
+    .init(id: 0, name: "Diamond", description: "", image: Image("card_bg")),
+    .init(id: 1, name: "Pearl", description: "", image: Image("card_bg"))
 ]
 
 let cardDesainData: [CardModel] = [
-    .init(id: 0, name: "THE RED DEVILS CARD", description: "Spesial untuk Anda, para Nasabah bank Mestika yang mencintai klub Manchester United yang berjuluk \"The Red Devils\"", image: Image("atm_bromo")),
-    .init(id: 1, name: "BROMO CARD", description: "Spesial untuk Anda, para Nasabah bank Mestika yang mencintai Bromo", image: Image("atm_bromo")),
-    .init(id: 2, name: "LAMBORGINI CARD", description: "Spesial untuk Anda, para Nasabah bank Mestika yang mencintai Lamborgini", image: Image("atm_bromo"))
+    .init(id: 0, name: "THE RED DEVILS CARD", description: "Spesial untuk Anda, para Nasabah bank Mestika yang mencintai klub Manchester United yang berjuluk \"The Red Devils\"", image: Image("card_bg")),
+    .init(id: 1, name: "BROMO CARD", description: "Spesial untuk Anda, para Nasabah bank Mestika yang mencintai Bromo", image: Image("card_bg")),
+    .init(id: 2, name: "LAMBORGINI CARD", description: "Spesial untuk Anda, para Nasabah bank Mestika yang mencintai Lamborgini", image: Image("card_bg"))
 ]
 
 let detailJenisATMData: [[DetailATM]] = [[
