@@ -18,8 +18,9 @@ struct ScanNPWPView: View {
     @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
     @Binding var shouldPresentActionScheet : Bool
-    @Binding var showMaskingCamera: Bool
-    @Binding var formShowed: Bool
+    
+    let onChange: ()->()
+    let onCommit: ()->()
     
     var body: some View {
         VStack(alignment: .center) {
@@ -48,7 +49,8 @@ struct ScanNPWPView: View {
             )
             
             Button(action: {
-                self.showMaskingCamera = false
+                //                self.showMaskingCamera = false
+                self.onChange()
                 self.shouldPresentActionScheet.toggle()
             }) {
                 Text(imageNPWP == nil ? "Ambil Foto NPWP" : "Ganti Foto Lain")
@@ -96,8 +98,8 @@ struct ScanNPWPView: View {
                 if (imageNPWP != nil) {
                     
                     Button(action: {
-                        self.formShowed.toggle()
-                        
+                        //                        self.formShowed.toggle()
+                        self.onCommit()
                         self.registerData.fotoNPWP = self.imageNPWP!
                         self.registerData.npwp = npwp
                         
@@ -130,7 +132,10 @@ struct ScanNPWPView: View {
 
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true))
-            .environmentObject(RegistrasiModel())
+        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false)) {
+            
+        } onCommit: {
+            
+        }
     }
 }
