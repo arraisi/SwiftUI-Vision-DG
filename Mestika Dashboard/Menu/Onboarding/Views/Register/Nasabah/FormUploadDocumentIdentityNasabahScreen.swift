@@ -76,6 +76,8 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                             ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, confirmNik: $confirmNik,
                                         onChange: {
                                             self.shouldPresentMaskSelfieCamera = false
+                                            self.formSelfie = false
+                                            self.formNPWP = false
                                         },
                                         onCommit: {
                                             if confirmImageKTP {
@@ -101,10 +103,10 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                             SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentActionScheet,
                                        onChange: {
                                         self.shouldPresentMaskSelfieCamera = true
+                                        self.formKTP = false
                                        },
                                        onCommit: {
-                                        self.formKTP = false
-                                        self.formSelfie = false
+                                        self.formSelfie.toggle()
                                         self.formNPWP = true
                                        })
                         }
@@ -123,11 +125,11 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                             ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet,
                                          onChange: {
                                             self.shouldPresentMaskSelfieCamera = false
-                                         },
-                                         onCommit: {
                                             self.formKTP = false
                                             self.formSelfie = false
-                                            self.formNPWP = false
+                                         },
+                                         onCommit: {
+                                            self.formNPWP.toggle()
                                          })
                         }
                         .foregroundColor(.black)
@@ -212,10 +214,12 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                 }
                 
                 if self.shouldPresentMaskSelfieCamera {
-                    Image("pattern_selfie_white")
+                    Image("pattern_selfie")
+                        .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .opacity(0.5)
+                        .offset(y: -(UIScreen.main.bounds.height * 0.1))
                 }
             }
         }
