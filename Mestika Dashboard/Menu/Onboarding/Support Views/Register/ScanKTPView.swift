@@ -24,7 +24,8 @@ struct ScanKTPView: View {
     @Binding var showAction : Bool
     @Binding var confirmNik: Bool
     
-    let callback: ()->()
+    let onChange: ()->()
+    let onCommit: ()->()
     
     var body: some View {
         VStack(alignment: .center) {
@@ -52,6 +53,7 @@ struct ScanKTPView: View {
             )
             
             Button(action: {
+                self.onChange()
                 self.showAction.toggle()
             }, label: {
                 Text(imageKTP == nil ? "Ambil Foto KTP" : "Ganti Foto Lain")
@@ -84,7 +86,7 @@ struct ScanKTPView: View {
                     }
                     .disabled(!confirmNik)
                 
-                Button(action: toggleConfirmNik) {
+                Button(action: {self.confirmNik.toggle()}) {
                     HStack(alignment: .top) {
                         Image(systemName: confirmNik ? "checkmark.square": "square")
                         Text("* Periksa kembali dan pastikan Nomor Kartu Tanda Penduduk (KTP) Anda telah sesuai")
@@ -101,7 +103,7 @@ struct ScanKTPView: View {
                     
                     Button(action: {
                         if confirmNik && nik.count == 16 {
-                            self.callback()
+                            self.onCommit()
                             self.registerData.nik = nik
                             self.registerData.fotoKTP = self.imageKTP!
                         }
@@ -121,19 +123,13 @@ struct ScanKTPView: View {
         }
         .padding(.bottom, 15)
     }
-    
-    /*
-     Fungsi untuk Toggle CheckBox NIK
-     */
-    func toggleConfirmNik() {
-        confirmNik = !confirmNik
-    }
-    
 }
 
 struct ScanKTPView_Previews: PreviewProvider {
     static var previews: some View {
         ScanKTPView(imageKTP: Binding.constant(nil), nik: Binding.constant(""), showAction: Binding.constant(false), confirmNik: Binding.constant(false)) {
+            
+        } onCommit: {
             
         }
     }

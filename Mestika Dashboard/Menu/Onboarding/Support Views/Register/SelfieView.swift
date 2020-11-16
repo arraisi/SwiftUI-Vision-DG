@@ -16,9 +16,12 @@ struct SelfieView: View {
     
     @Binding var imageSelfie: Image?
     @Binding var shouldPresentActionScheet : Bool
-    @Binding var showMaskingCamera : Bool
-    @Binding var formShowed: Bool
-    @Binding var nextFormShowed: Bool
+//    @Binding var showMaskingCamera : Bool
+//    @Binding var formShowed: Bool
+//    @Binding var nextFormShowed: Bool
+    
+    let onChange: ()->()
+    let onCommit: ()->()
     
     var body: some View {
         
@@ -50,7 +53,7 @@ struct SelfieView: View {
             Button(action: {
                 print("ON TAP SELFIE")
                 self.shouldPresentActionScheet.toggle()
-                self.showMaskingCamera = true
+                self.onChange()
             }, label: {
                 Text(imageSelfie == nil ? "Ambil Gambar Selfie" : "Ganti Foto Lain")
                     .foregroundColor(imageSelfie == nil ? .white : Color(hex: "#2334D0"))
@@ -67,16 +70,8 @@ struct SelfieView: View {
             
             if (imageSelfie != nil) {
                 Button(action: {
-//                    self.collapsedFormPersonal.toggle()
-                    //                        self.collapsedFormNPWP.toggle()
-                    
-                    //                        self.registerData.fotoSelfie = self.imageSelfie!
-//                    self.selfieIsSubmited = true
                     if imageSelfie != nil {
-                        self.formShowed.toggle()
-                        self.nextFormShowed.toggle()
-                        self.showMaskingCamera = false
-                        
+                        self.onCommit()
                         self.registerData.fotoSelfie = self.imageSelfie!
                     }
                 }) {
@@ -90,11 +85,6 @@ struct SelfieView: View {
                 .padding(.vertical, 15)
             } else { EmptyView() }
         }.navigationBarHidden(true)
-        //            .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, minHeight: 0, maxHeight: collapsedFormPersonal ? 0 : .none)
-        //            .clipped()
-        //            .animation(.easeOut)
-        //            .transition(.slide)
-        
         
     }
     
@@ -112,6 +102,10 @@ struct SelfieView: View {
 
 struct SelfieView_Previews: PreviewProvider {
     static var previews: some View {
-        SelfieView(imageSelfie: Binding.constant(Image("card_bg")), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true), nextFormShowed: Binding.constant(false)).environmentObject(RegistrasiModel())
+        SelfieView(imageSelfie: Binding.constant(Image("card_bg")), shouldPresentActionScheet: Binding.constant(false)) {
+            
+        } onCommit: {
+            
+        }
     }
 }
