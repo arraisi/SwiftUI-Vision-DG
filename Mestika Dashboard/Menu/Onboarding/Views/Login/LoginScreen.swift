@@ -121,9 +121,7 @@ struct LoginScreen: View {
                         .padding(.bottom, 10)
                         .padding(.leading, 20)
                     
-                    Button(action: {
-                        
-                    }, label: {
+                    NavigationLink(destination: WelcomeView(), label: {
                         Text("Register Here")
                             .font(.subheadline)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
