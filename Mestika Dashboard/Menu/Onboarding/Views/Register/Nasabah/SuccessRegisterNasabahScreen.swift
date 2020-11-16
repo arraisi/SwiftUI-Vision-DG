@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import JGProgressHUD_SwiftUI
 
 struct SuccessRegisterNasabahScreen: View {
     
+    /* Binding Object */
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
+    @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
     
-    /*
-     Boolean for Show Modal
-     */
+    /* HUD Variable */
+    @State private var dim = true
+    
+    /* Boolean for Show Modal */
     @State var showingModal = false
     @State var showingModalJam = false
     @State var showingModalTanggal = false
@@ -23,24 +28,12 @@ struct SuccessRegisterNasabahScreen: View {
     
     @State var date = Date()
     
-    let jam:[JamWawancara] = [
-        .init(jam: "07.00 - 08.00"),
-        .init(jam: "08.00 - 09.00"),
-        .init(jam: "09.00 - 10.00"),
-        .init(jam: "10.00 - 11.00"),
-        .init(jam: "11.00 - 12.00"),
-        .init(jam: "13.00 - 14.00"),
-        .init(jam: "14.00 - 15.00"),
-        .init(jam: "15.00 - 16.00")
-    ]
-    
-    let tanggal:[TanggalWawancara] = [
-        .init(tanggal: "01/09/2020"),
-        .init(tanggal: "02/09/2020")
-    ]
-    
     var disableForm: Bool {
         tanggalWawancara.isEmpty || pilihJam.isEmpty
+    }
+    
+    init() {
+        getAllSchedule()
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -222,16 +215,8 @@ struct SuccessRegisterNasabahScreen: View {
                 .padding(.bottom, 35)
             }
             
-            if self.showingModal {
+            if self.showingModal || self.showingModalJam || self.showingModalTanggal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
-            }
-            
-            if self.showingModalJam {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalJam = false } })
-            }
-            
-            if self.showingModalTanggal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -239,6 +224,9 @@ struct SuccessRegisterNasabahScreen: View {
         .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear {
+            showIndeterminate()
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
@@ -248,6 +236,32 @@ struct SuccessRegisterNasabahScreen: View {
         }
         .popup(isPresented: $showingModalTanggal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloaterTanggal()
+        }
+    }
+    
+    func getAllSchedule() {
+        self.scheduleVM.getAllSchedule() { success in
+            
+        }
+    }
+    
+    private func getScheduleById(id: Int) {
+        self.scheduleVM.getScheduleById(idSchedule: id)
+    }
+    
+    private func showIndeterminate() {
+        hudCoordinator.showHUD {
+            let hud = JGProgressHUD()
+            if dim {
+                hud.backgroundColor = UIColor(white: 0, alpha: 0.4)
+            }
+            
+            hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 4, opacity: 0.3)
+            hud.vibrancyEnabled = false
+            hud.textLabel.text = "Loading"
+            
+            hud.dismiss(afterDelay: 2)
+            return hud
         }
     }
     
@@ -320,21 +334,21 @@ struct SuccessRegisterNasabahScreen: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(0...jam.count-1, id: \.self) {index in
+            List {
                 
                 HStack {
-                    Text(jam[index].jam)
+                    Text("\(self.scheduleVM.timeStart) - \(self.scheduleVM.timeEnd)")
                         .font(Font.system(size: 14))
-                    
+
                     Spacer()
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    print(jam[index])
-                    pilihJam = jam[index].jam
+                    print(self.scheduleVM.timeStart)
+                    pilihJam = "\(self.scheduleVM.timeStart)" + "-" + "\(self.scheduleVM.timeEnd)"
                     self.showingModalJam.toggle()
                 })
-                
+
             }
             .background(Color.white)
             .padding(.vertical)
@@ -377,18 +391,19 @@ struct SuccessRegisterNasabahScreen: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(0...tanggal.count-1, id: \.self) {index in
+            List(self.scheduleVM.schedule, id: \.id) { data in
                 
                 HStack {
-                    Text(tanggal[index].tanggal)
+                    Text(data.date)
                         .font(Font.system(size: 14))
                     
                     Spacer()
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    print(tanggal[index])
-                    tanggalWawancara = tanggal[index].tanggal
+                    print(data)
+                    getScheduleById(id: data.id)
+                    tanggalWawancara = data.date
                     self.showingModalTanggal.toggle()
                 })
                 
