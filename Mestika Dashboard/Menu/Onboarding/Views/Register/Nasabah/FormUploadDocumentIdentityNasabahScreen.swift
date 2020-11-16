@@ -142,7 +142,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                     .padding([.horizontal, .top], 30)
                     
                     NavigationLink(
-                        destination: EmailVerificationView().environmentObject(registerData),
+                        destination: FormEmailVerificationNasabahScreen().environmentObject(registerData),
                         isActive: $nextViewActive,
                         label: {
                             Button(action: {
