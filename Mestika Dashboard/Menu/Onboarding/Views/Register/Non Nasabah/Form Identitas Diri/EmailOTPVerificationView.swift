@@ -16,6 +16,7 @@ struct EmailOTPVerificationView: View {
     /* Variable PIN OTP */
     var maxDigits: Int = 6
     @State var pin: String = ""
+    @State var pinShare: String = ""
     @State var showPin = true
     @State var isDisabled = false
     
@@ -32,21 +33,6 @@ struct EmailOTPVerificationView: View {
     
     var disableForm: Bool {
         pin.count < 6
-    }
-    
-    func getOTP() {
-        self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
-        ) { success in
-            
-            if success {
-                print(self.otpVM.isLoading)
-                print(self.otpVM.code)
-                self.showingAlert = true
-            }
-            
-            self.showingAlert = true
-        }
     }
     
     var body: some View {
@@ -96,7 +82,7 @@ struct EmailOTPVerificationView: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
-//                    .disabled(isResendOtpDisabled)
+                    .disabled(isResendOtpDisabled)
                     
                     Text("(00:\(timeRemaining))")
                         .font(.caption2)
@@ -119,7 +105,7 @@ struct EmailOTPVerificationView: View {
                     
                     Button(action: {
                         print(pin)
-                        if (pin == self.otpVM.code) {
+                        if (pin == self.pinShare) {
                             self.isOtpValid = true
                         } else {
                             print("Not Valid")
@@ -155,7 +141,11 @@ struct EmailOTPVerificationView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .onAppear(perform: getOTP)
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                getOTP()
+            }
+        })
         .onReceive(timer) { time in
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
@@ -166,11 +156,7 @@ struct EmailOTPVerificationView: View {
             }
         }
         .alert(isPresented: $showingAlert) {
-            if (self.otpVM.code.isEmpty) {
-                return Alert(title: Text("Message Error"), message: Text("No OTP Code"), dismissButton: .default(Text("Oke")))
-            } else {
-                return Alert(title: Text("OTP Code"), message: Text(self.otpVM.code), dismissButton: .default(Text("Oke")))
-            }
+            return Alert(title: Text("OTP Code"), message: Text(self.pinShare), dismissButton: .default(Text("Oke")))
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
@@ -284,6 +270,25 @@ struct EmailOTPVerificationView: View {
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    func getOTP() {
+        self.otpVM.otpRequest(
+            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+        ) { success in
+            
+            if success {
+                print(self.otpVM.isLoading)
+                print("PIN : \(self.otpVM.code)")
+                
+                DispatchQueue.main.sync {
+                    self.pinShare = self.otpVM.code
+                }
+                self.showingAlert = true
+            }
+            
+            self.showingAlert = true
+        }
     }
 }
 

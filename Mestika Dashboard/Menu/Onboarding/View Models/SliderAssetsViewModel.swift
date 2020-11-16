@@ -13,7 +13,7 @@ class SliderAssetsSummaryViewModel: ObservableObject {
     
     @Published var assets: [SliderAssetsViewModel] = [SliderAssetsViewModel]()
     
-    func getSliderAssets() {
+    func getSliderAssets(completion: @escaping (Bool) -> Void) {
         
         AssetsService.shared.getSliderAssets { result in
             print(result)
@@ -26,6 +26,8 @@ class SliderAssetsSummaryViewModel: ObservableObject {
                             self.assets = assets.map(SliderAssetsViewModel.init)
                         }
                     }
+                    
+                    completion(true)
                    
                 case .failure(let error):
                     print(error.localizedDescription)

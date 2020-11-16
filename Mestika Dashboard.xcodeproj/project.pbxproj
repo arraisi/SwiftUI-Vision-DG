@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
+		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
+		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
+		522563842562549900BCAB67 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
@@ -281,6 +285,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
+		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
+		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5245F884253FE702002E8B53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -545,6 +552,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				522563842562549900BCAB67 /* JGProgressHUD-SwiftUI in Frameworks */,
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
 				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
 				526A814A2560AAAD00D614CB /* BottomSheet in Frameworks */,
@@ -949,6 +957,7 @@
 				52ADFEC72557DA3700A1001F /* AssetsService.swift */,
 				52AE1A80255A425100B011B7 /* OtpService.swift */,
 				52C0556F255F687300A57400 /* UserRegistrationService.swift */,
+				5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */,
 			);
 			name = Services;
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
@@ -1200,6 +1209,7 @@
 				5264ADF5255E75BD000565D5 /* ErrorResponse.swift */,
 				6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */,
 				526A81572560B1F900D614CB /* LoginBindingModel.swift */,
+				5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1210,6 +1220,7 @@
 				52ADFEC52557DA3700A1001F /* SliderAssetsViewModel.swift */,
 				52AE1A74255A3E7800B011B7 /* OtpViewModel.swift */,
 				6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */,
+				5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1367,6 +1378,7 @@
 				523A86232542B67900ADFE25 /* PopupView */,
 				523A86322542CC6E00ADFE25 /* BottomSheet */,
 				52C05578255F6B9900A57400 /* MultipartForm */,
+				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1443,6 +1455,7 @@
 				523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */,
 				523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */,
+				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -1537,6 +1550,7 @@
 				52AE1A8C255A448100B011B7 /* OtpRequest.swift in Sources */,
 				C0E6C8FB255F87BB00A79237 /* PilihJenisATMView.swift in Sources */,
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
+				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
 				52ADFFAD2557DFDC00A1001F /* RegisterProvisionView.swift in Sources */,
@@ -1679,6 +1693,7 @@
 				5290A13C255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
+				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* PilihDesainATMView.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
@@ -1721,6 +1736,7 @@
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
+				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,
 				52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				5290A14A255BCA0E0090F788 /* FormSumberDanaNasabahScreen.swift in Sources */,
@@ -2067,6 +2083,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView";
@@ -2094,6 +2118,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */;
+			productName = "JGProgressHUD-SwiftUI";
+		};
 		523A86232542B67900ADFE25 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */;

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import JGProgressHUD_SwiftUI
 
 struct ContentView: View {
     
@@ -41,14 +42,15 @@ struct ContentView: View {
     }
     
     var body: some View {
-//        BottomNavigationView()
-        NavigationView {
-            ZStack {
-                Color(hex: "#F6F8FB")
-                WelcomeView()
-                    .navigationBarHidden(true)
+        JGProgressHUDPresenter(userInteractionOnHUD: false) {
+            NavigationView {
+                ZStack {
+                    Color(hex: "#F6F8FB")
+                    WelcomeView()
+                        .navigationBarHidden(true)
+                }
+                .edgesIgnoringSafeArea(.top)
             }
-            .edgesIgnoringSafeArea(.top)
         }
     }
 }
