@@ -27,6 +27,15 @@
           "revision": "fd37cca19583f784288dc3f1d22e9c5c69d6fd68",
           "version": "0.0.10"
         }
+      },
+      {
+        "package": "SlidingTabView",
+        "repositoryURL": "https://github.com/QuynhNguyen/SlidingTabView.git",
+        "state": {
+          "branch": null,
+          "revision": "b0f0662977418824d50546b2850a523dcd793bb0",
+          "version": "1.0.2"
+        }
       }
     ]
   },

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0657A77625627F04006ADE19 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0657A77525627F04006ADE19 /* NotificationScreen.swift */; };
+		0657A782256284FF006ADE19 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 0657A781256284FF006ADE19 /* SlidingTabView */; };
+		0657A78725628BC2006ADE19 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0657A78625628BC2006ADE19 /* Colors.xcassets */; };
+		0657A78D25629148006ADE19 /* ListNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0657A78C25629148006ADE19 /* ListNotificationView.swift */; };
+		0657A79525629168006ADE19 /* ListAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0657A79425629168006ADE19 /* ListAnnouncementView.swift */; };
+		0657A79B2562D540006ADE19 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0657A79A2562D540006ADE19 /* NotificationModel.swift */; };
+		0657A7A02562D6CC006ADE19 /* NotificationMonthly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0657A79F2562D6CC006ADE19 /* NotificationMonthly.swift */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
@@ -281,6 +288,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0657A77525627F04006ADE19 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
+		0657A78625628BC2006ADE19 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		0657A78C25629148006ADE19 /* ListNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNotificationView.swift; sourceTree = "<group>"; };
+		0657A79425629168006ADE19 /* ListAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAnnouncementView.swift; sourceTree = "<group>"; };
+		0657A79A2562D540006ADE19 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		0657A79F2562D6CC006ADE19 /* NotificationMonthly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMonthly.swift; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5245F884253FE702002E8B53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -547,6 +560,7 @@
 			files = (
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
 				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
+				0657A782256284FF006ADE19 /* SlidingTabView in Frameworks */,
 				526A814A2560AAAD00D614CB /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +582,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0657A77425627EC9006ADE19 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				0657A7992562D520006ADE19 /* BindingModel */,
+				0657A77525627F04006ADE19 /* NotificationScreen.swift */,
+				0657A78C25629148006ADE19 /* ListNotificationView.swift */,
+				0657A79425629168006ADE19 /* ListAnnouncementView.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		0657A7992562D520006ADE19 /* BindingModel */ = {
+			isa = PBXGroup;
+			children = (
+				0657A79A2562D540006ADE19 /* NotificationModel.swift */,
+				0657A79F2562D6CC006ADE19 /* NotificationMonthly.swift */,
+			);
+			path = BindingModel;
+			sourceTree = "<group>";
+		};
 		523A86282542BE8600ADFE25 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -633,6 +667,7 @@
 				5245F886253FE702002E8B53 /* SceneDelegate.swift */,
 				5245F888253FE702002E8B53 /* ContentView.swift */,
 				5245F88D253FE705002E8B53 /* Assets.xcassets */,
+				0657A78625628BC2006ADE19 /* Colors.xcassets */,
 				5245F892253FE705002E8B53 /* LaunchScreen.storyboard */,
 				5245F895253FE705002E8B53 /* Info.plist */,
 				5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */,
@@ -1238,6 +1273,7 @@
 				526B657A254FB20800C13C36 /* Account */,
 				5247460E2547CA38001F43C5 /* Favorite */,
 				52C34886254288BD00F08F37 /* Transfer */,
+				0657A77425627EC9006ADE19 /* Notification */,
 				5245F8BD253FE9FC002E8B53 /* BottomNavigationView.swift */,
 				52474D5D254026BD0094B758 /* DashboardTabs.swift */,
 				52474D622540276A0094B758 /* TransferTabs.swift */,
@@ -1367,6 +1403,7 @@
 				523A86232542B67900ADFE25 /* PopupView */,
 				523A86322542CC6E00ADFE25 /* BottomSheet */,
 				52C05578255F6B9900A57400 /* MultipartForm */,
+				0657A781256284FF006ADE19 /* SlidingTabView */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1443,6 +1480,7 @@
 				523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */,
 				523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */,
+				0657A780256284FF006ADE19 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -1478,6 +1516,7 @@
 				5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */,
 				52ADFEA22557D99F00A1001F /* sumberPenyandangDana.json in Resources */,
 				52BF57D42558E57D00F009B5 /* savingTypeData.json in Resources */,
+				0657A78725628BC2006ADE19 /* Colors.xcassets in Resources */,
 				52ADFEA72557D99F00A1001F /* besarPerkiraanSetoran.json in Resources */,
 				C0A4F99C25528C0700566A11 /* Montserrat-Medium.ttf in Resources */,
 				52ADFE9E2557D99F00A1001F /* besarPerkiraanPenarikan.json in Resources */,
@@ -1512,6 +1551,7 @@
 			files = (
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
+				0657A7A02562D6CC006ADE19 /* NotificationMonthly.swift in Sources */,
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				52ADFF8D2557DFDC00A1001F /* UnusedPilihJenisATMView.swift in Sources */,
@@ -1521,6 +1561,7 @@
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,
 				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
 				52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */,
+				0657A79525629168006ADE19 /* ListAnnouncementView.swift in Sources */,
 				52474D79254028CD0094B758 /* AccountTabs.swift in Sources */,
 				52ADFE992557D99F00A1001F /* DetailJenisATMModel.swift in Sources */,
 				52AE1A75255A3E7800B011B7 /* OtpViewModel.swift in Sources */,
@@ -1544,6 +1585,7 @@
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
 				C092ABF92553B4BF0051CE3E /* Data.swift in Sources */,
 				5290A125255BBFAC0090F788 /* RegisterNasabahPhoneOTPScreen.swift in Sources */,
+				0657A78D25629148006ADE19 /* ListNotificationView.swift in Sources */,
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
 				525950222553E03000C8CA5D /* OtpVerificationForgotPasswordView.swift in Sources */,
 				C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */,
@@ -1562,6 +1604,7 @@
 				52ADFF882557DFDC00A1001F /* EmailOTPVerificationView.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
+				0657A77625627F04006ADE19 /* NotificationScreen.swift in Sources */,
 				52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */,
 				52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */,
 				5290A12A255BC5930090F788 /* ChooseTypeSavingForNasabahScreen.swift in Sources */,
@@ -1642,6 +1685,7 @@
 				526A81682560B2B200D614CB /* FirstOTPLoginView.swift in Sources */,
 				5290A190255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift in Sources */,
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
+				0657A79B2562D540006ADE19 /* NotificationModel.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
 				5290A134255BC7200090F788 /* FormEmailVerificationNasabahScreen.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
@@ -2067,6 +2111,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0657A780256284FF006ADE19 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView";
@@ -2094,6 +2146,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0657A781256284FF006ADE19 /* SlidingTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0657A780256284FF006ADE19 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
+			productName = SlidingTabView;
+		};
 		523A86232542B67900ADFE25 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */;

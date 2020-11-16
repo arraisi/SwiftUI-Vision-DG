@@ -248,7 +248,24 @@ struct WelcomeView: View {
         .cornerRadius(20)
     }
     
+    @Environment(\.managedObjectContext) var managedObjectContext
     func getUserDetails() {
+        let data = User(context: managedObjectContext)
+        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
+        data.nik = "3277102102890001"
+        data.email = "andri.ferinata@gmail.com"
+        data.phone = "08562006488"
+        data.pin = "111111"
+        data.password = "ferinata21"
+        data.firstName = "Andri"
+        data.lastName = "Ferinata"
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
         if (user.last?.deviceId == deviceId && isFirstLogin) {
             //            showAlert.toggle()
             showingModalRegistered.toggle()
