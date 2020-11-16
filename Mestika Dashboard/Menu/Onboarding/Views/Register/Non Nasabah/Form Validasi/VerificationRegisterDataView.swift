@@ -401,6 +401,7 @@ struct VerificationRegisterDataView: View {
             data.lastName = "R"
             data.email = self.registerData.email
             
+            
             nextRoute = true
             
             do {

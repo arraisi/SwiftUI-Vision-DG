@@ -38,7 +38,7 @@ struct WelcomeView: View {
     var registerData = RegistrasiModel()
     var loginData = LoginBindingModel()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
-    @State private var isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
+    @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
     
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
@@ -231,7 +231,7 @@ struct WelcomeView: View {
             .cornerRadius(12)
             
             NavigationLink(
-                destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData),
+                destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData),
                 label: {
                     Text("Ya, Saya Memiliki")
                         .foregroundColor(.black)
@@ -249,7 +249,8 @@ struct WelcomeView: View {
     }
     
     func getUserDetails() {
-        if (user.last?.deviceId == deviceId && isFirstLogin) {
+        print(isFirstLogin)
+        if (user.last?.deviceId == deviceId && isFirstLogin != nil) {
             //            showAlert.toggle()
             showingModalRegistered.toggle()
         }
