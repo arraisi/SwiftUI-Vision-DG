@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "NavigationStack",
+        "repositoryURL": "https://github.com/matteopuc/swiftui-navigation-stack",
+        "state": {
+          "branch": null,
+          "revision": "7b1dd956e4eed27780311520b31f6831ec87a820",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "SwiftUIX",
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX.git",
         "state": {
