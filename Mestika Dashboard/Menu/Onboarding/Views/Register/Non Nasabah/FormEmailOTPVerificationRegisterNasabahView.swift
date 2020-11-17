@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmailOTPVerificationView: View {
+struct FormEmailOTPVerificationRegisterNasabahView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var registerData: RegistrasiModel
@@ -295,6 +295,6 @@ struct EmailOTPVerificationView: View {
 
 struct EmailOTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailOTPVerificationView().environmentObject(RegistrasiModel())
+        FormEmailOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

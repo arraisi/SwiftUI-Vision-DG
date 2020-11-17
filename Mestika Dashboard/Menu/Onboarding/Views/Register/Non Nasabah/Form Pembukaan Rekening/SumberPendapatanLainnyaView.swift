@@ -13,6 +13,9 @@ struct SumberPendapatanLainnyaView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let sumberPendapatanLainnya: [MasterModel] = load("sumberPendapatanLainnya.json")
+    @State var sumberPendapatanLain = ""
+    
+    @State var selectedId = 0
     
     var body: some View {
         ZStack {
@@ -75,17 +78,64 @@ struct SumberPendapatanLainnyaView: View {
                                 // Forms input
                                 ZStack {
                                     
-                                    RadioButtonGroup(
-                                        items: sumberPendapatanLainnya,
-                                        selectedId: $registerData.sumberPendapatanLainnyaId) { selected in
-                                        print("Selected is: \(selected)")
+                                    VStack {
                                         
-                                        if let i = sumberPendapatanLainnya.firstIndex(where: { $0.id == selected }) {
-                                            print(sumberPendapatanLainnya[i])
-                                            registerData.sumberPendapatanLainnya = sumberPendapatanLainnya[i].name
+                                        Button(action:{
+                                            
+                                            self.selectedId = 1
+                                            
+                                        }) {
+                                            
+                                            HStack(alignment: .center, spacing: 10) {
+                                                
+                                                Image(systemName: self.selectedId == 1 ? "largecircle.fill.circle" : "circle")
+                                                    //                    .renderingMode(.original)
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 19, height: 19)
+                                                
+                                                Text("Ya, Saya memiliki")
+                                                    .font(.custom("Montserrat-Regular", size: 10))
+                                                
+                                                Spacer()
+                                                
+                                            }
+                                            .foregroundColor(Color.black.opacity(0.6))
                                         }
                                         
-                                        print(registerData.sumberPendapatanLainnya)
+                                        if self.selectedId == 1 {
+                                            TextField("Sumber Pendapatan Lainnya", text: $sumberPendapatanLain) {change in
+                                            } onCommit: {
+                                            }
+                                            .font(Font.system(size: 14))
+                                            .frame(height: 36)
+                                            .padding(.horizontal)
+                                            .background(Color.gray.opacity(0.1))
+                                            .cornerRadius(10)
+                                            .padding(.leading, 25)
+                                        }
+                                        
+                                        Button(action:{
+                                            
+                                            self.selectedId = 2
+                                            
+                                        }) {
+                                            
+                                            HStack(alignment: .center, spacing: 10) {
+                                                
+                                                Image(systemName: self.selectedId == 2 ? "largecircle.fill.circle" : "circle")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 19, height: 19)
+                                                
+                                                Text("Tidak, Saya tidak memiliki")
+                                                    .font(.custom("Montserrat-Regular", size: 10))
+                                                
+                                                Spacer()
+                                                
+                                            }
+                                            .foregroundColor(Color.black.opacity(0.6))
+                                        }
                                     }
                                     .padding()
                                     
@@ -126,5 +176,11 @@ struct SumberPendapatanLainnyaView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         
+    }
+}
+
+struct SumberPendapatanLainnyaView_Previews: PreviewProvider {
+    static var previews: some View {
+        SumberPendapatanLainnyaView().environmentObject(RegistrasiModel())
     }
 }

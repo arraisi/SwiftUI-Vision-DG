@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PilihJenisATMView: View {
+struct FormPilihJenisATMView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -155,6 +155,6 @@ struct PilihJenisATMView: View {
 
 struct PilihATMView_Previews: PreviewProvider {
     static var previews: some View {
-        PilihJenisATMView()
+        FormPilihJenisATMView()
     }
 }

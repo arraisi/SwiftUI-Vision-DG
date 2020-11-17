@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PilihDesainATMView: View {
+struct FormPilihDesainATMView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var selectedTab = 0
@@ -84,7 +84,7 @@ struct PilihDesainATMView: View {
                     }
                     .padding(.horizontal)
                     
-                    NavigationLink(destination: DetailKartuATMView(),
+                    NavigationLink(destination: FormDetailKartuATMView(),
                         label: {
                             Text("PILIH DESAIN KARTU")
                                 .foregroundColor(.white)
@@ -147,6 +147,6 @@ struct PilihDesainATMView: View {
 
 struct PilihDesainATMView_Previews: PreviewProvider {
     static var previews: some View {
-        PilihDesainATMView()
+        FormPilihDesainATMView()
     }
 }

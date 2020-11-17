@@ -617,7 +617,7 @@ struct SuccessRegisterNasabahScreen: View {
                     Group {
                         
                         NavigationLink(
-                            destination: PilihJenisATMView(),
+                            destination: FormPilihJenisATMView(),
                             label: {
                                 Text("Buat Janji")
                                     .foregroundColor(.white)

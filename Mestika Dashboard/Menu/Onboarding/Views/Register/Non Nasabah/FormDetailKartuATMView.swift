@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailKartuATMView: View {
+struct FormDetailKartuATMView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -146,6 +146,6 @@ struct DetailKartuATMView: View {
 
 struct DetailKartuATMView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailKartuATMView()
+        FormDetailKartuATMView()
     }
 }

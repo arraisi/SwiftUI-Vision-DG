@@ -162,10 +162,9 @@
 		52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF4E2557DED900A1001F /* TextRecognizer.swift */; };
 		52ADFF542557DEEA00A1001F /* TextFieldWithPickerAsInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInput.swift */; };
 		52ADFF862557DFDC00A1001F /* FormEmailConfirmationNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5C2557DFDB00A1001F /* FormEmailConfirmationNasabahScreen.swift */; };
-		52ADFF882557DFDC00A1001F /* EmailOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */; };
-		52ADFF892557DFDC00A1001F /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */; };
-		52ADFF8A2557DFDC00A1001F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF602557DFDB00A1001F /* Coordinator.swift */; };
-		52ADFF8B2557DFDC00A1001F /* PilihDesainATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF612557DFDB00A1001F /* PilihDesainATMView.swift */; };
+		52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5E2557DFDB00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift */; };
+		52ADFF892557DFDC00A1001F /* FormEmailVerificationRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF5F2557DFDB00A1001F /* FormEmailVerificationRegisterNasabahView.swift */; };
+		52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF612557DFDB00A1001F /* FormPilihDesainATMView.swift */; };
 		52ADFF8C2557DFDC00A1001F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF622557DFDB00A1001F /* WelcomeView.swift */; };
 		52ADFF8E2557DFDC00A1001F /* BesarPerkiraanPenarikanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF652557DFDB00A1001F /* BesarPerkiraanPenarikanView.swift */; };
 		52ADFF8F2557DFDC00A1001F /* KeluargaTerdekat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF662557DFDB00A1001F /* KeluargaTerdekat.swift */; };
@@ -193,7 +192,7 @@
 		52ADFFA92557DFDC00A1001F /* IncomingVideoCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */; };
 		52ADFFAA2557DFDC00A1001F /* RegisterRekeningCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */; };
 		52ADFFAB2557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF832557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift */; };
-		52ADFFAC2557DFDC00A1001F /* DetailKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */; };
+		52ADFFAC2557DFDC00A1001F /* FormDetailKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */; };
 		52ADFFAD2557DFDC00A1001F /* KetentuanRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF852557DFDC00A1001F /* KetentuanRegisterNasabahView.swift */; };
 		52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AE1A6F255A3D9A00B011B7 /* OtpResponse.swift */; };
 		52AE1A75255A3E7800B011B7 /* OtpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AE1A74255A3E7800B011B7 /* OtpViewModel.swift */; };
@@ -257,7 +256,7 @@
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */; };
-		C0E6C8FB255F87BB00A79237 /* PilihJenisATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C8FA255F87BB00A79237 /* PilihJenisATMView.swift */; };
+		C0E6C8FB255F87BB00A79237 /* FormPilihJenisATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */; };
 		C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */; };
 		C0E6C91A255F934D00A79237 /* DetailLimitKartuAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */; };
 		C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */; };
@@ -442,10 +441,9 @@
 		52ADFF4E2557DED900A1001F /* TextRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
 		52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInput.swift; sourceTree = "<group>"; };
 		52ADFF5C2557DFDB00A1001F /* FormEmailConfirmationNasabahScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEmailConfirmationNasabahScreen.swift; sourceTree = "<group>"; };
-		52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailOTPVerificationView.swift; sourceTree = "<group>"; };
-		52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
-		52ADFF602557DFDB00A1001F /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		52ADFF612557DFDB00A1001F /* PilihDesainATMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PilihDesainATMView.swift; sourceTree = "<group>"; };
+		52ADFF5E2557DFDB00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEmailOTPVerificationRegisterNasabahView.swift; sourceTree = "<group>"; };
+		52ADFF5F2557DFDB00A1001F /* FormEmailVerificationRegisterNasabahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEmailVerificationRegisterNasabahView.swift; sourceTree = "<group>"; };
+		52ADFF612557DFDB00A1001F /* FormPilihDesainATMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPilihDesainATMView.swift; sourceTree = "<group>"; };
 		52ADFF622557DFDB00A1001F /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		52ADFF652557DFDB00A1001F /* BesarPerkiraanPenarikanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BesarPerkiraanPenarikanView.swift; sourceTree = "<group>"; };
 		52ADFF662557DFDB00A1001F /* KeluargaTerdekat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeluargaTerdekat.swift; sourceTree = "<group>"; };
@@ -473,7 +471,7 @@
 		52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingVideoCallView.swift; sourceTree = "<group>"; };
 		52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRekeningCardView.swift; sourceTree = "<group>"; };
 		52ADFF832557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormOTPVerificationRegisterNasabahView.swift; sourceTree = "<group>"; };
-		52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailKartuATMView.swift; sourceTree = "<group>"; };
+		52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDetailKartuATMView.swift; sourceTree = "<group>"; };
 		52ADFF852557DFDC00A1001F /* KetentuanRegisterNasabahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KetentuanRegisterNasabahView.swift; sourceTree = "<group>"; };
 		52AE1A6F255A3D9A00B011B7 /* OtpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResponse.swift; sourceTree = "<group>"; };
 		52AE1A74255A3E7800B011B7 /* OtpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewModel.swift; sourceTree = "<group>"; };
@@ -536,7 +534,7 @@
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOTPVerificationView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCVVVerificationView.swift; sourceTree = "<group>"; };
-		C0E6C8FA255F87BB00A79237 /* PilihJenisATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilihJenisATMView.swift; sourceTree = "<group>"; };
+		C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPilihJenisATMView.swift; sourceTree = "<group>"; };
 		C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLimitKartuAtmView.swift; sourceTree = "<group>"; };
 		C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLimitKartuAtmView.swift; sourceTree = "<group>"; };
 		C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormNewPinAtmView.swift; sourceTree = "<group>"; };
@@ -962,14 +960,6 @@
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
 			sourceTree = SOURCE_ROOT;
 		};
-		52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */ = {
-			isa = PBXGroup;
-			children = (
-				52ADFF602557DFDB00A1001F /* Coordinator.swift */,
-			);
-			path = "Form Identitas Diri";
-			sourceTree = "<group>";
-		};
 		52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */ = {
 			isa = PBXGroup;
 			children = (
@@ -1167,20 +1157,19 @@
 		C00AC550255E51B6005D67C0 /* Non Nasabah */ = {
 			isa = PBXGroup;
 			children = (
-				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
-				52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */,
-				52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */,
-				52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */,
 				52ADFF792557DFDB00A1001F /* Form Validasi */,
 				52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */,
 				52ADFF852557DFDC00A1001F /* KetentuanRegisterNasabahView.swift */,
 				52ADFF772557DFDB00A1001F /* FormPhoneVerificationRegisterNasabahView.swift */,
-				52BF57CE2558E34100F009B5 /* FormPilihJenisTabunganView.swift */,
 				52ADFF832557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift */,
+				52ADFF5F2557DFDB00A1001F /* FormEmailVerificationRegisterNasabahView.swift */,
+				52ADFF5E2557DFDB00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift */,
+				52BF57CE2558E34100F009B5 /* FormPilihJenisTabunganView.swift */,
+				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
 				52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */,
-				C0E6C8FA255F87BB00A79237 /* PilihJenisATMView.swift */,
-				52ADFF612557DFDB00A1001F /* PilihDesainATMView.swift */,
-				52ADFF842557DFDC00A1001F /* DetailKartuATMView.swift */,
+				C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */,
+				52ADFF612557DFDB00A1001F /* FormPilihDesainATMView.swift */,
+				52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */,
 			);
 			path = "Non Nasabah";
 			sourceTree = "<group>";
@@ -1542,13 +1531,13 @@
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
 				C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */,
 				52ADFF332557DDBD00A1001F /* OTPTextField.swift in Sources */,
-				52ADFF892557DFDC00A1001F /* EmailVerificationView.swift in Sources */,
+				52ADFF892557DFDC00A1001F /* FormEmailVerificationRegisterNasabahView.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
 				526A81582560B1F900D614CB /* LoginBindingModel.swift in Sources */,
 				52AE1A8C255A448100B011B7 /* OtpRequest.swift in Sources */,
-				C0E6C8FB255F87BB00A79237 /* PilihJenisATMView.swift in Sources */,
+				C0E6C8FB255F87BB00A79237 /* FormPilihJenisATMView.swift in Sources */,
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
 				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
@@ -1572,7 +1561,7 @@
 				5290A168255BCC8E0090F788 /* FormInformasiPerusahaanNasabahScreen.swift in Sources */,
 				C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */,
 				C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */,
-				52ADFF882557DFDC00A1001F /* EmailOTPVerificationView.swift in Sources */,
+				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
 				52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */,
@@ -1649,7 +1638,6 @@
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
-				52ADFF8A2557DFDC00A1001F /* Coordinator.swift in Sources */,
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
 				52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */,
 				526A81682560B2B200D614CB /* FirstOTPLoginView.swift in Sources */,
@@ -1676,7 +1664,7 @@
 				52ADFF0D2557DCB800A1001F /* KeyboardAwareModifier.swift in Sources */,
 				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
 				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
-				52ADFFAC2557DFDC00A1001F /* DetailKartuATMView.swift in Sources */,
+				52ADFFAC2557DFDC00A1001F /* FormDetailKartuATMView.swift in Sources */,
 				52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */,
 				52ADFF922557DFDC00A1001F /* BesarPerkiraanSetoranView.swift in Sources */,
 				52ADFEAD2557D9A800A1001F /* Card.swift in Sources */,
@@ -1694,7 +1682,7 @@
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
-				52ADFF8B2557DFDC00A1001F /* PilihDesainATMView.swift in Sources */,
+				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
 				C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */,
