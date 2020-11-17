@@ -310,7 +310,7 @@ struct WelcomeView: View {
         .cornerRadius(20)
     }
     
-    @Environment(\.managedObjectContext) var managedObjectContext
+//    @Environment(\.managedObjectContext) var managedObjectContext
     func getUserDetails() {
 //        let data = User(context: managedObjectContext)
 //        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
@@ -321,7 +321,7 @@ struct WelcomeView: View {
 //        data.password = "ferinata21"
 //        data.firstName = "Andri"
 //        data.lastName = "Ferinata"
-//        
+//
 //        do {
 //            try self.managedObjectContext.save()
 //        } catch {

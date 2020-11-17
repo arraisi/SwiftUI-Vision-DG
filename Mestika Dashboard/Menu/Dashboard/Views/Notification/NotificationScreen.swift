@@ -12,15 +12,15 @@ struct NotificationScreen: View {
     @State private var selectedTabIndex = 0
     
     init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
-        appearance.backgroundImage = UIImage()
-        appearance.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1369999945, green: 0.1289999932, blue: 0.4589999914, alpha: 1)
-        ]
-        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0.1369999945, green: 0.1289999932, blue: 0.4589999914, alpha: 1)
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().standardAppearance = appearance
+//        let appearance = UINavigationBarAppearance()
+//        appearance.backgroundColor = .white
+//        appearance.backgroundImage = UIImage()
+//        appearance.titleTextAttributes = [
+//            NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.1369999945, green: 0.1289999932, blue: 0.4589999914, alpha: 1)
+//        ]
+//        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0.1369999945, green: 0.1289999932, blue: 0.4589999914, alpha: 1)
+//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//        UINavigationBar.appearance().standardAppearance = appearance
     }
     var body: some View {
         VStack(spacing: 0) {
