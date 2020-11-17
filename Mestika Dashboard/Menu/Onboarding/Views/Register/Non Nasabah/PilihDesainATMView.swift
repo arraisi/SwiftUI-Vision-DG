@@ -16,7 +16,7 @@ struct PilihDesainATMView: View {
     var body: some View {
         VStack {
             AppBar
-                .padding(.top, 45)
+                .padding(.top, 55)
                 .padding(.horizontal, 30)
             
             ScrollView{
@@ -118,12 +118,6 @@ struct PilihDesainATMView: View {
     // MARK: - APP BAR
     var AppBar: some View {
         HStack {
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(Color(hex: "#232175"))
-            }
             Spacer()
             logo
             Spacer()

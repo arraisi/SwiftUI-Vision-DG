@@ -181,6 +181,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
             }
         )
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $shouldPresentImagePicker) {
             ZStack {
                 if formKTP {

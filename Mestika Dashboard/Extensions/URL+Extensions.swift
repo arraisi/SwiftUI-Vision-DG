@@ -37,18 +37,18 @@ extension URL {
     }
     
     static func urlRegister() -> URL? {
-        return URL(string: "http://192.168.100.10:8765/api/v1.0/user")
+        return URL(string: "http://159.65.2.90:8765/api/v1.0/user")
     }
     
     static func urlOTP() -> URL? {
-        return URL(string: "http://192.168.100.10:8765/api/v1.0/otp")
+        return URL(string: "http://159.65.2.90:8765/api/v1.0/otp")
     }
     
     static func urlSheduleInterview() -> URL? {
-        return URL(string: "http://192.168.100.10:8765/api/v1.0/schedule/find-all")
+        return URL(string: "http://159.65.2.90:8765/api/v1.0/schedule/find-all")
     }
     
     static func urlSheduleInterviewFindById() -> URL? {
-        return URL(string: "http://192.168.100.10:8765/api/v1.0/schedule/find-byid")
+        return URL(string: "http://159.65.2.90:8765/api/v1.0/schedule/find-byid")
     }
 }

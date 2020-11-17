@@ -160,6 +160,7 @@ struct FormRegisterVerificationPinScreen: View {
                         
                     }
                     .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+                    .navigationBarBackButtonHidden(true)
                     .padding(.bottom, 25)
                 }
                 .KeyboardAwarePadding()

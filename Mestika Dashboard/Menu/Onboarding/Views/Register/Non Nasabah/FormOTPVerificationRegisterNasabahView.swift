@@ -45,7 +45,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     func getOTP() {
         self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
         ) { success in
             
             if success {
@@ -182,6 +182,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

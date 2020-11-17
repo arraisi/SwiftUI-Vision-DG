@@ -45,7 +45,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
     
     func getOTP() {
         self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
         ) { success in
             
             if success {
@@ -180,6 +180,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -198,7 +199,12 @@ struct RegisterNasabahPhoneOTPScreen: View {
             }
         }
         .alert(isPresented: $showingAlert) {
-            return Alert(title: Text("OTP Code"), message: Text(self.pinShare), dismissButton: .default(Text("Oke")))
+            return Alert(
+                title: Text("OTP Code"),
+                message: Text(self.pinShare),
+                dismissButton: .default(Text("Oke"), action: {
+                    self.pin = self.pinShare
+                }))
         }
         .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             bottomMessageOTPinCorrect()

@@ -34,8 +34,9 @@ struct KetentuanRegisterNasabahView: View {
                 Spacer()
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
     }
     
     var cardForm: some View {
@@ -95,7 +96,7 @@ struct KetentuanRegisterNasabahView: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(radius: 30)
-        .padding(.top, 100)
+        .padding(.top, 120)
     }
 }
 
