@@ -14,6 +14,9 @@
 		0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5932563F8A1001B659D /* ListNotificationView.swift */; };
 		0658B59F2563F904001B659D /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B59E2563F904001B659D /* SlidingTabView */; };
 		0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0658B5A62563FA6D001B659D /* Colors.xcassets */; };
+		0658B5AE256401BA001B659D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AD256401BA001B659D /* FirebaseAnalytics */; };
+		0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AF256401BA001B659D /* FirebaseMessaging */; };
+		0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5B1256401BA001B659D /* FirebaseAuth */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -563,8 +566,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */,
+				0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */,
 				522563842562549900BCAB67 /* JGProgressHUD-SwiftUI in Frameworks */,
 				52E0557E2563C307009294DA /* NavigationStack in Frameworks */,
+				0658B5AE256401BA001B659D /* FirebaseAnalytics in Frameworks */,
 				0658B59F2563F904001B659D /* SlidingTabView in Frameworks */,
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
 				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
@@ -1416,6 +1422,9 @@
 				C06AC3102563770700D06EE3 /* SwiftUIX */,
 				52E0557D2563C307009294DA /* NavigationStack */,
 				0658B59E2563F904001B659D /* SlidingTabView */,
+				0658B5AD256401BA001B659D /* FirebaseAnalytics */,
+				0658B5AF256401BA001B659D /* FirebaseMessaging */,
+				0658B5B1256401BA001B659D /* FirebaseAuth */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1496,6 +1505,7 @@
 				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 				0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -1970,6 +1980,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1993,6 +2004,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2135,6 +2147,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
 		522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI";
@@ -2190,6 +2210,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */;
 			productName = SlidingTabView;
+		};
+		0658B5AD256401BA001B659D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		0658B5AF256401BA001B659D /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		0658B5B1256401BA001B659D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 		522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
