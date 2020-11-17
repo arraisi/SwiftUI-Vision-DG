@@ -137,6 +137,7 @@ struct VerificationPINView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }

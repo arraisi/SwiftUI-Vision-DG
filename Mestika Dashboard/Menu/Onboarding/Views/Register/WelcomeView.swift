@@ -231,7 +231,7 @@ struct WelcomeView: View {
             .cornerRadius(12)
             
             NavigationLink(
-                destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData),
+                destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData),
                 label: {
                     Text("Ya, Saya Memiliki")
                         .foregroundColor(.black)
@@ -250,7 +250,7 @@ struct WelcomeView: View {
     
     func getUserDetails() {
         print(isFirstLogin)
-        if (user.last?.deviceId == deviceId && isFirstLogin != nil) {
+        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
             //            showAlert.toggle()
             showingModalRegistered.toggle()
         }

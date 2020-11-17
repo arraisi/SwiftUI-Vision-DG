@@ -103,9 +103,7 @@ struct DetailKartuATMView: View {
                     }
                     
                     Spacer()
-                    Button(action: {
-                        
-                    }, label: {
+                    NavigationLink(destination: WelcomeView(), label: {
                         Text("KEMBALI KE HALAMAN UTAMA")
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .foregroundColor(.white)

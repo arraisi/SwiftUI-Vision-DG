@@ -203,6 +203,7 @@ struct VerificationDataPersonalView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

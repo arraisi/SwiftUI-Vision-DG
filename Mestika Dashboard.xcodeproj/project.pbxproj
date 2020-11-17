@@ -1919,14 +1919,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = 8ZTJDGA48U;
+				DEVELOPMENT_TEAM = H9UB4842E4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

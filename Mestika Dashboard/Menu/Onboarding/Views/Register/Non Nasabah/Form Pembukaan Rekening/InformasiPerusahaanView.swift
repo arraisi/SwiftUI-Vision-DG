@@ -146,6 +146,7 @@ struct InformasiPerusahaanView: View {
                         
                     }
                     .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+                    .navigationBarBackButtonHidden(true)
                     .padding(.bottom, 25)
                     
                 }

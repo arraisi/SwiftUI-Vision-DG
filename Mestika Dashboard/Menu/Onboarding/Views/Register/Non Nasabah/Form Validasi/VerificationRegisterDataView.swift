@@ -369,6 +369,7 @@ struct VerificationRegisterDataView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(title: Text("Message"), message: Text("GAGAL MENDAFTAR"), dismissButton: .default(Text("Oke")))
         }
@@ -401,6 +402,7 @@ struct VerificationRegisterDataView: View {
             data.lastName = "R"
             data.email = self.registerData.email
             
+            UserDefaults.standard.set("true", forKey: "isFirstLogin")
             
             nextRoute = true
             
