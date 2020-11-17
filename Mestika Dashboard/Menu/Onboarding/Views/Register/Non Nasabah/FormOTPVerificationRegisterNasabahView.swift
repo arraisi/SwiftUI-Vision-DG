@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OTPVerificationView: View {
+struct FormOTPVerificationRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
@@ -127,7 +127,7 @@ struct OTPVerificationView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    NavigationLink(destination: ChooseTypeSavingScreen().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    NavigationLink(destination: FormPilihJenisTabunganView().environmentObject(registerData), isActive: self.$isOtpValid) {
                         Text("")
                     }
                     
@@ -368,7 +368,7 @@ struct OTPVerificationView: View {
 #if DEBUG
 struct OTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        OTPVerificationView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+        FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
     }
 }
 #endif

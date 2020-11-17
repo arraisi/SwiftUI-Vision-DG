@@ -219,7 +219,7 @@ struct WelcomeView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: RegisterProvisionView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData)) {
+            NavigationLink(destination: KetentuanRegisterNasabahView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData)) {
                 Text("Tidak, Saya Tidak Memiliki")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

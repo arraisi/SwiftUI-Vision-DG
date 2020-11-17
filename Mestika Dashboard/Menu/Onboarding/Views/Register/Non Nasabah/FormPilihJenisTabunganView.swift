@@ -8,7 +8,7 @@
 import SwiftUI
 import PopupView
 
-struct ChooseTypeSavingScreen: View {
+struct FormPilihJenisTabunganView: View {
     
     /* Carousel Variables */
     @State var data = savingTypeData
@@ -188,6 +188,6 @@ struct ChooseTypeSavingScreen: View {
 
 struct ChooseTypeSavingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseTypeSavingScreen().environmentObject(RegistrasiModel())
+        FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
     }
 }
