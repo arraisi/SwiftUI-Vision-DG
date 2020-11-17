@@ -127,7 +127,7 @@ struct RegisterRekeningCardView: View {
                 Spacer()
             }
             .padding(.horizontal, 30)
-            .padding(.top, 100)
+            .padding(.top, 120)
             .padding(.bottom, 35)
             
             if self.showingModal {
@@ -137,6 +137,7 @@ struct RegisterRekeningCardView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

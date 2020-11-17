@@ -18,8 +18,9 @@ struct ScanNPWPView: View {
     @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
     @Binding var shouldPresentActionScheet : Bool
-    @Binding var showMaskingCamera: Bool
-    @Binding var formShowed: Bool
+    
+    let onChange: ()->()
+    let onCommit: ()->()
     
     var body: some View {
         VStack(alignment: .center) {
@@ -48,7 +49,8 @@ struct ScanNPWPView: View {
             )
             
             Button(action: {
-                self.showMaskingCamera = false
+                //                self.showMaskingCamera = false
+                self.onChange()
                 self.shouldPresentActionScheet.toggle()
             }) {
                 Text(imageNPWP == nil ? "Ambil Foto NPWP" : "Ganti Foto Lain")
@@ -60,6 +62,7 @@ struct ScanNPWPView: View {
             .background(Color(hex: imageNPWP == nil ? "#2334D0" : "#FFFFFF"))
             .cornerRadius(12)
             .padding([.top, .bottom], 15)
+            .disabled(alreadyHaveNpwp)
             
             VStack(alignment: .leading) {
                 
@@ -79,11 +82,11 @@ struct ScanNPWPView: View {
                     .onReceive(npwp.publisher.collect()) {
                         self.npwp = String($0.prefix(15))
                     }
-                    .disabled(!alreadyHaveNpwp)
+                    .disabled(alreadyHaveNpwp)
                 
                 Button(action: toggleHasNpwp) {
                     HStack(alignment: .top) {
-                        Image(systemName: !alreadyHaveNpwp ? "checkmark.square": "square")
+                        Image(systemName: alreadyHaveNpwp ? "checkmark.square": "square")
                         Text("* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini")
                             .font(.custom("Montserrat-Regular", size: 8))
                             .foregroundColor(Color(hex: "#707070"))
@@ -96,8 +99,8 @@ struct ScanNPWPView: View {
                 if (imageNPWP != nil) {
                     
                     Button(action: {
-                        self.formShowed.toggle()
-                        
+                        //                        self.formShowed.toggle()
+                        self.onCommit()
                         self.registerData.fotoNPWP = self.imageNPWP!
                         self.registerData.npwp = npwp
                         
@@ -125,12 +128,19 @@ struct ScanNPWPView: View {
      */
     func toggleHasNpwp() {
         self.alreadyHaveNpwp.toggle()
+        if self.alreadyHaveNpwp {
+            self.npwp = ""
+            self.imageNPWP = nil
+        }
     }
 }
 
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false), showMaskingCamera: Binding.constant(false), formShowed: Binding.constant(true))
-            .environmentObject(RegistrasiModel())
+        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false)) {
+            
+        } onCommit: {
+            
+        }
     }
 }

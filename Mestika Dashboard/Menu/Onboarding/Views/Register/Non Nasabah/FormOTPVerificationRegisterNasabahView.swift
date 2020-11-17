@@ -1,54 +1,69 @@
 //
-//  EmailOTPVerificationView.swift
+//  OTPVerificationView.swift
 //  Bank Mestika
 //
-//  Created by Prima Jatnika on 01/10/20.
+//  Created by Prima Jatnika on 24/09/20.
 //
 
 import SwiftUI
 
-struct EmailOTPVerificationView: View {
+struct FormOTPVerificationRegisterNasabahView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
-    @ObservedObject private var otpVM = OtpViewModel()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Variable PIN OTP */
     var maxDigits: Int = 6
     @State var pin: String = ""
+    @State var pinShare: String = ""
     @State var showPin = true
     @State var isDisabled = false
     
     /* Variable Validation */
     @State var isOtpValid = false
+    @State var otpInvalidCount = 0
     @State var isResendOtpDisabled = true
     
+    /* Data Binding */
+    @Binding var rootIsActive : Bool
+    @ObservedObject private var otpVM = OtpViewModel()
+    
+    /* Timer */
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     /* Boolean for Show Modal */
-    @State var showingModal = false
+    @State var showingOtpIncorect = false
+    @State var showingOtpInvalid = false
     @State private var showingAlert: Bool = false
     
+    /* Disabled Form */
     var disableForm: Bool {
         pin.count < 6
     }
     
     func getOTP() {
         self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
         ) { success in
             
             if success {
                 print(self.otpVM.isLoading)
                 print(self.otpVM.code)
+                
+                DispatchQueue.main.sync {
+                    self.pinShare = self.otpVM.code
+                }
                 self.showingAlert = true
+                
             }
             
             self.showingAlert = true
         }
     }
     
+    // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -58,14 +73,13 @@ struct EmailOTPVerificationView: View {
             }
             
             VStack(alignment: .center) {
-                Text("Kami telah mengirimkan OTP ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
+                Text("Kami telah mengirimkan OTP ke No. \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
                     .font(.subheadline)
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
-                    .fixedSize(horizontal: false, vertical: true)
                 
                 Text("Silahkan masukan kode OTP dengan REF #1234")
                     .font(.caption)
@@ -87,16 +101,16 @@ struct EmailOTPVerificationView: View {
                     
                     Button(action: {
                         print("-> Resend OTP")
-                        self.timeRemaining = 60
-                        
                         getOTP()
+                        
+                        self.timeRemaining = 60
                     }) {
                         Text("Resend OTP")
                             .font(.caption2)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
-//                    .disabled(isResendOtpDisabled)
+                    .disabled(isResendOtpDisabled)
                     
                     Text("(00:\(timeRemaining))")
                         .font(.caption2)
@@ -113,17 +127,29 @@ struct EmailOTPVerificationView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    NavigationLink(destination: TujuanPembukaanRekeningView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    NavigationLink(destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isOtpValid) {
                         Text("")
                     }
                     
                     Button(action: {
                         print(pin)
-                        if (pin == self.otpVM.code) {
+                        print(self.pinShare)
+                        
+                        if (pin == self.pinShare && otpInvalidCount < 5) {
+                            print("OTP CORRECT")
                             self.isOtpValid = true
-                        } else {
-                            print("Not Valid")
-                            showingModal.toggle()
+                        }
+                        
+                        if (pin != self.pinShare && otpInvalidCount <= 4) {
+                            print("OTP INCORRECT")
+                            self.otpInvalidCount += 1
+                            print("\(self.otpInvalidCount)")
+                            showingOtpIncorect.toggle()
+                        }
+                        
+                        if (otpInvalidCount >= 5) {
+                            print("OTP INVALID IN 5 TIME")
+                            showingOtpInvalid.toggle()
                         }
                     }) {
                         Text("Verifikasi OTP")
@@ -146,16 +172,25 @@ struct EmailOTPVerificationView: View {
             .shadow(radius: 30)
             .padding(.top, 120)
             
-            if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+            if self.showingOtpIncorect {
+                ModalOverlay(tapAction: { withAnimation { self.showingOtpIncorect = false } })
+            }
+            
+            if self.showingOtpInvalid {
+                ModalOverlay(tapAction: { withAnimation { self.showingOtpInvalid = false } })
             }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .onAppear(perform: getOTP)
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                getOTP()
+            }
+        })
         .onReceive(timer) { time in
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
@@ -166,14 +201,19 @@ struct EmailOTPVerificationView: View {
             }
         }
         .alert(isPresented: $showingAlert) {
-            if (self.otpVM.code.isEmpty) {
-                return Alert(title: Text("Message Error"), message: Text("No OTP Code"), dismissButton: .default(Text("Oke")))
-            } else {
-                return Alert(title: Text("OTP Code"), message: Text(self.otpVM.code), dismissButton: .default(Text("Oke")))
-            }
+            return Alert(
+                title: Text("OTP Code"),
+                message: Text(self.pinShare),
+                dismissButton: .default(Text("Oke"), action: {
+                    pin = self.pinShare
+                })
+            )
         }
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            createBottomFloater()
+        .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            bottomMessageOTPinCorrect()
+        }
+        .popup(isPresented: $showingOtpInvalid, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            bottomMessageOTPVailure()
         }
     }
     
@@ -235,20 +275,18 @@ struct EmailOTPVerificationView: View {
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
         var chars = Array(myString)
-        if chars.count > 2 {
-            chars[index[0]] = newChar
-            chars[index[1]] = chars[index[0]]
-            chars[index[2]] = chars[index[1]]
-            chars[index[3]] = chars[index[2]]
+        if chars.count > 5 {
+            for data in index {
+                chars[data] = newChar
+            }
         }
+        
         let modifiedString = String(chars)
         return modifiedString
     }
     
-    /*
-     Fuction for Create Bottom Floater (Modal)
-     */
-    func createBottomFloater() -> some View {
+    // MARK: -BOTTOM MESSAGE OTP IN CORRECT
+    func bottomMessageOTPinCorrect() -> some View {
         VStack(alignment: .leading) {
             Image(systemName: "xmark.octagon.fill")
                 .resizable()
@@ -285,10 +323,53 @@ struct EmailOTPVerificationView: View {
         .background(Color.white)
         .cornerRadius(20)
     }
-}
-
-struct EmailOTPVerificationView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmailOTPVerificationView().environmentObject(RegistrasiModel())
+    
+    // MARK: -BOTTOM MESSAGE OTP VAILURE 5 TIME
+    func bottomMessageOTPVailure() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Kode OTP Salah")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Text("Kode OTP yang anda masukan telah salah 5 kali, silahkan ulangi lagi minggu depan.")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {
+                self.rootIsActive = false
+            }) {
+                Text("Kembali ke Halaman Utama")
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
+
+#if DEBUG
+struct OTPVerificationView_Previews: PreviewProvider {
+    static var previews: some View {
+        FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+    }
+}
+#endif

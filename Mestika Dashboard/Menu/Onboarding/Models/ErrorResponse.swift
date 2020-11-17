@@ -8,11 +8,7 @@
 import Foundation
 
 // MARK: - ErrorModel
-class ErrorResponse {
-    var error, status: String?
-
-    enum CodingKeys: String, CodingKey {
-        case error
-        case status = "status"
-    }
+class ErrorResponse: Decodable {
+    let error: String
+    let status: String
 }

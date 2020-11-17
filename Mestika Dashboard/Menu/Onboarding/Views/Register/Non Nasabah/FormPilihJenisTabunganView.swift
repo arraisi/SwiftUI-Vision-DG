@@ -8,7 +8,7 @@
 import SwiftUI
 import PopupView
 
-struct ChooseTypeSavingScreen: View {
+struct FormPilihJenisTabunganView: View {
     
     /* Carousel Variables */
     @State var data = savingTypeData
@@ -90,6 +90,7 @@ struct ChooseTypeSavingScreen: View {
             }
         }
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }
@@ -188,6 +189,6 @@ struct ChooseTypeSavingScreen: View {
 
 struct ChooseTypeSavingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseTypeSavingScreen().environmentObject(RegistrasiModel())
+        FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
     }
 }

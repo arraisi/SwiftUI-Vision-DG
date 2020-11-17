@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import JGProgressHUD_SwiftUI
+import NavigationStack
 
 struct ContentView: View {
     
@@ -18,11 +20,11 @@ struct ContentView: View {
         
         appearance.backgroundColor = UIColor(Color(hex: "#242576"))
         
-//        // this only applies to big titles
-//        appearance.largeTitleTextAttributes = [
-//            .font : UIFont.systemFont(ofSize: 20),
-//            NSAttributedString.Key.foregroundColor : UIColor.white
-//        ]
+        //        // this only applies to big titles
+        //        appearance.largeTitleTextAttributes = [
+        //            .font : UIFont.systemFont(ofSize: 20),
+        //            NSAttributedString.Key.foregroundColor : UIColor.white
+        //        ]
         
         // this only applies to small titles
         appearance.titleTextAttributes = [
@@ -41,14 +43,17 @@ struct ContentView: View {
     }
     
     var body: some View {
-//        BottomNavigationView()
-        NavigationView {
-            ZStack {
-                Color(hex: "#F6F8FB")
-                WelcomeView()
-                    .navigationBarHidden(true)
+        JGProgressHUDPresenter(userInteractionOnHUD: false) {
+            NavigationView {
+                NavigationStackView {
+                    ZStack {
+                        Color(hex: "#F6F8FB")
+                        WelcomeView()
+                            .navigationBarHidden(true)
+                    }
+                    .edgesIgnoringSafeArea(.top)
+                }
             }
-            .edgesIgnoringSafeArea(.top)
         }
     }
 }
@@ -57,7 +62,7 @@ class ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
-
+    
     @objc class func injected() {
         UIApplication.shared.windows.first?.rootViewController = UIHostingController(rootView: ContentView())
     }

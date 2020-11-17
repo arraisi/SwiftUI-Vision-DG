@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FormUploadDocumentIdentityNasabahScreen: View {
+    
     /*
      Environtment Object
      */
@@ -72,15 +73,19 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                     // Form KTP
                     VStack {
                         DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
-                            //                            ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, formShowed: $formKTP, nextFormShowed: $formSelfie, confirmNik: $confirmNik, confirmImageKTP: $confirmImageKTP)
-                            
-                            ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, confirmNik: $confirmNik) {
-                                if confirmImageKTP {
-                                    
-                                    self.formKTP = false
-                                    self.formSelfie = true
-                                }
-                            }
+                            ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, confirmNik: $confirmNik,
+                                        onChange: {
+                                            self.shouldPresentMaskSelfieCamera = false
+                                            self.formSelfie = false
+                                            self.formNPWP = false
+                                        },
+                                        onCommit: {
+                                            if confirmImageKTP {
+                                                self.formKTP = false
+                                                self.formSelfie = true
+                                                self.formNPWP = false
+                                            }
+                                        })
                         }
                         .foregroundColor(.black)
                         .padding(.horizontal, 25)
@@ -95,7 +100,15 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                     // Form Selfie
                     VStack {
                         DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: $formSelfie) {
-                            SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formSelfie, nextFormShowed: $formNPWP)
+                            SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentActionScheet,
+                                       onChange: {
+                                        self.shouldPresentMaskSelfieCamera = true
+                                        self.formKTP = false
+                                       },
+                                       onCommit: {
+                                        self.formSelfie.toggle()
+                                        self.formNPWP = true
+                                       })
                         }
                         .foregroundColor(.black)
                         .padding(.horizontal, 25)
@@ -109,7 +122,15 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                     // Form NPWP
                     VStack {
                         DisclosureGroup("Masukkan NPWP Anda", isExpanded: $formNPWP) {
-                            ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet, showMaskingCamera: $shouldPresentMaskSelfieCamera, formShowed: $formNPWP)
+                            ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet,
+                                         onChange: {
+                                            self.shouldPresentMaskSelfieCamera = false
+                                            self.formKTP = false
+                                            self.formSelfie = false
+                                         },
+                                         onCommit: {
+                                            self.formNPWP.toggle()
+                                         })
                         }
                         .foregroundColor(.black)
                         .padding(.horizontal, 25)
@@ -121,7 +142,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                     .padding([.horizontal, .top], 30)
                     
                     NavigationLink(
-                        destination: EmailVerificationView().environmentObject(registerData),
+                        destination: FormEmailVerificationNasabahScreen().environmentObject(registerData),
                         isActive: $nextViewActive,
                         label: {
                             Button(action: {
@@ -131,7 +152,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                                 if imageKTP != nil
                                     && registerData.nik != ""
                                     && confirmNik
-                                    && (registerData.npwp != "" || imageNPWP != nil)
+                                    && (registerData.npwp != "" || imageNPWP != nil || !alreadyHaveNpwp)
                                     && imageSelfie != nil {
                                     
                                     self.nextViewActive.toggle()
@@ -160,6 +181,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
             }
         )
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $shouldPresentImagePicker) {
             ZStack {
                 if formKTP {
@@ -193,10 +215,12 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                 }
                 
                 if self.shouldPresentMaskSelfieCamera {
-                    Image("pattern_selfie_white")
+                    Image("pattern_selfie")
+                        .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .opacity(0.5)
+                        .offset(y: -(UIScreen.main.bounds.height * 0.1))
                 }
             }
         }

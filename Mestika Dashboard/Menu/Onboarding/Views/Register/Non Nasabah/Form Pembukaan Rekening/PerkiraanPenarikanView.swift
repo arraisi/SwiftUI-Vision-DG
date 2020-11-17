@@ -149,6 +149,7 @@ struct PerkiraanPenarikanView: View {
         }
         .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

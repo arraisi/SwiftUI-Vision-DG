@@ -17,6 +17,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
     var maxDigits: Int = 6
     @State var pin: String = ""
     @State var showPin = true
+    @State var pinShare: String = ""
     @State var isDisabled = false
     
     /* Variable Validation */
@@ -44,12 +45,16 @@ struct RegisterNasabahPhoneOTPScreen: View {
     
     func getOTP() {
         self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
         ) { success in
             
             if success {
                 print(self.otpVM.isLoading)
                 print(self.otpVM.code)
+                
+                DispatchQueue.main.sync {
+                    self.pinShare = self.otpVM.code
+                }
                 self.showingAlert = true
             }
             
@@ -104,7 +109,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
-                    //                    .disabled(isResendOtpDisabled)
+                    .disabled(isResendOtpDisabled)
                     
                     Text("(00:\(timeRemaining))")
                         .font(.caption2)
@@ -128,12 +133,12 @@ struct RegisterNasabahPhoneOTPScreen: View {
                     Button(action: {
                         print(pin)
                         
-                        if (pin == self.otpVM.code && otpInvalidCount < 5) {
+                        if (pin == self.pinShare && otpInvalidCount < 5) {
                             print("OTP CORRECT")
                             self.isOtpValid = true
                         }
                         
-                        if (pin != self.otpVM.code && otpInvalidCount <= 4) {
+                        if (pin != self.pinShare && otpInvalidCount <= 4) {
                             print("OTP INCORRECT")
                             self.otpInvalidCount += 1
                             print("\(self.otpInvalidCount)")
@@ -175,10 +180,15 @@ struct RegisterNasabahPhoneOTPScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .onAppear(perform: getOTP)
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                getOTP()
+            }
+        })
         .onReceive(timer) { time in
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
@@ -189,11 +199,12 @@ struct RegisterNasabahPhoneOTPScreen: View {
             }
         }
         .alert(isPresented: $showingAlert) {
-            if (self.otpVM.code.isEmpty) {
-                return Alert(title: Text("Message Error"), message: Text("No OTP Code"), dismissButton: .default(Text("Oke")))
-            } else {
-                return Alert(title: Text("OTP Code"), message: Text(self.otpVM.code), dismissButton: .default(Text("Oke")))
-            }
+            return Alert(
+                title: Text("OTP Code"),
+                message: Text(self.pinShare),
+                dismissButton: .default(Text("Oke"), action: {
+                    self.pin = self.pinShare
+                }))
         }
         .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             bottomMessageOTPinCorrect()

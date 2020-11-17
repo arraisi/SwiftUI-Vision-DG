@@ -26,7 +26,7 @@ struct DetailLimitKartuAtmView: View {
                 RowLimitKartuAtmView(title: limit.title, value: limit.value)
             }
             
-            NavigationLink(destination: PilihDesainATMView(),
+            NavigationLink(destination: FormPilihDesainATMView(),
                 label: {
                     Text("PILIH KARTU ATM INI")
                         .foregroundColor(.white)

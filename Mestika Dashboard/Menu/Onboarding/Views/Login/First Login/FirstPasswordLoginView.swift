@@ -221,7 +221,7 @@ struct FirstPasswordLoginView: View {
     func checkPassword() {
         if (deviceId == user.last?.deviceId && password == user.last?.password) {
             
-            UserDefaults.standard.set(false, forKey: "isFirstLogin")
+            UserDefaults.standard.set("false", forKey: "isFirstLogin")
             print("DATA READY")
             nextRoute = true
             

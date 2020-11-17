@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PhoneVerificationView: View {
+struct FormPhoneVerificationRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
@@ -75,7 +75,7 @@ struct PhoneVerificationView: View {
                 .cornerRadius(15)
                 .padding(.horizontal, 20)
                 
-                NavigationLink(destination: OTPVerificationView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
                     Text("Verifikasi No. Telepon")
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -97,6 +97,7 @@ struct PhoneVerificationView: View {
         }
         .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -105,7 +106,7 @@ struct PhoneVerificationView: View {
 
 struct PhoneVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        PhoneVerificationView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+        FormPhoneVerificationRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
     }
 }
 

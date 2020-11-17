@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct PilihJenisATMView: View {
+struct FormPilihJenisATMView: View {
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Carousel Variables */
     @State var cards = myCardData
@@ -21,13 +23,16 @@ struct PilihJenisATMView: View {
     let itemGapHeight:CGFloat = 10
     
     var body: some View {
-        NavigationView {
+        VStack {
+            AppBar
+                .padding(.top, 55)
+                .padding(.horizontal, 30)
+            
             ScrollView(.vertical, showsIndicators: false) {
                 ZStack {
                     Color(hex: "#F6F8FB")
                     
                     VStack() {
-                        
                         // MARK: - CAROUSEL
                         VStack{
                             
@@ -76,11 +81,35 @@ struct PilihJenisATMView: View {
                     }
                 }
             }
-            .navigationBarTitle("Kartu-Ku", displayMode: .inline)
-            .background(Color(hex: "#F6F8FB")
-                        .edgesIgnoringSafeArea(.all))
+        }
+        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .navigationBarHidden(true)
+        .background(Color(hex: "#F6F8FB")
+                    .edgesIgnoringSafeArea(.all))
+    }
+    
+    // MARK: - APP BAR
+    var AppBar: some View {
+        HStack {
+            Spacer()
+            logo
+            Spacer()
         }
     }
+    
+    // MARK: - LOGO
+    var logo: some View {
+        HStack(alignment: .center, spacing: .none) {
+            Image("Logo M")
+                .resizable()
+                .frame(width: 25, height: 25)
+            Text("BANK MESTIKA")
+                .foregroundColor(Color(hex: "#232175"))
+                .font(.system(size: 20))
+                .bold()
+        }
+    }
+
     
     // MARK: - ON DRAG ENDED
     private func onDragEnded(value: DragGesture.Value) {
@@ -126,6 +155,6 @@ struct PilihJenisATMView: View {
 
 struct PilihATMView_Previews: PreviewProvider {
     static var previews: some View {
-        PilihJenisATMView()
+        FormPilihJenisATMView()
     }
 }

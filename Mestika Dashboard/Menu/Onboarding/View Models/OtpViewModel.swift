@@ -16,7 +16,6 @@ class OtpViewModel: ObservableObject {
     @Published var reference: String = ""
     @Published var timeCounter: Int = 15
     @Published var code: String = ""
-    @Published var errorMessage = ErrorResponse()
 }
 
 extension OtpViewModel {
@@ -29,12 +28,12 @@ extension OtpViewModel {
         
         OtpService.shared.postOtp(otpRequest: otpRequest) { result in
             switch result {
-            case.success(let response):
-                if (response.status != nil) {
-                    print("Valid")
-                    
-                    
-                }
+            case.success(let _): break
+//                if (response.status != nil) {
+//                    print("Valid")
+//
+//
+//                }
             case .failure(let error):
                 print("ERROR-->")
                 DispatchQueue.main.async {
@@ -60,8 +59,8 @@ extension OtpViewModel {
                     
                     DispatchQueue.main.async {
                         self.isLoading = false
-                        self.reference = response.reference!
-                        self.code = response.code!
+                        self.reference = response.reference
+                        self.code = response.code
                     }
                     
                     completion(true)

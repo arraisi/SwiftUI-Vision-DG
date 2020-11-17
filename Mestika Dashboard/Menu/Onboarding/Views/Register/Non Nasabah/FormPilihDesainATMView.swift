@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PilihDesainATMView: View {
+struct FormPilihDesainATMView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var selectedTab = 0
@@ -16,7 +16,7 @@ struct PilihDesainATMView: View {
     var body: some View {
         VStack {
             AppBar
-                .padding(.top, 45)
+                .padding(.top, 55)
                 .padding(.horizontal, 30)
             
             ScrollView{
@@ -84,7 +84,7 @@ struct PilihDesainATMView: View {
                     }
                     .padding(.horizontal)
                     
-                    NavigationLink(destination: DetailKartuATMView(),
+                    NavigationLink(destination: FormDetailKartuATMView(),
                         label: {
                             Text("PILIH DESAIN KARTU")
                                 .foregroundColor(.white)
@@ -118,12 +118,6 @@ struct PilihDesainATMView: View {
     // MARK: - APP BAR
     var AppBar: some View {
         HStack {
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(Color(hex: "#232175"))
-            }
             Spacer()
             logo
             Spacer()
@@ -153,6 +147,6 @@ struct PilihDesainATMView: View {
 
 struct PilihDesainATMView_Previews: PreviewProvider {
     static var previews: some View {
-        PilihDesainATMView()
+        FormPilihDesainATMView()
     }
 }

@@ -82,24 +82,45 @@ struct TujuanPembukaanRekeningView: View {
                                 .padding(.vertical, 30)
                             
                             // Forms input
+//                            ZStack {
+//
+//                                CheckBoxGroup(items: tujuanPembukaanRekening, markedId: $registerData.tujuanPembukaanId) { id, marked in
+//
+//                                    registerData.tujuanPembukaan = ""
+//
+//                                    tujuanPembukaanRekening.forEach { (item) in
+//                                        if marked.contains(item.id) {
+//                                            registerData.tujuanPembukaan += item.name
+//                                            if marked.last != item.id {
+//                                                registerData.tujuanPembukaan += ", "
+//                                            }
+//                                        }
+//                                    }
+//
+//
+//                                    print(registerData.tujuanPembukaanId)
+//                                    print(registerData.tujuanPembukaan)
+//
+//                                }
+//                                .padding()
+//
+//                            }
+//                            .frame(width: UIScreen.main.bounds.width - 100)
+//                            .background(Color.white)
+//                            .cornerRadius(15)
+//                            .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+                            
+                            // Forms input
                             ZStack {
                                 
-                                CheckBoxGroup(items: tujuanPembukaanRekening, markedId: $registerData.tujuanPembukaanId) { id, marked in
+                                RadioButtonGroup(
+                                    items: tujuanPembukaanRekening,
+                                    selectedId: $registerData.tujuanPembukaanId) { selected in
                                     
-                                    registerData.tujuanPembukaan = ""
-                                    
-                                    tujuanPembukaanRekening.forEach { (item) in
-                                        if marked.contains(item.id) {
-                                            registerData.tujuanPembukaan += item.name
-                                            if marked.last != item.id {
-                                                registerData.tujuanPembukaan += ", "
-                                            }
-                                        }
+                                    if let i = tujuanPembukaanRekening.firstIndex(where: { $0.id == selected }) {
+                                        print(tujuanPembukaanRekening[i])
+                                        registerData.tujuanPembukaan = tujuanPembukaanRekening[i].name
                                     }
-                                    
-                                    
-                                    print(registerData.tujuanPembukaanId)
-                                    print(registerData.tujuanPembukaan)
                                     
                                 }
                                 .padding()
@@ -111,37 +132,37 @@ struct TujuanPembukaanRekeningView: View {
                             .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                             
                             // Button
-                                if (editMode == .inactive) {
-                                    NavigationLink(destination: SumberDanaView().environmentObject(registerData)) {
-                                        
-                                        Text("Berikutnya")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    }
-                                    .disabled(registerData.tujuanPembukaanId.count == 0)
-                                    .frame(height: 50)
-                                    .background(registerData.tujuanPembukaanId.count == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
-                                } else {
-                                    NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
-                                        
-                                        Text("Simpan")
-                                            .foregroundColor(.white)
-                                            .fontWeight(.bold)
-                                            .font(.system(size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    }
-                                    .frame(height: 50)
-                                    .background(Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
+                            if (editMode == .inactive) {
+                                NavigationLink(destination: SumberDanaView().environmentObject(registerData)) {
+                                    
+                                    Text("Berikutnya")
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                    
                                 }
+                                .disabled(registerData.tujuanPembukaanId == 0)
+                                .frame(height: 50)
+                                .background(registerData.tujuanPembukaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 25)
+                            } else {
+                                NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                                    
+                                    Text("Simpan")
+                                        .foregroundColor(.white)
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                    
+                                }
+                                .frame(height: 50)
+                                .background(Color(hex: "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 25)
+                            }
                         }
                         .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                         .cornerRadius(25.0)
@@ -159,6 +180,7 @@ struct TujuanPembukaanRekeningView: View {
         }
         .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
