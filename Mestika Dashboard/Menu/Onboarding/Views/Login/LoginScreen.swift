@@ -7,6 +7,7 @@
 
 import LocalAuthentication
 import SwiftUI
+import NavigationStack
 
 struct LoginScreen: View {
     
@@ -121,7 +122,7 @@ struct LoginScreen: View {
                         .padding(.bottom, 10)
                         .padding(.leading, 20)
                     
-                    NavigationLink(destination: WelcomeView(), label: {
+                    PopView(destination: .root, label: {
                         Text("Register Here")
                             .font(.subheadline)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

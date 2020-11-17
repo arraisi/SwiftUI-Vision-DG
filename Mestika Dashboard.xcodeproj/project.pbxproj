@@ -221,6 +221,7 @@
 		52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20A225511F8600CC048A /* FormInputResetPinScreen.swift */; };
 		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
+		52E0557E2563C307009294DA /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* NavigationStack */; };
 		6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
 		6122BB4B73F6658A6EC4DFED /* UserRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */; };
@@ -550,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				522563842562549900BCAB67 /* JGProgressHUD-SwiftUI in Frameworks */,
+				52E0557E2563C307009294DA /* NavigationStack in Frameworks */,
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
 				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
 				C06AC3112563770700D06EE3 /* SwiftUIX in Frameworks */,
@@ -1368,6 +1370,7 @@
 				52C05578255F6B9900A57400 /* MultipartForm */,
 				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
 				C06AC3102563770700D06EE3 /* SwiftUIX */,
+				52E0557D2563C307009294DA /* NavigationStack */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1446,6 +1449,7 @@
 				52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */,
 				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
 				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -1907,14 +1911,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = 8ZTJDGA48U;
+				DEVELOPMENT_TEAM = H9UB4842E4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1930,14 +1934,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = 8ZTJDGA48U;
+				DEVELOPMENT_TEAM = H9UB4842E4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2103,6 +2107,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
@@ -2133,6 +2145,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */;
 			productName = MultipartForm;
+		};
+		52E0557D2563C307009294DA /* NavigationStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
+			productName = NavigationStack;
 		};
 		C06AC3102563770700D06EE3 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;

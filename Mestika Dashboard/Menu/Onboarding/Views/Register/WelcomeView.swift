@@ -8,6 +8,7 @@
 import SwiftUI
 import PopupView
 import SystemConfiguration
+import NavigationStack
 
 var data = [
     ImageCarousel(
@@ -151,7 +152,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: LoginScreen()) {
+            PushView(destination: LoginScreen()) {
                 Text("LOGIN")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
