@@ -12,7 +12,7 @@ class RegistrasiModel: ObservableObject {
     @Published var jenisTabungan = ""
     @Published var nik = ""
     @Published var email = ""
-    @Published var tujuanPembukaanId: [Int] = []
+    @Published var tujuanPembukaanId: Int = 0
     @Published var tujuanPembukaan = ""
     @Published var sumberDanaId = 0
     @Published var sumberDana = ""

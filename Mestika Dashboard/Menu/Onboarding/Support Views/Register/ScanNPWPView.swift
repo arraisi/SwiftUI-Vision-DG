@@ -62,6 +62,7 @@ struct ScanNPWPView: View {
             .background(Color(hex: imageNPWP == nil ? "#2334D0" : "#FFFFFF"))
             .cornerRadius(12)
             .padding([.top, .bottom], 15)
+            .disabled(alreadyHaveNpwp)
             
             VStack(alignment: .leading) {
                 
@@ -81,11 +82,11 @@ struct ScanNPWPView: View {
                     .onReceive(npwp.publisher.collect()) {
                         self.npwp = String($0.prefix(15))
                     }
-                    .disabled(!alreadyHaveNpwp)
+                    .disabled(alreadyHaveNpwp)
                 
                 Button(action: toggleHasNpwp) {
                     HStack(alignment: .top) {
-                        Image(systemName: !alreadyHaveNpwp ? "checkmark.square": "square")
+                        Image(systemName: alreadyHaveNpwp ? "checkmark.square": "square")
                         Text("* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini")
                             .font(.custom("Montserrat-Regular", size: 8))
                             .foregroundColor(Color(hex: "#707070"))
@@ -127,6 +128,10 @@ struct ScanNPWPView: View {
      */
     func toggleHasNpwp() {
         self.alreadyHaveNpwp.toggle()
+        if self.alreadyHaveNpwp {
+            self.npwp = ""
+            self.imageNPWP = nil
+        }
     }
 }
 

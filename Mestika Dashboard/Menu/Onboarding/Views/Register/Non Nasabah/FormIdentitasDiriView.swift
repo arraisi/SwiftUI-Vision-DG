@@ -105,6 +105,7 @@ struct FormIdentitasDiriView: View {
                                        onChange: {
                                         self.shouldPresentMaskSelfieCamera = true
                                         self.formKTP = false
+                                        self.formNPWP = false
                                        },
                                        onCommit: {
                                         self.formSelfie.toggle()
@@ -143,7 +144,7 @@ struct FormIdentitasDiriView: View {
                     .padding([.horizontal, .top], 30)
                     
                     NavigationLink(
-                        destination: EmailVerificationView().environmentObject(registerData),
+                        destination: TujuanPembukaanRekeningView().environmentObject(registerData),
                         isActive: $nextViewActive,
                         label: {
                             Button(action: {
@@ -153,7 +154,7 @@ struct FormIdentitasDiriView: View {
                                 if imageKTP != nil
                                     && registerData.nik != ""
                                     && confirmNik
-                                    && (registerData.npwp != "" || imageNPWP != nil || !alreadyHaveNpwp)
+                                    && (registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp)
                                     && imageSelfie != nil {
                                     
                                     self.nextViewActive.toggle()

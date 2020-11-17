@@ -127,7 +127,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    NavigationLink(destination: FormPilihJenisTabunganView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    NavigationLink(destination: EmailVerificationView().environmentObject(registerData), isActive: self.$isOtpValid) {
                         Text("")
                     }
                     

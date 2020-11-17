@@ -965,9 +965,6 @@
 		52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */ = {
 			isa = PBXGroup;
 			children = (
-				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
-				52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */,
-				52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */,
 				52ADFF602557DFDB00A1001F /* Coordinator.swift */,
 			);
 			path = "Form Identitas Diri";
@@ -1170,6 +1167,9 @@
 		C00AC550255E51B6005D67C0 /* Non Nasabah */ = {
 			isa = PBXGroup;
 			children = (
+				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
+				52ADFF5E2557DFDB00A1001F /* EmailOTPVerificationView.swift */,
+				52ADFF5F2557DFDB00A1001F /* EmailVerificationView.swift */,
 				52ADFF5B2557DFDB00A1001F /* Form Identitas Diri */,
 				52ADFF792557DFDB00A1001F /* Form Validasi */,
 				52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */,
@@ -1919,14 +1919,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1942,14 +1942,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
