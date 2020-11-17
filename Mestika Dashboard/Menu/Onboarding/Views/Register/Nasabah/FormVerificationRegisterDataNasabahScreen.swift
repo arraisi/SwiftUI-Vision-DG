@@ -409,7 +409,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(title: Text("Message"), message: Text("GAGAL MENDAFTAR"), dismissButton: .default(Text("Oke")))
         }
@@ -451,7 +451,8 @@ struct FormVerificationRegisterDataNasabahScreen: View {
             data.lastName = "R"
             data.email = self.registerData.email
             
-            UserDefaults.standard.set("true", forKey: "isFirstLogin")
+            UserDefaults.standard.set("false", forKey: "isFirstLogin")
+            UserDefaults.standard.set("true", forKey: "isSchedule")
             
             nextRoute = true
             

@@ -443,6 +443,7 @@
 //
 
 import SwiftUI
+import JGProgressHUD_SwiftUI
 
 struct JamWawancara {
     var jam: String
@@ -455,6 +456,14 @@ struct TanggalWawancara {
 struct SuccessRegisterView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    /* HUD Variable */
+    @State private var dim = true
+    
+    /* Routing */
+    @State private var backRoute: Bool = false
     
     /*
      Boolean for Show Modal
@@ -465,6 +474,10 @@ struct SuccessRegisterView: View {
     
     @State var pilihJam: String = ""
     @State var tanggalWawancara: String = ""
+    
+    /* CORE DATA */
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    var user: FetchedResults<User>
     
     @State var date = Date()
     
@@ -620,34 +633,41 @@ struct SuccessRegisterView: View {
                             .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                     }
                     
-                    Button(action : {
-                        showingModal.toggle()
-                    }) {
-                        Text("Buat Janji")
-                            .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    }
-                    .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
-                    .cornerRadius(12)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                    .padding(.bottom, 5)
-                    .disabled(disableForm)
-                    
                     Group {
-                        Button(action : {}) {
-                            Text("Batalkan Permohonan")
-                                .foregroundColor(Color(hex: "#707070"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        }
+                        
+                        NavigationLink(
+                            destination: PilihJenisATMView(),
+                            label: {
+                                Text("Buat Janji")
+                                    .foregroundColor(.white)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .font(.system(size: 13))
+                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            })
+                            .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                            .cornerRadius(12)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
+                            .padding(.bottom, 5)
+                            .disabled(disableForm)
+                        
+                        Button(
+                            action: {
+                                self.showingModal.toggle()
+                            },
+                            label: {
+                                Text("Batalkan Permohonan")
+                                    .foregroundColor(Color(hex: "#707070"))
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .font(.system(size: 13))
+                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            }
+                        )
                         .background(Color.white)
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
+                        
                         
                         Spacer()
                     }
@@ -660,6 +680,12 @@ struct SuccessRegisterView: View {
                 .padding(.top, 90)
                 .padding(.bottom, 35)
             }
+            
+            NavigationLink(
+                destination: WelcomeView(),
+                isActive: self.$backRoute,
+                label: {}
+            )
             
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
@@ -676,11 +702,14 @@ struct SuccessRegisterView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            showIndeterminate()
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            createBottomFloater()
+            popupMessageCancelRegister()
         }
         .popup(isPresented: $showingModalJam, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloaterJam()
@@ -690,9 +719,92 @@ struct SuccessRegisterView: View {
         }
     }
     
-    /*
-     Fuction for Create Bottom Floater (Modal)
-     */
+    func removeUser() {
+        
+        showIndeterminate()
+        
+        let data = user.last
+        managedObjectContext.delete(data!)
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            // handle the Core Data error
+        }
+        
+        UserDefaults.standard.set("false", forKey: "isFirstLogin")
+        UserDefaults.standard.set("false", forKey: "isSchedule")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            print("DELETE SUCCESS")
+            self.backRoute = true
+        }
+    }
+    
+    private func showIndeterminate() {
+        hudCoordinator.showHUD {
+            let hud = JGProgressHUD()
+            if dim {
+                hud.backgroundColor = UIColor(white: 0, alpha: 0.4)
+            }
+            
+            hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 4, opacity: 0.3)
+            hud.vibrancyEnabled = false
+            hud.textLabel.text = "Loading"
+            
+            hud.dismiss(afterDelay: 2)
+            return hud
+        }
+    }
+    
+    // MARK:- POPUP CANCEL REGISTER
+    func popupMessageCancelRegister() -> some View {
+        VStack(alignment: .center) {
+            
+            Text("Batalkan Permohonan")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 30)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Button(
+                action: {},
+                label: {
+                    Text("TIDAK")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 5)
+            
+            Button(
+                action: {
+                    removeUser()
+                },
+                label: {
+                    Text("YA")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color.gray)
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    /* Fuction for Create Bottom Floater (Modal) */
     func createBottomFloater() -> some View {
         VStack(alignment: .leading) {
             Image("Logo M")

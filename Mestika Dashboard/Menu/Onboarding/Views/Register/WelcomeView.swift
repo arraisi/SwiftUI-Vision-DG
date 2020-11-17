@@ -39,6 +39,7 @@ struct WelcomeView: View {
     var loginData = LoginBindingModel()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
+    @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
     
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
@@ -47,6 +48,7 @@ struct WelcomeView: View {
     /* Boolean for Show Modal & Alert */
     @State var showingModal = false
     @State var showingModalRegistered = false
+    @State var showingModalSchedule = false
     @State var showAlert = false
     
     /* Variable for Image Carousel */
@@ -75,7 +77,7 @@ struct WelcomeView: View {
                     .padding(.horizontal, 30)
             }
             
-            if self.showingModal || self.showingModalRegistered {
+            if self.showingModal || self.showingModalRegistered || self.showingModalSchedule {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
             }
         }
@@ -90,13 +92,19 @@ struct WelcomeView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            return Alert(title: Text("Message"), message: Text("New User Success Registered"), dismissButton: .default(Text("Oke")))
+            return Alert(
+                title: Text("Message"),
+                message: Text("New User Success Registered"),
+                dismissButton: .default(Text("Oke")))
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }
         .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageSuccess()
+        }
+        .popup(isPresented: $showingModalSchedule, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageScheduleVideoCall()
         }
     }
     
@@ -155,6 +163,58 @@ struct WelcomeView: View {
     }
     
     // MARK: -Popup Message Success (Modal)
+    func popupMessageScheduleVideoCall() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_highfive")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text("Jadwal Wawancara sudah diterima")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Customer Service kami akan menghubungi anda untuk melakukan konfirmasi dan aktivasi, pastikan anda available pada jam yang telah anda tentukan.")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            Button(
+                action: {
+                    UserDefaults.standard.set("true", forKey: "isFirstLogin")
+                    UserDefaults.standard.set("false", forKey: "isSchedule")
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        showingModalRegistered.toggle()
+                    }
+                },
+                label: {
+                    Text("Kembali")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: -Popup Message Success (Modal)
     func popupMessageSuccess() -> some View {
         VStack(alignment: .leading) {
             Image("ic_highfive")
@@ -191,6 +251,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
+            
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
@@ -250,9 +311,15 @@ struct WelcomeView: View {
     
     func getUserDetails() {
         print(isFirstLogin)
+        print(isSchedule)
         if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
-            //            showAlert.toggle()
             showingModalRegistered.toggle()
+        }
+        
+        if (user.last?.deviceId == deviceId && isSchedule == "true") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                showingModalSchedule.toggle()
+            }
         }
     }
 }
