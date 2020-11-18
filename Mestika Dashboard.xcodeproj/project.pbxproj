@@ -177,7 +177,7 @@
 		52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF6C2557DFDB00A1001F /* TujuanPembukaanRekeningView.swift */; };
 		52ADFF972557DFDC00A1001F /* PINView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF6E2557DFDB00A1001F /* PINView.swift */; };
 		52ADFF982557DFDC00A1001F /* InformasiPerusahaanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF6F2557DFDB00A1001F /* InformasiPerusahaanView.swift */; };
-		52ADFF992557DFDC00A1001F /* SumberPenyandangDanaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF702557DFDB00A1001F /* SumberPenyandangDanaView.swift */; };
+		52ADFF992557DFDC00A1001F /* FormSumberPenyandangDana1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF702557DFDB00A1001F /* FormSumberPenyandangDana1View.swift */; };
 		52ADFF9A2557DFDC00A1001F /* SumberDanaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF712557DFDB00A1001F /* SumberDanaView.swift */; };
 		52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF722557DFDB00A1001F /* PasswordView.swift */; };
 		52ADFF9C2557DFDC00A1001F /* PerkiraanPenarikanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF732557DFDB00A1001F /* PerkiraanPenarikanView.swift */; };
@@ -230,6 +230,7 @@
 		C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702B42554E2B60089DBD1 /* CardLimitView.swift */; };
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
+		C01B3DF02564203300BD3C06 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = C01B3DEF2564203300BD3C06 /* Introspect */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
 		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
 		C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2F92563726700D06EE3 /* KetentuanModel.swift */; };
@@ -259,6 +260,11 @@
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */; };
+		C0E40B7A2564D83F00259612 /* FormJabatanProfesiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E40B792564D83F00259612 /* FormJabatanProfesiView.swift */; };
+		C0E40B822564D90700259612 /* jabatanProfesi.json in Resources */ = {isa = PBXBuildFile; fileRef = C0E40B812564D90700259612 /* jabatanProfesi.json */; };
+		C0E40BAE2564E59200259612 /* FormIndustriTempatBekerjaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E40BAD2564E59200259612 /* FormIndustriTempatBekerjaView.swift */; };
+		C0E40BB32564E5C900259612 /* industriTempatBekerja.json in Resources */ = {isa = PBXBuildFile; fileRef = C0E40BB22564E5C900259612 /* industriTempatBekerja.json */; };
+		C0E40BBE2564E76000259612 /* FormSumberPenyandandDana2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E40BBD2564E76000259612 /* FormSumberPenyandandDana2View.swift */; };
 		C0E6C8FB255F87BB00A79237 /* FormPilihJenisATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */; };
 		C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */; };
 		C0E6C91A255F934D00A79237 /* DetailLimitKartuAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */; };
@@ -459,7 +465,7 @@
 		52ADFF6C2557DFDB00A1001F /* TujuanPembukaanRekeningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TujuanPembukaanRekeningView.swift; sourceTree = "<group>"; };
 		52ADFF6E2557DFDB00A1001F /* PINView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINView.swift; sourceTree = "<group>"; };
 		52ADFF6F2557DFDB00A1001F /* InformasiPerusahaanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformasiPerusahaanView.swift; sourceTree = "<group>"; };
-		52ADFF702557DFDB00A1001F /* SumberPenyandangDanaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumberPenyandangDanaView.swift; sourceTree = "<group>"; };
+		52ADFF702557DFDB00A1001F /* FormSumberPenyandangDana1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSumberPenyandangDana1View.swift; sourceTree = "<group>"; };
 		52ADFF712557DFDB00A1001F /* SumberDanaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SumberDanaView.swift; sourceTree = "<group>"; };
 		52ADFF722557DFDB00A1001F /* PasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		52ADFF732557DFDB00A1001F /* PerkiraanPenarikanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerkiraanPenarikanView.swift; sourceTree = "<group>"; };
@@ -539,6 +545,11 @@
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOTPVerificationView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCVVVerificationView.swift; sourceTree = "<group>"; };
+		C0E40B792564D83F00259612 /* FormJabatanProfesiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormJabatanProfesiView.swift; sourceTree = "<group>"; };
+		C0E40B812564D90700259612 /* jabatanProfesi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = jabatanProfesi.json; sourceTree = "<group>"; };
+		C0E40BAD2564E59200259612 /* FormIndustriTempatBekerjaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormIndustriTempatBekerjaView.swift; sourceTree = "<group>"; };
+		C0E40BB22564E5C900259612 /* industriTempatBekerja.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = industriTempatBekerja.json; sourceTree = "<group>"; };
+		C0E40BBD2564E76000259612 /* FormSumberPenyandandDana2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSumberPenyandandDana2View.swift; sourceTree = "<group>"; };
 		C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPilihJenisATMView.swift; sourceTree = "<group>"; };
 		C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLimitKartuAtmView.swift; sourceTree = "<group>"; };
 		C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLimitKartuAtmView.swift; sourceTree = "<group>"; };
@@ -558,6 +569,7 @@
 				52E0557E2563C307009294DA /* NavigationStack in Frameworks */,
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
 				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
+				C01B3DF02564203300BD3C06 /* Introspect in Frameworks */,
 				C06AC3112563770700D06EE3 /* SwiftUIX in Frameworks */,
 				526A814A2560AAAD00D614CB /* BottomSheet in Frameworks */,
 			);
@@ -942,6 +954,8 @@
 				52ADFE8D2557D99F00A1001F /* perkiraanSetoran.json */,
 				52ADFE8E2557D99F00A1001F /* sumberPendapatanLainnya.json */,
 				52ADFE8F2557D99F00A1001F /* besarPerkiraanSetoran.json */,
+				C0E40B812564D90700259612 /* jabatanProfesi.json */,
+				C0E40BB22564E5C900259612 /* industriTempatBekerja.json */,
 			);
 			path = "Pembukaan Rekening";
 			sourceTree = "<group>";
@@ -973,14 +987,17 @@
 			children = (
 				52ADFF652557DFDB00A1001F /* BesarPerkiraanPenarikanView.swift */,
 				52ADFF662557DFDB00A1001F /* KeluargaTerdekat.swift */,
-				52ADFF672557DFDB00A1001F /* PerkerjaanView.swift */,
 				52ADFF682557DFDB00A1001F /* PerkiraanSetoranView.swift */,
 				52ADFF692557DFDB00A1001F /* BesarPerkiraanSetoranView.swift */,
 				52ADFF6B2557DFDB00A1001F /* SumberPendapatanLainnyaView.swift */,
 				52ADFF6C2557DFDB00A1001F /* TujuanPembukaanRekeningView.swift */,
 				52ADFF6E2557DFDB00A1001F /* PINView.swift */,
+				52ADFF672557DFDB00A1001F /* PerkerjaanView.swift */,
+				C0E40B792564D83F00259612 /* FormJabatanProfesiView.swift */,
+				C0E40BAD2564E59200259612 /* FormIndustriTempatBekerjaView.swift */,
 				52ADFF6F2557DFDB00A1001F /* InformasiPerusahaanView.swift */,
-				52ADFF702557DFDB00A1001F /* SumberPenyandangDanaView.swift */,
+				52ADFF702557DFDB00A1001F /* FormSumberPenyandangDana1View.swift */,
+				C0E40BBD2564E76000259612 /* FormSumberPenyandandDana2View.swift */,
 				52ADFF712557DFDB00A1001F /* SumberDanaView.swift */,
 				52ADFF722557DFDB00A1001F /* PasswordView.swift */,
 				52ADFF732557DFDB00A1001F /* PerkiraanPenarikanView.swift */,
@@ -1377,6 +1394,7 @@
 				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
 				C06AC3102563770700D06EE3 /* SwiftUIX */,
 				52E0557D2563C307009294DA /* NavigationStack */,
+				C01B3DEF2564203300BD3C06 /* Introspect */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1456,6 +1474,7 @@
 				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
 				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -1491,10 +1510,12 @@
 				5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */,
 				52ADFEA22557D99F00A1001F /* sumberPenyandangDana.json in Resources */,
 				52BF57D42558E57D00F009B5 /* savingTypeData.json in Resources */,
+				C0E40B822564D90700259612 /* jabatanProfesi.json in Resources */,
 				52ADFEA72557D99F00A1001F /* besarPerkiraanSetoran.json in Resources */,
 				C0A4F99C25528C0700566A11 /* Montserrat-Medium.ttf in Resources */,
 				52ADFE9E2557D99F00A1001F /* besarPerkiraanPenarikan.json in Resources */,
 				C0A4F99D25528C0700566A11 /* Montserrat-Black.ttf in Resources */,
+				C0E40BB32564E5C900259612 /* industriTempatBekerja.json in Resources */,
 				C0A4F99625528C0700566A11 /* Montserrat-SemiBold.ttf in Resources */,
 				52ADFE932557D99F00A1001F /* masterData.json in Resources */,
 				C0A4F99B25528C0700566A11 /* Montserrat-ExtraBold.ttf in Resources */,
@@ -1525,6 +1546,7 @@
 			files = (
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
+				C0E40BAE2564E59200259612 /* FormIndustriTempatBekerjaView.swift in Sources */,
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				5290A16D255BCCDC0090F788 /* FormPenghasilanKotorNasabahScreen.swift in Sources */,
@@ -1602,7 +1624,7 @@
 				5247463F2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift in Sources */,
 				52ADFE942557D99F00A1001F /* MasterModel.swift in Sources */,
 				5290A172255BCD170090F788 /* FormSumberPendapatanLainnyaScreen.swift in Sources */,
-				52ADFF992557DFDC00A1001F /* SumberPenyandangDanaView.swift in Sources */,
+				52ADFF992557DFDC00A1001F /* FormSumberPenyandangDana1View.swift in Sources */,
 				525DB51F2546869B00D48075 /* PinView.swift in Sources */,
 				525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */,
 				52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */,
@@ -1642,6 +1664,7 @@
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
 				5290A154255BCB0F0090F788 /* FormBesarPerkiraanPenarikanDanaNasabahScreen.swift in Sources */,
+				C0E40BBE2564E76000259612 /* FormSumberPenyandandDana2View.swift in Sources */,
 				525FA11D25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift in Sources */,
 				C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */,
 				5290A186255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift in Sources */,
@@ -1676,6 +1699,7 @@
 				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
 				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
 				52ADFFAC2557DFDC00A1001F /* FormDetailKartuATMView.swift in Sources */,
+				C0E40B7A2564D83F00259612 /* FormJabatanProfesiView.swift in Sources */,
 				52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */,
 				52ADFF922557DFDC00A1001F /* BesarPerkiraanSetoranView.swift in Sources */,
 				52ADFEAD2557D9A800A1001F /* Card.swift in Sources */,
@@ -1919,14 +1943,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 7UWQ7HF465;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.visiondg.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1942,14 +1966,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 7UWQ7HF465;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mlpt.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.visiondg.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2123,6 +2147,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
@@ -2158,6 +2190,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
 			productName = NavigationStack;
+		};
+		C01B3DEF2564203300BD3C06 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		C06AC3102563770700D06EE3 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;

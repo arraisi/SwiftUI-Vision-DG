@@ -27,12 +27,7 @@ struct KetentuanRegisterNasabahView: View {
                     .frame(height: 300)
                 Color(hex: "#F6F8FB")
             }
-            
-            VStack {
-                Spacer()
-                cardForm
-                Spacer()
-            }
+            cardForm
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
@@ -59,9 +54,12 @@ struct KetentuanRegisterNasabahView: View {
                         Text(data.number)
                             .font(.custom("Montserrat-Bold", size: 12))
                             .foregroundColor(Color(hex: "#232175"))
+                        
                         Text(data.caption)
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(.gray)
+                        
+                        Spacer()
                     }
                     .fixedSize(horizontal: false, vertical: true)
                 }
