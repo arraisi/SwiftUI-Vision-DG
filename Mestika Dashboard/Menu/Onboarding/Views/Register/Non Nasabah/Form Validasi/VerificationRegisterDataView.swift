@@ -55,32 +55,32 @@ struct VerificationRegisterDataView: View {
                         
                         VStack(alignment: .leading) {
                             Group {
-                                LabelTextField(value: $registerData.nik, label: "KTP", placeHolder: "KTP") { (Bool) in
+                                LabelTextFieldWithIcon(value: $registerData.nik, label: "KTP", placeHolder: "KTP") {
+                                    (Bool) in
                                     print("on edit")
                                 } onCommit: {
                                     print("on commit")
-                                }
-                                .padding(.top, 20)
+                                }.padding(.top, 20)
                                 .padding(.horizontal, 20)
                                 .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                                 
-                                LabelTextField(value: $registerData.noTelepon, label: "No. Telepon", placeHolder: "No. Telepon") { (Bool) in
+                                LabelTextFieldWithIcon(value: $registerData.noTelepon, label: "No. Telepon", placeHolder: "No. Telepon") {
+                                    (Bool) in
                                     print("on edit")
                                 } onCommit: {
                                     print("on commit")
-                                }
-                                .padding(.top, 10)
+                                }.padding(.top, 10)
                                 .padding(.horizontal, 20)
                                 .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                                 
-                                LabelTextField(value: $registerData.email, label: "Email", placeHolder: "Email") { (Bool) in
+                                LabelTextFieldWithIcon(value: registerData.email, label: "Email", placeHolder: "Email") {
+                                    (Bool) in
                                     print("on edit")
                                 } onCommit: {
                                     print("on commit")
-                                }
-                                .padding(.top, 10)
+                                }.padding(.top, 10)
                                 .padding(.horizontal, 20)
-                                .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                .disabled(true)
                                 
                                 VStack {
                                     HStack {
