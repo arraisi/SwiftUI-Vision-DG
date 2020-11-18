@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "name": "Pilihan 1"
+        "name": "Ibu Rumah Tangga"
     },
     {
         "id": 2,
-        "name": "Pilihan 2"
+        "name": "Pensiunan"
     },
     {
         "id": 3,
-        "name": "Pilihan 3"
+        "name": "Pelajar / Mahasiswa"
     }
 ]

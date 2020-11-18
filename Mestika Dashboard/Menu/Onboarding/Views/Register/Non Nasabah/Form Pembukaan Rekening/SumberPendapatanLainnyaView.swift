@@ -10,15 +10,21 @@ import SwiftUI
 struct SumberPendapatanLainnyaView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+//    var registerData = RegistrasiModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let sumberPendapatanLainnya: [MasterModel] = load("sumberPendapatanLainnya.json")
     @State var sumberPendapatanLain = ""
     
     @State var selectedId = 0
+    @State var selection: String?
+    
+    @State var sumberPendapatanLainIndex = 0
+    @State var isShowingKeluargaTerdekat = false
     
     var body: some View {
-        ZStack {
+        
+        ZStack(alignment: .top) {
             Color(hex: "#232175")
             
             VStack {
@@ -30,6 +36,7 @@ struct SumberPendapatanLainnyaView: View {
                     .cornerRadius(radius: 25.0, corners: .topLeft)
                     .cornerRadius(radius: 25.0, corners: .topRight)
             }
+            
             
             VStack {
                 ScrollView {
@@ -104,15 +111,16 @@ struct SumberPendapatanLainnyaView: View {
                                         }
                                         
                                         if self.selectedId == 1 {
-                                            TextField("Sumber Pendapatan Lainnya", text: $sumberPendapatanLain) {change in
-                                            } onCommit: {
+                                            VStack(alignment: .leading) {
+                                                TextFieldWithPickerAsInput(data: ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"], placeholder: "Pilih pendapatan lainnya", selectionIndex:$sumberPendapatanLainIndex, text: $registerData.sumberPendapatanLain)
+                                                    .frame(height: 36)
+                                                    .font(Font.system(size: 14))
+                                                    .padding(.horizontal)
+                                                    .background(Color.gray.opacity(0.1))
+                                                    .cornerRadius(10)
+                                                
                                             }
-                                            .font(Font.system(size: 14))
-                                            .frame(height: 36)
-                                            .padding(.horizontal)
-                                            .background(Color.gray.opacity(0.1))
-                                            .cornerRadius(10)
-                                            .padding(.leading, 25)
+                                            .padding(.horizontal, 20)
                                         }
                                         
                                         Button(action:{
@@ -145,8 +153,17 @@ struct SumberPendapatanLainnyaView: View {
                                 .cornerRadius(15)
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
+                                NavigationLink(
+                                    destination: KeluargaTerdekat().environmentObject(registerData),
+                                    tag: "keluargaTerdekat",
+                                    selection: $selection,
+                                    label: {EmptyView()})
+                                
                                 // Button
-                                NavigationLink(destination: KeluargaTerdekat().environmentObject(registerData), label:{
+                                Button(action: {
+                                    registerData.sumberPendapatanLainnyaId = self.selectedId
+                                    self.selection = "keluargaTerdekat"
+                                }, label:{
                                     
                                     Text("Berikutnya")
                                         .foregroundColor(.white)
@@ -154,9 +171,9 @@ struct SumberPendapatanLainnyaView: View {
                                         .frame(maxWidth: .infinity, maxHeight: 40)
                                     
                                 })
-                                .disabled(registerData.sumberPendapatanLainnyaId == 0)
+                                .disabled(self.selectedId == 0)
                                 .frame(height: 50)
-                                .background(registerData.sumberPendapatanLainnyaId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                .background(self.selectedId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
                                 .cornerRadius(12)
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 25)
@@ -172,9 +189,11 @@ struct SumberPendapatanLainnyaView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.all)
+//        .onTapGesture() {
+//            UIApplication.shared.endEditing()
+//        }
         
     }
 }

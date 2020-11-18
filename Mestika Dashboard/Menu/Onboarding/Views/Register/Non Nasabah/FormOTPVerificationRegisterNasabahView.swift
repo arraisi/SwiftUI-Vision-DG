@@ -275,7 +275,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
         var chars = Array(myString)
-        if chars.count > 5 {
+        if chars.count >= 9 {
             for data in index {
                 chars[data] = newChar
             }
