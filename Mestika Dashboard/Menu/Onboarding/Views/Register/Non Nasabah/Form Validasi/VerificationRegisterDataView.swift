@@ -73,7 +73,7 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                                 
-                                LabelTextFieldWithIcon(value: registerData.email, label: "Email", placeHolder: "Email") {
+                                LabelTextFieldWithIcon(value: $registerData.email, label: "Email", placeHolder: "Email") {
                                     (Bool) in
                                     print("on edit")
                                 } onCommit: {
