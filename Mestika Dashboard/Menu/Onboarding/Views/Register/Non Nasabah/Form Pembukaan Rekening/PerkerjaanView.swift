@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct PerkerjaanView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var editMode: EditMode = .inactive
+    @State var selection: String?
+    @State var isShowingInformasiPerusahaan = false
     
     let pekerjaan: [MasterModel] = load("pekerjaan.json")
     
@@ -96,39 +99,99 @@ struct PerkerjaanView: View {
                                 .cornerRadius(15)
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
+                                // Navigation Jabatan Profesi
+                                NavigationLink(
+                                    destination: FormJabatanProfesiView().environmentObject(registerData),
+                                    tag: "jabatanProfesi",
+                                    selection: $selection,
+                                    label: {EmptyView()})
+                                
+                                // Navigation Sumber Penyandang Dana
+                                NavigationLink(
+                                    destination: FormSumberPenyandangDana1View().environmentObject(registerData),
+                                    tag: "sumberPenyandangDana",
+                                    selection: $selection,
+                                    label: {EmptyView()})
+                                
+                                // Navigation Sumber Penyandang Dana
+                                NavigationLink(
+                                    destination: InformasiPerusahaanView().environmentObject(registerData),
+                                    tag: "informasiPerusahaan",
+                                    selection: $selection,
+                                    label: {EmptyView()})
+                                
+                                // Navigation Industri Tempat Bekerja
+                                NavigationLink(
+                                    destination: FormIndustriTempatBekerjaView().environmentObject(registerData),
+                                    tag: "industriTempatBekerja",
+                                    selection: $selection,
+                                    label: {EmptyView()})
+                                
                                 // Button
                                 if (editMode == .inactive) {
-                                    if registerData.pekerjaanId == 9 {
-                                        NavigationLink(destination: SumberPenyandangDanaView().environmentObject(registerData)) {
-                                            
-                                            Text("Berikutnya")
-                                                .foregroundColor(.white)
-                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                                .frame(maxWidth: .infinity, maxHeight: 40)
-                                            
+                                    
+                                    Button(action: {
+                                        print("pekerjaan id : \(registerData.pekerjaanId)")
+                                        
+                                        switch registerData.pekerjaanId {
+                                        case 6 :
+                                            self.selection = "jabatanProfesi"
+                                        case 9:
+                                            self.selection = "industriTempatBekerja"
+                                        case 10:
+                                            self.selection = "sumberPenyandangDana"
+                                        case 11:
+                                            self.selection = "sumberPenyandangDana"
+                                        case 12:
+                                            self.selection = "sumberPenyandangDana"
+                                        default:
+                                            self.selection = "informasiPerusahaan"
                                         }
-                                        .disabled(registerData.pekerjaanId == 0)
-                                        .frame(height: 50)
-                                        .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                        .cornerRadius(12)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 25)
-                                    } else {
-                                        NavigationLink(destination: InformasiPerusahaanView().environmentObject(registerData)) {
-                                            
-                                            Text("Berikutnya")
-                                                .foregroundColor(.white)
-                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                                .frame(maxWidth: .infinity, maxHeight: 40)
-                                            
-                                        }
-                                        .disabled(registerData.pekerjaanId == 0)
-                                        .frame(height: 50)
-                                        .background(Color(hex: "#2334D0"))
-                                        .cornerRadius(12)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 25)
-                                    }
+                                        
+                                    }, label: {
+                                        Text("Berikutnya")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                    })
+                                    .disabled(registerData.pekerjaanId == 0)
+                                    .frame(height: 50)
+                                    .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
+                                    
+                                    //                                    if registerData.pekerjaanId == 9 {
+                                    //                                        NavigationLink(destination: SumberPenyandangDanaView().environmentObject(registerData)) {
+                                    //
+                                    //                                            Text("Berikutnya")
+                                    //                                                .foregroundColor(.white)
+                                    //                                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                    //                                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                    //
+                                    //                                        }
+                                    //                                        .disabled(registerData.pekerjaanId == 0)
+                                    //                                        .frame(height: 50)
+                                    //                                        .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    //                                        .cornerRadius(12)
+                                    //                                        .padding(.horizontal, 20)
+                                    //                                        .padding(.vertical, 25)
+                                    //                                    } else {
+                                    //                                        NavigationLink(destination: InformasiPerusahaanView().environmentObject(registerData)) {
+                                    //
+                                    //                                            Text("Berikutnya")
+                                    //                                                .foregroundColor(.white)
+                                    //                                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                    //                                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                    //
+                                    //                                        }
+                                    //                                        .disabled(registerData.pekerjaanId == 0)
+                                    //                                        .frame(height: 50)
+                                    //                                        .background(Color(hex: "#2334D0"))
+                                    //                                        .cornerRadius(12)
+                                    //                                        .padding(.horizontal, 20)
+                                    //                                        .padding(.vertical, 25)
+                                    //                                    }
                                     
                                 } else {
                                     NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {

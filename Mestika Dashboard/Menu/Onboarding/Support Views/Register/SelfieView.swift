@@ -52,8 +52,8 @@ struct SelfieView: View {
             
             Button(action: {
                 print("ON TAP SELFIE")
-                self.shouldPresentActionScheet.toggle()
                 self.onChange()
+                self.shouldPresentActionScheet.toggle()
             }, label: {
                 Text(imageSelfie == nil ? "Ambil Gambar Selfie" : "Ganti Foto Lain")
                     .foregroundColor(imageSelfie == nil ? .white : Color(hex: "#2334D0"))

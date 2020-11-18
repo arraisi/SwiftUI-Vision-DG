@@ -49,9 +49,8 @@ struct ScanNPWPView: View {
             )
             
             Button(action: {
-                //                self.showMaskingCamera = false
-                self.onChange()
                 self.shouldPresentActionScheet.toggle()
+                self.onChange()
             }) {
                 Text(imageNPWP == nil ? "Ambil Foto NPWP" : "Ganti Foto Lain")
                     .foregroundColor(imageNPWP == nil ? .white : Color(hex: "#2334D0"))

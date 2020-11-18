@@ -33,6 +33,18 @@
     },
     {
         "id": 9,
+        "name": "Wiraswasta"
+    },
+    {
+        "id": 10,
         "name": "Pensiunan"
+    },
+    {
+        "id": 11,
+        "name": "Pelajar / Mahasiswa"
+    },
+    {
+        "id": 12,
+        "name": "Ibu Rumah Tangga"
     }
 ]

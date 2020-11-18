@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Supervisor"
+    },
+    {
+        "id": 2,
+        "name": "Manager"
+    },
+    {
+        "id": 3,
+        "name": "Direksi"
+    },
+    {
+        "id": 4,
+        "name": "Komisaris"
+    }
+]

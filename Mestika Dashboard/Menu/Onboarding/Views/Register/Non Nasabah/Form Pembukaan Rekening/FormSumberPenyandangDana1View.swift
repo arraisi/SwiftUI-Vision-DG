@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SumberPenyandangDanaView: View {
+struct FormSumberPenyandangDana1View: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -70,7 +70,7 @@ struct SumberPenyandangDanaView: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Sumber Penyandang Dana")
+                                Text("Sumber Penyandang Dana - 01")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .padding(.horizontal, 20)
@@ -100,7 +100,7 @@ struct SumberPenyandangDanaView: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 // Button
-                                NavigationLink(destination: PenghasilanKotorView().environmentObject(registerData), label:{
+                                NavigationLink(destination: FormSumberPenyandandDana2View().environmentObject(registerData), label:{
                                     
                                     Text("Berikutnya")
                                         .foregroundColor(.white)
@@ -140,6 +140,6 @@ struct SumberPenyandangDanaView: View {
 
 struct FormSumberPenyandangDanaView_Previews: PreviewProvider {
     static var previews: some View {
-        SumberPenyandangDanaView().environmentObject(RegistrasiModel())
+        FormSumberPenyandangDana1View().environmentObject(RegistrasiModel())
     }
 }
