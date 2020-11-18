@@ -18,9 +18,11 @@ struct ScanNPWPView: View {
     @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
     @Binding var shouldPresentActionScheet : Bool
-    
+
     let onChange: ()->()
     let onCommit: ()->()
+    
+    @State var isValidNPWP: Bool = false
     
     var body: some View {
         VStack(alignment: .center) {
@@ -70,18 +72,23 @@ struct ScanNPWPView: View {
                     .font(.custom("Montserrat-SemiBold", size: 10))
                     .foregroundColor(.black)
                 
-                TextField("No. NPWP", text: $npwp)
-                    .frame(height: 10)
-                    .font(.custom("Montserrat-SemiBold", size: 12))
-                    .foregroundColor(.black)
-                    .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .keyboardType(.numberPad)
-                    .onReceive(npwp.publisher.collect()) {
-                        self.npwp = String($0.prefix(15))
-                    }
-                    .disabled(alreadyHaveNpwp)
+                TextFieldValidation(data: $npwp, title: "No. NPWP", disable: false, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in
+                    self.npwp = String(str.prefix(15))
+                    self.isValidNPWP = str.count == 15
+                }
+                
+//                TextField("No. NPWP", text: $npwp)
+//                    .frame(height: 10)
+//                    .font(.custom("Montserrat-SemiBold", size: 12))
+//                    .foregroundColor(.black)
+//                    .padding()
+//                    .background(Color.gray.opacity(0.1))
+//                    .cornerRadius(10)
+//                    .keyboardType(.numberPad)
+//                    .onReceive(npwp.publisher.collect()) {
+//                        self.npwp = String($0.prefix(15))
+//                    }
+//                    .disabled(alreadyHaveNpwp)
                 
                 Button(action: toggleHasNpwp) {
                     HStack(alignment: .top) {
@@ -137,7 +144,6 @@ struct ScanNPWPView: View {
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
         ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false)) {
-            
         } onCommit: {
             
         }

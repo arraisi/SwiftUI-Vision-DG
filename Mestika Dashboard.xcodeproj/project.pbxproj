@@ -17,6 +17,8 @@
 		0658B5AE256401BA001B659D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AD256401BA001B659D /* FirebaseAnalytics */; };
 		0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AF256401BA001B659D /* FirebaseMessaging */; };
 		0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5B1256401BA001B659D /* FirebaseAuth */; };
+		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
+		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -307,6 +309,8 @@
 		0658B5912563F8A1001B659D /* NotificationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 		0658B5932563F8A1001B659D /* ListNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNotificationView.swift; sourceTree = "<group>"; };
 		0658B5A62563FA6D001B659D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
+		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
@@ -665,6 +669,8 @@
 				C04B958A255450D0006690C2 /* PopUpBubble.swift */,
 				C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */,
 				C00702C6255531280089DBD1 /* DismissingKeyboard.swift */,
+				0A4010712563E00B00983B16 /* TextFieldValidation.swift */,
+				0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -1664,6 +1670,7 @@
 				52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */,
 				52ADFF542557DEEA00A1001F /* TextFieldWithPickerAsInput.swift in Sources */,
 				52ADFF8C2557DFDC00A1001F /* WelcomeView.swift in Sources */,
+				0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */,
 				525950262553E03000C8CA5D /* LoginScreen.swift in Sources */,
 				C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
@@ -1815,6 +1822,7 @@
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,
+				0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */,
 				52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				5290A14A255BCA0E0090F788 /* FormSumberDanaNasabahScreen.swift in Sources */,

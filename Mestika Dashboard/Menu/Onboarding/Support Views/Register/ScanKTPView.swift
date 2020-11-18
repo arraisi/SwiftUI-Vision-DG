@@ -27,6 +27,8 @@ struct ScanKTPView: View {
     let onChange: ()->()
     let onCommit: ()->()
     
+    @State var isValidKtp: Bool = false
+    
     var body: some View {
         VStack(alignment: .center) {
             Text("Mohon siapkan terlebih dahulu \nKartu Tanda Penduduk (KTP) Anda")
@@ -73,18 +75,24 @@ struct ScanKTPView: View {
                     .font(.custom("Montserrat-SemiBold", size: 10))
                     .foregroundColor(.black)
                 
-                TextField("No. KTP (Otomatis terisi)", text: $nik)
-                    .frame(height: 10)
-                    .font(.custom("Montserrat-SemiBold", size: 12))
-                    .foregroundColor(.black)
-                    .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .keyboardType(.numberPad)
-                    .onReceive(nik.publisher.collect()) {
-                        self.nik = String($0.prefix(16))
-                    }
-                    .disabled(!confirmNik)
+                TextFieldValidation(data: $nik, title: "No. KTP (Otomatis terisi)", disable: !confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
+                    self.nik = String(str.prefix(16))
+                    self.isValidKtp = str.count == 16
+                    
+                }
+                
+//                TextField("No. KTP (Otomatis terisi)", text: $nik)
+//                    .frame(height: 10)
+//                    .font(.custom("Montserrat-SemiBold", size: 12))
+//                    .foregroundColor(.black)
+//                    .padding()
+//                    .background(Color.gray.opacity(0.1))
+//                    .cornerRadius(10)
+//                    .keyboardType(.numberPad)
+//                    .onReceive(nik.publisher.collect()) {
+//                        self.nik = String($0.prefix(16))
+//                    }
+//                    .disabled(!confirmNik)
                 
                 Button(action: {self.confirmNik.toggle()}) {
                     HStack(alignment: .top) {
