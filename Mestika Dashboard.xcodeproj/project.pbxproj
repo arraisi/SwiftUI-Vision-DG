@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */; };
+		0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58F2563F8A1001B659D /* NotificationMonthly.swift */; };
+		0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5902563F8A1001B659D /* NotificationModel.swift */; };
+		0658B5972563F8A2001B659D /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5912563F8A1001B659D /* NotificationScreen.swift */; };
+		0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5932563F8A1001B659D /* ListNotificationView.swift */; };
+		0658B59F2563F904001B659D /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B59E2563F904001B659D /* SlidingTabView */; };
+		0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0658B5A62563FA6D001B659D /* Colors.xcassets */; };
+		0658B5AE256401BA001B659D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AD256401BA001B659D /* FirebaseAnalytics */; };
+		0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AF256401BA001B659D /* FirebaseMessaging */; };
+		0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5B1256401BA001B659D /* FirebaseAuth */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
@@ -18,7 +28,7 @@
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
 		5245F889253FE702002E8B53 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F888253FE702002E8B53 /* ContentView.swift */; };
 		5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */; };
-		5245F88E253FE705002E8B53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5245F88D253FE705002E8B53 /* Assets.xcassets */; };
+		5245F88E253FE705002E8B53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5245F88D253FE705002E8B53 /* Images.xcassets */; };
 		5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5245F890253FE705002E8B53 /* Preview Assets.xcassets */; };
 		5245F894253FE705002E8B53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5245F892253FE705002E8B53 /* LaunchScreen.storyboard */; };
 		5245F89F253FE706002E8B53 /* Mestika_DashboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F89E253FE706002E8B53 /* Mestika_DashboardTests.swift */; };
@@ -293,6 +303,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAnnouncementView.swift; sourceTree = "<group>"; };
+		0658B58F2563F8A1001B659D /* NotificationMonthly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationMonthly.swift; sourceTree = "<group>"; };
+		0658B5902563F8A1001B659D /* NotificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		0658B5912563F8A1001B659D /* NotificationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
+		0658B5932563F8A1001B659D /* ListNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNotificationView.swift; sourceTree = "<group>"; };
+		0658B5A62563FA6D001B659D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
@@ -304,7 +320,7 @@
 		5245F886253FE702002E8B53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5245F888253FE702002E8B53 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5245F88B253FE702002E8B53 /* Mestika_Dashboard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mestika_Dashboard.xcdatamodel; sourceTree = "<group>"; };
-		5245F88D253FE705002E8B53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5245F88D253FE705002E8B53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5245F890253FE705002E8B53 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5245F893253FE705002E8B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5245F895253FE705002E8B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -565,8 +581,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */,
+				0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */,
 				522563842562549900BCAB67 /* JGProgressHUD-SwiftUI in Frameworks */,
 				52E0557E2563C307009294DA /* NavigationStack in Frameworks */,
+				0658B5AE256401BA001B659D /* FirebaseAnalytics in Frameworks */,
+				0658B59F2563F904001B659D /* SlidingTabView in Frameworks */,
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
 				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
 				C01B3DF02564203300BD3C06 /* Introspect in Frameworks */,
@@ -592,6 +612,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0658B58C2563F8A1001B659D /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */,
+				0658B58E2563F8A1001B659D /* BindingModel */,
+				0658B5912563F8A1001B659D /* NotificationScreen.swift */,
+				0658B5932563F8A1001B659D /* ListNotificationView.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		0658B58E2563F8A1001B659D /* BindingModel */ = {
+			isa = PBXGroup;
+			children = (
+				0658B58F2563F8A1001B659D /* NotificationMonthly.swift */,
+				0658B5902563F8A1001B659D /* NotificationModel.swift */,
+			);
+			path = BindingModel;
+			sourceTree = "<group>";
+		};
+		0658B5AB2563FAEE001B659D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				5245F88D253FE705002E8B53 /* Images.xcassets */,
+				0658B5A62563FA6D001B659D /* Colors.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		523A86282542BE8600ADFE25 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +699,7 @@
 		5245F883253FE702002E8B53 /* Mestika Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0658B5AB2563FAEE001B659D /* Assets */,
 				523A86282542BE8600ADFE25 /* Components */,
 				52474D822540320D0094B758 /* Extensions */,
 				C00AC552255E52E2005D67C0 /* Menu */,
@@ -658,7 +708,6 @@
 				5245F884253FE702002E8B53 /* AppDelegate.swift */,
 				5245F886253FE702002E8B53 /* SceneDelegate.swift */,
 				5245F888253FE702002E8B53 /* ContentView.swift */,
-				5245F88D253FE705002E8B53 /* Assets.xcassets */,
 				5245F892253FE705002E8B53 /* LaunchScreen.storyboard */,
 				5245F895253FE705002E8B53 /* Info.plist */,
 				5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */,
@@ -1258,6 +1307,7 @@
 		C01C67A4255E38180019D06F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0658B58C2563F8A1001B659D /* Notification */,
 				52BF57F52559279100F009B5 /* PaymentTransaction */,
 				526B657A254FB20800C13C36 /* Account */,
 				5247460E2547CA38001F43C5 /* Favorite */,
@@ -1394,6 +1444,10 @@
 				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
 				C06AC3102563770700D06EE3 /* SwiftUIX */,
 				52E0557D2563C307009294DA /* NavigationStack */,
+				0658B59E2563F904001B659D /* SlidingTabView */,
+				0658B5AD256401BA001B659D /* FirebaseAnalytics */,
+				0658B5AF256401BA001B659D /* FirebaseMessaging */,
+				0658B5B1256401BA001B659D /* FirebaseAuth */,
 				C01B3DEF2564203300BD3C06 /* Introspect */,
 			);
 			productName = "Mestika Dashboard";
@@ -1474,6 +1528,8 @@
 				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
 				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
@@ -1510,6 +1566,7 @@
 				5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */,
 				52ADFEA22557D99F00A1001F /* sumberPenyandangDana.json in Resources */,
 				52BF57D42558E57D00F009B5 /* savingTypeData.json in Resources */,
+				0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */,
 				C0E40B822564D90700259612 /* jabatanProfesi.json in Resources */,
 				52ADFEA72557D99F00A1001F /* besarPerkiraanSetoran.json in Resources */,
 				C0A4F99C25528C0700566A11 /* Montserrat-Medium.ttf in Resources */,
@@ -1519,7 +1576,7 @@
 				C0A4F99625528C0700566A11 /* Montserrat-SemiBold.ttf in Resources */,
 				52ADFE932557D99F00A1001F /* masterData.json in Resources */,
 				C0A4F99B25528C0700566A11 /* Montserrat-ExtraBold.ttf in Resources */,
-				5245F88E253FE705002E8B53 /* Assets.xcassets in Resources */,
+				5245F88E253FE705002E8B53 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1554,6 +1611,7 @@
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,
 				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
+				0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */,
 				52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */,
 				52474D79254028CD0094B758 /* AccountTabs.swift in Sources */,
 				52ADFE992557D99F00A1001F /* DetailJenisATMModel.swift in Sources */,
@@ -1664,10 +1722,12 @@
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
 				5290A154255BCB0F0090F788 /* FormBesarPerkiraanPenarikanDanaNasabahScreen.swift in Sources */,
+				0658B5972563F8A2001B659D /* NotificationScreen.swift in Sources */,
 				C0E40BBE2564E76000259612 /* FormSumberPenyandandDana2View.swift in Sources */,
 				525FA11D25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift in Sources */,
 				C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */,
 				5290A186255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift in Sources */,
+				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
@@ -1681,6 +1741,7 @@
 				5290A134255BC7200090F788 /* FormEmailVerificationNasabahScreen.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
 				5290A177255BCD5E0090F788 /* FormDataKeluargaTerdekatNasabahScreen.swift in Sources */,
+				0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */,
 				526A81672560B2B200D614CB /* FirstLoginView.swift in Sources */,
 				C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */,
 				52ADFF912557DFDC00A1001F /* PerkiraanSetoranView.swift in Sources */,
@@ -1757,6 +1818,7 @@
 				52ADFEBC2557DA0700A1001F /* RecognizedText.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,
+				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,
@@ -1950,6 +2012,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.visiondg.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1973,6 +2036,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.visiondg.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2107,6 +2171,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+		0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
 		522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI";
@@ -2166,6 +2246,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0658B59E2563F904001B659D /* SlidingTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */;
+			productName = SlidingTabView;
+		};
+		0658B5AD256401BA001B659D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		0658B5AF256401BA001B659D /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		0658B5B1256401BA001B659D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */;
