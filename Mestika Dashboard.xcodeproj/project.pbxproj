@@ -228,6 +228,7 @@
 		C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702B42554E2B60089DBD1 /* CardLimitView.swift */; };
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
+		C01B3DF02564203300BD3C06 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = C01B3DEF2564203300BD3C06 /* Introspect */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
 		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
 		C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2F92563726700D06EE3 /* KetentuanModel.swift */; };
@@ -554,6 +555,7 @@
 				52E0557E2563C307009294DA /* NavigationStack in Frameworks */,
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
 				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
+				C01B3DF02564203300BD3C06 /* Introspect in Frameworks */,
 				C06AC3112563770700D06EE3 /* SwiftUIX in Frameworks */,
 				526A814A2560AAAD00D614CB /* BottomSheet in Frameworks */,
 			);
@@ -1371,6 +1373,7 @@
 				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
 				C06AC3102563770700D06EE3 /* SwiftUIX */,
 				52E0557D2563C307009294DA /* NavigationStack */,
+				C01B3DEF2564203300BD3C06 /* Introspect */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1450,6 +1453,7 @@
 				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
 				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -2115,6 +2119,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
@@ -2150,6 +2162,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
 			productName = NavigationStack;
+		};
+		C01B3DEF2564203300BD3C06 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		C06AC3102563770700D06EE3 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;

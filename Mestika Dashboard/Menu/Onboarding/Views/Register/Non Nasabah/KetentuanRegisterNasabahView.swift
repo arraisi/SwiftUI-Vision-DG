@@ -27,12 +27,7 @@ struct KetentuanRegisterNasabahView: View {
                     .frame(height: 300)
                 Color(hex: "#F6F8FB")
             }
-            
-            VStack {
-                Spacer()
-                cardForm
-                Spacer()
-            }
+            cardForm
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
