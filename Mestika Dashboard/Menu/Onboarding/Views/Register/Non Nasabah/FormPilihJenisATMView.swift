@@ -145,7 +145,7 @@ struct FormPilihJenisATMView: View {
     // MARK: - UPDATE HEIGHT
     private func updateHeight(value : Int){
         
-        for i in 0..<data.count{
+        for i in 0..<3 {
             cards[i].isShow = false
         }
         
