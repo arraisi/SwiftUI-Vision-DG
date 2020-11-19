@@ -17,6 +17,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     var maxDigits: Int = 6
     @State var pin: String = ""
     @State var pinShare: String = ""
+    @State var referenceCode: String = ""
     @State var showPin = true
     @State var isDisabled = false
     
@@ -27,7 +28,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     /* Data Binding */
     @Binding var rootIsActive : Bool
-    @ObservedObject private var otpVM = OtpViewModel()
     
     /* Timer */
     @State private var timeRemaining = 30
@@ -43,6 +43,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
         pin.count < 6
     }
     
+    @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
         self.otpVM.otpRequest(
             otpRequest: OtpRequest(destination: "085875074351", type: "hp")
@@ -51,9 +52,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
             if success {
                 print(self.otpVM.isLoading)
                 print(self.otpVM.code)
+                print(self.otpVM.reference)
                 
                 DispatchQueue.main.sync {
                     self.pinShare = self.otpVM.code
+                    self.referenceCode = self.otpVM.reference
                 }
                 self.showingAlert = true
                 
@@ -81,7 +84,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
                 
-                Text("Silahkan masukan kode OTP dengan REF #1234")
+                Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
                     .font(.caption)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)

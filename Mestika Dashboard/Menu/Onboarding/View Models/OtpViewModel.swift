@@ -29,11 +29,11 @@ extension OtpViewModel {
         OtpService.shared.postOtp(otpRequest: otpRequest) { result in
             switch result {
             case.success(let _): break
-//                if (response.status != nil) {
-//                    print("Valid")
-//
-//
-//                }
+            //                if (response.status != nil) {
+            //                    print("Valid")
+            //
+            //
+            //                }
             case .failure(let error):
                 print("ERROR-->")
                 DispatchQueue.main.async {
@@ -57,11 +57,9 @@ extension OtpViewModel {
                 if (response.code != nil) {
                     print("Success")
                     
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                        self.reference = response.reference
-                        self.code = response.code
-                    }
+                    self.isLoading = false
+                    self.reference = response.reference
+                    self.code = response.code
                     
                     completion(true)
                 } else {

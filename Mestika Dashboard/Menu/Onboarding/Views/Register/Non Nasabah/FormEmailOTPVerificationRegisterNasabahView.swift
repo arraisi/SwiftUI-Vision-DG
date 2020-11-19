@@ -17,6 +17,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     var maxDigits: Int = 6
     @State var pin: String = ""
     @State var pinShare: String = ""
+    @State var referenceCode: String = ""
     @State var showPin = true
     @State var isDisabled = false
     
@@ -53,7 +54,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     .padding(.horizontal, 20)
                     .fixedSize(horizontal: false, vertical: true)
                 
-                Text("Silahkan masukan kode OTP dengan REF #1234")
+                Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
                     .font(.caption)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
@@ -157,7 +158,12 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             }
         }
         .alert(isPresented: $showingAlert) {
-            return Alert(title: Text("OTP Code"), message: Text(self.pinShare), dismissButton: .default(Text("Oke")))
+            return Alert(
+                title: Text("OTP Code"),
+                message: Text(self.pinShare),
+                dismissButton: .default(Text("Oke"), action: {
+                    pin = self.pinShare
+                }))
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
@@ -284,6 +290,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 
                 DispatchQueue.main.sync {
                     self.pinShare = self.otpVM.code
+                    self.referenceCode = self.otpVM.reference
                 }
                 self.showingAlert = true
             }

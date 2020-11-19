@@ -17,6 +17,7 @@ struct WelcomeView: View {
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.aple.com")
     
     /* Routing Variable */
+    @State var routeToLogin: Bool = false
     @State var isActiveForNonNasabahPage : Bool = false
     @State var isActiveForNasabahPage : Bool = false
     @State var isActiveRoot : Bool = false
@@ -144,9 +145,14 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            PushView(destination: LoginScreen()) {
+            PushView(
+                destination: LoginScreen(),
+                isActive: self.$routeToLogin
+                ) {
                 Button(
-                    action: {},
+                    action: {
+                        self.routeToLogin = true
+                    },
                     label : {
                         Text("LOGIN")
                             .foregroundColor(.white)
@@ -353,7 +359,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: -Popup Message Success (Modal)
+    // MARK: -Popup Message Schedule Video Call (Modal)
     func popupMessageScheduleVideoCall() -> some View {
         VStack(alignment: .leading) {
             Image("ic_highfive")
@@ -444,7 +450,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: -Create Bottom Floater (Modal)
+    // MARK: -Popup Message Menu (Modal)
     func popupMessageMenu() -> some View {
         VStack(alignment: .leading) {
             Image("ic_bells")

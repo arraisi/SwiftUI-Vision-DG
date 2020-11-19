@@ -18,6 +18,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
     @State var pin: String = ""
     @State var showPin = true
     @State var pinShare: String = ""
+    @State var referenceCode: String = ""
     @State var isDisabled = false
     
     /* Variable Validation */
@@ -54,6 +55,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                 
                 DispatchQueue.main.sync {
                     self.pinShare = self.otpVM.code
+                    self.referenceCode = self.otpVM.reference
                 }
                 self.showingAlert = true
             }
@@ -80,7 +82,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
                 
-                Text("Silahkan masukan kode OTP dengan REF #1234")
+                Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
                     .font(.caption)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
