@@ -26,8 +26,8 @@ struct WelcomeView: View {
     var registerData = RegistrasiModel()
     var loginData = LoginBindingModel()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
-//    @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
-//    @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
+    @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
+    @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
     
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
@@ -43,6 +43,10 @@ struct WelcomeView: View {
     @State var showingModalRejected = false
     @State var showingModalMissedSchedule = false
     
+    /* Boolean for Core Data Status */
+    @State var showingModalRegistered = false
+    @State var showingModalSchedule = false
+
     init() {
         getMobileVersion()
     }
@@ -69,7 +73,7 @@ struct WelcomeView: View {
                     .padding(.horizontal, 30)
             }
             
-            if self.showingModalMenu || self.showingModalRejected || self.showingModalApprove {
+            if self.showingModalMenu || self.showingModalRejected || self.showingModalApprove || self.showingModalRegistered || self.showingModalSchedule {
                 ModalOverlay(tapAction: { withAnimation { self.showingModalMenu = false } })
             }
         }
@@ -88,6 +92,13 @@ struct WelcomeView: View {
         .popup(isPresented: $showingModalRejected, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageRejected()
         }
+        .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageSuccess()
+        }
+        .popup(isPresented: $showingModalSchedule, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageScheduleVideoCall()
+        }
+
     }
     
     var header: some View {
@@ -517,15 +528,15 @@ struct WelcomeView: View {
 //            print("Error saving managed object context: \(error)")
 //        }
         
-//        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
-//            showingModalRegistered.toggle()
-//        }
-//
-//        if (user.last?.deviceId == deviceId && isSchedule == "true") {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                showingModalSchedule.toggle()
-//            }
-//        }
+        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
+            showingModalRegistered.toggle()
+        }
+
+        if (user.last?.deviceId == deviceId && isSchedule == "true") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                showingModalSchedule.toggle()
+            }
+        }
     }
     
     /* Function GET Mobile Version */
