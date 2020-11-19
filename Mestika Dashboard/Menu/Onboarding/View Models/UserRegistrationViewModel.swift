@@ -50,12 +50,14 @@ extension UserRegistrationViewModel {
             case .success(let response):
                 print(response.code)
                 
-                
-                self.isLoading = false
-                self.code = response.code
-                self.message = response.message
-                
-                completion(true)
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.code = response.code
+//                    self.code = "R05"
+                    self.message = response.message
+                    
+                    completion(true)
+                }
                 
             case .failure(let error):
                 print("ERROR-->")

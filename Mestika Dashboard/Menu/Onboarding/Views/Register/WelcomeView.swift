@@ -33,14 +33,17 @@ struct WelcomeView: View {
     @State var isViewActivity: Bool = false
     
     /* Boolean for Show Modal & Alert */
-    @State var showingModal = false
-    @State var showingModalRegistered = false
-    @State var showingModalSchedule = false
-    @State var showAlert = false
+    @State var showingModalMenu = false
+    @State var showingModalCreatedNew = false
+    @State var showingModalVideoCallSchedule = false
+    @State var showingModalDebitCreated = false
+    @State var showingModalVideoCallFinish = false
+    @State var showingModalApprove = false
+    @State var showingModalRejected = false
+    @State var showingModalMissedSchedule = false
     
     init() {
         getMobileVersion()
-        getUserStatus(deviceId: deviceId!)
     }
     
     var body: some View {
@@ -65,30 +68,24 @@ struct WelcomeView: View {
                     .padding(.horizontal, 30)
             }
             
-            if self.showingModal || self.showingModalRegistered || self.showingModalSchedule {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+            if self.showingModalMenu || self.showingModalRejected || self.showingModalApprove {
+                ModalOverlay(tapAction: { withAnimation { self.showingModalMenu = false } })
             }
         }
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
         .onAppear() {
             print("APPEAR")
-//            getUserDetails()
+            getUserStatus(deviceId: deviceId!)
         }
-        .alert(isPresented: $showAlert) {
-            return Alert(
-                title: Text("Message"),
-                message: Text("New User Success Registered"),
-                dismissButton: .default(Text("Oke")))
+        .popup(isPresented: $showingModalMenu, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageMenu()
         }
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            createBottomFloater()
+        .popup(isPresented: $showingModalApprove, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageApprove()
         }
-        .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageSuccess()
-        }
-        .popup(isPresented: $showingModalSchedule, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageScheduleVideoCall()
+        .popup(isPresented: $showingModalRejected, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageRejected()
         }
     }
     
@@ -135,7 +132,7 @@ struct WelcomeView: View {
         VStack {
             
             Button(action : {
-                showingModal.toggle()
+                showingModalMenu.toggle()
             }) {
                 Text("DAFTAR")
                     .foregroundColor(.white)
@@ -148,14 +145,212 @@ struct WelcomeView: View {
             .cornerRadius(12)
             
             PushView(destination: LoginScreen()) {
-                Text("LOGIN")
-                    .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 12))
-                    .frame(maxWidth: .infinity, maxHeight: 40)
+                Button(
+                    action: {},
+                    label : {
+                        Text("LOGIN")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 12))
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                    })
             }
             .cornerRadius(12)
         }
+    }
+    
+    // MARK: -Popup Message Create New (Modal)
+    func popupMessageCreatedNew() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_group")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text("PERSETUJUAN SEDANG DALAM PROSES")
+                .fontWeight(.heavy)
+                .font(.system(size: 22))
+                .foregroundColor(.yellow)
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Persetujuan sedang dalam proses. Hasil akan dikirim melalui SMS atau email.")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            Button(
+                action: {},
+                label: {
+                    Text("Saya Tunggu")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: -Popup Message Approve (Modal)
+    func popupMessageApprove() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_group")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text("PEMBUKAAN REKENING DISETUJUI")
+                .fontWeight(.heavy)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Selamat pembukaan rekening baru anda telah disetujui.")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            Text("Silahkan tunggu sampai kartu ATM Anda diterima.")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            Button(
+                action: {},
+                label: {
+                    Text("Kembali ke Halaman Utama")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: -Popup Message Rejected (Modal)
+    func popupMessageRejected() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_group")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text("Pembukaan Rekening ditolak")
+                .fontWeight(.heavy)
+                .font(.system(size: 22))
+                .foregroundColor(.red)
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Maaf, pembukaan rekening online Anda telah ditolak.")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            Button(
+                action: {},
+                label: {
+                    Text("Kembali ke Halaman Utama")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: -Popup Message Missed Schedule (Modal)
+    func popupMessageMissedSchedule() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_group")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text("REGISTRASI GAGAL")
+                .fontWeight(.heavy)
+                .font(.system(size: 22))
+                .foregroundColor(.red)
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Anda telah melewati waktu wawancara pendaftaran (Jumat 11 September 2020).")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            Text("Silahkan lakukan registrasi kembali untuk mendaftar.")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            Button(
+                action: {},
+                label: {
+                    Text("Kembali ke Halaman Utama")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     // MARK: -Popup Message Success (Modal)
@@ -182,14 +377,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 30)
             
             Button(
-                action: {
-//                    UserDefaults.standard.set("true", forKey: "isFirstLogin")
-//                    UserDefaults.standard.set("false", forKey: "isSchedule")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        showingModalRegistered.toggle()
-                    }
-                },
+                action: {},
                 label: {
                     Text("Kembali")
                         .foregroundColor(.white)
@@ -257,7 +445,7 @@ struct WelcomeView: View {
     }
     
     // MARK: -Create Bottom Floater (Modal)
-    func createBottomFloater() -> some View {
+    func popupMessageMenu() -> some View {
         VStack(alignment: .leading) {
             Image("ic_bells")
                 .resizable()
@@ -305,7 +493,7 @@ struct WelcomeView: View {
         .cornerRadius(20)
     }
     
-//    @Environment(\.managedObjectContext) var managedObjectContext
+    /* Funtion GET User Details Core Data */
     func getUserDetails() {
 //        let data = User(context: managedObjectContext)
 //        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
@@ -365,8 +553,33 @@ struct WelcomeView: View {
                 print("CODE STATUS : \(self.userVM.code)")
                 print("MESSAGE STATUS : \(self.userVM.message)")
             }
+            
+            if (self.userVM.code == "R01") {
+                self.showingModalCreatedNew = true
+            }
+            
+            if (self.userVM.code == "R02") {
+                
+            }
+            
+            if (self.userVM.code == "R03") {
+                
+            }
+            
+            if (self.userVM.code == "R04") {
+                
+            }
+            
+            if (self.userVM.code == "R05") {
+                self.showingModalApprove = true
+            }
+            
+            if (self.userVM.code == "R06") {
+                self.showingModalRejected = true
+            }
         }
     }
+    
 }
 
 struct RegisterView_Previews: PreviewProvider {
