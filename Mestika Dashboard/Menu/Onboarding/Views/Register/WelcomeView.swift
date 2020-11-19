@@ -16,11 +16,11 @@ struct WelcomeView: View {
     /* For Check Internet Connection */
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.aple.com")
     
+    /* Routing Variable */
     @State var isActiveForNonNasabahPage : Bool = false
     @State var isActiveForNasabahPage : Bool = false
     @State var isActiveRoot : Bool = false
     @State var isActiveRootLogin : Bool = false
-    @ObservedObject var assetsSliderVM = SliderAssetsSummaryViewModel()
     
     var registerData = RegistrasiModel()
     var loginData = LoginBindingModel()
@@ -38,9 +38,10 @@ struct WelcomeView: View {
     @State var showingModalSchedule = false
     @State var showAlert = false
     
-    /* Variable for Image Carousel */
-    @State var menu = 0
-    @State var page = 0
+    init() {
+        getMobileVersion()
+        getUserStatus(deviceId: deviceId!)
+    }
     
     var body: some View {
         ZStack {
@@ -49,6 +50,7 @@ struct WelcomeView: View {
             VStack(alignment: .leading) {
                 header
                     .padding(.top, 20)
+                    .padding(.bottom, 60)
                     .padding(.horizontal, 30)
                 
                 PaginationView(axis: .horizontal) {
@@ -114,19 +116,19 @@ struct WelcomeView: View {
     var imageSliderOne: some View {
         Image("slider_pic_1")
             .resizable()
-            .padding()
+            .padding(.horizontal)
     }
     
     var imageSliderTwo: some View {
         Image("slider_pic_2")
             .resizable()
-            .padding()
+            .padding(.horizontal)
     }
     
     var imageSliderThree: some View {
         Image("slider_pic_3")
             .resizable()
-            .padding()
+            .padding(.horizontal)
     }
     
     var footerBtn: some View {
@@ -330,6 +332,40 @@ struct WelcomeView: View {
 //                showingModalSchedule.toggle()
 //            }
 //        }
+    }
+    
+    /* Function GET Mobile Version */
+    @ObservedObject var mobileVersionVM = MobileVersionViewModel()
+    func getMobileVersion() {
+        print("GET VERSION MOBILE")
+        
+        DispatchQueue.main.async {
+            self.mobileVersionVM.getMobileVersion { success in
+                
+                if success {
+                    print("LOADING : \(self.mobileVersionVM.isLoading)")
+                    print("INI VERSION NUMBER : \(self.mobileVersionVM.versionNumber)")
+                    print("INI VERSION NAME : \(self.mobileVersionVM.versionName)")
+                    print("INI VERSION PATCH : \(self.mobileVersionVM.versionCodePatch)")
+                    print("INI VERSION MINOR : \(self.mobileVersionVM.versionCodeMinor)")
+                }
+            }
+        }
+    }
+    
+    /* Function GET USER Status */
+    @ObservedObject var userVM = UserRegistrationViewModel()
+    func getUserStatus(deviceId: String) {
+        print("GET USER STATUS")
+        print("DEVICE ID : \(deviceId)")
+        
+        self.userVM.userCheck(deviceId: deviceId) { success in
+            
+            if success {
+                print("CODE STATUS : \(self.userVM.code)")
+                print("MESSAGE STATUS : \(self.userVM.message)")
+            }
+        }
     }
 }
 

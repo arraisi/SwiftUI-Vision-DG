@@ -109,6 +109,10 @@
 		526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */; };
 		526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */; };
 		526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B661A254FFB0500C13C36 /* SettingMenu.swift */; };
+		527E31202566138E004FF5ED /* MobileVersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E311F2566138E004FF5ED /* MobileVersionResponse.swift */; };
+		527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E3124256613EB004FF5ED /* MobileVersionService.swift */; };
+		527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312925661644004FF5ED /* MobileVersionViewModel.swift */; };
+		527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312E25663289004FF5ED /* UserCheckResponse.swift */; };
 		5290A125255BBFAC0090F788 /* RegisterNasabahPhoneOTPScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A124255BBFAC0090F788 /* RegisterNasabahPhoneOTPScreen.swift */; };
 		5290A12A255BC5930090F788 /* ChooseTypeSavingForNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A129255BC5930090F788 /* ChooseTypeSavingForNasabahScreen.swift */; };
 		5290A12F255BC6AD0090F788 /* FormUploadDocumentIdentityNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A12E255BC6AD0090F788 /* FormUploadDocumentIdentityNasabahScreen.swift */; };
@@ -403,6 +407,10 @@
 		526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettingScreen.swift; sourceTree = "<group>"; };
 		526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordOrPinSettingScreen.swift; sourceTree = "<group>"; };
 		526B661A254FFB0500C13C36 /* SettingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenu.swift; sourceTree = "<group>"; };
+		527E311F2566138E004FF5ED /* MobileVersionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionResponse.swift; sourceTree = "<group>"; };
+		527E3124256613EB004FF5ED /* MobileVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionService.swift; sourceTree = "<group>"; };
+		527E312925661644004FF5ED /* MobileVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionViewModel.swift; sourceTree = "<group>"; };
+		527E312E25663289004FF5ED /* UserCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCheckResponse.swift; sourceTree = "<group>"; };
 		5290A124255BBFAC0090F788 /* RegisterNasabahPhoneOTPScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNasabahPhoneOTPScreen.swift; sourceTree = "<group>"; };
 		5290A129255BC5930090F788 /* ChooseTypeSavingForNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTypeSavingForNasabahScreen.swift; sourceTree = "<group>"; };
 		5290A12E255BC6AD0090F788 /* FormUploadDocumentIdentityNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUploadDocumentIdentityNasabahScreen.swift; sourceTree = "<group>"; };
@@ -1026,6 +1034,7 @@
 				52AE1A80255A425100B011B7 /* OtpService.swift */,
 				52C0556F255F687300A57400 /* UserRegistrationService.swift */,
 				5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */,
+				527E3124256613EB004FF5ED /* MobileVersionService.swift */,
 			);
 			name = Services;
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
@@ -1271,6 +1280,8 @@
 				526A81572560B1F900D614CB /* LoginBindingModel.swift */,
 				5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */,
 				C06AC2F92563726700D06EE3 /* KetentuanModel.swift */,
+				527E311F2566138E004FF5ED /* MobileVersionResponse.swift */,
+				527E312E25663289004FF5ED /* UserCheckResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1283,6 +1294,7 @@
 				6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */,
 				5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */,
 				C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */,
+				527E312925661644004FF5ED /* MobileVersionViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1601,6 +1613,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */,
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
 				C0E40BAE2564E59200259612 /* FormIndustriTempatBekerjaView.swift in Sources */,
@@ -1678,6 +1691,7 @@
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
+				527E31202566138E004FF5ED /* MobileVersionResponse.swift in Sources */,
 				52ADFF9C2557DFDC00A1001F /* PerkiraanPenarikanView.swift in Sources */,
 				5247463F2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift in Sources */,
 				52ADFE942557D99F00A1001F /* MasterModel.swift in Sources */,
@@ -1706,6 +1720,7 @@
 				C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,
+				527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */,
 				52ADFF9A2557DFDC00A1001F /* SumberDanaView.swift in Sources */,
 				52ADFFA82557DFDC00A1001F /* VerificationRegisterDataView.swift in Sources */,
 				C0A4F9AC25529A9700566A11 /* ArrowDownShape.swift in Sources */,
@@ -1812,6 +1827,7 @@
 				5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */,
 				52BF57CF2558E34100F009B5 /* FormPilihJenisTabunganView.swift in Sources */,
 				52ADFFA42557DFDC00A1001F /* VerificationPINView.swift in Sources */,
+				527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
 				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */,

@@ -14,12 +14,13 @@ class UserRegistrationService {
     
     static let shared = UserRegistrationService()
 
+    /* POST USER */
     func postUser(completion: @escaping(Result<UserRegistrationResponse, NetworkError>) -> Void) {
 
         let imageURL = URL(fileURLWithPath: #file).deletingLastPathComponent().appendingPathComponent("2.png")
         let imageData = try? Data(contentsOf: imageURL)
 
-        guard let url = URL.urlRegister() else {
+        guard let url = URL.urlUser() else {
             return completion(.failure(.badUrl))
         }
 
@@ -56,6 +57,38 @@ class UserRegistrationService {
             }
 
         }.resume()
+    }
+    
+    /* GET USER */
+    func getUser(deviceId: String, completion: @escaping(Result<UserCheckResponse, NetworkError>) -> Void) {
+        
+        guard let url = URL.urlUser() else {
+            return completion(.failure(.badUrl))
+        }
+        
+        print("DEVICE ID HEADER : \(deviceId)")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("*/*", forHTTPHeaderField: "accept")
+        request.addValue(deviceId, forHTTPHeaderField: "X-Device-ID")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(.failure(.noData))
+            }
+            
+            let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data)
+            
+            if userResponse == nil {
+                completion(.failure(.decodingError))
+            } else {
+                completion(.success(userResponse!))
+            }
+            
+        }.resume()
+        
     }
     
 }

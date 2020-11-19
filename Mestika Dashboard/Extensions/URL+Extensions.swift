@@ -36,19 +36,23 @@ extension URL {
          return URL(string: "https://my-json-server.typicode.com/primajatnika271995/dummy-json/assets-landing")
     }
     
-    static func urlRegister() -> URL? {
-        return URL(string: "http://159.65.2.90:8765/api/v1.0/user")
+    static func urlMobileVersion() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/version/mobile")
+    }
+    
+    static func urlUser() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user")
     }
     
     static func urlOTP() -> URL? {
-        return URL(string: "http://159.65.2.90:8765/api/v1.0/otp")
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/otp")
     }
     
     static func urlSheduleInterview() -> URL? {
-        return URL(string: "http://159.65.2.90:8765/api/v1.0/schedule/find-all")
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/schedule/find-all")
     }
     
     static func urlSheduleInterviewFindById() -> URL? {
-        return URL(string: "http://159.65.2.90:8765/api/v1.0/schedule/find-byid")
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/schedule/find-byid")
     }
 }
