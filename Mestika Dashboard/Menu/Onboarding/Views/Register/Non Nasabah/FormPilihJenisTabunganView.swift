@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PopupView
+import NavigationStack
 
 struct FormPilihJenisTabunganView: View {
     
@@ -115,7 +116,7 @@ struct FormPilihJenisTabunganView: View {
             EmptyView()
                 .frame(height: 150)
             
-            NavigationLink(destination:
+            PushView(destination:
                 FormIdentitasDiriView().environmentObject(registerData)
             ) {
                 Text("Pilih Tabungan ini")

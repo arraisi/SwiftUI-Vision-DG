@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormEmailOTPVerificationRegisterNasabahView: View {
     
@@ -45,17 +46,16 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             }
             
             VStack(alignment: .center) {
-                Text("Kami telah mengirimkan OTP ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
-                    .font(.subheadline)
+                Text("Kami telah mengirimkan Kode Verifikasi ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
+                    .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
-                    .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
-                    .font(.caption)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -70,7 +70,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 
                 HStack {
                     Text("Tidak Menerima Kode?")
-                        .font(.caption2)
+                        .font(.custom("Montserrat-Regular", size: 10))
                     
                     Button(action: {
                         print("-> Resend OTP")
@@ -79,19 +79,18 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         getOTP()
                     }) {
                         Text("Resend OTP")
-                            .font(.caption2)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.custom("Montserrat-SemiBold", size: 10))
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
                     .disabled(isResendOtpDisabled)
                     
                     Text("(00:\(timeRemaining))")
-                        .font(.caption2)
+                        .font(.custom("Montserrat-Regular", size: 12))
                 }
                 .padding(.top, 5)
                 
-                Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
-                    .font(.caption)
+                Text("Silahkan cek email Anda untuk melihat kode OTP")
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 15)
@@ -100,7 +99,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    NavigationLink(destination: FormPilihJenisTabunganView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    PushView(destination: FormPilihJenisTabunganView().environmentObject(registerData), isActive: self.$isOtpValid) {
                         Text("")
                     }
                     
@@ -115,15 +114,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.top, 10)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 25)
                     .disabled(disableForm)
                 }
             }
@@ -180,7 +178,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     .bold()
                     .frame(width: 40, height: 40)
                     .multilineTextAlignment(.center)
-                    .background(Color.gray.opacity(0.1))
+                    .background(Color.white)
                     .cornerRadius(8)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
             }

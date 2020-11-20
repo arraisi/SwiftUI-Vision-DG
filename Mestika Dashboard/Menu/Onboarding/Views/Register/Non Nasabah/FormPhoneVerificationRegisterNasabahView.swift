@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormPhoneVerificationRegisterNasabahView: View {
     
@@ -35,14 +36,13 @@ struct FormPhoneVerificationRegisterNasabahView: View {
             
             VStack(alignment: .center) {
                 Text("Phone Verification")
-                    .font(.subheadline)
+                    .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
-                    .fontWeight(.bold)
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
                 
                 Text("Silahkan masukan No. Telepon Anda")
-                    .font(.caption)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -69,18 +69,18 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                     .keyboardType(.numberPad)
                 }
                 .frame(height: 20)
-                .font(.subheadline)
+                .font(.custom("Montserrat-Regular", size: 12))
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .background(Color(hex: "#f4f4f4"))
                 .cornerRadius(15)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
                 .padding(.horizontal, 20)
                 
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
+                PushView(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
                     Text("Verifikasi No. Telepon")
                         .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 }
                 .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)
