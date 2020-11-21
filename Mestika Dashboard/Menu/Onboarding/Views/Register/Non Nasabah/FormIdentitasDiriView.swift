@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import NavigationStack
 
 struct FormIdentitasDiriView: View {
     
@@ -143,7 +144,7 @@ struct FormIdentitasDiriView: View {
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .padding([.horizontal, .top], 30)
                     
-                    NavigationLink(
+                    PushView(
                         destination: TujuanPembukaanRekeningView().environmentObject(registerData),
                         isActive: $nextViewActive,
                         label: {
@@ -173,7 +174,6 @@ struct FormIdentitasDiriView: View {
                         .padding(30)
                 }
             }
-            
         }
         .background(
             VStack {
@@ -184,6 +184,11 @@ struct FormIdentitasDiriView: View {
         )
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .navigationBarItems(trailing: PopView(destination: .root) {
+            Text("Cancel")
+                .font(.custom("Montserrat-SemiBold", size: 14))
+                .foregroundColor(.white)
+        })
         .sheet(isPresented: $shouldPresentImagePicker) {
             ZStack {
                 if formKTP {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormOTPVerificationRegisterNasabahView: View {
     
@@ -76,16 +77,15 @@ struct FormOTPVerificationRegisterNasabahView: View {
             }
             
             VStack(alignment: .center) {
-                Text("Kami telah mengirimkan OTP ke No. \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
-                    .font(.subheadline)
+                Text("Kami telah mengirimkan OTP ke no. \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
+                    .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
-                    .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
                 
                 Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
-                    .font(.caption)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -100,7 +100,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 
                 HStack {
                     Text("Tidak Menerima Kode?")
-                        .font(.caption2)
+                        .font(.custom("Montserrat-Regular", size: 10))
                     
                     Button(action: {
                         print("-> Resend OTP")
@@ -109,19 +109,18 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         self.timeRemaining = 60
                     }) {
                         Text("Resend OTP")
-                            .font(.caption2)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.custom("Montserrat-SemiBold", size: 10))
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
                     .disabled(isResendOtpDisabled)
                     
                     Text("(00:\(timeRemaining))")
-                        .font(.caption2)
+                        .font(.custom("Montserrat-Regular", size: 10))
                 }
                 .padding(.top, 5)
                 
                 Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
-                    .font(.caption)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 15)
@@ -130,7 +129,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    NavigationLink(destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    PushView(destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isOtpValid) {
                         Text("")
                     }
                     
@@ -157,19 +156,18 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.top, 10)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 25)
                     .disabled(disableForm)
                 }
             }
-            .frame(width: UIScreen.main.bounds.width - 30)
+            .frame(width: UIScreen.main.bounds.width - 50)
             .background(Color.white)
             .cornerRadius(15)
             .shadow(radius: 30)
@@ -230,7 +228,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .bold()
                     .frame(width: 40, height: 40)
                     .multilineTextAlignment(.center)
-                    .background(Color.gray.opacity(0.1))
+                    .background(Color.white)
                     .cornerRadius(8)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
             }

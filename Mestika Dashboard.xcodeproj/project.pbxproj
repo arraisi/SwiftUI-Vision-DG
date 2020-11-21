@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06409F72256798D7008ABB20 /* AddressOptionsView.swift */; };
 		0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */; };
 		0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58F2563F8A1001B659D /* NotificationMonthly.swift */; };
 		0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5902563F8A1001B659D /* NotificationModel.swift */; };
@@ -302,6 +303,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06409F72256798D7008ABB20 /* AddressOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressOptionsView.swift; sourceTree = "<group>"; };
 		0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAnnouncementView.swift; sourceTree = "<group>"; };
 		0658B58F2563F8A1001B659D /* NotificationMonthly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationMonthly.swift; sourceTree = "<group>"; };
 		0658B5902563F8A1001B659D /* NotificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
@@ -1079,6 +1081,7 @@
 				C075137A255C19A900BB75D8 /* ScanNPWPView.swift */,
 				C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */,
 				C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */,
+				06409F72256798D7008ABB20 /* AddressOptionsView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -1652,6 +1655,7 @@
 				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
+				06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */,
 				52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */,
 				52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */,
 				5290A12A255BC5930090F788 /* ChooseTypeSavingForNasabahScreen.swift in Sources */,

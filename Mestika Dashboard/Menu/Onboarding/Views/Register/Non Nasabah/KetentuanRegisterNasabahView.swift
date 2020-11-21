@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct KetentuanRegisterNasabahView: View {
     
@@ -29,9 +30,13 @@ struct KetentuanRegisterNasabahView: View {
             }
             cardForm
         }
+        .introspectNavigationController { navigationController in
+            navigationController.hidesBarsOnSwipe = true
+        }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .navigationBarItems(trailing: EmptyView())
     }
     
     var cardForm: some View {
@@ -66,7 +71,7 @@ struct KetentuanRegisterNasabahView: View {
             }
             .padding(20)
             
-            NavigationLink(destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
+            PushView(destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
                 Text("Lanjut Membuat Rekening")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))

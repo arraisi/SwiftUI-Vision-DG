@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormEmailVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
@@ -35,14 +36,13 @@ struct FormEmailVerificationRegisterNasabahView: View {
             
             VStack(alignment: .center) {
                 Text("Email Verification")
-                    .font(.subheadline)
+                    .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
-                    .fontWeight(.bold)
-                    .padding(.top, 20)
+                    .padding(.top, 30)
                     .padding(.horizontal, 20)
                 
                 Text("Silahkan masukan Alamat Email Anda")
-                    .font(.caption)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -59,37 +59,36 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     }
                 })
                 .frame(height: 30)
-                .font(.subheadline)
+                .font(.custom("Montserrat-Regular", size: 12))
                 .autocapitalization(.none)
                 .padding()
-                .background(Color.gray.opacity(0.1))
+                .background(Color.white)
                 .cornerRadius(15)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                 .padding(.top, 20)
                 .padding(.horizontal, 20)
                 
                 HStack {
                     Text("*Email harus lebih dari 8 karakter")
-                        .font(.caption2)
-                        .fontWeight(.semibold)
+                        .font(.custom("Montserrat-SemiBold", size: 10))
                         .foregroundColor(.black)
                     
                     Spacer()
                 }
                 .padding(.horizontal, 30)
-                .padding(.bottom, 10)
+                .padding(.vertical, 10)
                 
-                NavigationLink(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
+                PushView(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
                     Text("Verifikasi Email")
                         .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 }
                 .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
-                .padding(.bottom, 20)
+                .padding(.bottom, 25)
                 .disabled(!self.isEmailValid)
             }
             .frame(width: UIScreen.main.bounds.width - 30)

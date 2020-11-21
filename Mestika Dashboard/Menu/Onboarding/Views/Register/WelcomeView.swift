@@ -10,6 +10,7 @@ import PopupView
 import SystemConfiguration
 import NavigationStack
 import SwiftUIX
+import Introspect
 
 struct WelcomeView: View {
     
@@ -46,72 +47,76 @@ struct WelcomeView: View {
     /* Boolean for Core Data Status */
     @State var showingModalRegistered = false
     @State var showingModalSchedule = false
-
+    
     init() {
         getMobileVersion()
     }
     
     var body: some View {
-        ZStack {
-            Color(hex: "#232175")
-            
-            VStack(alignment: .leading) {
-                header
-                    .padding(.top, 20)
-                    .padding(.bottom, 60)
-                    .padding(.horizontal, 30)
+        NavigationView {
+            ZStack {
+                Color(hex: "#232175")
                 
-                PaginationView(axis: .horizontal) {
-                    imageSliderOne.eraseToAnyView()
-                    imageSliderTwo.eraseToAnyView()
-                    imageSliderThree.eraseToAnyView()
+                VStack(alignment: .leading) {
+                    
+                    header
+                        .padding(.top, 30)
+                        .padding(.horizontal, 30)
+                    
+                    PaginationView(axis: .horizontal) {
+                        imageSliderOne.eraseToAnyView()
+                        imageSliderTwo.eraseToAnyView()
+                        imageSliderThree.eraseToAnyView()
+                    }
+                    
+                    footerBtn
+                        .padding(.top, 20)
+                        .padding([.bottom, .horizontal], 30)
                 }
                 
-                footerBtn
-                    .padding(.top, 20)
-                    .padding(.bottom, 35)
-                    .padding(.horizontal, 30)
+                if self.showingModalMenu || self.showingModalRejected || self.showingModalApprove || self.showingModalRegistered || self.showingModalSchedule {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalMenu = false } })
+                }
             }
-            
-            if self.showingModalMenu || self.showingModalRejected || self.showingModalApprove || self.showingModalRegistered || self.showingModalSchedule {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalMenu = false } })
+            .navigationBarHidden(true)
+            .navigationBarItems(trailing: EmptyView())
+            .edgesIgnoringSafeArea(.all)
+            .introspectNavigationController { navigationController in
+                navigationController.hidesBarsOnSwipe = true
+            }
+            .onAppear() {
+                print("APPEAR")
+                getUserStatus(deviceId: deviceId!)
+            }
+            .popup(isPresented: $showingModalMenu, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageMenu()
+            }
+            .popup(isPresented: $showingModalApprove, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageApprove()
+            }
+            .popup(isPresented: $showingModalRejected, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageRejected()
+            }
+            .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageSuccess()
+            }
+            .popup(isPresented: $showingModalSchedule, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageScheduleVideoCall()
             }
         }
-        .navigationBarHidden(true)
-        .edgesIgnoringSafeArea(.all)
-        .onAppear() {
-            print("APPEAR")
-            getUserStatus(deviceId: deviceId!)
-        }
-        .popup(isPresented: $showingModalMenu, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageMenu()
-        }
-        .popup(isPresented: $showingModalApprove, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageApprove()
-        }
-        .popup(isPresented: $showingModalRejected, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageRejected()
-        }
-        .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageSuccess()
-        }
-        .popup(isPresented: $showingModalSchedule, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageScheduleVideoCall()
-        }
-
+        
     }
     
     var header: some View {
         VStack(alignment: .leading) {
             Text("Welcome to")
-                .fontWeight(.semibold)
-                .font(.system(size: 15))
+                .font(.custom("Montserrat-Regular", size: 15))
                 .foregroundColor(.white)
             
             HStack(alignment: .center, spacing: .none) {
                 Image("logo_m_mestika")
                     .resizable()
-                    .frame(width: 25, height: 25)
+                    .frame(width: 30, height: 30)
                 
                 Text("BANK MESTIKA")
                     .foregroundColor(.white)
@@ -125,19 +130,22 @@ struct WelcomeView: View {
     var imageSliderOne: some View {
         Image("slider_pic_1")
             .resizable()
-            .padding(.horizontal)
+            .frame(height: UIScreen.main.bounds.height * 0.55)
+            .padding(.horizontal, 30)
     }
     
     var imageSliderTwo: some View {
         Image("slider_pic_2")
             .resizable()
-            .padding(.horizontal)
+            .frame(height: UIScreen.main.bounds.height * 0.55)
+            .padding(.horizontal, 30)
     }
     
     var imageSliderThree: some View {
         Image("slider_pic_3")
             .resizable()
-            .padding(.horizontal)
+            .frame(height: UIScreen.main.bounds.height * 0.55)
+            .padding(.horizontal, 30)
     }
     
     var footerBtn: some View {
@@ -148,9 +156,8 @@ struct WelcomeView: View {
             }) {
                 Text("DAFTAR")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 13))
-                    .frame(maxWidth: .infinity, maxHeight: 40)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
             }
             .padding(.bottom, 2)
             .background(Color(hex: "#2334D0"))
@@ -159,7 +166,7 @@ struct WelcomeView: View {
             PushView(
                 destination: LoginScreen(),
                 isActive: self.$routeToLogin
-                ) {
+            ) {
                 Button(
                     action: {
                         self.routeToLogin = true
@@ -167,9 +174,8 @@ struct WelcomeView: View {
                     label : {
                         Text("LOGIN")
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 12))
-                            .frame(maxWidth: .infinity, maxHeight: 40)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
                     })
             }
             .cornerRadius(12)
@@ -438,7 +444,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(
+            PushView(
                 destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData),
                 isActive: self.$isActiveRootLogin,
                 label: {
@@ -470,36 +476,32 @@ struct WelcomeView: View {
                 .padding(.top, 20)
             
             Text("Sebelum Memulai..!!")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.system(size: 16))
+                .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 20)
             
             Text("Apakah Anda telah memiliki rekening di Bank Mestika")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.system(size: 22))
+                .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: KetentuanRegisterNasabahView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData)) {
+            PushView(destination: KetentuanRegisterNasabahView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData)) {
                 Text("Tidak, Saya Tidak Memiliki")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 13))
-                    .frame(maxWidth: .infinity, maxHeight: 40)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
             }
             .padding(.bottom, 2)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(
+            PushView(
                 destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData),
                 label: {
                     Text("Ya, Saya Memiliki")
                         .foregroundColor(.black)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 12))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
+                        .font(.custom("Montserrat-SemiBold", size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
                 })
                 .padding(.bottom, 30)
                 .cornerRadius(12)
@@ -512,26 +514,26 @@ struct WelcomeView: View {
     
     /* Funtion GET User Details Core Data */
     func getUserDetails() {
-//        let data = User(context: managedObjectContext)
-//        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-//        data.nik = "3277102102890001"
-//        data.email = "andri.ferinata@gmail.com"
-//        data.phone = "08562006488"
-//        data.pin = "111111"
-//        data.password = "ferinata21"
-//        data.firstName = "Andri"
-//        data.lastName = "Ferinata"
-//
-//        do {
-//            try self.managedObjectContext.save()
-//        } catch {
-//            print("Error saving managed object context: \(error)")
-//        }
+        //        let data = User(context: managedObjectContext)
+        //        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
+        //        data.nik = "3277102102890001"
+        //        data.email = "andri.ferinata@gmail.com"
+        //        data.phone = "08562006488"
+        //        data.pin = "111111"
+        //        data.password = "ferinata21"
+        //        data.firstName = "Andri"
+        //        data.lastName = "Ferinata"
+        //
+        //        do {
+        //            try self.managedObjectContext.save()
+        //        } catch {
+        //            print("Error saving managed object context: \(error)")
+        //        }
         
         if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
             showingModalRegistered.toggle()
         }
-
+        
         if (user.last?.deviceId == deviceId && isSchedule == "true") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 showingModalSchedule.toggle()
