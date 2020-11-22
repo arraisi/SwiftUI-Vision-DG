@@ -10,7 +10,6 @@ import SwiftUI
 struct AddressOptionsView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let addressOptions: [MasterModel] = [
         MasterModel(id: 1, name: "Alamat Sesuai KTP"),
@@ -18,6 +17,8 @@ struct AddressOptionsView: View {
         MasterModel(id: 4, name: "Alamat Perusahaan"),
         MasterModel(id: 5, name: "Alamat Lainnya"),
     ]
+    
+    @State var addressOptionId: Int = 1
     
     var body: some View {
         VStack {
@@ -29,14 +30,14 @@ struct AddressOptionsView: View {
             
             RadioButtonGroup(
                 items: addressOptions,
-                selectedId: $registerData.addressOptionId) { selected in
+                selectedId: $addressOptionId) { selected in
                 
                 if let i = addressOptions.firstIndex(where: { $0.id == selected }) {
                     print(addressOptions[i])
-                    registerData.addressOptionName = addressOptions[i].name
+//                    registerData.addressOptionName = addressOptions[i].name
                 }
                 
-                print("Selected is: \(registerData.addressOptionName)")
+                print("Selected is: \(selected)")
                 
             }
             .padding()

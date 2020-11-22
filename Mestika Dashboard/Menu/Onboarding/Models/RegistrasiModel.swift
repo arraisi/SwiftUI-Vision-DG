@@ -64,6 +64,4 @@ class RegistrasiModel: ObservableObject {
     @Published var fotoNPWP: Image = Image("")
     @Published var npwp = ""
     @Published var hasNoNpwp: Bool = false
-    @Published var addressOptionId = 1
-    @Published var addressOptionName = ""
 }

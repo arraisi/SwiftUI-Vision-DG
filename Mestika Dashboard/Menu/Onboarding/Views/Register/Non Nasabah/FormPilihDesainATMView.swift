@@ -84,7 +84,8 @@ struct FormPilihDesainATMView: View {
                     }
                     .padding(.horizontal)
                     
-                    NavigationLink(destination: FormDetailKartuATMView(),
+                    NavigationLink(destination:
+                                   FormCompletionKartuATMView().environmentObject(RegistrasiModel()),
                         label: {
                             Text("PILIH DESAIN KARTU")
                                 .foregroundColor(.white)

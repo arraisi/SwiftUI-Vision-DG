@@ -12,6 +12,7 @@ struct LabelTextField: View {
     @Binding var value: String
     var label: String
     var placeHolder: String
+    var disabled: Bool = false
     let onEditingChanged: (Bool)->Void
     let onCommit: ()->Void
     
@@ -31,6 +32,7 @@ struct LabelTextField: View {
                 .padding(.horizontal)
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
+                .disabled(disabled)
         }
        
     }
