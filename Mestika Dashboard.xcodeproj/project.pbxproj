@@ -250,6 +250,7 @@
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
 		C01B3DF02564203300BD3C06 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = C01B3DEF2564203300BD3C06 /* Introspect */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
+		C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */; };
 		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
 		C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2F92563726700D06EE3 /* KetentuanModel.swift */; };
 		C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */; };
@@ -550,6 +551,7 @@
 		C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithToolBarKeyBoard.swift; sourceTree = "<group>"; };
 		C00702C6255531280089DBD1 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
 		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
+		C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewModel.swift; sourceTree = "<group>"; };
 		C0587B7B255BED2600F82D9D /* SelfieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieView.swift; sourceTree = "<group>"; };
 		C06AC2F92563726700D06EE3 /* KetentuanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanModel.swift; sourceTree = "<group>"; };
 		C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanViewModel.swift; sourceTree = "<group>"; };
@@ -1294,6 +1296,7 @@
 				C06AC2F92563726700D06EE3 /* KetentuanModel.swift */,
 				527E311F2566138E004FF5ED /* MobileVersionResponse.swift */,
 				527E312E25663289004FF5ED /* UserCheckResponse.swift */,
+				C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1803,6 +1806,7 @@
 				52ADFFAA2557DFDC00A1001F /* RegisterRekeningCardView.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
+				C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */,
 				5290A13C255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
