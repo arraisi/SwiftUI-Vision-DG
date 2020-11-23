@@ -9,8 +9,9 @@ import Foundation
 
 // MARK: - ScheduleInterviewResponse
 class ScheduleInterviewResponse: Decodable {
-    let id: Int
-    let date: String
+    var id: Int
+    var date: String
+    var nik: String
 //    var time: JSONNull?
-    let timeStart, timeEnd: String
+    var timeStart, timeEnd: String
 }

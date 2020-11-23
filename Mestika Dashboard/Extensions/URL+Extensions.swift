@@ -55,4 +55,9 @@ extension URL {
     static func urlSheduleInterviewFindById() -> URL? {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/schedule/find-byid")
     }
+    
+    static func urlSheduleInterviewSubmit() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user?type=scheduleVC")
+    }
+    
 }

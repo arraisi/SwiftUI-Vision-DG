@@ -74,4 +74,37 @@ class ScheduleInterviewService {
             
         }.resume()
     }
+    
+    // MARK:- API GET SCHEDULE FIND BY ID
+    func submitScheduleInterview(date: String, nik: String, endTime: String, startTime: String, completion: @escaping(Result<ScheduleInterviewResponse?, NetworkError>) -> Void) {
+        
+        let body: [String: String] = ["date": date, "nik":  nik, "timeEnd": endTime, "timeStart": startTime]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        guard let url = URL.urlSheduleInterviewSubmit() else {
+            return completion(.failure(.badUrl))
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("*/*", forHTTPHeaderField: "accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("21", forHTTPHeaderField: "X-Device-ID")
+        request.addValue("01", forHTTPHeaderField: "X-Firebase-ID")
+        
+        request.httpBody = finalBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            print("response: \(String(describing: response))")
+            
+            guard let _ = data, error == nil else {
+                return completion(.failure(.noData))
+            }
+            
+        }.resume()
+    }
 }

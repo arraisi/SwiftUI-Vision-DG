@@ -17,6 +17,8 @@ struct FormPhoneVerificationRegisterNasabahView: View {
     /* Variable Data */
     @State var phoneNumber: String = ""
     
+    @State var isShowNextView : Bool = false
+    
     /* Disabled Form */
     var disableForm: Bool {
         phoneNumber.count < 10
@@ -76,11 +78,17 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
                 .padding(.horizontal, 20)
                 
-                PushView(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
-                    Text("Verifikasi No. Telepon")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                PushView(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData), isActive: $isShowNextView) {
+                    
+                    Button(action: {
+                        self.isShowNextView.toggle()
+                    }, label: {
+                        Text("Verifikasi No. Telepon")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    })
+                    
                 }
                 .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)
