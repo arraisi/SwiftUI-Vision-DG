@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormVerificationRegisterDataNasabahScreen: View {
     
@@ -41,6 +42,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
             }
             
             VStack {
+                
                 ScrollView {
                     VStack {
                         VStack(alignment: .leading) {
@@ -383,7 +385,8 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                 VStack {
                     Button(action: {
                         
-                        saveUserToCoreData()
+//                        saveUserToCoreData()
+                        saveUserToDb()
                         
                     }, label: {
                         Text("Submit Data")
@@ -409,9 +412,11 @@ struct FormVerificationRegisterDataNasabahScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarHidden(true)
         .alert(isPresented: $showingAlert) {
-            return Alert(title: Text("Message"), message: Text("GAGAL MENDAFTAR"), dismissButton: .default(Text("Oke")))
+            return Alert(
+                title: Text("Error 400"),
+                message: Text("The operation couldn’t be completed."),
+                dismissButton: .default(Text("Oke")))
         }
     }
     
@@ -474,6 +479,12 @@ struct FormVerificationRegisterDataNasabahScreen: View {
         self.userRegisterVM.userRegistration() { success in
             if success {
                 print("SUCCESS")
+                nextRoute = true
+            }
+            
+            if !success {
+                print("GAGAL")
+                self.showingAlert = true
             }
         }
     }

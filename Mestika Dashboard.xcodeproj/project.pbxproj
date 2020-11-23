@@ -16,6 +16,8 @@
 		0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0658B5A62563FA6D001B659D /* Colors.xcassets */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
+		520E467B2568B5A800DE9205 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* Introspect */; };
+		520E46812568BEF100DE9205 /* Indicators in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* Indicators */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -85,7 +87,6 @@
 		5264ADF6255E75BD000565D5 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264ADF5255E75BD000565D5 /* ErrorResponse.swift */; };
 		526A81492560AAAD00D614CB /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		526A814A2560AAAD00D614CB /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
-		526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */ = {isa = PBXBuildFile; productRef = 52C05578255F6B9900A57400 /* MultipartForm */; };
 		526A81582560B1F900D614CB /* LoginBindingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A81572560B1F900D614CB /* LoginBindingModel.swift */; };
 		526A81652560B2B200D614CB /* FirstATMLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A81602560B2B200D614CB /* FirstATMLoginView.swift */; };
 		526A81672560B2B200D614CB /* FirstLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A81622560B2B200D614CB /* FirstLoginView.swift */; };
@@ -588,8 +589,9 @@
 			files = (
 				522563842562549900BCAB67 /* JGProgressHUD-SwiftUI in Frameworks */,
 				52E0557E2563C307009294DA /* NavigationStack in Frameworks */,
+				520E46812568BEF100DE9205 /* Indicators in Frameworks */,
 				526A81492560AAAD00D614CB /* PopupView in Frameworks */,
-				526A814B2560AAAD00D614CB /* MultipartForm in Frameworks */,
+				520E467B2568B5A800DE9205 /* Introspect in Frameworks */,
 				C06AC3112563770700D06EE3 /* SwiftUIX in Frameworks */,
 				526A814A2560AAAD00D614CB /* BottomSheet in Frameworks */,
 			);
@@ -641,6 +643,13 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		520E46792568B5A800DE9205 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		523A86282542BE8600ADFE25 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +692,7 @@
 				5245F89D253FE706002E8B53 /* Mestika DashboardTests */,
 				5245F8A8253FE706002E8B53 /* Mestika DashboardUITests */,
 				5245F882253FE702002E8B53 /* Products */,
+				520E46792568B5A800DE9205 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1445,10 +1455,11 @@
 			packageProductDependencies = (
 				523A86232542B67900ADFE25 /* PopupView */,
 				523A86322542CC6E00ADFE25 /* BottomSheet */,
-				52C05578255F6B9900A57400 /* MultipartForm */,
 				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
 				C06AC3102563770700D06EE3 /* SwiftUIX */,
 				52E0557D2563C307009294DA /* NavigationStack */,
+				520E467A2568B5A800DE9205 /* Introspect */,
+				520E46802568BEF100DE9205 /* Indicators */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1531,6 +1542,7 @@
 				0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 				0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -2192,6 +2204,14 @@
 				minimumVersion = 7.1.0;
 			};
 		};
+		520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Connapptivity/SwiftUI-Indicators";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
 		522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI";
@@ -2251,6 +2271,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		520E467A2568B5A800DE9205 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		520E46802568BEF100DE9205 /* Indicators */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */;
+			productName = Indicators;
+		};
 		522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */;
@@ -2265,11 +2295,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
 			productName = BottomSheet;
-		};
-		52C05578255F6B9900A57400 /* MultipartForm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */;
-			productName = MultipartForm;
 		};
 		52E0557D2563C307009294DA /* NavigationStack */ = {
 			isa = XCSwiftPackageProductDependency;

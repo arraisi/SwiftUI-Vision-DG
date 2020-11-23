@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class UserRegistrationViewModel: ObservableObject {
     @Published var isLoading: Bool = false
@@ -18,21 +19,28 @@ extension UserRegistrationViewModel {
             self.isLoading = true
         }
         
-        UserRegistrationService.shared.postUser() { result in
+        UserRegistrationService.shared.postUser(
+            imageKtp: UIImage(named: "atm_red_devils")!,
+            imageNpwp: UIImage(named: "atm_red_devils")!,
+            imageSelfie: UIImage(named: "atm_red_devils")!) { result in
+                
             switch result {
             case .success(let response):
                 print(response.deviceID)
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
                 }
+                
                 completion(true)
                 
             case .failure(let error):
+                
                 print("ERROR-->")
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
                 }
+                completion(false)
                 
                 print(error.localizedDescription)
             }
@@ -50,8 +58,13 @@ extension UserRegistrationViewModel {
             case .success(let response):
                 print(response.code)
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
+                    completion(true)
+                }
+                
+                DispatchQueue.main.async {
+                    
                     self.code = response.code
 //                    self.code = "R05"
                     self.message = response.message
@@ -63,6 +76,7 @@ extension UserRegistrationViewModel {
                 print("ERROR-->")
                 DispatchQueue.main.async {
                     self.isLoading = false
+                    completion(false)
                 }
                 
                 print(error.localizedDescription)

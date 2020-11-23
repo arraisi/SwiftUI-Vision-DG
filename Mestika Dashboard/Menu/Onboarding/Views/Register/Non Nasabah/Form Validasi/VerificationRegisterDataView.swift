@@ -371,7 +371,10 @@ struct VerificationRegisterDataView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
-            return Alert(title: Text("Message"), message: Text("GAGAL MENDAFTAR"), dismissButton: .default(Text("Oke")))
+            return Alert(
+                title: Text("Error 400"),
+                message: Text("The operation couldn’t be completed."),
+                dismissButton: .default(Text("Oke")))
         }
         
     }
@@ -423,6 +426,12 @@ struct VerificationRegisterDataView: View {
         self.userRegisterVM.userRegistration() { success in
             if success {
                 print("SUCCESS")
+                nextRoute = true
+            }
+            
+            if !success {
+                print("GAGAL")
+                self.showingAlert = true
             }
         }
     }

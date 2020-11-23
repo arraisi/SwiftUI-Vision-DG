@@ -11,6 +11,7 @@ import SystemConfiguration
 import NavigationStack
 import SwiftUIX
 import Introspect
+import Indicators
 
 struct WelcomeView: View {
     
@@ -53,58 +54,55 @@ struct WelcomeView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color(hex: "#232175")
+        ZStack {
+            Color(hex: "#232175")
+            
+            if self.userVM.isLoading {
+                LinearWaitingIndicator()
+                    .padding(.top, 45)
+            }
+            
+            VStack(alignment: .leading) {
                 
-                VStack(alignment: .leading) {
-                    
-                    header
-                        .padding(.top, 30)
-                        .padding(.horizontal, 30)
-                    
-                    PaginationView(axis: .horizontal) {
-                        imageSliderOne.eraseToAnyView()
-                        imageSliderTwo.eraseToAnyView()
-                        imageSliderThree.eraseToAnyView()
-                    }
-                    
-                    footerBtn
-                        .padding(.top, 20)
-                        .padding([.bottom, .horizontal], 30)
+                header
+                    .padding(.top, 30)
+                    .padding(.horizontal, 30)
+                
+                PaginationView(axis: .horizontal) {
+                    imageSliderOne.eraseToAnyView()
                 }
                 
-                if self.showingModalMenu || self.showingModalRejected || self.showingModalApprove || self.showingModalRegistered || self.showingModalSchedule {
-                    ModalOverlay(tapAction: { withAnimation { self.showingModalMenu = false } })
-                }
+                footerBtn
+                    .padding(.top, 20)
+                    .padding([.bottom, .horizontal], 30)
             }
-            .navigationBarHidden(true)
-            .navigationBarItems(trailing: EmptyView())
-            .edgesIgnoringSafeArea(.all)
-            .introspectNavigationController { navigationController in
-                navigationController.hidesBarsOnSwipe = true
-            }
-            .onAppear() {
-                print("APPEAR")
-                getUserStatus(deviceId: deviceId!)
-            }
-            .popup(isPresented: $showingModalMenu, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-                popupMessageMenu()
-            }
-            .popup(isPresented: $showingModalApprove, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-                popupMessageApprove()
-            }
-            .popup(isPresented: $showingModalRejected, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-                popupMessageRejected()
-            }
-            .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-                popupMessageSuccess()
-            }
-            .popup(isPresented: $showingModalSchedule, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-                popupMessageScheduleVideoCall()
+            
+            if self.showingModalMenu || self.showingModalRejected || self.showingModalApprove || self.showingModalRegistered || self.showingModalSchedule {
+                ModalOverlay(tapAction: { withAnimation { self.showingModalMenu = false } })
             }
         }
-        
+        .navigationBarHidden(true)
+        .navigationBarItems(trailing: EmptyView())
+        .edgesIgnoringSafeArea(.all)
+        .onAppear() {
+            print("APPEAR")
+            getUserStatus(deviceId: deviceId!)
+        }
+        .popup(isPresented: $showingModalMenu, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageMenu()
+        }
+        .popup(isPresented: $showingModalApprove, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageApprove()
+        }
+        .popup(isPresented: $showingModalRejected, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageRejected()
+        }
+        .popup(isPresented: $showingModalRegistered, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageSuccess()
+        }
+        .popup(isPresented: $showingModalSchedule, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageScheduleVideoCall()
+        }
     }
     
     var header: some View {
@@ -485,7 +483,7 @@ struct WelcomeView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            PushView(destination: KetentuanRegisterNasabahView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData)) {
+            PushView(destination: KetentuanRegisterNasabahView(rootIsActive: $isActiveForNonNasabahPage).environmentObject(registerData)) {
                 Text("Tidak, Saya Tidak Memiliki")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
@@ -514,31 +512,16 @@ struct WelcomeView: View {
     
     /* Funtion GET User Details Core Data */
     func getUserDetails() {
-        //        let data = User(context: managedObjectContext)
-        //        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-        //        data.nik = "3277102102890001"
-        //        data.email = "andri.ferinata@gmail.com"
-        //        data.phone = "08562006488"
-        //        data.pin = "111111"
-        //        data.password = "ferinata21"
-        //        data.firstName = "Andri"
-        //        data.lastName = "Ferinata"
-        //
-        //        do {
-        //            try self.managedObjectContext.save()
-        //        } catch {
-        //            print("Error saving managed object context: \(error)")
-        //        }
         
-        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
-            showingModalRegistered.toggle()
-        }
-        
-        if (user.last?.deviceId == deviceId && isSchedule == "true") {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                showingModalSchedule.toggle()
-            }
-        }
+//        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
+//            showingModalRegistered.toggle()
+//        }
+//
+//        if (user.last?.deviceId == deviceId && isSchedule == "true") {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                showingModalSchedule.toggle()
+//            }
+//        }
     }
     
     /* Function GET Mobile Version */
