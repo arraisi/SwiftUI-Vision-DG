@@ -17,6 +17,10 @@ struct WelcomeView: View {
     /* For Check Internet Connection */
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.aple.com")
     
+    @State var showLogin = false
+    @State var showRegisterNasabah = false
+    @State var showRegisterNonNasabah = false
+    
     /* Routing Variable */
     @State var routeToLogin: Bool = false
     @State var routeToPilihDesainKartuATM: Bool = false
@@ -451,17 +455,17 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            PushView(
-                destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData),
-                isActive: self.$isActiveRootLogin,
-                label: {
-                    Text("Login")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
-                }
-            )
+            PushView(destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData), isActive: self.$isActiveRootLogin) {
+                Button(action: {
+                    
+                }, label: {
+                        Text("Login")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                })
+            }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
@@ -492,24 +496,36 @@ struct WelcomeView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-//            PushView(destination: KetentuanRegisterNasabahView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData)) {
-            PushView(destination: FormCompletionKartuATMView().environmentObject(registerData)) {
-                Text("Tidak, Saya Tidak Memiliki")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 13))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
+            PushView(destination: KetentuanRegisterNasabahView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData), isActive: self.$showRegisterNonNasabah) {
+//            PushView(destination: FormCompletionKartuATMView().environmentObject(registerData), isActive: self.$showRegisterNonNasabah) {
+                
+                Button(action: {
+                    self.showRegisterNonNasabah.toggle()
+                }, label: {
+                    Text("Tidak, Saya Tidak Memiliki")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                
             }
             .padding(.bottom, 2)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
             PushView(
-                destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData),
+                destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData), isActive: self.$showRegisterNasabah,
                 label: {
-                    Text("Ya, Saya Memiliki")
-                        .foregroundColor(.black)
-                        .font(.custom("Montserrat-SemiBold", size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
+                    
+                    
+                    Button(action: {
+                        self.showRegisterNasabah.toggle()
+                    }, label: {
+                        Text("Ya, Saya Memiliki")
+                            .foregroundColor(.black)
+                            .font(.custom("Montserrat-SemiBold", size: 13))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                    })
                 })
                 .padding(.bottom, 30)
                 .cornerRadius(12)
