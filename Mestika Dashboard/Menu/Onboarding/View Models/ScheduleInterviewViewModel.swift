@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+import Combine
 
 class ScheduleInterviewSummaryViewModel: ObservableObject {
     var idSchedule: Int = 0
@@ -77,6 +79,21 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
             }
         }
     }
+    
+    // MARK:- SUBMIT SCHEDULE INTERVIEW
+    func submitSchedule(date: String, nik: String, endTime: String, startTime: String) {
+        ScheduleInterviewService.shared.submitScheduleInterview(date: date, nik: nik, endTime: endTime, startTime: startTime) { result in
+            print(result)
+            
+            switch result {
+            case .success(let schedule):
+                print("Success \(String(describing: schedule?.nik))")
+
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 class ScheduleInterviewViewModel: Identifiable {
@@ -95,6 +112,10 @@ class ScheduleInterviewViewModel: Identifiable {
         return self.schedule.date
     }
     
+    var nik: String {
+        return self.schedule.nik
+    }
+    
     var timeStart: String {
         return self.schedule.timeStart
     }
@@ -102,4 +123,5 @@ class ScheduleInterviewViewModel: Identifiable {
     var timeEnd: String {
         return self.schedule.timeEnd
     }
+    
 }

@@ -17,6 +17,8 @@ struct KetentuanRegisterNasabahView: View {
     /* Data Binding */
     @Binding var rootIsActive : Bool
     
+    @State var isShowNextView : Bool = false
+    
     /* Data Model */
     @StateObject var ketentuanViewModel = KetentuanViewModel()
     
@@ -71,11 +73,17 @@ struct KetentuanRegisterNasabahView: View {
             }
             .padding(20)
             
-            PushView(destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData)) {
-                Text("Lanjut Membuat Rekening")
+            PushView(destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData), isActive: $isShowNextView) {
+                
+                Button(action: {
+                    self.isShowNextView.toggle()
+                }, label: {
+                    Text("Lanjut Membuat Rekening")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                })
+                
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)

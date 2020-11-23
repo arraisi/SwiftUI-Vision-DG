@@ -20,6 +20,7 @@ struct WelcomeView: View {
     
     /* Routing Variable */
     @State var routeToLogin: Bool = false
+    @State var routeToPilihDesainKartuATM: Bool = false
     @State var isActiveForNonNasabahPage : Bool = false
     @State var isActiveForNasabahPage : Bool = false
     @State var isActiveRoot : Bool = false
@@ -248,27 +249,33 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            Text("Silahkan tunggu sampai kartu ATM Anda diterima.")
+            Text("Silakan pilih tombol Lanjutkan untuk ke tahap selanjutnya")
                 .font(.caption)
                 .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            Button(
-                action: {},
-                label: {
-                    Text("Kembali ke Halaman Utama")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
-                }
-            )
+            PushView(
+                destination: FormPilihDesainATMView(),
+                isActive: self.$routeToPilihDesainKartuATM
+            ) {
+                Button(
+                    action: {
+                        self.routeToPilihDesainKartuATM = true
+                    },
+                    label: {
+                        Text("Kembali ke Halaman Utama")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                    }
+                )
+            }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
-            
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)

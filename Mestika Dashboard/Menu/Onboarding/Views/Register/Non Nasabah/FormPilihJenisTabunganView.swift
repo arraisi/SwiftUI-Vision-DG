@@ -11,6 +11,8 @@ import NavigationStack
 
 struct FormPilihJenisTabunganView: View {
     
+    @State var isShowNextView : Bool = false
+    
     /* Carousel Variables */
     @State var data = savingTypeData
     @State var firstOffset : CGFloat = 0
@@ -117,13 +119,18 @@ struct FormPilihJenisTabunganView: View {
                 .frame(height: 150)
             
             PushView(destination:
-                FormIdentitasDiriView().environmentObject(registerData)
-            ) {
-                Text("Pilih Tabungan ini")
-                    .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 13))
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        FormIdentitasDiriView().environmentObject(registerData), isActive: $isShowNextView) {
+                
+                Button(action: {
+                    self.isShowNextView.toggle()
+                }, label: {
+                    Text("Pilih Tabungan ini")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                })
+                
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)

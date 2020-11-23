@@ -14,6 +14,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @State var isShowNextView : Bool = false
+    
     /* Variable PIN OTP */
     var maxDigits: Int = 6
     @State var pin: String = ""

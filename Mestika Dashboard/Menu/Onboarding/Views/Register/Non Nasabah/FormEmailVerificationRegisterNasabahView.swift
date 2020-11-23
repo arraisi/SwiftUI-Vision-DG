@@ -14,6 +14,8 @@ struct FormEmailVerificationRegisterNasabahView: View {
     @State var email: String = ""
     @State private var isEmailValid : Bool   = false
     
+    @State var isShowNextView : Bool = false
+    
     func textFieldValidatorEmail(_ string: String) -> Bool {
         if string.count > 100 {
             return false
@@ -78,11 +80,17 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 .padding(.horizontal, 30)
                 .padding(.vertical, 10)
                 
-                PushView(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
-                    Text("Verifikasi Email")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                PushView(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData), isActive: $isShowNextView) {
+                    
+                    Button(action: {
+                        self.isShowNextView.toggle()
+                    }, label: {
+                        Text("Verifikasi Email")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    })
+                    
                 }
                 .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)

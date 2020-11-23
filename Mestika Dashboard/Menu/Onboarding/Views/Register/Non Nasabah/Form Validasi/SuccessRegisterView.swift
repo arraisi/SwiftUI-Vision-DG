@@ -456,6 +456,8 @@ struct TanggalWawancara {
 struct SuccessRegisterView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
+    
     @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -565,9 +567,9 @@ struct SuccessRegisterView: View {
                         .padding(.trailing, 20)
                         
                     }
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(10)
-                        .padding(.horizontal, 20)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
                     
                     Text("Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru")
                         .font(.subheadline)
@@ -635,21 +637,39 @@ struct SuccessRegisterView: View {
                     
                     Group {
                         
-                        NavigationLink(
-                            destination: FormPilihJenisATMView(),
-                            label: {
-                                Text("Buat Janji")
-                                    .foregroundColor(.white)
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                    .font(.system(size: 13))
-                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                            })
-                            .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
-                            .cornerRadius(12)
-                            .padding(.horizontal, 20)
-                            .padding(.top, 20)
-                            .padding(.bottom, 5)
-                            .disabled(disableForm)
+                        Button(action: {
+                            if pilihJam != "" {
+                                submitSchedule()
+                            }
+                        }, label: {
+                            Text("Buat Janji")
+                                .foregroundColor(.white)
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        })
+                        .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                        .cornerRadius(12)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 20)
+                        .padding(.bottom, 5)
+                        .disabled(disableForm)
+                        
+                        //                        NavigationLink(
+                        //                            destination: FormPilihJenisATMView(),
+                        //                            label: {
+                        //                                Text("Buat Janji")
+                        //                                    .foregroundColor(.white)
+                        //                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        //                                    .font(.system(size: 13))
+                        //                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        //                            })
+                        //                            .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                        //                            .cornerRadius(12)
+                        //                            .padding(.horizontal, 20)
+                        //                            .padding(.top, 20)
+                        //                            .padding(.bottom, 5)
+                        //                            .disabled(disableForm)
                         
                         Button(
                             action: {
@@ -755,6 +775,11 @@ struct SuccessRegisterView: View {
             hud.dismiss(afterDelay: 2)
             return hud
         }
+    }
+    
+    func submitSchedule() {
+        let timeArr = pilihJam.components(separatedBy: " - ")
+        scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[1])
     }
     
     // MARK:- POPUP CANCEL REGISTER
