@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormDetailKartuATMView: View {
     
@@ -13,9 +14,8 @@ struct FormDetailKartuATMView: View {
     
     var body: some View {
         VStack {
-            AppBar
+            AppBarLogo(light: false, hideBack: true)
                 .padding(.top, 55)
-                .padding(.horizontal, 30)
             
             ScrollView {
                 VStack(spacing: 25){
@@ -103,12 +103,12 @@ struct FormDetailKartuATMView: View {
                     }
                     
                     Spacer()
-                    NavigationLink(destination: WelcomeView(), label: {
+                    PopView(destination: .root) {
                         Text("KEMBALI KE HALAMAN UTAMA")
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                    })
+                    }
                     .frame(height: 50)
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
@@ -119,28 +119,6 @@ struct FormDetailKartuATMView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-    }
-    
-    // MARK: - APP BAR
-    var AppBar: some View {
-        HStack {
-            Spacer()
-            logo
-            Spacer()
-        }
-    }
-    
-    // MARK: - LOGO
-    var logo: some View {
-        HStack(alignment: .center, spacing: .none) {
-            Image("Logo M")
-                .resizable()
-                .frame(width: 25, height: 25)
-            Text("BANK MESTIKA")
-                .foregroundColor(Color(hex: "#232175"))
-                .font(.system(size: 20))
-                .bold()
-        }
     }
 }
 
