@@ -15,7 +15,7 @@ import Introspect
 struct WelcomeView: View {
     
     /* For Check Internet Connection */
-    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.aple.com")
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
     
     @State var showLogin = false
     @State var showRegisterNasabah = false
@@ -255,7 +255,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            Text("Silakan pilih tombol Lanjutkan untuk ke tahap selanjutnya")
+            Text("Silakan pilih tombol \"Lanjutkan\" untuk ke tahap selanjutnya")
                 .font(.caption)
                 .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#232175"))
@@ -271,7 +271,7 @@ struct WelcomeView: View {
                         self.routeToPilihDesainKartuATM = true
                     },
                     label: {
-                        Text("Kembali ke Halaman Utama")
+                        Text("Lanjutkan")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))

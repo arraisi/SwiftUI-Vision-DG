@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormPilihDesainATMView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -15,9 +16,8 @@ struct FormPilihDesainATMView: View {
     
     var body: some View {
         VStack {
-            AppBar
+            AppBarLogo()
                 .padding(.top, 55)
-                .padding(.horizontal, 30)
             
             ScrollView{
                 
@@ -84,19 +84,17 @@ struct FormPilihDesainATMView: View {
                     }
                     .padding(.horizontal)
                     
-                    NavigationLink(destination:
-                                   FormCompletionKartuATMView().environmentObject(RegistrasiModel()),
-                        label: {
-                            Text("PILIH DESAIN KARTU")
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                .frame(maxWidth: .infinity, maxHeight: 40)
-                        })
-                        .frame(height: 50)
-                        .background(Color(hex: "#2334D0"))
-                        .cornerRadius(12)
-                        .padding(.horizontal)
-                        .padding(.vertical, 20)
+                    PushView(destination: FormCompletionKartuATMView().environmentObject(RegistrasiModel())) {
+                        Text("PILIH DESAIN KARTU")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                    }
+                    .frame(height: 50)
+                    .background(Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.horizontal)
+                    .padding(.vertical, 20)
                     
                 }
                 .animation(nil)
@@ -114,28 +112,6 @@ struct FormPilihDesainATMView: View {
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .navigationBarHidden(true)
-    }
-    
-    // MARK: - APP BAR
-    var AppBar: some View {
-        HStack {
-            Spacer()
-            logo
-            Spacer()
-        }
-    }
-    
-    // MARK: - LOGO
-    var logo: some View {
-        HStack(alignment: .center, spacing: .none) {
-            Image("Logo M")
-                .resizable()
-                .frame(width: 25, height: 25)
-            Text("BANK MESTIKA")
-                .foregroundColor(Color(hex: "#232175"))
-                .font(.system(size: 20))
-                .bold()
-        }
     }
     
     // MARK: - PAGES APPEARANCE

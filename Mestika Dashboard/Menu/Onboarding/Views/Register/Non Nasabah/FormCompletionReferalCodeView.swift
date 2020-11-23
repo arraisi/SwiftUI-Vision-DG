@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormCompletionReferalCodeView: View {
     /* Environtment Object */
@@ -22,7 +23,9 @@ struct FormCompletionReferalCodeView: View {
                     .scaledToFill()
             }
             VStack {
-                appBar
+                AppBarLogo(light: true)
+                    .padding(.top, 55)
+                
                 ScrollView {
                     Text("LENGKAPI DATA")
                         .multilineTextAlignment(.center)
@@ -32,7 +35,7 @@ struct FormCompletionReferalCodeView: View {
                     
                     referalCodeCard
                     
-                    NavigationLink(destination: FormDetailKartuATMView().environmentObject(registerData)) {
+                    PushView(destination: FormDetailKartuATMView().environmentObject(RegistrasiModel())) {
                         Text("SUBMIT")
                             .foregroundColor(Color("DarkStaleBlue"))
                             .fontWeight(.bold)
@@ -55,26 +58,6 @@ struct FormCompletionReferalCodeView: View {
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
-        }
-    }
-    
-    // MARK: - APP BAR
-    var appBar: some View {
-        HStack {
-            Spacer()
-            logo
-            Spacer()
-        }
-        .padding(.top, 60)
-    }
-    
-    // MARK: - LOGO
-    var logo: some View {
-        HStack(alignment: .center, spacing: .none) {
-            Image("logo_mestika")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 120, height: 25)
         }
     }
     
