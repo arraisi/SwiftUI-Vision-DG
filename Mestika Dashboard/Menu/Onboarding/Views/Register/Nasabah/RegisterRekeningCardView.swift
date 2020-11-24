@@ -20,7 +20,6 @@ struct RegisterRekeningCardView: View {
     ]
     
     /* Environtment Object */
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var registerData: RegistrasiModel
     
     @State var jenisKartuCtrl: String = ""
@@ -108,9 +107,8 @@ struct RegisterRekeningCardView: View {
                         label: {
                             Text("Verifikasi No. Kartu")
                                 .foregroundColor(.white)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, maxHeight: 50)
                         })
                         .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                         .cornerRadius(12)

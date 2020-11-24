@@ -37,14 +37,12 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
                     .padding(.top, 30)
-                    .padding(.horizontal, 20)
                 
                 Text("Silahkan masukan Alamat Email Anda")
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
-                    .padding(.horizontal, 20)
                 
                 TextField("Masukan alamat email anda", text: $email, onEditingChanged: { (isChanged) in
                     if !isChanged {
@@ -64,7 +62,6 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                 .padding(.top, 20)
-                .padding(.horizontal, 20)
                 
                 HStack {
                     Text("*Email harus lebih dari 8 karakter")
@@ -73,7 +70,6 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     
                     Spacer()
                 }
-                .padding(.horizontal, 30)
                 .padding(.vertical, 10)
                 
                 NavigationLink(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
@@ -86,16 +82,16 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 }
                 .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)
-                .padding(.horizontal, 20)
                 .padding(.top, 10)
-                .padding(.bottom, 25)
+                .padding(.bottom, 30)
                 .disabled(!self.isEmailValid)
             }
-            .frame(width: UIScreen.main.bounds.width - 30)
+            .padding(.horizontal, 30)
+            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color.white)
             .cornerRadius(15)
             .shadow(radius: 30)
-            .padding(.top, 120)
+            .padding(.top, UIScreen.main.bounds.height * 0.15)
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
@@ -110,7 +106,9 @@ struct FormEmailVerificationRegisterNasabahView: View {
 #if DEBUG
 struct EmailVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FormEmailVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        NavigationView {
+            FormEmailVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        }
     }
 }
 #endif

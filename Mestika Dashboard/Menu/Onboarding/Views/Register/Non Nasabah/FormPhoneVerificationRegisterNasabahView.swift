@@ -33,8 +33,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 Text("Phone Verification")
                     .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
-                    .padding(.top, 20)
-                    .padding(.horizontal, 20)
+                    .padding(.top, 30)
                 
                 Text("Silahkan masukan No. Telepon Anda")
                     .font(.custom("Montserrat-Regular", size: 12))
@@ -42,7 +41,6 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
                     .padding(.bottom, 20)
-                    .padding(.horizontal, 20)
                 
                 HStack {
                     Text("🇮🇩 +62 ").foregroundColor(.black)
@@ -69,7 +67,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 .background(Color(hex: "#f4f4f4"))
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
-                .padding(20)
+                .padding(.vertical, 15)
                 
                 NavigationLink(destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
                     
@@ -81,16 +79,16 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 }
                 .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)
-                .padding(.horizontal, 20)
                 .padding(.top, 30)
-                .padding(.bottom, 20)
+                .padding(.bottom, 30)
                 .disabled(disableForm)
             }
-            .frame(width: UIScreen.main.bounds.width - 30)
+            .padding(.horizontal, 30)
+            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color.white)
             .cornerRadius(15)
             .shadow(radius: 30)
-            .padding(.top, 120)
+            .padding(.top, UIScreen.main.bounds.height * 0.15)
         }
         .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
