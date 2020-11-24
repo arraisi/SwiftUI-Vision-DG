@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,9 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         Bundle(path: injectionBundlePath)?.load()
         #endif
+        
+        ///Implement Firebase
+        FirebaseApp.configure()
+        
         return true
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        if let refreshedToken = Messaging.messaging().fcmToken {
+            print("FCM token: \(refreshedToken)")
+        }
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

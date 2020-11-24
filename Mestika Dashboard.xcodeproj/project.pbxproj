@@ -11,6 +11,7 @@
 		0620291E256D914500A830EA /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620291D256D914500A830EA /* GeneralResponse.swift */; };
 		06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06409F72256798D7008ABB20 /* AddressOptionsView.swift */; };
 		064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */; };
+		064CCE5E256DB40D001B8EB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */; };
 		064EBDAE256ADEB20070A792 /* FormCompletionKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */; };
 		064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */; };
 		0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */; };
@@ -323,6 +324,7 @@
 		0620291D256D914500A830EA /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
 		06409F72256798D7008ABB20 /* AddressOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressOptionsView.swift; sourceTree = "<group>"; };
 		064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Extensions.swift"; sourceTree = "<group>"; };
+		064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompletionKartuATMView.swift; sourceTree = "<group>"; };
 		064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompletionReferalCodeView.swift; sourceTree = "<group>"; };
 		0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAnnouncementView.swift; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 				5245F892253FE705002E8B53 /* LaunchScreen.storyboard */,
 				5245F895253FE705002E8B53 /* Info.plist */,
 				5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */,
+				064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */,
 				5245F88F253FE705002E8B53 /* Preview Content */,
 			);
 			path = "Mestika Dashboard";
@@ -1596,6 +1599,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064CCE5E256DB40D001B8EB7 /* GoogleService-Info.plist in Resources */,
 				C0A4F99A25528C0700566A11 /* Montserrat-Regular.ttf in Resources */,
 				C092ABFF2553B5850051CE3E /* myCardData.json in Resources */,
 				C0A4F99E25528C0700566A11 /* Montserrat-ExtraLight.ttf in Resources */,
