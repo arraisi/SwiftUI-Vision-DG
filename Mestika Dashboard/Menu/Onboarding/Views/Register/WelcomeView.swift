@@ -26,7 +26,7 @@ struct WelcomeView: View {
     
     /* Routing Variable */
     @State var routeToLogin: Bool = false
-    @State var routeToPilihDesainKartuATM: Bool = false
+    @State var isActiveForPilihDesainKartuATM: Bool = false
     @State var isActiveForNonNasabahPage : Bool = false
     @State var isActiveForNasabahPage : Bool = false
     @State var isActiveRoot : Bool = false
@@ -34,6 +34,7 @@ struct WelcomeView: View {
     
     var registerData = RegistrasiModel()
     var loginData = LoginBindingModel()
+    var productATMData = AddProductATM()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
     @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
@@ -48,7 +49,7 @@ struct WelcomeView: View {
     @State var showingModalVideoCallSchedule = false
     @State var showingModalDebitCreated = false
     @State var showingModalVideoCallFinish = false
-    @State var showingModalApprove = false
+    @State var showingModalApprove = true
     @State var showingModalRejected = false
     @State var showingModalMissedSchedule = false
     
@@ -262,7 +263,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihDesainATMView()){
+            NavigationLink(destination: FormPilihDesainATMView(rootIsActive: $isActiveForPilihDesainKartuATM).environmentObject(productATMData)){
                 Text("Lanjutkan")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

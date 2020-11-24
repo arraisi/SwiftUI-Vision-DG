@@ -13,14 +13,16 @@ class ATMService {
     static let shared = ATMService()
     
     // MARK : get response model.
-    func postAddProductATM(dataRequest: AddProductATM, completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
+    func postAddProductATM(dataRequest: AddProductATM, completion: @escaping(Result<GeneralResponse, NetworkError>) -> Void) {
         
         guard let url = URL.urlAddProductATM() else {
             return completion(.failure(.badUrl))
         }
         
         // MARK : serialize model data
-        let finalBody = try! JSONSerialization.data(withJSONObject: dataRequest)
+        let finalBody = try! JSONEncoder().encode(dataRequest)
+        let json = String(data: finalBody, encoding: String.Encoding.utf8)
+        print(json)
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -41,12 +43,12 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode(OtpResponse.self, from: data)
+            let response = try? JSONDecoder().decode(GeneralResponse.self, from: data)
             
             if response == nil {
                 completion(.failure(.decodingError))
             } else {
-                completion(.success(otpResponse!))
+                completion(.success(response!))
             }
         }.resume()
     }

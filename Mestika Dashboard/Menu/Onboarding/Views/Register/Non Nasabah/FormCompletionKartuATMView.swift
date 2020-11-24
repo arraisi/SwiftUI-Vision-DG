@@ -11,16 +11,18 @@ import NavigationStack
 struct FormCompletionKartuATMView: View {
     
     /* Environtment Object */
-    @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var atmData: AddProductATM
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var location : String = ""
     @State var showingAddressModal = false
     @State var showingSuggestionNameModal = false
     
-    @State var nameOnCard : String = ""
-    @State var currentAddressOptionId = 1
-    @State var currentAddress : Address = Address()
+//    @State var nameOnCard : String = ""
+//    @State var currentAddress : Address = Address()
+    
+    //Dummy data
+    var currentUser = UserDetails(firstName: "", lastName: "", productName: "", phone: "", email: "", nik: "", imageKtp: nil, imageSelfie: nil, hasNoNpwp: false, imageNpwp: nil, purposeOfAccountOpening: "", sourcOfFunds: "", monthlyWithdrawalFrequency: "", monthlyWithdrawalAmount: "", monthlyDepositFrequency: "", monthlyDepositAmount: "", occupation: "", position: "", companyName: "", companyAddress: "", companyKecamatan: "", companyKelurahan: "", companyPostalCode: "", companyPhoneNumber: "", companyBusinessField: "", annualGrossIncome: "", hasOtherSourceOfIncome: "", otherSourceOfIncome: "", relativeRelationship: "", relativesName: false, relativesAddress: "Jl XDam 1", relativesPostalCode: "50423", relativesKelurahan: "Karang Mekar", relativesPhoneNumber: "", funderName: "", funderRelation: "", funderOccupation: "", isWni: true, isAgreeTNC: false, isAgreetoShare: false, isAddressEqualToDukcapil: false, correspondenceAddress: "BPC D2", correspondenceRt: "01", correspondenceRw: "02", correspondenceKelurahan: "Cibeber", correspondenceKecamatan: "Cimahi Selatan", correspondencePostalCode: "40151")
     
     let addressOptions: [MasterModel] = [
         MasterModel(id: 1, name: "Alamat Sesuai KTP"),
@@ -63,7 +65,7 @@ struct FormCompletionKartuATMView: View {
                     nameCard
                     addressCard
                     
-                    PushView(destination: FormCompletionReferalCodeView().environmentObject(RegistrasiModel())) {
+                    NavigationLink(destination: FormCompletionReferalCodeView().environmentObject(atmData)) {
                         Text("MASUKKAN DATA")
                             .foregroundColor(Color("DarkStaleBlue"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -93,6 +95,9 @@ struct FormCompletionKartuATMView: View {
         .popup(isPresented: $showingAddressModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomAddressFloater()
         }
+        .onAppear(){
+            fetchAddressOption()
+        }
     }
     
     var nameCard: some View {
@@ -120,7 +125,7 @@ struct FormCompletionKartuATMView: View {
                     
                     HStack {
                         
-                        TextField("Masukkan Nama", text: $nameOnCard) { changed in
+                        TextField("Masukkan Nama", text: $atmData.atmName) { changed in
                             if changed {
                                 showingSuggestionNameModal.toggle()
                             }
@@ -162,7 +167,7 @@ struct FormCompletionKartuATMView: View {
             
             RadioButtonGroup(
                 items: addressOptions,
-                selectedId: $currentAddressOptionId) { selected in
+                selectedId: $atmData.addressOptionId) { selected in
                 fetchAddressOption()
             }
             .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
@@ -191,14 +196,14 @@ struct FormCompletionKartuATMView: View {
                 
                 HStack {
                     
-                    TextField("Alamat", text: $currentAddress.address) { changed in
+                    TextField("Alamat", text: $atmData.atmAddressInput) { changed in
                     } onCommit: {
                     }
                     .font(Font.system(size: 14))
                     .frame(height: 36)
-                    .disabled(currentAddressOptionId != 4)
+                    .disabled(atmData.addressOptionId != 4)
                     
-                    if currentAddressOptionId == 4 {
+                    if atmData.addressOptionId == 4 {
                         Button(action:{
                             showingAddressModal.toggle()
                         }, label: {
@@ -214,25 +219,25 @@ struct FormCompletionKartuATMView: View {
                 
             }
             
-            LabelTextField(value: $currentAddress.rtRw, label: "", placeHolder: "RT/RW", disabled:currentAddressOptionId != 4 ) { (change) in
+            LabelTextField(value: $atmData.atmAddressrtRwInput, label: "", placeHolder: "RT/RW", disabled:atmData.addressOptionId != 4 ) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $currentAddress.kelurahan, label: "", placeHolder: "Kelurahan", disabled:currentAddressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddresskelurahanInput, label: "", placeHolder: "Kelurahan", disabled:atmData.addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $currentAddress.kecamatan, label: "", placeHolder: "Kecamatan", disabled:currentAddressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddresskecamatanInput, label: "", placeHolder: "Kecamatan", disabled:atmData.addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $currentAddress.kodePos, label: "", placeHolder: "Kode Pos", disabled:currentAddressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddresspostalCodeInput, label: "", placeHolder: "Kode Pos", disabled:atmData.addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
@@ -283,7 +288,12 @@ struct FormCompletionKartuATMView: View {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
                     print(cities[index])
-                    currentAddress = cities[index]
+                    atmData.atmAddressInput = cities[index].address
+                    atmData.atmAddresspostalCodeInput = cities[index].kodePos
+                    atmData.atmAddresskecamatanInput = cities[index].kecamatan
+                    atmData.atmAddresskelurahanInput = cities[index].kelurahan
+                    atmData.atmAddressrtRwInput = cities[index].rtRw
+                    
                     self.showingAddressModal.toggle()
                 })
                 
@@ -320,7 +330,7 @@ struct FormCompletionKartuATMView: View {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
                     print(suggestions[index])
-                    nameOnCard = suggestions[index]
+                    atmData.atmName = suggestions[index]
                     self.showingSuggestionNameModal.toggle()
                 })
                 
@@ -338,21 +348,40 @@ struct FormCompletionKartuATMView: View {
     }
     
     func fetchAddressOption() {
-        switch currentAddressOptionId {
+        switch atmData.addressOptionId {
         case 1:
-            currentAddress = Address(address: registerData.alamatKeluarga, city: registerData.kecamatanKeluarga, kodePos: registerData.kodePosKeluarga, kecamatan: registerData.kecamatanKeluarga, kelurahan: registerData.kelurahanKeluarga, rtRw: registerData.rtrw)
+            atmData.atmAddressInput = currentUser.relativesAddress
+            atmData.atmAddresspostalCodeInput = currentUser.relativesPostalCode
+            atmData.atmAddresskecamatanInput = currentUser.relativesKelurahan
+            atmData.atmAddresskelurahanInput = currentUser.relativesKelurahan
+            atmData.atmAddressrtRwInput = ""
         case 2:
-            currentAddress = Address(address: registerData.alamatKeluarga, city: registerData.kecamatanKeluarga, kodePos: registerData.kodePosKeluarga, kecamatan: registerData.kecamatanKeluarga, kelurahan: registerData.kelurahanKeluarga, rtRw: registerData.rtrw)
+            atmData.atmAddressInput = currentUser.correspondenceAddress
+            atmData.atmAddresspostalCodeInput = currentUser.correspondencePostalCode
+            atmData.atmAddresskecamatanInput = currentUser.correspondenceKecamatan
+            atmData.atmAddresskelurahanInput = currentUser.correspondenceKelurahan
+            atmData.atmAddressrtRwInput = "\(currentUser.correspondenceRt)\\\(currentUser.correspondenceRw)"
+//            currentAddress = Address(address: currentUser.correspondenceAddress, city: currentUser.correspondenceKecamatan, kodePos: currentUser.correspondencePostalCode, kecamatan: currentUser.correspondenceKecamatan, kelurahan: currentUser.correspondenceKelurahan, rtRw: "\(currentUser.correspondenceRt)\\\(currentUser.correspondenceRw)")
         case 3:
-            currentAddress = Address(address: registerData.alamatPerusahaan, city: registerData.kecamatan, kodePos: registerData.kodePos, kecamatan: registerData.kecamatan, kelurahan: registerData.kelurahan, rtRw: registerData.rtrw)
+            atmData.atmAddressInput = currentUser.companyAddress
+            atmData.atmAddresspostalCodeInput = currentUser.companyPostalCode
+            atmData.atmAddresskecamatanInput = currentUser.companyKecamatan
+            atmData.atmAddresskelurahanInput = currentUser.companyKelurahan
+            atmData.atmAddressrtRwInput = ""
+//            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:
-            currentAddress = Address()
+            atmData.atmAddressInput = ""
+            atmData.atmAddresspostalCodeInput = ""
+            atmData.atmAddresskecamatanInput = ""
+            atmData.atmAddresskelurahanInput = ""
+            atmData.atmAddressrtRwInput = ""
+//            currentAddress = Address()
         }
     }
 }
 
 struct FormCompletionDataView_Previews: PreviewProvider {
     static var previews: some View {
-        FormCompletionKartuATMView().environmentObject(RegistrasiModel())
+        FormCompletionKartuATMView().environmentObject(AddProductATM())
     }
 }
