@@ -60,4 +60,8 @@ extension URL {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user?type=scheduleVC")
     }
     
+    static func urlAddProductATM() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user?type=addProduct");
+    }
+    
 }
