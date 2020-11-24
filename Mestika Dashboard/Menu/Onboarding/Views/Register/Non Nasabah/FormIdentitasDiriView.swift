@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Combine
-import NavigationStack
 
 struct FormIdentitasDiriView: View {
     
@@ -15,6 +14,7 @@ struct FormIdentitasDiriView: View {
      Environtment Object
      */
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     /*
      Recognized Nomor Induk Ktp
      */
@@ -144,34 +144,34 @@ struct FormIdentitasDiriView: View {
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .padding([.horizontal, .top], 30)
                     
-                    PushView(
+                    NavigationLink(
                         destination: TujuanPembukaanRekeningView().environmentObject(registerData),
-                        isActive: $nextViewActive,
-                        label: {
-                            Button(action: {
-                                
-                                self.registerData.npwp = self.npwp
-                                
-                                if imageKTP != nil
-                                    && registerData.nik != ""
-                                    && confirmNik
-                                    && (registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp)
-                                    && imageSelfie != nil {
-                                    
-                                    self.nextViewActive.toggle()
-                                    
-                                }
-                                
-                            }, label: {
-                                Text("Lanjut Pembukaan Rekening Baru")
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 16))
-                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                            })
-                        })
-                        .background(Color(hex: "#232175"))
-                        .cornerRadius(12)
-                        .padding(30)
+                        isActive: self.$nextViewActive,
+                        label: {EmptyView()})
+                    
+                    Button(action: {
+                        
+                        self.registerData.npwp = self.npwp
+                        
+                        if imageKTP != nil
+                            && registerData.nik != ""
+                            && confirmNik
+                            && (registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp)
+                            && imageSelfie != nil {
+                            
+                            self.nextViewActive = true
+                            
+                        }
+                        
+                    }, label: {
+                        Text("Lanjut Pembukaan Rekening Baru")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 16))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    })
+                    .background(Color(hex: "#232175"))
+                    .cornerRadius(12)
+                    .padding(30)
                 }
             }
         }
@@ -184,7 +184,7 @@ struct FormIdentitasDiriView: View {
         )
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing: PopView(destination: .root) {
+        .navigationBarItems(trailing: Button(action: {self.appState.moveToWelcomeView = true}) {
             Text("Cancel")
                 .font(.custom("Montserrat-SemiBold", size: 14))
                 .foregroundColor(.white)
@@ -279,6 +279,8 @@ struct FormIdentitasDiriView: View {
 
 struct FormIdentitasDiriView_Previews: PreviewProvider {
     static var previews: some View {
-        FormIdentitasDiriView().environmentObject(RegistrasiModel())
+        NavigationView {
+            FormIdentitasDiriView().environmentObject(RegistrasiModel())
+        }
     }
 }

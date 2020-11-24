@@ -18,7 +18,7 @@ struct ContentView: View {
         // this overrides everything you have set up earlier.
         appearance.configureWithTransparentBackground()
         
-        appearance.backgroundColor = UIColor(Color(hex: "#242576"))
+        appearance.backgroundColor = #colorLiteral(red: 0.1223579869, green: 0.1184208766, blue: 0.4122344553, alpha: 1)
         
         //        // this only applies to big titles
         //        appearance.largeTitleTextAttributes = [
@@ -42,18 +42,16 @@ struct ContentView: View {
         
     }
     
+    let appState = AppState()
+    
     var body: some View {
         JGProgressHUDPresenter(userInteractionOnHUD: false) {
-            NavigationView {
-                NavigationStackView {
-                    ZStack {
-                        Color(hex: "#F6F8FB")
-                        WelcomeView()
-                            .navigationBarHidden(true)
-                    }
-                    .edgesIgnoringSafeArea(.top)
-                }
+            ZStack {
+                Color(hex: "#F6F8FB")
+                WelcomeView()
+                    .environmentObject(appState)
             }
+            .edgesIgnoringSafeArea(.top)
         }
     }
 }

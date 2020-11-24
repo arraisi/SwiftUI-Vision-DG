@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct FormCompletionKartuATMView: View {
     
@@ -49,7 +50,9 @@ struct FormCompletionKartuATMView: View {
                     .scaledToFill()
             }
             VStack {
-                appBar
+                AppBarLogo(light: true)
+                    .padding(.top, 55)
+                
                 ScrollView {
                     Text("LENGKAPI DATA")
                         .multilineTextAlignment(.center)
@@ -60,7 +63,7 @@ struct FormCompletionKartuATMView: View {
                     nameCard
                     addressCard
                     
-                    NavigationLink(destination: FormCompletionReferalCodeView().environmentObject(registerData)) {
+                    PushView(destination: FormCompletionReferalCodeView().environmentObject(RegistrasiModel())) {
                         Text("MASUKKAN DATA")
                             .foregroundColor(Color("DarkStaleBlue"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -89,26 +92,6 @@ struct FormCompletionKartuATMView: View {
         }
         .popup(isPresented: $showingAddressModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomAddressFloater()
-        }
-    }
-    
-    // MARK: - APP BAR
-    var appBar: some View {
-        HStack {
-            Spacer()
-            logo
-            Spacer()
-        }
-        .padding(.top, 60)
-    }
-    
-    // MARK: - LOGO
-    var logo: some View {
-        HStack(alignment: .center, spacing: .none) {
-            Image("logo_mestika")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 120, height: 25)
         }
     }
     

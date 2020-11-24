@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct FormEmailVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
     @State var email: String = ""
     @State private var isEmailValid : Bool   = false
-    
-    @State var isShowNextView : Bool = false
     
     func textFieldValidatorEmail(_ string: String) -> Bool {
         if string.count > 100 {
@@ -27,7 +24,6 @@ struct FormEmailVerificationRegisterNasabahView: View {
         return emailPredicate.evaluate(with: string)
     }
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -80,16 +76,12 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 .padding(.horizontal, 30)
                 .padding(.vertical, 10)
                 
-                PushView(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData), isActive: $isShowNextView) {
+                NavigationLink(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
                     
-                    Button(action: {
-                        self.isShowNextView.toggle()
-                    }, label: {
-                        Text("Verifikasi Email")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    })
+                    Text("Verifikasi Email")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     
                 }
                 .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
