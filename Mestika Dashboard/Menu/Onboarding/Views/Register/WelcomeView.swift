@@ -49,7 +49,7 @@ struct WelcomeView: View {
     @State var showingModalVideoCallSchedule = false
     @State var showingModalDebitCreated = false
     @State var showingModalVideoCallFinish = false
-    @State var showingModalApprove = true
+    @State var showingModalApprove = false
     @State var showingModalRejected = false
     @State var showingModalMissedSchedule = false
     
