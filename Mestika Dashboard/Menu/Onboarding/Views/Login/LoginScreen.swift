@@ -11,6 +11,8 @@ import NavigationStack
 
 struct LoginScreen: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @State private var isUnlocked = false
     @State private var isActiveRoute = false
     
@@ -122,7 +124,9 @@ struct LoginScreen: View {
                         .padding(.bottom, 10)
                         .padding(.leading, 20)
                     
-                    PopView(destination: .root, label: {
+                    Button(action: {
+                        self.appState.moveToWelcomeView = true
+                    }) {
                         Text("Register Here")
                             .font(.subheadline)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -131,7 +135,7 @@ struct LoginScreen: View {
                             .padding(.top, 5)
                             .padding(.bottom, 10)
                             .padding(.trailing, 20)
-                    })
+                    }
                 }
                 .padding(.bottom)
 

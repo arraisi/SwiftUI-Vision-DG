@@ -77,8 +77,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
                     .multilineTextAlignment(.center)
-                    .padding(.top, 20)
-                    .padding(.horizontal, 20)
+                    .padding(.top, 30)
                 
                 Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
                     .font(.custom("Montserrat-Regular", size: 12))
@@ -86,7 +85,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
                     .padding(.bottom, 20)
-                    .padding(.horizontal, 20)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 ZStack {
@@ -121,7 +119,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .multilineTextAlignment(.center)
                     .padding(.top, 15)
                     .padding(.bottom, 20)
-                    .padding(.horizontal, 20)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
@@ -157,18 +154,18 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
-                    .padding(.horizontal, 20)
                     .padding(.top, 10)
-                    .padding(.bottom, 25)
+                    .padding(.bottom, 30)
                     .disabled(disableForm)
                     
                 }
             }
-            .frame(width: UIScreen.main.bounds.width - 50)
+            .padding(.horizontal, 30)
+            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color.white)
             .cornerRadius(15)
             .shadow(radius: 30)
-            .padding(.top, 120)
+            .padding(.top, UIScreen.main.bounds.height * 0.15)
             
             if self.showingOtpIncorect {
                 ModalOverlay(tapAction: { withAnimation { self.showingOtpIncorect = false } })
@@ -316,7 +313,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             Text("")
         }
-        .frame(width: UIScreen.main.bounds.width - 60)
+        .frame(width: UIScreen.main.bounds.width - 40)
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
@@ -358,7 +355,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             Text("")
         }
-        .frame(width: UIScreen.main.bounds.width - 60)
+        .frame(width: UIScreen.main.bounds.width - 40)
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
@@ -368,7 +365,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
 #if DEBUG
 struct OTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FormOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        NavigationView {
+            FormOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        }
     }
 }
 #endif
