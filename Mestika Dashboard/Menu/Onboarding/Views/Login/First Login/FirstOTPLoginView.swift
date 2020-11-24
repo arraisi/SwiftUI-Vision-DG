@@ -345,7 +345,11 @@ struct FirstOTPLoginView: View {
     
     func getOTP() {
         self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: self.loginData.noTelepon, type: "hp")
+            otpRequest: OtpRequest(
+                    destination: self.loginData.noTelepon,
+                    type: "hp",
+                    trytime: 30
+            )
         ) { success in
             
             if success {

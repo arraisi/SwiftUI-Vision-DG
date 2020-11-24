@@ -14,26 +14,50 @@ class OtpViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     @Published var reference: String = ""
-    @Published var timeCounter: Int = 15
+    @Published var timeCounter: Int = 30
     @Published var code: String = ""
+    @Published var statusMessage: String = ""
 }
 
 extension OtpViewModel {
     
     // MARK: - POST OTP
-    func otpValidation(otpRequest: OtpResponse, completion: @escaping (Bool) -> Void) {
+    func otpValidation(
+        code: String,
+        destination: String,
+        reference: String,
+        timeCounter: Int,
+        tryCount: Int,
+        completion: @escaping (Bool) -> Void) {
+        
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        OtpService.shared.postOtp(otpRequest: otpRequest) { result in
+        OtpService.shared.validateOtp(
+            code: code,
+            destination: destination,
+            reference: reference,
+            timeCounter: timeCounter,
+            tryCount: tryCount) { result in
+            
             switch result {
-            case.success(let _): break
-            //                if (response.status != nil) {
-            //                    print("Valid")
-            //
-            //
-            //                }
+            case.success(let response):
+                
+                if (response.status?.message != "OTP_INVALID") {
+                    print("Success")
+                    
+                    self.isLoading = false
+                    completion(true)
+                } else {
+                    print("Failed")
+                    print(response.status?.message)
+                    print(response.status?.code)
+                    
+                    self.isLoading = false
+                    completion(false)
+                }
+                
             case .failure(let error):
                 print("ERROR-->")
                 DispatchQueue.main.async {
@@ -54,20 +78,29 @@ extension OtpViewModel {
         OtpService.shared.getRequestOtp(otpRequest: otpRequest) { result in
             switch result {
             case.success(let response):
-                if (response.code != nil) {
+                print(response.status?.message!)
+                
+                if (response.status?.message != "OTP_REQUESTED_FAILED") {
                     print("Success")
                     
                     self.isLoading = false
-                    self.reference = response.reference
-                    self.code = response.code
+                    self.reference = response.reference ?? "0"
+                    self.code = response.code ?? "0"
+                    self.statusMessage = (response.status?.message)!
+                    self.timeCounter = response.timeCounter ?? 0
                     
                     completion(true)
+                    
                 } else {
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                    }
-                    completion(true)
+                    print("Failed Request")
+                    
+                    self.isLoading = false
+                    self.statusMessage = (response.status?.message)!
+                    self.timeCounter = response.tryCount ?? 0
+                    
+                    completion(false)
                 }
+                
             case .failure(let error):
                 print("ERROR-->")
                 DispatchQueue.main.async {

@@ -12,7 +12,6 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var registerData: RegistrasiModel
-    @ObservedObject private var otpVM = OtpViewModel()
     
     @State var isShowNextView : Bool = false
     
@@ -101,18 +100,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    PushView(destination: FormPilihJenisTabunganView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    PushView(
+                        destination: FormPilihJenisTabunganView().environmentObject(registerData),
+                        isActive: self.$isOtpValid) {
                         Text("")
                     }
                     
                     Button(action: {
-                        print(pin)
-                        if (pin == self.pinShare) {
-                            self.isOtpValid = true
-                        } else {
-                            print("Not Valid")
-                            showingModal.toggle()
-                        }
+                        validateOTP()
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
@@ -279,23 +274,64 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         .cornerRadius(20)
     }
     
+    @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
         self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: self.registerData.noTelepon, type: "hp")
+            otpRequest: OtpRequest(
+                    destination: self.registerData.email,
+                    type: "email",
+                    trytime: 60
+            )
         ) { success in
             
             if success {
-                print(self.otpVM.isLoading)
-                print("PIN : \(self.otpVM.code)")
+                print("isLoading \(self.otpVM.isLoading)")
+                print("otpRef \(self.otpVM.reference)")
+                print("status \(self.otpVM.statusMessage)")
                 
-                DispatchQueue.main.sync {
-                    self.pinShare = self.otpVM.code
+                DispatchQueue.main.async {
+                    self.timeRemaining = self.otpVM.timeCounter
                     self.referenceCode = self.otpVM.reference
                 }
+                
                 self.showingAlert = true
             }
             
-            self.showingAlert = true
+            if !success {
+                if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
+                    print("OTP FAILED")
+                    print(self.otpVM.timeCounter)
+                    
+                    DispatchQueue.main.sync {
+                        self.pinShare = self.otpVM.code
+                        self.referenceCode = self.otpVM.reference
+                        self.timeRemaining = self.otpVM.timeCounter
+                    }
+                    self.showingAlert = true
+                }
+            }
+        }
+    }
+    
+    func validateOTP() {
+        self.otpVM.otpValidation(
+            code: self.pin,
+            destination: self.otpVM.destination,
+            reference: self.otpVM.reference,
+            timeCounter: self.otpVM.timeCounter,
+            tryCount: self.otpVM.timeCounter)
+        { success in
+            
+            if success {
+                print("OTP VALID")
+                self.isOtpValid = true
+            }
+            
+            if !success {
+                print("OTP INVALID")
+                showingModal.toggle()
+            }
+            
         }
     }
 }

@@ -7,12 +7,16 @@
 
 import SwiftUI
 import NavigationStack
+import JGProgressHUD_SwiftUI
 
 struct FormOTPVerificationRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    /* HUD Variable */
+    @State private var dim = true
     
     @State var isShowNextView : Bool = false
     
@@ -40,33 +44,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var showingOtpIncorect = false
     @State var showingOtpInvalid = false
     @State private var showingAlert: Bool = false
+    @State private var showingAlertError: Bool = false
     
     /* Disabled Form */
     var disableForm: Bool {
         pin.count < 6
-    }
-    
-    @ObservedObject private var otpVM = OtpViewModel()
-    func getOTP() {
-        self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
-        ) { success in
-            
-            if success {
-                print(self.otpVM.isLoading)
-                print(self.otpVM.code)
-                print(self.otpVM.reference)
-                
-                DispatchQueue.main.sync {
-                    self.pinShare = self.otpVM.code
-                    self.referenceCode = self.otpVM.reference
-                }
-                self.showingAlert = true
-                
-            }
-            
-            self.showingAlert = true
-        }
     }
     
     // MARK: -MAIN CONTENT
@@ -131,30 +113,33 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    PushView(destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    PushView(
+                        destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData),
+                        isActive: self.$isOtpValid) {
+                        
                         Text("")
                     }
                     
                     Button(action: {
-                        print(pin)
-                        print(self.pinShare)
                         
-                        if (pin == self.pinShare && otpInvalidCount < 5) {
-                            print("OTP CORRECT")
-                            self.isOtpValid = true
-                        }
+                        validateOTP()
                         
-                        if (pin != self.pinShare && otpInvalidCount <= 4) {
-                            print("OTP INCORRECT")
-                            self.otpInvalidCount += 1
-                            print("\(self.otpInvalidCount)")
-                            showingOtpIncorect.toggle()
-                        }
-                        
-                        if (otpInvalidCount >= 5) {
-                            print("OTP INVALID IN 5 TIME")
-                            showingOtpInvalid.toggle()
-                        }
+                        //                        if (pin == self.pinShare && otpInvalidCount < 5) {
+                        //                            print("OTP CORRECT")
+                        //                            self.isOtpValid = true
+                        //                        }
+                        //
+                        //                        if (pin != self.pinShare && otpInvalidCount <= 4) {
+                        //                            print("OTP INCORRECT")
+                        //                            self.otpInvalidCount += 1
+                        //                            print("\(self.otpInvalidCount)")
+                        //                            showingOtpIncorect.toggle()
+                        //                        }
+                        //
+                        //                        if (otpInvalidCount >= 5) {
+                        //                            print("OTP INVALID IN 5 TIME")
+                        //                            showingOtpInvalid.toggle()
+                        //                        }
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
@@ -203,13 +188,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 isResendOtpDisabled = false
             }
         }
-        .alert(isPresented: $showingAlert) {
+        .alert(isPresented: $showingAlertError) {
             return Alert(
-                title: Text("OTP Code"),
-                message: Text(self.pinShare),
-                dismissButton: .default(Text("Oke"), action: {
-                    pin = self.pinShare
-                })
+                title: Text("MESSAGE"),
+                message: Text(self.otpVM.statusMessage),
+                dismissButton: .default(Text("Oke"))
             )
         }
         .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
@@ -366,6 +349,88 @@ struct FormOTPVerificationRegisterNasabahView: View {
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    @ObservedObject private var otpVM = OtpViewModel()
+    func getOTP() {
+        self.otpVM.otpRequest(
+            otpRequest: OtpRequest(
+                destination: self.registerData.noTelepon,
+                type: "hp",
+                trytime: 60
+            )
+        ) { success in
+            
+            if success {
+                print("isLoading \(self.otpVM.isLoading)")
+                print("otpRef \(self.otpVM.reference)")
+                print("status \(self.otpVM.statusMessage)")
+                
+                DispatchQueue.main.async {
+                    self.timeRemaining = self.otpVM.timeCounter
+                    self.referenceCode = self.otpVM.reference
+                }
+                
+                self.showingAlertError = true
+            }
+            
+            if !success {
+                if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
+                    print("OTP FAILED")
+                    print(self.otpVM.timeCounter)
+                    
+                    DispatchQueue.main.sync {
+                        self.pinShare = self.otpVM.code
+                        self.referenceCode = self.otpVM.reference
+                        self.timeRemaining = self.otpVM.timeCounter
+                    }
+                    self.showingAlertError = true
+                }
+            }
+        }
+    }
+    
+    func validateOTP() {
+        self.otpVM.otpValidation(
+            code: self.pin,
+            destination: self.otpVM.destination,
+            reference: self.otpVM.reference,
+            timeCounter: self.otpVM.timeCounter,
+            tryCount: self.otpVM.timeCounter)
+        { success in
+            
+            if success {
+                print("OTP VALID")
+                self.isOtpValid = true
+            }
+            
+            if !success {
+                print("OTP INVALID")
+                showingOtpIncorect.toggle()
+            }
+            
+        }
+    }
+    
+    @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
+    private func showIndeterminate() {
+        hudCoordinator.showHUD {
+            let hud = JGProgressHUD()
+            if dim {
+                hud.backgroundColor = UIColor(white: 0, alpha: 0.4)
+            }
+            
+            hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 4, opacity: 0.3)
+            hud.vibrancyEnabled = false
+            
+            hud.textLabel.text = "Loading"
+            
+            if !self.otpVM.isLoading {
+                hud.dismiss(afterDelay: 1)
+            }
+            
+            return hud
+        }
     }
 }
 

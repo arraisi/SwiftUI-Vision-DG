@@ -10,4 +10,5 @@ import Foundation
 struct OtpRequest: Codable {
     var destination: String
     var type: String
+    var trytime: Int
 }
