@@ -6,15 +6,11 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct FormEmailOTPVerificationRegisterNasabahView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject private var otpVM = OtpViewModel()
-    
-    @State var isShowNextView : Bool = false
     
     /* Variable PIN OTP */
     var maxDigits: Int = 6
@@ -101,9 +97,12 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    PushView(destination: FormPilihJenisTabunganView().environmentObject(registerData), isActive: self.$isOtpValid) {
-                        Text("")
-                    }
+                    NavigationLink(
+                        destination: FormPilihJenisTabunganView().environmentObject(registerData),
+                        isActive: self.$isOtpValid,
+                        label: {
+                            EmptyView()
+                        })
                     
                     Button(action: {
                         print(pin)
@@ -302,6 +301,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
 
 struct EmailOTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FormEmailOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        NavigationView {
+            FormEmailOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        }
     }
 }

@@ -6,18 +6,13 @@
 //
 
 import SwiftUI
-import NavigationStack
+import Introspect
 
 struct KetentuanRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    /* Data Binding */
-    @Binding var rootIsActive : Bool
-    
-    @State var isShowNextView : Bool = false
+    @EnvironmentObject var appState: AppState
     
     /* Data Model */
     @StateObject var ketentuanViewModel = KetentuanViewModel()
@@ -32,13 +27,13 @@ struct KetentuanRegisterNasabahView: View {
             }
             cardForm
         }
-        .introspectNavigationController { navigationController in
-            navigationController.hidesBarsOnSwipe = true
-        }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: EmptyView())
+        .introspectNavigationController { nc in
+            nc.navigationBar.isHidden = false
+        }
     }
     
     var cardForm: some View {
@@ -73,17 +68,11 @@ struct KetentuanRegisterNasabahView: View {
             }
             .padding(20)
             
-            PushView(destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData), isActive: $isShowNextView) {
-                
-                Button(action: {
-                    self.isShowNextView.toggle()
-                }, label: {
-                    Text("Lanjut Membuat Rekening")
+            NavigationLink(destination: FormPhoneVerificationRegisterNasabahView().environmentObject(registerData)){
+                Text("Lanjut Membuat Rekening")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                })
-                
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
@@ -92,7 +81,7 @@ struct KetentuanRegisterNasabahView: View {
             .padding(.top, 10)
             
             Button(action : {
-                presentationMode.wrappedValue.dismiss()
+                self.appState.moveToWelcomeView = true
             }) {
                 Text("Batal Mendaftar")
                     .foregroundColor(.gray)
@@ -113,6 +102,6 @@ struct KetentuanRegisterNasabahView: View {
 
 struct RegisterProvisionView_Previews: PreviewProvider {
     static var previews: some View {
-        KetentuanRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+        KetentuanRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

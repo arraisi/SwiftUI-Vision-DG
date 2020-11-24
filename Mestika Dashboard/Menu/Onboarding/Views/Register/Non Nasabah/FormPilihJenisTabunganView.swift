@@ -7,11 +7,8 @@
 
 import SwiftUI
 import PopupView
-import NavigationStack
 
 struct FormPilihJenisTabunganView: View {
-    
-    @State var isShowNextView : Bool = false
     
     /* Carousel Variables */
     @State var data = savingTypeData
@@ -20,8 +17,8 @@ struct FormPilihJenisTabunganView: View {
     @State var count : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = 170
-    let itemHeight:CGFloat = 150
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 150 // 100 is amount padding left and right
+    let itemHeight:CGFloat = 194
     let itemGapHeight:CGFloat = 10
     
     @State var showingModal = false
@@ -34,8 +31,7 @@ struct FormPilihJenisTabunganView: View {
             
             VStack() {
                 Text("Pilih Jenis Tabungan Anda")
-                    .font(.subheadline)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
                     .padding(.horizontal, 15)
                     .padding(.top, 40)
@@ -74,14 +70,14 @@ struct FormPilihJenisTabunganView: View {
                 .padding(.vertical,25)
                 .onAppear {
                     
-                    self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.2)) / 2) : 0)
+                    self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.01)) / 2) : 0)
                     
                     self.data[0].isShow = true
                 }
                 
                 detailsTypeSaving
                     .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                    .frame(width: UIScreen.main.bounds.width - 60)
+                    .frame(width: UIScreen.main.bounds.width - 30)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                 
                 Spacer()
@@ -102,44 +98,35 @@ struct FormPilihJenisTabunganView: View {
     var detailsTypeSaving: some View {
         VStack(alignment: .leading) {
             Text("Deposit Tabungan")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.custom("Montserrat-Bold", size: 30))
                 .foregroundColor(Color(hex: "#3756DF"))
                 .padding(.top, 10)
-                .padding(.horizontal, 15)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Text("Keunggulan Tabungan :")
-                .font(.footnote)
-                .padding(.top, 10)
-                .padding(.horizontal, 15)
+                .font(.custom("Montserrat-Regular", size: 12))
+                .padding(.vertical, 10)
                 .foregroundColor(Color(hex: "#5A6876"))
             
             EmptyView()
                 .frame(height: 150)
             
-            PushView(destination:
-                        FormIdentitasDiriView().environmentObject(registerData), isActive: $isShowNextView) {
+            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
                 
-                Button(action: {
-                    self.isShowNextView.toggle()
-                }, label: {
-                    Text("Pilih Tabungan ini")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                })
+                Text("Pilih Tabungan ini")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
-            .padding(.horizontal, 20)
             .padding(.bottom, 10)
             .padding(.top, 10)
             
         }
-        .padding(10)
+        .padding(.bottom, 15)
+        .padding([.horizontal, .top], 25)
         .background(Color.white)
     }
     
@@ -197,6 +184,8 @@ struct FormPilihJenisTabunganView: View {
 
 struct ChooseTypeSavingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
+        NavigationView {
+            FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
+        }
     }
 }

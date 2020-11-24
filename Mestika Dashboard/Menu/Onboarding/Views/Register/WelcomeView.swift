@@ -8,11 +8,13 @@
 import SwiftUI
 import PopupView
 import SystemConfiguration
-import NavigationStack
 import SwiftUIX
 import Introspect
 
 struct WelcomeView: View {
+    
+    @EnvironmentObject var appState: AppState
+    @State var isWelcomeViewActive: Bool = false
     
     /* For Check Internet Connection */
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
@@ -83,11 +85,15 @@ struct WelcomeView: View {
                     ModalOverlay(tapAction: { withAnimation { self.showingModalMenu = false } })
                 }
             }
-            .navigationBarHidden(true)
             .navigationBarItems(trailing: EmptyView())
             .edgesIgnoringSafeArea(.all)
-            .introspectNavigationController { navigationController in
-                navigationController.hidesBarsOnSwipe = true
+            .navigationBarHidden(true)
+            .onReceive(self.appState.$moveToWelcomeView) { moveToWelcomeView in
+                if moveToWelcomeView {
+                    print("Move to Welcome: \(moveToWelcomeView)")
+                    self.isWelcomeViewActive = false
+                    self.appState.moveToWelcomeView = false
+                }
             }
             .onAppear() {
                 print("APPEAR")
@@ -168,20 +174,11 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            PushView(
-                destination: LoginScreen(),
-                isActive: self.$routeToLogin
-            ) {
-                Button(
-                    action: {
-                        self.routeToLogin = true
-                    },
-                    label : {
-                        Text("LOGIN")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, maxHeight: 50)
-                    })
+            NavigationLink(destination: LoginScreen()){
+                Text("LOGIN")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
             }
             .cornerRadius(12)
         }
@@ -262,22 +259,12 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            PushView(
-                destination: FormPilihDesainATMView(),
-                isActive: self.$routeToPilihDesainKartuATM
-            ) {
-                Button(
-                    action: {
-                        self.routeToPilihDesainKartuATM = true
-                    },
-                    label: {
-                        Text("Lanjutkan")
-                            .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, maxHeight: 40)
-                    }
-                )
+            NavigationLink(destination: FormPilihDesainATMView()){
+                Text("Lanjutkan")
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 40)
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
@@ -455,16 +442,12 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            PushView(destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData), isActive: self.$isActiveRootLogin) {
-                Button(action: {
-                    
-                }, label: {
-                        Text("Login")
-                            .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, maxHeight: 40)
-                })
+            NavigationLink(destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData)){
+                Text("Login")
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 40)
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
@@ -496,39 +479,25 @@ struct WelcomeView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            PushView(destination: KetentuanRegisterNasabahView(rootIsActive: self.$isActiveForNonNasabahPage).environmentObject(registerData), isActive: self.$showRegisterNonNasabah) {
-//            PushView(destination: FormCompletionKartuATMView().environmentObject(registerData), isActive: self.$showRegisterNonNasabah) {
-                
-                Button(action: {
-                    self.showRegisterNonNasabah.toggle()
-                }, label: {
-                    Text("Tidak, Saya Tidak Memiliki")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                })
-                
+            NavigationLink(destination: KetentuanRegisterNasabahView().environmentObject(registerData), isActive: self.$isWelcomeViewActive){
+                Text("Tidak, Saya Tidak Memiliki")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
             }
+            .isDetailLink(false)
             .padding(.bottom, 2)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            PushView(
-                destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData), isActive: self.$showRegisterNasabah,
-                label: {
-                    
-                    
-                    Button(action: {
-                        self.showRegisterNasabah.toggle()
-                    }, label: {
-                        Text("Ya, Saya Memiliki")
-                            .foregroundColor(.black)
-                            .font(.custom("Montserrat-SemiBold", size: 13))
-                            .frame(maxWidth: .infinity, maxHeight: 50)
-                    })
-                })
-                .padding(.bottom, 30)
-                .cornerRadius(12)
+            NavigationLink(destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData)){
+                Text("Ya, Saya Memiliki")
+                    .foregroundColor(.black)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 30)
+            .cornerRadius(12)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)

@@ -6,26 +6,19 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct FormPhoneVerificationRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Variable Data */
     @State var phoneNumber: String = ""
-    
-    @State var isShowNextView : Bool = false
     
     /* Disabled Form */
     var disableForm: Bool {
         phoneNumber.count < 10
     }
-    
-    /* Data Binding */
-    @Binding var rootIsActive : Bool
     
     // MARK: -MAIN CONTENT
     var body: some View {
@@ -76,18 +69,14 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 .background(Color(hex: "#f4f4f4"))
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
-                .padding(.horizontal, 20)
+                .padding(20)
                 
-                PushView(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive).environmentObject(registerData), isActive: $isShowNextView) {
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
                     
-                    Button(action: {
-                        self.isShowNextView.toggle()
-                    }, label: {
-                        Text("Verifikasi No. Telepon")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    })
+                    Text("Verifikasi No. Telepon")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     
                 }
                 .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
@@ -114,12 +103,8 @@ struct FormPhoneVerificationRegisterNasabahView: View {
 
 struct PhoneVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FormPhoneVerificationRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
-    }
-}
-
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        NavigationView {
+            FormPhoneVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        }
     }
 }

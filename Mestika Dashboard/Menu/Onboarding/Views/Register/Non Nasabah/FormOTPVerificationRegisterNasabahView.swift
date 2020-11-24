@@ -6,15 +6,12 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct FormOTPVerificationRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State var isShowNextView : Bool = false
+    @EnvironmentObject var appState: AppState
     
     /* Variable PIN OTP */
     var maxDigits: Int = 6
@@ -28,9 +25,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var isOtpValid = false
     @State var otpInvalidCount = 0
     @State var isResendOtpDisabled = true
-    
-    /* Data Binding */
-    @Binding var rootIsActive : Bool
     
     /* Timer */
     @State private var timeRemaining = 30
@@ -131,13 +125,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    PushView(destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isOtpValid) {
-                        Text("")
+                    
+                    NavigationLink(destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                        EmptyView()
                     }
                     
                     Button(action: {
-                        print(pin)
-                        print(self.pinShare)
                         
                         if (pin == self.pinShare && otpInvalidCount < 5) {
                             print("OTP CORRECT")
@@ -155,6 +148,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             print("OTP INVALID IN 5 TIME")
                             showingOtpInvalid.toggle()
                         }
+                        
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
@@ -167,6 +161,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 25)
                     .disabled(disableForm)
+                    
                 }
             }
             .frame(width: UIScreen.main.bounds.width - 50)
@@ -304,7 +299,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 .padding([.bottom, .top], 20)
             
             Text("Kode OTP yang anda masukan salah silahkan ulangi lagi")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -312,7 +307,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             Button(action: {}) {
                 Text("Kembali")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -337,23 +332,24 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 .padding(.top, 20)
             
             Text("Kode OTP Salah")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
             Text("Kode OTP yang anda masukan telah salah 5 kali, silahkan ulangi lagi minggu depan.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
             Button(action: {
-                self.rootIsActive = false
+//                self.rootIsActive = false
+                self.appState.moveToWelcomeView = true
             }) {
                 Text("Kembali ke Halaman Utama")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -372,7 +368,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
 #if DEBUG
 struct OTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+        FormOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }
 #endif
