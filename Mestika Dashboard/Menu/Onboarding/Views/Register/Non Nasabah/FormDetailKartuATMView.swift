@@ -10,6 +10,7 @@ import NavigationStack
 
 struct FormDetailKartuATMView: View {
     
+    @EnvironmentObject var atmData: AddProductATM
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {

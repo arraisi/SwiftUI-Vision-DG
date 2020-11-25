@@ -10,10 +10,12 @@ import NavigationStack
 
 struct FormCompletionReferalCodeView: View {
     /* Environtment Object */
-    @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var atmData: AddProductATM
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var referalCode: String = ""
+    @ObservedObject private var productVM = ATMProductViewModel()
+    
+    @State private var goToSuccessPage = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -35,8 +37,13 @@ struct FormCompletionReferalCodeView: View {
                     
                     referalCodeCard
                     
-                    PushView(destination: FormDetailKartuATMView().environmentObject(RegistrasiModel())) {
-                        Text("SUBMIT")
+                    NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData), isActive: $goToSuccessPage){
+                        
+                    }
+                    Button(action: {
+                        self.postData()
+                    }) {
+                        Text(productVM.isLoading ? "Harap Tunggu" : "SUBMIT")
                             .foregroundColor(Color("DarkStaleBlue"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))
@@ -47,6 +54,7 @@ struct FormCompletionReferalCodeView: View {
                     .cornerRadius(15)
                     .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                     .padding(.vertical, 30)
+                    .disabled(productVM.isLoading)
                 }
             }
         }
@@ -86,7 +94,7 @@ struct FormCompletionReferalCodeView: View {
                     
                     HStack {
                         
-                        TextField("Masukkan kode referal", text: $referalCode) { changed in
+                        TextField("Masukkan kode referal", text: $atmData.atmAddresspostalReferral) { changed in
                             
                         } onCommit: {
                         }
@@ -107,11 +115,19 @@ struct FormCompletionReferalCodeView: View {
         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
         .padding(.top, 20)
     }
+    
+    func postData() {
+        productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
+            if success {
+                self.goToSuccessPage = true
+            }
+        }
+    }
 }
 
 struct FormCompletionReferalCodeView_Previews: PreviewProvider {
     static var previews: some View {
         FormCompletionReferalCodeView()
-            .environmentObject(RegistrasiModel())
+            .environmentObject(AddProductATM())
     }
 }

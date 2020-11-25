@@ -9,18 +9,22 @@ import SwiftUI
 import NavigationStack
 
 struct AppBarLogo: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var light: Bool = false
     var hideBack: Bool = false
     
     var body: some View {
         HStack {
             if !hideBack {
-                PopView {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
                     Image("ic_back")
                         .foregroundColor(light ? .white : Color("DarkStaleBlue"))
                         .frame(width: 30, height: 25)
                         .padding(.horizontal, 10)
-                }
+                })
             }
             Spacer()
             logo
