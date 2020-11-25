@@ -15,7 +15,8 @@ import Indicators
 struct WelcomeView: View {
     
     @EnvironmentObject var appState: AppState
-    @State var isWelcomeViewActive: Bool = false
+    @State var isKetentuanViewActive: Bool = false
+    @State var isLoginViewActive: Bool = false
     
     /* For Check Internet Connection */
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
@@ -26,7 +27,7 @@ struct WelcomeView: View {
     
     /* Routing Variable */
     @State var routeToLogin: Bool = false
-    @State var routeToPilihDesainKartuATM: Bool = false
+    @State var isActiveForPilihDesainKartuATM: Bool = false
     @State var isActiveForNonNasabahPage : Bool = false
     @State var isActiveForNasabahPage : Bool = false
     @State var isActiveRoot : Bool = false
@@ -34,6 +35,7 @@ struct WelcomeView: View {
     
     var registerData = RegistrasiModel()
     var loginData = LoginBindingModel()
+    var productATMData = AddProductATM()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
     @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
@@ -92,7 +94,8 @@ struct WelcomeView: View {
             .onReceive(self.appState.$moveToWelcomeView) { moveToWelcomeView in
                 if moveToWelcomeView {
                     print("Move to Welcome: \(moveToWelcomeView)")
-                    self.isWelcomeViewActive = false
+                    self.isKetentuanViewActive = false
+                    self.isLoginViewActive = false
                     self.appState.moveToWelcomeView = false
                 }
             }
@@ -175,12 +178,13 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: LoginScreen()){
+            NavigationLink(destination: LoginScreen(), isActive: self.$isLoginViewActive){
                 Text("LOGIN")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
+            .isDetailLink(false)
             .cornerRadius(12)
         }
     }
@@ -260,7 +264,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihDesainATMView()){
+            NavigationLink(destination: FormPilihDesainATMView(rootIsActive: $isActiveForPilihDesainKartuATM).environmentObject(productATMData)){
                 Text("Lanjutkan")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -480,7 +484,7 @@ struct WelcomeView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: KetentuanRegisterNasabahView().environmentObject(registerData), isActive: self.$isWelcomeViewActive){
+            NavigationLink(destination: KetentuanRegisterNasabahView().environmentObject(registerData), isActive: self.$isKetentuanViewActive){
                 Text("Tidak, Saya Tidak Memiliki")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))

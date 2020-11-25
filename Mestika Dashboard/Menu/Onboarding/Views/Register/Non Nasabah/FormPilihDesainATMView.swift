@@ -9,8 +9,11 @@ import SwiftUI
 import NavigationStack
 
 struct FormPilihDesainATMView: View {
+    
+    @EnvironmentObject var atmData: AddProductATM
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @Binding var rootIsActive: Bool
     @State private var selectedTab = 0
     @State private var titleCard = "THE CARD"
     
@@ -54,6 +57,7 @@ struct FormPilihDesainATMView: View {
                                         }
                                         let card = cardDesainData[selectedTab]
                                         print(card)
+                                        selectCard(card: card)
                                     }
                                     if value.translation.width > 0 {
                                         print("right")
@@ -65,6 +69,7 @@ struct FormPilihDesainATMView: View {
                                         
                                         let card = cardDesainData[selectedTab]
                                         print(card)
+                                        selectCard(card: card)
                                     }})
                 )
                 
@@ -84,7 +89,7 @@ struct FormPilihDesainATMView: View {
                     }
                     .padding(.horizontal)
                     
-                    PushView(destination: FormCompletionKartuATMView().environmentObject(RegistrasiModel())) {
+                    NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData)) {
                         Text("PILIH DESAIN KARTU")
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
@@ -114,6 +119,10 @@ struct FormPilihDesainATMView: View {
         .navigationBarHidden(true)
     }
     
+    func selectCard(card: CardModel) {
+        atmData.atmDesignName = card.name
+    }
+    
     // MARK: - PAGES APPEARANCE
     func setupAppearance() {
         UIPageControl.appearance().currentPageIndicatorTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -124,6 +133,6 @@ struct FormPilihDesainATMView: View {
 
 struct PilihDesainATMView_Previews: PreviewProvider {
     static var previews: some View {
-        FormPilihDesainATMView()
+        FormPilihDesainATMView(rootIsActive: .constant(false)).environmentObject(AddProductATM())
     }
 }

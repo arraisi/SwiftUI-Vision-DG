@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06202919256D905500A830EA /* ATMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06202918256D905500A830EA /* ATMService.swift */; };
+		0620291E256D914500A830EA /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620291D256D914500A830EA /* GeneralResponse.swift */; };
 		06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06409F72256798D7008ABB20 /* AddressOptionsView.swift */; };
+		064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */; };
+		064CCE5E256DB40D001B8EB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */; };
 		064EBDAE256ADEB20070A792 /* FormCompletionKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */; };
 		064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */; };
 		0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */; };
@@ -20,6 +24,8 @@
 		0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AF256401BA001B659D /* FirebaseMessaging */; };
 		0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5B1256401BA001B659D /* FirebaseAuth */; };
 		06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */; };
+		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
+		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
@@ -307,7 +313,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06202918256D905500A830EA /* ATMService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATMService.swift; sourceTree = "<group>"; };
+		0620291D256D914500A830EA /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
 		06409F72256798D7008ABB20 /* AddressOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressOptionsView.swift; sourceTree = "<group>"; };
+		064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Extensions.swift"; sourceTree = "<group>"; };
+		064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompletionKartuATMView.swift; sourceTree = "<group>"; };
 		064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompletionReferalCodeView.swift; sourceTree = "<group>"; };
 		0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAnnouncementView.swift; sourceTree = "<group>"; };
@@ -317,6 +327,8 @@
 		0658B5932563F8A1001B659D /* ListNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNotificationView.swift; sourceTree = "<group>"; };
 		0658B5A62563FA6D001B659D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarLogo.swift; sourceTree = "<group>"; };
+		0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductATM.swift; sourceTree = "<group>"; };
+		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
@@ -725,6 +737,7 @@
 				5245F892253FE705002E8B53 /* LaunchScreen.storyboard */,
 				5245F895253FE705002E8B53 /* Info.plist */,
 				5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */,
+				064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */,
 				5245F88F253FE705002E8B53 /* Preview Content */,
 			);
 			path = "Mestika Dashboard";
@@ -877,6 +890,7 @@
 				526B65FC254FF4C300C13C36 /* CornerRadius+Extensions.swift */,
 				6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */,
 				C068A5AF256CF3C100CE96C4 /* UIApplication.swift */,
+				064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1039,6 +1053,7 @@
 		52ADFEC62557DA3700A1001F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				06202918256D905500A830EA /* ATMService.swift */,
 				52ADFEC72557DA3700A1001F /* AssetsService.swift */,
 				52AE1A80255A425100B011B7 /* OtpService.swift */,
 				52C0556F255F687300A57400 /* UserRegistrationService.swift */,
@@ -1262,9 +1277,9 @@
 				52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */,
 				C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */,
 				52ADFF612557DFDB00A1001F /* FormPilihDesainATMView.swift */,
-				52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */,
 				064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */,
 				064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */,
+				52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */,
 			);
 			path = "Non Nasabah";
 			sourceTree = "<group>";
@@ -1295,6 +1310,8 @@
 				527E311F2566138E004FF5ED /* MobileVersionResponse.swift */,
 				527E312E25663289004FF5ED /* UserCheckResponse.swift */,
 				C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */,
+				0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */,
+				0620291D256D914500A830EA /* GeneralResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1308,6 +1325,7 @@
 				5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */,
 				C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */,
 				527E312925661644004FF5ED /* MobileVersionViewModel.swift */,
+				0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1570,6 +1588,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064CCE5E256DB40D001B8EB7 /* GoogleService-Info.plist in Resources */,
 				C0A4F99A25528C0700566A11 /* Montserrat-Regular.ttf in Resources */,
 				C092ABFF2553B5850051CE3E /* myCardData.json in Resources */,
 				C0A4F99E25528C0700566A11 /* Montserrat-ExtraLight.ttf in Resources */,
@@ -1645,6 +1664,7 @@
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
 				C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */,
 				52ADFF332557DDBD00A1001F /* OTPTextField.swift in Sources */,
+				06202919256D905500A830EA /* ATMService.swift in Sources */,
 				52ADFF892557DFDC00A1001F /* FormEmailVerificationRegisterNasabahView.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
@@ -1653,6 +1673,7 @@
 				52AE1A8C255A448100B011B7 /* OtpRequest.swift in Sources */,
 				C0E6C8FB255F87BB00A79237 /* FormPilihJenisATMView.swift in Sources */,
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
+				0620291E256D914500A830EA /* GeneralResponse.swift in Sources */,
 				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
@@ -1719,6 +1740,7 @@
 				C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */,
 				52468AF225417B60007518AE /* PurchasePayment.swift in Sources */,
 				5247465325480BBC001F43C5 /* LastPurchasePayment.swift in Sources */,
+				0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */,
 				5290A18B255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift in Sources */,
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
 				525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */,
@@ -1750,6 +1772,7 @@
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
+				064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */,
 				5290A154255BCB0F0090F788 /* FormBesarPerkiraanPenarikanDanaNasabahScreen.swift in Sources */,
 				0658B5972563F8A2001B659D /* NotificationScreen.swift in Sources */,
 				C0E40BBE2564E76000259612 /* FormSumberPenyandandDana2View.swift in Sources */,
@@ -1861,6 +1884,7 @@
 				C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */,
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
 				5290A195255BD1790090F788 /* SuccessRegisterNasabahScreen.swift in Sources */,
+				0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */,
 				52C05570255F687300A57400 /* UserRegistrationService.swift in Sources */,
 				52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */,
 				6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */,

@@ -41,14 +41,12 @@ struct KetentuanRegisterNasabahView: View {
             Image("ic_bells")
                 .resizable()
                 .frame(width: 90, height: 90)
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
+                .padding(.top, 30)
             
             Text("Sebelum Memulai..!!")
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.top, 10)
-                .padding(.horizontal, 20)
             
             VStack(spacing: 20) {
                 ForEach(ketentuanViewModel.data) { data in
@@ -66,7 +64,6 @@ struct KetentuanRegisterNasabahView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 }
             }
-            .padding(20)
             
             NavigationLink(destination: FormPhoneVerificationRegisterNasabahView().environmentObject(registerData)){
                 Text("Lanjut Membuat Rekening")
@@ -76,7 +73,6 @@ struct KetentuanRegisterNasabahView: View {
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
-            .padding(.horizontal, 20)
             .padding(.bottom, 5)
             .padding(.top, 10)
             
@@ -89,19 +85,21 @@ struct KetentuanRegisterNasabahView: View {
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
             }
             .cornerRadius(12)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding(.bottom, 30)
         }
-        .frame(width: UIScreen.main.bounds.width - 40)
+        .padding(.horizontal, 30)
+        .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(radius: 30)
-        .padding(.top, 120)
+        .padding(.top, UIScreen.main.bounds.height * 0.15)
     }
 }
 
 struct RegisterProvisionView_Previews: PreviewProvider {
     static var previews: some View {
-        KetentuanRegisterNasabahView().environmentObject(RegistrasiModel())
+        NavigationView {
+            KetentuanRegisterNasabahView().environmentObject(RegistrasiModel())
+        }
     }
 }
