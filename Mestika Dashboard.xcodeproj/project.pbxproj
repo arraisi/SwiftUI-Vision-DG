@@ -255,6 +255,8 @@
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
 		C01B3DF02564203300BD3C06 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = C01B3DEF2564203300BD3C06 /* Introspect */; };
+		C02E9BAD256E814C00622E7A /* WelcomeViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeViewNew.swift */; };
+		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
 		C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */; };
 		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
@@ -564,6 +566,8 @@
 		C00702B42554E2B60089DBD1 /* CardLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitView.swift; sourceTree = "<group>"; };
 		C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithToolBarKeyBoard.swift; sourceTree = "<group>"; };
 		C00702C6255531280089DBD1 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
+		C02E9BAC256E814C00622E7A /* WelcomeViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewNew.swift; sourceTree = "<group>"; };
+		C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCarousel.swift; sourceTree = "<group>"; };
 		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
 		C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewModel.swift; sourceTree = "<group>"; };
 		C0587B7B255BED2600F82D9D /* SelfieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieView.swift; sourceTree = "<group>"; };
@@ -1264,6 +1268,7 @@
 			isa = PBXGroup;
 			children = (
 				52ADFF622557DFDB00A1001F /* WelcomeView.swift */,
+				C02E9BAC256E814C00622E7A /* WelcomeViewNew.swift */,
 				5290A120255BBEBD0090F788 /* Nasabah */,
 				C00AC550255E51B6005D67C0 /* Non Nasabah */,
 			);
@@ -1350,6 +1355,7 @@
 		C01C67A3255E37890019D06F /* Support Views */ = {
 			isa = PBXGroup;
 			children = (
+				C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */,
 				52BF57D82558E66600F009B5 /* Register */,
 			);
 			path = "Support Views";
@@ -1790,6 +1796,7 @@
 				525FA11D25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift in Sources */,
 				C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */,
 				5290A186255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift in Sources */,
+				C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */,
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
@@ -1884,6 +1891,7 @@
 				52ADFEBC2557DA0700A1001F /* RecognizedText.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,
+				C02E9BAD256E814C00622E7A /* WelcomeViewNew.swift in Sources */,
 				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,

@@ -10,8 +10,8 @@ import SwiftUI
 struct FirstATMLoginView: View {
     
     /* Routing Bool */
-    @Binding var rootIsActive: Bool
     @State private var nextRoute: Bool = false
+    @EnvironmentObject var appState: AppState
     
     @State var atmNumber: String = ""
     @State var pin: String = ""
@@ -22,8 +22,6 @@ struct FirstATMLoginView: View {
     /* CORE DATA */
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Boolean for Show Modal */
     @State var showingModal = false
@@ -123,7 +121,7 @@ struct FirstATMLoginView: View {
                 .disabled(disableForm)
             
             NavigationLink(
-                destination: FirstPasswordLoginView(rootIsActive: self.$rootIsActive),
+                destination: FirstPasswordLoginView(),
                 isActive: self.$nextRoute,
                 label: {}
             )
@@ -168,7 +166,8 @@ struct FirstATMLoginView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-                self.rootIsActive = true
+//                self.rootIsActive = true
+                self.appState.moveToWelcomeView = true
             }) {
                 Text("Kembali")
                     .foregroundColor(.white)
@@ -191,7 +190,7 @@ struct FirstATMLoginView: View {
 #if DEBUG
 struct FirstATMLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstATMLoginView(rootIsActive: .constant(false))
+        FirstATMLoginView()
     }
 }
 #endif

@@ -263,7 +263,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihDesainATMView(rootIsActive: $isActiveForPilihDesainKartuATM).environmentObject(productATMData)){
+            NavigationLink(destination: FormPilihDesainATMView().environmentObject(productATMData)){
                 Text("Lanjutkan")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -446,7 +446,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData)){
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData)){
                 Text("Login")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

@@ -477,6 +477,8 @@ struct SuccessRegisterView: View {
     @State var pilihJam: String = ""
     @State var tanggalWawancara: String = ""
     
+    @State var showFormPilihJenisATM = false
+    
     /* CORE DATA */
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
@@ -596,7 +598,7 @@ struct SuccessRegisterView: View {
                             .cornerRadius(15)
                             .padding(.bottom, 5)
                             .padding(.horizontal, 20)
-                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                            .disabled(true)
                         
                         Text("No. HP.")
                             .font(.subheadline)
@@ -614,7 +616,7 @@ struct SuccessRegisterView: View {
                             .cornerRadius(15)
                             .padding(.bottom, 5)
                             .padding(.horizontal, 20)
-                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                            .disabled(true)
                         
                         Text("Email.")
                             .font(.subheadline)
@@ -632,7 +634,7 @@ struct SuccessRegisterView: View {
                             .cornerRadius(15)
                             .padding(.bottom, 5)
                             .padding(.horizontal, 20)
-                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                            .disabled(true)
                     }
                     
                     Group {
@@ -640,11 +642,12 @@ struct SuccessRegisterView: View {
                         Button(action: {
                             if pilihJam != "" {
                                 submitSchedule()
+                                self.showFormPilihJenisATM = true
                             }
                         }, label: {
                             Text("Buat Janji")
                                 .foregroundColor(.white)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
@@ -655,21 +658,7 @@ struct SuccessRegisterView: View {
                         .padding(.bottom, 5)
                         .disabled(disableForm)
                         
-                        //                        NavigationLink(
-                        //                            destination: FormPilihJenisATMView(),
-                        //                            label: {
-                        //                                Text("Buat Janji")
-                        //                                    .foregroundColor(.white)
-                        //                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        //                                    .font(.system(size: 13))
-                        //                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        //                            })
-                        //                            .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
-                        //                            .cornerRadius(12)
-                        //                            .padding(.horizontal, 20)
-                        //                            .padding(.top, 20)
-                        //                            .padding(.bottom, 5)
-                        //                            .disabled(disableForm)
+                        NavigationLink(destination: FormPilihJenisATMView(), isActive: self.$showFormPilihJenisATM) {EmptyView()}
                         
                         Button(
                             action: {
@@ -704,8 +693,7 @@ struct SuccessRegisterView: View {
             NavigationLink(
                 destination: WelcomeView(),
                 isActive: self.$backRoute,
-                label: {}
-            )
+                label: {})
             
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })

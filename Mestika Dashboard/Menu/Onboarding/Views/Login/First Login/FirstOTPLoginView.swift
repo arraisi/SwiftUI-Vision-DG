@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FirstOTPLoginView: View {
     /* Environtment Object */
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var loginData: LoginBindingModel
+    @EnvironmentObject var appState: AppState
     
     /* Variable PIN OTP */
     var maxDigits: Int = 6
@@ -20,7 +20,6 @@ struct FirstOTPLoginView: View {
     @State var isDisabled = false
     
     /* Data Binding */
-    @Binding var rootIsActive : Bool
     @ObservedObject private var otpVM = OtpViewModel()
     
     /* Variable Validation */
@@ -165,7 +164,7 @@ struct FirstOTPLoginView: View {
                 .padding(.horizontal, 20)
             
             VStack {
-                NavigationLink(destination: FirstATMLoginView(rootIsActive: self.$rootIsActive), isActive: self.$isOtpValid) {
+                NavigationLink(destination: FirstATMLoginView(), isActive: self.$isOtpValid) {
                     Text("")
                 }
                 
@@ -284,7 +283,9 @@ struct FirstOTPLoginView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            Button(action: {}) {
+            Button(action: {
+                    self.appState.moveToWelcomeView = true
+            }) {
                 Text("Kembali")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -324,7 +325,8 @@ struct FirstOTPLoginView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-                self.rootIsActive = false
+//                self.rootIsActive = false
+                self.appState.moveToWelcomeView = true
             }) {
                 Text("Kembali ke Halaman Utama")
                     .foregroundColor(.white)
@@ -362,7 +364,7 @@ struct FirstOTPLoginView: View {
 #if DEBUG
 struct FirstOTPLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstOTPLoginView(rootIsActive: .constant(false)).environmentObject(LoginBindingModel())
+        FirstOTPLoginView().environmentObject(LoginBindingModel())
     }
 }
 #endif

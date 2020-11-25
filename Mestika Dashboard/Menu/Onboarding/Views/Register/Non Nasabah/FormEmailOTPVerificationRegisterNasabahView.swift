@@ -127,7 +127,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 10)
                     .padding(.bottom, 25)
-//                    .disabled(disableForm)
+                    .disabled(disableForm)
                 }
             }
             .frame(width: UIScreen.main.bounds.width - 30)

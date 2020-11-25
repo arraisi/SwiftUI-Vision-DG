@@ -158,7 +158,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     .cornerRadius(12)
                     .padding(.top, 10)
                     .padding(.bottom, 30)
-//                    .disabled(disableForm)
+                    .disabled(disableForm)
                     
                 }
             }
