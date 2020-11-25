@@ -72,7 +72,7 @@ struct ScanNPWPView: View {
                     .font(.custom("Montserrat-SemiBold", size: 10))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $npwp, title: "No. NPWP", disable: false, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $npwp, title: "No. NPWP", disable: alreadyHaveNpwp, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.npwp = String(str.prefix(15))
                     self.isValidNPWP = str.count == 15
                 }

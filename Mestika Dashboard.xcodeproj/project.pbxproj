@@ -210,7 +210,7 @@
 		52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */; };
 		52ADFFA82557DFDC00A1001F /* VerificationRegisterDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */; };
 		52ADFFA92557DFDC00A1001F /* IncomingVideoCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */; };
-		52ADFFAA2557DFDC00A1001F /* RegisterRekeningCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */; };
+		52ADFFAA2557DFDC00A1001F /* FormInputKartuATMAtauRekeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF822557DFDB00A1001F /* FormInputKartuATMAtauRekeningView.swift */; };
 		52ADFFAB2557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF832557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift */; };
 		52ADFFAC2557DFDC00A1001F /* FormDetailKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */; };
 		52ADFFAD2557DFDC00A1001F /* KetentuanRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF852557DFDC00A1001F /* KetentuanRegisterNasabahView.swift */; };
@@ -515,7 +515,7 @@
 		52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationAddressView.swift; sourceTree = "<group>"; };
 		52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationRegisterDataView.swift; sourceTree = "<group>"; };
 		52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingVideoCallView.swift; sourceTree = "<group>"; };
-		52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRekeningCardView.swift; sourceTree = "<group>"; };
+		52ADFF822557DFDB00A1001F /* FormInputKartuATMAtauRekeningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputKartuATMAtauRekeningView.swift; sourceTree = "<group>"; };
 		52ADFF832557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormOTPVerificationRegisterNasabahView.swift; sourceTree = "<group>"; };
 		52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDetailKartuATMView.swift; sourceTree = "<group>"; };
 		52ADFF852557DFDC00A1001F /* KetentuanRegisterNasabahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KetentuanRegisterNasabahView.swift; sourceTree = "<group>"; };
@@ -968,7 +968,7 @@
 			isa = PBXGroup;
 			children = (
 				5290A140255BC9670090F788 /* Form Pembukaan Rekening */,
-				52ADFF822557DFDB00A1001F /* RegisterRekeningCardView.swift */,
+				52ADFF822557DFDB00A1001F /* FormInputKartuATMAtauRekeningView.swift */,
 				5290A124255BBFAC0090F788 /* RegisterNasabahPhoneOTPScreen.swift */,
 				5290A129255BC5930090F788 /* ChooseTypeSavingForNasabahScreen.swift */,
 				5290A12E255BC6AD0090F788 /* FormUploadDocumentIdentityNasabahScreen.swift */,
@@ -1811,7 +1811,7 @@
 				52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */,
 				525950232553E03000C8CA5D /* PhoneNumberVerificationForgotPasswordView.swift in Sources */,
 				52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */,
-				52ADFFAA2557DFDC00A1001F /* RegisterRekeningCardView.swift in Sources */,
+				52ADFFAA2557DFDC00A1001F /* FormInputKartuATMAtauRekeningView.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
 				C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */,
@@ -2049,7 +2049,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = 7UWQ7HF465;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2057,7 +2057,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.visiondg.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2073,7 +2073,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = 7UWQ7HF465;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2081,7 +2081,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.visiondg.Bank-Mestika";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.multipolar.Bank-Mestika";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

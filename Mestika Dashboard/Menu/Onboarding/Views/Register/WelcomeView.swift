@@ -493,7 +493,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData)){
+            NavigationLink(destination: FormInputKartuATMAtauRekeningView().environmentObject(registerData)){
                 Text("Ya, Saya Memiliki")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
