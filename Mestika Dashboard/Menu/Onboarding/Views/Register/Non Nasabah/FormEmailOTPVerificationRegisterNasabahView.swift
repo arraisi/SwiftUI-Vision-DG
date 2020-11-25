@@ -81,8 +81,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     }
                     .disabled(isResendOtpDisabled)
                     
-                    Text("(00:\(timeRemaining))")
-                        .font(.custom("Montserrat-Regular", size: 12))
+                    Button(
+                        action: {
+                            self.isOtpValid = true
+                        },
+                        label: {
+                            Text("(00:\(timeRemaining))")
+                                .font(.custom("Montserrat-Regular", size: 10))
+                        })
                 }
                 .padding(.top, 5)
                 
@@ -132,6 +138,11 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .navigationBarItems(
+            trailing: LoadingIndicator(style: .medium, animate: .constant(self.otpVM.isLoading))
+                .configure {
+                    $0.color = .white
+            })
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -151,11 +162,10 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text("OTP Code"),
-                message: Text(self.pinShare),
-                dismissButton: .default(Text("Oke"), action: {
-                    pin = self.pinShare
-                }))
+                title: Text("MESSAGE"),
+                message: Text(self.otpVM.statusMessage),
+                dismissButton: .default(Text("Oke"))
+            )
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()

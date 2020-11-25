@@ -20,9 +20,6 @@
 		0658B5972563F8A2001B659D /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5912563F8A1001B659D /* NotificationScreen.swift */; };
 		0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5932563F8A1001B659D /* ListNotificationView.swift */; };
 		0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0658B5A62563FA6D001B659D /* Colors.xcassets */; };
-		0658B5AE256401BA001B659D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AD256401BA001B659D /* FirebaseAnalytics */; };
-		0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AF256401BA001B659D /* FirebaseMessaging */; };
-		0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5B1256401BA001B659D /* FirebaseAuth */; };
 		06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */; };
 		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
@@ -71,6 +68,17 @@
 		52474D68254028350094B758 /* FavoriteTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D67254028350094B758 /* FavoriteTabs.swift */; };
 		52474D79254028CD0094B758 /* AccountTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D78254028CD0094B758 /* AccountTabs.swift */; };
 		52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */; };
+		524CB10A256DFFF8006ED6F0 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
+		524CB10B256DFFF8006ED6F0 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
+		524CB10C256DFFF8006ED6F0 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
+		524CB10D256DFFF8006ED6F0 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = C06AC3102563770700D06EE3 /* SwiftUIX */; };
+		524CB10E256DFFF8006ED6F0 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* NavigationStack */; };
+		524CB10F256DFFF8006ED6F0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* Introspect */; };
+		524CB110256DFFF8006ED6F0 /* Indicators in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* Indicators */; };
+		524CB115256E0524006ED6F0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 524CB114256E0524006ED6F0 /* FirebaseMessaging */; };
+		524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */; };
+		524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB11E256E1141006ED6F0 /* CitizenService.swift */; };
+		524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB123256E1289006ED6F0 /* CitizenViewModel.swift */; };
 		5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */; };
 		525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */; };
 		525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */; };
@@ -380,6 +388,9 @@
 		52474D67254028350094B758 /* FavoriteTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTabs.swift; sourceTree = "<group>"; };
 		52474D78254028CD0094B758 /* AccountTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTabs.swift; sourceTree = "<group>"; };
 		52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTransactionTabs.swift; sourceTree = "<group>"; };
+		524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNIKResponse.swift; sourceTree = "<group>"; };
+		524CB11E256E1141006ED6F0 /* CitizenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenService.swift; sourceTree = "<group>"; };
+		524CB123256E1289006ED6F0 /* CitizenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenViewModel.swift; sourceTree = "<group>"; };
 		525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordForgotPasswordView.swift; sourceTree = "<group>"; };
 		525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmPinForgotPasswordView.swift; sourceTree = "<group>"; };
 		525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmForgotPasswordScreen.swift; sourceTree = "<group>"; };
@@ -609,6 +620,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				524CB115256E0524006ED6F0 /* FirebaseMessaging in Frameworks */,
+				524CB10C256DFFF8006ED6F0 /* JGProgressHUD-SwiftUI in Frameworks */,
+				524CB10F256DFFF8006ED6F0 /* Introspect in Frameworks */,
+				524CB110256DFFF8006ED6F0 /* Indicators in Frameworks */,
+				524CB10A256DFFF8006ED6F0 /* PopupView in Frameworks */,
+				524CB10E256DFFF8006ED6F0 /* NavigationStack in Frameworks */,
+				524CB10B256DFFF8006ED6F0 /* BottomSheet in Frameworks */,
+				524CB10D256DFFF8006ED6F0 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1078,7 @@
 				52C0556F255F687300A57400 /* UserRegistrationService.swift */,
 				5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */,
 				527E3124256613EB004FF5ED /* MobileVersionService.swift */,
+				524CB11E256E1141006ED6F0 /* CitizenService.swift */,
 			);
 			name = Services;
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
@@ -1312,6 +1332,7 @@
 				C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */,
 				0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */,
 				0620291D256D914500A830EA /* GeneralResponse.swift */,
+				524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1326,6 +1347,7 @@
 				C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */,
 				527E312925661644004FF5ED /* MobileVersionViewModel.swift */,
 				0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */,
+				524CB123256E1289006ED6F0 /* CitizenViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1481,13 +1503,14 @@
 			);
 			name = "Mestika Dashboard";
 			packageProductDependencies = (
-				523A86232542B67900ADFE25,
-				523A86322542CC6E00ADFE25,
-				522563832562549900BCAB67,
-				C06AC3102563770700D06EE3,
-				52E0557D2563C307009294DA,
-				520E467A2568B5A800DE9205,
-				520E46802568BEF100DE9205,
+				523A86232542B67900ADFE25 /* PopupView */,
+				523A86322542CC6E00ADFE25 /* BottomSheet */,
+				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
+				C06AC3102563770700D06EE3 /* SwiftUIX */,
+				52E0557D2563C307009294DA /* NavigationStack */,
+				520E467A2568B5A800DE9205 /* Introspect */,
+				520E46802568BEF100DE9205 /* Indicators */,
+				524CB114256E0524006ED6F0 /* FirebaseMessaging */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1561,16 +1584,16 @@
 			);
 			mainGroup = 5245F878253FE702002E8B53;
 			packageReferences = (
-				523A86222542B67900ADFE25,
-				523A86312542CC6E00ADFE25,
-				52C05577255F6B9900A57400,
-				522563822562549900BCAB67,
-				C06AC30F2563770700D06EE3,
-				52E0557C2563C307009294DA,
-				0658B59D2563F904001B659D,
-				0658B5AC256401BA001B659D,
-				C01B3DEE2564203300BD3C06,
-				520E467F2568BEF100DE9205,
+				523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */,
+				523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
+				52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */,
+				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
+				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -1765,11 +1788,13 @@
 				525DB5152546828100D48075 /* String+Extensions.swift in Sources */,
 				52ADFFA22557DFDC00A1001F /* SuccessRegisterView.swift in Sources */,
 				5290A159255BCBA70090F788 /* FormPerkiraanSetoranNasabahScreen.swift in Sources */,
+				524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */,
 				52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */,
 				5290A181255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift in Sources */,
 				C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */,
 				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
+				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
 				064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */,
@@ -1871,6 +1896,7 @@
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
 				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */,
 				52ADFEBC2557DA0700A1001F /* RecognizedText.swift in Sources */,
+				524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,
 				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
@@ -2229,7 +2255,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0658B59D2563F904001B659D = {
+		0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
 			requirement = {
@@ -2237,7 +2263,7 @@
 				minimumVersion = 1.0.2;
 			};
 		};
-		0658B5AC256401BA001B659D = {
+		0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -2245,7 +2271,7 @@
 				minimumVersion = 7.1.0;
 			};
 		};
-		520E467F2568BEF100DE9205 = {
+		520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Connapptivity/SwiftUI-Indicators";
 			requirement = {
@@ -2253,7 +2279,7 @@
 				minimumVersion = 1.3.1;
 			};
 		};
-		522563822562549900BCAB67 = {
+		522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI";
 			requirement = {
@@ -2261,7 +2287,7 @@
 				minimumVersion = 0.1.1;
 			};
 		};
-		523A86222542B67900ADFE25 = {
+		523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView";
 			requirement = {
@@ -2269,7 +2295,7 @@
 				minimumVersion = 0.0.10;
 			};
 		};
-		523A86312542CC6E00ADFE25 = {
+		523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weitieda/bottom-sheet";
 			requirement = {
@@ -2277,7 +2303,7 @@
 				minimumVersion = 1.0.5;
 			};
 		};
-		52C05577255F6B9900A57400 = {
+		52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davbeck/MultipartForm";
 			requirement = {
@@ -2285,7 +2311,7 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		52E0557C2563C307009294DA = {
+		52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack";
 			requirement = {
@@ -2293,7 +2319,7 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		C01B3DEE2564203300BD3C06 = {
+		C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
@@ -2301,7 +2327,7 @@
 				minimumVersion = 0.1.1;
 			};
 		};
-		C06AC30F2563770700D06EE3 = {
+		C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
 			requirement = {
@@ -2312,39 +2338,44 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		520E467A2568B5A800DE9205 = {
+		520E467A2568B5A800DE9205 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C01B3DEE2564203300BD3C06;
+			package = C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		520E46802568BEF100DE9205 = {
+		520E46802568BEF100DE9205 /* Indicators */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 520E467F2568BEF100DE9205;
+			package = 520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */;
 			productName = Indicators;
 		};
-		522563832562549900BCAB67 = {
+		522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 522563822562549900BCAB67;
+			package = 522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */;
 			productName = "JGProgressHUD-SwiftUI";
 		};
-		523A86232542B67900ADFE25 = {
+		523A86232542B67900ADFE25 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 523A86222542B67900ADFE25;
+			package = 523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
 		};
-		523A86322542CC6E00ADFE25 = {
+		523A86322542CC6E00ADFE25 /* BottomSheet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 523A86312542CC6E00ADFE25;
+			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
 			productName = BottomSheet;
 		};
-		52E0557D2563C307009294DA = {
+		524CB114256E0524006ED6F0 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52E0557C2563C307009294DA;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		52E0557D2563C307009294DA /* NavigationStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
 			productName = NavigationStack;
 		};
-		C06AC3102563770700D06EE3 = {
+		C06AC3102563770700D06EE3 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C06AC30F2563770700D06EE3;
+			package = C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */

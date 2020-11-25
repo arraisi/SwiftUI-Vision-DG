@@ -45,6 +45,8 @@
 		<string>Montserrat-SemiBold.ttf</string>
 		<string>Montserrat-Thin.ttf</string>
 	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

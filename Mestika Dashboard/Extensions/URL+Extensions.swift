@@ -37,7 +37,7 @@ extension URL {
     }
     
     static func urlMobileVersion() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/version/mobile")
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/version/mobile/find-by-osType")
     }
     
     static func urlUser() -> URL? {
@@ -48,8 +48,12 @@ extension URL {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/otp")
     }
     
+    static func urlCitizen() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/citizen/nik")
+    }
+    
     static func urlSheduleInterview() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/schedule/find-all")
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/schedule")
     }
     
     static func urlSheduleInterviewFindById() -> URL? {

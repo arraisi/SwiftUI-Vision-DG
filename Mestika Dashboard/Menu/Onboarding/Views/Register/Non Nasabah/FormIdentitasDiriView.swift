@@ -59,12 +59,19 @@ struct FormIdentitasDiriView: View {
                 
                 // content here
                 VStack {
-                    Text("Identitas Diri")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
-                        .foregroundColor(Color(hex: "#F6F8FB"))
-                        .padding([.top], 60)
-                        .padding([.horizontal], 30)
-                    
+                    Button(
+                        action: {
+                            self.nextViewActive = true
+                        },
+                        label: {
+                            Text("Identitas Diri")
+                                .font(.custom("Montserrat-SemiBold", size: 18))
+                                .foregroundColor(Color(hex: "#F6F8FB"))
+                                .padding([.top], 60)
+                                .padding([.horizontal], 30)
+                        }
+                    )
+  
                     Text("Silihkan isi dan lengkapi data identitas Anda")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .multilineTextAlignment(.center)

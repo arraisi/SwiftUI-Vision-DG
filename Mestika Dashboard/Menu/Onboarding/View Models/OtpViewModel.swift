@@ -105,8 +105,10 @@ extension OtpViewModel {
                 print("ERROR-->")
                 DispatchQueue.main.async {
                     self.isLoading = false
+                    self.statusMessage = "Server Error"
                 }
                 
+                completion(false)
                 print(error.localizedDescription)
             }
             

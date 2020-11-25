@@ -19,7 +19,7 @@ struct WelcomeView: View {
     @State var isLoginViewActive: Bool = false
     
     /* For Check Internet Connection */
-    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "http://gateway.visiondg.xyz:8765")
     
     @State var showLogin = false
     @State var showRegisterNasabah = false

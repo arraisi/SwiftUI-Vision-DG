@@ -497,6 +497,10 @@ struct SuccessRegisterView: View {
         tanggalWawancara.isEmpty || pilihJam.isEmpty
     }
     
+    init() {
+        getAllSchedule()
+    }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack(alignment: .top) {
@@ -869,7 +873,6 @@ struct SuccessRegisterView: View {
     }
     
     // MARK: -Fuction for Create Bottom Floater (Modal)
-    
     func createBottomFloaterJam() -> some View {
         VStack {
             HStack {
@@ -926,8 +929,7 @@ struct SuccessRegisterView: View {
         .cornerRadius(20)
     }
     
-    // MARK: -Fuction for Create Bottom Floater (Modal)
-    
+    // MARK: -Fuction for Create Bottom Floater (Modal
     func createBottomFloaterTanggal() -> some View {
         VStack {
             HStack {
@@ -957,18 +959,19 @@ struct SuccessRegisterView: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(0...tanggal.count-1, id: \.self) {index in
+            List(self.scheduleVM.schedule, id: \.id) { data in
                 
                 HStack {
-                    Text(tanggal[index].tanggal)
+                    Text(data.date)
                         .font(Font.system(size: 14))
                     
                     Spacer()
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    print(tanggal[index])
-                    tanggalWawancara = tanggal[index].tanggal
+                    print(data)
+                    pilihJam = "\(self.scheduleVM.timeStart)" + "-" + "\(self.scheduleVM.timeEnd)"
+                    tanggalWawancara = data.date
                     self.showingModalTanggal.toggle()
                 })
                 
@@ -982,6 +985,10 @@ struct SuccessRegisterView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    func getAllSchedule() {
+        self.scheduleVM.getAllSchedule() { success in }
     }
 }
 

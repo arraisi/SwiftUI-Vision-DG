@@ -94,8 +94,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     .disabled(isResendOtpDisabled)
                     
-                    Text("(00:\(timeRemaining))")
-                        .font(.custom("Montserrat-Regular", size: 10))
+                    Button(
+                        action: {
+                            self.isOtpValid = true
+                        },
+                        label: {
+                            Text("(00:\(timeRemaining))")
+                                .font(.custom("Montserrat-Regular", size: 10))
+                        })
                 }
                 .padding(.top, 5)
                 
@@ -164,6 +170,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarItems(
+            trailing: LoadingIndicator(style: .medium, animate: .constant(self.otpVM.isLoading))
+                .configure {
+                    $0.color = .white
+            })
         .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -326,7 +337,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-//                self.rootIsActive = false
+                //                self.rootIsActive = false
                 self.appState.moveToWelcomeView = true
             }) {
                 Text("Kembali ke Halaman Utama")
@@ -370,6 +381,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
             }
             
             if !success {
+                print("OTP RESP \(self.otpVM.statusMessage)")
+                
+                if (self.otpVM.statusMessage == "Server Error") {
+                    self.showingAlertError = true
+                }
+                
                 if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
                     print("OTP FAILED")
                     print(self.otpVM.timeCounter)
