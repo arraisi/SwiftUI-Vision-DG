@@ -25,8 +25,7 @@ struct FormCompletionReferalCodeView: View {
                     .scaledToFill()
             }
             VStack {
-                AppBarLogo(light: true)
-                    .padding(.top, 55)
+                AppBarLogo(light: false, onCancel: {})
                 
                 ScrollView {
                     Text("LENGKAPI DATA")

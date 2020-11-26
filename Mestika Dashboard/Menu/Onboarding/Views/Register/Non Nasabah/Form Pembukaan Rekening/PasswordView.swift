@@ -106,8 +106,8 @@ struct PasswordView: View {
                                                 Button(action: {
                                                     self.securedPassword.toggle()
                                                 }) {
-                                                    Text("show")
-                                                        .font(.custom("Montserrat-Light", size: 10))
+                                                    Image(systemName: "eye.slash")
+                                                        .font(.custom("Montserrat-Light", size: 14))
                                                         .frame(width: 80, height: 50)
                                                         .cornerRadius(10)
                                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -130,8 +130,8 @@ struct PasswordView: View {
                                                 Button(action: {
                                                     self.securedPassword.toggle()
                                                 }) {
-                                                    Text("show")
-                                                        .font(.custom("Montserrat-Light", size: 10))
+                                                    Image(systemName: "eye.fill")
+                                                        .font(.custom("Montserrat-Light", size: 14))
                                                         .frame(width: 80, height: 50)
                                                         .cornerRadius(10)
                                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -155,8 +155,8 @@ struct PasswordView: View {
                                                 Button(action: {
                                                     self.securedConfirmation.toggle()
                                                 }) {
-                                                    Text("show")
-                                                        .font(.custom("Montserrat-Light", size: 10))
+                                                    Image(systemName: "eye.slash")
+                                                        .font(.custom("Montserrat-Light", size: 14))
                                                         .frame(width: 80, height: 50)
                                                         .cornerRadius(10)
                                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -175,8 +175,8 @@ struct PasswordView: View {
                                                 Button(action: {
                                                     self.securedConfirmation.toggle()
                                                 }) {
-                                                    Text("show")
-                                                        .font(.custom("Montserrat-Light", size: 10))
+                                                    Image(systemName: "eye.fill")
+                                                        .font(.custom("Montserrat-Light", size: 14))
                                                         .frame(width: 80, height: 50)
                                                         .cornerRadius(10)
                                                         .foregroundColor(Color(hex: "#3756DF"))

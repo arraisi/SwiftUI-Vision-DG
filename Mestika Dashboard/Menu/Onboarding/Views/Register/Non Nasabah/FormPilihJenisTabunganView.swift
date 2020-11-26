@@ -25,71 +25,77 @@ struct FormPilihJenisTabunganView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
     var body: some View {
-        ZStack {
-            Color(hex: "#F6F8FB")
-                .edgesIgnoringSafeArea(.all)
+        ZStack(alignment: .top) {
             
-            VStack() {
-                Text("Pilih Jenis Tabungan Anda")
-                    .font(.custom("Montserrat-SemiBold", size: 18))
-                    .foregroundColor(Color(hex: "#232175"))
-                    .padding(.horizontal, 15)
-                    .padding(.top, 40)
-                
-                // MARK: - CAROUSEL
-                VStack{
-                    
-                    HStack(spacing: itemWidth * 0.08){
-                        
-                        ForEach(data){card in
-                            CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
-                                .offset(x: self.offset)
-                                .highPriorityGesture(
-                                    
-                                    DragGesture()
-                                        .onChanged({ (value) in
-                                            
-                                            if value.translation.width > 0 {
-                                                self.offset = value.location.x
-                                            }
-                                            else{
-                                                self.offset = value.location.x - self.itemWidth
-                                            }
-                                            
-                                        })
-                                        .onEnded(onDragEnded)
-                                )
-                        }
-                    }
-                    .frame(width: itemWidth)
-                    .offset(x: self.firstOffset)
-                }
-                .edgesIgnoringSafeArea(.bottom)
-                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                .animation(.spring())
-                .padding(.vertical,25)
-                .onAppear {
-                    
-                    self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.01)) / 2) : 0)
-                    
-                    self.data[0].isShow = true
-                }
-                
-                detailsTypeSaving
-                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                    .frame(width: UIScreen.main.bounds.width - 30)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                
-                Spacer()
+            VStack {
+                Color(hex: "#F6F8FB")
+                    .edgesIgnoringSafeArea(.all)
             }
             
+            VStack {
+                AppBarLogo(onCancel: {})
+                
+                VStack() {
+                    Text("Pilih Jenis Tabungan Anda")
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.horizontal, 15)
+                    
+                    // MARK: - CAROUSEL
+                    VStack{
+                        
+                        HStack(spacing: itemWidth * 0.08){
+                            
+                            ForEach(data){card in
+                                CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                    .offset(x: self.offset)
+                                    .highPriorityGesture(
+                                        
+                                        DragGesture()
+                                            .onChanged({ (value) in
+                                                
+                                                if value.translation.width > 0 {
+                                                    self.offset = value.location.x
+                                                }
+                                                else{
+                                                    self.offset = value.location.x - self.itemWidth
+                                                }
+                                                
+                                            })
+                                            .onEnded(onDragEnded)
+                                    )
+                            }
+                        }
+                        .frame(width: itemWidth)
+                        .offset(x: self.firstOffset)
+                    }
+                    .edgesIgnoringSafeArea(.bottom)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .animation(.spring())
+                    .padding(.vertical,25)
+                    .onAppear {
+                        
+                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.01)) / 2) : 0)
+                        
+                        self.data[0].isShow = true
+                    }
+                    
+                    detailsTypeSaving
+                        .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                        .frame(width: UIScreen.main.bounds.width - 30)
+                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    
+                    Spacer()
+                }
+                .padding(.vertical, 30)
+            }
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }
@@ -98,7 +104,7 @@ struct FormPilihJenisTabunganView: View {
     var detailsTypeSaving: some View {
         VStack(alignment: .leading) {
             Text("Deposit Tabungan")
-                .font(.custom("Montserrat-Bold", size: 30))
+                .font(.custom("Montserrat-Bold", size: 22))
                 .foregroundColor(Color(hex: "#3756DF"))
                 .padding(.top, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -184,8 +190,6 @@ struct FormPilihJenisTabunganView: View {
 
 struct ChooseTypeSavingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
-        }
+        FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
     }
 }

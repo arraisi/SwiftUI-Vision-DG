@@ -18,7 +18,7 @@ struct ScanNPWPView: View {
     @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
     @Binding var shouldPresentActionScheet : Bool
-
+    
     let onChange: ()->()
     let onCommit: ()->()
     
@@ -77,18 +77,18 @@ struct ScanNPWPView: View {
                     self.isValidNPWP = str.count == 15
                 }
                 
-//                TextField("No. NPWP", text: $npwp)
-//                    .frame(height: 10)
-//                    .font(.custom("Montserrat-SemiBold", size: 12))
-//                    .foregroundColor(.black)
-//                    .padding()
-//                    .background(Color.gray.opacity(0.1))
-//                    .cornerRadius(10)
-//                    .keyboardType(.numberPad)
-//                    .onReceive(npwp.publisher.collect()) {
-//                        self.npwp = String($0.prefix(15))
-//                    }
-//                    .disabled(alreadyHaveNpwp)
+                //                TextField("No. NPWP", text: $npwp)
+                //                    .frame(height: 10)
+                //                    .font(.custom("Montserrat-SemiBold", size: 12))
+                //                    .foregroundColor(.black)
+                //                    .padding()
+                //                    .background(Color.gray.opacity(0.1))
+                //                    .cornerRadius(10)
+                //                    .keyboardType(.numberPad)
+                //                    .onReceive(npwp.publisher.collect()) {
+                //                        self.npwp = String($0.prefix(15))
+                //                    }
+                //                    .disabled(alreadyHaveNpwp)
                 
                 Button(action: toggleHasNpwp) {
                     HStack(alignment: .top) {
@@ -102,26 +102,23 @@ struct ScanNPWPView: View {
                 }
                 .padding(.bottom, 15)
                 
-                if (imageNPWP != nil) {
-                    
-                    Button(action: {
-                        //                        self.formShowed.toggle()
+                Button(action: {
+                    if self.alreadyHaveNpwp || (self.npwp != "" && self.imageNPWP != nil) {
                         self.onCommit()
                         self.registerData.fotoNPWP = self.imageNPWP!
                         self.registerData.npwp = npwp
-                        
-                        print("REGISTER DATA NPWP : \(self.registerData.npwp)")
-                    }) {
-                        Text("Simpan")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
-                    .background(Color(hex: "#2334D0"))
-                    .cornerRadius(12)
-                    .padding(.top, 15)
                     
-                } else { EmptyView() }
+                    print("REGISTER DATA NPWP : \(self.registerData.npwp)")
+                }) {
+                    Text("Simpan")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                }
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.top, 15)
                 
             }.navigationBarHidden(true)
             
@@ -138,6 +135,16 @@ struct ScanNPWPView: View {
             self.npwp = ""
             self.imageNPWP = nil
         }
+    }
+    
+    func validasiNPWP() -> Bool {
+        if self.alreadyHaveNpwp {
+            return false
+        } else if self.npwp != "" && self.imageNPWP != nil {
+            return false
+        }
+        
+        return true
     }
 }
 

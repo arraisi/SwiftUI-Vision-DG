@@ -120,6 +120,7 @@ struct InformasiPerusahaanView: View {
                                         Button(action: {
                                             
                                             self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
+                                            self.registerData.kodePos = self.kodePos
                                             
                                             self.nextViewActive = true
                                             
@@ -235,10 +236,49 @@ struct InformasiPerusahaanView: View {
             }
             .padding(.horizontal, 20)
             
-            LabelTextField(value: $registerData.kodePos, label: "Kode Pos", placeHolder: "Kode Pos") { (Bool) in
-                print("on edit")
-            } onCommit: {
-                print("on commit")
+//            LabelTextField(value: $registerData.kodePos, label: "Kode Pos", placeHolder: "Kode Pos") { (Bool) in
+//                print("on edit")
+//            } onCommit: {
+//                print("on commit")
+//            }
+//            .padding(.horizontal, 20)
+            
+//            VStack(alignment: .leading) {
+//                Text("Kode Pos")
+//                    .font(Font.system(size: 10))
+//                    .fontWeight(.semibold)
+//                    .foregroundColor(Color(hex: "#707070"))
+//                    .multilineTextAlignment(.leading)
+//
+//                TextFieldValidation(data: self.$registerData.kodePos, title: "Kode Pos", disable: false, isValid: false, keyboardType: .numberPad) { strArr in
+//                    registerData.kodePos = ""
+//                }
+//            }
+//            .padding(.horizontal, 20)
+            
+            VStack(alignment: .leading) {
+                
+                Text("Kode Pos")
+                    .font(Font.system(size: 10))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    TextField("Kode Pos", text: $kodePos) {change in
+                    } onCommit: {
+                    }
+                    .onReceive(kodePos.publisher.collect()) {
+                        self.kodePos = String($0.prefix(5))
+                    }
+                    .keyboardType(.numberPad)
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                }
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
             }
             .padding(.horizontal, 20)
             
@@ -331,6 +371,7 @@ struct InformasiPerusahaanView: View {
                     print(cities[index])
                     registerData.alamatPerusahaan = cities[index].city
                     registerData.kodePos = cities[index].kodePos
+                    kodePos = cities[index].kodePos
                     registerData.kecamatan = cities[index].kecamatan
                     self.showingModal.toggle()
                 })

@@ -51,8 +51,7 @@ struct FormCompletionKartuATMView: View {
                     .scaledToFill()
             }
             VStack {
-                AppBarLogo(light: true, hideBack: true)
-                    .padding(.top, 55)
+                AppBarLogo(light: false, onCancel:{})
                 
                 ScrollView {
                     Text("LENGKAPI DATA")

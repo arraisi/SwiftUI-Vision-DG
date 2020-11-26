@@ -32,8 +32,6 @@ struct WelcomeViewCarousel: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: self.screen)
-                        .background(Color(hex: "#2334D0"))
-                        .cornerRadius(25)
                         .offset(x: self.currentItemPosition)
                         .highPriorityGesture(
                             

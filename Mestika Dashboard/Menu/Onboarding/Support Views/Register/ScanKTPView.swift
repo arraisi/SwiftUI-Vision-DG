@@ -76,7 +76,7 @@ struct ScanKTPView: View {
                     .font(.custom("Montserrat-SemiBold", size: 10))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $nik, title: "No. KTP (Otomatis terisi)", disable: !confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $nik, title: "No. KTP (Otomatis terisi)", disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.nik = String(str.prefix(16))
                     self.isValidKtp = str.count == 16
                     

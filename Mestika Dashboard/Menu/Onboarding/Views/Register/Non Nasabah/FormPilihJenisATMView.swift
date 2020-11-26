@@ -23,11 +23,17 @@ struct FormPilihJenisATMView: View {
     let itemGapHeight:CGFloat = 10
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            ZStack {
+        ZStack(alignment: .top) {
+            
+            VStack {
                 Color(hex: "#F6F8FB")
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
+            VStack {
+                AppBarLogo(onCancel: {})
                 
-                VStack() {
+                ScrollView(.vertical, showsIndicators: false) {
                     // MARK: - CAROUSEL
                     VStack{
                         
@@ -62,26 +68,23 @@ struct FormPilihJenisATMView: View {
                     .padding(.vertical,25)
                     .onAppear {
                         
-                        self.firstOffset = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+                        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.cards.count / 2))
+                        let offsetMiddleItem = (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+                        self.firstOffset = offsetFirstItem - offsetMiddleItem
                         
                         self.cards[0].isShow = true
+                        
                     }
                     
                     DetailLimitKartuAtmView(card: cards[Int(self.count)])
                         .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
                         .padding(.horizontal, 30)
-                        .padding(.bottom)
-                    
-                    Spacer()
+                        .padding(.bottom, 50)
                 }
             }
         }
-        .padding(.top, UIScreen.main.bounds.height * 0.12)
-        .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing: EmptyView())
+        .navigationBarHidden(true)
     }
     
     // MARK: - ON DRAG ENDED
@@ -128,8 +131,6 @@ struct FormPilihJenisATMView: View {
 
 struct PilihATMView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            FormPilihJenisATMView()
-        }
+        FormPilihJenisATMView().environmentObject(AddProductATM())
     }
 }
