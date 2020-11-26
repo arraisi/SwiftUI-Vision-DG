@@ -22,77 +22,84 @@ struct FormPhoneVerificationRegisterNasabahView: View {
     
     // MARK: -MAIN CONTENT
     var body: some View {
+        
         ZStack(alignment: .top) {
+            
             VStack {
                 Color(hex: "#232175")
                     .frame(height: 300)
                 Color(hex: "#F6F8FB")
             }
             
-            VStack(alignment: .center) {
-                Text("Phone Verification")
-                    .font(.custom("Montserrat-SemiBold", size: 18))
-                    .foregroundColor(Color(hex: "#232175"))
-                    .padding(.top, 30)
+            VStack {
+                AppBarLogo(light: false, onCancel: {})
                 
-                Text("Silahkan masukan No. Telepon Anda")
-                    .font(.custom("Montserrat-Regular", size: 12))
-                    .foregroundColor(Color(hex: "#707070"))
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 5)
-                    .padding(.bottom, 20)
-                
-                HStack {
-                    Text("🇮🇩 +62 ").foregroundColor(.black)
+                VStack(alignment: .center) {
+                    Text("Phone Verification")
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.top, 30)
                     
-                    Divider()
-                        .frame(height: 30)
+                    Text("Silahkan masukan No. Telepon Anda")
+                        .font(.custom("Montserrat-Regular", size: 12))
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 5)
+                        .padding(.bottom, 20)
                     
-                    TextField("No. Telepon", text: $phoneNumber, onEditingChanged: { changed in
-                        print("\($phoneNumber)")
+                    HStack {
+                        Text("🇮🇩 +62 ").foregroundColor(.black)
                         
-                        self.registerData.noTelepon = "0" + phoneNumber
-                    }, onCommit: {
-                        print("Commited")
-                        self.registerData.noTelepon = "0" + phoneNumber
-                    })
-                    .onReceive(phoneNumber.publisher.collect()) {
-                        self.phoneNumber = String($0.prefix(12))
+                        Divider()
+                            .frame(height: 30)
+                        
+                        TextField("No. Telepon", text: $phoneNumber, onEditingChanged: { changed in
+                            print("\($phoneNumber)")
+                            
+                            self.registerData.noTelepon = "0" + phoneNumber
+                        }, onCommit: {
+                            print("Commited")
+                            self.registerData.noTelepon = "0" + phoneNumber
+                        })
+                        .onReceive(phoneNumber.publisher.collect()) {
+                            self.phoneNumber = String($0.prefix(12))
+                        }
+                        .keyboardType(.numberPad)
                     }
-                    .keyboardType(.numberPad)
+                    .frame(height: 20)
+                    .font(.custom("Montserrat-Regular", size: 12))
+                    .padding()
+                    .background(Color(hex: "#f4f4f4"))
+                    .cornerRadius(15)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
+                    .padding(.vertical, 15)
+                    
+                    NavigationLink(destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
+                        
+                        Text("Verifikasi No. Telepon")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        
+                    }
+                    .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.top, 30)
+                    .padding(.bottom, 30)
+                    .disabled(disableForm)
                 }
-                .frame(height: 20)
-                .font(.custom("Montserrat-Regular", size: 12))
-                .padding()
-                .background(Color(hex: "#f4f4f4"))
+                .padding(.horizontal, 30)
+                .frame(width: UIScreen.main.bounds.width - 40)
+                .background(Color.white)
                 .cornerRadius(15)
-                .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
-                .padding(.vertical, 15)
-                
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
-                    
-                    Text("Verifikasi No. Telepon")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    
-                }
-                .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
-                .cornerRadius(12)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                 .padding(.top, 30)
-                .padding(.bottom, 30)
-                .disabled(disableForm)
+                
             }
-            .padding(.horizontal, 30)
-            .frame(width: UIScreen.main.bounds.width - 40)
-            .background(Color.white)
-            .cornerRadius(15)
-            .shadow(radius: 30)
-            .padding(.top, UIScreen.main.bounds.height * 0.15)
+            
         }
         .edgesIgnoringSafeArea(.top)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

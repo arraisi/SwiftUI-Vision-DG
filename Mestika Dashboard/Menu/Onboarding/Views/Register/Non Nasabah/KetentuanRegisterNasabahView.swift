@@ -20,16 +20,22 @@ struct KetentuanRegisterNasabahView: View {
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
+            
             VStack {
                 Color(hex: "#232175")
                     .frame(height: 300)
                 Color(hex: "#F6F8FB")
             }
-            cardForm
+            
+            VStack {
+                AppBarLogo(light: false, onCancel: {})
+                
+                cardForm
+                    .padding(.top, 30)
+            }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .navigationBarItems(trailing: EmptyView())
         .introspectNavigationController { nc in
             nc.navigationBar.isHidden = false
@@ -91,8 +97,7 @@ struct KetentuanRegisterNasabahView: View {
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
         .cornerRadius(15)
-        .shadow(radius: 30)
-        .padding(.top, UIScreen.main.bounds.height * 0.15)
+        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
     }
 }
 

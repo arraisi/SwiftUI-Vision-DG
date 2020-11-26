@@ -95,12 +95,11 @@ struct FormSumberPenyandandDana2View: View {
                                     Text("Berikutnya")
                                         .foregroundColor(.white)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                        .frame(maxWidth: .infinity, maxHeight: 50)
                                     
                                 })
-                                .disabled(registerData.sumberPenyandangDanaId == 0)
-                                .frame(height: 50)
-                                .background(registerData.sumberPenyandangDanaId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                .disabled(isValid())
+                                .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
                                 .cornerRadius(12)
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 25)
@@ -176,6 +175,20 @@ struct FormSumberPenyandandDana2View: View {
             .padding(.horizontal, 20)
             
         }
+    }
+    
+    // MARK : - Check form is fill
+    func isValid() -> Bool {
+        if registerData.namaPenyandangDana == "" {
+            return true
+        }
+        if registerData.hubunganPenyandangDana == "" {
+            return true
+        }
+        if registerData.profesiPenyandangDana == "" {
+            return true
+        }
+        return false
     }
 }
 

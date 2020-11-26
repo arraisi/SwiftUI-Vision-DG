@@ -16,103 +16,112 @@ struct FormPilihDesainATMView: View {
     @State private var titleCard = "THE CARD"
     
     var body: some View {
-        ScrollView{
-            
-            Text("Pilih Desain Kartu ATM Anda")
-                .font(.custom("Montserrat-SemiBold", size: 18))
-                .foregroundColor(Color(hex: "#232175"))
-                .padding(.top, 25)
-                .padding(.bottom, 10)
-            
-            TabView(selection: $selectedTab) {
-                ForEach(cardDesainData) {
-                    TabItemView(card: $0) {card in
-                        print(card)
-                    }
-                }
-            }
-            .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
-            .frame(width: UIScreen.main.bounds.width, height: 200)
-            .tabViewStyle(PageTabViewStyle(
-                            indexDisplayMode: .always))
-            .padding(.bottom, 25)
-            .onAppear(perform: {
-                setupAppearance()
-            })
-            .gesture(
-                DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    .onEnded({ value in
-                                if value.translation.width < 0 {
-                                    print("left")
-                                    withAnimation(.easeOut) {
-                                        if selectedTab != cardDesainData.count-1 {
-                                            selectedTab += 1
-                                        }
-                                    }
-                                    let card = cardDesainData[selectedTab]
-                                    print(card)
-                                    selectCard(card: card)
-                                }
-                                if value.translation.width > 0 {
-                                    print("right")
-                                    withAnimation(.easeOut) {
-                                        if selectedTab != 0 {
-                                            selectedTab -= 1
-                                        }
-                                    }
-                                    
-                                    let card = cardDesainData[selectedTab]
-                                    print(card)
-                                    selectCard(card: card)
-                                }})
-            )
+        
+        ZStack(alignment: .top) {
             
             VStack {
-                HStack {
-                    Text(cardDesainData[selectedTab].name)
-                        .font(.custom("Montserrat-SemiBold", size: 15))
-                    
-                    Spacer()
-                }
-                .padding()
-                
-                HStack{
-                    Text(cardDesainData[selectedTab].description)
-                        .font(.custom("Montserrat-Light", size: 10))
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData)) {
-                    Text("PILIH DESAIN KARTU")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
-                }
-                .frame(height: 50)
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.horizontal)
-                .padding(.vertical, 20)
-                
+                Color(hex: "#F6F8FB")
+                    .edgesIgnoringSafeArea(.all)
             }
-            .animation(nil)
-            //                .transition(.flipFromLeft)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 25, style: .continuous)
-                    .fill(Color(.white))
-                    .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4))
-            .padding(.leading, 25)
-            .padding(.trailing, 25)
-            .padding(.bottom)
+            
+            VStack {
+                AppBarLogo(onCancel: {})
+                
+                ScrollView {
+                    
+                    Text("Pilih Desain Kartu ATM Anda")
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.top, 25)
+                        .padding(.bottom, 10)
+                    
+                    TabView(selection: $selectedTab) {
+                        ForEach(cardDesainData) {
+                            TabItemView(card: $0) {card in
+                                print(card)
+                            }
+                        }
+                    }
+                    .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
+                    .frame(width: UIScreen.main.bounds.width, height: 200)
+                    .tabViewStyle(PageTabViewStyle(
+                                    indexDisplayMode: .always))
+                    .padding(.bottom, 25)
+                    .onAppear(perform: {
+                        setupAppearance()
+                    })
+                    .gesture(
+                        DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                            .onEnded({ value in
+                                        if value.translation.width < 0 {
+                                            print("left")
+                                            withAnimation(.easeOut) {
+                                                if selectedTab != cardDesainData.count-1 {
+                                                    selectedTab += 1
+                                                }
+                                            }
+                                            let card = cardDesainData[selectedTab]
+                                            print(card)
+                                            selectCard(card: card)
+                                        }
+                                        if value.translation.width > 0 {
+                                            print("right")
+                                            withAnimation(.easeOut) {
+                                                if selectedTab != 0 {
+                                                    selectedTab -= 1
+                                                }
+                                            }
+                                            
+                                            let card = cardDesainData[selectedTab]
+                                            print(card)
+                                            selectCard(card: card)
+                                        }})
+                    )
+                    
+                    VStack {
+                        HStack {
+                            Text(cardDesainData[selectedTab].name)
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                            
+                            Spacer()
+                        }
+                        .padding()
+                        
+                        HStack{
+                            Text(cardDesainData[selectedTab].description)
+                                .font(.custom("Montserrat-Light", size: 10))
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                        
+                        NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData)) {
+                            Text("PILIH DESAIN KARTU")
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, maxHeight: 40)
+                        }
+                        .frame(height: 50)
+                        .background(Color(hex: "#2334D0"))
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                        .padding(.vertical, 20)
+                        
+                    }
+                    .animation(nil)
+                    //                .transition(.flipFromLeft)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 25, style: .continuous)
+                            .fill(Color(.white))
+                            .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4))
+                    .padding(.leading, 25)
+                    .padding(.trailing, 25)
+                    .padding(.bottom)
+                }
+            }
         }
-        .padding(.top, UIScreen.main.bounds.height * 0.12)
-        .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing: EmptyView())
+        .navigationBarHidden(true)
     }
     
     func selectCard(card: CardModel) {

@@ -25,77 +25,82 @@ struct FormEmailVerificationRegisterNasabahView: View {
     }
     
     var body: some View {
+        
         ZStack(alignment: .top) {
+            
             VStack {
                 Color(hex: "#232175")
                     .frame(height: 300)
                 Color(hex: "#F6F8FB")
             }
             
-            VStack(alignment: .center) {
-                Text("Email Verification")
-                    .font(.custom("Montserrat-SemiBold", size: 18))
-                    .foregroundColor(Color(hex: "#232175"))
-                    .padding(.top, 30)
+            VStack {
+                AppBarLogo(light: false, onCancel: {})
                 
-                Text("Silahkan masukan Alamat Email Anda")
-                    .font(.custom("Montserrat-Regular", size: 12))
-                    .foregroundColor(Color(hex: "#707070"))
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 5)
-                
-                TextField("Masukan alamat email anda", text: $email, onEditingChanged: { (isChanged) in
-                    if !isChanged {
-                        if (self.textFieldValidatorEmail(self.email) && self.email.count > 8)  {
-                            self.isEmailValid = true
-                            self.registerData.email = email
-                        } else {
-                            self.isEmailValid = false
+                VStack(alignment: .center) {
+                    Text("Email Verification")
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.top, 30)
+                    
+                    Text("Silahkan masukan Alamat Email Anda")
+                        .font(.custom("Montserrat-Regular", size: 12))
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 5)
+                    
+                    TextField("Masukan alamat email anda", text: $email, onEditingChanged: { (isChanged) in
+                        if !isChanged {
+                            if (self.textFieldValidatorEmail(self.email) && self.email.count > 8)  {
+                                self.isEmailValid = true
+                                self.registerData.email = email
+                            } else {
+                                self.isEmailValid = false
+                            }
                         }
+                    })
+                    .frame(height: 30)
+                    .font(.custom("Montserrat-Regular", size: 12))
+                    .autocapitalization(.none)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+                    .padding(.top, 20)
+                    
+                    HStack {
+                        Text("*Email harus lebih dari 8 karakter")
+                            .font(.custom("Montserrat-SemiBold", size: 10))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
                     }
-                })
-                .frame(height: 30)
-                .font(.custom("Montserrat-Regular", size: 12))
-                .autocapitalization(.none)
-                .padding()
+                    .padding(.vertical, 10)
+                    
+                    NavigationLink(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
+                        
+                        Text("Verifikasi Email")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        
+                    }
+                    .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.top, 10)
+                    .padding(.bottom, 30)
+                    .disabled(!self.isEmailValid)
+                }
+                .padding(.horizontal, 30)
+                .frame(width: UIScreen.main.bounds.width - 40)
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                .padding(.top, 20)
-                
-                HStack {
-                    Text("*Email harus lebih dari 8 karakter")
-                        .font(.custom("Montserrat-SemiBold", size: 10))
-                        .foregroundColor(.black)
-                    
-                    Spacer()
-                }
-                .padding(.vertical, 10)
-                
-                NavigationLink(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
-                    
-                    Text("Verifikasi Email")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    
-                }
-                .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
-                .cornerRadius(12)
-                .padding(.top, 10)
-                .padding(.bottom, 30)
-                .disabled(!self.isEmailValid)
+                .padding(.top, 30)
             }
-            .padding(.horizontal, 30)
-            .frame(width: UIScreen.main.bounds.width - 40)
-            .background(Color.white)
-            .cornerRadius(15)
-            .shadow(radius: 30)
-            .padding(.top, UIScreen.main.bounds.height * 0.15)
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -106,9 +111,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
 #if DEBUG
 struct EmailVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            FormEmailVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
-        }
+        FormEmailVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }
 #endif

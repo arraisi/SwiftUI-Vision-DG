@@ -15,8 +15,7 @@ struct FormDetailKartuATMView: View {
     
     var body: some View {
         VStack {
-            AppBarLogo(light: false, hideBack: true)
-                .padding(.top, 55)
+            AppBarLogo(onCancel: {})
             
             ScrollView {
                 VStack(spacing: 25){
