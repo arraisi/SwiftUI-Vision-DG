@@ -13,10 +13,10 @@ class CitizenService {
     
     static let shared = CitizenService()
     
-    func checkNIK(nik: String, completion: @escaping(Result<CheckNIKResponse, NetworkError>) -> Void) {
+    func checkNIK(nik: String, completion: @escaping(Result<CheckNIKResponse, ErrorResult>) -> Void) {
         
         guard let url = URL.urlCitizen() else {
-            return completion(.failure(.badUrl))
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         print("NIK : \(nik)")
@@ -27,26 +27,25 @@ class CitizenService {
         request.httpMethod = "GET"
         request.addValue("*/*", forHTTPHeaderField: "accept")
         
-        print(request.url)
-        
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             guard let data = data, error == nil else {
-                return completion(.failure(.noData))
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let citizenResponse = try? JSONDecoder().decode(CheckNIKResponse.self, from: data)
+                    completion(.success(citizenResponse!))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
-            let citizenResponse = try? JSONDecoder().decode(CheckNIKResponse.self, from: data)
-            
-//            if citizenResponse == nil {
-//                completion(.failure(.decodingError))
-//            } else {
-//                completion(.success(citizenResponse!))
-//            }
-            completion(.success(citizenResponse!))
         }.resume()
         
     }

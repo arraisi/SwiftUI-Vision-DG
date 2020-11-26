@@ -108,24 +108,39 @@ struct ScanKTPView: View {
                 }
                 .padding(.bottom, 15)
                 
-                
-                if (imageKTP != nil) {
-
-                    Button(action: {
-                        if confirmNik && nik.count == 16 {
-                            getCitizen(nik: self.nik)
-                        }
-                    }) {
-                        Text("Simpan")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                Button(action: {
+                    if confirmNik && nik.count == 16 {
+                        getCitizen(nik: self.nik)
                     }
-                    .background(Color(hex: "#2334D0"))
-                    .cornerRadius(12)
-                    .padding(.top, 15)
+                }) {
+                    Text("Simpan")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                }
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.top, 15)
 
-                } else { EmptyView() }
+                
+                
+//                if (imageKTP != nil) {
+//
+//                    Button(action: {
+//                        if confirmNik && nik.count == 16 {
+//                            getCitizen(nik: self.nik)
+//                        }
+//                    }) {
+//                        Text("Simpan")
+//                            .foregroundColor(.white)
+//                            .font(.custom("Montserrat-SemiBold", size: 14))
+//                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+//                    }
+//                    .background(Color(hex: "#2334D0"))
+//                    .cornerRadius(12)
+//                    .padding(.top, 15)
+//
+//                } else { EmptyView() }
                 
             }
         }

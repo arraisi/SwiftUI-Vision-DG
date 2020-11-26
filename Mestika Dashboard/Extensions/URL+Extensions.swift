@@ -40,6 +40,10 @@ extension URL {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/version/mobile/find-by-osType")
     }
     
+    static func urlUserNew() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user/new")
+    }
+    
     static func urlUser() -> URL? {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user")
     }

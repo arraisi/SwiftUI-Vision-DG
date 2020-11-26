@@ -22,7 +22,6 @@ struct FormCompletionKartuATMView: View {
 //    @State var currentAddress : Address = Address()
     
     //Dummy data
-    var currentUser = UserDetails(firstName: "", lastName: "", productName: "", phone: "", email: "", nik: "", imageKtp: nil, imageSelfie: nil, hasNoNpwp: false, imageNpwp: nil, purposeOfAccountOpening: "", sourcOfFunds: "", monthlyWithdrawalFrequency: "", monthlyWithdrawalAmount: "", monthlyDepositFrequency: "", monthlyDepositAmount: "", occupation: "", position: "", companyName: "", companyAddress: "", companyKecamatan: "", companyKelurahan: "", companyPostalCode: "", companyPhoneNumber: "", companyBusinessField: "", annualGrossIncome: "", hasOtherSourceOfIncome: "", otherSourceOfIncome: "", relativeRelationship: "", relativesName: false, relativesAddress: "Jl XDam 1", relativesPostalCode: "50423", relativesKelurahan: "Karang Mekar", relativesPhoneNumber: "", funderName: "", funderRelation: "", funderOccupation: "", isWni: true, isAgreeTNC: false, isAgreetoShare: false, isAddressEqualToDukcapil: false, correspondenceAddress: "BPC D2", correspondenceRt: "01", correspondenceRw: "02", correspondenceKelurahan: "Cibeber", correspondenceKecamatan: "Cimahi Selatan", correspondencePostalCode: "40151")
     
     let addressOptions: [MasterModel] = [
         MasterModel(id: 1, name: "Alamat Sesuai KTP"),
@@ -350,23 +349,22 @@ struct FormCompletionKartuATMView: View {
     func fetchAddressOption() {
         switch atmData.addressOptionId {
         case 1:
-            atmData.atmAddressInput = currentUser.relativesAddress
-            atmData.atmAddresspostalCodeInput = currentUser.relativesPostalCode
-            atmData.atmAddresskecamatanInput = currentUser.relativesKelurahan
-            atmData.atmAddresskelurahanInput = currentUser.relativesKelurahan
+            atmData.atmAddressInput = ""
+            atmData.atmAddresspostalCodeInput = ""
+            atmData.atmAddresskecamatanInput = ""
+            atmData.atmAddresskelurahanInput = ""
             atmData.atmAddressrtRwInput = ""
         case 2:
-            atmData.atmAddressInput = currentUser.correspondenceAddress
-            atmData.atmAddresspostalCodeInput = currentUser.correspondencePostalCode
-            atmData.atmAddresskecamatanInput = currentUser.correspondenceKecamatan
-            atmData.atmAddresskelurahanInput = currentUser.correspondenceKelurahan
-            atmData.atmAddressrtRwInput = "\(currentUser.correspondenceRt)\\\(currentUser.correspondenceRw)"
-//            currentAddress = Address(address: currentUser.correspondenceAddress, city: currentUser.correspondenceKecamatan, kodePos: currentUser.correspondencePostalCode, kecamatan: currentUser.correspondenceKecamatan, kelurahan: currentUser.correspondenceKelurahan, rtRw: "\(currentUser.correspondenceRt)\\\(currentUser.correspondenceRw)")
+            atmData.atmAddressInput = ""
+            atmData.atmAddresspostalCodeInput = ""
+            atmData.atmAddresskecamatanInput = ""
+            atmData.atmAddresskelurahanInput = ""
+            atmData.atmAddressrtRwInput = ""
         case 3:
-            atmData.atmAddressInput = currentUser.companyAddress
-            atmData.atmAddresspostalCodeInput = currentUser.companyPostalCode
-            atmData.atmAddresskecamatanInput = currentUser.companyKecamatan
-            atmData.atmAddresskelurahanInput = currentUser.companyKelurahan
+            atmData.atmAddressInput = ""
+            atmData.atmAddresspostalCodeInput = ""
+            atmData.atmAddresskecamatanInput = ""
+            atmData.atmAddresskelurahanInput = ""
             atmData.atmAddressrtRwInput = ""
 //            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:

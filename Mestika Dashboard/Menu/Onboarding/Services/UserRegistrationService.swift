@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class UserRegistrationService {
     
@@ -19,10 +20,10 @@ class UserRegistrationService {
         imageKtp: UIImage,
         imageNpwp: UIImage,
         imageSelfie: UIImage,
-        completion: @escaping(Result<UserRegistrationResponse, NetworkError>) -> Void) {
+        completion: @escaping(Result<UserRegistrationResponse, ErrorResult>) -> Void) {
 
-        guard let url = URL.urlUser() else {
-            return completion(.failure(.badUrl))
+        guard let url = URL.urlUserNew() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
 
         let userDetailParam: [String : Any] = [
@@ -31,10 +32,11 @@ class UserRegistrationService {
             "productName": "Produk Tabungan 1",
             "mobileNumber": "085875074351",
             "emailAddress": "primajatnika271995@tabeldata.com",
-            "nik": "891029102910191029",
+            "nik": "1234123412341234",
             "imageKtp": "String",
             "imageSelfie": "String",
             "hasNoNpwp": true,
+            "hasOtherSourceOfIncome": false,
             "imageNpwp": "String",
             "purposeOfAccountOpening": "Pinjaman / Angsuran Kredit",
             "sourceOfFund": "Gaji",
@@ -57,6 +59,7 @@ class UserRegistrationService {
             "password": "123abc",
             "pin": "147852",
             "relativesAddress": "Komp. Jakapurwa",
+            "relativesKecamatan": "Kujangsari",
             "relativesPostalCode": "64656",
             "relativesKelurahan": "Antapani",
             "relativesPhoneNumber": "088218115997",
@@ -78,8 +81,8 @@ class UserRegistrationService {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-            request.addValue("21", forHTTPHeaderField: "X-Device-ID")
             request.addValue("*/*", forHTTPHeaderField: "accept")
+            request.addValue("120", forHTTPHeaderField: "X-Device-ID")
             
             var data = Data()
             
@@ -100,6 +103,7 @@ class UserRegistrationService {
             data.append("Content-Disposition: form-data; name=\"image_selfie\"; filename=\"\(imageSelfie)\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageSelfie.pngData()!)
+            
             //
             // Add the User Details
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
@@ -110,21 +114,25 @@ class UserRegistrationService {
 
 
             URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
-
-                guard let data = data, error == nil else {
-                    return completion(.failure(.noData))
+                
+                if error == nil {
+                    let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                    if let json = jsonData as? [String: Any] {
+                        print(json)
+                    }
                 }
 
                 if let httpResponse = response as? HTTPURLResponse {
                     print("\(httpResponse.statusCode)")
-                }
-
-                let userResponse = try? JSONDecoder().decode(UserRegistrationResponse.self, from: data)
-
-                if userResponse == nil {
-                    completion(.failure(.decodingError))
-                } else {
-                    completion(.success(userResponse!))
+                    
+                    if (httpResponse.statusCode == 500) {
+                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    }
+                    
+                    if (httpResponse.statusCode == 201) {
+                        let userResponse = try? JSONDecoder().decode(UserRegistrationResponse.self, from: data!)
+                        completion(.success(userResponse!))
+                    }
                 }
 
             }.resume()

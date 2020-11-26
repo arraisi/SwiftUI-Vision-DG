@@ -35,14 +35,20 @@ extension UserRegistrationViewModel {
                 completion(true)
                 
             case .failure(let error):
-                
                 print("ERROR-->")
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
                 }
-                completion(false)
                 
-                print(error.localizedDescription)
+                switch error {
+                case .custom(code: 500):
+                    print("Internal Server Error")
+                    self.message = "Internal Server Error"
+                default:
+                    print("ERRROR")
+                }
+                completion(false)
             }
         }
     }
