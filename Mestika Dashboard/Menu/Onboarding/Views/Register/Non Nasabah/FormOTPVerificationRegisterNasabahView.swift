@@ -133,6 +133,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         }
                         
                         Button(action: {
+                            // dummy
+                            self.isOtpValid = true
+                            
                             if (pin == self.pinShare && otpInvalidCount < 5) {
                                 print("OTP CORRECT")
                                 self.isOtpValid = true
@@ -160,7 +163,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         .cornerRadius(12)
                         .padding(.top, 10)
                         .padding(.bottom, 30)
-                        .disabled(disableForm)
+//                        .disabled(disableForm)
                         
                     }
                 }

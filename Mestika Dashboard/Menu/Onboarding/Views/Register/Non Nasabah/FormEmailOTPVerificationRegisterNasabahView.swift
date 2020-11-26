@@ -110,6 +110,9 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             })
                         
                         Button(action: {
+                            // dummy
+                            self.isOtpValid = true
+                            
                             print(pin)
                             if (pin == self.pinShare) {
                                 self.isOtpValid = true
@@ -128,7 +131,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         .padding(.horizontal, 20)
                         .padding(.top, 10)
                         .padding(.bottom, 25)
-                        .disabled(disableForm)
+                        //                        .disabled(disableForm)
                     }
                 }
                 .frame(width: UIScreen.main.bounds.width - 40)

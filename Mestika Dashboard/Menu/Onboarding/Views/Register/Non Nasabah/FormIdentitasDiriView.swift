@@ -58,7 +58,7 @@ struct FormIdentitasDiriView: View {
             }
             
             VStack {
-                AppBarLogo(light: false, showCancel: true) {
+                AppBarLogo(light: false, showCancel: false) {
                     self.appState.moveToWelcomeView = true
                 }
                 
@@ -192,6 +192,7 @@ struct FormIdentitasDiriView: View {
                             .frame(height: UIScreen.main.bounds.height/3)
                         Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all)
                     })
+                .KeyboardAwarePadding()
             }
         }
         .edgesIgnoringSafeArea(.all)
