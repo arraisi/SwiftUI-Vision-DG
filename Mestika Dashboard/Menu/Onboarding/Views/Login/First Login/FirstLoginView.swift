@@ -11,9 +11,8 @@ struct FirstLoginView: View {
     
     /* Environtment Object */
     @EnvironmentObject var loginData: LoginBindingModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var appState: AppState
     
-    @Binding var rootIsActive: Bool
     @State private var nextRoute: Bool = false
     @State var phoneNumber: String = ""
     
@@ -133,7 +132,7 @@ struct FirstLoginView: View {
                 .disabled(disableForm)
             
             NavigationLink(
-                destination: FirstOTPLoginView(rootIsActive: self.$rootIsActive).environmentObject(loginData),
+                destination: FirstOTPLoginView().environmentObject(loginData),
                 isActive: self.$nextRoute,
                 label: {}
             )
@@ -183,7 +182,8 @@ struct FirstLoginView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-                self.rootIsActive = true
+//                self.rootIsActive = true
+                self.appState.moveToWelcomeView = true
             }) {
                 Text("Kembali")
                     .foregroundColor(.white)
@@ -206,7 +206,7 @@ struct FirstLoginView: View {
 #if DEBUG
 struct FirstLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstLoginView(rootIsActive: .constant(false)).environmentObject(LoginBindingModel())
+        FirstLoginView().environmentObject(LoginBindingModel())
     }
 }
 #endif

@@ -264,7 +264,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihDesainATMView(rootIsActive: $isActiveForPilihDesainKartuATM).environmentObject(productATMData)){
+            NavigationLink(destination: FormPilihDesainATMView().environmentObject(productATMData)){
                 Text("Lanjutkan")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -447,7 +447,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FirstLoginView(rootIsActive: self.$isActiveRootLogin).environmentObject(loginData)){
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData)){
                 Text("Login")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -495,7 +495,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: RegisterRekeningCardView(rootIsActive: self.$isActiveForNasabahPage).environmentObject(registerData)){
+            NavigationLink(destination: FormInputKartuATMAtauRekeningView().environmentObject(registerData)){
                 Text("Ya, Saya Memiliki")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))

@@ -120,6 +120,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     
                     Button(action: {
+                        // temporary dummy
+                        self.isOtpValid = true
                         
                         validateOTP()
                         

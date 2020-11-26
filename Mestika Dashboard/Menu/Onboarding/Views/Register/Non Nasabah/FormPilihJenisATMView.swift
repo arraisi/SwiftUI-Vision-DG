@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FormPilihJenisATMView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var atmData: AddProductATM
     
     /* Carousel Variables */
     @State var cards = myCardData
@@ -23,69 +23,65 @@ struct FormPilihJenisATMView: View {
     let itemGapHeight:CGFloat = 10
     
     var body: some View {
-        VStack {
-            AppBarLogo()
-                .padding(.top, 55)
-                .padding(.horizontal, 30)
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                ZStack {
-                    Color(hex: "#F6F8FB")
-                    
-                    VStack() {
-                        // MARK: - CAROUSEL
-                        VStack{
+        ScrollView(.vertical, showsIndicators: false) {
+            ZStack {
+                Color(hex: "#F6F8FB")
+                
+                VStack() {
+                    // MARK: - CAROUSEL
+                    VStack{
+                        
+                        HStack(spacing: itemWidth * 0.08){
                             
-                            HStack(spacing: itemWidth * 0.08){
-                                
-                                ForEach(cards){card in
-                                    CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: false)
-                                        .offset(x: self.offset)
-                                        .highPriorityGesture(
-                                            
-                                            DragGesture()
-                                                .onChanged({ (value) in
-                                                    
-                                                    if value.translation.width > 0 {
-                                                        self.offset = value.location.x
-                                                    }
-                                                    else{
-                                                        self.offset = value.location.x - self.itemWidth
-                                                    }
-                                                    
-                                                })
-                                                .onEnded(onDragEnded)
-                                        )
-                                }
+                            ForEach(cards){card in
+                                CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: false)
+                                    .offset(x: self.offset)
+                                    .highPriorityGesture(
+                                        
+                                        DragGesture()
+                                            .onChanged({ (value) in
+                                                
+                                                if value.translation.width > 0 {
+                                                    self.offset = value.location.x
+                                                }
+                                                else{
+                                                    self.offset = value.location.x - self.itemWidth
+                                                }
+                                                
+                                            })
+                                            .onEnded(onDragEnded)
+                                    )
                             }
-                            .frame(width: itemWidth)
-                            .offset(x: self.firstOffset)
                         }
-                        .edgesIgnoringSafeArea(.bottom)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                        .animation(.spring())
-                        .padding(.vertical,25)
-                        .onAppear {
-                            
-                            self.firstOffset = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
-                            
-                            self.cards[0].isShow = true
-                        }
-                        
-                        DetailLimitKartuAtmView(card: cards[Int(self.count)])
-                            .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
-                            .padding(.horizontal, 30)
-                            .padding(.bottom)
-                        
-                        Spacer()
+                        .frame(width: itemWidth)
+                        .offset(x: self.firstOffset)
                     }
+                    .edgesIgnoringSafeArea(.bottom)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .animation(.spring())
+                    .padding(.vertical,25)
+                    .onAppear {
+                        
+                        self.firstOffset = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.cards.count / 2)) - (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+                        
+                        self.cards[0].isShow = true
+                    }
+                    
+                    DetailLimitKartuAtmView(card: cards[Int(self.count)])
+                        .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
+                        .padding(.horizontal, 30)
+                        .padding(.bottom)
+                    
+                    Spacer()
                 }
             }
         }
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        .navigationBarHidden(true)
-        .background(Color(hex: "#F6F8FB")
-                    .edgesIgnoringSafeArea(.all))
+        .padding(.top, UIScreen.main.bounds.height * 0.12)
+        .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(trailing: EmptyView())
     }
     
     // MARK: - ON DRAG ENDED
@@ -132,6 +128,8 @@ struct FormPilihJenisATMView: View {
 
 struct PilihATMView_Previews: PreviewProvider {
     static var previews: some View {
-        FormPilihJenisATMView()
+        NavigationView {
+            FormPilihJenisATMView()
+        }
     }
 }

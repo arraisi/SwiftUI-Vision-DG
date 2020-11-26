@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FirstPasswordLoginView: View {
     
-    @Binding var rootIsActive : Bool
+    @EnvironmentObject var appState: AppState
+    
     @State private var nextRoute: Bool = false
     @State var password: String = ""
     @State var confirmationPassword: String = ""
@@ -23,8 +24,6 @@ struct FirstPasswordLoginView: View {
     /* CORE DATA */
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Boolean for Show Modal */
     @State var showingModal = false
@@ -248,7 +247,9 @@ struct FirstPasswordLoginView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Button(action: {}) {
+            Button(action: {
+                self.appState.moveToWelcomeView = true
+            }) {
                 Text("Kembali")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -270,7 +271,7 @@ struct FirstPasswordLoginView: View {
 #if DEBUG
 struct FirstPasswordLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstPasswordLoginView(rootIsActive: .constant(false))
+        FirstPasswordLoginView()
     }
 }
 #endif

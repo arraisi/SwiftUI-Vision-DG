@@ -12,7 +12,7 @@ struct FormCompletionKartuATMView: View {
     
     /* Environtment Object */
     @EnvironmentObject var atmData: AddProductATM
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var location : String = ""
     @State var showingAddressModal = false
@@ -52,7 +52,7 @@ struct FormCompletionKartuATMView: View {
                     .scaledToFill()
             }
             VStack {
-                AppBarLogo(light: true)
+                AppBarLogo(light: true, hideBack: true)
                     .padding(.top, 55)
                 
                 ScrollView {
