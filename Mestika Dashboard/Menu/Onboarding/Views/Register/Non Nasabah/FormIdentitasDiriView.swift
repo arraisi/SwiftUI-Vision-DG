@@ -162,14 +162,8 @@ struct FormIdentitasDiriView: View {
                                 
                                 self.registerData.npwp = self.npwp
                                 
-                                if imageKTP != nil
-                                    && registerData.nik != ""
-                                    && confirmNik
-                                    && (registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp)
-                                    && imageSelfie != nil {
-                                    
+                                if isValidForm() {
                                     self.nextViewActive = true
-                                    
                                 }
                                 
                             }, label: {
@@ -178,8 +172,9 @@ struct FormIdentitasDiriView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 16))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             })
-                            .background(Color(hex: "#232175"))
+                            .background(Color(hex: !isValidForm() ? "#CBD1D9" : "#232175"))
                             .cornerRadius(12)
+                            .disabled(!isValidForm())
                         }
                         .padding(20)
                         .padding(.vertical, 25)
@@ -249,6 +244,17 @@ struct FormIdentitasDiriView: View {
                 self.shouldPresentCamera = false
             }), ActionSheet.Button.cancel()])
         }
+    }
+    
+    /*
+     Fungsi untuk cek form sudah terisi valid semua atau belum
+     */
+    private func isValidForm() -> Bool {
+        return imageKTP != nil
+            && registerData.nik != ""
+            && confirmNik
+            && (registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp)
+            && imageSelfie != nil
     }
     
     /*
