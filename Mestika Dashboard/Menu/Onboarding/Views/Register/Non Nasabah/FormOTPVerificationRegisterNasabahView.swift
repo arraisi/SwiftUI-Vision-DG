@@ -49,30 +49,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
         pin.count < 6
     }
     
-    @ObservedObject private var otpVM = OtpViewModel()
-    func getOTP() {
-        self.otpVM.otpRequest(
-//            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
-            otpRequest: OtpRequest(destination: registerData.noTelepon, type: "hp")
-        ) { success in
-            
-            if success {
-                print(self.otpVM.isLoading)
-                print(self.otpVM.code)
-                print(self.otpVM.reference)
-                
-                DispatchQueue.main.sync {
-                    self.pinShare = self.otpVM.code
-                    self.referenceCode = self.otpVM.reference
-                }
-                self.showingAlert = true
-                
-            }
-            
-            self.showingAlert = true
-        }
-    }
-    
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
