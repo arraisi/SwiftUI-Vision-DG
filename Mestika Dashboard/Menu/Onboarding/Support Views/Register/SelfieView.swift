@@ -62,9 +62,14 @@ struct SelfieView: View {
 //                    .overlay(
 //                        RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
 //                    )
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(hex: imageSelfie == nil ? "#2334D0" : "#FFFFFF"))
+                            .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                    )
+                    .padding(.vertical, 5)
             })
             .foregroundColor(.black)
-            .background(Color(hex: imageSelfie == nil ? "#2334D0" : "#FFFFFF"))
             .cornerRadius(12)
             .padding(.vertical, 10)
             
