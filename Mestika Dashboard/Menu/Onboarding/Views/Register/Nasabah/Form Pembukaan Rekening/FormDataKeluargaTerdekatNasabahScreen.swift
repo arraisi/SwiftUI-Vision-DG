@@ -274,7 +274,11 @@ struct FormDataKeluargaTerdekatNasabahScreen: View {
                     } onCommit: {
                     }
                     .onReceive(noTelepon.publisher.collect()) {
-                        self.noTelepon = String($0.prefix(12))
+                        if String($0).hasPrefix("0") {
+                            self.noTelepon = String(String($0).substring(with: 1..<String($0).count).prefix(12))
+                        } else {
+                            self.noTelepon = String($0.prefix(12))
+                        }
                     }
                     .keyboardType(.numberPad)
                     .font(Font.system(size: 14))
