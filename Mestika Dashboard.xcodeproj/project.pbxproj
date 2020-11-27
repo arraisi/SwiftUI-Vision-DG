@@ -24,6 +24,7 @@
 		0658B5AE256401BA001B659D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AD256401BA001B659D /* FirebaseAnalytics */; };
 		0658B5B0256401BA001B659D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5AF256401BA001B659D /* FirebaseMessaging */; };
 		0658B5B2256401BA001B659D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0658B5B1256401BA001B659D /* FirebaseAuth */; };
+		06AD56F82570C6390071C4A9 /* term.html in Resources */ = {isa = PBXBuildFile; fileRef = 06AD56F72570C6390071C4A9 /* term.html */; };
 		06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */; };
 		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
@@ -335,6 +336,7 @@
 		0658B5912563F8A1001B659D /* NotificationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 		0658B5932563F8A1001B659D /* ListNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNotificationView.swift; sourceTree = "<group>"; };
 		0658B5A62563FA6D001B659D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		06AD56F72570C6390071C4A9 /* term.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = term.html; sourceTree = "<group>"; };
 		06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarLogo.swift; sourceTree = "<group>"; };
 		0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductATM.swift; sourceTree = "<group>"; };
 		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
@@ -677,6 +679,14 @@
 				0658B5A62563FA6D001B659D /* Colors.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		06AD56F62570C62C0071C4A9 /* Html */ = {
+			isa = PBXGroup;
+			children = (
+				06AD56F72570C6390071C4A9 /* term.html */,
+			);
+			path = Html;
 			sourceTree = "<group>";
 		};
 		523A86282542BE8600ADFE25 /* Components */ = {
@@ -1413,6 +1423,7 @@
 		C092ABFD2553B51B0051CE3E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				06AD56F62570C62C0071C4A9 /* Html */,
 				52ADFE762557D99F00A1001F /* Master */,
 				C01C67A6255E3A890019D06F /* json */,
 				C0A4F98C25528BF200566A11 /* fonts */,
@@ -1628,6 +1639,7 @@
 				C0E40B822564D90700259612 /* jabatanProfesi.json in Resources */,
 				52ADFEA72557D99F00A1001F /* besarPerkiraanSetoran.json in Resources */,
 				C0A4F99C25528C0700566A11 /* Montserrat-Medium.ttf in Resources */,
+				06AD56F82570C6390071C4A9 /* term.html in Resources */,
 				52ADFE9E2557D99F00A1001F /* besarPerkiraanPenarikan.json in Resources */,
 				C0A4F99D25528C0700566A11 /* Montserrat-Black.ttf in Resources */,
 				C0E40BB32564E5C900259612 /* industriTempatBekerja.json in Resources */,

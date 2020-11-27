@@ -166,14 +166,14 @@ struct WelcomeViewNew: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 20)
             
-            Text("Apakah Anda telah memiliki rekening di Bank Mestika")
+            Text("Apakah Anda Merupakan Nasabah Bank Mestika?")
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
             NavigationLink(destination: KetentuanRegisterNasabahView().environmentObject(registerData), isActive: self.$isKetentuanViewActive){
-                Text("Tidak, Saya Tidak Memiliki")
+                Text("Tidak, saya bukan")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -184,7 +184,7 @@ struct WelcomeViewNew: View {
             .cornerRadius(12)
             
             NavigationLink(destination: FormInputKartuATMAtauRekeningView().environmentObject(registerData)){
-                Text("Ya, Saya Memiliki")
+                Text("Ya, saya nasabah Bank Mestika")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)

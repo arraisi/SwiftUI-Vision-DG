@@ -24,7 +24,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     /* Variable Validation */
     @State var isOtpValid = false
     @State var otpInvalidCount = 0
-    @State var isResendOtpDisabled = true
+    @State var isResendOtpDisabled = false
     
     /* Timer */
     @State private var timeRemaining = 30
@@ -43,7 +43,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
         self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
+//            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
+            otpRequest: OtpRequest(destination: registerData.noTelepon, type: "hp")
         ) { success in
             
             if success {
@@ -113,7 +114,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         }
                         .disabled(isResendOtpDisabled)
                         
-                        Text("(00:\(timeRemaining))")
+                        Text("(00:\(String(format: "%02d", timeRemaining)))")
                             .font(.custom("Montserrat-Regular", size: 10))
                     }
                     .padding(.top, 5)
