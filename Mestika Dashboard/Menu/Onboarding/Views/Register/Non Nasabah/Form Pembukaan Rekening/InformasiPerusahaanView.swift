@@ -311,7 +311,11 @@ struct InformasiPerusahaanView: View {
                     } onCommit: {
                     }
                     .onReceive(noTlpPerusahaan.publisher.collect()) {
-                        self.noTlpPerusahaan = String($0.prefix(12))
+                        if String($0).hasPrefix("0") {
+                            self.noTlpPerusahaan = String(String($0).substring(with: 1..<String($0).count).prefix(12))
+                        } else {
+                            self.noTlpPerusahaan = String($0.prefix(12))
+                        }
                     }
                     .keyboardType(.numberPad)
                     .font(Font.system(size: 14))
