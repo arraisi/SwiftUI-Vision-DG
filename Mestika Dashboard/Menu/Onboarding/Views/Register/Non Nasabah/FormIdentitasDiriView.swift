@@ -43,7 +43,7 @@ struct FormIdentitasDiriView: View {
     
     
     @State private var shouldPresentImagePicker = false
-    @State private var shouldPresentActionScheet = false
+//    @State private var shouldPresentActionScheet = false
     @State private var shouldPresentCamera = false
     @State private var nextViewActive = false
     
@@ -88,9 +88,9 @@ struct FormIdentitasDiriView: View {
                             // Form KTP
                             VStack {
                                 DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
-                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentImagePicker, confirmNik: $confirmNik,
+                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentCamera, confirmNik: $confirmNik,
                                                 onChange: {
-                                                    self.shouldPresentMaskSelfieCamera = false
+//                                                    self.shouldPresentMaskSelfieCamera = false
                                                     self.formSelfie = false
                                                     self.formNPWP = false
                                                 },
@@ -113,7 +113,7 @@ struct FormIdentitasDiriView: View {
                             // Form Selfie
                             VStack {
                                 DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: $formSelfie) {
-                                    SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentActionScheet,
+                                    SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentCamera,
                                                onChange: {
                                                 self.shouldPresentMaskSelfieCamera = true
                                                 self.formKTP = false
@@ -135,7 +135,7 @@ struct FormIdentitasDiriView: View {
                             // Form NPWP
                             VStack {
                                 DisclosureGroup("Masukkan NPWP Anda", isExpanded: $formNPWP) {
-                                    ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentActionScheet,
+                                    ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentCamera,
                                                  onChange: {
                                                     self.shouldPresentMaskSelfieCamera = false
                                                     self.formKTP = false
@@ -192,7 +192,7 @@ struct FormIdentitasDiriView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .sheet(isPresented: $shouldPresentImagePicker) {
+        .sheet(isPresented: $shouldPresentCamera) {
             ZStack {
                 if formKTP {
                     
@@ -221,7 +221,7 @@ struct FormIdentitasDiriView: View {
                         })
                 }
                 else {
-                    SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker)
+                    SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker, frontCamera: self.$formSelfie)
                 }
                 
                 if self.shouldPresentMaskSelfieCamera {
@@ -234,16 +234,16 @@ struct FormIdentitasDiriView: View {
                 }
             }
         }
-        .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                self.shouldPresentImagePicker = true
-                self.shouldPresentCamera = true
-            }), ActionSheet.Button.default(Text("Photo Library"), action: {
-                self.shouldPresentMaskSelfieCamera = false
-                self.shouldPresentImagePicker = true
-                self.shouldPresentCamera = false
-            }), ActionSheet.Button.cancel()])
-        }
+//        .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
+//            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+//                self.shouldPresentImagePicker = true
+//                self.shouldPresentCamera = true
+//            }), ActionSheet.Button.default(Text("Photo Library"), action: {
+//                self.shouldPresentMaskSelfieCamera = false
+//                self.shouldPresentImagePicker = true
+//                self.shouldPresentCamera = false
+//            }), ActionSheet.Button.cancel()])
+//        }
     }
     
     /*

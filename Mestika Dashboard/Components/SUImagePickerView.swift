@@ -13,6 +13,7 @@ struct SUImagePickerView: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var image: Image?
     @Binding var isPresented: Bool
+    @Binding var frontCamera: Bool
     
     func makeCoordinator() -> ImagePickerViewCoordinator {
         return ImagePickerViewCoordinator(image: $image, isPresented: $isPresented)
@@ -21,6 +22,7 @@ struct SUImagePickerView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let pickerController = UIImagePickerController()
         pickerController.sourceType = sourceType
+        pickerController.cameraDevice = frontCamera ? .front : .rear
         pickerController.delegate = context.coordinator
         return pickerController
     }
