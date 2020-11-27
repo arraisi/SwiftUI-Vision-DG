@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 class OtpViewModel: ObservableObject {
-    var destination: String = "085875074351"
+//    var destination: String = "085875074351"
+    var destination: String = "08562006488"
     var type: String = "hp"
     
     @Published var isLoading: Bool = false
@@ -64,6 +65,7 @@ extension OtpViewModel {
                     self.isLoading = false
                 }
                 
+                completion(false)
                 print(error.localizedDescription)
             }
         }
@@ -83,14 +85,17 @@ extension OtpViewModel {
                 if (response.status?.message != "OTP_REQUESTED_FAILED") {
                     print("Success")
                     
-                    self.isLoading = false
-                    self.reference = response.reference ?? "0"
-                    self.code = response.code ?? "0"
-                    self.statusMessage = (response.status?.message)!
-                    self.timeCounter = response.timeCounter ?? 0
-                    
-                    completion(true)
-                    
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                        self.destination = response.destination ?? ""
+                        self.reference = response.reference ?? "0"
+                        self.code = response.code ?? "0"
+                        self.statusMessage = (response.status?.message)!
+                        self.timeCounter = response.timeCounter ?? 0
+                        
+                        completion(true)
+                    }
+
                 } else {
                     print("Failed Request")
                     

@@ -71,6 +71,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     
                     Button(action: {
                         print("-> Resend OTP")
+                        
+                        self.resetField()
                         self.timeRemaining = 60
                         
                         getOTP()
@@ -89,6 +91,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
+                        .disabled(true)
                 }
                 .padding(.top, 5)
                 
@@ -338,10 +341,15 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             
             if !success {
                 print("OTP INVALID")
-                showingModal.toggle()
+                self.showingModal.toggle()
+                self.resetField()
             }
             
         }
+    }
+    
+    private func resetField() {
+        self.pin = "" /// return to empty pin
     }
 }
 

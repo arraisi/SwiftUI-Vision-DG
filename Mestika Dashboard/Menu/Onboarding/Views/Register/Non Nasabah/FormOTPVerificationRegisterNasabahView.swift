@@ -86,6 +86,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         print("-> Resend OTP")
                         getOTP()
                         
+                        self.resetField()
                         self.timeRemaining = 60
                     }) {
                         Text("Resend OTP")
@@ -102,6 +103,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
+                        .disabled(true)
                 }
                 .padding(.top, 5)
                 
@@ -121,7 +123,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     
                     Button(action: {
                         // temporary dummy
-                        self.isOtpValid = true
+//                        self.isOtpValid = true
                         
                         validateOTP()
                         
@@ -423,6 +425,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             if !success {
                 print("OTP INVALID")
                 showingOtpIncorect.toggle()
+                resetField()
             }
             
         }
@@ -447,6 +450,10 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             return hud
         }
+    }
+    
+    private func resetField() {
+        self.pin = "" /// return to empty pin
     }
 }
 
