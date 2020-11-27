@@ -51,15 +51,9 @@ struct FormEmailVerificationRegisterNasabahView: View {
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
                     
-                    TextField("Masukan alamat email anda", text: $email, onEditingChanged: { (isChanged) in
-                        if !isChanged {
-                            if (self.textFieldValidatorEmail(self.email) && self.email.count > 8)  {
-                                self.isEmailValid = true
-                                self.registerData.email = email
-                            } else {
-                                self.isEmailValid = false
-                            }
-                        }
+                    TextField("Masukan alamat email anda", text: $email, onEditingChanged: { changed in
+                        print("Changed")
+                        self.registerData.email = self.email
                     })
                     .frame(height: 30)
                     .font(.custom("Montserrat-Regular", size: 12))
@@ -69,6 +63,9 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     .cornerRadius(15)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                     .padding(.top, 20)
+                    .onReceive(email.publisher.collect()) { it in
+                        self.isEmailValid = self.textFieldValidatorEmail(String(it)) && it.count > 8
+                    }
                     
                     HStack {
                         Text("*Email harus lebih dari 8 karakter")
