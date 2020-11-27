@@ -10,6 +10,7 @@ import PopupView
 import SystemConfiguration
 import SwiftUIX
 import Introspect
+import Indicators
 
 struct WelcomeView: View {
     
@@ -18,7 +19,7 @@ struct WelcomeView: View {
     @State var isLoginViewActive: Bool = false
     
     /* For Check Internet Connection */
-    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.apple.com")
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "http://gateway.visiondg.xyz:8765")
     
     @State var showLogin = false
     @State var showRegisterNasabah = false
@@ -511,31 +512,16 @@ struct WelcomeView: View {
     
     /* Funtion GET User Details Core Data */
     func getUserDetails() {
-        //        let data = User(context: managedObjectContext)
-        //        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-        //        data.nik = "3277102102890001"
-        //        data.email = "andri.ferinata@gmail.com"
-        //        data.phone = "08562006488"
-        //        data.pin = "111111"
-        //        data.password = "ferinata21"
-        //        data.firstName = "Andri"
-        //        data.lastName = "Ferinata"
-        //
-        //        do {
-        //            try self.managedObjectContext.save()
-        //        } catch {
-        //            print("Error saving managed object context: \(error)")
-        //        }
         
-        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
-            showingModalRegistered.toggle()
-        }
-        
-        if (user.last?.deviceId == deviceId && isSchedule == "true") {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                showingModalSchedule.toggle()
-            }
-        }
+//        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
+//            showingModalRegistered.toggle()
+//        }
+//
+//        if (user.last?.deviceId == deviceId && isSchedule == "true") {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                showingModalSchedule.toggle()
+//            }
+//        }
     }
     
     /* Function GET Mobile Version */

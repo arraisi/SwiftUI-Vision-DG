@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SlidingTabView
 
 struct NotificationScreen: View {
     @State private var selectedTabIndex = 0
@@ -24,14 +23,15 @@ struct NotificationScreen: View {
     }
     var body: some View {
         VStack(spacing: 0) {
-            SlidingTabView(selection: self.$selectedTabIndex, tabs: ["Pesan", "Pemberitahuan"],
-                           font: .caption, activeAccentColor: .primary, selectionBarColor: .primary,
-                           selectionBarHeight: 2)
-            if selectedTabIndex == 0 {
-                ListNotificationView()
-            } else {
-                ListAnnouncementView()
-            }
+//            SlidingTabView(selection: self.$selectedTabIndex, tabs: ["Pesan", "Pemberitahuan"],
+//                           font: .caption, activeAccentColor: .primary, selectionBarColor: .primary,
+//                           selectionBarHeight: 2)
+//            if selectedTabIndex == 0 {
+//                ListNotificationView()
+//            } else {
+//                ListAnnouncementView()
+//            }
+            ListNotificationView()
         }
         .navigationBarTitle("Inbox", displayMode: .inline)
         .animation(.none)

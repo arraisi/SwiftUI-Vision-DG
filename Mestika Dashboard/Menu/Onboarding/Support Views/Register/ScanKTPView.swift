@@ -28,6 +28,7 @@ struct ScanKTPView: View {
     let onCommit: ()->()
     
     @State var isValidKtp: Bool = false
+    @State var showingAlert: Bool = false
     
     var body: some View {
         VStack(alignment: .center) {
@@ -108,12 +109,10 @@ struct ScanKTPView: View {
                 .padding(.bottom, 15)
                 
                 if (imageKTP != nil) {
-                    
+
                     Button(action: {
                         if confirmNik && nik.count == 16 {
-                            self.onCommit()
-                            self.registerData.nik = nik
-                            self.registerData.fotoKTP = self.imageKTP!
+                            getCitizen(nik: self.nik)
                         }
                     }) {
                         Text("Simpan")
@@ -124,12 +123,41 @@ struct ScanKTPView: View {
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 15)
-                    
+
                 } else { EmptyView() }
                 
             }
         }
         .padding(.bottom, 15)
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text("MESSAGE"),
+                message: Text(self.citizenVM.errorMessage),
+                dismissButton: .default(Text("Oke"))
+            )
+        }
+    }
+    
+    /* Function GET Citizen */
+    @ObservedObject private var citizenVM = CitizenViewModel()
+    func getCitizen(nik: String) {
+        print("GET CITIZEN")
+        self.citizenVM.getCitizen(nik: nik) { success in
+            if success {
+                print("isLoading \(self.citizenVM.isLoading)")
+                print("nikValid \(self.citizenVM.nik)")
+                
+                self.showingAlert = true
+                
+                self.registerData.nik = nik
+                self.registerData.fotoKTP = self.imageKTP!
+                self.onCommit()
+            }
+            
+            if !success {
+                self.showingAlert = true
+            }
+        }
     }
 }
 

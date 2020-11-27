@@ -64,4 +64,22 @@ class RegistrasiModel: ObservableObject {
     @Published var fotoNPWP: Image = Image("")
     @Published var npwp = ""
     @Published var hasNoNpwp: Bool = false
+    @Published var namaLengkapFromNik: String = ""
+    @Published var nomorKKFromNik: String = ""
+    @Published var jenisKelaminFromNik: String = ""
+    @Published var tempatLahirFromNik: String = ""
+    @Published var tanggalLahirFromNik: String = ""
+    @Published var agamaFromNik: String = ""
+    @Published var statusPerkawinanFromNik: String = ""
+    @Published var pendidikanFromNik: String = ""
+    @Published var jenisPekerjaanFromNik: String = ""
+    @Published var namaIbuFromNik: String = ""
+    @Published var statusHubunganFromNik: String = ""
+    @Published var alamatKtpFromNik: String = ""
+    @Published var rtFromNik: String = ""
+    @Published var rwFromNik: String = ""
+    @Published var kelurahanFromNik: String = ""
+    @Published var kecamatanFromNik: String = ""
+    @Published var kabupatenKotaFromNik: String = ""
+    @Published var provinsiFromNik: String = ""
 }

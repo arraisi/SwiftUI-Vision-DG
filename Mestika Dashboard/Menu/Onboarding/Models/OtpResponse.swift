@@ -7,9 +7,16 @@
 
 import Foundation
 
-class OtpResponse: Decodable {
-    let destination: String
-    let reference: String
-    let code: String
-    let timeCounter: Int
+// MARK: - OtpResponse
+struct OtpResponse: Decodable {
+    let destination, reference, code: String?
+    let timeCounter: Int?
+    let tryCount: Int?
+    let status: Status?
+    let nik: String?
+}
+
+// MARK: - Status
+struct Status: Codable {
+    let code, message: String?
 }

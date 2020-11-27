@@ -133,7 +133,10 @@ struct BottomNavigationView: View {
     
     var navBarItem: some View {
         HStack(spacing: 30) {
-            NavigationLink(destination: NotificationScreen(), label: {
+//            NavigationLink(destination: NotificationScreen(), label: {
+//                Image("ic_bell")
+//            })
+            Button(action: {}, label: {
                 Image("ic_bell")
             })
             Button(action: {}, label: {

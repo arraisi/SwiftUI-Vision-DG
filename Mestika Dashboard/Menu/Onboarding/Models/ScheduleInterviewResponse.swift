@@ -11,7 +11,6 @@ import Foundation
 class ScheduleInterviewResponse: Decodable {
     var id: Int
     var date: String
-    var nik: String
 //    var time: JSONNull?
     var timeStart, timeEnd: String
 }

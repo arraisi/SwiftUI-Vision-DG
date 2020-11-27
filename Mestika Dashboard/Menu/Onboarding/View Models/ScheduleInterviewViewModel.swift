@@ -51,6 +51,9 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 }
                 
             case .failure(let error):
+                
+                print("Error Get Schedule")
+                
                 DispatchQueue.main.async {
                     self.isLoading = false
                 }
@@ -87,7 +90,7 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
             
             switch result {
             case .success(let schedule):
-                print("Success \(String(describing: schedule?.nik))")
+                print(schedule?.date)
 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -110,10 +113,6 @@ class ScheduleInterviewViewModel: Identifiable {
     
     var date: String {
         return self.schedule.date
-    }
-    
-    var nik: String {
-        return self.schedule.nik
     }
     
     var timeStart: String {

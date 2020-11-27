@@ -343,7 +343,8 @@ struct VerificationRegisterDataView: View {
                 VStack {
                     Button(action: {
                         
-                        saveUserToCoreData()
+//                        saveUserToCoreData()
+                        saveUserToDb()
                         
                     }, label: {
                         Text("Submit Data")
@@ -369,9 +370,17 @@ struct VerificationRegisterDataView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarItems(
+            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
+                .configure {
+                    $0.color = .white
+            })
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
-            return Alert(title: Text("Message"), message: Text("GAGAL MENDAFTAR"), dismissButton: .default(Text("Oke")))
+            return Alert(
+                title: Text("Message"),
+                message: Text("\(self.userRegisterVM.message)"),
+                dismissButton: .default(Text("Oke")))
         }
         
     }
@@ -420,9 +429,14 @@ struct VerificationRegisterDataView: View {
     
     /* Save User To DB */
     func saveUserToDb() {
+//        nextRoute = true
         self.userRegisterVM.userRegistration() { success in
             if success {
-                print("SUCCESS")
+                nextRoute = true
+            }
+
+            if !success {
+                self.showingAlert = true
             }
         }
     }

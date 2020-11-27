@@ -28,7 +28,6 @@ struct RegisterNasabahPhoneOTPScreen: View {
     
     /* Data Binding */
     @Binding var rootIsActive : Bool
-    @ObservedObject private var otpVM = OtpViewModel()
     
     /* Timer */
     @State private var timeRemaining = 30
@@ -42,26 +41,6 @@ struct RegisterNasabahPhoneOTPScreen: View {
     /* Disabled Form */
     var disableForm: Bool {
         pin.count < 6
-    }
-    
-    func getOTP() {
-        self.otpVM.otpRequest(
-            otpRequest: OtpRequest(destination: "085875074351", type: "hp")
-        ) { success in
-            
-            if success {
-                print(self.otpVM.isLoading)
-                print(self.otpVM.code)
-                
-                DispatchQueue.main.sync {
-                    self.pinShare = self.otpVM.code
-                    self.referenceCode = self.otpVM.reference
-                }
-                self.showingAlert = true
-            }
-            
-            self.showingAlert = true
-        }
     }
     
     // MARK: -MAIN CONTENT
@@ -128,29 +107,14 @@ struct RegisterNasabahPhoneOTPScreen: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 VStack {
-                    NavigationLink(destination: ChooseTypeSavingForNasabahScreen().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    NavigationLink(
+                        destination: ChooseTypeSavingForNasabahScreen().environmentObject(registerData),
+                        isActive: self.$isOtpValid) {
                         Text("")
                     }
                     
                     Button(action: {
-                        print(pin)
-                        
-                        if (pin == self.pinShare && otpInvalidCount < 5) {
-                            print("OTP CORRECT")
-                            self.isOtpValid = true
-                        }
-                        
-                        if (pin != self.pinShare && otpInvalidCount <= 4) {
-                            print("OTP INCORRECT")
-                            self.otpInvalidCount += 1
-                            print("\(self.otpInvalidCount)")
-                            showingOtpIncorect.toggle()
-                        }
-                        
-                        if (otpInvalidCount >= 5) {
-                            print("OTP INVALID IN 5 TIME")
-                            showingOtpInvalid.toggle()
-                        }
+                        validateOTP()
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
@@ -364,6 +328,67 @@ struct RegisterNasabahPhoneOTPScreen: View {
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    @ObservedObject private var otpVM = OtpViewModel()
+    func getOTP() {
+        self.otpVM.otpRequest(
+            otpRequest: OtpRequest(
+                    destination: "085359117336",
+                    type: "hp",
+                    trytime: 60
+            )
+        ) { success in
+            
+            if success {
+                print("isLoading \(self.otpVM.isLoading)")
+                print("otpRef \(self.otpVM.reference)")
+                print("status \(self.otpVM.statusMessage)")
+                
+                DispatchQueue.main.async {
+                    self.timeRemaining = self.otpVM.timeCounter
+                    self.referenceCode = self.otpVM.reference
+                }
+                
+                self.showingAlert = true
+            }
+            
+            if !success {
+                if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
+                    print("OTP FAILED")
+                    print(self.otpVM.timeCounter)
+                    
+                    DispatchQueue.main.sync {
+                        self.pinShare = self.otpVM.code
+                        self.referenceCode = self.otpVM.reference
+                        self.timeRemaining = self.otpVM.timeCounter
+                    }
+                    self.showingAlert = true
+                }
+            }
+        }
+    }
+    
+    func validateOTP() {
+        self.otpVM.otpValidation(
+            code: self.pin,
+            destination: self.otpVM.destination,
+            reference: self.otpVM.reference,
+            timeCounter: self.otpVM.timeCounter,
+            tryCount: self.otpVM.timeCounter)
+        { success in
+            
+            if success {
+                print("OTP VALID")
+                self.isOtpValid = true
+            }
+            
+            if !success {
+                print("OTP INVALID")
+                showingOtpIncorect.toggle()
+            }
+            
+        }
     }
 }
 

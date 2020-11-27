@@ -32,6 +32,10 @@ class ScheduleInterviewService {
                 return completion(.failure(.noData))
             }
             
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+            }
+            
             let scheduleResponse = try? JSONDecoder().decode([ScheduleInterviewResponse].self, from: data)
             
             if scheduleResponse == nil {
