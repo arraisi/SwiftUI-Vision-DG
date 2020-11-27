@@ -123,7 +123,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             self.isOtpValid = true
                         },
                         label: {
-                            Text("(00:\(timeRemaining))")
+                            Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
                 }
