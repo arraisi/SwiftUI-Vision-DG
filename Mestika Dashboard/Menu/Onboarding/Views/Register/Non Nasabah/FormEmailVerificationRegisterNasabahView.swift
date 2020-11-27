@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct FormEmailVerificationRegisterNasabahView: View {
+    
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     @State var email: String = ""
     @State private var isEmailValid : Bool   = false

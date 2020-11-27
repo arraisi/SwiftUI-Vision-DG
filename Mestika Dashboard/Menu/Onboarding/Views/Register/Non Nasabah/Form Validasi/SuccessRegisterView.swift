@@ -24,6 +24,7 @@ struct SuccessRegisterView: View {
     
     @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
     @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var appState: AppState
     
     /* HUD Variable */
     @State private var dim = true
@@ -54,7 +55,7 @@ struct SuccessRegisterView: View {
     }
     
     init() {
-//        getAllSchedule()
+        getAllSchedule()
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -244,7 +245,7 @@ struct SuccessRegisterView: View {
                 .cornerRadius(15)
                 .shadow(radius: 30)
                 .padding(.horizontal, 30)
-                .padding(.top, 90)
+                .padding(.top, 120)
                 .padding(.bottom, 35)
             }
             
@@ -286,21 +287,21 @@ struct SuccessRegisterView: View {
         
         showIndeterminate()
         
-        let data = user.last
-        managedObjectContext.delete(data!)
-        
-        do {
-            try managedObjectContext.save()
-        } catch {
-            // handle the Core Data error
-        }
-        
-        UserDefaults.standard.set("false", forKey: "isFirstLogin")
-        UserDefaults.standard.set("false", forKey: "isSchedule")
+//        let data = user.last
+//        managedObjectContext.delete(data!)
+//
+//        do {
+//            try managedObjectContext.save()
+//        } catch {
+//            // handle the Core Data error
+//        }
+//
+//        UserDefaults.standard.set("false", forKey: "isFirstLogin")
+//        UserDefaults.standard.set("false", forKey: "isSchedule")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             print("DELETE SUCCESS")
-            self.backRoute = true
+            self.appState.moveToWelcomeView = true
         }
     }
     

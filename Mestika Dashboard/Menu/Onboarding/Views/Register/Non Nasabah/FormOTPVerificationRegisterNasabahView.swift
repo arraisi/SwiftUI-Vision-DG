@@ -120,27 +120,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     
                     Button(action: {
-                        // temporary dummy
-                        self.isOtpValid = true
-                        
                         validateOTP()
-                        
-                        //                        if (pin == self.pinShare && otpInvalidCount < 5) {
-                        //                            print("OTP CORRECT")
-                        //                            self.isOtpValid = true
-                        //                        }
-                        //
-                        //                        if (pin != self.pinShare && otpInvalidCount <= 4) {
-                        //                            print("OTP INCORRECT")
-                        //                            self.otpInvalidCount += 1
-                        //                            print("\(self.otpInvalidCount)")
-                        //                            showingOtpIncorect.toggle()
-                        //                        }
-                        //
-                        //                        if (otpInvalidCount >= 5) {
-                        //                            print("OTP INVALID IN 5 TIME")
-                        //                            showingOtpInvalid.toggle()
-                        //                        }
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)

@@ -11,6 +11,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     /* Variable Data */
     @State var phoneNumber: String = ""
@@ -105,6 +106,12 @@ struct FormPhoneVerificationRegisterNasabahView: View {
         }
         .edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
+        .onReceive(self.appState.$skipOTP) { skipOTP in
+            if skipOTP {
+                print("Skip OTP: \(skipOTP)")
+                self.appState.skipOTP = false
+            }
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
