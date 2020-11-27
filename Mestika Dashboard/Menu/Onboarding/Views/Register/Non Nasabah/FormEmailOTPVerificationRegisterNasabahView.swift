@@ -35,60 +35,26 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     }
     
     var body: some View {
-        
         ZStack(alignment: .top) {
-            
             VStack {
                 Color(hex: "#232175")
                     .frame(height: 300)
                 Color(hex: "#F6F8FB")
             }
             
-            VStack {
-                AppBarLogo(light: false, onCancel: {})
+            VStack(alignment: .center) {
+                Text("Kami telah mengirimkan Kode Verifikasi ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
+                    .font(.custom("Montserrat-SemiBold", size: 18))
+                    .foregroundColor(Color(hex: "#232175"))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
+                    .padding(.horizontal, 20)
+                    .fixedSize(horizontal: false, vertical: true)
                 
-                VStack(alignment: .center) {
-                    Text("Kami telah mengirimkan Kode Verifikasi ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 30)
-                        .padding(.horizontal, 20)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
-                        .font(.custom("Montserrat-Regular", size: 12))
-                        .foregroundColor(Color(hex: "#707070"))
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 5)
-                        .padding(.bottom, 20)
-                        .padding(.horizontal, 20)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    ZStack {
-                        pinDots
-                        backgroundField
-                    }
-                    
-                    HStack {
-                        Text("Tidak Menerima Kode?")
-                            .font(.custom("Montserrat-Regular", size: 10))
-                        
-                        Button(action: {
-                            print("-> Resend OTP")
-                            self.timeRemaining = 60
-                            
-                            getOTP()
-                        }) {
-                            Text("Resend OTP")
-                                .font(.custom("Montserrat-SemiBold", size: 10))
-                                .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
-                        }
-                        .disabled(isResendOtpDisabled)
-                        
-                        Text("(00:\(timeRemaining))")
-                            .font(.custom("Montserrat-Regular", size: 12))
-                    }
+                Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
+                    .font(.custom("Montserrat-Regular", size: 12))
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.center)
                     .padding(.top, 5)
                     .padding(.bottom, 20)
                     .padding(.horizontal, 20)
@@ -151,13 +117,19 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
+                    .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 10)
+                    .padding(.bottom, 25)
+                    .disabled(disableForm)
                 }
-                .frame(width: UIScreen.main.bounds.width - 40)
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                .padding(.vertical, 30)
             }
+            .frame(width: UIScreen.main.bounds.width - 30)
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(radius: 30)
+            .padding(.top, 120)
             
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
@@ -373,6 +345,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
 
 struct EmailOTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FormEmailOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        NavigationView {
+            FormEmailOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        }
     }
 }
