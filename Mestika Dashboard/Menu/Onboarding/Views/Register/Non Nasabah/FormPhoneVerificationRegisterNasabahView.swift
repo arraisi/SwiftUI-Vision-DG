@@ -27,7 +27,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
             
             VStack {
                 Color(hex: "#232175")
-                    .frame(height: 300)
+                    .frame(height: UIScreen.main.bounds.height*0.35)
                 Color(hex: "#F6F8FB")
             }
             
@@ -61,6 +61,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                             print("Commited")
                             self.registerData.noTelepon = "0" + phoneNumber
                         })
+                        .foregroundColor(.black)
                         .onReceive(phoneNumber.publisher.collect()) {
                             self.phoneNumber = String($0.prefix(12))
                         }
@@ -69,7 +70,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                     .frame(height: 20)
                     .font(.custom("Montserrat-Regular", size: 12))
                     .padding()
-                    .background(Color(hex: "#f4f4f4"))
+                    .background(Color.white)
                     .cornerRadius(15)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
                     .padding(.vertical, 15)
@@ -110,6 +111,7 @@ struct PhoneVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             FormPhoneVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+                .environment(\.colorScheme, .dark)
         }
     }
 }

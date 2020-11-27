@@ -23,15 +23,25 @@ struct KetentuanRegisterNasabahView: View {
             
             VStack {
                 Color(hex: "#232175")
-                    .frame(height: 300)
+                    .frame(height: UIScreen.main.bounds.height*0.5)
                 Color(hex: "#F6F8FB")
             }
             
             VStack {
                 AppBarLogo(light: false, onCancel: {})
                 
-                cardForm
-                    .padding(.top, 30)
+                ScrollView(showsIndicators: false) {
+                    ZStack {
+                        VStack {
+                            Color(hex: "#232175")
+                                .frame(height: UIScreen.main.bounds.height*0.2)
+                            Color(hex: "#F6F8FB")
+                        }
+                        
+                        cardForm
+                            .padding(.top, 30)
+                    }
+                }
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -50,9 +60,9 @@ struct KetentuanRegisterNasabahView: View {
                 .padding(.top, 30)
             
             Text("Sebelum Memulai..!!")
-                .font(.custom("Montserrat-Bold", size: 24))
+                .font(.custom("Montserrat-Bold", size: 22))
                 .foregroundColor(Color(hex: "#232175"))
-                .padding(.top, 10)
+                .padding(.vertical, 10)
             
             VStack(spacing: 20) {
                 ForEach(ketentuanViewModel.data) { data in
@@ -80,7 +90,7 @@ struct KetentuanRegisterNasabahView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 5)
-            .padding(.top, 10)
+            .padding(.top, 30)
             
             Button(action : {
                 self.appState.moveToWelcomeView = true
@@ -91,10 +101,10 @@ struct KetentuanRegisterNasabahView: View {
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
             }
             .cornerRadius(12)
-            .padding(.bottom, 30)
+            .padding(.bottom, 20)
         }
         .padding(.horizontal, 30)
-        .frame(width: UIScreen.main.bounds.width - 30)
+        .frame(width: UIScreen.main.bounds.width - 40)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)

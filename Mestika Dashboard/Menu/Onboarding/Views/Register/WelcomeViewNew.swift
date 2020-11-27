@@ -66,26 +66,25 @@ struct WelcomeViewNew: View {
                             Text("DAFTAR")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
-                                .frame(maxWidth: .infinity, maxHeight: 50)
                         }
-                        .frame(height: 50)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
                         .background(Color(hex: "#2334D0"))
-                        .cornerRadius(12)
+                        .cornerRadius(15)
                         
                         NavigationLink(destination: LoginScreen(), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
-                                .frame(maxWidth: .infinity, maxHeight: 50)
                         }
                         .isDetailLink(false)
-                        .cornerRadius(12)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .cornerRadius(15)
                     }
                     .padding(.horizontal, 20)
                     
                     Spacer()
                 }
-                .padding(.vertical, 20)
+//                .padding(.vertical, 20)
                 
                 
                 if self.isShowModal {
