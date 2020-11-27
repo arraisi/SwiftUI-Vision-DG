@@ -113,7 +113,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                     }
                     .disabled(isResendOtpDisabled)
                     
-                    Text("(00:\(timeRemaining))")
+                    Text("(00:\(String(format: "%02d", timeRemaining)))")
                         .font(.caption2)
                 }
                 .padding(.top, 5)
@@ -198,6 +198,8 @@ struct RegisterNasabahPhoneOTPScreen: View {
             
             if self.timeRemaining < 1 {
                 isResendOtpDisabled = false
+            } else {
+                isResendOtpDisabled = true
             }
         }
         .alert(isPresented: $showingAlert) {

@@ -30,7 +30,7 @@ struct KetentuanRegisterNasabahView: View {
             VStack {
                 AppBarLogo(light: false, onCancel: {})
                 
-                ScrollView(showsIndicators: false) {
+//                ScrollView(showsIndicators: false) {
                     ZStack {
                         VStack {
                             Color(hex: "#232175")
@@ -39,8 +39,8 @@ struct KetentuanRegisterNasabahView: View {
                         }
                         
                         cardForm
-                            .padding(.top, 30)
-                    }
+                            .padding(.vertical, 30)
+//                    }
                 }
             }
         }
@@ -64,22 +64,24 @@ struct KetentuanRegisterNasabahView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical, 10)
             
-            VStack(spacing: 20) {
-                ForEach(ketentuanViewModel.data) { data in
-                    HStack(alignment: .top) {
-                        Text(data.number)
-                            .font(.custom("Montserrat-Bold", size: 12))
-                            .foregroundColor(Color(hex: "#232175"))
-                        
-                        Text(data.caption)
-                            .font(.custom("Montserrat-Regular", size: 12))
-                            .foregroundColor(.gray)
-                        
-                        Spacer()
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                }
-            }
+//            VStack(spacing: 20) {
+//                ForEach(ketentuanViewModel.data) { data in
+//                    HStack(alignment: .top) {
+//                        Text(data.number)
+//                            .font(.custom("Montserrat-Bold", size: 12))
+//                            .foregroundColor(Color(hex: "#232175"))
+//
+//                        Text(data.caption)
+//                            .font(.custom("Montserrat-Regular", size: 12))
+//                            .foregroundColor(.gray)
+//
+//                        Spacer()
+//                    }
+//                    .fixedSize(horizontal: false, vertical: true)
+//                }
+//            }
+            
+            WebView(urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
             
             NavigationLink(destination: FormPhoneVerificationRegisterNasabahView().environmentObject(registerData)){
                 Text("Lanjut Membuat Rekening")
@@ -90,7 +92,7 @@ struct KetentuanRegisterNasabahView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 5)
-            .padding(.top, 30)
+            .padding(.top, 10)
             
             Button(action : {
                 self.appState.moveToWelcomeView = true

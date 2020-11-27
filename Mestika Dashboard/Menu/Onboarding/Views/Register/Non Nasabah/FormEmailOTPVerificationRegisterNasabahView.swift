@@ -87,7 +87,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         }
                         .disabled(isResendOtpDisabled)
                         
-                        Text("(00:\(timeRemaining))")
+                        Text("(00:\(String(format: "%02d", timeRemaining)))")
                             .font(.custom("Montserrat-Regular", size: 12))
                     }
                     .padding(.top, 5)
@@ -162,6 +162,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             
             if self.timeRemaining < 1 {
                 isResendOtpDisabled = false
+            } else {
+                isResendOtpDisabled = true
             }
         }
         .alert(isPresented: $showingAlert) {

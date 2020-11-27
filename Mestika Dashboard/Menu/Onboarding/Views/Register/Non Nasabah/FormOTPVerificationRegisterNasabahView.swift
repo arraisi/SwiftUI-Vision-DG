@@ -24,7 +24,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     /* Variable Validation */
     @State var isOtpValid = false
     @State var otpInvalidCount = 0
-    @State var isResendOtpDisabled = false
+    @State var isResendOtpDisabled = true
     
     /* Timer */
     @State private var timeRemaining = 30
@@ -201,6 +201,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             if self.timeRemaining < 1 {
                 isResendOtpDisabled = false
+            } else {
+                isResendOtpDisabled = true
             }
         }
         .alert(isPresented: $showingAlert) {
