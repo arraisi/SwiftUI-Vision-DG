@@ -12,6 +12,7 @@ struct FormDetailKartuATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         VStack {
@@ -103,7 +104,9 @@ struct FormDetailKartuATMView: View {
                     }
                     
                     Spacer()
-                    PopView(destination: .root) {
+                    Button(action: {
+                        self.appState.moveToWelcomeView = true
+                    }) {
                         Text("KEMBALI KE HALAMAN UTAMA")
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .foregroundColor(.white)

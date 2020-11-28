@@ -82,4 +82,5 @@ class RegistrasiModel: ObservableObject {
     @Published var kecamatanFromNik: String = ""
     @Published var kabupatenKotaFromNik: String = ""
     @Published var provinsiFromNik: String = ""
+    @Published var bidangUsaha: String = ""
 }

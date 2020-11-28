@@ -211,7 +211,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                         })
                 }
                 else {
-                    SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker)
+                    SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker, frontCamera: self.$formSelfie)
                 }
                 
                 if self.shouldPresentMaskSelfieCamera {

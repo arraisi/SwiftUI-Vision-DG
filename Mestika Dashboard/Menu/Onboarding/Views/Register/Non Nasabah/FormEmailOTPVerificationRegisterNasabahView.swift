@@ -71,6 +71,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     
                     Button(action: {
                         print("-> Resend OTP")
+                        
+                        self.resetField()
                         self.timeRemaining = 60
                         
                         getOTP()
@@ -89,6 +91,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
+                        .disabled(true)
                 }
                 .padding(.top, 5)
                 
@@ -110,6 +113,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         })
                     
                     Button(action: {
+//                        self.isOtpValid = true
                         validateOTP()
                     }) {
                         Text("Verifikasi OTP")
@@ -220,14 +224,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     
     private func getImageName(at index: Int) -> String {
         if index >= self.pin.count {
-            return "•"
+            return ""
         }
         
         if self.showPin {
             return self.pin.digits[index].numberString
         }
         
-        return ""
+        return "•"
     }
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
@@ -299,7 +303,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-                    self.timeRemaining = self.otpVM.timeCounter
+                    self.timeRemaining = 30
                     self.referenceCode = self.otpVM.reference
                 }
                 
@@ -314,7 +318,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     DispatchQueue.main.sync {
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-                        self.timeRemaining = self.otpVM.timeCounter
+                        self.timeRemaining = 30
                     }
                     self.showingAlert = true
                 }
@@ -338,10 +342,15 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             
             if !success {
                 print("OTP INVALID")
-                showingModal.toggle()
+                self.showingModal.toggle()
+                self.resetField()
             }
             
         }
+    }
+    
+    private func resetField() {
+        self.pin = "" /// return to empty pin
     }
 }
 

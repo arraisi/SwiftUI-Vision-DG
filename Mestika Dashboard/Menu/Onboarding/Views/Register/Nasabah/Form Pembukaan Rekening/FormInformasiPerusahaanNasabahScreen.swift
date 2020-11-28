@@ -239,6 +239,20 @@ struct FormInformasiPerusahaanNasabahScreen: View {
                 print("on commit")
             }
             .padding(.horizontal, 20)
+
+            LabelTextField(value: $registerData.kelurahan, label: "Kelurahan", placeHolder: "Kelurahan") { (Bool) in
+                print("on edit")
+            } onCommit: {
+                print("on commit")
+            }
+            .padding(.horizontal, 20)
+
+            LabelTextField(value: $registerData.bidangUsaha, label: "Bidang Usaha", placeHolder: "Bidang Usaha") { (Bool) in
+                print("on edit")
+            } onCommit: {
+                print("on commit")
+            }
+            .padding(.horizontal, 20)
             
             Group {
                 

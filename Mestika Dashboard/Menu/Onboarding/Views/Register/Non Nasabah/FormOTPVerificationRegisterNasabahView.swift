@@ -86,6 +86,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         print("-> Resend OTP")
                         getOTP()
                         
+                        self.resetField()
                         self.timeRemaining = 60
                     }) {
                         Text("Resend OTP")
@@ -102,6 +103,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
+                        .disabled(true)
                 }
                 .padding(.top, 5)
                 
@@ -120,6 +122,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     
                     Button(action: {
+                        // temporary dummy
+//                        self.isOtpValid = true
+                        
                         validateOTP()
                     }) {
                         Text("Verifikasi OTP")
@@ -238,11 +243,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     private func getImageName(at index: Int) -> String {
         if index >= self.pin.count {
-            return "•"
+            return ""
         }
         
         if self.showPin {
-            return self.pin.digits[index].numberString
+            return "•"
         }
         
         return ""
@@ -357,7 +362,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-                    self.timeRemaining = self.otpVM.timeCounter
+//                    self.timeRemaining = self.otpVM.timeCounter
                     self.referenceCode = self.otpVM.reference
                 }
                 
@@ -403,6 +408,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             if !success {
                 print("OTP INVALID")
                 showingOtpIncorect.toggle()
+                resetField()
             }
             
         }
@@ -427,6 +433,10 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             return hud
         }
+    }
+
+    private func resetField() {
+        self.pin = "" /// return to empty pin
     }
 }
 

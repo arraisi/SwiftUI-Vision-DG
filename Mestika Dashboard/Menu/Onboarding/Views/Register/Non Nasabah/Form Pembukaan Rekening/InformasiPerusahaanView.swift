@@ -31,10 +31,10 @@ struct InformasiPerusahaanView: View {
     @State var nextViewActive: Bool = false
     
     let cities:[Address] = [
-        .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: ""),
-        .init(city: "Jakarta Barat", kodePos: "14012", kecamatan: "Jakarta Barat", kelurahan: ""),
-        .init(city: "Jakarta Timur", kodePos: "14012", kecamatan: "Jakarta Timur", kelurahan: ""),
-        .init(city: "Jakarta Utara", kodePos: "14012", kecamatan: "Jakarta Utara", kelurahan: "")
+        .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Andir"),
+        .init(city: "Jakarta Barat", kodePos: "14012", kecamatan: "Jakarta Barat", kelurahan: "Andir"),
+        .init(city: "Jakarta Timur", kodePos: "14012", kecamatan: "Jakarta Timur", kelurahan: "Andir"),
+        .init(city: "Jakarta Utara", kodePos: "14012", kecamatan: "Jakarta Utara", kelurahan: "Andir")
     ]
     
     /*
@@ -283,6 +283,20 @@ struct InformasiPerusahaanView: View {
             .padding(.horizontal, 20)
             
             LabelTextField(value: $registerData.kecamatan, label: "Kecamatan", placeHolder: "Kecamatan") { (Bool) in
+                print("on edit")
+            } onCommit: {
+                print("on commit")
+            }
+            .padding(.horizontal, 20)
+
+            LabelTextField(value: $registerData.kelurahan, label: "Kelurahan", placeHolder: "Kelurahan") { (Bool) in
+                print("on edit")
+            } onCommit: {
+                print("on commit")
+            }
+            .padding(.horizontal, 20)
+
+            LabelTextField(value: $registerData.bidangUsaha, label: "Bidang Usaha", placeHolder: "Bidang Usaha") { (Bool) in
                 print("on edit")
             } onCommit: {
                 print("on commit")

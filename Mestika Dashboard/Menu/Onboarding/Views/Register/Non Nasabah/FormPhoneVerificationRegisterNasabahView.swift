@@ -33,7 +33,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
             }
             
             VStack {
-                AppBarLogo(light: false, onCancel: {})
+//                AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
                     Text("Phone Verification")
@@ -99,13 +99,14 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                .padding(.top, 30)
+                .padding(.top, UIScreen.main.bounds.height * 0.15)
                 
             }
             
         }
         .edgesIgnoringSafeArea(.top)
-        .navigationBarHidden(true)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onReceive(self.appState.$skipOTP) { skipOTP in
             if skipOTP {
                 print("Skip OTP: \(skipOTP)")

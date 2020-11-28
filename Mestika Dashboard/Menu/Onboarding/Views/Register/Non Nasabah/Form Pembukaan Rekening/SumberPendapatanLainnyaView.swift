@@ -190,6 +190,7 @@ struct SumberPendapatanLainnyaView: View {
             }
         }
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
 //        .onTapGesture() {
 //            UIApplication.shared.endEditing()
