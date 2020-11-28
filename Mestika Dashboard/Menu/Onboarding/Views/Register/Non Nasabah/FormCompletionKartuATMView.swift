@@ -93,15 +93,16 @@ struct FormCompletionKartuATMView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-            createBottomSuggestionNameFloater()
-        }
         .popup(isPresented: $showingAddressModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomAddressFloater()
+        }
+        .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+            createBottomSuggestionNameFloater()
         }
         .onAppear(){
             fetchAddressOption()
         }
+        
     }
     
     var nameCard: some View {
@@ -117,40 +118,29 @@ struct FormCompletionKartuATMView: View {
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat", size: 10))
                     .foregroundColor(Color("DarkStaleBlue"))
-                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15))
                 
-                Group {
-                    
-                    Text("")
-                        .font(Font.system(size: 10))
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color(hex: "#707070"))
-                        .multilineTextAlignment(.leading)
-                    
-                    HStack {
-                        
-                        TextField("Masukkan Nama", text: $atmData.atmName) { changed in
-                            if changed {
-                                showingSuggestionNameModal.toggle()
-                            }
-                        } onCommit: {
+                HStack {
+                    Button(action:{
+                        showingSuggestionNameModal.toggle()
+                    }, label: {
+                        if atmData.atmName != "" {
+                            Text(atmData.atmName)
+                                .font(Font.system(size: 14))
+                                .foregroundColor(.black)
+                                .frame(height: 36)
+                        } else {
+                            Text("Masukkan Nama")
+                                .font(Font.system(size: 14))
+                                .foregroundColor(Color.gray.opacity(0.5))
+                                .frame(height: 36)
                         }
-                        .font(Font.system(size: 14))
-                        .frame(height: 36)
-                        
-//                        Button(action:{
-//                            showingSuggestionNameModal.toggle()
-//                        }, label: {
-//                            Image(systemName: "location.viewfinder")
-//                                .font(Font.system(size: 20))
-//                                .foregroundColor(Color(hex: "#707070"))
-//                        })
-                    }
-                    .padding(.horizontal)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    
+                        Spacer()
+                    })
                 }
+                .padding(.horizontal, 15)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
             }
             .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
         }
@@ -299,6 +289,53 @@ struct FormCompletionKartuATMView: View {
     
     // MARK: -Fuction for Create Bottom Floater (Modal)
     
+    
+    func createBottomSuggestionNameFloater() -> some View {
+        VStack {
+            HStack {
+                Text("Nama Kartu")
+                    .fontWeight(.bold)
+                    .font(.system(size: 19))
+                    .foregroundColor(Color(hex: "#232175"))
+                Spacer()
+            }
+            
+            HStack {
+                TextField("Alamat Perusahaan", text: $location)
+                    .font(Font.system(size: 14))
+                    .frame(height: 0)
+                    .disabled(true)
+            }
+            .padding(.horizontal)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
+            
+            List(self.suggestions, id: \.self) { suggestion in
+                
+                HStack {
+                    Text(suggestion)
+                        .font(Font.system(size: 14))
+                    
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .onTapGesture(perform: {
+                    print(suggestion)
+                    atmData.atmName = suggestion
+                    self.showingSuggestionNameModal.toggle()
+                })
+                
+            }
+            .background(Color.white)
+            .padding(.bottom)
+            .frame(height: 150)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     func createBottomAddressFloater() -> some View {
         VStack {
             HStack {
@@ -352,44 +389,6 @@ struct FormCompletionKartuATMView: View {
             .background(Color.white)
             .padding(.vertical)
             .frame(height: 150)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(20)
-    }
-    
-    func createBottomSuggestionNameFloater() -> some View {
-        VStack {
-            HStack {
-                Text("Nama Kartu")
-                    .fontWeight(.bold)
-                    .font(.system(size: 19))
-                    .foregroundColor(Color(hex: "#232175"))
-                Spacer()
-            }
-            
-            List(0...suggestions.count-1, id: \.self) {index in
-                
-                HStack {
-                    Text(suggestions[index])
-                        .font(Font.system(size: 14))
-                    
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    print(suggestions[index])
-                    atmData.atmName = suggestions[index]
-                    self.showingSuggestionNameModal.toggle()
-                })
-                
-            }
-            .background(Color.white)
-//            .padding(.vertical)
-            .frame(height: 200)
-            .cornerRadius(20)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
