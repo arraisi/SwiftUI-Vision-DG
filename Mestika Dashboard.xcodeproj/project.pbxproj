@@ -38,6 +38,7 @@
 		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
 		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
 		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
+		5205862225725173005DB764 /* FormEmailOTPNasabah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205862125725173005DB764 /* FormEmailOTPNasabah.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -356,6 +357,7 @@
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
+		5205862125725173005DB764 /* FormEmailOTPNasabah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailOTPNasabah.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
@@ -1039,6 +1041,7 @@
 				5290A18A255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift */,
 				5290A18F255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift */,
 				5290A194255BD1790090F788 /* SuccessRegisterNasabahScreen.swift */,
+				5205862125725173005DB764 /* FormEmailOTPNasabah.swift */,
 			);
 			path = Nasabah;
 			sourceTree = "<group>";
@@ -1821,6 +1824,7 @@
 				5290A18B255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift in Sources */,
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
 				525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */,
+				5205862225725173005DB764 /* FormEmailOTPNasabah.swift in Sources */,
 				C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				52ADFEAE2557D9A800A1001F /* SliderAssetsResponse.swift in Sources */,

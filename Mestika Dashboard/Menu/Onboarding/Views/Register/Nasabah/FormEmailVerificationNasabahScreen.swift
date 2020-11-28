@@ -79,7 +79,7 @@ struct FormEmailVerificationNasabahScreen: View {
                 .padding(.horizontal, 30)
                 .padding(.bottom, 10)
                 
-                NavigationLink(destination: FormEmailConfirmationNasabahScreen().environmentObject(registerData)) {
+                NavigationLink(destination: FormEmailOTPNasabah().environmentObject(registerData)) {
                     Text("Verifikasi Email")
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
