@@ -397,7 +397,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     func validateOTP() {
         self.otpVM.otpValidation(
             code: self.pin,
-            destination: self.otpVM.destination,
+            destination: "+62" + self.registerData.noTelepon,
             reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
             tryCount: tryCount,

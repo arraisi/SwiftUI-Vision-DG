@@ -27,6 +27,17 @@
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
+		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
+		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
+		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
+		520585F825721F00005DB764 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = C06AC3102563770700D06EE3 /* SwiftUIX */; };
+		520585F925721F00005DB764 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* NavigationStack */; };
+		520585FA25721F00005DB764 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* Introspect */; };
+		520585FB25721F00005DB764 /* Indicators in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* Indicators */; };
+		520585FC25721F00005DB764 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 524CB114256E0524006ED6F0 /* FirebaseMessaging */; };
+		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
+		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
+		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -342,6 +353,9 @@
 		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
+		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
+		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
@@ -630,6 +644,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				520585FC25721F00005DB764 /* FirebaseMessaging in Frameworks */,
+				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
+				520585FA25721F00005DB764 /* Introspect in Frameworks */,
+				520585FB25721F00005DB764 /* Indicators in Frameworks */,
+				520585F525721F00005DB764 /* PopupView in Frameworks */,
+				520585F925721F00005DB764 /* NavigationStack in Frameworks */,
+				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
+				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1095,6 +1117,7 @@
 				5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */,
 				527E3124256613EB004FF5ED /* MobileVersionService.swift */,
 				524CB11E256E1141006ED6F0 /* CitizenService.swift */,
+				5205861925723A2F005DB764 /* PasswordService.swift */,
 			);
 			name = Services;
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
@@ -1358,6 +1381,7 @@
 				0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */,
 				0620291D256D914500A830EA /* GeneralResponse.swift */,
 				524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */,
+				5205860F25723965005DB764 /* PasswordResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1373,6 +1397,7 @@
 				527E312925661644004FF5ED /* MobileVersionViewModel.swift */,
 				0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */,
 				524CB123256E1289006ED6F0 /* CitizenViewModel.swift */,
+				52058614257239AB005DB764 /* PasswordViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1530,14 +1555,14 @@
 			);
 			name = "Mestika Dashboard";
 			packageProductDependencies = (
-				523A86232542B67900ADFE25,
-				523A86322542CC6E00ADFE25,
-				522563832562549900BCAB67,
-				C06AC3102563770700D06EE3,
-				52E0557D2563C307009294DA,
-				520E467A2568B5A800DE9205,
-				520E46802568BEF100DE9205,
-				524CB114256E0524006ED6F0,
+				523A86232542B67900ADFE25 /* PopupView */,
+				523A86322542CC6E00ADFE25 /* BottomSheet */,
+				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
+				C06AC3102563770700D06EE3 /* SwiftUIX */,
+				52E0557D2563C307009294DA /* NavigationStack */,
+				520E467A2568B5A800DE9205 /* Introspect */,
+				520E46802568BEF100DE9205 /* Indicators */,
+				524CB114256E0524006ED6F0 /* FirebaseMessaging */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1611,16 +1636,16 @@
 			);
 			mainGroup = 5245F878253FE702002E8B53;
 			packageReferences = (
-				523A86222542B67900ADFE25,
-				523A86312542CC6E00ADFE25,
-				52C05577255F6B9900A57400,
-				522563822562549900BCAB67,
-				C06AC30F2563770700D06EE3,
-				52E0557C2563C307009294DA,
-				0658B59D2563F904001B659D,
-				0658B5AC256401BA001B659D,
-				C01B3DEE2564203300BD3C06,
-				520E467F2568BEF100DE9205,
+				523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */,
+				523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
+				52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */,
+				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
+				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -1821,6 +1846,7 @@
 				52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */,
 				5290A181255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift in Sources */,
 				C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */,
+				5205861A25723A2F005DB764 /* PasswordService.swift in Sources */,
 				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
 				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
@@ -1837,6 +1863,7 @@
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
+				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
@@ -1933,6 +1960,7 @@
 				C02E9BAD256E814C00622E7A /* WelcomeViewNew.swift in Sources */,
 				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
+				52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,
 				0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */,
@@ -2291,7 +2319,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0658B59D2563F904001B659D = {
+		0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
 			requirement = {
@@ -2299,7 +2327,7 @@
 				minimumVersion = 1.0.2;
 			};
 		};
-		0658B5AC256401BA001B659D = {
+		0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -2307,7 +2335,7 @@
 				minimumVersion = 7.1.0;
 			};
 		};
-		520E467F2568BEF100DE9205 = {
+		520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Connapptivity/SwiftUI-Indicators";
 			requirement = {
@@ -2315,7 +2343,7 @@
 				minimumVersion = 1.3.1;
 			};
 		};
-		522563822562549900BCAB67 = {
+		522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI";
 			requirement = {
@@ -2323,7 +2351,7 @@
 				minimumVersion = 0.1.1;
 			};
 		};
-		523A86222542B67900ADFE25 = {
+		523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView";
 			requirement = {
@@ -2331,7 +2359,7 @@
 				minimumVersion = 0.0.10;
 			};
 		};
-		523A86312542CC6E00ADFE25 = {
+		523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weitieda/bottom-sheet";
 			requirement = {
@@ -2339,7 +2367,7 @@
 				minimumVersion = 1.0.5;
 			};
 		};
-		52C05577255F6B9900A57400 = {
+		52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davbeck/MultipartForm";
 			requirement = {
@@ -2347,7 +2375,7 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		52E0557C2563C307009294DA = {
+		52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack";
 			requirement = {
@@ -2355,7 +2383,7 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		C01B3DEE2564203300BD3C06 = {
+		C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
@@ -2363,7 +2391,7 @@
 				minimumVersion = 0.1.1;
 			};
 		};
-		C06AC30F2563770700D06EE3 = {
+		C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
 			requirement = {
@@ -2374,44 +2402,44 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		520E467A2568B5A800DE9205 = {
+		520E467A2568B5A800DE9205 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C01B3DEE2564203300BD3C06;
+			package = C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		520E46802568BEF100DE9205 = {
+		520E46802568BEF100DE9205 /* Indicators */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 520E467F2568BEF100DE9205;
+			package = 520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */;
 			productName = Indicators;
 		};
-		522563832562549900BCAB67 = {
+		522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 522563822562549900BCAB67;
+			package = 522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */;
 			productName = "JGProgressHUD-SwiftUI";
 		};
-		523A86232542B67900ADFE25 = {
+		523A86232542B67900ADFE25 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 523A86222542B67900ADFE25;
+			package = 523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
 		};
-		523A86322542CC6E00ADFE25 = {
+		523A86322542CC6E00ADFE25 /* BottomSheet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 523A86312542CC6E00ADFE25;
+			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
 			productName = BottomSheet;
 		};
-		524CB114256E0524006ED6F0 = {
+		524CB114256E0524006ED6F0 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0658B5AC256401BA001B659D;
+			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
 		};
-		52E0557D2563C307009294DA = {
+		52E0557D2563C307009294DA /* NavigationStack */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52E0557C2563C307009294DA;
+			package = 52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
 			productName = NavigationStack;
 		};
-		C06AC3102563770700D06EE3 = {
+		C06AC3102563770700D06EE3 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C06AC30F2563770700D06EE3;
+			package = C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */

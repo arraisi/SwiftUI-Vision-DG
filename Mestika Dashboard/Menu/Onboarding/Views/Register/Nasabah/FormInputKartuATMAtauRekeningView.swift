@@ -102,7 +102,7 @@ struct FormInputKartuATMAtauRekeningView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     NavigationLink(
-                        destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData),
+                        destination: RegisterNasabahPhoneOTPScreen(rootIsActive: .constant(false)).environmentObject(registerData),
                         label: {
                             Text("Verifikasi No. Kartu")
                                 .foregroundColor(.white)
@@ -128,7 +128,7 @@ struct FormInputKartuATMAtauRekeningView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .onAppear{
-            self.registerData.noTelepon = "+6285359117336"
+            self.registerData.noTelepon = "85359117336"
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()

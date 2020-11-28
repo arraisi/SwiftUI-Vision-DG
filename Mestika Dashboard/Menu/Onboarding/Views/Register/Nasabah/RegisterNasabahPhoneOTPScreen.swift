@@ -336,7 +336,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
     func getOTP() {
         self.otpVM.otpRequest(
             otpRequest: OtpRequest(
-                    destination: "085359117336",
+                destination: self.registerData.noTelepon,
                     type: "hp",
                     trytime: 60
             )
@@ -374,7 +374,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
     func validateOTP() {
         self.otpVM.otpValidation(
             code: self.pin,
-            destination: self.otpVM.destination,
+            destination: "+62" + self.registerData.noTelepon,
             reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
             tryCount: tryCount,
@@ -389,9 +389,14 @@ struct RegisterNasabahPhoneOTPScreen: View {
             if !success {
                 print("OTP INVALID")
                 showingOtpIncorect.toggle()
+                resetField()
             }
             
         }
+    }
+    
+    private func resetField() {
+        self.pin = "" /// return to empty pin
     }
 }
 

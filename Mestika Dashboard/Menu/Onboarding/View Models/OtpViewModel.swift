@@ -9,8 +9,7 @@ import Foundation
 import Combine
 
 class OtpViewModel: ObservableObject {
-//    var destination: String = "085875074351"
-    var destination: String = "08562006488"
+    var destination: String = "85359117336"
     var type: String = "hp"
     
     @Published var isLoading: Bool = false

@@ -283,6 +283,18 @@ struct PasswordView: View {
         .background(Color.white)
         .cornerRadius(20)
     }
+    
+    @ObservedObject private var passwordVM = PasswordViewModel()
+    func getValidationPassword() {
+        self.passwordVM.validationPassword(password: password) { success in
+            
+            if success {
+                print(self.passwordVM.code)
+                print(self.passwordVM.message)
+            }
+            
+        }
+    }
 }
 
 struct PasswordView_Previews: PreviewProvider {
