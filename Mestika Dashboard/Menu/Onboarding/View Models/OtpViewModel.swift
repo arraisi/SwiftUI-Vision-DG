@@ -29,6 +29,7 @@ extension OtpViewModel {
         reference: String,
         timeCounter: Int,
         tryCount: Int,
+        type: String,
         completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
@@ -40,7 +41,8 @@ extension OtpViewModel {
             destination: destination,
             reference: reference,
             timeCounter: timeCounter,
-            tryCount: tryCount) { result in
+            tryCount: tryCount,
+            type: type) { result in
             
             switch result {
             case.success(let response):

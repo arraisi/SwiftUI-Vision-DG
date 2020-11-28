@@ -242,16 +242,17 @@ struct FormOTPVerificationRegisterNasabahView: View {
     }
     
     private func getImageName(at index: Int) -> String {
-        if index >= self.pin.count {
-            return ""
-        }
-        
-        if self.showPin {
-            return "•"
-        }
-        
-        return ""
-    }
+         if index >= self.pin.count {
+             return "•"
+         }
+         
+         if self.showPin {
+             return self.pin.digits[index].numberString
+         }
+         
+         return ""
+     }
+
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
         var chars = Array(myString)
@@ -395,9 +396,10 @@ struct FormOTPVerificationRegisterNasabahView: View {
         self.otpVM.otpValidation(
             code: self.pin,
             destination: self.otpVM.destination,
-            reference: self.otpVM.reference,
+            reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
-            tryCount: self.otpVM.timeCounter)
+            tryCount: self.otpVM.timeCounter,
+            type: "hp")
         { success in
             
             if success {

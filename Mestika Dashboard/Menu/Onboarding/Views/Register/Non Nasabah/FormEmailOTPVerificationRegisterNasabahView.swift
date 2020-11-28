@@ -224,14 +224,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     
     private func getImageName(at index: Int) -> String {
         if index >= self.pin.count {
-            return ""
+            return "•"
         }
         
         if self.showPin {
             return self.pin.digits[index].numberString
         }
         
-        return "•"
+        return ""
     }
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
@@ -330,9 +330,10 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         self.otpVM.otpValidation(
             code: self.pin,
             destination: self.otpVM.destination,
-            reference: self.otpVM.reference,
+            reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
-            tryCount: self.otpVM.timeCounter)
+            tryCount: self.otpVM.timeCounter,
+            type: "email")
         { success in
             
             if success {

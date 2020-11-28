@@ -57,10 +57,10 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         TextField("No. Telepon", text: $phoneNumber, onEditingChanged: { changed in
                             print("\($phoneNumber)")
                             
-                            self.registerData.noTelepon = "0" + phoneNumber
+                            self.registerData.noTelepon = "+62" + phoneNumber
                         }, onCommit: {
                             print("Commited")
-                            self.registerData.noTelepon = "0" + phoneNumber
+                            self.registerData.noTelepon = "+62" + phoneNumber
                         })
                         .foregroundColor(.black)
                         .onReceive(phoneNumber.publisher.collect()) {

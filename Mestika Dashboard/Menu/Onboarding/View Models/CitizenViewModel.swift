@@ -52,6 +52,9 @@ extension CitizenViewModel {
                 
                 self.isLoading = false
                 self.nik = response.nik ?? ""
+                self.namaLengkap = response.namaLengkap ?? ""
+                self.alamatKtp = response.alamatKtp ?? ""
+                self.kelurahan = response.kelurahan ?? ""
                 self.errorMessage = "VALID"
                 completion(true)
                 
