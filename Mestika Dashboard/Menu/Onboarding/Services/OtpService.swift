@@ -31,7 +31,8 @@ class OtpService {
             "destination":  destination,
             "reference": reference,
             "timeCounter": timeCounter,
-            "tryCount": tryCount
+            "tryCount": tryCount,
+            "nik": ""
         ]
         
         print("body => \(body)")

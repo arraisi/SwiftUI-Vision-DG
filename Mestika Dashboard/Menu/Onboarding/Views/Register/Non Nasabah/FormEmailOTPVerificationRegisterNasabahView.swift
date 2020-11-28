@@ -22,6 +22,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     /* Variable Validation */
     @State var isOtpValid = false
     @State var isResendOtpDisabled = true
+    @State var tryCount = 0
     
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -114,6 +115,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     
                     Button(action: {
 //                        self.isOtpValid = true
+                        self.tryCount += 1
                         validateOTP()
                     }) {
                         Text("Verifikasi OTP")
@@ -332,7 +334,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             destination: self.otpVM.destination,
             reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
-            tryCount: self.otpVM.timeCounter,
+            tryCount: tryCount,
             type: "email")
         { success in
             

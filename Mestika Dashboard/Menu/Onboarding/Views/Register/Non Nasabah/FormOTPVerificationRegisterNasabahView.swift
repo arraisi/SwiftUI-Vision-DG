@@ -33,6 +33,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var isOtpValid = false
     @State var otpInvalidCount = 0
     @State var isResendOtpDisabled = true
+    @State var tryCount = 0
     
     /* Timer */
     @State private var timeRemaining = 30
@@ -125,6 +126,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         // temporary dummy
 //                        self.isOtpValid = true
                         
+                        self.tryCount += 1
                         validateOTP()
                     }) {
                         Text("Verifikasi OTP")
@@ -398,7 +400,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             destination: self.otpVM.destination,
             reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
-            tryCount: self.otpVM.timeCounter,
+            tryCount: tryCount,
             type: "hp")
         { success in
             
