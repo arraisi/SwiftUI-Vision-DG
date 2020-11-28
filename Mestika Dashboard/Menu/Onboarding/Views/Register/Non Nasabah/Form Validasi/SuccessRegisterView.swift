@@ -24,6 +24,7 @@ struct SuccessRegisterView: View {
     
     @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
     @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var appState: AppState
     
     /* HUD Variable */
     @State private var dim = true
@@ -54,7 +55,7 @@ struct SuccessRegisterView: View {
     }
     
     init() {
-//        getAllSchedule()
+        getAllSchedule()
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -118,7 +119,7 @@ struct SuccessRegisterView: View {
                             .disabled(true)
                         
                         Button(action:{
-//                            showingModalJam.toggle()
+                            showingModalJam.toggle()
                         }, label: {
                             Image(systemName: "clock")
                                 .font(Font.system(size: 20))
@@ -244,7 +245,7 @@ struct SuccessRegisterView: View {
                 .cornerRadius(15)
                 .shadow(radius: 30)
                 .padding(.horizontal, 30)
-                .padding(.top, 90)
+                .padding(.top, 120)
                 .padding(.bottom, 35)
             }
             
@@ -280,27 +281,30 @@ struct SuccessRegisterView: View {
         .popup(isPresented: $showingModalTanggal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloaterTanggal()
         }
+        .popup(isPresented: $showingModalJam, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+            createBottomFloaterJam()
+        }
     }
     
     func removeUser() {
         
         showIndeterminate()
         
-        let data = user.last
-        managedObjectContext.delete(data!)
-        
-        do {
-            try managedObjectContext.save()
-        } catch {
-            // handle the Core Data error
-        }
-        
-        UserDefaults.standard.set("false", forKey: "isFirstLogin")
-        UserDefaults.standard.set("false", forKey: "isSchedule")
+//        let data = user.last
+//        managedObjectContext.delete(data!)
+//
+//        do {
+//            try managedObjectContext.save()
+//        } catch {
+//            // handle the Core Data error
+//        }
+//
+//        UserDefaults.standard.set("false", forKey: "isFirstLogin")
+//        UserDefaults.standard.set("false", forKey: "isSchedule")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             print("DELETE SUCCESS")
-            self.backRoute = true
+            self.appState.moveToWelcomeView = true
         }
     }
     
@@ -453,7 +457,6 @@ struct SuccessRegisterView: View {
                 .onTapGesture(perform: {
                     print(data)
                     tanggalWawancara = data.date
-                    pilihJam = "\(data.timeStart)" + "-" + "\(data.timeEnd)"
                     self.showingModalTanggal.toggle()
                 })
                 
@@ -467,6 +470,63 @@ struct SuccessRegisterView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
+    }
+
+    // MARK: -Fuction for Create Bottom Floater (Modal
+    func createBottomFloaterJam() -> some View {
+        VStack {
+            HStack {
+                Text("Jam")
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 19))
+                        .foregroundColor(Color(hex: "#232175"))
+                Spacer()
+            }
+
+            HStack {
+
+                TextField("Jam Wawancara", text: $tanggalWawancara)
+                        .font(Font.system(size: 14))
+                        .frame(height: 36)
+
+                Button(action:{
+                    print("cari jam")
+                }, label: {
+                    Image(systemName: "clock")
+                            .font(Font.system(size: 20))
+                            .foregroundColor(Color(hex: "#707070"))
+                })
+
+            }
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+
+            List(self.scheduleVM.schedule, id: \.timeStart) { data in
+
+                HStack {
+                    Text("\(data.timeStart)" + "-" + "\(data.timeEnd)")
+                            .font(Font.system(size: 14))
+
+                    Spacer()
+                }
+                        .contentShape(Rectangle())
+                        .onTapGesture(perform: {
+                            print(data)
+                            pilihJam = "\(data.timeStart)" + "-" + "\(data.timeEnd)"
+                            self.showingModalJam.toggle()
+                        })
+
+            }
+                    .background(Color.white)
+                    .padding(.vertical)
+                    .frame(height: 150)
+
+        }
+                .frame(width: UIScreen.main.bounds.width - 60)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(20)
     }
     
     func getAllSchedule() {

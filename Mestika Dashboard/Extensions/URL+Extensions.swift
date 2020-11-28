@@ -52,6 +52,10 @@ extension URL {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/otp")
     }
     
+    static func urlPasswordValidation() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/password/validation")
+    }
+    
     static func urlCitizen() -> URL? {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/citizen/nik")
     }

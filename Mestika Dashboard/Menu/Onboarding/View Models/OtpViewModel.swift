@@ -9,8 +9,7 @@ import Foundation
 import Combine
 
 class OtpViewModel: ObservableObject {
-//    var destination: String = "085875074351"
-    var destination: String = "08562006488"
+    var destination: String = "85359117336"
     var type: String = "hp"
     
     @Published var isLoading: Bool = false
@@ -29,6 +28,7 @@ extension OtpViewModel {
         reference: String,
         timeCounter: Int,
         tryCount: Int,
+        type: String,
         completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
@@ -40,7 +40,8 @@ extension OtpViewModel {
             destination: destination,
             reference: reference,
             timeCounter: timeCounter,
-            tryCount: tryCount) { result in
+            tryCount: tryCount,
+            type: type) { result in
             
             switch result {
             case.success(let response):
@@ -84,14 +85,16 @@ extension OtpViewModel {
                 
                 if (response.status?.message != "OTP_REQUESTED_FAILED") {
                     print("Success")
-                    
+                    print(response.timeCounter)
+                    print(response.tryCount)
+
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.destination = response.destination ?? ""
                         self.reference = response.reference ?? "0"
                         self.code = response.code ?? "0"
                         self.statusMessage = (response.status?.message)!
-                        self.timeCounter = response.timeCounter ?? 0
+                        self.timeCounter = response.timeCounter ?? 30
                         
                         completion(true)
                     }

@@ -27,6 +27,18 @@
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
+		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
+		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
+		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
+		520585F825721F00005DB764 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = C06AC3102563770700D06EE3 /* SwiftUIX */; };
+		520585F925721F00005DB764 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* NavigationStack */; };
+		520585FA25721F00005DB764 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* Introspect */; };
+		520585FB25721F00005DB764 /* Indicators in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* Indicators */; };
+		520585FC25721F00005DB764 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 524CB114256E0524006ED6F0 /* FirebaseMessaging */; };
+		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
+		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
+		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
+		5205862225725173005DB764 /* FormEmailOTPNasabah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205862125725173005DB764 /* FormEmailOTPNasabah.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -70,14 +82,6 @@
 		52474D68254028350094B758 /* FavoriteTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D67254028350094B758 /* FavoriteTabs.swift */; };
 		52474D79254028CD0094B758 /* AccountTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D78254028CD0094B758 /* AccountTabs.swift */; };
 		52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */; };
-		524CB10A256DFFF8006ED6F0 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
-		524CB10B256DFFF8006ED6F0 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
-		524CB10C256DFFF8006ED6F0 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
-		524CB10D256DFFF8006ED6F0 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = C06AC3102563770700D06EE3 /* SwiftUIX */; };
-		524CB10E256DFFF8006ED6F0 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* NavigationStack */; };
-		524CB10F256DFFF8006ED6F0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* Introspect */; };
-		524CB110256DFFF8006ED6F0 /* Indicators in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* Indicators */; };
-		524CB115256E0524006ED6F0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 524CB114256E0524006ED6F0 /* FirebaseMessaging */; };
 		524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */; };
 		524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB11E256E1141006ED6F0 /* CitizenService.swift */; };
 		524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB123256E1289006ED6F0 /* CitizenViewModel.swift */; };
@@ -253,8 +257,12 @@
 		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
 		52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */; };
+		6122B1B4830E422629CE8044 /* FormSumberPenyandangDana1NasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BC00225C785A592328B0 /* FormSumberPenyandangDana1NasabahScreen.swift */; };
 		6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */; };
 		6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */; };
+		6122B83A43151ADAFB938BAC /* FormJabatanProfesiNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122B8BECC7A6C088ED64876 /* FormJabatanProfesiNasabahScreen.swift */; };
+		6122B8E351C3CC19CC99290C /* FormSumberPenyandangDana2NasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BBCFB4F61C18C1B9A0B1 /* FormSumberPenyandangDana2NasabahScreen.swift */; };
+		6122BA4F4FF8A3674D4842AC /* FormIndustriTempatBekerjaNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122B504E3D20FAAC96AB557 /* FormIndustriTempatBekerjaNasabahScreen.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
 		6122BB4B73F6658A6EC4DFED /* UserRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */; };
 		C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702B42554E2B60089DBD1 /* CardLimitView.swift */; };
@@ -346,6 +354,10 @@
 		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
+		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
+		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
+		5205862125725173005DB764 /* FormEmailOTPNasabah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailOTPNasabah.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
@@ -570,8 +582,12 @@
 		52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResetPinScreen.swift; sourceTree = "<group>"; };
 		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
 		52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
+		6122B504E3D20FAAC96AB557 /* FormIndustriTempatBekerjaNasabahScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormIndustriTempatBekerjaNasabahScreen.swift; sourceTree = "<group>"; };
+		6122B8BECC7A6C088ED64876 /* FormJabatanProfesiNasabahScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormJabatanProfesiNasabahScreen.swift; sourceTree = "<group>"; };
 		6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationResponse.swift; sourceTree = "<group>"; };
 		6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		6122BBCFB4F61C18C1B9A0B1 /* FormSumberPenyandangDana2NasabahScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSumberPenyandangDana2NasabahScreen.swift; sourceTree = "<group>"; };
+		6122BC00225C785A592328B0 /* FormSumberPenyandangDana1NasabahScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSumberPenyandangDana1NasabahScreen.swift; sourceTree = "<group>"; };
 		6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStatementView.swift; sourceTree = "<group>"; };
 		6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModel.swift; sourceTree = "<group>"; };
 		C00702B42554E2B60089DBD1 /* CardLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitView.swift; sourceTree = "<group>"; };
@@ -630,14 +646,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				524CB115256E0524006ED6F0 /* FirebaseMessaging in Frameworks */,
-				524CB10C256DFFF8006ED6F0 /* JGProgressHUD-SwiftUI in Frameworks */,
-				524CB10F256DFFF8006ED6F0 /* Introspect in Frameworks */,
-				524CB110256DFFF8006ED6F0 /* Indicators in Frameworks */,
-				524CB10A256DFFF8006ED6F0 /* PopupView in Frameworks */,
-				524CB10E256DFFF8006ED6F0 /* NavigationStack in Frameworks */,
-				524CB10B256DFFF8006ED6F0 /* BottomSheet in Frameworks */,
-				524CB10D256DFFF8006ED6F0 /* SwiftUIX in Frameworks */,
+				520585FC25721F00005DB764 /* FirebaseMessaging in Frameworks */,
+				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
+				520585FA25721F00005DB764 /* Introspect in Frameworks */,
+				520585FB25721F00005DB764 /* Indicators in Frameworks */,
+				520585F525721F00005DB764 /* PopupView in Frameworks */,
+				520585F925721F00005DB764 /* NavigationStack in Frameworks */,
+				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
+				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,6 +1041,7 @@
 				5290A18A255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift */,
 				5290A18F255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift */,
 				5290A194255BD1790090F788 /* SuccessRegisterNasabahScreen.swift */,
+				5205862125725173005DB764 /* FormEmailOTPNasabah.swift */,
 			);
 			path = Nasabah;
 			sourceTree = "<group>";
@@ -1044,6 +1061,10 @@
 				5290A171255BCD170090F788 /* FormSumberPendapatanLainnyaScreen.swift */,
 				5290A176255BCD5E0090F788 /* FormDataKeluargaTerdekatNasabahScreen.swift */,
 				526B1FE8255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift */,
+				6122B8BECC7A6C088ED64876 /* FormJabatanProfesiNasabahScreen.swift */,
+				6122BC00225C785A592328B0 /* FormSumberPenyandangDana1NasabahScreen.swift */,
+				6122BBCFB4F61C18C1B9A0B1 /* FormSumberPenyandangDana2NasabahScreen.swift */,
+				6122B504E3D20FAAC96AB557 /* FormIndustriTempatBekerjaNasabahScreen.swift */,
 			);
 			path = "Form Pembukaan Rekening";
 			sourceTree = "<group>";
@@ -1099,6 +1120,7 @@
 				5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */,
 				527E3124256613EB004FF5ED /* MobileVersionService.swift */,
 				524CB11E256E1141006ED6F0 /* CitizenService.swift */,
+				5205861925723A2F005DB764 /* PasswordService.swift */,
 			);
 			name = Services;
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
@@ -1362,6 +1384,7 @@
 				0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */,
 				0620291D256D914500A830EA /* GeneralResponse.swift */,
 				524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */,
+				5205860F25723965005DB764 /* PasswordResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1377,6 +1400,7 @@
 				527E312925661644004FF5ED /* MobileVersionViewModel.swift */,
 				0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */,
 				524CB123256E1289006ED6F0 /* CitizenViewModel.swift */,
+				52058614257239AB005DB764 /* PasswordViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1800,6 +1824,7 @@
 				5290A18B255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift in Sources */,
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
 				525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */,
+				5205862225725173005DB764 /* FormEmailOTPNasabah.swift in Sources */,
 				C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				52ADFEAE2557D9A800A1001F /* SliderAssetsResponse.swift in Sources */,
@@ -1825,6 +1850,7 @@
 				52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */,
 				5290A181255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift in Sources */,
 				C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */,
+				5205861A25723A2F005DB764 /* PasswordService.swift in Sources */,
 				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
 				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
@@ -1841,6 +1867,7 @@
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
+				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
@@ -1937,6 +1964,7 @@
 				C02E9BAD256E814C00622E7A /* WelcomeViewNew.swift in Sources */,
 				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
+				52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,
 				0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */,
@@ -1955,6 +1983,10 @@
 				06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */,
 				6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */,
 				6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */,
+				6122B83A43151ADAFB938BAC /* FormJabatanProfesiNasabahScreen.swift in Sources */,
+				6122B1B4830E422629CE8044 /* FormSumberPenyandangDana1NasabahScreen.swift in Sources */,
+				6122B8E351C3CC19CC99290C /* FormSumberPenyandangDana2NasabahScreen.swift in Sources */,
+				6122BA4F4FF8A3674D4842AC /* FormIndustriTempatBekerjaNasabahScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

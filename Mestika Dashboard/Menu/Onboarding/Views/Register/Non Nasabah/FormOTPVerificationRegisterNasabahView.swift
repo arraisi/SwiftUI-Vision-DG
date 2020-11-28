@@ -33,6 +33,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var isOtpValid = false
     @State var otpInvalidCount = 0
     @State var isResendOtpDisabled = true
+    @State var tryCount = 0
     
     /* Timer */
     @State private var timeRemaining = 30
@@ -125,24 +126,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         // temporary dummy
 //                        self.isOtpValid = true
                         
+                        self.tryCount += 1
                         validateOTP()
-                        
-                        //                        if (pin == self.pinShare && otpInvalidCount < 5) {
-                        //                            print("OTP CORRECT")
-                        //                            self.isOtpValid = true
-                        //                        }
-                        //
-                        //                        if (pin != self.pinShare && otpInvalidCount <= 4) {
-                        //                            print("OTP INCORRECT")
-                        //                            self.otpInvalidCount += 1
-                        //                            print("\(self.otpInvalidCount)")
-                        //                            showingOtpIncorect.toggle()
-                        //                        }
-                        //
-                        //                        if (otpInvalidCount >= 5) {
-                        //                            print("OTP INVALID IN 5 TIME")
-                        //                            showingOtpInvalid.toggle()
-                        //                        }
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
@@ -259,16 +244,17 @@ struct FormOTPVerificationRegisterNasabahView: View {
     }
     
     private func getImageName(at index: Int) -> String {
-        if index >= self.pin.count {
-            return "•"
-        }
-        
-        if self.showPin {
-            return self.pin.digits[index].numberString
-        }
-        
-        return ""
-    }
+         if index >= self.pin.count {
+             return "•"
+         }
+         
+         if self.showPin {
+             return self.pin.digits[index].numberString
+         }
+         
+         return ""
+     }
+
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
         var chars = Array(myString)
@@ -379,7 +365,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-                    self.timeRemaining = self.otpVM.timeCounter
+//                    self.timeRemaining = self.otpVM.timeCounter
                     self.referenceCode = self.otpVM.reference
                 }
                 
@@ -411,10 +397,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
     func validateOTP() {
         self.otpVM.otpValidation(
             code: self.pin,
-            destination: self.otpVM.destination,
-            reference: self.otpVM.reference,
+            destination: "+62" + self.registerData.noTelepon,
+            reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
-            tryCount: self.otpVM.timeCounter)
+            tryCount: tryCount,
+            type: "hp")
         { success in
             
             if success {
@@ -451,7 +438,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             return hud
         }
     }
-    
+
     private func resetField() {
         self.pin = "" /// return to empty pin
     }

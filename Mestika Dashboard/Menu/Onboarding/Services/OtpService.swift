@@ -23,6 +23,7 @@ class OtpService {
         reference: String,
         timeCounter: Int,
         tryCount: Int,
+        type: String,
         completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
         
         let body: [String: Any] = [
@@ -30,7 +31,8 @@ class OtpService {
             "destination":  destination,
             "reference": reference,
             "timeCounter": timeCounter,
-            "tryCount": tryCount
+            "tryCount": tryCount,
+            "nik": ""
         ]
         
         print("body => \(body)")
@@ -42,7 +44,9 @@ class OtpService {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        let paramsUrl = url.appending("type", value: type)
+        
+        var request = URLRequest(url: paramsUrl)
         request.httpMethod = "POST"
         request.addValue("*/*", forHTTPHeaderField: "accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

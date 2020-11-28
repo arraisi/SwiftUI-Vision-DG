@@ -400,6 +400,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                     .padding(.horizontal, 100)
                     .padding(.top, 10)
                     .padding(.bottom, 20)
+                    .disabled(self.userRegisterVM.isLoading)
 
                     NavigationLink(
                             destination: SuccessRegisterNasabahScreen().environmentObject(registerData),
@@ -412,10 +413,16 @@ struct FormVerificationRegisterDataNasabahScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarItems(
+            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
+                .configure {
+                    $0.color = .white
+            })
+        .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text("Error 400"),
-                message: Text("The operation couldn’t be completed."),
+                title: Text("Message"),
+                message: Text("\(self.userRegisterVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
     }

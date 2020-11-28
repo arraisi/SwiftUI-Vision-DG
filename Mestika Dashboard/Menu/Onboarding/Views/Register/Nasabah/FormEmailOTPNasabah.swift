@@ -1,50 +1,40 @@
 //
-//  RegisterNasabahPhoneOTPScreen.swift
+//  FormEmailOTPNasabah.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 11/11/20.
+//  Created by Prima Jatnika on 28/11/20.
 //
 
 import SwiftUI
 
-struct RegisterNasabahPhoneOTPScreen: View {
+struct FormEmailOTPNasabah: View {
     
-    /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Variable PIN OTP */
     var maxDigits: Int = 6
     @State var pin: String = ""
-    @State var showPin = true
     @State var pinShare: String = ""
     @State var referenceCode: String = ""
+    @State var showPin = true
     @State var isDisabled = false
     
     /* Variable Validation */
     @State var isOtpValid = false
-    @State var otpInvalidCount = 0
     @State var isResendOtpDisabled = true
     @State var tryCount = 0
     
-    /* Data Binding */
-    @Binding var rootIsActive : Bool
-    
-    /* Timer */
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     /* Boolean for Show Modal */
-    @State var showingOtpIncorect = false
-    @State var showingOtpInvalid = false
+    @State var showingModal = false
     @State private var showingAlert: Bool = false
     
-    /* Disabled Form */
     var disableForm: Bool {
         pin.count < 6
     }
     
-    // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -54,16 +44,16 @@ struct RegisterNasabahPhoneOTPScreen: View {
             }
             
             VStack(alignment: .center) {
-                Text("Kami telah mengirimkan OTP ke No. \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
-                    .font(.title3)
+                Text("Kami telah mengirimkan Kode Verifikasi ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
+                    .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
-                    .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.top, 20)
                     .padding(.horizontal, 20)
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
-                    .font(.caption)
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
@@ -78,28 +68,36 @@ struct RegisterNasabahPhoneOTPScreen: View {
                 
                 HStack {
                     Text("Tidak Menerima Kode?")
-                        .font(.caption2)
+                        .font(.custom("Montserrat-Regular", size: 10))
                     
                     Button(action: {
                         print("-> Resend OTP")
-                        getOTP()
                         
+                        self.resetField()
                         self.timeRemaining = 60
+                        
+                        getOTP()
                     }) {
                         Text("Resend OTP")
-                            .font(.caption2)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.custom("Montserrat-SemiBold", size: 10))
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                     }
                     .disabled(isResendOtpDisabled)
                     
-                    Text("(00:\(String(format: "%02d", timeRemaining)))")
-                        .font(.caption2)
+                    Button(
+                        action: {
+                            self.isOtpValid = true
+                        },
+                        label: {
+                            Text("(00:\(String(format: "%02d", timeRemaining)))")
+                                .font(.custom("Montserrat-Regular", size: 10))
+                        })
+                        .disabled(true)
                 }
                 .padding(.top, 5)
                 
-                Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
-                    .font(.caption)
+                Text("Silahkan cek email Anda untuk melihat kode OTP")
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.top, 15)
@@ -109,26 +107,27 @@ struct RegisterNasabahPhoneOTPScreen: View {
                 
                 VStack {
                     NavigationLink(
-                        destination: FormEmailVerificationNasabahScreen().environmentObject(registerData),
-                        isActive: self.$isOtpValid) {
-                        Text("")
-                    }
+                        destination: ChooseTypeSavingForNasabahScreen().environmentObject(registerData),
+                        isActive: self.$isOtpValid,
+                        label: {
+                            EmptyView()
+                        })
                     
                     Button(action: {
+//                        self.isOtpValid = true
                         self.tryCount += 1
                         validateOTP()
                     }) {
                         Text("Verifikasi OTP")
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.top, 10)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 25)
                     .disabled(disableForm)
                 }
             }
@@ -138,17 +137,18 @@ struct RegisterNasabahPhoneOTPScreen: View {
             .shadow(radius: 30)
             .padding(.top, 120)
             
-            if self.showingOtpIncorect {
-                ModalOverlay(tapAction: { withAnimation { self.showingOtpIncorect = false } })
-            }
-            
-            if self.showingOtpInvalid {
-                ModalOverlay(tapAction: { withAnimation { self.showingOtpInvalid = false } })
+            if self.showingModal {
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
             }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .navigationBarItems(
+            trailing: LoadingIndicator(style: .medium, animate: .constant(self.otpVM.isLoading))
+                .configure {
+                    $0.color = .white
+            })
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -170,17 +170,13 @@ struct RegisterNasabahPhoneOTPScreen: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text("OTP Code"),
-                message: Text(self.pinShare),
-                dismissButton: .default(Text("Oke"), action: {
-                    self.pin = self.pinShare
-                }))
+                title: Text("MESSAGE"),
+                message: Text(self.otpVM.statusMessage),
+                dismissButton: .default(Text("Oke"))
+            )
         }
-        .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            bottomMessageOTPinCorrect()
-        }
-        .popup(isPresented: $showingOtpInvalid, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
-            bottomMessageOTPVailure()
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            createBottomFloater()
         }
     }
     
@@ -194,7 +190,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                     .bold()
                     .frame(width: 40, height: 40)
                     .multilineTextAlignment(.center)
-                    .background(Color.gray.opacity(0.1))
+                    .background(Color.white)
                     .cornerRadius(8)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
             }
@@ -229,31 +225,33 @@ struct RegisterNasabahPhoneOTPScreen: View {
     }
     
     private func getImageName(at index: Int) -> String {
-         if index >= self.pin.count {
-             return "•"
-         }
-         
-         if self.showPin {
-             return self.pin.digits[index].numberString
-         }
-         
-         return ""
+        if index >= self.pin.count {
+            return "•"
+        }
+        
+        if self.showPin {
+            return self.pin.digits[index].numberString
+        }
+        
+        return ""
     }
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
         var chars = Array(myString)
-        if chars.count > 5 {
-            for data in index {
-                chars[data] = newChar
-            }
+        if chars.count > 2 {
+            chars[index[0]] = newChar
+            chars[index[1]] = chars[index[0]]
+            chars[index[2]] = chars[index[1]]
+            chars[index[3]] = chars[index[2]]
         }
-        
         let modifiedString = String(chars)
         return modifiedString
     }
     
-    // MARK: -BOTTOM MESSAGE OTP IN CORRECT
-    func bottomMessageOTPinCorrect() -> some View {
+    /*
+     Fuction for Create Bottom Floater (Modal)
+     */
+    func createBottomFloater() -> some View {
         VStack(alignment: .leading) {
             Image(systemName: "xmark.octagon.fill")
                 .resizable()
@@ -291,53 +289,12 @@ struct RegisterNasabahPhoneOTPScreen: View {
         .cornerRadius(20)
     }
     
-    // MARK: -BOTTOM MESSAGE OTP VAILURE 5 TIME
-    func bottomMessageOTPVailure() -> some View {
-        VStack(alignment: .leading) {
-            Image(systemName: "xmark.octagon.fill")
-                .resizable()
-                .frame(width: 65, height: 65)
-                .foregroundColor(.red)
-                .padding(.top, 20)
-            
-            Text("Kode OTP Salah")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.system(size: 22))
-                .foregroundColor(Color(hex: "#232175"))
-                .padding([.bottom, .top], 20)
-            
-            Text("Kode OTP yang anda masukan telah salah 5 kali, silahkan ulangi lagi minggu depan.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.system(size: 16))
-                .foregroundColor(Color(hex: "#232175"))
-                .padding(.bottom, 30)
-            
-            Button(action: {
-                self.rootIsActive = true
-            }) {
-                Text("Kembali ke Halaman Utama")
-                    .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 12))
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-            }
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            
-            Text("")
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-    }
-    
     @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
         self.otpVM.otpRequest(
             otpRequest: OtpRequest(
-                destination: self.registerData.noTelepon,
-                    type: "hp",
+                    destination: self.registerData.email,
+                    type: "email",
                     trytime: 60
             )
         ) { success in
@@ -348,7 +305,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-                    self.timeRemaining = self.otpVM.timeCounter
+                    self.timeRemaining = 30
                     self.referenceCode = self.otpVM.reference
                 }
                 
@@ -363,7 +320,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                     DispatchQueue.main.sync {
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-                        self.timeRemaining = self.otpVM.timeCounter
+                        self.timeRemaining = 30
                     }
                     self.showingAlert = true
                 }
@@ -374,11 +331,11 @@ struct RegisterNasabahPhoneOTPScreen: View {
     func validateOTP() {
         self.otpVM.otpValidation(
             code: self.pin,
-            destination: "+62" + self.registerData.noTelepon,
+            destination: self.registerData.email,
             reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
             tryCount: tryCount,
-            type: "hp")
+            type: "email")
         { success in
             
             if success {
@@ -388,8 +345,8 @@ struct RegisterNasabahPhoneOTPScreen: View {
             
             if !success {
                 print("OTP INVALID")
-                showingOtpIncorect.toggle()
-                resetField()
+                self.showingModal.toggle()
+                self.resetField()
             }
             
         }
@@ -400,8 +357,8 @@ struct RegisterNasabahPhoneOTPScreen: View {
     }
 }
 
-struct RegisterNasabahPhoneOTPScreen_Previews: PreviewProvider {
+struct FormEmailOTPNasabah_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterNasabahPhoneOTPScreen(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+        FormEmailOTPNasabah()
     }
 }

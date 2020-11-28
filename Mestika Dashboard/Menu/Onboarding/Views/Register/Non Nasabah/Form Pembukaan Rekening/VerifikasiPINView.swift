@@ -237,11 +237,11 @@ struct VerifikasiPINView: View {
     
     private func getImageName(at index: Int) -> String {
         if index >= self.pin.count {
-            return "•"
+            return ""
         }
         
         if self.showPin {
-            return self.pin.digits[index].numberString
+            return "•"
         }
         
         return ""

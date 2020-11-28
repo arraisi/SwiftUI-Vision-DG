@@ -28,9 +28,6 @@ struct KetentuanRegisterNasabahView: View {
             }
             
             VStack {
-                AppBarLogo(light: false, onCancel: {})
-                
-//                ScrollView(showsIndicators: false) {
                     ZStack {
                         VStack {
                             Color(hex: "#232175")
@@ -40,16 +37,15 @@ struct KetentuanRegisterNasabahView: View {
                         
                         cardForm
                             .padding(.vertical, 30)
-//                    }
                 }
             }
+            .padding(.top, 90)
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
-        .navigationBarItems(trailing: EmptyView())
-        .introspectNavigationController { nc in
-            nc.navigationBar.isHidden = false
-        }
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+//        .introspectNavigationController { nc in
+//            nc.navigationBar.isHidden = false
+//        }
     }
     
     var cardForm: some View {
@@ -63,23 +59,6 @@ struct KetentuanRegisterNasabahView: View {
                 .font(.custom("Montserrat-Bold", size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical, 10)
-            
-//            VStack(spacing: 20) {
-//                ForEach(ketentuanViewModel.data) { data in
-//                    HStack(alignment: .top) {
-//                        Text(data.number)
-//                            .font(.custom("Montserrat-Bold", size: 12))
-//                            .foregroundColor(Color(hex: "#232175"))
-//
-//                        Text(data.caption)
-//                            .font(.custom("Montserrat-Regular", size: 12))
-//                            .foregroundColor(.gray)
-//
-//                        Spacer()
-//                    }
-//                    .fixedSize(horizontal: false, vertical: true)
-//                }
-//            }
             
             WebView(urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
             

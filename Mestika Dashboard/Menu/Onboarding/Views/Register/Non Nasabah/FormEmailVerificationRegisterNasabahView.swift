@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct FormEmailVerificationRegisterNasabahView: View {
+    
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     @State var email: String = ""
     @State private var isEmailValid : Bool   = false
@@ -35,7 +37,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
             }
             
             VStack {
-                AppBarLogo(light: false, onCancel: {})
+//                AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
                     Text("Email Verification")
@@ -93,11 +95,12 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                .padding(.top, 30)
+                .padding(.top, 120)
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

@@ -46,5 +46,77 @@
     {
         "id": 12,
         "name": "Ibu Rumah Tangga"
+    },
+    {
+        "id": 13,
+        "name": "Notaris"
+    },
+    {
+        "id": 14,
+        "name": "Pengacara"
+    },
+    {
+        "id": 15,
+        "name": "Guru/Dosen"
+    },
+    {
+        "id": 16,
+        "name": "Dokter"
+    },
+    {
+        "id": 17,
+        "name": "Pimpinan Keagamaan"
+    },
+    {
+        "id": 18,
+        "name": "Advokat"
+    },
+    {
+        "id": 19,
+        "name": "Kurator"
+    },
+    {
+        "id": 20,
+        "name": "Konsultan Keuangan"
+    },
+    {
+        "id": 21,
+        "name": "Konsultan Pajak"
+    },
+    {
+        "id": 22,
+        "name": "Konsultan Lainnya"
+    },
+    {
+        "id": 23,
+        "name": "Buruh"
+    },
+    {
+        "id": 24,
+        "name": "Pembantu Rumah Tangga"
+    },
+    {
+        "id": 25,
+        "name": "Akuntan"
+    },
+    {
+        "id": 26,
+        "name": "Karyawan Bank Mestika"
+    },
+    {
+        "id": 27,
+        "name": "Hakim"
+    },
+    {
+        "id": 28,
+        "name": "Jaksa"
+    },
+    {
+        "id": 29,
+        "name": "Auditor"
+    },
+    {
+        "id": 30,
+        "name": "Petani/Nelayan/Peternak"
     }
 ]

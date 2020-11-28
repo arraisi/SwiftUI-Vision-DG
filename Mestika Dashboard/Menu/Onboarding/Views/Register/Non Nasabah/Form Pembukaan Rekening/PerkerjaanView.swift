@@ -124,6 +124,13 @@ struct PerkerjaanView: View {
                                             tag: "sumberPenyandangDana",
                                             selection: $selection,
                                             label: {EmptyView()})
+
+                                        // Navigation Sumber Penyandang Dana 2
+                                        NavigationLink(
+                                                destination: FormSumberPenyandandDana2View().environmentObject(registerData),
+                                                tag: "sumberPenyandangDana2",
+                                                selection: $selection,
+                                                label: {EmptyView()})
                                         
                                         // Navigation Sumber Penyandang Dana
                                         NavigationLink(
@@ -151,11 +158,11 @@ struct PerkerjaanView: View {
                                                 case 9:
                                                     self.selection = "industriTempatBekerja"
                                                 case 10:
-                                                    self.selection = "sumberPenyandangDana"
+                                                    self.selection = "sumberPenyandangDana2"
                                                 case 11:
-                                                    self.selection = "sumberPenyandangDana"
+                                                    self.selection = "sumberPenyandangDana2"
                                                 case 12:
-                                                    self.selection = "sumberPenyandangDana"
+                                                    self.selection = "sumberPenyandangDana2"
                                                 default:
                                                     self.selection = "informasiPerusahaan"
                                                 }

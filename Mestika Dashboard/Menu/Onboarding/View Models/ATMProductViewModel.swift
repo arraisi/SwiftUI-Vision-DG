@@ -16,7 +16,6 @@ extension ATMProductViewModel {
     func addProductATM(dataRequest: AddProductATM, completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
             self.isLoading = true
-//            MARK : ADD ACTION
         }
         
         ATMService.shared.postAddProductATM(dataRequest: dataRequest) { result in

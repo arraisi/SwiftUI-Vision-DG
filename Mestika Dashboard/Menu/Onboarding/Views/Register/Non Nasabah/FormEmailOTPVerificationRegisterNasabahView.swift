@@ -22,6 +22,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     /* Variable Validation */
     @State var isOtpValid = false
     @State var isResendOtpDisabled = true
+    @State var tryCount = 0
     
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -113,6 +114,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         })
                     
                     Button(action: {
+//                        self.isOtpValid = true
+                        self.tryCount += 1
                         validateOTP()
                     }) {
                         Text("Verifikasi OTP")
@@ -302,7 +305,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-                    self.timeRemaining = self.otpVM.timeCounter
+                    self.timeRemaining = 30
                     self.referenceCode = self.otpVM.reference
                 }
                 
@@ -317,7 +320,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     DispatchQueue.main.sync {
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-                        self.timeRemaining = self.otpVM.timeCounter
+                        self.timeRemaining = 30
                     }
                     self.showingAlert = true
                 }
@@ -329,9 +332,10 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         self.otpVM.otpValidation(
             code: self.pin,
             destination: self.otpVM.destination,
-            reference: self.otpVM.reference,
+            reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
-            tryCount: self.otpVM.timeCounter)
+            tryCount: tryCount,
+            type: "email")
         { success in
             
             if success {

@@ -86,6 +86,13 @@ struct FormInputKartuATMAtauRekeningView: View {
                         .background(Color.gray.opacity(0.1))
                         .frame(height: 50)
                         .cornerRadius(20)
+                        .onReceive(noKartuCtrl.publisher.collect()) {
+                            if (jenisKartuCtrl == "Kartu ATM") {
+                                self.noKartuCtrl = String($0.prefix(16))
+                            } else {
+                                self.noKartuCtrl = String($0.prefix(8))
+                            }
+                        }
                     
                     Text("*Pastikan kartu ATM atau Rekening Anda telah aktif, jika belum aktifasi kartu ATM silahkan kunjungi Kantor Bank Mestika terdekat.")
                         .font(.custom("Montserrat-Regular", size: 10))
@@ -95,7 +102,7 @@ struct FormInputKartuATMAtauRekeningView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     NavigationLink(
-                        destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData),
+                        destination: RegisterNasabahPhoneOTPScreen(rootIsActive: .constant(false)).environmentObject(registerData),
                         label: {
                             Text("Verifikasi No. Kartu")
                                 .foregroundColor(.white)
@@ -120,6 +127,9 @@ struct FormInputKartuATMAtauRekeningView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .onAppear{
+            self.registerData.noTelepon = "85359117336"
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

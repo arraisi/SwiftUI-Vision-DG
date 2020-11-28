@@ -40,7 +40,8 @@ struct FormCompletionReferalCodeView: View {
                         
                     }
                     Button(action: {
-                        self.postData()
+//                        self.postData()
+                        self.goToSuccessPage = true
                     }) {
                         Text(productVM.isLoading ? "Harap Tunggu" : "SUBMIT")
                             .foregroundColor(Color("DarkStaleBlue"))
