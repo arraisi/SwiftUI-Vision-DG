@@ -37,6 +37,9 @@ struct WelcomeViewNew: View {
     @State var isShowModal = false
     @State var modalSelection = ""
     
+//    @State var isShowModal = true
+//    @State var modalSelection = "RegisterApprovedModal"
+    
     var body: some View {
         NavigationView {
             

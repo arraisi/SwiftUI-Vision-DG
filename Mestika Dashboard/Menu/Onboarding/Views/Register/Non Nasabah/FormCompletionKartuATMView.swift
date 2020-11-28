@@ -12,11 +12,13 @@ struct FormCompletionKartuATMView: View {
     
     /* Environtment Object */
     @EnvironmentObject var atmData: AddProductATM
+    @ObservedObject private var productVM = ATMProductViewModel()
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var location : String = ""
     @State var showingAddressModal = false
     @State var showingSuggestionNameModal = false
+    @State var goToSuccessPage = false
     
 //    @State var nameOnCard : String = ""
 //    @State var currentAddress : Address = Address()
@@ -62,6 +64,7 @@ struct FormCompletionKartuATMView: View {
                     
                     nameCard
                     addressCard
+                    referalCodeCard
                     
                     NavigationLink(destination: FormCompletionReferalCodeView().environmentObject(atmData)) {
                         Text("MASUKKAN DATA")
@@ -76,6 +79,9 @@ struct FormCompletionKartuATMView: View {
                     .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                     .padding(.vertical, 30)
                 }
+            }
+            NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData), isActive: $goToSuccessPage){
+                EmptyView()
             }
         }
         .introspectNavigationController { navigationController in
@@ -244,6 +250,53 @@ struct FormCompletionKartuATMView: View {
         .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
     }
     
+    var referalCodeCard: some View {
+        ZStack {
+            VStack {
+                Text("Masukkan Kode Referal")
+                    .multilineTextAlignment(.center)
+                    .font(.custom("Montserrat-Bold", size: 18))
+                    .foregroundColor(Color("DarkStaleBlue"))
+                    .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
+                
+                Text("Dari mana Anda tahu informasi Digital Banking Bank mestika")
+                    .multilineTextAlignment(.center)
+                    .font(.custom("Montserrat", size: 10))
+                    .foregroundColor(Color("DarkStaleBlue"))
+                    .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                
+                Group {
+                    
+                    Text("")
+                        .font(Font.system(size: 10))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("Masukkan kode referal", text: $atmData.atmAddresspostalReferral) { changed in
+                            
+                        } onCommit: {
+                        }
+                        .font(Font.system(size: 14))
+                        .frame(height: 36)
+                    }
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                    
+                }
+            }
+            .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
+        }
+        .frame(width: UIScreen.main.bounds.width - 40)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+        .padding(.vertical, 20)
+    }
+    
     // MARK: -Fuction for Create Bottom Floater (Modal)
     
     func createBottomAddressFloater() -> some View {
@@ -373,6 +426,14 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddresskelurahanInput = ""
             atmData.atmAddressrtRwInput = ""
 //            currentAddress = Address()
+        }
+    }
+    
+    func postData() {
+        productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
+            if success {
+                self.goToSuccessPage = true
+            }
         }
     }
 }

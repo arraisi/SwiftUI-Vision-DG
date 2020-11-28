@@ -13,6 +13,8 @@ struct FormDetailKartuATMView: View {
     @EnvironmentObject var atmData: AddProductATM
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @ObservedObject private var productVM = ATMProductViewModel()
+    
     var body: some View {
         VStack {
             AppBarLogo(onCancel: {})
