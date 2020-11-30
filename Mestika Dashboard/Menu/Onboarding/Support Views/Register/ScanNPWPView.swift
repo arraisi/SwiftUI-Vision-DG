@@ -110,7 +110,9 @@ struct ScanNPWPView: View {
                 Button(action: {
                     if self.alreadyHaveNpwp || (self.npwp != "" && self.imageNPWP != nil) {
                         self.onCommit()
-                        self.registerData.fotoNPWP = self.imageNPWP!
+                        if let npwp = self.imageNPWP {
+                            self.registerData.fotoNPWP = npwp
+                        }
                         self.registerData.npwp = npwp
                     }
                     
