@@ -204,7 +204,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                                         Divider()
                                             .frame(height: 30)
                                         
-                                        NavigationLink(destination: FormTujuanPembukaanRekeningNasabahScreen(editMode: .active).environmentObject(registerData)) {
+                                        NavigationLink(destination: TujuanPembukaanRekeningRegisterNasabahView(editMode: .active).environmentObject(registerData)) {
                                             Text("Edit").foregroundColor(.blue)
                                         }
                                     }
@@ -229,7 +229,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                                         Divider()
                                             .frame(height: 30)
                                         
-                                        NavigationLink(destination: FormSumberDanaNasabahScreen(editMode: .active).environmentObject(registerData)) {
+                                        NavigationLink(destination: SumberDanaRegisterNasabahView(editMode: .active).environmentObject(registerData)) {
                                             Text("Edit").foregroundColor(.blue)
                                         }
                                     }
@@ -255,7 +255,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                                         Divider()
                                             .frame(height: 30)
                                         
-                                        NavigationLink(destination: FormPerkiraanPenarikanDanaNasabahScreen(editMode: .active).environmentObject(registerData)) {
+                                        NavigationLink(destination: PerkiraanPenarikanDanaRegisterNasabahView(editMode: .active).environmentObject(registerData)) {
                                             Text("Edit").foregroundColor(.blue)
                                         }
                                     }
@@ -282,7 +282,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                                         Divider()
                                             .frame(height: 30)
                                         
-                                        NavigationLink(destination: FormBesarPerkiraanPenarikanDanaNasabahScreen(editMode: .active).environmentObject(registerData)) {
+                                        NavigationLink(destination: BesarPerkiraanPenarikanDanaRegisterNasabahView(editMode: .active).environmentObject(registerData)) {
                                             Text("Edit").foregroundColor(.blue)
                                         }
                                     }
@@ -307,7 +307,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                                         Divider()
                                             .frame(height: 30)
                                         
-                                        NavigationLink(destination: FormPerkiraanSetoranNasabahScreen(editMode: .active).environmentObject(registerData)) {
+                                        NavigationLink(destination: PerkiraanSetoranRegisterNasabahView(editMode: .active).environmentObject(registerData)) {
                                             Text("Edit").foregroundColor(.blue)
                                         }
                                     }
@@ -332,7 +332,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                                         Divider()
                                             .frame(height: 30)
                                         
-                                        NavigationLink(destination: FormBesarPerkiraanSetoranNasabahScreen(editMode: .active).environmentObject(registerData)) {
+                                        NavigationLink(destination: BesarPerkiraanSetoranRegisterNasabahView(editMode: .active).environmentObject(registerData)) {
                                             Text("Edit").foregroundColor(.blue)
                                         }
                                     }
@@ -357,7 +357,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
                                         Divider()
                                             .frame(height: 30)
                                         
-                                        NavigationLink(destination: FormPekerjaanNasabahScreen(editMode: .active).environmentObject(registerData)) {
+                                        NavigationLink(destination: PekerjaanRegisterNasabahView(editMode: .active).environmentObject(registerData)) {
                                             Text("Edit").foregroundColor(.blue)
                                         }
                                     }

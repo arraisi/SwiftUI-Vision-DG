@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormUploadDocumentIdentityNasabahScreen: View {
+struct InputIdentitasDiriRegisterNasabahView: View {
     
     /*
      Environtment Object
@@ -153,7 +153,7 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                             
                             NavigationLink(
-                                destination: FormEmailVerificationNasabahScreen().environmentObject(registerData),
+                                destination: TujuanPembukaanRekeningRegisterNasabahView().environmentObject(registerData),
                                 isActive: self.$nextViewActive,
                                 label: {EmptyView()})
                             
@@ -292,6 +292,6 @@ struct FormUploadDocumentIdentityNasabahScreen: View {
 
 struct FormUploadDocumentIdentityNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormUploadDocumentIdentityNasabahScreen().environmentObject(RegistrasiModel())
+        InputIdentitasDiriRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

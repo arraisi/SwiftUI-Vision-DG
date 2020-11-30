@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChooseTypeSavingForNasabahScreen: View {
+struct PilihJenisTabunganRegisterNasabahView: View {
     
     /* Carousel Variables */
     @State var data = savingTypeData
@@ -115,7 +115,7 @@ struct ChooseTypeSavingForNasabahScreen: View {
                 .frame(height: 150)
             
             NavigationLink(destination:
-                FormUploadDocumentIdentityNasabahScreen().environmentObject(registerData)
+                InputIdentitasDiriRegisterNasabahView().environmentObject(registerData)
             ) {
                 Text("Pilih Tabungan ini")
                     .foregroundColor(.white)
@@ -188,6 +188,6 @@ struct ChooseTypeSavingForNasabahScreen: View {
 
 struct ChooseTypeSavingForNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseTypeSavingForNasabahScreen().environmentObject(RegistrasiModel())
+        PilihJenisTabunganRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

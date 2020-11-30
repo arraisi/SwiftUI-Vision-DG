@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormDataKeluargaTerdekatNasabahScreen: View {
+struct KeluargaTerdekatRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -360,6 +360,6 @@ struct FormDataKeluargaTerdekatNasabahScreen: View {
 
 struct FormDataKeluargaTerdekatNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormDataKeluargaTerdekatNasabahScreen().environmentObject(RegistrasiModel())
+        KeluargaTerdekatRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

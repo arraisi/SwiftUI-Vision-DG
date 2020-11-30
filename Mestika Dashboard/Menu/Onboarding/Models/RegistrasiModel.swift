@@ -29,8 +29,8 @@ class RegistrasiModel: ObservableObject {
     @Published var jabatanProfesiId = 0
     @Published var jabatanProfesi = ""
     @Published var namaPenyandangDana = ""
-    @Published var hubunganPenyandangDana:String? = ""
-    @Published var profesiPenyandangDana:String? = ""
+    @Published var hubunganPenyandangDana:String = ""
+    @Published var profesiPenyandangDana:String = ""
     @Published var industriTempatBekerjaId = 0
     @Published var industriTempatBekerja = ""
     @Published var sumberPenyandangDanaId = 0

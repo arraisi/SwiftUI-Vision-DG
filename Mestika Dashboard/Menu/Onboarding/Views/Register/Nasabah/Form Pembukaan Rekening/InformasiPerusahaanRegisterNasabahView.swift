@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormInformasiPerusahaanNasabahScreen: View {
+struct InformasiPerusahaanRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
@@ -359,6 +359,6 @@ struct FormInformasiPerusahaanNasabahScreen: View {
 
 struct FormInformasiPerusahaanNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInformasiPerusahaanNasabahScreen().environmentObject(RegistrasiModel())
+        InformasiPerusahaanRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

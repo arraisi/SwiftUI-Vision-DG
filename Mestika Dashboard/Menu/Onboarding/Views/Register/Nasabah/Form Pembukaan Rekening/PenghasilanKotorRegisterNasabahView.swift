@@ -1,5 +1,5 @@
 //
-//  FormBesarPerkiraanSetoranNasabahScreen.swift
+//  FormPenghasilanKotorNasabahScreen.swift
 //  Mestika Dashboard
 //
 //  Created by Prima Jatnika on 11/11/20.
@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-struct FormBesarPerkiraanSetoranNasabahScreen: View {
+struct PenghasilanKotorRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var editMode: EditMode = .inactive
-    
-    let besarPerkiraanSetoran: [MasterModel] = load("besarPerkiraanSetoran.json")
+    let penghasilanKotor: [MasterModel] = load("penghasilanKotor.json")
     
     var body: some View {
         
@@ -32,7 +30,6 @@ struct FormBesarPerkiraanSetoranNasabahScreen: View {
             }
             
             VStack {
-                
                 ScrollView {
                     
                     // Title
@@ -69,7 +66,7 @@ struct FormBesarPerkiraanSetoranNasabahScreen: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Berapa Besar Perkiraan Setoran Dana Anda Setiap Bulannya")
+                                Text("Berapa Penghasilan Kotor Anda")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .multilineTextAlignment(.center)
@@ -80,16 +77,15 @@ struct FormBesarPerkiraanSetoranNasabahScreen: View {
                                 ZStack {
                                     
                                     RadioButtonGroup(
-                                        items: besarPerkiraanSetoran,
-                                        selectedId: $registerData.besarPerkiraanSetoranId) { selected in
+                                        items: penghasilanKotor,
+                                        selectedId: $registerData.penghasilanKotorId) { selected in
                                         
-                                        if let i = besarPerkiraanSetoran.firstIndex(where: { $0.id == selected }) {
-                                            print(besarPerkiraanSetoran[i])
-                                            registerData.besarPerkiraanSetoran = besarPerkiraanSetoran[i].name
+                                        if let i = penghasilanKotor.firstIndex(where: { $0.id == selected }) {
+                                            print(penghasilanKotor[i])
+                                            registerData.penghasilanKotor = penghasilanKotor[i].name
                                         }
                                         
-                                        print("Selected is: \(registerData.besarPerkiraanSetoran)")
-                                        
+                                        print("Selected is: \(registerData.penghasilanKotor)")
                                     }
                                     .padding()
                                     
@@ -99,43 +95,29 @@ struct FormBesarPerkiraanSetoranNasabahScreen: View {
                                 .cornerRadius(15)
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
+                                
                                 // Button
-                                if (editMode == .inactive) {
-                                    NavigationLink(destination: FormPekerjaanNasabahScreen().environmentObject(registerData)) {
-                                        
-                                        Text("Berikutnya")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    }
-                                    .disabled(registerData.besarPerkiraanSetoranId == 0)
-                                    .frame(height: 50)
-                                    .background(registerData.besarPerkiraanSetoranId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
-                                } else {
-                                    NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData)) {
-                                        
-                                        Text("Simpan")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    }
-                                    .frame(height: 50)
-                                    .background(Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
-                                }
+                                //                                NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData), label:{
+                                NavigationLink(destination: SumberPendapatanLainnyaRegisterNasabahView().environmentObject(registerData), label:{
+                                    
+                                    Text("Berikutnya")
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                    
+                                })
+                                .disabled(registerData.penghasilanKotorId == 0)
+                                .frame(height: 50)
+                                .background(registerData.penghasilanKotorId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 20)
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                             .cornerRadius(25.0)
-                            .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 10, y: -2)
+                            .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 5, y: -2)
                             .padding(.horizontal, 30)
-                            .padding(.top, 24)
+                            .padding(.top, 25)
                             
                         }
                         
@@ -154,8 +136,8 @@ struct FormBesarPerkiraanSetoranNasabahScreen: View {
     }
 }
 
-struct FormBesarPerkiraanSetoranNasabahScreen_Previews: PreviewProvider {
+struct FormPenghasilanKotorNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormBesarPerkiraanSetoranNasabahScreen().environmentObject(RegistrasiModel())
+        PenghasilanKotorRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

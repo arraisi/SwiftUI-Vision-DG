@@ -12,7 +12,7 @@ struct JenisNoKartu {
     var jenis: String
 }
 
-struct FormInputKartuATMAtauRekeningView: View {
+struct NoAtmOrRekeningVerificationView: View {
     
     let jenisKartuList:[JenisNoKartu] = [
         .init(jenis: "Kartu ATM"),
@@ -102,7 +102,7 @@ struct FormInputKartuATMAtauRekeningView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     NavigationLink(
-                        destination: RegisterNasabahPhoneOTPScreen(rootIsActive: .constant(false)).environmentObject(registerData),
+                        destination: PhoneOTPRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(registerData),
                         label: {
                             Text("Verifikasi No. Kartu")
                                 .foregroundColor(.white)
@@ -139,7 +139,7 @@ struct FormInputKartuATMAtauRekeningView: View {
 struct RegisterRekeningCardView_Previews: PreviewProvider {
     static var previews: some View {
         //        NavigationView {
-        FormInputKartuATMAtauRekeningView().environmentObject(RegistrasiModel())
+        NoAtmOrRekeningVerificationView().environmentObject(RegistrasiModel())
         //        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FormBesarPerkiraanPenarikanDanaNasabahScreen.swift
+//  FormPekerjaanNasabahScreen.swift
 //  Mestika Dashboard
 //
 //  Created by Prima Jatnika on 11/11/20.
@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-struct FormBesarPerkiraanPenarikanDanaNasabahScreen: View {
+struct PekerjaanRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var editMode: EditMode = .inactive
     
-    let besarPerkiraanPenarikan: [MasterModel] = load("besarPerkiraanPenarikan.json")
+    let pekerjaan: [MasterModel] = load("pekerjaan.json")
+    @State var selection: String?
     
     var body: some View {
         
@@ -32,7 +33,6 @@ struct FormBesarPerkiraanPenarikanDanaNasabahScreen: View {
             }
             
             VStack {
-                
                 ScrollView {
                     
                     // Title
@@ -69,7 +69,7 @@ struct FormBesarPerkiraanPenarikanDanaNasabahScreen: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Berapa Besar Perkiraan Penarikan Dana Anda Setiap Bulannya")
+                                Text("Apa Pekerjaan Anda")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .multilineTextAlignment(.center)
@@ -80,15 +80,15 @@ struct FormBesarPerkiraanPenarikanDanaNasabahScreen: View {
                                 ZStack {
                                     
                                     RadioButtonGroup(
-                                        items: besarPerkiraanPenarikan,
-                                        selectedId: $registerData.besarPerkiraanPenarikanId) { selected in
+                                        items: pekerjaan,
+                                        selectedId: $registerData.pekerjaanId) { selected in
                                         
-                                        if let i = besarPerkiraanPenarikan.firstIndex(where: { $0.id == selected }) {
-                                            print(besarPerkiraanPenarikan[i])
-                                            registerData.besarPerkiraanPenarikan = besarPerkiraanPenarikan[i].name
+                                        if let i = pekerjaan.firstIndex(where: { $0.id == selected }) {
+                                            print(pekerjaan[i])
+                                            registerData.pekerjaan = pekerjaan[i].name
                                         }
                                         
-                                        print("Selected is: \(registerData.besarPerkiraanPenarikan)")
+                                        print(registerData.pekerjaan)
                                     }
                                     .padding()
                                     
@@ -97,37 +97,91 @@ struct FormBesarPerkiraanPenarikanDanaNasabahScreen: View {
                                 .background(Color.white)
                                 .cornerRadius(15)
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+
+                                // Navigation Jabatan Profesi
+                                NavigationLink(
+                                        destination: JabatanProfesiRegisterNasabahView().environmentObject(registerData),
+                                        tag: "jabatanProfesi",
+                                        selection: $selection,
+                                        label: {EmptyView()})
+
+                                // Navigation Sumber Penyandang Dana
+                                NavigationLink(
+                                        destination: SumberPenyandangDana1RegisterNasabahView().environmentObject(registerData),
+                                        tag: "sumberPenyandangDana",
+                                        selection: $selection,
+                                        label: {EmptyView()})
+
+                                // Navigation Sumber Penyandang Dana 2
+                                NavigationLink(
+                                        destination: SumberPenyandandDana2RegisterNasabahView().environmentObject(registerData),
+                                        tag: "sumberPenyandangDana2",
+                                        selection: $selection,
+                                        label: {EmptyView()})
+
+                                // Navigation Sumber Penyandang Dana
+                                NavigationLink(
+                                        destination: InformasiPerusahaanRegisterNasabahView().environmentObject(registerData),
+                                        tag: "informasiPerusahaan",
+                                        selection: $selection,
+                                        label: {EmptyView()})
+
+                                // Navigation Industri Tempat Bekerja
+                                NavigationLink(
+                                        destination: IndustriTempatBekerjaRegisterNasabahView().environmentObject(registerData),
+                                        tag: "industriTempatBekerja",
+                                        selection: $selection,
+                                        label: {EmptyView()})
                                 
                                 // Button
                                 if (editMode == .inactive) {
-                                    NavigationLink(destination: FormPerkiraanSetoranNasabahScreen().environmentObject(registerData)) {
-                                        
+
+                                    Button(action: {
+                                        print("pekerjaan id : \(registerData.pekerjaanId)")
+
+                                        switch registerData.pekerjaanId {
+                                        case 6 :
+                                            self.selection = "jabatanProfesi"
+                                        case 9:
+                                            self.selection = "industriTempatBekerja"
+                                        case 10:
+                                            self.selection = "sumberPenyandangDana2"
+                                        case 11:
+                                            self.selection = "sumberPenyandangDana2"
+                                        case 12:
+                                            self.selection = "sumberPenyandangDana2"
+                                        default:
+                                            self.selection = "informasiPerusahaan"
+                                        }
+
+                                    }, label: {
                                         Text("Berikutnya")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    }
-                                    .disabled(registerData.besarPerkiraanPenarikanId == 0)
-                                    .frame(height: 50)
-                                    .background(registerData.besarPerkiraanPenarikanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
+                                                .foregroundColor(.white)
+                                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                    })
+                                            .disabled(registerData.pekerjaanId == 0)
+                                            .frame(height: 50)
+                                            .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .cornerRadius(12)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 25)
+                                    
                                 } else {
                                     NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData)) {
                                         
                                         Text("Simpan")
                                             .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .fontWeight(.bold)
+                                            .font(.system(size: 14))
                                             .frame(maxWidth: .infinity, maxHeight: 40)
                                         
                                     }
                                     .frame(height: 50)
                                     .background(Color(hex: "#2334D0"))
                                     .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
+                                    .padding(.horizontal, 35)
+                                    .padding(.vertical, 20)
                                 }
                                 
                             }
@@ -151,11 +205,12 @@ struct FormBesarPerkiraanPenarikanDanaNasabahScreen: View {
         }
         .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-struct FormBesarPerkiraanPenarikanDanaNasabahScreen_Previews: PreviewProvider {
+struct FormPekerjaanNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormBesarPerkiraanPenarikanDanaNasabahScreen().environmentObject(RegistrasiModel())
+        PekerjaanRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

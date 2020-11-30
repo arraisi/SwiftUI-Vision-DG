@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegisterNasabahPhoneOTPScreen: View {
+struct PhoneOTPRegisterNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
@@ -109,7 +109,7 @@ struct RegisterNasabahPhoneOTPScreen: View {
                 
                 VStack {
                     NavigationLink(
-                        destination: FormEmailVerificationNasabahScreen().environmentObject(registerData),
+                        destination: InputEmailRegisterNasabahView().environmentObject(registerData),
                         isActive: self.$isOtpValid) {
                         Text("")
                     }
@@ -402,6 +402,6 @@ struct RegisterNasabahPhoneOTPScreen: View {
 
 struct RegisterNasabahPhoneOTPScreen_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterNasabahPhoneOTPScreen(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+        PhoneOTPRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

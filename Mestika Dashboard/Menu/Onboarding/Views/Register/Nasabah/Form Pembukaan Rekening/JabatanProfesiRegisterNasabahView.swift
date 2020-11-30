@@ -5,7 +5,7 @@
 import SwiftUI
 import NavigationStack
 
-struct FormJabatanProfesiNasabahScreen: View {
+struct JabatanProfesiRegisterNasabahView: View {
     /*
      Registrasi Environtment Object
      */
@@ -111,7 +111,7 @@ struct FormJabatanProfesiNasabahScreen: View {
 
                                     // Button
                                     if (editMode == .inactive) {
-                                        NavigationLink(destination: FormInformasiPerusahaanNasabahScreen().environmentObject(registerData)) {
+                                        NavigationLink(destination: InformasiPerusahaanRegisterNasabahView().environmentObject(registerData)) {
 
                                             Text("Berikutnya")
                                                     .foregroundColor(.white)
@@ -162,8 +162,8 @@ struct FormJabatanProfesiNasabahScreen: View {
     }
 }
 
-struct FormJabatanProfesiNasabahScreen_Previews: PreviewProvider {
+struct JabatanProfesiRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
-        FormJabatanProfesiNasabahScreen().environmentObject(RegistrasiModel())
+        JabatanProfesiRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

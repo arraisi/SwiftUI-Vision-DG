@@ -1,5 +1,5 @@
 //
-//  FormPenghasilanKotorNasabahScreen.swift
+//  FormPerkiraanPenarikanDanaNasabahScreen.swift
 //  Mestika Dashboard
 //
 //  Created by Prima Jatnika on 11/11/20.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct FormPenghasilanKotorNasabahScreen: View {
-    
+struct PerkiraanPenarikanDanaRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var editMode: EditMode = .inactive
     
-    let penghasilanKotor: [MasterModel] = load("penghasilanKotor.json")
+    let perkiraanPenarikan: [MasterModel] = load("perkiraanPenarikan.json")
     
     var body: some View {
         
@@ -30,6 +30,7 @@ struct FormPenghasilanKotorNasabahScreen: View {
             }
             
             VStack {
+                
                 ScrollView {
                     
                     // Title
@@ -66,7 +67,7 @@ struct FormPenghasilanKotorNasabahScreen: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Berapa Penghasilan Kotor Anda")
+                                Text("Berapa Kali Perkiraan Penarikan Dana dalam Sebulan")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .multilineTextAlignment(.center)
@@ -77,15 +78,16 @@ struct FormPenghasilanKotorNasabahScreen: View {
                                 ZStack {
                                     
                                     RadioButtonGroup(
-                                        items: penghasilanKotor,
-                                        selectedId: $registerData.penghasilanKotorId) { selected in
+                                        items: perkiraanPenarikan,
+                                        selectedId: $registerData.perkiraanPenarikanId) { selected in
                                         
-                                        if let i = penghasilanKotor.firstIndex(where: { $0.id == selected }) {
-                                            print(penghasilanKotor[i])
-                                            registerData.penghasilanKotor = penghasilanKotor[i].name
+                                        if let i = perkiraanPenarikan.firstIndex(where: { $0.id == selected }) {
+                                            print(perkiraanPenarikan[i])
+                                            registerData.perkiraanPenarikan = perkiraanPenarikan[i].name
                                         }
                                         
-                                        print("Selected is: \(registerData.penghasilanKotor)")
+                                        print("Selected is: \(registerData.perkiraanPenarikan)")
+                                        
                                     }
                                     .padding()
                                     
@@ -96,24 +98,43 @@ struct FormPenghasilanKotorNasabahScreen: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 // Button
-                                NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData), label:{
-                                    
-                                    Text("Berikutnya")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .frame(maxWidth: .infinity, maxHeight: 40)
-                                    
-                                })
-                                .disabled(registerData.penghasilanKotorId == 0)
-                                .frame(height: 50)
-                                .background(registerData.penghasilanKotorId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                .cornerRadius(12)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 20)
+                                if (editMode == .inactive) {
+                                    NavigationLink(destination: BesarPerkiraanPenarikanDanaRegisterNasabahView().environmentObject(registerData)) {
+                                        
+                                        Text("Berikutnya")
+                                            .foregroundColor(.white)
+                                            .fontWeight(.bold)
+                                            .font(.system(size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                        
+                                    }
+                                    .disabled(registerData.perkiraanPenarikanId == 0)
+                                    .frame(height: 50)
+                                    .background(registerData.perkiraanPenarikanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
+                                } else {
+                                    NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData)) {
+                                        
+                                        Text("Simpan")
+                                            .foregroundColor(.white)
+                                            .fontWeight(.bold)
+                                            .font(.system(size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                        
+                                    }
+                                    .frame(height: 50)
+                                    .background(Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
+                                }
+                                
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                             .cornerRadius(25.0)
-                            .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 5, y: -2)
+                            .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 10, y: -2)
                             .padding(.horizontal, 30)
                             .padding(.top, 25)
                             
@@ -121,21 +142,18 @@ struct FormPenghasilanKotorNasabahScreen: View {
                         
                     }
                     .padding(.bottom, 25)
-                    
                 }
                 .padding(.bottom, 0.1)
                 .KeyboardAwarePadding()
-                
             }
-            
         }
         .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
     }
 }
 
-struct FormPenghasilanKotorNasabahScreen_Previews: PreviewProvider {
+struct FormPerkiraanPenarikanDanaNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormPenghasilanKotorNasabahScreen().environmentObject(RegistrasiModel())
+        PerkiraanPenarikanDanaRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

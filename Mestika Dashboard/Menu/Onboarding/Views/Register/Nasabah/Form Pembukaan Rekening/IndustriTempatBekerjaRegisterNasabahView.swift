@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct FormIndustriTempatBekerjaNasabahScreen: View {
+struct IndustriTempatBekerjaRegisterNasabahView: View {
     /*
      Registrasi Environtment Object
      */
@@ -108,7 +108,7 @@ struct FormIndustriTempatBekerjaNasabahScreen: View {
 
                                     // Button
                                     if (editMode == .inactive) {
-                                        NavigationLink(destination: FormInformasiPerusahaanNasabahScreen().environmentObject(registerData)) {
+                                        NavigationLink(destination: InformasiPerusahaanRegisterNasabahView().environmentObject(registerData)) {
 
                                             Text("Berikutnya")
                                                     .foregroundColor(.white)
@@ -162,6 +162,6 @@ struct FormIndustriTempatBekerjaNasabahScreen: View {
 
 struct FormIndustriTempatBekerjaNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormIndustriTempatBekerjaNasabahScreen().environmentObject(RegistrasiModel())
+        IndustriTempatBekerjaRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

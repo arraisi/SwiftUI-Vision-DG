@@ -8,7 +8,7 @@
 import SwiftUI
 import Introspect
 
-struct KetentuanRegisterNasabahView: View {
+struct KetentuanRegisterNonNasabahView: View {
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
@@ -92,10 +92,10 @@ struct KetentuanRegisterNasabahView: View {
     }
 }
 
-struct RegisterProvisionView_Previews: PreviewProvider {
+struct KetentuanRegisterNonNasabahView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            KetentuanRegisterNasabahView().environmentObject(RegistrasiModel())
+            KetentuanRegisterNonNasabahView().environmentObject(RegistrasiModel())
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormEmailVerificationNasabahScreen: View {
+struct InputEmailRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
@@ -79,7 +79,7 @@ struct FormEmailVerificationNasabahScreen: View {
                 .padding(.horizontal, 30)
                 .padding(.bottom, 10)
                 
-                NavigationLink(destination: FormEmailOTPNasabah().environmentObject(registerData)) {
+                NavigationLink(destination: EmailOTPRegisterNasabahView().environmentObject(registerData)) {
                     Text("Verifikasi Email")
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -111,6 +111,6 @@ struct FormEmailVerificationNasabahScreen: View {
 
 struct FormEmailVerificationNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormEmailVerificationNasabahScreen().environmentObject(RegistrasiModel())
+        InputEmailRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

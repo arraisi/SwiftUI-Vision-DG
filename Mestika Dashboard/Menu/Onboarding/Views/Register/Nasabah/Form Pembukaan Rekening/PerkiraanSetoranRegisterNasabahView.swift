@@ -1,5 +1,5 @@
 //
-//  FormSumberDanaNasabahScreen.swift
+//  FormPerkiraanSetoranNasabahScreen.swift
 //  Mestika Dashboard
 //
 //  Created by Prima Jatnika on 11/11/20.
@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct FormSumberDanaNasabahScreen: View {
-    
+struct PerkiraanSetoranRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var editMode: EditMode = .inactive
     
-    let sumberDana: [MasterModel] = load("sumberDana.json")
+    let perkiraanSetoran: [MasterModel] = load("perkiraanSetoran.json")
     
     var body: some View {
         
@@ -32,7 +31,6 @@ struct FormSumberDanaNasabahScreen: View {
             }
             
             VStack {
-                
                 ScrollView {
                     
                     // Title
@@ -69,27 +67,26 @@ struct FormSumberDanaNasabahScreen: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Pilih Sumber Dana Kamu")
+                                Text("Berapa Kali Perkiraan Setoran Dana Dalam Sebulan")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
-                                    .font(Font.system(size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
-                                    .fontWeight(.semibold)
-                                    .padding(.horizontal, 20)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 40)
                                     .padding(.vertical, 30)
                                 
                                 // Forms input
                                 ZStack {
                                     
                                     RadioButtonGroup(
-                                        items: sumberDana,
-                                        selectedId: $registerData.sumberDanaId) { selected in
+                                        items: perkiraanSetoran,
+                                        selectedId: $registerData.perkiraanSetoranId) { selected in
                                         
-                                        if let i = sumberDana.firstIndex(where: { $0.id == selected }) {
-                                            print(sumberDana[i])
-                                            registerData.sumberDana = sumberDana[i].name
+                                        if let i = perkiraanSetoran.firstIndex(where: { $0.id == selected }) {
+                                            print(perkiraanSetoran[i])
+                                            registerData.perkiraanSetoran = perkiraanSetoran[i].name
                                         }
                                         
-                                        print("Selected is: \(registerData.sumberDanaId)")
+                                        print("Selected is: \(registerData.perkiraanSetoran)")
                                         
                                     }
                                     .padding()
@@ -98,10 +95,11 @@ struct FormSumberDanaNasabahScreen: View {
                                 .frame(width: UIScreen.main.bounds.width - 100)
                                 .background(Color.white)
                                 .cornerRadius(15)
+                                .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 // Button
                                 if (editMode == .inactive) {
-                                    NavigationLink(destination: FormPerkiraanPenarikanDanaNasabahScreen().environmentObject(registerData)) {
+                                    NavigationLink(destination: BesarPerkiraanSetoranRegisterNasabahView().environmentObject(registerData)) {
                                         
                                         Text("Berikutnya")
                                             .foregroundColor(.white)
@@ -109,9 +107,9 @@ struct FormSumberDanaNasabahScreen: View {
                                             .frame(maxWidth: .infinity, maxHeight: 40)
                                         
                                     }
-                                    .disabled(registerData.sumberDanaId == 0)
+                                    .disabled(registerData.perkiraanSetoranId == 0)
                                     .frame(height: 50)
-                                    .background(registerData.sumberDanaId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    .background(registerData.perkiraanSetoranId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
                                     .cornerRadius(12)
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 25)
@@ -120,8 +118,7 @@ struct FormSumberDanaNasabahScreen: View {
                                         
                                         Text("Simpan")
                                             .foregroundColor(.white)
-                                            .fontWeight(.bold)
-                                            .font(.system(size: 14))
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
                                             .frame(maxWidth: .infinity, maxHeight: 40)
                                         
                                     }
@@ -131,13 +128,13 @@ struct FormSumberDanaNasabahScreen: View {
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 25)
                                 }
+                                
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                             .cornerRadius(25.0)
                             .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 10, y: -2)
                             .padding(.horizontal, 30)
                             .padding(.top, 25)
-                            
                         }
                         
                     }
@@ -153,8 +150,8 @@ struct FormSumberDanaNasabahScreen: View {
     }
 }
 
-struct FormSumberDanaNasabahScreen_Previews: PreviewProvider {
+struct FormPerkiraanSetoranNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormSumberDanaNasabahScreen().environmentObject(RegistrasiModel())
+        PerkiraanSetoranRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

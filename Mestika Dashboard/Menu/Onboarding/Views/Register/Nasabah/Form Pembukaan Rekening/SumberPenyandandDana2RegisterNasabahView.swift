@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct FormSumberPenyandangDana1NasabahScreen: View {
+struct SumberPenyandandDana2RegisterNasabahView: View {
     /*
      Registrasi Environtment Object
      */
@@ -12,6 +12,10 @@ struct FormSumberPenyandangDana1NasabahScreen: View {
 
     // View variables
     let sumberPenyandangDana: [MasterModel] = load("sumberPenyandangDana.json")
+    let hubunganOptions = ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"]
+    let profesiPenyandandDanaOptions = ["Pegawai Swasta", "Pegawai Negeri", "Pegawai BUMN/BUMD", "Wirausaha"]
+    @State var hubunganId : Int = 0
+    @State var profesiPenyandangDanaId : Int = 0
 
     var body: some View {
 
@@ -74,7 +78,7 @@ struct FormSumberPenyandangDana1NasabahScreen: View {
                                         Spacer()
 
                                         // Sub title
-                                        Text("Sumber Penyandang Dana - 01")
+                                        Text("Sumber Penyandang Dana - 02")
                                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                                 .foregroundColor(Color(hex: "#232175"))
                                                 .padding(.horizontal, 20)
@@ -82,20 +86,8 @@ struct FormSumberPenyandangDana1NasabahScreen: View {
 
                                         // Forms input
                                         ZStack {
-
-                                            RadioButtonGroup(
-                                                    items: sumberPenyandangDana,
-                                                    selectedId: $registerData.sumberPenyandangDanaId) { selected in
-
-                                                if let i = sumberPenyandangDana.firstIndex(where: { $0.id == selected }) {
-                                                    print(sumberPenyandangDana[i])
-                                                    registerData.sumberPenyandangDana = sumberPenyandangDana[i].name
-                                                }
-
-                                                print("Selected is: \(registerData.sumberPenyandangDana)")
-
-                                            }
-                                                    .padding()
+                                            cardForm
+                                                    .padding(.vertical, 20)
 
                                         }
                                                 .frame(width: UIScreen.main.bounds.width - 100)
@@ -104,7 +96,7 @@ struct FormSumberPenyandangDana1NasabahScreen: View {
                                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
 
                                         // Button
-                                        NavigationLink(destination: FormSumberPenyandandDana2NasabahScreen().environmentObject(registerData), label:{
+                                        NavigationLink(destination: InformasiPerusahaanRegisterNasabahView().environmentObject(registerData), label:{
 
                                             Text("Berikutnya")
                                                     .foregroundColor(.white)
@@ -112,9 +104,9 @@ struct FormSumberPenyandangDana1NasabahScreen: View {
                                                     .frame(maxWidth: .infinity, maxHeight: 50)
 
                                         })
-                                                .disabled(registerData.sumberPenyandangDanaId == 0)
+                                                .disabled(isValid())
                                                 .frame(height: 50)
-                                                .background(registerData.sumberPenyandangDanaId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                                .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
                                                 .cornerRadius(12)
                                                 .padding(.horizontal, 20)
                                                 .padding(.vertical, 25)
@@ -141,10 +133,115 @@ struct FormSumberPenyandangDana1NasabahScreen: View {
                 .navigationBarHidden(true)
 
     }
+
+    // MARK: - Form Group
+    var cardForm: some View {
+
+        VStack(alignment: .leading) {
+
+            LabelTextField(value: $registerData.namaPenyandangDana, label: "Nama Penyandang Dana", placeHolder: "Nama"){ (changed) in
+                print("on edit")
+            } onCommit: {
+                print("on commit")
+            }
+                    .padding(.horizontal, 20)
+
+            VStack(alignment: .leading) {
+
+                Text("Hubungan Dengan Anda")
+                        .font(Font.system(size: 10))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+
+                HStack {
+                    TextField("Pilih hubungan", text: $registerData.hubunganPenyandangDana)
+                            .font(.custom("Montserrat-Regular", size: 12))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+
+                    Menu {
+                        ForEach(0..<hubunganOptions.count, id: \.self) { i in
+                            Button(action: {
+                                print(hubunganOptions[i])
+                                registerData.hubunganPenyandangDana = hubunganOptions[i]
+                            }) {
+                                Text(hubunganOptions[i])
+                                        .font(.custom("Montserrat-Regular", size: 10))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+
+                }
+                        .frame(height: 36)
+                        .font(Font.system(size: 14))
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+
+            }
+                    .padding(.horizontal, 20)
+
+            VStack(alignment: .leading) {
+
+                Text("Profesi Penyandang Dana")
+                        .font(Font.system(size: 10))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+
+                HStack {
+                    TextField("Pilih profesi", text: $registerData.profesiPenyandangDana)
+                            .font(.custom("Montserrat-Regular", size: 12))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+
+                    Menu {
+                        ForEach(0..<profesiPenyandandDanaOptions.count, id: \.self) { i in
+                            Button(action: {
+                                print(profesiPenyandandDanaOptions[i])
+                                registerData.profesiPenyandangDana = profesiPenyandandDanaOptions[i]
+                            }) {
+                                Text(profesiPenyandandDanaOptions[i])
+                                        .font(.custom("Montserrat-Regular", size: 10))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+
+                }
+                        .frame(height: 36)
+                        .font(Font.system(size: 14))
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+
+            }
+                    .padding(.horizontal, 20)
+
+        }
+    }
+
+    // MARK : - Check form is fill
+    func isValid() -> Bool {
+        if registerData.namaPenyandangDana == "" {
+            return true
+        }
+        if registerData.hubunganPenyandangDana == "" {
+            return true
+        }
+        if registerData.profesiPenyandangDana == "" {
+            return true
+        }
+        return false
+    }
 }
 
-struct FormSumberPenyandangDana1NasabahScreen_Previews: PreviewProvider {
+struct SumberPenyandandDana2RegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
-        FormSumberPenyandangDana1NasabahScreen().environmentObject(RegistrasiModel())
+        SumberPenyandandDana2RegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

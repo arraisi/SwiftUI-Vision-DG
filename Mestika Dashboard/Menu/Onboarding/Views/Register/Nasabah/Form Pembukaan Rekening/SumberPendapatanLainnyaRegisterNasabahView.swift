@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormSumberPendapatanLainnyaScreen: View {
+struct SumberPendapatanLainnyaRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -96,7 +96,8 @@ struct FormSumberPendapatanLainnyaScreen: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 // Button
-                                NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData), label:{
+//                                NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData), label:{
+                                NavigationLink(destination: KeluargaTerdekatRegisterNasabahView().environmentObject(registerData), label:{
                                     
                                     Text("Berikutnya")
                                         .foregroundColor(.white)
@@ -128,8 +129,8 @@ struct FormSumberPendapatanLainnyaScreen: View {
     }
 }
 
-struct FormSumberPendapatanLainnyaScreen_Previews: PreviewProvider {
+struct SumberPendapatanLainnyaRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
-        FormSumberPendapatanLainnyaScreen().environmentObject(RegistrasiModel())
+        SumberPendapatanLainnyaRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FormEmailOTPNasabah: View {
+struct EmailOTPRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
@@ -92,7 +92,7 @@ struct FormEmailOTPNasabah: View {
                             Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
-                        .disabled(true)
+                        .disabled(false) // false to by pass to next view
                 }
                 .padding(.top, 5)
                 
@@ -107,7 +107,7 @@ struct FormEmailOTPNasabah: View {
                 
                 VStack {
                     NavigationLink(
-                        destination: ChooseTypeSavingForNasabahScreen().environmentObject(registerData),
+                        destination: PilihJenisTabunganRegisterNasabahView().environmentObject(registerData),
                         isActive: self.$isOtpValid,
                         label: {
                             EmptyView()
@@ -359,6 +359,6 @@ struct FormEmailOTPNasabah: View {
 
 struct FormEmailOTPNasabah_Previews: PreviewProvider {
     static var previews: some View {
-        FormEmailOTPNasabah()
+        EmailOTPRegisterNasabahView()
     }
 }

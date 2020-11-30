@@ -48,7 +48,7 @@ struct ContentView: View {
         JGProgressHUDPresenter(userInteractionOnHUD: false) {
             ZStack {
                 Color(hex: "#F6F8FB")
-                WelcomeViewNew()
+                WelcomeView()
                     .environmentObject(appState)
             }
             .edgesIgnoringSafeArea(.top)

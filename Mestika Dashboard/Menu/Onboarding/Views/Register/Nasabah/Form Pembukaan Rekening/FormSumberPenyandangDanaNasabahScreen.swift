@@ -100,7 +100,7 @@ struct FormSumberPenyandangDanaNasabahScreen: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 // Button
-                                NavigationLink(destination: FormPenghasilanKotorNasabahScreen().environmentObject(registerData), label:{
+                                NavigationLink(destination: PenghasilanKotorRegisterNasabahView().environmentObject(registerData), label:{
                                     
                                     Text("Berikutnya")
                                         .foregroundColor(.white)
