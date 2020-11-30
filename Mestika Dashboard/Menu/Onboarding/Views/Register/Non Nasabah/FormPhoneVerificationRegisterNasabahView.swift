@@ -13,6 +13,8 @@ struct FormPhoneVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    @State var isRouteActive: Bool = false
+    
     /* Variable Data */
     @State var phoneNumber: String = ""
     
@@ -80,7 +82,8 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                     .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
                     .padding(.vertical, 15)
                     
-                    NavigationLink(destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
+                    NavigationLink(
+                        destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isRouteActive) {
                         
                         Text("Verifikasi No. Telepon")
                             .foregroundColor(.white)
@@ -88,6 +91,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         
                     }
+//                    .isDetailLink(false)
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 30)
@@ -110,6 +114,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
         .onReceive(self.appState.$skipOTP) { skipOTP in
             if skipOTP {
                 print("Skip OTP: \(skipOTP)")
+                self.isRouteActive = false
                 self.appState.skipOTP = false
             }
         }

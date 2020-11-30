@@ -149,12 +149,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
             .shadow(radius: 30)
             .padding(.top, UIScreen.main.bounds.height * 0.15)
             
-            if self.showingOtpIncorect {
+            if self.showingOtpIncorect || self.showingOtpInvalid {
                 ModalOverlay(tapAction: { withAnimation { self.showingOtpIncorect = false } })
-            }
-            
-            if self.showingOtpInvalid {
-                ModalOverlay(tapAction: { withAnimation { self.showingOtpInvalid = false } })
             }
         }
         .edgesIgnoringSafeArea(.all)

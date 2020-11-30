@@ -40,6 +40,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
 //                AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
+                    
                     Text("Email Verification")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
@@ -53,6 +54,9 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     
                     TextField("Masukan alamat email anda", text: $email, onEditingChanged: { changed in
                         print("Changed")
+                        self.registerData.email = self.email
+                    }, onCommit: {
+                        print("Commited")
                         self.registerData.email = self.email
                     })
                     .frame(height: 30)

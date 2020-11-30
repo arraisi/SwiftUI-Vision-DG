@@ -92,7 +92,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
-//                        .disabled(true)
+                        .disabled(true)
                 }
                 .padding(.top, 5)
                 
@@ -291,11 +291,12 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     
     @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
+        print("EMAIL \(self.registerData.email)")
         self.otpVM.otpRequest(
             otpRequest: OtpRequest(
                     destination: self.registerData.email,
                     type: "email",
-                    trytime: 60
+                    trytime: 1
             )
         ) { success in
             
@@ -331,7 +332,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     func validateOTP() {
         self.otpVM.otpValidation(
             code: self.pin,
-            destination: self.otpVM.destination,
+            destination: self.registerData.email,
             reference: referenceCode,
             timeCounter: self.otpVM.timeCounter,
             tryCount: tryCount,
