@@ -55,6 +55,9 @@ extension CitizenViewModel {
                 self.namaLengkap = response.namaLengkap ?? ""
                 self.alamatKtp = response.alamatKtp ?? ""
                 self.kelurahan = response.kelurahan ?? ""
+                self.kecamatan = response.kecamatan ?? ""
+                self.kabupatenKota = response.kabupatenKota ?? ""
+                self.provinsi = response.provinsi ?? ""
                 self.errorMessage = "VALID"
                 completion(true)
                 

@@ -14,75 +14,81 @@ class UserRegistrationService {
     private init() {}
     
     static let shared = UserRegistrationService()
-
+    
     /* POST USER */
     func postUser(
+        registerData: RegistrasiModel,
         imageKtp: UIImage,
         imageNpwp: UIImage,
         imageSelfie: UIImage,
         completion: @escaping(Result<UserRegistrationResponse, ErrorResult>) -> Void) {
-
+        
         guard let url = URL.urlUserNew() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
-
+        
+        var deviceId = UIDevice.current.identifierForVendor?.uuidString
+        
+        print("DEVICE ID \(deviceId)")
+        print(registerData.tujuanPembukaan)
+        
         let userDetailParam: [String : Any] = [
-            "mobileNumber": "85875074351",
-              "productName": "Bank Mestika Product",
-              "imageKtp": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201114_142434_.jpg",
-              "nik": "5106040309800927",
-              "imageSelfie": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201114_142434_.jpg",
-              "imageNpwp": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201114_142434_.jpg",
-              "noNpwp": "",
-              "emailAddress": "primajatnika@gmail.com",
-              "purposeOfAccountOpening": "Pinjaman / Angsuran Kredit",
-              "sourceOfFund": "Gaji",
-              "monthlyWithdrawalFrequency": "10 - 25 Kali",
-              "monthlyWithdrawalAmount": "30 Juta",
-              "monthlyDepositFrequency": "0 – 10 Kali",
-              "monthlyDepositAmount": "30 Juta",
-              "occupation": "Polisi",
-              "position": "Head",
-              "companyName": "Tokopedia",
-              "companyAddress": "Jakarta Raya",
-              "companyKecamatan": "Jakarta",
-              "companyKelurahan": "Jakarta",
-              "companyPostalCode": "01921",
-              "companyBusinessField": "Jakarta",
-              "annualGrossIncome": "Rp 10 Juta - Rp 20 Juta",
-              "hasOtherSourceOfIncome": false,
-              "otherSourceOfIncome": "Tidak",
-              "relativeRelationship": "Ayah",
-              "relativesName": "Test",
-              "relativesAddress": "Bandung",
-              "relativesPostalCode": "40287",
-              "relativesKelurahan": "Bandung Kidul",
-              "relativesKecamatan": "Kujangsari",
-              "relativesPhoneNumber": "88219901229",
-              "funderName": "Test",
-              "funderRelation": "Teman",
-              "funderOccupation": "Kang Dawet",
-              "password": "123abc",
-              "pin": "271295",
-              "isWni": false,
-              "isAgreeTnc": false,
-              "isAgreetoShare": false,
-              "isAddressEqualToDukcapil": "Ya, alamat sesuai",
-              "addressInput": "Komp. Jakapurwa",
-              "addressRtRwInput": "02/05",
-              "addressKelurahanInput": "Bandung Kidul",
-              "addressKecamatanInput": "Kujangsari",
-              "addressPostalCodeInput": "40287",
-              "hasNoNpwp": false,
-              "fireBaseId": "1",
-              "nasabahName": "DATA TEST T 03",
-              "addressDukcapil": "JL PROF DR LATUMETEN I GG.5/6",
-              "addressRtRwDukcapil": "3/5",
-              "addressKelurahanDukcapil": "JELAMBAR",
-              "addressKecamatanDukcapil": "GROGOL PETAMBURAN",
-              "addressPostalCodeDukcapil": "12345",
-              "addressKabupatenDukcapil": "KOTA ADM. JAKARTA BARAT",
-              "addressPropinsiDukcapil": "DKI JAKARTA"
+            "mobileNumber": registerData.noTelepon,
+            "productName": "Bank Mestika Product",
+            "imageKtp": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201114_142434_.jpg",
+            "nik": registerData.nik,
+            "imageSelfie": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201114_142434_.jpg",
+            "imageNpwp": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201114_142434_.jpg",
+            "noNpwp": "",
+            "emailAddress": registerData.email,
+            "purposeOfAccountOpening": registerData.tujuanPembukaan,
+            "sourceOfFund": registerData.sumberDana,
+            "monthlyWithdrawalFrequency": registerData.perkiraanPenarikan,
+            "monthlyWithdrawalAmount": registerData.besarPerkiraanPenarikan,
+            "monthlyDepositFrequency": registerData.perkiraanSetoran,
+            "monthlyDepositAmount": registerData.besarPerkiraanSetoran,
+            "occupation": registerData.pekerjaan,
+            "position": registerData.jabatanProfesi,
+            "companyName": registerData.namaPerusahaan,
+            "companyAddress": registerData.alamatPerusahaan,
+            "companyKecamatan": registerData.kecamatan,
+            "companyKelurahan": registerData.kecamatan,
+            "companyPostalCode": registerData.kodePos,
+            "companyBusinessField": registerData.alamatPerusahaan,
+            "annualGrossIncome": registerData.penghasilanKotor,
+            "hasOtherSourceOfIncome": false,
+            "otherSourceOfIncome": "Tidak",
+            "relativeRelationship": registerData.hubunganKekerabatan,
+            "relativesName": registerData.namaKeluarga,
+            "relativesAddress": registerData.alamatKeluarga,
+            "relativesPostalCode": registerData.kodePosKeluarga,
+            "relativesKelurahan": registerData.kelurahanKeluarga,
+            "relativesKecamatan": registerData.kecamatanKeluarga,
+            "relativesPhoneNumber": registerData.noTelepon,
+            "funderName": "TEST",
+            "funderRelation": "TEMAN",
+            "funderOccupation": "TESTER",
+            "password": registerData.password,
+            "pin": registerData.pin,
+            "isWni": true,
+            "isAgreeTnc": true,
+            "isAgreetoShare": true,
+            "isAddressEqualToDukcapil": "Ya, alamat sesuai",
+            "addressInput": "Komp. Jakapurwa",
+            "addressRtRwInput": "02/05",
+            "addressKelurahanInput": "Bandung Kidul",
+            "addressKecamatanInput": "Kujangsari",
+            "addressPostalCodeInput": "40287",
+            "hasNoNpwp": false,
+            "fireBaseId": "1",
+            "nasabahName": registerData.namaLengkapFromNik,
+            "addressDukcapil": registerData.alamatKtpFromNik,
+            "addressRtRwDukcapil": "\(registerData.rtFromNik)/\(registerData.rwFromNik)",
+            "addressKelurahanDukcapil": registerData.kelurahanFromNik,
+            "addressKecamatanDukcapil": registerData.kecamatanFromNik,
+            "addressPostalCodeDukcapil": "12345",
+            "addressKabupatenDukcapil": registerData.kabupatenKotaFromNik,
+            "addressPropinsiDukcapil": registerData.provinsiFromNik
         ]
         
         do {
@@ -92,12 +98,12 @@ class UserRegistrationService {
             
             // generate boundary string using a unique per-app string
             let boundary = UUID().uuidString
-
+            
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             request.addValue("*/*", forHTTPHeaderField: "accept")
-            request.addValue("120", forHTTPHeaderField: "X-Device-ID")
+            request.addValue(deviceId!, forHTTPHeaderField: "X-Device-ID")
             
             var data = Data()
             
@@ -126,8 +132,8 @@ class UserRegistrationService {
             data.append("\(jsonString!)".data(using: .utf8)!)
             
             data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-
-
+            
+            
             URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
                 
                 if error == nil {
@@ -136,7 +142,7 @@ class UserRegistrationService {
                         print(json)
                     }
                 }
-
+                
                 if let httpResponse = response as? HTTPURLResponse {
                     print("\(httpResponse.statusCode)")
                     
@@ -149,7 +155,7 @@ class UserRegistrationService {
                         completion(.success(userResponse!))
                     }
                 }
-
+                
             }.resume()
             
         } catch {

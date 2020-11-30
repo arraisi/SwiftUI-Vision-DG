@@ -431,7 +431,7 @@ struct VerificationRegisterDataView: View {
     /* Save User To DB */
     func saveUserToDb() {
 //        nextRoute = true
-        self.userRegisterVM.userRegistration() { success in
+        self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
                 nextRoute = true
             }

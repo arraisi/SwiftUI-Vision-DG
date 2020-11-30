@@ -483,7 +483,7 @@ struct FormVerificationRegisterDataNasabahScreen: View {
     
     /* Save User To DB */
     func saveUserToDb() {
-        self.userRegisterVM.userRegistration() { success in
+        self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
                 print("SUCCESS")
                 nextRoute = true

@@ -14,12 +14,13 @@ class UserRegistrationViewModel: ObservableObject {
 extension UserRegistrationViewModel {
     
     /* REGISTER USER */
-    func userRegistration(completion: @escaping (Bool) -> Void) {
+    func userRegistration(registerData: RegistrasiModel, completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
         UserRegistrationService.shared.postUser(
+            registerData: registerData,
             imageKtp: UIImage(named: "atm_red_devils")!,
             imageNpwp: UIImage(named: "atm_red_devils")!,
             imageSelfie: UIImage(named: "atm_red_devils")!) { result in

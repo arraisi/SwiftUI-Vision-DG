@@ -155,6 +155,15 @@ struct ScanKTPView: View {
                 self.showingAlert = true
                 
                 self.registerData.nik = nik
+                self.registerData.namaLengkapFromNik = self.citizenVM.namaLengkap
+                self.registerData.tempatLahirFromNik = self.citizenVM.tempatLahir
+                self.registerData.alamatKtpFromNik = self.citizenVM.alamatKtp
+                self.registerData.rtFromNik = self.citizenVM.rt
+                self.registerData.rwFromNik = self.citizenVM.rw
+                self.registerData.kelurahanFromNik = self.citizenVM.kelurahan
+                self.registerData.kecamatanFromNik = self.citizenVM.kecamatan
+                self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
+                self.registerData.provinsiFromNik = self.citizenVM.provinsi
                 self.registerData.fotoKTP = self.imageKTP!
                 self.onCommit()
             }

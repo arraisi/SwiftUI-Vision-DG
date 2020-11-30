@@ -92,7 +92,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             Text("(00:\(String(format: "%02d", timeRemaining)))")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
-                        .disabled(true)
+//                        .disabled(true)
                 }
                 .padding(.top, 5)
                 
