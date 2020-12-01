@@ -229,7 +229,7 @@ struct FormIdentitasDiriView: View {
                         })
                 }
                 else {
-                    SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker, frontCamera: self.$formSelfie)
+                    SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
                 }
                 
                 if self.shouldPresentMaskSelfieCamera {
