@@ -252,7 +252,7 @@ struct InputIdentitasDiriRegisterNasabahView: View {
         return imageKTP != nil
             && registerData.nik != ""
             && confirmNik
-            && (registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp)
+            && ((registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp) && !self.formNPWP)
             && imageSelfie != nil
     }
     
