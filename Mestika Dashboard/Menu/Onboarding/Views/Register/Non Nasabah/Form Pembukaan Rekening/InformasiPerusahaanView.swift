@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-struct Address {
-    var address: String = ""
-    var city: String = ""
-    var kodePos: String = ""
-    var kecamatan: String = ""
-    var kelurahan: String = ""
-    var rtRw: String = ""
-}
-
 struct InformasiPerusahaanView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel

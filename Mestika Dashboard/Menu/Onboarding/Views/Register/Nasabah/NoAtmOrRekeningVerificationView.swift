@@ -32,13 +32,18 @@ struct NoAtmOrRekeningVerificationView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
+            
             VStack {
                 Color(hex: "#232175")
-                    .frame(height: 300)
+                    .frame(height: UIScreen.main.bounds.height*0.5)
                 Color(hex: "#F6F8FB")
             }
             
             VStack {
+                AppBarLogo(light: false) {
+                    
+                }
+                
                 VStack(alignment: .center) {
                     Text("No. Kartu ATM atau Rekening")
                         .font(.custom("Montserrat-Bold", size: 18))
@@ -62,14 +67,14 @@ struct NoAtmOrRekeningVerificationView: View {
                         
                         Menu {
                             ForEach(0..<jenisKartuList.count, id: \.self) { i in
-                            Button(action: {
-                                print(jenisKartuList[i])
-                                jenisKartuCtrl = jenisKartuList[i].jenis
-                            }) {
-                                Text(jenisKartuList[i].jenis)
-                                    .font(.custom("Montserrat-Regular", size: 10))
+                                Button(action: {
+                                    print(jenisKartuList[i])
+                                    jenisKartuCtrl = jenisKartuList[i].jenis
+                                }) {
+                                    Text(jenisKartuList[i].jenis)
+                                        .font(.custom("Montserrat-Regular", size: 10))
+                                }
                             }
-                        }
                         } label: {
                             Image(systemName: "chevron.right").padding()
                         }
@@ -102,7 +107,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     NavigationLink(
-                        destination: PhoneOTPRegisterNasabahView(rootIsActive: .constant(false)).environmentObject(registerData),
+                        destination: PhoneOTPRegisterNasabahView().environmentObject(registerData),
                         label: {
                             Text("Verifikasi No. Kartu")
                                 .foregroundColor(.white)
@@ -120,13 +125,13 @@ struct NoAtmOrRekeningVerificationView: View {
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(radius: 30)
+                .padding(.vertical, 25)
             }
             .padding(.horizontal, 30)
-            .padding(.top, UIScreen.main.bounds.height * 0.15)
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarHidden(true)
         .onAppear{
             self.registerData.noTelepon = "85359117336"
         }

@@ -296,6 +296,8 @@
 		C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */; };
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
 		C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347D22559422B000754C4 /* CardBlockView.swift */; };
+		C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */; };
+		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */; };
@@ -620,6 +622,8 @@
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
+		C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppBar.swift; sourceTree = "<group>"; };
+		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOTPVerificationView.swift; sourceTree = "<group>"; };
@@ -748,6 +752,7 @@
 				0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */,
 				06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */,
 				06AD56FF2570CAC50071C4A9 /* WebView.swift */,
+				C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -1364,6 +1369,7 @@
 		C01C67A0255E36F20019D06F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C0BFB51C2576373700676B95 /* Register */,
 				52ADFE7E2557D99F00A1001F /* CardModel.swift */,
 				52ADFE802557D99F00A1001F /* DetailJenisATMModel.swift */,
 				52ADFE832557D99F00A1001F /* RegistrasiModel.swift */,
@@ -1504,6 +1510,14 @@
 				C0A4F98E25528C0600566A11 /* Montserrat-Thin.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		C0BFB51C2576373700676B95 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				C0BFB51D2576375400676B95 /* Address.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		C0D7B5D92552AF25009C3976 /* CardManagement */ = {
@@ -1730,6 +1744,7 @@
 				C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */,
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,
+				C0BFB51E2576375500676B95 /* Address.swift in Sources */,
 				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
 				0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */,
 				52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */,
@@ -1860,6 +1875,7 @@
 				C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */,
 				5290A186255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift in Sources */,
 				C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */,
+				C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */,
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
