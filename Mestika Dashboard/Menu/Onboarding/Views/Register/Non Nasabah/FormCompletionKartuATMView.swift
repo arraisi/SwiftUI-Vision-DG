@@ -66,18 +66,20 @@ struct FormCompletionKartuATMView: View {
                     addressCard
                     referalCodeCard
                     
-                    NavigationLink(destination: FormCompletionReferalCodeView().environmentObject(atmData)) {
+                    Button(action: {
+                        
+                    }, label: {
                         Text("MASUKKAN DATA")
                             .foregroundColor(Color("DarkStaleBlue"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    }
+                    })
                     .frame(width: UIScreen.main.bounds.width - 40, height: 50)
                     .background(Color.white)
                     .cornerRadius(15)
                     .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
-                    .padding(.vertical, 30)
+                    .padding(.bottom, 30)
                 }
             }
             NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData), isActive: $goToSuccessPage){
@@ -168,7 +170,9 @@ struct FormCompletionKartuATMView: View {
             
             VStack { Divider() }.padding(.horizontal, 20)
             
-            formAddress
+            if atmData.addressOptionId == 4 {
+                formAddress
+            }
         }
         .frame(width: UIScreen.main.bounds.width - 40)
         .background(Color.white)
