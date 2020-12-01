@@ -20,7 +20,8 @@ struct WelcomeView: View {
     @State var isKetentuanViewActive: Bool = false
     @State var isLoginViewActive: Bool = false
     @State var isFirstLoginViewActive: Bool = false
-    @State var isActiveRootLogin : Bool = false
+    @State var isActiveRootLogin: Bool = false
+    @State var isNoAtmOrRekViewActive: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -106,6 +107,7 @@ struct WelcomeView: View {
                     self.isKetentuanViewActive = false
                     self.isLoginViewActive = false
                     self.isFirstLoginViewActive = false
+                    self.isNoAtmOrRekViewActive = false
                     self.appState.moveToWelcomeView = false
                 }
             }
@@ -186,12 +188,13 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: NoAtmOrRekeningVerificationView().environmentObject(registerData)){
+            NavigationLink(destination: NoAtmOrRekeningVerificationView().environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive){
                 Text("Ya, saya nasabah Bank Mestika")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
+            .isDetailLink(false)
             .padding(.bottom, 30)
             .cornerRadius(12)
         }
