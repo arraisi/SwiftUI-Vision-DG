@@ -78,7 +78,7 @@ struct SumberPenyandandDana2RegisterNasabahView: View {
                                         Spacer()
 
                                         // Sub title
-                                        Text("Sumber Penyandang Dana - 02")
+                                        Text("Sumber Penyandang Dana")
                                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                                 .foregroundColor(Color(hex: "#232175"))
                                                 .padding(.horizontal, 20)

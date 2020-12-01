@@ -10,7 +10,9 @@ extension URLRequest {
     init(_ url: URL) {
         self.init(url: url)
         self.setValue("*/*", forHTTPHeaderField: "accept")
+        ///TODO : + add firebase id
         self.setValue(UIDevice.current.identifierForVendor?.uuidString, forHTTPHeaderField: "X-Device-ID")
+        ///TODO : add firebase id
         self.setValue("1", forHTTPHeaderField: "X-Firebase-ID")
     }
 }

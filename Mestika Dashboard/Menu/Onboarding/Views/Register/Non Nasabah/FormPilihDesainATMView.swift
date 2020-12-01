@@ -7,10 +7,12 @@
 
 import SwiftUI
 import NavigationStack
+import JGProgressHUD_SwiftUI
 
 struct FormPilihDesainATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
+    @ObservedObject private var productVM = ATMProductViewModel()
     
     @State private var selectedTab = 0
     @State private var titleCard = "THE CARD"
@@ -122,6 +124,9 @@ struct FormPilihDesainATMView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .onAppear() {
+            self.fetchATMDesignList()
+        }
     }
     
     func selectCard(card: CardModel) {
@@ -134,6 +139,35 @@ struct FormPilihDesainATMView: View {
         UIPageControl.appearance().pageIndicatorTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.1968375428)
     }
     
+    // MARK: - LOADING HANDLER
+    @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
+    private func showIndeterminate() {
+        hudCoordinator.showHUD {
+            let hud = JGProgressHUD()
+            hud.backgroundColor = UIColor(white: 0, alpha: 0.4)
+            
+            hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 4, opacity: 0.3)
+            hud.vibrancyEnabled = false
+            
+            hud.textLabel.text = "Loading"
+            
+            if !self.productVM.isLoading {
+                hud.dismiss(afterDelay: 1)
+            }
+            
+            return hud
+        }
+    }
+    
+    // MARK: - FETCH ATM LIST DATA FROM API
+    private func fetchATMDesignList() {
+        productVM.getListATMDesign() { (success: Bool) in
+            if success {
+//                self.cards = productVM.listATM
+//                self.refreshCarousel()
+            }
+        }
+    }
 }
 
 struct PilihDesainATMView_Previews: PreviewProvider {

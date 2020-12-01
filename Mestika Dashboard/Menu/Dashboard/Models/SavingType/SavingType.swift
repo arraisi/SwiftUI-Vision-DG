@@ -14,5 +14,10 @@ struct SavingType: Hashable, Codable, Identifiable {
     var rekeningNumber: String
     var imageName : String
     var isShow : Bool
-    
+    var description: [SavingTypeDescription]
+}
+
+struct SavingTypeDescription: Hashable, Codable, Identifiable {
+    var id : String
+    var desc: String
 }

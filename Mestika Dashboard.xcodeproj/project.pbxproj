@@ -10,6 +10,8 @@
 		06202919256D905500A830EA /* ATMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06202918256D905500A830EA /* ATMService.swift */; };
 		0620291E256D914500A830EA /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0620291D256D914500A830EA /* GeneralResponse.swift */; };
 		06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06409F72256798D7008ABB20 /* AddressOptionsView.swift */; };
+		064BC25E2576093300F15CA9 /* ATMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BC25D2576093300F15CA9 /* ATMModel.swift */; };
+		064BC26325760DA200F15CA9 /* ATMCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BC26225760DA200F15CA9 /* ATMCardView.swift */; };
 		064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */; };
 		064CCE5E256DB40D001B8EB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */; };
 		064EBDAE256ADEB20070A792 /* FormCompletionKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */; };
@@ -336,6 +338,8 @@
 		06202918256D905500A830EA /* ATMService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATMService.swift; sourceTree = "<group>"; };
 		0620291D256D914500A830EA /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
 		06409F72256798D7008ABB20 /* AddressOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressOptionsView.swift; sourceTree = "<group>"; };
+		064BC25D2576093300F15CA9 /* ATMModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMModel.swift; sourceTree = "<group>"; };
+		064BC26225760DA200F15CA9 /* ATMCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMCardView.swift; sourceTree = "<group>"; };
 		064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Extensions.swift"; sourceTree = "<group>"; };
 		064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompletionKartuATMView.swift; sourceTree = "<group>"; };
@@ -748,6 +752,7 @@
 				0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */,
 				06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */,
 				06AD56FF2570CAC50071C4A9 /* WebView.swift */,
+				064BC26225760DA200F15CA9 /* ATMCardView.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -1382,6 +1387,7 @@
 				0620291D256D914500A830EA /* GeneralResponse.swift */,
 				524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */,
 				5205860F25723965005DB764 /* PasswordResponse.swift */,
+				064BC25D2576093300F15CA9 /* ATMModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1746,6 +1752,7 @@
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
+				064BC25E2576093300F15CA9 /* ATMModel.swift in Sources */,
 				526A81582560B1F900D614CB /* LoginBindingModel.swift in Sources */,
 				52AE1A8C255A448100B011B7 /* OtpRequest.swift in Sources */,
 				C0E6C8FB255F87BB00A79237 /* FormPilihJenisATMView.swift in Sources */,
@@ -1967,6 +1974,7 @@
 				52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				5290A14A255BCA0E0090F788 /* SumberDanaRegisterNasabahView.swift in Sources */,
+				064BC26325760DA200F15CA9 /* ATMCardView.swift in Sources */,
 				C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */,
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
 				5290A195255BD1790090F788 /* SuccessRegisterNasabahScreen.swift in Sources */,

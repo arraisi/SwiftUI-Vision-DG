@@ -67,7 +67,7 @@ struct FormCompletionKartuATMView: View {
                     referalCodeCard
                     
                     Button(action: {
-                        
+                        self.postData()
                     }, label: {
                         Text("MASUKKAN DATA")
                             .foregroundColor(Color("DarkStaleBlue"))

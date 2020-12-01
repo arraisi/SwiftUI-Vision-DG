@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     var digits: [Int] {
@@ -49,5 +50,27 @@ extension String {
         let startIndex = index(from: r.lowerBound)
         let endIndex = index(from: r.upperBound)
         return String(self[startIndex..<endIndex])
+    }
+    
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+
+        return String(data: data, encoding: .utf8)
+    }
+
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
+
+    func base64ToImage() -> UIImage? {
+        let cleanBase64 = self.replacingOccurrences(of: "data:image/jpeg;base64,", with: "")
+            .replacingOccurrences(of: "data:image/png;base64,", with: "")
+        if let dataDecoded = Data(base64Encoded: cleanBase64, options: []), let img = UIImage(data: dataDecoded) {
+            return img
+        } else {
+            return nil
+        }
     }
 }

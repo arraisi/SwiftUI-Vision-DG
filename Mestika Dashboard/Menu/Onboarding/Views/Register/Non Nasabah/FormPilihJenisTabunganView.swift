@@ -64,6 +64,7 @@ struct FormPilihJenisTabunganView: View {
                                             })
                                             .onEnded(onDragEnded)
                                     )
+                                    .cornerRadius(10)
                             }
                         }
                         .frame(width: itemWidth)
@@ -80,11 +81,12 @@ struct FormPilihJenisTabunganView: View {
                         self.data[0].isShow = true
                     }
                     
-                    detailsTypeSaving
-                        .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                        .frame(width: UIScreen.main.bounds.width - 30)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    
+                    if self.data.count > Int(self.count) {
+                        DetailsTypeSavingView(data: self.data[Int(self.count)])
+                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                            .frame(width: UIScreen.main.bounds.width - 30)
+                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    }
                     Spacer()
                 }
                 .padding(.vertical, 30)

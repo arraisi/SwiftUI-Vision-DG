@@ -12,7 +12,7 @@ class ATMService {
     
     static let shared = ATMService()
     
-    // MARK : get response model.
+    // MARK : get response model of add product ATM.
     func postAddProductATM(dataRequest: AddProductATM, completion: @escaping(Result<GeneralResponse, NetworkError>) -> Void) {
         
         guard let url = URL.urlAddProductATM() else {
@@ -26,11 +26,7 @@ class ATMService {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue("1", forHTTPHeaderField: "X-Device-ID")
-        request.addValue("1", forHTTPHeaderField: "X-Firebase-ID")
-        request.addValue("*/*", forHTTPHeaderField: "accept")
         request.httpBody = finalBody
-        
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -44,6 +40,68 @@ class ATMService {
             
             // MARK : change model response.
             let response = try? JSONDecoder().decode(GeneralResponse.self, from: data)
+            
+            if response == nil {
+                completion(.failure(.decodingError))
+            } else {
+                completion(.success(response!))
+            }
+        }.resume()
+    }
+    
+    // MARK : get response model of list ATM.
+    func getListATM(completion: @escaping(Result<[ATMModel], NetworkError>) -> Void) {
+        
+        guard let url = URL.urlGetListATM() else {
+            return completion(.failure(.badUrl))
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(.failure(.noData))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+            }
+            
+            // MARK : change model response.
+            let response = try? JSONDecoder().decode([ATMModel].self, from: data)
+            
+            if response == nil {
+                completion(.failure(.decodingError))
+            } else {
+                completion(.success(response!))
+            }
+        }.resume()
+    }
+    
+    // MARK : get response model of list ATM Design.
+    func getListATMDesign(completion: @escaping(Result<[ATMModel], NetworkError>) -> Void) {
+        
+        guard let url = URL.urlGetListATMDesign() else {
+            return completion(.failure(.badUrl))
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(.failure(.noData))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+            }
+            
+            // MARK : change model response.
+            let response = try? JSONDecoder().decode([ATMModel].self, from: data)
             
             if response == nil {
                 completion(.failure(.decodingError))
