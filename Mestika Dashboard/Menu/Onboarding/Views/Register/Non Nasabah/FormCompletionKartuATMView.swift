@@ -93,9 +93,9 @@ struct FormCompletionKartuATMView: View {
 //            .introspectNavigationController { navigationController in
 //                navigationController.hidesBarsOnSwipe = true
 //            }
-//            .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.top)
 //            .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-//            .navigationBarHidden(true)
+            .navigationBarHidden(true)
             .onTapGesture() {
                 UIApplication.shared.endEditing()
             }
@@ -175,9 +175,7 @@ struct FormCompletionKartuATMView: View {
             
             VStack { Divider() }.padding(.horizontal, 20)
             
-            if atmData.addressOptionId == 4 {
-                formAddress
-            }
+            formAddress
         }
         .frame(width: UIScreen.main.bounds.width - 40)
         .background(Color.white)
