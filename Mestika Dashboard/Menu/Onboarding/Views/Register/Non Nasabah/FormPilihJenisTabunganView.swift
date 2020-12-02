@@ -21,6 +21,10 @@ struct FormPilihJenisTabunganView: View {
     let itemHeight:CGFloat = 194
     let itemGapHeight:CGFloat = 10
     
+    @GestureState private var dragOffset = CGSize.zero
+    
+    @Binding var shouldPopToRootView : Bool
+    
     @State var showingModal = false
     @EnvironmentObject var registerData: RegistrasiModel
     
@@ -98,6 +102,13 @@ struct FormPilihJenisTabunganView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                self.shouldPopToRootView = false
+            }
+            
+        }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }
@@ -192,6 +203,6 @@ struct FormPilihJenisTabunganView: View {
 
 struct ChooseTypeSavingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
+        FormPilihJenisTabunganView(shouldPopToRootView: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

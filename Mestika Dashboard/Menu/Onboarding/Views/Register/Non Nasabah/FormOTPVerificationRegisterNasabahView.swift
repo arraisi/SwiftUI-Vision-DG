@@ -31,6 +31,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var referenceCode: String = ""
     @State var showPin = true
     @State var isDisabled = false
+    @State var messageResponse: String = ""
     
     /* Variable Validation */
     @State var isOtpValid = false
@@ -184,7 +185,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
         .alert(isPresented: $showingAlertError) {
             return Alert(
                 title: Text("MESSAGE"),
-                message: Text(self.otpVM.statusMessage),
+                message: Text(self.messageResponse),
                 dismissButton: .default(Text("Oke"))
             )
         }
@@ -364,6 +365,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 DispatchQueue.main.async {
 //                    self.timeRemaining = self.otpVM.timeCounter
                     self.referenceCode = self.otpVM.reference
+                    self.messageResponse = self.otpVM.statusMessage
                 }
                 
                 self.showingAlertError = true
@@ -381,6 +383,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     print(self.otpVM.timeCounter)
                     
                     DispatchQueue.main.sync {
+                        self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
                         self.timeRemaining = self.otpVM.timeCounter

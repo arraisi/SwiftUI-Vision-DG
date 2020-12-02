@@ -12,6 +12,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    @State var activeRoute: Bool = false
     @Binding var shouldPopToRootView : Bool
     @Binding var shouldPopToRootView2 : Bool
     
@@ -93,7 +94,9 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     }
                     .padding(.vertical, 10)
                     
-                    NavigationLink(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
+                    NavigationLink(
+                        destination: FormEmailOTPVerificationRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),
+                        isActive: self.$activeRoute) {
                         
                         Text("Verifikasi Email")
                             .foregroundColor(.white)
@@ -101,6 +104,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         
                     }
+                    .isDetailLink(false)
                     .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 10)

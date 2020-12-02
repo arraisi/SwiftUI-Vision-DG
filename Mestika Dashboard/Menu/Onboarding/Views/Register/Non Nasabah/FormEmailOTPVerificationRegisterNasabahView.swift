@@ -18,11 +18,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     @State var referenceCode: String = ""
     @State var showPin = true
     @State var isDisabled = false
+    @State var messageResponse: String = ""
     
     /* Variable Validation */
     @State var isOtpValid = false
     @State var isResendOtpDisabled = true
     @State var tryCount = 0
+    
+    @Binding var shouldPopToRootView : Bool
     
     @State private var timeRemaining = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -107,11 +110,12 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 
                 VStack {
                     NavigationLink(
-                        destination: FormPilihJenisTabunganView().environmentObject(registerData),
+                        destination: FormPilihJenisTabunganView(shouldPopToRootView: self.$shouldPopToRootView).environmentObject(registerData),
                         isActive: self.$isOtpValid,
                         label: {
                             EmptyView()
-                        })
+                        }).isDetailLink(false)
+                    
                     
                     Button(action: {
 //                        self.isOtpValid = true
@@ -171,7 +175,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("MESSAGE"),
-                message: Text(self.otpVM.statusMessage),
+                message: Text(self.messageResponse),
                 dismissButton: .default(Text("Oke"))
             )
         }
@@ -308,6 +312,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 DispatchQueue.main.async {
                     self.timeRemaining = 30
                     self.referenceCode = self.otpVM.reference
+                    self.messageResponse = self.otpVM.statusMessage
                 }
                 
                 self.showingAlert = true
@@ -319,6 +324,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     print(self.otpVM.timeCounter)
                     
                     DispatchQueue.main.sync {
+                        self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
                         self.timeRemaining = 30
@@ -361,7 +367,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
 struct EmailOTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FormEmailOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+            FormEmailOTPVerificationRegisterNasabahView(shouldPopToRootView: .constant(false)).environmentObject(RegistrasiModel())
         }
     }
 }

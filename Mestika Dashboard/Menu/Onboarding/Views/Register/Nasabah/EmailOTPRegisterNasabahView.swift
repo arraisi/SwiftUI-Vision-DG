@@ -35,6 +35,8 @@ struct EmailOTPRegisterNasabahView: View {
         pin.count < 6
     }
     
+    @Binding var shouldPopToRootView : Bool
+    
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -115,14 +117,13 @@ struct EmailOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: PilihJenisTabunganRegisterNasabahView().environmentObject(registerData),
+                            destination: PilihJenisTabunganRegisterNasabahView(shouldPopToRootView: self.$shouldPopToRootView).environmentObject(registerData),
                             isActive: self.$isOtpValid,
                             label: {
                                 EmptyView()
-                            })
+                            }).isDetailLink(false)
                         
                         Button(action: {
-                            //                        self.isOtpValid = true
                             self.tryCount += 1
                             validateOTP()
                         }) {
@@ -366,6 +367,6 @@ struct EmailOTPRegisterNasabahView: View {
 
 struct FormEmailOTPNasabah_Previews: PreviewProvider {
     static var previews: some View {
-        EmailOTPRegisterNasabahView()
+        EmailOTPRegisterNasabahView(shouldPopToRootView: .constant(false))
     }
 }

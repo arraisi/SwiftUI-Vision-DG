@@ -117,11 +117,12 @@ struct FormCompletionReferalCodeView: View {
     }
     
     func postData() {
-        productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
-            if success {
-                self.goToSuccessPage = true
-            }
-        }
+        self.goToSuccessPage = true
+//        productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
+//            if success {
+//                self.goToSuccessPage = true
+//            }
+//        }
     }
 }
 
