@@ -24,7 +24,7 @@ class ATMService {
         let json = String(data: finalBody, encoding: String.Encoding.utf8)
         print(json)
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "POST"
         request.httpBody = finalBody
         
@@ -56,7 +56,7 @@ class ATMService {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -87,7 +87,7 @@ class ATMService {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in

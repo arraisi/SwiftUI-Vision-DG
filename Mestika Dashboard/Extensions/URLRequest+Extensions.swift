@@ -4,15 +4,25 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 extension URLRequest {
 
     init(_ url: URL) {
         self.init(url: url)
         self.setValue("*/*", forHTTPHeaderField: "accept")
-        ///TODO : + add firebase id
-        self.setValue(UIDevice.current.identifierForVendor?.uuidString, forHTTPHeaderField: "X-Device-ID")
-        ///TODO : add firebase id
-        self.setValue("1", forHTTPHeaderField: "X-Firebase-ID")
+        
+        if let token = Messaging.messaging().fcmToken {
+            if let indexEnd = token.index(of: ":") {
+                let firebaseId = String(token[..<indexEnd])
+                let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
+                
+                self.setValue("\(deviceId)\(firebaseId)", forHTTPHeaderField: "X-Device-ID")
+                self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
+            }
+        } else {
+            let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
+            self.setValue(deviceId, forHTTPHeaderField: "X-Device-ID")
+        }
     }
 }

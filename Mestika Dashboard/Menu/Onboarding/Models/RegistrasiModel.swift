@@ -185,7 +185,7 @@ class RegistrasiModel: ObservableObject {
     }
     
     func load() {
-        let userDefaults = UserDefaults.standard
+         let userDefaults = UserDefaults.standard
         do {
             if let json = userDefaults.string(forKey: "registerModel") {
                 let jsonDecoder = JSONDecoder()

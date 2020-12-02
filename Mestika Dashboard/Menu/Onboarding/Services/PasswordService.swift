@@ -24,9 +24,8 @@ class PasswordService {
         
         let finalUrl = url.appending("password", value: password)
         
-        var request = URLRequest(url: finalUrl)
+        var request = URLRequest(finalUrl)
         request.httpMethod = "GET"
-        request.addValue("*/*", forHTTPHeaderField: "accept")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             

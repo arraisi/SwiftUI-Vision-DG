@@ -22,7 +22,7 @@ class MobileVersionService {
         
         let paramsUrl = url.appending("osType", value: "ios")
         
-        var request = URLRequest(url: paramsUrl)
+        var request = URLRequest(paramsUrl)
         request.httpMethod = "GET"
         
         

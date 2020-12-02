@@ -99,12 +99,11 @@ class UserRegistrationService {
             // generate boundary string using a unique per-app string
             let boundary = UUID().uuidString
             
-            var request = URLRequest(url: url)
+            var request = URLRequest(url)
             request.httpMethod = "POST"
             request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             request.addValue("*/*", forHTTPHeaderField: "accept")
-            request.addValue(deviceId!, forHTTPHeaderField: "X-Device-ID")
-            
+         
             var data = Data()
             
             // Add the image KTP
@@ -172,10 +171,8 @@ class UserRegistrationService {
         
         print("DEVICE ID HEADER : \(deviceId)")
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "GET"
-        request.addValue("*/*", forHTTPHeaderField: "accept")
-        request.addValue(deviceId, forHTTPHeaderField: "X-Device-ID")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             

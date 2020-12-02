@@ -36,6 +36,7 @@
 		0AF48AD025778C760037942D /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACF25778C760037942D /* Formatter+Extensions.swift */; };
 		0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */; };
 		0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */; };
+		0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */; };
 		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
 		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
@@ -373,6 +374,7 @@
 		0AF48ACF25778C760037942D /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
 		0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Extensions.swift"; sourceTree = "<group>"; };
 		0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
+		0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extensions.swift"; sourceTree = "<group>"; };
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
@@ -972,6 +974,7 @@
 				0AF48ACF25778C760037942D /* Formatter+Extensions.swift */,
 				0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */,
 				0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */,
+				0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1918,6 +1921,7 @@
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
 				52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */,
+				0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */,
 				0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */,
 				526A81682560B2B200D614CB /* FirstOTPLoginView.swift in Sources */,
 				5290A190255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift in Sources */,
