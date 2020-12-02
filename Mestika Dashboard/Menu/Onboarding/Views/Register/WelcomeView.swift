@@ -35,11 +35,11 @@ struct WelcomeView: View {
     @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
     
     // Modal Variables
-//    @State var isShowModal = false
-//    @State var modalSelection = ""
+    @State var isShowModal = false
+    @State var modalSelection = ""
     
-    @State var isShowModal = true
-    @State var modalSelection = "RegisterApprovedModal"
+//    @State var isShowModal = true
+//    @State var modalSelection = "RegisterApprovedModal"
     
     var body: some View {
         NavigationView {

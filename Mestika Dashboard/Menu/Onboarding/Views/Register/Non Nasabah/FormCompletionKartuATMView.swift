@@ -89,7 +89,7 @@ struct FormCompletionKartuATMView: View {
         .introspectNavigationController { navigationController in
             navigationController.hidesBarsOnSwipe = true
         }
-        .edgesIgnoringSafeArea(.top)
+//        .edgesIgnoringSafeArea(.top)
 //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .onTapGesture() {
