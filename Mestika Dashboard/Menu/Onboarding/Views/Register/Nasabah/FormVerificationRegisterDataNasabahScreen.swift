@@ -8,7 +8,7 @@
 import SwiftUI
 import Indicators
 
-struct FormVerificationRegisterDataNasabahScreen: View {
+struct DataVerificationRegisterNasabahView: View {
     
     /* Environtment & Bind Obj */
     @EnvironmentObject var registerData: RegistrasiModel
@@ -440,44 +440,44 @@ struct FormVerificationRegisterDataNasabahScreen: View {
     /* Save User To Core Data */
     func saveUserToCoreData()  {
         
-        if (user.isEmpty) {
-            print("------SAVE TO CORE DATA-------")
-            
-            let data = User(context: managedObjectContext)
-            data.deviceId = UIDevice.current.identifierForVendor?.uuidString
+//        if (user.isEmpty) {
+//            print("------SAVE TO CORE DATA-------")
+//
+//            let data = User(context: managedObjectContext)
+//            data.deviceId = UIDevice.current.identifierForVendor?.uuidString
+////            data.nik = self.registerData.nik
+////            data.email = self.registerData.email
+////            data.phone = "085875074351"
+////            data.pin = "776540"
+////            data.password = "bringmee"
+////            data.firstName = "Prima"
+////            data.lastName = "Jatnika"
+////            data.email = "primajatnika271995@icloud.com"
+//
 //            data.nik = self.registerData.nik
 //            data.email = self.registerData.email
-//            data.phone = "085875074351"
-//            data.pin = "776540"
-//            data.password = "bringmee"
-//            data.firstName = "Prima"
-//            data.lastName = "Jatnika"
-//            data.email = "primajatnika271995@icloud.com"
-            
-            data.nik = self.registerData.nik
-            data.email = self.registerData.email
-            data.phone = self.registerData.noTelepon
-            data.pin = self.registerData.pin
-            data.password = self.registerData.password
-            data.firstName = "Stevia"
-            data.lastName = "R"
-            data.email = self.registerData.email
-            
-            UserDefaults.standard.set("false", forKey: "isFirstLogin")
-            UserDefaults.standard.set("true", forKey: "isSchedule")
-            
-            nextRoute = true
-            
-            do {
-                try self.managedObjectContext.save()
-            } catch {
-                print("Error saving managed object context: \(error)")
-            }
-        } else {
-            
-            print("GAGAL MENDAFTAR")
-            showingAlert = true
-        }
+//            data.phone = self.registerData.noTelepon
+//            data.pin = self.registerData.pin
+//            data.password = self.registerData.password
+//            data.firstName = "Stevia"
+//            data.lastName = "R"
+//            data.email = self.registerData.email
+//
+//            UserDefaults.standard.set("false", forKey: "isFirstLogin")
+//            UserDefaults.standard.set("true", forKey: "isSchedule")
+//
+//            nextRoute = true
+//
+//            do {
+//                try self.managedObjectContext.save()
+//            } catch {
+//                print("Error saving managed object context: \(error)")
+//            }
+//        } else {
+//
+//            print("GAGAL MENDAFTAR")
+//            showingAlert = true
+//        }
         
     }
     
@@ -499,6 +499,6 @@ struct FormVerificationRegisterDataNasabahScreen: View {
 
 struct FormVerificationRegisterDataNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormVerificationRegisterDataNasabahScreen().environmentObject(RegistrasiModel())
+        DataVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

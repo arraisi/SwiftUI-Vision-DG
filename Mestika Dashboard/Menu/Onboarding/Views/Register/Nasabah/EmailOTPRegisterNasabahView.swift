@@ -115,7 +115,7 @@ struct EmailOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: PilihJenisTabunganRegisterNasabahView().environmentObject(registerData),
+                            destination: JenisTabunganRegisterNasabahView().environmentObject(registerData),
                             isActive: self.$isOtpValid,
                             label: {
                                 EmptyView()

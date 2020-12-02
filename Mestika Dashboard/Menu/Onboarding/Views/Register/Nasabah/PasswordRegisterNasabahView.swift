@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InputPasswordRegisterNasabahView: View {
+struct PasswordRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
@@ -204,7 +204,7 @@ struct InputPasswordRegisterNasabahView: View {
                                     .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                     
                                     NavigationLink(
-                                        destination: InputPinRegisterNasabahView().environmentObject(registerData),
+                                        destination: PinRegisterNasabahView().environmentObject(registerData),
                                         isActive: $activeRoute,
                                         label: {EmptyView()}
                                     )
@@ -234,7 +234,7 @@ struct InputPasswordRegisterNasabahView: View {
                                 }
                                 .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                                 .cornerRadius(25.0)
-                                .shadow(color: Color(hex: "#D6DAF0"), radius: 5)
+                                .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 5, y: -2)
                                 .padding(.horizontal, 30)
                                 .padding(.top, 25)
                                 
@@ -310,6 +310,6 @@ struct InputPasswordRegisterNasabahView: View {
 
 struct FormRegisterPasswordNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        InputPasswordRegisterNasabahView().environmentObject(RegistrasiModel())
+        PasswordRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }

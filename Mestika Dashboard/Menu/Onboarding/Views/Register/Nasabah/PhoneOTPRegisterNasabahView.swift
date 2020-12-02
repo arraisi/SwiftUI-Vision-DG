@@ -118,7 +118,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: InputEmailRegisterNasabahView().environmentObject(registerData),
+                            destination: EmailRegisterNasabahView().environmentObject(registerData),
                             isActive: self.$isOtpValid) {
                             EmptyView()
                         }

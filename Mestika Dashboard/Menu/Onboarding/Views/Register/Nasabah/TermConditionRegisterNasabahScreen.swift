@@ -32,7 +32,6 @@ struct TermConditionRegisterNasabahScreen: View {
         isChecked && isChecked2
     }
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack {
             VStack {
@@ -42,13 +41,18 @@ struct TermConditionRegisterNasabahScreen: View {
             }
             
             VStack {
+                
+                AppBarLogo(light: false) {
+                    
+                }
+                
                 VStack {
                     Text("SYARAT DAN KETENTUAN")
                         .font(.title2)
                         .bold()
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .padding(.vertical, 20)
+                        .padding(.vertical, 25)
                         .padding(.horizontal, 20)
                         .fixedSize(horizontal: false, vertical: true)
                     
@@ -71,6 +75,7 @@ struct TermConditionRegisterNasabahScreen: View {
                         Divider()
                             .padding(.horizontal, 20)
                             .padding(.bottom, 20)
+                        
                         Spacer()
                         
                         Button(action: toggle) {
@@ -106,7 +111,7 @@ struct TermConditionRegisterNasabahScreen: View {
                             .padding(.bottom, 20)
                         }
                         
-                        NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData)) {
+                        NavigationLink(destination: DataVerificationRegisterNasabahView().environmentObject(registerData)) {
                             Text("Berikutnya")
                                 .foregroundColor(.white)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -125,15 +130,18 @@ struct TermConditionRegisterNasabahScreen: View {
                     .background(Color.white)
                     .cornerRadius(15)
                     .shadow(radius: 30)
+                    
+                    Spacer()
                 }
                 .padding(.horizontal, 30)
-                .padding(.top, 35)
                 .padding(.bottom, 35)
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
         
     }
 }
