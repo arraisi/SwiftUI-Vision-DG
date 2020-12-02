@@ -24,7 +24,7 @@ class ATMService {
         let json = String(data: finalBody, encoding: String.Encoding.utf8)
         print(json)
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "POST"
         request.httpBody = finalBody
         
@@ -56,7 +56,7 @@ class ATMService {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -81,13 +81,13 @@ class ATMService {
     }
     
     // MARK : get response model of list ATM Design.
-    func getListATMDesign(completion: @escaping(Result<[ATMModel], NetworkError>) -> Void) {
+    func getListATMDesign(completion: @escaping(Result<GeneralPaginationResponse<ATMDesignModel>, NetworkError>) -> Void) {
         
         guard let url = URL.urlGetListATMDesign() else {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -101,7 +101,7 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode([ATMModel].self, from: data)
+            let response = try? JSONDecoder().decode(GeneralPaginationResponse<ATMDesignModel>.self, from: data)
             
             if response == nil {
                 completion(.failure(.decodingError))

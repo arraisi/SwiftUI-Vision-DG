@@ -12,8 +12,15 @@ struct FormEmailVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    @State var activeRoute: Bool = false
+    @Binding var shouldPopToRootView : Bool
+    @Binding var shouldPopToRootView2 : Bool
+    
     @State var email: String = ""
     @State private var isEmailValid : Bool   = false
+    @Environment(\.presentationMode) var presentationMode
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     func textFieldValidatorEmail(_ string: String) -> Bool {
         if string.count > 100 {
@@ -41,10 +48,17 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("Email Verification")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .padding(.top, 30)
+                    Button(
+                        action: {
+                            self.shouldPopToRootView2 = false
+                        },
+                        label: {
+                            Text("Email Verification")
+                                .font(.custom("Montserrat-SemiBold", size: 18))
+                                .foregroundColor(Color(hex: "#232175"))
+                                .padding(.top, 30)
+                        }
+                    )
                     
                     Text("Silahkan masukan Alamat Email Anda")
                         .font(.custom("Montserrat-Regular", size: 12))
@@ -80,7 +94,9 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     }
                     .padding(.vertical, 10)
                     
-                    NavigationLink(destination: FormEmailOTPVerificationRegisterNasabahView().environmentObject(registerData)) {
+                    NavigationLink(
+                        destination: FormEmailOTPVerificationRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),
+                        isActive: self.$activeRoute) {
                         
                         Text("Verifikasi Email")
                             .foregroundColor(.white)
@@ -88,6 +104,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         
                     }
+                    .isDetailLink(false)
                     .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 10)
@@ -103,19 +120,25 @@ struct FormEmailVerificationRegisterNasabahView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                self.shouldPopToRootView2 = false
+            }
+            
+        }))
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        
     }
 }
 
 #if DEBUG
 struct EmailVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FormEmailVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+        FormEmailVerificationRegisterNasabahView(shouldPopToRootView: .constant(false), shouldPopToRootView2: .constant(false)).environmentObject(RegistrasiModel())
     }
 }
 #endif

@@ -26,7 +26,7 @@ class AssetsService {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         

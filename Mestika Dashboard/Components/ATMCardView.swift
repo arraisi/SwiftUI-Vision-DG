@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ATMCardView: View {
-    var card: ATMCard
+    var card: ATMViewModel
     
     var cardWidth: CGFloat
     var cardHeight: CGFloat
@@ -94,6 +94,6 @@ struct ATMCardView: View {
 
 struct ATMCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ATMCardView(card: ATMCard(id: "1", key: "1", title: "Test", cardImage: UIImage(named: "atm_bromo")!, description: ATMDescriptionModel(limitPurchase: "0", limitPayment: "0", limitPenarikanHarian: "0", limitTransferKeBankLain: "0", limitTransferAntarSesama: "0", codeClass: "0")), cardWidth: 315, cardHeight: 197, showContent: true)
+        ATMCardView(card: ATMViewModel(id: "1", key: "1", title: "Test", cardImage: UIImage(named: "atm_bromo")!, description: ATMDescriptionModel(limitPurchase: "0", limitPayment: "0", limitPenarikanHarian: "0", limitTransferKeBankLain: "0", limitTransferAntarSesama: "0", codeClass: "0")), cardWidth: 315, cardHeight: 197, showContent: true)
     }
 }

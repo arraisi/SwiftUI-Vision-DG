@@ -9,7 +9,8 @@ import UIKit
 
 class ATMProductViewModel : ObservableObject {
     @Published var isLoading: Bool = false
-    @Published var listATM: [ATMCard] = []
+    @Published var listATM: [ATMViewModel] = []
+    @Published var listATMDesign: [ATMDesignViewModel] = []
 }
 
 extension ATMProductViewModel {
@@ -52,17 +53,17 @@ extension ATMProductViewModel {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listATM = response.map({ (data: ATMModel) -> ATMCard in
+                    self.listATM = response.map({ (data: ATMModel) -> ATMViewModel in
                         var image = UIImage(named: "card_bg")!
                         if let img = data.cardImage.base64ToImage() {
                             image = img
                         }
-                        return ATMCard (
+                        return ATMViewModel (
                             id: data.id,
                             key: data.key,
                             title: data.title,
                             cardImage: image,
-                            description: data.description
+                            description: self.mapDescriptionLimit(data: data.description)
                         )
                     })
                     completion(true)
@@ -79,8 +80,17 @@ extension ATMProductViewModel {
         }
     }
     
+    func mapDescriptionLimit(data: ATMDescriptionModel) -> ATMDescriptionModel {
+        return ATMDescriptionModel(limitPurchase: data.limitPurchase.thousandSeparator(),
+                                   limitPayment: data.limitPayment.thousandSeparator(),
+                                   limitPenarikanHarian: data.limitPenarikanHarian.thousandSeparator(),
+                                   limitTransferKeBankLain: data.limitTransferKeBankLain.thousandSeparator(),
+                                   limitTransferAntarSesama: data.limitTransferAntarSesama.thousandSeparator(),
+                                   codeClass: data.codeClass)
+    }
+    
     // MARK: - Get List ATM Design
-    func getListATMDesign(completion: @escaping (Bool) -> Void) {
+    func getListATMDesign(type: String, completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
             self.isLoading = true
         }
@@ -90,15 +100,18 @@ extension ATMProductViewModel {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listATM = response.map({ (data: ATMModel) -> ATMCard in
+                    self.listATMDesign = response.data.content.filter({ (data: ATMDesignModel) -> Bool in
+                        return data.cardType == type
+                    }).map({ (data: ATMDesignModel) -> ATMDesignViewModel in
                         var image = UIImage(named: "card_bg")!
                         if let img = data.cardImage.base64ToImage() {
                             image = img
                         }
-                        return ATMCard (
+                        return ATMDesignViewModel (
                             id: data.id,
                             key: data.key,
                             title: data.title,
+                            cardType: data.cardType,
                             cardImage: image,
                             description: data.description
                         )

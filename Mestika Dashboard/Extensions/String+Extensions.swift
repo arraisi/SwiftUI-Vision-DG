@@ -73,4 +73,12 @@ extension String {
             return nil
         }
     }
+    
+    func thousandSeparator() -> String {
+        if let num = Int64(self) {
+            return num.formattedWithSeparator
+        } else {
+            return self
+        }
+    }
 }

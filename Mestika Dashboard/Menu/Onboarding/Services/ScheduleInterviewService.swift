@@ -22,7 +22,7 @@ class ScheduleInterviewService {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "GET"
         request.addValue("*/*", forHTTPHeaderField: "accept")
         
@@ -58,7 +58,7 @@ class ScheduleInterviewService {
         
         let finalUrl = url.appending("id", value: idSchedule.numberString)
         
-        var request = URLRequest(url: finalUrl)
+        var request = URLRequest(finalUrl)
         request.httpMethod = "GET"
         request.addValue("*/*", forHTTPHeaderField: "accept")
         
@@ -92,12 +92,9 @@ class ScheduleInterviewService {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url)
         request.httpMethod = "POST"
-        request.addValue("*/*", forHTTPHeaderField: "accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("21", forHTTPHeaderField: "X-Device-ID")
-        request.addValue("01", forHTTPHeaderField: "X-Firebase-ID")
         
         request.httpBody = finalBody
         

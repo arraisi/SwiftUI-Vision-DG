@@ -8,22 +8,14 @@
 import SwiftUI
 
 struct TabItemView: View {
-    let card: CardModel
-    let callback: (CardModel)->()
-    
-    init(
-        card: CardModel,
-        callback: @escaping (CardModel)->()
-    ) {
-        self.card = card
-        self.callback = callback
-    }
+    var card: ATMDesignViewModel
+    let callback: (ATMDesignViewModel)->()
     
     var body: some View {
         Button(action: {
             self.callback(self.card)
         }, label: {
-            card.image
+            Image(uiImage: card.cardImage)
                 .resizable()
                 .padding(.horizontal, 25)
                 .aspectRatio(contentMode: .fit)
@@ -34,8 +26,8 @@ struct TabItemView: View {
 
 struct TabItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TabItemView(card: cardData[0]) {id in
-            //            cardData[0].id = id
-        }
+        TabItemView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: UIImage(named:"card_bg")!, description: "")) { (id:ATMDesignViewModel) in
+            
+            }
     }
 }

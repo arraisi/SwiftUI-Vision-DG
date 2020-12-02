@@ -11,6 +11,7 @@ import NavigationStack
 struct FormDetailKartuATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
+    @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var appState: AppState
     
@@ -49,7 +50,7 @@ struct FormDetailKartuATMView: View {
                             
                             Spacer()
                             
-                            TextField("Nama", text: Binding.constant("")) { (isChanged) in
+                            TextField("Nama", text: $atmData.atmName) { (isChanged) in
                                 
                             } onCommit: {
                                 

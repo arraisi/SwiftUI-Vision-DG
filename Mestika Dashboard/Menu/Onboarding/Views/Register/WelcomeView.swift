@@ -113,12 +113,11 @@ struct WelcomeView: View {
             }
             .onAppear() {
                 print("APPEAR")
+                registerData.load()
                 getUserStatus(deviceId: deviceId!)
             }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-                
                 popupMenu()
-                
             }
         }
     }
@@ -177,18 +176,22 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: KetentuanRegisterNonNasabahView().environmentObject(registerData), isActive: self.$isKetentuanViewActive){
+            NavigationLink(
+                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(registerData),
+                isActive: self.$isKetentuanViewActive){
+                
                 Text("Tidak, saya bukan")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
+                
             }
             .isDetailLink(false)
             .padding(.bottom, 2)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: NoAtmOrRekeningVerificationView().environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive){
+            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive){
                 Text("Ya, saya nasabah Bank Mestika")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
@@ -407,7 +410,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData)){
+            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData)){
                 Text("Lanjutkan")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
@@ -561,6 +564,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        WelcomeView().environmentObject(AppState())
     }
 }

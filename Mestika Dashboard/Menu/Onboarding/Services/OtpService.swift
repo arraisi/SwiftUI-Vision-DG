@@ -46,12 +46,9 @@ class OtpService {
         
         let paramsUrl = url.appending("type", value: type)
         
-        var request = URLRequest(url: paramsUrl)
+        var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
-        request.addValue("*/*", forHTTPHeaderField: "accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(deviceId, forHTTPHeaderField: "X-Device-ID")
-        request.setValue("1", forHTTPHeaderField: "X-Firebase-ID")
         request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -88,10 +85,8 @@ class OtpService {
             .appending("destination", value: otpRequest.destination)
             .appending("type", value: otpRequest.type)
         
-        var request = URLRequest(url: finalUrl)
+        var request = URLRequest(finalUrl)
         request.httpMethod = "GET"
-        request.setValue(deviceId, forHTTPHeaderField: "X-Device-ID")
-        request.setValue("1", forHTTPHeaderField: "X-Firebase-ID")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
