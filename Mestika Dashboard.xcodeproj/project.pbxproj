@@ -135,7 +135,7 @@
 		527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312925661644004FF5ED /* MobileVersionViewModel.swift */; };
 		527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312E25663289004FF5ED /* UserCheckResponse.swift */; };
 		5290A125255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A124255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift */; };
-		5290A12A255BC5930090F788 /* JenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A129255BC5930090F788 /* JenisTabunganRegisterNasabahView.swift */; };
+		5290A12A255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A129255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift */; };
 		5290A12F255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */; };
 		5290A134255BC7200090F788 /* EmailRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A133255BC7200090F788 /* EmailRegisterNasabahView.swift */; };
 		5290A13C255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A13B255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift */; };
@@ -463,7 +463,7 @@
 		527E312925661644004FF5ED /* MobileVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionViewModel.swift; sourceTree = "<group>"; };
 		527E312E25663289004FF5ED /* UserCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCheckResponse.swift; sourceTree = "<group>"; };
 		5290A124255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
-		5290A129255BC5930090F788 /* JenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
+		5290A129255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilihJenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitasDiriRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A133255BC7200090F788 /* EmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A13B255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailReVerificationNasabahScreen.swift; sourceTree = "<group>"; };
@@ -1040,7 +1040,7 @@
 				5290A124255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift */,
 				5290A133255BC7200090F788 /* EmailRegisterNasabahView.swift */,
 				5205862125725173005DB764 /* EmailOTPRegisterNasabahView.swift */,
-				5290A129255BC5930090F788 /* JenisTabunganRegisterNasabahView.swift */,
+				5290A129255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift */,
 				5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */,
 				5290A17B255BCDFD0090F788 /* PasswordRegisterNasabahView.swift */,
 				5290A180255BCE3D0090F788 /* PinRegisterNasabahView.swift */,
@@ -1801,7 +1801,7 @@
 				06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */,
 				52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */,
 				52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */,
-				5290A12A255BC5930090F788 /* JenisTabunganRegisterNasabahView.swift in Sources */,
+				5290A12A255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift in Sources */,
 				5290A17C255BCDFD0090F788 /* PasswordRegisterNasabahView.swift in Sources */,
 				526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */,
 				526B1FE9255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift in Sources */,

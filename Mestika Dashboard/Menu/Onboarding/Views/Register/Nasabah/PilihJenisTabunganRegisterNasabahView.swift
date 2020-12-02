@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct JenisTabunganRegisterNasabahView: View {
+struct PilihJenisTabunganRegisterNasabahView: View {
     
     /* Carousel Variables */
     @State var data = savingTypeData
@@ -189,6 +189,6 @@ struct JenisTabunganRegisterNasabahView: View {
 
 struct ChooseTypeSavingForNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        JenisTabunganRegisterNasabahView().environmentObject(RegistrasiModel())
+        PilihJenisTabunganRegisterNasabahView().environmentObject(RegistrasiModel())
     }
 }
