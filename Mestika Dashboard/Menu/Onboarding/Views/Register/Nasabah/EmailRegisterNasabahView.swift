@@ -1,8 +1,8 @@
 //
-//  FormEmailVerificationNasabahScreen.swift
+//  EmailV2.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 11/11/20.
+//  Created by Abdul R. Arraisi on 02/12/20.
 //
 
 import SwiftUI
@@ -15,6 +15,12 @@ struct EmailRegisterNasabahView: View {
     @State var email: String = ""
     @State private var isEmailValid : Bool   = false
     
+    @State var activeRoute: Bool = false
+    @Binding var shouldPopToRootView : Bool
+    @Binding var shouldPopToRootView2 : Bool
+    
+    @GestureState private var dragOffset = CGSize.zero
+    
     func textFieldValidatorEmail(_ string: String) -> Bool {
         if string.count > 100 {
             return false
@@ -25,6 +31,9 @@ struct EmailRegisterNasabahView: View {
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluate(with: string)
     }
+    
+    @State var str = "Hi"
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -40,11 +49,19 @@ struct EmailRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("Email Verification")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .padding(.top, 30)
-                    
+                    Button(
+                        action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
+                        },
+                        label: {
+                            Text("Email Verification")
+                                .font(.custom("Montserrat-SemiBold", size: 18))
+                                .foregroundColor(Color(hex: "#232175"))
+                                .padding(.top, 30)
+                        }
+                    )
+
                     Text("Silahkan masukan Alamat Email Anda")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
@@ -79,12 +96,15 @@ struct EmailRegisterNasabahView: View {
                     }
                     .padding(.bottom, 10)
                     
-                    NavigationLink(destination: EmailOTPRegisterNasabahView().environmentObject(registerData)) {
+                    NavigationLink(
+                        destination: EmailOTPRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),
+                        isActive: self.$activeRoute) {
                         Text("Verifikasi Email")
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
+                    .isDetailLink(false)
                     .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 10)
@@ -103,6 +123,13 @@ struct EmailRegisterNasabahView: View {
         .edgesIgnoringSafeArea(.all)
         //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                self.shouldPopToRootView2 = false
+            }
+            
+        }))
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -110,8 +137,8 @@ struct EmailRegisterNasabahView: View {
     }
 }
 
-struct FormEmailVerificationNasabahScreen_Previews: PreviewProvider {
+struct EmailRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailRegisterNasabahView().environmentObject(RegistrasiModel())
+        EmailRegisterNasabahView(shouldPopToRootView: .constant(false), shouldPopToRootView2: .constant(false)).environmentObject(RegistrasiModel())
     }
 }
