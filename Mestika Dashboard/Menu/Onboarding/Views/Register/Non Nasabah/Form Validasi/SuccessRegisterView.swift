@@ -217,7 +217,7 @@ struct SuccessRegisterView: View {
                         .padding(.bottom, 5)
                         .disabled(disableForm)
                         
-                        NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
+                        NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
                         
                         Button(
                             action: {

@@ -87,7 +87,7 @@ struct FormCompletionKartuATMView: View {
                         .padding(.bottom, 30)
                     }
                 }
-                NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData), isActive: $goToSuccessPage){
+                NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
                     EmptyView()
                 }
             }
@@ -407,24 +407,24 @@ struct FormCompletionKartuATMView: View {
     
     func fetchAddressOption() {
         switch atmData.addressOptionId {
-        case 1:
-            atmData.atmAddressInput = ""
-            atmData.atmAddresspostalCodeInput = ""
-            atmData.atmAddresskecamatanInput = ""
-            atmData.atmAddresskelurahanInput = ""
+        case 1: /// Sesuai KTP
+            atmData.atmAddressInput = registerData.alamatKtpFromNik
+            atmData.atmAddresspostalCodeInput = registerData.kodePos
+            atmData.atmAddresskecamatanInput = registerData.kecamatanFromNik
+            atmData.atmAddresskelurahanInput = registerData.kelurahanFromNik
+            atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
+        case 2: /// Surat Menyurat
+            atmData.atmAddressInput = registerData.alamatKeluarga
+            atmData.atmAddresspostalCodeInput = registerData.kodePosKeluarga
+            atmData.atmAddresskecamatanInput = registerData.kecamatanKeluarga
+            atmData.atmAddresskelurahanInput = registerData.kelurahanKeluarga
             atmData.atmAddressrtRwInput = ""
-        case 2:
-            atmData.atmAddressInput = ""
-            atmData.atmAddresspostalCodeInput = ""
-            atmData.atmAddresskecamatanInput = ""
-            atmData.atmAddresskelurahanInput = ""
-            atmData.atmAddressrtRwInput = ""
-        case 3:
-            atmData.atmAddressInput = ""
-            atmData.atmAddresspostalCodeInput = ""
-            atmData.atmAddresskecamatanInput = ""
-            atmData.atmAddresskelurahanInput = ""
-            atmData.atmAddressrtRwInput = ""
+        case 3: /// Perusahaan
+            atmData.atmAddressInput = registerData.alamatPerusahaan
+            atmData.atmAddresspostalCodeInput = registerData.kodePos
+            atmData.atmAddresskecamatanInput = registerData.kecamatan
+            atmData.atmAddresskelurahanInput = registerData.kelurahan
+            atmData.atmAddressrtRwInput = registerData.rtrw
 //            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:
             atmData.atmAddressInput = ""
@@ -437,12 +437,17 @@ struct FormCompletionKartuATMView: View {
     }
     
     func postData() {
+        ///MARK : Complete data
+        atmData.nik = registerData.nik
+        
         self.goToSuccessPage = true
-//        productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
-//            if success {
-//                self.goToSuccessPage = true
-//            }
-//        }
+        self.isLoading = true
+        productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
+            self.isLoading = false
+            if success {
+                self.goToSuccessPage = true
+            }
+        }
     }
 }
 

@@ -35,11 +35,11 @@ struct WelcomeView: View {
     @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
     
     // Modal Variables
-    @State var isShowModal = false
-    @State var modalSelection = ""
+//    @State var isShowModal = false
+//    @State var modalSelection = ""
     
-//    @State var isShowModal = true
-//    @State var modalSelection = "RegisterApprovedModal"
+    @State var isShowModal = true
+    @State var modalSelection = "RegisterApprovedModal"
     
     var body: some View {
         NavigationView {
@@ -410,7 +410,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData)){
+            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData)){
                 Text("Lanjutkan")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))

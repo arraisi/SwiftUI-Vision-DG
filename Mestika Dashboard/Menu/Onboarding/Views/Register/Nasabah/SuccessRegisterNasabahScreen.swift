@@ -197,7 +197,7 @@ struct SuccessRegisterNasabahScreen: View {
                     Group {
                         
                         NavigationLink(
-                            destination: FormPilihJenisATMView().environmentObject(productATMData),
+                            destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData),
                             label: {
                                 Text("Buat Janji")
                                     .foregroundColor(.white)
