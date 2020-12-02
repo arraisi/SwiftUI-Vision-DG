@@ -81,7 +81,7 @@ class ATMService {
     }
     
     // MARK : get response model of list ATM Design.
-    func getListATMDesign(completion: @escaping(Result<[ATMModel], NetworkError>) -> Void) {
+    func getListATMDesign(completion: @escaping(Result<GeneralPaginationResponse<ATMDesignModel>, NetworkError>) -> Void) {
         
         guard let url = URL.urlGetListATMDesign() else {
             return completion(.failure(.badUrl))
@@ -101,7 +101,7 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode([ATMModel].self, from: data)
+            let response = try? JSONDecoder().decode(GeneralPaginationResponse<ATMDesignModel>.self, from: data)
             
             if response == nil {
                 completion(.failure(.decodingError))

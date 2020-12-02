@@ -9,6 +9,7 @@ import UIKit
 
 struct ATMModel: Codable {
     let id, key, title: String
+    let cardType: String?
     let cardImage: String
     let description: ATMDescriptionModel
     let ignoreField, ignoreField1: String
@@ -22,8 +23,9 @@ struct ATMDescriptionModel: Codable {
     let codeClass: String
 }
 
-struct ATMCard {
+struct ATMViewModel {
     var id, key, title: String
+    var cardType: String?
     var cardImage: UIImage
     var description: ATMDescriptionModel
     var isShow: Bool = false

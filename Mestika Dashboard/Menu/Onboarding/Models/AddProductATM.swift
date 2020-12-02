@@ -16,9 +16,10 @@ class AddProductATM: ObservableObject, Codable {
     @Published var atmAddresspostalCodeInput: String = ""
     @Published var atmAddresspostalReferral: String = ""
     @Published var atmAddressrtRwInput: String = ""
-    @Published var atmDesignName: String = ""
     @Published var atmName: String = ""
-    @Published var productName: String = ""
+    @Published var atmDesignType: String = ""
+    @Published var productType: String = ""
+    @Published var nik: String = ""
     
     var addressOptionId: Int = 1
     

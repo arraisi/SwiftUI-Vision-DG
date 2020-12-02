@@ -16,12 +16,15 @@
 		064CCE5E256DB40D001B8EB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */; };
 		064EBDAE256ADEB20070A792 /* FormCompletionKartuATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */; };
 		064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */; };
+		0651B1E3257758CB00E4A834 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0651B1E2257758CB00E4A834 /* LoadingView.swift */; };
 		0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */; };
 		0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B58F2563F8A1001B659D /* NotificationMonthly.swift */; };
 		0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5902563F8A1001B659D /* NotificationModel.swift */; };
 		0658B5972563F8A2001B659D /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5912563F8A1001B659D /* NotificationScreen.swift */; };
 		0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658B5932563F8A1001B659D /* ListNotificationView.swift */; };
 		0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0658B5A62563FA6D001B659D /* Colors.xcassets */; };
+		065DF51E25765ABE00255743 /* ATMDesignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DF51D25765ABE00255743 /* ATMDesignModel.swift */; };
+		065DF52325765B5200255743 /* GeneralPaginationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DF52225765B5200255743 /* GeneralPaginationResponse.swift */; };
 		06AD57002570CAC50071C4A9 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD56FF2570CAC50071C4A9 /* WebView.swift */; };
 		06AD57092570D3370071C4A9 /* term.html in Resources */ = {isa = PBXBuildFile; fileRef = 06AD57082570D3370071C4A9 /* term.html */; };
 		06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */; };
@@ -346,12 +349,15 @@
 		064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompletionKartuATMView.swift; sourceTree = "<group>"; };
 		064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCompletionReferalCodeView.swift; sourceTree = "<group>"; };
+		0651B1E2257758CB00E4A834 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		0658B58D2563F8A1001B659D /* ListAnnouncementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListAnnouncementView.swift; sourceTree = "<group>"; };
 		0658B58F2563F8A1001B659D /* NotificationMonthly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationMonthly.swift; sourceTree = "<group>"; };
 		0658B5902563F8A1001B659D /* NotificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		0658B5912563F8A1001B659D /* NotificationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 		0658B5932563F8A1001B659D /* ListNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNotificationView.swift; sourceTree = "<group>"; };
 		0658B5A62563FA6D001B659D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		065DF51D25765ABE00255743 /* ATMDesignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignModel.swift; sourceTree = "<group>"; };
+		065DF52225765B5200255743 /* GeneralPaginationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPaginationResponse.swift; sourceTree = "<group>"; };
 		06AD56FF2570CAC50071C4A9 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		06AD57082570D3370071C4A9 /* term.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = term.html; sourceTree = "<group>"; };
 		06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarLogo.swift; sourceTree = "<group>"; };
@@ -758,6 +764,7 @@
 				06AD56FF2570CAC50071C4A9 /* WebView.swift */,
 				064BC26225760DA200F15CA9 /* ATMCardView.swift */,
 				C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */,
+				0651B1E2257758CB00E4A834 /* LoadingView.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -1394,6 +1401,8 @@
 				524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */,
 				5205860F25723965005DB764 /* PasswordResponse.swift */,
 				064BC25D2576093300F15CA9 /* ATMModel.swift */,
+				065DF51D25765ABE00255743 /* ATMDesignModel.swift */,
+				065DF52225765B5200255743 /* GeneralPaginationResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1746,6 +1755,7 @@
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				5290A16D255BCCDC0090F788 /* PenghasilanKotorRegisterNasabahView.swift in Sources */,
+				065DF51E25765ABE00255743 /* ATMDesignModel.swift in Sources */,
 				52ADFF8E2557DFDC00A1001F /* BesarPerkiraanPenarikanView.swift in Sources */,
 				C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */,
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
@@ -1758,6 +1768,8 @@
 				52ADFE992557D99F00A1001F /* DetailJenisATMModel.swift in Sources */,
 				52AE1A75255A3E7800B011B7 /* OtpViewModel.swift in Sources */,
 				523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */,
+				0651B1E3257758CB00E4A834 /* LoadingView.swift in Sources */,
+				065DF52325765B5200255743 /* GeneralPaginationResponse.swift in Sources */,
 				526B660C254FFA7900C13C36 /* TransactionFeesScreen.swift in Sources */,
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
 				C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */,

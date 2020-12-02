@@ -81,6 +81,6 @@ extension URL {
     }
     
     static func urlGetListATMDesign() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm-design");
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm-design?type=design");
     }
 }
