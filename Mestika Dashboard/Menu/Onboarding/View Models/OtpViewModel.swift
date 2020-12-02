@@ -102,9 +102,11 @@ extension OtpViewModel {
                 } else {
                     print("Failed Request")
                     
-                    self.isLoading = false
-                    self.statusMessage = (response.status?.message)!
-                    self.timeCounter = response.tryCount ?? 0
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                        self.statusMessage = (response.status?.message)!
+                        self.timeCounter = response.tryCount ?? 0
+                    }
                     
                     completion(false)
                 }
