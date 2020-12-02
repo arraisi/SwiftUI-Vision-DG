@@ -15,6 +15,12 @@ struct InputEmailRegisterNasabahView: View {
     @State var email: String = ""
     @State private var isEmailValid : Bool   = false
     
+    @State var activeRoute: Bool = false
+    @Binding var shouldPopToRootView : Bool
+    @Binding var shouldPopToRootView2 : Bool
+    
+    @GestureState private var dragOffset = CGSize.zero
+    
     func textFieldValidatorEmail(_ string: String) -> Bool {
         if string.count > 100 {
             return false
@@ -90,12 +96,15 @@ struct InputEmailRegisterNasabahView: View {
                     }
                     .padding(.bottom, 10)
                     
-                    NavigationLink(destination: EmailOTPRegisterNasabahView().environmentObject(registerData)) {
+                    NavigationLink(
+                        destination: EmailOTPRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),
+                        isActive: self.$activeRoute) {
                         Text("Verifikasi Email")
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     }
+                    .isDetailLink(false)
                     .background(Color(hex: !self.isEmailValid ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 10)
@@ -114,6 +123,13 @@ struct InputEmailRegisterNasabahView: View {
         .edgesIgnoringSafeArea(.all)
         //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                self.shouldPopToRootView2 = false
+            }
+            
+        }))
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -123,6 +139,6 @@ struct InputEmailRegisterNasabahView: View {
 
 struct FormEmailVerificationNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        InputEmailRegisterNasabahView().environmentObject(RegistrasiModel())
+        InputEmailRegisterNasabahView(shouldPopToRootView: .constant(false), shouldPopToRootView2: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

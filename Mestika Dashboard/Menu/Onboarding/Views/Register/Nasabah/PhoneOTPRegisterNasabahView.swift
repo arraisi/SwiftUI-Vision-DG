@@ -23,6 +23,7 @@ struct PhoneOTPRegisterNasabahView: View {
     @State var pinShare: String = ""
     @State var referenceCode: String = ""
     @State var isDisabled = false
+    @State var messageResponse: String = ""
     
     /* Variable Validation */
     @State var isOtpValid = false
@@ -39,6 +40,9 @@ struct PhoneOTPRegisterNasabahView: View {
     @State var showingOtpInvalid = false
     @State private var showingAlert: Bool = false
     @State private var showingAlertError: Bool = false
+    
+    @Binding var rootIsActive : Bool
+    @Binding var root2IsActive : Bool
     
     /* Disabled Form */
     var disableForm: Bool {
@@ -118,10 +122,11 @@ struct PhoneOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: InputEmailRegisterNasabahView().environmentObject(registerData),
+                            destination: InputEmailRegisterNasabahView(shouldPopToRootView: self.$rootIsActive, shouldPopToRootView2: self.$root2IsActive).environmentObject(registerData),
                             isActive: self.$isOtpValid) {
                             EmptyView()
                         }
+                        .isDetailLink(false)
                         
                         Button(action: {
                             self.tryCount += 1
@@ -178,13 +183,11 @@ struct PhoneOTPRegisterNasabahView: View {
                 isResendOtpDisabled = true
             }
         }
-        .alert(isPresented: $showingAlert) {
+        .alert(isPresented: $showingAlertError) {
             return Alert(
-                title: Text("OTP Code"),
-                message: Text(self.pinShare),
-                dismissButton: .default(Text("Oke"), action: {
-                    self.pin = self.pinShare
-                }))
+                title: Text("MESSAGE"),
+                message: Text(self.messageResponse),
+                dismissButton: .default(Text("Oke")))
         }
         .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             bottomMessageOTPinCorrect()
@@ -361,6 +364,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 DispatchQueue.main.async {
 //                    self.timeRemaining = self.otpVM.timeCounter
                     self.referenceCode = self.otpVM.reference
+                    self.messageResponse = self.otpVM.statusMessage
                 }
                 
                 self.showingAlertError = true
@@ -378,6 +382,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     print(self.otpVM.timeCounter)
                     
                     DispatchQueue.main.sync {
+                        self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
                         self.timeRemaining = self.otpVM.timeCounter
@@ -419,6 +424,6 @@ struct PhoneOTPRegisterNasabahView: View {
 
 struct RegisterNasabahPhoneOTPScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PhoneOTPRegisterNasabahView().environmentObject(RegistrasiModel())
+        PhoneOTPRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

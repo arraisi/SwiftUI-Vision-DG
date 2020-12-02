@@ -25,6 +25,10 @@ struct NoAtmOrRekeningVerificationView: View {
     @State var jenisKartuCtrl: String = ""
     @State var noKartuCtrl: String = ""
     
+    /* Root Binding */
+    @State var isActive : Bool = false
+    @Binding var rootIsActive : Bool
+    
     /* Disabled Form */
     var disableForm: Bool {
         noKartuCtrl.count < 6
@@ -107,13 +111,15 @@ struct NoAtmOrRekeningVerificationView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     NavigationLink(
-                        destination: PhoneOTPRegisterNasabahView().environmentObject(registerData),
+                        destination: PhoneOTPRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData),
+                        isActive: self.$isActive,
                         label: {
                             Text("Verifikasi No. Kartu")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, maxHeight: 50)
                         })
+                        .isDetailLink(false)
                         .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                         .cornerRadius(12)
                         .padding(.bottom, 30)
@@ -143,8 +149,6 @@ struct NoAtmOrRekeningVerificationView: View {
 
 struct RegisterRekeningCardView_Previews: PreviewProvider {
     static var previews: some View {
-        //        NavigationView {
-        NoAtmOrRekeningVerificationView().environmentObject(RegistrasiModel())
-        //        }
+        NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

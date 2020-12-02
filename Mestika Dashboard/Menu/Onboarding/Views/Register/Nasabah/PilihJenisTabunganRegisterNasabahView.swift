@@ -23,6 +23,10 @@ struct PilihJenisTabunganRegisterNasabahView: View {
     @State var showingModal = false
     @EnvironmentObject var registerData: RegistrasiModel
     
+    @GestureState private var dragOffset = CGSize.zero
+    
+    @Binding var shouldPopToRootView : Bool
+    
     var body: some View {
         ZStack(alignment: .top) {
             
@@ -95,6 +99,13 @@ struct PilihJenisTabunganRegisterNasabahView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                self.shouldPopToRootView = false
+            }
+            
+        }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }
@@ -189,6 +200,6 @@ struct PilihJenisTabunganRegisterNasabahView: View {
 
 struct ChooseTypeSavingForNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PilihJenisTabunganRegisterNasabahView().environmentObject(RegistrasiModel())
+        PilihJenisTabunganRegisterNasabahView(shouldPopToRootView: .constant(false)).environmentObject(RegistrasiModel())
     }
 }
