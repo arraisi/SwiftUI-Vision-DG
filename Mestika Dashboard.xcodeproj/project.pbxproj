@@ -32,6 +32,9 @@
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
+		0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */; };
+		0AF48AD025778C760037942D /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACF25778C760037942D /* Formatter+Extensions.swift */; };
+		0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */; };
 		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
 		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
@@ -365,6 +368,9 @@
 		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
+		0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMCardDesignView.swift; sourceTree = "<group>"; };
+		0AF48ACF25778C760037942D /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
+		0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Extensions.swift"; sourceTree = "<group>"; };
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
@@ -765,6 +771,7 @@
 				064BC26225760DA200F15CA9 /* ATMCardView.swift */,
 				C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */,
 				0651B1E2257758CB00E4A834 /* LoadingView.swift */,
+				0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -960,6 +967,8 @@
 				6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */,
 				C068A5AF256CF3C100CE96C4 /* UIApplication.swift */,
 				064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */,
+				0AF48ACF25778C760037942D /* Formatter+Extensions.swift */,
+				0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1756,6 +1765,7 @@
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				5290A16D255BCCDC0090F788 /* PenghasilanKotorRegisterNasabahView.swift in Sources */,
 				065DF51E25765ABE00255743 /* ATMDesignModel.swift in Sources */,
+				0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */,
 				52ADFF8E2557DFDC00A1001F /* BesarPerkiraanPenarikanView.swift in Sources */,
 				C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */,
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
@@ -1777,6 +1787,7 @@
 				06202919256D905500A830EA /* ATMService.swift in Sources */,
 				52ADFF892557DFDC00A1001F /* FormEmailVerificationRegisterNasabahView.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
+				0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
 				064BC25E2576093300F15CA9 /* ATMModel.swift in Sources */,
@@ -1820,6 +1831,7 @@
 				C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */,
 				52ADFF982557DFDC00A1001F /* InformasiPerusahaanView.swift in Sources */,
 				52BF57EB2558F06A00F009B5 /* DetailsTypeSavingView.swift in Sources */,
+				0AF48AD025778C760037942D /* Formatter+Extensions.swift in Sources */,
 				52ADFF172557DCE400A1001F /* LoadingIndicator.swift in Sources */,
 				C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */,
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,

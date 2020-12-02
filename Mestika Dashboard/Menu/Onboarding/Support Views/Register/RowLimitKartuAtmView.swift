@@ -29,6 +29,9 @@ struct RowLimitKartuAtmView: View {
                 .padding(.horizontal)
                 
                 HStack {
+                    Text("Rp")
+                        .font(.custom("Montserrat-Bold", size: 12))
+                        .foregroundColor(Color(hex: "#232175"))
                     Text(value)
                         .font(.custom("Montserrat-Bold", size: 20))
                         .foregroundColor(Color(hex: "#232175"))

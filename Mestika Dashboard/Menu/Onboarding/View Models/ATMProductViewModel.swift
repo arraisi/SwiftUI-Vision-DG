@@ -63,7 +63,7 @@ extension ATMProductViewModel {
                             key: data.key,
                             title: data.title,
                             cardImage: image,
-                            description: data.description
+                            description: self.mapDescriptionLimit(data: data.description)
                         )
                     })
                     completion(true)
@@ -78,6 +78,15 @@ extension ATMProductViewModel {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func mapDescriptionLimit(data: ATMDescriptionModel) -> ATMDescriptionModel {
+        return ATMDescriptionModel(limitPurchase: data.limitPurchase.thousandSeparator(),
+                                   limitPayment: data.limitPayment.thousandSeparator(),
+                                   limitPenarikanHarian: data.limitPenarikanHarian.thousandSeparator(),
+                                   limitTransferKeBankLain: data.limitTransferKeBankLain.thousandSeparator(),
+                                   limitTransferAntarSesama: data.limitTransferAntarSesama.thousandSeparator(),
+                                   codeClass: data.codeClass)
     }
     
     // MARK: - Get List ATM Design

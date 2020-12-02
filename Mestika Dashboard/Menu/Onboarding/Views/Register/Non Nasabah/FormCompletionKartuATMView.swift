@@ -19,6 +19,7 @@ struct FormCompletionKartuATMView: View {
     @State var showingAddressModal = false
     @State var showingSuggestionNameModal = false
     @State var goToSuccessPage = false
+    @State var isLoading = false
     
 //    @State var nameOnCard : String = ""
 //    @State var currentAddress : Address = Address()
@@ -46,65 +47,69 @@ struct FormCompletionKartuATMView: View {
     ]
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                Image("bg_blue")
-                    .resizable()
-                    .scaledToFill()
-            }
-            VStack {
-                AppBarLogo(light: false, onCancel:{})
-                
-                ScrollView {
-                    Text("LENGKAPI DATA")
-                        .multilineTextAlignment(.center)
-                        .font(.custom("Montserrat-Bold", size: 26))
-                        .foregroundColor(.white)
-                        .padding(EdgeInsets(top: 20, leading: 15, bottom: 0, trailing: 15))
+        LoadingView(isShowing: $isLoading) {
+            
+            ZStack(alignment: .top) {
+                VStack {
+                    Image("bg_blue")
+                        .resizable()
+                        .scaledToFill()
+                }
+                VStack {
+                    AppBarLogo(light: false, onCancel:{})
+//                        .padding(.top, 50)
                     
-                    nameCard
-                    addressCard
-                    referalCodeCard
-                    
-                    Button(action: {
-                        self.postData()
-                    }, label: {
-                        Text("MASUKKAN DATA")
-                            .foregroundColor(Color("DarkStaleBlue"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    })
-                    .frame(width: UIScreen.main.bounds.width - 40, height: 50)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
-                    .padding(.bottom, 30)
+                    ScrollView {
+                        Text("LENGKAPI DATA")
+                            .multilineTextAlignment(.center)
+                            .font(.custom("Montserrat-Bold", size: 26))
+                            .foregroundColor(.white)
+                            .padding(EdgeInsets(top: 20, leading: 15, bottom: 0, trailing: 15))
+                        
+                        nameCard
+                        addressCard
+                        referalCodeCard
+                        
+                        Button(action: {
+                            self.postData()
+                        }, label: {
+                            Text("MASUKKAN DATA")
+                                .foregroundColor(Color("DarkStaleBlue"))
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        })
+                        .frame(width: UIScreen.main.bounds.width - 40, height: 50)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+                        .padding(.bottom, 30)
+                    }
+                }
+                NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData), isActive: $goToSuccessPage){
+                    EmptyView()
                 }
             }
-            NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData), isActive: $goToSuccessPage){
-                EmptyView()
+//            .introspectNavigationController { navigationController in
+//                navigationController.hidesBarsOnSwipe = true
+//            }
+            .edgesIgnoringSafeArea(.top)
+//            .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+            .navigationBarHidden(true)
+            .onTapGesture() {
+                UIApplication.shared.endEditing()
             }
+            .popup(isPresented: $showingAddressModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+                createBottomAddressFloater()
+            }
+            .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+                createBottomSuggestionNameFloater()
+            }
+            .onAppear(){
+                fetchAddressOption()
+            }
+                
         }
-        .introspectNavigationController { navigationController in
-            navigationController.hidesBarsOnSwipe = true
-        }
-        .edgesIgnoringSafeArea(.top)
-//        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarHidden(true)
-        .onTapGesture() {
-            UIApplication.shared.endEditing()
-        }
-        .popup(isPresented: $showingAddressModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-            createBottomAddressFloater()
-        }
-        .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-            createBottomSuggestionNameFloater()
-        }
-        .onAppear(){
-            fetchAddressOption()
-        }
-        
     }
     
     var nameCard: some View {
@@ -170,9 +175,7 @@ struct FormCompletionKartuATMView: View {
             
             VStack { Divider() }.padding(.horizontal, 20)
             
-            if atmData.addressOptionId == 4 {
-                formAddress
-            }
+            formAddress
         }
         .frame(width: UIScreen.main.bounds.width - 40)
         .background(Color.white)
