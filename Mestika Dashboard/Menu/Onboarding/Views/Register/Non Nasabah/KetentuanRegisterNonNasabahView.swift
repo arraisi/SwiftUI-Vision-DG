@@ -17,6 +17,10 @@ struct KetentuanRegisterNonNasabahView: View {
     /* Data Model */
     @StateObject var ketentuanViewModel = KetentuanViewModel()
     
+    /* Root Binding */
+    @State var isActive : Bool = false
+    @Binding var rootIsActive : Bool
+    
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
@@ -48,12 +52,15 @@ struct KetentuanRegisterNonNasabahView: View {
                             
                             WebView(urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                             
-                            NavigationLink(destination: FormPhoneVerificationRegisterNasabahView().environmentObject(registerData)){
+                            NavigationLink(
+                                destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData)
+                                ){
                                 Text("Lanjut Membuat Rekening")
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             }
+                            .isDetailLink(false)
                             .background(Color(hex: "#2334D0"))
                             .cornerRadius(12)
                             .padding(.bottom, 5)
@@ -92,7 +99,8 @@ struct KetentuanRegisterNonNasabahView: View {
 struct KetentuanRegisterNonNasabahView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            KetentuanRegisterNonNasabahView().environmentObject(RegistrasiModel())
+            KetentuanRegisterNonNasabahView(
+                rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
         }
     }
 }

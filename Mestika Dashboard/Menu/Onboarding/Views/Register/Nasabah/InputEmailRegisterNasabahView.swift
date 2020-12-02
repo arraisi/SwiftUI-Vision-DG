@@ -27,6 +27,7 @@ struct InputEmailRegisterNasabahView: View {
     }
     
     @State var str = "Hi"
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -42,11 +43,19 @@ struct InputEmailRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("Email Verification")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .padding(.top, 30)
-                    
+                    Button(
+                        action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
+                        },
+                        label: {
+                            Text("Email Verification")
+                                .font(.custom("Montserrat-SemiBold", size: 18))
+                                .foregroundColor(Color(hex: "#232175"))
+                                .padding(.top, 30)
+                        }
+                    )
+
                     Text("Silahkan masukan Alamat Email Anda")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))

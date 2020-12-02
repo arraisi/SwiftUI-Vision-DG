@@ -13,7 +13,9 @@ struct FormPhoneVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
-    @State var isRouteActive: Bool = false
+    @State var showSelf: Bool = false
+    @Binding var rootIsActive : Bool
+    @Binding var root2IsActive : Bool
     
     /* Variable Data */
     @State var phoneNumber: String = ""
@@ -83,20 +85,22 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                     .padding(.vertical, 15)
                     
                     NavigationLink(
-                        destination: FormOTPVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isRouteActive) {
-                        
-                        Text("Verifikasi No. Telepon")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                        
-                    }
-//                    .isDetailLink(false)
+                        destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$root2IsActive).environmentObject(registerData),
+                        isActive: self.$root2IsActive,
+                        label: {
+                            Text("Verifikasi No. Telepon")
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        }
+                    )
+                    .isDetailLink(false)
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 30)
                     .padding(.bottom, 30)
                     .disabled(disableForm)
+  
                 }
                 .padding(.horizontal, 30)
                 .frame(width: UIScreen.main.bounds.width - 40)
@@ -108,16 +112,10 @@ struct FormPhoneVerificationRegisterNasabahView: View {
             }
             
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .edgesIgnoringSafeArea(.top)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-        .onReceive(self.appState.$skipOTP) { skipOTP in
-            if skipOTP {
-                print("Skip OTP: \(skipOTP)")
-                self.isRouteActive = false
-                self.appState.skipOTP = false
-            }
-        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -127,7 +125,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
 struct PhoneVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FormPhoneVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+            FormPhoneVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(RegistrasiModel())
                 .environment(\.colorScheme, .dark)
         }
     }

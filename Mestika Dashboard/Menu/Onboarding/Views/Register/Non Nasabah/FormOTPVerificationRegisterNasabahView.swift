@@ -16,6 +16,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @Binding var rootIsActive : Bool
+    @Binding var root2IsActive : Bool
+    
     /* HUD Variable */
     @State private var dim = true
     
@@ -118,14 +121,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 
                 VStack {
                     
-                    NavigationLink(destination: FormEmailVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$isOtpValid) {
+                    NavigationLink(destination: FormEmailVerificationRegisterNasabahView(shouldPopToRootView: self.$rootIsActive, shouldPopToRootView2: self.$root2IsActive).environmentObject(registerData), isActive: self.$isOtpValid) {
                         EmptyView()
                     }
+                    .isDetailLink(false)
                     
                     Button(action: {
-                        // temporary dummy
-//                        self.isOtpValid = true
-                        
                         self.tryCount += 1
                         validateOTP()
                     }) {
@@ -444,7 +445,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
 struct OTPVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FormOTPVerificationRegisterNasabahView().environmentObject(RegistrasiModel())
+            FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(RegistrasiModel())
         }
     }
 }
