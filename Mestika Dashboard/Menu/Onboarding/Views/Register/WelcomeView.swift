@@ -177,11 +177,15 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: KetentuanRegisterNonNasabahView().environmentObject(registerData), isActive: self.$isKetentuanViewActive){
+            NavigationLink(
+                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(registerData),
+                isActive: self.$isKetentuanViewActive){
+                
                 Text("Tidak, saya bukan")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
+                
             }
             .isDetailLink(false)
             .padding(.bottom, 2)
