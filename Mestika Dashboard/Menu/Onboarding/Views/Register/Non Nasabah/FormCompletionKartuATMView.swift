@@ -12,6 +12,7 @@ struct FormCompletionKartuATMView: View {
     
     /* Environtment Object */
     @EnvironmentObject var atmData: AddProductATM
+    @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject private var productVM = ATMProductViewModel()
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -446,6 +447,6 @@ struct FormCompletionKartuATMView: View {
 
 struct FormCompletionDataView_Previews: PreviewProvider {
     static var previews: some View {
-        FormCompletionKartuATMView().environmentObject(AddProductATM())
+        FormCompletionKartuATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel())
     }
 }

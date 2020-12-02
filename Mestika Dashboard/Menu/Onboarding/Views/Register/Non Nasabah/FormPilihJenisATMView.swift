@@ -10,6 +10,7 @@ import SwiftUI
 struct FormPilihJenisATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
+    @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject private var productVM = ATMProductViewModel()
     
     /* Carousel Variables */
@@ -171,6 +172,6 @@ struct FormPilihJenisATMView: View {
 
 struct PilihATMView_Previews: PreviewProvider {
     static var previews: some View {
-        FormPilihJenisATMView().environmentObject(AddProductATM())
+        FormPilihJenisATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel())
     }
 }
