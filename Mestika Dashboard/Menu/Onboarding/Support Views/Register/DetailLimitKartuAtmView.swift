@@ -11,7 +11,7 @@ struct DetailLimitKartuAtmView: View {
     
     @EnvironmentObject var atmData: AddProductATM
     
-    let card: ATMCard
+    let card: ATMViewModel
     
     var body: some View {
         VStack {
@@ -53,6 +53,6 @@ struct DetailLimitKartuAtmView: View {
 
 struct DetailLimitKartuAtmView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailLimitKartuAtmView(card: ATMCard(id: "1", key: "1", title: "Test", cardImage: UIImage(named: "atm_bromo")!, description: ATMDescriptionModel(limitPurchase: "0", limitPayment: "0", limitPenarikanHarian: "0", limitTransferKeBankLain: "0", limitTransferAntarSesama: "0", codeClass: "0")))
+        DetailLimitKartuAtmView(card: ATMViewModel(id: "1", key: "1", title: "Test", cardImage: UIImage(named: "atm_bromo")!, description: ATMDescriptionModel(limitPurchase: "0", limitPayment: "0", limitPenarikanHarian: "0", limitTransferKeBankLain: "0", limitTransferAntarSesama: "0", codeClass: "0")))
     }
 }
