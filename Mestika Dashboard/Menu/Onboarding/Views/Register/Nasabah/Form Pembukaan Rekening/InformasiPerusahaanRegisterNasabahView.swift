@@ -355,7 +355,7 @@ struct InformasiPerusahaanRegisterNasabahView: View {
                     Button(action:{
                         showingModalBidang.toggle()
                     }, label: {
-                        Image(systemName: "location.viewfinder")
+                        Image(systemName: "chevron.right")
                             .font(Font.system(size: 20))
                             .foregroundColor(Color(hex: "#707070"))
                     })
@@ -483,14 +483,14 @@ struct InformasiPerusahaanRegisterNasabahView: View {
                 
                 HStack {
                     
-                    TextField("Pilih Bidang Usaha", text: $registerData.bidangUsaha)
+                    TextField("Cari Bidang Usaha", text: $registerData.bidangUsaha)
                         .font(Font.system(size: 14))
                         .frame(height: 36)
                     
                     Button(action:{
                         print("cari bidang usaha")
                     }, label: {
-                        Image(systemName: "calendar")
+                        Image(systemName: "magnifyingglass")
                             .font(Font.system(size: 20))
                             .foregroundColor(Color(hex: "#707070"))
                     })
