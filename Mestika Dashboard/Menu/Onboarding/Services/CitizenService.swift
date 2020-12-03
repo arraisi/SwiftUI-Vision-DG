@@ -23,9 +23,8 @@ class CitizenService {
         
         let finalUrl = url.appending("nik", value: nik)
         
-        var request = URLRequest(url: finalUrl)
+        var request = URLRequest(finalUrl)
         request.httpMethod = "GET"
-        request.addValue("*/*", forHTTPHeaderField: "accept")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             

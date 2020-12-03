@@ -126,7 +126,7 @@ struct SumberDanaRegisterNasabahView: View {
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
                                         } else {
-                                            NavigationLink(destination: FormVerificationRegisterDataNasabahScreen().environmentObject(registerData)) {
+                                            NavigationLink(destination: DataVerificationRegisterNasabahView().environmentObject(registerData)) {
                                                 
                                                 Text("Simpan")
                                                     .foregroundColor(.white)

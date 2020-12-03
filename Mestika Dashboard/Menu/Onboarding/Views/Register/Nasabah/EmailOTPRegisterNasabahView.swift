@@ -1,8 +1,8 @@
 //
-//  FormEmailOTPNasabah.swift
+//  EmailOTPV2.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 28/11/20.
+//  Created by Abdul R. Arraisi on 02/12/20.
 //
 
 import SwiftUI
@@ -117,7 +117,7 @@ struct EmailOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: PilihJenisTabunganRegisterNasabahView(shouldPopToRootView: self.$shouldPopToRootView).environmentObject(registerData),
+                            destination: JenisTabunganRegisterNasabahView(shouldPopToRootView: self.$shouldPopToRootView).environmentObject(registerData),
                             isActive: self.$isOtpValid,
                             label: {
                                 EmptyView()
@@ -365,7 +365,7 @@ struct EmailOTPRegisterNasabahView: View {
     }
 }
 
-struct FormEmailOTPNasabah_Previews: PreviewProvider {
+struct EmailOTPRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
         EmailOTPRegisterNasabahView(shouldPopToRootView: .constant(false))
     }

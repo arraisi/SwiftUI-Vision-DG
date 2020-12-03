@@ -12,6 +12,7 @@ import JGProgressHUD_SwiftUI
 struct FormPilihDesainATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
+    @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject private var productVM = ATMProductViewModel()
     
     @State var cards: [ATMDesignViewModel] = []
@@ -125,44 +126,46 @@ struct FormPilihDesainATMView: View {
                         
                         if cards.count > Int(count) {
                             VStack {
-                                HStack {
-                                    Text(cards[Int(count)].title)
-                                        .font(.custom("Montserrat-SemiBold", size: 15))
+                                VStack {
+                                    HStack {
+                                        Text(cards[Int(count)].title)
+                                            .font(.custom("Montserrat-SemiBold", size: 15))
+                                        
+                                        Spacer()
+                                    }
+                                    .padding()
+                                    .padding(.top, 30)
                                     
-                                    Spacer()
+                                    HStack{
+                                        Text(cards[Int(count)].description)
+                                            .font(.custom("Montserrat-Light", size: 10))
+                                        Spacer()
+                                    }
+                                    .padding(.horizontal)
+                                    
+                                    NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData)) {
+                                        Text("PILIH DESAIN KARTU")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                    }
+                                    .frame(height: 50)
+                                    .background(Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal)
+                                    .padding(.vertical, 20)
+                                    
                                 }
-                                .padding()
-                                
-                                HStack{
-                                    Text(cards[Int(count)].description)
-                                        .font(.custom("Montserrat-Light", size: 10))
-                                    Spacer()
-                                }
-                                .padding(.horizontal)
-                                
-                                NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData)) {
-                                    Text("PILIH DESAIN KARTU")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .frame(maxWidth: .infinity, maxHeight: 40)
-                                }
-                                .frame(height: 50)
-                                .background(Color(hex: "#2334D0"))
-                                .cornerRadius(12)
-                                .padding(.horizontal)
-                                .padding(.vertical, 20)
-                                
+                                .animation(nil)
+                                //                .transition(.flipFromLeft)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                                        .fill(Color(.white)))
+                                .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                                .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
                             }
-                            .animation(nil)
-                            //                .transition(.flipFromLeft)
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                    .fill(Color(.white))
-                                    .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4))
-                            .padding(.leading, 25)
-                            .padding(.trailing, 25)
-                            .padding(.bottom)
+                            .padding(.horizontal, 25)
+                            .padding(.vertical)
                         }
                     }
                 }
@@ -264,7 +267,7 @@ struct FormPilihDesainATMView: View {
 struct PilihDesainATMView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FormPilihDesainATMView().environmentObject(AddProductATM())
+            FormPilihDesainATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel())
         }
     }
 }

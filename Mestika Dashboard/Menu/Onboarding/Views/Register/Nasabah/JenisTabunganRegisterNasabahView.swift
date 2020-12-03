@@ -1,13 +1,13 @@
 //
-//  ChooseTypeSavingForNasabahScreen.swift
+//  JenisTabunganV2.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 11/11/20.
+//  Created by Abdul R. Arraisi on 02/12/20.
 //
 
 import SwiftUI
 
-struct PilihJenisTabunganRegisterNasabahView: View {
+struct JenisTabunganRegisterNasabahView: View {
     
     /* Carousel Variables */
     @State var data = savingTypeData
@@ -127,7 +127,7 @@ struct PilihJenisTabunganRegisterNasabahView: View {
             EmptyView()
                 .frame(height: 150)
             
-            NavigationLink(destination: InputIdentitasDiriRegisterNasabahView().environmentObject(registerData)) {
+            NavigationLink(destination: IdentitasDiriRegisterNasabahView().environmentObject(registerData)) {
                 
                 Text("Pilih Tabungan ini")
                     .foregroundColor(.white)
@@ -198,8 +198,8 @@ struct PilihJenisTabunganRegisterNasabahView: View {
     }
 }
 
-struct ChooseTypeSavingForNasabahScreen_Previews: PreviewProvider {
+struct JenisTabunganRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
-        PilihJenisTabunganRegisterNasabahView(shouldPopToRootView: .constant(false)).environmentObject(RegistrasiModel())
+        JenisTabunganRegisterNasabahView(shouldPopToRootView: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

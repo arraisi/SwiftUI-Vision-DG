@@ -1,8 +1,8 @@
 //
-//  FormEmailVerificationNasabahScreen.swift
+//  EmailV2.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 11/11/20.
+//  Created by Abdul R. Arraisi on 02/12/20.
 //
 
 import SwiftUI
@@ -137,8 +137,8 @@ struct EmailRegisterNasabahView: View {
     }
 }
 
-struct FormEmailVerificationNasabahScreen_Previews: PreviewProvider {
+struct EmailRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
-        InputEmailRegisterNasabahView(shouldPopToRootView: .constant(false), shouldPopToRootView2: .constant(false)).environmentObject(RegistrasiModel())
+        EmailRegisterNasabahView(shouldPopToRootView: .constant(false), shouldPopToRootView2: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

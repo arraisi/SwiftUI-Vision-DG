@@ -35,6 +35,8 @@
 		0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */; };
 		0AF48AD025778C760037942D /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACF25778C760037942D /* Formatter+Extensions.swift */; };
 		0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */; };
+		0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */; };
+		0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */; };
 		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
 		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
@@ -46,7 +48,6 @@
 		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
 		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
 		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
-		5205862225725173005DB764 /* EmailOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205862125725173005DB764 /* EmailOTPRegisterNasabahView.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -140,10 +141,7 @@
 		527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E3124256613EB004FF5ED /* MobileVersionService.swift */; };
 		527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312925661644004FF5ED /* MobileVersionViewModel.swift */; };
 		527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312E25663289004FF5ED /* UserCheckResponse.swift */; };
-		5290A125255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A124255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift */; };
-		5290A12A255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A129255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift */; };
-		5290A12F255BC6AD0090F788 /* InputIdentitasDiriRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A12E255BC6AD0090F788 /* InputIdentitasDiriRegisterNasabahView.swift */; };
-		5290A134255BC7200090F788 /* InputEmailRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A133255BC7200090F788 /* InputEmailRegisterNasabahView.swift */; };
+		5290A12F255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */; };
 		5290A13C255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A13B255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift */; };
 		5290A142255BC9900090F788 /* TujuanPembukaanRekeningRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A141255BC9900090F788 /* TujuanPembukaanRekeningRegisterNasabahView.swift */; };
 		5290A14A255BCA0E0090F788 /* SumberDanaRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A149255BCA0E0090F788 /* SumberDanaRegisterNasabahView.swift */; };
@@ -156,11 +154,11 @@
 		5290A16D255BCCDC0090F788 /* PenghasilanKotorRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A16C255BCCDC0090F788 /* PenghasilanKotorRegisterNasabahView.swift */; };
 		5290A172255BCD170090F788 /* SumberPendapatanLainnyaRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A171255BCD170090F788 /* SumberPendapatanLainnyaRegisterNasabahView.swift */; };
 		5290A177255BCD5E0090F788 /* KeluargaTerdekatRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A176255BCD5E0090F788 /* KeluargaTerdekatRegisterNasabahView.swift */; };
-		5290A17C255BCDFD0090F788 /* FormRegisterPasswordNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A17B255BCDFD0090F788 /* FormRegisterPasswordNasabahScreen.swift */; };
-		5290A181255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A180255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift */; };
-		5290A186255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A185255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift */; };
+		5290A17C255BCDFD0090F788 /* PasswordRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A17B255BCDFD0090F788 /* PasswordRegisterNasabahView.swift */; };
+		5290A181255BCE3D0090F788 /* PinRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A180255BCE3D0090F788 /* PinRegisterNasabahView.swift */; };
+		5290A186255BCE8A0090F788 /* PinConfirmationRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A185255BCE8A0090F788 /* PinConfirmationRegisterNasabahView.swift */; };
 		5290A18B255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A18A255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift */; };
-		5290A190255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A18F255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift */; };
+		5290A190255BCF920090F788 /* DataVerificationRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A18F255BCF920090F788 /* DataVerificationRegisterNasabahView.swift */; };
 		5290A195255BD1790090F788 /* SuccessRegisterNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A194255BD1790090F788 /* SuccessRegisterNasabahScreen.swift */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
@@ -305,6 +303,10 @@
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
 		C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347D22559422B000754C4 /* CardBlockView.swift */; };
 		C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */; };
+		C0BCCB222577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */; };
+		C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */; };
+		C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */; };
+		C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */; };
 		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
@@ -371,10 +373,11 @@
 		0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMCardDesignView.swift; sourceTree = "<group>"; };
 		0AF48ACF25778C760037942D /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
 		0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Extensions.swift"; sourceTree = "<group>"; };
+		0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
+		0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extensions.swift"; sourceTree = "<group>"; };
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
-		5205862125725173005DB764 /* EmailOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
@@ -474,10 +477,7 @@
 		527E3124256613EB004FF5ED /* MobileVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionService.swift; sourceTree = "<group>"; };
 		527E312925661644004FF5ED /* MobileVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionViewModel.swift; sourceTree = "<group>"; };
 		527E312E25663289004FF5ED /* UserCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCheckResponse.swift; sourceTree = "<group>"; };
-		5290A124255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
-		5290A129255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilihJenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
-		5290A12E255BC6AD0090F788 /* InputIdentitasDiriRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputIdentitasDiriRegisterNasabahView.swift; sourceTree = "<group>"; };
-		5290A133255BC7200090F788 /* InputEmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEmailRegisterNasabahView.swift; sourceTree = "<group>"; };
+		5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitasDiriRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A13B255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailReVerificationNasabahScreen.swift; sourceTree = "<group>"; };
 		5290A141255BC9900090F788 /* TujuanPembukaanRekeningRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuanPembukaanRekeningRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A149255BCA0E0090F788 /* SumberDanaRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumberDanaRegisterNasabahView.swift; sourceTree = "<group>"; };
@@ -490,11 +490,11 @@
 		5290A16C255BCCDC0090F788 /* PenghasilanKotorRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenghasilanKotorRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A171255BCD170090F788 /* SumberPendapatanLainnyaRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumberPendapatanLainnyaRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A176255BCD5E0090F788 /* KeluargaTerdekatRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeluargaTerdekatRegisterNasabahView.swift; sourceTree = "<group>"; };
-		5290A17B255BCDFD0090F788 /* FormRegisterPasswordNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRegisterPasswordNasabahScreen.swift; sourceTree = "<group>"; };
-		5290A180255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRegisterPinNasabahScreen.swift; sourceTree = "<group>"; };
-		5290A185255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRegisterVerificationPinScreen.swift; sourceTree = "<group>"; };
+		5290A17B255BCDFD0090F788 /* PasswordRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRegisterNasabahView.swift; sourceTree = "<group>"; };
+		5290A180255BCE3D0090F788 /* PinRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRegisterNasabahView.swift; sourceTree = "<group>"; };
+		5290A185255BCE8A0090F788 /* PinConfirmationRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinConfirmationRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A18A255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermConditionRegisterNasabahScreen.swift; sourceTree = "<group>"; };
-		5290A18F255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVerificationRegisterDataNasabahScreen.swift; sourceTree = "<group>"; };
+		5290A18F255BCF920090F788 /* DataVerificationRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataVerificationRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A194255BD1790090F788 /* SuccessRegisterNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessRegisterNasabahScreen.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
@@ -639,6 +639,10 @@
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
 		C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppBar.swift; sourceTree = "<group>"; };
+		C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
+		C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterNasabahView.swift; sourceTree = "<group>"; };
+		C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
+		C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
@@ -969,6 +973,8 @@
 				064CCE50256DADBD001B8EB7 /* Published+Extensions.swift */,
 				0AF48ACF25778C760037942D /* Formatter+Extensions.swift */,
 				0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */,
+				0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */,
+				0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1053,19 +1059,19 @@
 			children = (
 				5290A140255BC9670090F788 /* Form Pembukaan Rekening */,
 				52ADFF822557DFDB00A1001F /* NoAtmOrRekeningVerificationView.swift */,
-				5290A124255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift */,
-				5290A133255BC7200090F788 /* InputEmailRegisterNasabahView.swift */,
-				5205862125725173005DB764 /* EmailOTPRegisterNasabahView.swift */,
-				5290A129255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift */,
-				5290A12E255BC6AD0090F788 /* InputIdentitasDiriRegisterNasabahView.swift */,
+				C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */,
+				C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */,
+				C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */,
+				C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */,
+				5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */,
+				5290A17B255BCDFD0090F788 /* PasswordRegisterNasabahView.swift */,
+				5290A180255BCE3D0090F788 /* PinRegisterNasabahView.swift */,
+				5290A185255BCE8A0090F788 /* PinConfirmationRegisterNasabahView.swift */,
 				5290A18A255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift */,
+				5290A18F255BCF920090F788 /* DataVerificationRegisterNasabahView.swift */,
+				5290A194255BD1790090F788 /* SuccessRegisterNasabahScreen.swift */,
 				52ADFF5C2557DFDB00A1001F /* FormEmailConfirmationNasabahScreen.swift */,
 				5290A13B255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift */,
-				5290A17B255BCDFD0090F788 /* FormRegisterPasswordNasabahScreen.swift */,
-				5290A180255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift */,
-				5290A185255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift */,
-				5290A18F255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift */,
-				5290A194255BD1790090F788 /* SuccessRegisterNasabahScreen.swift */,
 			);
 			path = Nasabah;
 			sourceTree = "<group>";
@@ -1786,6 +1792,7 @@
 				52ADFF332557DDBD00A1001F /* OTPTextField.swift in Sources */,
 				06202919256D905500A830EA /* ATMService.swift in Sources */,
 				52ADFF892557DFDC00A1001F /* FormEmailVerificationRegisterNasabahView.swift in Sources */,
+				C0BCCB222577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
@@ -1801,8 +1808,8 @@
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
 				52ADFFAD2557DFDC00A1001F /* KetentuanRegisterNonNasabahView.swift in Sources */,
 				C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */,
+				C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */,
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
-				5290A125255BBFAC0090F788 /* PhoneOTPRegisterNasabahView.swift in Sources */,
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
 				525950222553E03000C8CA5D /* OtpVerificationForgotPasswordView.swift in Sources */,
 				C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */,
@@ -1824,8 +1831,7 @@
 				06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */,
 				52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */,
 				52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */,
-				5290A12A255BC5930090F788 /* PilihJenisTabunganRegisterNasabahView.swift in Sources */,
-				5290A17C255BCDFD0090F788 /* FormRegisterPasswordNasabahScreen.swift in Sources */,
+				5290A17C255BCDFD0090F788 /* PasswordRegisterNasabahView.swift in Sources */,
 				526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */,
 				526B1FE9255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift in Sources */,
 				C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */,
@@ -1866,7 +1872,6 @@
 				5290A18B255BCEF20090F788 /* TermConditionRegisterNasabahScreen.swift in Sources */,
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
 				525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */,
-				5205862225725173005DB764 /* EmailOTPRegisterNasabahView.swift in Sources */,
 				C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				52ADFEAE2557D9A800A1001F /* SliderAssetsResponse.swift in Sources */,
@@ -1890,7 +1895,7 @@
 				5290A159255BCBA70090F788 /* PerkiraanSetoranRegisterNasabahView.swift in Sources */,
 				524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */,
 				52C3487F254287B800F08F37 /* TransactionFavorit.swift in Sources */,
-				5290A181255BCE3D0090F788 /* FormRegisterPinNasabahScreen.swift in Sources */,
+				5290A181255BCE3D0090F788 /* PinRegisterNasabahView.swift in Sources */,
 				C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */,
 				5205861A25723A2F005DB764 /* PasswordService.swift in Sources */,
 				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
@@ -1904,7 +1909,7 @@
 				C0E40BBE2564E76000259612 /* FormSumberPenyandandDana2View.swift in Sources */,
 				525FA11D25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift in Sources */,
 				C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */,
-				5290A186255BCE8A0090F788 /* FormRegisterVerificationPinScreen.swift in Sources */,
+				5290A186255BCE8A0090F788 /* PinConfirmationRegisterNasabahView.swift in Sources */,
 				C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */,
 				C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */,
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
@@ -1915,11 +1920,12 @@
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
 				52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */,
+				0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */,
+				0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */,
 				526A81682560B2B200D614CB /* FirstOTPLoginView.swift in Sources */,
-				5290A190255BCF920090F788 /* FormVerificationRegisterDataNasabahScreen.swift in Sources */,
+				5290A190255BCF920090F788 /* DataVerificationRegisterNasabahView.swift in Sources */,
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
-				5290A134255BC7200090F788 /* InputEmailRegisterNasabahView.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
 				5290A177255BCD5E0090F788 /* KeluargaTerdekatRegisterNasabahView.swift in Sources */,
 				0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */,
@@ -1936,6 +1942,7 @@
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */,
 				5290A163255BCC430090F788 /* PekerjaanRegisterNasabahView.swift in Sources */,
+				C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */,
 				52ADFEC82557DA3700A1001F /* SliderAssetsViewModel.swift in Sources */,
 				52ADFF0D2557DCB800A1001F /* KeyboardAwareModifier.swift in Sources */,
 				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
@@ -1960,6 +1967,7 @@
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
+				C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
@@ -1987,7 +1995,7 @@
 				526A81652560B2B200D614CB /* FirstATMLoginView.swift in Sources */,
 				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,
 				524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */,
-				5290A12F255BC6AD0090F788 /* InputIdentitasDiriRegisterNasabahView.swift in Sources */,
+				5290A12F255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift in Sources */,
 				5290A14F255BCABA0090F788 /* PerkiraanPenarikanDanaRegisterNasabahView.swift in Sources */,
 				526B6593254FBAF100C13C36 /* MySavings.swift in Sources */,
 				064EBDAE256ADEB20070A792 /* FormCompletionKartuATMView.swift in Sources */,
@@ -2201,7 +2209,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 7UWQ7HF465;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2225,7 +2233,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 7UWQ7HF465;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

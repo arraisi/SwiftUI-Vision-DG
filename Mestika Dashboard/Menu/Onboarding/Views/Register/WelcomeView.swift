@@ -113,12 +113,11 @@ struct WelcomeView: View {
             }
             .onAppear() {
                 print("APPEAR")
+                registerData.load()
                 getUserStatus(deviceId: deviceId!)
             }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-                
                 popupMenu()
-                
             }
         }
     }
@@ -411,7 +410,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData)){
+            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData)){
                 Text("Lanjutkan")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
@@ -565,6 +564,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        WelcomeView().environmentObject(AppState())
     }
 }

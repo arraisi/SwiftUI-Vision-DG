@@ -1,17 +1,18 @@
 //
-//  RegisterNasabahPhoneOTPScreen.swift
+//  PhoneOTPV2.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 11/11/20.
+//  Created by Abdul R. Arraisi on 02/12/20.
 //
 
 import SwiftUI
 
 struct PhoneOTPRegisterNasabahView: View {
     
+    
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
-    @EnvironmentObject var appState: AppState 
+    @EnvironmentObject var appState: AppState
     
     /* HUD Variable */
     @State private var dim = true
@@ -122,7 +123,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: InputEmailRegisterNasabahView(shouldPopToRootView: self.$rootIsActive, shouldPopToRootView2: self.$root2IsActive).environmentObject(registerData),
+                            destination: EmailRegisterNasabahView(shouldPopToRootView: self.$rootIsActive, shouldPopToRootView2: self.$root2IsActive).environmentObject(registerData),
                             isActive: self.$isOtpValid) {
                             EmptyView()
                         }
@@ -162,7 +163,7 @@ struct PhoneOTPRegisterNasabahView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-//        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -326,7 +327,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-//                self.rootIsActive = true
+                //                self.rootIsActive = true
                 self.appState.moveToWelcomeView = true
             }) {
                 Text("Kembali ke Halaman Utama")
@@ -362,7 +363,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-//                    self.timeRemaining = self.otpVM.timeCounter
+                    //                    self.timeRemaining = self.otpVM.timeCounter
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
                 }
@@ -422,7 +423,7 @@ struct PhoneOTPRegisterNasabahView: View {
     }
 }
 
-struct RegisterNasabahPhoneOTPScreen_Previews: PreviewProvider {
+struct PhoneOTPRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
         PhoneOTPRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(RegistrasiModel())
     }
