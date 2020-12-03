@@ -80,7 +80,7 @@ extension URL {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm");
     }
     
-    static func urlGetListATMDesign() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm-design?type=design");
+    static func urlGetListATMDesign(type: String) -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm-design?type=\(type)");
     }
 }

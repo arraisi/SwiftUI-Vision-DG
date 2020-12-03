@@ -26,6 +26,7 @@ class ATMService {
         
         var request = URLRequest(url)
         request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -81,9 +82,9 @@ class ATMService {
     }
     
     // MARK : get response model of list ATM Design.
-    func getListATMDesign(completion: @escaping(Result<GeneralPaginationResponse<ATMDesignModel>, NetworkError>) -> Void) {
+    func getListATMDesign(type: String, completion: @escaping(Result<GeneralPaginationResponse<ATMDesignModel>, NetworkError>) -> Void) {
         
-        guard let url = URL.urlGetListATMDesign() else {
+        guard let url = URL.urlGetListATMDesign(type: type) else {
             return completion(.failure(.badUrl))
         }
         

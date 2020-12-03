@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwURL
 
 struct ATMCardDesignView: View {
     var card: ATMDesignViewModel
@@ -17,10 +18,17 @@ struct ATMCardDesignView: View {
     
     var body: some View {
         ZStack {
-            Image(uiImage: card.cardImage)
-                .resizable()
-                .frame(width: cardWidth, height: cardHeight)
-                .background(Color.clear)
+            RemoteImageView(
+                url: card.cardImage!,
+                placeholderImage: Image.init("card_bg"),
+                transition: .custom(transition: .opacity, animation: .easeOut(duration: 0.5))
+            ).progress({ progress in
+                return LoadingView(isShowing: Binding.constant(true)) {
+                    EmptyView()
+                }
+            })
+            .frame(width: cardWidth, height: cardHeight)
+            .background(Color.clear)
             
             if showContent {
                 VStack(){
@@ -55,6 +63,6 @@ struct ATMCardDesignView: View {
 
 struct ATMCardDesignView_Previews: PreviewProvider {
     static var previews: some View {
-        ATMCardDesignView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: UIImage(named:"card_bg")!, description: "test"), cardWidth: 315, cardHeight: 197, showContent: false)
+        ATMCardDesignView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "test"), cardWidth: 315, cardHeight: 197, showContent: false)
     }
 }
