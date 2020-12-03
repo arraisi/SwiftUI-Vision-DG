@@ -111,7 +111,7 @@ struct FormVerificationAddressViewNasabahScreen: View {
                         .shadow(radius: 30)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 50)
+                    .padding(.top, 70)
                 }
                 
                 VStack {

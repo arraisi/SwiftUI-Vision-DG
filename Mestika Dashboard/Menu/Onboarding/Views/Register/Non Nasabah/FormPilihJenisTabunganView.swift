@@ -39,13 +39,12 @@ struct FormPilihJenisTabunganView: View {
             VStack {
                 
                 VStack() {
-                    NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), label: {
-                        Text("Pilih Jenis Tabungan Anda")
-                            .font(.custom("Montserrat-SemiBold", size: 18))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .padding(.horizontal, 15)
-                            .padding(.top, 90)
-                    })
+                    
+                    Text("Pilih Jenis Tabungan Anda")
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.horizontal, 15)
+                        .padding(.top, 90)
                     
                     // MARK: - CAROUSEL
                     VStack{
