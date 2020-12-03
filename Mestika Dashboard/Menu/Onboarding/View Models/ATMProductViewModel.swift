@@ -54,15 +54,11 @@ extension ATMProductViewModel {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.listATM = response.map({ (data: ATMModel) -> ATMViewModel in
-                        var image = UIImage(named: "card_bg")!
-                        if let img = data.cardImage.base64ToImage() {
-                            image = img
-                        }
                         return ATMViewModel (
                             id: data.id,
                             key: data.key,
                             title: data.title,
-                            cardImage: image,
+                            cardImage: URL(string: data.cardImage),
                             description: self.mapDescriptionLimit(data: data.description)
                         )
                     })
@@ -95,24 +91,18 @@ extension ATMProductViewModel {
             self.isLoading = true
         }
         
-        ATMService.shared.getListATMDesign() { result in
+        ATMService.shared.getListATMDesign(type: type) { result in
             switch result {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listATMDesign = response.data.content.filter({ (data: ATMDesignModel) -> Bool in
-                        return data.cardType == type
-                    }).map({ (data: ATMDesignModel) -> ATMDesignViewModel in
-                        var image = UIImage(named: "card_bg")!
-                        if let img = data.cardImage.base64ToImage() {
-                            image = img
-                        }
+                    self.listATMDesign = response.data.content.map({ (data: ATMDesignModel) -> ATMDesignViewModel in
                         return ATMDesignViewModel (
                             id: data.id,
                             key: data.key,
                             title: data.title,
                             cardType: data.cardType,
-                            cardImage: image,
+                            cardImage: URL(string: data.cardImage),
                             description: data.description
                         )
                     })

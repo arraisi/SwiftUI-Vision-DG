@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwURL
 
 struct ATMCardView: View {
     var card: ATMViewModel
@@ -17,10 +18,17 @@ struct ATMCardView: View {
     
     var body: some View {
         ZStack {
-            Image(uiImage: card.cardImage)
-                .resizable()
-                .frame(width: cardWidth, height: cardHeight)
-                .background(Color.clear)
+            RemoteImageView(
+                url: card.cardImage!,
+                placeholderImage: Image("card_bg"),
+                transition: .custom(transition: .opacity, animation: .easeOut(duration: 0.5))
+            ).progress({ progress in
+                return LoadingView(isShowing: Binding.constant(true)) {
+                    EmptyView()
+                }
+            })
+            .frame(width: cardWidth, height: cardHeight)
+            .cornerRadius(10)
             
             if showContent {
                 VStack(){
@@ -88,12 +96,13 @@ struct ATMCardView: View {
             }
         }
         .frame(width: cardWidth, height: cardHeight, alignment: .center)
+        .cornerRadius(10)
         .background(Color.clear)
     }
 }
 
 struct ATMCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ATMCardView(card: ATMViewModel(id: "1", key: "1", title: "Test", cardImage: UIImage(named: "atm_bromo")!, description: ATMDescriptionModel(limitPurchase: "0", limitPayment: "0", limitPenarikanHarian: "0", limitTransferKeBankLain: "0", limitTransferAntarSesama: "0", codeClass: "0")), cardWidth: 315, cardHeight: 197, showContent: true)
+        ATMCardView(card: ATMViewModel(id: "1", key: "1", title: "Test", cardImage: URL(string: "")!, description: ATMDescriptionModel(limitPurchase: "0", limitPayment: "0", limitPenarikanHarian: "0", limitTransferKeBankLain: "0", limitTransferAntarSesama: "0", codeClass: "0")), cardWidth: 315, cardHeight: 197, showContent: true)
     }
 }

@@ -15,18 +15,18 @@ struct TabItemView: View {
         Button(action: {
             self.callback(self.card)
         }, label: {
-            Image(uiImage: card.cardImage)
-                .resizable()
-                .padding(.horizontal, 25)
-                .aspectRatio(contentMode: .fit)
-                .tag(card.id)
+//            Image(uiImage: card.cardImage)
+//                .resizable()
+//                .padding(.horizontal, 25)
+//                .aspectRatio(contentMode: .fit)
+//                .tag(card.id)
         })
     }
 }
 
 struct TabItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TabItemView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: UIImage(named:"card_bg")!, description: "")) { (id:ATMDesignViewModel) in
+        TabItemView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "")) { (id:ATMDesignViewModel) in
             
             }
     }

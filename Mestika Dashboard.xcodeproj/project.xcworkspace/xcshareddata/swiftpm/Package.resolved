@@ -162,6 +162,15 @@
           "revision": "7f6484328875a56187b1737e2f8fa3ce7c3c9030",
           "version": "0.0.3"
         }
+      },
+      {
+        "package": "SwURL",
+        "repositoryURL": "https://github.com/cmtrounce/SwURL",
+        "state": {
+          "branch": null,
+          "revision": "ea349b67d8fd663d0e96e3116280ba1615a83d3d",
+          "version": "0.4.0"
+        }
       }
     ]
   },

@@ -20,7 +20,7 @@ struct ATMDesignModel: Codable {
 struct ATMDesignViewModel {
     var id, key, title: String
     var cardType: String?
-    var cardImage: UIImage
+    var cardImage: URL?
     var description: String
     var isShow: Bool = false
 }
