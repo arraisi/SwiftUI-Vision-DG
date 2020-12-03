@@ -10,12 +10,14 @@ import SwiftUI
 struct TermConditionRegisterNasabahScreen: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     @State var scrollPosition: CGFloat = 0.0
     
     @State var isChecked:Bool = false
     @State var isChecked1:Bool = false
     @State var isChecked2:Bool = false
+    @State var showingAlert: Bool = false
     
     func toggle() {
         isChecked = !isChecked
@@ -42,9 +44,9 @@ struct TermConditionRegisterNasabahScreen: View {
             
             VStack {
                 
-                AppBarLogo(light: false) {
-                    
-                }
+                AppBarLogo(light: false, showCancel: true, onCancel: {
+                    self.showingAlert = true
+                })
                 
                 VStack {
                     Text("SYARAT DAN KETENTUAN")
@@ -142,7 +144,14 @@ struct TermConditionRegisterNasabahScreen: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text("Apakah ingin membatalkan registrasi ?"),
+                primaryButton: .default(Text("YA"), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text("Tidak")))
+        }
     }
 }
 

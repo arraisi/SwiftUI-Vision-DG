@@ -96,7 +96,7 @@ struct SumberPenyandandDana2RegisterNasabahView: View {
                                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                         
                                         // Button
-                                        NavigationLink(destination: InformasiPerusahaanRegisterNasabahView().environmentObject(registerData), label:{
+                                        NavigationLink(destination: SumberPendapatanLainnyaRegisterNasabahView().environmentObject(registerData), label:{
                                             
                                             Text("Berikutnya")
                                                 .foregroundColor(.white)

@@ -48,6 +48,7 @@
 		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
 		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
 		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
+		5206B70F2578D1D800CB4DEB /* FormVerificationAddressViewNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5206B70E2578D1D800CB4DEB /* FormVerificationAddressViewNasabahScreen.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -378,6 +379,7 @@
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
+		5206B70E2578D1D800CB4DEB /* FormVerificationAddressViewNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVerificationAddressViewNasabahScreen.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
@@ -1095,6 +1097,7 @@
 				5290A171255BCD170090F788 /* SumberPendapatanLainnyaRegisterNasabahView.swift */,
 				5290A176255BCD5E0090F788 /* KeluargaTerdekatRegisterNasabahView.swift */,
 				526B1FE8255BE3A80062B87F /* FormSumberPenyandangDanaNasabahScreen.swift */,
+				5206B70E2578D1D800CB4DEB /* FormVerificationAddressViewNasabahScreen.swift */,
 			);
 			path = "Form Pembukaan Rekening";
 			sourceTree = "<group>";
@@ -1853,6 +1856,7 @@
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
 				527E31202566138E004FF5ED /* MobileVersionResponse.swift in Sources */,
+				5206B70F2578D1D800CB4DEB /* FormVerificationAddressViewNasabahScreen.swift in Sources */,
 				52ADFF9C2557DFDC00A1001F /* PerkiraanPenarikanView.swift in Sources */,
 				5247463F2548068E001F43C5 /* FavoritePurchasePaymentScreen.swift in Sources */,
 				52ADFE942557D99F00A1001F /* MasterModel.swift in Sources */,

@@ -99,7 +99,7 @@ struct FormSumberPenyandandDana2View: View {
                                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                         
                                         // Button
-                                        NavigationLink(destination: InformasiPerusahaanView().environmentObject(registerData), label:{
+                                        NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
                                             
                                             Text("Berikutnya")
                                                 .foregroundColor(.white)

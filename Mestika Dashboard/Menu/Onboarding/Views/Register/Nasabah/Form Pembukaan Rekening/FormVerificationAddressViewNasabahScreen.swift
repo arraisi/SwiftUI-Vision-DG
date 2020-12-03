@@ -1,13 +1,13 @@
 //
-//  VerificationAddressView.swift
-//  Bank Mestika
+//  FormVerificationAddressViewNasabahScreen.swift
+//  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 30/09/20.
+//  Created by Prima Jatnika on 03/12/20.
 //
 
 import SwiftUI
 
-struct VerificationAddressView: View {
+struct FormVerificationAddressViewNasabahScreen: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @State var alamat: String = ""
@@ -21,6 +21,9 @@ struct VerificationAddressView: View {
                 .resizable()
             
             VStack {
+                
+                AppBarLogo(light: false, onCancel: {})
+                
                 ScrollView {
                     VStack {
                         Text("PASTIKAN INFORMASI ANDA BENAR")
@@ -91,7 +94,7 @@ struct VerificationAddressView: View {
                                     })
                                         .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $registerData.kodePos, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
                                         print("on edit")
                                     }, onCommit: {
                                         print("on commit")
@@ -112,7 +115,7 @@ struct VerificationAddressView: View {
                 }
                 
                 VStack {
-                    NavigationLink(destination: PasswordView().environmentObject(registerData)) {
+                    NavigationLink(destination: PasswordRegisterNasabahView().environmentObject(registerData)) {
                         Text("Submit Data")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -129,13 +132,13 @@ struct VerificationAddressView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
 }
 
-struct VerificationAddressView_Previews: PreviewProvider {
+struct FormVerificationAddressViewNasabahScreen_Previews: PreviewProvider {
     static var previews: some View {
-        VerificationAddressView().environmentObject(RegistrasiModel())
+        FormVerificationAddressViewNasabahScreen().environmentObject(RegistrasiModel())
     }
 }

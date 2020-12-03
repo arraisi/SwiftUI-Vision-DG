@@ -29,6 +29,7 @@ struct ScanKTPView: View {
     
     @State var isValidKtp: Bool = false
     @State var showingAlert: Bool = false
+    @State var messageResponse: String = ""
     
     var body: some View {
         VStack(alignment: .center) {
@@ -137,7 +138,7 @@ struct ScanKTPView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("MESSAGE"),
-                message: Text(self.citizenVM.errorMessage),
+                message: Text(self.messageResponse),
                 dismissButton: .default(Text("Oke"))
             )
         }
@@ -151,6 +152,7 @@ struct ScanKTPView: View {
             if success {
                 print("isLoading \(self.citizenVM.isLoading)")
                 print("nikValid \(self.citizenVM.nik)")
+                self.messageResponse = self.citizenVM.errorMessage
                 
                 self.showingAlert = true
                 
@@ -169,6 +171,7 @@ struct ScanKTPView: View {
             }
             
             if !success {
+                self.messageResponse = self.citizenVM.errorMessage
                 self.showingAlert = true
             }
         }

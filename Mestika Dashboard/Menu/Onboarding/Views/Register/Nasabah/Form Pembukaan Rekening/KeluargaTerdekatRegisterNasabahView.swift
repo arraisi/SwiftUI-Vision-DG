@@ -107,7 +107,7 @@ struct KeluargaTerdekatRegisterNasabahView: View {
                                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                         
                                         NavigationLink(
-                                            destination: PasswordRegisterNasabahView().environmentObject(registerData),
+                                            destination: FormVerificationAddressViewNasabahScreen().environmentObject(registerData),
                                             isActive: $nextViewActive,
                                             label: {
                                                 Button(action: {
