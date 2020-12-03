@@ -21,6 +21,35 @@ struct InformasiPerusahaanView: View {
     @State var noTlpPerusahaan: String = ""
     @State var nextViewActive: Bool = false
     
+    let bidangUsaha:[BidangUsaha] = [
+        .init(nama: "Minimarket/ Jasa Parkir/ SPBU"),
+        .init(nama: "Ekspor/ Impor"),
+        .init(nama: "Perdagangan Barang Antik"),
+        .init(nama: "Biro Perjalanan/ Travel"),
+        .init(nama: "Perdagangan Emas/ Permata/ Logam Mulia"),
+        .init(nama: "Properti/ Real Estate/ Kontraktor"),
+        .init(nama: "Money Changer"),
+        .init(nama: "MLM (Multi Level Marketing)"),
+        .init(nama: "Pedagang Sayur"),
+        .init(nama: "Perdagangan/ Jual Beli"),
+        .init(nama: "Restoran/ Rumah Makan"),
+        .init(nama: "Jasa Pendidikan"),
+        .init(nama: "Jasa Kesehatan"),
+        .init(nama: "Perkebunan"),
+        .init(nama: "Pertanian dan Perikanan"),
+        .init(nama: "Peternakan"),
+        .init(nama: "Industri/ Pabrik"),
+        .init(nama: "Perhotelan"),
+        .init(nama: "Pengangkutan/ Transportasi"),
+        .init(nama: "Lembaga Keuangan"),
+        .init(nama: "Yayasan Sosial"),
+        .init(nama: "Konstruksi/ Kontraktor"),
+        .init(nama: "Notaris"),
+        .init(nama: "Konsultan Keuangan/ Perencana Keuangan"),
+        .init(nama: "Advokat"),
+        .init(nama: "Konsultan Pajak"),
+    ]
+    
     let cities:[Address] = [
         .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Andir"),
         .init(city: "Jakarta Barat", kodePos: "14012", kecamatan: "Jakarta Barat", kelurahan: "Andir"),
@@ -32,6 +61,7 @@ struct InformasiPerusahaanView: View {
      Boolean for Show Modal
      */
     @State var showingModal = false
+    @State var showingModalBidang = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -149,7 +179,7 @@ struct InformasiPerusahaanView: View {
             }
             
             // Background Color When Modal Showing
-            if self.showingModal {
+            if self.showingModal || self.showingModalBidang {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
             }
         }
@@ -160,7 +190,9 @@ struct InformasiPerusahaanView: View {
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
         }
-        
+        .popup(isPresented: $showingModalBidang, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+            createBottomFloaterBidangUsaha()
+        }
     }
     
     // MARK : - Check form is fill
@@ -287,10 +319,35 @@ struct InformasiPerusahaanView: View {
             }
             .padding(.horizontal, 20)
 
-            LabelTextField(value: $registerData.bidangUsaha, label: "Bidang Usaha", placeHolder: "Bidang Usaha") { (Bool) in
-                print("on edit")
-            } onCommit: {
-                print("on commit")
+            Group {
+                Text("Bidang Usaha")
+                    .font(Font.system(size: 10))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("Bidang Usaha", text: $registerData.bidangUsaha) { changed in
+                    } onCommit: {
+                    }
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                    .disabled(true)
+                    
+                    Button(action:{
+                        showingModalBidang.toggle()
+                    }, label: {
+                        Image(systemName: "location.viewfinder")
+                            .font(Font.system(size: 20))
+                            .foregroundColor(Color(hex: "#707070"))
+                    })
+                    
+                }
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
             }
             .padding(.horizontal, 20)
             
@@ -396,6 +453,62 @@ struct InformasiPerusahaanView: View {
         .background(Color.white)
         .cornerRadius(20)
     }
+    
+    // MARK: -Fuction for Create Bottom Floater (Modal)
+        func createBottomFloaterBidangUsaha() -> some View {
+            VStack {
+                HStack {
+                    Text("Bidang Usaha")
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 19))
+                        .foregroundColor(Color(hex: "#232175"))
+                    Spacer()
+                }
+                
+                HStack {
+                    
+                    TextField("Pilih Bidang Usaha", text: $registerData.bidangUsaha)
+                        .font(Font.system(size: 14))
+                        .frame(height: 36)
+                    
+                    Button(action:{
+                        print("cari bidang usaha")
+                    }, label: {
+                        Image(systemName: "calendar")
+                            .font(Font.system(size: 20))
+                            .foregroundColor(Color(hex: "#707070"))
+                    })
+                    
+                }
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
+                List(0...bidangUsaha.count-1, id: \.self) {index in
+                    
+                    HStack {
+                        Text(bidangUsaha[index].nama)
+                            .font(Font.system(size: 14))
+                        
+                        Spacer()
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture(perform: {
+                        registerData.bidangUsaha = bidangUsaha[index].nama
+                        self.showingModalBidang.toggle()
+                    })
+                    
+                }
+                .background(Color.white)
+                .padding(.vertical)
+                .frame(height: 150)
+                
+            }
+            .frame(width: UIScreen.main.bounds.width - 60)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(20)
+        }
 }
 
 struct FormInformasiPerusahaanView_Previews: PreviewProvider {

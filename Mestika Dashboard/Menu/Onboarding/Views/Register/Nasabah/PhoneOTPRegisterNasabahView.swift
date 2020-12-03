@@ -108,7 +108,7 @@ struct PhoneOTPRegisterNasabahView: View {
                                 Text("(00:\(String(format: "%02d", timeRemaining)))")
                                     .font(.custom("Montserrat-Regular", size: 10))
                             })
-                            .disabled(false) // false by pass to next page
+                            .disabled(true) // false by pass to next page
                     }
                     .padding(.top, 5)
                     

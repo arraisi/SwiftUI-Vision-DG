@@ -102,7 +102,7 @@ struct EmailOTPRegisterNasabahView: View {
                                 Text("(00:\(String(format: "%02d", timeRemaining)))")
                                     .font(.custom("Montserrat-Regular", size: 10))
                             })
-                            .disabled(false) // false to by pass to next view
+                            .disabled(true) // false to by pass to next view
                     }
                     .padding(.top, 5)
                     
