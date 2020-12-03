@@ -33,7 +33,7 @@ struct VerificationAddressView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         VStack(alignment: .center) {
-                            Text("Apakah Alamat Surat Menyurat Anda adalah dibawah ini?")
+                            Text("Apakah Alamat Surat Menyurat Anda Sesuai KTP?")
                                 .font(.title2)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
@@ -108,7 +108,7 @@ struct VerificationAddressView: View {
                         .shadow(radius: 30)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 90)
+                    .padding(.top, 50)
                 }
                 
                 VStack {

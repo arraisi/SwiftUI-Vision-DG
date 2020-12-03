@@ -29,7 +29,7 @@ extension UserRegistrationViewModel {
             case .success(let response):
                 print(response.deviceID)
                 
-                registerData.save()
+//                registerData.save()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
