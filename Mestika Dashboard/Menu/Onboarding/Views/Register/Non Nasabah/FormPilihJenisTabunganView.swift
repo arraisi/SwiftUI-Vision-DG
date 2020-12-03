@@ -39,6 +39,7 @@ struct FormPilihJenisTabunganView: View {
             VStack {
                 
                 VStack() {
+                    
                     Text("Pilih Jenis Tabungan Anda")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))

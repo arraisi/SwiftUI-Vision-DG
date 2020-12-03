@@ -113,8 +113,8 @@ struct WelcomeView: View {
             }
             .onAppear() {
                 print("APPEAR")
-                registerData.load()
-                getUserStatus(deviceId: deviceId!)
+//                registerData.load()
+//                getUserStatus(deviceId: deviceId!)
             }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()

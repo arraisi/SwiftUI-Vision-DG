@@ -99,11 +99,12 @@ class UserRegistrationService {
             // generate boundary string using a unique per-app string
             let boundary = UUID().uuidString
             
-            var request = URLRequest(url)
+            var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             request.addValue("*/*", forHTTPHeaderField: "accept")
-         
+            request.addValue(deviceId!, forHTTPHeaderField: "X-Device-ID")
+            
             var data = Data()
             
             // Add the image KTP
@@ -161,6 +162,7 @@ class UserRegistrationService {
             print(error.localizedDescription)
         }
     }
+    
     
     /* GET USER */
     func getUser(deviceId: String, completion: @escaping(Result<UserCheckResponse, NetworkError>) -> Void) {
