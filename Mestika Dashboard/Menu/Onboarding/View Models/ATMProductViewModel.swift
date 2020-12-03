@@ -96,7 +96,9 @@ extension ATMProductViewModel {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listATMDesign = response.data.content.map({ (data: ATMDesignModel) -> ATMDesignViewModel in
+                    self.listATMDesign = response.data.content.filter({ (data: ATMDesignModel) -> Bool in
+                        return data.cardType == type
+                    }).map({ (data: ATMDesignModel) -> ATMDesignViewModel in
                         return ATMDesignViewModel (
                             id: data.id,
                             key: data.key,

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwURL
+import SDWebImageSwiftUI
 
 struct ATMCardDesignView: View {
     var card: ATMDesignViewModel
@@ -18,17 +18,19 @@ struct ATMCardDesignView: View {
     
     var body: some View {
         ZStack {
-            RemoteImageView(
-                url: card.cardImage!,
-                placeholderImage: Image.init("card_bg"),
-                transition: .custom(transition: .opacity, animation: .easeOut(duration: 0.5))
-            ).progress({ progress in
-                return LoadingView(isShowing: Binding.constant(true)) {
-                    EmptyView()
+            WebImage(url: card.cardImage!)
+                .onSuccess { image, data, cacheType in
+                    // Success
+                    // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
                 }
-            })
-            .frame(width: cardWidth, height: cardHeight)
-            .background(Color.clear)
+                .placeholder {
+                    Rectangle().foregroundColor(.gray).opacity(0.5)
+                }
+                .resizable()
+                .indicator(.activity) // Activity Indicator
+                .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                .scaledToFill()
+                .frame(width: cardWidth, height: cardHeight)
             
             if showContent {
                 VStack(){

@@ -28,7 +28,7 @@
 		06AD57002570CAC50071C4A9 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD56FF2570CAC50071C4A9 /* WebView.swift */; };
 		06AD57092570D3370071C4A9 /* term.html in Resources */ = {isa = PBXBuildFile; fileRef = 06AD57082570D3370071C4A9 /* term.html */; };
 		06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */; };
-		06E8A4A22578DE4700E61002 /* SwURL in Frameworks */ = {isa = PBXBuildFile; productRef = 06E8A4A12578DE4700E61002 /* SwURL */; };
+		06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */; };
 		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
@@ -674,10 +674,10 @@
 				520585FC25721F00005DB764 /* FirebaseMessaging in Frameworks */,
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
+				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
 				520585FB25721F00005DB764 /* Indicators in Frameworks */,
 				520585F525721F00005DB764 /* PopupView in Frameworks */,
 				520585F925721F00005DB764 /* NavigationStack in Frameworks */,
-				06E8A4A22578DE4700E61002 /* SwURL in Frameworks */,
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 			);
@@ -1612,7 +1612,7 @@
 				520E467A2568B5A800DE9205 /* Introspect */,
 				520E46802568BEF100DE9205 /* Indicators */,
 				524CB114256E0524006ED6F0 /* FirebaseMessaging */,
-				06E8A4A12578DE4700E61002 /* SwURL */,
+				06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1696,7 +1696,7 @@
 				0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
-				06E8A4A02578DE4700E61002 /* XCRemoteSwiftPackageReference "SwURL" */,
+				06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -2399,12 +2399,12 @@
 				minimumVersion = 7.1.0;
 			};
 		};
-		06E8A4A02578DE4700E61002 /* XCRemoteSwiftPackageReference "SwURL" */ = {
+		06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/cmtrounce/SwURL";
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.4.0;
+				minimumVersion = 1.5.0;
 			};
 		};
 		520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */ = {
@@ -2474,10 +2474,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		06E8A4A12578DE4700E61002 /* SwURL */ = {
+		06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 06E8A4A02578DE4700E61002 /* XCRemoteSwiftPackageReference "SwURL" */;
-			productName = SwURL;
+			package = 06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		520E467A2568B5A800DE9205 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
