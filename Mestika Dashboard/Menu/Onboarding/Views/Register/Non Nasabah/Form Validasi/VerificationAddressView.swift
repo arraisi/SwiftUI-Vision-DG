@@ -101,7 +101,7 @@ struct VerificationAddressView: View {
                             }
                         
                         }
-                        .frame(width: UIScreen.main.bounds.width - 30)
+                        .frame(width: UIScreen.main.bounds.width - 50)
                         .background(Color.white)
                         .cornerRadius(15)
                         .shadow(radius: 30)

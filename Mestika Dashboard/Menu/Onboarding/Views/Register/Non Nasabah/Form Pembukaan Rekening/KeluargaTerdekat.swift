@@ -94,7 +94,7 @@ struct KeluargaTerdekat: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 NavigationLink(
-                                    destination: PasswordView().environmentObject(registerData),
+                                    destination: VerificationAddressView().environmentObject(registerData),
                                     isActive: $nextViewActive,
                                     label: {
                                         Button(action: {

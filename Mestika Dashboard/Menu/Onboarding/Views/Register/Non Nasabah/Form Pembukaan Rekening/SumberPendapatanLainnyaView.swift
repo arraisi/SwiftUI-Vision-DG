@@ -22,6 +22,14 @@ struct SumberPendapatanLainnyaView: View {
     @State var sumberPendapatanLainIndex = 0
     @State var isShowingKeluargaTerdekat = false
     
+    // MARK : - Check form is fill
+    func isValid() -> Bool {
+        if selectedId == 0 {
+            return true
+        }
+        return false
+    }
+    
     var body: some View {
         
         ZStack(alignment: .top) {
@@ -171,7 +179,7 @@ struct SumberPendapatanLainnyaView: View {
                                         .frame(maxWidth: .infinity, maxHeight: 40)
                                     
                                 })
-                                .disabled(self.selectedId == 0)
+                                .disabled(isValid())
                                 .frame(height: 50)
                                 .background(self.selectedId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
                                 .cornerRadius(12)

@@ -9,12 +9,14 @@ import SwiftUI
 
 struct Term_ConditionView: View {
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     @State var scrollPosition: CGFloat = 0.0
     
-    @State var isChecked:Bool = false
-    @State var isChecked1:Bool = false
-    @State var isChecked2:Bool = false
+    @State var isChecked: Bool = false
+    @State var isChecked1: Bool = false
+    @State var isChecked2: Bool = false
+    @State var showingAlert: Bool = false
     
     func toggle() {
         isChecked = !isChecked
@@ -133,7 +135,23 @@ struct Term_ConditionView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-        
+        .navigationBarItems(
+            trailing: Button(
+                action: {
+                    self.showingAlert = true
+                },
+                label: {
+                    Text("cancel")
+                }
+            ))
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text("Apakah ingin membatalkan registrasi ?"),
+                primaryButton: .default(Text("YA"), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text("Tidak")))
+        }
     }
 }
 
