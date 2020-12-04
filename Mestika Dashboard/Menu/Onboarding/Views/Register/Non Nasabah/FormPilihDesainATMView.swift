@@ -143,7 +143,7 @@ struct FormPilihDesainATMView: View {
                                     }
                                     .padding(.horizontal)
                                     
-                                    NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData)) {
+                                    NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData).environmentObject(registerData)) {
                                         Text("PILIH DESAIN KARTU")
                                             .foregroundColor(.white)
                                             .font(.custom("Montserrat-SemiBold", size: 14))

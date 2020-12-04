@@ -9,11 +9,15 @@ import SwiftUI
 
 struct SavingSelectionModalView: View {
     @EnvironmentObject var registerData: RegistrasiModel
+    var data: SavingType
+    
+    @Binding var isShowModal: Bool
+    @State var goToNextPage: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
             Group {
-                Image("Saving Landscape")
+                Image(data.imageName)
                     .resizable()
                     .frame(height: 200)
                 
@@ -23,7 +27,7 @@ struct SavingSelectionModalView: View {
                     .padding(.top, 10)
                     .foregroundColor(Color(hex: "#5A6876"))
                 
-                Text("Deposit Tabungan")
+                Text(data.tabunganName)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(hex: "#232175"))
@@ -36,87 +40,49 @@ struct SavingSelectionModalView: View {
                     .foregroundColor(Color(hex: "#5A6876"))
                 
                 ScrollView {
-                    HStack(alignment: .top) {
-                        Text("01")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#5A6876"))
+            
+                    ForEach(data.description, id: \.id) { card in
+                        HStack(alignment: .top) {
+                            Text(card.id)
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.bold)
+                                .frame(width: 25, height: 18)
+                            Text(card.desc)
+                                .font(.caption)
+                                .foregroundColor(Color(hex: "#5A6876"))
+                                .frame(minHeight: 18)
+                            Spacer()
+                        }
+                        .padding(.top, 2)
+                        .padding(.horizontal, 15)
                     }
-                    .padding(.top, 5)
-                    .padding(.horizontal, 15)
-                    .fixedSize(horizontal: false, vertical: true)
-                    
-                    HStack(alignment: .top) {
-                        Text("02")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#5A6876"))
-                    }
-                    .padding(.top, 5)
-                    .padding(.horizontal, 15)
-                    .fixedSize(horizontal: false, vertical: true)
-                    
-                    HStack(alignment: .top) {
-                        Text("03")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#5A6876"))
-                    }
-                    .padding(.top, 5)
-                    .padding(.horizontal, 15)
-                    .fixedSize(horizontal: false, vertical: true)
-                    
-                    HStack(alignment: .top) {
-                        Text("04")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#5A6876"))
-                    }
-                    .padding(.top, 5)
-                    .padding(.horizontal, 15)
-                    .fixedSize(horizontal: false, vertical: true)
-                    
-                    HStack(alignment: .top) {
-                        Text("05")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod")
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#5A6876"))
-                    }
-                    .padding(.top, 5)
-                    .padding(.horizontal, 15)
-                    .fixedSize(horizontal: false, vertical: true)
                 }
-                .frame(height: 250)
+                .frame(minHeight: 200)
             }
             
-            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
-                Text("Pilih Tabungan ini")
+            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
+                EmptyView()
+            }
+            
+            Button(action: {
+                registerData.jenisTabungan = data.tabunganName
+                goToNextPage = true
+            }) {
+                Text("Pilih Tabungan Ini")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 13))
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.horizontal, 20)
-            .padding(.top, 10)
+            .padding(.bottom, 10)
+            .padding(.top, 5)
             
-            Button(action: {}) {
+            Button(action: {
+                self.isShowModal = false
+            }) {
                 Text("Pilih Tabungan lain")
                     .foregroundColor(Color(hex: "#5A6876"))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -134,6 +100,6 @@ struct SavingSelectionModalView: View {
 
 struct SavingSelectionModalView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingSelectionModalView().environmentObject(RegistrasiModel())
+        SavingSelectionModalView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tabungan_simpel", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false)).environmentObject(RegistrasiModel())
     }
 }

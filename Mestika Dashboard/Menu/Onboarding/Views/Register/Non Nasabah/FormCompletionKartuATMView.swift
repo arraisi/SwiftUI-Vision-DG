@@ -87,6 +87,8 @@ struct FormCompletionKartuATMView: View {
                         .padding(.bottom, 30)
                     }
                 }
+                .padding(.bottom, 50)
+                
                 NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
                     EmptyView()
                 }
@@ -107,9 +109,9 @@ struct FormCompletionKartuATMView: View {
                 createBottomSuggestionNameFloater()
             }
             .onAppear(){
+                atmData.atmName = registerData.namaLengkapFromNik
                 fetchAddressOption()
             }
-                
         }
     }
     

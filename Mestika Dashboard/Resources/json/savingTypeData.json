@@ -1,9 +1,30 @@
 [
     {
         "id": 1,
-        "tabunganName": "Tabungan Mestika Batik (TAMES BATIK)",
+        "tabunganName": "Tabungan Simpanan Pelajar",
         "rekeningNumber": "1234",
-        "imageName": "jt_tames_batik",
+        "imageName": "jt_tabungan_simpel",
+        "isShow": false,
+        "description": [
+            {
+                "id" : "01",
+                "desc" : "Memiliki buku tabungan."
+            },
+            {
+                "id" : "02",
+                "desc" : "Bebas biaya administrasi bulanan."
+            },
+            {
+                "id" : "03",
+                "desc" : "Transaksi dapat dilayani di sekolah dan semua channel bank."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "tabunganName": "Tabungan Bank Mestika",
+        "rekeningNumber": "12345",
+        "imageName": "jt_tabungan_mestika",
         "isShow": false,
         "description": [
             {
@@ -12,43 +33,23 @@
             },
             {
                 "id" : "02",
-                "desc" : "Bebas biaya administrasi bulanan."
-            },
-            {
-                "id" : "03",
                 "desc" : "Memiliki buku tabungan."
             },
             {
-                "id" : "04",
-                "desc" : "Dapat bertransaksi menggunakan fasilitas SMS Banking."
-            },
-            {
-                "id" : "05",
-                "desc" : "Memiliki fasilitas Over Draft Safe Guard (OD Safe Guard) & Sweep."
-            },
-            {
-                "id" : "06",
+                "id" : "03",
                 "desc" : "Dapat mengikuti program Undian Gempita Bank Mestika yang diadakan setiap 6 (enam) bulan."
             },
             {
-                "id" : "07",
-                "desc" : "Setiap saldo rata-rata per bulan rekening Tabungan Mestika Batik sebesar Rp 1.000.000,- akan mendapatkan 1 (satu) nomor undian."
+                "id" : "04",
+                "desc" : "Setiap saldo rata-rata per bulan rekening Tames Rp 1.000.000,- akan mendapatkan 1 (satu) nomor undian."
             },
             {
-                "id" : "08",
-                "desc" : "Rekening Tabungan Mestika Batik dengan saldo rata-rata Rp 500.000.000,- per bulan berhak mengikuti Undian Grand Prize."
+                "id" : "05",
+                "desc" : "Rekening Tames dengan saldo rata-rata Rp 500.000.000,- per bulan berhak mengikuti Undian Grand Prize."
             },
             {
-                "id" : "09",
-                "desc" : "Nasabah mendapatkan hadiah sesuai dengan nominal tabungan."
-            },
-            {
-                "id" : "10",
-                "desc" : "Memiliki fasilitas auto debet pembayaran PLN, TELKOM (Telepon Rumah dan Indihome), TELKOMSEL (Halo) dan INDOSAT Ooredoo."
-            },
-            {
-                "id" : "11",
-                "desc" : "Dapat bertransaksi di seluruh Kantor Bank Mestika."
+                "id" : "06",
+                "desc" : "Memiliki fasilitas SMS Banking untuk bertransaksi."
             }
         ]
     }

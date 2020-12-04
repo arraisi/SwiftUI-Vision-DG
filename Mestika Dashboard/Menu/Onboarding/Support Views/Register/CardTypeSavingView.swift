@@ -20,6 +20,8 @@ struct CardTypeSavingView: View {
                 .frame(width: cardWidth, height: cardHeight)
         }
         .frame(width: cardWidth, height: cardHeight, alignment: .center)
+        .cornerRadius(10)
+        .background(Color.clear)
     }
 }
 

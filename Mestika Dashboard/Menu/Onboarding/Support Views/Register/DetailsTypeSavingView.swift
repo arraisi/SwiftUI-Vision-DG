@@ -12,6 +12,7 @@ struct DetailsTypeSavingView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
     var data: SavingType
+    @Binding var isShowModal: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -49,16 +50,24 @@ struct DetailsTypeSavingView: View {
                     .padding(.horizontal, 15)
                 }
             }
-            .frame(minHeight: 200)
+            .frame(minHeight: 150)
             
-            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
-                
+//            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
+//
+//                Text("Pilih Tabungan ini")
+//                    .foregroundColor(.white)
+//                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+//
+//            }
+            Button(action: {
+                self.isShowModal = true
+            }, label: {
                 Text("Pilih Tabungan ini")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                
-            }
+            })
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 10)
@@ -73,6 +82,6 @@ struct DetailsTypeSavingView: View {
 
 struct DetailsTypeSavingView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsTypeSavingView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tames_batik", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")])).environmentObject(RegistrasiModel())
+        DetailsTypeSavingView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tames_batik", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false)).environmentObject(RegistrasiModel())
     }
 }

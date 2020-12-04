@@ -17,8 +17,8 @@ struct FormPilihJenisTabunganView: View {
     @State var count : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 150 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 194
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
+    let itemHeight:CGFloat = 190
     let itemGapHeight:CGFloat = 10
     
     @GestureState private var dragOffset = CGSize.zero
@@ -51,7 +51,7 @@ struct FormPilihJenisTabunganView: View {
                         
                         HStack(spacing: itemWidth * 0.08){
                             
-                            ForEach(data){card in
+                            ForEach(data, id: \.id){ card in
                                 CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
                                     .offset(x: self.offset)
                                     .highPriorityGesture(
@@ -69,7 +69,6 @@ struct FormPilihJenisTabunganView: View {
                                             })
                                             .onEnded(onDragEnded)
                                     )
-                                    .cornerRadius(10)
                             }
                         }
                         .frame(width: itemWidth)
@@ -78,16 +77,13 @@ struct FormPilihJenisTabunganView: View {
                     .edgesIgnoringSafeArea(.bottom)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .animation(.spring())
-                    .padding(.vertical,25)
+                    .padding(.vertical, 25)
                     .onAppear {
-                        
-                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.01)) / 2) : 0)
-                        
-                        self.data[0].isShow = true
+                        refreshCarousel()
                     }
                     
                     if self.data.count > Int(self.count) {
-                        DetailsTypeSavingView(data: self.data[Int(self.count)])
+                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal)
                             .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 30)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
@@ -105,14 +101,25 @@ struct FormPilihJenisTabunganView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-        
+
             if(value.startLocation.x < 20 && value.translation.width > 100) {
                 self.shouldPopToRootView = false
             }
-            
+
         }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
+        }
+    }
+    
+    // MARK: - REFRESH THE CARD ITEM OFFSET
+    private func refreshCarousel() {
+        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2))
+        let offsetMiddleItem = (self.data.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+        self.firstOffset = offsetFirstItem - offsetMiddleItem
+        
+        if data.count > 0 {
+            self.data[0].isShow = true
         }
     }
     
@@ -153,7 +160,7 @@ struct FormPilihJenisTabunganView: View {
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView()
+        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal)
             .environmentObject(registerData)
             .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 220)
             .background(Color(.white))

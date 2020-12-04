@@ -180,9 +180,9 @@ struct FormIdentitasDiriView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 16))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             })
-                            .background(Color(hex: !isValidForm() ? "#CBD1D9" : "#232175"))
+                            .background(Color(hex: !isValidForm() || formKTP || formSelfie || formNPWP ? "#CBD1D9" : "#232175"))
                             .cornerRadius(12)
-                            .disabled(!isValidForm())
+                            .disabled(!isValidForm() || formKTP || formSelfie || formNPWP)
                         }
                         .padding(20)
                         .padding(.vertical, 25)

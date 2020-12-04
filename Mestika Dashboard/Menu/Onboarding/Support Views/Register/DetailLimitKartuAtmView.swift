@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailLimitKartuAtmView: View {
     
     @EnvironmentObject var atmData: AddProductATM
+    @EnvironmentObject var registerData: RegistrasiModel
     
     let card: ATMViewModel
     
@@ -31,7 +32,7 @@ struct DetailLimitKartuAtmView: View {
             RowLimitKartuAtmView(title: "Payment", value: card.description.limitPayment)
             RowLimitKartuAtmView(title: "Purchase", value: card.description.limitPurchase)
             
-            NavigationLink(destination: FormPilihDesainATMView().environmentObject(atmData),
+            NavigationLink(destination: FormPilihDesainATMView().environmentObject(atmData).environmentObject(registerData),
                 label: {
                     Text("PILIH KARTU ATM INI")
                         .foregroundColor(.white)

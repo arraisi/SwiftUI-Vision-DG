@@ -99,11 +99,9 @@ class UserRegistrationService {
             // generate boundary string using a unique per-app string
             let boundary = UUID().uuidString
             
-            var request = URLRequest(url: url)
+            var request = URLRequest(url)
             request.httpMethod = "POST"
             request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-            request.addValue("*/*", forHTTPHeaderField: "accept")
-            request.addValue(deviceId!, forHTTPHeaderField: "X-Device-ID")
             
             var data = Data()
             
@@ -148,11 +146,11 @@ class UserRegistrationService {
                     
                     if (httpResponse.statusCode == 500) {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
-                    }
-                    
-                    if (httpResponse.statusCode == 200) {
+                    } else if (httpResponse.statusCode == 200) {
                         let userResponse = try? JSONDecoder().decode(UserRegistrationResponse.self, from: data!)
                         completion(.success(userResponse!))
+                    } else {
+                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                     }
                 }
                 

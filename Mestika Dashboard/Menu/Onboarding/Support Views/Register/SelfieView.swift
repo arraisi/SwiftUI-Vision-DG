@@ -67,7 +67,7 @@ struct SelfieView: View {
                             .fill(Color(hex: imageSelfie == nil ? "#2334D0" : "#FFFFFF"))
                             .shadow(color: .gray, radius: 2, x: 0, y: 1)
                     )
-                    .padding(.vertical, 5)
+                    .padding(5)
             })
             .foregroundColor(.black)
             .cornerRadius(12)

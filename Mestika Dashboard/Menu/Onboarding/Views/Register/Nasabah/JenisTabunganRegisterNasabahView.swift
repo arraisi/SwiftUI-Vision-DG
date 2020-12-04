@@ -148,7 +148,7 @@ struct JenisTabunganRegisterNasabahView: View {
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView()
+        SavingSelectionModalView(data: data[Int(self.count)], isShowModal: $showingModal)
             .environmentObject(registerData)
             .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 220)
             .background(Color(.white))

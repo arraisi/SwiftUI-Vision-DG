@@ -120,12 +120,12 @@ struct TermConditionRegisterNasabahScreen: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
-                        .background(Color(hex: !isChecked ? "#CBD1D9" : "#2334D0"))
+                        .background(Color(hex: !isChecked || !isChecked1 ? "#CBD1D9" : "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         .padding(.top, 10)
                         .padding(.bottom, 20)
-                        .disabled(!isChecked)
+                        .disabled(!isChecked || !isChecked1)
                         
                     }
                     .frame(width: UIScreen.main.bounds.width - 30, height: 500)
