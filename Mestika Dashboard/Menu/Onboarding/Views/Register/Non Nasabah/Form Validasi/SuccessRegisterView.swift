@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import JGProgressHUD_SwiftUI
 
 struct JamWawancara {
     var jam: String
@@ -22,7 +21,6 @@ struct SuccessRegisterView: View {
     @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
     var productATMData = AddProductATM()
     
-    @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var appState: AppState
     
@@ -60,88 +58,29 @@ struct SuccessRegisterView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
-        ZStack(alignment: .top) {
-            Image("bg_blue")
-                .resizable()
+        LoadingView(isShowing: $scheduleVM.isLoading) {
             
-            ScrollView {
-                VStack(alignment: .leading) {
-                    Image("ic_trophy")
-                        .resizable()
-                        .frame(width: 95, height: 95)
-                        .padding(.top, 40)
-                        .padding(.horizontal, 20)
-                    
-                    Text("Pendaftaran Rekening Baru Telah Berhasil")
-                        .font(.title)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(.bold)
-                        .padding([.top], 20)
-                        .padding(.horizontal, 20)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    Text("Silahkan pilih waktu untuk dihubungi.")
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#707070"))
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 25)
-                        .padding(.horizontal, 20)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    HStack {
-                        TextField("Pilih Tanggal Wawancara", text: $tanggalWawancara)
-                            .font(.subheadline)
-                            .frame(height: 36)
-                            .padding(.leading, 20)
-                            .disabled(true)
+            ZStack(alignment: .top) {
+                Image("bg_blue")
+                    .resizable()
+                
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Image("ic_trophy")
+                            .resizable()
+                            .frame(width: 95, height: 95)
+                            .padding(.top, 40)
+                            .padding(.horizontal, 20)
                         
-                        Button(action:{
-                            showingModalTanggal.toggle()
-                        }, label: {
-                            Image(systemName: "calendar")
-                                .font(Font.system(size: 20))
-                                .foregroundColor(Color(hex: "#707070"))
-                        })
-                        .padding(.trailing, 20)
+                        Text("Pendaftaran Rekening Baru Telah Berhasil")
+                            .font(.title)
+                            .foregroundColor(Color(hex: "#232175"))
+                            .fontWeight(.bold)
+                            .padding([.top], 20)
+                            .padding(.horizontal, 20)
+                            .fixedSize(horizontal: false, vertical: true)
                         
-                    }
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 10)
-                    
-                    HStack {
-                        
-                        TextField("Pilih Jam", text: $pilihJam)
-                            .font(.subheadline)
-                            .frame(height: 36)
-                            .padding(.leading, 20)
-                            .disabled(true)
-                        
-                        Button(action:{
-                            showingModalJam.toggle()
-                        }, label: {
-                            Image(systemName: "clock")
-                                .font(Font.system(size: 20))
-                                .foregroundColor(Color(hex: "#707070"))
-                        })
-                        .padding(.trailing, 20)
-                        
-                    }
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 20)
-                    
-                    Text("Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru")
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#707070"))
-                        .multilineTextAlignment(.leading)
-                        .padding([.top, .bottom], 10)
-                        .padding(.horizontal, 20)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    Group {
-                        Text("KTP.")
+                        Text("Silahkan pilih waktu untuk dihubungi.")
                             .font(.subheadline)
                             .foregroundColor(Color(hex: "#707070"))
                             .multilineTextAlignment(.leading)
@@ -149,128 +88,188 @@ struct SuccessRegisterView: View {
                             .padding(.horizontal, 20)
                             .fixedSize(horizontal: false, vertical: true)
                         
-                        TextField("No KTP", text: $registerData.nik)
-                            .frame(height: 10)
-                            .font(.subheadline)
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(15)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal, 20)
-                            .disabled(true)
-                        
-                        Text("No. HP.")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "#707070"))
-                            .multilineTextAlignment(.leading)
-                            .padding(.top, 5)
-                            .padding(.horizontal, 20)
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        TextField("Nomor Handphone", text: $registerData.noTelepon)
-                            .frame(height: 10)
-                            .font(.subheadline)
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(15)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal, 20)
-                            .disabled(true)
-                        
-                        Text("Email.")
-                            .font(.subheadline)
-                            .foregroundColor(Color(hex: "#707070"))
-                            .multilineTextAlignment(.leading)
-                            .padding(.top, 5)
-                            .padding(.horizontal, 20)
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        TextField("Alamat Email", text: $registerData.email)
-                            .frame(height: 10)
-                            .font(.subheadline)
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(15)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal, 20)
-                            .disabled(true)
-                    }
-                    
-                    Group {
-                        
-                        Button(action: {
-                            if pilihJam != "" {
-//                                submitSchedule()
-                                self.showFormPilihJenisATM = true
-                            }
-                        }, label: {
-                            Text("Buat Janji")
-                                .foregroundColor(.white)
-                                .fontWeight(.bold)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        })
-                        .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
-                        .cornerRadius(12)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 20)
-                        .padding(.bottom, 5)
-                        .disabled(disableForm)
-                        
-                        NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
-                        
-                        Button(
-                            action: {
-                                self.showingModal.toggle()
-                            },
-                            label: {
-                                Text("Batalkan Permohonan")
+                        HStack {
+                            TextField("Pilih Tanggal Wawancara", text: $tanggalWawancara)
+                                .font(.subheadline)
+                                .frame(height: 36)
+                                .padding(.leading, 20)
+                                .disabled(true)
+                            
+                            Button(action:{
+                                showingModalTanggal.toggle()
+                            }, label: {
+                                Image(systemName: "calendar")
+                                    .font(Font.system(size: 20))
                                     .foregroundColor(Color(hex: "#707070"))
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            })
+                            .padding(.trailing, 20)
+                            
+                        }
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                        
+                        HStack {
+                            
+                            TextField("Pilih Jam", text: $pilihJam)
+                                .font(.subheadline)
+                                .frame(height: 36)
+                                .padding(.leading, 20)
+                                .disabled(true)
+                            
+                            Button(action:{
+                                showingModalJam.toggle()
+                            }, label: {
+                                Image(systemName: "clock")
+                                    .font(Font.system(size: 20))
+                                    .foregroundColor(Color(hex: "#707070"))
+                            })
+                            .padding(.trailing, 20)
+                            
+                        }
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20)
+                        
+                        Text("Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru")
+                            .font(.subheadline)
+                            .foregroundColor(Color(hex: "#707070"))
+                            .multilineTextAlignment(.leading)
+                            .padding([.top, .bottom], 10)
+                            .padding(.horizontal, 20)
+                            .fixedSize(horizontal: false, vertical: true)
+                        
+                        Group {
+                            Text("KTP.")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#707070"))
+                                .multilineTextAlignment(.leading)
+                                .padding(.top, 25)
+                                .padding(.horizontal, 20)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            TextField("No KTP", text: $registerData.nik)
+                                .frame(height: 10)
+                                .font(.subheadline)
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(15)
+                                .padding(.bottom, 5)
+                                .padding(.horizontal, 20)
+                                .disabled(true)
+                            
+                            Text("No. HP.")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#707070"))
+                                .multilineTextAlignment(.leading)
+                                .padding(.top, 5)
+                                .padding(.horizontal, 20)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            TextField("Nomor Handphone", text: $registerData.noTelepon)
+                                .frame(height: 10)
+                                .font(.subheadline)
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(15)
+                                .padding(.bottom, 5)
+                                .padding(.horizontal, 20)
+                                .disabled(true)
+                            
+                            Text("Email.")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#707070"))
+                                .multilineTextAlignment(.leading)
+                                .padding(.top, 5)
+                                .padding(.horizontal, 20)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            TextField("Alamat Email", text: $registerData.email)
+                                .frame(height: 10)
+                                .font(.subheadline)
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(15)
+                                .padding(.bottom, 5)
+                                .padding(.horizontal, 20)
+                                .disabled(true)
+                        }
+                        
+                        Group {
+                            
+                            Button(action: {
+                                if pilihJam != "" {
+                                    //                                submitSchedule()
+                                    self.showFormPilihJenisATM = true
+                                }
+                            }, label: {
+                                Text("Buat Janji")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
                                     .font(.system(size: 13))
                                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                            }
-                        )
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 20)
-                        
-                        
-                        Spacer()
+                            })
+                            .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                            .cornerRadius(12)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
+                            .padding(.bottom, 5)
+                            .disabled(disableForm)
+                            
+                            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
+                            
+                            Button(
+                                action: {
+                                    self.showingModal.toggle()
+                                },
+                                label: {
+                                    Text("Batalkan Permohonan")
+                                        .foregroundColor(Color(hex: "#707070"))
+                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                        .font(.system(size: 13))
+                                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                                }
+                            )
+                            .background(Color.white)
+                            .cornerRadius(12)
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 20)
+                            
+                            
+                            Spacer()
+                        }
                     }
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(radius: 30)
+                    .padding(.horizontal, 10)
+                    .padding(.top, 120)
+                    .padding(.bottom, 35)
                 }
-                .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(radius: 30)
-                .padding(.horizontal, 30)
-                .padding(.top, 120)
-                .padding(.bottom, 35)
-            }
-            
-            NavigationLink(
-                destination: WelcomeView(),
-                isActive: self.$backRoute,
-                label: {})
-            
-            if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
-            }
-            
-            if self.showingModalJam {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalJam = false } })
-            }
-            
-            if self.showingModalTanggal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
+                
+                NavigationLink(
+                    destination: WelcomeView(),
+                    isActive: self.$backRoute,
+                    label: {})
+                
+                if self.showingModal {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                }
+                
+                if self.showingModalJam {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalJam = false } })
+                }
+                
+                if self.showingModalTanggal {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
+                }
             }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            showIndeterminate()
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -288,39 +287,21 @@ struct SuccessRegisterView: View {
     
     func removeUser() {
         
-        showIndeterminate()
-        
-//        let data = user.last
-//        managedObjectContext.delete(data!)
-//
-//        do {
-//            try managedObjectContext.save()
-//        } catch {
-//            // handle the Core Data error
-//        }
-//
-//        UserDefaults.standard.set("false", forKey: "isFirstLogin")
-//        UserDefaults.standard.set("false", forKey: "isSchedule")
+        //        let data = user.last
+        //        managedObjectContext.delete(data!)
+        //
+        //        do {
+        //            try managedObjectContext.save()
+        //        } catch {
+        //            // handle the Core Data error
+        //        }
+        //
+        //        UserDefaults.standard.set("false", forKey: "isFirstLogin")
+        //        UserDefaults.standard.set("false", forKey: "isSchedule")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             print("DELETE SUCCESS")
             self.appState.moveToWelcomeView = true
-        }
-    }
-    
-    private func showIndeterminate() {
-        hudCoordinator.showHUD {
-            let hud = JGProgressHUD()
-            if dim {
-                hud.backgroundColor = UIColor(white: 0, alpha: 0.4)
-            }
-            
-            hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 4, opacity: 0.3)
-            hud.vibrancyEnabled = false
-            hud.textLabel.text = "Loading"
-            
-            hud.dismiss(afterDelay: 2)
-            return hud
         }
     }
     
@@ -445,10 +426,10 @@ struct SuccessRegisterView: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(self.scheduleVM.schedule, id: \.date) { data in
+            List(self.scheduleVM.scheduleDates, id: \.self) { data in
                 
                 HStack {
-                    Text(data.date)
+                    Text(data)
                         .font(Font.system(size: 14))
                     
                     Spacer()
@@ -456,8 +437,66 @@ struct SuccessRegisterView: View {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
                     print(data)
-                    tanggalWawancara = data.date
+                    tanggalWawancara = data
+                    scheduleVM.getScheduleById(date: tanggalWawancara)
                     self.showingModalTanggal.toggle()
+                })
+                
+            }
+            .background(Color.white)
+            .padding(.bottom)
+            .frame(height: 200)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: -Fuction for Create Bottom Floater (Modal
+    func createBottomFloaterJam() -> some View {
+        VStack {
+            HStack {
+                Text("Jam")
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 19))
+                    .foregroundColor(Color(hex: "#232175"))
+                Spacer()
+            }
+            
+            HStack {
+                
+                TextField("Jam Wawancara", text: $tanggalWawancara)
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                
+                Button(action:{
+                    print("cari jam")
+                }, label: {
+                    Image(systemName: "clock")
+                        .font(Font.system(size: 20))
+                        .foregroundColor(Color(hex: "#707070"))
+                })
+                
+            }
+            .padding(.horizontal)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
+            
+            List(self.scheduleVM.scheduleJamBasedOnDate, id: \.self) { data in
+                
+                HStack {
+                    Text(data)
+                        .font(Font.system(size: 14))
+                    
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .onTapGesture(perform: {
+                    print(data)
+                    pilihJam = data
+                    self.showingModalJam.toggle()
                 })
                 
             }
@@ -470,63 +509,6 @@ struct SuccessRegisterView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
-    }
-
-    // MARK: -Fuction for Create Bottom Floater (Modal
-    func createBottomFloaterJam() -> some View {
-        VStack {
-            HStack {
-                Text("Jam")
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 19))
-                        .foregroundColor(Color(hex: "#232175"))
-                Spacer()
-            }
-
-            HStack {
-
-                TextField("Jam Wawancara", text: $tanggalWawancara)
-                        .font(Font.system(size: 14))
-                        .frame(height: 36)
-
-                Button(action:{
-                    print("cari jam")
-                }, label: {
-                    Image(systemName: "clock")
-                            .font(Font.system(size: 20))
-                            .foregroundColor(Color(hex: "#707070"))
-                })
-
-            }
-                    .padding(.horizontal)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
-
-            List(self.scheduleVM.schedule, id: \.timeStart) { data in
-
-                HStack {
-                    Text("\(data.timeStart)" + "-" + "\(data.timeEnd)")
-                            .font(Font.system(size: 14))
-
-                    Spacer()
-                }
-                        .contentShape(Rectangle())
-                        .onTapGesture(perform: {
-                            print(data)
-                            pilihJam = "\(data.timeStart)" + "-" + "\(data.timeEnd)"
-                            self.showingModalJam.toggle()
-                        })
-
-            }
-                    .background(Color.white)
-                    .padding(.vertical)
-                    .frame(height: 150)
-
-        }
-                .frame(width: UIScreen.main.bounds.width - 60)
-                .padding()
-                .background(Color.white)
-                .cornerRadius(20)
     }
     
     func getAllSchedule() {

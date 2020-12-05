@@ -19,9 +19,16 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
     @Published var timeStart: String = ""
     @Published var timeEnd: String = ""
     
+    @Published var scheduleDates = [String]()
+    @Published var scheduleJamBasedOnDate = [String]()
     
     // MARK:- GET ALL SCHEDULE
     func getAllSchedule(completion: @escaping (Bool) -> Void) {
+        if schedule.count > 0 {
+            self.isLoading = false
+            completion(true)
+            return
+        }
         
         DispatchQueue.main.async {
             self.isLoading = true
@@ -41,6 +48,9 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.schedule = schedule.map(ScheduleInterviewViewModel.init)
+                        self.scheduleDates = Array(Set(schedule.map({ (resp:ScheduleInterviewResponse) -> String in
+                            return resp.date
+                        }))).sorted()
                     }
                 }
                 
@@ -61,6 +71,15 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // MARK:- GET SCHEDULE BY DATE
+    func getScheduleById(date: String) {
+        self.scheduleJamBasedOnDate = Array(Set(schedule.filter({ (data:ScheduleInterviewViewModel) -> Bool in
+            return data.date == date
+        }).map({ (data:ScheduleInterviewViewModel) -> String in
+            return "\(data.timeStart)" + "-" + "\(data.timeEnd)"
+        }))).sorted()
     }
     
     // MARK:- GET SCHEDULE BY ID
@@ -99,7 +118,7 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
     }
 }
 
-class ScheduleInterviewViewModel: Identifiable {
+class ScheduleInterviewViewModel {
     
     var schedule: ScheduleInterviewResponse
     

@@ -94,25 +94,21 @@ struct FormCompletionKartuATMView: View {
                     EmptyView()
                 }
             }
-//            .introspectNavigationController { navigationController in
-//                navigationController.hidesBarsOnSwipe = true
-//            }
-            .edgesIgnoringSafeArea(.top)
-//            .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-            .navigationBarHidden(true)
-            .onTapGesture() {
-                UIApplication.shared.endEditing()
-            }
-            .popup(isPresented: $showingAddressModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-                createBottomAddressFloater()
-            }
-            .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-                createBottomSuggestionNameFloater()
-            }
-            .onAppear(){
-                atmData.atmName = registerData.namaLengkapFromNik
-                fetchAddressOption()
-            }
+        }
+        .edgesIgnoringSafeArea(.top)
+        .navigationBarHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .popup(isPresented: $showingAddressModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+            createBottomAddressFloater()
+        }
+        .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+            createBottomSuggestionNameFloater()
+        }
+        .onAppear(){
+            atmData.atmName = registerData.namaLengkapFromNik
+            fetchAddressOption()
         }
     }
     
