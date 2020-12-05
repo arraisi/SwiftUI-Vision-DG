@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3984AC03-F006-407F-9CE6-53D6BE00E3AE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mestika Dashboard/Menu/Onboarding/Services/ATMService.swift"
@@ -71,32 +71,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6C4D9700-E784-489A-A5D7-436BF32C05BF"
+            uuid = "E4B62A8A-AA36-4094-9C04-499F47C83746"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mestika Dashboard/Menu/Onboarding/Services/UserRegistrationService.swift"
+            filePath = "Mestika Dashboard/Menu/Onboarding/View Models/ScheduleInterviewViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "postUser(registerData:imageKtp:imageNpwp:imageSelfie:completion:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "getAllSchedule(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "ECE61B60-3565-4ED6-B2F3-D90E50009DF5"
+            uuid = "10A3B2E7-49DB-454E-8490-82ED1A371A7A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mestika Dashboard/Menu/Onboarding/Services/UserRegistrationService.swift"
+            filePath = "Mestika Dashboard/Menu/Onboarding/View Models/ScheduleInterviewViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "postUser(registerData:imageKtp:imageNpwp:imageSelfie:completion:)"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "getAllSchedule(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

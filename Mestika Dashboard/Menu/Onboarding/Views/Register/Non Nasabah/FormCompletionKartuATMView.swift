@@ -74,14 +74,15 @@ struct FormCompletionKartuATMView: View {
                         Button(action: {
                             self.postData()
                         }, label: {
-                            Text("MASUKKAN DATA")
-                                .foregroundColor(Color("DarkStaleBlue"))
+                            Text("Submit Data")
+                                .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
                         .frame(width: UIScreen.main.bounds.width - 40, height: 50)
-                        .background(Color.white)
+                        .background(Color(hex: !isValid() ? "#CBD1D9" : "#FFFFFF"))
+                        .disabled(!isValid())
                         .cornerRadius(15)
                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                         .padding(.bottom, 30)
@@ -178,7 +179,9 @@ struct FormCompletionKartuATMView: View {
             
             VStack { Divider() }.padding(.horizontal, 20)
             
-            formAddress
+            if atmData.addressOptionId == 4 {
+                formAddress
+            }
         }
         .frame(width: UIScreen.main.bounds.width - 40)
         .background(Color.white)
@@ -405,6 +408,14 @@ struct FormCompletionKartuATMView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    func isValid() -> Bool {
+        if atmData.addressOptionId == 4 {
+            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0
+        } else {
+            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0
+        }
     }
     
     func fetchAddressOption() {
