@@ -39,7 +39,14 @@ struct WelcomeView: View {
     @State var modalSelection = ""
     
 //    @State var isShowModal = true
-//    @State var modalSelection = "RegisterApprovedModal"
+    //    CREATED
+    //    KYC_SCHEDULED
+    //    KYC_WAITING
+    //    WAITING
+    //    ACTIVE
+    //    NOT_APPROVED
+//    @State var modalSelection = "CREATED"
+    
     
     var body: some View {
         NavigationView {
@@ -142,6 +149,20 @@ struct WelcomeView: View {
     
     func popupMenu() -> some View {
         switch modalSelection {
+        case "CREATED" :
+            return AnyView(PopupCreated())
+        case "KYC_SCHEDULED" :
+            return AnyView(PopupKYCScheduled())
+        case "KYC_WAITING" :
+            return AnyView(PopupKYCWaiting())
+        case "WAITING" :
+            return AnyView(PopupWaiting())
+        case "ACTIVE" :
+            return AnyView(PopupActive())
+        case "NOT_APPROVED" :
+            return AnyView(PopupNotApproved())
+            
+        // MARK: OLD
         case "SuccsessRegisterModal":
             return AnyView(SuccsessRegisterModal())
         case "ScheduleVideoCallModal":
@@ -157,6 +178,280 @@ struct WelcomeView: View {
         }
     }
     
+    // MARK: # Status : CREATED
+    func PopupCreated() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_bell")
+                .resizable()
+                .frame(width: 75, height: 90)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("INFORMASI SUBMIT JADWAL VIDEOCALL")
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Anda belum melakukan submit jadwal Videocall")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+                Text("Halaman Submit Jadwal Videocall")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .isDetailLink(false)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: # Status : KYC_SCHEDULED
+    func PopupKYCScheduled() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_bell")
+                .resizable()
+                .frame(width: 75, height: 90)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("INFORMASI SUBMIT PRODUK ATM")
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Anda belum melakukan submit produk dan desain ATM")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+                Text("Halaman Submit Produk ATM")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .isDetailLink(false)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: # Status : KYC_WAITING
+    func PopupKYCWaiting() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_cs")
+                .resizable()
+                .frame(width: 64, height: 90)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Mohon Tunggu")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Data anda telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change date from API
+            Text("Tanggal : 2020-12-02")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 5)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            // MARK: change time from API
+            Text("Jam : 10:00 - 11:00")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            // MARK: change destination
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+                Text("Reschedule Jadwal")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .isDetailLink(false)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    
+    
+    
+    
+    // MARK: # Status : WAITING
+    func PopupWaiting() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_clock")
+                .resizable()
+                .frame(width: 91, height: 95)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Persetujuan sedang dalam proses")
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Persetujuan sedang dalam proses. Hasil akan dikirimkan melalui SMS atau email")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+                Text("Saya tunggu")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .isDetailLink(false)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 5)
+            
+            // MARK: change destination
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+                Text("Batalkan Permohonan")
+                    .foregroundColor(.black)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .isDetailLink(false)
+            .padding(.bottom, 20)
+            .cornerRadius(12)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: # Status : ACTIVE
+    func PopupActive() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_bell")
+                .resizable()
+                .frame(width: 75, height: 90)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("PEMBUKAAN REKENING DISETUJUI")
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Selamat pembukaan rekening baru Anda telah disetujui")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+                Text("Kembali ke halaman utama")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .isDetailLink(false)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: # Status : NOT_APPROVED
+    func PopupNotApproved() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("PEMBUKAAN REKENING TELAH DITOLAK")
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Maaf, pembukaan rekening online Anda telah ditolak")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+                Text("Kembali ke halaman utama")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .isDetailLink(false)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    // MARK: #OLD POPUP
     // MARK: #ScreeningNasabahModal - Popup Message Menu (Modal)
     func ScreeningNasabahModal() -> some View {
         VStack(alignment: .leading) {
@@ -386,11 +681,11 @@ struct WelcomeView: View {
     // MARK: #RegisterApprovedModal - Popup Message Approve (Modal)
     func RegisterApprovedModal() -> some View {
         VStack(alignment: .leading) {
-            Image("ic_group")
+            Image("ic_title_bell")
                 .resizable()
-                .frame(width: 75, height: 75)
+                .frame(width: 75, height: 90)
                 .padding(.top, 20)
-                .padding(.bottom, 10)
+                .padding(.bottom, 20)
             
             Text("PEMBUKAAN REKENING DISETUJUI")
                 .font(.custom("Montserrat-Bold", size: 20))
@@ -398,7 +693,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Selamat pembukaan rekening baru anda telah disetujui.")
+            Text("Selamat pembukaan rekening baru Anda telah disetujui.")
                 .font(.custom("Montserrat-Bold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
