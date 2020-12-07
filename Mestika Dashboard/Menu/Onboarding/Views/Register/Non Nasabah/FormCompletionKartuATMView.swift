@@ -60,7 +60,7 @@ struct FormCompletionKartuATMView: View {
                     AppBarLogo(light: false, onCancel:{})
 //                        .padding(.top, 50)
                     
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
                         Text("LENGKAPI DATA")
                             .multilineTextAlignment(.center)
                             .font(.custom("Montserrat-Bold", size: 26))
@@ -88,7 +88,7 @@ struct FormCompletionKartuATMView: View {
                         .padding(.bottom, 30)
                     }
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 150)
                 
                 NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
                     EmptyView()
