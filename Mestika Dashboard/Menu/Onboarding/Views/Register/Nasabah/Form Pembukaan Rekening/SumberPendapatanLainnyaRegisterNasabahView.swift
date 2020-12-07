@@ -11,6 +11,15 @@ struct SumberPendapatanLainnyaRegisterNasabahView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
+    @State var sumberPendapatanLain = ""
+    
+    @State var selectedId = 0
+    @State var selection: String?
+    
+    @State var sumberPendapatanLainIndex = 0
+    @State var isShowingKeluargaTerdekat = false
+    
+    let sumberPendapatanLainnyaList = ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"]
     let sumberPendapatanLainnya: [MasterModel] = load("sumberPendapatanLainnya.json")
     
     var body: some View {
@@ -87,17 +96,94 @@ struct SumberPendapatanLainnyaRegisterNasabahView: View {
                                         // Forms input
                                         ZStack {
                                             
-                                            RadioButtonGroup(
-                                                items: sumberPendapatanLainnya,
-                                                selectedId: $registerData.sumberPendapatanLainnyaId) { selected in
-                                                print("Selected is: \(selected)")
+                                            VStack {
                                                 
-                                                if let i = sumberPendapatanLainnya.firstIndex(where: { $0.id == selected }) {
-                                                    print(sumberPendapatanLainnya[i])
-                                                    registerData.sumberPendapatanLainnya = sumberPendapatanLainnya[i].name
+                                                Button(action:{
+                                                    
+                                                    self.selectedId = 1
+                                                    
+                                                }) {
+                                                    
+                                                    HStack(alignment: .center, spacing: 10) {
+                                                        
+                                                        Image(systemName: self.selectedId == 1 ? "largecircle.fill.circle" : "circle")
+                                                            //                    .renderingMode(.original)
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .frame(width: 19, height: 19)
+                                                        
+                                                        Text("Ya, Saya memiliki")
+                                                            .font(.custom("Montserrat-Regular", size: 10))
+                                                        
+                                                        Spacer()
+                                                        
+                                                    }
+                                                    .foregroundColor(Color.black.opacity(0.6))
                                                 }
                                                 
-                                                print(registerData.sumberPendapatanLainnya)
+                                                if self.selectedId == 1 {
+                                                    //                                            VStack(alignment: .leading) {
+                                                    //                                                TextFieldWithPickerAsInput(data: ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"], placeholder: "Pilih pendapatan lainnya", selectionIndex:$sumberPendapatanLainIndex, text: $registerData.sumberPendapatanLain)
+                                                    //                                                    .frame(height: 36)
+                                                    //                                                    .font(Font.system(size: 14))
+                                                    //                                                    .padding(.horizontal)
+                                                    //                                                    .background(Color.gray.opacity(0.1))
+                                                    //                                                    .cornerRadius(10)
+                                                    //
+                                                    //                                            }
+                                                    //                                            .padding(.horizontal, 20)
+                                                    
+                                                    
+                                                    HStack {
+                                                        TextField("Pilih pendapatan lainnya", text: $registerData.sumberPendapatanLainnya)
+                                                            .font(.custom("Montserrat-Regular", size: 12))
+                                                            .frame(height: 50)
+                                                            .padding(.leading, 15)
+                                                            .disabled(true)
+                                                        
+                                                        Menu {
+                                                            ForEach(0..<sumberPendapatanLainnyaList.count, id: \.self) { i in
+                                                                Button(action: {
+                                                                    print(sumberPendapatanLainnyaList[i])
+                                                                    registerData.sumberPendapatanLainnya = sumberPendapatanLainnyaList[i]
+                                                                }) {
+                                                                    Text(sumberPendapatanLainnyaList[i])
+                                                                        .font(.custom("Montserrat-Regular", size: 10))
+                                                                }
+                                                            }
+                                                        } label: {
+                                                            Image(systemName: "chevron.right").padding()
+                                                        }
+                                                        
+                                                    }
+                                                    .frame(height: 36)
+                                                    .font(Font.system(size: 14))
+                                                    .background(Color.gray.opacity(0.1))
+                                                    .cornerRadius(10)
+                                                    .padding(.horizontal, 20)
+                                                }
+                                                
+                                                Button(action:{
+                                                    
+                                                    self.selectedId = 2
+                                                    
+                                                }) {
+                                                    
+                                                    HStack(alignment: .center, spacing: 10) {
+                                                        
+                                                        Image(systemName: self.selectedId == 2 ? "largecircle.fill.circle" : "circle")
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .frame(width: 19, height: 19)
+                                                        
+                                                        Text("Tidak, Saya tidak memiliki")
+                                                            .font(.custom("Montserrat-Regular", size: 10))
+                                                        
+                                                        Spacer()
+                                                        
+                                                    }
+                                                    .foregroundColor(Color.black.opacity(0.6))
+                                                }
                                             }
                                             .padding()
                                             
@@ -117,12 +203,12 @@ struct SumberPendapatanLainnyaRegisterNasabahView: View {
                                                 .frame(maxWidth: .infinity, maxHeight: 40)
                                             
                                         })
-                                        .disabled(registerData.sumberPendapatanLainnyaId == 0)
                                         .frame(height: 50)
-                                        .background(registerData.sumberPendapatanLainnyaId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                        .background(isDisableButtonBerikutnya() ? Color(.lightGray) : Color(hex: "#2334D0"))
                                         .cornerRadius(12)
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 25)
+                                        .disabled(isDisableButtonBerikutnya())
                                         
                                     }
                                     .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -142,6 +228,13 @@ struct SumberPendapatanLainnyaRegisterNasabahView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+    }
+    
+    private func isDisableButtonBerikutnya() -> Bool {
+        if self.selectedId == 2 || (self.selectedId == 1 && registerData.sumberPendapatanLainnya != "") {
+            return false
+        }
+        return true
     }
 }
 

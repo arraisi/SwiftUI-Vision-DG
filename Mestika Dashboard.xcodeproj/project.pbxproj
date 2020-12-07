@@ -143,7 +143,6 @@
 		527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E3124256613EB004FF5ED /* MobileVersionService.swift */; };
 		527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312925661644004FF5ED /* MobileVersionViewModel.swift */; };
 		527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312E25663289004FF5ED /* UserCheckResponse.swift */; };
-		5290A12F255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */; };
 		5290A13C255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A13B255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift */; };
 		5290A142255BC9900090F788 /* TujuanPembukaanRekeningRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A141255BC9900090F788 /* TujuanPembukaanRekeningRegisterNasabahView.swift */; };
 		5290A14A255BCA0E0090F788 /* SumberDanaRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5290A149255BCA0E0090F788 /* SumberDanaRegisterNasabahView.swift */; };
@@ -309,6 +308,7 @@
 		C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */; };
 		C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */; };
 		C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */; };
+		C0BD8265257DB1D30057B485 /* FormIdentitasDiriRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD8264257DB1D30057B485 /* FormIdentitasDiriRegisterNasabahView.swift */; };
 		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
@@ -480,7 +480,6 @@
 		527E3124256613EB004FF5ED /* MobileVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionService.swift; sourceTree = "<group>"; };
 		527E312925661644004FF5ED /* MobileVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionViewModel.swift; sourceTree = "<group>"; };
 		527E312E25663289004FF5ED /* UserCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCheckResponse.swift; sourceTree = "<group>"; };
-		5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitasDiriRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A13B255BC8490090F788 /* FormEmailReVerificationNasabahScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailReVerificationNasabahScreen.swift; sourceTree = "<group>"; };
 		5290A141255BC9900090F788 /* TujuanPembukaanRekeningRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TujuanPembukaanRekeningRegisterNasabahView.swift; sourceTree = "<group>"; };
 		5290A149255BCA0E0090F788 /* SumberDanaRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumberDanaRegisterNasabahView.swift; sourceTree = "<group>"; };
@@ -646,6 +645,7 @@
 		C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
+		C0BD8264257DB1D30057B485 /* FormIdentitasDiriRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormIdentitasDiriRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
@@ -1067,7 +1067,7 @@
 				C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */,
 				C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */,
 				C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */,
-				5290A12E255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift */,
+				C0BD8264257DB1D30057B485 /* FormIdentitasDiriRegisterNasabahView.swift */,
 				5290A17B255BCDFD0090F788 /* PasswordRegisterNasabahView.swift */,
 				5290A180255BCE3D0090F788 /* PinRegisterNasabahView.swift */,
 				5290A185255BCE8A0090F788 /* PinConfirmationRegisterNasabahView.swift */,
@@ -1967,6 +1967,7 @@
 				52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */,
 				525950232553E03000C8CA5D /* PhoneNumberVerificationForgotPasswordView.swift in Sources */,
 				52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */,
+				C0BD8265257DB1D30057B485 /* FormIdentitasDiriRegisterNasabahView.swift in Sources */,
 				52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
@@ -2003,7 +2004,6 @@
 				526A81652560B2B200D614CB /* FirstATMLoginView.swift in Sources */,
 				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,
 				524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */,
-				5290A12F255BC6AD0090F788 /* IdentitasDiriRegisterNasabahView.swift in Sources */,
 				5290A14F255BCABA0090F788 /* PerkiraanPenarikanDanaRegisterNasabahView.swift in Sources */,
 				526B6593254FBAF100C13C36 /* MySavings.swift in Sources */,
 				064EBDAE256ADEB20070A792 /* FormCompletionKartuATMView.swift in Sources */,
@@ -2214,11 +2214,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2226,9 +2226,9 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlpt.VisionDG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.multipolar.VisionDG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Multipolar Developmentn All In One";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2239,11 +2239,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 8ZTJDGA48U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2251,9 +2251,9 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlpt.VisionDG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.multipolar.VisionDG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Multipolar Developmentn All In One";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

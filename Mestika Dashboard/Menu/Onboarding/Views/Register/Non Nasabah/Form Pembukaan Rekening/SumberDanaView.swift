@@ -34,7 +34,7 @@ struct SumberDanaView: View {
             VStack {
                 AppBarLogo(light: false, onCancel: {})
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     ZStack {
                         VStack {
                             Color(hex: "#232175")
@@ -50,9 +50,10 @@ struct SumberDanaView: View {
                             Text("DATA PEMBUKAAN REKENING")
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
                                 .padding(.vertical, 30)
                                 .padding(.horizontal, 40)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
                             
                             // Content
                             ZStack {
@@ -163,7 +164,6 @@ struct SumberDanaView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
     }
-    
 }
 
 struct FormSumberDanaView_Previews: PreviewProvider {

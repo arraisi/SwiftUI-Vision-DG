@@ -127,7 +127,7 @@ struct JenisTabunganRegisterNasabahView: View {
             EmptyView()
                 .frame(height: 150)
             
-            NavigationLink(destination: IdentitasDiriRegisterNasabahView().environmentObject(registerData)) {
+            NavigationLink(destination: FormIdentitasDiriRegisterNasabahView().environmentObject(registerData)) {
                 
                 Text("Pilih Tabungan ini")
                     .foregroundColor(.white)

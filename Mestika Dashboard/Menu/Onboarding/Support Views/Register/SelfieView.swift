@@ -15,10 +15,6 @@ struct SelfieView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
     @Binding var imageSelfie: Image?
-    @Binding var shouldPresentActionScheet : Bool
-//    @Binding var showMaskingCamera : Bool
-//    @Binding var formShowed: Bool
-//    @Binding var nextFormShowed: Bool
     
     let onChange: ()->()
     let onCommit: ()->()
@@ -38,10 +34,8 @@ struct SelfieView: View {
                 VStack {
                     imageSelfie?
                         .resizable()
-                        .frame(maxWidth: 350, maxHeight: 200)
-                        .cornerRadius(10)
+                        .scaledToFill()
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             }
             .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             .background(Color(hex: "#F5F5F5"))
@@ -53,7 +47,6 @@ struct SelfieView: View {
             Button(action: {
                 print("ON TAP SELFIE")
                 self.onChange()
-                self.shouldPresentActionScheet.toggle()
             }, label: {
                 Text(imageSelfie == nil ? "Ambil Gambar Selfie" : "Ganti Foto Lain")
                     .foregroundColor(imageSelfie == nil ? .white : Color(hex: "#2334D0"))
@@ -107,7 +100,7 @@ struct SelfieView: View {
 
 struct SelfieView_Previews: PreviewProvider {
     static var previews: some View {
-        SelfieView(imageSelfie: Binding.constant(Image("card_bg")), shouldPresentActionScheet: Binding.constant(false)) {
+        SelfieView(imageSelfie: Binding.constant(Image("card_bg"))) {
             
         } onCommit: {
             

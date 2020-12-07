@@ -10,7 +10,7 @@ import SwiftUI
 struct SumberPendapatanLainnyaView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
-//    var registerData = RegistrasiModel()
+    //    var registerData = RegistrasiModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let sumberPendapatanLainnya: [MasterModel] = load("sumberPendapatanLainnya.json")
@@ -21,6 +21,8 @@ struct SumberPendapatanLainnyaView: View {
     
     @State var sumberPendapatanLainIndex = 0
     @State var isShowingKeluargaTerdekat = false
+    
+    let sumberPendapatanLainnyaList = ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"]
     
     // MARK : - Check form is fill
     func isValid() -> Bool {
@@ -119,15 +121,44 @@ struct SumberPendapatanLainnyaView: View {
                                         }
                                         
                                         if self.selectedId == 1 {
-                                            VStack(alignment: .leading) {
-                                                TextFieldWithPickerAsInput(data: ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"], placeholder: "Pilih pendapatan lainnya", selectionIndex:$sumberPendapatanLainIndex, text: $registerData.sumberPendapatanLain)
-                                                    .frame(height: 36)
-                                                    .font(Font.system(size: 14))
-                                                    .padding(.horizontal)
-                                                    .background(Color.gray.opacity(0.1))
-                                                    .cornerRadius(10)
+                                            //                                            VStack(alignment: .leading) {
+                                            //                                                TextFieldWithPickerAsInput(data: ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"], placeholder: "Pilih pendapatan lainnya", selectionIndex:$sumberPendapatanLainIndex, text: $registerData.sumberPendapatanLain)
+                                            //                                                    .frame(height: 36)
+                                            //                                                    .font(Font.system(size: 14))
+                                            //                                                    .padding(.horizontal)
+                                            //                                                    .background(Color.gray.opacity(0.1))
+                                            //                                                    .cornerRadius(10)
+                                            //
+                                            //                                            }
+                                            //                                            .padding(.horizontal, 20)
+                                            
+                                            
+                                            HStack {
+                                                TextField("Pilih pendapatan lainnya", text: $registerData.sumberPendapatanLainnya)
+                                                    .font(.custom("Montserrat-Regular", size: 12))
+                                                    .frame(height: 50)
+                                                    .padding(.leading, 15)
+                                                    .disabled(true)
+                                                
+                                                Menu {
+                                                    ForEach(0..<sumberPendapatanLainnyaList.count, id: \.self) { i in
+                                                        Button(action: {
+                                                            print(sumberPendapatanLainnyaList[i])
+                                                            registerData.sumberPendapatanLainnya = sumberPendapatanLainnyaList[i]
+                                                        }) {
+                                                            Text(sumberPendapatanLainnyaList[i])
+                                                                .font(.custom("Montserrat-Regular", size: 10))
+                                                        }
+                                                    }
+                                                } label: {
+                                                    Image(systemName: "chevron.right").padding()
+                                                }
                                                 
                                             }
+                                            .frame(height: 36)
+                                            .font(Font.system(size: 14))
+                                            .background(Color.gray.opacity(0.1))
+                                            .cornerRadius(10)
                                             .padding(.horizontal, 20)
                                         }
                                         
@@ -200,9 +231,9 @@ struct SumberPendapatanLainnyaView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
-//        .onTapGesture() {
-//            UIApplication.shared.endEditing()
-//        }
+        //        .onTapGesture() {
+        //            UIApplication.shared.endEditing()
+        //        }
         
     }
 }
