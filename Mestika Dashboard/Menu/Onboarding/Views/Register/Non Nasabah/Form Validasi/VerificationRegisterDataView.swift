@@ -343,7 +343,7 @@ struct VerificationRegisterDataView: View {
                 VStack {
                     Button(action: {
                         
-//                        saveUserToCoreData()
+                        //                        saveUserToCoreData()
                         saveUserToDb()
                         
                     }, label: {
@@ -359,11 +359,11 @@ struct VerificationRegisterDataView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 20)
                     .disabled(self.userRegisterVM.isLoading)
-
+                    
                     NavigationLink(
-                            destination: SuccessRegisterView().environmentObject(registerData),
-                            isActive: self.$nextRoute,
-                            label: {}
+                        destination: SuccessRegisterView().environmentObject(registerData),
+                        isActive: self.$nextRoute,
+                        label: {}
                     )
                 }
                 .background(Color.white)
@@ -375,7 +375,7 @@ struct VerificationRegisterDataView: View {
             trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
                 .configure {
                     $0.color = .white
-            })
+                })
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
@@ -430,12 +430,12 @@ struct VerificationRegisterDataView: View {
     
     /* Save User To DB */
     func saveUserToDb() {
-//        nextRoute = true
+        //        nextRoute = true
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
                 nextRoute = true
             }
-
+            
             if !success {
                 self.showingAlert = true
             }
