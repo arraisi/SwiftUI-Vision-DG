@@ -10,11 +10,11 @@ import SwiftUI
 struct VerificationRegisterDataView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     @State var image: Image? = nil
     
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var nextRoute: Bool = false
     
@@ -42,6 +42,11 @@ struct VerificationRegisterDataView: View {
             }
             
             VStack {
+                
+                AppBarLogo(light: false, showCancel: true) {
+                    self.appState.moveToWelcomeView = true
+                }
+                
                 ScrollView {
                     VStack {
                         Text("PASTIKAN INFORMASI ANDA BENAR")
@@ -49,7 +54,7 @@ struct VerificationRegisterDataView: View {
                             .bold()
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
-                            .padding(.vertical, 20)
+                            .padding(.vertical, 25)
                             .padding(.horizontal, 20)
                             .fixedSize(horizontal: false, vertical: true)
                         
@@ -336,7 +341,7 @@ struct VerificationRegisterDataView: View {
                         .shadow(radius: 30)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 90)
+//                    .padding(.top, 90)
                     .padding(.bottom, 35)
                 }
                 
@@ -370,13 +375,13 @@ struct VerificationRegisterDataView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarItems(
-            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
-                .configure {
-                    $0.color = .white
-                })
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+//        .navigationBarItems(
+//            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
+//                .configure {
+//                    $0.color = .white
+//                })
+//        .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),

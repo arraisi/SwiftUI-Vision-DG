@@ -12,6 +12,7 @@ struct DataVerificationRegisterNasabahView: View {
     
     /* Environtment & Bind Obj */
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     @State var image: Image? = nil
     
@@ -43,8 +44,8 @@ struct DataVerificationRegisterNasabahView: View {
             
             VStack {
                 
-                AppBarLogo(light: false) {
-                    
+                AppBarLogo(light: false, showCancel: true) {
+                    self.appState.moveToWelcomeView = true
                 }
                 
                 ScrollView {
@@ -458,7 +459,7 @@ struct DataVerificationRegisterNasabahView: View {
             
             let data = User(context: managedObjectContext)
             data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-            
+
             data.nik = self.registerData.nik
             data.email = self.registerData.email
             data.phone = self.registerData.noTelepon
@@ -467,7 +468,7 @@ struct DataVerificationRegisterNasabahView: View {
             data.firstName = "Stevia"
             data.lastName = "R"
             data.email = self.registerData.email
-            
+
             UserDefaults.standard.set("false", forKey: "isFirstLogin")
             UserDefaults.standard.set("true", forKey: "isSchedule")
             
