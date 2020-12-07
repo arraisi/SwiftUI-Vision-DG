@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct PhoneOTPRegisterNasabahView: View {
     
@@ -27,6 +28,7 @@ struct PhoneOTPRegisterNasabahView: View {
     @State var messageResponse: String = ""
     
     /* Variable Validation */
+    @State var isLoading = true
     @State var isOtpValid = false
     @State var otpInvalidCount = 0
     @State var isResendOtpDisabled = true
@@ -68,6 +70,13 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 AppBarLogo(light: false) {
                     
+                }
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
                 }
                 
                 VStack(alignment: .center) {
@@ -210,7 +219,9 @@ struct PhoneOTPRegisterNasabahView: View {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.messageResponse),
-                dismissButton: .default(Text("Oke")))
+                dismissButton: .default(Text("Oke"), action: {
+                    self.isLoading = false
+                }))
         }
         .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             bottomMessageOTPinCorrect()
