@@ -41,11 +41,7 @@ struct FormCompletionKartuATMView: View {
         .init(city: "Jakarta Utara", kodePos: "14012", kecamatan: "Jakarta Utara", kelurahan: "Utara")
     ]
     
-    let suggestions:[String] = [
-        "ANDRI FERINATA",
-        "A. FERINATA",
-        "ANDRI F"
-    ]
+    @State var suggestions:[String] = []
     
     var body: some View {
         LoadingView(isShowing: $isLoading) {
@@ -343,6 +339,9 @@ struct FormCompletionKartuATMView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
+        .onAppear() {
+            self.generateNameSuggestion()
+        }
     }
     
     func createBottomAddressFloater() -> some View {
@@ -408,9 +407,9 @@ struct FormCompletionKartuATMView: View {
     
     func isValid() -> Bool {
         if atmData.addressOptionId == 4 {
-            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0
+            return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).isEmpty
         } else {
-            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0
+            return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty
         }
     }
     
@@ -455,6 +454,26 @@ struct FormCompletionKartuATMView: View {
             self.isLoading = false
             if success {
                 self.goToSuccessPage = true
+            }
+        }
+    }
+    
+    func generateNameSuggestion() {
+        self.suggestions = []
+        let names = self.registerData.namaLengkapFromNik.split(separator: " ").map { (name: Substring) -> String in
+            return name.uppercased()
+        }
+        
+        //suggestion 1
+        let suggestion1 = names.joined(separator: " ")
+        self.suggestions.append(suggestion1)
+        
+        //suggestion 2
+        names.forEach { (name:String) in
+            let alias = "\(name.substring(to: 1))."
+            let suggestion = names.joined(separator: " ").replacingOccurrences(of: name, with: alias)
+            if !self.suggestions.contains(suggestion) {
+                self.suggestions.append(suggestion)
             }
         }
     }
