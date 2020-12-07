@@ -14,6 +14,17 @@ struct FormVerificationAddressViewNasabahScreen: View {
     
     let verificationAddress: [MasterModel] = load("verificationAddress.json")
     
+    var disableForm: Bool {
+        
+        if (registerData.verificationAddressId != 1) {
+            if (registerData.alamatKtpFromNik.isEmpty || registerData.rtFromNik.isEmpty || registerData.kelurahanFromNik.isEmpty || registerData.kecamatanFromNik.isEmpty || registerData.kodePosKeluarga.isEmpty) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack(alignment: .top) {
@@ -94,7 +105,7 @@ struct FormVerificationAddressViewNasabahScreen: View {
                                     })
                                         .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.kodePos, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
                                         print("on edit")
                                     }, onCommit: {
                                         print("on commit")
@@ -122,7 +133,8 @@ struct FormVerificationAddressViewNasabahScreen: View {
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     }
-                    .background(Color(hex: "#2334D0"))
+                    .disabled(disableForm)
+                    .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 100)
                     .padding(.top, 10)

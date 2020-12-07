@@ -17,15 +17,15 @@ struct JenisTabunganRegisterNasabahView: View {
     
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 150 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 194
+    let itemHeight:CGFloat = 120
     let itemGapHeight:CGFloat = 10
-    
-    @State var showingModal = false
-    @EnvironmentObject var registerData: RegistrasiModel
     
     @GestureState private var dragOffset = CGSize.zero
     
     @Binding var shouldPopToRootView : Bool
+    
+    @State var showingModal = false
+    @EnvironmentObject var registerData: RegistrasiModel
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -36,63 +36,59 @@ struct JenisTabunganRegisterNasabahView: View {
             }
             
             VStack {
-                AppBarLogo(onCancel: {})
-                
-                ScrollView(showsIndicators: false) {
-                    VStack() {
-                        Text("Pilih Jenis Tabungan Anda")
-                            .font(.custom("Montserrat-SemiBold", size: 18))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .padding(.horizontal, 15)
+                VStack() {
+                    
+                    Text("Pilih Jenis Tabungan Anda")
+                        .font(.custom("Montserrat-SemiBold", size: 15))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.horizontal, 15)
+                        .padding(.top, 70)
+                    
+                    // MARK: - CAROUSEL
+                    VStack{
                         
-                        // MARK: - CAROUSEL
-                        VStack{
+                        HStack(spacing: itemWidth * 0.08){
                             
-                            HStack(spacing: itemWidth * 0.08){
-                                
-                                ForEach(data){card in
-                                    CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
-                                        .offset(x: self.offset)
-                                        .highPriorityGesture(
-                                            
-                                            DragGesture()
-                                                .onChanged({ (value) in
-                                                    
-                                                    if value.translation.width > 0 {
-                                                        self.offset = value.location.x
-                                                    }
-                                                    else{
-                                                        self.offset = value.location.x - self.itemWidth
-                                                    }
-                                                    
-                                                })
-                                                .onEnded(onDragEnded)
-                                        )
-                                }
+                            ForEach(data, id: \.id){ card in
+                                CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                    .offset(x: self.offset)
+                                    .highPriorityGesture(
+                                        
+                                        DragGesture()
+                                            .onChanged({ (value) in
+                                                
+                                                if value.translation.width > 0 {
+                                                    self.offset = value.location.x
+                                                }
+                                                else{
+                                                    self.offset = value.location.x - self.itemWidth
+                                                }
+                                                
+                                            })
+                                            .onEnded(onDragEnded)
+                                    )
                             }
-                            .frame(width: itemWidth)
-                            .offset(x: self.firstOffset)
                         }
-                        .edgesIgnoringSafeArea(.bottom)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                        .animation(.spring())
-                        .padding(.vertical,25)
-                        .onAppear {
-                            
-                            self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.01)) / 2) : 0)
-                            
-                            self.data[0].isShow = true
-                        }
-                        
-                        detailsTypeSaving
+                        .frame(width: itemWidth)
+                        .offset(x: self.firstOffset)
+                    }
+                    .edgesIgnoringSafeArea(.bottom)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .animation(.spring())
+                    .padding(.vertical, 25)
+                    .onAppear {
+                        refreshCarousel()
+                    }
+                    
+                    if self.data.count > Int(self.count) {
+                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal)
                             .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 30)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                        
-                        Spacer()
                     }
-                    .padding(.vertical, 30)
+                    Spacer()
                 }
+                .padding(.vertical, 30)
             }
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
@@ -100,16 +96,28 @@ struct JenisTabunganRegisterNasabahView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-        
+
             if(value.startLocation.x < 20 && value.translation.width > 100) {
                 self.shouldPopToRootView = false
             }
-            
+
         }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
+        }
+    }
+    
+    // MARK: - REFRESH THE CARD ITEM OFFSET
+    private func refreshCarousel() {
+        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2))
+        let offsetMiddleItem = (self.data.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+        self.firstOffset = offsetFirstItem - offsetMiddleItem
+        
+        if data.count > 0 {
+            self.data[0].isShow = true
         }
     }
     
@@ -150,12 +158,11 @@ struct JenisTabunganRegisterNasabahView: View {
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView(data: data[Int(self.count)], isShowModal: $showingModal)
+        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal)
             .environmentObject(registerData)
-            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 220)
+            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 150)
             .background(Color(.white))
-            .cornerRadius(50)
-            .shadow(radius: 60)
+            .cornerRadius(30)
     }
     
     // MARK: - ON DRAG ENDED

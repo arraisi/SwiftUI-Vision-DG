@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct EmailOTPRegisterNasabahView: View {
     
@@ -20,6 +21,7 @@ struct EmailOTPRegisterNasabahView: View {
     @State var isDisabled = false
     
     /* Variable Validation */
+    @State var isLoading = true
     @State var isOtpValid = false
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
@@ -52,11 +54,16 @@ struct EmailOTPRegisterNasabahView: View {
             
             VStack {
                 
-                CustomAppBar(light: false, barItemsHidden: false, barItems: AnyView(
-                                LoadingIndicator(style: .medium, animate: .constant(true))
-                                    .configure {
-                                        $0.color = .white
-                                    }))
+                AppBarLogo(light: false) {
+                    
+                }
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
                 
                 VStack(alignment: .center) {
                     Text("Kami telah mengirimkan Kode Verifikasi ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
@@ -201,7 +208,9 @@ struct EmailOTPRegisterNasabahView: View {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.otpVM.statusMessage),
-                dismissButton: .default(Text("Oke"))
+                dismissButton: .default(Text("Oke"), action: {
+                    self.isLoading = false
+                })
             )
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {

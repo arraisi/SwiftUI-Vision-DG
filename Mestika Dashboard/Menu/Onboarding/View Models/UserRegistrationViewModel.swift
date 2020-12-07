@@ -27,7 +27,7 @@ extension UserRegistrationViewModel {
                 
             switch result {
             case .success(let response):
-                print(response.deviceID)
+//                print(response.deviceID)
                 
 //                registerData.save()
                 

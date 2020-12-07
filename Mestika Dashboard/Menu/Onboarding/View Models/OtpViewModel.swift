@@ -74,6 +74,7 @@ extension OtpViewModel {
     
     // MARK:- GET OTP
     func otpRequest(otpRequest: OtpRequest, completion: @escaping (Bool) -> Void) {
+        
         DispatchQueue.main.async {
             self.isLoading = true
         }
