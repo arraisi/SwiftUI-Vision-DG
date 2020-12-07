@@ -36,6 +36,7 @@ struct SuccessRegisterView: View {
     @State var showingModal = false
     @State var showingModalJam = false
     @State var showingModalTanggal = false
+    @State var showingModalInformation = false
     
     @State var pilihJam: String = ""
     @State var tanggalWawancara: String = ""
@@ -210,8 +211,9 @@ struct SuccessRegisterView: View {
                             
                             Button(action: {
                                 if pilihJam != "" {
-                                    //                                submitSchedule()
-                                    self.showFormPilihJenisATM = true
+                                    // submitSchedule()
+                                    // self.showFormPilihJenisATM = true
+                                    self.showingModalInformation = true
                                 }
                             }, label: {
                                 Text("Buat Janji")
@@ -274,6 +276,10 @@ struct SuccessRegisterView: View {
                 if self.showingModalTanggal {
                     ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
                 }
+                
+                if self.showingModalInformation {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalInformation = false } })
+                }
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -293,6 +299,10 @@ struct SuccessRegisterView: View {
         .popup(isPresented: $showingModalJam, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloaterJam()
         }
+        .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            showModalInformation()
+        }
+        
     }
     
     func removeUser() {
@@ -519,6 +529,62 @@ struct SuccessRegisterView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    func showModalInformation() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_cs")
+                .resizable()
+                .frame(width: 64, height: 90)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Informasi")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text("Tanggal : \(tanggalWawancara)")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 5)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Jam : \(pilihJam)")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Button(
+                action: {
+                    self.showFormPilihJenisATM = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     func getAllSchedule() {
