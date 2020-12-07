@@ -12,13 +12,14 @@ struct VerificationAddressView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @State var alamat: String = ""
     @State var kodePos : String = ""
+    @State var isShowNextView : Bool = false
     
     let verificationAddress: [MasterModel] = load("verificationAddress.json")
     
     var disableForm: Bool {
         
         if (registerData.verificationAddressId != 1) {
-            if (registerData.alamatKtpFromNik.isEmpty || registerData.rtFromNik.isEmpty || registerData.kelurahanFromNik.isEmpty || registerData.kecamatanFromNik.isEmpty || registerData.kodePosKeluarga.isEmpty) {
+            if (registerData.alamatKtpFromNik.isEmpty || registerData.rtFromNik.isEmpty || registerData.kelurahanFromNik.isEmpty || registerData.kecamatanFromNik.isEmpty || kodePos.isEmpty) {
                 return true
             }
         }
@@ -152,19 +153,26 @@ struct VerificationAddressView: View {
                 }
                 
                 VStack {
-                    NavigationLink(destination: PasswordView().environmentObject(registerData)) {
+                    NavigationLink(destination: PasswordView().environmentObject(registerData), isActive: self.$isShowNextView) {EmptyView()}
+                    
+                    
+                    Button(action: {
+                        self.registerData.kodePosKeluarga = self.kodePos
+                        self.isShowNextView = true
+                    }, label: {
                         Text("Submit Data")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    }
+                    })
                     .disabled(disableForm)
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 100)
                     .padding(.top, 10)
                     .padding(.bottom, 10)
+                    
                 }
                 .background(Color.white)
             }
