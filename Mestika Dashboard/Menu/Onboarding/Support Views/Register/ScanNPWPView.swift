@@ -17,7 +17,6 @@ struct ScanNPWPView: View {
     @Binding var npwp: String
     @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
-    @Binding var shouldPresentActionScheet : Bool
     
     let onChange: ()->()
     let onCommit: ()->()
@@ -38,10 +37,8 @@ struct ScanNPWPView: View {
                 VStack {
                     imageNPWP?
                         .resizable()
-                        .frame(maxWidth: 350, maxHeight: 200)
-                        .cornerRadius(10)
+                        .scaledToFill()
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             }
             .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             .background(Color(hex: "#F5F5F5"))
@@ -51,20 +48,14 @@ struct ScanNPWPView: View {
             )
             
             Button(action: {
-                self.shouldPresentActionScheet.toggle()
                 self.onChange()
             }) {
                 Text(imageNPWP == nil ? "Upload Gambar NPWP" : "Ganti Foto Lain")
                     .foregroundColor(imageNPWP == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(hex: imageNPWP == nil ? "#2334D0" : "#FFFFFF"))
-                            .shadow(color: .gray, radius: 2, x: 0, y: 1)
-                    )
-                    .padding(5)
             }
+            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+            .background(Color(hex: alreadyHaveNpwp ? "#CBD1D9" : imageNPWP == nil ? "#2334D0" : "#FFFFFF"))
             .foregroundColor(.black)
             .cornerRadius(12)
             .padding([.top, .bottom], 15)
@@ -123,10 +114,10 @@ struct ScanNPWPView: View {
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 }
-                .background(Color(hex: "#2334D0"))
+                .background(Color(hex: isDisableButtonSimpan() ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)
                 .padding(.top, 15)
-                
+                .disabled(isDisableButtonSimpan())
             }.navigationBarHidden(true)
             
         }
@@ -153,11 +144,19 @@ struct ScanNPWPView: View {
         
         return true
     }
+    
+    func isDisableButtonSimpan() -> Bool {
+        if self.alreadyHaveNpwp || (self.npwp.count == 15 && self.imageNPWP != nil) {
+            return false
+        }
+        
+        return true
+    }
 }
 
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), shouldPresentActionScheet: Binding.constant(false)) {
+        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil)) {
         } onCommit: {
             
         }

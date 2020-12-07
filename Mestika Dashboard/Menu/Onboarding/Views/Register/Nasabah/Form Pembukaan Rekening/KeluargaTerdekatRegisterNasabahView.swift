@@ -16,7 +16,10 @@ struct KeluargaTerdekatRegisterNasabahView: View {
     @State var location : String = ""
     @State var showingModal = false
     @State var noTelepon: String = ""
+    @State var kodePos : String = ""
     @State var nextViewActive: Bool = false
+    
+    let hubunganKekerabatanOptions = ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"]
     
     let cities:[Address] = [
         .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Selatan"),
@@ -112,6 +115,7 @@ struct KeluargaTerdekatRegisterNasabahView: View {
                                             label: {
                                                 Button(action: {
                                                     
+                                                    self.registerData.kodePosKeluarga = self.kodePos
                                                     self.registerData.noTeleponPerusahaan = self.noTelepon
                                                     
                                                     self.nextViewActive = true
@@ -166,7 +170,7 @@ struct KeluargaTerdekatRegisterNasabahView: View {
     
     // MARK : - Check form is fill
     func isValid() -> Bool {
-        if registerData.hubunganKekerabatan == "" || registerData.hubunganKekerabatan == nil {
+        if registerData.hubunganKekerabatanKeluarga == "" {
             return true
         }
         if registerData.namaKeluarga == "" {
@@ -175,7 +179,7 @@ struct KeluargaTerdekatRegisterNasabahView: View {
         if registerData.alamatKeluarga == "" {
             return true
         }
-        if registerData.kodePosKeluarga == "" {
+        if kodePos == "" {
             return true
         }
         if registerData.kecamatanKeluarga == "" {
@@ -203,12 +207,39 @@ struct KeluargaTerdekatRegisterNasabahView: View {
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
-                TextFieldWithPickerAsInput(data: ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"], placeholder: "Hubungan kekerabatan", selectionIndex: $selectionID, text: $registerData.hubunganKekerabatan)
-                    .frame(height: 36)
-                    .font(Font.system(size: 14))
-                    .padding(.horizontal)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(10)
+                //                TextFieldWithPickerAsInput(data: ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"], placeholder: "Hubungan kekerabatan", selectionIndex: $selectionID, text: $registerData.hubunganKekerabatan)
+                //                    .frame(height: 36)
+                //                    .font(Font.system(size: 14))
+                //                    .padding(.horizontal)
+                //                    .background(Color.gray.opacity(0.1))
+                //                    .cornerRadius(10)
+                
+                HStack {
+                    TextField("Hubungan Kekerabatan", text: $registerData.hubunganKekerabatanKeluarga)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<hubunganKekerabatanOptions.count, id: \.self) { i in
+                            Button(action: {
+                                print(hubunganKekerabatanOptions[i])
+                                registerData.hubunganKekerabatanKeluarga = hubunganKekerabatanOptions[i]
+                            }) {
+                                Text(hubunganKekerabatanOptions[i])
+                                    .font(.custom("Montserrat-Regular", size: 10))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
                 
             }
             
@@ -249,9 +280,35 @@ struct KeluargaTerdekatRegisterNasabahView: View {
                 
             }
             
-            LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos") { (change) in
+            //            LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos") { (change) in
+            //
+            //            } onCommit: {
+            //
+            //            }
+            
+            VStack(alignment: .leading) {
                 
-            } onCommit: {
+                Text("Kode Pos")
+                    .font(Font.system(size: 10))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    TextField("Kode Pos", text: $kodePos) {change in
+                    } onCommit: {
+                        self.registerData.kodePosKeluarga = self.kodePos
+                    }
+                    .onReceive(kodePos.publisher.collect()) {
+                        self.kodePos = String($0.prefix(5))
+                    }
+                    .keyboardType(.numberPad)
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                }
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
                 
             }
             
@@ -353,6 +410,7 @@ struct KeluargaTerdekatRegisterNasabahView: View {
                     print(cities[index])
                     registerData.alamatKeluarga = cities[index].city
                     registerData.kodePosKeluarga = cities[index].kodePos
+                    self.kodePos = cities[index].kodePos
                     registerData.kecamatanKeluarga = cities[index].kecamatan
                     registerData.kelurahanKeluarga = cities[index].kelurahan
                     

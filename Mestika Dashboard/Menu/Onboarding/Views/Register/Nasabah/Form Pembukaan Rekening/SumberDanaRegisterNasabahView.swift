@@ -50,9 +50,10 @@ struct SumberDanaRegisterNasabahView: View {
                             Text("DATA PEMBUKAAN REKENING")
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
                                 .padding(.vertical, 30)
                                 .padding(.horizontal, 40)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
                             
                             // Content
                             ZStack {
