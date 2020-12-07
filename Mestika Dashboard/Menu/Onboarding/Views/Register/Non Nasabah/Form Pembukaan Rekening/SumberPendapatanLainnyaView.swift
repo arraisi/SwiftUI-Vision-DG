@@ -201,24 +201,50 @@ struct SumberPendapatanLainnyaView: View {
                                     selection: $selection,
                                     label: {EmptyView()})
                                 
+                                NavigationLink(
+                                    destination: VerificationRegisterDataView().environmentObject(registerData),
+                                    tag: "verificationView",
+                                    selection: $selection,
+                                    label: {EmptyView()})
+                                
                                 // Button
-                                Button(action: {
-                                    registerData.sumberPendapatanLainnyaId = self.selectedId
-                                    self.selection = "keluargaTerdekat"
-                                }, label:{
-                                    
-                                    Text("Berikutnya")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .frame(maxWidth: .infinity, maxHeight: 40)
-                                    
-                                })
-                                .frame(height: 50)
-                                .background(isDisableButtonBerikutnya() ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                .cornerRadius(12)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 25)
-                                .disabled(isDisableButtonBerikutnya())
+                                if (editMode == .inactive) {
+                                    Button(action: {
+                                        registerData.sumberPendapatanLainnyaId = self.selectedId
+                                        self.selection = "keluargaTerdekat"
+                                    }, label:{
+                                        
+                                        Text("Berikutnya")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                        
+                                    })
+                                    .frame(height: 50)
+                                    .background(isDisableButtonBerikutnya() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
+                                    .disabled(isDisableButtonBerikutnya())
+                                } else {
+                                    Button(action: {
+                                        registerData.sumberPendapatanLainnyaId = self.selectedId
+                                        self.selection = "verificationView"
+                                    }, label:{
+                                        
+                                        Text("Simpan")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                        
+                                    })
+                                    .frame(height: 50)
+                                    .background(isDisableButtonBerikutnya() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
+                                    .disabled(isDisableButtonBerikutnya())
+                                }
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -235,7 +261,7 @@ struct SumberPendapatanLainnyaView: View {
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
         .onAppear() {
-            self.selectedId = registerData.sumberPendapatanLainnyaId
+            registerData.sumberPendapatanLainnyaId = self.selectedId
         }
         //        .onTapGesture() {
         //            UIApplication.shared.endEditing()
