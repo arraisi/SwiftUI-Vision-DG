@@ -210,12 +210,12 @@ struct SumberPendapatanLainnyaView: View {
                                         .frame(maxWidth: .infinity, maxHeight: 40)
                                     
                                 })
-                                .disabled(isValid())
                                 .frame(height: 50)
-                                .background(self.selectedId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                .background(isDisableButtonBerikutnya() ? Color(.lightGray) : Color(hex: "#2334D0"))
                                 .cornerRadius(12)
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 25)
+                                .disabled(isDisableButtonBerikutnya())
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -235,6 +235,13 @@ struct SumberPendapatanLainnyaView: View {
         //            UIApplication.shared.endEditing()
         //        }
         
+    }
+    
+    private func isDisableButtonBerikutnya() -> Bool {
+        if self.selectedId == 2 || (self.selectedId == 1 && registerData.sumberPendapatanLainnya != "") {
+            return false
+        }
+        return true
     }
 }
 
