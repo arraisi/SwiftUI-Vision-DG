@@ -95,14 +95,19 @@ struct SuccessRegisterView: View {
                                 .padding(.leading, 20)
                                 .disabled(true)
                             
-                            Button(action:{
-                                showingModalTanggal.toggle()
-                            }, label: {
-                                Image(systemName: "calendar")
-                                    .font(Font.system(size: 20))
-                                    .foregroundColor(Color(hex: "#707070"))
-                            })
-                            .padding(.trailing, 20)
+                            Menu {
+                                ForEach(self.scheduleVM.scheduleDates, id: \.self) { data in
+                                    Button(action: {
+                                        tanggalWawancara = data
+                                        scheduleVM.getScheduleById(date: tanggalWawancara)
+                                    }) {
+                                        Text(data)
+                                            .font(.custom("Montserrat-Regular", size: 10))
+                                    }
+                                }
+                            } label: {
+                                Image(systemName: "calendar").padding()
+                            }
                             
                         }
                         .background(Color.gray.opacity(0.1))
@@ -118,14 +123,19 @@ struct SuccessRegisterView: View {
                                 .padding(.leading, 20)
                                 .disabled(true)
                             
-                            Button(action:{
-                                showingModalJam.toggle()
-                            }, label: {
-                                Image(systemName: "clock")
-                                    .font(Font.system(size: 20))
-                                    .foregroundColor(Color(hex: "#707070"))
-                            })
-                            .padding(.trailing, 20)
+                            
+                            Menu {
+                                ForEach(self.scheduleVM.scheduleJamBasedOnDate, id: \.self) { data in
+                                    Button(action: {
+                                        pilihJam = data
+                                    }) {
+                                        Text(data)
+                                            .font(.custom("Montserrat-Regular", size: 10))
+                                    }
+                                }
+                            } label: {
+                                Image(systemName: "clock").padding()
+                            }
                             
                         }
                         .background(Color.gray.opacity(0.1))

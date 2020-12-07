@@ -38,59 +38,61 @@ struct FormPilihJenisTabunganView: View {
             
             VStack {
                 
-                VStack() {
-                    
-                    Text("Pilih Jenis Tabungan Anda")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .padding(.horizontal, 15)
-                        .padding(.top, 90)
-                    
-                    // MARK: - CAROUSEL
-                    VStack{
+                ScrollView(showsIndicators: false) {
+                    VStack() {
                         
-                        HStack(spacing: itemWidth * 0.08){
+                        Text("Pilih Jenis Tabungan Anda")
+                            .font(.custom("Montserrat-SemiBold", size: 18))
+                            .foregroundColor(Color(hex: "#232175"))
+                            .padding(.horizontal, 15)
+                            .padding(.top, 90)
+                        
+                        // MARK: - CAROUSEL
+                        VStack{
                             
-                            ForEach(data, id: \.id){ card in
-                                CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
-                                    .offset(x: self.offset)
-                                    .highPriorityGesture(
-                                        
-                                        DragGesture()
-                                            .onChanged({ (value) in
-                                                
-                                                if value.translation.width > 0 {
-                                                    self.offset = value.location.x
-                                                }
-                                                else{
-                                                    self.offset = value.location.x - self.itemWidth
-                                                }
-                                                
-                                            })
-                                            .onEnded(onDragEnded)
-                                    )
+                            HStack(spacing: itemWidth * 0.08){
+                                
+                                ForEach(data, id: \.id){ card in
+                                    CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                        .offset(x: self.offset)
+                                        .highPriorityGesture(
+                                            
+                                            DragGesture()
+                                                .onChanged({ (value) in
+                                                    
+                                                    if value.translation.width > 0 {
+                                                        self.offset = value.location.x
+                                                    }
+                                                    else{
+                                                        self.offset = value.location.x - self.itemWidth
+                                                    }
+                                                    
+                                                })
+                                                .onEnded(onDragEnded)
+                                        )
+                                }
                             }
+                            .frame(width: itemWidth)
+                            .offset(x: self.firstOffset)
                         }
-                        .frame(width: itemWidth)
-                        .offset(x: self.firstOffset)
+                        .edgesIgnoringSafeArea(.bottom)
+                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                        .animation(.spring())
+                        .padding(.vertical, 25)
+                        .onAppear {
+                            refreshCarousel()
+                        }
+                        
+                        if self.data.count > Int(self.count) {
+                            DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal)
+                                .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                                .frame(width: UIScreen.main.bounds.width - 30)
+                                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                        }
+                        Spacer()
                     }
-                    .edgesIgnoringSafeArea(.bottom)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    .animation(.spring())
-                    .padding(.vertical, 25)
-                    .onAppear {
-                        refreshCarousel()
-                    }
-                    
-                    if self.data.count > Int(self.count) {
-                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal)
-                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                            .frame(width: UIScreen.main.bounds.width - 30)
-                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    }
-                    Spacer()
+                    .padding(.vertical, 30)
                 }
-                .padding(.vertical, 30)
             }
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
