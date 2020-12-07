@@ -59,7 +59,7 @@ struct WelcomeView: View {
                     Spacer()
                     
                     Header
-                        .padding(.horizontal, 20)
+                        .padding([.horizontal, .top], 20)
                     
                     Spacer()
                     
