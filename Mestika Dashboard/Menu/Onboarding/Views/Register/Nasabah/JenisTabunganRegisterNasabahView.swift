@@ -38,59 +38,61 @@ struct JenisTabunganRegisterNasabahView: View {
             VStack {
                 AppBarLogo(onCancel: {})
                 
-                VStack() {
-                    Text("Pilih Jenis Tabungan Anda")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
-                        .foregroundColor(Color(hex: "#232175"))
-                        .padding(.horizontal, 15)
-                    
-                    // MARK: - CAROUSEL
-                    VStack{
+                ScrollView(showsIndicators: false) {
+                    VStack() {
+                        Text("Pilih Jenis Tabungan Anda")
+                            .font(.custom("Montserrat-SemiBold", size: 18))
+                            .foregroundColor(Color(hex: "#232175"))
+                            .padding(.horizontal, 15)
                         
-                        HStack(spacing: itemWidth * 0.08){
+                        // MARK: - CAROUSEL
+                        VStack{
                             
-                            ForEach(data){card in
-                                CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
-                                    .offset(x: self.offset)
-                                    .highPriorityGesture(
-                                        
-                                        DragGesture()
-                                            .onChanged({ (value) in
-                                                
-                                                if value.translation.width > 0 {
-                                                    self.offset = value.location.x
-                                                }
-                                                else{
-                                                    self.offset = value.location.x - self.itemWidth
-                                                }
-                                                
-                                            })
-                                            .onEnded(onDragEnded)
-                                    )
+                            HStack(spacing: itemWidth * 0.08){
+                                
+                                ForEach(data){card in
+                                    CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                                        .offset(x: self.offset)
+                                        .highPriorityGesture(
+                                            
+                                            DragGesture()
+                                                .onChanged({ (value) in
+                                                    
+                                                    if value.translation.width > 0 {
+                                                        self.offset = value.location.x
+                                                    }
+                                                    else{
+                                                        self.offset = value.location.x - self.itemWidth
+                                                    }
+                                                    
+                                                })
+                                                .onEnded(onDragEnded)
+                                        )
+                                }
                             }
+                            .frame(width: itemWidth)
+                            .offset(x: self.firstOffset)
                         }
-                        .frame(width: itemWidth)
-                        .offset(x: self.firstOffset)
-                    }
-                    .edgesIgnoringSafeArea(.bottom)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    .animation(.spring())
-                    .padding(.vertical,25)
-                    .onAppear {
-                        
-                        self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.01)) / 2) : 0)
-                        
-                        self.data[0].isShow = true
-                    }
-                    
-                    detailsTypeSaving
-                        .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                        .frame(width: UIScreen.main.bounds.width - 30)
+                        .edgesIgnoringSafeArea(.bottom)
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    
-                    Spacer()
+                        .animation(.spring())
+                        .padding(.vertical,25)
+                        .onAppear {
+                            
+                            self.firstOffset = ((self.itemWidth + (itemWidth*0.01)) * CGFloat(self.data.count / 2)) - (self.data.count % 2 == 0 ? ((self.itemWidth + (itemWidth*0.01)) / 2) : 0)
+                            
+                            self.data[0].isShow = true
+                        }
+                        
+                        detailsTypeSaving
+                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                            .frame(width: UIScreen.main.bounds.width - 30)
+                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 30)
                 }
-                .padding(.vertical, 30)
             }
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
