@@ -34,7 +34,7 @@ struct PerkiraanPenarikanView: View {
             VStack {
                 AppBarLogo(light: false, onCancel: {})
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     ZStack {
                         
                         VStack {
@@ -87,6 +87,7 @@ struct PerkiraanPenarikanView: View {
                                             .multilineTextAlignment(.center)
                                             .padding(.horizontal, 40)
                                             .padding(.vertical, 30)
+                                            .fixedSize(horizontal: false, vertical: true)
                                         
                                         // Forms input
                                         ZStack {

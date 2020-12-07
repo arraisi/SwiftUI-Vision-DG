@@ -40,10 +40,10 @@ struct FormIdentitasDiriView: View {
     @State private var imageNPWP: Image?
     @State private var npwp: String = ""
     @State private var alreadyHaveNpwp: Bool = false
-    
-    
-    @State private var shouldPresentImagePicker = false
-//    @State private var shouldPresentActionScheet = false
+    /*
+     Views Variables
+     */
+    @State private var shouldPresentKtpScanner = true
     @State private var shouldPresentCamera = false
     @State private var nextViewActive = false
     
@@ -58,12 +58,15 @@ struct FormIdentitasDiriView: View {
             }
             
             VStack {
+                
                 AppBarLogo(light: false, showCancel: false) {
                     self.appState.moveToWelcomeView = true
                 }
                 
                 ScrollView(showsIndicators: false) {
-                    ZStack {
+                    
+                    ZStack(alignment: .top) {
+                        
                         VStack {
                             Color(hex: "#232175")
                                 .frame(height: 170)
@@ -74,17 +77,9 @@ struct FormIdentitasDiriView: View {
                         VStack(spacing: 25) {
                             
                             VStack(spacing: 10) {
-                                
-                                Button(
-                                    action: {
-                                        self.nextViewActive = true
-                                    },
-                                    label: {
-                                        Text("Identitas Diri")
-                                            .font(.custom("Montserrat-SemiBold", size: 18))
-                                            .foregroundColor(Color(hex: "#F6F8FB"))
-                                    }
-                                )
+                                Text("Identitas Diri")
+                                    .font(.custom("Montserrat-SemiBold", size: 18))
+                                    .foregroundColor(Color(hex: "#F6F8FB"))
                                 
                                 Text("Silihkan isi dan lengkapi data identitas Anda")
                                     .font(.custom("Montserrat-Regular", size: 12))
@@ -95,18 +90,18 @@ struct FormIdentitasDiriView: View {
                             
                             // Form KTP
                             VStack {
-                                DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
-                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentCamera, confirmNik: $confirmNik,
+                                DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: self.$formKTP) {
+                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik,
                                                 onChange: {
-//                                                    self.shouldPresentMaskSelfieCamera = false
-                                                    self.formSelfie = false
-                                                    self.formNPWP = false
+                                                    self.actionSelection("ktp")
+                                                    self.shouldPresentKtpScanner = true
+                                                    self.shouldPresentCamera = true
                                                 },
                                                 onCommit: {
                                                     if confirmImageKTP {
-                                                        self.formKTP = false
-                                                        self.formSelfie = true
-                                                        self.formNPWP = false
+                                                        self.shouldPresentKtpScanner = false
+                                                        self.shouldPresentCamera = false
+                                                        self.actionSelection("selfie")
                                                     }
                                                 })
                                 }
@@ -120,16 +115,16 @@ struct FormIdentitasDiriView: View {
                             
                             // Form Selfie
                             VStack {
-                                DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: $formSelfie) {
-                                    SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentCamera,
+                                DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: self.$formSelfie) {
+                                    SelfieView(registerData: _registerData, imageSelfie: $imageSelfie,
                                                onChange: {
-                                                self.shouldPresentMaskSelfieCamera = true
-                                                self.formKTP = false
-                                                self.formNPWP = false
+                                                self.actionSelection("selfie")
+                                                self.shouldPresentKtpScanner = false
+                                                self.shouldPresentCamera = true
                                                },
                                                onCommit: {
-                                                self.formSelfie.toggle()
-                                                self.formNPWP = true
+                                                self.shouldPresentCamera = false
+                                                self.actionSelection("npwp")
                                                })
                                 }
                                 .foregroundColor(.black)
@@ -142,15 +137,16 @@ struct FormIdentitasDiriView: View {
                             
                             // Form NPWP
                             VStack {
-                                DisclosureGroup("Masukkan NPWP Anda", isExpanded: $formNPWP) {
-                                    ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentCamera,
+                                DisclosureGroup("Masukkan NPWP Anda", isExpanded: self.$formNPWP) {
+                                    ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP,
                                                  onChange: {
-                                                    self.shouldPresentMaskSelfieCamera = false
-                                                    self.formKTP = false
-                                                    self.formSelfie = false
+                                                    self.actionSelection("npwp")
+                                                    self.shouldPresentKtpScanner = false
+                                                    self.shouldPresentCamera = true
                                                  },
                                                  onCommit: {
-                                                    self.formNPWP.toggle()
+                                                    self.shouldPresentCamera = false
+                                                    self.actionSelection("")
                                                  })
                                 }
                                 .foregroundColor(.black)
@@ -180,14 +176,13 @@ struct FormIdentitasDiriView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 16))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             })
-                            .background(Color(hex: !isValidForm() || formKTP || formSelfie || formNPWP ? "#CBD1D9" : "#232175"))
+                            .background(Color(hex: !isValidForm() ? "#CBD1D9" : "#232175"))
                             .cornerRadius(12)
-                            .disabled(!isValidForm() || formKTP || formSelfie || formNPWP)
+                            .disabled(!isValidForm())
                         }
                         .padding(20)
                         .padding(.vertical, 25)
                     }
-                    
                 }
                 .background(
                     VStack {
@@ -201,57 +196,81 @@ struct FormIdentitasDiriView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .sheet(isPresented: $shouldPresentCamera) {
-            ZStack {
-                if formKTP {
-                    
-                    ScanningView(recognizedText: $recognizedText.value)
-                        .onDisappear(perform: {
-                            if (recognizedText.value != "-") {
-                                print("scan value : \(recognizedText.value)")
-                                let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
-                                print("matched value : \(matched)")
-                                print("recognizedText.value value : \(recognizedText.value)")
-                                
-                                if matched.count != 0 {
-                                    self.nik = matched[0]
-                                }
-                                
-                                if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
-                                    self.confirmImageKTP = true
-                                    print("1. self.confirmImageKTP \(self.confirmImageKTP)")
-                                } else {
-                                    self.confirmImageKTP = false
-                                    print("2. self.confirmImageKTP \(self.confirmImageKTP)")
-                                }
-                                
-                                _ = retrieveImage(forKey: "ktp")
+            
+            if self.shouldPresentKtpScanner {
+                
+                ScanningView(recognizedText: $recognizedText.value)
+                    .onDisappear(perform: {
+                        if (recognizedText.value != "-") {
+                            print("scan value : \(recognizedText.value)")
+                            let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
+                            print("matched value : \(matched)")
+                            print("recognizedText.value value : \(recognizedText.value)")
+                            
+                            if matched.count != 0 {
+                                self.nik = matched[0]
                             }
-                        })
-                }
-                else {
+                            
+                            if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
+                                self.confirmImageKTP = true
+                                print("1. self.confirmImageKTP \(self.confirmImageKTP)")
+                            } else {
+                                self.confirmImageKTP = false
+                                print("2. self.confirmImageKTP \(self.confirmImageKTP)")
+                            }
+                            
+                            _ = retrieveImage(forKey: "ktp")
+                        }
+                    })
+                
+            }
+            else {
+                
+                ZStack {
                     SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
+                    
+                    if self.shouldPresentMaskSelfieCamera {
+                        Image("pattern_selfie")
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .opacity(0.5)
+                            .offset(y: -(UIScreen.main.bounds.height * 0.1))
+                    }
                 }
                 
-                if self.shouldPresentMaskSelfieCamera {
-                    Image("pattern_selfie")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .opacity(0.5)
-                        .offset(y: -(UIScreen.main.bounds.height * 0.1))
-                }
             }
         }
-//        .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-//            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-//                self.shouldPresentImagePicker = true
-//                self.shouldPresentCamera = true
-//            }), ActionSheet.Button.default(Text("Photo Library"), action: {
-//                self.shouldPresentMaskSelfieCamera = false
-//                self.shouldPresentImagePicker = true
-//                self.shouldPresentCamera = false
-//            }), ActionSheet.Button.cancel()])
-//        }
+    }
+    
+    /*
+     Fungsi untuk ambil Gambar dari Local Storage
+     */
+    private func actionSelection(_ selection: String) {
+        switch selection {
+        case "ktp":
+            self.formSelfie = false
+            self.formNPWP = false
+            self.formKTP = true
+            self.shouldPresentMaskSelfieCamera = false
+        case "selfie":
+            self.formKTP = false
+            self.formNPWP = false
+            self.formSelfie = true
+            self.shouldPresentMaskSelfieCamera = true
+        case "npwp":
+            self.formKTP = false
+            self.formSelfie = false
+            self.formNPWP = true
+            self.shouldPresentMaskSelfieCamera = false
+        default:
+            self.formKTP = false
+            self.formSelfie = false
+            self.formNPWP = false
+            self.shouldPresentKtpScanner = true
+            self.shouldPresentMaskSelfieCamera = false
+            self.shouldPresentCamera = false
+        }
     }
     
     /*
@@ -261,7 +280,7 @@ struct FormIdentitasDiriView: View {
         return imageKTP != nil
             && registerData.nik != ""
             && confirmNik
-            && (registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp)
+            && ((registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp) && !self.formNPWP)
             && imageSelfie != nil
     }
     
@@ -297,6 +316,7 @@ struct FormIdentitasDiriView: View {
             return []
         }
     }
+    
 }
 
 struct FormIdentitasDiriView_Previews: PreviewProvider {

@@ -17,7 +17,7 @@ struct DetailsTypeSavingView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(data.tabunganName)
-                .font(.title)
+                .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#3756DF"))
                 .padding(.top, 10)
@@ -32,46 +32,41 @@ struct DetailsTypeSavingView: View {
                 .foregroundColor(Color(hex: "#5A6876"))
             
             ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false) {
-                
+
                 ForEach(data.description, id: \.id) { card in
                     HStack(alignment: .top) {
                         Text(card.id)
-                            .font(.subheadline)
+                            .font(.caption)
                             .foregroundColor(Color(hex: "#232175"))
                             .fontWeight(.bold)
                             .frame(width: 25, height: 18)
                         Text(card.desc)
-                            .font(.caption)
+                            .font(.caption2)
                             .foregroundColor(Color(hex: "#5A6876"))
                             .frame(minHeight: 18)
                         Spacer()
                     }
-                    .padding(.top, 2)
+                    .padding(.top, 1)
                     .padding(.horizontal, 15)
                 }
             }
-            .frame(minHeight: 150)
+            .frame(height: 100)
             
-//            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
-//
-//                Text("Pilih Tabungan ini")
-//                    .foregroundColor(.white)
-//                    .font(.custom("Montserrat-SemiBold", size: 14))
-//                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-//
-//            }
-            Button(action: {
-                self.isShowModal = true
-            }, label: {
-                Text("Pilih Tabungan ini")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-            })
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 10)
-            .padding(.top, 10)
+            Button(
+                action: {
+                    self.isShowModal = true
+                },
+                label: {
+                    Text("Pilih Tabungan ini")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 12))
+                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 10)
+                .padding(.top, 10)
             
         }
         .padding(.horizontal, 10)

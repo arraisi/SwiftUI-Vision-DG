@@ -21,7 +21,7 @@ class UserRegistrationService {
         imageKtp: UIImage,
         imageNpwp: UIImage,
         imageSelfie: UIImage,
-        completion: @escaping(Result<UserRegistrationResponse, ErrorResult>) -> Void) {
+        completion: @escaping(Result<UserCheckResponse, ErrorResult>) -> Void) {
         
         guard let url = URL.urlUserNew() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
@@ -147,7 +147,7 @@ class UserRegistrationService {
                     if (httpResponse.statusCode == 500) {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                     } else if (httpResponse.statusCode == 200) {
-                        let userResponse = try? JSONDecoder().decode(UserRegistrationResponse.self, from: data!)
+                        let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data!)
                         completion(.success(userResponse!))
                     } else {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))

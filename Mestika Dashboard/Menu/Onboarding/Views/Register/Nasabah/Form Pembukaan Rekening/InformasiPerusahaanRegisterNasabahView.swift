@@ -136,6 +136,7 @@ struct InformasiPerusahaanRegisterNasabahView: View {
                                             .foregroundColor(Color(hex: "#232175"))
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 30)
+                                            .multilineTextAlignment(.center)
                                         
                                         // Forms input
                                         ZStack {

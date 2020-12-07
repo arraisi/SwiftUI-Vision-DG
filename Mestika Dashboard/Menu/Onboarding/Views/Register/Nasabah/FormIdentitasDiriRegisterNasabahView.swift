@@ -1,13 +1,14 @@
 //
-//  FormUploadDocumentIdentityNasabahScreen.swift
+//  FormIdentitasDiriRegisterNasabahView.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 11/11/20.
+//  Created by Abdul R. Arraisi on 07/12/20.
 //
 
 import SwiftUI
+import Combine
 
-struct IdentitasDiriRegisterNasabahView: View {
+struct FormIdentitasDiriRegisterNasabahView: View {
     
     /*
      Environtment Object
@@ -39,10 +40,10 @@ struct IdentitasDiriRegisterNasabahView: View {
     @State private var imageNPWP: Image?
     @State private var npwp: String = ""
     @State private var alreadyHaveNpwp: Bool = false
-    
-    
-    @State private var shouldPresentImagePicker = false
-//    @State private var shouldPresentActionScheet = false
+    /*
+     Views Variables
+     */
+    @State private var shouldPresentKtpScanner = true
     @State private var shouldPresentCamera = false
     @State private var nextViewActive = false
     
@@ -57,12 +58,15 @@ struct IdentitasDiriRegisterNasabahView: View {
             }
             
             VStack {
+                
                 AppBarLogo(light: false, showCancel: false) {
                     self.appState.moveToWelcomeView = true
                 }
                 
                 ScrollView(showsIndicators: false) {
-                    ZStack {
+                    
+                    ZStack(alignment: .top) {
+                        
                         VStack {
                             Color(hex: "#232175")
                                 .frame(height: 170)
@@ -86,18 +90,18 @@ struct IdentitasDiriRegisterNasabahView: View {
                             
                             // Form KTP
                             VStack {
-                                DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: $formKTP) {
-                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, showAction: $shouldPresentCamera, confirmNik: $confirmNik,
+                                DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: self.$formKTP) {
+                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik,
                                                 onChange: {
-//                                                    self.shouldPresentMaskSelfieCamera = false
-                                                    self.formSelfie = false
-                                                    self.formNPWP = false
+                                                    self.actionSelection("ktp")
+                                                    self.shouldPresentKtpScanner = true
+                                                    self.shouldPresentCamera = true
                                                 },
                                                 onCommit: {
                                                     if confirmImageKTP {
-                                                        self.formKTP = false
-                                                        self.formSelfie = true
-                                                        self.formNPWP = false
+                                                        self.shouldPresentKtpScanner = false
+                                                        self.shouldPresentCamera = false
+                                                        self.actionSelection("selfie")
                                                     }
                                                 })
                                 }
@@ -111,16 +115,16 @@ struct IdentitasDiriRegisterNasabahView: View {
                             
                             // Form Selfie
                             VStack {
-                                DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: $formSelfie) {
-                                    SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, shouldPresentActionScheet: $shouldPresentCamera,
+                                DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: self.$formSelfie) {
+                                    SelfieView(registerData: _registerData, imageSelfie: $imageSelfie,
                                                onChange: {
-                                                self.shouldPresentMaskSelfieCamera = true
-                                                self.formKTP = false
-                                                self.formNPWP = false
+                                                self.actionSelection("selfie")
+                                                self.shouldPresentKtpScanner = false
+                                                self.shouldPresentCamera = true
                                                },
                                                onCommit: {
-                                                self.formSelfie.toggle()
-                                                self.formNPWP = true
+                                                self.shouldPresentCamera = false
+                                                self.actionSelection("npwp")
                                                })
                                 }
                                 .foregroundColor(.black)
@@ -133,15 +137,16 @@ struct IdentitasDiriRegisterNasabahView: View {
                             
                             // Form NPWP
                             VStack {
-                                DisclosureGroup("Masukkan NPWP Anda", isExpanded: $formNPWP) {
-                                    ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, shouldPresentActionScheet: $shouldPresentCamera,
+                                DisclosureGroup("Masukkan NPWP Anda", isExpanded: self.$formNPWP) {
+                                    ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP,
                                                  onChange: {
-                                                    self.shouldPresentMaskSelfieCamera = false
-                                                    self.formKTP = false
-                                                    self.formSelfie = false
+                                                    self.actionSelection("npwp")
+                                                    self.shouldPresentKtpScanner = false
+                                                    self.shouldPresentCamera = true
                                                  },
                                                  onCommit: {
-                                                    self.formNPWP.toggle()
+                                                    self.shouldPresentCamera = false
+                                                    self.actionSelection("")
                                                  })
                                 }
                                 .foregroundColor(.black)
@@ -178,7 +183,6 @@ struct IdentitasDiriRegisterNasabahView: View {
                         .padding(20)
                         .padding(.vertical, 25)
                     }
-                    
                 }
                 .background(
                     VStack {
@@ -192,57 +196,81 @@ struct IdentitasDiriRegisterNasabahView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .sheet(isPresented: $shouldPresentCamera) {
-            ZStack {
-                if formKTP {
-                    
-                    ScanningView(recognizedText: $recognizedText.value)
-                        .onDisappear(perform: {
-                            if (recognizedText.value != "-") {
-                                print("scan value : \(recognizedText.value)")
-                                let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
-                                print("matched value : \(matched)")
-                                print("recognizedText.value value : \(recognizedText.value)")
-                                
-                                if matched.count != 0 {
-                                    self.nik = matched[0]
-                                }
-                                
-                                if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
-                                    self.confirmImageKTP = true
-                                    print("1. self.confirmImageKTP \(self.confirmImageKTP)")
-                                } else {
-                                    self.confirmImageKTP = false
-                                    print("2. self.confirmImageKTP \(self.confirmImageKTP)")
-                                }
-                                
-                                _ = retrieveImage(forKey: "ktp")
+            
+            if self.shouldPresentKtpScanner {
+                
+                ScanningView(recognizedText: $recognizedText.value)
+                    .onDisappear(perform: {
+                        if (recognizedText.value != "-") {
+                            print("scan value : \(recognizedText.value)")
+                            let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
+                            print("matched value : \(matched)")
+                            print("recognizedText.value value : \(recognizedText.value)")
+                            
+                            if matched.count != 0 {
+                                self.nik = matched[0]
                             }
-                        })
-                }
-                else {
-                    SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentImagePicker, frontCamera: self.$formSelfie)
+                            
+                            if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
+                                self.confirmImageKTP = true
+                                print("1. self.confirmImageKTP \(self.confirmImageKTP)")
+                            } else {
+                                self.confirmImageKTP = false
+                                print("2. self.confirmImageKTP \(self.confirmImageKTP)")
+                            }
+                            
+                            _ = retrieveImage(forKey: "ktp")
+                        }
+                    })
+                
+            }
+            else {
+                
+                ZStack {
+                    SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
+                    
+                    if self.shouldPresentMaskSelfieCamera {
+                        Image("pattern_selfie")
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .opacity(0.5)
+                            .offset(y: -(UIScreen.main.bounds.height * 0.1))
+                    }
                 }
                 
-                if self.shouldPresentMaskSelfieCamera {
-                    Image("pattern_selfie")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .opacity(0.5)
-                        .offset(y: -(UIScreen.main.bounds.height * 0.1))
-                }
             }
         }
-//        .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-//            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-//                self.shouldPresentImagePicker = true
-//                self.shouldPresentCamera = true
-//            }), ActionSheet.Button.default(Text("Photo Library"), action: {
-//                self.shouldPresentMaskSelfieCamera = false
-//                self.shouldPresentImagePicker = true
-//                self.shouldPresentCamera = false
-//            }), ActionSheet.Button.cancel()])
-//        }
+    }
+    
+    /*
+     Fungsi untuk ambil Gambar dari Local Storage
+     */
+    private func actionSelection(_ selection: String) {
+        switch selection {
+        case "ktp":
+            self.formSelfie = false
+            self.formNPWP = false
+            self.formKTP = true
+            self.shouldPresentMaskSelfieCamera = false
+        case "selfie":
+            self.formKTP = false
+            self.formNPWP = false
+            self.formSelfie = true
+            self.shouldPresentMaskSelfieCamera = true
+        case "npwp":
+            self.formKTP = false
+            self.formSelfie = false
+            self.formNPWP = true
+            self.shouldPresentMaskSelfieCamera = false
+        default:
+            self.formKTP = false
+            self.formSelfie = false
+            self.formNPWP = false
+            self.shouldPresentKtpScanner = true
+            self.shouldPresentMaskSelfieCamera = false
+            self.shouldPresentCamera = false
+        }
     }
     
     /*
@@ -288,10 +316,11 @@ struct IdentitasDiriRegisterNasabahView: View {
             return []
         }
     }
+    
 }
 
-struct FormUploadDocumentIdentityNasabahScreen_Previews: PreviewProvider {
+struct FormIdentitasDiriRegisterNasabahView_Previews: PreviewProvider {
     static var previews: some View {
-        IdentitasDiriRegisterNasabahView().environmentObject(RegistrasiModel())
+        FormIdentitasDiriRegisterNasabahView()
     }
 }

@@ -79,6 +79,8 @@ struct SumberPenyandangDana1RegisterNasabahView: View {
                                             .foregroundColor(Color(hex: "#232175"))
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 30)
+                                            .multilineTextAlignment(.center)
+                                            .fixedSize(horizontal: false, vertical: true)
                                         
                                         // Forms input
                                         ZStack {

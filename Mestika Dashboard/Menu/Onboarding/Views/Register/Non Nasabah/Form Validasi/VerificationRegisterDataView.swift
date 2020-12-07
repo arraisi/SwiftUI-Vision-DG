@@ -10,11 +10,11 @@ import SwiftUI
 struct VerificationRegisterDataView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     @State var image: Image? = nil
     
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var nextRoute: Bool = false
     
@@ -42,6 +42,11 @@ struct VerificationRegisterDataView: View {
             }
             
             VStack {
+                
+                AppBarLogo(light: false, showCancel: true) {
+                    self.appState.moveToWelcomeView = true
+                }
+                
                 ScrollView {
                     VStack {
                         Text("PASTIKAN INFORMASI ANDA BENAR")
@@ -49,7 +54,7 @@ struct VerificationRegisterDataView: View {
                             .bold()
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
-                            .padding(.vertical, 20)
+                            .padding(.vertical, 25)
                             .padding(.horizontal, 20)
                             .fixedSize(horizontal: false, vertical: true)
                         
@@ -336,14 +341,14 @@ struct VerificationRegisterDataView: View {
                         .shadow(radius: 30)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 90)
+//                    .padding(.top, 90)
                     .padding(.bottom, 35)
                 }
                 
                 VStack {
                     Button(action: {
                         
-//                        saveUserToCoreData()
+                        //                        saveUserToCoreData()
                         saveUserToDb()
                         
                     }, label: {
@@ -359,24 +364,24 @@ struct VerificationRegisterDataView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 20)
                     .disabled(self.userRegisterVM.isLoading)
-
+                    
                     NavigationLink(
-                            destination: SuccessRegisterView().environmentObject(registerData),
-                            isActive: self.$nextRoute,
-                            label: {}
+                        destination: SuccessRegisterView().environmentObject(registerData),
+                        isActive: self.$nextRoute,
+                        label: {}
                     )
                 }
                 .background(Color.white)
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarItems(
-            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
-                .configure {
-                    $0.color = .white
-            })
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+//        .navigationBarItems(
+//            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
+//                .configure {
+//                    $0.color = .white
+//                })
+//        .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),
@@ -430,12 +435,24 @@ struct VerificationRegisterDataView: View {
     
     /* Save User To DB */
     func saveUserToDb() {
-//        nextRoute = true
+        //        nextRoute = true
+        
+//        self.registerData.nik = "5106040309800927"
+//        self.registerData.namaLengkapFromNik = "DATA TEST T 03"
+//        self.registerData.tempatLahirFromNik = "LAHIR"
+//        self.registerData.alamatKtpFromNik = "JL PROF DR LATUMETEN I GG.5/6"
+//        self.registerData.rtFromNik = "02"
+//        self.registerData.rwFromNik = "03"
+//        self.registerData.kelurahanFromNik = "ANDIR"
+//        self.registerData.kecamatanFromNik = "ANDIR"
+//        self.registerData.kabupatenKotaFromNik = "ANDIR"
+//        self.registerData.provinsiFromNik = "JAWA BARAT"
+        
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
                 nextRoute = true
             }
-
+            
             if !success {
                 self.showingAlert = true
             }

@@ -87,6 +87,7 @@ struct PerkiraanPenarikanDanaRegisterNasabahView: View {
                                             .multilineTextAlignment(.center)
                                             .padding(.horizontal, 40)
                                             .padding(.vertical, 30)
+                                            .fixedSize(horizontal: false, vertical: true)
                                         
                                         // Forms input
                                         ZStack {

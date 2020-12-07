@@ -23,11 +23,13 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     /* Variable Validation */
     @State var isOtpValid = false
     @State var isResendOtpDisabled = true
+    @State var isBtnValidationDisabled = false
     @State var tryCount = 0
     
     @Binding var shouldPopToRootView : Bool
     
     @State private var timeRemaining = 30
+    @State private var timeRemainingBtn = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     /* Boolean for Show Modal */
@@ -35,7 +37,10 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     @State private var showingAlert: Bool = false
     
     var disableForm: Bool {
-        pin.count < 6
+        if (pin.count < 6 || self.isBtnValidationDisabled) {
+            return true
+        }
+        return false
     }
     
     var body: some View {
@@ -122,10 +127,17 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         self.tryCount += 1
                         validateOTP()
                     }) {
-                        Text("Verifikasi OTP")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        if (self.isBtnValidationDisabled) {
+                            Text("(00:\(String(format: "%02d", timeRemainingBtn)))")
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        } else {
+                            Text("Verifikasi OTP")
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                        }
                     }
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
@@ -170,6 +182,16 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 isResendOtpDisabled = false
             } else {
                 isResendOtpDisabled = true
+            }
+            
+            if self.timeRemainingBtn > 0 {
+                self.timeRemainingBtn -= 1
+            }
+            
+            if self.timeRemainingBtn < 1 {
+                isBtnValidationDisabled = false
+            } else {
+//                isBtnValidationDisabled = true
             }
         }
         .alert(isPresented: $showingAlert) {
@@ -352,6 +374,28 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             
             if !success {
                 print("OTP INVALID")
+                
+                if (self.tryCount == 1) {
+                    self.timeRemainingBtn = 30
+                }
+                
+                if (self.tryCount == 2) {
+                    self.timeRemainingBtn = 60
+                }
+                
+                if (self.tryCount == 3) {
+                    self.timeRemainingBtn = 120
+                }
+                
+                if (self.tryCount == 4) {
+                    self.timeRemainingBtn = 240
+                }
+                
+                if (self.tryCount == 5) {
+                    self.timeRemainingBtn = 480
+                }
+                
+                self.isBtnValidationDisabled = true
                 self.showingModal.toggle()
                 self.resetField()
             }

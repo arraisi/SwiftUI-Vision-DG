@@ -17,8 +17,8 @@ struct FormPilihJenisTabunganView: View {
     @State var count : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 190
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 150 // 100 is amount padding left and right
+    let itemHeight:CGFloat = 120
     let itemGapHeight:CGFloat = 10
     
     @GestureState private var dragOffset = CGSize.zero
@@ -37,14 +37,13 @@ struct FormPilihJenisTabunganView: View {
             }
             
             VStack {
-                
                 VStack() {
                     
                     Text("Pilih Jenis Tabungan Anda")
-                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .font(.custom("Montserrat-SemiBold", size: 15))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.horizontal, 15)
-                        .padding(.top, 90)
+                        .padding(.top, 70)
                     
                     // MARK: - CAROUSEL
                     VStack{
@@ -162,10 +161,9 @@ struct FormPilihJenisTabunganView: View {
     private func createBottomFloater() -> some View {
         SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal)
             .environmentObject(registerData)
-            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 220)
+            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 150)
             .background(Color(.white))
-            .cornerRadius(50)
-            .shadow(radius: 60)
+            .cornerRadius(30)
     }
     
     // MARK: - ON DRAG ENDED
