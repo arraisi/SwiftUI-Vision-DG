@@ -11,6 +11,7 @@ struct VerificationAddressView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @State var alamat: String = ""
+    @State var kodePos : String = ""
     
     let verificationAddress: [MasterModel] = load("verificationAddress.json")
     
@@ -31,7 +32,7 @@ struct VerificationAddressView: View {
             Image("bg_blue")
                 .resizable()
             
-            VStack {
+            VStack(spacing: 0) {
                 ScrollView {
                     VStack {
                         Text("PASTIKAN INFORMASI ANDA BENAR")
@@ -102,13 +103,40 @@ struct VerificationAddressView: View {
                                     })
                                         .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                    }, onCommit: {
-                                        print("on commit")
-                                    })
-                                        .padding(.horizontal, 20)
-                                        .padding(.bottom, 30)
+//                                    LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
+//                                        print("on edit")
+//                                    }, onCommit: {
+//                                        print("on commit")
+//                                    })
+//                                        .padding(.horizontal, 20)
+//                                        .padding(.bottom, 30)
+                                    
+                                    VStack(alignment: .leading) {
+                                        
+                                        Text("Kode Pos")
+                                            .font(Font.system(size: 10))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color(hex: "#707070"))
+                                        
+                                        HStack {
+                                            TextField("Kode Pos", text: $kodePos) {change in
+                                            } onCommit: {
+                                                self.registerData.kodePosKeluarga = self.kodePos
+                                            }
+                                            .onReceive(kodePos.publisher.collect()) {
+                                                self.kodePos = String($0.prefix(5))
+                                            }
+                                            .keyboardType(.numberPad)
+                                            .font(Font.system(size: 14))
+                                            .frame(height: 36)
+                                        }
+                                        .padding(.horizontal)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                        
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.bottom, 30)
                                 }
                             }
                         
@@ -120,6 +148,7 @@ struct VerificationAddressView: View {
                     }
                     .padding(.horizontal, 30)
                     .padding(.top, 70)
+                    .padding(.bottom, 10)
                 }
                 
                 VStack {
@@ -140,9 +169,13 @@ struct VerificationAddressView: View {
                 .background(Color.white)
             }
         }
+        .KeyboardAwarePadding()
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
     }
 }
 
