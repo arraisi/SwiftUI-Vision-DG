@@ -19,6 +19,9 @@ struct PasswordView: View {
     
     @State private var showingModal: Bool = false
     @State private var activeRoute: Bool = false
+    @State private var modalErrorMessage: String = ""
+    @State private var modalButtonText: String = ""
+    
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -204,9 +207,11 @@ struct PasswordView: View {
                             Button(
                                 action: {
                                     if (password != confirmationPassword) {
+                                        self.modalErrorMessage = "Password tidak sama, silahkan ketik ulang"
+                                        self.modalButtonText = "Kembali"
                                         self.showingModal.toggle()
                                     } else {
-                                        self.activeRoute = true
+                                        getValidationPassword()
                                     }
                                 },
                                 label:{
@@ -247,31 +252,31 @@ struct PasswordView: View {
             UIApplication.shared.endEditing()
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            bottomMessagePasswordIncorrect()
+            modalPasswordError()
         }
     }
     
-    // MARK: -BOTTOM MESSAGE OTP IN CORRECT
-    func bottomMessagePasswordIncorrect() -> some View {
+    // MARK: -Bottom modal for error
+    func modalPasswordError() -> some View {
         VStack(alignment: .leading) {
-            Image(systemName: "xmark.octagon.fill")
+            Image("ic_title_warning")
                 .resizable()
-                .frame(width: 65, height: 65)
+                .frame(width: 101, height: 99)
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Password tidak sama, silahkan ketik ulang")
+            Text(modalErrorMessage)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.system(size: 22))
+                .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
             Button(action: {}) {
-                Text("Kembali")
+                Text(modalButtonText)
                     .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 12))
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
@@ -284,15 +289,23 @@ struct PasswordView: View {
         .cornerRadius(20)
     }
     
-    @ObservedObject private var passwordVM = PasswordViewModel()
+    @ObservedObject var passwordVM = PasswordViewModel()
     func getValidationPassword() {
         self.passwordVM.validationPassword(password: password) { success in
-            
             if success {
+                switch self.passwordVM.code {
+                case "R100":
+                    self.activeRoute = true
+                default:
+                    self.modalErrorMessage = self.passwordVM.message
+                    self.modalButtonText = "OK"
+                    self.showingModal.toggle()
+                }
+            }
+            else {
                 print(self.passwordVM.code)
                 print(self.passwordVM.message)
             }
-            
         }
     }
 }
