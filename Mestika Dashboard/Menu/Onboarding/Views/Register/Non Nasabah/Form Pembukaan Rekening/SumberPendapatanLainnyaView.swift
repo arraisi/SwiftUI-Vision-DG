@@ -13,6 +13,9 @@ struct SumberPendapatanLainnyaView: View {
     //    var registerData = RegistrasiModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    
     let sumberPendapatanLainnya: [MasterModel] = load("sumberPendapatanLainnya.json")
     @State var sumberPendapatanLain = ""
     
@@ -198,24 +201,51 @@ struct SumberPendapatanLainnyaView: View {
                                     selection: $selection,
                                     label: {EmptyView()})
                                 
+                                NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData),
+                                       tag: "verificationRegister",
+                                       selection: $selection,
+                                       label: {EmptyView()})
+                                
                                 // Button
-                                Button(action: {
-                                    registerData.sumberPendapatanLainnyaId = self.selectedId
-                                    self.selection = "keluargaTerdekat"
-                                }, label:{
+                                if (editMode == .inactive) {
+                                
+                                    Button(action: {
+                                        registerData.sumberPendapatanLainnyaId = self.selectedId
+                                        self.selection = "keluargaTerdekat"
+                                    }, label:{
+                                        
+                                        Text("Berikutnya")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                        
+                                    })
+                                    .disabled(isValid())
+                                    .frame(height: 50)
+                                    .background(self.selectedId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
                                     
-                                    Text("Berikutnya")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .frame(maxWidth: .infinity, maxHeight: 40)
-                                    
-                                })
-                                .disabled(isValid())
-                                .frame(height: 50)
-                                .background(self.selectedId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                .cornerRadius(12)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 25)
+                                } else {
+                                    Button(action: {
+                                        registerData.sumberPendapatanLainnyaId = self.selectedId
+                                        self.selection = "verificationRegister"
+                                    }, label:{
+                                        
+                                        Text("Simpan")
+                                            .foregroundColor(.white)
+                                            .fontWeight(.bold)
+                                            .font(.system(size: 14))
+                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                        
+                                    })
+                                    .frame(height: 50)
+                                    .background(Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 25)
+                                }
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -231,6 +261,9 @@ struct SumberPendapatanLainnyaView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
+        .onAppear() {
+            self.selectedId = registerData.sumberPendapatanLainnyaId
+        }
         //        .onTapGesture() {
         //            UIApplication.shared.endEditing()
         //        }

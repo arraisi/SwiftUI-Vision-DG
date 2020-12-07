@@ -11,6 +11,9 @@ struct InformasiPerusahaanView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    
     @State var namaPerusahaan: String = ""
     @State var alamatPerusahaan: String = ""
     @State var kelurahan: String = ""
@@ -20,6 +23,7 @@ struct InformasiPerusahaanView: View {
     
     @State var noTlpPerusahaan: String = ""
     @State var nextViewActive: Bool = false
+    @State var verificationViewActive: Bool = false
     
     let bidangUsaha:[BidangUsaha] = [
         .init(nama: "Minimarket/ Jasa Parkir/ SPBU"),
@@ -134,30 +138,57 @@ struct InformasiPerusahaanView: View {
                                 .cornerRadius(15)
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
-                                NavigationLink(
-                                    destination: PenghasilanKotorView().environmentObject(registerData),
-                                    isActive: $nextViewActive,
-                                    label: {
-                                        Button(action: {
-                                            
-                                            self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
-                                            self.registerData.kodePos = self.kodePos
-                                            
-                                            self.nextViewActive = true
-                                            
-                                        }, label: {
-                                            Text("Berikutnya")
-                                                .foregroundColor(.white)
-                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                if (editMode == .inactive) {
+                                    NavigationLink(
+                                        destination: PenghasilanKotorView().environmentObject(registerData),
+                                        isActive: $nextViewActive,
+                                        label: {
+                                            Button(action: {
+                                                
+                                                self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
+                                                self.registerData.kodePos = self.kodePos
+                                                
+                                                self.nextViewActive = true
+                                                
+                                            }, label: {
+                                                Text("Berikutnya")
+                                                    .foregroundColor(.white)
+                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+                                            })
                                         })
-                                    })
-                                    .disabled(isValid())
-                                    .frame(height: 50)
-                                    .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
+                                        .disabled(isValid())
+                                        .frame(height: 50)
+                                        .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                        .cornerRadius(12)
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 25)
+                                } else {
+                                    NavigationLink(
+                                        destination: VerificationRegisterDataView().environmentObject(registerData),
+                                        isActive: $verificationViewActive,
+                                        label: {
+                                            Button(action: {
+                                                
+                                                self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
+                                                self.registerData.kodePos = self.kodePos
+                                                
+                                                self.verificationViewActive = true
+                                                
+                                            }, label: {
+                                                Text("Simpan")
+                                                    .foregroundColor(.white)
+                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+                                            })
+                                        })
+                                        .disabled(isValid())
+                                        .frame(height: 50)
+                                        .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                        .cornerRadius(12)
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 25)
+                                }
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -192,6 +223,10 @@ struct InformasiPerusahaanView: View {
         }
         .popup(isPresented: $showingModalBidang, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloaterBidangUsaha()
+        }
+        .onAppear() {
+            self.noTlpPerusahaan = self.registerData.noTeleponPerusahaan
+            self.kodePos = self.registerData.kodePos
         }
     }
     

@@ -330,7 +330,9 @@ struct VerificationRegisterDataView: View {
                                     .background(Color.gray.opacity(0.1))
                                     .cornerRadius(15)
                                     .padding(.horizontal, 20)
-                                    .padding(.bottom, 20)
+                                    
+                                    dynamicForm
+                                    
                                 }
                             }
                             Spacer()
@@ -389,6 +391,529 @@ struct VerificationRegisterDataView: View {
                 dismissButton: .default(Text("Oke")))
         }
         
+    }
+    
+    var dynamicForm: some View {
+        VStack(alignment: .leading) {
+            
+            // MARK : Pekerjaan BUMN
+            if [6 ,9].contains(registerData.pekerjaanId) {
+                
+                if registerData.pekerjaanId == 6 {
+                    Text("Jabatan")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 20)
+                    
+                    HStack {
+                        TextField("Jabatan", text: $registerData.jabatanProfesi)
+                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        
+                        Divider()
+                            .frame(height: 30)
+                        
+                        NavigationLink(destination: FormJabatanProfesiView(editMode: .active).environmentObject(registerData)) {
+                            Text("Edit").foregroundColor(.blue)
+                        }
+                    }
+                    .frame(height: 20)
+                    .font(.subheadline)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(15)
+                    .padding(.horizontal, 20)
+                }
+                
+                // MARK : Pekerjaan Wiraswasta
+                if registerData.pekerjaanId == 9 {
+                    Text("Industri")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 20)
+                    
+                    HStack {
+                        TextField("Industri", text: $registerData.industriTempatBekerja)
+                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        
+                        Divider()
+                            .frame(height: 30)
+                        
+                        NavigationLink(destination: FormIndustriTempatBekerjaView(editMode: .active).environmentObject(registerData)) {
+                            Text("Edit").foregroundColor(.blue)
+                        }
+                    }
+                    .frame(height: 20)
+                    .font(.subheadline)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(15)
+                    .padding(.horizontal, 20)
+                }
+            } else {
+            
+                // MARK : Pekerjaan Wiraswasta
+                Text("Penghasilan Kotor")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                
+                HStack {
+                    TextField("Penghasilan Kotor", text: $registerData.penghasilanKotor)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    
+                    Divider()
+                        .frame(height: 30)
+                    
+                    NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
+                        Text("Edit").foregroundColor(.blue)
+                    }
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Text("Sumber Pendapatan Lainnya")
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, 20)
+            
+            HStack {
+                TextField("Sumber Pendapatan Lainnya", text: $registerData.sumberPendapatanLainnya)
+                    .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                
+                Divider()
+                    .frame(height: 30)
+                
+                NavigationLink(destination: SumberPendapatanLainnyaView(editMode: .active).environmentObject(registerData)) {
+                    Text("Edit").foregroundColor(.blue)
+                }
+            }
+            .frame(height: 20)
+            .font(.subheadline)
+            .padding()
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(15)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 10)
+            
+            // MARK : Pekerjaan Wiraswasta
+            if [10, 11, 23].contains(registerData.pekerjaanId) {
+                informasiPenyandangDanaFields
+            } else {
+                informasiPerusahaanFields
+            }
+            
+            informasiKeluargaFields
+        }
+    }
+    
+    var informasiPenyandangDanaFields: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Informasi Penyandang Dana")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                
+                Divider()
+                    .frame(height: 30)
+                
+                NavigationLink(destination: FormSumberPenyandandDana2View(editMode: .active).environmentObject(registerData)) {
+                    Text("Edit").foregroundColor(.blue)
+                }
+            }
+            .frame(height: 20)
+            .font(.subheadline)
+            .padding()
+            .cornerRadius(15)
+            
+            Group {
+                Text("Nama Penyandang Dana")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Nama Penyandang Dana", text: $registerData.namaPenyandangDana)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Hubungan Dengan Anda")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Hubungan Dengan Anda", text: $registerData.hubunganPenyandangDana)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Profesi Penyandang Dana")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Profesi Penyandang Dana", text: $registerData.profesiPenyandangDana)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+        }
+        .padding(.bottom, 5)
+    }
+    
+    var informasiPerusahaanFields: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Informasi Perusahaan")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                
+                Divider()
+                    .frame(height: 30)
+                
+                NavigationLink(destination: InformasiPerusahaanView(editMode: .active).environmentObject(registerData)) {
+                    Text("Edit").foregroundColor(.blue)
+                }
+            }
+            .frame(height: 20)
+            .font(.subheadline)
+            .padding()
+            .cornerRadius(15)
+            
+            Group {
+                Text("Nama Perusahaan")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Nama Perusahaan", text: $registerData.namaPerusahaan)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Bidang Usaha")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Bidang Usaha", text: $registerData.bidangUsaha)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Alamat Perusahaan")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Alamat Perusahaan", text: $registerData.alamatPerusahaan)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Kode Pos")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Kode Pos", text: $registerData.kodePos)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Kecamatan")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Kecamatan", text: $registerData.kecamatan)
+                        .disabled(true)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Kelurahan")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Kelurahan", text: $registerData.kelurahan)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Nomor Telepon")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Nomor Telepon", text: $registerData.noTeleponPerusahaan)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+        }
+        .padding(.bottom, 5)
+    }
+    
+    var informasiKeluargaFields: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Keluarga Terdekat Anda")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                
+                Divider()
+                    .frame(height: 30)
+                
+                NavigationLink(destination: KeluargaTerdekat(editMode: .active).environmentObject(registerData)) {
+                    Text("Edit").foregroundColor(.blue)
+                }
+            }
+            .frame(height: 20)
+            .font(.subheadline)
+            .padding()
+            .cornerRadius(15)
+            
+            Group {
+                Text("Hubungan Dengan Anda")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Hubungan Dengan Anda", text: $registerData.hubunganKekerabatanKeluarga)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Nama")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Nama", text: $registerData.namaKeluarga)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Alamat")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Alamat Perusahaan", text: $registerData.alamatKeluarga)
+                        .disabled(true)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Kode Pos")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Kode Pos", text: $registerData.kodePosKeluarga)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Kecamatan")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Kecamatan", text: $registerData.kecamatanKeluarga)
+                        .disabled(true)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Kelurahan")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Kelurahan", text: $registerData.kelurahanKeluarga)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Nomor Telepon")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Nomor Telepon", text: $registerData.noTlpKeluarga)
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+        }
+        .padding(.bottom, 20)
     }
     
     private func retrieveImage(forKey key: String) -> UIImage? {
