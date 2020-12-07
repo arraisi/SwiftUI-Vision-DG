@@ -27,19 +27,18 @@ extension PasswordViewModel {
             switch result {
             case .success(let response):
                 print(response.code)
-                
                 DispatchQueue.main.async {
                     self.code = response.code
                     self.message = response.message
+                    completion(true)
                 }
-                completion(true)
                 
             case .failure(let error):
                 print("ERROR-->")
                 DispatchQueue.main.async {
                     self.isLoading = false
+                    completion(false)
                 }
-                completion(false)
             }
         }
     }
