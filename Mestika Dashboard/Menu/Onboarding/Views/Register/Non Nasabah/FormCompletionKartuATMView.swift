@@ -17,6 +17,7 @@ struct FormCompletionKartuATMView: View {
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var location : String = ""
+    @State var kodePos : String = ""
     @State var showingAddressModal = false
     @State var showingSuggestionNameModal = false
     @State var goToSuccessPage = false
@@ -56,7 +57,7 @@ struct FormCompletionKartuATMView: View {
                     AppBarLogo(light: false, onCancel:{})
 //                        .padding(.top, 50)
                     
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
                         Text("LENGKAPI DATA")
                             .multilineTextAlignment(.center)
                             .font(.custom("Montserrat-Bold", size: 26))
@@ -69,6 +70,7 @@ struct FormCompletionKartuATMView: View {
                         
                         Button(action: {
                             self.postData()
+                            self.atmData.atmAddresspostalCodeInput = self.kodePos
                         }, label: {
                             Text("Submit Data")
                                 .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
@@ -84,7 +86,7 @@ struct FormCompletionKartuATMView: View {
                         .padding(.bottom, 30)
                     }
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 150)
                 
                 NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
                     EmptyView()
@@ -236,11 +238,29 @@ struct FormCompletionKartuATMView: View {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddresspostalCodeInput, label: "", placeHolder: "Kode Pos", disabled:atmData.addressOptionId != 4) { (change) in
-                
-            } onCommit: {
-                
-            }
+//            LabelTextField(value: $atmData.atmAddresspostalCodeInput, label: "", placeHolder: "Kode Pos", disabled:atmData.addressOptionId != 4) { (change) in
+//
+//            } onCommit: {
+//
+//            }
+            
+                HStack {
+                    TextField("Kode Pos", text: $kodePos) {change in
+                    } onCommit: {
+                        self.atmData.atmAddresspostalCodeInput = self.kodePos
+                    }
+                    .onReceive(kodePos.publisher.collect()) {
+                        self.kodePos = String($0.prefix(5))
+                    }
+                    .keyboardType(.numberPad)
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                    .disabled(atmData.addressOptionId != 4)
+                }
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            
         }
         .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
     }
@@ -386,6 +406,7 @@ struct FormCompletionKartuATMView: View {
                     print(cities[index])
                     atmData.atmAddressInput = cities[index].address
                     atmData.atmAddresspostalCodeInput = cities[index].kodePos
+                    self.kodePos = cities[index].kodePos
                     atmData.atmAddresskecamatanInput = cities[index].kecamatan
                     atmData.atmAddresskelurahanInput = cities[index].kelurahan
                     atmData.atmAddressrtRwInput = cities[index].rtRw
@@ -407,7 +428,7 @@ struct FormCompletionKartuATMView: View {
     
     func isValid() -> Bool {
         if atmData.addressOptionId == 4 {
-            return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).isEmpty && !atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).isEmpty
+            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 && self.kodePos.trimmingCharacters(in: .whitespaces).count > 0
         } else {
             return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty
         }
@@ -435,6 +456,7 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressrtRwInput = registerData.rtrw
 //            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:
+            self.kodePos = ""
             atmData.atmAddressInput = ""
             atmData.atmAddresspostalCodeInput = ""
             atmData.atmAddresskecamatanInput = ""

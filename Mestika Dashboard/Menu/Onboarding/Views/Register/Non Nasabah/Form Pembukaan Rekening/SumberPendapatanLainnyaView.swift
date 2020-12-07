@@ -201,51 +201,24 @@ struct SumberPendapatanLainnyaView: View {
                                     selection: $selection,
                                     label: {EmptyView()})
                                 
-                                NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData),
-                                       tag: "verificationRegister",
-                                       selection: $selection,
-                                       label: {EmptyView()})
-                                
                                 // Button
-                                if (editMode == .inactive) {
-                                
-                                    Button(action: {
-                                        registerData.sumberPendapatanLainnyaId = self.selectedId
-                                        self.selection = "keluargaTerdekat"
-                                    }, label:{
-                                        
-                                        Text("Berikutnya")
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    })
-                                    .disabled(isValid())
-                                    .frame(height: 50)
-                                    .background(self.selectedId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
+                                Button(action: {
+                                    registerData.sumberPendapatanLainnyaId = self.selectedId
+                                    self.selection = "keluargaTerdekat"
+                                }, label:{
                                     
-                                } else {
-                                    Button(action: {
-                                        registerData.sumberPendapatanLainnyaId = self.selectedId
-                                        self.selection = "verificationRegister"
-                                    }, label:{
-                                        
-                                        Text("Simpan")
-                                            .foregroundColor(.white)
-                                            .fontWeight(.bold)
-                                            .font(.system(size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                        
-                                    })
-                                    .frame(height: 50)
-                                    .background(Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 25)
-                                }
+                                    Text("Berikutnya")
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                    
+                                })
+                                .frame(height: 50)
+                                .background(isDisableButtonBerikutnya() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 25)
+                                .disabled(isDisableButtonBerikutnya())
                                 
                             }
                             .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -268,6 +241,13 @@ struct SumberPendapatanLainnyaView: View {
         //            UIApplication.shared.endEditing()
         //        }
         
+    }
+    
+    private func isDisableButtonBerikutnya() -> Bool {
+        if self.selectedId == 2 || (self.selectedId == 1 && registerData.sumberPendapatanLainnya != "") {
+            return false
+        }
+        return true
     }
 }
 

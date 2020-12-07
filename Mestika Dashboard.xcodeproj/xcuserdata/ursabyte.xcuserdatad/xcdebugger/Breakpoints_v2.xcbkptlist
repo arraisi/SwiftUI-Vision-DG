@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6DD8D5B1-A158-4803-B01C-64A00C321652"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8193BFEA-BEB8-4F6E-B90E-1C05F86DEAFC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mestika Dashboard/Menu/Onboarding/View Models/ScheduleInterviewViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "getAllSchedule(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8193BFEA-BEB8-4F6E-B90E-1C05F86DEAFC - e2a4a740c2844776"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.Result&lt;Swift.Optional&lt;Swift.Array&lt;Mestika_Dashboard.ScheduleInterviewResponse&gt;&gt;, Mestika_Dashboard.NetworkError&gt;) -&gt; () in Mestika_Dashboard.ScheduleInterviewSummaryViewModel.getAllSchedule(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Mestika Dashboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ursabyte/Documents/Jobs/Workspace%20XCode/dashboard-mestika-ios/Mestika%20Dashboard/Menu/Onboarding/View%20Models/ScheduleInterviewViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "82">
+               </Location>
+               <Location
+                  uuid = "8193BFEA-BEB8-4F6E-B90E-1C05F86DEAFC - 5dc7bca73e6f8379"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #1 (Mestika_Dashboard.ScheduleInterviewResponse) -&gt; Mestika_Dashboard.ScheduleInterviewViewModel in closure #1 () -&gt; () in closure #2 (Swift.Result&lt;Swift.Optional&lt;Swift.Array&lt;Mestika_Dashboard.ScheduleInterviewResponse&gt;&gt;, Mestika_Dashboard.NetworkError&gt;) -&gt; () in Mestika_Dashboard.ScheduleInterviewSummaryViewModel.getAllSchedule(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Mestika Dashboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ursabyte/Documents/Jobs/Workspace%20XCode/dashboard-mestika-ios/Mestika%20Dashboard/Menu/Onboarding/View%20Models/ScheduleInterviewViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

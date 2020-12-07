@@ -12,7 +12,6 @@ struct FormDetailKartuATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var appState: AppState
     
     @ObservedObject private var productVM = ATMProductViewModel()

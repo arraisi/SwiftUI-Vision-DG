@@ -11,8 +11,21 @@ struct VerificationAddressView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @State var alamat: String = ""
+    @State var kodePos : String = ""
+    @State var isShowNextView : Bool = false
     
     let verificationAddress: [MasterModel] = load("verificationAddress.json")
+    
+    var disableForm: Bool {
+        
+        if (registerData.verificationAddressId != 1) {
+            if (registerData.alamatKtpFromNik.isEmpty || registerData.rtFromNik.isEmpty || registerData.kelurahanFromNik.isEmpty || registerData.kecamatanFromNik.isEmpty || kodePos.isEmpty) {
+                return true
+            }
+        }
+        
+        return false
+    }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
@@ -20,7 +33,7 @@ struct VerificationAddressView: View {
             Image("bg_blue")
                 .resizable()
             
-            VStack {
+            VStack(spacing: 0) {
                 ScrollView {
                     VStack {
                         Text("PASTIKAN INFORMASI ANDA BENAR")
@@ -91,13 +104,40 @@ struct VerificationAddressView: View {
                                     })
                                         .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                    }, onCommit: {
-                                        print("on commit")
-                                    })
-                                        .padding(.horizontal, 20)
-                                        .padding(.bottom, 30)
+//                                    LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
+//                                        print("on edit")
+//                                    }, onCommit: {
+//                                        print("on commit")
+//                                    })
+//                                        .padding(.horizontal, 20)
+//                                        .padding(.bottom, 30)
+                                    
+                                    VStack(alignment: .leading) {
+                                        
+                                        Text("Kode Pos")
+                                            .font(Font.system(size: 10))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color(hex: "#707070"))
+                                        
+                                        HStack {
+                                            TextField("Kode Pos", text: $kodePos) {change in
+                                            } onCommit: {
+                                                self.registerData.kodePosKeluarga = self.kodePos
+                                            }
+                                            .onReceive(kodePos.publisher.collect()) {
+                                                self.kodePos = String($0.prefix(5))
+                                            }
+                                            .keyboardType(.numberPad)
+                                            .font(Font.system(size: 14))
+                                            .frame(height: 36)
+                                        }
+                                        .padding(.horizontal)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                        
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.bottom, 30)
                                 }
                             }
                         
@@ -109,28 +149,41 @@ struct VerificationAddressView: View {
                     }
                     .padding(.horizontal, 30)
                     .padding(.top, 70)
+                    .padding(.bottom, 10)
                 }
                 
                 VStack {
-                    NavigationLink(destination: PasswordView().environmentObject(registerData)) {
+                    NavigationLink(destination: PasswordView().environmentObject(registerData), isActive: self.$isShowNextView) {EmptyView()}
+                    
+                    
+                    Button(action: {
+                        self.registerData.kodePosKeluarga = self.kodePos
+                        self.isShowNextView = true
+                    }, label: {
                         Text("Submit Data")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    }
-                    .background(Color(hex: "#2334D0"))
+                    })
+                    .disabled(disableForm)
+                    .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 100)
                     .padding(.top, 10)
                     .padding(.bottom, 10)
+                    
                 }
                 .background(Color.white)
             }
         }
+        .KeyboardAwarePadding()
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
     }
 }
 
