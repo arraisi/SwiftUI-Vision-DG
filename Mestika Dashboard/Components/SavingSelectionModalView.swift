@@ -19,7 +19,7 @@ struct SavingSelectionModalView: View {
             Group {
                 Image(data.imageName)
                     .resizable()
-                    .frame(height: 200)
+                    .frame(height: 130)
                 
                 Text("Anda Telah memilih Tabungan")
                     .font(.caption)
@@ -28,7 +28,7 @@ struct SavingSelectionModalView: View {
                     .foregroundColor(Color(hex: "#5A6876"))
                 
                 Text(data.tabunganName)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title3)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(hex: "#232175"))
                     .padding(.horizontal, 15)
@@ -44,21 +44,21 @@ struct SavingSelectionModalView: View {
                     ForEach(data.description, id: \.id) { card in
                         HStack(alignment: .top) {
                             Text(card.id)
-                                .font(.subheadline)
+                                .font(.caption)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
                                 .frame(width: 25, height: 18)
                             Text(card.desc)
-                                .font(.caption)
+                                .font(.caption2)
                                 .foregroundColor(Color(hex: "#5A6876"))
                                 .frame(minHeight: 18)
                             Spacer()
                         }
-                        .padding(.top, 2)
+                        .padding(.top, 1)
                         .padding(.horizontal, 15)
                     }
                 }
-                .frame(minHeight: 200)
+                .frame(minHeight: 130)
             }
             
             NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
@@ -71,14 +71,13 @@ struct SavingSelectionModalView: View {
             }) {
                 Text("Pilih Tabungan Ini")
                     .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.horizontal, 20)
-            .padding(.bottom, 10)
-            .padding(.top, 5)
+            .padding(.top, 15)
             
             Button(action: {
                 self.isShowModal = false
@@ -86,7 +85,7 @@ struct SavingSelectionModalView: View {
                 Text("Pilih Tabungan lain")
                     .foregroundColor(Color(hex: "#5A6876"))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 13))
+                    .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
             .cornerRadius(12)
