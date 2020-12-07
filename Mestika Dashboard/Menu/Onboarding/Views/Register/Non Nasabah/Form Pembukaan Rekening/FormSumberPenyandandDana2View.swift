@@ -15,7 +15,7 @@ struct FormSumberPenyandandDana2View: View {
     
     // View variables
     let sumberPenyandangDana: [MasterModel] = load("sumberPenyandangDana.json")
-    let hubunganOptions = ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"]
+    let hubunganOptions = ["Ayah", "Ibu", "Kakak", "Adik", "Saudara", "Teman"]
     let profesiPenyandandDanaOptions = ["Pegawai Swasta", "Pegawai Negeri", "Pegawai BUMN/BUMD", "Wirausaha"]
     @State var hubunganId : Int = 0
     @State var profesiPenyandangDanaId : Int = 0
