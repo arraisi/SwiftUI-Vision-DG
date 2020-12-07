@@ -12,7 +12,6 @@ struct FormDetailKartuATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var appState: AppState
     
     @ObservedObject private var productVM = ATMProductViewModel()
@@ -61,42 +60,42 @@ struct FormDetailKartuATMView: View {
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(10)
                         }
-                        HStack{
-                            Text("No. Kartu")
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .foregroundColor(Color(hex: "#707070"))
-                            
-                            Spacer()
-                            
-                            TextField("No. Kartu", text: Binding.constant("")) { (isChanged) in
-                                
-                            } onCommit: {
-                                
-                            }
-                            .font(.custom("Montserrat-Regular", size: 12))
-                            .frame(width: 200, height: 36)
-                            .padding(.horizontal)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(10)
-                        }
-                        HStack{
-                            Text("Expired")
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .foregroundColor(Color(hex: "#707070"))
-                            
-                            Spacer()
-                            
-                            TextField("Expired", text: Binding.constant("")) { (isChanged) in
-                                
-                            } onCommit: {
-                                
-                            }
-                            .font(.custom("Montserrat-Regular", size: 12))
-                            .frame(width: 200, height: 36)
-                            .padding(.horizontal)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(10)
-                        }
+//                        HStack{
+//                            Text("No. Kartu")
+//                                .font(.custom("Montserrat-Regular", size: 12))
+//                                .foregroundColor(Color(hex: "#707070"))
+//
+//                            Spacer()
+//
+//                            TextField("No. Kartu", text: Binding.constant("")) { (isChanged) in
+//
+//                            } onCommit: {
+//
+//                            }
+//                            .font(.custom("Montserrat-Regular", size: 12))
+//                            .frame(width: 200, height: 36)
+//                            .padding(.horizontal)
+//                            .background(Color.gray.opacity(0.1))
+//                            .cornerRadius(10)
+//                        }
+//                        HStack{
+//                            Text("Expired")
+//                                .font(.custom("Montserrat-Regular", size: 12))
+//                                .foregroundColor(Color(hex: "#707070"))
+//
+//                            Spacer()
+//
+//                            TextField("Expired", text: Binding.constant("")) { (isChanged) in
+//
+//                            } onCommit: {
+//
+//                            }
+//                            .font(.custom("Montserrat-Regular", size: 12))
+//                            .frame(width: 200, height: 36)
+//                            .padding(.horizontal)
+//                            .background(Color.gray.opacity(0.1))
+//                            .cornerRadius(10)
+//                        }
                     }
                     
                     HStack {

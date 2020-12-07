@@ -13,6 +13,9 @@ struct FormSumberPenyandandDana2View: View {
      */
     @EnvironmentObject var registerData: RegistrasiModel
     
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    
     // View variables
     let sumberPenyandangDana: [MasterModel] = load("sumberPenyandangDana.json")
     let hubunganOptions = ["Ayah", "Ibu", "Kakak", "Adik", "Saudara", "Teman"]
@@ -99,20 +102,37 @@ struct FormSumberPenyandandDana2View: View {
                                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                         
                                         // Button
-                                        NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
-                                            
-                                            Text("Berikutnya")
-                                                .foregroundColor(.white)
-                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                                .frame(maxWidth: .infinity, maxHeight: 50)
-                                            
-                                        })
-                                        .disabled(isValid())
-                                        .frame(height: 50)
-                                        .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                        .cornerRadius(12)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 25)
+                                        if (editMode == .inactive) {
+                                            NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
+                                                
+                                                Text("Berikutnya")
+                                                    .foregroundColor(.white)
+                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                                    .frame(maxWidth: .infinity, maxHeight: 50)
+                                                
+                                            })
+                                            .disabled(isValid())
+                                            .frame(height: 50)
+                                            .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .cornerRadius(12)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 25)
+                                        } else {
+                                            NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                                                
+                                                Text("Simpan")
+                                                    .foregroundColor(.white)
+                                                    .fontWeight(.bold)
+                                                    .font(.system(size: 14))
+                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+                                                
+                                            }
+                                            .frame(height: 50)
+                                            .background(Color(hex: "#2334D0"))
+                                            .cornerRadius(12)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 25)
+                                        }
                                         
                                     }
                                     .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))

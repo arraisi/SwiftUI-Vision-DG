@@ -81,4 +81,8 @@ extension String {
             return self
         }
     }
+    
+    func isNotEmpty() -> Bool {
+        return !self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
 }

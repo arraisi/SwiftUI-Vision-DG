@@ -12,12 +12,16 @@ struct KeluargaTerdekat: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    
     @State var selectionID : Int = 0
     @State var location : String = ""
     @State var showingModal = false
     @State var noTelepon: String = ""
     @State var kodePos : String = ""
     @State var nextViewActive: Bool = false
+    @State var verificationViewActive: Bool = false
     
     let hubunganKekerabatanOptions = ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"]
     
@@ -109,31 +113,57 @@ struct KeluargaTerdekat: View {
                                         .cornerRadius(15)
                                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                         
-                                        NavigationLink(
-                                            destination: VerificationAddressView().environmentObject(registerData),
-                                            isActive: $nextViewActive,
-                                            label: {
-                                                Button(action: {
-                                                    
-                                                    self.registerData.kodePosKeluarga = self.kodePos
-                                                    self.registerData.noTeleponPerusahaan = self.noTelepon
-                                                    
-                                                    self.nextViewActive = true
-                                                    
-                                                }, label: {
-                                                    Text("Berikutnya")
-                                                        .foregroundColor(.white)
-                                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                        if (editMode == .inactive) {
+                                            NavigationLink(
+                                                destination: VerificationAddressView().environmentObject(registerData),
+                                                isActive: $nextViewActive,
+                                                label: {
+                                                    Button(action: {
+                                                        
+                                                        self.registerData.kodePosKeluarga = self.kodePos
+                                                        self.registerData.noTeleponPerusahaan = self.noTelepon
+                                                        
+                                                        self.nextViewActive = true
+                                                        
+                                                    }, label: {
+                                                        Text("Berikutnya")
+                                                            .foregroundColor(.white)
+                                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                                    })
                                                 })
-                                            })
-                                            .disabled(isValid())
-                                            .frame(height: 50)
-                                            .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                            .cornerRadius(12)
-                                            .padding(.horizontal, 20)
-                                            .padding(.vertical, 25)
-                                        
+                                                .disabled(isValid())
+                                                .frame(height: 50)
+                                                .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                                .cornerRadius(12)
+                                                .padding(.horizontal, 20)
+                                                .padding(.vertical, 25)
+                                        } else {
+                                            NavigationLink(
+                                                destination: VerificationRegisterDataView().environmentObject(registerData),
+                                                isActive: $verificationViewActive,
+                                                label: {
+                                                    Button(action: {
+                                                        
+                                                        self.registerData.kodePosKeluarga = self.kodePos
+                                                        self.registerData.noTeleponPerusahaan = self.noTelepon
+                                                        
+                                                        self.verificationViewActive = true
+                                                        
+                                                    }, label: {
+                                                        Text("Simpan")
+                                                            .foregroundColor(.white)
+                                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                                            .frame(maxWidth: .infinity, maxHeight: 40)
+                                                    })
+                                                })
+                                                .disabled(isValid())
+                                                .frame(height: 50)
+                                                .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                                .cornerRadius(12)
+                                                .padding(.horizontal, 20)
+                                                .padding(.vertical, 25)
+                                        }
                                         
                                     }
                                     .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
@@ -165,6 +195,10 @@ struct KeluargaTerdekat: View {
         }
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
+        }
+        .onAppear() {
+            self.kodePos = self.registerData.kodePosKeluarga
+            self.noTelepon = self.registerData.noTeleponPerusahaan 
         }
     }
     

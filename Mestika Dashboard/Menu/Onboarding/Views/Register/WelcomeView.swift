@@ -38,7 +38,6 @@ struct WelcomeView: View {
     @State var isShowModal = false
     @State var modalSelection = ""
     
-//    @State var isShowModal = true
     //    CREATED
     //    KYC_SCHEDULED
     //    KYC_WAITING
@@ -46,7 +45,7 @@ struct WelcomeView: View {
     //    ACTIVE
     //    NOT_APPROVED
 //    @State var modalSelection = "CREATED"
-    
+//    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -200,7 +199,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFirstLoginViewActive){
                 Text("Halaman Submit Jadwal Videocall")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))

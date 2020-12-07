@@ -11,6 +11,9 @@ struct PenghasilanKotorView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    
     let penghasilanKotor: [MasterModel] = load("penghasilanKotor.json")
     
     var body: some View {
@@ -106,20 +109,37 @@ struct PenghasilanKotorView: View {
                                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                         
                                         // Button
-                                        NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
-                                            
-                                            Text("Berikutnya")
-                                                .foregroundColor(.white)
-                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                                .frame(maxWidth: .infinity, maxHeight: 40)
-                                            
-                                        })
-                                        .disabled(registerData.penghasilanKotorId == 0)
-                                        .frame(height: 50)
-                                        .background(registerData.penghasilanKotorId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                        .cornerRadius(12)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 20)
+                                        if (editMode == .inactive) {
+                                            NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
+                                                
+                                                Text("Berikutnya")
+                                                    .foregroundColor(.white)
+                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+                                                
+                                            })
+                                            .disabled(registerData.penghasilanKotorId == 0)
+                                            .frame(height: 50)
+                                            .background(registerData.penghasilanKotorId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .cornerRadius(12)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 20)
+                                        } else {
+                                            NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                                                
+                                                Text("Simpan")
+                                                    .foregroundColor(.white)
+                                                    .fontWeight(.bold)
+                                                    .font(.system(size: 14))
+                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+                                                
+                                            }
+                                            .frame(height: 50)
+                                            .background(Color(hex: "#2334D0"))
+                                            .cornerRadius(12)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 25)
+                                        }
                                     }
                                     .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                                     .cornerRadius(25.0)
