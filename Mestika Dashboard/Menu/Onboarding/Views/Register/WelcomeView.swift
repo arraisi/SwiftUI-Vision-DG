@@ -485,7 +485,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive){
+            NavigationLink(destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isNoAtmOrRekViewActive){
                 Text("Ya, saya nasabah Bank Mestika")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))

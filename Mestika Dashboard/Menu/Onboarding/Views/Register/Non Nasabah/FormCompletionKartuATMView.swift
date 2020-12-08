@@ -45,56 +45,56 @@ struct FormCompletionKartuATMView: View {
     @State var suggestions:[String] = []
     
     var body: some View {
-        LoadingView(isShowing: $isLoading) {
+        ZStack(alignment: .top) {
             
-            ZStack(alignment: .top) {
+            Color(hex: "#232175")
+                .edgesIgnoringSafeArea(.all)
+            
+            ScrollView(showsIndicators: false) {
                 VStack {
-                    Image("bg_blue")
-                        .resizable()
-                        .scaledToFill()
-                }
-                VStack {
-                    AppBarLogo(light: false, onCancel:{})
-//                        .padding(.top, 50)
+                    Text("LENGKAPI DATA")
+                        .multilineTextAlignment(.center)
+                        .font(.custom("Montserrat-Bold", size: 26))
+                        .foregroundColor(.white)
+                        .padding(EdgeInsets(top: 120, leading: 15, bottom: 0, trailing: 15))
                     
-                    ScrollView(.vertical, showsIndicators: false) {
-                        Text("LENGKAPI DATA")
-                            .multilineTextAlignment(.center)
-                            .font(.custom("Montserrat-Bold", size: 26))
-                            .foregroundColor(.white)
-                            .padding(EdgeInsets(top: 20, leading: 15, bottom: 0, trailing: 15))
-                        
-                        nameCard
-                        addressCard
-                        referalCodeCard
-                        
-                        Button(action: {
-                            self.postData()
-                            self.atmData.atmAddresspostalCodeInput = self.kodePos
-                        }, label: {
-                            Text("Submit Data")
-                                .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        })
-                        .frame(width: UIScreen.main.bounds.width - 40, height: 50)
-                        .background(Color(hex: !isValid() ? "#CBD1D9" : "#FFFFFF"))
-                        .disabled(!isValid())
-                        .cornerRadius(15)
-                        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
-                        .padding(.bottom, 30)
-                    }
+                    nameCard
+                    addressCard
+                    referalCodeCard
+                    
+                    Button(action: {
+                        self.postData()
+                        self.atmData.atmAddresspostalCodeInput = self.kodePos
+                    }, label: {
+                        Text("Submit Data")
+                            .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
+                            .fontWeight(.bold)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    })
+                    .frame(width: UIScreen.main.bounds.width - 40, height: 50)
+                    .background(Color(hex: !isValid() ? "#CBD1D9" : "#FFFFFF"))
+                    .disabled(!isValid())
+                    .cornerRadius(15)
+                    .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+                    .padding(.bottom, 30)
                 }
-                .padding(.bottom, 150)
-                
-                NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
-                    EmptyView()
-                }
+                .padding(.bottom, 35)
+            }
+            
+            NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
+                EmptyView()
+            }
+            
+            if self.showingAddressModal || self.showingSuggestionNameModal {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showingAddressModal = false
+                } })
             }
         }
         .edgesIgnoringSafeArea(.top)
-        .navigationBarHidden(true)
+        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -313,8 +313,6 @@ struct FormCompletionKartuATMView: View {
     }
     
     // MARK: -Fuction for Create Bottom Floater (Modal)
-    
-    
     func createBottomSuggestionNameFloater() -> some View {
         VStack {
             HStack {
