@@ -132,13 +132,13 @@ struct WelcomeView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("Welcome to")
-                    .font(.custom("Montserrat-Regular", size: 15))
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(.white)
                 
                 Image("logo_mestika")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 40)
+                    .frame(height: 30)
                     .padding(.top, -2)
                 
             }
@@ -485,7 +485,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive){
+            NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive){
                 Text("Ya, saya nasabah Bank Mestika")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))

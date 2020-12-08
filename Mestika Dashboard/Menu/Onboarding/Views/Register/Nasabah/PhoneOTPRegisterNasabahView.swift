@@ -36,15 +36,14 @@ struct PhoneOTPRegisterNasabahView: View {
     @State var tryCount = 0
     
     /* Timer */
-    @State private var timeRemaining = 30
+    @State private var timeRemainingRsnd = 30
     @State private var timeRemainingBtn = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     /* Boolean for Show Modal */
-    @State var showingOtpIncorect = false
-    @State var showingOtpInvalid = false
-    @State private var showingAlert: Bool = false
-    @State private var showingAlertError: Bool = false
+    @State private var isShowModal = false
+    @State private var isShowAlert: Bool = false
+    @State private var modalSelection = ""
     
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
@@ -68,10 +67,8 @@ struct PhoneOTPRegisterNasabahView: View {
             
             VStack {
                 
-                AppBarLogo(light: false) {
-                    
-                }
-                
+                AppBarLogo(light: false, onCancel: {})
+
                 if (self.isLoading) {
                     LinearWaitingIndicator()
                         .animated(true)
@@ -81,7 +78,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("Kami telah mengirimkan OTP ke No. \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
+                    Text("Kami telah mengirimkan OTP ke No. +62\(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
@@ -109,7 +106,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             getOTP()
                             
                             self.resetField()
-                            self.timeRemaining = 60
+                            self.timeRemainingRsnd = 30
                         }) {
                             Text("Resend OTP")
                                 .font(.custom("Montserrat-SemiBold", size: 10))
@@ -118,12 +115,12 @@ struct PhoneOTPRegisterNasabahView: View {
                         .disabled(isResendOtpDisabled)
                         
                         Button(action: {
-                                self.isOtpValid = true
-                            }, label: {
-                                Text("(00:\(String(format: "%02d", timeRemaining)))")
-                                    .font(.custom("Montserrat-Regular", size: 10))
-                            })
-                            .disabled(true) // false by pass to next page
+                            self.isOtpValid = true
+                        }, label: {
+                            Text("(00:\(String(format: "%02d", timeRemainingRsnd)))")
+                                .font(.custom("Montserrat-Regular", size: 10))
+                        })
+                        .disabled(true) // false by pass to next page
                     }
                     .padding(.top, 5)
                     
@@ -148,7 +145,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             validateOTP()
                         }) {
                             if (self.isBtnValidationDisabled) {
-                                Text("(00:\(String(format: "%02d", timeRemainingBtn)))")
+                                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -175,16 +172,11 @@ struct PhoneOTPRegisterNasabahView: View {
                 
             }
             
-            if self.showingOtpIncorect {
-                ModalOverlay(tapAction: { withAnimation { self.showingOtpIncorect = false } })
-            }
-            
-            if self.showingOtpInvalid {
-                ModalOverlay(tapAction: { withAnimation { self.showingOtpInvalid = false } })
+            if self.isShowModal {
+                ModalOverlay(tapAction: { withAnimation { } })
             }
         }
         .edgesIgnoringSafeArea(.all)
-        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -195,11 +187,11 @@ struct PhoneOTPRegisterNasabahView: View {
             }
         })
         .onReceive(timer) { time in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
+            if self.timeRemainingRsnd > 0 {
+                self.timeRemainingRsnd -= 1
             }
             
-            if self.timeRemaining < 1 {
+            if self.timeRemainingRsnd < 1 {
                 isResendOtpDisabled = false
             } else {
                 isResendOtpDisabled = true
@@ -211,11 +203,9 @@ struct PhoneOTPRegisterNasabahView: View {
             
             if self.timeRemainingBtn < 1 {
                 isBtnValidationDisabled = false
-            } else {
-//                isBtnValidationDisabled = true
             }
         }
-        .alert(isPresented: $showingAlertError) {
+        .alert(isPresented: $isShowAlert) {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.messageResponse),
@@ -223,12 +213,13 @@ struct PhoneOTPRegisterNasabahView: View {
                     self.isLoading = false
                 }))
         }
-        .popup(isPresented: $showingOtpIncorect, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            bottomMessageOTPinCorrect()
-        }
-        .popup(isPresented: $showingOtpInvalid, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
-            bottomMessageOTPVailure()
-        }
+        .popup(
+            isPresented: $isShowModal,
+            type: .floater(),
+            position: .bottom,
+            animation: Animation.spring(),
+            closeOnTap: false,
+            closeOnTapOutside: false) { popupMenu() }
     }
     
     private var pinDots: some View {
@@ -299,8 +290,20 @@ struct PhoneOTPRegisterNasabahView: View {
         return modifiedString
     }
     
+    // MARK: Function Selection POPUP
+    func popupMenu() -> some View {
+        switch modalSelection {
+        case "OTPINCORRECT":
+            return AnyView(popupOTPInvalid())
+        case "OTPINCORRECT5TIME":
+            return AnyView(popupOTPIncorrect5Time())
+        default:
+            return AnyView(popupOTPInvalid())
+        }
+    }
+    
     // MARK: -BOTTOM MESSAGE OTP IN CORRECT
-    func bottomMessageOTPinCorrect() -> some View {
+    func popupOTPInvalid() -> some View {
         VStack(alignment: .leading) {
             Image(systemName: "xmark.octagon.fill")
                 .resizable()
@@ -320,7 +323,10 @@ struct PhoneOTPRegisterNasabahView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            Button(action: {}) {
+            Button(action: {
+                self.isLoading = false
+                self.isShowModal.toggle()
+            }) {
                 Text("Kembali")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -338,8 +344,8 @@ struct PhoneOTPRegisterNasabahView: View {
         .cornerRadius(20)
     }
     
-    // MARK: -BOTTOM MESSAGE OTP VAILURE 5 TIME
-    func bottomMessageOTPVailure() -> some View {
+    // MARK: -BOTTOM MESSAGE OTP INCORRECT 5 TIME
+    func popupOTPIncorrect5Time() -> some View {
         VStack(alignment: .leading) {
             Image(systemName: "xmark.octagon.fill")
                 .resizable()
@@ -360,7 +366,6 @@ struct PhoneOTPRegisterNasabahView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-                //                self.rootIsActive = true
                 self.appState.moveToWelcomeView = true
             }) {
                 Text("Kembali ke Halaman Utama")
@@ -386,7 +391,7 @@ struct PhoneOTPRegisterNasabahView: View {
             otpRequest: OtpRequest(
                 destination: self.registerData.noTelepon,
                 type: "hp",
-                trytime: 60
+                trytime: 1
             )
         ) { success in
             
@@ -397,18 +402,19 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 DispatchQueue.main.async {
                     //                    self.timeRemaining = self.otpVM.timeCounter
+                    self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
                 }
                 
-                self.showingAlertError = true
+                self.isShowAlert = true
             }
             
             if !success {
                 print("OTP RESP \(self.otpVM.statusMessage)")
                 
                 if (self.otpVM.statusMessage == "Server Error") {
-                    self.showingAlertError = true
+                    self.isShowAlert = true
                 }
                 
                 if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
@@ -416,23 +422,25 @@ struct PhoneOTPRegisterNasabahView: View {
                     print(self.otpVM.timeCounter)
                     
                     DispatchQueue.main.sync {
+                        self.isLoading = self.otpVM.isLoading
                         self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-                        self.timeRemaining = self.otpVM.timeCounter
+                        self.timeRemainingRsnd = self.otpVM.timeCounter
                     }
-                    self.showingAlertError = true
+                    self.isShowAlert = true
                 }
             }
         }
     }
     
     func validateOTP() {
+        self.isLoading = true
         self.otpVM.otpValidation(
             code: self.pin,
             destination: "+62" + self.registerData.noTelepon,
             reference: referenceCode,
-            timeCounter: self.otpVM.timeCounter,
+            timeCounter: self.timeRemainingBtn,
             tryCount: tryCount,
             type: "hp")
         { success in
@@ -440,33 +448,46 @@ struct PhoneOTPRegisterNasabahView: View {
             if success {
                 print("OTP VALID")
                 self.isOtpValid = true
+                self.isLoading = false
             }
             
             if !success {
                 print("OTP INVALID")
                 
+                self.isLoading = false
+                //                self.timeRemainingBtn = self.otpVM.timeRemaining
+                
                 if (self.tryCount == 1) {
                     self.timeRemainingBtn = 30
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal.toggle()
                 }
                 
                 if (self.tryCount == 2) {
                     self.timeRemainingBtn = 60
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal.toggle()
                 }
                 
                 if (self.tryCount == 3) {
                     self.timeRemainingBtn = 120
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal.toggle()
                 }
                 
                 if (self.tryCount == 4) {
                     self.timeRemainingBtn = 240
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal.toggle()
                 }
                 
-                if (self.tryCount == 5) {
+                if (self.tryCount >= 5) {
                     self.timeRemainingBtn = 480
+                    self.modalSelection = "OTPINCORRECT5TIME"
+                    self.isShowModal.toggle()
                 }
                 
                 self.isBtnValidationDisabled = true
-                showingOtpIncorect.toggle()
                 resetField()
             }
             

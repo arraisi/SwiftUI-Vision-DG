@@ -21,8 +21,8 @@ struct FormPilihJenisATMView: View {
     @State var isLoading : Bool = false
     
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 190
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 60 // 100 is amount padding left and right
+    let itemHeight:CGFloat = 160
     let itemGapHeight:CGFloat = 10
     
     var body: some View {

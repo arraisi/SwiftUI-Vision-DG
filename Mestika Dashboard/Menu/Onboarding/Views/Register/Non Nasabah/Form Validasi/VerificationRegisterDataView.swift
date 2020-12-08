@@ -536,7 +536,7 @@ struct VerificationRegisterDataView: View {
             .padding(.bottom, 10)
             
             // MARK : Pekerjaan Wiraswasta
-            if [10, 11, 23].contains(registerData.pekerjaanId) {
+            if [10, 11, 12].contains(registerData.pekerjaanId) {
                 informasiPenyandangDanaFields
             } else {
                 informasiPerusahaanFields

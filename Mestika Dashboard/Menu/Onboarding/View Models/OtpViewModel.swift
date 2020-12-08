@@ -15,6 +15,7 @@ class OtpViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var reference: String = ""
     @Published var timeCounter: Int = 30
+    @Published var timeRemaining: Int = 0
     @Published var code: String = ""
     @Published var statusMessage: String = ""
 }
@@ -56,6 +57,8 @@ extension OtpViewModel {
                     print(response.status?.message)
                     print(response.status?.code)
                     
+                    
+                    self.timeRemaining = response.timeCounter!
                     self.isLoading = false
                     completion(false)
                 }
