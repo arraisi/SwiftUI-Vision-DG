@@ -84,6 +84,7 @@ class RegistrasiModel: ObservableObject {
     @Published var kabupatenKotaFromNik: String = ""
     @Published var provinsiFromNik: String = ""
     @Published var bidangUsaha: String = ""
+    @Published var desainKartuATMImage: URL = URL(fileURLWithPath: "")
     
     static let shared = RegistrasiModel()
     

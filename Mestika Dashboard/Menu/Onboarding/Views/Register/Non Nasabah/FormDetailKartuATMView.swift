@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NavigationStack
+import SDWebImageSwiftUI
 
 struct FormDetailKartuATMView: View {
     
@@ -30,9 +31,23 @@ struct FormDetailKartuATMView: View {
                         Spacer()
                     }
                     
-                    Image("atm_bromo")
+//                    Image("atm_bromo")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+                    
+                    WebImage(url: registerData.desainKartuATMImage)
+                        .onSuccess { image, data, cacheType in
+                            // Success
+                            // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
+                        }
+                        .placeholder {
+                            Rectangle().foregroundColor(.gray).opacity(0.5)
+                        }
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .indicator(.activity) // Activity Indicator
+                        .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                        .scaledToFill()
+                        .cornerRadius(10)
                     
                     HStack {
                         Text("Selamat data kartu ATM baru Anda telah berhasil disimpan.")
@@ -54,6 +69,7 @@ struct FormDetailKartuATMView: View {
                             } onCommit: {
                                 
                             }
+                            .disabled(true)
                             .font(.custom("Montserrat-Regular", size: 12))
                             .frame(width: 200, height: 36)
                             .padding(.horizontal)
