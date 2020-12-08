@@ -199,7 +199,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change destination
-            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFirstLoginViewActive){
+            NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
                 Text("Halaman Submit Jadwal Videocall")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
@@ -240,7 +240,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData)){
                 Text("Halaman Submit Produk ATM")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
@@ -295,13 +295,12 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+            NavigationLink(destination: SuccessRegisterView().environmentObject(loginData)){
                 Text("Reschedule Jadwal")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
-            .isDetailLink(false)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
@@ -313,10 +312,6 @@ struct WelcomeView: View {
         .cornerRadius(20)
         .shadow(radius: 20)
     }
-    
-    
-    
-    
     
     // MARK: # Status : WAITING
     func PopupWaiting() -> some View {
@@ -340,25 +335,30 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
-                Text("Saya tunggu")
+            Button(action:{
+                self.isShowModal = false
+                self.modalSelection = ""
+            }, label: {
+                Text("Saya Tunggu")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
+            })
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 5)
             
             // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+            Button(action:{
+                self.isShowModal = false
+                self.modalSelection = ""
+//                self.registerData.clear()
+            }, label: {
                 Text("Batalkan Permohonan")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
+            })
             .padding(.bottom, 20)
             .cornerRadius(12)
             
