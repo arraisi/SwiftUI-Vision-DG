@@ -23,7 +23,7 @@ struct KeluargaTerdekat: View {
     @State var nextViewActive: Bool = false
     @State var verificationViewActive: Bool = false
     
-    let hubunganKekerabatanOptions = ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"]
+    let hubunganKekerabatanOptions = ["Ayah", "Ibu", "Kakak", "Adik", "Saudara", "Teman"]
     
     let cities:[Address] = [
         .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Selatan"),
