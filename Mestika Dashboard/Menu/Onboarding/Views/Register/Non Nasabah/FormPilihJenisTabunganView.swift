@@ -17,8 +17,8 @@ struct FormPilihJenisTabunganView: View {
     @State var count : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 150 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 120
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 170 // 100 is amount padding left and right
+    let itemHeight:CGFloat = 150
     let itemGapHeight:CGFloat = 10
     
     @GestureState private var dragOffset = CGSize.zero
@@ -43,7 +43,7 @@ struct FormPilihJenisTabunganView: View {
                         .font(.custom("Montserrat-SemiBold", size: 15))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.horizontal, 15)
-                        .padding(.top, 70)
+                        .padding(.top, 80)
                     
                     // MARK: - CAROUSEL
                     VStack{

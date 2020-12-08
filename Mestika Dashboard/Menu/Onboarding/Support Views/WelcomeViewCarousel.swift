@@ -12,7 +12,7 @@ struct WelcomeViewCarousel: View {
     /* Carousel Variables */
     @Binding var data: [String]
     
-    let screen = UIScreen.main.bounds.width-40
+    let screen = UIScreen.main.bounds.width - 30
     let spacing: CGFloat = 20
     
     @State var itemIndex : CGFloat = 0

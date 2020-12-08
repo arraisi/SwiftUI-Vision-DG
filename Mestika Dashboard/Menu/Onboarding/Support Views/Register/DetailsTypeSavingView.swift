@@ -50,7 +50,7 @@ struct DetailsTypeSavingView: View {
                     .padding(.horizontal, 15)
                 }
             }
-            .frame(height: 100)
+            .frame(height: 120)
             
             Button(
                 action: {

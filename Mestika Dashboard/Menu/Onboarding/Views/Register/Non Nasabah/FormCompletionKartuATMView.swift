@@ -45,24 +45,22 @@ struct FormCompletionKartuATMView: View {
     @State var suggestions:[String] = []
     
     var body: some View {
-        LoadingView(isShowing: $isLoading) {
+        ZStack(alignment: .top) {
             
-            ZStack(alignment: .top) {
-                VStack {
-                    Image("bg_blue")
-                        .resizable()
-                        .scaledToFill()
-                }
-                VStack {
-                    AppBarLogo(light: false, onCancel:{})
-//                        .padding(.top, 50)
-                    
-                    ScrollView(.vertical, showsIndicators: false) {
+            Color(hex: "#232175")
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                
+                AppBarLogo(light: false, onCancel:{})
+                
+                ScrollView(showsIndicators: false) {
+                    VStack {
                         Text("LENGKAPI DATA")
                             .multilineTextAlignment(.center)
                             .font(.custom("Montserrat-Bold", size: 26))
                             .foregroundColor(.white)
-                            .padding(EdgeInsets(top: 20, leading: 15, bottom: 0, trailing: 15))
+                            .padding(EdgeInsets(top: 30, leading: 15, bottom: 0, trailing: 15))
                         
                         nameCard
                         addressCard
@@ -74,7 +72,7 @@ struct FormCompletionKartuATMView: View {
                         }, label: {
                             Text("Submit Data")
                                 .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
@@ -85,15 +83,23 @@ struct FormCompletionKartuATMView: View {
                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                         .padding(.bottom, 30)
                     }
+                    .padding(.bottom, 35)
                 }
-                .padding(.bottom, 150)
-                
-                NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
-                    EmptyView()
-                }
+            }
+            
+            NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
+                EmptyView()
+            }
+            
+            if self.showingAddressModal || self.showingSuggestionNameModal {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showingAddressModal = false
+                } })
             }
         }
         .edgesIgnoringSafeArea(.top)
+//        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+//        .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -105,6 +111,7 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
+//            registerData.namaLengkapFromNik = "Prima Jatnika"
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
         }
@@ -313,8 +320,6 @@ struct FormCompletionKartuATMView: View {
     }
     
     // MARK: -Fuction for Create Bottom Floater (Modal)
-    
-    
     func createBottomSuggestionNameFloater() -> some View {
         VStack {
             HStack {

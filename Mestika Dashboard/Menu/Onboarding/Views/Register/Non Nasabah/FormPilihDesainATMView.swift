@@ -15,6 +15,8 @@ struct FormPilihDesainATMView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject private var productVM = ATMProductViewModel()
     
+    @State var nextRoute: Bool = false
+    
     @State var cards: [ATMDesignViewModel] = []
     @State private var titleCard = "THE CARD"
     @State private var isLoading = false
@@ -143,7 +145,17 @@ struct FormPilihDesainATMView: View {
                                     }
                                     .padding(.horizontal)
                                     
-                                    NavigationLink(destination: FormCompletionKartuATMView().environmentObject(atmData).environmentObject(registerData)) {
+                                    NavigationLink(
+                                        destination: FormCompletionKartuATMView().environmentObject(atmData).environmentObject(registerData),
+                                        isActive: self.$nextRoute
+                                    ) {
+                                        EmptyView()
+                                    }
+                                    
+                                    Button {
+                                        self.registerData.desainKartuATMImage = cards[Int(count)].cardImage!
+                                        self.nextRoute = true
+                                    } label: {
                                         Text("PILIH DESAIN KARTU")
                                             .foregroundColor(.white)
                                             .font(.custom("Montserrat-SemiBold", size: 14))

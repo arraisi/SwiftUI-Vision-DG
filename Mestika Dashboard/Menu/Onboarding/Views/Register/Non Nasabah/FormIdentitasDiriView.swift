@@ -15,6 +15,10 @@ struct FormIdentitasDiriView: View {
      */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    @State private var nextViewActive = false
+    @State private var backToSummary = false
     /*
      Recognized Nomor Induk Ktp
      */
@@ -45,7 +49,6 @@ struct FormIdentitasDiriView: View {
      */
     @State private var shouldPresentKtpScanner = true
     @State private var shouldPresentCamera = false
-    @State private var nextViewActive = false
     
     var body: some View {
         
@@ -77,9 +80,14 @@ struct FormIdentitasDiriView: View {
                         VStack(spacing: 25) {
                             
                             VStack(spacing: 10) {
-                                Text("Identitas Diri")
-                                    .font(.custom("Montserrat-SemiBold", size: 18))
-                                    .foregroundColor(Color(hex: "#F6F8FB"))
+                                
+                                Button(action: {
+                                    self.nextViewActive = true
+                                }, label: {
+                                    Text("Identitas Diri")
+                                        .font(.custom("Montserrat-SemiBold", size: 18))
+                                        .foregroundColor(Color(hex: "#F6F8FB"))
+                                })
                                 
                                 Text("Silihkan isi dan lengkapi data identitas Anda")
                                     .font(.custom("Montserrat-Regular", size: 12))
@@ -162,12 +170,21 @@ struct FormIdentitasDiriView: View {
                                 isActive: self.$nextViewActive,
                                 label: {EmptyView()})
                             
+                            NavigationLink(
+                                destination: VerificationRegisterDataView().environmentObject(registerData),
+                                isActive: self.$backToSummary,
+                                label: {EmptyView()})
+                            
                             Button(action: {
                                 
                                 self.registerData.npwp = self.npwp
                                 
                                 if isValidForm() {
-                                    self.nextViewActive = true
+                                    if editMode == .inactive {
+                                        self.nextViewActive = true
+                                    } else {
+                                        self.backToSummary = true
+                                    }
                                 }
                                 
                             }, label: {
