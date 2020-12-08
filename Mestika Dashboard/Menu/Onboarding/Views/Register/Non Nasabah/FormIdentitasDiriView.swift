@@ -15,6 +15,10 @@ struct FormIdentitasDiriView: View {
      */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    @State private var nextViewActive = false
+    @State private var backToSummary = false
     /*
      Recognized Nomor Induk Ktp
      */
@@ -45,7 +49,6 @@ struct FormIdentitasDiriView: View {
      */
     @State private var shouldPresentKtpScanner = true
     @State private var shouldPresentCamera = false
-    @State private var nextViewActive = false
     
     var body: some View {
         
@@ -167,12 +170,21 @@ struct FormIdentitasDiriView: View {
                                 isActive: self.$nextViewActive,
                                 label: {EmptyView()})
                             
+                            NavigationLink(
+                                destination: VerificationRegisterDataView().environmentObject(registerData),
+                                isActive: self.$backToSummary,
+                                label: {EmptyView()})
+                            
                             Button(action: {
                                 
                                 self.registerData.npwp = self.npwp
                                 
                                 if isValidForm() {
-                                    self.nextViewActive = true
+                                    if editMode == .inactive {
+                                        self.nextViewActive = true
+                                    } else {
+                                        self.backToSummary = true
+                                    }
                                 }
                                 
                             }, label: {
