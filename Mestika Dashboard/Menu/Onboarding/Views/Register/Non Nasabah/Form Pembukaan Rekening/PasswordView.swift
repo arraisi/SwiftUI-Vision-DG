@@ -18,9 +18,9 @@ struct PasswordView: View {
     @State private var securedConfirmation: Bool = true
     
     @State private var showingModal: Bool = false
-    @State private var showingModalPasswordError: Bool = true
+    @State private var showingModalPasswordError: Bool = false
     @State private var activeRoute: Bool = false
-    @State private var modalErrorMessage: String = "Password anda lemah"
+    @State private var modalErrorMessage: String = ""
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
