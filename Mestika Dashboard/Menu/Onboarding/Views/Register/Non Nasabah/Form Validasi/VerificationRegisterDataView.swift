@@ -17,6 +17,7 @@ struct VerificationRegisterDataView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @State private var nextRoute: Bool = false
+    @State private var backToEditKTP: Bool = false
     
     @ObservedObject private var userRegisterVM = UserRegistrationViewModel()
     
@@ -87,21 +88,34 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 .disabled(true)
                                 
+                                NavigationLink(
+                                    destination: FormIdentitasDiriView(editMode: .active).environmentObject(registerData),
+                                    isActive: self.$backToEditKTP,
+                                    label: {
+                                        EmptyView()
+                                    })
+                                
                                 VStack {
-                                    HStack {
-                                        Text("Foto KTP")
-                                            .font(.subheadline)
-                                            .foregroundColor(Color(hex: "#232175"))
-                                            .fontWeight(.bold)
-                                        Spacer()
-                                        
-                                        VStack {
-                                            self.registerData.fotoKTP
-                                                .resizable()
-                                                .frame(maxWidth: 80, maxHeight: 50)
-                                                .cornerRadius(8)
+                                    
+                                    Button(action: {
+                                        self.backToEditKTP = true
+                                    }) {
+                                        HStack {
+                                            Text("Foto KTP")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color(hex: "#232175"))
+                                                .fontWeight(.bold)
+                                            Spacer()
+                                            
+                                            VStack {
+                                                self.registerData.fotoKTP
+                                                    .resizable()
+                                                    .frame(maxWidth: 80, maxHeight: 50)
+                                                    .cornerRadius(8)
+                                            }
+                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                         }
-                                        .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
+                                        
                                     }
                                     
                                     Divider()
@@ -110,20 +124,25 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 
                                 VStack {
-                                    HStack {
-                                        Text("Selfie")
-                                            .font(.subheadline)
-                                            .foregroundColor(Color(hex: "#232175"))
-                                            .fontWeight(.bold)
-                                        Spacer()
+                                    
+                                    Button(action: {
                                         
-                                        VStack {
-                                            self.registerData.fotoSelfie
-                                                .resizable()
-                                                .frame(maxWidth: 80, maxHeight: 50)
-                                                .cornerRadius(8)
+                                    }) {
+                                        HStack {
+                                            Text("Selfie")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color(hex: "#232175"))
+                                                .fontWeight(.bold)
+                                            Spacer()
+                                            
+                                            VStack {
+                                                self.registerData.fotoSelfie
+                                                    .resizable()
+                                                    .frame(maxWidth: 80, maxHeight: 50)
+                                                    .cornerRadius(8)
+                                            }
+                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                         }
-                                        .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                     }
                                     Divider()
                                 }
@@ -131,20 +150,25 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 
                                 VStack {
-                                    HStack {
-                                        Text("NPWP")
-                                            .font(.subheadline)
-                                            .foregroundColor(Color(hex: "#232175"))
-                                            .fontWeight(.bold)
-                                        Spacer()
+                                    
+                                    Button(action: {
                                         
-                                        VStack {
-                                            self.registerData.fotoNPWP
-                                                .resizable()
-                                                .frame(maxWidth: 80, maxHeight: 50)
-                                                .cornerRadius(8)
+                                    }) {
+                                        HStack {
+                                            Text("NPWP")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color(hex: "#232175"))
+                                                .fontWeight(.bold)
+                                            Spacer()
+                                            
+                                            VStack {
+                                                self.registerData.fotoNPWP
+                                                    .resizable()
+                                                    .frame(maxWidth: 80, maxHeight: 50)
+                                                    .cornerRadius(8)
+                                            }
+                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                         }
-                                        .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                     }
                                     Divider()
                                 }
@@ -343,7 +367,7 @@ struct VerificationRegisterDataView: View {
                         .shadow(radius: 30)
                     }
                     .padding(.horizontal, 30)
-//                    .padding(.top, 90)
+                    //                    .padding(.top, 90)
                     .padding(.bottom, 35)
                 }
                 
@@ -378,12 +402,12 @@ struct VerificationRegisterDataView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-//        .navigationBarItems(
-//            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
-//                .configure {
-//                    $0.color = .white
-//                })
-//        .navigationBarBackButtonHidden(true)
+        //        .navigationBarItems(
+        //            trailing: LoadingIndicator(style: .medium, animate: .constant(self.userRegisterVM.isLoading))
+        //                .configure {
+        //                    $0.color = .white
+        //                })
+        //        .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),
@@ -512,7 +536,7 @@ struct VerificationRegisterDataView: View {
             .padding(.bottom, 10)
             
             // MARK : Pekerjaan Wiraswasta
-            if [10, 11, 23].contains(registerData.pekerjaanId) {
+            if [10, 11, 12].contains(registerData.pekerjaanId) {
                 informasiPenyandangDanaFields
             } else {
                 informasiPerusahaanFields
@@ -933,19 +957,19 @@ struct VerificationRegisterDataView: View {
         
         if (user.isEmpty) {
             print("------SAVE TO CORE DATA-------")
-            
-            let data = User(context: managedObjectContext)
-            data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-            data.nik = self.registerData.nik
-            data.email = self.registerData.email
-            data.phone = self.registerData.noTelepon
-            data.pin = self.registerData.pin
-            data.password = self.registerData.password
-            data.firstName = "Stevia"
-            data.lastName = "R"
-            data.email = self.registerData.email
-            
-            UserDefaults.standard.set("true", forKey: "isFirstLogin")
+            //
+            //            let data = User(context: managedObjectContext)
+            //            data.deviceId = UIDevice.current.identifierForVendor?.uuidString
+            //            data.nik = self.registerData.nik
+            //            data.email = self.registerData.email
+            //            data.phone = self.registerData.noTelepon
+            //            data.pin = self.registerData.pin
+            //            data.password = self.registerData.password
+            //            data.firstName = "Stevia"
+            //            data.lastName = "R"
+            //            data.email = self.registerData.email
+            //
+            //            UserDefaults.standard.set("true", forKey: "isFirstLogin")
             
             nextRoute = true
             
@@ -965,16 +989,16 @@ struct VerificationRegisterDataView: View {
     func saveUserToDb() {
         //        nextRoute = true
         
-//        self.registerData.nik = "5106040309800927"
-//        self.registerData.namaLengkapFromNik = "DATA TEST T 03"
-//        self.registerData.tempatLahirFromNik = "LAHIR"
-//        self.registerData.alamatKtpFromNik = "JL PROF DR LATUMETEN I GG.5/6"
-//        self.registerData.rtFromNik = "02"
-//        self.registerData.rwFromNik = "03"
-//        self.registerData.kelurahanFromNik = "ANDIR"
-//        self.registerData.kecamatanFromNik = "ANDIR"
-//        self.registerData.kabupatenKotaFromNik = "ANDIR"
-//        self.registerData.provinsiFromNik = "JAWA BARAT"
+        //        self.registerData.nik = "5106040309800927"
+        //        self.registerData.namaLengkapFromNik = "DATA TEST T 03"
+        //        self.registerData.tempatLahirFromNik = "LAHIR"
+        //        self.registerData.alamatKtpFromNik = "JL PROF DR LATUMETEN I GG.5/6"
+        //        self.registerData.rtFromNik = "02"
+        //        self.registerData.rwFromNik = "03"
+        //        self.registerData.kelurahanFromNik = "ANDIR"
+        //        self.registerData.kecamatanFromNik = "ANDIR"
+        //        self.registerData.kabupatenKotaFromNik = "ANDIR"
+        //        self.registerData.provinsiFromNik = "JAWA BARAT"
         
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {

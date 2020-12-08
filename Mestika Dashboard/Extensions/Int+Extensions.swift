@@ -15,3 +15,12 @@ extension Int {
         return String(self)
     }
 }
+
+extension Int {
+    func formatted(allowedUnits: NSCalendar.Unit = [.hour, .minute]) -> String? {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = allowedUnits
+        formatter.zeroFormattingBehavior = .pad
+        return formatter.string(from: DateComponents(second: self))
+    }
+}

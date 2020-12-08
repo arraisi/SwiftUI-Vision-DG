@@ -54,6 +54,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.bold)
                         .padding(.top, 30)
+                        .multilineTextAlignment(.center)
                     
                     Text("Silahkan masukan no kartu ATM atau Rekening anda")
                         .font(.custom("Montserrat-Regular", size: 12))
