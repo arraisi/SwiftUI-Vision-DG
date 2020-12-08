@@ -187,7 +187,7 @@ struct VerificationRegisterDataView: View {
                                     
                                     HStack {
                                         TextField("Sumber Dana", text: $registerData.sumberDana)
-                                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                            .disabled(true)
                                         
                                         Divider()
                                             .frame(height: 30)
@@ -397,7 +397,37 @@ struct VerificationRegisterDataView: View {
         VStack(alignment: .leading) {
             
             // MARK : Pekerjaan BUMN
-            if [6 ,9].contains(registerData.pekerjaanId) {
+            if [6 ,9, 10, 11, 12].contains(registerData.pekerjaanId) {
+                
+                // MARK : Pekerjaan Pensiunan, Pelajar, IRT
+                if (registerData.pekerjaanId == 10 || registerData.pekerjaanId == 11 || registerData.pekerjaanId == 12) {
+                    EmptyView()
+                } else {
+                    Text("Penghasilan Kotor")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 20)
+                    
+                    HStack {
+                        TextField("Penghasilan Kotor", text: $registerData.penghasilanKotor)
+                            .disabled(true)
+                        
+                        Divider()
+                            .frame(height: 30)
+                        
+                        NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
+                            Text("Edit").foregroundColor(.blue)
+                        }
+                    }
+                    .frame(height: 20)
+                    .font(.subheadline)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(15)
+                    .padding(.horizontal, 20)
+                }
                 
                 if registerData.pekerjaanId == 6 {
                     Text("Jabatan")
@@ -409,7 +439,7 @@ struct VerificationRegisterDataView: View {
                     
                     HStack {
                         TextField("Jabatan", text: $registerData.jabatanProfesi)
-                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                            .disabled(true)
                         
                         Divider()
                             .frame(height: 30)
@@ -453,33 +483,6 @@ struct VerificationRegisterDataView: View {
                     .cornerRadius(15)
                     .padding(.horizontal, 20)
                 }
-            } else {
-            
-                // MARK : Pekerjaan Wiraswasta
-                Text("Penghasilan Kotor")
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.gray)
-                    .multilineTextAlignment(.leading)
-                    .padding(.horizontal, 20)
-                
-                HStack {
-                    TextField("Penghasilan Kotor", text: $registerData.penghasilanKotor)
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                    
-                    Divider()
-                        .frame(height: 30)
-                    
-                    NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
-                        Text("Edit").foregroundColor(.blue)
-                    }
-                }
-                .frame(height: 20)
-                .font(.subheadline)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(15)
-                .padding(.horizontal, 20)
             }
             
             Text("Sumber Pendapatan Lainnya")
