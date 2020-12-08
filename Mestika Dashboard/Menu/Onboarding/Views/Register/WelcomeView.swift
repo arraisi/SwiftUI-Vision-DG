@@ -120,7 +120,7 @@ struct WelcomeView: View {
             .onAppear() {
                 print("APPEAR")
 //                registerData.load()
-//                getUserStatus(deviceId: deviceId!)
+                getUserStatus(deviceId: deviceId!)
             }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
@@ -824,34 +824,37 @@ struct WelcomeView: View {
             if success {
                 print("CODE STATUS : \(self.userVM.code)")
                 print("MESSAGE STATUS : \(self.userVM.message)")
-            }
-            
-            if (self.userVM.code == "R01") {
-                self.modalSelection = "RegisterCreatedModal"
+                
+                self.modalSelection = self.userVM.message
                 self.isShowModal = true
             }
             
-            if (self.userVM.code == "R02") {
-                
-            }
-            
-            if (self.userVM.code == "R03") {
-                
-            }
-            
-            if (self.userVM.code == "R04") {
-                
-            }
-            
-            if (self.userVM.code == "R05") {
-                self.modalSelection = "RegisterApprovedModal"
-                self.isShowModal = true
-            }
-            
-            if (self.userVM.code == "R06") {
-                self.modalSelection = "RegisterRejectedModal"
-                self.isShowModal = true
-            }
+//            if (self.userVM.code == "R01") {
+//                self.modalSelection = "RegisterCreatedModal"
+//                self.isShowModal = true
+//            }
+//
+//            if (self.userVM.code == "R02") {
+//
+//            }
+//
+//            if (self.userVM.code == "R03") {
+//
+//            }
+//
+//            if (self.userVM.code == "R04") {
+//
+//            }
+//
+//            if (self.userVM.code == "R05") {
+//                self.modalSelection = "RegisterApprovedModal"
+//                self.isShowModal = true
+//            }
+//
+//            if (self.userVM.code == "R06") {
+//                self.modalSelection = "RegisterRejectedModal"
+//                self.isShowModal = true
+//            }
         }
     }
 }
