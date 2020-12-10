@@ -301,6 +301,8 @@
 		C0A4F99E25528C0700566A11 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */; };
 		C0A4F9AC25529A9700566A11 /* ArrowDownShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */; };
 		C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */; };
+		C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */; };
+		C0AC4A6F2582116500848AC7 /* InformasiPerusahaanVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */; };
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
 		C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347D22559422B000754C4 /* CardBlockView.swift */; };
 		C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */; };
@@ -638,6 +640,8 @@
 		C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowDownShape.swift; sourceTree = "<group>"; };
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
+		C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiKeluargaVerificationView.swift; sourceTree = "<group>"; };
+		C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiPerusahaanVerificationView.swift; sourceTree = "<group>"; };
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
 		C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppBar.swift; sourceTree = "<group>"; };
@@ -1211,6 +1215,8 @@
 				C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */,
 				C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */,
 				06409F72256798D7008ABB20 /* AddressOptionsView.swift */,
+				C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */,
+				C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -1859,6 +1865,7 @@
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
+				C0AC4A6F2582116500848AC7 /* InformasiPerusahaanVerificationView.swift in Sources */,
 				527E31202566138E004FF5ED /* MobileVersionResponse.swift in Sources */,
 				5206B70F2578D1D800CB4DEB /* FormVerificationAddressViewNasabahScreen.swift in Sources */,
 				52ADFF9C2557DFDC00A1001F /* PerkiraanPenarikanView.swift in Sources */,
@@ -1907,6 +1914,7 @@
 				C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */,
 				5205861A25723A2F005DB764 /* PasswordService.swift in Sources */,
 				52468AE8254179CE007518AE /* ListPromoForYouView.swift in Sources */,
+				C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */,
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
 				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
