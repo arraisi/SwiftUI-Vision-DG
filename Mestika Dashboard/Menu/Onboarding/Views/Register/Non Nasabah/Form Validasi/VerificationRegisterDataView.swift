@@ -17,7 +17,10 @@ struct VerificationRegisterDataView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @State private var nextRoute: Bool = false
-    @State private var backToEditKTP: Bool = false
+    @State private var editImageSelection: String = ""
+    @State private var shouldPresentCamera: Bool = false
+    @State private var shouldPresentMaskSelfie: Bool = false
+    @State private var imageTaken: Image?
     
     @ObservedObject private var userRegisterVM = UserRegistrationViewModel()
     
@@ -88,17 +91,12 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 .disabled(true)
                                 
-                                NavigationLink(
-                                    destination: FormIdentitasDiriView(editMode: .active).environmentObject(registerData),
-                                    isActive: self.$backToEditKTP,
-                                    label: {
-                                        EmptyView()
-                                    })
-                                
                                 VStack {
                                     
                                     Button(action: {
-                                        self.backToEditKTP = true
+                                        self.editImageSelection = "ktp"
+                                        self.shouldPresentMaskSelfie = false
+                                        self.shouldPresentCamera = true
                                     }) {
                                         HStack {
                                             Text("Foto KTP")
@@ -126,7 +124,9 @@ struct VerificationRegisterDataView: View {
                                 VStack {
                                     
                                     Button(action: {
-                                        
+                                        self.editImageSelection = "selfie"
+                                        self.shouldPresentMaskSelfie = true
+                                        self.shouldPresentCamera = true
                                     }) {
                                         HStack {
                                             Text("Selfie")
@@ -152,7 +152,9 @@ struct VerificationRegisterDataView: View {
                                 VStack {
                                     
                                     Button(action: {
-                                        
+                                        self.editImageSelection = "npwp"
+                                        self.shouldPresentMaskSelfie = false
+                                        self.shouldPresentCamera = true
                                     }) {
                                         HStack {
                                             Text("NPWP")
@@ -408,6 +410,35 @@ struct VerificationRegisterDataView: View {
         //                    $0.color = .white
         //                })
         //        .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $shouldPresentCamera, onDismiss: {
+            print("Hello on DISMISS SHEET")
+            switch self.editImageSelection {
+            case "ktp":
+                self.registerData.fotoKTP = self.imageTaken ?? Image("")
+            case "selfie":
+                self.registerData.fotoSelfie = self.imageTaken ?? Image("")
+            case "npwp":
+                self.registerData.fotoNPWP = self.imageTaken ?? Image("")
+            default:
+                self.registerData.fotoKTP = self.imageTaken ?? Image("")
+            }
+            
+        }) {
+            
+            ZStack {
+                SUImagePickerView(sourceType: .camera, image: self.$imageTaken, isPresented: self.$shouldPresentCamera, frontCamera: self.$shouldPresentMaskSelfie)
+                
+                if self.shouldPresentMaskSelfie {
+                    Image("pattern_selfie")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .opacity(0.5)
+                        .offset(y: -(UIScreen.main.bounds.height * 0.1))
+                }
+            }
+            
+        }
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),
