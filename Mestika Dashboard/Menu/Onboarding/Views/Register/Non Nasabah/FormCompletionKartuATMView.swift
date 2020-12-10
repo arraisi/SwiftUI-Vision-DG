@@ -87,7 +87,7 @@ struct FormCompletionKartuATMView: View {
                 }
             }
             
-            NavigationLink(destination: FormPINTransaksiATMView(unLocked: false).environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
+            NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
                 EmptyView()
             }
             

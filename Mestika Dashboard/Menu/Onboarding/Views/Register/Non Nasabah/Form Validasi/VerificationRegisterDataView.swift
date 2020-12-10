@@ -149,33 +149,35 @@ struct VerificationRegisterDataView: View {
                                 .padding(.top, 20)
                                 .padding(.horizontal, 20)
                                 
-                                VStack {
-                                    
-                                    Button(action: {
-                                        self.editImageSelection = "npwp"
-                                        self.shouldPresentMaskSelfie = false
-                                        self.shouldPresentCamera = true
-                                    }) {
-                                        HStack {
-                                            Text("NPWP")
-                                                .font(.subheadline)
-                                                .foregroundColor(Color(hex: "#232175"))
-                                                .fontWeight(.bold)
-                                            Spacer()
-                                            
-                                            VStack {
-                                                self.registerData.fotoNPWP
-                                                    .resizable()
-                                                    .frame(maxWidth: 80, maxHeight: 50)
-                                                    .cornerRadius(8)
+                                if self.registerData.npwp != "" {
+                                    VStack {
+                                        
+                                        Button(action: {
+                                            self.editImageSelection = "npwp"
+                                            self.shouldPresentMaskSelfie = false
+                                            self.shouldPresentCamera = true
+                                        }) {
+                                            HStack {
+                                                Text("NPWP")
+                                                    .font(.subheadline)
+                                                    .foregroundColor(Color(hex: "#232175"))
+                                                    .fontWeight(.bold)
+                                                Spacer()
+                                                
+                                                VStack {
+                                                    self.registerData.fotoNPWP
+                                                        .resizable()
+                                                        .frame(maxWidth: 80, maxHeight: 50)
+                                                        .cornerRadius(8)
+                                                }
+                                                .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                             }
-                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                         }
+                                        Divider()
                                     }
-                                    Divider()
+                                    .padding([.top, .bottom], 20)
+                                    .padding(.horizontal, 20)
                                 }
-                                .padding([.top, .bottom], 20)
-                                .padding(.horizontal, 20)
                                 
                                 Group {
                                     
