@@ -17,12 +17,12 @@ struct FormInputAtmPinForgotPasswordView: View {
         ZStack {
             Image("bg_blue")
                 .resizable()
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 Text("INPUT DATA ATM")
                     .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                 
                 Text("Masukkan nomor kartu ATM dan PIN ATM Anda yang sudah terdaftar")
@@ -60,10 +60,10 @@ struct FormInputAtmPinForgotPasswordView: View {
                 Spacer()
                 
                 VStack {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {}, label: {
                         Text("AKTIVASI KARTU ATM")
                             .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         
