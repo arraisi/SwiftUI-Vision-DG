@@ -126,9 +126,9 @@ struct FormIndustriTempatBekerjaView: View {
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 25)
                                     } else {
-                                        NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                                        NavigationLink(destination: InformasiPerusahaanView(editMode: self.editMode).environmentObject(registerData)) {
                                             
-                                            Text("Simpan")
+                                            Text("Berikutnya")
                                                 .foregroundColor(.white)
                                                 .fontWeight(.bold)
                                                 .font(.system(size: 14))

@@ -165,7 +165,7 @@ struct InformasiPerusahaanView: View {
                                         .padding(.vertical, 25)
                                 } else {
                                     NavigationLink(
-                                        destination: VerificationRegisterDataView().environmentObject(registerData),
+                                        destination: PenghasilanKotorView(editMode: self.editMode).environmentObject(registerData),
                                         isActive: $verificationViewActive,
                                         label: {
                                             Button(action: {

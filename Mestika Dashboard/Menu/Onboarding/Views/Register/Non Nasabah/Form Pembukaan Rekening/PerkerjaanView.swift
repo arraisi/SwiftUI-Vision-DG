@@ -127,21 +127,21 @@ struct PerkerjaanView: View {
 
                                         // Navigation Sumber Penyandang Dana 2
                                         NavigationLink(
-                                                destination: FormSumberPenyandandDana2View().environmentObject(registerData),
+                                            destination: FormSumberPenyandandDana2View(editMode: self.editMode).environmentObject(registerData),
                                                 tag: "sumberPenyandangDana2",
                                                 selection: $selection,
                                                 label: {EmptyView()})
                                         
                                         // Navigation Sumber Penyandang Dana
                                         NavigationLink(
-                                            destination: InformasiPerusahaanView().environmentObject(registerData),
+                                            destination: InformasiPerusahaanView(editMode: self.editMode).environmentObject(registerData),
                                             tag: "informasiPerusahaan",
                                             selection: $selection,
                                             label: {EmptyView()})
                                         
                                         // Navigation Industri Tempat Bekerja
                                         NavigationLink(
-                                            destination: FormIndustriTempatBekerjaView().environmentObject(registerData),
+                                            destination: FormIndustriTempatBekerjaView(editMode: self.editMode).environmentObject(registerData),
                                             tag: "industriTempatBekerja",
                                             selection: $selection,
                                             label: {EmptyView()})
@@ -180,53 +180,37 @@ struct PerkerjaanView: View {
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
                                             
-                                            //                                    if registerData.pekerjaanId == 9 {
-                                            //                                        NavigationLink(destination: SumberPenyandangDanaView().environmentObject(registerData)) {
-                                            //
-                                            //                                            Text("Berikutnya")
-                                            //                                                .foregroundColor(.white)
-                                            //                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                            //                                                .frame(maxWidth: .infinity, maxHeight: 40)
-                                            //
-                                            //                                        }
-                                            //                                        .disabled(registerData.pekerjaanId == 0)
-                                            //                                        .frame(height: 50)
-                                            //                                        .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                            //                                        .cornerRadius(12)
-                                            //                                        .padding(.horizontal, 20)
-                                            //                                        .padding(.vertical, 25)
-                                            //                                    } else {
-                                            //                                        NavigationLink(destination: InformasiPerusahaanView().environmentObject(registerData)) {
-                                            //
-                                            //                                            Text("Berikutnya")
-                                            //                                                .foregroundColor(.white)
-                                            //                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                            //                                                .frame(maxWidth: .infinity, maxHeight: 40)
-                                            //
-                                            //                                        }
-                                            //                                        .disabled(registerData.pekerjaanId == 0)
-                                            //                                        .frame(height: 50)
-                                            //                                        .background(Color(hex: "#2334D0"))
-                                            //                                        .cornerRadius(12)
-                                            //                                        .padding(.horizontal, 20)
-                                            //                                        .padding(.vertical, 25)
-                                            //                                    }
-                                            
                                         } else {
-                                            NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                                            Button(action: {
+                                                print("pekerjaan id : \(registerData.pekerjaanId)")
                                                 
-                                                Text("Simpan")
+                                                switch registerData.pekerjaanId {
+                                                case 6 :
+                                                    self.selection = "jabatanProfesi"
+                                                case 9:
+                                                    self.selection = "industriTempatBekerja"
+                                                case 10:
+                                                    self.selection = "sumberPenyandangDana2"
+                                                case 11:
+                                                    self.selection = "sumberPenyandangDana2"
+                                                case 12:
+                                                    self.selection = "sumberPenyandangDana2"
+                                                default:
+                                                    self.selection = "informasiPerusahaan"
+                                                }
+                                                
+                                            }, label: {
+                                                Text("Berikutnya")
                                                     .foregroundColor(.white)
-                                                    .fontWeight(.bold)
-                                                    .font(.system(size: 14))
+                                                    .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
-                                                
-                                            }
+                                            })
+                                            .disabled(registerData.pekerjaanId == 0)
                                             .frame(height: 50)
-                                            .background(Color(hex: "#2334D0"))
+                                            .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
                                             .cornerRadius(12)
-                                            .padding(.horizontal, 35)
-                                            .padding(.vertical, 20)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 25)
                                         }
                                         
                                     }
