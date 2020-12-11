@@ -113,7 +113,7 @@ struct PerkerjaanView: View {
                                         
                                         // Navigation Jabatan Profesi
                                         NavigationLink(
-                                            destination: FormJabatanProfesiView().environmentObject(registerData),
+                                            destination: FormJabatanProfesiView(editMode: self.editMode).environmentObject(registerData),
                                             tag: "jabatanProfesi",
                                             selection: $selection,
                                             label: {EmptyView()})

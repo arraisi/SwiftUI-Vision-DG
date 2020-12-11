@@ -129,7 +129,7 @@ struct FormJabatanProfesiView: View {
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 25)
                                     } else {
-                                        NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                                        NavigationLink(destination: InformasiPerusahaanView(editMode: self.editMode).environmentObject(registerData)) {
                                             
                                             Text("Simpan")
                                                 .foregroundColor(.white)

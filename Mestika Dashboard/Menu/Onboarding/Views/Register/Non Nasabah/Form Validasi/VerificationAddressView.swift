@@ -122,7 +122,7 @@ struct VerificationAddressView: View {
                                         HStack {
                                             TextField("Kode Pos", text: $kodePos) {change in
                                             } onCommit: {
-                                                self.registerData.kodePosKeluarga = self.kodePos
+//                                                self.registerData.kodePosKeluarga = self.kodePos
                                             }
                                             .onReceive(kodePos.publisher.collect()) {
                                                 self.kodePos = String($0.prefix(5))
@@ -157,7 +157,7 @@ struct VerificationAddressView: View {
                     
                     
                     Button(action: {
-                        self.registerData.kodePosKeluarga = self.kodePos
+//                        self.registerData.kodePosKeluarga = self.kodePos
                         self.isShowNextView = true
                     }, label: {
                         Text("Submit Data")

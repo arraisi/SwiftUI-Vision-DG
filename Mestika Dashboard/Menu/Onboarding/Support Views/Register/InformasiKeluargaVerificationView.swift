@@ -98,7 +98,7 @@ struct InformasiKeluargaVerificationView: View {
                     .padding(.horizontal, 20)
                 HStack {
                     TextField("Kode Pos", text: $registerData.kodePosKeluarga)
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .disabled(true)
                 }
                 .frame(height: 20)
                 .font(.subheadline)
