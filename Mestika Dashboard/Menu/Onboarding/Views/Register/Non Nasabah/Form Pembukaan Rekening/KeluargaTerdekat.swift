@@ -121,7 +121,7 @@ struct KeluargaTerdekat: View {
                                                     Button(action: {
                                                         
                                                         self.registerData.kodePosKeluarga = self.kodePos
-                                                        self.registerData.noTeleponPerusahaan = self.noTelepon
+                                                        self.registerData.noTlpKeluarga = self.noTelepon
                                                         
                                                         self.nextViewActive = true
                                                         
@@ -146,7 +146,7 @@ struct KeluargaTerdekat: View {
                                                     Button(action: {
                                                         
                                                         self.registerData.kodePosKeluarga = self.kodePos
-                                                        self.registerData.noTeleponPerusahaan = self.noTelepon
+                                                        self.registerData.noTlpKeluarga = self.noTelepon
                                                         
                                                         self.verificationViewActive = true
                                                         
@@ -378,6 +378,7 @@ struct KeluargaTerdekat: View {
                     
                     TextField("No. Telepon", text: $noTelepon) {change in
                     } onCommit: {
+                        self.registerData.noTlpKeluarga = self.noTelepon
                     }
                     .onReceive(noTelepon.publisher.collect()) {
                         if String($0).hasPrefix("0") {

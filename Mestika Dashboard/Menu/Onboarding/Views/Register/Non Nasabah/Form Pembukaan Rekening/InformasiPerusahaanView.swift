@@ -406,6 +406,7 @@ struct InformasiPerusahaanView: View {
                     
                     TextField("No. Telepon", text: $noTlpPerusahaan) {change in
                     } onCommit: {
+                        self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
                     }
                     .onReceive(noTlpPerusahaan.publisher.collect()) {
                         if String($0).hasPrefix("0") {
