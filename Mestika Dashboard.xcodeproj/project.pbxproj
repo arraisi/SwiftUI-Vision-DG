@@ -328,6 +328,7 @@
 		C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */; };
 		C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB654C255E4D81009ADFFE /* DbViewModel.swift */; };
 		C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB90D22553D7E2004DBCF5 /* CardView.swift */; };
+		C0F6044C25863018007022F0 /* InterviewScheduleRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F6044B25863018007022F0 /* InterviewScheduleRegisterView.swift */; };
 		C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */; };
 		C0FE1E3E255A67D400B3AAE0 /* NumbersPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */; };
 /* End PBXBuildFile section */
@@ -668,6 +669,7 @@
 		C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormNewPinAtmView.swift; sourceTree = "<group>"; };
 		C0EB654C255E4D81009ADFFE /* DbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbViewModel.swift; sourceTree = "<group>"; };
 		C0EB90D22553D7E2004DBCF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		C0F6044B25863018007022F0 /* InterviewScheduleRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewScheduleRegisterView.swift; sourceTree = "<group>"; };
 		C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPINConfigurationView.swift; sourceTree = "<group>"; };
 		C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersPadView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1199,6 +1201,7 @@
 				52ADFF7B2557DFDB00A1001F /* Term&ConditionView.swift */,
 				52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */,
 				52ADFF7D2557DFDB00A1001F /* InterviewRegistrationView.swift */,
+				C0F6044B25863018007022F0 /* InterviewScheduleRegisterView.swift */,
 				52ADFF7E2557DFDB00A1001F /* VerificationDataPersonalView.swift */,
 				52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */,
 				52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */,
@@ -1864,6 +1867,7 @@
 				525950262553E03000C8CA5D /* LoginScreen.swift in Sources */,
 				C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
+				C0F6044C25863018007022F0 /* InterviewScheduleRegisterView.swift in Sources */,
 				52ADFEF42557DC5C00A1001F /* CheckBoxGroup.swift in Sources */,
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,

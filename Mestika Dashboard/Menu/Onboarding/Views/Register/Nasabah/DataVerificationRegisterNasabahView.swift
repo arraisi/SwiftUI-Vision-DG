@@ -12,6 +12,8 @@ struct DataVerificationRegisterNasabahView: View {
     
     /* Environtment & Bind Obj */
     @EnvironmentObject var registerData: RegistrasiModel
+    var productATMData = AddProductATM()
+    
     @EnvironmentObject var appState: AppState
     
     @State var image: Image? = nil
@@ -417,7 +419,7 @@ struct DataVerificationRegisterNasabahView: View {
                     .disabled(self.userRegisterVM.isLoading)
                     
                     NavigationLink(
-                        destination: SuccessRegisterNasabahScreen().environmentObject(registerData),
+                        destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData),
                         isActive: self.$nextRoute,
                         label: {EmptyView()}
                     )
