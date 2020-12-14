@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+struct BidangUsaha {
+    var nama: String
+}
+
 struct InformasiPerusahaanView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel

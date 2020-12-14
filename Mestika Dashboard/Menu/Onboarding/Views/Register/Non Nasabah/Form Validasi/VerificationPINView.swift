@@ -142,7 +142,7 @@ struct VerificationPINView: View {
                         .padding(.bottom, 5)
                         
                         NavigationLink(
-                            destination: SuccessRegisterNasabahScreen().environmentObject(registerData).environmentObject(atmData),
+                            destination: SuccessRegisterView().environmentObject(registerData).environmentObject(atmData),
                             isActive: self.$nextToFormVideoCall,
                             label: {
                                 EmptyView()

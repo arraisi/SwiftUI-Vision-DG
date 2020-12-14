@@ -472,26 +472,38 @@ struct WelcomeView: View {
             
             NavigationLink(
                 destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(registerData),
-                isActive: self.$isKetentuanViewActive){
-                
+                isActive: self.$isKetentuanViewActive) {
+                EmptyView()
+            }
+            .isDetailLink(false)
+            
+            Button(action: {
+                self.appState.nasabahIsExisting = false
+                self.isKetentuanViewActive = true
+            }) {
                 Text("Tidak, saya bukan")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
-                
             }
-            .isDetailLink(false)
             .padding(.bottom, 2)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive){
+            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive) {
+               EmptyView()
+            }
+            .isDetailLink(false)
+            
+            Button(action: {
+                self.appState.nasabahIsExisting = true
+                self.isNoAtmOrRekViewActive = true
+            }) {
                 Text("Ya, saya nasabah Bank Mestika")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
-            .isDetailLink(false)
             .padding(.bottom, 30)
             .cornerRadius(12)
         }

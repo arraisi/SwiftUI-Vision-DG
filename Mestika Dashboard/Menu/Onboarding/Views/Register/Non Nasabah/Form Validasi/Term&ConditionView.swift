@@ -18,6 +18,9 @@ struct Term_ConditionView: View {
     @State var isChecked2: Bool = false
     @State var showingAlert: Bool = false
     
+    @State var dataVerificationNasabah: Bool = false
+    @State var dataVerificationNonNasabah: Bool = false
+    
     func toggle() {
         isChecked = !isChecked
         scrollPosition = 0.3
@@ -107,7 +110,17 @@ struct Term_ConditionView: View {
                             .padding(.bottom, 20)
                         }
                         
-                        NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                        NavigationLink(destination: DataVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$dataVerificationNasabah) {EmptyView()}
+                        
+                        NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: self.$dataVerificationNonNasabah) {EmptyView()}
+                        
+                        Button(action: {
+                            if self.appState.nasabahIsExisting {
+                                self.dataVerificationNasabah = true
+                            } else {
+                                self.dataVerificationNonNasabah = true
+                            }
+                        }) {
                             Text("Berikutnya")
                                 .foregroundColor(.white)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
