@@ -24,6 +24,7 @@ struct InformasiPerusahaanView: View {
     @State var kodePos : String = ""
     @State var kecamatan : String = ""
     @State var location : String = ""
+    @State var isEditFromSummary: Bool = false
     
     @State var noTlpPerusahaan: String = ""
     @State var nextViewActive: Bool = false
@@ -168,30 +169,60 @@ struct InformasiPerusahaanView: View {
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 25)
                                 } else {
-                                    NavigationLink(
-                                        destination: PenghasilanKotorView(editMode: self.editMode).environmentObject(registerData),
-                                        isActive: $verificationViewActive,
-                                        label: {
-                                            Button(action: {
-                                                
-                                                self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
-                                                self.registerData.kodePos = self.kodePos
-                                                
-                                                self.verificationViewActive = true
-                                                
-                                            }, label: {
-                                                Text("Simpan")
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+                                    
+                                    if isEditFromSummary {
+                                        NavigationLink(
+                                            destination: VerificationRegisterDataView().environmentObject(registerData),
+                                            isActive: $verificationViewActive,
+                                            label: {
+                                                Button(action: {
+                                                    
+                                                    self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
+                                                    self.registerData.kodePos = self.kodePos
+                                                    
+                                                    self.verificationViewActive = true
+                                                    
+                                                }, label: {
+                                                    Text("Simpan")
+                                                        .foregroundColor(.white)
+                                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                                })
                                             })
-                                        })
-                                        .disabled(isValid())
-                                        .frame(height: 50)
-                                        .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                        .cornerRadius(12)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 25)
+                                            .disabled(isValid())
+                                            .frame(height: 50)
+                                            .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .cornerRadius(12)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 25)
+                                    } else {
+                                        NavigationLink(
+                                            destination: PenghasilanKotorView(editMode: self.editMode).environmentObject(registerData),
+                                            isActive: $verificationViewActive,
+                                            label: {
+                                                Button(action: {
+                                                    
+                                                    self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
+                                                    self.registerData.kodePos = self.kodePos
+                                                    
+                                                    self.verificationViewActive = true
+                                                    
+                                                }, label: {
+                                                    Text("Simpan")
+                                                        .foregroundColor(.white)
+                                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                                })
+                                            })
+                                            .disabled(isValid())
+                                            .frame(height: 50)
+                                            .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .cornerRadius(12)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 25)
+                                    }
+                                    
+                                    
                                 }
                                 
                             }

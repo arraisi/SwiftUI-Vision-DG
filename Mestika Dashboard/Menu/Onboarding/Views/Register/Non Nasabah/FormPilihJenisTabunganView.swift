@@ -37,13 +37,15 @@ struct FormPilihJenisTabunganView: View {
             }
             
             VStack {
+                AppBarLogo(onCancel: {})
+                
                 VStack() {
                     
                     Text("Pilih Jenis Tabungan Anda")
                         .font(.custom("Montserrat-SemiBold", size: 15))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.horizontal, 15)
-                        .padding(.top, 80)
+                        .padding(.top, 20)
                     
                     // MARK: - CAROUSEL
                     VStack{
@@ -97,7 +99,8 @@ struct FormPilihJenisTabunganView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+//        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
 

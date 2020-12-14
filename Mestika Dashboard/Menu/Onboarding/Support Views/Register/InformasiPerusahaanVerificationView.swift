@@ -23,7 +23,7 @@ struct InformasiPerusahaanVerificationView: View {
                 Divider()
                     .frame(height: 30)
                 
-                NavigationLink(destination: InformasiPerusahaanView(editMode: .active).environmentObject(registerData)) {
+                NavigationLink(destination: InformasiPerusahaanView(editMode: .active, isEditFromSummary: true).environmentObject(registerData)) {
                     Text("Edit").foregroundColor(.blue)
                 }
             }
