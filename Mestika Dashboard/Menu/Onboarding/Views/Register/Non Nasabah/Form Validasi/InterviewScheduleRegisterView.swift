@@ -1,24 +1,20 @@
 //
-//  SuccessRegisterNasabahScreen.swift
+//  InterviewScheduleRegisterView.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 11/11/20.
+//  Created by Abdul R. Arraisi on 13/12/20.
 //
 
 import SwiftUI
-import JGProgressHUD_SwiftUI
 
-struct SuccessRegisterNasabahScreen: View {
-    
-    @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
-    @EnvironmentObject var productATMData: AddProductATM
-//    var productATMData = AddProductATM()
+struct InterviewScheduleRegisterView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
-    @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
-    @EnvironmentObject var appState: AppState
+    @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
+    var productATMData = AddProductATM()
     
     @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var appState: AppState
     
     /* HUD Variable */
     @State private var dim = true
@@ -26,10 +22,13 @@ struct SuccessRegisterNasabahScreen: View {
     /* Routing */
     @State private var backRoute: Bool = false
     
-    /* Boolean for Show Modal */
+    /*
+     Boolean for Show Modal
+     */
     @State var showingModal = false
     @State var showingModalJam = false
     @State var showingModalTanggal = false
+    @State var showingModalInformation = false
     
     @State var pilihJam: String = ""
     @State var tanggalWawancara: String = ""
@@ -51,139 +50,174 @@ struct SuccessRegisterNasabahScreen: View {
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     var body: some View {
-        ZStack(alignment: .top) {
-            Image("bg_blue")
-                .resizable()
+        LoadingView(isShowing: $scheduleVM.isLoading) {
             
-            VStack {
+            ZStack(alignment: .top) {
+                Image("bg_blue")
+                    .resizable()
                 
-                AppBarLogo(light: false) {
+                VStack {
                     
-                }
-                
-                ScrollView {
+                    AppBarLogo(light: false, showCancel: false) { }
                     
-                    VStack(alignment: .leading) {
+                    ScrollView {
                         VStack(alignment: .leading) {
-                            Image("ic_trophy")
+                            Image("ic_group")
                                 .resizable()
-                                .frame(width: 95, height: 95)
+                                .frame(width: 70, height: 95)
                                 .padding(.top, 40)
+                                .padding(.horizontal, 20)
                             
-                            Text("Pendaftaran Rekening Baru Telah Berhasil")
-                                .font(.custom("Montserrat-Bold", size: 24))
+                            Text("Pendaftaran Melalui Wawancara")
+                                .font(.title)
                                 .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.bold)
                                 .padding([.top], 20)
+                                .padding(.horizontal, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            Text("Silahkan pilih waktu untuk dihubungi.")
-                                .font(.custom("Montserrat-Regular", size: 12))
+                            Text("Untuk menyelesaikan pendaftaran\n rekening. pihak Kami kemudian akan\n menghubungi Anda")
+                                .font(.subheadline)
                                 .foregroundColor(Color(hex: "#707070"))
                                 .multilineTextAlignment(.leading)
                                 .padding(.top, 25)
+                                .padding(.horizontal, 20)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text("Silahkan pilih waktu untuk dihubungi.")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#707070"))
+                                .multilineTextAlignment(.leading)
+                                .padding(.top, 25)
+                                .padding(.horizontal, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
                             HStack {
                                 TextField("Pilih Tanggal Wawancara", text: $tanggalWawancara)
-                                    .font(.custom("Montserrat-Regular", size: 12))
-                                    .frame(height: 50)
+                                    .font(.subheadline)
+                                    .frame(height: 36)
+                                    .padding(.leading, 20)
                                     .disabled(true)
                                 
-                                Button(action:{
-                                    showingModalTanggal.toggle()
-                                }, label: {
-                                    Image(systemName: "calendar")
-                                        .font(Font.system(size: 20))
-                                        .foregroundColor(Color(hex: "#707070"))
-                                })
+                                Menu {
+                                    ForEach(self.scheduleVM.scheduleDates, id: \.self) { data in
+                                        Button(action: {
+                                            tanggalWawancara = data
+                                            scheduleVM.getScheduleById(date: tanggalWawancara)
+                                        }) {
+                                            Text(data)
+                                                .font(.custom("Montserrat-Regular", size: 10))
+                                        }
+                                    }
+                                } label: {
+                                    Image(systemName: "calendar").padding()
+                                }
                                 
                             }
-                            .padding(.horizontal, 20)
                             .background(Color.gray.opacity(0.1))
-                            .cornerRadius(15)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 20)
                             .padding(.bottom, 10)
                             
                             HStack {
                                 
                                 TextField("Pilih Jam", text: $pilihJam)
-                                    .font(.custom("Montserrat-Regular", size: 12))
-                                    .frame(height: 50)
+                                    .font(.subheadline)
+                                    .frame(height: 36)
+                                    .padding(.leading, 20)
                                     .disabled(true)
                                 
-                                Button(action:{
-                                    showingModalJam.toggle()
-                                }, label: {
-                                    Image(systemName: "clock")
-                                        .font(Font.system(size: 20))
-                                        .foregroundColor(Color(hex: "#707070"))
-                                })
+                                
+                                Menu {
+                                    ForEach(self.scheduleVM.scheduleJamBasedOnDate, id: \.self) { data in
+                                        Button(action: {
+                                            pilihJam = data
+                                        }) {
+                                            Text(data)
+                                                .font(.custom("Montserrat-Regular", size: 10))
+                                        }
+                                    }
+                                } label: {
+                                    Image(systemName: "clock").padding()
+                                }
                                 
                             }
-                            .padding(.horizontal, 20)
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(10)
+                            .padding(.horizontal, 20)
                             
                             Text("Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru")
-                                .font(.custom("Montserrat-Regular", size: 12))
+                                .font(.subheadline)
                                 .foregroundColor(Color(hex: "#707070"))
                                 .multilineTextAlignment(.leading)
                                 .padding([.top, .bottom], 10)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        .padding(.horizontal, 20)
-                        
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("KTP.")
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .foregroundColor(Color(hex: "#707070"))
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            TextField("No KTP", text: $registerData.nik)
                                 .padding(.horizontal, 20)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .frame(height: 50)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(15)
-                                .disabled(true)
-                            
-                            Text("No. HP.")
-                                .font(.subheadline)
-                                .foregroundColor(Color(hex: "#707070"))
-                                .multilineTextAlignment(.leading)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            TextField("Nomor Handphone", text: $registerData.noTelepon)
-                                .padding(.horizontal, 20)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .frame(height: 50)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(15)
-                                .disabled(true)
-                            
-                            Text("Email.")
-                                .font(.subheadline)
-                                .foregroundColor(Color(hex: "#707070"))
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            
-                            TextField("Alamat Email", text: $registerData.email)
-                                .padding(.horizontal, 20)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .frame(height: 50)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(15)
-                                .disabled(true)
+                            Group {
+                                Text("KTP.")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color(hex: "#707070"))
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.top, 25)
+                                    .padding(.horizontal, 20)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                TextField("No KTP", text: $registerData.nik)
+                                    .frame(height: 10)
+                                    .font(.subheadline)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(15)
+                                    .padding(.bottom, 5)
+                                    .padding(.horizontal, 20)
+                                    .disabled(true)
+                                
+                                Text("No. HP.")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color(hex: "#707070"))
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.top, 5)
+                                    .padding(.horizontal, 20)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                TextField("Nomor Handphone", text: $registerData.noTelepon)
+                                    .frame(height: 10)
+                                    .font(.subheadline)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(15)
+                                    .padding(.bottom, 5)
+                                    .padding(.horizontal, 20)
+                                    .disabled(true)
+                                
+                                Text("Email.")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color(hex: "#707070"))
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.top, 5)
+                                    .padding(.horizontal, 20)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                TextField("Alamat Email", text: $registerData.email)
+                                    .frame(height: 10)
+                                    .font(.subheadline)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(15)
+                                    .padding(.bottom, 5)
+                                    .padding(.horizontal, 20)
+                                    .disabled(true)
+                            }
                             
                             Group {
                                 
                                 Button(action: {
                                     if pilihJam != "" {
-                                        //                                submitSchedule()
-                                        self.showFormPilihJenisATM = true
+                                        // submitSchedule()
+                                        // self.showFormPilihJenisATM = true
+                                        self.showingModalInformation = true
                                     }
                                 }, label: {
                                     Text("Buat Janji")
@@ -199,7 +233,7 @@ struct SuccessRegisterNasabahScreen: View {
                                 .padding(.bottom, 5)
                                 .disabled(disableForm)
                                 
-                                NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
+                                NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
                                 
                                 Button(
                                     action: {
@@ -222,40 +256,39 @@ struct SuccessRegisterNasabahScreen: View {
                                 Spacer()
                             }
                         }
-                        .padding(.vertical, 20)
-                        .padding(.horizontal, 20)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(radius: 30)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 25)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 40)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(radius: 30)
-                    .padding(30)
                 }
-            }
-            
-            NavigationLink(
-                destination: WelcomeView(),
-                isActive: self.$backRoute,
-                label: {EmptyView()}
-            )
-            
-            if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
-            }
-            
-            if self.showingModalJam {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalJam = false } })
-            }
-            
-            if self.showingModalTanggal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
+                
+                NavigationLink(
+                    destination: WelcomeView(),
+                    isActive: self.$backRoute,
+                    label: {})
+                
+                if self.showingModal {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                }
+                
+                if self.showingModalJam {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalJam = false } })
+                }
+                
+                if self.showingModalTanggal {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
+                }
+                
+                if self.showingModalInformation {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalInformation = false } })
+                }
             }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .onAppear {
-            showIndeterminate()
-        }
+        .onAppear {}
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -268,11 +301,13 @@ struct SuccessRegisterNasabahScreen: View {
         .popup(isPresented: $showingModalJam, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloaterJam()
         }
+        .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            showModalInformation()
+        }
+        
     }
     
     func removeUser() {
-        
-        //        showIndeterminate()
         
         //        let data = user.last
         //        managedObjectContext.delete(data!)
@@ -282,29 +317,13 @@ struct SuccessRegisterNasabahScreen: View {
         //        } catch {
         //            // handle the Core Data error
         //        }
-        
+        //
         //        UserDefaults.standard.set("false", forKey: "isFirstLogin")
         //        UserDefaults.standard.set("false", forKey: "isSchedule")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             print("DELETE SUCCESS")
             self.appState.moveToWelcomeView = true
-        }
-    }
-    
-    private func showIndeterminate() {
-        hudCoordinator.showHUD {
-            let hud = JGProgressHUD()
-            if dim {
-                hud.backgroundColor = UIColor(white: 0, alpha: 0.4)
-            }
-            
-            hud.shadow = JGProgressHUDShadow(color: .black, offset: .zero, radius: 4, opacity: 0.3)
-            hud.vibrancyEnabled = false
-            hud.textLabel.text = "Loading"
-            
-            hud.dismiss(afterDelay: 2)
-            return hud
         }
     }
     
@@ -360,7 +379,7 @@ struct SuccessRegisterNasabahScreen: View {
         .cornerRadius(20)
     }
     
-    // MARK: - POPUP PROSES REGISTER
+    /* Fuction for Create Bottom Floater (Modal) */
     func createBottomFloater() -> some View {
         VStack(alignment: .leading) {
             Image("Logo M")
@@ -429,10 +448,10 @@ struct SuccessRegisterNasabahScreen: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(self.scheduleVM.schedule, id: \.date) { data in
+            List(self.scheduleVM.scheduleDates, id: \.self) { data in
                 
                 HStack {
-                    Text(data.date)
+                    Text(data)
                         .font(Font.system(size: 14))
                     
                     Spacer()
@@ -440,14 +459,15 @@ struct SuccessRegisterNasabahScreen: View {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
                     print(data)
-                    tanggalWawancara = data.date
+                    tanggalWawancara = data
+                    scheduleVM.getScheduleById(date: tanggalWawancara)
                     self.showingModalTanggal.toggle()
                 })
                 
             }
             .background(Color.white)
-            .padding(.vertical)
-            .frame(height: 150)
+            .padding(.bottom)
+            .frame(height: 200)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -456,6 +476,7 @@ struct SuccessRegisterNasabahScreen: View {
         .cornerRadius(20)
     }
     
+    // MARK: -Fuction for Create Bottom Floater (Modal
     func createBottomFloaterJam() -> some View {
         VStack {
             HStack {
@@ -485,10 +506,10 @@ struct SuccessRegisterNasabahScreen: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(self.scheduleVM.schedule, id: \.timeStart) { data in
+            List(self.scheduleVM.scheduleJamBasedOnDate, id: \.self) { data in
                 
                 HStack {
-                    Text("\(data.timeStart)" + "-" + "\(data.timeEnd)")
+                    Text(data)
                         .font(Font.system(size: 14))
                     
                     Spacer()
@@ -496,7 +517,7 @@ struct SuccessRegisterNasabahScreen: View {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
                     print(data)
-                    pilihJam = "\(data.timeStart)" + "-" + "\(data.timeEnd)"
+                    pilihJam = data
                     self.showingModalJam.toggle()
                 })
                 
@@ -512,13 +533,69 @@ struct SuccessRegisterNasabahScreen: View {
         .cornerRadius(20)
     }
     
+    func showModalInformation() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_cs")
+                .resizable()
+                .frame(width: 64, height: 90)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Informasi")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text("Tanggal : \(tanggalWawancara)")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 5)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text("Jam : \(pilihJam)")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#2334D0"))
+                .padding(.bottom, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Button(
+                action: {
+                    self.showFormPilihJenisATM = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
     func getAllSchedule() {
         self.scheduleVM.getAllSchedule() { success in }
     }
 }
 
-struct SuccessRegisterNasabahScreen_Previews: PreviewProvider {
+struct InterviewScheduleRegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        SuccessRegisterNasabahScreen().environmentObject(RegistrasiModel())
+        InterviewScheduleRegisterView()
     }
 }
