@@ -68,6 +68,7 @@ struct VerificationPINView: View {
                                         .padding()
                                         .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
+                                        .disabled(shouldVerificationWithVC)
                                         .keyboardType(.phonePad)
                                     
                                     Spacer()
@@ -97,6 +98,7 @@ struct VerificationPINView: View {
                                         .padding()
                                         .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
+                                        .disabled(shouldVerificationWithVC)
                                         .keyboardType(.phonePad)
                                     
                                     Spacer()
@@ -122,6 +124,9 @@ struct VerificationPINView: View {
                         HStack {
                             Button(action: {
                                 self.shouldVerificationWithVC.toggle()
+                                if self.shouldVerificationWithVC {
+                                    self.pin = ""
+                                }
                             }) {
                                 HStack(alignment: .top) {
                                     Image(systemName: shouldVerificationWithVC ? "checkmark.square": "square")
@@ -192,6 +197,9 @@ struct VerificationPINView: View {
         .edgesIgnoringSafeArea(.all)
         //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }

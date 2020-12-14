@@ -249,6 +249,7 @@
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
 		C02C2DE025875B0C00CED248 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = C02C2DDF25875B0C00CED248 /* Mantis */; };
+		C02C2DE825876BAA00CED248 /* PhotoCropping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C2DE725876BAA00CED248 /* PhotoCropping.swift */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
@@ -563,6 +564,7 @@
 		C00702B42554E2B60089DBD1 /* CardLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitView.swift; sourceTree = "<group>"; };
 		C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithToolBarKeyBoard.swift; sourceTree = "<group>"; };
 		C00702C6255531280089DBD1 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
+		C02C2DE725876BAA00CED248 /* PhotoCropping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCropping.swift; sourceTree = "<group>"; };
 		C02E9BAC256E814C00622E7A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCarousel.swift; sourceTree = "<group>"; };
 		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
@@ -736,6 +738,7 @@
 				C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */,
 				0651B1E2257758CB00E4A834 /* LoadingView.swift */,
 				0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */,
+				C02C2DE725876BAA00CED248 /* PhotoCropping.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -1280,9 +1283,10 @@
 				C02E9BAC256E814C00622E7A /* WelcomeView.swift */,
 				C00AC550255E51B6005D67C0 /* Non Nasabah Verification */,
 				5290A120255BBEBD0090F788 /* Nasabah Verification */,
+				52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */,
+				52ADFF792557DFDB00A1001F /* Form Validasi */,
 				52BF57CE2558E34100F009B5 /* FormPilihJenisTabunganView.swift */,
 				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
-				52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */,
 				52ADFF7B2557DFDB00A1001F /* Term&ConditionView.swift */,
 				C0D3F6D1258714FE00D4F1C8 /* DataVerificationNasabahView.swift */,
 				52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */,
@@ -1291,7 +1295,6 @@
 				52ADFF612557DFDB00A1001F /* FormPilihDesainATMView.swift */,
 				064EBDAD256ADEB20070A792 /* FormCompletionKartuATMView.swift */,
 				52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */,
-				52ADFF792557DFDB00A1001F /* Form Validasi */,
 				52ADFF7E2557DFDB00A1001F /* VerificationDataPersonalView.swift */,
 				52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */,
 				52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */,
@@ -1882,6 +1885,7 @@
 				52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */,
 				525950232553E03000C8CA5D /* PhoneNumberVerificationForgotPasswordView.swift in Sources */,
 				52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */,
+				C02C2DE825876BAA00CED248 /* PhotoCropping.swift in Sources */,
 				52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
