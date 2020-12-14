@@ -137,18 +137,18 @@ struct JenisTabunganRegisterNasabahView: View {
             EmptyView()
                 .frame(height: 150)
             
-            NavigationLink(destination: FormIdentitasDiriRegisterNasabahView().environmentObject(registerData)) {
-                
-                Text("Pilih Tabungan ini")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                
-            }
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 10)
-            .padding(.top, 10)
+//            NavigationLink(destination: FormIdentitasDiriRegisterNasabahView().environmentObject(registerData)) {
+//                
+//                Text("Pilih Tabungan ini")
+//                    .foregroundColor(.white)
+//                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+//                
+//            }
+//            .background(Color(hex: "#2334D0"))
+//            .cornerRadius(12)
+//            .padding(.bottom, 10)
+//            .padding(.top, 10)
             
         }
         .padding(.bottom, 15)

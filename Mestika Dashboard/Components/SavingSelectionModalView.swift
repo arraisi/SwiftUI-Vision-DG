@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SavingSelectionModalView: View {
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     var data: SavingType
     
     @Binding var isShowModal: Bool
@@ -66,6 +67,7 @@ struct SavingSelectionModalView: View {
             }
             
             Button(action: {
+                print("nasabah? : \(self.appState.nasabahIsExisting)")
                 registerData.jenisTabungan = data.tabunganName
                 goToNextPage = true
             }) {
