@@ -138,7 +138,7 @@ struct ScanKTPView: View {
                 print("nikValid \(self.citizenVM.nik)")
                 self.messageResponse = self.citizenVM.errorMessage
                 
-                self.showingAlert = true
+//                self.showingAlert = true
                 
                 self.registerData.nik = nik
                 self.registerData.namaLengkapFromNik = self.citizenVM.namaLengkap
