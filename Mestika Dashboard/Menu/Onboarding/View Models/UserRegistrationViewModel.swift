@@ -21,9 +21,9 @@ extension UserRegistrationViewModel {
         
         UserRegistrationService.shared.postUser(
             registerData: registerData,
-            imageKtp: UIImage(named: "atm_red_devils")!,
-            imageNpwp: UIImage(named: "atm_red_devils")!,
-            imageSelfie: UIImage(named: "atm_red_devils")!) { result in
+            imageKtp: registerData.fotoKTP.asUIImage(),
+            imageNpwp: registerData.fotoNPWP.asUIImage(),
+            imageSelfie: registerData.fotoSelfie.asUIImage()) { result in
                 
             switch result {
             case .success(let response):
