@@ -26,6 +26,7 @@ struct PhoneOTPRegisterNasabahView: View {
     @State var referenceCode: String = ""
     @State var isDisabled = false
     @State var messageResponse: String = ""
+    @State var destinationNumber: String = ""
     
     /* Variable Validation */
     @State var isLoading = true
@@ -78,7 +79,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("Kami telah mengirimkan OTP ke No. +62\(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
+                    Text("Kami telah mengirimkan OTP ke No. \(replace(myString: destinationNumber, [6, 7, 8, 9], "x"))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
@@ -387,10 +388,11 @@ struct PhoneOTPRegisterNasabahView: View {
     
     @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
-        self.otpVM.otpRequest(
+        self.otpVM.otpRequestAccOrRek(
             otpRequest: OtpRequest(
-                destination: self.registerData.noTelepon,
-                type: "hp",
+                destination: self.registerData.atmOrRekening == "ATM" ? self.registerData.noAtm : self.registerData
+                    .noRekening,
+                type: self.registerData.atmOrRekening == "ATM" ? "atm" : "rek",
                 trytime: 1
             )
         ) { success in
@@ -405,6 +407,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
+                    self.destinationNumber = self.otpVM.destination
                 }
                 
                 self.isShowAlert = true
@@ -436,13 +439,15 @@ struct PhoneOTPRegisterNasabahView: View {
     
     func validateOTP() {
         self.isLoading = true
-        self.otpVM.otpValidation(
+        self.otpVM.otpValidationAccOrRek(
             code: self.pin,
-            destination: "+62" + self.registerData.noTelepon,
+            destination: self.destinationNumber,
             reference: referenceCode,
             timeCounter: self.timeRemainingBtn,
             tryCount: tryCount,
-            type: "hp")
+            type: self.registerData.atmOrRekening == "ATM" ? "atm" : "rek",
+            accValue: self.registerData.atmOrRekening == "ATM" ? self.registerData.noAtm : self.registerData
+                .noRekening)
         { success in
             
             if success {

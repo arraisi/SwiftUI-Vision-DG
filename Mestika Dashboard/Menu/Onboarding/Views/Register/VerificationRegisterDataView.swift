@@ -749,6 +749,80 @@ struct VerificationRegisterDataView: View {
             }
         }
     }
+    
+    func clearData() {
+        self.registerData.noTelepon = ""
+        self.registerData.jenisTabungan = ""
+        self.registerData.email = ""
+        self.registerData.tujuanPembukaanId = 0
+        self.registerData.tujuanPembukaan = ""
+        self.registerData.sumberDanaId = 0
+        self.registerData.sumberDana = ""
+        self.registerData.perkiraanPenarikanId = 0
+        self.registerData.perkiraanPenarikan = ""
+        self.registerData.besarPerkiraanPenarikanId = 0
+        self.registerData.besarPerkiraanPenarikan = ""
+        self.registerData.perkiraanSetoranId = 0
+        self.registerData.perkiraanSetoran = ""
+        self.registerData.pekerjaanId = 0
+        self.registerData.pekerjaan = ""
+        self.registerData.besarPerkiraanSetoranId = 0
+        self.registerData.besarPerkiraanSetoran = ""
+        self.registerData.jabatanProfesiId = 0
+        self.registerData.jabatanProfesi = ""
+        self.registerData.namaPenyandangDana = ""
+        self.registerData.hubunganPenyandangDana = ""
+        self.registerData.profesiPenyandangDana = ""
+        self.registerData.industriTempatBekerjaId = 0
+        self.registerData.industriTempatBekerja = ""
+        self.registerData.sumberPenyandangDanaId = 0
+        self.registerData.sumberPenyandangDana = ""
+        self.registerData.sumberPendapatanLainnyaId = 0
+        self.registerData.sumberPendapatanLainnya = ""
+        self.registerData.sumberPendapatanLain = ""
+        self.registerData.namaPerusahaan = ""
+        self.registerData.alamatPerusahaan = ""
+        self.registerData.alamatKeluarga = ""
+        self.registerData.kodePosKeluarga = ""
+        self.registerData.kecamatanKeluarga = ""
+        self.registerData.kelurahanKeluarga = ""
+        self.registerData.noTlpKeluarga = ""
+        self.registerData.kodePos = ""
+        self.registerData.kecamatan = ""
+        self.registerData.kelurahan = ""
+        self.registerData.rtrw = ""
+        self.registerData.noTeleponPerusahaan = ""
+        self.registerData.penghasilanKotorId = 0
+        self.registerData.penghasilanKotor = ""
+        self.registerData.namaKeluarga = ""
+        self.registerData.hubunganKekerabatanKeluarga = ""
+        self.registerData.hubunganKekerabatan = ""
+        self.registerData.password = ""
+        self.registerData.pin = ""
+        self.registerData.verificationAddressId = 1
+        self.registerData.confirmationPin = ""
+        self.registerData.npwp = ""
+        self.registerData.hasNoNpwp = false
+        self.registerData.namaLengkapFromNik = ""
+        self.registerData.nomorKKFromNik = ""
+        self.registerData.jenisKelaminFromNik = ""
+        self.registerData.tempatLahirFromNik = ""
+        self.registerData.tanggalLahirFromNik = ""
+        self.registerData.agamaFromNik = ""
+        self.registerData.statusPerkawinanFromNik = ""
+        self.registerData.pendidikanFromNik = ""
+        self.registerData.jenisPekerjaanFromNik = ""
+        self.registerData.namaIbuFromNik = ""
+        self.registerData.statusHubunganFromNik = ""
+        self.registerData.alamatKtpFromNik = ""
+        self.registerData.rtFromNik = ""
+        self.registerData.rwFromNik = ""
+        self.registerData.kelurahanFromNik = ""
+        self.registerData.kecamatanFromNik = ""
+        self.registerData.kabupatenKotaFromNik = ""
+        self.registerData.provinsiFromNik = ""
+        self.registerData.bidangUsaha = ""
+    }
 }
 
 struct VerificationRegisterDataView_Previews: PreviewProvider {

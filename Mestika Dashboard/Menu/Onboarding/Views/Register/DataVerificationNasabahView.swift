@@ -760,16 +760,18 @@ struct DataVerificationRegisterNasabahView: View {
     func saveUserToDb() {
         //        nextRoute = true
         
-        //        self.registerData.nik = "5106040309800927"
-        //        self.registerData.namaLengkapFromNik = "DATA TEST T 03"
-        //        self.registerData.tempatLahirFromNik = "LAHIR"
-        //        self.registerData.alamatKtpFromNik = "JL PROF DR LATUMETEN I GG.5/6"
-        //        self.registerData.rtFromNik = "02"
-        //        self.registerData.rwFromNik = "03"
-        //        self.registerData.kelurahanFromNik = "ANDIR"
-        //        self.registerData.kecamatanFromNik = "ANDIR"
-        //        self.registerData.kabupatenKotaFromNik = "ANDIR"
-        //        self.registerData.provinsiFromNik = "JAWA BARAT"
+//                self.registerData.noTelepon = "85875074351"
+//                self.registerData.email = "primajatnika271995@gmail.com"
+//                self.registerData.nik = "5106040309800927"
+//                self.registerData.namaLengkapFromNik = "DATA TEST T 03"
+//                self.registerData.tempatLahirFromNik = "LAHIR"
+//                self.registerData.alamatKtpFromNik = "JL PROF DR LATUMETEN I GG.5/6"
+//                self.registerData.rtFromNik = "02"
+//                self.registerData.rwFromNik = "03"
+//                self.registerData.kelurahanFromNik = "ANDIR"
+//                self.registerData.kecamatanFromNik = "ANDIR"
+//                self.registerData.kabupatenKotaFromNik = "ANDIR"
+//                self.registerData.provinsiFromNik = "JAWA BARAT"
         
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
