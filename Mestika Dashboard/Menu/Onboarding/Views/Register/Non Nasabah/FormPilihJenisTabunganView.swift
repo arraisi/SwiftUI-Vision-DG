@@ -37,7 +37,7 @@ struct FormPilihJenisTabunganView: View {
             }
             
             VStack {
-                AppBarLogo(onCancel: {})
+                AppBarLogo(light: false, onCancel: {})
                 
                 VStack() {
                     

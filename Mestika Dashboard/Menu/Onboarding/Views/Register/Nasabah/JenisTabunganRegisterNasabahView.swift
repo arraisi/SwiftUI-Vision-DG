@@ -36,13 +36,16 @@ struct JenisTabunganRegisterNasabahView: View {
             }
             
             VStack {
+                
+                AppBarLogo(light: false, onCancel: {})
+                
                 VStack() {
                     
                     Text("Pilih Jenis Tabungan Anda")
                         .font(.custom("Montserrat-SemiBold", size: 15))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.horizontal, 15)
-                        .padding(.top, 80)
+                        .padding(.top, 20)
                     
                     // MARK: - CAROUSEL
                     VStack{
@@ -96,7 +99,8 @@ struct JenisTabunganRegisterNasabahView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarHidden(true)
+//        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
 
