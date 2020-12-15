@@ -1111,13 +1111,6 @@
 			path = "Form Pembukaan Rekening";
 			sourceTree = "<group>";
 		};
-		52ADFF792557DFDB00A1001F /* Form Validasi */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Form Validasi";
-			sourceTree = "<group>";
-		};
 		52BF57D82558E66600F009B5 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -1284,7 +1277,6 @@
 				C00AC550255E51B6005D67C0 /* Non Nasabah Verification */,
 				5290A120255BBEBD0090F788 /* Nasabah Verification */,
 				52ADFF642557DFDB00A1001F /* Form Pembukaan Rekening */,
-				52ADFF792557DFDB00A1001F /* Form Validasi */,
 				52BF57CE2558E34100F009B5 /* FormPilihJenisTabunganView.swift */,
 				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
 				52ADFF7B2557DFDB00A1001F /* Term&ConditionView.swift */,
