@@ -23,6 +23,8 @@ struct FormCompletionKartuATMView: View {
     @State var goToSuccessPage = false
     @State var isLoading = false
     
+    @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
+    
     @State var addressOptionId = 1
     
 //    @State var nameOnCard : String = ""
@@ -113,7 +115,7 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-//            registerData.namaLengkapFromNik = "Prima Jatnika"
+            registerData.namaLengkapFromNik = nama_local!
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
         }

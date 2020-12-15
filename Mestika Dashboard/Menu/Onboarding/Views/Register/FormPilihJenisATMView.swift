@@ -31,6 +31,8 @@ struct FormPilihJenisATMView: View {
             ZStack(alignment: .top) {
                 
                 VStack {
+                    Color(hex: "#232175")
+                        .frame(height: 100)
                     Color(hex: "#F6F8FB")
                         .edgesIgnoringSafeArea(.all)
                 }

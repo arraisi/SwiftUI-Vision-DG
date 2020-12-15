@@ -471,7 +471,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 30)
             
             NavigationLink(
-                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(registerData),
+                destination: DataVerificationRegisterNasabahView().environmentObject(registerData),
                 isActive: self.$isKetentuanViewActive) {
                 EmptyView()
             }
@@ -722,6 +722,7 @@ struct WelcomeView: View {
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
+            .isDetailLink(false)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
