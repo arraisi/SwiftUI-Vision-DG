@@ -81,7 +81,7 @@ struct WelcomeView: View {
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
                         
-                        NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: self.$isLoginViewActive){
+                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
