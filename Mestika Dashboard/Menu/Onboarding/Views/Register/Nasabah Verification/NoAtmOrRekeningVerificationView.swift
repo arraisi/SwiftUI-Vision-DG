@@ -89,20 +89,28 @@ struct NoAtmOrRekeningVerificationView: View {
                     .cornerRadius(20)
                     .padding(.vertical, 5)
                     
-                    TextField("Masukan no kartu", text: $noKartuCtrl)
-                        .font(.custom("Montserrat-Regular", size: 12))
-                        .keyboardType(.numberPad)
-                        .padding(15)
-                        .background(Color.gray.opacity(0.1))
-                        .frame(height: 50)
-                        .cornerRadius(20)
-                        .onReceive(noKartuCtrl.publisher.collect()) {
-                            if (jenisKartuCtrl == "Kartu ATM") {
-                                self.noKartuCtrl = String($0.prefix(16))
-                            } else {
-                                self.noKartuCtrl = String($0.prefix(8))
-                            }
+                    TextField("Masukan no kartu", text: $noKartuCtrl, onEditingChanged: { changed in
+                        if (jenisKartuCtrl == "Kartu ATM") {
+                            self.registerData.atmOrRekening = "ATM"
+                            self.registerData.noAtm = self.noKartuCtrl
+                        } else {
+                            self.registerData.atmOrRekening = "REKENING"
+                            self.registerData.noRekening = self.noKartuCtrl
                         }
+                    })
+                    .font(.custom("Montserrat-Regular", size: 12))
+                    .keyboardType(.numberPad)
+                    .padding(15)
+                    .background(Color.gray.opacity(0.1))
+                    .frame(height: 50)
+                    .cornerRadius(20)
+                    .onReceive(noKartuCtrl.publisher.collect()) {
+                        if (jenisKartuCtrl == "Kartu ATM") {
+                            self.noKartuCtrl = String($0.prefix(16))
+                        } else {
+                            self.noKartuCtrl = String($0.prefix(8))
+                        }
+                    }
                     
                     Text("*Pastikan kartu ATM atau Rekening Anda telah aktif, jika belum aktifasi kartu ATM silahkan kunjungi Kantor Bank Mestika terdekat.")
                         .font(.custom("Montserrat-Regular", size: 10))
@@ -140,7 +148,7 @@ struct NoAtmOrRekeningVerificationView: View {
         //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .onAppear{
-            self.registerData.noTelepon = "85359117336"
+            //            self.registerData.noTelepon = "85359117336"
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
