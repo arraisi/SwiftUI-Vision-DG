@@ -23,6 +23,8 @@ struct FormCompletionKartuATMView: View {
     @State var goToSuccessPage = false
     @State var isLoading = false
     
+    @State var addressOptionId = 1
+    
 //    @State var nameOnCard : String = ""
 //    @State var currentAddress : Address = Address()
     
@@ -173,14 +175,14 @@ struct FormCompletionKartuATMView: View {
             
             RadioButtonGroup(
                 items: addressOptions,
-                selectedId: $atmData.addressOptionId) { selected in
+                selectedId: $addressOptionId) { selected in
                 fetchAddressOption()
             }
             .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
             
             VStack { Divider() }.padding(.horizontal, 20)
             
-            if atmData.addressOptionId == 4 {
+            if addressOptionId == 4 {
                 formAddress
             }
         }
@@ -209,9 +211,9 @@ struct FormCompletionKartuATMView: View {
                     }
                     .font(Font.system(size: 14))
                     .frame(height: 36)
-                    .disabled(atmData.addressOptionId != 4)
+                    .disabled(addressOptionId != 4)
                     
-                    if atmData.addressOptionId == 4 {
+                    if addressOptionId == 4 {
                         Button(action:{
                             showingAddressModal.toggle()
                         }, label: {
@@ -227,25 +229,25 @@ struct FormCompletionKartuATMView: View {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddressrtRwInput, label: "", placeHolder: "RT/RW", disabled:atmData.addressOptionId != 4 ) { (change) in
+            LabelTextField(value: $atmData.atmAddressrtRwInput, label: "", placeHolder: "RT/RW", disabled:addressOptionId != 4 ) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddresskelurahanInput, label: "", placeHolder: "Kelurahan", disabled:atmData.addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddresskelurahanInput, label: "", placeHolder: "Kelurahan", disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddresskecamatanInput, label: "", placeHolder: "Kecamatan", disabled:atmData.addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddresskecamatanInput, label: "", placeHolder: "Kecamatan", disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-//            LabelTextField(value: $atmData.atmAddresspostalCodeInput, label: "", placeHolder: "Kode Pos", disabled:atmData.addressOptionId != 4) { (change) in
+//            LabelTextField(value: $atmData.atmAddresspostalCodeInput, label: "", placeHolder: "Kode Pos", disabled:addressOptionId != 4) { (change) in
 //
 //            } onCommit: {
 //
@@ -262,7 +264,7 @@ struct FormCompletionKartuATMView: View {
                     .keyboardType(.numberPad)
                     .font(Font.system(size: 14))
                     .frame(height: 36)
-                    .disabled(atmData.addressOptionId != 4)
+                    .disabled(addressOptionId != 4)
                 }
                 .padding(.horizontal)
                 .background(Color.gray.opacity(0.1))
@@ -432,7 +434,7 @@ struct FormCompletionKartuATMView: View {
     }
     
     func isValid() -> Bool {
-        if atmData.addressOptionId == 4 {
+        if addressOptionId == 4 {
             return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 && self.kodePos.trimmingCharacters(in: .whitespaces).count > 0
         } else {
             return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty
@@ -440,7 +442,7 @@ struct FormCompletionKartuATMView: View {
     }
     
     func fetchAddressOption() {
-        switch atmData.addressOptionId {
+        switch addressOptionId {
         case 1: /// Sesuai KTP
             atmData.atmAddressInput = registerData.alamatKtpFromNik
             atmData.atmAddresspostalCodeInput = registerData.kodePos

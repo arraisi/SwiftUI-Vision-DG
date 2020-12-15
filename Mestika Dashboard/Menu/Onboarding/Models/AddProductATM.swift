@@ -20,8 +20,11 @@ class AddProductATM: ObservableObject, Codable {
     @Published var atmDesignType: String = ""
     @Published var productType: String = ""
     @Published var nik: String = ""
+    @Published var isNasabahMestika: Bool = false
+    @Published var isVcall: Bool = false
+    @Published var isAddressEqualToDukcapil: String = ""
     
-    var addressOptionId: Int = 1
+//    var addressOptionId: Int = 1
     
 //    // All your properties should be included
 //    enum CodingKeys: String, CodingKey {
