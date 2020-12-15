@@ -31,7 +31,8 @@ struct JenisTabunganRegisterNasabahView: View {
         ZStack(alignment: .top) {
             
             VStack {
-                Color(hex: "#F6F8FB")
+                Color(hex: "#232175")
+                    .frame(height: 100)
                     .edgesIgnoringSafeArea(.all)
             }
             
