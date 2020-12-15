@@ -83,6 +83,15 @@
         }
       },
       {
+        "package": "Mantis",
+        "repositoryURL": "https://github.com/guoyingtao/Mantis.git",
+        "state": {
+          "branch": null,
+          "revision": "693d958630122e81b097c719b515de7e9e68402c",
+          "version": "1.4.7"
+        }
+      },
+      {
         "package": "MultipartForm",
         "repositoryURL": "https://github.com/davbeck/MultipartForm",
         "state": {

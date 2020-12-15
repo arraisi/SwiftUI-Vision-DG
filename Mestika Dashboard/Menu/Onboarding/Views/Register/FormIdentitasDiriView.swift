@@ -44,6 +44,7 @@ struct FormIdentitasDiriView: View {
     @State private var imageNPWP: Image?
     @State private var npwp: String = ""
     @State private var alreadyHaveNpwp: Bool = false
+    @State private var shouldPresentPhotoEditor: Bool = false
     /*
      Views Variables
      */
@@ -212,7 +213,16 @@ struct FormIdentitasDiriView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .sheet(isPresented: $shouldPresentCamera) {
+        .fullScreenCover(isPresented: $shouldPresentCamera, onDismiss: {
+            if formNPWP {
+                if self.shouldPresentPhotoEditor { // end cropping
+                    self.shouldPresentPhotoEditor = false
+                } else { // begin cropping
+                    self.shouldPresentPhotoEditor = true
+                    self.shouldPresentCamera = true
+                }
+            }
+        }) {
             
             if self.shouldPresentKtpScanner {
                 
@@ -243,19 +253,22 @@ struct FormIdentitasDiriView: View {
             }
             else {
                 
-                ZStack {
-                    SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
-                    
-                    if self.shouldPresentMaskSelfieCamera {
-                        Image("pattern_selfie")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .opacity(0.5)
-                            .offset(y: -(UIScreen.main.bounds.height * 0.1))
+                if shouldPresentPhotoEditor {
+                    ImageEditor(image: $imageNPWP, isShowing: $shouldPresentCamera)
+                } else {
+                    ZStack {
+                        SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
+                        
+                        if self.shouldPresentMaskSelfieCamera {
+                            Image("pattern_selfie")
+                                .renderingMode(.original)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .opacity(0.5)
+                                .offset(y: -(UIScreen.main.bounds.height * 0.12))
+                        }
                     }
                 }
-                
             }
         }
     }
