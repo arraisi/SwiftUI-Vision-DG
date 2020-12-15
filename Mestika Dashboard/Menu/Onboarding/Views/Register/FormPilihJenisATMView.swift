@@ -31,14 +31,12 @@ struct FormPilihJenisATMView: View {
             ZStack(alignment: .top) {
                 
                 VStack {
-                    Color(hex: "#232175")
-                        .frame(height: 100)
                     Color(hex: "#F6F8FB")
                         .edgesIgnoringSafeArea(.all)
                 }
                 
                 VStack {
-                    AppBarLogo(light: false, onCancel: {})
+                    AppBarLogo(light: true, onCancel: {})
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         // MARK: - CAROUSEL

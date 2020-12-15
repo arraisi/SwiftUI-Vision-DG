@@ -22,6 +22,7 @@ struct WelcomeView: View {
     @State var isFirstLoginViewActive: Bool = false
     @State var isActiveRootLogin: Bool = false
     @State var isNoAtmOrRekViewActive: Bool = false
+    @State var isFormPilihJenisAtm: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -114,6 +115,7 @@ struct WelcomeView: View {
                     self.isLoginViewActive = false
                     self.isFirstLoginViewActive = false
                     self.isNoAtmOrRekViewActive = false
+                    self.isFormPilihJenisAtm = false
                     self.appState.moveToWelcomeView = false
                 }
             }
@@ -239,18 +241,23 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            // MARK: change destination
-            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData)){
-                Text("Halaman Submit Produk ATM")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
+            Button(
+                action: {
+                    self.isFormPilihJenisAtm = true
+                },
+                label: {
+                    Text("Halaman Submit Produk ATM")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+            )
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
             
+            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
+                .isDetailLink(false)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
@@ -471,7 +478,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 30)
             
             NavigationLink(
-                destination: DataVerificationRegisterNasabahView().environmentObject(registerData),
+                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(registerData),
                 isActive: self.$isKetentuanViewActive) {
                 EmptyView()
             }
@@ -716,16 +723,19 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData)){
-                Text("Lanjutkan")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
+            Button(
+                action: {},
+                label: {
+                    Text("Lanjutkan")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+            )
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
+            
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
