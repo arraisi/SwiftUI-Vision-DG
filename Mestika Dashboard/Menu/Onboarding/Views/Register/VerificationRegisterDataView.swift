@@ -14,11 +14,17 @@ struct VerificationRegisterDataView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    /*
+     Recognized Nomor Induk Ktp
+     */
+    @ObservedObject var recognizedText: RecognizedText = RecognizedText()
+    /*
+     Views Variables
+     */
     @State private var nextRoute: Bool = false
-    @State private var editImageSelection: String = ""
-    @State private var shouldPresentCamera: Bool = false
-    @State private var shouldPresentPhotoEditor: Bool = false
     @State private var shouldPresentMaskSelfie: Bool = false
+    @State private var shouldPresentCamera = false
+    @State private var cameraFileName = ""
     
     @State private var imageTaken: Image?
     
@@ -95,11 +101,11 @@ struct VerificationRegisterDataView: View {
                                 VStack {
                                     
                                     Button(action: {
-                                        self.editImageSelection = "ktp"
+                                        self.cameraFileName = "ktp"
                                         self.shouldPresentCamera = true
                                     }) {
                                         HStack {
-                                            Text("Foto KTP")
+                                            Text("Foto KTP e")
                                                 .font(.subheadline)
                                                 .foregroundColor(Color(hex: "#232175"))
                                                 .fontWeight(.bold)
@@ -125,7 +131,7 @@ struct VerificationRegisterDataView: View {
                                 VStack {
                                     
                                     Button(action: {
-                                        self.editImageSelection = "selfie"
+                                        self.cameraFileName = "selfie"
                                         self.shouldPresentMaskSelfie = true
                                         self.shouldPresentCamera = true
                                     }) {
@@ -155,7 +161,7 @@ struct VerificationRegisterDataView: View {
                                     VStack {
                                         
                                         Button(action: {
-                                            self.editImageSelection = "npwp"
+                                            self.cameraFileName = "npwp"
                                             self.shouldPresentCamera = true
                                         }) {
                                             HStack {
@@ -269,7 +275,7 @@ struct VerificationRegisterDataView: View {
                                     
                                     HStack {
                                         TextField("Besar Perkiraan Penarikan", text: $registerData.besarPerkiraanPenarikan)
-                                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                            .disabled(true)
                                         
                                         Divider()
                                             .frame(height: 30)
@@ -294,7 +300,7 @@ struct VerificationRegisterDataView: View {
                                     
                                     HStack {
                                         TextField("Perkiraan Setoran", text: $registerData.perkiraanSetoran)
-                                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                            .disabled(true)
                                         
                                         Divider()
                                             .frame(height: 30)
@@ -319,7 +325,7 @@ struct VerificationRegisterDataView: View {
                                     
                                     HStack {
                                         TextField("Besar Perkiraan Setoran", text: $registerData.besarPerkiraanPenarikan)
-                                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                            .disabled(true)
                                         
                                         Divider()
                                             .frame(height: 30)
@@ -344,7 +350,7 @@ struct VerificationRegisterDataView: View {
                                     
                                     HStack {
                                         TextField("Pekerjaan", text: $registerData.pekerjaan)
-                                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                            .disabled(true)
                                         
                                         Divider()
                                             .frame(height: 30)
@@ -378,7 +384,6 @@ struct VerificationRegisterDataView: View {
                 VStack {
                     Button(action: {
                         
-                        //                        saveUserToCoreData()
                         saveUserToDb()
                         
                     }, label: {
@@ -406,71 +411,12 @@ struct VerificationRegisterDataView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $shouldPresentCamera, onDismiss: {
-            
-            switch self.editImageSelection {
-            
-            case "ktp":
-                if self.shouldPresentPhotoEditor { // end cropping
-                    if let result = self.imageTaken {
-                        registerData.fotoKTP = result
-                    }
-                    self.shouldPresentPhotoEditor = false
-                } else { // begin cropping
-                    // Temporary
-                    if let result = self.imageTaken {
-                        registerData.fotoKTP = result
-                    }
-                    // TODO: Memory issue
-                    // self.shouldPresentPhotoEditor = true
-                    // self.shouldPresentCamera = true
-                }
-                
-            case "selfie":
-                self.registerData.fotoSelfie = self.imageTaken ?? Image("")
-                
-            case "npwp":
-                
-                if self.shouldPresentPhotoEditor { // end cropping
-                    if let result = self.imageTaken {
-                        registerData.fotoNPWP = result
-                    }
-                    self.shouldPresentPhotoEditor = false
-                } else { // begin cropping
-                    // Temporary
-                    if let result = self.imageTaken {
-                        registerData.fotoNPWP = result
-                    }
-                    // TODO: Memory issue
-                    // self.shouldPresentPhotoEditor = true
-                    // self.shouldPresentCamera = true
-                }
-                
-            default:
-                self.registerData.fotoKTP = self.imageTaken ?? Image("")
-            }
-            
-            self.shouldPresentMaskSelfie = false
-            
-        }) {
-            if shouldPresentPhotoEditor {
-                ImageEditor(image: $imageTaken, isShowing: $shouldPresentCamera)
+        .fullScreenCover(isPresented: $shouldPresentCamera) {
+            if self.cameraFileName == "selfie" {
+               camera
             } else {
-                ZStack {
-                    SUImagePickerView(sourceType: .camera, image: $imageTaken, isPresented: $shouldPresentCamera, frontCamera: $shouldPresentMaskSelfie)
-                    
-                    if shouldPresentMaskSelfie {
-                        Image("pattern_selfie")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .opacity(0.5)
-                            .offset(y: -(UIScreen.main.bounds.height * 0.1))
-                    }
-                    
-                }
+               scanner
             }
-            
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
@@ -479,6 +425,46 @@ struct VerificationRegisterDataView: View {
                 dismissButton: .default(Text("Oke")))
         }
         
+    }
+    
+    var scanner: some View {
+        ScanningView(recognizedText: $recognizedText.value, cameraFileName: $cameraFileName)
+            .onDisappear(perform: {
+                let scanResult = retrieveImage(forKey: self.cameraFileName)
+                
+                if let image = scanResult {
+                    switch self.cameraFileName {
+                    case "ktp":
+                        self.registerData.fotoKTP = Image(uiImage: image)
+                    case "npwp":
+                        self.registerData.fotoNPWP = Image(uiImage: image)
+                    default:
+                        print("retrieve image nil")
+                    }
+                }
+            })
+    }
+    
+    var camera: some View {
+        ZStack {
+            SUImagePickerView(sourceType: .camera, image: $imageTaken, isPresented: $shouldPresentCamera, frontCamera: $shouldPresentMaskSelfie)
+                .onDisappear {
+                    if let image = imageTaken {
+                        registerData.fotoSelfie = image
+                    }
+                    self.shouldPresentMaskSelfie = false
+                }
+            
+            if shouldPresentMaskSelfie {
+                Image("pattern_selfie")
+                    .renderingMode(.original)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .opacity(0.5)
+                    .offset(y: -(UIScreen.main.bounds.height * 0.12))
+            }
+            
+        }
     }
     
     var dynamicForm: some View {
