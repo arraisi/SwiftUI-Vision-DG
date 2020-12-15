@@ -28,7 +28,6 @@ struct FormIdentitasDiriView: View {
      */
     @State private var formKTP: Bool = true
     @State private var imageKTP: Image?
-    @State private var confirmImageKTP: Bool = false
     @State private var nik: String = ""
     @State private var confirmNik: Bool = false
     /*
@@ -44,12 +43,12 @@ struct FormIdentitasDiriView: View {
     @State private var imageNPWP: Image?
     @State private var npwp: String = ""
     @State private var alreadyHaveNpwp: Bool = false
-    @State private var shouldPresentPhotoEditor: Bool = false
     /*
      Views Variables
      */
-    @State private var shouldPresentKtpScanner = true
+    @State private var shouldPresentScanner = true
     @State private var shouldPresentCamera = false
+    @State private var cameraFileName = ""
     
     var body: some View {
         
@@ -103,15 +102,13 @@ struct FormIdentitasDiriView: View {
                                     ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik,
                                                 onChange: {
                                                     self.actionSelection("ktp")
-                                                    self.shouldPresentKtpScanner = true
+                                                    self.shouldPresentScanner = true
                                                     self.shouldPresentCamera = true
                                                 },
                                                 onCommit: {
-                                                    if confirmImageKTP {
-                                                        self.shouldPresentKtpScanner = false
-                                                        self.shouldPresentCamera = false
-                                                        self.actionSelection("selfie")
-                                                    }
+                                                    self.shouldPresentScanner = false
+                                                    self.shouldPresentCamera = false
+                                                    self.actionSelection("selfie")
                                                 })
                                 }
                                 .foregroundColor(.black)
@@ -128,7 +125,7 @@ struct FormIdentitasDiriView: View {
                                     SelfieView(registerData: _registerData, imageSelfie: $imageSelfie,
                                                onChange: {
                                                 self.actionSelection("selfie")
-                                                self.shouldPresentKtpScanner = false
+                                                self.shouldPresentScanner = false
                                                 self.shouldPresentCamera = true
                                                },
                                                onCommit: {
@@ -150,7 +147,7 @@ struct FormIdentitasDiriView: View {
                                     ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP,
                                                  onChange: {
                                                     self.actionSelection("npwp")
-                                                    self.shouldPresentKtpScanner = false
+                                                    self.shouldPresentScanner = true
                                                     self.shouldPresentCamera = true
                                                  },
                                                  onCommit: {
@@ -213,60 +210,52 @@ struct FormIdentitasDiriView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $shouldPresentCamera, onDismiss: {
-            if formNPWP {
-                if self.shouldPresentPhotoEditor { // end cropping
-                    self.shouldPresentPhotoEditor = false
-                } else { // begin cropping
-                    self.shouldPresentPhotoEditor = true
-                    self.shouldPresentCamera = true
-                }
-            }
-        }) {
+        .fullScreenCover(isPresented: $shouldPresentCamera) {
             
-            if self.shouldPresentKtpScanner {
+            if self.shouldPresentScanner {
                 
-                ScanningView(recognizedText: $recognizedText.value)
+                ScanningView(recognizedText: $recognizedText.value, cameraFileName: $cameraFileName)
                     .onDisappear(perform: {
                         if (recognizedText.value != "-") {
-                            print("scan value : \(recognizedText.value)")
-                            let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
-                            print("matched value : \(matched)")
-                            print("recognizedText.value value : \(recognizedText.value)")
-                            
-                            if matched.count != 0 {
-                                self.nik = matched[0]
+                            if self.cameraFileName == "ktp" {
+                                let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
+                                
+                                if matched.count != 0 {
+                                    self.nik = matched[0]
+                                }
+                                
+                                print("self.cameraFileName \(self.cameraFileName)")
                             }
                             
-                            if recognizedText.value.contains("Berlaku Hingga") && recognizedText.value.contains("PROVINSI")  {
-                                self.confirmImageKTP = true
-                                print("1. self.confirmImageKTP \(self.confirmImageKTP)")
-                            } else {
-                                self.confirmImageKTP = false
-                                print("2. self.confirmImageKTP \(self.confirmImageKTP)")
+                            let scanResult = retrieveImage(forKey: self.cameraFileName)
+                            if let image = scanResult {
+                                switch self.cameraFileName {
+                                case "ktp":
+                                    self.imageKTP = Image(uiImage: image)
+                                    self.registerData.fotoKTP = imageKTP!
+                                case "npwp":
+                                    self.imageNPWP = Image(uiImage: image)
+                                    self.registerData.fotoNPWP = imageNPWP!
+                                default:
+                                    print("retrieve image nil")
+                                }
                             }
                             
-                            _ = retrieveImage(forKey: "ktp")
                         }
                     })
                 
             }
             else {
-                
-                if shouldPresentPhotoEditor {
-                    ImageEditor(image: $imageNPWP, isShowing: $shouldPresentCamera)
-                } else {
-                    ZStack {
-                        SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
-                        
-                        if self.shouldPresentMaskSelfieCamera {
-                            Image("pattern_selfie")
-                                .renderingMode(.original)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .opacity(0.5)
-                                .offset(y: -(UIScreen.main.bounds.height * 0.12))
-                        }
+                ZStack {
+                    SUImagePickerView(sourceType: .camera, image: formNPWP ? self.$imageNPWP : self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
+                    
+                    if self.shouldPresentMaskSelfieCamera {
+                        Image("pattern_selfie")
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .opacity(0.5)
+                            .offset(y: -(UIScreen.main.bounds.height * 0.12))
                     }
                 }
             }
@@ -277,6 +266,7 @@ struct FormIdentitasDiriView: View {
      Fungsi untuk ambil Gambar dari Local Storage
      */
     private func actionSelection(_ selection: String) {
+        self.cameraFileName = selection
         switch selection {
         case "ktp":
             self.formSelfie = false
@@ -297,7 +287,7 @@ struct FormIdentitasDiriView: View {
             self.formKTP = false
             self.formSelfie = false
             self.formNPWP = false
-            self.shouldPresentKtpScanner = true
+            self.shouldPresentScanner = true
             self.shouldPresentMaskSelfieCamera = false
             self.shouldPresentCamera = false
         }
@@ -321,9 +311,6 @@ struct FormIdentitasDiriView: View {
         if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
            let image = UIImage(data: imageData) {
             print(image)
-            
-            self.imageKTP = Image(uiImage: image)
-            self.registerData.fotoKTP = imageKTP!
             return image
         }
         

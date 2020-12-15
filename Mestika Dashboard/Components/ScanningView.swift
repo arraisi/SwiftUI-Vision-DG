@@ -14,11 +14,12 @@ struct ScanningView: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var recognizedText: String
+    @Binding var cameraFileName: String
     
     typealias UIViewControllerType = VNDocumentCameraViewController
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(recognizedText: $recognizedText, parent: self)
+        return Coordinator(recognizedText: $recognizedText, cameraFileName: $cameraFileName, parent: self)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ScanningView>) -> VNDocumentCameraViewController {
@@ -34,12 +35,14 @@ struct ScanningView: UIViewControllerRepresentable {
     class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
         
         var recognizedText: Binding<String>
+        var cameraFileName: Binding<String>
         var parent: ScanningView
         private let textRecognizer: TextRecognizer
         
-        init(recognizedText: Binding<String>, parent: ScanningView) {
+        init(recognizedText: Binding<String>, cameraFileName: Binding<String>, parent: ScanningView) {
             self.recognizedText = recognizedText
             textRecognizer = TextRecognizer(recognizedText: recognizedText)
+            self.cameraFileName = cameraFileName
             self.parent = parent
         }
         
@@ -58,7 +61,7 @@ struct ScanningView: UIViewControllerRepresentable {
                 let image = scan.imageOfPage(at: pageIndex)
                 print(scan.imageOfPage(at: 0))
                 
-                store(imgStore: scan.imageOfPage(at: 0), forKey: "ktp")
+                store(imgStore: scan.imageOfPage(at: 0), forKey: cameraFileName.wrappedValue)
                 if let cgImage = image.cgImage {
                     images.append(cgImage)
                 }
