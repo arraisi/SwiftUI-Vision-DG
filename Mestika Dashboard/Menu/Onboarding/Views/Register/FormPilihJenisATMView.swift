@@ -36,7 +36,7 @@ struct FormPilihJenisATMView: View {
                 }
                 
                 VStack {
-                    AppBarLogo(light: false, onCancel: {})
+                    AppBarLogo(light: true, onCancel: {})
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         // MARK: - CAROUSEL

@@ -6,20 +6,18 @@
 //
 
 import SwiftUI
-
-struct JamWawancara {
-    var jam: String
-}
-
-struct TanggalWawancara {
-    var tanggal: String
-}
+import Indicators
 
 struct SuccessRegisterView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
     var productATMData = AddProductATM()
+    
+    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local")
+    @State private var email_local = UserDefaults.standard.string(forKey: "email_local")
+    @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
+    @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var appState: AppState
@@ -29,6 +27,7 @@ struct SuccessRegisterView: View {
     
     /* Routing */
     @State private var backRoute: Bool = false
+    @State private var nextRoute: Bool = false
     
     /*
      Boolean for Show Modal
@@ -37,6 +36,9 @@ struct SuccessRegisterView: View {
     @State var showingModalJam = false
     @State var showingModalTanggal = false
     @State var showingModalInformation = false
+    
+    @State var isLoading = false
+    @State var showingAlert = false
     
     @State var pilihJam: String = ""
     @State var tanggalWawancara: String = ""
@@ -68,6 +70,13 @@ struct SuccessRegisterView: View {
                 VStack {
                     
                     AppBarLogo(light: false, showCancel: false) { }
+                    
+                    if (self.isLoading) {
+                        LinearWaitingIndicator()
+                            .animated(true)
+                            .foregroundColor(.green)
+                            .frame(height: 1)
+                    }
                     
                     ScrollView {
                         VStack(alignment: .leading) {
@@ -215,9 +224,7 @@ struct SuccessRegisterView: View {
                                 
                                 Button(action: {
                                     if pilihJam != "" {
-                                        // submitSchedule()
-                                        // self.showFormPilihJenisATM = true
-                                        self.showingModalInformation = true
+                                         submitSchedule()
                                     }
                                 }, label: {
                                     Text("Buat Janji")
@@ -288,39 +295,31 @@ struct SuccessRegisterView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .onAppear {}
+        .onAppear {
+            self.registerData.nik = nik_local!
+            self.registerData.noTelepon = phone_local!
+            self.registerData.email = email_local!
+            self.registerData.namaLengkapFromNik = nama_local!
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageCancelRegister()
         }
-        .popup(isPresented: $showingModalTanggal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-            createBottomFloaterTanggal()
-        }
-        .popup(isPresented: $showingModalJam, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-            createBottomFloaterJam()
-        }
         .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             showModalInformation()
+        }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text("Message"),
+                message: Text("\(self.scheduleVM.message)"),
+                dismissButton: .default(Text("Oke")))
         }
         
     }
     
     func removeUser() {
-        
-        //        let data = user.last
-        //        managedObjectContext.delete(data!)
-        //
-        //        do {
-        //            try managedObjectContext.save()
-        //        } catch {
-        //            // handle the Core Data error
-        //        }
-        //
-        //        UserDefaults.standard.set("false", forKey: "isFirstLogin")
-        //        UserDefaults.standard.set("false", forKey: "isSchedule")
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             print("DELETE SUCCESS")
             self.appState.moveToWelcomeView = true
@@ -328,8 +327,22 @@ struct SuccessRegisterView: View {
     }
     
     func submitSchedule() {
-        let timeArr = pilihJam.components(separatedBy: " - ")
-        scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[1])
+        self.isLoading = true
+        let timeArr = pilihJam.components(separatedBy: "-")
+        print("time start \(timeArr[0])")
+        print("time end \(timeArr[1])")
+        scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { success in
+            
+            if success {
+                self.isLoading = false
+                self.showingModalInformation = true
+            }
+            
+            if !success {
+                self.isLoading = false
+                self.showingAlert.toggle()
+            }
+        }
     }
     
     // MARK:- POPUP CANCEL REGISTER
@@ -416,121 +429,6 @@ struct SuccessRegisterView: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 20)
-    }
-    
-    // MARK: -Fuction for Create Bottom Floater (Modal
-    func createBottomFloaterTanggal() -> some View {
-        VStack {
-            HStack {
-                Text("Tanggal")
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 19))
-                    .foregroundColor(Color(hex: "#232175"))
-                Spacer()
-            }
-            
-            HStack {
-                
-                TextField("Tanggal Wawancara", text: $tanggalWawancara)
-                    .font(Font.system(size: 14))
-                    .frame(height: 36)
-                
-                Button(action:{
-                    print("cari tanggal")
-                }, label: {
-                    Image(systemName: "calendar")
-                        .font(Font.system(size: 20))
-                        .foregroundColor(Color(hex: "#707070"))
-                })
-                
-            }
-            .padding(.horizontal)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
-            
-            List(self.scheduleVM.scheduleDates, id: \.self) { data in
-                
-                HStack {
-                    Text(data)
-                        .font(Font.system(size: 14))
-                    
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    print(data)
-                    tanggalWawancara = data
-                    scheduleVM.getScheduleById(date: tanggalWawancara)
-                    self.showingModalTanggal.toggle()
-                })
-                
-            }
-            .background(Color.white)
-            .padding(.bottom)
-            .frame(height: 200)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(20)
-    }
-    
-    // MARK: -Fuction for Create Bottom Floater (Modal
-    func createBottomFloaterJam() -> some View {
-        VStack {
-            HStack {
-                Text("Jam")
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 19))
-                    .foregroundColor(Color(hex: "#232175"))
-                Spacer()
-            }
-            
-            HStack {
-                
-                TextField("Jam Wawancara", text: $tanggalWawancara)
-                    .font(Font.system(size: 14))
-                    .frame(height: 36)
-                
-                Button(action:{
-                    print("cari jam")
-                }, label: {
-                    Image(systemName: "clock")
-                        .font(Font.system(size: 20))
-                        .foregroundColor(Color(hex: "#707070"))
-                })
-                
-            }
-            .padding(.horizontal)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
-            
-            List(self.scheduleVM.scheduleJamBasedOnDate, id: \.self) { data in
-                
-                HStack {
-                    Text(data)
-                        .font(Font.system(size: 14))
-                    
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    print(data)
-                    pilihJam = data
-                    self.showingModalJam.toggle()
-                })
-                
-            }
-            .background(Color.white)
-            .padding(.vertical)
-            .frame(height: 150)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(20)
     }
     
     func showModalInformation() -> some View {

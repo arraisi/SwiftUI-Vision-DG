@@ -22,6 +22,9 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
     @Published var scheduleDates = [String]()
     @Published var scheduleJamBasedOnDate = [String]()
     
+    @Published var message: String = ""
+    @Published var code: String = ""
+    
     // MARK:- GET ALL SCHEDULE
     func getAllSchedule(completion: @escaping (Bool) -> Void) {
         if schedule.count > 0 {
@@ -103,16 +106,36 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
     }
     
     // MARK:- SUBMIT SCHEDULE INTERVIEW
-    func submitSchedule(date: String, nik: String, endTime: String, startTime: String) {
+    func submitSchedule(date: String, nik: String, endTime: String, startTime: String, completion: @escaping (Bool) -> Void) {
         ScheduleInterviewService.shared.submitScheduleInterview(date: date, nik: nik, endTime: endTime, startTime: startTime) { result in
             print(result)
             
             switch result {
             case .success(let schedule):
-                print(schedule?.date)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                    self.code = schedule!.code
+                    self.message = schedule!.message
+                }
+                
+                completion(true)
 
             case .failure(let error):
-                print(error.localizedDescription)
+                print("ERROR-->")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    print("Internal Server Error")
+                    self.message = "Internal Server Error"
+                default:
+                    print("ERRROR")
+                }
+                completion(false)
             }
         }
     }

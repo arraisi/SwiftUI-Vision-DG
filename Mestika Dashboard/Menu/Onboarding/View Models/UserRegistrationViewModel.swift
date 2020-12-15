@@ -76,7 +76,6 @@ extension UserRegistrationViewModel {
                 }
                 
                 DispatchQueue.main.async {
-                    
                     self.code = response.code
 //                    self.code = "R05"
                     self.message = response.message
