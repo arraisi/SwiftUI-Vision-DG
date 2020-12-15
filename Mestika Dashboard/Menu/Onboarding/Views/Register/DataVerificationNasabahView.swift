@@ -771,27 +771,29 @@ struct DataVerificationRegisterNasabahView: View {
         
         self.isLoading = true
         
-        self.registerData.noTelepon = "85875074351"
-        self.registerData.email = "primajatnika271995@gmail.com"
-        self.registerData.nik = "5106040309800927"
-        self.registerData.namaLengkapFromNik = "DATA TEST T 03"
-        self.registerData.tempatLahirFromNik = "LAHIR"
-        self.registerData.alamatKtpFromNik = "JL PROF DR LATUMETEN I GG.5/6"
-        self.registerData.rtFromNik = "02"
-        self.registerData.rwFromNik = "03"
-        self.registerData.kelurahanFromNik = "ANDIR"
-        self.registerData.kecamatanFromNik = "ANDIR"
-        self.registerData.kabupatenKotaFromNik = "ANDIR"
-        self.registerData.provinsiFromNik = "JAWA BARAT"
+//        self.registerData.noTelepon = "85875074351"
+//        self.registerData.email = "primajatnika271995@gmail.com"
+//        self.registerData.nik = "5106040309800927"
+//        self.registerData.namaLengkapFromNik = "DATA TEST T 03"
+//        self.registerData.tempatLahirFromNik = "LAHIR"
+//        self.registerData.alamatKtpFromNik = "JL PROF DR LATUMETEN I GG.5/6"
+//        self.registerData.rtFromNik = "02"
+//        self.registerData.rwFromNik = "03"
+//        self.registerData.kelurahanFromNik = "ANDIR"
+//        self.registerData.kecamatanFromNik = "ANDIR"
+//        self.registerData.kabupatenKotaFromNik = "ANDIR"
+//        self.registerData.provinsiFromNik = "JAWA BARAT"
         
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
-                UserDefaults.standard.set(self.registerData.nik, forKey: "nik_local")
-                UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
-                UserDefaults.standard.set(self.registerData.noTelepon, forKey: "phone_local")
-                UserDefaults.standard.set(self.registerData.namaLengkapFromNik, forKey: "nama_local")
-                
                 self.isLoading = false
+                
+                let data = User(context: managedObjectContext)
+                data.nik = self.registerData.nik
+                data.email = self.registerData.email
+                data.phone = self.registerData.noTelepon
+                data.firstName = self.registerData.namaLengkapFromNik
+                
                 nextRoute = true
             }
             

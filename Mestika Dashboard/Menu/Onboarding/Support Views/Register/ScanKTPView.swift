@@ -151,6 +151,10 @@ struct ScanKTPView: View {
                 self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
                 self.registerData.provinsiFromNik = self.citizenVM.provinsi
                 self.registerData.fotoKTP = self.imageKTP!
+                
+                UserDefaults.standard.set(self.registerData.nik, forKey: "nik_local")
+                UserDefaults.standard.set(self.registerData.namaLengkapFromNik, forKey: "nama_local")
+                
                 self.onCommit()
             }
             

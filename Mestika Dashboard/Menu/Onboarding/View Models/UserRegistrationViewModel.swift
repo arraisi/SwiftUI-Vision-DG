@@ -30,9 +30,6 @@ extension UserRegistrationViewModel {
                 
             switch result {
             case .success(let response):
-//                print(response.deviceID)
-                
-//                registerData.save()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false

@@ -62,9 +62,11 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                             print("\($phoneNumber)")
                             
                             self.registerData.noTelepon = phoneNumber
+                            UserDefaults.standard.set(self.registerData.noTelepon, forKey: "phone_local")
                         }, onCommit: {
                             print("Commited")
                             self.registerData.noTelepon = phoneNumber
+                            UserDefaults.standard.set(self.registerData.noTelepon, forKey: "phone_local")
                         })
                         .foregroundColor(.black)
                         .onReceive(phoneNumber.publisher.collect()) {
