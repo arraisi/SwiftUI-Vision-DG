@@ -38,7 +38,7 @@ class UserRegistrationService {
             "imageKtp": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201211_090631_.jpg",
             "nik": registerData.nik,
             "imageSelfie": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201211_090631_.jpg",
-            "imageNpwp": "",
+            "imageNpwp": "/storage/emulated/0/Android/data/com.multipolar.visiondg.mestika/files/Pictures/visiondgimage/20201211_090631_.jpg",
             "noNpwp": "",
             "emailAddress": registerData.email,
             "purposeOfAccountOpening": registerData.tujuanPembukaan,
@@ -107,19 +107,19 @@ class UserRegistrationService {
             
             // Add the image KTP
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"image_ktp\"; filename=\"\(imageKtp)\"\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"image_ktp\"; filename=\"\(deviceId)_ktp.jpg\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageKtp.pngData()!)
             
             // Add the image NPWP
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(imageNpwp)\"\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId)_npwp.jpg\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageNpwp.pngData()!)
             
             // Add the image SELFIE
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"image_selfie\"; filename=\"\(imageSelfie)\"\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"image_selfie\"; filename=\"\(deviceId)_selfie.jpg\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageSelfie.pngData()!)
             

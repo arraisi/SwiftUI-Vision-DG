@@ -19,11 +19,14 @@ extension UserRegistrationViewModel {
             self.isLoading = true
         }
         
+        let url = URL(string: "https://disdukcapil.soppengkab.go.id/wp-content/uploads/2017/03/KTPEL.jpg")
+        let data = try? Data(contentsOf: url!)
+        
         UserRegistrationService.shared.postUser(
             registerData: registerData,
-            imageKtp: registerData.fotoKTP.asUIImage(),
-            imageNpwp: registerData.fotoNPWP.asUIImage(),
-            imageSelfie: registerData.fotoSelfie.asUIImage()) { result in
+            imageKtp: UIImage(data: data!)!,
+            imageNpwp: UIImage(data: data!)!,
+            imageSelfie: UIImage(data: data!)!) { result in
                 
             switch result {
             case .success(let response):
