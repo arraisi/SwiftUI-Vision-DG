@@ -131,6 +131,8 @@ struct InformasiPerusahaanView: View {
                                     .foregroundColor(Color(hex: "#232175"))
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 30)
+                                    .multilineTextAlignment(.center)
+                                    .fixedSize(horizontal: false, vertical: true)
                                 
                                 // Forms input
                                 ZStack {
@@ -273,7 +275,7 @@ struct InformasiPerusahaanView: View {
         if registerData.alamatPerusahaan == "" {
             return true
         }
-        if registerData.kodePos == "" {
+        if self.kodePos == "" {
             return true
         }
         if registerData.kecamatan == "" {
