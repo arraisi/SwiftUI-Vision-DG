@@ -485,6 +485,7 @@ struct WelcomeView: View {
             .isDetailLink(false)
             
             Button(action: {
+                self.appState.nasabahIsExisting = false
                 self.isKetentuanViewActive = true
             }) {
                 Text("Tidak, saya bukan")
@@ -502,6 +503,7 @@ struct WelcomeView: View {
             .isDetailLink(false)
             
             Button(action: {
+                self.appState.nasabahIsExisting = true
                 self.isNoAtmOrRekViewActive = true
             }) {
                 Text("Ya, saya nasabah Bank Mestika")
