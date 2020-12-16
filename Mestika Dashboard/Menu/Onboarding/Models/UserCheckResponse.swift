@@ -10,4 +10,6 @@ import Foundation
 class UserCheckResponse: Decodable {
     let code: String
     let message: String
+    let scheduledDate: String?
+    let scheduledHours: String?
 }

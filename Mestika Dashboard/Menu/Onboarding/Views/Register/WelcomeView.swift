@@ -101,7 +101,6 @@ struct WelcomeView: View {
                 if self.isShowModal {
                     ModalOverlay(tapAction: { withAnimation {
                         self.isShowModal = false
-                        self.modalSelection = ""
                     } })
                 }
             }
@@ -288,14 +287,14 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change date from API
-            Text("Tanggal : 2020-12-02")
+            Text("Tanggal : \(self.userVM.user?.scheduledDate ?? "-")")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 5)
                 .fixedSize(horizontal: false, vertical: true)
             
             // MARK: change time from API
-            Text("Jam : 10:00 - 11:00")
+            Text("Jam : \(self.userVM.user?.scheduledHours ?? "-")")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
@@ -344,7 +343,6 @@ struct WelcomeView: View {
             // MARK: change destination
             Button(action:{
                 self.isShowModal = false
-                self.modalSelection = ""
             }, label: {
                 Text("Saya Tunggu")
                     .foregroundColor(.white)
