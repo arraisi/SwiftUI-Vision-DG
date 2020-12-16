@@ -2114,7 +2114,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = 7UWQ7HF465;
+				DEVELOPMENT_TEAM = H9UB4842E4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2122,7 +2122,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.multipolar.tech.VisionDG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlpt.VisionDG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2139,7 +2139,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = 7UWQ7HF465;
+				DEVELOPMENT_TEAM = H9UB4842E4;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

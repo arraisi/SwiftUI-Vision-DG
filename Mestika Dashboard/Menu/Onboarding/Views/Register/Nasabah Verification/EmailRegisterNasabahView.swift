@@ -71,9 +71,11 @@ struct EmailRegisterNasabahView: View {
                     TextField("Masukan alamat email anda", text: $email, onEditingChanged: { changed in
                         print("Changed")
                         self.registerData.email = self.email
+                        UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
                     }, onCommit: {
                         print("Commited")
                         self.registerData.email = self.email
+                        UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
                     })
                     .frame(height: 30)
                     .font(.custom("Montserrat-Regular", size: 12))

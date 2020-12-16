@@ -8,6 +8,7 @@ import Combine
 import SwiftUI
 
 class RegistrasiModel: ObservableObject {
+    @Published var homeRoute: Bool = false
     @Published var noTelepon = ""
     @Published var jenisTabungan = ""
     @Published var nik = ""

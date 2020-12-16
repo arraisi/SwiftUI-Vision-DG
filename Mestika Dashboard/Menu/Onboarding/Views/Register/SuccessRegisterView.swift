@@ -465,6 +465,15 @@ struct SuccessRegisterView: View {
             
             Button(
                 action: {
+                    
+                    print(registerData.homeRoute)
+//
+//                    if self.registerData.homeRoute {
+//                        self.appState.moveToDashboard = true
+//                    } else {
+//                        self.showFormPilihJenisATM = true
+//                    }
+                    
                     self.showFormPilihJenisATM = true
                 },
                 label: {

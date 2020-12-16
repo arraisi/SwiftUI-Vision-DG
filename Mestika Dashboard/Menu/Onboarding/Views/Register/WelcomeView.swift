@@ -23,6 +23,7 @@ struct WelcomeView: View {
     @State var isActiveRootLogin: Bool = false
     @State var isNoAtmOrRekViewActive: Bool = false
     @State var isFormPilihJenisAtm: Bool = false
+    @State var isRescheduleInterview: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -116,6 +117,7 @@ struct WelcomeView: View {
                     self.isFirstLoginViewActive = false
                     self.isNoAtmOrRekViewActive = false
                     self.isFormPilihJenisAtm = false
+                    self.isRescheduleInterview = false
                     self.appState.moveToWelcomeView = false
                 }
             }
@@ -162,18 +164,6 @@ struct WelcomeView: View {
             return AnyView(PopupActive())
         case "NOT_APPROVED" :
             return AnyView(PopupNotApproved())
-            
-        // MARK: OLD
-        case "SuccsessRegisterModal":
-            return AnyView(SuccsessRegisterModal())
-        case "ScheduleVideoCallModal":
-            return AnyView(ScheduleVideoCallModal())
-        case "RegisterRejectedModal":
-            return AnyView(RegisterRejectedModal())
-        case "RegisterApprovedModal":
-            return AnyView(RegisterApprovedModal())
-        case "RegisterCreatedModal":
-            return AnyView(RegisterCreatedModal())
         default:
             return AnyView(ScreeningNasabahModal())
         }
@@ -301,16 +291,28 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            // MARK: change destination
-            NavigationLink(destination: SuccessRegisterView().environmentObject(loginData)){
-                Text("Reschedule Jadwal")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-            }
+            Button(
+                action: {
+                    self.registerData.homeRoute = true
+                    self.isRescheduleInterview = true
+                },
+                label: {
+                    Text("Reschedule Jadwal")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+            )
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
+            
+            NavigationLink(
+                destination: SuccessRegisterView().environmentObject(registerData),
+                isActive: self.$isRescheduleInterview,
+                label: {}
+            )
+            .isDetailLink(false)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -786,22 +788,6 @@ struct WelcomeView: View {
     
     /* Funtion GET User Details Core Data */
     func getUserDetails() {
-        //        let data = User(context: managedObjectContext)
-        //        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-        //        data.nik = "3277102102890001"
-        //        data.email = "andri.ferinata@gmail.com"
-        //        data.phone = "08562006488"
-        //        data.pin = "111111"
-        //        data.password = "ferinata21"
-        //        data.firstName = "Andri"
-        //        data.lastName = "Ferinata"
-        //
-        //        do {
-        //            try self.managedObjectContext.save()
-        //        } catch {
-        //            print("Error saving managed object context: \(error)")
-        //        }
-        
         if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
             modalSelection = "SuccsessRegisterModal"
             self.isShowModal = true
@@ -849,33 +835,6 @@ struct WelcomeView: View {
                 self.modalSelection = self.userVM.message
                 self.isShowModal = false
             }
-            
-//            if (self.userVM.code == "R01") {
-//                self.modalSelection = "RegisterCreatedModal"
-//                self.isShowModal = true
-//            }
-//
-//            if (self.userVM.code == "R02") {
-//
-//            }
-//
-//            if (self.userVM.code == "R03") {
-//
-//            }
-//
-//            if (self.userVM.code == "R04") {
-//
-//            }
-//
-//            if (self.userVM.code == "R05") {
-//                self.modalSelection = "RegisterApprovedModal"
-//                self.isShowModal = true
-//            }
-//
-//            if (self.userVM.code == "R06") {
-//                self.modalSelection = "RegisterRejectedModal"
-//                self.isShowModal = true
-//            }
         }
     }
 }
