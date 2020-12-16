@@ -11,6 +11,7 @@ import Indicators
 struct VerificationRegisterDataView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    var productATMData = AddProductATM()
     @EnvironmentObject var appState: AppState
     
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -22,7 +23,8 @@ struct VerificationRegisterDataView: View {
     /*
      Views Variables
      */
-    @State private var nextRoute: Bool = false
+    @State private var nextRouteNasabah: Bool = false
+    @State private var nextRouteNonNasabah: Bool = false
     @State private var shouldPresentMaskSelfie: Bool = false
     @State private var shouldPresentCamera = false
     @State private var cameraFileName = ""
@@ -413,8 +415,14 @@ struct VerificationRegisterDataView: View {
                     
                     NavigationLink(
                         destination: SuccessRegisterView().environmentObject(registerData),
-                        isActive: self.$nextRoute,
+                        isActive: self.$nextRouteNonNasabah,
                         label: {}
+                    )
+                    
+                    NavigationLink(
+                        destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData),
+                        isActive: self.$nextRouteNasabah,
+                        label: {EmptyView()}
                     )
                 }
                 .background(Color.white)
@@ -424,9 +432,9 @@ struct VerificationRegisterDataView: View {
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $shouldPresentCamera) {
             if self.cameraFileName == "selfie" {
-               camera
+                camera
             } else {
-               scanner
+                scanner
             }
         }
         .alert(isPresented: $showingAlert) {
@@ -719,7 +727,13 @@ struct VerificationRegisterDataView: View {
             //
             //            UserDefaults.standard.set("true", forKey: "isFirstLogin")
             
-            nextRoute = true
+            //            nextRoute = true
+            
+            if self.appState.nasabahIsExisting {
+                self.nextRouteNasabah = true
+            } else {
+                self.nextRouteNonNasabah = true
+            }
             
             do {
                 try self.managedObjectContext.save()
@@ -740,9 +754,11 @@ struct VerificationRegisterDataView: View {
         
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
-                
-                self.isLoading = false
-                nextRoute = true
+                if self.appState.nasabahIsExisting {
+                    self.nextRouteNasabah = true
+                } else {
+                    self.nextRouteNonNasabah = true
+                }
             }
             
             if !success {
