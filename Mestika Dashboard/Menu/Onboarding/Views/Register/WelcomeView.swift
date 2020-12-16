@@ -36,8 +36,8 @@ struct WelcomeView: View {
     @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
     
     // Modal Variables
-    @State var isShowModal = false
-    @State var modalSelection = ""
+//    @State var isShowModal = false
+//    @State var modalSelection = ""
     
     //    CREATED
     //    KYC_SCHEDULED
@@ -45,8 +45,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-//    @State var modalSelection = "CREATED"
-//    @State var isShowModal = true
+    @State var modalSelection = "KYC_WAITING"
+    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -280,7 +280,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Data anda telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :")
+            Text("Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :")
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -301,7 +301,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             // MARK: change destination
-            NavigationLink(destination: SuccessRegisterView().environmentObject(loginData)){
+            NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
                 Text("Reschedule Jadwal")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
