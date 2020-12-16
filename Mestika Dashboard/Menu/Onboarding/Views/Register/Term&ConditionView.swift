@@ -18,8 +18,7 @@ struct Term_ConditionView: View {
     @State var isChecked2: Bool = false
     @State var showingAlert: Bool = false
     
-    @State var dataVerificationNasabah: Bool = false
-    @State var dataVerificationNonNasabah: Bool = false
+    @State var isShowDataVerification: Bool = false
     
     func toggle() {
         isChecked = !isChecked
@@ -110,16 +109,10 @@ struct Term_ConditionView: View {
                             .padding(.bottom, 20)
                         }
                         
-                        NavigationLink(destination: DataVerificationRegisterNasabahView().environmentObject(registerData), isActive: self.$dataVerificationNasabah) {EmptyView()}
-                        
-                        NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: self.$dataVerificationNonNasabah) {EmptyView()}
+                        NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: self.$isShowDataVerification) {EmptyView()}
                         
                         Button(action: {
-                            if self.appState.nasabahIsExisting {
-                                self.dataVerificationNasabah = true
-                            } else {
-                                self.dataVerificationNonNasabah = true
-                            }
+                            self.isShowDataVerification = true
                         }) {
                             Text("Berikutnya")
                                 .foregroundColor(.white)

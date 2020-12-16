@@ -105,7 +105,7 @@ struct VerificationRegisterDataView: View {
                                         self.shouldPresentCamera = true
                                     }) {
                                         HStack {
-                                            Text("Foto KTP e")
+                                            Text("Foto KTP")
                                                 .font(.subheadline)
                                                 .foregroundColor(Color(hex: "#232175"))
                                                 .fontWeight(.bold)

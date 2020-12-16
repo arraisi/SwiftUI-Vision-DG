@@ -289,7 +289,6 @@
 		C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */; };
 		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
-		C0D3F6D2258714FE00D4F1C8 /* DataVerificationNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3F6D1258714FE00D4F1C8 /* DataVerificationNasabahView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */; };
@@ -604,7 +603,6 @@
 		C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
-		C0D3F6D1258714FE00D4F1C8 /* DataVerificationNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataVerificationNasabahView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOTPVerificationView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCVVVerificationView.swift; sourceTree = "<group>"; };
@@ -1280,7 +1278,7 @@
 				52BF57CE2558E34100F009B5 /* FormPilihJenisTabunganView.swift */,
 				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
 				52ADFF7B2557DFDB00A1001F /* Term&ConditionView.swift */,
-				C0D3F6D1258714FE00D4F1C8 /* DataVerificationNasabahView.swift */,
+				52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */,
 				52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */,
 				52ADFF7A2557DFDB00A1001F /* SuccessRegisterView.swift */,
 				C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */,
@@ -1289,7 +1287,6 @@
 				52ADFF842557DFDC00A1001F /* FormDetailKartuATMView.swift */,
 				52ADFF7E2557DFDB00A1001F /* VerificationDataPersonalView.swift */,
 				52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */,
-				52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */,
 				52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */,
 				064EBDB8256B04E20070A792 /* FormCompletionReferalCodeView.swift */,
 				C05BA90725821A7D00E115D6 /* FormPINTransaksiATMView.swift */,
@@ -1737,7 +1734,6 @@
 				52ADFFAD2557DFDC00A1001F /* KetentuanRegisterNonNasabahView.swift in Sources */,
 				C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */,
 				C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */,
-				C0D3F6D2258714FE00D4F1C8 /* DataVerificationNasabahView.swift in Sources */,
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
 				525950222553E03000C8CA5D /* OtpVerificationForgotPasswordView.swift in Sources */,
@@ -2118,7 +2114,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 7UWQ7HF465;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2126,7 +2122,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlpt.VisionDG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.multipolar.tech.VisionDG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2143,7 +2139,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = 7UWQ7HF465;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

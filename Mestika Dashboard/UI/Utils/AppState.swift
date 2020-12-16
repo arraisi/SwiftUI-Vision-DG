@@ -12,5 +12,4 @@ class AppState: ObservableObject {
     @Published var moveToWelcomeView: Bool = false
     @Published var moveToDashboard: Bool = false
     @Published var skipOTP: Bool = false
-    @Published var nasabahIsExisting: Bool = false
 }

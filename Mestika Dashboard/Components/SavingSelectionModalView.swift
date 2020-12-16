@@ -67,7 +67,6 @@ struct SavingSelectionModalView: View {
             }
             
             Button(action: {
-                print("nasabah? : \(self.appState.nasabahIsExisting)")
                 registerData.jenisTabungan = data.tabunganName
                 goToNextPage = true
             }) {
