@@ -408,6 +408,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
                     self.destinationNumber = self.otpVM.destination
+                    self.registerData.noTelepon = self.otpVM.destination
                 }
                 
                 self.isShowAlert = true

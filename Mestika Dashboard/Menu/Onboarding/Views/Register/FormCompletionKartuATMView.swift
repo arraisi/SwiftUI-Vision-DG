@@ -437,7 +437,7 @@ struct FormCompletionKartuATMView: View {
     
     func isValid() -> Bool {
         if addressOptionId == 4 {
-            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 && self.kodePos.trimmingCharacters(in: .whitespaces).count > 0
+            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && (atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 || self.kodePos.trimmingCharacters(in: .whitespaces).count > 0)
         } else {
             return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty
         }

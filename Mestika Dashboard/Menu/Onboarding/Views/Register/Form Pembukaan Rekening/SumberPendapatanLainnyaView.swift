@@ -168,6 +168,7 @@ struct SumberPendapatanLainnyaView: View {
                                         Button(action:{
                                             
                                             self.selectedId = 2
+                                            registerData.sumberPendapatanLainnya = "Tidak memiliki"
                                             
                                         }) {
                                             
