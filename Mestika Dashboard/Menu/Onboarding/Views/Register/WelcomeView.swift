@@ -7,12 +7,16 @@
 
 import SwiftUI
 import PopupView
+import JitsiMeet
 
 struct WelcomeView: View {
     
     init() {
         getMobileVersion()
     }
+    
+    fileprivate var jitsiMeetView: JitsiMeetView?
+    @State var isShowJitsi: Bool = false
     
     @EnvironmentObject var appState: AppState
     
@@ -37,8 +41,8 @@ struct WelcomeView: View {
     @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
     
     // Modal Variables
-//    @State var isShowModal = false
-//    @State var modalSelection = ""
+    @State var isShowModal = false
+    @State var modalSelection = ""
     
     //    CREATED
     //    KYC_SCHEDULED
@@ -46,8 +50,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-    @State var modalSelection = "KYC_WAITING"
-    @State var isShowModal = true
+//    @State var modalSelection = "KYC_WAITING"
+//    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -73,7 +77,8 @@ struct WelcomeView: View {
                     VStack(spacing: 5) {
                         
                         Button(action : {
-                            self.isShowModal.toggle()
+//                            self.isShowModal.toggle()
+                            openJitsiMeet()
                         }) {
                             Text("DAFTAR")
                                 .foregroundColor(.white)
@@ -82,6 +87,9 @@ struct WelcomeView: View {
                         .frame(maxWidth: .infinity, maxHeight: 50)
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
+                        .sheet(isPresented: $isShowJitsi) {
+                            JitsiView()
+                        }
                         
                         NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
@@ -125,6 +133,14 @@ struct WelcomeView: View {
 //                registerData.load()
                 getUserStatus(deviceId: deviceId!)
             }
+            .onAppear(perform: {
+                let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+                    builder.serverURL = URL(string: "https://meet.jit.si")
+                    builder.welcomePageEnabled = false
+                }
+                
+                JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
+            })
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
             }
@@ -147,6 +163,27 @@ struct WelcomeView: View {
             }
             Spacer()
         }
+    }
+    
+    fileprivate mutating func cleanUp() {
+        if (jitsiMeetView != nil) {
+            self.jitsiMeetView = nil
+        }
+    }
+    
+    func openJitsiMeet() {
+        let jitsiMeetView = JitsiMeetView()
+        
+        let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+            builder.room = "123"
+        }
+        
+        let vc = UIViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.view = jitsiMeetView
+        
+        jitsiMeetView.join(options)
+//        vc.present(vc, animated: true, completion: nil)
     }
     
     func popupMenu() -> some View {
