@@ -327,6 +327,8 @@ struct PasswordView: View {
                 switch self.passwordVM.code {
                 case "R100":
                     self.activeRoute = true
+                case "200":
+                    self.activeRoute = true
                 default:
                     self.modalErrorMessage = self.passwordVM.message
                     self.showingModalPasswordError.toggle()
