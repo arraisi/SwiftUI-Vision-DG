@@ -28,6 +28,7 @@ struct WelcomeView: View {
     @State var isNoAtmOrRekViewActive: Bool = false
     @State var isFormPilihJenisAtm: Bool = false
     @State var isRescheduleInterview: Bool = false
+    @State var isFormPilihSchedule: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -37,8 +38,8 @@ struct WelcomeView: View {
     var productATMData = AddProductATM()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State var images = ["slider_pic_1", "slider_pic_2", "slider_pic_3"]
-    @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
-    @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
+    @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
+    @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
     
     // Modal Variables
     @State var isShowModal = false
@@ -125,6 +126,7 @@ struct WelcomeView: View {
                     self.isNoAtmOrRekViewActive = false
                     self.isFormPilihJenisAtm = false
                     self.isRescheduleInterview = false
+                    self.isFormPilihSchedule = false
                     self.appState.moveToWelcomeView = false
                 }
             }
@@ -205,17 +207,43 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            // MARK: change destination
-            NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
-                Text("Halaman Submit Jadwal Videocall")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
+            if (status_register_nasabah == "true") {
+                
+                Button(
+                    action: {
+                        self.isFormPilihSchedule = true
+                    },
+                    label: {
+                        Text("Halaman Submit Jadwal Videocall")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                    }
+                )
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+                
+                NavigationLink(
+                    destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData),
+                    isActive: self.$isFormPilihSchedule,
+                    label: {}
+                )
+                .isDetailLink(false)
+                
+            } else  {
+                // MARK: change destination
+                NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
+                    Text("Halaman Submit Jadwal Videocall")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .isDetailLink(false)
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
             }
-            .isDetailLink(false)
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -795,21 +823,6 @@ struct WelcomeView: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 20)
-    }
-    
-    /* Funtion GET User Details Core Data */
-    func getUserDetails() {
-        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
-            modalSelection = "SuccsessRegisterModal"
-            self.isShowModal = true
-        }
-        
-        if (user.last?.deviceId == deviceId && isSchedule == "true") {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                modalSelection = "ScheduleVideoCallModal"
-                self.isShowModal = true
-            }
-        }
     }
     
     /* Function GET Mobile Version */

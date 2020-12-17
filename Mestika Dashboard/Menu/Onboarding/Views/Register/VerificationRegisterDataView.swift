@@ -755,8 +755,12 @@ struct VerificationRegisterDataView: View {
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
                 if self.appState.nasabahIsExisting {
+                    UserDefaults.standard.set("true", forKey: "register_nasabah")
+                    UserDefaults.standard.set("false", forKey: "register_non_nasabah")
                     self.nextRouteNasabah = true
                 } else {
+                    UserDefaults.standard.set("false", forKey: "register_nasabah")
+                    UserDefaults.standard.set("true", forKey: "register_non_nasabah")
                     self.nextRouteNonNasabah = true
                 }
             }

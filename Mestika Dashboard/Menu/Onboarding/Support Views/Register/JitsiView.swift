@@ -15,13 +15,6 @@ struct JitsiView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
         
-//        let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-//            builder.serverURL = URL(string: "https://meet.jit.si")
-//            builder.welcomePageEnabled = false
-//        }
-//        
-//        JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
-        
         let jitsiMeetView = JitsiMeetView()
         self.jitsiMeetView = jitsiMeetView
         

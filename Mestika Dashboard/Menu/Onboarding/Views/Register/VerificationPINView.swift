@@ -162,6 +162,7 @@ struct VerificationPINView: View {
                         
                         Button(action: {
                             if self.shouldVerificationWithVC {
+                                UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
                                 self.nextToFormVideoCall = true
                             } else {
                                 if pin == dummyPin {
