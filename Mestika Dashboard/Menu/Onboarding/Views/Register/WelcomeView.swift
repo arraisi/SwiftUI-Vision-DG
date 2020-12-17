@@ -41,6 +41,10 @@ struct WelcomeView: View {
     @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
     
+    @State private var time_schedule_start = UserDefaults.standard.string(forKey: "time_schedule_start")
+    @State private var time_schedule_end = UserDefaults.standard.string(forKey: "time_schedule_end")
+    @State private var date_schedule_end = UserDefaults.standard.string(forKey: "date_schedule_end")
+    
     // Modal Variables
     @State var isShowModal = false
     @State var modalSelection = ""
@@ -321,14 +325,14 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change date from API
-            Text("Tanggal : \(self.userVM.user?.scheduledDate ?? "-")")
+            Text("Tanggal : \(date_schedule_end!)")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 5)
                 .fixedSize(horizontal: false, vertical: true)
             
             // MARK: change time from API
-            Text("Jam : \(self.userVM.user?.scheduledHours ?? "-")")
+            Text("Jam : \(time_schedule_start!) - \(time_schedule_end!)")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
