@@ -170,7 +170,7 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 
                                 // NPWP ROW
-                                if self.registerData.npwp != "!" {
+                                if self.registerData.npwp != "" {
                                     VStack {
                                         
                                         Button(action: {
