@@ -15,17 +15,13 @@ struct JitsiView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
         
-        let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-            builder.serverURL = URL(string: "https://meet.jit.si")
-            builder.welcomePageEnabled = false
-        }
+//        let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+//            builder.serverURL = URL(string: "https://meet.jit.si")
+//            builder.welcomePageEnabled = false
+//        }
+//        
+//        JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
         
-        JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
-        
-        return UIViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
         let jitsiMeetView = JitsiMeetView()
         self.jitsiMeetView = jitsiMeetView
         
@@ -38,6 +34,12 @@ struct JitsiView: UIViewControllerRepresentable {
         vc.view = jitsiMeetView
         
         jitsiMeetView.join(options)
-        vc.present(vc, animated: true, completion: nil)
+//        vc.present(vc, animated: true, completion: nil)
+        
+        return vc
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+
     }
 }

@@ -77,8 +77,8 @@ struct WelcomeView: View {
                     VStack(spacing: 5) {
                         
                         Button(action : {
-//                            self.isShowModal.toggle()
-                            openJitsiMeet()
+                            self.isShowModal.toggle()
+//                            self.isShowJitsi = true
                         }) {
                             Text("DAFTAR")
                                 .foregroundColor(.white)
@@ -163,27 +163,6 @@ struct WelcomeView: View {
             }
             Spacer()
         }
-    }
-    
-    fileprivate mutating func cleanUp() {
-        if (jitsiMeetView != nil) {
-            self.jitsiMeetView = nil
-        }
-    }
-    
-    func openJitsiMeet() {
-        let jitsiMeetView = JitsiMeetView()
-        
-        let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-            builder.room = "123"
-        }
-        
-        let vc = UIViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.view = jitsiMeetView
-        
-        jitsiMeetView.join(options)
-//        vc.present(vc, animated: true, completion: nil)
     }
     
     func popupMenu() -> some View {
