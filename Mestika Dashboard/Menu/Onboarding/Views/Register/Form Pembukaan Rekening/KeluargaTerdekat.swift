@@ -198,7 +198,7 @@ struct KeluargaTerdekat: View {
         }
         .onAppear() {
             self.kodePos = self.registerData.kodePosKeluarga
-            self.noTelepon = self.registerData.noTeleponPerusahaan 
+            self.noTelepon = self.registerData.noTlpKeluarga
         }
     }
     

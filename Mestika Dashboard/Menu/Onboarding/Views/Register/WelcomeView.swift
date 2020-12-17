@@ -37,8 +37,8 @@ struct WelcomeView: View {
     @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
     
     // Modal Variables
-    @State var isShowModal = false
-    @State var modalSelection = ""
+//    @State var isShowModal = false
+//    @State var modalSelection = ""
     
     //    CREATED
     //    KYC_SCHEDULED
@@ -46,8 +46,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-//    @State var modalSelection = "CREATED"
-//    @State var isShowModal = true
+    @State var modalSelection = "KYC_WAITING"
+    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -102,7 +102,6 @@ struct WelcomeView: View {
                 if self.isShowModal {
                     ModalOverlay(tapAction: { withAnimation {
                         self.isShowModal = false
-                        self.modalSelection = ""
                     } })
                 }
             }
@@ -271,38 +270,33 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Data anda telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :")
+            Text("Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :")
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
             // MARK: change date from API
-            Text("Tanggal : 2020-12-02")
+            Text("Tanggal : \(self.userVM.user?.scheduledDate ?? "-")")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 5)
                 .fixedSize(horizontal: false, vertical: true)
             
             // MARK: change time from API
-            Text("Jam : 10:00 - 11:00")
+            Text("Jam : \(self.userVM.user?.scheduledHours ?? "-")")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Button(
-                action: {
-                    self.registerData.homeRoute = true
-                    self.isRescheduleInterview = true
-                },
-                label: {
-                    Text("Reschedule Jadwal")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-            )
+            // MARK: change destination
+            NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
+                Text("Reschedule Jadwal")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
@@ -346,7 +340,6 @@ struct WelcomeView: View {
             // MARK: change destination
             Button(action:{
                 self.isShowModal = false
-                self.modalSelection = ""
             }, label: {
                 Text("Saya Tunggu")
                     .foregroundColor(.white)

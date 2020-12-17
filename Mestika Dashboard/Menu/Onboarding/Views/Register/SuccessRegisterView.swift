@@ -296,10 +296,10 @@ struct SuccessRegisterView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .onAppear {
-            self.registerData.nik = nik_local!
-            self.registerData.noTelepon = phone_local!
-            self.registerData.email = email_local!
-            self.registerData.namaLengkapFromNik = nama_local!
+            self.registerData.nik = nik_local ?? ""
+            self.registerData.noTelepon = phone_local ?? ""
+            self.registerData.email = email_local ?? ""
+            self.registerData.namaLengkapFromNik = nama_local ?? ""
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
