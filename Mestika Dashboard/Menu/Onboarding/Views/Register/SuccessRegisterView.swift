@@ -331,6 +331,11 @@ struct SuccessRegisterView: View {
         let timeArr = pilihJam.components(separatedBy: "-")
         print("time start \(timeArr[0])")
         print("time end \(timeArr[1])")
+        
+        UserDefaults.standard.set(timeArr[0], forKey: "time_schedule_start")
+        UserDefaults.standard.set(timeArr[1], forKey: "time_schedule_end")
+        UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
+        
         scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { success in
             
             if success {
@@ -465,6 +470,15 @@ struct SuccessRegisterView: View {
             
             Button(
                 action: {
+                    
+                    print(registerData.homeRoute)
+//
+//                    if self.registerData.homeRoute {
+//                        self.appState.moveToDashboard = true
+//                    } else {
+//                        self.showFormPilihJenisATM = true
+//                    }
+                    
                     self.showFormPilihJenisATM = true
                 },
                 label: {

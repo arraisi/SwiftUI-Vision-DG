@@ -29,8 +29,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Required access to the Audio</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Requires access to the camera</string>
+	<string>Required access to the camera</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We need use to get data.</string>
 	<key>NSFileProviderDomainUsageDescription</key>
@@ -85,5 +87,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
 </dict>
 </plist>

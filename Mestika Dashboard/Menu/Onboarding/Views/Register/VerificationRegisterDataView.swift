@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct VerificationRegisterDataView: View {
     
@@ -29,6 +30,8 @@ struct VerificationRegisterDataView: View {
     @State private var cameraFileName = ""
     
     @State private var imageTaken: Image?
+    
+    @State var isLoading = false
     
     @ObservedObject private var userRegisterVM = UserRegistrationViewModel()
     
@@ -58,6 +61,14 @@ struct VerificationRegisterDataView: View {
                 AppBarLogo(light: false, showCancel: true) {
                     self.appState.moveToWelcomeView = true
                 }
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
+
                 
                 ScrollView {
                     VStack {
@@ -159,7 +170,7 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 
                                 // NPWP ROW
-                                if self.registerData.npwp != "!" {
+                                if self.registerData.npwp != "" {
                                     VStack {
                                         
                                         Button(action: {
@@ -739,16 +750,23 @@ struct VerificationRegisterDataView: View {
     /* Save User To DB */
     func saveUserToDb() {
         
+        self.isLoading = true
+        
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
                 if self.appState.nasabahIsExisting {
+                    UserDefaults.standard.set("true", forKey: "register_nasabah")
+                    UserDefaults.standard.set("false", forKey: "register_non_nasabah")
                     self.nextRouteNasabah = true
                 } else {
+                    UserDefaults.standard.set("false", forKey: "register_nasabah")
+                    UserDefaults.standard.set("true", forKey: "register_non_nasabah")
                     self.nextRouteNonNasabah = true
                 }
             }
             
             if !success {
+                self.isLoading = false
                 self.showingAlert = true
             }
         }

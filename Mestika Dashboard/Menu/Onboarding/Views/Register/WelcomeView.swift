@@ -7,12 +7,16 @@
 
 import SwiftUI
 import PopupView
+import JitsiMeet
 
 struct WelcomeView: View {
     
     init() {
         getMobileVersion()
     }
+    
+    fileprivate var jitsiMeetView: JitsiMeetView?
+    @State var isShowJitsi: Bool = false
     
     @EnvironmentObject var appState: AppState
     
@@ -23,6 +27,8 @@ struct WelcomeView: View {
     @State var isActiveRootLogin: Bool = false
     @State var isNoAtmOrRekViewActive: Bool = false
     @State var isFormPilihJenisAtm: Bool = false
+    @State var isRescheduleInterview: Bool = false
+    @State var isFormPilihSchedule: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -32,12 +38,16 @@ struct WelcomeView: View {
     var productATMData = AddProductATM()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State var images = ["slider_pic_1", "slider_pic_2", "slider_pic_3"]
-    @State private var isFirstLogin = UserDefaults.standard.string(forKey: "isFirstLogin")
-    @State private var isSchedule = UserDefaults.standard.string(forKey: "isSchedule")
+    @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
+    @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
+    
+    @State private var time_schedule_start = UserDefaults.standard.string(forKey: "time_schedule_start")
+    @State private var time_schedule_end = UserDefaults.standard.string(forKey: "time_schedule_end")
+    @State private var date_schedule_end = UserDefaults.standard.string(forKey: "date_schedule_end")
     
     // Modal Variables
-//    @State var isShowModal = false
-//    @State var modalSelection = ""
+    @State var isShowModal = false
+    @State var modalSelection = ""
     
     //    CREATED
     //    KYC_SCHEDULED
@@ -45,8 +55,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-    @State var modalSelection = "KYC_WAITING"
-    @State var isShowModal = true
+//    @State var modalSelection = "KYC_WAITING"
+//    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -73,6 +83,7 @@ struct WelcomeView: View {
                         
                         Button(action : {
                             self.isShowModal.toggle()
+//                            sendVideoCallNotification()
                         }) {
                             Text("DAFTAR")
                                 .foregroundColor(.white)
@@ -81,8 +92,11 @@ struct WelcomeView: View {
                         .frame(maxWidth: .infinity, maxHeight: 50)
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
+                        .sheet(isPresented: $isShowJitsi) {
+                            JitsiView()
+                        }
                         
-                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
+                        NavigationLink(destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -115,6 +129,8 @@ struct WelcomeView: View {
                     self.isFirstLoginViewActive = false
                     self.isNoAtmOrRekViewActive = false
                     self.isFormPilihJenisAtm = false
+                    self.isRescheduleInterview = false
+                    self.isFormPilihSchedule = false
                     self.appState.moveToWelcomeView = false
                 }
             }
@@ -122,6 +138,19 @@ struct WelcomeView: View {
                 print("APPEAR")
 //                registerData.load()
                 getUserStatus(deviceId: deviceId!)
+            }
+            .onAppear(perform: {
+                let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+                    builder.serverURL = URL(string: "https://meet.jit.si")
+                    builder.welcomePageEnabled = false
+                }
+                
+                JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
+            })
+            .onAppear() {
+                NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
+                    self.isShowJitsi = true
+                }
             }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
@@ -161,18 +190,6 @@ struct WelcomeView: View {
             return AnyView(PopupActive())
         case "NOT_APPROVED" :
             return AnyView(PopupNotApproved())
-            
-        // MARK: OLD
-        case "SuccsessRegisterModal":
-            return AnyView(SuccsessRegisterModal())
-        case "ScheduleVideoCallModal":
-            return AnyView(ScheduleVideoCallModal())
-        case "RegisterRejectedModal":
-            return AnyView(RegisterRejectedModal())
-        case "RegisterApprovedModal":
-            return AnyView(RegisterApprovedModal())
-        case "RegisterCreatedModal":
-            return AnyView(RegisterCreatedModal())
         default:
             return AnyView(ScreeningNasabahModal())
         }
@@ -199,17 +216,43 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            // MARK: change destination
-            NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
-                Text("Halaman Submit Jadwal Videocall")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
+            if (status_register_nasabah == "true") {
+                
+                Button(
+                    action: {
+                        self.isFormPilihSchedule = true
+                    },
+                    label: {
+                        Text("Halaman Submit Jadwal Videocall")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                    }
+                )
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+                
+                NavigationLink(
+                    destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData),
+                    isActive: self.$isFormPilihSchedule,
+                    label: {}
+                )
+                .isDetailLink(false)
+                
+            } else  {
+                // MARK: change destination
+                NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
+                    Text("Halaman Submit Jadwal Videocall")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .isDetailLink(false)
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
             }
-            .isDetailLink(false)
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -287,14 +330,14 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change date from API
-            Text("Tanggal : \(self.userVM.user?.scheduledDate ?? "-")")
+            Text("Tanggal : \(date_schedule_end!)")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 5)
                 .fixedSize(horizontal: false, vertical: true)
             
             // MARK: change time from API
-            Text("Jam : \(self.userVM.user?.scheduledHours ?? "-")")
+            Text("Jam : \(time_schedule_start!) - \(time_schedule_end!)")
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
@@ -310,6 +353,13 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
+            
+            NavigationLink(
+                destination: SuccessRegisterView().environmentObject(registerData),
+                isActive: self.$isRescheduleInterview,
+                label: {}
+            )
+            .isDetailLink(false)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -784,35 +834,29 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    /* Funtion GET User Details Core Data */
-    func getUserDetails() {
-        //        let data = User(context: managedObjectContext)
-        //        data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-        //        data.nik = "3277102102890001"
-        //        data.email = "andri.ferinata@gmail.com"
-        //        data.phone = "08562006488"
-        //        data.pin = "111111"
-        //        data.password = "ferinata21"
-        //        data.firstName = "Andri"
-        //        data.lastName = "Ferinata"
-        //
-        //        do {
-        //            try self.managedObjectContext.save()
-        //        } catch {
-        //            print("Error saving managed object context: \(error)")
-        //        }
-        
-        if (user.last?.deviceId == deviceId && isFirstLogin == "true") {
-            modalSelection = "SuccsessRegisterModal"
-            self.isShowModal = true
+    /* Function Send Notification */
+    func sendVideoCallNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in
+            
         }
         
-        if (user.last?.deviceId == deviceId && isSchedule == "true") {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                modalSelection = "ScheduleVideoCallModal"
-                self.isShowModal = true
-            }
-        }
+        let content = UNMutableNotificationContent()
+        content.title = "Video Call Notification"
+        content.body = "Test Schedule Video Call"
+        
+        let open = UNNotificationAction(identifier: "open", title: "Open", options: .foreground)
+        let cancel = UNNotificationAction(identifier: "cancel", title: "Cancel", options: .destructive)
+        
+        let categorys = UNNotificationCategory(identifier: "action", actions: [open, cancel], intentIdentifiers: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([categorys])
+        
+        content.categoryIdentifier = "action"
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let req = UNNotificationRequest(identifier: "req", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(req, withCompletionHandler: nil)
     }
     
     /* Function GET Mobile Version */
@@ -849,33 +893,6 @@ struct WelcomeView: View {
                 self.modalSelection = self.userVM.message
                 self.isShowModal = false
             }
-            
-//            if (self.userVM.code == "R01") {
-//                self.modalSelection = "RegisterCreatedModal"
-//                self.isShowModal = true
-//            }
-//
-//            if (self.userVM.code == "R02") {
-//
-//            }
-//
-//            if (self.userVM.code == "R03") {
-//
-//            }
-//
-//            if (self.userVM.code == "R04") {
-//
-//            }
-//
-//            if (self.userVM.code == "R05") {
-//                self.modalSelection = "RegisterApprovedModal"
-//                self.isShowModal = true
-//            }
-//
-//            if (self.userVM.code == "R06") {
-//                self.modalSelection = "RegisterRejectedModal"
-//                self.isShowModal = true
-//            }
         }
     }
 }

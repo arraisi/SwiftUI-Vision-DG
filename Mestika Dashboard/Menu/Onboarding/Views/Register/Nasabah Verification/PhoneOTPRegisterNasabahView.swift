@@ -409,6 +409,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     self.messageResponse = self.otpVM.statusMessage
                     self.destinationNumber = self.otpVM.destination
                     self.registerData.noTelepon = self.otpVM.destination
+                    UserDefaults.standard.set(self.otpVM.destination, forKey: "phone_local")
                 }
                 
                 self.isShowAlert = true

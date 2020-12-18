@@ -17,6 +17,8 @@ struct FormDetailKartuATMView: View {
     
     @ObservedObject private var productVM = ATMProductViewModel()
     
+    @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
+    
     var body: some View {
         VStack {
             AppBarLogo(onCancel: {})
@@ -76,42 +78,52 @@ struct FormDetailKartuATMView: View {
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(10)
                         }
-//                        HStack{
-//                            Text("No. Kartu")
-//                                .font(.custom("Montserrat-Regular", size: 12))
-//                                .foregroundColor(Color(hex: "#707070"))
-//
-//                            Spacer()
-//
-//                            TextField("No. Kartu", text: Binding.constant("")) { (isChanged) in
-//
-//                            } onCommit: {
-//
-//                            }
-//                            .font(.custom("Montserrat-Regular", size: 12))
-//                            .frame(width: 200, height: 36)
-//                            .padding(.horizontal)
-//                            .background(Color.gray.opacity(0.1))
-//                            .cornerRadius(10)
-//                        }
-//                        HStack{
-//                            Text("Expired")
-//                                .font(.custom("Montserrat-Regular", size: 12))
-//                                .foregroundColor(Color(hex: "#707070"))
-//
-//                            Spacer()
-//
-//                            TextField("Expired", text: Binding.constant("")) { (isChanged) in
-//
-//                            } onCommit: {
-//
-//                            }
-//                            .font(.custom("Montserrat-Regular", size: 12))
-//                            .frame(width: 200, height: 36)
-//                            .padding(.horizontal)
-//                            .background(Color.gray.opacity(0.1))
-//                            .cornerRadius(10)
-//                        }
+                        
+                        if (is_video_call != "true") {
+                            EmptyView()
+                        } else {
+                            Group {
+                                HStack {
+                                    Text("No. Kartu")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(Color(hex: "#707070"))
+
+                                    Spacer()
+
+                                    TextField("No. Kartu", text: Binding.constant("")) { (isChanged) in
+
+                                    } onCommit: {
+
+                                    }
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                                    .frame(width: 200, height: 36)
+                                    .padding(.horizontal)
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(10)
+                                    .disabled(true)
+                                }
+                                
+                                HStack {
+                                    Text("Expired")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(Color(hex: "#707070"))
+
+                                    Spacer()
+
+                                    TextField("Expired", text: Binding.constant("")) { (isChanged) in
+
+                                    } onCommit: {
+
+                                    }
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                                    .frame(width: 200, height: 36)
+                                    .padding(.horizontal)
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(10)
+                                    .disabled(true)
+                                }
+                            }
+                        }
                     }
                     
                     HStack {

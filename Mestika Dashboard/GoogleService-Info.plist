@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>333149912108-9d8afsd7sjn6ifb4dho1lru80cc2e283.apps.googleusercontent.com</string>
+	<string>298437457542-qd2jslr4ifhb319j04nnn52gj7ipkg13.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.333149912108-9d8afsd7sjn6ifb4dho1lru80cc2e283</string>
+	<string>com.googleusercontent.apps.298437457542-qd2jslr4ifhb319j04nnn52gj7ipkg13</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDcvygLl1VwTR0Pd1HmngEZ-LkerfWWOsc</string>
+	<string>AIzaSyBaUrbNpKQ0d6obgj5PKMRIobEXVroa-FA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>333149912108</string>
+	<string>298437457542</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.multipolar.visiondg.Bank-Mestika</string>
+	<string>com.mlpt.VisionDG</string>
 	<key>PROJECT_ID</key>
-	<string>bank-mestika-dev</string>
+	<string>visiondg-mestika-ios</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bank-mestika-dev.appspot.com</string>
+	<string>visiondg-mestika-ios.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:333149912108:ios:f24750158fbb8e4d526589</string>
-	<key>DATABASE_URL</key>
-	<string>https://bank-mestika-dev.firebaseio.com</string>
+	<string>1:298437457542:ios:04f00863df0e5d9a588307</string>
 </dict>
 </plist>
