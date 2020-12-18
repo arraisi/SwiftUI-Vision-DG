@@ -83,7 +83,7 @@ struct WelcomeView: View {
                         
                         Button(action : {
                             self.isShowModal.toggle()
-//                            self.isShowJitsi = true
+//                            sendVideoCallNotification()
                         }) {
                             Text("DAFTAR")
                                 .foregroundColor(.white)
@@ -147,6 +147,11 @@ struct WelcomeView: View {
                 
                 JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
             })
+            .onAppear() {
+                NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
+                    self.isShowJitsi = true
+                }
+            }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
             }
@@ -827,6 +832,31 @@ struct WelcomeView: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 20)
+    }
+    
+    /* Function Send Notification */
+    func sendVideoCallNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in
+            
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Video Call Notification"
+        content.body = "Test Schedule Video Call"
+        
+        let open = UNNotificationAction(identifier: "open", title: "Open", options: .foreground)
+        let cancel = UNNotificationAction(identifier: "cancel", title: "Cancel", options: .destructive)
+        
+        let categorys = UNNotificationCategory(identifier: "action", actions: [open, cancel], intentIdentifiers: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([categorys])
+        
+        content.categoryIdentifier = "action"
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let req = UNNotificationRequest(identifier: "req", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(req, withCompletionHandler: nil)
     }
     
     /* Function GET Mobile Version */
