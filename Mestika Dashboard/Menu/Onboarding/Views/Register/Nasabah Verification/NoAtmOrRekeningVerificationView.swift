@@ -93,9 +93,15 @@ struct NoAtmOrRekeningVerificationView: View {
                         if (jenisKartuCtrl == "Kartu ATM") {
                             self.registerData.atmOrRekening = "ATM"
                             self.registerData.noAtm = self.noKartuCtrl
+                            
+                            self.registerData.accType = "ATM"
+                            self.registerData.accNo = self.noKartuCtrl
                         } else {
                             self.registerData.atmOrRekening = "REKENING"
                             self.registerData.noRekening = self.noKartuCtrl
+                            
+                            self.registerData.accType = "REKENING"
+                            self.registerData.accNo = self.noKartuCtrl
                         }
                     })
                     .font(.custom("Montserrat-Regular", size: 12))
@@ -149,6 +155,7 @@ struct NoAtmOrRekeningVerificationView: View {
         .navigationBarHidden(true)
         .onAppear{
             //            self.registerData.noTelepon = "85359117336"
+            self.registerData.isNasabahmestika = true
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()

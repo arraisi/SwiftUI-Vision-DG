@@ -97,6 +97,9 @@ struct KetentuanRegisterNonNasabahView: View {
         .introspectNavigationController { nc in
             nc.navigationBar.isHidden = false
         }
+        .onAppear() {
+            self.registerData.isNasabahmestika = false
+        }
     }
 }
 

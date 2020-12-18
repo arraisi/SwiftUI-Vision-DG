@@ -89,6 +89,11 @@ class RegistrasiModel: ObservableObject {
     @Published var noAtm: String = ""
     @Published var atmOrRekening: String = ""
     
+    // For nasabah use only
+    @Published var isNasabahmestika: Bool = false
+    @Published var accType: String = ""
+    @Published var accNo: String = ""
+    
     static let shared = RegistrasiModel()
     
     // MARK : Convert to codeable object.
