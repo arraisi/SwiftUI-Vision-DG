@@ -96,7 +96,7 @@ struct WelcomeView: View {
                             JitsiView()
                         }
                         
-                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
+                        NavigationLink(destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
