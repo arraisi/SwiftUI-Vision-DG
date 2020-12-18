@@ -20,16 +20,34 @@ struct VerificationPINView: View {
     @State var nextToFormVideoCall = false
     @State var nextToPilihJenisAtm = false
     
-    @State var pin: String = ""
-    @State private var secured: Bool = true
-    
-    let dummyPin = "123456"
-    
     @State var shouldVerificationWithVC:Bool = false
     
+    
+    /* HUD Variable */
+    @State private var dim = true
+    
+    /* Variable PIN  */
+    @State var pin: String = ""
+    @State private var secured: Bool = true
+    let dummyPin = "123456"
+    
+    /* Variable Validation */
+    @State var isOtpValid = false
+    @State var otpInvalidCount = 0
+    @State var isResendOtpDisabled = true
+    @State var isBtnValidationDisabled = false
+    @State var tryCount = 0
     var disableForm: Bool {
-        pin.count < 6
+        if (pin.count < 6 || self.isBtnValidationDisabled) {
+            return true
+        }
+        return false
     }
+    
+    /* Timer */
+    @State private var timeRemainingRsnd = 30
+    @State private var timeRemainingBtn = 30
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
@@ -126,6 +144,7 @@ struct VerificationPINView: View {
                                 self.shouldVerificationWithVC.toggle()
                                 if self.shouldVerificationWithVC {
                                     self.pin = ""
+                                    self.isBtnValidationDisabled = false
                                 }
                             }) {
                                 HStack(alignment: .top) {
@@ -161,20 +180,24 @@ struct VerificationPINView: View {
                             })
                         
                         Button(action: {
+                            self.tryCount += 1
                             if self.shouldVerificationWithVC {
                                 UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
                                 self.nextToFormVideoCall = true
                             } else {
-                                if pin == dummyPin {
-                                    self.nextToPilihJenisAtm = true
-                                } else {
-                                    showingModal.toggle()
-                                }
+                                validatePIN()
                             }
                         }) {
-                            Text("Berikutnya")
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 14))
+                            
+                            if (self.isBtnValidationDisabled) {
+                                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                            } else {
+                                Text("Berikutnya")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                            }
                         }
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         .background(Color(hex: disableButton() ? "#CBD1D9" : "#2334D0"))
@@ -196,10 +219,28 @@ struct VerificationPINView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onReceive(timer) { time in
+            if self.timeRemainingRsnd > 0 {
+                self.timeRemainingRsnd -= 1
+            }
+            
+            if self.timeRemainingRsnd < 1 {
+                isResendOtpDisabled = false
+            } else {
+                isResendOtpDisabled = true
+            }
+            
+            if self.timeRemainingBtn > 0 {
+                self.timeRemainingBtn -= 1
+            }
+            
+            if self.timeRemainingBtn < 1 {
+                isBtnValidationDisabled = false
+            }
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
@@ -211,6 +252,41 @@ struct VerificationPINView: View {
             return false
         } else {
             return true
+        }
+    }
+    
+    func validatePIN() {
+        
+        if pin == dummyPin {
+            self.nextToPilihJenisAtm = true
+        } else {
+            
+            if (self.tryCount == 1) {
+                self.timeRemainingBtn = 30
+                self.showingModal.toggle()
+            }
+            
+            if (self.tryCount == 2) {
+                self.timeRemainingBtn = 60
+                self.showingModal.toggle()
+            }
+            
+            if (self.tryCount == 3) {
+                self.timeRemainingBtn = 120
+                self.showingModal.toggle()
+            }
+            
+            if (self.tryCount == 4) {
+                self.timeRemainingBtn = 240
+                self.showingModal.toggle()
+            }
+            
+            if (self.tryCount >= 5) {
+                self.timeRemainingBtn = 480
+                self.showingModal.toggle()
+            }
+            
+            self.isBtnValidationDisabled = true
         }
     }
     
@@ -226,14 +302,18 @@ struct VerificationPINView: View {
                 .padding(.bottom, 10)
             
             Text("PIN ATM yang anda Masukkan Salah!")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#DF1C1C"))
                 .padding(.bottom, 30)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
             
             Text("PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar.")
                 .font(.caption)
                 .foregroundColor(Color(hex: "#232175"))
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
             
             Text("Silahkan coba kembali..")
                 .font(.caption)
@@ -241,8 +321,8 @@ struct VerificationPINView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            Button(action: {self.nextToFormVideoCall = true}) {
-                Text("Pendaftaran Melalui Wawancara")
+            Button(action: {self.showingModal = false}) {
+                Text("Kembali")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
             }
@@ -250,16 +330,6 @@ struct VerificationPINView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom)
-            
-            Button(action: {self.appState.moveToWelcomeView = true}) {
-                Text("Kembali ke Halaman Utama")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-            }
-            .frame(maxWidth: .infinity, maxHeight: 50)
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 25)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
