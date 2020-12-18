@@ -8,11 +8,10 @@
 import UIKit
 import CoreData
 import Firebase
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,7 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///Implement Firebase
         FirebaseApp.configure()
         
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        if response.actionIdentifier == "open" {
+            NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil)
+        }
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
