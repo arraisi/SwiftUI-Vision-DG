@@ -38,6 +38,7 @@ struct WelcomeView: View {
     var productATMData = AddProductATM()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State var images = ["slider_pic_1", "slider_pic_2", "slider_pic_3"]
+    @State private var jitsi_room_id = UserDefaults.standard.string(forKey: "jitsi_room")
     @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
     
@@ -92,8 +93,8 @@ struct WelcomeView: View {
                         .frame(maxWidth: .infinity, maxHeight: 50)
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
-                        .sheet(isPresented: $isShowJitsi) {
-                            JitsiView()
+                        .fullScreenCover(isPresented: $isShowJitsi) {
+                            JitsiView(jitsi_room: .constant(jitsi_room_id!))
                         }
                         
                         NavigationLink(destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isLoginViewActive){

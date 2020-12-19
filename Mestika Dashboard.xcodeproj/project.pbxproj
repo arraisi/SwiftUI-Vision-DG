@@ -45,7 +45,6 @@
 		520585F925721F00005DB764 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* NavigationStack */; };
 		520585FA25721F00005DB764 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* Introspect */; };
 		520585FB25721F00005DB764 /* Indicators in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* Indicators */; };
-		520585FC25721F00005DB764 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 524CB114256E0524006ED6F0 /* FirebaseMessaging */; };
 		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
 		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
 		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
@@ -369,6 +368,7 @@
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
+		5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mestika Dashboard.entitlements"; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5245F884253FE702002E8B53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -641,7 +641,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C02C2DE025875B0C00CED248 /* Mantis in Frameworks */,
-				520585FC25721F00005DB764 /* FirebaseMessaging in Frameworks */,
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
@@ -800,6 +799,7 @@
 		5245F883253FE702002E8B53 /* Mestika Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */,
 				0658B5AB2563FAEE001B659D /* Assets */,
 				523A86282542BE8600ADFE25 /* Components */,
 				52474D822540320D0094B758 /* Extensions */,
@@ -1565,7 +1565,6 @@
 				52E0557D2563C307009294DA /* NavigationStack */,
 				520E467A2568B5A800DE9205 /* Introspect */,
 				520E46802568BEF100DE9205 /* Indicators */,
-				524CB114256E0524006ED6F0 /* FirebaseMessaging */,
 				06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */,
 				C02C2DDF25875B0C00CED248 /* Mantis */,
 			);
@@ -2257,11 +2256,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Mestika Dashboard/Mestika Dashboard.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = W6C4KR772T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2269,7 +2269,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlpt.VisionDG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mti.sample.notification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2283,11 +2283,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Mestika Dashboard/Mestika Dashboard.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Mestika Dashboard/Preview Content\"";
-				DEVELOPMENT_TEAM = H9UB4842E4;
+				DEVELOPMENT_TEAM = W6C4KR772T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Mestika Dashboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2295,7 +2296,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlpt.VisionDG;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mti.sample.notification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2561,11 +2562,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
 			productName = BottomSheet;
-		};
-		524CB114256E0524006ED6F0 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
 		};
 		52E0557D2563C307009294DA /* NavigationStack */ = {
 			isa = XCSwiftPackageProductDependency;

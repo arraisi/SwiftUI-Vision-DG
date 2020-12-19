@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>298437457542-qd2jslr4ifhb319j04nnn52gj7ipkg13.apps.googleusercontent.com</string>
+	<string>298437457542-jd1qt2rh5rs7pqn0etrr7homb1b9q6bs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.298437457542-qd2jslr4ifhb319j04nnn52gj7ipkg13</string>
+	<string>com.googleusercontent.apps.298437457542-jd1qt2rh5rs7pqn0etrr7homb1b9q6bs</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBaUrbNpKQ0d6obgj5PKMRIobEXVroa-FA</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mlpt.VisionDG</string>
+	<string>com.mti.sample.notification</string>
 	<key>PROJECT_ID</key>
 	<string>visiondg-mestika-ios</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:298437457542:ios:04f00863df0e5d9a588307</string>
+	<string>1:298437457542:ios:d2168962031dcf7a588307</string>
 </dict>
 </plist>
