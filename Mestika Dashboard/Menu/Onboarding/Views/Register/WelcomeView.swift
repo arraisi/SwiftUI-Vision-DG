@@ -365,7 +365,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             // MARK: change destination
-            NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
+            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
                 Text("Reschedule Jadwal")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))

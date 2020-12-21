@@ -16,9 +16,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
     
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
+    
+    @State var editModeForReschedule: EditMode = .inactive
     
     /* HUD Variable */
     @State private var dim = true
@@ -41,6 +44,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
+    @State var routingReschedule: Bool = false
     
     /* Timer */
     @State private var timeRemainingRsnd = 30
@@ -144,6 +148,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         }
                         .isDetailLink(false)
                         
+                        NavigationLink(
+                            destination: SuccessRegisterView().environmentObject(registerData),
+                            isActive: self.$routingReschedule,
+                            label: {}
+                        )
+                        
                         Button(action: {
                             self.tryCount += 1
                             validateOTP()
@@ -185,6 +195,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear {
+            if (editModeForReschedule == .active) {
+                self.registerData.noTelepon = phone_local ?? ""
+            }
         }
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -453,8 +468,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             if success {
                 print("OTP VALID")
-                self.isOtpValid = true
-                self.isLoading = false
+                
+                if (editModeForReschedule == .active) {
+                    self.isLoading = false
+                    self.routingReschedule = true
+                } else {
+                    self.isOtpValid = true
+                    self.isLoading = false
+                }
             }
             
             if !success {
