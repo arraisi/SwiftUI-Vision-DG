@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>298437457542-jd1qt2rh5rs7pqn0etrr7homb1b9q6bs.apps.googleusercontent.com</string>
+	<string>736220806662-1qkark36vfelcrddkg5pm5k7elvagtnk.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.298437457542-jd1qt2rh5rs7pqn0etrr7homb1b9q6bs</string>
+	<string>com.googleusercontent.apps.736220806662-1qkark36vfelcrddkg5pm5k7elvagtnk</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBaUrbNpKQ0d6obgj5PKMRIobEXVroa-FA</string>
+	<string>AIzaSyCdfNNtcpm0jvAfBbgQAFCyRA8nKYuNu6c</string>
 	<key>GCM_SENDER_ID</key>
-	<string>298437457542</string>
+	<string>736220806662</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mti.sample.notification</string>
+	<string>com.mlpt.visiondg.mestika</string>
 	<key>PROJECT_ID</key>
-	<string>visiondg-mestika-ios</string>
+	<string>mestikavisiondg</string>
 	<key>STORAGE_BUCKET</key>
-	<string>visiondg-mestika-ios.appspot.com</string>
+	<string>mestikavisiondg.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:298437457542:ios:d2168962031dcf7a588307</string>
+	<string>1:736220806662:ios:561e36b8ec9e7d535b0d87</string>
+	<key>DATABASE_URL</key>
+	<string>https://mestikavisiondg.firebaseio.com</string>
 </dict>
 </plist>

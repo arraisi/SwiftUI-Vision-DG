@@ -6,8 +6,14 @@
 //
 
 import SwiftUI
+import JitsiMeet
 
 struct IncomingVideoCallView: View {
+    
+    var jitsiMeetView: JitsiMeetView?
+    @State var isShowJitsi: Bool = false
+    
+    @Binding var jitsiRoom: String
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
@@ -54,6 +60,22 @@ struct IncomingVideoCallView: View {
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .navigationBarHidden(true)
+        .onAppear(perform: {
+            let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+                builder.serverURL = URL(string: "https://meet.jit.si")
+                builder.welcomePageEnabled = false
+            }
+            
+            JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
+        })
+        .onAppear() {
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
+                
+            }
+        }
+        .fullScreenCover(isPresented: $isShowJitsi) {
+            JitsiView(jitsi_room: self.$jitsiRoom)
+        }
     }
     
     var header: some View {
@@ -79,7 +101,9 @@ struct IncomingVideoCallView: View {
     var footerBtn: some View {
         HStack {
             VStack {
-                Button(action: {}) {
+                Button(action: {
+                    self.isShowJitsi = true
+                }) {
                     Image("ic_call")
                 }
                 Text("Accept")
@@ -103,6 +127,6 @@ struct IncomingVideoCallView: View {
 
 struct IncomingVideoCallView_Previews: PreviewProvider {
     static var previews: some View {
-        IncomingVideoCallView()
+        IncomingVideoCallView(jitsiRoom: .constant("123456"))
     }
 }

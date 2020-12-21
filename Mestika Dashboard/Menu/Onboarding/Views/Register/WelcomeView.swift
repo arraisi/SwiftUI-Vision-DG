@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import PopupView
 import JitsiMeet
 
@@ -29,6 +30,7 @@ struct WelcomeView: View {
     @State var isFormPilihJenisAtm: Bool = false
     @State var isRescheduleInterview: Bool = false
     @State var isFormPilihSchedule: Bool = false
+    @State var isIncomingVideoCall: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -38,7 +40,6 @@ struct WelcomeView: View {
     var productATMData = AddProductATM()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State var images = ["slider_pic_1", "slider_pic_2", "slider_pic_3"]
-    @State private var jitsi_room_id = UserDefaults.standard.string(forKey: "jitsi_room")
     @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
     
@@ -49,6 +50,8 @@ struct WelcomeView: View {
     // Modal Variables
     @State var isShowModal = false
     @State var modalSelection = ""
+    
+    @State var jitsiRoom = ""
     
     //    CREATED
     //    KYC_SCHEDULED
@@ -93,9 +96,6 @@ struct WelcomeView: View {
                         .frame(maxWidth: .infinity, maxHeight: 50)
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
-                        .fullScreenCover(isPresented: $isShowJitsi) {
-                            JitsiView(jitsi_room: .constant(jitsi_room_id!))
-                        }
                         
                         NavigationLink(destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
@@ -118,6 +118,12 @@ struct WelcomeView: View {
                         self.isShowModal = false
                     } })
                 }
+                
+                NavigationLink(
+                    destination: IncomingVideoCallView(jitsiRoom: self.$jitsiRoom),
+                    isActive: self.$isIncomingVideoCall,
+                    label: {}
+                )
             }
             .navigationBarItems(trailing: EmptyView())
             .edgesIgnoringSafeArea(.all)
@@ -135,9 +141,20 @@ struct WelcomeView: View {
                     self.appState.moveToWelcomeView = false
                 }
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Detail"))) { obj in
+                print("RECEIVED DATA")
+                if let userInfo = obj.userInfo, let info = userInfo["room_id"] {
+                    print(info)
+                    self.jitsiRoom = info as! String
+                    print(jitsiRoom)
+                    
+                    self.isIncomingVideoCall = true
+                    
+//                    self.isShowJitsi = true
+                }
+            }
             .onAppear() {
                 print("APPEAR")
-//                registerData.load()
                 getUserStatus(deviceId: deviceId!)
             }
             .onAppear(perform: {
@@ -150,8 +167,11 @@ struct WelcomeView: View {
             })
             .onAppear() {
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
-                    self.isShowJitsi = true
+                    
                 }
+            }
+            .fullScreenCover(isPresented: $isShowJitsi) {
+                JitsiView(jitsi_room: self.$jitsiRoom)
             }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
@@ -896,6 +916,7 @@ struct WelcomeView: View {
             }
         }
     }
+    
 }
 
 struct WelcomeView_Previews: PreviewProvider {
