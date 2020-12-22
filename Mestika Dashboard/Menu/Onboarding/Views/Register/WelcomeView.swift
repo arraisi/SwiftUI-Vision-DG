@@ -352,19 +352,46 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            // MARK: change date from API
-            Text("Tanggal : -")
-                .font(.custom("Montserrat-Bold", size: 18))
-                .foregroundColor(Color(hex: "#2334D0"))
-                .padding(.bottom, 5)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            // MARK: change time from API
-            Text("Jam : -")
-                .font(.custom("Montserrat-Bold", size: 18))
-                .foregroundColor(Color(hex: "#2334D0"))
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Tanggal")
+                        .frame(width: 100, alignment: .leading)
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(":")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("\((user.last?.tanggalInterview!)!)")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                
+                HStack {
+                    Text("Jam")
+                        .frame(width: 100, alignment: .leading)
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(":")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("\((user.last?.jamInterviewStart!)!) - \((user.last?.jamInterviewEnd!)!)")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                
+            }
             
             // MARK: change destination
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
