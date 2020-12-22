@@ -87,7 +87,7 @@ struct VerificationPINView: View {
                                         .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
-                                        .keyboardType(.phonePad)
+                                        .keyboardType(.numberPad)
                                     
                                     Spacer()
                                     
@@ -117,7 +117,7 @@ struct VerificationPINView: View {
                                         .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
-                                        .keyboardType(.phonePad)
+                                        .keyboardType(.numberPad)
                                     
                                     Spacer()
                                     
