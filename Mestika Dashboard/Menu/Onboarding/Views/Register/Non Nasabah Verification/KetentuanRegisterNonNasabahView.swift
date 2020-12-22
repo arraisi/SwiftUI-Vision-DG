@@ -67,7 +67,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             }
                             .isDetailLink(false)
-                            .background(self.readFinished ? Color(hex: "#2334D0") : Color(hex: "#FFFFFF"))
+                            .background(self.readFinished ? Color(hex: "#2334D0") : Color(.lightGray))
                             .disabled(!self.readFinished)
                             .cornerRadius(12)
                             .padding(.bottom, 5)

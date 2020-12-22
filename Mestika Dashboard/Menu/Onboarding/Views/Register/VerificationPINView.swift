@@ -87,7 +87,14 @@ struct VerificationPINView: View {
                                         .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
-                                        .keyboardType(.phonePad)
+                                        .keyboardType(.numberPad)
+                                        .onReceive(pin.publisher.collect()) {
+                                            if String($0).hasPrefix("0") {
+                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
+                                            } else {
+                                                self.pin = String($0.prefix(6))
+                                            }
+                                        }
                                     
                                     Spacer()
                                     
@@ -117,7 +124,14 @@ struct VerificationPINView: View {
                                         .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
-                                        .keyboardType(.phonePad)
+                                        .keyboardType(.numberPad)
+                                        .onReceive(pin.publisher.collect()) {
+                                            if String($0).hasPrefix("0") {
+                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
+                                            } else {
+                                                self.pin = String($0.prefix(6))
+                                            }
+                                        }
                                     
                                     Spacer()
                                     
