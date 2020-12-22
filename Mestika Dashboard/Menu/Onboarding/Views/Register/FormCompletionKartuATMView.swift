@@ -478,6 +478,8 @@ struct FormCompletionKartuATMView: View {
     func postData() {
         ///MARK : Complete data
         atmData.nik = registerData.nik
+        atmData.isNasabahMestika = registerData.isNasabahmestika
+        atmData.isVcall = registerData.isNasabahmestika
         
         self.goToSuccessPage = true
         self.isLoading = true
