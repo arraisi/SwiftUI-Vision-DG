@@ -11,6 +11,8 @@ import JitsiMeet
 
 struct JitsiView: UIViewControllerRepresentable {
     
+    @EnvironmentObject var appState: AppState
+    
     @Binding var jitsi_room: String
     
     @State var jitsiMeetView: JitsiMeetView?
@@ -28,6 +30,7 @@ struct JitsiView: UIViewControllerRepresentable {
             print("CLEAN UP")
             parent.cleanUp()
             parent.presentationMode.wrappedValue.dismiss()
+            parent.appState.moveToWelcomeView = true
         }
     }
     

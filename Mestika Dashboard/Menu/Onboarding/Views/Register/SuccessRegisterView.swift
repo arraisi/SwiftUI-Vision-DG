@@ -332,6 +332,17 @@ struct SuccessRegisterView: View {
         print("time start \(timeArr[0])")
         print("time end \(timeArr[1])")
         
+        let data = User(context: managedObjectContext)
+        data.jamInterviewEnd = timeArr[1]
+        data.jamInterviewStart = timeArr[0]
+        data.tanggalInterview = self.tanggalWawancara
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
         UserDefaults.standard.set(timeArr[0], forKey: "time_schedule_start")
         UserDefaults.standard.set(timeArr[1], forKey: "time_schedule_end")
         UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
