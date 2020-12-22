@@ -59,7 +59,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         print("OPEN FROM Backgroud")
-        NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil)
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        let jitsiRoom = userInfo["room"]
+        print(jitsiRoom)
+        
+        let dataRoom: [String: Any] = ["room_id": jitsiRoom]
+        
+        NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
     }
     
     // [START receive_message]
