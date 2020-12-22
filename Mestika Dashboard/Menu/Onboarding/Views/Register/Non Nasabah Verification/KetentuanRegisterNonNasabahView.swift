@@ -55,15 +55,6 @@ struct KetentuanRegisterNonNasabahView: View {
                                     .padding(.vertical, 10)
                                 
                                 WebView(urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
-                                    .gesture(
-                                       DragGesture().onChanged { value in
-                                          if value.translation.height > 0 {
-                                             print("Scroll down")
-                                          } else {
-                                             print("Scroll up")
-                                          }
-                                       }
-                                    )
                                 
                                 NavigationLink(
                                     destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData)
