@@ -18,6 +18,7 @@ struct SuccessRegisterView: View {
     @State private var email_local = UserDefaults.standard.string(forKey: "email_local")
     @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
     @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
+    @State private var routing_schedule = UserDefaults.standard.string(forKey: "routingSchedule")
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var appState: AppState
@@ -467,42 +468,81 @@ struct SuccessRegisterView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text("Tanggal : \(tanggalWawancara)")
-                .font(.custom("Montserrat-Bold", size: 18))
-                .foregroundColor(Color(hex: "#2334D0"))
-                .padding(.bottom, 5)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Text("Jam : \(pilihJam)")
-                .font(.custom("Montserrat-Bold", size: 18))
-                .foregroundColor(Color(hex: "#2334D0"))
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Button(
-                action: {
-                    
-                    print(registerData.homeRoute)
-//
-//                    if self.registerData.homeRoute {
-//                        self.appState.moveToDashboard = true
-//                    } else {
-//                        self.showFormPilihJenisATM = true
-//                    }
-                    
-                    self.showFormPilihJenisATM = true
-                },
-                label: {
-                    Text("OK")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Tanggal")
+                        .frame(width: 100, alignment: .leading)
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(":")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("\(tanggalWawancara)")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-            )
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
+                
+                HStack {
+                    Text("Jam")
+                        .frame(width: 100, alignment: .leading)
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(":")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("\(pilihJam)")
+                        .font(.custom("Montserrat-Bold", size: 18))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.bottom, 5)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                
+            }
+            
+            if (routing_schedule == "true") {
+                Button(
+                    action: {
+                        self.appState.moveToDashboard = true
+                    },
+                    label: {
+                        Text("OK")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                    }
+                )
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+            } else {
+                Button(
+                    action: {
+                        print(registerData.homeRoute)
+                        self.showFormPilihJenisATM = true
+                    },
+                    label: {
+                        Text("OK")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                    }
+                )
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+            }
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)

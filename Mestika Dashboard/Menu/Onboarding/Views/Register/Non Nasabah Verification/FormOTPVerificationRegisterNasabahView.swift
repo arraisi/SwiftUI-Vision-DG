@@ -123,7 +123,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         
                         Button(
                             action: {
-                                self.isOtpValid = true
+                                self.routingReschedule = true
                             },
                             label: {
                                 Text("(00:\(String(format: "%02d", timeRemainingRsnd)))")
@@ -153,6 +153,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             isActive: self.$routingReschedule,
                             label: {}
                         )
+                        .isDetailLink(false)
                         
                         Button(action: {
                             self.tryCount += 1
@@ -471,8 +472,10 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 
                 if (editModeForReschedule == .active) {
                     self.isLoading = false
+                    UserDefaults.standard.set("true", forKey: "routingSchedule")
                     self.routingReschedule = true
                 } else {
+                    UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.isOtpValid = true
                     self.isLoading = false
                 }

@@ -402,6 +402,19 @@ struct WelcomeView: View {
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
+            .padding(.bottom, 5)
+            
+            Button(
+                action: {},
+                label: {
+                    Text("Batalkan Permohonan")
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+            )
+            .background(Color.white)
+            .cornerRadius(12)
             .padding(.bottom, 20)
             
             NavigationLink(
