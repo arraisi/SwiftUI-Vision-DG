@@ -115,8 +115,8 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
-                    self.code = schedule!.code
-                    self.message = schedule!.message
+                    self.code = schedule!.code!
+                    self.message = schedule!.message!
                 }
                 
                 completion(true)

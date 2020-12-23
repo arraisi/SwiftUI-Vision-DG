@@ -48,8 +48,8 @@ struct WelcomeView: View {
 //    @State private var date_schedule_end = UserDefaults.standard.string(forKey: "date_schedule_end")
     
     // Modal Variables
-    @State var isShowModal = false
-    @State var modalSelection = ""
+//    @State var isShowModal = false
+//    @State var modalSelection = ""
     
     @State var jitsiRoom = ""
     
@@ -59,8 +59,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-//    @State var modalSelection = "KYC_WAITING"
-//    @State var isShowModal = true
+    @State var modalSelection = "KYC_WAITING"
+    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -365,7 +365,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\((user.last?.tanggalInterview!)!)")
+                    Text("\((user.last?.tanggalInterview ?? "")!)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -384,7 +384,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\((user.last?.jamInterviewStart!)!) - \((user.last?.jamInterviewEnd!)!)")
+                    Text("\((user.last?.jamInterviewStart ?? "")!) - \((user.last?.jamInterviewEnd ?? "")!)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -405,7 +405,9 @@ struct WelcomeView: View {
             .padding(.bottom, 5)
             
             Button(
-                action: {},
+                action: {
+                    cancelRegistration()
+                },
                 label: {
                     Text("Batalkan Permohonan")
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -959,6 +961,29 @@ struct WelcomeView: View {
         }
     }
     
+    func cancelRegistration() {
+//        self.isLoading = true
+        
+        self.userVM.cancelRegistration(nik: user.last?.nik ?? "", completion: { (success:Bool) in
+            
+            if success {
+//                self.isLoading = false
+//                removeUser()
+                
+                self.modalSelection = ""
+                
+                let domain = Bundle.main.bundleIdentifier!
+                UserDefaults.standard.removePersistentDomain(forName: domain)
+                UserDefaults.standard.synchronize()
+                
+            } else {
+//                self.isLoading = false
+                
+//                self.scheduleVM.message = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+//                self.showingAlert.toggle()
+            }
+        })
+    }
 }
 
 struct WelcomeView_Previews: PreviewProvider {

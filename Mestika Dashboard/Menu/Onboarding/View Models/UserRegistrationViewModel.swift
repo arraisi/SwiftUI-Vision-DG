@@ -74,11 +74,38 @@ extension UserRegistrationViewModel {
                 }
                 
                 DispatchQueue.main.async {
-                    self.code = response.code
+                    self.code = response.code ?? ""
 //                    self.code = "R05"
-                    self.message = response.message
+                    self.message = response.message ?? ""
                     self.user = response
                     
+                    completion(true)
+                }
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    completion(false)
+                }
+                
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    /* CANCEL REGISTRATION */
+    func cancelRegistration(nik: String, completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        UserRegistrationService.shared.cancelRequest(nik: nik) { result in
+            switch result {
+            case .success( _):
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
                     completion(true)
                 }
                 

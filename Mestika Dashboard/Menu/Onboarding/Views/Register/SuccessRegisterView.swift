@@ -12,6 +12,7 @@ struct SuccessRegisterView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
+    @ObservedObject var regVM = UserRegistrationViewModel()
     var productATMData = AddProductATM()
     
     @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local")
@@ -57,7 +58,7 @@ struct SuccessRegisterView: View {
     }
     
     init() {
-        getAllSchedule()
+        
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -297,6 +298,8 @@ struct SuccessRegisterView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .onAppear {
+            getAllSchedule()
+            
             self.registerData.nik = nik_local ?? ""
             self.registerData.noTelepon = phone_local ?? ""
             self.registerData.email = email_local ?? ""
@@ -321,6 +324,10 @@ struct SuccessRegisterView: View {
     }
     
     func removeUser() {
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             print("DELETE SUCCESS")
             self.appState.moveToWelcomeView = true
@@ -362,6 +369,23 @@ struct SuccessRegisterView: View {
         }
     }
     
+    func cancelRegistration() {
+        self.isLoading = true
+        
+        regVM.cancelRegistration(nik: nik_local ?? "", completion: { (success:Bool) in
+            
+            if success {
+                self.isLoading = false
+                removeUser()
+            } else {
+                self.isLoading = false
+                
+                self.scheduleVM.message = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+                self.showingAlert.toggle()
+            }
+        })
+    }
+    
     // MARK:- POPUP CANCEL REGISTER
     func popupMessageCancelRegister() -> some View {
         VStack(alignment: .center) {
@@ -389,7 +413,7 @@ struct SuccessRegisterView: View {
             
             Button(
                 action: {
-                    removeUser()
+                    cancelRegistration()
                 },
                 label: {
                     Text("YA")
