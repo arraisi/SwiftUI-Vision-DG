@@ -58,7 +58,7 @@ struct SuccessRegisterView: View {
     }
     
     init() {
-        
+        getAllSchedule()
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -298,8 +298,6 @@ struct SuccessRegisterView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .onAppear {
-            getAllSchedule()
-            
             self.registerData.nik = nik_local ?? ""
             self.registerData.noTelepon = phone_local ?? ""
             self.registerData.email = email_local ?? ""
@@ -344,6 +342,7 @@ struct SuccessRegisterView: View {
         data.jamInterviewEnd = timeArr[1]
         data.jamInterviewStart = timeArr[0]
         data.tanggalInterview = self.tanggalWawancara
+        data.nik = self.registerData.nik
         
         do {
             try self.managedObjectContext.save()

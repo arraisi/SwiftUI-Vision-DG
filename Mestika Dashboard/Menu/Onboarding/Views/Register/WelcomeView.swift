@@ -48,8 +48,8 @@ struct WelcomeView: View {
 //    @State private var date_schedule_end = UserDefaults.standard.string(forKey: "date_schedule_end")
     
     // Modal Variables
-//    @State var isShowModal = false
-//    @State var modalSelection = ""
+    @State var isShowModal = false
+    @State var modalSelection = ""
     
     @State var jitsiRoom = ""
     
@@ -59,8 +59,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-    @State var modalSelection = "KYC_WAITING"
-    @State var isShowModal = true
+//    @State var modalSelection = "KYC_WAITING"
+//    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -161,7 +161,7 @@ struct WelcomeView: View {
             }
             .onAppear(perform: {
                 let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-                    builder.serverURL = URL(string: "https://meet.jit.si")
+                    builder.serverURL = URL(string: "https://video.visiondg.xyz")
                     builder.welcomePageEnabled = false
                 }
                 
@@ -470,8 +470,9 @@ struct WelcomeView: View {
             
             // MARK: change destination
             Button(action:{
-                self.isShowModal = false
-                self.modalSelection = ""
+//                self.isShowModal = false
+//                self.modalSelection = ""
+                cancelRegistration()
 //                self.registerData.clear()
             }, label: {
                 Text("Batalkan Permohonan")
