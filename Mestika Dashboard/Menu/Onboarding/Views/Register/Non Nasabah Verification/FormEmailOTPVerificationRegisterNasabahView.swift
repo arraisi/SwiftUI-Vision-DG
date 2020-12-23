@@ -215,8 +215,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             type: .floater(),
             position: .bottom,
             animation: Animation.spring(),
-            closeOnTap: false,
-            closeOnTapOutside: false) { popupMenu() }
+            closeOnTap: true,
+            closeOnTapOutside: true) { popupMenu() }
     }
     
     private var pinDots: some View {
