@@ -161,7 +161,7 @@ struct WelcomeView: View {
             }
             .onAppear(perform: {
                 let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-                    builder.serverURL = URL(string: "https://meet.jit.si")
+                    builder.serverURL = URL(string: "https://video.visiondg.xyz")
                     builder.welcomePageEnabled = false
                 }
                 
