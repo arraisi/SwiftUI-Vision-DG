@@ -79,7 +79,7 @@ struct FormDetailKartuATMView: View {
                             .cornerRadius(10)
                         }
                         
-                        if (is_video_call != "true") {
+                        if (is_video_call == "true") {
                             EmptyView()
                         } else {
                             Group {
