@@ -199,6 +199,7 @@ struct VerificationPINView: View {
                                 UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
                                 self.nextToFormVideoCall = true
                             } else {
+                                UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
                                 validatePIN()
                             }
                         }) {

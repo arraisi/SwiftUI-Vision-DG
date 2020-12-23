@@ -24,6 +24,7 @@ struct FormCompletionKartuATMView: View {
     @State var isLoading = false
     
     @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
+    @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
     
     @State var addressOptionId = 1
     
@@ -479,9 +480,9 @@ struct FormCompletionKartuATMView: View {
         ///MARK : Complete data
         atmData.nik = registerData.nik
         atmData.isNasabahMestika = registerData.isNasabahmestika
-        atmData.isVcall = !registerData.isNasabahmestika
+        atmData.isVcall = is_video_call == "true" ? true : false
         
-        self.goToSuccessPage = true
+//        self.goToSuccessPage = true
         self.isLoading = true
         productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
             self.isLoading = false
