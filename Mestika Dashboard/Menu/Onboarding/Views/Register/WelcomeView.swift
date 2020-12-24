@@ -150,7 +150,7 @@ struct WelcomeView: View {
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Detail"))) { obj in
-                print("RECEIVED DATA")
+                print("RECEIVED JITSI START")
                 if let userInfo = obj.userInfo, let info = userInfo["room_id"] {
                     print(info)
                     self.jitsiRoom = info as! String
@@ -158,6 +158,11 @@ struct WelcomeView: View {
                     
                     self.isIncomingVideoCall = true
                 }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
+                print("RECEIVED JITSI END")
+                
+                getUserStatus(deviceId: deviceId!)
             }
             .onAppear {
                 getMobileVersion()

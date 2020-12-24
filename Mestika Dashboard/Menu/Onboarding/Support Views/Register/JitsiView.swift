@@ -29,6 +29,8 @@ struct JitsiView: UIViewControllerRepresentable {
         func conferenceTerminated(_ data: [AnyHashable : Any]!) {
             print("CLEAN UP")
             parent.cleanUp()
+            
+            NotificationCenter.default.post(name: NSNotification.Name("JitsiEnd"), object: nil)
             parent.presentationMode.wrappedValue.dismiss()
             parent.appState.moveToWelcomeView = true
         }
