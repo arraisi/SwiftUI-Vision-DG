@@ -217,8 +217,8 @@ struct EmailOTPRegisterNasabahView: View {
             type: .floater(),
             position: .bottom,
             animation: Animation.spring(),
-            closeOnTap: false,
-            closeOnTapOutside: false) { popupMenu() }
+            closeOnTap: true,
+            closeOnTapOutside: true) { popupMenu() }
     }
     
     private var pinDots: some View {
@@ -323,7 +323,7 @@ struct EmailOTPRegisterNasabahView: View {
             
             Button(action: {
                 self.isLoading = false
-                self.isShowModal.toggle()
+                self.isShowModal = false
             }) {
                 Text("Kembali")
                     .foregroundColor(.white)

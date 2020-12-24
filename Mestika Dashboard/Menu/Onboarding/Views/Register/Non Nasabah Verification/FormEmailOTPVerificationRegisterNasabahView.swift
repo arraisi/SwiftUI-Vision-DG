@@ -321,7 +321,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             
             Button(action: {
                 self.isLoading = false
-                self.isShowModal.toggle()
+                self.isShowModal = false
             }) {
                 Text("Kembali")
                     .foregroundColor(.white)

@@ -224,8 +224,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             if self.timeRemainingBtn < 1 {
                 isBtnValidationDisabled = false
-            } else {
-//                isBtnValidationDisabled = true
             }
         }
         .alert(isPresented: $isShowAlert) {
@@ -347,7 +345,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             Button(action: {
                 self.isLoading = false
-                self.isShowModal.toggle()
+                self.isShowModal = false
             }) {
                 Text("Kembali")
                     .foregroundColor(.white)
