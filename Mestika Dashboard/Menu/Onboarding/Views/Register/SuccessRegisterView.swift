@@ -60,10 +60,6 @@ struct SuccessRegisterView: View {
         tanggalWawancara.isEmpty || pilihJam.isEmpty
     }
     
-//    init() {
-//        getAllSchedule()
-//    }
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack(alignment: .top) {
@@ -337,13 +333,13 @@ struct SuccessRegisterView: View {
     
     func submitSchedule() {
         self.isLoading = true
+        
         let timeArr = pilihJam.components(separatedBy: "-")
         print("time start \(timeArr[0])")
         print("time end \(timeArr[1])")
         
         let data = User(context: managedObjectContext)
-        data.jamInterviewEnd = timeArr[1]
-        data.jamInterviewStart = timeArr[0]
+        data.jamInterviewStart = self.pilihJam
         data.tanggalInterview = self.tanggalWawancara
         data.nik = self.registerData.nik
         
@@ -358,6 +354,13 @@ struct SuccessRegisterView: View {
         UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
         
         scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { success in
+            
+            let dataSchedule: [String: Any] = [
+                "dateInterview": self.tanggalWawancara,
+                "timeInterview": self.pilihJam
+            ]
+            
+            NotificationCenter.default.post(name: NSNotification.Name("Schedule"), object: nil, userInfo: dataSchedule)
             
             if success {
                 self.isLoading = false

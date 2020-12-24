@@ -23,11 +23,17 @@ extension UserRegistrationViewModel {
         let url = URL(string: "https://disdukcapil.soppengkab.go.id/wp-content/uploads/2017/03/KTPEL.jpg")
         let data = try? Data(contentsOf: url!)
         
+        let imageKtp = registerData.fotoKTP.asUIImage()
+        let imageKtpCompress = imageKtp.resized(withPercentage: 0.1)
+        
+        let imageSelfie = registerData.fotoSelfie.asUIImage()
+        let imageSelfieCompress = imageSelfie.resized(withPercentage: 0.1)
+        
         UserRegistrationService.shared.postUser(
             registerData: registerData,
-            imageKtp: UIImage(data: data!)!,
+            imageKtp: imageKtpCompress!,
             imageNpwp: UIImage(data: data!)!,
-            imageSelfie: UIImage(data: data!)!) { result in
+            imageSelfie: imageSelfieCompress!) { result in
                 
             switch result {
             case .success(let response):

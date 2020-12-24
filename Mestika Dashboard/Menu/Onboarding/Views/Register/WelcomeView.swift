@@ -40,6 +40,9 @@ struct WelcomeView: View {
     @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
     
+    @State private var dateInterview = "-"
+    @State private var timeInterview = "-"
+    
     // Modal Variables
     @State var isShowModal = false
     @State var modalSelection = ""
@@ -102,7 +105,6 @@ struct WelcomeView: View {
                     
                     Spacer()
                 }
-//                .padding(.vertical, 20)
                 
                 
                 if self.isShowModal {
@@ -133,6 +135,18 @@ struct WelcomeView: View {
                     self.isFormPilihSchedule = false
                     self.isIncomingVideoCall = false
                     self.appState.moveToWelcomeView = false
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
+                print("RECEIVED SCHEDULE")
+                if let dateInfo = obj.userInfo, let info = dateInfo["dateInterview"] {
+                    print(info)
+                    dateInterview = info as! String
+                }
+                
+                if let timeInfo = obj.userInfo, let info = timeInfo["timeInterview"] {
+                    print(info)
+                    timeInterview = info as! String
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Detail"))) { obj in
@@ -350,7 +364,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\((user.last?.tanggalInterview ?? "")!)")
+                    Text("\(dateInterview == "-" ? user.last?.tanggalInterview as! String : dateInterview)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -369,7 +383,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\((user.last?.jamInterviewStart ?? "")!) - \((user.last?.jamInterviewEnd ?? "")!)")
+                    Text("\(timeInterview == "-" ? user.last?.jamInterviewStart as! String : timeInterview)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
