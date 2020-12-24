@@ -50,12 +50,10 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                     
                     self.isLoading = false
                     
-                    DispatchQueue.main.async {
-                        self.schedule = schedule.map(ScheduleInterviewViewModel.init)
-                        self.scheduleDates = Array(Set(schedule.map({ (resp:ScheduleInterviewResponse) -> String in
-                            return resp.date
-                        }))).sorted()
-                    }
+                    self.schedule = schedule.map(ScheduleInterviewViewModel.init)
+                    self.scheduleDates = Array(Set(schedule.map({ (resp:ScheduleInterviewResponse) -> String in
+                        return resp.date
+                    }))).sorted()
                 }
                 
                 completion(true)

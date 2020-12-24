@@ -18,6 +18,10 @@ struct SuccessRegisterView: View {
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
     
+    @State var schedule = [ScheduleInterviewViewModel]()
+    @State var scheduleDates = [String]()
+    @State var scheduleJamBasedOnDate = [String]()
+    
     @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local")
     @State private var email_local = UserDefaults.standard.string(forKey: "email_local")
     @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
@@ -109,10 +113,10 @@ struct SuccessRegisterView: View {
                                 .disabled(true)
                             
                             Menu {
-                                ForEach(self.scheduleVM.scheduleDates, id: \.self) { data in
+                                ForEach(self.scheduleDates, id: \.self) { data in
                                     Button(action: {
                                         tanggalWawancara = data
-                                        scheduleVM.getScheduleById(date: tanggalWawancara)
+                                        getScheduleById(date: tanggalWawancara)
                                     }) {
                                         Text(data)
                                             .font(.custom("Montserrat-Regular", size: 10))
@@ -138,7 +142,7 @@ struct SuccessRegisterView: View {
                             
                             
                             Menu {
-                                ForEach(self.scheduleVM.scheduleJamBasedOnDate, id: \.self) { data in
+                                ForEach(self.scheduleJamBasedOnDate, id: \.self) { data in
                                     Button(action: {
                                         pilihJam = data
                                     }) {
@@ -574,6 +578,7 @@ struct SuccessRegisterView: View {
         .shadow(radius: 20)
     }
     
+    // MARK:- GET ALL SCHEDULE
     func getAllSchedule() {
         self.isLoading = true
         
@@ -581,12 +586,26 @@ struct SuccessRegisterView: View {
             
             if success {
                 self.isLoading = self.scheduleVM.isLoading
+                self.schedule = self.scheduleVM.schedule
+                
+                self.scheduleDates = Array(Set(schedule.map({ (resp: ScheduleInterviewViewModel) -> String in
+                    return resp.date
+                }))).sorted()
             }
             
             if !success {
                 self.isLoading = false
             }
         }
+    }
+    
+    // MARK:- GET SCHEDULE BY DATE
+    func getScheduleById(date: String) {
+        self.scheduleJamBasedOnDate = Array(Set(schedule.filter({ (data:ScheduleInterviewViewModel) -> Bool in
+            return data.date == date
+        }).map({ (data:ScheduleInterviewViewModel) -> String in
+            return "\(data.timeStart)" + "-" + "\(data.timeEnd)"
+        }))).sorted()
     }
 }
 

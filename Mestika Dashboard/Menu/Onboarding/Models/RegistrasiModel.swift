@@ -85,6 +85,7 @@ class RegistrasiModel: ObservableObject {
     @Published var kecamatanFromNik: String = ""
     @Published var kabupatenKotaFromNik: String = ""
     @Published var provinsiFromNik: String = ""
+    @Published var kodePosFromNik: String = ""
     @Published var bidangUsaha: String = ""
     @Published var desainKartuATMImage: URL = URL(fileURLWithPath: "")
     @Published var noRekening: String = ""
