@@ -103,6 +103,7 @@ struct SumberPendapatanLainnyaView: View {
                                         Button(action:{
                                             
                                             self.selectedId = 1
+                                            registerData.hasSumberPendapatanLainnya = true
                                             
                                         }) {
                                             
@@ -124,17 +125,6 @@ struct SumberPendapatanLainnyaView: View {
                                         }
                                         
                                         if self.selectedId == 1 {
-                                            //                                            VStack(alignment: .leading) {
-                                            //                                                TextFieldWithPickerAsInput(data: ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"], placeholder: "Pilih pendapatan lainnya", selectionIndex:$sumberPendapatanLainIndex, text: $registerData.sumberPendapatanLain)
-                                            //                                                    .frame(height: 36)
-                                            //                                                    .font(Font.system(size: 14))
-                                            //                                                    .padding(.horizontal)
-                                            //                                                    .background(Color.gray.opacity(0.1))
-                                            //                                                    .cornerRadius(10)
-                                            //
-                                            //                                            }
-                                            //                                            .padding(.horizontal, 20)
-                                            
                                             
                                             HStack {
                                                 TextField("Pilih pendapatan lainnya", text: $registerData.sumberPendapatanLainnya)
@@ -169,6 +159,7 @@ struct SumberPendapatanLainnyaView: View {
                                             
                                             self.selectedId = 2
                                             registerData.sumberPendapatanLainnya = "Tidak memiliki"
+                                            registerData.hasSumberPendapatanLainnya = false
                                             
                                         }) {
                                             

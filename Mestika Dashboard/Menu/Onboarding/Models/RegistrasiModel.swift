@@ -38,6 +38,7 @@ class RegistrasiModel: ObservableObject {
     @Published var sumberPenyandangDana = ""
     @Published var sumberPendapatanLainnyaId: Int = 0
     @Published var sumberPendapatanLainnya = ""
+    @Published var hasSumberPendapatanLainnya: Bool = false
     @Published var sumberPendapatanLain:String? = ""
     @Published var namaPerusahaan = ""
     @Published var alamatPerusahaan = ""
@@ -92,6 +93,12 @@ class RegistrasiModel: ObservableObject {
     @Published var isWni: Bool = false
     @Published var isAgree: Bool = false
     @Published var isShareData: Bool = false
+    @Published var isAddressEqualToDukcapil: String = ""
+    @Published var addressInput: String = ""
+    @Published var addressRtRwInput: String = ""
+    @Published var addressKelurahanInput: String = ""
+    @Published var addressKecamatanInput: String = ""
+    @Published var addressPostalCodeInput: String = ""
     
     // For nasabah use only
     @Published var isNasabahmestika: Bool = false

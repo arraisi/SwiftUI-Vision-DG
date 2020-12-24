@@ -10,16 +10,20 @@ import SwiftUI
 struct VerificationAddressView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
-    @State var alamat: String = ""
-    @State var kodePos : String = ""
     @State var isShowNextView : Bool = false
+    
+    @State var addressInput: String = ""
+    @State var addressRtRwInput: String = ""
+    @State var addressKelurahanInput: String = ""
+    @State var addressKecamatanInput: String = ""
+    @State var addressKodePosInput: String = ""
     
     let verificationAddress: [MasterModel] = load("verificationAddress.json")
     
     var disableForm: Bool {
         
         if (registerData.verificationAddressId != 1) {
-            if (registerData.alamatKtpFromNik.isEmpty || registerData.rtFromNik.isEmpty || registerData.kelurahanFromNik.isEmpty || registerData.kecamatanFromNik.isEmpty || kodePos.isEmpty) {
+            if (registerData.addressInput.isEmpty || registerData.addressRtRwInput.isEmpty || registerData.addressKelurahanInput.isEmpty || registerData.addressKecamatanInput.isEmpty || registerData.addressPostalCodeInput.isEmpty) {
                 return true
             }
         }
@@ -34,6 +38,9 @@ struct VerificationAddressView: View {
                 .resizable()
             
             VStack(spacing: 0) {
+                
+                AppBarLogo(light: false, onCancel: {})
+                
                 ScrollView {
                     VStack {
                         Text("PASTIKAN INFORMASI ANDA BENAR")
@@ -56,11 +63,17 @@ struct VerificationAddressView: View {
                                 .padding(.horizontal, 20)
                             
                             ZStack {
-
+                                
                                 RadioButtonGroup(
                                     items: verificationAddress,
                                     selectedId: $registerData.verificationAddressId) { selected in
                                     print("Selected is: \(selected)")
+                                    
+                                    if (selected == 1) {
+                                        registerData.isAddressEqualToDukcapil = "Ya, alamat sesuai"
+                                    } else if (selected == 2) {
+                                        registerData.isAddressEqualToDukcapil = "Tidak, alamat tidak sesuai"
+                                    }
                                 }
                                 .padding(.horizontal, 20)
                                 .padding(.top, 15)
@@ -76,41 +89,41 @@ struct VerificationAddressView: View {
                                     Divider()
                                         .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.alamatKtpFromNik, label: "Alamat", placeHolder: "Alamat", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressInput, label: "Alamat", placeHolder: "Alamat", onEditingChanged: { (Bool) in
                                         print("on edit")
+                                        registerData.addressInput = self.addressInput
                                     }, onCommit: {
                                         print("on commit")
+                                        registerData.addressInput = self.addressInput
                                     })
-                                        .padding(.horizontal, 20)
+                                    .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.rtFromNik, label: "RT/RW", placeHolder: "RT/RW", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressRtRwInput, label: "RT/RW", placeHolder: "RT/RW", onEditingChanged: { (Bool) in
                                         print("on edit")
+                                        registerData.addressRtRwInput = self.addressRtRwInput
                                     }, onCommit: {
                                         print("on commit")
+                                        registerData.addressRtRwInput = self.addressRtRwInput
                                     })
-                                        .padding(.horizontal, 20)
+                                    .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.kelurahanFromNik, label: "Kelurahan", placeHolder: "Kelurahan", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressKelurahanInput, label: "Kelurahan", placeHolder: "Kelurahan", onEditingChanged: { (Bool) in
                                         print("on edit")
+                                        registerData.addressKelurahanInput = self.addressKelurahanInput
                                     }, onCommit: {
                                         print("on commit")
+                                        registerData.addressKelurahanInput = self.addressKelurahanInput
                                     })
-                                        .padding(.horizontal, 20)
+                                    .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $registerData.kecamatanFromNik, label: "Kecamatan", placeHolder: "Kecamatan", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressKecamatanInput, label: "Kecamatan", placeHolder: "Kecamatan", onEditingChanged: { (Bool) in
                                         print("on edit")
+                                        registerData.addressKecamatanInput = self.addressKecamatanInput
                                     }, onCommit: {
                                         print("on commit")
+                                        registerData.addressKecamatanInput = self.addressKecamatanInput
                                     })
-                                        .padding(.horizontal, 20)
-                                    
-//                                    LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos", onEditingChanged: { (Bool) in
-//                                        print("on edit")
-//                                    }, onCommit: {
-//                                        print("on commit")
-//                                    })
-//                                        .padding(.horizontal, 20)
-//                                        .padding(.bottom, 30)
+                                    .padding(.horizontal, 20)
                                     
                                     VStack(alignment: .leading) {
                                         
@@ -120,12 +133,13 @@ struct VerificationAddressView: View {
                                             .foregroundColor(Color(hex: "#707070"))
                                         
                                         HStack {
-                                            TextField("Kode Pos", text: $kodePos) {change in
+                                            TextField("Kode Pos", text: $addressKodePosInput) { change in
                                             } onCommit: {
-//                                                self.registerData.kodePosKeluarga = self.kodePos
+                                                print("on commit")
+                                                registerData.addressPostalCodeInput = self.addressKodePosInput
                                             }
-                                            .onReceive(kodePos.publisher.collect()) {
-                                                self.kodePos = String($0.prefix(5))
+                                            .onReceive(addressKodePosInput.publisher.collect()) {
+                                                self.addressKodePosInput = String($0.prefix(5))
                                             }
                                             .keyboardType(.numberPad)
                                             .font(Font.system(size: 14))
@@ -140,7 +154,7 @@ struct VerificationAddressView: View {
                                     .padding(.bottom, 30)
                                 }
                             }
-                        
+                            
                         }
                         .frame(width: UIScreen.main.bounds.width - 50)
                         .background(Color.white)
@@ -148,7 +162,7 @@ struct VerificationAddressView: View {
                         .shadow(radius: 30)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 70)
+                    .padding(.top, 50)
                     .padding(.bottom, 10)
                 }
                 
@@ -157,8 +171,9 @@ struct VerificationAddressView: View {
                     
                     
                     Button(action: {
-//                        self.registerData.kodePosKeluarga = self.kodePos
+                        
                         self.isShowNextView = true
+                        
                     }, label: {
                         Text("Submit Data")
                             .foregroundColor(.white)
@@ -179,7 +194,7 @@ struct VerificationAddressView: View {
         }
         .KeyboardAwarePadding()
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
