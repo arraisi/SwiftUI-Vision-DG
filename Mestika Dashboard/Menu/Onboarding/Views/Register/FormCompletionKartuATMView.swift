@@ -14,7 +14,6 @@ struct FormCompletionKartuATMView: View {
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject private var productVM = ATMProductViewModel()
-//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var location : String = ""
     @State var kodePos : String = ""
@@ -25,6 +24,7 @@ struct FormCompletionKartuATMView: View {
     
     @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
     @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
+    @State private var is_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     
     @State var addressOptionId = 1
     
@@ -479,7 +479,7 @@ struct FormCompletionKartuATMView: View {
     func postData() {
         ///MARK : Complete data
         atmData.nik = registerData.nik
-        atmData.isNasabahMestika = registerData.isNasabahmestika
+        atmData.isNasabahMestika = is_register_nasabah == "true" ? true : false
         atmData.isVcall = is_video_call == "true" ? true : false
         
         self.goToSuccessPage = true

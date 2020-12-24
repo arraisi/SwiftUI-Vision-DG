@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import Firebase
 
 class UserRegistrationService {
     
@@ -28,6 +29,10 @@ class UserRegistrationService {
         }
         
         var deviceId = UIDevice.current.identifierForVendor?.uuidString
+        
+        let token = Messaging.messaging().fcmToken
+        let indexEnd = token!.index(of: ":")
+        let firebaseId = String(token![..<indexEnd!])
         
         print("DEVICE ID \(deviceId)")
         print(registerData.tujuanPembukaan)
@@ -70,17 +75,17 @@ class UserRegistrationService {
             "funderOccupation": "TESTER",
             "password": registerData.password,
             "pin": registerData.pin,
-            "isWni": true,
-            "isAgreeTnc": true,
-            "isAgreetoShare": true,
+            "isWni": registerData.isWni,
+            "isAgreeTnc": registerData.isAgree,
+            "isAgreetoShare": registerData.isShareData,
             "isAddressEqualToDukcapil": "Ya, alamat sesuai",
             "addressInput": "Komp. Jakapurwa",
             "addressRtRwInput": "02/05",
             "addressKelurahanInput": "Bandung Kidul",
             "addressKecamatanInput": "Kujangsari",
             "addressPostalCodeInput": "40287",
-            "hasNoNpwp": false,
-            "fireBaseId": "1",
+            "hasNoNpwp": registerData.hasNoNpwp,
+            "fireBaseId": firebaseId,
             "nasabahName": registerData.namaLengkapFromNik,
             "addressDukcapil": registerData.alamatKtpFromNik,
             "addressRtRwDukcapil": "\(registerData.rtFromNik)/\(registerData.rwFromNik)",

@@ -150,9 +150,6 @@ struct WelcomeView: View {
             }
             .onAppear() {
                 print("APPEAR")
-                registerData.nik = "123456"
-                registerData.noTelepon = "85875074351"
-                registerData.email = "primadev@gmail.com"
                 getUserStatus(deviceId: deviceId!)
             }
             .onAppear() {

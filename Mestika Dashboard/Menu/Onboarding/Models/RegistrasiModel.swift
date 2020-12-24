@@ -89,6 +89,9 @@ class RegistrasiModel: ObservableObject {
     @Published var noRekening: String = ""
     @Published var noAtm: String = ""
     @Published var atmOrRekening: String = ""
+    @Published var isWni: Bool = false
+    @Published var isAgree: Bool = false
+    @Published var isShareData: Bool = false
     
     // For nasabah use only
     @Published var isNasabahmestika: Bool = false

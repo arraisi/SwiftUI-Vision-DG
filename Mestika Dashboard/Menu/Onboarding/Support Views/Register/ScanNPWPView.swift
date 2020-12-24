@@ -105,6 +105,10 @@ struct ScanNPWPView: View {
                             self.registerData.fotoNPWP = npwp
                         }
                         self.registerData.npwp = npwp
+                        self.registerData.hasNoNpwp = true
+                    } else {
+                        self.onCommit()
+                        self.registerData.hasNoNpwp = false
                     }
                     
                     print("REGISTER DATA NPWP : \(self.registerData.npwp)")

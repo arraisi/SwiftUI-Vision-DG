@@ -18,6 +18,7 @@ struct FormDetailKartuATMView: View {
     @ObservedObject private var productVM = ATMProductViewModel()
     
     @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
+    @State private var is_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     
     var body: some View {
         VStack {
@@ -79,7 +80,7 @@ struct FormDetailKartuATMView: View {
                             .cornerRadius(10)
                         }
                         
-                        if (is_video_call == "true") {
+                        if (is_video_call == "true" || is_register_nasabah == "true") {
                             EmptyView()
                         } else {
                             Group {

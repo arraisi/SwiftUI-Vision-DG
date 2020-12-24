@@ -13,38 +13,51 @@ struct Term_ConditionView: View {
     
     @State var scrollPosition: CGFloat = 0.0
     
-    @State var isChecked: Bool = false
-    @State var isChecked1: Bool = false
-    @State var isChecked2: Bool = false
+    @State var isCheckedWni: Bool = false
+    @State var isCheckedAgree: Bool = false
+    @State var isCheckedShareData: Bool = false
     @State var showingAlert: Bool = false
+    @State var disableAgree = true
     
     @State var isShowDataVerification: Bool = false
     
-    func toggle() {
-        isChecked = !isChecked
-        scrollPosition = 0.3
+    @State var readFinished = false
+    
+    func toggleIsWni() {
+        isCheckedWni = !isCheckedWni
+        self.disableAgree.toggle()
+        self.registerData.isWni = isCheckedWni
     }
     
-    func toggle1() {
-        isChecked1 = !isChecked1
-        scrollPosition = 1
+    func toggleIsAgree() {
+        isCheckedAgree = !isCheckedAgree
+        self.registerData.isAgree = isCheckedWni
+        
     }
-    func toggle2() { isChecked2 = !isChecked2 }
+    func toggleIsShareData() {
+        isCheckedShareData = !isCheckedShareData
+        self.registerData.isShareData = isCheckedShareData
+    }
     
     var disableForm: Bool {
-        isChecked && isChecked2
+        isCheckedWni && isCheckedAgree
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             VStack {
                 Color(hex: "#232175")
-                    .frame(height: 300)
+                    .frame(height: UIScreen.main.bounds.height*0.5)
                 Color(hex: "#F6F8FB")
             }
             
             VStack {
+                
+                AppBarLogo(light: false, showCancel: true, onCancel: {
+                    self.showingAlert = true
+                })
+                
                 VStack {
                     Text("SYARAT DAN KETENTUAN")
                         .font(.title2)
@@ -56,29 +69,16 @@ struct Term_ConditionView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .leading) {
-                        ScrollView {
-                            ScrollViewReader { scrollProxy in
-                                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pretium sollicitudin ex. Nulla faucibus tellus sed est auctor volutpat. Integer sollicitudin, nisi quis luctus malesuada, quam tortor elementum ligula, ut interdum leo turpis id mi. Vivamus nec consequat nibh. Cras augue ligula, vulputate id est in, suscipit convallis ligula. Duis porta, lorem id pharetra rutrum, neque metus eleifend tellus, et interdum odio dui ut lorem. Nunc elementum erat magna, eget lobortis mi venenatis sit amet. Ut vitae dictum odio. Quisque convallis enim eros, non sagittis nunc pulvinar ac. In vel malesuada dui, vel posuere lacus. Donec tempus libero ac augue lacinia convallis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pretium sollicitudin ex. Nulla faucibus tellus sed est auctor volutpat. Integer sollicitudin, nisi quis luctus malesuada, quam tortor elementum ligula, ut interdum leo turpis id mi. Vivamus nec consequat nibh. Cras augue ligula, vulputate id est in, suscipit convallis ligula. Duis porta, lorem id pharetra rutrum, neque metus eleifend tellus, et interdum odio dui ut lorem. Nunc elementum erat magna, eget lobortis mi venenatis sit amet. Ut vitae dictum odio. Quisque convallis enim eros, non sagittis nunc pulvinar ac. In vel malesuada dui, vel posuere lacus. Donec tempus libero ac augue lacinia convallis.")
-                                    .id("text")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color(hex: "#707070"))
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.top, 20)
-                                    .padding(.horizontal, 20)
-                                    .onChange(of: scrollPosition) { newScrollPosition in
-                                        scrollProxy.scrollTo("text")
-                                    }
-                            }
-                        }
+                        WebView(readFinished: self.$readFinished, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                         
                         Divider()
                             .padding(.horizontal, 20)
                             .padding(.bottom, 20)
                         Spacer()
                         
-                        Button(action: toggle) {
+                        Button(action: toggleIsWni) {
                             HStack(alignment: .top) {
-                                Image(systemName: isChecked ? "checkmark.square": "square")
+                                Image(systemName: isCheckedWni ? "checkmark.square": "square")
                                 Text("* Saya Adalah Warga Negara Indonesia dan tidak memiliki kewajiban pajak di Negara lain")
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#707070"))
@@ -86,22 +86,24 @@ struct Term_ConditionView: View {
                             .padding(.horizontal, 20)
                             .padding(.bottom, 5)
                         }
+                        .disabled(!readFinished)
                         
-                        Button(action: toggle1) {
+                        Button(action: toggleIsAgree) {
                             HStack(alignment: .top) {
-                                Image(systemName: isChecked1 ? "checkmark.square": "square")
-                                Text("* Saya Adalah Warga Negara Indonesia dan tidak memiliki kewajiban pajak di Negara lain")
+                                Image(systemName: isCheckedAgree ? "checkmark.square": "square")
+                                Text("* Saya setuju")
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#707070"))
                             }
                             .padding(.horizontal, 20)
                             .padding(.bottom, 5)
                         }
+                        .disabled(disableAgree)
                         
-                        Button(action: toggle2) {
+                        Button(action: toggleIsShareData) {
                             HStack(alignment: .top) {
-                                Image(systemName: isChecked2 ? "checkmark.square": "square")
-                                Text("* Saya Adalah Warga Negara Indonesia dan tidak memiliki kewajiban pajak di Negara lain")
+                                Image(systemName: isCheckedShareData ? "checkmark.square": "square")
+                                Text("* Saya memberikan hak kepada Bank Mestika untuk memberikan data kepada pihak ketiga yang berkerjasama dengan Bank Mestika")
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#707070"))
                             }
@@ -120,12 +122,12 @@ struct Term_ConditionView: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
-                        .background(Color(hex: !isChecked || !isChecked1 ? "#CBD1D9" : "#2334D0"))
+                        .background(Color(hex: !disableForm ? "#CBD1D9" : "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal, 20)
                         .padding(.top, 10)
                         .padding(.bottom, 20)
-                        .disabled(!isChecked || !isChecked1)
+                        .disabled(!disableForm)
                         
                     }
                     .frame(width: UIScreen.main.bounds.width - 30, height: 500)
@@ -139,17 +141,8 @@ struct Term_ConditionView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(
-            trailing: Button(
-                action: {
-                    self.showingAlert = true
-                },
-                label: {
-                    Text("cancel")
-                }
-            ))
+        .navigationBarHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Apakah ingin membatalkan registrasi ?"),
