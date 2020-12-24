@@ -55,8 +55,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-//    @State var modalSelection = "KYC_WAITING"
-//    @State var isShowModal = true
+    //    @State var modalSelection = "KYC_WAITING"
+    //    @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -474,10 +474,10 @@ struct WelcomeView: View {
             
             // MARK: change destination
             Button(action:{
-//                self.isShowModal = false
-//                self.modalSelection = ""
+                //                self.isShowModal = false
+                //                self.modalSelection = ""
                 cancelRegistration()
-//                self.registerData.clear()
+                //                self.registerData.clear()
             }, label: {
                 Text("Batalkan Permohonan")
                     .foregroundColor(.black)
@@ -557,16 +557,17 @@ struct WelcomeView: View {
                 .padding(.bottom, 20)
             
             // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
-                Text("Kembali ke halaman utama")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
+            Button(
+                action: {},
+                label: {
+                    Text("Kembali ke halaman utama")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
@@ -616,7 +617,7 @@ struct WelcomeView: View {
             .cornerRadius(12)
             
             NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive) {
-               EmptyView()
+                EmptyView()
             }
             .isDetailLink(false)
             
@@ -967,13 +968,13 @@ struct WelcomeView: View {
     }
     
     func cancelRegistration() {
-//        self.isLoading = true
+        //        self.isLoading = true
         
         self.userVM.cancelRegistration(nik: user.last?.nik ?? "", completion: { (success:Bool) in
             
             if success {
-//                self.isLoading = false
-//                removeUser()
+                //                self.isLoading = false
+                //                removeUser()
                 
                 self.modalSelection = ""
                 
@@ -982,10 +983,10 @@ struct WelcomeView: View {
                 UserDefaults.standard.synchronize()
                 
             } else {
-//                self.isLoading = false
+                //                self.isLoading = false
                 
-//                self.scheduleVM.message = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
-//                self.showingAlert.toggle()
+                //                self.scheduleVM.message = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+                //                self.showingAlert.toggle()
             }
         })
     }
