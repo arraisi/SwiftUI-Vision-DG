@@ -12,11 +12,6 @@ import JitsiMeet
 
 struct WelcomeView: View {
     
-    init() {
-        getMobileVersion()
-    }
-    
-    fileprivate var jitsiMeetView: JitsiMeetView?
     @State var isShowJitsi: Bool = false
     
     @EnvironmentObject var appState: AppState
@@ -40,12 +35,10 @@ struct WelcomeView: View {
     var productATMData = AddProductATM()
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     @State var images = ["slider_pic_1", "slider_pic_2", "slider_pic_3"]
+    
+    // Local Storage Status Register Nasabah
     @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
-    
-//    @State private var time_schedule_start = UserDefaults.standard.string(forKey: "time_schedule_start")
-//    @State private var time_schedule_end = UserDefaults.standard.string(forKey: "time_schedule_end")
-//    @State private var date_schedule_end = UserDefaults.standard.string(forKey: "date_schedule_end")
     
     // Modal Variables
     @State var isShowModal = false
@@ -87,7 +80,6 @@ struct WelcomeView: View {
                         
                         Button(action : {
                             self.isShowModal.toggle()
-//                            sendVideoCallNotification()
                         }) {
                             Text("DAFTAR")
                                 .foregroundColor(.white)
@@ -97,7 +89,7 @@ struct WelcomeView: View {
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
                         
-                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
+                        NavigationLink(destination: SuccessRegisterView().environmentObject(loginData).environmentObject(registerData), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -151,22 +143,18 @@ struct WelcomeView: View {
                     print(jitsiRoom)
                     
                     self.isIncomingVideoCall = true
-                    
-//                    self.isShowJitsi = true
                 }
+            }
+            .onAppear {
+                getMobileVersion()
             }
             .onAppear() {
                 print("APPEAR")
+                registerData.nik = "123456"
+                registerData.noTelepon = "85875074351"
+                registerData.email = "primadev@gmail.com"
                 getUserStatus(deviceId: deviceId!)
             }
-            .onAppear(perform: {
-                let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-                    builder.serverURL = URL(string: "https://video.visiondg.xyz")
-                    builder.welcomePageEnabled = false
-                }
-                
-                JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
-            })
             .onAppear() {
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
                     

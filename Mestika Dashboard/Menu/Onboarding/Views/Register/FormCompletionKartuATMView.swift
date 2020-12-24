@@ -482,7 +482,7 @@ struct FormCompletionKartuATMView: View {
         atmData.isNasabahMestika = registerData.isNasabahmestika
         atmData.isVcall = is_video_call == "true" ? true : false
         
-//        self.goToSuccessPage = true
+        self.goToSuccessPage = true
         self.isLoading = true
         productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
             self.isLoading = false

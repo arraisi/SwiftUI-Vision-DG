@@ -48,8 +48,9 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 if let schedule = schedule {
                     self._scheduleModels = schedule
                     
+                    self.isLoading = false
+                    
                     DispatchQueue.main.async {
-                        self.isLoading = false
                         self.schedule = schedule.map(ScheduleInterviewViewModel.init)
                         self.scheduleDates = Array(Set(schedule.map({ (resp:ScheduleInterviewResponse) -> String in
                             return resp.date
@@ -59,18 +60,12 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 
                 completion(true)
                 
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
+                self.isLoading = false
                 
             case .failure(let error):
                 
                 print("Error Get Schedule")
-                
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
-                
+                self.isLoading = false
                 print(error.localizedDescription)
             }
         }
