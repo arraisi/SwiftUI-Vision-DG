@@ -140,6 +140,11 @@
 		527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E3124256613EB004FF5ED /* MobileVersionService.swift */; };
 		527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312925661644004FF5ED /* MobileVersionViewModel.swift */; };
 		527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312E25663289004FF5ED /* UserCheckResponse.swift */; };
+		528AE2C225959B8C003AFD73 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2C125959B8C003AFD73 /* AppConstants.swift */; };
+		528AE2C72595B89A003AFD73 /* AddressSugestionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2C62595B89A003AFD73 /* AddressSugestionResponse.swift */; };
+		528AE2CC2595B95E003AFD73 /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2CB2595B95E003AFD73 /* AddressService.swift */; };
+		528AE2D12595BB01003AFD73 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2D02595BB01003AFD73 /* AddressViewModel.swift */; };
+		528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2DD2595DCB0003AFD73 /* bidangUsaha.json */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
 		52ADFE932557D99F00A1001F /* masterData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE772557D99F00A1001F /* masterData.json */; };
@@ -464,6 +469,11 @@
 		527E3124256613EB004FF5ED /* MobileVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionService.swift; sourceTree = "<group>"; };
 		527E312925661644004FF5ED /* MobileVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionViewModel.swift; sourceTree = "<group>"; };
 		527E312E25663289004FF5ED /* UserCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCheckResponse.swift; sourceTree = "<group>"; };
+		528AE2C125959B8C003AFD73 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		528AE2C62595B89A003AFD73 /* AddressSugestionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSugestionResponse.swift; sourceTree = "<group>"; };
+		528AE2CB2595B95E003AFD73 /* AddressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; };
+		528AE2D02595BB01003AFD73 /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		528AE2DD2595DCB0003AFD73 /* bidangUsaha.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bidangUsaha.json; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE772557D99F00A1001F /* masterData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masterData.json; sourceTree = "<group>"; };
@@ -1086,6 +1096,7 @@
 				52ADFE8F2557D99F00A1001F /* besarPerkiraanSetoran.json */,
 				C0E40B812564D90700259612 /* jabatanProfesi.json */,
 				C0E40BB22564E5C900259612 /* industriTempatBekerja.json */,
+				528AE2DD2595DCB0003AFD73 /* bidangUsaha.json */,
 			);
 			path = "Pembukaan Rekening";
 			sourceTree = "<group>";
@@ -1096,6 +1107,7 @@
 				C068A5A7256CED8300CE96C4 /* AppState.swift */,
 				52ADFEB52557DA0700A1001F /* RecognizedText.swift */,
 				52ADFEB82557DA0700A1001F /* KeyboardGuardian.swift */,
+				528AE2C125959B8C003AFD73 /* AppConstants.swift */,
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
@@ -1113,6 +1125,7 @@
 				527E3124256613EB004FF5ED /* MobileVersionService.swift */,
 				524CB11E256E1141006ED6F0 /* CitizenService.swift */,
 				5205861925723A2F005DB764 /* PasswordService.swift */,
+				528AE2CB2595B95E003AFD73 /* AddressService.swift */,
 			);
 			name = Services;
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
@@ -1391,6 +1404,7 @@
 				0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */,
 				524CB123256E1289006ED6F0 /* CitizenViewModel.swift */,
 				52058614257239AB005DB764 /* PasswordViewModel.swift */,
+				528AE2D02595BB01003AFD73 /* AddressViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1503,6 +1517,7 @@
 			isa = PBXGroup;
 			children = (
 				C0BFB51D2576375400676B95 /* Address.swift */,
+				528AE2C62595B89A003AFD73 /* AddressSugestionResponse.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -1833,6 +1848,7 @@
 				527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */,
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
 				52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */,
+				528AE2D12595BB01003AFD73 /* AddressViewModel.swift in Sources */,
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
 				C0E40BAE2564E59200259612 /* FormIndustriTempatBekerjaView.swift in Sources */,
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
@@ -1893,6 +1909,7 @@
 				C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */,
 				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
+				528AE2C72595B89A003AFD73 /* AddressSugestionResponse.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
 				06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */,
 				52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */,
@@ -1944,6 +1961,7 @@
 				52ADFEBE2557DA0700A1001F /* UIImage+Utils.swift in Sources */,
 				C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */,
 				C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */,
+				528AE2C225959B8C003AFD73 /* AppConstants.swift in Sources */,
 				064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,
@@ -2008,6 +2026,7 @@
 				C0E40B7A2564D83F00259612 /* FormJabatanProfesiView.swift in Sources */,
 				52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */,
 				52ADFF922557DFDC00A1001F /* BesarPerkiraanSetoranView.swift in Sources */,
+				528AE2CC2595B95E003AFD73 /* AddressService.swift in Sources */,
 				52ADFEAD2557D9A800A1001F /* Card.swift in Sources */,
 				C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */,
 				52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */,
@@ -2020,6 +2039,7 @@
 				52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
+				528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */,
 				C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,

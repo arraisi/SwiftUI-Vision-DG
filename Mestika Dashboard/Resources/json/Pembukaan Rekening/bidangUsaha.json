@@ -1,0 +1,114 @@
+//
+//  bidangUsaha.swift
+//  Mestika Dashboard
+//
+//  Created by Prima Jatnika on 25/12/20.
+//
+
+
+[
+    {
+        "id": 1,
+        "name": "Minimarket/ Jasa Parkir/ SPBU"
+    },
+    {
+        "id": 2,
+        "name": "Ekspor/ Impor"
+    },
+    {
+        "id": 3,
+        "name": "Perdagangan Barang Antik"
+    },
+    {
+        "id": 4,
+        "name": "Biro Perjalanan/ Travel"
+    },
+    {
+        "id": 5,
+        "name": "Perdagangan Emas/ Permata/ Logam Mulia"
+    },
+    {
+        "id": 6,
+        "name": "Properti/ Real Estate/ Kontraktor"
+    },
+    {
+        "id": 7,
+        "name": "Money Changer"
+    },
+    {
+        "id": 8,
+        "name": "MLM (Multi Level Marketing)"
+    },
+    {
+        "id": 9,
+        "name": "Pedagang Sayur"
+    },
+    {
+        "id": 10,
+        "name": "Perdagangan/ Jual Beli"
+    },
+    {
+        "id": 11,
+        "name": "Restoran/ Rumah Makan"
+    },
+    {
+        "id": 12,
+        "name": "Jasa Pendidikan"
+    },
+    {
+        "id": 13,
+        "name": "Jasa Kesehatan"
+    },
+    {
+        "id": 14,
+        "name": "Perkebunan"
+    },
+    {
+        "id": 15,
+        "name": "Pertanian dan Perikanan"
+    },
+    {
+        "id": 16,
+        "name": "Peternakan"
+    },
+    {
+        "id": 17,
+        "name": "Industri/ Pabrik"
+    },
+    {
+        "id": 18,
+        "name": "Perhotelan"
+    },
+    {
+        "id": 19,
+        "name": "Pengangkutan/ Transportasi"
+    },
+    {
+        "id": 20,
+        "name": "Lembaga Keuangan"
+    },
+    {
+        "id": 21,
+        "name": "Yayasan Sosial"
+    },
+    {
+        "id": 22,
+        "name": "Konstruksi/ Kontraktor"
+    },
+    {
+        "id": 23,
+        "name": "Notaris"
+    },
+    {
+        "id": 24,
+        "name": "Konsultan Keuangan/ Perencana Keuangan"
+    },
+    {
+        "id": 25,
+        "name": "Advokat"
+    },
+    {
+        "id": 26,
+        "name": "Konsultan Pajak"
+    },
+]

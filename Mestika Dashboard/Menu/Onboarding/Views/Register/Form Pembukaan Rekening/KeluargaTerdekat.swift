@@ -25,12 +25,12 @@ struct KeluargaTerdekat: View {
     
     let hubunganKekerabatanOptions = ["Ayah", "Ibu", "Kakak", "Adik", "Saudara", "Teman"]
     
-    let cities:[Address] = [
-        .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Selatan"),
-        .init(city: "Jakarta Barat", kodePos: "14012", kecamatan: "Jakarta Barat", kelurahan: "Barat"),
-        .init(city: "Jakarta Timur", kodePos: "14012", kecamatan: "Jakarta Timur", kelurahan: "Timur"),
-        .init(city: "Jakarta Utara", kodePos: "14012", kecamatan: "Jakarta Utara", kelurahan: "Utara")
-    ]
+    @State var isLoading: Bool = false
+    @State private var isShowAlert: Bool = false
+    
+    @State var messageResponse: String = ""
+    
+    @State var addressSugestion = [AddressViewModel]()
     
     
     var body: some View {
@@ -200,6 +200,13 @@ struct KeluargaTerdekat: View {
             self.kodePos = self.registerData.kodePosKeluarga
             self.noTelepon = self.registerData.noTlpKeluarga
         }
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("MESSAGE"),
+                message: Text(self.messageResponse),
+                dismissButton: .default(Text("Oke"))
+            )
+        }
     }
     
     // MARK : - Check form is fill
@@ -298,27 +305,20 @@ struct KeluargaTerdekat: View {
                     }
                     .font(Font.system(size: 14))
                     .frame(height: 36)
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
                     
                     Button(action:{
-                        showingModal.toggle()
+                        searchAddress()
                     }, label: {
-                        Image(systemName: "location.viewfinder")
+                        Image(systemName: "magnifyingglass")
                             .font(Font.system(size: 20))
                             .foregroundColor(Color(hex: "#707070"))
                     })
                     
                 }
-                .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
             }
-            
-            //            LabelTextField(value: $registerData.kodePosKeluarga, label: "Kode Pos", placeHolder: "Kode Pos") { (change) in
-            //
-            //            } onCommit: {
-            //
-            //            }
             
             VStack(alignment: .leading) {
                 
@@ -432,24 +432,21 @@ struct KeluargaTerdekat: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(0...cities.count-1, id: \.self) {index in
+            List(addressSugestion, id: \.formatted_address) { data in
                 
                 HStack {
-                    Text(cities[index].city)
+                    Text(data.formatted_address)
                         .font(Font.system(size: 14))
                     
                     Spacer()
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    print(cities[index])
-                    registerData.alamatKeluarga = cities[index].city
-                    registerData.kodePosKeluarga = cities[index].kodePos
-                    self.kodePos = cities[index].kodePos
-                    registerData.kecamatanKeluarga = cities[index].kecamatan
-                    registerData.kelurahanKeluarga = cities[index].kelurahan
-                    
-                    //                    registerData.alamatKeluarga = alamatKeluarga
+                    registerData.alamatKeluarga = data.formatted_address
+                    registerData.kodePosKeluarga = data.postalCode
+                    self.kodePos = data.postalCode
+                    registerData.kecamatanKeluarga = data.kecamatan
+                    registerData.kelurahanKeluarga = data.kelurahan
                     self.showingModal.toggle()
                 })
                 
@@ -463,6 +460,28 @@ struct KeluargaTerdekat: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    // MARK: - SEARCH LOCATION
+    @ObservedObject var addressVM = AddressSummaryViewModel()
+    func searchAddress() {
+        self.isLoading = true
+        
+        self.addressVM.getAddressSugestion(addressInput: registerData.alamatKeluarga) { success in
+            if success {
+                self.isLoading = self.addressVM.isLoading
+                self.addressSugestion = self.addressVM.address
+                self.showingModal = true
+                print("Success")
+            }
+            
+            if !success {
+                self.isLoading = self.addressVM.isLoading
+                self.isShowAlert = true
+                self.messageResponse = self.addressVM.message
+                print("Not Found")
+            }
+        }
     }
     
 }

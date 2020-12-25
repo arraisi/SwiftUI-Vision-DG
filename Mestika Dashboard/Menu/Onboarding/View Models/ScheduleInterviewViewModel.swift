@@ -65,6 +65,8 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 print("Error Get Schedule")
                 self.isLoading = false
                 print(error.localizedDescription)
+                
+                completion(false)
             }
         }
     }

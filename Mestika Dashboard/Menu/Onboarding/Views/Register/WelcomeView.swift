@@ -92,7 +92,7 @@ struct WelcomeView: View {
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
                         
-                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
+                        NavigationLink(destination: VerificationAddressView().environmentObject(registerData), isActive: self.$isLoginViewActive){
                             Text("LOGIN")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -153,7 +153,7 @@ struct WelcomeView: View {
                 print("RECEIVED JITSI START")
                 if let userInfo = obj.userInfo, let info = userInfo["room_id"] {
                     print(info)
-                    self.jitsiRoom = info as! String
+                    self.jitsiRoom = info as! String ?? ""
                     print(jitsiRoom)
                     
                     self.isIncomingVideoCall = true

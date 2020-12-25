@@ -33,7 +33,7 @@ extension URL {
 extension URL {
     
     static func urlForSliderAssets() -> URL? {
-         return URL(string: "https://my-json-server.typicode.com/primajatnika271995/dummy-json/assets-landing")
+        return URL(string: "https://my-json-server.typicode.com/primajatnika271995/dummy-json/assets-landing")
     }
     
     static func urlMobileVersion() -> URL? {
@@ -82,5 +82,9 @@ extension URL {
     
     static func urlGetListATMDesign(type: String) -> URL? {
         return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm-design?type=\(type)");
+    }
+    
+    static func urlGetSuggestionAddress() -> URL? {
+        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/google-maps/address/geoloc-results")
     }
 }

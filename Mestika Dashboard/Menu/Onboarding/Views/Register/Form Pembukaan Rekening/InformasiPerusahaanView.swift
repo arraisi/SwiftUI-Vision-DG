@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct BidangUsaha {
     var nama: String
@@ -29,6 +30,13 @@ struct InformasiPerusahaanView: View {
     @State var noTlpPerusahaan: String = ""
     @State var nextViewActive: Bool = false
     @State var verificationViewActive: Bool = false
+    
+    @State var isLoading: Bool = false
+    @State private var isShowAlert: Bool = false
+    
+    @State var messageResponse: String = ""
+    
+    @State var addressSugestion = [AddressViewModel]()
     
     let bidangUsaha:[BidangUsaha] = [
         .init(nama: "Minimarket/ Jasa Parkir/ SPBU"),
@@ -59,13 +67,6 @@ struct InformasiPerusahaanView: View {
         .init(nama: "Konsultan Pajak"),
     ]
     
-    let cities:[Address] = [
-        .init(city: "Jakarta Selatan", kodePos: "14012", kecamatan: "Jakarta Selatan", kelurahan: "Andir"),
-        .init(city: "Jakarta Barat", kodePos: "14012", kecamatan: "Jakarta Barat", kelurahan: "Andir"),
-        .init(city: "Jakarta Timur", kodePos: "14012", kecamatan: "Jakarta Timur", kelurahan: "Andir"),
-        .init(city: "Jakarta Utara", kodePos: "14012", kecamatan: "Jakarta Utara", kelurahan: "Andir")
-    ]
-    
     /*
      Boolean for Show Modal
      */
@@ -90,6 +91,16 @@ struct InformasiPerusahaanView: View {
             }
             
             VStack {
+                
+                AppBarLogo(light: false, onCancel: {})
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
+                
                 ScrollView {
                     
                     // Title
@@ -97,8 +108,7 @@ struct InformasiPerusahaanView: View {
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 60)
-                        .padding(.vertical, 45)
+                        .padding(.vertical, 25)
                         .padding(.horizontal, 40)
                     
                     // Content
@@ -255,6 +265,7 @@ struct InformasiPerusahaanView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .navigationBarHidden(true)
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
         }
@@ -264,6 +275,13 @@ struct InformasiPerusahaanView: View {
         .onAppear() {
             self.noTlpPerusahaan = self.registerData.noTeleponPerusahaan
             self.kodePos = self.registerData.kodePos
+        }
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("MESSAGE"),
+                message: Text(self.messageResponse),
+                dismissButton: .default(Text("Oke"))
+            )
         }
     }
     
@@ -314,42 +332,23 @@ struct InformasiPerusahaanView: View {
                     }
                     .font(Font.system(size: 14))
                     .frame(height: 36)
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
                     
                     Button(action:{
-                        showingModal.toggle()
+                        //                        showingModal.toggle()
+                        searchAddress()
                     }, label: {
-                        Image(systemName: "location.viewfinder")
+                        Image(systemName: "magnifyingglass")
                             .font(Font.system(size: 20))
                             .foregroundColor(Color(hex: "#707070"))
                     })
                     
                 }
-                .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
                 
             }
             .padding(.horizontal, 20)
-            
-//            LabelTextField(value: $registerData.kodePos, label: "Kode Pos", placeHolder: "Kode Pos") { (Bool) in
-//                print("on edit")
-//            } onCommit: {
-//                print("on commit")
-//            }
-//            .padding(.horizontal, 20)
-            
-//            VStack(alignment: .leading) {
-//                Text("Kode Pos")
-//                    .font(Font.system(size: 10))
-//                    .fontWeight(.semibold)
-//                    .foregroundColor(Color(hex: "#707070"))
-//                    .multilineTextAlignment(.leading)
-//
-//                TextFieldValidation(data: self.$registerData.kodePos, title: "Kode Pos", disable: false, isValid: false, keyboardType: .numberPad) { strArr in
-//                    registerData.kodePos = ""
-//                }
-//            }
-//            .padding(.horizontal, 20)
             
             VStack(alignment: .leading) {
                 
@@ -383,14 +382,14 @@ struct InformasiPerusahaanView: View {
                 print("on commit")
             }
             .padding(.horizontal, 20)
-
+            
             LabelTextField(value: $registerData.kelurahan, label: "Kelurahan", placeHolder: "Kelurahan") { (Bool) in
                 print("on edit")
             } onCommit: {
                 print("on commit")
             }
             .padding(.horizontal, 20)
-
+            
             Group {
                 Text("Bidang Usaha")
                     .font(Font.system(size: 10))
@@ -411,8 +410,6 @@ struct InformasiPerusahaanView: View {
                         showingModalBidang.toggle()
                     }, label: {
                         Image(systemName: "chevron.right")
-                            .font(Font.system(size: 20))
-                            .foregroundColor(Color(hex: "#707070"))
                     })
                     
                 }
@@ -467,7 +464,6 @@ struct InformasiPerusahaanView: View {
     }
     
     // MARK: -Fuction for Create Bottom Floater (Modal)
-    
     func createBottomFloater() -> some View {
         VStack {
             HStack {
@@ -487,7 +483,7 @@ struct InformasiPerusahaanView: View {
                 Button(action:{
                     print("find location")
                 }, label: {
-                    Image(systemName: "location.viewfinder")
+                    Image(systemName: "location")
                         .font(Font.system(size: 20))
                         .foregroundColor(Color(hex: "#707070"))
                 })
@@ -497,22 +493,77 @@ struct InformasiPerusahaanView: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(0...cities.count-1, id: \.self) {index in
-                
+            List(addressSugestion, id: \.formatted_address) { data in
                 HStack {
-                    Text(cities[index].city)
+                    Text(data.formatted_address)
                         .font(Font.system(size: 14))
                     
                     Spacer()
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    print(cities[index])
-                    registerData.alamatPerusahaan = cities[index].city
-                    registerData.kodePos = cities[index].kodePos
-                    kodePos = cities[index].kodePos
-                    registerData.kecamatan = cities[index].kecamatan
+                    registerData.alamatPerusahaan = data.formatted_address
+                    registerData.kodePos = data.postalCode
+                    kodePos = data.postalCode
+                    registerData.kecamatan = data.kecamatan
+                    registerData.kelurahan = data.kelurahan
                     self.showingModal.toggle()
+                })
+            }
+            .background(Color.white)
+            .padding(.vertical)
+            .frame(height: 150)
+            
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: -Fuction for Create Bottom Floater (Modal)
+    func createBottomFloaterBidangUsaha() -> some View {
+        VStack {
+            HStack {
+                Text("Bidang Usaha")
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 19))
+                    .foregroundColor(Color(hex: "#232175"))
+                Spacer()
+            }
+            
+            HStack {
+                
+                TextField("Cari Bidang Usaha", text: $registerData.bidangUsaha)
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                
+                Button(action:{
+                    print("cari bidang usaha")
+                }, label: {
+                    Image(systemName: "magnifyingglass")
+                        .font(Font.system(size: 20))
+                        .foregroundColor(Color(hex: "#707070"))
+                })
+                
+            }
+            .padding(.horizontal)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
+            
+            List(0...bidangUsaha.count-1, id: \.self) {index in
+                
+                HStack {
+                    Text(bidangUsaha[index].nama)
+                        .font(Font.system(size: 14))
+                    
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .onTapGesture(perform: {
+                    registerData.bidangUsaha = bidangUsaha[index].nama
+                    self.showingModalBidang.toggle()
                 })
                 
             }
@@ -527,61 +578,27 @@ struct InformasiPerusahaanView: View {
         .cornerRadius(20)
     }
     
-    // MARK: -Fuction for Create Bottom Floater (Modal)
-        func createBottomFloaterBidangUsaha() -> some View {
-            VStack {
-                HStack {
-                    Text("Bidang Usaha")
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 19))
-                        .foregroundColor(Color(hex: "#232175"))
-                    Spacer()
-                }
-                
-                HStack {
-                    
-                    TextField("Cari Bidang Usaha", text: $registerData.bidangUsaha)
-                        .font(Font.system(size: 14))
-                        .frame(height: 36)
-                    
-                    Button(action:{
-                        print("cari bidang usaha")
-                    }, label: {
-                        Image(systemName: "magnifyingglass")
-                            .font(Font.system(size: 20))
-                            .foregroundColor(Color(hex: "#707070"))
-                    })
-                    
-                }
-                .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
-                List(0...bidangUsaha.count-1, id: \.self) {index in
-                    
-                    HStack {
-                        Text(bidangUsaha[index].nama)
-                            .font(Font.system(size: 14))
-                        
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture(perform: {
-                        registerData.bidangUsaha = bidangUsaha[index].nama
-                        self.showingModalBidang.toggle()
-                    })
-                    
-                }
-                .background(Color.white)
-                .padding(.vertical)
-                .frame(height: 150)
-                
+    // MARK: - SEARCH LOCATION
+    @ObservedObject var addressVM = AddressSummaryViewModel()
+    func searchAddress() {
+        self.isLoading = true
+        
+        self.addressVM.getAddressSugestion(addressInput: registerData.alamatPerusahaan) { success in
+            if success {
+                self.isLoading = self.addressVM.isLoading
+                self.addressSugestion = self.addressVM.address
+                self.showingModal = true
+                print("Success")
             }
-            .frame(width: UIScreen.main.bounds.width - 60)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(20)
+            
+            if !success {
+                self.isLoading = self.addressVM.isLoading
+                self.isShowAlert = true
+                self.messageResponse = self.addressVM.message
+                print("Not Found")
+            }
         }
+    }
 }
 
 struct FormInformasiPerusahaanView_Previews: PreviewProvider {
