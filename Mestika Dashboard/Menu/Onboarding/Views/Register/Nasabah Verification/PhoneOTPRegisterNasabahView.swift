@@ -79,13 +79,14 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("Kami telah mengirimkan OTP ke No. \(replace(myString: destinationNumber, [6, 7, 8, 9], "x"))")
+                    Text("Kami telah mengirimkan OTP \nke No. \(replace(myString: destinationNumber, [6, 7, 8, 9], "x"))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
+                    Text("Silahkan masukan kode OTP dengan \nREF #\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -125,7 +126,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
+                    Text("Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)

@@ -85,13 +85,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.", comment: "") + " \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
+                    Text(NSLocalizedString("Kami telah mengirimkan \nOTP ke no.", comment: "") + " \(replace(myString: registerData.noTelepon, [6, 7, 8, 9], "x"))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Silahkan masukan kode OTP dengan REF #", comment: "")+"\(referenceCode)")
+                    Text(NSLocalizedString("Silahkan masukan kode OTP dengan \nREF #", comment: "")+"\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -133,7 +134,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text(NSLocalizedString("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP", comment: ""))
+                    Text(NSLocalizedString("Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP", comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
