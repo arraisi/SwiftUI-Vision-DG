@@ -103,6 +103,7 @@ struct SumberPendapatanLainnyaView: View {
                                         Button(action:{
                                             
                                             self.selectedId = 1
+                                            registerData.sumberPendapatanLainnya = ""
                                             registerData.hasSumberPendapatanLainnya = true
                                             
                                         }) {
