@@ -82,9 +82,10 @@ struct WelcomeView: View {
                     VStack(spacing: 5) {
                         
                         Button(action : {
-                            self.isShowModal.toggle()
+//                            self.isShowModal.toggle()
+                            getUserStatus(deviceId: deviceId!)
                         }) {
-                            Text("DAFTAR")
+                            Text(NSLocalizedString("Register", comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                         }
@@ -93,7 +94,7 @@ struct WelcomeView: View {
                         .cornerRadius(15)
                         
                         NavigationLink(destination: VerificationAddressView().environmentObject(registerData), isActive: self.$isLoginViewActive){
-                            Text("LOGIN")
+                            Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                         }
@@ -168,10 +169,6 @@ struct WelcomeView: View {
                 getMobileVersion()
             }
             .onAppear() {
-                print("APPEAR")
-                getUserStatus(deviceId: deviceId!)
-            }
-            .onAppear() {
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
                     
                 }
@@ -188,7 +185,7 @@ struct WelcomeView: View {
     var Header: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Welcome to")
+                Text(NSLocalizedString("Welcome to", comment: ""))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(.white)
                 
@@ -217,6 +214,8 @@ struct WelcomeView: View {
             return AnyView(PopupActive())
         case "NOT_APPROVED" :
             return AnyView(PopupNotApproved())
+        case "DEFAULT" :
+            return AnyView(ScreeningNasabahModal())
         default:
             return AnyView(ScreeningNasabahModal())
         }
@@ -585,12 +584,12 @@ struct WelcomeView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("Sebelum Memulai..!!")
+            Text(NSLocalizedString("Before Starting..!!", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 20)
             
-            Text("Apakah Anda Merupakan Nasabah Bank Mestika?")
+            Text(NSLocalizedString("Are you a customer of Bank Mestika?", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -962,7 +961,12 @@ struct WelcomeView: View {
                 print("MESSAGE STATUS : \(self.userVM.message)")
                 
                 self.modalSelection = self.userVM.message
-                self.isShowModal = false
+                self.isShowModal = true
+            }
+            
+            if !success {
+                self.modalSelection = "DEFAULT"
+                self.isShowModal = true
             }
         }
     }

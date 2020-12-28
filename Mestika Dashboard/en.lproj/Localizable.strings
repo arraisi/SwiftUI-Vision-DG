@@ -6,4 +6,9 @@
   
 */
 
+/* WELCOME SCREEN LOCALIZATION */
 "Welcome to" = "Welcome to";
+"Register" = "REGISTER";
+"Login" = "LOGIN";
+"Before Starting..!!" = "Before Starting..!!";
+"Are you a customer of Bank Mestika?" = "Are you a customer of Bank Mestika?";
