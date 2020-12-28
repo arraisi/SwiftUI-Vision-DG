@@ -49,13 +49,18 @@ struct ScanNPWPView: View {
             
             Button(action: {
                 self.onChange()
-            }) {
+            }, label: {
                 Text(imageNPWP == nil ? "Upload Gambar NPWP" : "Ganti Foto Lain")
                     .foregroundColor(imageNPWP == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
-            }
-            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-            .background(Color(hex: alreadyHaveNpwp ? "#CBD1D9" : imageNPWP == nil ? "#2334D0" : "#FFFFFF"))
+                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(hex: imageNPWP == nil ? "#2334D0" : "#FFFFFF"))
+                            .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                    )
+                    .padding(5)
+            })
             .foregroundColor(.black)
             .cornerRadius(12)
             .padding([.top, .bottom], 15)

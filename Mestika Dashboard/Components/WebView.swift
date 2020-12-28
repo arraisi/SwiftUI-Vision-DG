@@ -19,7 +19,6 @@ struct WebView: UIViewRepresentable {
     private let  webview = WKWebView()
     
     func makeUIView(context: Context) -> WKWebView {
-        
         webview.scrollView.delegate = context.coordinator
         return webview
     }
@@ -45,10 +44,15 @@ struct WebView: UIViewRepresentable {
         }
         
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            if self.parent.readFinished {
+                let scrollPoint = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.size.height)
+                scrollView.setContentOffset(scrollPoint, animated: false)
+            }
+            
             if (scrollView.contentOffset.y) > (scrollView.contentSize.height - scrollView.frame.size.height) {
                 //bottom reached
                 self.parent.readFinished = true
-            } 
+            }
         }
     }
     
