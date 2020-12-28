@@ -116,11 +116,13 @@ class UserRegistrationService {
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageKtp.pngData()!)
             
-            // Add the image NPWP
-            data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId)_npwp.jpg\"\r\n".data(using: .utf8)!)
-            data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-            data.append(imageNpwp.pngData()!)
+            if registerData.hasNoNpwp {
+                // Add the image NPWP
+                data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+                data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId)_npwp.jpg\"\r\n".data(using: .utf8)!)
+                data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+                data.append(imageNpwp.pngData()!)
+            }
             
             // Add the image SELFIE
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
