@@ -7,3 +7,55 @@
 */
 
 "Welcome to" = "Selamat Datang di";
+
+/*
+ KetentuanRegisterNonNasabahView
+ */
+"Sebelum Memulai..!!" = "";
+"Lanjut Membuat Rekening" = "";
+"Batal Mendaftar" = "";
+/*
+ FormPhoneVerificationRegisterNasabahView
+ */
+"Phone Verification" = "";
+"Silahkan masukan No. Telepon Anda" = "";
+"No. Telepon" = "";
+"Verifikasi No. Telepon" = "";
+/*
+ FormOTPVerificationRegisterNasabahView
+ */
+"Kami telah mengirimkan OTP ke no." = "";
+"Silahkan masukan kode OTP dengan REF #" = "";
+"Tidak Menerima Kode?" = "";
+"Resend OTP" = "Resend OTP";
+"Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP" = "";
+"Verifikasi OTP" = "";
+"Kode OTP Salah" = "";
+"Kode OTP yang anda masukan salah silahkan ulangi lagi" = "";
+"Kembali" = "";
+"Kode OTP Salah" = "";
+"Kode OTP yang anda masukan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
+"Kembali ke Halaman Utama" = "";
+/*
+ FormEmailVerificationRegisterNasabahView
+ */
+"Email Verification" = "";
+"Silahkan masukan Alamat Email Anda" = "";
+"Masukan alamat email anda" = "";
+"*Email harus lebih dari 8 karakter" = "";
+"Verifikasi Email" = "";
+/*
+ FormEmailOTPVerificationRegisterNasabahView
+ */
+"Kami telah mengirimkan Kode Verifikasi ke" = "";
+"Silahkan masukan kode OTP dengan REF #" = "";
+"Tidak Menerima Kode?" = "";
+"Silahkan cek email Anda untuk melihat kode OTP" = "";
+"Verifikasi OTP" = "";
+"Kode OTP Salah" = "";
+"Kode OTP yang anda masukan salah silahkan ulangi lagi" = "";
+"Kode OTP yang anda masukan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
+"Kembali" = "";
+//"" = "";
+//"" = "";
+//"" = "";
