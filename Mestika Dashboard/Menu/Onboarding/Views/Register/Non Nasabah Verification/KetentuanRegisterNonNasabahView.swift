@@ -51,7 +51,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                 .frame(width: 90, height: 90)
                                 .padding(.top, 30)
                             
-                            Text("Sebelum Memulai..!!")
+                            Text(NSLocalizedString("Sebelum Memulai..!!", comment: ""))
                                 .font(.custom("Montserrat-Bold", size: 22))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .padding(.vertical, 10)
@@ -61,7 +61,7 @@ struct KetentuanRegisterNonNasabahView: View {
                             NavigationLink(
                                 destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData)
                             ){
-                                Text("Lanjut Membuat Rekening")
+                                Text(NSLocalizedString("Lanjut Membuat Rekening", comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -76,7 +76,7 @@ struct KetentuanRegisterNonNasabahView: View {
                             Button(action : {
                                 self.appState.moveToWelcomeView = true
                             }) {
-                                Text("Batal Mendaftar")
+                                Text(NSLocalizedString("Batal Mendaftar", comment: ""))
                                     .foregroundColor(.gray)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

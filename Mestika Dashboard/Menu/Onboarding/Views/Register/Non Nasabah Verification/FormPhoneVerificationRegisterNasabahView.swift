@@ -40,12 +40,12 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
-                    Text("Phone Verification")
+                    Text(NSLocalizedString("Phone Verification", comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.top, 30)
                     
-                    Text("Silahkan masukan No. Telepon Anda")
+                    Text(NSLocalizedString("Silahkan masukan No. Telepon Anda", comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -58,7 +58,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         Divider()
                             .frame(height: 30)
                         
-                        TextField("No. Telepon", text: $phoneNumber, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("No. Telepon", comment: ""), text: $phoneNumber, onEditingChanged: { changed in
                             print("\($phoneNumber)")
                             
                             self.registerData.noTelepon = phoneNumber
@@ -90,7 +90,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$root2IsActive).environmentObject(registerData),
                         isActive: self.$root2IsActive,
                         label: {
-                            Text("Verifikasi No. Telepon")
+                            Text(NSLocalizedString("Verifikasi No. Telepon", comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
