@@ -67,7 +67,7 @@ struct EmailOTPRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text("Kami telah mengirimkan Kode Verifikasi ke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
+                    Text("Kami telah mengirimkan Kode Verifikasi \nke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
@@ -75,7 +75,7 @@ struct EmailOTPRegisterNasabahView: View {
                         .padding(.horizontal, 20)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    Text("Silahkan masukan kode OTP dengan REF #\(referenceCode)")
+                    Text("Silahkan masukan kode OTP dengan \nREF #\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)

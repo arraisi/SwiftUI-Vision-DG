@@ -80,7 +80,7 @@ struct PasswordView: View {
                         
                         VStack {
                             // Sub title
-                            Text("Masukan Password Aplikasi Digital Banking")
+                            Text("Masukkan Password Aplikasi Digital Banking")
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .multilineTextAlignment(.center)
