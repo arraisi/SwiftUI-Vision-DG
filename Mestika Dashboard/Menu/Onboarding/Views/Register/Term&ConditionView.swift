@@ -103,7 +103,7 @@ struct Term_ConditionView: View {
                         Button(action: toggleIsShareData) {
                             HStack(alignment: .top) {
                                 Image(systemName: isCheckedShareData ? "checkmark.square": "square")
-                                Text("* Saya memberikan hak kepada Bank Mestika untuk memberikan data kepada pihak ketiga yang berkerjasama dengan Bank Mestika")
+                                Text("Saya memberikan hak kepada Bank Mestika untuk memberikan data kepada pihak ketiga yang berkerjasama dengan Bank Mestika")
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#707070"))
                             }

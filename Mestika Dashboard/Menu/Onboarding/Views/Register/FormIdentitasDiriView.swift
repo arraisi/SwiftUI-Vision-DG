@@ -30,6 +30,7 @@ struct FormIdentitasDiriView: View {
     @State private var imageKTP: Image?
     @State private var nik: String = ""
     @State private var confirmNik: Bool = false
+    @State private var shouldPresentKTP = true
     /*
      Selfie
      */
@@ -210,39 +211,59 @@ struct FormIdentitasDiriView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
         .fullScreenCover(isPresented: $shouldPresentCamera) {
             
             if self.shouldPresentScanner {
-                
-                ScanningView(recognizedText: $recognizedText.value, cameraFileName: $cameraFileName)
-                    .onDisappear(perform: {
-                        if (recognizedText.value != "-") {
-                            if self.cameraFileName == "ktp" {
-                                let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
-                                
-                                if matched.count != 0 {
-                                    self.nik = matched[0]
+                ZStack {
+                    ScanningView(recognizedText: $recognizedText.value, cameraFileName: $cameraFileName)
+                        .onDisappear(perform: {
+                            if (recognizedText.value != "-") {
+                                if self.cameraFileName == "ktp" {
+                                    let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
+                                    
+                                    if matched.count != 0 {
+                                        self.nik = matched[0]
+                                    }
+                                    
+                                    print("self.cameraFileName \(self.cameraFileName)")
                                 }
                                 
-                                print("self.cameraFileName \(self.cameraFileName)")
-                            }
-                            
-                            let scanResult = retrieveImage(forKey: self.cameraFileName)
-                            if let image = scanResult {
-                                switch self.cameraFileName {
-                                case "ktp":
-                                    self.imageKTP = Image(uiImage: image)
-                                    self.registerData.fotoKTP = imageKTP!
-                                case "npwp":
-                                    self.imageNPWP = Image(uiImage: image)
-                                    self.registerData.fotoNPWP = imageNPWP!
-                                default:
-                                    print("retrieve image nil")
+                                let scanResult = retrieveImage(forKey: self.cameraFileName)
+                                if let image = scanResult {
+                                    switch self.cameraFileName {
+                                    case "ktp":
+                                        self.imageKTP = Image(uiImage: image)
+                                        self.registerData.fotoKTP = imageKTP!
+                                    case "npwp":
+                                        self.imageNPWP = Image(uiImage: image)
+                                        self.registerData.fotoNPWP = imageNPWP!
+                                    default:
+                                        print("retrieve image nil")
+                                    }
                                 }
+                                
                             }
-                            
+                        })
+                    
+                    if self.shouldPresentKTP {
+                        VStack(alignment: .center){
+                            Spacer()
+                            HStack{
+                                Text("\(Image(systemName: "checkmark")) Pastikan e-KTP anda asli dan bukan versi scan, unggah dan fotokopi")
+                            }
+                            HStack{
+                                Text("\(Image(systemName: "checkmark")) Pastikan e-KTP tidak terpotong , data dan foto terlihat jelas")
+                            }
                         }
-                    })
+                        .foregroundColor(.white)
+                        .padding([.horizontal], 20)
+                        .padding([.bottom], 140)
+                    }
+                       
+                }
                 
             }
             else {
@@ -272,21 +293,25 @@ struct FormIdentitasDiriView: View {
             self.formSelfie = false
             self.formNPWP = false
             self.formKTP = true
+            self.shouldPresentKTP = true
             self.shouldPresentMaskSelfieCamera = false
         case "selfie":
             self.formKTP = false
             self.formNPWP = false
             self.formSelfie = true
+            self.shouldPresentKTP = false
             self.shouldPresentMaskSelfieCamera = true
         case "npwp":
             self.formKTP = false
             self.formSelfie = false
             self.formNPWP = true
+            self.shouldPresentKTP = false
             self.shouldPresentMaskSelfieCamera = false
         default:
             self.formKTP = false
             self.formSelfie = false
             self.formNPWP = false
+            self.shouldPresentKTP = true
             self.shouldPresentScanner = true
             self.shouldPresentMaskSelfieCamera = false
             self.shouldPresentCamera = false

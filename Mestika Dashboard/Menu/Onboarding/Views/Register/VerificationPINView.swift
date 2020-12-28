@@ -69,7 +69,7 @@ struct VerificationPINView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .center) {
-                        Text("Silahkan Masukan PIN \nkartu ATM Anda")
+                        Text("Silahkan Masukkan PIN \nkartu ATM Anda")
                             .font(.custom("Montserrat-SemiBold", size: 18))
                             .foregroundColor(Color(hex: "#232175"))
                             .multilineTextAlignment(.center)
@@ -81,7 +81,7 @@ struct VerificationPINView: View {
                             
                             ZStack {
                                 HStack (spacing: 0) {
-                                    SecureField("Maukan PIN ATM", text: $pin)
+                                    SecureField("Maukkan PIN ATM", text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
                                         .frame(width: 200, height: 50)
@@ -118,7 +118,7 @@ struct VerificationPINView: View {
                             
                             ZStack {
                                 HStack (spacing: 0) {
-                                    TextField("Maukan PIN ATM", text: $pin)
+                                    TextField("Maukkan PIN ATM", text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
                                         .frame(width: 200, height: 50)
