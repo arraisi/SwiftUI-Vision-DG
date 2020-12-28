@@ -28,6 +28,12 @@ struct FormCompletionKartuATMView: View {
     
     @State var addressOptionId = 1
     
+    @State private var isShowAlert: Bool = false
+    
+    @State var messageResponse: String = ""
+    
+    @State var addressSugestion = [AddressViewModel]()
+    
 //    @State var nameOnCard : String = ""
 //    @State var currentAddress : Address = Address()
     
@@ -116,9 +122,16 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-            registerData.namaLengkapFromNik = nama_local!
+//            registerData.namaLengkapFromNik = nama_local!
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
+        }
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("MESSAGE"),
+                message: Text(self.messageResponse),
+                dismissButton: .default(Text("Oke"))
+            )
         }
     }
     
@@ -215,20 +228,20 @@ struct FormCompletionKartuATMView: View {
                     .font(Font.system(size: 14))
                     .frame(height: 36)
                     .disabled(addressOptionId != 4)
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
                     
                     if addressOptionId == 4 {
                         Button(action:{
-                            showingAddressModal.toggle()
+                            searchAddress()
                         }, label: {
-                            Image(systemName: "location.viewfinder")
+                            Image(systemName: "magnifyingglass")
                                 .font(Font.system(size: 20))
                                 .foregroundColor(Color(hex: "#707070"))
                         })
                     }
                 }
-                .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
                 
             }
             
@@ -403,23 +416,23 @@ struct FormCompletionKartuATMView: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(0...cities.count-1, id: \.self) {index in
+            
+            List(addressSugestion, id: \.formatted_address) {data in
                 
                 HStack {
-                    Text(cities[index].city)
+                    Text(data.formatted_address)
                         .font(Font.system(size: 14))
                     
                     Spacer()
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    print(cities[index])
-                    atmData.atmAddressInput = cities[index].address
-                    atmData.atmAddresspostalCodeInput = cities[index].kodePos
-                    self.kodePos = cities[index].kodePos
-                    atmData.atmAddresskecamatanInput = cities[index].kecamatan
-                    atmData.atmAddresskelurahanInput = cities[index].kelurahan
-                    atmData.atmAddressrtRwInput = cities[index].rtRw
+                    atmData.atmAddressInput = data.formatted_address
+                    atmData.atmAddresspostalCodeInput = data.postalCode
+                    self.kodePos = data.postalCode
+                    atmData.atmAddresskecamatanInput = data.kecamatan
+                    atmData.atmAddresskelurahanInput = data.kelurahan
+                    atmData.atmAddressrtRwInput = data.rt
                     
                     self.showingAddressModal.toggle()
                 })
@@ -510,6 +523,28 @@ struct FormCompletionKartuATMView: View {
             let suggestion = names.joined(separator: " ").replacingOccurrences(of: name, with: alias)
             if !self.suggestions.contains(suggestion) {
                 self.suggestions.append(suggestion)
+            }
+        }
+    }
+    
+    // MARK: - SEARCH LOCATION
+    @ObservedObject var addressVM = AddressSummaryViewModel()
+    func searchAddress() {
+        self.isLoading = true
+        
+        self.addressVM.getAddressSugestion(addressInput: atmData.atmAddressInput) { success in
+            if success {
+                self.isLoading = self.addressVM.isLoading
+                self.addressSugestion = self.addressVM.address
+                self.showingAddressModal = true
+                print("Success")
+            }
+            
+            if !success {
+                self.isLoading = self.addressVM.isLoading
+                self.isShowAlert = true
+                self.messageResponse = self.addressVM.message
+                print("Not Found")
             }
         }
     }

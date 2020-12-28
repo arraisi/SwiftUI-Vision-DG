@@ -93,7 +93,7 @@ struct WelcomeView: View {
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
                         
-                        NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: self.$isLoginViewActive){
+                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -557,7 +557,9 @@ struct WelcomeView: View {
             
             // MARK: change destination
             Button(
-                action: {},
+                action: {
+                    UserDefaults.standard.set("reset", forKey: "reset_register")
+                },
                 label: {
                     Text("Kembali ke halaman utama")
                         .foregroundColor(.white)
@@ -960,8 +962,15 @@ struct WelcomeView: View {
                 print("CODE STATUS : \(self.userVM.code)")
                 print("MESSAGE STATUS : \(self.userVM.message)")
                 
-                self.modalSelection = self.userVM.message
-                self.isShowModal = true
+                let reset = UserDefaults.standard.string(forKey: "reset_register")
+                
+                if (reset == "reset") {
+                    self.modalSelection = "DEFAULT"
+                    self.isShowModal = true
+                } else {
+                    self.modalSelection = self.userVM.message
+                    self.isShowModal = true
+                }
             }
             
             if !success {
