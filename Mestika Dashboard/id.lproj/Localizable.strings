@@ -6,4 +6,9 @@
   
 */
 
+/* WELCOME SCREEN LOCALIZATION */
 "Welcome to" = "Selamat Datang di";
+"Register" = "DAFTAR";
+"Login" = "MASUK";
+"Before Starting..!!" = "Sebelum Memulai..!!";
+"Are you a customer of Bank Mestika?" = "Apakah Anda Merupakan Nasabah Bank Mestika?";
