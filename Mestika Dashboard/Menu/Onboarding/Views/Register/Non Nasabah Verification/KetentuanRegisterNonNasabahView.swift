@@ -22,6 +22,7 @@ struct KetentuanRegisterNonNasabahView: View {
     @Binding var rootIsActive : Bool
     
     @State var readFinished = false
+    @State var scrollToBottom = false
     
     // MARK: -MAIN CONTENT
     var body: some View {
@@ -56,7 +57,23 @@ struct KetentuanRegisterNonNasabahView: View {
                                 .foregroundColor(Color(hex: "#232175"))
                                 .padding(.vertical, 10)
                             
-                            WebView(readFinished: self.$readFinished, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                            WebView(readFinished: self.$readFinished, scrollToBottom: self.$scrollToBottom, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                                .onChange(of: readFinished, perform: { value in
+                                    scrollToBottom = true
+                                })
+                                .highPriorityGesture(
+                                    
+                                    DragGesture()
+                                        .onChanged({ (value) in
+                                            
+                                            if value.translation.height > 0 {
+                                                print("\(value.translation.height) > 0")
+                                                scrollToBottom = false
+                                                
+                                            }
+                                            
+                                        })
+                                )
                             
                             NavigationLink(
                                 destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData)

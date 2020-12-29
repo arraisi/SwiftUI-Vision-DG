@@ -22,6 +22,7 @@ struct Term_ConditionView: View {
     @State var isShowDataVerification: Bool = false
     
     @State var readFinished = false
+    @State var scrollToBottom = false
     
     func toggleIsWni() {
         isCheckedWni = !isCheckedWni
@@ -69,7 +70,23 @@ struct Term_ConditionView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .leading) {
-                        WebView(readFinished: self.$readFinished, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                        WebView(readFinished: self.$readFinished, scrollToBottom: self.$scrollToBottom, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                            .onChange(of: readFinished, perform: { value in
+                                scrollToBottom = true
+                            })
+                            .highPriorityGesture(
+                                
+                                DragGesture()
+                                    .onChanged({ (value) in
+                                        
+                                        if value.translation.height > 0 {
+                                            print("\(value.translation.height) > 0")
+                                            scrollToBottom = false
+                                            
+                                        }
+                                        
+                                    })
+                            )
                         
                         Divider()
                             .padding(.horizontal, 20)

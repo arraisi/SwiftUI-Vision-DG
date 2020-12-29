@@ -13,6 +13,7 @@ import SwiftUI
 struct WebView: UIViewRepresentable {
     
     @Binding var readFinished: Bool
+    @Binding var scrollToBottom: Bool
     
     /// String representation of the URL you want to open in the WebView.
     let urlString: String?
@@ -44,9 +45,9 @@ struct WebView: UIViewRepresentable {
         }
         
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            if self.parent.readFinished {
+            if self.parent.scrollToBottom {
                 let scrollPoint = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.size.height)
-                scrollView.setContentOffset(scrollPoint, animated: false)
+                scrollView.contentOffset = scrollPoint
             }
             
             if (scrollView.contentOffset.y) > (scrollView.contentSize.height - scrollView.frame.size.height) {
