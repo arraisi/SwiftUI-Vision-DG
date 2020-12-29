@@ -56,7 +56,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         .padding(.top, 30)
                         .multilineTextAlignment(.center)
                     
-                    Text("Silahkan masukan no kartu ATM atau Rekening anda")
+                    Text("Silahkan masukkan no kartu ATM atau Rekening anda")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#5A6876"))
                         .multilineTextAlignment(.center)
@@ -89,7 +89,7 @@ struct NoAtmOrRekeningVerificationView: View {
                     .cornerRadius(20)
                     .padding(.vertical, 5)
                     
-                    TextField("Masukan no kartu", text: $noKartuCtrl, onEditingChanged: { changed in
+                    TextField("Masukkan no kartu", text: $noKartuCtrl, onEditingChanged: { changed in
                         if (jenisKartuCtrl == "Kartu ATM") {
                             self.registerData.atmOrRekening = "ATM"
                             self.registerData.noAtm = self.noKartuCtrl

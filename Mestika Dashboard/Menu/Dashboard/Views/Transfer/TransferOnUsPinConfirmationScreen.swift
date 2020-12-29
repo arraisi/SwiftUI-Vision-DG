@@ -27,7 +27,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                 VStack {
                     Spacer(minLength: 0)
                     
-                    Text("Masukan PIN Transaksi anda")
+                    Text("Masukkan PIN Transaksi anda")
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .foregroundColor(.white)

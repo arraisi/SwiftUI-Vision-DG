@@ -50,7 +50,7 @@ struct CardCVVVerificationView: View {
                     VStack(alignment: .leading) {
                         
                         HStack (spacing: 0) {
-                            TextField("Masukan Password", text: $cvv.text, onEditingChanged: { changed in
+                            TextField("Masukkan Password", text: $cvv.text, onEditingChanged: { changed in
                                 print("input \($cvv.text)")
                             })
                             .font(.custom("Montserrat-Regular", size: 14))

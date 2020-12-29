@@ -80,7 +80,7 @@ struct FirstATMLoginView: View {
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
             
-            TextField("Masukan nomor ATM Anda", text: $atmNumber, onEditingChanged: { changed in
+            TextField("Masukkan nomor ATM Anda", text: $atmNumber, onEditingChanged: { changed in
                 print("\($atmNumber)")
             })
             .frame(height: 20)
@@ -91,7 +91,7 @@ struct FirstATMLoginView: View {
             .cornerRadius(20)
             .padding(.horizontal, 20)
             
-            TextField("Masukan PIN ATM Anda", text: $pin, onEditingChanged: { changed in
+            TextField("Masukkan PIN ATM Anda", text: $pin, onEditingChanged: { changed in
                 print("\($pin)")
             })
             .frame(height: 20)
@@ -159,7 +159,7 @@ struct FirstATMLoginView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Data yang anda masukan tidak sesuai, silahkan masukkan kembali.")
+            Text("Data yang anda masukkan tidak sesuai, silahkan masukkan kembali.")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))

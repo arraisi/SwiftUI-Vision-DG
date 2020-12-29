@@ -60,13 +60,13 @@ struct FormEmailVerificationRegisterNasabahView: View {
                         }
                     )
                     
-                    Text(NSLocalizedString("Silahkan masukan Alamat Email Anda", comment: ""))
+                    Text(NSLocalizedString("Silahkan masukkan Alamat Email Anda", comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
                     
-                    TextField(NSLocalizedString("Masukan alamat email anda", comment: ""), text: $email, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Masukkan alamat email anda", comment: ""), text: $email, onEditingChanged: { changed in
                         print("Changed")
                         self.registerData.email = self.email
                         UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
@@ -95,6 +95,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                         Spacer()
                     }
                     .padding(.vertical, 10)
+                    .hidden()
                     
                     NavigationLink(
                         destination: FormEmailOTPVerificationRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),

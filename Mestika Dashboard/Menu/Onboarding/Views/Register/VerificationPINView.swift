@@ -81,7 +81,7 @@ struct VerificationPINView: View {
                             
                             ZStack {
                                 HStack (spacing: 0) {
-                                    SecureField("Maukkan PIN ATM", text: $pin)
+                                    SecureField("Masukkan PIN ATM", text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
                                         .frame(width: 200, height: 50)

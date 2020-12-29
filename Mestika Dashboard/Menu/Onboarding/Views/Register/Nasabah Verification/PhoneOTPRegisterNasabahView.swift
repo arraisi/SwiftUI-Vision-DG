@@ -86,7 +86,7 @@ struct PhoneOTPRegisterNasabahView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text("Silahkan masukan kode OTP dengan \nREF #\(referenceCode)")
+                    Text("Silahkan masukkan kode OTP dengan \nREF #\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -319,7 +319,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Kode OTP yang anda masukan salah silahkan ulangi lagi")
+            Text("Kode OTP yang anda masukkan salah silahkan ulangi lagi")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -361,7 +361,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Kode OTP yang anda masukan telah salah 5 kali, silahkan ulangi lagi minggu depan.")
+            Text("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -413,7 +413,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     UserDefaults.standard.set(self.otpVM.destination, forKey: "phone_local")
                 }
                 
-                self.isShowAlert = true
+                self.isShowAlert = false
             }
             
             if !success {

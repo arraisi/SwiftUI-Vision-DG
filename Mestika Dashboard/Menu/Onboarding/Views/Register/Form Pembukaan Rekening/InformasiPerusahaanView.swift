@@ -136,7 +136,7 @@ struct InformasiPerusahaanView: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Masukan Informasi Perusahaan")
+                                Text("Masukkan Informasi Perusahaan")
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .padding(.horizontal, 20)

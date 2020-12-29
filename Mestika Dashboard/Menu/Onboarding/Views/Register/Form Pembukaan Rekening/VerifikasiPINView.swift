@@ -87,7 +87,7 @@ struct VerifikasiPINView: View {
                             Spacer()
                             
                             // Sub title
-                            Text("Masukan Kembali \nPIN Transaksi Baru Anda")
+                            Text("Masukkan Kembali \nPIN Transaksi Baru Anda")
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .multilineTextAlignment(.center)
@@ -264,7 +264,7 @@ struct VerifikasiPINView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("PIN Transaksi yang anda masukan tidak sama dengan awal, silahkan masukan kembali")
+            Text("PIN Transaksi yang anda masukkan tidak sama dengan awal, silahkan masukkan kembali")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))

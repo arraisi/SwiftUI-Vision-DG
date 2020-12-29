@@ -179,7 +179,7 @@ struct FirstLoginView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Nomor yang anda masukan tidak terdaftar silahkan lakukan registrasi.")
+            Text("Nomor yang anda masukkan tidak terdaftar silahkan lakukan registrasi.")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))

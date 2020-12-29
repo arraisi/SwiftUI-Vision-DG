@@ -75,7 +75,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         .padding(.horizontal, 20)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    Text(NSLocalizedString("Silahkan masukan kode OTP dengan \nREF #", comment: "") + "\(referenceCode)")
+                    Text(NSLocalizedString("Silahkan masukkan kode OTP dengan \nREF #", comment: "") + "\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -313,7 +313,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukan salah silahkan ulangi lagi", comment: ""))
+            Text(NSLocalizedString("Kode OTP yang anda masukkan salah silahkan ulangi lagi", comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -355,7 +355,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukan telah salah 5 kali, silahkan ulangi lagi minggu depan.", comment: ""))
+            Text(NSLocalizedString("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.", comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -403,7 +403,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     self.messageResponse = self.otpVM.statusMessage
                 }
                 
-                self.isShowAlert = true
+                self.isShowAlert = false
             }
             
             if !success {

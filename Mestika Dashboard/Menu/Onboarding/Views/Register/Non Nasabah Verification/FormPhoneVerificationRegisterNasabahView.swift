@@ -45,7 +45,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Silahkan masukan No. Telepon Anda", comment: ""))
+                    Text(NSLocalizedString("Silahkan masukkan No. Telepon Anda", comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)

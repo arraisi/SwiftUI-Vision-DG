@@ -62,13 +62,13 @@ struct EmailRegisterNasabahView: View {
                         }
                     )
 
-                    Text("Silahkan masukan Alamat Email Anda")
+                    Text("Silahkan masukkan Alamat Email Anda")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
                     
-                    TextField("Masukan alamat email anda", text: $email, onEditingChanged: { changed in
+                    TextField("Masukkan alamat email anda", text: $email, onEditingChanged: { changed in
                         print("Changed")
                         self.registerData.email = self.email
                         UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
@@ -97,6 +97,7 @@ struct EmailRegisterNasabahView: View {
                         Spacer()
                     }
                     .padding(.bottom, 10)
+                    .hidden()
                     
                     NavigationLink(
                         destination: EmailOTPRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),

@@ -87,7 +87,7 @@ struct FirstPasswordLoginView: View {
                     if (securedPassword) {
                         ZStack {
                             HStack (spacing: 0) {
-                                SecureField("Masukan Password", text: $password)
+                                SecureField("Masukkan Password", text: $password)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -109,7 +109,7 @@ struct FirstPasswordLoginView: View {
                     } else {
                         ZStack {
                             HStack (spacing: 0) {
-                                TextField("Masukan Password", text: $password, onEditingChanged: { changed in
+                                TextField("Masukkan Password", text: $password, onEditingChanged: { changed in
                                     print("\($password)")
                                 })
                                 .font(.custom("Montserrat-SemiBold", size: 14))

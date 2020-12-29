@@ -81,7 +81,7 @@ struct PINView: View {
                             Spacer()
                             
                             // Sub title
-                            Text("Masukan PIN \nTransaksi Baru Anda")
+                            Text("Masukkan PIN \nTransaksi Baru Anda")
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.semibold)

@@ -37,7 +37,7 @@ struct CardActivationView: View {
                     .multilineTextAlignment(.center)
                     .padding(.vertical, 5)
                 
-                TextField("Masukan nomor ATM Anda", text: $atmNumber, onEditingChanged: { changed in
+                TextField("Masukkan nomor ATM Anda", text: $atmNumber, onEditingChanged: { changed in
                     print("\($atmNumber)")
                 })
                 .keyboardType(.numberPad)
@@ -47,7 +47,7 @@ struct CardActivationView: View {
                 .background(Color.white)
                 .cornerRadius(15)
                 
-                TextField("Masukan PIN ATM Anda", text: $pin, onEditingChanged: { changed in
+                TextField("Masukkan PIN ATM Anda", text: $pin, onEditingChanged: { changed in
                     print("\($pin)")
                 })
                 .keyboardType(.numberPad)

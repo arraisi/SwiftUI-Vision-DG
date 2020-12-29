@@ -25,7 +25,7 @@ struct ScanNPWPView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Silahkan masukan Foto kartu NPWP Anda")
+            Text("Silahkan masukkan Foto kartu NPWP Anda")
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)

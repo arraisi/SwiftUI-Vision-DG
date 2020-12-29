@@ -46,7 +46,7 @@ class AddressSummaryViewModel: ObservableObject {
                 
                 switch error {
                 case .custom(code: 400):
-                    self.message = "Masukan Alamat Lengkap!"
+                    self.message = "Masukkan Alamat Lengkap!"
                 default:
                     self.message = "Internal Server Error"
                 }
