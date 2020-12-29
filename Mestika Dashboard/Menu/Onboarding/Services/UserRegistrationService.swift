@@ -36,14 +36,14 @@ class UserRegistrationService {
         
         print("DEVICE ID \(deviceId)")
         print(registerData.tujuanPembukaan)
+        print(registerData.hasNoNpwp)
         
-        let userDetailParam: [String : Any] = [
+        var userDetailParam: [String : Any] = [
             "mobileNumber": registerData.noTelepon,
             "productName": "Bank Mestika Product",
             "imageKtp": "/storage/20201211_090631_.jpg",
             "nik": registerData.nik,
             "imageSelfie": "/storage/20201211_090631_.jpg",
-            "imageNpwp": "/storage/20201211_090631_.jpg",
             "noNpwp": registerData.npwp ?? "",
             "emailAddress": registerData.email,
             "purposeOfAccountOpening": registerData.tujuanPembukaan,
@@ -84,7 +84,7 @@ class UserRegistrationService {
             "addressKelurahanInput": registerData.addressKelurahanInput ?? "",
             "addressKecamatanInput": registerData.addressKecamatanInput ?? "",
             "addressPostalCodeInput": registerData.addressPostalCodeInput ?? "",
-            "hasNoNpwp": registerData.hasNoNpwp,
+            "hasNoNpwp": registerData.npwp != "" ? true : false,
             "fireBaseId": firebaseId,
             "nasabahName": registerData.namaLengkapFromNik,
             "addressDukcapil": registerData.alamatKtpFromNik,
@@ -95,6 +95,10 @@ class UserRegistrationService {
             "addressKabupatenDukcapil": registerData.kabupatenKotaFromNik,
             "addressPropinsiDukcapil": registerData.provinsiFromNik
         ]
+        
+        if registerData.npwp != "" {
+            userDetailParam["imageNpwp"] = "/storage/20201211_090631_.jpg"
+        }
         
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userDetailParam, options: .prettyPrinted)
@@ -116,7 +120,7 @@ class UserRegistrationService {
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageKtp.pngData()!)
             
-            if registerData.hasNoNpwp {
+            if registerData.npwp != "" {
                 // Add the image NPWP
                 data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
                 data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId)_npwp.jpg\"\r\n".data(using: .utf8)!)

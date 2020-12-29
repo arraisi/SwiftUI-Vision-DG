@@ -111,9 +111,11 @@ struct ScanNPWPView: View {
                         }
                         self.registerData.npwp = npwp
                         self.registerData.hasNoNpwp = true
+                        print("NPWP YES")
                     } else {
                         self.onCommit()
                         self.registerData.hasNoNpwp = false
+                        print("NPWP NO")
                     }
                     
                     print("REGISTER DATA NPWP : \(self.registerData.npwp)")

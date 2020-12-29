@@ -29,10 +29,13 @@ extension UserRegistrationViewModel {
         let imageSelfie = registerData.fotoSelfie.asUIImage()
         let imageSelfieCompress = imageSelfie.resized(withPercentage: 0.1)
         
+        let imageNpwp = registerData.fotoNPWP.asUIImage()
+        let imageNpwpCompress = imageNpwp.resized(withPercentage: 0.1)
+        
         UserRegistrationService.shared.postUser(
             registerData: registerData,
             imageKtp: imageKtpCompress!,
-            imageNpwp: UIImage(data: data!)!,
+            imageNpwp: imageNpwpCompress!,
             imageSelfie: imageSelfieCompress!) { result in
                 
             switch result {
