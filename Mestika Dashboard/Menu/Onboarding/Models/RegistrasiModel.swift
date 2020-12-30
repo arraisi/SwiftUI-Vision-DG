@@ -94,7 +94,7 @@ class RegistrasiModel: ObservableObject {
     @Published var isWni: Bool = false
     @Published var isAgree: Bool = false
     @Published var isShareData: Bool = false
-    @Published var isAddressEqualToDukcapil: String = ""
+    @Published var isAddressEqualToDukcapil: Bool = false
     @Published var addressInput: String = ""
     @Published var addressRtRwInput: String = ""
     @Published var addressKelurahanInput: String = ""

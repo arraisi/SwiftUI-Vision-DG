@@ -22,7 +22,7 @@ class AddProductATM: ObservableObject, Codable {
     @Published var nik: String = ""
     @Published var isNasabahMestika: Bool = false
     @Published var isVcall: Bool = false
-    @Published var isAddressEqualToDukcapil: String = ""
+    @Published var isAddressEqualToDukcapil: Bool = false
     
 //    var addressOptionId: Int = 1
     

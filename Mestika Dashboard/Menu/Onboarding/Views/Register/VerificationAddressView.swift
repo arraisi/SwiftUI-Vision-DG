@@ -70,9 +70,9 @@ struct VerificationAddressView: View {
                                     print("Selected is: \(selected)")
                                     
                                     if (selected == 1) {
-                                        registerData.isAddressEqualToDukcapil = "Ya, alamat sesuai"
+                                        registerData.isAddressEqualToDukcapil = true
                                     } else if (selected == 2) {
-                                        registerData.isAddressEqualToDukcapil = "Tidak, alamat tidak sesuai"
+                                        registerData.isAddressEqualToDukcapil = false
                                     }
                                 }
                                 .padding(.horizontal, 20)
