@@ -61,6 +61,49 @@
 "Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
 "Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
 "Kembali" = "";
-//"" = "";
-//"" = "";
-//"" = "";
+
+/**
+ Verifikasi Register Nasabah
+ **/
+
+/*
+ NoAtmOrRekeningVerificationView
+ */
+"No. Kartu ATM atau Rekening" = "";
+"Silahkan masukkan no kartu ATM atau Rekening anda" = "";
+"Pilih jenis no kartu yang diinput" = "";
+"Masukkan no kartu" = "";
+"*Pastikan kartu ATM atau Rekening Anda telah aktif, jika belum aktifasi kartu ATM silahkan kunjungi Kantor Bank Mestika terdekat." = "";
+"Verifikasi No. Kartu" = "";
+/*
+ PhoneOTPRegisterNasabahView
+ */
+"Kami telah mengirimkan OTP \nke No." = "";
+"Silahkan masukkan kode OTP dengan" = "";
+"Tidak Menerima Kode?" = "";
+"Resend OTP" = "";
+"Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP" = "";
+"Verifikasi OTP" = "";
+"Kode OTP Salah" = "";
+"Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
+"Kembali" = "";
+"Kode OTP Salah" = "";
+"Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
+"Kembali ke Halaman Utama" = "";
+/*
+ EmailRegisterNasabahView
+ */
+"Email Verification" = "";
+"Silahkan masukkan Alamat Email Anda" = "";
+"Masukkan alamat email anda" = "";
+"*Email harus lebih dari 8 karakter" = "";
+"Verifikasi Email" = "";
+"Kami telah mengirimkan Kode Verifikasi \nke" = "";
+"Silahkan masukkan kode OTP dengan" = "";
+"Kode OTP Salah" = "";
+/*
+ JenisTabunganRegisterNasabahView
+ */
+"Pilih Jenis Tabungan Anda" = "";
+"Deposit Tabungan" = "";
+"Keunggulan Tabungan :" = "";
