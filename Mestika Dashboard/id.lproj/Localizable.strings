@@ -107,3 +107,86 @@
 "Pilih Jenis Tabungan Anda" = "";
 "Deposit Tabungan" = "";
 "Keunggulan Tabungan :" = "";
+/*
+ FormPilihJenisTabunganView
+ */
+"Pilih Tabungan ini" = "";
+/*
+ FormIdentitasDiriView
+ */
+"Identitas Diri" = "";
+"Silihkan isi dan lengkapi data identitas Anda" = "";
+"Foto KTP dan No. Induk Penduduk" = "";
+"Ambil Foto sendiri atau Selfie" = "";
+"Masukkan NPWP Anda" = "";
+"Lanjut Pembukaan Rekening Baru" = "";
+/*
+ Term_ConditionView
+ */
+"SYARAT DAN KETENTUAN" = "";
+"* Saya Adalah Warga Negara Indonesia dan tidak memiliki kewajiban pajak di Negara lain" = "";
+"* Saya setuju" = "";
+"Saya memberikan hak kepada Bank Mestika untuk memberikan data kepada pihak ketiga yang berkerjasama dengan Bank Mestika" = "";
+"Berikutnya" = "";
+"Apakah ingin membatalkan registrasi ?" = "";
+"YA" = "";
+"Tidak" = "";
+/*
+ VerificationRegisterDataView
+ */
+"PASTIKAN INFORMASI ANDA BENAR" = "";
+"KTP" = "";
+"No. Telepon" = "";
+"Foto KTP" = "";
+"Tujuan Pembukaan Rekening" = "";
+"Sumber Dana" = "";
+"Perkiraan Penarikan" = "";
+"Besar Perkiraan Penarikan" = "";
+"Perkiraan Setoran" = "";
+"Besar Perkiraan Setoran" = "";
+"Submit Data" = "";
+"Penghasilan Kotor" = "";
+"Jabatan" = "";
+"Industri" = "";
+"Sumber Pendapatan Lainnya" = "";
+"Informasi Penyandang Dana" = "";
+"Nama Penyandang Dana" = "";
+"Hubungan Dengan Anda" = "";
+"Profesi Penyandang Dana" = "";
+/*
+ VerificationPINView
+ */
+"VERIFIKASI PIN \nKARTU ATM ANDA" = "";
+"Silahkan Masukkan PIN \nkartu ATM Anda" = "";
+"Masukkan PIN ATM" = "";
+"Rekening Anda tidak memiliki kartu ATM?" = "";
+"Verifikasi Lewat Video Call" = "";
+"PIN ATM yang anda Masukkan Salah!" = "";
+"PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar." = "";
+"Silahkan coba kembali.." = "";
+"Kembali" = "";
+/*
+ SuccessRegisterView
+ */
+"Pendaftaran Rekening Baru Telah Berhasil" = "";
+"Silahkan pilih waktu untuk dihubungi." = "";
+"Pilih Tanggal Wawancara" = "";
+"Pilih Jam" = "";
+"Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru" = "";
+"KTP." = "";
+"No KTP" = "";
+"No. HP." = "";
+"Nomor Handphone" = "";
+"Alamat Email" = "";
+"Buat Janji" = "";
+"Batalkan Permohonan" = "";
+"Gagal membatalkan permohonan. Silakan coba beberapa saat lagi." = "";
+"Batalkan Permohonan" = "";
+"TIDAK" = "";
+"YA" = "";
+"Terimakasih telah memilih Bank Mestika" = "";
+"Permohonan Pembukaan Rekening Anda sedang dalam proses persetujuan. Pihak kami akan menghubungi Anda untuk memverifikasi data." = "";
+"Informasi" = "";
+"Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :" = "";
+"Tanggal" = "";
+"Jam" = "";
