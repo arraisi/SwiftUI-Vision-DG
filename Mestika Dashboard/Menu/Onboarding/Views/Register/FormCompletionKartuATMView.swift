@@ -34,8 +34,8 @@ struct FormCompletionKartuATMView: View {
     
     @State var addressSugestion = [AddressViewModel]()
     
-//    @State var nameOnCard : String = ""
-//    @State var currentAddress : Address = Address()
+    //    @State var nameOnCard : String = ""
+    //    @State var currentAddress : Address = Address()
     
     //Dummy data
     
@@ -109,8 +109,8 @@ struct FormCompletionKartuATMView: View {
             }
         }
         .edgesIgnoringSafeArea(.top)
-//        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-//        .navigationBarBackButtonHidden(true)
+        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        //        .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -122,7 +122,7 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-//            registerData.namaLengkapFromNik = nama_local!
+            registerData.namaLengkapFromNik = nama_local!
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
         }
@@ -201,6 +201,10 @@ struct FormCompletionKartuATMView: View {
             if addressOptionId == 4 {
                 formAddress
             }
+            
+            if addressOptionId == 3 {
+                formPerusahaan
+            }
         }
         .frame(width: UIScreen.main.bounds.width - 40)
         .background(Color.white)
@@ -263,28 +267,88 @@ struct FormCompletionKartuATMView: View {
                 
             }
             
-//            LabelTextField(value: $atmData.atmAddresspostalCodeInput, label: "", placeHolder: "Kode Pos", disabled:addressOptionId != 4) { (change) in
-//
-//            } onCommit: {
-//
-//            }
+            HStack {
+                TextField("Kode Pos", text: $kodePos) {change in
+                } onCommit: {
+                    self.atmData.atmAddresspostalCodeInput = self.kodePos
+                }
+                .onReceive(kodePos.publisher.collect()) {
+                    self.kodePos = String($0.prefix(5))
+                }
+                .keyboardType(.numberPad)
+                .font(Font.system(size: 14))
+                .frame(height: 36)
+                .disabled(addressOptionId != 4)
+            }
+            .padding(.horizontal)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
             
+        }
+        .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
+    }
+    
+    var formPerusahaan: some View {
+        VStack(alignment: .leading) {
+            
+            Group {
+                
+                Text("")
+                    .font(Font.system(size: 10))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
                 HStack {
-                    TextField("Kode Pos", text: $kodePos) {change in
+                    
+                    TextField("Alamat", text: $registerData.alamatPerusahaan) { changed in
                     } onCommit: {
-                        self.atmData.atmAddresspostalCodeInput = self.kodePos
                     }
-                    .onReceive(kodePos.publisher.collect()) {
-                        self.kodePos = String($0.prefix(5))
-                    }
-                    .keyboardType(.numberPad)
                     .font(Font.system(size: 14))
                     .frame(height: 36)
-                    .disabled(addressOptionId != 4)
+                    .disabled(true)
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
                 }
-                .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
+                
+            }
+            
+            LabelTextField(value: $registerData.rtrw, label: "", placeHolder: "RT/RW", disabled: true ) { (change) in
+                
+            } onCommit: {
+                
+            }
+            
+            LabelTextField(value: $registerData.kelurahan, label: "", placeHolder: "Kelurahan", disabled: true) { (change) in
+                
+            } onCommit: {
+                
+            }
+            
+            LabelTextField(value: $registerData.kecamatan, label: "", placeHolder: "Kecamatan", disabled: true
+            ) { (change) in
+                
+            } onCommit: {
+                
+            }
+            
+            HStack {
+                TextField("Kode Pos", text: $registerData.kodePos) {change in
+                } onCommit: {
+                    self.registerData.kodePos = self.kodePos
+                }
+                .onReceive(kodePos.publisher.collect()) {
+                    self.kodePos = String($0.prefix(5))
+                }
+                .keyboardType(.numberPad)
+                .font(Font.system(size: 14))
+                .frame(height: 36)
+                .disabled(true)
+            }
+            .padding(.horizontal)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
             
         }
         .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
@@ -477,7 +541,7 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddresskecamatanInput = registerData.kecamatan
             atmData.atmAddresskelurahanInput = registerData.kelurahan
             atmData.atmAddressrtRwInput = registerData.rtrw
-//            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
+        //            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:
             self.kodePos = ""
             atmData.atmAddressInput = ""
@@ -485,7 +549,7 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddresskecamatanInput = ""
             atmData.atmAddresskelurahanInput = ""
             atmData.atmAddressrtRwInput = ""
-//            currentAddress = Address()
+        //            currentAddress = Address()
         }
     }
     
