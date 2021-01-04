@@ -61,6 +61,132 @@
 "Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
 "Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
 "Kembali" = "";
-//"" = "";
-//"" = "";
-//"" = "";
+
+/**
+ Verifikasi Register Nasabah
+ **/
+
+/*
+ NoAtmOrRekeningVerificationView
+ */
+"No. Kartu ATM atau Rekening" = "";
+"Silahkan masukkan no kartu ATM atau Rekening anda" = "";
+"Pilih jenis no kartu yang diinput" = "";
+"Masukkan no kartu" = "";
+"*Pastikan kartu ATM atau Rekening Anda telah aktif, jika belum aktifasi kartu ATM silahkan kunjungi Kantor Bank Mestika terdekat." = "";
+"Verifikasi No. Kartu" = "";
+/*
+ PhoneOTPRegisterNasabahView
+ */
+"Kami telah mengirimkan OTP \nke No." = "";
+"Silahkan masukkan kode OTP dengan" = "";
+"Tidak Menerima Kode?" = "";
+"Resend OTP" = "";
+"Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP" = "";
+"Verifikasi OTP" = "";
+"Kode OTP Salah" = "";
+"Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
+"Kembali" = "";
+"Kode OTP Salah" = "";
+"Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
+"Kembali ke Halaman Utama" = "";
+/*
+ EmailRegisterNasabahView
+ */
+"Email Verification" = "";
+"Silahkan masukkan Alamat Email Anda" = "";
+"Masukkan alamat email anda" = "";
+"*Email harus lebih dari 8 karakter" = "";
+"Verifikasi Email" = "";
+"Kami telah mengirimkan Kode Verifikasi \nke" = "";
+"Silahkan masukkan kode OTP dengan" = "";
+"Kode OTP Salah" = "";
+/*
+ JenisTabunganRegisterNasabahView
+ */
+"Pilih Jenis Tabungan Anda" = "";
+"Deposit Tabungan" = "";
+"Keunggulan Tabungan :" = "";
+/*
+ FormPilihJenisTabunganView
+ */
+"Pilih Tabungan ini" = "";
+/*
+ FormIdentitasDiriView
+ */
+"Identitas Diri" = "";
+"Silihkan isi dan lengkapi data identitas Anda" = "";
+"Foto KTP dan No. Induk Penduduk" = "";
+"Ambil Foto sendiri atau Selfie" = "";
+"Masukkan NPWP Anda" = "";
+"Lanjut Pembukaan Rekening Baru" = "";
+/*
+ Term_ConditionView
+ */
+"SYARAT DAN KETENTUAN" = "";
+"* Saya Adalah Warga Negara Indonesia dan tidak memiliki kewajiban pajak di Negara lain" = "";
+"* Saya setuju" = "";
+"Saya memberikan hak kepada Bank Mestika untuk memberikan data kepada pihak ketiga yang berkerjasama dengan Bank Mestika" = "";
+"Berikutnya" = "";
+"Apakah ingin membatalkan registrasi ?" = "";
+"YA" = "";
+"Tidak" = "";
+/*
+ VerificationRegisterDataView
+ */
+"PASTIKAN INFORMASI ANDA BENAR" = "";
+"KTP" = "";
+"No. Telepon" = "";
+"Foto KTP" = "";
+"Tujuan Pembukaan Rekening" = "";
+"Sumber Dana" = "";
+"Perkiraan Penarikan" = "";
+"Besar Perkiraan Penarikan" = "";
+"Perkiraan Setoran" = "";
+"Besar Perkiraan Setoran" = "";
+"Submit Data" = "";
+"Penghasilan Kotor" = "";
+"Jabatan" = "";
+"Industri" = "";
+"Sumber Pendapatan Lainnya" = "";
+"Informasi Penyandang Dana" = "";
+"Nama Penyandang Dana" = "";
+"Hubungan Dengan Anda" = "";
+"Profesi Penyandang Dana" = "";
+/*
+ VerificationPINView
+ */
+"VERIFIKASI PIN \nKARTU ATM ANDA" = "";
+"Silahkan Masukkan PIN \nkartu ATM Anda" = "";
+"Masukkan PIN ATM" = "";
+"Rekening Anda tidak memiliki kartu ATM?" = "";
+"Verifikasi Lewat Video Call" = "";
+"PIN ATM yang anda Masukkan Salah!" = "";
+"PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar." = "";
+"Silahkan coba kembali.." = "";
+"Kembali" = "";
+/*
+ SuccessRegisterView
+ */
+"Pendaftaran Rekening Baru Telah Berhasil" = "";
+"Silahkan pilih waktu untuk dihubungi." = "";
+"Pilih Tanggal Wawancara" = "";
+"Pilih Jam" = "";
+"Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru" = "";
+"KTP." = "";
+"No KTP" = "";
+"No. HP." = "";
+"Nomor Handphone" = "";
+"Alamat Email" = "";
+"Buat Janji" = "";
+"Batalkan Permohonan" = "";
+"Gagal membatalkan permohonan. Silakan coba beberapa saat lagi." = "";
+"Batalkan Permohonan" = "";
+"TIDAK" = "";
+"YA" = "";
+"Terimakasih telah memilih Bank Mestika" = "";
+"Permohonan Pembukaan Rekening Anda sedang dalam proses persetujuan. Pihak kami akan menghubungi Anda untuk memverifikasi data." = "";
+"Informasi" = "";
+"Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :" = "";
+"Tanggal" = "";
+"Jam" = "";

@@ -85,12 +85,12 @@ struct FormIdentitasDiriView: View {
                                 Button(action: {
                                     self.nextViewActive = true
                                 }, label: {
-                                    Text("Identitas Diri")
+                                    Text(NSLocalizedString("Identitas Diri", comment: ""))
                                         .font(.custom("Montserrat-SemiBold", size: 18))
                                         .foregroundColor(Color(hex: "#F6F8FB"))
                                 })
                                 
-                                Text("Silihkan isi dan lengkapi data identitas Anda")
+                                Text(NSLocalizedString("Silihkan isi dan lengkapi data identitas Anda", comment: ""))
                                     .font(.custom("Montserrat-Regular", size: 12))
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(Color(hex: "#F6F8FB"))
@@ -99,7 +99,7 @@ struct FormIdentitasDiriView: View {
                             
                             // Form KTP
                             VStack {
-                                DisclosureGroup("Foto KTP dan No. Induk Penduduk", isExpanded: self.$formKTP) {
+                                DisclosureGroup(NSLocalizedString("Foto KTP dan No. Induk Penduduk", comment: ""), isExpanded: self.$formKTP) {
                                     ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik,
                                                 onChange: {
                                                     self.actionSelection("ktp")
@@ -122,7 +122,7 @@ struct FormIdentitasDiriView: View {
                             
                             // Form Selfie
                             VStack {
-                                DisclosureGroup("Ambil Foto sendiri atau Selfie", isExpanded: self.$formSelfie) {
+                                DisclosureGroup(NSLocalizedString("Ambil Foto sendiri atau Selfie", comment: ""), isExpanded: self.$formSelfie) {
                                     SelfieView(registerData: _registerData, imageSelfie: $imageSelfie,
                                                onChange: {
                                                 self.actionSelection("selfie")
@@ -144,7 +144,7 @@ struct FormIdentitasDiriView: View {
                             
                             // Form NPWP
                             VStack {
-                                DisclosureGroup("Masukkan NPWP Anda", isExpanded: self.$formNPWP) {
+                                DisclosureGroup(NSLocalizedString("Masukkan NPWP Anda", comment: ""), isExpanded: self.$formNPWP) {
                                     ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP,
                                                  onChange: {
                                                     self.actionSelection("npwp")
@@ -187,7 +187,7 @@ struct FormIdentitasDiriView: View {
                                 }
                                 
                             }, label: {
-                                Text("Lanjut Pembukaan Rekening Baru")
+                                Text(NSLocalizedString("Lanjut Pembukaan Rekening Baru", comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 16))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

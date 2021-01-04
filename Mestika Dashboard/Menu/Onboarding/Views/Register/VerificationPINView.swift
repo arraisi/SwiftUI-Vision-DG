@@ -60,7 +60,7 @@ struct VerificationPINView: View {
                 
                 VStack {
                     
-                    Text("VERIFIKASI PIN \nKARTU ATM ANDA")
+                    Text(NSLocalizedString("VERIFIKASI PIN \nKARTU ATM ANDA", comment: ""))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -69,7 +69,7 @@ struct VerificationPINView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .center) {
-                        Text("Silahkan Masukkan PIN \nkartu ATM Anda")
+                        Text(NSLocalizedString("Silahkan Masukkan PIN \nkartu ATM Anda", comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 18))
                             .foregroundColor(Color(hex: "#232175"))
                             .multilineTextAlignment(.center)
@@ -81,7 +81,7 @@ struct VerificationPINView: View {
                             
                             ZStack {
                                 HStack (spacing: 0) {
-                                    SecureField("Masukkan PIN ATM", text: $pin)
+                                    SecureField(NSLocalizedString("Masukkan PIN ATM", comment: ""), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
                                         .frame(width: 200, height: 50)
@@ -118,7 +118,7 @@ struct VerificationPINView: View {
                             
                             ZStack {
                                 HStack (spacing: 0) {
-                                    TextField("Masukkan PIN ATM", text: $pin)
+                                    TextField(NSLocalizedString("Masukkan PIN ATM", comment: ""), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
                                         .frame(width: 200, height: 50)
@@ -164,10 +164,10 @@ struct VerificationPINView: View {
                                 HStack(alignment: .top) {
                                     Image(systemName: shouldVerificationWithVC ? "checkmark.square": "square")
                                     VStack(alignment: .leading) {
-                                        Text("Rekening Anda tidak memiliki kartu ATM?")
+                                        Text(NSLocalizedString("Rekening Anda tidak memiliki kartu ATM?", comment: ""))
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .foregroundColor(Color(hex: "#707070"))
-                                        Text("Verifikasi Lewat Video Call")
+                                        Text(NSLocalizedString("Verifikasi Lewat Video Call", comment: ""))
                                             .font(.custom("Montserrat-Bold", size: 12))
                                             .foregroundColor(Color(hex: "#3756DF"))
                                     }
@@ -316,7 +316,7 @@ struct VerificationPINView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 10)
             
-            Text("PIN ATM yang anda Masukkan Salah!")
+            Text(NSLocalizedString("PIN ATM yang anda Masukkan Salah!", comment: ""))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#DF1C1C"))
@@ -324,20 +324,20 @@ struct VerificationPINView: View {
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar.")
+            Text(NSLocalizedString("PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar.", comment: ""))
                 .font(.caption)
                 .foregroundColor(Color(hex: "#232175"))
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Silahkan coba kembali..")
+            Text(NSLocalizedString("Silahkan coba kembali..", comment: ""))
                 .font(.caption)
                 .bold()
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
             Button(action: {self.showingModal = false}) {
-                Text("Kembali")
+                Text(NSLocalizedString("Kembali", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
             }

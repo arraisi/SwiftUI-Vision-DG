@@ -67,7 +67,7 @@ struct EmailOTPRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text("Kami telah mengirimkan Kode Verifikasi \nke \(replace(myString: registerData.email, [4, 5, 6, 7], "x"))")
+                    Text(NSLocalizedString("Kami telah mengirimkan Kode Verifikasi ke\n", comment: "") + " \(registerData.email)")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
@@ -75,7 +75,7 @@ struct EmailOTPRegisterNasabahView: View {
                         .padding(.horizontal, 20)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    Text("Silahkan masukkan kode OTP dengan \nREF #\(referenceCode)")
+                    Text(NSLocalizedString("Silahkan masukkan kode OTP dengan", comment: "")+" \nREF #\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -119,7 +119,7 @@ struct EmailOTPRegisterNasabahView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text("Silahkan cek email Anda untuk melihat kode OTP")
+                    Text(NSLocalizedString("Silahkan cek email Anda untuk melihat kode OTP", comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
@@ -309,13 +309,13 @@ struct EmailOTPRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Kode OTP Salah")
+            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Kode OTP yang anda masukkan salah silahkan ulangi lagi")
+            Text(NSLocalizedString("Kode OTP yang anda masukkan salah silahkan ulangi lagi", comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -325,7 +325,7 @@ struct EmailOTPRegisterNasabahView: View {
                 self.isLoading = false
                 self.isShowModal = false
             }) {
-                Text("Kembali")
+                Text(NSLocalizedString("Kembali", comment: ""))
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 12))
@@ -351,13 +351,13 @@ struct EmailOTPRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Kode OTP Salah")
+            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.")
+            Text(NSLocalizedString("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.", comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -366,7 +366,7 @@ struct EmailOTPRegisterNasabahView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text("Kembali ke Halaman Utama")
+                Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 12))

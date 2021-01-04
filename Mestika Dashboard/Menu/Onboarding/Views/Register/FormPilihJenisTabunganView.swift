@@ -42,7 +42,7 @@ struct FormPilihJenisTabunganView: View {
                 
                 VStack() {
                     
-                    Text("Pilih Jenis Tabungan Anda")
+                    Text(NSLocalizedString("Pilih Jenis Tabungan Anda", comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 15))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.horizontal, 15)
@@ -128,13 +128,13 @@ struct FormPilihJenisTabunganView: View {
     
     var detailsTypeSaving: some View {
         VStack(alignment: .leading) {
-            Text("Deposit Tabungan")
+            Text(NSLocalizedString("Deposit Tabungan", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 22))
                 .foregroundColor(Color(hex: "#3756DF"))
                 .padding(.top, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("Keunggulan Tabungan :")
+            Text(NSLocalizedString("Keunggulan Tabungan :", comment: ""))
                 .font(.custom("Montserrat-Regular", size: 12))
                 .padding(.vertical, 10)
                 .foregroundColor(Color(hex: "#5A6876"))
@@ -144,7 +144,7 @@ struct FormPilihJenisTabunganView: View {
             
             NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
                 
-                Text("Pilih Tabungan ini")
+                Text(NSLocalizedString("Pilih Tabungan ini", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

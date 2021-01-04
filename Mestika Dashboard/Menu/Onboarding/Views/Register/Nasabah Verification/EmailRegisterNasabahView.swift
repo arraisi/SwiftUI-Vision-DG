@@ -55,20 +55,20 @@ struct EmailRegisterNasabahView: View {
                             self.presentationMode.wrappedValue.dismiss()
                         },
                         label: {
-                            Text("Email Verification")
+                            Text(NSLocalizedString("Email Verification", comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .padding(.top, 30)
                         }
                     )
 
-                    Text("Silahkan masukkan Alamat Email Anda")
+                    Text(NSLocalizedString("Silahkan masukkan Alamat Email Anda", comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
                     
-                    TextField("Masukkan alamat email anda", text: $email, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Masukkan alamat email anda", comment: ""), text: $email, onEditingChanged: { changed in
                         print("Changed")
                         self.registerData.email = self.email
                         UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
@@ -90,7 +90,7 @@ struct EmailRegisterNasabahView: View {
                     }
                     
                     HStack {
-                        Text("*Email harus lebih dari 8 karakter")
+                        Text(NSLocalizedString("*Email harus lebih dari 8 karakter", comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 10))
                             .foregroundColor(.gray)
                         
@@ -102,7 +102,7 @@ struct EmailRegisterNasabahView: View {
                     NavigationLink(
                         destination: EmailOTPRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),
                         isActive: self.$activeRoute) {
-                        Text("Verifikasi Email")
+                        Text(NSLocalizedString("Verifikasi Email", comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
