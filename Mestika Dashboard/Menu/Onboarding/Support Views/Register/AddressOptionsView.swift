@@ -22,7 +22,7 @@ struct AddressOptionsView: View {
     
     var body: some View {
         VStack {
-            Text("Alamat Pengiriman")
+            Text(NSLocalizedString("Alamat Pengiriman", comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Bold", size: 14))
                 .foregroundColor(Color("DarkStaleBlue"))

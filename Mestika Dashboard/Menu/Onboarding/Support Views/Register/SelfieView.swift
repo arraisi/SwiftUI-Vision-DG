@@ -22,7 +22,7 @@ struct SelfieView: View {
     var body: some View {
         
         VStack(alignment: .center) {
-            Text("Silahkan Lakukan Selfie")
+            Text(NSLocalizedString("Silahkan Lakukan Selfie", comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
@@ -48,7 +48,7 @@ struct SelfieView: View {
                 print("ON TAP SELFIE")
                 self.onChange()
             }, label: {
-                Text(imageSelfie == nil ? "Ambil Gambar Selfie" : "Ganti Foto Lain")
+                Text(imageSelfie == nil ? NSLocalizedString("Ambil Gambar Selfie", comment: "") : NSLocalizedString("Ganti Foto Lain", comment: ""))
                     .foregroundColor(imageSelfie == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -73,7 +73,7 @@ struct SelfieView: View {
                         self.registerData.fotoSelfie = self.imageSelfie!
                     }
                 }) {
-                    Text("Simpan")
+                    Text(NSLocalizedString("Simpan", comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

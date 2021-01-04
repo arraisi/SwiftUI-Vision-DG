@@ -190,3 +190,121 @@
 "Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :" = "";
 "Tanggal" = "";
 "Jam" = "";
+/*
+ FormPilihJenisATMView
+ */
+"Pilih Jenis Kartu ATM Anda" = "";
+/*
+ FormPilihDesainATMView
+ */
+"Pilih Desain Kartu ATM Anda" = "";
+"PILIH DESAIN KARTU" = "";
+/*
+ FormCompletionKartuATMView
+ */
+"Alamat Sesuai KTP" = "";
+"Alamat Surat Menyurat" = "";
+"Alamat Perusahaan" = "";
+"Alamat Lainnya" = "";
+"LENGKAPI DATA" = "";
+"Submit Data" = "";
+"Nama Pada Kartu ATM" = "";
+"Nama ini akan dicetak pada kartu ATM baru Anda" = "";
+"Masukkan Nama" = "";
+"Alamat Pengiriman" = "";
+"Alamat" = "";
+"Kelurahan" = "";
+"Kecamatan" = "";
+"Kode Pos" = "";
+"Masukkan Kode Referal" = "";
+"Dari mana Anda tahu informasi Digital Banking Bank mestika" = "";
+"Masukkan kode referal" = "";
+"Nama Kartu" = "";
+"Alamat Perusahaan" = "";
+"Alamat" = "";
+/*
+ FormDetailKartuATMView
+ */
+"KARTU ATM ANDA \nAKAN SEGERA DIKIRIM" = "";
+"Selamat data kartu ATM baru Anda telah berhasil disimpan." = "";
+"Nama" = "";
+"No. Kartu" = "";
+"Silahkan tunggu beberapa saat sampai kartu ATM Anda diterima." = "";
+"KEMBALI KE HALAMAN UTAMA" = "";
+/*
+ VerificationDataPersonalView
+ */
+"Template" = "";
+"Anda telah memilih mendaftar jenis tabungan" = "";
+"Deposit Tabungan." = "";
+"Sebelum melanjutkan proses pendaftaran, silahkan terlebih dahulu memverifikasi data yang telah Anda Isi." = "";
+"Jenis Tabungan" = "";
+"Tujuan Pembukaan Rekening" = "";
+"Sumber Dana" = "";
+"Pekerjaan" = "";
+"Jabatan" = "";
+"Nama Perusahaan" = "";
+"Alamat Perusahaan" = "";
+"Kecamatan Perusahaan" = "";
+"Kelurahan Perusahaan" = "";
+"Kode Pos Perusahaan" = "";
+"No. Perusahaan" = "";
+"Bidang Usaha" = "";
+"Penghasilan" = "";
+"Data Valid" = "";
+/*
+ VerificationAddressView
+ */
+"PASTIKAN INFORMASI ANDA BENAR" = "";
+"Apakah Alamat Surat Menyurat Anda Sesuai KTP?" = "";
+/*
+ IncomingVideoCallView
+ */
+"Incoming Video Call" = "";
+"Call Center Mestika Bank" = "";
+/*
+ FormCompletionReferalCodeView
+ */
+"LENGKAPI DATA" = "";
+"Masukkan Kode Referal" = "";
+"Dari mana Anda tahu informasi Digital Banking Bank mestika" = "";
+/*
+ FormPINTransaksiATMView
+ */
+"Masukkan PIN Transaksi anda" = "";
+"Ubah PIN Transaksi" = "";
+/*
+ DetailsTypeSavingView
+ */
+"Keunggulan Tabungan :" = "";
+"Pilih Tabungan ini" = "";
+/*
+ ScanKTPView
+ */
+"Mohon siapkan terlebih dahulu \nKartu Tanda Penduduk (KTP) Anda" = "";
+"Ambil Foto KTP" = "";
+"Ganti Foto Lain" = "";
+"Nomor Kartu Tanda Penduduk" = "";
+"No. KTP (Otomatis terisi)" = "";
+"Ambil Gambar Selfie" = "";
+"Ganti Foto Lain" = "";
+"Simpan" = "";
+"Silahkan masukkan Foto kartu NPWP Anda" = "";
+"* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini" = "";
+"Nomor NPWP" = "";
+"Upload Gambar NPWP" = "";
+/*
+ DetailLimitKartuAtmView
+ */
+"Detail Limit Kartu ATM" = "";
+"Penarikan Harian" = "";
+"Transfer Antar Sesama Bank Mestika" = "";
+"Transfer ke Bank Lain" = "";
+"Penarikan Harian" = "";
+"Payment" = "";
+"Purchase" = "";
+/*
+ AddressOptionsView
+ */
+"Alamat Pengiriman" = "";
+"Keluarga Terdekat Anda" = "";

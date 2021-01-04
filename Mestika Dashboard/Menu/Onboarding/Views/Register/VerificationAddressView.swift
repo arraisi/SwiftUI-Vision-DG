@@ -43,7 +43,7 @@ struct VerificationAddressView: View {
                 
                 ScrollView {
                     VStack {
-                        Text("PASTIKAN INFORMASI ANDA BENAR")
+                        Text(NSLocalizedString("PASTIKAN INFORMASI ANDA BENAR", comment: ""))
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
@@ -53,7 +53,7 @@ struct VerificationAddressView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         VStack(alignment: .center) {
-                            Text("Apakah Alamat Surat Menyurat Anda Sesuai KTP?")
+                            Text(NSLocalizedString("Apakah Alamat Surat Menyurat Anda Sesuai KTP?", comment: ""))
                                 .font(.title2)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
@@ -89,7 +89,7 @@ struct VerificationAddressView: View {
                                     Divider()
                                         .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressInput, label: "Alamat", placeHolder: "Alamat", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressInput, label: NSLocalizedString("Alamat", comment: ""), placeHolder: NSLocalizedString("Alamat", comment: ""), onEditingChanged: { (Bool) in
                                         print("on edit")
                                         registerData.addressInput = self.addressInput
                                     }, onCommit: {
@@ -107,7 +107,7 @@ struct VerificationAddressView: View {
                                     })
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressKelurahanInput, label: "Kelurahan", placeHolder: "Kelurahan", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressKelurahanInput, label: NSLocalizedString("Kelurahan", comment: ""), placeHolder: NSLocalizedString("Kelurahan", comment: ""), onEditingChanged: { (Bool) in
                                         print("on edit")
                                         registerData.addressKelurahanInput = self.addressKelurahanInput
                                     }, onCommit: {
@@ -116,7 +116,7 @@ struct VerificationAddressView: View {
                                     })
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressKecamatanInput, label: "Kecamatan", placeHolder: "Kecamatan", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressKecamatanInput, label: NSLocalizedString("Kecamatan", comment: ""), placeHolder: NSLocalizedString("Kecamatan", comment: ""), onEditingChanged: { (Bool) in
                                         print("on edit")
                                         registerData.addressKecamatanInput = self.addressKecamatanInput
                                     }, onCommit: {
@@ -127,13 +127,13 @@ struct VerificationAddressView: View {
                                     
                                     VStack(alignment: .leading) {
                                         
-                                        Text("Kode Pos")
+                                        Text(NSLocalizedString("Kode Pos", comment: ""))
                                             .font(Font.system(size: 10))
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color(hex: "#707070"))
                                         
                                         HStack {
-                                            TextField("Kode Pos", text: $addressKodePosInput) { change in
+                                            TextField(NSLocalizedString("Kode Pos", comment: ""), text: $addressKodePosInput) { change in
                                             } onCommit: {
                                                 print("on commit")
                                                 registerData.addressPostalCodeInput = self.addressKodePosInput
@@ -175,7 +175,7 @@ struct VerificationAddressView: View {
                         self.isShowNextView = true
                         
                     }, label: {
-                        Text("Submit Data")
+                        Text(NSLocalizedString("Submit Data", comment: ""))
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))

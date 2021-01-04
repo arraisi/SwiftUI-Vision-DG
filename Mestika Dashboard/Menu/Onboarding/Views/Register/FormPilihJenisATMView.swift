@@ -40,7 +40,7 @@ struct FormPilihJenisATMView: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         
-                        Text("Pilih Jenis Kartu ATM Anda")
+                        Text(NSLocalizedString("Pilih Jenis Kartu ATM Anda", comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 18))
                             .foregroundColor(Color(hex: "#232175"))
                             .padding(.top, 25)

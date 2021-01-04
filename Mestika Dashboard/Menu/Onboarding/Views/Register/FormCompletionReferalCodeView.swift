@@ -28,7 +28,7 @@ struct FormCompletionReferalCodeView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 ScrollView {
-                    Text("LENGKAPI DATA")
+                    Text(NSLocalizedString("LENGKAPI DATA", comment: ""))
                         .multilineTextAlignment(.center)
                         .font(.custom("Montserrat-Bold", size: 26))
                         .foregroundColor(.white)
@@ -43,7 +43,7 @@ struct FormCompletionReferalCodeView: View {
 //                        self.postData()
                         self.goToSuccessPage = true
                     }) {
-                        Text(productVM.isLoading ? "Harap Tunggu" : "SUBMIT")
+                        Text(productVM.isLoading ? NSLocalizedString("Harap Tunggu", comment: "") : NSLocalizedString("SUBMIT", comment: ""))
                             .foregroundColor(Color("DarkStaleBlue"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))
@@ -72,13 +72,13 @@ struct FormCompletionReferalCodeView: View {
     var referalCodeCard: some View {
         ZStack {
             VStack {
-                Text("Masukkan Kode Referal")
+                Text(NSLocalizedString("Masukkan Kode Referal", comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color("DarkStaleBlue"))
                     .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
                 
-                Text("Dari mana Anda tahu informasi Digital Banking Bank mestika")
+                Text(NSLocalizedString("Dari mana Anda tahu informasi Digital Banking Bank mestika", comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat", size: 10))
                     .foregroundColor(Color("DarkStaleBlue"))
@@ -94,7 +94,7 @@ struct FormCompletionReferalCodeView: View {
                     
                     HStack {
                         
-                        TextField("Masukkan kode referal", text: $atmData.atmAddresspostalReferral) { changed in
+                        TextField(NSLocalizedString("Masukkan Kode Referal", comment: ""), text: $atmData.atmAddresspostalReferral) { changed in
                             
                         } onCommit: {
                         }

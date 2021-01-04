@@ -17,7 +17,7 @@ struct DetailLimitKartuAtmView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Detail Limit Kartu ATM")
+                Text(NSLocalizedString("Detail Limit Kartu ATM", comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 15))
                 
                 Spacer()
@@ -25,16 +25,16 @@ struct DetailLimitKartuAtmView: View {
             .padding()
             .padding(.top, 20)
             
-            RowLimitKartuAtmView(title: "Penarikan Harian", value: card.description.limitPenarikanHarian)
-            RowLimitKartuAtmView(title: "Transfer Antar Sesama Bank Mestika", value: card.description.limitTransferAntarSesama)
-            RowLimitKartuAtmView(title: "Transfer ke Bank Lain", value: card.description.limitTransferKeBankLain)
-            RowLimitKartuAtmView(title: "Penarikan Harian", value: card.description.limitPenarikanHarian)
-            RowLimitKartuAtmView(title: "Payment", value: card.description.limitPayment)
-            RowLimitKartuAtmView(title: "Purchase", value: card.description.limitPurchase)
+            RowLimitKartuAtmView(title: NSLocalizedString("Penarikan Harian", comment: ""), value: card.description.limitPenarikanHarian)
+            RowLimitKartuAtmView(title: NSLocalizedString("Transfer Antar Sesama Bank Mestika", comment: ""), value: card.description.limitTransferAntarSesama)
+            RowLimitKartuAtmView(title: NSLocalizedString("Transfer ke Bank Lain", comment: ""), value: card.description.limitTransferKeBankLain)
+            RowLimitKartuAtmView(title: NSLocalizedString("Penarikan Harian", comment: ""), value: card.description.limitPenarikanHarian)
+            RowLimitKartuAtmView(title: NSLocalizedString("Payment", comment: ""), value: card.description.limitPayment)
+            RowLimitKartuAtmView(title: NSLocalizedString("Purchase", comment: ""), value: card.description.limitPurchase)
             
             NavigationLink(destination: FormPilihDesainATMView().environmentObject(atmData).environmentObject(registerData),
                 label: {
-                    Text("PILIH KARTU ATM INI")
+                    Text(NSLocalizedString("PILIH KARTU ATM INI", comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 40)
