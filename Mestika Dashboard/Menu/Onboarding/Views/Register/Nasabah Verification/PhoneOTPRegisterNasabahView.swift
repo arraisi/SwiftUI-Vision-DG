@@ -35,6 +35,7 @@ struct PhoneOTPRegisterNasabahView: View {
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
+    @State var tryCountResend = 0
     
     /* Timer */
     @State private var timeRemainingRsnd = 30
@@ -105,10 +106,11 @@ struct PhoneOTPRegisterNasabahView: View {
                         
                         Button(action: {
                             print("-> Resend OTP")
+                            self.timeRemainingRsnd += 1
                             getOTP()
                             
                             self.resetField()
-                            self.timeRemainingRsnd = 30
+//                            self.timeRemainingRsnd = 30
                         }) {
                             Text(NSLocalizedString("Resend OTP", comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 10))
@@ -119,7 +121,7 @@ struct PhoneOTPRegisterNasabahView: View {
                         Button(action: {
                             self.isOtpValid = true
                         }, label: {
-                            Text("(00:\(String(format: "%02d", timeRemainingRsnd)))")
+                            Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!)")
                                 .font(.custom("Montserrat-Regular", size: 10))
                         })
                         .disabled(true) // false by pass to next page
@@ -414,6 +416,22 @@ struct PhoneOTPRegisterNasabahView: View {
                 }
                 
                 self.isShowAlert = false
+                
+                if (self.tryCountResend == 1) {
+                    self.timeRemainingRsnd = 60
+                }
+                
+                if (self.tryCountResend == 2) {
+                    self.timeRemainingRsnd = 120
+                }
+                
+                if (self.tryCountResend == 3) {
+                    self.timeRemainingRsnd = 240
+                }
+                
+                if (self.tryCountResend == 4) {
+                    self.timeRemainingRsnd = 480
+                }
             }
             
             if !success {
