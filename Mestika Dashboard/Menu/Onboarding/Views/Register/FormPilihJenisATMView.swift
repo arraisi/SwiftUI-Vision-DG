@@ -39,6 +39,13 @@ struct FormPilihJenisATMView: View {
                     AppBarLogo(light: true, onCancel: {})
                     
                     ScrollView(.vertical, showsIndicators: false) {
+                        
+                        Text("Pilih Jenis Kartu ATM Anda")
+                            .font(.custom("Montserrat-SemiBold", size: 18))
+                            .foregroundColor(Color(hex: "#232175"))
+                            .padding(.top, 25)
+                            .padding(.bottom, 10)
+                        
                         // MARK: - CAROUSEL
                         VStack{
                             

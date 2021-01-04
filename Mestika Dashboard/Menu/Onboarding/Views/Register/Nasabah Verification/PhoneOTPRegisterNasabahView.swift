@@ -79,7 +79,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP \nke No.", comment: "") + "\(replace(myString: destinationNumber, [6, 7, 8, 9], "x"))")
+                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke No.\n", comment: "") + " \(destinationNumber)")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
