@@ -117,10 +117,8 @@ extension OtpViewModel {
                 
             case .failure(let error):
                 print("ERROR-->")
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.statusMessage = "Server Error"
-                }
+                self.isLoading = false
+                self.statusMessage = "Internal Server Error"
                 
                 completion(false)
                 print(error.localizedDescription)
