@@ -88,8 +88,8 @@ struct WelcomeView: View {
                             Text(NSLocalizedString("Register", comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, maxHeight: 50)
                         }
-                        .frame(maxWidth: .infinity, maxHeight: 50)
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
                         

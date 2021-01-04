@@ -37,54 +37,54 @@ extension URL {
     }
     
     static func urlMobileVersion() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/version/mobile/find-by-osType")
+        return URL(string: AppConstants().PROD_URL + "/version/mobile/find-by-osType")
     }
     
     static func urlUserNew() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user/new")
+        return URL(string: AppConstants().PROD_URL + "/user/new")
     }
     
     static func urlUser() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user")
+        return URL(string: AppConstants().PROD_URL + "/user")
     }
     
     static func urlOTP() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/otp")
+        return URL(string: AppConstants().PROD_URL + "/otp")
     }
     
     static func urlPasswordValidation() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/password/validation")
+        return URL(string: AppConstants().PROD_URL + "/password/validation")
     }
     
     static func urlCitizen() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/citizen/nik")
+        return URL(string: AppConstants().PROD_URL + "/citizen/nik")
     }
     
     static func urlSheduleInterview() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/schedule")
+        return URL(string: AppConstants().PROD_URL + "/schedule")
     }
     
     static func urlSheduleInterviewFindById() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/schedule/find-byid")
+        return URL(string: AppConstants().PROD_URL + "/schedule/find-byid")
     }
     
     static func urlSheduleInterviewSubmit() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user?type=scheduleVC")
+        return URL(string: AppConstants().PROD_URL + "/user?type=scheduleVC")
     }
     
     static func urlAddProductATM() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/user?type=addProduct");
+        return URL(string: AppConstants().PROD_URL + "/user?type=addProduct");
     }
     
     static func urlGetListATM() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm");
+        return URL(string: AppConstants().PROD_URL + "/content/content-find-atm");
     }
     
     static func urlGetListATMDesign(type: String) -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/content/content-find-atm-design?type=\(type)");
+        return URL(string: AppConstants().PROD_URL + "/content/content-find-atm-design?type=\(type)");
     }
     
     static func urlGetSuggestionAddress() -> URL? {
-        return URL(string: "http://gateway.visiondg.xyz:8765/api/v1.0/google-maps/address/geoloc-results")
+        return URL(string: AppConstants().PROD_URL + "/google-maps/address/geoloc-results")
     }
 }
