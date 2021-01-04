@@ -507,6 +507,7 @@ struct InformasiPerusahaanView: View {
                     kodePos = data.postalCode
                     registerData.kecamatan = data.kecamatan
                     registerData.kelurahan = data.kelurahan
+                    registerData.rtrw = "\(data.rt) / \(data.rw)"
                     self.showingModal.toggle()
                 })
             }

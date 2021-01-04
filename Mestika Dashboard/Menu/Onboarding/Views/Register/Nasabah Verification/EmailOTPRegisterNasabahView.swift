@@ -28,6 +28,7 @@ struct EmailOTPRegisterNasabahView: View {
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
+    @State var tryCountResend = 0
     
     @State private var timeRemainingRsnd = 30
     @State private var timeRemainingBtn = 30
@@ -96,8 +97,9 @@ struct EmailOTPRegisterNasabahView: View {
                         Button(action: {
                             print("-> Resend OTP")
                             
+                            self.timeRemainingRsnd += 1
                             self.resetField()
-                            self.timeRemainingRsnd = 30
+//                            self.timeRemainingRsnd = 30
                             
                             getOTP()
                         }) {
@@ -112,7 +114,7 @@ struct EmailOTPRegisterNasabahView: View {
                                 self.isOtpValid = true
                             },
                             label: {
-                                Text("(00:\(String(format: "%02d", timeRemainingRsnd)))")
+                                Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
                                     .font(.custom("Montserrat-Regular", size: 10))
                             })
                             .disabled(true) // false to by pass to next view
@@ -406,6 +408,22 @@ struct EmailOTPRegisterNasabahView: View {
                 }
                 
                 self.isShowAlert = false
+                
+                if (self.tryCountResend == 1) {
+                    self.timeRemainingRsnd = 60
+                }
+                
+                if (self.tryCountResend == 2) {
+                    self.timeRemainingRsnd = 120
+                }
+                
+                if (self.tryCountResend == 3) {
+                    self.timeRemainingRsnd = 240
+                }
+                
+                if (self.tryCountResend == 4) {
+                    self.timeRemainingRsnd = 480
+                }
             }
             
             if !success {
