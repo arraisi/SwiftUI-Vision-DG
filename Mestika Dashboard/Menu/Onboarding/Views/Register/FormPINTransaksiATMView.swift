@@ -26,7 +26,7 @@ struct FormPINTransaksiATMView: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text("Masukkan PIN Transaksi anda")
+                Text(NSLocalizedString("Masukkan PIN Transaksi anda", comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color.white)
                 
@@ -70,7 +70,7 @@ struct FormPINTransaksiATMView: View {
                 .padding(.horizontal, 30)
             }
         }
-        .navigationBarTitle("Ubah PIN Transaksi", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Ubah PIN Transaksi", comment: ""), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
             Text("Cancel")
         }))

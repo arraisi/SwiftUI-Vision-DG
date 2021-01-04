@@ -32,7 +32,7 @@ struct ScanKTPView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Mohon siapkan terlebih dahulu \nKartu Tanda Penduduk (KTP) Anda")
+            Text(NSLocalizedString("Mohon siapkan terlebih dahulu \nKartu Tanda Penduduk (KTP) Anda", comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
@@ -58,7 +58,7 @@ struct ScanKTPView: View {
             Button(action: {
                 self.onChange()
             }, label: {
-                Text(imageKTP == nil ? "Ambil Foto KTP" : "Ganti Foto Lain")
+                Text(imageKTP == nil ? NSLocalizedString("Ambil Foto KTP", comment: "") : NSLocalizedString("Ganti Foto Lain", comment: ""))
                     .foregroundColor(imageKTP == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -75,12 +75,12 @@ struct ScanKTPView: View {
             
             VStack(alignment: .leading) {
                 
-                Text("Nomor Kartu Tanda Penduduk")
+                Text(NSLocalizedString("Nomor Kartu Tanda Penduduk", comment: ""))
                     .multilineTextAlignment(.leading)
                     .font(.custom("Montserrat-SemiBold", size: 10))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $nik, title: "No. KTP (Otomatis terisi)", disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $nik, title: NSLocalizedString("No. KTP (Otomatis terisi)", comment: ""), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.nik = String(str.prefix(16))
                     self.isValidKtp = str.count == 16
                     
@@ -89,7 +89,7 @@ struct ScanKTPView: View {
                 Button(action: {self.confirmNik.toggle()}) {
                     HStack(alignment: .top) {
                         Image(systemName: confirmNik ? "checkmark.square": "square")
-                        Text("* Periksa kembali dan pastikan Nomor Kartu Tanda Penduduk (KTP) Anda telah sesuai")
+                        Text(NSLocalizedString("* Periksa kembali dan pastikan Nomor Kartu Tanda Penduduk (KTP) Anda telah sesuai", comment: ""))
                             .font(.custom("Montserrat-Regular", size: 8))
                             .foregroundColor(Color(hex: "#707070"))
                     }
@@ -104,7 +104,7 @@ struct ScanKTPView: View {
                     Button(action: {
                         getCitizen(nik: self.nik)
                     }) {
-                        Text("Simpan")
+                        Text(NSLocalizedString("Simpan", comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

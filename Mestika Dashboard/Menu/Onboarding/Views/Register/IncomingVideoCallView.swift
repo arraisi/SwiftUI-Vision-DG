@@ -31,13 +31,13 @@ struct IncomingVideoCallView: View {
                     .padding(.bottom, 50)
                 
                 VStack {
-                    Text("Incoming Video Call")
+                    Text(NSLocalizedString("Incoming Video Call", comment: ""))
                         .font(.title3)
                         .foregroundColor(.white)
                         .padding(.bottom, 5)
                     
-                    Text("Call Center Mestika Bank")
-                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    Text(NSLocalizedString("Call Center Mestika Bank", comment: ""))
+                        .font(.title)
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                 }
@@ -58,7 +58,7 @@ struct IncomingVideoCallView: View {
             )
             
         }
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .onAppear(perform: {
             let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in

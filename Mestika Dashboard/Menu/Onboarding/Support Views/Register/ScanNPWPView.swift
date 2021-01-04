@@ -25,7 +25,7 @@ struct ScanNPWPView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Silahkan masukkan Foto kartu NPWP Anda")
+            Text(NSLocalizedString("Silahkan masukkan Foto kartu NPWP Anda", comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
@@ -50,7 +50,7 @@ struct ScanNPWPView: View {
             Button(action: {
                 self.onChange()
             }, label: {
-                Text(imageNPWP == nil ? "Upload Gambar NPWP" : "Ganti Foto Lain")
+                Text(imageNPWP == nil ? NSLocalizedString("Upload Gambar NPWP", comment: "") : NSLocalizedString("Ganti Foto Lain", comment: ""))
                     .foregroundColor(imageNPWP == nil && !alreadyHaveNpwp ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -68,7 +68,7 @@ struct ScanNPWPView: View {
             
             VStack(alignment: .leading) {
                 
-                Text("Nomor NPWP")
+                Text(NSLocalizedString("Nomor NPWP", comment: ""))
                     .multilineTextAlignment(.leading)
                     .font(.custom("Montserrat-SemiBold", size: 10))
                     .foregroundColor(.black)
@@ -94,7 +94,7 @@ struct ScanNPWPView: View {
                 Button(action: toggleHasNpwp) {
                     HStack(alignment: .top) {
                         Image(systemName: alreadyHaveNpwp ? "checkmark.square": "square")
-                        Text("* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini")
+                        Text(NSLocalizedString("* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini", comment: ""))
                             .font(.custom("Montserrat-Regular", size: 8))
                             .foregroundColor(Color(hex: "#707070"))
                     }
@@ -120,7 +120,7 @@ struct ScanNPWPView: View {
                     
                     print("REGISTER DATA NPWP : \(self.registerData.npwp)")
                 }) {
-                    Text("Simpan")
+                    Text(NSLocalizedString("Simpan", comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

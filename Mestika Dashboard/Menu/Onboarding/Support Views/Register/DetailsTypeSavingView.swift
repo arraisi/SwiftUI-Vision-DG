@@ -25,7 +25,7 @@ struct DetailsTypeSavingView: View {
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("Keunggulan Tabungan :")
+            Text(NSLocalizedString("Keunggulan Tabungan :", comment: ""))
                 .font(.footnote)
                 .padding(.top, 10)
                 .padding(.horizontal, 15)
@@ -57,7 +57,7 @@ struct DetailsTypeSavingView: View {
                     self.isShowModal = true
                 },
                 label: {
-                    Text("Pilih Tabungan ini")
+                    Text(NSLocalizedString("Pilih Tabungan ini", comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)

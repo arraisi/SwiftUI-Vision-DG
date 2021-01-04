@@ -46,7 +46,7 @@ struct FormPilihDesainATMView: View {
                     
                     ScrollView {
                         
-                        Text("Pilih Desain Kartu ATM Anda")
+                        Text(NSLocalizedString("Pilih Desain Kartu ATM Anda", comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 18))
                             .foregroundColor(Color(hex: "#232175"))
                             .padding(.top, 25)
@@ -156,7 +156,7 @@ struct FormPilihDesainATMView: View {
                                         self.registerData.desainKartuATMImage = cards[Int(count)].cardImage!
                                         self.nextRoute = true
                                     } label: {
-                                        Text("PILIH DESAIN KARTU")
+                                        Text(NSLocalizedString("PILIH DESAIN KARTU", comment: ""))
                                             .foregroundColor(.white)
                                             .font(.custom("Montserrat-SemiBold", size: 14))
                                             .frame(maxWidth: .infinity, maxHeight: 40)

@@ -14,7 +14,7 @@ struct InformasiKeluargaVerificationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Keluarga Terdekat Anda")
+                Text(NSLocalizedString("Keluarga Terdekat Anda", comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
@@ -33,14 +33,14 @@ struct InformasiKeluargaVerificationView: View {
             .cornerRadius(15)
             
             Group {
-                Text("Hubungan Dengan Anda")
+                Text(NSLocalizedString("Hubungan Dengan Anda", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Hubungan Dengan Anda", text: $registerData.hubunganKekerabatanKeluarga)
+                    TextField(NSLocalizedString("Hubungan Dengan Anda", comment: ""), text: $registerData.hubunganKekerabatanKeluarga)
                         .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 }
                 .frame(height: 20)
@@ -52,14 +52,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text("Nama")
+                Text(NSLocalizedString("Nama", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Nama", text: $registerData.namaKeluarga)
+                    TextField(NSLocalizedString("Nama", comment: ""), text: $registerData.namaKeluarga)
                         .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 }
                 .frame(height: 20)
@@ -71,14 +71,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text("Alamat")
+                Text(NSLocalizedString("Alamat", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Alamat Perusahaan", text: $registerData.alamatKeluarga)
+                    TextField(NSLocalizedString("Alamat Perusahaan", comment: ""), text: $registerData.alamatKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -90,14 +90,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text("Kode Pos")
+                Text(NSLocalizedString("Kode Pos", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Kode Pos", text: $registerData.kodePosKeluarga)
+                    TextField(NSLocalizedString("Kode Pos", comment: ""), text: $registerData.kodePosKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -109,14 +109,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text("Kecamatan")
+                Text(NSLocalizedString("Kecamatan", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Kecamatan", text: $registerData.kecamatanKeluarga)
+                    TextField(NSLocalizedString("Kecamatan", comment: ""), text: $registerData.kecamatanKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -128,14 +128,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text("Kelurahan")
+                Text(NSLocalizedString("Kelurahan", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Kelurahan", text: $registerData.kelurahanKeluarga)
+                    TextField(NSLocalizedString("Kelurahan", comment: ""), text: $registerData.kelurahanKeluarga)
                         .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 }
                 .frame(height: 20)
@@ -147,7 +147,7 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text("Nomor Telepon")
+                Text(NSLocalizedString("Nomor Telepon", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)

@@ -26,7 +26,7 @@ struct FormDetailKartuATMView: View {
             ScrollView {
                 VStack(spacing: 25){
                     HStack {
-                        Text("KARTU ATM ANDA \nAKAN SEGERA DIKIRIM")
+                        Text(NSLocalizedString("KARTU ATM ANDA \nAKAN SEGERA DIKIRIM", comment: ""))
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#2334D0"))
                             .fixedSize(horizontal: false, vertical: true)
@@ -52,7 +52,7 @@ struct FormDetailKartuATMView: View {
                         .cornerRadius(10)
                     
                     HStack {
-                        Text("Selamat data kartu ATM baru Anda telah berhasil disimpan.")
+                        Text(NSLocalizedString("Selamat data kartu ATM baru Anda telah berhasil disimpan.", comment: ""))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#1D2238"))
                         Spacer()
@@ -60,13 +60,13 @@ struct FormDetailKartuATMView: View {
                     
                     VStack {
                         HStack{
-                            Text("Nama")
+                            Text(NSLocalizedString("Nama", comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .foregroundColor(Color(hex: "#707070"))
                             
                             Spacer()
                             
-                            TextField("Nama", text: $atmData.atmName) { (isChanged) in
+                            TextField(NSLocalizedString("Nama", comment: ""), text: $atmData.atmName) { (isChanged) in
                                 
                             } onCommit: {
                                 
@@ -84,13 +84,13 @@ struct FormDetailKartuATMView: View {
                         } else {
                             Group {
                                 HStack {
-                                    Text("No. Kartu")
+                                    Text(NSLocalizedString("No. Kartu", comment: ""))
                                         .font(.custom("Montserrat-Regular", size: 12))
                                         .foregroundColor(Color(hex: "#707070"))
 
                                     Spacer()
 
-                                    TextField("No. Kartu", text: Binding.constant("")) { (isChanged) in
+                                    TextField(NSLocalizedString("No. Kartu", comment: ""), text: Binding.constant("")) { (isChanged) in
 
                                     } onCommit: {
 
@@ -127,7 +127,7 @@ struct FormDetailKartuATMView: View {
                     }
                     
                     HStack {
-                        Text("Silahkan tunggu beberapa saat sampai kartu ATM Anda diterima.")
+                        Text(NSLocalizedString("Silahkan tunggu beberapa saat sampai kartu ATM Anda diterima.", comment: ""))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#1D2238"))
                         Spacer()
@@ -137,7 +137,7 @@ struct FormDetailKartuATMView: View {
                     Button(action: {
                         self.appState.moveToWelcomeView = true
                     }) {
-                        Text("KEMBALI KE HALAMAN UTAMA")
+                        Text(NSLocalizedString("KEMBALI KE HALAMAN UTAMA", comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
