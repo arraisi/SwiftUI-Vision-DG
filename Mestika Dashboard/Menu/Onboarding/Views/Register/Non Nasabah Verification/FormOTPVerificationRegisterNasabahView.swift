@@ -86,7 +86,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + " \(registerData.noTelepon)")
+                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "+62\(registerData.noTelepon)")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)

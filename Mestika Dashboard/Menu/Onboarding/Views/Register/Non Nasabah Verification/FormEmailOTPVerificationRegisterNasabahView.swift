@@ -114,7 +114,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                                 self.isOtpValid = true
                             },
                             label: {
-                                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!)")
+                                Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
                                     .font(.custom("Montserrat-Regular", size: 10))
                             })
                             .disabled(true)

@@ -14,8 +14,11 @@ struct FormPhoneVerificationRegisterNasabahView: View {
     @EnvironmentObject var appState: AppState
     
     @State var showSelf: Bool = false
+    @State var isInvalidInput: Bool = false
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
+    
+    @State var isShowModal: Bool = false
     
     /* Variable Data */
     @State var phoneNumber: String = ""
@@ -70,6 +73,47 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         })
                         .foregroundColor(.black)
                         .onReceive(phoneNumber.publisher.collect()) {
+                            
+                            if String($0).hasPrefix("1") {
+                                self.isInvalidInput = true
+                                print("INVALID")
+                            }
+                            
+                            if String($0).hasPrefix("2") {
+                                self.isInvalidInput = true
+                                print("INVALID")
+                            }
+                            
+                            if String($0).hasPrefix("3") {
+                                self.isInvalidInput = true
+                                print("INVALID")
+                            }
+                            
+                            if String($0).hasPrefix("4") {
+                                self.isInvalidInput = true
+                                print("INVALID")
+                            }
+                            
+                            if String($0).hasPrefix("5") {
+                                self.isInvalidInput = true
+                                print("INVALID")
+                            }
+                            
+                            if String($0).hasPrefix("6") {
+                                self.isInvalidInput = true
+                                print("INVALID")
+                            }
+                            
+                            if String($0).hasPrefix("7") {
+                                self.isInvalidInput = true
+                                print("INVALID")
+                            }
+                            
+                            if String($0).hasPrefix("8") {
+                                self.isInvalidInput = false
+                                print("VALID")
+                            }
+                            
                             if String($0).hasPrefix("0") {
                                 self.phoneNumber = String(String($0).substring(with: 1..<String($0).count).prefix(12))
                             } else {
@@ -86,22 +130,33 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                     .shadow(color: Color(hex: "#3756DF").opacity(0.25), radius: 15, x: 0.0, y: 4)
                     .padding(.vertical, 15)
                     
-                    NavigationLink(
-                        destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$root2IsActive).environmentObject(registerData),
-                        isActive: self.$root2IsActive,
-                        label: {
-                            Text(NSLocalizedString("Verifikasi No. Telepon", comment: ""))
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    Button(action: {
+                        if self.isInvalidInput {
+                            self.isShowModal = true
+                            print("INVALID INPUT (Cannot Pass Screen)")
+                        } else {
+                            print("VALID")
+                            self.root2IsActive = true
                         }
-                    )
-                    .isDetailLink(false)
+                        
+                    }, label: {
+                        Text(NSLocalizedString("Verifikasi No. Telepon", comment: ""))
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    })
                     .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 30)
                     .padding(.bottom, 30)
                     .disabled(disableForm)
+                    
+                    NavigationLink(
+                        destination: FormOTPVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$root2IsActive).environmentObject(registerData),
+                        isActive: self.$root2IsActive,
+                        label: {}
+                    )
+                    .isDetailLink(false)
   
                 }
                 .padding(.horizontal, 30)
@@ -113,13 +168,59 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 
             }
             
+            if self.isShowModal {
+                ModalOverlay(tapAction: { withAnimation {} })
+            }
+            
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .popup(
+            isPresented: $isShowModal,
+            type: .floater(),
+            position: .bottom,
+            animation: Animation.spring(),
+            closeOnTap: true,
+            closeOnTapOutside: true) { popupOTPInvalid() }
+    }
+    
+    // MARK: -BOTTOM MESSAGE OTP IN CORRECT
+    func popupOTPInvalid() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Mohon Periksa Nomor Handphone Anda")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.isShowModal = false
+            }) {
+                Text(NSLocalizedString("Kembali", comment: ""))
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
