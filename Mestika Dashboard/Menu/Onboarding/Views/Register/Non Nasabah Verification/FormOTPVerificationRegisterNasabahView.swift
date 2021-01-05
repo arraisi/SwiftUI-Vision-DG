@@ -429,7 +429,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.messageResponse = self.otpVM.statusMessage
                 }
                 
-                self.isShowAlert = false
+                self.isShowAlert = true
                 
                 if (self.tryCountResend == 1) {
                     self.timeRemainingRsnd = 60

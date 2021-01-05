@@ -99,8 +99,6 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             
                             self.tryCountResend += 1
                             self.resetField()
-//                            self.timeRemainingRsnd = 30
-                            
                             getOTP()
                         }) {
                             Text("Resend OTP")
