@@ -42,7 +42,7 @@ struct FormPilihDesainATMView: View {
                 }
                 
                 VStack {
-                    AppBarLogo(onCancel: {})
+                    AppBarLogo(light: false, onCancel: {})
                     
                     ScrollView {
                         

@@ -36,7 +36,7 @@ struct FormPilihJenisATMView: View {
                 }
                 
                 VStack {
-                    AppBarLogo(light: true, onCancel: {})
+                    AppBarLogo(light: false, onCancel: {})
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         
