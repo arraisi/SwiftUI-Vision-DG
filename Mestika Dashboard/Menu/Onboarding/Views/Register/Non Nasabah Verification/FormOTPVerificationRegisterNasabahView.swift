@@ -432,19 +432,19 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 self.isShowAlert = true
                 
                 if (self.tryCountResend == 1) {
-                    self.timeRemainingRsnd = 60
+                    self.timeRemainingRsnd = 30
                 }
                 
                 if (self.tryCountResend == 2) {
-                    self.timeRemainingRsnd = 120
+                    self.timeRemainingRsnd = 60
                 }
                 
                 if (self.tryCountResend == 3) {
-                    self.timeRemainingRsnd = 240
+                    self.timeRemainingRsnd = 90
                 }
                 
                 if (self.tryCountResend == 4) {
-                    self.timeRemainingRsnd = 480
+                    self.timeRemainingRsnd = 120
                 }
             }
             
