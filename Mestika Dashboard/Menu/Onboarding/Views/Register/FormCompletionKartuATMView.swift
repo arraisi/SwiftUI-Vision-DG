@@ -39,10 +39,16 @@ struct FormCompletionKartuATMView: View {
     
     //Dummy data
     
-    let addressOptions: [MasterModel] = [
+    @State var addressOptions: [MasterModel] = [
         MasterModel(id: 1, name: NSLocalizedString("Alamat Sesuai KTP", comment: "")),
         MasterModel(id: 2, name: NSLocalizedString("Alamat Surat Menyurat", comment: "")),
         MasterModel(id: 3, name: NSLocalizedString("Alamat Perusahaan", comment: "")),
+        MasterModel(id: 4, name: NSLocalizedString("Alamat Lainnya", comment: "")),
+    ]
+    
+    @State var addressOptionsNonPekerja: [MasterModel] = [
+        MasterModel(id: 1, name: NSLocalizedString("Alamat Sesuai KTP", comment: "")),
+        MasterModel(id: 2, name: NSLocalizedString("Alamat Surat Menyurat", comment: "")),
         MasterModel(id: 4, name: NSLocalizedString("Alamat Lainnya", comment: "")),
     ]
     
@@ -75,7 +81,7 @@ struct FormCompletionKartuATMView: View {
                         
                         nameCard
                         addressCard
-                        referalCodeCard
+//                        referalCodeCard
                         
                         Button(action: {
                             self.postData()
@@ -125,6 +131,8 @@ struct FormCompletionKartuATMView: View {
             registerData.namaLengkapFromNik = nama_local!
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
+            
+            
         }
         .alert(isPresented: $isShowAlert) {
             return Alert(
@@ -189,12 +197,21 @@ struct FormCompletionKartuATMView: View {
                 .foregroundColor(Color("DarkStaleBlue"))
                 .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
             
-            RadioButtonGroup(
-                items: addressOptions,
-                selectedId: $addressOptionId) { selected in
-                fetchAddressOption()
+            if registerData.pekerjaanId == 10 || registerData.pekerjaanId == 11 || registerData.pekerjaanId == 12 {
+                RadioButtonGroup(
+                    items: addressOptionsNonPekerja,
+                    selectedId: $addressOptionId) { selected in
+                    fetchAddressOption()
+                }
+                .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+            } else {
+                RadioButtonGroup(
+                    items: addressOptions,
+                    selectedId: $addressOptionId) { selected in
+                    fetchAddressOption()
+                }
+                .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
             }
-            .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
             
             VStack { Divider() }.padding(.horizontal, 20)
             
