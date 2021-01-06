@@ -84,6 +84,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design?type=\(type)");
     }
     
+    static func urlGetSuggestionAddressResult() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/google-maps/address/results")
+    }
+    
     static func urlGetSuggestionAddress() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/google-maps/address/geoloc-results")
     }

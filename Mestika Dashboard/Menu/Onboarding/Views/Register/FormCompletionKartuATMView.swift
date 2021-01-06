@@ -33,9 +33,7 @@ struct FormCompletionKartuATMView: View {
     @State var messageResponse: String = ""
     
     @State var addressSugestion = [AddressViewModel]()
-    
-    //    @State var nameOnCard : String = ""
-    //    @State var currentAddress : Address = Address()
+    @State var addressSugestionResult = [AddressResultViewModel]()
     
     //Dummy data
     
@@ -128,7 +126,7 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-            registerData.namaLengkapFromNik = nama_local!
+//            registerData.namaLengkapFromNik = nama_local!
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
             
@@ -498,7 +496,7 @@ struct FormCompletionKartuATMView: View {
             .cornerRadius(10)
             
             
-            List(addressSugestion, id: \.formatted_address) {data in
+            List(addressSugestionResult, id: \.formatted_address) {data in
                 
                 HStack {
                     Text(data.formatted_address)
@@ -508,13 +506,7 @@ struct FormCompletionKartuATMView: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    atmData.atmAddressInput = data.formatted_address
-                    atmData.atmAddresspostalCodeInput = data.postalCode
-                    self.kodePos = data.postalCode
-                    atmData.atmAddresskecamatanInput = data.kecamatan
-                    atmData.atmAddresskelurahanInput = data.kelurahan
-                    atmData.atmAddressrtRwInput = data.rt
-                    
+                    searchAddress(data: data.formatted_address)
                     self.showingAddressModal.toggle()
                 })
                 
@@ -613,11 +605,38 @@ struct FormCompletionKartuATMView: View {
     func searchAddress() {
         self.isLoading = true
         
-        self.addressVM.getAddressSugestion(addressInput: atmData.atmAddressInput) { success in
+        self.addressVM.getAddressSugestionResult(addressInput: atmData.atmAddressInput) { success in
+            if success {
+                self.isLoading = self.addressVM.isLoading
+                self.addressSugestionResult = self.addressVM.addressResult
+                self.showingAddressModal = true
+                print("Success")
+            }
+            
+            if !success {
+                self.isLoading = self.addressVM.isLoading
+                self.isShowAlert = true
+                self.messageResponse = self.addressVM.message
+                print("Not Found")
+            }
+        }
+    }
+    
+    // MARK: - SEARCH LOCATION COMPLETION
+    func searchAddress(data: String) {
+        self.isLoading = true
+        
+        self.addressVM.getAddressSugestion(addressInput: data) { success in
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
-                self.showingAddressModal = true
+                atmData.atmAddressInput = self.addressSugestion[0].formatted_address
+                atmData.atmAddresspostalCodeInput = self.addressSugestion[0].postalCode
+//                self.kodePos = self.addressSugestion[0].postalCode
+                atmData.atmAddresskecamatanInput = self.addressSugestion[0].kecamatan
+                atmData.atmAddresskelurahanInput = self.addressSugestion[0].kelurahan
+                atmData.atmAddressrtRwInput = self.addressSugestion[0].rt
+                self.showingAddressModal = false
                 print("Success")
             }
             

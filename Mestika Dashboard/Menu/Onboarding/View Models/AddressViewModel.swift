@@ -10,12 +10,53 @@ import Foundation
 class AddressSummaryViewModel: ObservableObject {
     
     private var _addressModels = [AddressSugestionResponse]()
+    private var _addressResultModels = [AddressSugestionResultResponse]()
     
     @Published var address = [AddressViewModel]()
+    @Published var addressResult = [AddressResultViewModel]()
     @Published var isLoading: Bool = false
     
     @Published var message: String = ""
     @Published var code: String = ""
+    
+    // MARK:- GET ALL ADDRESS RESULT
+    func getAddressSugestionResult(addressInput: String, completion: @escaping (Bool) -> Void) {
+        if address.count > 0 {
+            self.isLoading = false
+            completion(true)
+            return
+        }
+        
+        AddressService.shared.getAddressSugestionResult(addressInput: addressInput) { result in
+            print(result)
+            
+            switch result {
+            case .success(let addressResult):
+                print("Length Data Address : \(addressResult?.count)")
+                
+                if let addressResult = addressResult {
+                    self.isLoading = false
+                    self._addressResultModels = addressResult
+                    self.addressResult = addressResult.map(AddressResultViewModel.init)
+                }
+                
+                completion(true)
+            case .failure(let error):
+                print("Error Get Address")
+                self.isLoading = false
+                print(error.localizedDescription)
+                
+                switch error {
+                case .custom(code: 400):
+                    self.message = "Masukkan Alamat Lengkap!"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                
+                completion(false)
+            }
+        }
+    }
     
     // MARK:- GET ALL ADDRESS
     func getAddressSugestion(addressInput: String, completion: @escaping (Bool) -> Void) {
@@ -115,5 +156,18 @@ class AddressViewModel {
     
     var postalCode: String {
         return self.address.postalCode
+    }
+}
+
+class AddressResultViewModel {
+    
+    var address: AddressSugestionResultResponse
+    
+    init(address: AddressSugestionResultResponse) {
+        self.address = address
+    }
+    
+    var formatted_address: String {
+        return self.address.formatted_address
     }
 }

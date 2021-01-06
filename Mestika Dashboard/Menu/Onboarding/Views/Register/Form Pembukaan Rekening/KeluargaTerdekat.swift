@@ -31,6 +31,7 @@ struct KeluargaTerdekat: View {
     @State var messageResponse: String = ""
     
     @State var addressSugestion = [AddressViewModel]()
+    @State var addressSugestionResult = [AddressResultViewModel]()
     
     
     var body: some View {
@@ -331,7 +332,6 @@ struct KeluargaTerdekat: View {
                 HStack {
                     TextField("Kode Pos", text: $kodePos) {change in
                     } onCommit: {
-                        self.registerData.kodePosKeluarga = self.kodePos
                     }
                     .onReceive(kodePos.publisher.collect()) {
                         self.kodePos = String($0.prefix(5))
@@ -432,7 +432,7 @@ struct KeluargaTerdekat: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(addressSugestion, id: \.formatted_address) { data in
+            List(addressSugestionResult, id: \.formatted_address) { data in
                 
                 HStack {
                     Text(data.formatted_address)
@@ -442,11 +442,7 @@ struct KeluargaTerdekat: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture(perform: {
-                    registerData.alamatKeluarga = data.formatted_address
-                    registerData.kodePosKeluarga = data.postalCode
-                    self.kodePos = data.postalCode
-                    registerData.kecamatanKeluarga = data.kecamatan
-                    registerData.kelurahanKeluarga = data.kelurahan
+                    searchAddress(data: data.formatted_address)
                     self.showingModal.toggle()
                 })
                 
@@ -467,11 +463,38 @@ struct KeluargaTerdekat: View {
     func searchAddress() {
         self.isLoading = true
         
-        self.addressVM.getAddressSugestion(addressInput: registerData.alamatKeluarga) { success in
+        self.addressVM.getAddressSugestionResult(addressInput: registerData.alamatKeluarga) { success in
+            if success {
+                self.isLoading = self.addressVM.isLoading
+                self.addressSugestionResult = self.addressVM.addressResult
+                self.showingModal = true
+                print("Success")
+            }
+            
+            if !success {
+                self.isLoading = self.addressVM.isLoading
+                self.isShowAlert = true
+                self.messageResponse = self.addressVM.message
+                print("Not Found")
+            }
+        }
+    }
+    
+    // MARK: - SEARCH LOCATION COMPLETION
+    func searchAddress(data: String) {
+        self.isLoading = true
+        
+        self.addressVM.getAddressSugestion(addressInput: data) { success in
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
-                self.showingModal = true
+                print(self.addressSugestion[0].postalCode)
+                registerData.alamatKeluarga = self.addressSugestion[0].formatted_address
+                registerData.kodePosKeluarga = self.addressSugestion[0].postalCode
+//                self.kodePos = "12345"
+                registerData.kecamatanKeluarga = self.addressSugestion[0].kecamatan
+                registerData.kelurahanKeluarga = self.addressSugestion[0].kelurahan
+                self.showingModal = false
                 print("Success")
             }
             
