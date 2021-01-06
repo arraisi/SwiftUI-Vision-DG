@@ -201,6 +201,31 @@ struct VerificationRegisterDataView: View {
                                 
                                 Group {
                                     
+                                    Text(NSLocalizedString("Jenis Tabungan", comment: ""))
+                                        .font(.caption)
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.leading)
+                                        .padding(.horizontal, 20)
+                                    
+                                    HStack {
+                                        TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
+                                            .disabled(true)
+                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//
+//                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+                                    }
+                                    .frame(height: 20)
+                                    .font(.subheadline)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(15)
+                                    .padding(.horizontal, 20)
+                                    
                                     Text(NSLocalizedString("Tujuan Pembukaan Rekening", comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
