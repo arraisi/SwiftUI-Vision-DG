@@ -17,8 +17,10 @@ struct FormDetailKartuATMView: View {
     
     @ObservedObject private var productVM = ATMProductViewModel()
     
-    @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
+    var isAllowBack: Bool = true
     
+    @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
+
     var body: some View {
         VStack {
             AppBarLogo(onCancel: {})
@@ -151,7 +153,17 @@ struct FormDetailKartuATMView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+                self.appState.navigationController?.view.removeGestureRecognizer(gesture)
+            }
+        }
+        .onDisappear {
+            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+                self.appState.navigationController?.view.addGestureRecognizer(gesture)
+            }
+        }
     }
 }
 

@@ -93,7 +93,9 @@ struct WelcomeView: View {
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
                         
-                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive){
+                        NavigationLink(destination:
+                                        FirstLoginView().environmentObject(loginData),
+                                       isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -167,6 +169,7 @@ struct WelcomeView: View {
             }
             .onAppear {
                 getMobileVersion()
+                
             }
             .onAppear() {
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
@@ -178,6 +181,9 @@ struct WelcomeView: View {
             }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
+            }
+            .introspectNavigationController { navigationController in
+                self.appState.navigationController = navigationController
             }
         }
     }
