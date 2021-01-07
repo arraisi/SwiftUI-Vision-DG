@@ -273,8 +273,7 @@ struct WelcomeView: View {
                 .isDetailLink(false)
                 
             } else  {
-                // MARK: change destination
-                NavigationLink(destination: SuccessRegisterView().environmentObject(registerData)){
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
                     Text("Halaman Submit Jadwal Videocall")
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
@@ -285,7 +284,6 @@ struct WelcomeView: View {
                 .cornerRadius(12)
                 .padding(.bottom, 20)
             }
-            
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
@@ -330,7 +328,10 @@ struct WelcomeView: View {
             .cornerRadius(12)
             .padding(.bottom, 20)
             
-            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
+//            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
+//                .isDetailLink(false)
+            
+            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForChooseATM: .active).environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
                 .isDetailLink(false)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -402,7 +403,6 @@ struct WelcomeView: View {
                 
             }
             
-            // MARK: change destination
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
                 Text("Reschedule Jadwal")
                     .foregroundColor(.white)

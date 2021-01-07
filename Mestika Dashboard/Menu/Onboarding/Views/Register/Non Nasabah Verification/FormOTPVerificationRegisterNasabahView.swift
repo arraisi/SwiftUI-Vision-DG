@@ -22,6 +22,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @Binding var root2IsActive : Bool
     
     @State var editModeForReschedule: EditMode = .inactive
+    @State var editModeForChooseATM: EditMode = .inactive
     
     /* HUD Variable */
     @State private var dim = true
@@ -46,6 +47,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var tryCount = 0
     @State var tryCountResend = 0
     @State var routingReschedule: Bool = false
+    @State var routingChooseATM: Bool = false
     
     /* Timer */
     @State private var timeRemainingRsnd = 30
@@ -56,6 +58,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State private var isShowModal = false
     @State private var isShowAlert: Bool = false
     @State private var modalSelection = ""
+    
+    var atmData = AddProductATM()
     
     /* Disabled Form */
     var disableForm: Bool {
@@ -157,6 +161,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         )
                         .isDetailLink(false)
                         
+                        NavigationLink(destination: FormPilihJenisATMView().environmentObject(atmData).environmentObject(registerData), isActive: self.$routingChooseATM, label: {EmptyView()})
+                            .isDetailLink(false)
+                        
                         Button(action: {
                             self.tryCount += 1
                             validateOTP()
@@ -201,6 +208,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
         }
         .onAppear {
             if (editModeForReschedule == .active) {
+                self.registerData.noTelepon = phone_local ?? ""
+            } else if (editModeForChooseATM == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
             }
         }
@@ -476,6 +485,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.isLoading = false
                     UserDefaults.standard.set("true", forKey: "routingSchedule")
                     self.routingReschedule = true
+                } else if (editModeForChooseATM == .active) {
+                    self.isLoading = false
+                    self.routingChooseATM = true
                 } else {
                     UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.isOtpValid = true
