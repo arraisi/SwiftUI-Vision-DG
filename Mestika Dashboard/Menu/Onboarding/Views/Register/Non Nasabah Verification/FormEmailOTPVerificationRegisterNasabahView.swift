@@ -404,22 +404,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 }
                 
                 self.isShowAlert = false
-                
-                if (self.tryCountResend == 1) {
-                    self.timeRemainingRsnd = 30
-                }
-                
-                if (self.tryCountResend == 2) {
-                    self.timeRemainingRsnd = 60
-                }
-                
-                if (self.tryCountResend == 3) {
-                    self.timeRemainingRsnd = 90
-                }
-                
-                if (self.tryCountResend == 4) {
-                    self.timeRemainingRsnd = 120
-                }
+                self.timeRemainingRsnd = max(30, self.tryCountResend * 30)
             }
             
             if !success {
