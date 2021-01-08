@@ -102,7 +102,7 @@ struct FormCompletionKartuATMView: View {
                 }
             }
             
-            NavigationLink(destination: FormDetailKartuATMView().environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
+            NavigationLink(destination: FormDetailKartuATMView(isAllowBack: false).environmentObject(atmData).environmentObject(registerData), isActive: $goToSuccessPage){
                 EmptyView()
             }
             

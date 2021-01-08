@@ -97,7 +97,7 @@ struct EmailOTPRegisterNasabahView: View {
                         Button(action: {
                             print("-> Resend OTP")
                             
-                            self.timeRemainingRsnd += 1
+                            self.tryCountResend += 1
                             self.resetField()
 //                            self.timeRemainingRsnd = 30
                             

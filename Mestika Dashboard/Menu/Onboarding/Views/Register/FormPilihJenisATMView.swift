@@ -11,6 +11,8 @@ struct FormPilihJenisATMView: View {
     
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
+    
     @ObservedObject private var productVM = ATMProductViewModel()
     
     /* Carousel Variables */
@@ -19,6 +21,7 @@ struct FormPilihJenisATMView: View {
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
     @State var isLoading : Bool = false
+    var isAllowBack: Bool = true
     
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 60 // 100 is amount padding left and right
@@ -92,9 +95,20 @@ struct FormPilihJenisATMView: View {
                 }
             }
             .edgesIgnoringSafeArea(.all)
+            .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
             .onAppear() {
                 self.fetchATMList()
+            }
+            .onAppear {
+                if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+                    self.appState.navigationController?.view.removeGestureRecognizer(gesture)
+                }
+            }
+            .onDisappear {
+                if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+                    self.appState.navigationController?.view.addGestureRecognizer(gesture)
+                }
             }
         }
     }

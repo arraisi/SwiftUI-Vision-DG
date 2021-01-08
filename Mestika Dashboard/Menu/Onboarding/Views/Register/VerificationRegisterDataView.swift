@@ -439,7 +439,7 @@ struct VerificationRegisterDataView: View {
                     .disabled(self.userRegisterVM.isLoading)
                     
                     NavigationLink(
-                        destination: SuccessRegisterView().environmentObject(registerData),
+                        destination: SuccessRegisterView(isAllowBack: false).environmentObject(registerData),
                         isActive: self.$nextRouteNonNasabah,
                         label: {}
                     )

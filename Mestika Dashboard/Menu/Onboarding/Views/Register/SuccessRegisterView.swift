@@ -37,6 +37,7 @@ struct SuccessRegisterView: View {
     /* Routing */
     @State private var backRoute: Bool = false
     @State private var nextRoute: Bool = false
+    var isAllowBack: Bool = true
     
     /*
      Boolean for Show Modal
@@ -239,7 +240,7 @@ struct SuccessRegisterView: View {
                             .padding(.bottom, 5)
                             .disabled(disableForm)
                             
-                            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
+                            NavigationLink(destination: FormPilihJenisATMView(isAllowBack: false).environmentObject(productATMData).environmentObject(registerData), isActive: self.$showFormPilihJenisATM) {EmptyView()}
                             
                             Button(
                                 action: {
@@ -293,6 +294,7 @@ struct SuccessRegisterView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             getAllSchedule()
         }
@@ -317,7 +319,16 @@ struct SuccessRegisterView: View {
                 message: Text("\(self.scheduleVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
-        
+        .onAppear {
+            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+                self.appState.navigationController?.view.removeGestureRecognizer(gesture)
+            }
+        }
+        .onDisappear {
+            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+                self.appState.navigationController?.view.addGestureRecognizer(gesture)
+            }
+        }
     }
     
     func removeUser() {

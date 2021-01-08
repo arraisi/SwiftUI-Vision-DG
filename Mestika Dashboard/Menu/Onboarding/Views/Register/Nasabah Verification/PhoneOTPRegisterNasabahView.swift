@@ -106,7 +106,7 @@ struct PhoneOTPRegisterNasabahView: View {
                         
                         Button(action: {
                             print("-> Resend OTP")
-                            self.timeRemainingRsnd += 1
+                            self.tryCountResend += 1
                             getOTP()
                             
                             self.resetField()
