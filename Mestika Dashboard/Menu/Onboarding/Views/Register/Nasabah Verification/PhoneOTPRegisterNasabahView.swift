@@ -417,7 +417,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 self.isShowAlert = false
                 
-                self.timeRemainingRsnd = max(30, self.tryCountResend * 30)
+                self.timeRemainingRsnd = max(30, (self.tryCountResend+1) * 30)
             }
             
             if !success {

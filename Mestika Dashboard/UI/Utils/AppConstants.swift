@@ -8,7 +8,7 @@
 import Foundation
 class AppConstants {
     #if DEBUG
-    var BASE_URL = "http://gateway.visiondg.xyz:8765/api/v1.0"
+    var BASE_URL = "http://eagle.visiondg.xyz:8765/api/v1.0"
     #elseif DEBUGQA
     var BASE_URL = "http://gateway.visiondg.xyz:8765/api/v1.0"
     #elseif DEBUGMESTIKA
