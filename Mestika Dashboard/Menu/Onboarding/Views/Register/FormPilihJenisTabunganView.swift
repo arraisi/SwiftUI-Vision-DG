@@ -16,6 +16,10 @@ struct FormPilihJenisTabunganView: View {
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
     
+    @State var goToNextPage: Bool = false
+    
+    @State var referenceCode: String = ""
+    
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 170 // 100 is amount padding left and right
     let itemHeight:CGFloat = 150
@@ -26,6 +30,7 @@ struct FormPilihJenisTabunganView: View {
     @Binding var shouldPopToRootView : Bool
     
     @State var showingModal = false
+    @State var showingModalReference = false
     @EnvironmentObject var registerData: RegistrasiModel
     
     var body: some View {
@@ -94,9 +99,13 @@ struct FormPilihJenisTabunganView: View {
                 }
                 .padding(.vertical, 30)
             }
-            if self.showingModal {
+            if self.showingModal || self.showingModalReference {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
                     .edgesIgnoringSafeArea(.all)
+            }
+            
+            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
+                EmptyView()
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -112,6 +121,9 @@ struct FormPilihJenisTabunganView: View {
         }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
+        }
+        .popup(isPresented: $showingModalReference, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            createBottomFloaterReferenceCode()
         }
     }
     
@@ -168,6 +180,58 @@ struct FormPilihJenisTabunganView: View {
             .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 150)
             .background(Color(.white))
             .cornerRadius(30)
+    }
+    
+    // MARK: -Function Create Bottom Loader Reference Code
+    private func createBottomFloaterReferenceCode() -> some View {
+        VStack {
+            HStack {
+                Text("Apakah anda memiliki kode referensi?")
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 19))
+                    .foregroundColor(Color(hex: "#232175"))
+                Spacer()
+            }
+            
+            HStack {
+                
+                TextField("Kode Referensi", text: $referenceCode)
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                
+            }
+            .padding(.horizontal)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
+            
+            Button(action: {}) {
+                Text("Ya, saya punya")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.horizontal, 20)
+            .padding(.top, 15)
+            
+            Button(action: {}) {
+                Text("Tidak, saya tidak punya")
+                    .foregroundColor(Color(hex: "#5A6876"))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .cornerRadius(12)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 10)
+            .padding(.top, 5)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     // MARK: - ON DRAG ENDED

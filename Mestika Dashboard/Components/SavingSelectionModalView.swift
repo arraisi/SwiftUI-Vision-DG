@@ -69,6 +69,7 @@ struct SavingSelectionModalView: View {
             Button(action: {
                 registerData.jenisTabungan = data.tabunganName
                 goToNextPage = true
+//                self.isShowModal = false
             }) {
                 Text("Pilih Tabungan Ini")
                     .foregroundColor(.white)
