@@ -315,6 +315,7 @@
 		C0FE1E3E255A67D400B3AAE0 /* NumbersPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */; };
 		C3228BBB5D5AA7A6E1E41F3D /* Pods_Mestika_Dashboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD70D4815009C0CA2FB7F62 /* Pods_Mestika_Dashboard.framework */; };
 		F6D9E9D47913CF19112957B1 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B40214F6E40C7D27E3C829 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */; };
+		FA42F2C325A8089D00C14A47 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA42F2C225A8089D00C14A47 /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -656,6 +657,7 @@
 		D306324D0D338A9EA5693289 /* Pods-Mestika DashboardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.release.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA5D284652F544A201339DA2 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig"; sourceTree = "<group>"; };
 		FA0ED41E69F7CBF9400AE8CF /* Pods-Mestika Dashboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.release.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.release.xcconfig"; sourceTree = "<group>"; };
+		FA42F2C225A8089D00C14A47 /* View+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1000,6 +1002,7 @@
 				0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */,
 				0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */,
 				0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */,
+				FA42F2C225A8089D00C14A47 /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2110,6 +2113,7 @@
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,
 				C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */,
+				FA42F2C325A8089D00C14A47 /* View+Extensions.swift in Sources */,
 				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
 				52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */,
