@@ -55,8 +55,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-    //    @State var modalSelection = "KYC_WAITING"
-    //    @State var isShowModal = true
+//        @State var modalSelection = ""
+//        @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -521,14 +521,15 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+            // MARK: back to home
+            Button(action:{
+                self.isShowModal = false
+            }, label: {
                 Text("Kembali ke halaman utama")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
+            })
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)

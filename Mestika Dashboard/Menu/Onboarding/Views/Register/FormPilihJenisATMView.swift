@@ -39,6 +39,12 @@ struct FormPilihJenisATMView: View {
                 }
                 
                 VStack {
+                    Color(hex: "#232175")
+                        .frame(height: 100)
+                        .edgesIgnoringSafeArea(.all)
+                }
+                
+                VStack {
                     AppBarLogo(light: false, onCancel: {})
                     
                     ScrollView(.vertical, showsIndicators: false) {

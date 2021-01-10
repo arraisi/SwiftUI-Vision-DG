@@ -19,6 +19,7 @@ struct KetentuanRegisterNonNasabahView: View {
     
     /* Root Binding */
     @State var isActive : Bool = false
+    @State var goToNext : Bool = false
     @Binding var rootIsActive : Bool
     
     @State var readFinished = false
@@ -76,14 +77,20 @@ struct KetentuanRegisterNonNasabahView: View {
                                 )
                             
                             NavigationLink(
-                                destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData)
-                            ){
+                                destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData),
+                                isActive: $goToNext,
+                                label: {}
+                            )
+                            .isDetailLink(false)
+                            
+                            Button(action : {
+                                self.goToNext = true
+                            }) {
                                 Text(NSLocalizedString("Lanjut Membuat Rekening", comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             }
-                            .isDetailLink(false)
                             .background(self.readFinished ? Color(hex: "#2334D0") : Color(.lightGray))
                             .disabled(!self.readFinished)
                             .cornerRadius(12)
