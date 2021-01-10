@@ -128,16 +128,13 @@ struct WelcomeView: View {
             .navigationBarHidden(true)
             .onReceive(self.appState.$moveToWelcomeView) { moveToWelcomeView in
                 if moveToWelcomeView {
-                    print("Move to Welcome: \(moveToWelcomeView)")
-                    self.isKetentuanViewActive = false
-                    self.isLoginViewActive = false
-                    self.isFirstLoginViewActive = false
-                    self.isNoAtmOrRekViewActive = false
-                    self.isFormPilihJenisAtm = false
-                    self.isRescheduleInterview = false
-                    self.isFormPilihSchedule = false
-                    self.isIncomingVideoCall = false
-                    self.appState.moveToWelcomeView = false
+                    activateWelcomeView()
+                }
+            }
+            .onReceive(self.appState.$moveToWelcomeViewThenCancel) { moveToWelcomeViewThenCancel in
+                if moveToWelcomeViewThenCancel {
+                    activateWelcomeView()
+                    cancelRegistration()
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
@@ -186,6 +183,19 @@ struct WelcomeView: View {
                 self.appState.navigationController = navigationController
             }
         }
+    }
+    
+    func activateWelcomeView() {
+        print("Move to Welcome: \(moveToWelcomeView)")
+        self.isKetentuanViewActive = false
+        self.isLoginViewActive = false
+        self.isFirstLoginViewActive = false
+        self.isNoAtmOrRekViewActive = false
+        self.isFormPilihJenisAtm = false
+        self.isRescheduleInterview = false
+        self.isFormPilihSchedule = false
+        self.isIncomingVideoCall = false
+        self.appState.moveToWelcomeView = false
     }
     
     var Header: some View {
@@ -413,17 +423,12 @@ struct WelcomeView: View {
             .cornerRadius(12)
             .padding(.bottom, 5)
             
-            Button(
-                action: {
-                    cancelRegistration()
-                },
-                label: {
-                    Text("Batalkan Permohonan")
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-            )
+            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
+                Text("Batalkan Permohonan")
+                    .foregroundColor(Color(hex: "#2334D0"))
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
             .background(Color.white)
             .cornerRadius(12)
             .padding(.bottom, 20)
