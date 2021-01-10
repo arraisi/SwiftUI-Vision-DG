@@ -128,11 +128,13 @@ struct WelcomeView: View {
             .navigationBarHidden(true)
             .onReceive(self.appState.$moveToWelcomeView) { moveToWelcomeView in
                 if moveToWelcomeView {
+                    print("Move to Welcome: \(moveToWelcomeView)")
                     activateWelcomeView()
                 }
             }
             .onReceive(self.appState.$moveToWelcomeViewThenCancel) { moveToWelcomeViewThenCancel in
                 if moveToWelcomeViewThenCancel {
+                    print("Move to Welcome: \(moveToWelcomeViewThenCancel)")
                     activateWelcomeView()
                     cancelRegistration()
                 }
@@ -186,7 +188,6 @@ struct WelcomeView: View {
     }
     
     func activateWelcomeView() {
-        print("Move to Welcome: \(moveToWelcomeView)")
         self.isKetentuanViewActive = false
         self.isLoginViewActive = false
         self.isFirstLoginViewActive = false
