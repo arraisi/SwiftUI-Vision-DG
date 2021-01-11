@@ -13,6 +13,7 @@ struct SavingSelectionModalView: View {
     var data: SavingType
     
     @Binding var isShowModal: Bool
+    @Binding var showingReferralCodeModal: Bool
     @State var goToNextPage: Bool = false
     
     var body: some View {
@@ -62,14 +63,15 @@ struct SavingSelectionModalView: View {
                 .frame(minHeight: 130)
             }
             
-            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
-                EmptyView()
-            }
+//            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
+//                EmptyView()
+//            }
             
             Button(action: {
                 registerData.jenisTabungan = data.tabunganName
-                goToNextPage = true
-//                self.isShowModal = false
+                self.isShowModal = false
+                self.showingReferralCodeModal = true
+//                goToNextPage = true
             }) {
                 Text("Pilih Tabungan Ini")
                     .foregroundColor(.white)
@@ -101,6 +103,6 @@ struct SavingSelectionModalView: View {
 
 struct SavingSelectionModalView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingSelectionModalView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tabungan_simpel", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false)).environmentObject(RegistrasiModel())
+        SavingSelectionModalView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tabungan_simpel", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false), showingReferralCodeModal: .constant(false)).environmentObject(RegistrasiModel())
     }
 }

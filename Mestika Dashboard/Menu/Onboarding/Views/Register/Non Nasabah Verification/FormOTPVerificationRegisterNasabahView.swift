@@ -23,6 +23,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     @State var editModeForReschedule: EditMode = .inactive
     @State var editModeForChooseATM: EditMode = .inactive
+    @State var editModeForCancel: EditMode = .inactive
     
     /* HUD Variable */
     @State private var dim = true
@@ -210,6 +211,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
             if (editModeForReschedule == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
             } else if (editModeForChooseATM == .active) {
+                self.registerData.noTelepon = phone_local ?? ""
+            } else if (editModeForCancel == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
             }
         }
@@ -440,22 +443,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 }
                 
                 self.isShowAlert = true
-                
-//                if (self.tryCountResend == 1) {
-//                    self.timeRemainingRsnd = 30
-//                }
-//
-//                if (self.tryCountResend == 2) {
-//                    self.timeRemainingRsnd = 60
-//                }
-//
-//                if (self.tryCountResend == 3) {
-//                    self.timeRemainingRsnd = 90
-//                }
-//
-//                if (self.tryCountResend == 4) {
-//                    self.timeRemainingRsnd = 120
-//                }
+                self.timeRemainingRsnd = max(30, (self.tryCountResend+1) * 30)
             }
             
             if !success {
@@ -504,6 +492,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 } else if (editModeForChooseATM == .active) {
                     self.isLoading = false
                     self.routingChooseATM = true
+                } else if (editModeForCancel == .active) {
+                    self.isLoading = false
+                    self.appState.moveToWelcomeViewThenCancel = true
                 } else {
                     UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.isOtpValid = true

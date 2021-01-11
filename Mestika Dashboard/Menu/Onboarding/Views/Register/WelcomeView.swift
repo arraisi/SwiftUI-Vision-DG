@@ -55,8 +55,8 @@ struct WelcomeView: View {
     //    WAITING
     //    ACTIVE
     //    NOT_APPROVED
-    //    @State var modalSelection = "KYC_WAITING"
-    //    @State var isShowModal = true
+//        @State var modalSelection = ""
+//        @State var isShowModal = true
     
     var body: some View {
         NavigationView {
@@ -129,15 +129,14 @@ struct WelcomeView: View {
             .onReceive(self.appState.$moveToWelcomeView) { moveToWelcomeView in
                 if moveToWelcomeView {
                     print("Move to Welcome: \(moveToWelcomeView)")
-                    self.isKetentuanViewActive = false
-                    self.isLoginViewActive = false
-                    self.isFirstLoginViewActive = false
-                    self.isNoAtmOrRekViewActive = false
-                    self.isFormPilihJenisAtm = false
-                    self.isRescheduleInterview = false
-                    self.isFormPilihSchedule = false
-                    self.isIncomingVideoCall = false
-                    self.appState.moveToWelcomeView = false
+                    activateWelcomeView()
+                }
+            }
+            .onReceive(self.appState.$moveToWelcomeViewThenCancel) { moveToWelcomeViewThenCancel in
+                if moveToWelcomeViewThenCancel {
+                    print("Move to Welcome: \(moveToWelcomeViewThenCancel)")
+                    activateWelcomeView()
+                    cancelRegistration()
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
@@ -186,6 +185,18 @@ struct WelcomeView: View {
                 self.appState.navigationController = navigationController
             }
         }
+    }
+    
+    func activateWelcomeView() {
+        self.isKetentuanViewActive = false
+        self.isLoginViewActive = false
+        self.isFirstLoginViewActive = false
+        self.isNoAtmOrRekViewActive = false
+        self.isFormPilihJenisAtm = false
+        self.isRescheduleInterview = false
+        self.isFormPilihSchedule = false
+        self.isIncomingVideoCall = false
+        self.appState.moveToWelcomeView = false
     }
     
     var Header: some View {
@@ -413,17 +424,12 @@ struct WelcomeView: View {
             .cornerRadius(12)
             .padding(.bottom, 5)
             
-            Button(
-                action: {
-                    cancelRegistration()
-                },
-                label: {
-                    Text("Batalkan Permohonan")
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-            )
+            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
+                Text("Batalkan Permohonan")
+                    .foregroundColor(Color(hex: "#2334D0"))
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
             .background(Color.white)
             .cornerRadius(12)
             .padding(.bottom, 20)
@@ -521,14 +527,15 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            // MARK: change destination
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
+            // MARK: back to home
+            Button(action:{
+                self.isShowModal = false
+            }, label: {
                 Text("Kembali ke halaman utama")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
+            })
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)

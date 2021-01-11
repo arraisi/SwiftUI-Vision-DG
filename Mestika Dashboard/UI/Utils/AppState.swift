@@ -13,6 +13,7 @@ class AppState: ObservableObject {
     @Published var moveToDashboard: Bool = false
     @Published var skipOTP: Bool = false
     @Published var nasabahIsExisting: Bool = false
+    @Published var moveToWelcomeViewThenCancel: Bool = false
     
     var navigationController: UINavigationController?
 }

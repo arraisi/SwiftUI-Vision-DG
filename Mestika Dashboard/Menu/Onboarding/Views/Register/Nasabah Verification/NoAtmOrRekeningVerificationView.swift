@@ -65,6 +65,9 @@ struct NoAtmOrRekeningVerificationView: View {
                     
                     HStack {
                         TextField(NSLocalizedString("Pilih jenis no kartu yang diinput", comment: ""), text: $jenisKartuCtrl)
+                            .onChange(of: jenisKartuCtrl, perform: { value in
+                                noKartuCtrl = ""
+                            })
                             .font(.custom("Montserrat-Regular", size: 12))
                             .frame(height: 50)
                             .padding(.leading, 15)
@@ -86,7 +89,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         
                     }
                     .background(Color.gray.opacity(0.1))
-                    .cornerRadius(20)
+                    .cornerRadius(15)
                     .padding(.vertical, 5)
                     
                     TextField(NSLocalizedString("Masukkan no kartu", comment: ""), text: $noKartuCtrl, onEditingChanged: { changed in
@@ -114,7 +117,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         if (jenisKartuCtrl == "Kartu ATM") {
                             self.noKartuCtrl = String($0.prefix(16))
                         } else {
-                            self.noKartuCtrl = String($0.prefix(8))
+                            self.noKartuCtrl = String($0.prefix(11))
                         }
                     }
                     

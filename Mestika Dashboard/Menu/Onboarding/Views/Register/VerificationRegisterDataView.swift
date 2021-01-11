@@ -25,7 +25,6 @@ struct VerificationRegisterDataView: View {
      */
     @State private var nextRouteNasabah: Bool = false
     @State private var nextRouteNonNasabah: Bool = false
-    @State private var shouldPresentMaskSelfie: Bool = false
     @State private var shouldPresentCamera = false
     @State private var cameraFileName = ""
     
@@ -68,7 +67,7 @@ struct VerificationRegisterDataView: View {
                         .foregroundColor(.green)
                         .frame(height: 1)
                 }
-
+                
                 
                 ScrollView {
                     VStack {
@@ -145,7 +144,7 @@ struct VerificationRegisterDataView: View {
                                     
                                     Button(action: {
                                         self.cameraFileName = "selfie"
-                                        self.shouldPresentMaskSelfie = true
+                                        //                                        self.shouldPresentMaskSelfie = true
                                         self.shouldPresentCamera = true
                                     }) {
                                         HStack {
@@ -491,22 +490,22 @@ struct VerificationRegisterDataView: View {
     
     var camera: some View {
         ZStack {
-            SUImagePickerView(sourceType: .camera, image: $imageTaken, isPresented: $shouldPresentCamera, frontCamera: $shouldPresentMaskSelfie)
+            SUImagePickerView(sourceType: .camera, image: $imageTaken, isPresented: $shouldPresentCamera, frontCamera: .constant(true))
                 .onDisappear {
                     if let image = imageTaken {
                         registerData.fotoSelfie = image
                     }
-                    self.shouldPresentMaskSelfie = false
+                    //                    self.shouldPresentMaskSelfie = false
                 }
             
-            if shouldPresentMaskSelfie {
-                Image("pattern_selfie")
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(0.5)
-                    .offset(y: -(UIScreen.main.bounds.height * 0.12))
-            }
+            //            if shouldPresentMaskSelfie {
+            Image("pattern_selfie")
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .opacity(0.5)
+                .offset(y: -(UIScreen.main.bounds.height * 0.12))
+            //            }
             
         }
     }
