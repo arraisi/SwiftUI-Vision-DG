@@ -26,7 +26,9 @@ struct FormPilihJenisTabunganView: View {
     @Binding var shouldPopToRootView : Bool
     
     @State var showingModal = false
+    @State var showingReferralCodeModal = false
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var atmData: AddProductATM
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -95,23 +97,37 @@ struct FormPilihJenisTabunganView: View {
                 .padding(.vertical, 30)
             }
             if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
-                    .edgesIgnoringSafeArea(.all)
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showingModal = false
+                    
+                } })
+                .edgesIgnoringSafeArea(.all)
+            }
+            if self.showingReferralCodeModal {
+                ModalOverlay(tapAction: { withAnimation {
+                    
+                    self.showingReferralCodeModal = false
+                    
+                } })
+                .edgesIgnoringSafeArea(.all)
             }
         }
         .edgesIgnoringSafeArea(.all)
-//        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-
+            
             if(value.startLocation.x < 20 && value.translation.width > 100) {
                 self.shouldPopToRootView = false
             }
-
+            
         }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
+        }
+        .popup(isPresented: $showingReferralCodeModal, type: .floater(), position: .top, animation: Animation.spring(), closeOnTapOutside: true) {
+            referralCodeModal()
         }
     }
     
@@ -163,11 +179,69 @@ struct FormPilihJenisTabunganView: View {
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal)
+        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal)
             .environmentObject(registerData)
             .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 150)
             .background(Color(.white))
             .cornerRadius(30)
+    }
+    
+    private func referralCodeModal() -> some View {
+        VStack {
+            VStack {
+                Text(NSLocalizedString("Do you have a referral code?", comment: ""))
+                    .multilineTextAlignment(.center)
+                    .font(.custom("Montserrat-Bold", size: 16))
+                    .foregroundColor(Color("DarkStaleBlue"))
+                    .padding(EdgeInsets(top: 25, leading: 15, bottom: 10, trailing: 15))
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                HStack {
+                    
+                    TextField(NSLocalizedString("Masukkan kode referal", comment: ""), text: $atmData.atmAddresspostalReferral) { changed in
+                        
+                    } onCommit: {
+                    }
+                    .font(Font.system(size: 14))
+                    .frame(height: 50)
+                }
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                
+                NavigationLink(
+                    destination: FormIdentitasDiriView().environmentObject(registerData)
+                ){
+                    Text(NSLocalizedString("Yes I do, Submit now", comment: ""))
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                }
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 5)
+                .padding(.top, 10)
+                
+                
+                NavigationLink(
+                    destination: FormIdentitasDiriView().environmentObject(registerData)
+                ){
+                    Text(NSLocalizedString("No, I don't", comment: ""))
+                        .foregroundColor(.gray)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                }
+                .cornerRadius(12)
+                
+            }
+            .padding(EdgeInsets(top: 0, leading: 25, bottom: 20, trailing: 25))
+        }
+        .frame(width: UIScreen.main.bounds.width - 40)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+        .padding(.vertical, 20)
+        
     }
     
     // MARK: - ON DRAG ENDED

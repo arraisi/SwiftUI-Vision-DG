@@ -10,6 +10,7 @@ import Indicators
 
 struct EmailOTPRegisterNasabahView: View {
     
+    var productATMData = AddProductATM()
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
@@ -132,7 +133,7 @@ struct EmailOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: FormPilihJenisTabunganView(shouldPopToRootView: self.$shouldPopToRootView).environmentObject(registerData),
+                            destination: FormPilihJenisTabunganView(shouldPopToRootView: self.$shouldPopToRootView).environmentObject(registerData).environmentObject(productATMData),
                             isActive: self.$isOtpValid,
                             label: {
                                 EmptyView()
