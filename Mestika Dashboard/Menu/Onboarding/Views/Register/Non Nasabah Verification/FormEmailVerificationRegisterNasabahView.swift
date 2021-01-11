@@ -44,9 +44,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
             }
             
             VStack {
-//                AppBarLogo(light: false, onCancel: {})
-                
-                CustomAppBar(light: false, barItemsHidden: true, barItems: AnyView(EmptyView()))
+                AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
                     
@@ -138,6 +136,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .navigationBarHidden(true)
     }
 }
 

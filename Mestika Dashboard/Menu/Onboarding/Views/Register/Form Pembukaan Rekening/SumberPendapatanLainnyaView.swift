@@ -52,15 +52,14 @@ struct SumberPendapatanLainnyaView: View {
             
             
             VStack {
+                AppBarLogo(light: false, onCancel: {})
                 ScrollView {
-                    
                     // Title
                     Text("DATA PEMBUKAAN REKENING")
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 60)
-                        .padding(.vertical, 45)
+                        .padding(.vertical, 25)
                         .padding(.horizontal, 40)
                     
                     // Content
@@ -253,6 +252,7 @@ struct SumberPendapatanLainnyaView: View {
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
         .onAppear() {
             registerData.sumberPendapatanLainnyaId = self.selectedId
         }
