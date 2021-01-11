@@ -95,7 +95,7 @@ class OtpService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("\(httpResponse.statusCode)")
+                print("OTP \(httpResponse.statusCode)")
             }
             
             let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)

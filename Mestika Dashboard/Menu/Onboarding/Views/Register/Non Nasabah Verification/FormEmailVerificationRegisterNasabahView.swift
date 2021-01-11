@@ -46,8 +46,6 @@ struct FormEmailVerificationRegisterNasabahView: View {
             VStack {
 //                AppBarLogo(light: false, onCancel: {})
                 
-                CustomAppBar(light: false, barItemsHidden: true, barItems: AnyView(EmptyView()))
-                
                 VStack(alignment: .center) {
                     
                     Button(
@@ -83,7 +81,6 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     .padding()
                     .background(Color.white)
                     .cornerRadius(15)
-                    .addBorder(self.isEmailValid ? Color.blue : Color.red, width: self.email.count > 0 ? 1 : 0 , cornerRadius: 15)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                     .padding(.top, 20)
                     .onReceive(email.publisher.collect()) { it in
@@ -122,7 +119,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                .padding(.vertical, 25)
+                .padding(.top, 120)
             }
         }
         .edgesIgnoringSafeArea(.all)

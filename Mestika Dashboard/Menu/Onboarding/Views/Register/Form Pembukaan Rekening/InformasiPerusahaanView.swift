@@ -607,7 +607,7 @@ struct InformasiPerusahaanView: View {
                 self.addressSugestion = self.addressVM.address
                 registerData.alamatPerusahaan = self.addressSugestion[0].formatted_address
                 registerData.kodePos = self.addressSugestion[0].postalCode
-                kodePos = self.addressSugestion[0].postalCode
+//                kodePos = self.addressSugestion[0].postalCode
                 registerData.kecamatan = self.addressSugestion[0].kecamatan
                 registerData.kelurahan = self.addressSugestion[0].kelurahan
                 registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"

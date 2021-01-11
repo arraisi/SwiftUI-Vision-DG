@@ -389,7 +389,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             otpRequest: OtpRequest(
                     destination: self.registerData.email,
                     type: "email",
-                    trytime: 1
+                    trytime: self.tryCountResend
             )
         ) { success in
             
@@ -402,6 +402,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
+                    self.timeRemainingRsnd = self.otpVM.timeCounter
                 }
                 
                 self.isShowAlert = false

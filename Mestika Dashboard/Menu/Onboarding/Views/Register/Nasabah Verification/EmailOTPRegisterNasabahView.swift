@@ -392,7 +392,7 @@ struct EmailOTPRegisterNasabahView: View {
             otpRequest: OtpRequest(
                 destination: self.registerData.email,
                 type: "email",
-                trytime: 1
+                trytime: self.tryCountResend
             )
         ) { success in
             

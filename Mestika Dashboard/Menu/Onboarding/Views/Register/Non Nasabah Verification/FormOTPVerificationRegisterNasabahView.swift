@@ -425,7 +425,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             otpRequest: OtpRequest(
                 destination: self.registerData.noTelepon,
                 type: "hp",
-                trytime: 1
+                trytime: self.tryCountResend
             )
         ) { success in
             
@@ -439,6 +439,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
+                    self.timeRemainingRsnd = self.otpVM.timeCounter
                 }
                 
                 self.isShowAlert = true

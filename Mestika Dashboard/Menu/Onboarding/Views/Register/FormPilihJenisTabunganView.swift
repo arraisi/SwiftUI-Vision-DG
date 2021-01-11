@@ -16,6 +16,10 @@ struct FormPilihJenisTabunganView: View {
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
     
+    @State var goToNextPage: Bool = false
+    
+    @State var referenceCode: String = ""
+    
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 170 // 100 is amount padding left and right
     let itemHeight:CGFloat = 150
@@ -110,6 +114,10 @@ struct FormPilihJenisTabunganView: View {
                     
                 } })
                 .edgesIgnoringSafeArea(.all)
+            }
+            
+            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
+                EmptyView()
             }
         }
         .edgesIgnoringSafeArea(.all)

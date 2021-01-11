@@ -396,7 +396,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 destination: self.registerData.atmOrRekening == "ATM" ? self.registerData.noAtm : self.registerData
                     .noRekening,
                 type: self.registerData.atmOrRekening == "ATM" ? "atm" : "rek",
-                trytime: 1
+                trytime: self.tryCountResend
             )
         ) { success in
             
