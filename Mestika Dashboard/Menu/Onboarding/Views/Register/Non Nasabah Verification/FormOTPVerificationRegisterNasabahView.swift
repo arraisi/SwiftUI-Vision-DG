@@ -21,6 +21,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
     
+    @State var editModeForCreateSchedule: EditMode = .inactive
     @State var editModeForReschedule: EditMode = .inactive
     @State var editModeForChooseATM: EditMode = .inactive
     @State var editModeForCancel: EditMode = .inactive
@@ -80,7 +81,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             }
             
             VStack {
-                
+
                 AppBarLogo(light: false, onCancel: {})
 
                 if (self.isLoading) {
@@ -208,9 +209,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
-            if (editModeForReschedule == .active) {
-                self.registerData.noTelepon = phone_local ?? ""
-            } else if (editModeForChooseATM == .active) {
+            if (editModeForCreateSchedule == .active || editModeForReschedule == .active || editModeForChooseATM == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
             } else if (editModeForCancel == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
@@ -484,13 +483,16 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             if success {
                 print("OTP VALID")
-                
-                if (editModeForReschedule == .active) {
+                if (editModeForCreateSchedule == .active) {
+                    self.isLoading = false
+                    self.routingReschedule = true
+                } else if (editModeForReschedule == .active) {
                     self.isLoading = false
                     UserDefaults.standard.set("true", forKey: "routingSchedule")
                     self.routingReschedule = true
                 } else if (editModeForChooseATM == .active) {
                     self.isLoading = false
+                    UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.routingChooseATM = true
                 } else if (editModeForCancel == .active) {
                     self.isLoading = false

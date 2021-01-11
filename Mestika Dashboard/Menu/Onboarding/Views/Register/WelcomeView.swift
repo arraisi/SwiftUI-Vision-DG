@@ -293,7 +293,7 @@ struct WelcomeView: View {
                 .isDetailLink(false)
                 
             } else  {
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCreateSchedule: .active).environmentObject(registerData)){
                     Text("Halaman Submit Jadwal Videocall")
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
