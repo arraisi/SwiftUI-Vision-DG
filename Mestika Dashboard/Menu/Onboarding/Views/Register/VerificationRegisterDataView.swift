@@ -26,6 +26,8 @@ struct VerificationRegisterDataView: View {
     @State private var nextRouteNasabah: Bool = false
     @State private var nextRouteNonNasabah: Bool = false
     @State private var shouldPresentCamera = false
+    @State private var shouldPresentCameraSelfie = false
+    
     @State private var cameraFileName = ""
     
     @State private var imageTaken: Image?
@@ -133,6 +135,9 @@ struct VerificationRegisterDataView: View {
                                         }
                                         
                                     }
+                                    .fullScreenCover(isPresented: $shouldPresentCamera) {
+                                        scanner
+                                    }
                                     
                                     Divider()
                                 }
@@ -144,8 +149,8 @@ struct VerificationRegisterDataView: View {
                                     
                                     Button(action: {
                                         self.cameraFileName = "selfie"
-                                        //                                        self.shouldPresentMaskSelfie = true
-                                        self.shouldPresentCamera = true
+                                        // self.shouldPresentMaskSelfie = true
+                                        self.shouldPresentCameraSelfie = true
                                     }) {
                                         HStack {
                                             Text("Selfie")
@@ -162,6 +167,9 @@ struct VerificationRegisterDataView: View {
                                             }
                                             .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                         }
+                                    }
+                                    .fullScreenCover(isPresented: $shouldPresentCameraSelfie) {
+                                        camera
                                     }
                                     Divider()
                                 }
@@ -191,6 +199,9 @@ struct VerificationRegisterDataView: View {
                                                 }
                                                 .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                             }
+                                        }
+                                        .fullScreenCover(isPresented: $shouldPresentCamera) {
+                                            scanner
                                         }
                                         Divider()
                                     }
@@ -454,13 +465,6 @@ struct VerificationRegisterDataView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $shouldPresentCamera) {
-            if self.cameraFileName == "selfie" {
-                camera
-            } else {
-                scanner
-            }
-        }
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),
@@ -490,7 +494,7 @@ struct VerificationRegisterDataView: View {
     
     var camera: some View {
         ZStack {
-            SUImagePickerView(sourceType: .camera, image: $imageTaken, isPresented: $shouldPresentCamera, frontCamera: .constant(true))
+            SUImagePickerView(sourceType: .camera, image: $imageTaken, isPresented: $shouldPresentCameraSelfie, frontCamera: .constant(true))
                 .onDisappear {
                     if let image = imageTaken {
                         registerData.fotoSelfie = image
