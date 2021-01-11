@@ -31,7 +31,7 @@ struct NoAtmOrRekeningVerificationView: View {
     
     /* Disabled Form */
     var disableForm: Bool {
-        noKartuCtrl.count < 6
+        jenisKartuCtrl == "Kartu ATM" ? noKartuCtrl.count < 16 : noKartuCtrl.count < 11
     }
     
     var body: some View {
