@@ -23,6 +23,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     @State var editModeForReschedule: EditMode = .inactive
     @State var editModeForChooseATM: EditMode = .inactive
+    @State var editModeForCancel: EditMode = .inactive
     
     /* HUD Variable */
     @State private var dim = true
@@ -210,6 +211,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
             if (editModeForReschedule == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
             } else if (editModeForChooseATM == .active) {
+                self.registerData.noTelepon = phone_local ?? ""
+            } else if (editModeForCancel == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
             }
         }
@@ -488,6 +491,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 } else if (editModeForChooseATM == .active) {
                     self.isLoading = false
                     self.routingChooseATM = true
+                } else if (editModeForCancel == .active) {
+                    self.isLoading = false
+                    self.appState.moveToWelcomeViewThenCancel = true
                 } else {
                     UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.isOtpValid = true
