@@ -47,57 +47,55 @@ struct FormPilihJenisATMView: View {
                 VStack {
                     AppBarLogo(light: false, onCancel: {})
                     
-                    ScrollView(.vertical, showsIndicators: false) {
+                    Text(NSLocalizedString("Pilih Jenis Kartu ATM Anda", comment: ""))
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.top, 25)
+                        .padding(.bottom, 10)
+                    
+                    // MARK: - CAROUSEL
+                    VStack{
                         
-                        Text(NSLocalizedString("Pilih Jenis Kartu ATM Anda", comment: ""))
-                            .font(.custom("Montserrat-SemiBold", size: 18))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .padding(.top, 25)
-                            .padding(.bottom, 10)
-                        
-                        // MARK: - CAROUSEL
-                        VStack{
+                        HStack(spacing: itemWidth * 0.08){
                             
-                            HStack(spacing: itemWidth * 0.08){
-                                
-                                ForEach(cards, id: \.id){card in
-                                    ATMCardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: false)
-                                        .offset(x: self.offset)
-                                        .highPriorityGesture(
-                                            
-                                            DragGesture()
-                                                .onChanged({ (value) in
-                                                    
-                                                    if value.translation.width > 0 {
-                                                        self.offset = value.location.x
-                                                    }
-                                                    else{
-                                                        self.offset = value.location.x - self.itemWidth
-                                                    }
-                                                    
-                                                })
-                                                .onEnded(onDragEnded)
-                                        )
-                                }
+                            ForEach(cards, id: \.id){card in
+                                ATMCardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: false)
+                                    .offset(x: self.offset)
+                                    .highPriorityGesture(
+                                        
+                                        DragGesture()
+                                            .onChanged({ (value) in
+                                                
+                                                if value.translation.width > 0 {
+                                                    self.offset = value.location.x
+                                                }
+                                                else{
+                                                    self.offset = value.location.x - self.itemWidth
+                                                }
+                                                
+                                            })
+                                            .onEnded(onDragEnded)
+                                    )
                             }
-                            .frame(width: itemWidth)
-                            .offset(x: self.firstOffset)
                         }
-                        .edgesIgnoringSafeArea(.bottom)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                        .animation(.spring())
-                        .padding(.vertical,25)
-                        .onAppear {
-                            refreshCarousel()
-                        }
-                        
-                        if cards.count > Int(count) {
-                            DetailLimitKartuAtmView(card: cards[Int(count)])
-                                .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
-                                .padding(.horizontal, 30)
-                                .padding(.bottom, 50)
-                        }
+                        .frame(width: itemWidth)
+                        .offset(x: self.firstOffset)
                     }
+                    .edgesIgnoringSafeArea(.bottom)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .animation(.spring())
+                    .padding(.vertical,25)
+                    .onAppear {
+                        refreshCarousel()
+                    }
+                    
+                    if cards.count > Int(count) {
+                        DetailLimitKartuAtmView(card: cards[Int(count)])
+                            .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
+                            .padding(.horizontal, 30)
+                            .padding(.bottom, 50)
+                    }
+                    
                 }
             }
             .edgesIgnoringSafeArea(.all)

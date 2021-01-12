@@ -50,141 +50,141 @@ struct FormPilihDesainATMView: View {
                 VStack {
                     AppBarLogo(light: false, onCancel: {})
                     
-                    ScrollView {
+                    Text(NSLocalizedString("Pilih Desain Kartu ATM Anda", comment: ""))
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color(hex: "#232175"))
+                        .padding(.top, 25)
+                        .padding(.bottom, 10)
+                    
+                    // MARK: - CAROUSEL
+                    VStack{
                         
-                        Text(NSLocalizedString("Pilih Desain Kartu ATM Anda", comment: ""))
-                            .font(.custom("Montserrat-SemiBold", size: 18))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .padding(.top, 25)
-                            .padding(.bottom, 10)
-                        
-                        // MARK: - CAROUSEL
-                        VStack{
+                        HStack(spacing: itemWidth * 0.08){
                             
-                            HStack(spacing: itemWidth * 0.08){
-                                
-                                ForEach(cards, id: \.id){card in
-                                    ATMCardDesignView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: false)
-                                        .offset(x: self.offset)
-                                        .highPriorityGesture(
-                                            
-                                            DragGesture()
-                                                .onChanged({ (value) in
-                                                    
-                                                    if value.translation.width > 0 {
-                                                        self.offset = value.location.x
-                                                    }
-                                                    else{
-                                                        self.offset = value.location.x - self.itemWidth
-                                                    }
-                                                    
-                                                })
-                                                .onEnded(onDragEnded)
-                                        )
-                                }
-                            }
-                            .frame(width: itemWidth)
-                            .offset(x: self.firstOffset)
-                        }
-                        .edgesIgnoringSafeArea(.bottom)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                        .animation(.spring())
-                        .padding(.vertical,25)
-                        .onAppear {
-                            refreshCarousel()
-                        }
-                        
-//                        TabView(selection: $selectedTab) {
-//                            ForEach(cards, id: \.id) {
-//                                TabItemView(card: $0) {card in
-//                                    print(card)
-//                                }
-//                            }
-//                        }
-//                        .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
-//                        .frame(width: UIScreen.main.bounds.width, height: 200)
-//                        .tabViewStyle(PageTabViewStyle(
-//                                        indexDisplayMode: .always))
-//                        .padding(.bottom, 25)
-//                        .onAppear(perform: {
-//                            setupAppearance()
-//                        })
-//                        .gesture(
-//                            DragGesture(minimumDistance: 0, coordinateSpace: .local)
-//                                .onEnded({ value in
-//                                            if value.translation.width < 0 {
-//                                                print("left")
-//                                                withAnimation(.easeOut) {
-//                                                    if selectedTab != cards.count-1 {
-//                                                        selectedTab += 1
-//                                                    }
-//                                                }
-//                                                selectCard(selected: selectedTab)
-//                                            }
-//                                            if value.translation.width > 0 {
-//                                                print("right")
-//                                                withAnimation(.easeOut) {
-//                                                    if selectedTab != 0 {
-//                                                        selectedTab -= 1
-//                                                    }
-//                                                }
-//                                                selectCard(selected: selectedTab)
-//                                            }})
-//                        )
-                        
-                        if cards.count > Int(count) {
-                            VStack {
-                                VStack {
-                                    HStack {
-                                        Text(cards[Int(count)].title)
-                                            .font(.custom("Montserrat-SemiBold", size: 15))
+                            ForEach(cards, id: \.id){card in
+                                ATMCardDesignView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: false)
+                                    .offset(x: self.offset)
+                                    .highPriorityGesture(
                                         
-                                        Spacer()
-                                    }
-                                    .padding()
-                                    .padding(.top, 30)
+                                        DragGesture()
+                                            .onChanged({ (value) in
+                                                
+                                                if value.translation.width > 0 {
+                                                    self.offset = value.location.x
+                                                }
+                                                else{
+                                                    self.offset = value.location.x - self.itemWidth
+                                                }
+                                                
+                                            })
+                                            .onEnded(onDragEnded)
+                                    )
+                            }
+                        }
+                        .frame(width: itemWidth)
+                        .offset(x: self.firstOffset)
+                    }
+                    .edgesIgnoringSafeArea(.bottom)
+                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                    .animation(.spring())
+                    .padding(.vertical,25)
+                    .onAppear {
+                        refreshCarousel()
+                    }
+                    
+                    //                        TabView(selection: $selectedTab) {
+                    //                            ForEach(cards, id: \.id) {
+                    //                                TabItemView(card: $0) {card in
+                    //                                    print(card)
+                    //                                }
+                    //                            }
+                    //                        }
+                    //                        .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
+                    //                        .frame(width: UIScreen.main.bounds.width, height: 200)
+                    //                        .tabViewStyle(PageTabViewStyle(
+                    //                                        indexDisplayMode: .always))
+                    //                        .padding(.bottom, 25)
+                    //                        .onAppear(perform: {
+                    //                            setupAppearance()
+                    //                        })
+                    //                        .gesture(
+                    //                            DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    //                                .onEnded({ value in
+                    //                                            if value.translation.width < 0 {
+                    //                                                print("left")
+                    //                                                withAnimation(.easeOut) {
+                    //                                                    if selectedTab != cards.count-1 {
+                    //                                                        selectedTab += 1
+                    //                                                    }
+                    //                                                }
+                    //                                                selectCard(selected: selectedTab)
+                    //                                            }
+                    //                                            if value.translation.width > 0 {
+                    //                                                print("right")
+                    //                                                withAnimation(.easeOut) {
+                    //                                                    if selectedTab != 0 {
+                    //                                                        selectedTab -= 1
+                    //                                                    }
+                    //                                                }
+                    //                                                selectCard(selected: selectedTab)
+                    //                                            }})
+                    //                        )
+                    
+                    if cards.count > Int(count) {
+                        VStack {
+                            VStack {
+                                HStack {
+                                    Text(cards[Int(count)].title)
+                                        .font(.custom("Montserrat-SemiBold", size: 15))
                                     
+                                    Spacer()
+                                }
+                                .padding()
+                                .padding(.top, 30)
+                                
+                                ScrollView {
                                     HStack{
                                         Text(cards[Int(count)].description)
                                             .font(.custom("Montserrat-Light", size: 10))
                                         Spacer()
                                     }
                                     .padding(.horizontal)
-                                    
-                                    NavigationLink(
-                                        destination: FormCompletionKartuATMView().environmentObject(atmData).environmentObject(registerData),
-                                        isActive: self.$nextRoute
-                                    ) {
-                                        EmptyView()
-                                    }
-                                    
-                                    Button {
-                                        self.registerData.desainKartuATMImage = cards[Int(count)].cardImage!
-                                        self.nextRoute = true
-                                    } label: {
-                                        Text(NSLocalizedString("PILIH DESAIN KARTU", comment: ""))
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .frame(maxWidth: .infinity, maxHeight: 40)
-                                    }
-                                    .frame(height: 50)
-                                    .background(Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
-                                    .padding(.horizontal)
-                                    .padding(.vertical, 20)
-                                    
                                 }
-                                .animation(nil)
-                                //                .transition(.flipFromLeft)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                        .fill(Color(.white)))
-                                .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                                .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
+                                
+                                NavigationLink(
+                                    destination: FormCompletionKartuATMView().environmentObject(atmData).environmentObject(registerData),
+                                    isActive: self.$nextRoute
+                                ) {
+                                    EmptyView()
+                                }
+                                
+                                Button {
+                                    self.registerData.desainKartuATMImage = cards[Int(count)].cardImage!
+                                    self.nextRoute = true
+                                } label: {
+                                    Text(NSLocalizedString("PILIH DESAIN KARTU", comment: ""))
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .frame(maxWidth: .infinity, maxHeight: 40)
+                                }
+                                .frame(height: 50)
+                                .background(Color(hex: "#2334D0"))
+                                .cornerRadius(12)
+                                .padding(.horizontal)
+                                .padding(.vertical, 20)
+                                
                             }
-                            .padding(.horizontal, 25)
-                            .padding(.vertical)
+                            .animation(nil)
+                            //                .transition(.flipFromLeft)
+                            .background(
+                                RoundedRectangle(cornerRadius: 25, style: .continuous)
+                                    .fill(Color(.white)))
+                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                            .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
                         }
+                        .padding(.horizontal, 25)
+                        .padding(.bottom, 50)
+                        .padding(.vertical)
                     }
                 }
             }

@@ -191,9 +191,10 @@ struct FormPilihJenisTabunganView: View {
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal)
+        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal, goToNextPage: $goToNextPage)
             .environmentObject(registerData)
-            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 150)
+            .environmentObject(atmData)
+            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 70)
             .background(Color(.white))
             .cornerRadius(30)
     }
@@ -301,5 +302,6 @@ struct FormPilihJenisTabunganView: View {
 struct ChooseTypeSavingScreen_Previews: PreviewProvider {
     static var previews: some View {
         FormPilihJenisTabunganView(shouldPopToRootView: .constant(false)).environmentObject(RegistrasiModel())
+            .environmentObject(AddProductATM())
     }
 }

@@ -163,7 +163,7 @@ struct JenisTabunganRegisterNasabahView: View {
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: .constant(false))
+        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: .constant(false), goToNextPage: Binding.constant(false))
             .environmentObject(registerData)
             .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 150)
             .background(Color(.white))
