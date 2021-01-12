@@ -134,29 +134,26 @@ struct ScanKTPView: View {
         print("GET CITIZEN")
         self.citizenVM.getCitizen(nik: nik) { success in
             if success {
-                DispatchQueue.main.async {
-                    print("isLoading \(self.citizenVM.isLoading)")
-                    print("nikValid \(self.citizenVM.nik)")
-                    self.messageResponse = self.citizenVM.errorMessage
-    //                self.showingAlert = true
-                    self.registerData.nik = nik
-                    self.registerData.namaLengkapFromNik = self.citizenVM.namaLengkap
-                    self.registerData.tempatLahirFromNik = self.citizenVM.tempatLahir
-                    self.registerData.alamatKtpFromNik = self.citizenVM.alamatKtp
-                    self.registerData.rtFromNik = self.citizenVM.rt
-                    self.registerData.rwFromNik = self.citizenVM.rw
-                    self.registerData.kelurahanFromNik = self.citizenVM.kelurahan
-                    self.registerData.kecamatanFromNik = self.citizenVM.kecamatan
-                    self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
-                    self.registerData.provinsiFromNik = self.citizenVM.provinsi
-                    self.registerData.fotoKTP = self.imageKTP!
-                    
-                    UserDefaults.standard.set(self.registerData.nik, forKey: "nik_local")
-                    UserDefaults.standard.set(self.registerData.namaLengkapFromNik, forKey: "nama_local")
-                    
-                    self.onCommit()
-                    
-                }
+                print("isLoading \(self.citizenVM.isLoading)")
+                print("nikValid \(self.citizenVM.nik)")
+                self.messageResponse = self.citizenVM.errorMessage
+//                self.showingAlert = true
+                self.registerData.nik = nik
+                self.registerData.namaLengkapFromNik = self.citizenVM.namaLengkap
+                self.registerData.tempatLahirFromNik = self.citizenVM.tempatLahir
+                self.registerData.alamatKtpFromNik = self.citizenVM.alamatKtp
+                self.registerData.rtFromNik = self.citizenVM.rt
+                self.registerData.rwFromNik = self.citizenVM.rw
+                self.registerData.kelurahanFromNik = self.citizenVM.kelurahan
+                self.registerData.kecamatanFromNik = self.citizenVM.kecamatan
+                self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
+                self.registerData.provinsiFromNik = self.citizenVM.provinsi
+                self.registerData.fotoKTP = self.imageKTP!
+                
+                UserDefaults.standard.set(self.registerData.nik, forKey: "nik_local")
+                UserDefaults.standard.set(self.registerData.namaLengkapFromNik, forKey: "nama_local")
+                
+                self.onCommit()
             }
             
             if !success {
