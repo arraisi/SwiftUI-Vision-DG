@@ -57,10 +57,11 @@ extension OtpViewModel {
                     print(response.status?.message)
                     print(response.status?.code)
                     
-                    
-                    self.timeRemaining = response.timeCounter!
-                    self.isLoading = false
-                    completion(false)
+                    DispatchQueue.main.async {
+                        self.timeRemaining = response.timeCounter!
+                        self.isLoading = false
+                        completion(false)
+                    }
                 }
                 
             case .failure(let error):

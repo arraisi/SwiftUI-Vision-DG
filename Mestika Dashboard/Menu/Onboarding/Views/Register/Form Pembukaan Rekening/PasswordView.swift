@@ -247,6 +247,7 @@ struct PasswordView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
