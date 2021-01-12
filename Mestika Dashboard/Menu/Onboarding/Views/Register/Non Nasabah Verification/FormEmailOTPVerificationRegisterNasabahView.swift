@@ -451,34 +451,34 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 print("OTP INVALID")
                 
                 self.isLoading = false
-//                self.timeRemainingBtn = self.otpVM.timeRemaining
+                self.timeRemainingBtn = self.otpVM.timeRemaining
                 self.modalSelection = "OTPINCORRECT"
-//                self.isShowModal.toggle()
+                self.isShowModal.toggle()
                 
-                if (self.tryCount == 1) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-
-                if (self.tryCount == 2) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-
-                if (self.tryCount == 3) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-
-                if (self.tryCount > 3) {
-                    self.tryCountResendDisable += 1
-                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
+//                if (self.tryCount == 1) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 2) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 3) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount > 3) {
+//                    self.tryCountResendDisable += 1
+//                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
                 
                 self.isBtnValidationDisabled = true
                 resetField()
