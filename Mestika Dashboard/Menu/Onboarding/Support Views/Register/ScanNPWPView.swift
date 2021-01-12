@@ -17,6 +17,7 @@ struct ScanNPWPView: View {
     @Binding var npwp: String
     @Binding var alreadyHaveNpwp: Bool
     @Binding var imageNPWP: Image?
+    @Binding var preview: Bool
     
     let onChange: ()->()
     let onCommit: ()->()
@@ -38,7 +39,11 @@ struct ScanNPWPView: View {
                     imageNPWP?
                         .resizable()
                         .scaledToFill()
+                        .onTapGesture {
+                            preview.toggle()
+                        }
                 }
+                .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             }
             .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             .background(Color(hex: "#F5F5F5"))
@@ -167,7 +172,7 @@ struct ScanNPWPView: View {
 
 struct ScanNPWPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil)) {
+        ScanNPWPView(npwp: Binding.constant(""), alreadyHaveNpwp: Binding.constant(false), imageNPWP: Binding.constant(nil), preview: .constant(false)) {
         } onCommit: {
             
         }

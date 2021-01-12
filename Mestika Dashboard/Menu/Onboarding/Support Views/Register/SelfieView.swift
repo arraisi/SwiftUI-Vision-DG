@@ -15,6 +15,7 @@ struct SelfieView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     
     @Binding var imageSelfie: Image?
+    @Binding var preview: Bool
     
     let onChange: ()->()
     let onCommit: ()->()
@@ -26,8 +27,7 @@ struct SelfieView: View {
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
-                .padding([.vertical], 15)
-                .padding(.horizontal, 20)
+                .padding(.vertical, 15)
             
             ZStack {
                 Image("ic_camera")
@@ -35,7 +35,14 @@ struct SelfieView: View {
                     imageSelfie?
                         .resizable()
                         .scaledToFill()
+                        .onTapGesture {
+                            if imageSelfie != nil {
+                                self.registerData.fotoSelfie = self.imageSelfie!
+                                preview.toggle()
+                            }
+                        }
                 }
+                .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             }
             .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             .background(Color(hex: "#F5F5F5"))
@@ -52,9 +59,6 @@ struct SelfieView: View {
                     .foregroundColor(imageSelfie == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 10).stroke(Color(.gray).opacity(0.4))
-//                    )
                     .background(
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color(hex: imageSelfie == nil ? "#2334D0" : "#FFFFFF"))
@@ -82,7 +86,7 @@ struct SelfieView: View {
                 .cornerRadius(12)
                 .padding(.vertical, 15)
             } else { EmptyView() }
-        }.navigationBarHidden(true)
+        }
         
     }
     
@@ -100,7 +104,7 @@ struct SelfieView: View {
 
 struct SelfieView_Previews: PreviewProvider {
     static var previews: some View {
-        SelfieView(imageSelfie: Binding.constant(Image("card_bg"))) {
+        SelfieView(imageSelfie: Binding.constant(Image("card_bg")), preview: .constant(false)) {
             
         } onCommit: {
             
