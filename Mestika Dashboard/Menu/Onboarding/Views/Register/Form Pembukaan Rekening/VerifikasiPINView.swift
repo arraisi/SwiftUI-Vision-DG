@@ -51,14 +51,14 @@ struct VerifikasiPINView: View {
             }
             
             VStack {
+                AppBarLogo(light: false, onCancel: {})
                 ScrollView {
                     // Title
                     Text("DATA PEMBUKAAN REKENING")
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 60)
-                        .padding(.vertical, 45)
+                        .padding(.vertical, 25)
                         .padding(.horizontal, 40)
                     
                     // Content
@@ -174,6 +174,7 @@ struct VerifikasiPINView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .navigationBarHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }

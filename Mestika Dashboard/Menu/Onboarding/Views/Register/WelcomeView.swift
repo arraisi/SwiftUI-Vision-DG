@@ -26,6 +26,7 @@ struct WelcomeView: View {
     @State var isRescheduleInterview: Bool = false
     @State var isFormPilihSchedule: Bool = false
     @State var isIncomingVideoCall: Bool = false
+    @State var isCancelViewActive: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -122,6 +123,13 @@ struct WelcomeView: View {
                     label: {}
                 )
                 .isDetailLink(false)
+                
+                NavigationLink(
+                    destination: SuccessCancelView(),
+                    isActive: self.$isCancelViewActive,
+                    label: {}
+                )
+                .isDetailLink(false)
             }
             .navigationBarItems(trailing: EmptyView())
             .edgesIgnoringSafeArea(.all)
@@ -196,6 +204,7 @@ struct WelcomeView: View {
         self.isRescheduleInterview = false
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
+        self.isCancelViewActive = false
         self.appState.moveToWelcomeView = false
     }
     
@@ -284,7 +293,7 @@ struct WelcomeView: View {
                 .isDetailLink(false)
                 
             } else  {
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCreateSchedule: .active).environmentObject(registerData)){
                     Text("Halaman Submit Jadwal Videocall")
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
@@ -1007,6 +1016,8 @@ struct WelcomeView: View {
                 let domain = Bundle.main.bundleIdentifier!
                 UserDefaults.standard.removePersistentDomain(forName: domain)
                 UserDefaults.standard.synchronize()
+                
+                self.isCancelViewActive = true
                 
             } else {
                 //                self.isLoading = false

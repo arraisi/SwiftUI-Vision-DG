@@ -21,6 +21,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
     
+    @State var editModeForCreateSchedule: EditMode = .inactive
     @State var editModeForReschedule: EditMode = .inactive
     @State var editModeForChooseATM: EditMode = .inactive
     @State var editModeForCancel: EditMode = .inactive
@@ -80,7 +81,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             }
             
             VStack {
-                
+
                 AppBarLogo(light: false, onCancel: {})
 
                 if (self.isLoading) {
@@ -208,9 +209,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
-            if (editModeForReschedule == .active) {
-                self.registerData.noTelepon = phone_local ?? ""
-            } else if (editModeForChooseATM == .active) {
+            if (editModeForCreateSchedule == .active || editModeForReschedule == .active || editModeForChooseATM == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
             } else if (editModeForCancel == .active) {
                 self.registerData.noTelepon = phone_local ?? ""
@@ -439,7 +438,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
-                    self.timeRemainingRsnd = self.otpVM.timeCounter
+//                    self.timeRemainingRsnd = self.otpVM.timeCounter
                 }
                 
                 self.isShowAlert = true
@@ -484,13 +483,16 @@ struct FormOTPVerificationRegisterNasabahView: View {
             
             if success {
                 print("OTP VALID")
-                
-                if (editModeForReschedule == .active) {
+                if (editModeForCreateSchedule == .active) {
+                    self.isLoading = false
+                    self.routingReschedule = true
+                } else if (editModeForReschedule == .active) {
                     self.isLoading = false
                     UserDefaults.standard.set("true", forKey: "routingSchedule")
                     self.routingReschedule = true
                 } else if (editModeForChooseATM == .active) {
                     self.isLoading = false
+                    UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.routingChooseATM = true
                 } else if (editModeForCancel == .active) {
                     self.isLoading = false
@@ -506,55 +508,57 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 print("OTP INVALID")
                 
                 self.isLoading = false
-                //                self.timeRemainingBtn = self.otpVM.timeRemaining
+                self.timeRemainingBtn = self.otpVM.timeRemaining
+                self.modalSelection = "OTPINCORRECT"
+                self.isShowModal.toggle()
                 
-                if (self.tryCount == 1) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 2) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 3) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 4) {
-                    self.timeRemainingBtn = 30
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 5) {
-                    self.timeRemainingBtn = 60
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 6) {
-                    self.timeRemainingBtn = 120
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 7) {
-                    self.timeRemainingBtn = 240
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount >= 8) {
-                    self.timeRemainingBtn = 480
-                    self.modalSelection = "OTPINCORRECT5TIME"
-                    self.isShowModal.toggle()
-                }
+//                if (self.tryCount == 1) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 2) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 3) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 4) {
+//                    self.timeRemainingBtn = 30
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 5) {
+//                    self.timeRemainingBtn = 60
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 6) {
+//                    self.timeRemainingBtn = 120
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount == 7) {
+//                    self.timeRemainingBtn = 240
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//
+//                if (self.tryCount >= 8) {
+//                    self.timeRemainingBtn = 480
+//                    self.modalSelection = "OTPINCORRECT5TIME"
+//                    self.isShowModal.toggle()
+//                }
                 
                 self.isBtnValidationDisabled = true
                 resetField()

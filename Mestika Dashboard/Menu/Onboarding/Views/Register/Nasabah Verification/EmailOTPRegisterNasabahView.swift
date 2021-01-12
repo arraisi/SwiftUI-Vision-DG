@@ -409,7 +409,6 @@ struct EmailOTPRegisterNasabahView: View {
                 }
                 
                 self.isShowAlert = false
-                
                 self.timeRemainingRsnd = max(30, (self.tryCountResend+1) * 30)
             }
             
@@ -458,55 +457,57 @@ struct EmailOTPRegisterNasabahView: View {
                 print("OTP INVALID")
                 
                 self.isLoading = false
-                //                self.timeRemainingBtn = self.otpVM.timeRemaining
+                self.timeRemainingBtn = self.otpVM.timeRemaining
+                self.modalSelection = "OTPINCORRECT"
+                self.isShowModal.toggle()
                 
-                if (self.tryCount == 1) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 2) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 3) {
-                    self.timeRemainingBtn = 0
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 4) {
-                    self.timeRemainingBtn = 30
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 5) {
-                    self.timeRemainingBtn = 60
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 6) {
-                    self.timeRemainingBtn = 120
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount == 7) {
-                    self.timeRemainingBtn = 240
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
-                }
-                
-                if (self.tryCount >= 8) {
-                    self.timeRemainingBtn = 480
-                    self.modalSelection = "OTPINCORRECT5TIME"
-                    self.isShowModal.toggle()
-                }
+//                if (self.tryCount == 1) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//                
+//                if (self.tryCount == 2) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//                
+//                if (self.tryCount == 3) {
+//                    self.timeRemainingBtn = 0
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//                
+//                if (self.tryCount == 4) {
+//                    self.timeRemainingBtn = 30
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//                
+//                if (self.tryCount == 5) {
+//                    self.timeRemainingBtn = 60
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//                
+//                if (self.tryCount == 6) {
+//                    self.timeRemainingBtn = 120
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//                
+//                if (self.tryCount == 7) {
+//                    self.timeRemainingBtn = 240
+//                    self.modalSelection = "OTPINCORRECT"
+//                    self.isShowModal.toggle()
+//                }
+//                
+//                if (self.tryCount >= 8) {
+//                    self.timeRemainingBtn = 480
+//                    self.modalSelection = "OTPINCORRECT5TIME"
+//                    self.isShowModal.toggle()
+//                }
                 
                 self.isBtnValidationDisabled = true
                 resetField()
