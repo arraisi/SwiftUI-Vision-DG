@@ -34,6 +34,10 @@ struct FormPilihJenisTabunganView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var atmData: AddProductATM
     
+    var disableSubmitReferralCodeBtn: Bool {
+        atmData.atmAddresspostalReferral == ""
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             
@@ -225,11 +229,11 @@ struct FormPilihJenisTabunganView: View {
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 }
-                .background(Color(hex: "#2334D0"))
+                .background(Color(hex: disableSubmitReferralCodeBtn ? "#CBD1D9" : "#2334D0"))
                 .cornerRadius(12)
                 .padding(.bottom, 5)
                 .padding(.top, 10)
-                
+                .disabled(disableSubmitReferralCodeBtn)
                 
                 NavigationLink(
                     destination: FormIdentitasDiriView().environmentObject(registerData)
