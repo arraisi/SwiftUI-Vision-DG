@@ -270,6 +270,7 @@
 		C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */; };
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
+		C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */; };
 		C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0884939255BC12E00E2F927 /* ScanKTPView.swift */; };
 		C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* MyCard.swift */; };
 		C092ABFF2553B5850051CE3E /* myCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = C092ABFE2553B5850051CE3E /* myCardData.json */; };
@@ -612,6 +613,7 @@
 		C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanViewModel.swift; sourceTree = "<group>"; };
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
+		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		C0884939255BC12E00E2F927 /* ScanKTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanKTPView.swift; sourceTree = "<group>"; };
 		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
 		C092ABFE2553B5850051CE3E /* myCardData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myCardData.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
@@ -804,6 +806,7 @@
 				0651B1E2257758CB00E4A834 /* LoadingView.swift */,
 				0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */,
 				C02C2DE725876BAA00CED248 /* PhotoCropping.swift */,
+				C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -1877,6 +1880,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */,
 				527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */,
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
 				52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */,

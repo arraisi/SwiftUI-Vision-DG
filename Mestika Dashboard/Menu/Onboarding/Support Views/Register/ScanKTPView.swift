@@ -22,6 +22,7 @@ struct ScanKTPView: View {
     @Binding var imageKTP: Image?
     @Binding var nik: String
     @Binding var confirmNik: Bool
+    @Binding var preview: Bool
     
     let onChange: ()->()
     let onCommit: ()->()
@@ -43,8 +44,9 @@ struct ScanKTPView: View {
                 VStack {
                     imageKTP?
                         .resizable()
-                        .frame(maxWidth: 350, maxHeight: 200)
-                        .cornerRadius(10)
+                        .onTapGesture {
+                            preview.toggle()
+                        }
                 }
                 .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 200, maxHeight: 221)
             }
@@ -176,7 +178,7 @@ struct ScanKTPView: View {
 
 struct ScanKTPView_Previews: PreviewProvider {
     static var previews: some View {
-        ScanKTPView(imageKTP: Binding.constant(nil), nik: Binding.constant(""), confirmNik: Binding.constant(false)) {
+        ScanKTPView(imageKTP: Binding.constant(nil), nik: Binding.constant(""), confirmNik: Binding.constant(false), preview: .constant(false)) {
             
         } onCommit: {
             
