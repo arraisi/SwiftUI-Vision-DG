@@ -50,13 +50,14 @@ struct KetentuanRegisterNonNasabahView: View {
                         VStack(alignment: .leading) {
                             Image("ic_bells")
                                 .resizable()
-                                .frame(width: 90, height: 90)
-                                .padding(.top, 30)
+                                .frame(width: 70, height: 70)
+                                .padding(.top, 20)
                             
                             Text(NSLocalizedString("Sebelum Memulai..!!", comment: ""))
-                                .font(.custom("Montserrat-Bold", size: 22))
+                                .font(.custom("Montserrat-Bold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
-                                .padding(.vertical, 10)
+                                .padding(.top, 0)
+                                .padding(.bottom, 5)
                             
                             WebView(readFinished: self.$readFinished, scrollToBottom: self.$scrollToBottom, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                                 .onChange(of: readFinished, perform: { value in
@@ -94,7 +95,6 @@ struct KetentuanRegisterNonNasabahView: View {
                             .background(self.readFinished ? Color(hex: "#2334D0") : Color(.lightGray))
                             .disabled(!self.readFinished)
                             .cornerRadius(12)
-                            .padding(.bottom, 5)
                             .padding(.top, 10)
                             
                             Button(action : {
@@ -106,9 +106,9 @@ struct KetentuanRegisterNonNasabahView: View {
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             }
                             .cornerRadius(12)
-                            .padding(.bottom, 20)
+                            .padding(.bottom, 10)
                         }
-                        .padding(.horizontal, 30)
+                        .padding(.horizontal, 20)
                         .frame(width: UIScreen.main.bounds.width - 40)
                         .background(Color.white)
                         .cornerRadius(15)
@@ -116,7 +116,6 @@ struct KetentuanRegisterNonNasabahView: View {
                         .padding(.vertical, 30)
                     }
                 }
-                .padding(.vertical, 25)
             }
         }
         .edgesIgnoringSafeArea(.all)

@@ -23,8 +23,8 @@ struct RadioButton: View {
         callback: @escaping (Int)->(),
         selectedID: Int,
         size: CGFloat = 19,
-        color: Color = Color(hex: "#707070"),
-        textSize: CGFloat = 10
+        color: Color = Color(hex: "#595959"),
+        textSize: CGFloat = 12
         ) {
         self.id = id
         self.label = label

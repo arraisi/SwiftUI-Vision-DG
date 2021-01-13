@@ -74,7 +74,7 @@ struct FormCompletionKartuATMView: View {
                     VStack {
                         Text(NSLocalizedString("LENGKAPI DATA", comment: ""))
                             .multilineTextAlignment(.center)
-                            .font(.custom("Montserrat-Bold", size: 26))
+                            .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(.white)
                             .padding(EdgeInsets(top: 30, leading: 15, bottom: 0, trailing: 15))
                         
@@ -97,6 +97,7 @@ struct FormCompletionKartuATMView: View {
                         .disabled(!isValid())
                         .cornerRadius(15)
                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+                        .padding(.top, 20)
                         .padding(.bottom, 30)
                     }
                     .padding(.bottom, 35)
@@ -127,8 +128,8 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-            registerData.namaLengkapFromNik = nama_local!
-            registerData.nik = nik_local!
+            registerData.namaLengkapFromNik = nama_local ?? ""
+            registerData.nik = nik_local ?? ""
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
             

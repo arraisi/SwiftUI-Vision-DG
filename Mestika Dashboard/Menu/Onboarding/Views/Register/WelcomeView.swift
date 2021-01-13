@@ -97,7 +97,7 @@ struct WelcomeView: View {
                         .cornerRadius(15)
                         
                         NavigationLink(destination:
-                                        FormIdentitasDiriView().environmentObject(registerData),
+                                        FirstLoginView().environmentObject(loginData),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
@@ -207,7 +207,6 @@ struct WelcomeView: View {
         self.isRescheduleInterview = false
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
-        self.isCancelViewActive = false
         self.appState.moveToWelcomeView = false
     }
     
