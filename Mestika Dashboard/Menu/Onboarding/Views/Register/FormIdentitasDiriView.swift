@@ -52,7 +52,7 @@ struct FormIdentitasDiriView: View {
      */
     @State private var shouldPresentScanner = false
     @State private var shouldPresentCamera = false
-    @State private var cameraFileName = ""
+    @State private var cameraFileName = "ktp"
     
     var body: some View {
         
@@ -279,9 +279,9 @@ struct FormIdentitasDiriView: View {
                             if matched.count != 0 {
                                 self.nik = matched[0]
                             }
-                            
-                            print("self.cameraFileName \(self.cameraFileName)")
                         }
+                        
+                        print("self.cameraFileName \(self.cameraFileName)")
                         
                         let scanResult = retrieveImage(forKey: self.cameraFileName)
                         if let image = scanResult {
@@ -322,7 +322,9 @@ struct FormIdentitasDiriView: View {
      Fungsi untuk ambil Gambar dari Local Storage
      */
     private func actionSelection(_ selection: String) {
+        
         self.cameraFileName = selection
+        
         switch selection {
         case "ktp":
             self.formSelfie = false
