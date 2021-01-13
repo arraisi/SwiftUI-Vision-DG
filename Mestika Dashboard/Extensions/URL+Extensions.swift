@@ -73,7 +73,7 @@ extension URL {
     }
     
     static func urlAddProductATM() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/user?type=addProduct");
+        return URL(string: AppConstants().BASE_URL + "/user/card");
     }
     
     static func urlGetListATM() -> URL? {

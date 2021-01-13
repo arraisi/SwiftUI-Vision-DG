@@ -179,6 +179,9 @@ struct FormIdentitasDiriView: View {
                             Button(action: {
                                 
                                 self.registerData.npwp = self.npwp
+                                print("NIK \(self.registerData.nik)")
+                                UserDefaults.standard.set(self.registerData.nik, forKey: "nik_local_storage")
+                                UserDefaults.standard.set(self.registerData.namaLengkapFromNik, forKey: "nama_local")
                                 
                                 if isValidForm() {
                                     if editMode == .inactive {

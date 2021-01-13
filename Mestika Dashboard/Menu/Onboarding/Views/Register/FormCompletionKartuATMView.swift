@@ -23,6 +23,7 @@ struct FormCompletionKartuATMView: View {
     @State var isLoading = false
     
     @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
+    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
     @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
     @State private var is_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     
@@ -83,7 +84,7 @@ struct FormCompletionKartuATMView: View {
                         
                         Button(action: {
                             self.postData()
-                            self.atmData.atmAddresspostalCodeInput = self.kodePos
+                            self.atmData.atmAddressPostalCodeInput = self.kodePos
                         }, label: {
                             Text(NSLocalizedString("Submit Data", comment: ""))
                                 .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
@@ -126,7 +127,8 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-//            registerData.namaLengkapFromNik = nama_local!
+            registerData.namaLengkapFromNik = nama_local!
+            registerData.nik = nik_local!
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
             
@@ -264,19 +266,39 @@ struct FormCompletionKartuATMView: View {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddressrtRwInput, label: "", placeHolder: "RT/RW", disabled:addressOptionId != 4 ) { (change) in
+            HStack {
+                LabelTextField(value: $atmData.atmAddressRtInput, label: "", placeHolder: "RT", disabled:addressOptionId != 4 ) { (change) in
+                    
+                } onCommit: {
+                    
+                }
+                
+                LabelTextField(value: $atmData.atmAddressRwInput, label: "", placeHolder: "RW", disabled:addressOptionId != 4 ) { (change) in
+                    
+                } onCommit: {
+                    
+                }
+            }
+            
+            LabelTextField(value: $atmData.atmAddressKelurahanInput, label: "", placeHolder: NSLocalizedString("Kelurahan", comment: ""), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddresskelurahanInput, label: "", placeHolder: NSLocalizedString("Kelurahan", comment: ""), disabled:addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddressKecamatanInput, label: "", placeHolder: NSLocalizedString("Kecamatan", comment: ""), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddresskecamatanInput, label: "", placeHolder: NSLocalizedString("Kecamatan", comment: ""), disabled:addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddressKotaInput, label: "", placeHolder: NSLocalizedString("Kota", comment: ""), disabled:addressOptionId != 4) { (change) in
+                
+            } onCommit: {
+                
+            }
+            
+            LabelTextField(value: $atmData.atmAddressPropinsiInput, label: "", placeHolder: NSLocalizedString("Provinsi", comment: ""), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
@@ -285,7 +307,7 @@ struct FormCompletionKartuATMView: View {
             HStack {
                 TextField("Kode Pos", text: $kodePos) {change in
                 } onCommit: {
-                    self.atmData.atmAddresspostalCodeInput = self.kodePos
+                    self.atmData.atmAddressPostalCodeInput = self.kodePos
                 }
                 .onReceive(kodePos.publisher.collect()) {
                     self.kodePos = String($0.prefix(5))
@@ -524,7 +546,7 @@ struct FormCompletionKartuATMView: View {
     
     func isValid() -> Bool {
         if addressOptionId == 4 {
-            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddresskelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && (atmData.atmAddresspostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 || self.kodePos.trimmingCharacters(in: .whitespaces).count > 0)
+            return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressKecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressKelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && (atmData.atmAddressPostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 || self.kodePos.trimmingCharacters(in: .whitespaces).count > 0)
         } else {
             return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty
         }
@@ -534,29 +556,29 @@ struct FormCompletionKartuATMView: View {
         switch addressOptionId {
         case 1: /// Sesuai KTP
             atmData.atmAddressInput = registerData.alamatKtpFromNik
-            atmData.atmAddresspostalCodeInput = registerData.kodePos
-            atmData.atmAddresskecamatanInput = registerData.kecamatanFromNik
-            atmData.atmAddresskelurahanInput = registerData.kelurahanFromNik
+            atmData.atmAddressPostalCodeInput = registerData.kodePos
+            atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
+            atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
         case 2: /// Surat Menyurat
             atmData.atmAddressInput = registerData.alamatKeluarga
-            atmData.atmAddresspostalCodeInput = registerData.kodePosKeluarga
-            atmData.atmAddresskecamatanInput = registerData.kecamatanKeluarga
-            atmData.atmAddresskelurahanInput = registerData.kelurahanKeluarga
+            atmData.atmAddressPostalCodeInput = registerData.kodePosKeluarga
+            atmData.atmAddressKecamatanInput = registerData.kecamatanKeluarga
+            atmData.atmAddressKelurahanInput = registerData.kelurahanKeluarga
             atmData.atmAddressrtRwInput = ""
         case 3: /// Perusahaan
             atmData.atmAddressInput = registerData.alamatPerusahaan
-            atmData.atmAddresspostalCodeInput = registerData.kodePos
-            atmData.atmAddresskecamatanInput = registerData.kecamatan
-            atmData.atmAddresskelurahanInput = registerData.kelurahan
+            atmData.atmAddressPostalCodeInput = registerData.kodePos
+            atmData.atmAddressKecamatanInput = registerData.kecamatan
+            atmData.atmAddressKelurahanInput = registerData.kelurahan
             atmData.atmAddressrtRwInput = registerData.rtrw
         //            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:
             self.kodePos = ""
             atmData.atmAddressInput = ""
-            atmData.atmAddresspostalCodeInput = ""
-            atmData.atmAddresskecamatanInput = ""
-            atmData.atmAddresskelurahanInput = ""
+            atmData.atmAddressPostalCodeInput = ""
+            atmData.atmAddressKecamatanInput = ""
+            atmData.atmAddressKelurahanInput = ""
             atmData.atmAddressrtRwInput = ""
         //            currentAddress = Address()
         }
@@ -569,6 +591,8 @@ struct FormCompletionKartuATMView: View {
         atmData.nik = registerData.nik
         atmData.isNasabahMestika = is_register_nasabah == "true" ? true : false
         atmData.isVcall = is_video_call == "true" ? true : false
+        atmData.codeClass = ""
+        atmData.imageDesign = ""
         
         self.goToSuccessPage = true
         self.isLoading = true
@@ -631,11 +655,14 @@ struct FormCompletionKartuATMView: View {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
                 atmData.atmAddressInput = self.addressSugestion[0].formatted_address
-                atmData.atmAddresspostalCodeInput = self.addressSugestion[0].postalCode
+                atmData.atmAddressPostalCodeInput = self.addressSugestion[0].postalCode
 //                self.kodePos = self.addressSugestion[0].postalCode
-                atmData.atmAddresskecamatanInput = self.addressSugestion[0].kecamatan
-                atmData.atmAddresskelurahanInput = self.addressSugestion[0].kelurahan
-                atmData.atmAddressrtRwInput = self.addressSugestion[0].rt
+                atmData.atmAddressKecamatanInput = self.addressSugestion[0].kecamatan
+                atmData.atmAddressKelurahanInput = self.addressSugestion[0].kelurahan
+                atmData.atmAddressRtInput = self.addressSugestion[0].rt
+                atmData.atmAddressRwInput = self.addressSugestion[0].rw
+                atmData.atmAddressKotaInput = self.addressSugestion[0].city
+                atmData.atmAddressPropinsiInput = self.addressSugestion[0].province
                 self.showingAddressModal = false
                 print("Success")
             }

@@ -132,7 +132,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         
                         Button(
                             action: {
-                                self.routingReschedule = true
+                                self.isOtpValid = true
                             },
                             label: {
                                 Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
