@@ -47,7 +47,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
-    @State var tryCountResend = 0
+    @State var tryCountResend = 1
     @State var tryCountResendDisable = 0
     @State var routingReschedule: Bool = false
     @State var routingChooseATM: Bool = false
