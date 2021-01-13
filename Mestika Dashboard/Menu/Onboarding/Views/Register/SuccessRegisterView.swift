@@ -22,7 +22,7 @@ struct SuccessRegisterView: View {
     @State var scheduleDates = [String]()
     @State var scheduleJamBasedOnDate = [String]()
     
-    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local")
+    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
     @State private var email_local = UserDefaults.standard.string(forKey: "email_local")
     @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
     @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
@@ -299,10 +299,10 @@ struct SuccessRegisterView: View {
             getAllSchedule()
         }
         .onAppear {
-            self.registerData.nik = nik_local ?? ""
-            self.registerData.noTelepon = phone_local ?? ""
-            self.registerData.email = email_local ?? ""
-            self.registerData.namaLengkapFromNik = nama_local ?? ""
+            self.registerData.nik = nik_local ?? "-"
+            self.registerData.noTelepon = phone_local ?? "-"
+            self.registerData.email = email_local ?? "-"
+            self.registerData.namaLengkapFromNik = nama_local ?? "-"
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -319,16 +319,16 @@ struct SuccessRegisterView: View {
                 message: Text("\(self.scheduleVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
-        .onAppear {
-            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-                self.appState.navigationController?.view.removeGestureRecognizer(gesture)
-            }
-        }
-        .onDisappear {
-            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-                self.appState.navigationController?.view.addGestureRecognizer(gesture)
-            }
-        }
+//        .onAppear {
+//            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+//                self.appState.navigationController?.view.removeGestureRecognizer(gesture)
+//            }
+//        }
+//        .onDisappear {
+//            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
+//                self.appState.navigationController?.view.addGestureRecognizer(gesture)
+//            }
+//        }
     }
     
     func removeUser() {

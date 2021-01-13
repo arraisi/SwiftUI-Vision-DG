@@ -782,6 +782,8 @@ struct VerificationRegisterDataView: View {
         
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
+//                UserDefaults.standard.set(self.registerData.nik, forKey: "nik_local")
+//                UserDefaults.standard.set(self.registerData.namaLengkapFromNik, forKey: "nama_local")
                 if self.appState.nasabahIsExisting {
                     UserDefaults.standard.set("true", forKey: "register_nasabah")
                     UserDefaults.standard.set("false", forKey: "register_non_nasabah")

@@ -40,6 +40,8 @@ struct WelcomeView: View {
     // Local Storage Status Register Nasabah
     @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
+    @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
+    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
     
     @State private var dateInterview = "-"
     @State private var timeInterview = "-"
@@ -95,7 +97,7 @@ struct WelcomeView: View {
                         .cornerRadius(15)
                         
                         NavigationLink(destination:
-                                        FirstLoginView().environmentObject(loginData),
+                                        FormIdentitasDiriView().environmentObject(registerData),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
@@ -176,7 +178,8 @@ struct WelcomeView: View {
             }
             .onAppear {
                 getMobileVersion()
-                
+                print(nama_local)
+                print(nik_local)
             }
             .onAppear() {
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
