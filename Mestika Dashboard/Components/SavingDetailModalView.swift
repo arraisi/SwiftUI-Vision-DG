@@ -56,7 +56,7 @@ struct SavingDetailModalView: View {
             }) {
                 Text(NSLocalizedString("Kembali", comment: ""))
                     .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
             .background(Color(hex: "#2334D0"))

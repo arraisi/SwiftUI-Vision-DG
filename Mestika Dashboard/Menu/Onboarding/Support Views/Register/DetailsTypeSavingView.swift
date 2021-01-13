@@ -73,7 +73,7 @@ struct DetailsTypeSavingView: View {
                 label: {
                     Text(NSLocalizedString("Pilih Tabungan ini", comment: ""))
                         .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 12))
+                        .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     
                 })
