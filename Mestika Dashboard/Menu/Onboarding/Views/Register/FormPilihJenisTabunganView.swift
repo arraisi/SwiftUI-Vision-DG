@@ -31,6 +31,7 @@ struct FormPilihJenisTabunganView: View {
     
     @State var showingModal = false
     @State var showingReferralCodeModal = false
+    @State var showingModalDetail = false
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var atmData: AddProductATM
     
@@ -95,7 +96,7 @@ struct FormPilihJenisTabunganView: View {
                     }
                     
                     if self.data.count > Int(self.count) {
-                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal)
+                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal, isShowModalDetail: $showingModalDetail)
                             .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 30)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
@@ -104,6 +105,14 @@ struct FormPilihJenisTabunganView: View {
                 }
                 .padding(.vertical, 30)
             }
+            
+            if self.showingModalDetail {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showingModalDetail = false
+                } })
+                .edgesIgnoringSafeArea(.all)
+            }
+            
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation {
                     self.showingModal = false
@@ -135,8 +144,11 @@ struct FormPilihJenisTabunganView: View {
             }
             
         }))
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $showingModal, type: .`default`, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
+        }
+        .popup(isPresented: $showingModalDetail, type: .`default`, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupDetailSaving()
         }
         .popup(isPresented: $showingReferralCodeModal, type: .floater(), position: .top, animation: Animation.spring(), closeOnTapOutside: true) {
             referralCodeModal()
@@ -189,14 +201,23 @@ struct FormPilihJenisTabunganView: View {
         .background(Color.white)
     }
     
+    private func popupDetailSaving() -> some View {
+        SavingDetailModalView(data: self.data[Int(self.count)], isShowModalDetail: $showingModalDetail)
+            .environmentObject(registerData)
+            .environmentObject(atmData)
+            .frame(width: UIScreen.main.bounds.width - 40)
+            .background(Color(.white))
+            .cornerRadius(15)
+    }
+    
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
         SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal, goToNextPage: $goToNextPage)
             .environmentObject(registerData)
             .environmentObject(atmData)
-            .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 70)
+            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
-            .cornerRadius(30)
+            .cornerRadius(15)
     }
     
     private func referralCodeModal() -> some View {

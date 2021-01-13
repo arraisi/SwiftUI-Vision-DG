@@ -25,6 +25,7 @@ struct JenisTabunganRegisterNasabahView: View {
     @Binding var shouldPopToRootView : Bool
     
     @State var showingModal = false
+    @State var showingModalDetail = false
     @EnvironmentObject var registerData: RegistrasiModel
     
     var body: some View {
@@ -85,7 +86,7 @@ struct JenisTabunganRegisterNasabahView: View {
                     }
                     
                     if self.data.count > Int(self.count) {
-                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal)
+                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal, isShowModalDetail: $showingModalDetail)
                             .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 30)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)

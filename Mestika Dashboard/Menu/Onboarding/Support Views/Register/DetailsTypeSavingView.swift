@@ -13,6 +13,7 @@ struct DetailsTypeSavingView: View {
     
     var data: SavingType
     @Binding var isShowModal: Bool
+    @Binding var isShowModalDetail: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -52,6 +53,19 @@ struct DetailsTypeSavingView: View {
             }
             .frame(height: 120)
             
+            VStack(alignment: .trailing, spacing: nil, content: {
+                Button(action: {
+                    self.isShowModalDetail = true
+                }, label: {
+                    Text(NSLocalizedString("Saving Detail", comment: ""))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(minHeight: 30)
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 10)
+                })
+            }).frame(maxWidth: .infinity, alignment: .trailing)
+            
             Button(
                 action: {
                     self.isShowModal = true
@@ -66,7 +80,6 @@ struct DetailsTypeSavingView: View {
                 .background(Color(hex: "#2334D0"))
                 .cornerRadius(12)
                 .padding(.bottom, 10)
-                .padding(.top, 10)
             
         }
         .padding(.horizontal, 10)
@@ -77,6 +90,6 @@ struct DetailsTypeSavingView: View {
 
 struct DetailsTypeSavingView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsTypeSavingView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tames_batik", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false)).environmentObject(RegistrasiModel())
+        DetailsTypeSavingView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tames_batik", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false), isShowModalDetail: Binding.constant(false)).environmentObject(RegistrasiModel())
     }
 }
