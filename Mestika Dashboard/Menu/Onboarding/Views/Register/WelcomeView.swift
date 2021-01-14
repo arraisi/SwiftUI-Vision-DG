@@ -97,7 +97,7 @@ struct WelcomeView: View {
                         .cornerRadius(15)
                         
                         NavigationLink(destination:
-                                        FormIdentitasDiriView().environmentObject(registerData),
+                                        FirstLoginView().environmentObject(loginData),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)

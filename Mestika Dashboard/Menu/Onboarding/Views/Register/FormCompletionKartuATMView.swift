@@ -22,6 +22,9 @@ struct FormCompletionKartuATMView: View {
     @State var goToSuccessPage = false
     @State var isLoading = false
     
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    var user: FetchedResults<User>
+    
     @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
     @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
     @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
@@ -127,12 +130,10 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-            registerData.namaLengkapFromNik = nama_local!
-            registerData.nik = nik_local!
+            registerData.namaLengkapFromNik = user.last?.lastName ?? "-"
+            registerData.nik = user.last?.nik ?? "-"
             atmData.atmName = registerData.namaLengkapFromNik
             fetchAddressOption()
-            
-            
         }
         .alert(isPresented: $isShowAlert) {
             return Alert(

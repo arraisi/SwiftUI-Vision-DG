@@ -299,7 +299,7 @@ struct SuccessRegisterView: View {
             getAllSchedule()
         }
         .onAppear {
-            self.registerData.nik = nik_local ?? "-"
+            self.registerData.nik = user.last?.nik ?? "-"
             self.registerData.noTelepon = phone_local ?? "-"
             self.registerData.email = email_local ?? "-"
             self.registerData.namaLengkapFromNik = nama_local ?? "-"

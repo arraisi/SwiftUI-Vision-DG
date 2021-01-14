@@ -15,6 +15,9 @@ struct FormDetailKartuATMView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    var user: FetchedResults<User>
+    
     @ObservedObject private var productVM = ATMProductViewModel()
     
     var isAllowBack: Bool = true
