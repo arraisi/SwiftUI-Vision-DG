@@ -496,10 +496,7 @@ struct WelcomeView: View {
             
             // MARK: change destination
             Button(action:{
-                //                self.isShowModal = false
-                //                self.modalSelection = ""
-                cancelRegistration()
-                //                self.registerData.clear()
+                
             }, label: {
                 Text("Batalkan Permohonan")
                     .foregroundColor(.black)
