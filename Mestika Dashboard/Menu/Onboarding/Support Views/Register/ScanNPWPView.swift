@@ -75,7 +75,7 @@ struct ScanNPWPView: View {
                 
                 Text(NSLocalizedString("Nomor NPWP", comment: ""))
                     .multilineTextAlignment(.leading)
-                    .font(.custom("Montserrat-SemiBold", size: 10))
+                    .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                 
                 TextFieldValidation(data: $npwp, title: "No. NPWP", disable: alreadyHaveNpwp, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in

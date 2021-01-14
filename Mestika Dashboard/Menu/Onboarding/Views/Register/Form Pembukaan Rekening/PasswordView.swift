@@ -89,7 +89,7 @@ struct PasswordView: View {
                                 .fixedSize(horizontal: false, vertical: true)
                             
                             Text("Password ini digunakan saat anda masuk kedalam Aplikasi Mobile Banking Mestika Bank (mengandung huruf kecil,angka,kapital,karakter khusus)")
-                                .font(.custom("Montserrat-Regular", size: 10))
+                                .font(.custom("Montserrat-Regular", size: 12))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 3)

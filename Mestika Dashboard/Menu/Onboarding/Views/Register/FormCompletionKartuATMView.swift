@@ -155,7 +155,7 @@ struct FormCompletionKartuATMView: View {
                 
                 Text(NSLocalizedString("Nama ini akan dicetak pada kartu ATM baru Anda", comment: ""))
                     .multilineTextAlignment(.center)
-                    .font(.custom("Montserrat", size: 10))
+                    .font(.custom("Montserrat", size: 12))
                     .foregroundColor(Color("DarkStaleBlue"))
                     .padding(EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15))
                 
@@ -237,7 +237,7 @@ struct FormCompletionKartuATMView: View {
             Group {
                 
                 Text("")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -332,7 +332,7 @@ struct FormCompletionKartuATMView: View {
             Group {
                 
                 Text("")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -403,14 +403,14 @@ struct FormCompletionKartuATMView: View {
                 
                 Text(NSLocalizedString("Dari mana Anda tahu informasi Digital Banking Bank mestika", comment: ""))
                     .multilineTextAlignment(.center)
-                    .font(.custom("Montserrat", size: 10))
+                    .font(.custom("Montserrat", size: 12))
                     .foregroundColor(Color("DarkStaleBlue"))
                     .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
                 
                 Group {
                     
                     Text("")
-                        .font(Font.system(size: 10))
+                        .font(Font.system(size: 12))
                         .fontWeight(.semibold)
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.leading)

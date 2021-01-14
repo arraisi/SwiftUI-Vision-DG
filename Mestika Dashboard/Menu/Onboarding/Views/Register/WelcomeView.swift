@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import PopupView
 import JitsiMeet
+import Indicators
 
 struct WelcomeView: View {
     
@@ -46,6 +47,10 @@ struct WelcomeView: View {
     @State private var dateInterview = "-"
     @State private var timeInterview = "-"
     
+    @State var isLoading = false
+    @State var showingAlert = false
+    @State var alertMessage = ""
+    
     // Modal Variables
     @State var isShowModal = false
     @State var modalSelection = ""
@@ -71,6 +76,13 @@ struct WelcomeView: View {
                 VStack(spacing: 10) {
                     Spacer()
                     
+                    if (self.isLoading) {
+                        LinearWaitingIndicator()
+                            .animated(true)
+                            .foregroundColor(.green)
+                            .frame(height: 1)
+                    }
+                    
                     Header
                         .padding([.horizontal, .top], 20)
                     
@@ -95,9 +107,11 @@ struct WelcomeView: View {
                         }
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(15)
+                        .disabled(isLoading)
                         
                         NavigationLink(destination:
                                         FirstLoginView().environmentObject(loginData),
+//                                       Term_ConditionView().environmentObject(registerData),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
@@ -106,6 +120,7 @@ struct WelcomeView: View {
                         .isDetailLink(false)
                         .frame(maxWidth: .infinity, maxHeight: 50)
                         .cornerRadius(15)
+                        .disabled(isLoading)
                     }
                     .padding(.horizontal, 20)
                     
@@ -140,6 +155,7 @@ struct WelcomeView: View {
                 if moveToWelcomeView {
                     print("Move to Welcome: \(moveToWelcomeView)")
                     activateWelcomeView()
+                    self.appState.moveToWelcomeView = false
                 }
             }
             .onReceive(self.appState.$moveToWelcomeViewThenCancel) { moveToWelcomeViewThenCancel in
@@ -147,6 +163,7 @@ struct WelcomeView: View {
                     print("Move to Welcome: \(moveToWelcomeViewThenCancel)")
                     activateWelcomeView()
                     cancelRegistration()
+                    self.appState.moveToWelcomeViewThenCancel = false
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
@@ -192,6 +209,12 @@ struct WelcomeView: View {
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
             }
+            .alert(isPresented: $showingAlert) {
+                return Alert(
+                    title: Text("Message"),
+                    message: Text(self.alertMessage),
+                    dismissButton: .default(Text("Oke")))
+            }
             .introspectNavigationController { navigationController in
                 self.appState.navigationController = navigationController
             }
@@ -207,7 +230,7 @@ struct WelcomeView: View {
         self.isRescheduleInterview = false
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
-        self.appState.moveToWelcomeView = false
+        self.isCancelViewActive = false
     }
     
     var Header: some View {
@@ -495,17 +518,12 @@ struct WelcomeView: View {
             .padding(.bottom, 5)
             
             // MARK: change destination
-            Button(action:{
-                //                self.isShowModal = false
-                //                self.modalSelection = ""
-                cancelRegistration()
-                //                self.registerData.clear()
-            }, label: {
+            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
                 Text("Batalkan Permohonan")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
-            })
+            }
             .padding(.bottom, 20)
             .cornerRadius(12)
             
@@ -1005,14 +1023,12 @@ struct WelcomeView: View {
     }
     
     func cancelRegistration() {
-        //        self.isLoading = true
+        self.isLoading = true
         
         self.userVM.cancelRegistration(nik: user.last?.nik ?? "", completion: { (success:Bool) in
             
             if success {
-                //                self.isLoading = false
-                //                removeUser()
-                
+                self.isLoading = false
                 self.modalSelection = ""
                 
                 let domain = Bundle.main.bundleIdentifier!
@@ -1022,10 +1038,10 @@ struct WelcomeView: View {
                 self.isCancelViewActive = true
                 
             } else {
-                //                self.isLoading = false
+                self.isLoading = false
                 
-                //                self.scheduleVM.message = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
-                //                self.showingAlert.toggle()
+                self.alertMessage = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+                self.showingAlert.toggle()
             }
         })
     }

@@ -145,7 +145,7 @@ struct FormPilihDesainATMView: View {
                                 ScrollView {
                                     HStack{
                                         Text(cards[Int(count)].description)
-                                            .font(.custom("Montserrat-Light", size: 10))
+                                            .font(.custom("Montserrat-Light", size: 12))
                                         Spacer()
                                     }
                                     .padding(.horizontal)

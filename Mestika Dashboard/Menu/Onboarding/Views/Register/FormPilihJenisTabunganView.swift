@@ -20,6 +20,8 @@ struct FormPilihJenisTabunganView: View {
     
     @State var referenceCode: String = ""
     
+    @State var scale: CGFloat = 0
+    
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 170 // 100 is amount padding left and right
     let itemHeight:CGFloat = 150
@@ -90,7 +92,7 @@ struct FormPilihJenisTabunganView: View {
                     .edgesIgnoringSafeArea(.bottom)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .animation(.spring())
-                    .padding(.vertical, 25)
+                    .padding(.vertical, 15)
                     .onAppear {
                         refreshCarousel()
                     }
@@ -103,7 +105,7 @@ struct FormPilihJenisTabunganView: View {
                     }
                     Spacer()
                 }
-                .padding(.vertical, 30)
+                .padding(.vertical, 20)
             }
             
             if self.showingModalDetail {
@@ -114,19 +116,16 @@ struct FormPilihJenisTabunganView: View {
             }
             
             if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation {
-                    self.showingModal = false
+                ZStack {
+                    ModalOverlay(tapAction: { withAnimation {
+                        self.showingModal = false
+                        
+                    } })
+                    .edgesIgnoringSafeArea(.all)
                     
-                } })
-                .edgesIgnoringSafeArea(.all)
-            }
-            if self.showingReferralCodeModal {
-                ModalOverlay(tapAction: { withAnimation {
-                    
-                    self.showingReferralCodeModal = false
-                    
-                } })
-                .edgesIgnoringSafeArea(.all)
+                    createBottomFloater()
+
+                }
             }
             
             NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
@@ -144,14 +143,11 @@ struct FormPilihJenisTabunganView: View {
 //            }
 //
 //        }))
-        .popup(isPresented: $showingModal, type: .`default`, animation: Animation.spring(), closeOnTapOutside: true) {
-            createBottomFloater()
-        }
+//        .popup(isPresented: $showingModal, type: .`default`, animation: Animation.spring(), closeOnTapOutside: false) {
+//            createBottomFloater()
+//        }
         .popup(isPresented: $showingModalDetail, type: .`default`, animation: Animation.spring(), closeOnTapOutside: true) {
             popupDetailSaving()
-        }
-        .popup(isPresented: $showingReferralCodeModal, type: .floater(), position: .top, animation: Animation.spring(), closeOnTapOutside: true) {
-            referralCodeModal()
         }
     }
     
@@ -218,63 +214,16 @@ struct FormPilihJenisTabunganView: View {
             .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
-    }
-    
-    private func referralCodeModal() -> some View {
-        VStack {
-            VStack {
-                Text(NSLocalizedString("Do you have a referral code?", comment: ""))
-                    .multilineTextAlignment(.center)
-                    .font(.custom("Montserrat-Bold", size: 16))
-                    .foregroundColor(Color("DarkStaleBlue"))
-                    .padding(EdgeInsets(top: 25, leading: 15, bottom: 10, trailing: 15))
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                HStack {
-                    
-                    TextField(NSLocalizedString("Masukkan kode referal", comment: ""), text: $atmData.atmAddresspostalReferral) { changed in
-                        
-                    } onCommit: {
-                    }
-                    .font(Font.system(size: 14))
-                    .frame(height: 50)
+            .scaleEffect(scale)
+            .animation(.easeInOut(duration: 0.2))
+            .onAppear {
+               withAnimation() {
+                    self.scale = 1
                 }
-                .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
-                NavigationLink(
-                    destination: FormIdentitasDiriView().environmentObject(registerData)
-                ){
-                    Text(NSLocalizedString("Yes I do, Submit now", comment: ""))
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                }
-                .background(Color(hex: disableSubmitReferralCodeBtn ? "#CBD1D9" : "#2334D0"))
-                .cornerRadius(12)
-                .padding(.bottom, 5)
-                .padding(.top, 10)
-                .disabled(disableSubmitReferralCodeBtn)
-                
-                NavigationLink(
-                    destination: FormIdentitasDiriView().environmentObject(registerData)
-                ){
-                    Text(NSLocalizedString("No, I don't", comment: ""))
-                        .foregroundColor(.gray)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                }
-                .cornerRadius(12)
-                
             }
-            .padding(EdgeInsets(top: 0, leading: 25, bottom: 20, trailing: 25))
-        }
-        .frame(width: UIScreen.main.bounds.width - 40)
-        .background(Color.white)
-        .cornerRadius(15)
-        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
-        .padding(.vertical, 20)
+            .onDisappear{
+                    self.scale = 0
+            }
         
     }
     

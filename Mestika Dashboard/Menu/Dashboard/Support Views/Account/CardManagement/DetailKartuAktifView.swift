@@ -29,7 +29,7 @@ struct DetailKartuAktifView: View {
                             
                             
                             Text("Riwayat transaksi pengunaan kartu")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                         }
@@ -52,7 +52,7 @@ struct DetailKartuAktifView: View {
                             
                             
                             Text("Laporan keuangan bulanan")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                         }
@@ -75,7 +75,7 @@ struct DetailKartuAktifView: View {
                             
                             
                             Text("Atur limit transaksi kartu")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                         }
@@ -98,7 +98,7 @@ struct DetailKartuAktifView: View {
                             
                             
                             Text("Ubah PIN ATM / Reset PIN ATM")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                         }
@@ -121,7 +121,7 @@ struct DetailKartuAktifView: View {
                             
                             
                             Text("Blokir kartu sementara")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                         }
@@ -144,7 +144,7 @@ struct DetailKartuAktifView: View {
                             
                             
                             Text("Laporkan kerusakan kartu")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                         }

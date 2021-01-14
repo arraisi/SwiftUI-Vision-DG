@@ -38,7 +38,7 @@ struct CardLimitView: View {
                         // Limit per Transaksi
                         VStack(alignment: .leading) {
                             Text("per Transaksi (Debit Card)")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                             HStack(alignment:.top){
                                 Text("Rp.")
                                     .font(.custom("Montserrat-Bold", size: 20))
@@ -68,7 +68,7 @@ struct CardLimitView: View {
                         VStack(alignment: .leading) {
                             
                             Text("per Transaksi (Debit Card)")
-                                .font(.custom("Montserrat-Light", size: 10))
+                                .font(.custom("Montserrat-Light", size: 12))
                             HStack(alignment:.top){
                                 Text("Rp.")
                                     .font(.custom("Montserrat-Bold", size: 20))

@@ -79,7 +79,7 @@ struct ScanKTPView: View {
                 
                 Text(NSLocalizedString("Nomor Kartu Tanda Penduduk", comment: ""))
                     .multilineTextAlignment(.leading)
-                    .font(.custom("Montserrat-SemiBold", size: 10))
+                    .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                 
                 TextFieldValidation(data: $nik, title: NSLocalizedString("No. KTP (Otomatis terisi)", comment: ""), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in

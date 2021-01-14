@@ -177,37 +177,43 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 
                                 // NPWP ROW
-                                if self.registerData.npwp != "" {
-                                    VStack {
-                                        
-                                        Button(action: {
-                                            self.cameraFileName = "npwp"
-                                            self.shouldPresentCamera = true
-                                        }) {
-                                            HStack {
-                                                Text("NPWP")
-                                                    .font(.subheadline)
-                                                    .foregroundColor(Color(hex: "#232175"))
-                                                    .fontWeight(.bold)
-                                                Spacer()
-                                                
-                                                VStack {
+                                //                                if self.registerData.npwp != "" {
+                                VStack {
+                                    
+                                    Button(action: {
+                                        self.cameraFileName = "npwp"
+                                        self.shouldPresentCamera = true
+                                    }) {
+                                        HStack {
+                                            Text(self.registerData.fotoNPWP != Image("") ? "Your NPWP photo" : "Add NPWP")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color(hex: "#232175"))
+                                                .fontWeight(.bold)
+                                            Spacer()
+                                            
+                                            VStack {
+                                                if self.registerData.fotoNPWP != Image("") {
                                                     self.registerData.fotoNPWP
                                                         .resizable()
                                                         .frame(maxWidth: 80, maxHeight: 50)
                                                         .cornerRadius(8)
+                                                } else {
+                                                    Image("ic_camera")
+                                                        .resizable()
+                                                        .frame(maxWidth: 50, maxHeight: 36)
                                                 }
-                                                .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                             }
+                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                         }
-                                        .fullScreenCover(isPresented: $shouldPresentCamera) {
-                                            scanner
-                                        }
-                                        Divider()
                                     }
-                                    .padding([.top, .bottom], 20)
-                                    .padding(.horizontal, 20)
+                                    .fullScreenCover(isPresented: $shouldPresentCamera) {
+                                        scanner
+                                    }
+                                    Divider()
                                 }
+                                .padding([.top, .bottom], 20)
+                                .padding(.horizontal, 20)
+                                //                                }
                                 
                                 Group {
                                     
@@ -222,12 +228,12 @@ struct VerificationRegisterDataView: View {
                                         TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
                                             .disabled(true)
                                         
-//                                        Divider()
-//                                            .frame(height: 30)
-//
-//                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
-//                                            Text("Edit").foregroundColor(.blue)
-//                                        }
+                                        //                                        Divider()
+                                        //                                            .frame(height: 30)
+                                        //
+                                        //                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
+                                        //                                            Text("Edit").foregroundColor(.blue)
+                                        //                                        }
                                     }
                                     .frame(height: 20)
                                     .font(.subheadline)

@@ -47,7 +47,7 @@ struct FormNewPinAtmView: View {
                             }, label: {
                                 Text("show")
                                     .foregroundColor(Color(hex: "#3756DF"))
-                                    .font(.custom("Montserrat-Light", size: 10))
+                                    .font(.custom("Montserrat-Light", size: 12))
                             })
                         }
                         .frame(height: 25)
@@ -69,7 +69,7 @@ struct FormNewPinAtmView: View {
                             }, label: {
                                 Text("show")
                                     .foregroundColor(Color(hex: "#3756DF"))
-                                    .font(.custom("Montserrat-Light", size: 10))
+                                    .font(.custom("Montserrat-Light", size: 12))
                             })
                         }
                         .frame(height: 25)

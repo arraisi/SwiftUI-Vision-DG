@@ -97,7 +97,7 @@ struct EmailOTPRegisterNasabahView: View {
                     
                     HStack {
                         Text("Tidak Menerima Kode?")
-                            .font(.custom("Montserrat-Regular", size: 10))
+                            .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
                             print("-> Resend OTP")
@@ -109,7 +109,7 @@ struct EmailOTPRegisterNasabahView: View {
                             getOTP()
                         }) {
                             Text("Resend OTP")
-                                .font(.custom("Montserrat-SemiBold", size: 10))
+                                .font(.custom("Montserrat-SemiBold", size: 12))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }
                         .disabled(isResendOtpDisabled)
@@ -120,7 +120,7 @@ struct EmailOTPRegisterNasabahView: View {
                             },
                             label: {
                                 Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
-                                    .font(.custom("Montserrat-Regular", size: 10))
+                                    .font(.custom("Montserrat-Regular", size: 12))
                             })
                             .disabled(true) // false to by pass to next view
                     }

@@ -46,9 +46,9 @@ struct CardDamageView: View {
                                     
                                     HStack {
                                         Text("Biaya pengganti sebesar")
-                                            .font(.custom("Montserrat-Regular", size: 8))
+                                            .font(.custom("Montserrat-Regular", size: 10))
                                         Text("Rp. 20.000,-")
-                                            .font(.custom("Montserrat-Bold", size: 8))
+                                            .font(.custom("Montserrat-Bold", size: 10))
                                     }
                                     
                                     Spacer()
@@ -131,7 +131,7 @@ struct CardDamageView: View {
             
             HStack {
                 Text("Terimakasih telah mengirimkan informasi kerusakan kartu Anda kepada Kami. Silahkan tunggu beberapa saat, pihak Kami akan segera menghubungi Anda untuk menindak lanjutin laporan Anda.")
-                    .font(.custom("Montserrat-Regular", size: 10))
+                    .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
             }

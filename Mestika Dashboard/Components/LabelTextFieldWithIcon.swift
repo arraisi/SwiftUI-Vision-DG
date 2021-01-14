@@ -21,7 +21,7 @@ struct LabelTextFieldWithIcon: View {
     var body: some View {
         VStack (alignment: .leading) {
             Text(label)
-                .font(Font.system(size: 10))
+                .font(Font.system(size: 12))
                 .fontWeight(.semibold)
                 .foregroundColor(Color(hex: "#707070"))
                 .multilineTextAlignment(.leading)

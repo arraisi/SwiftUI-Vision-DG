@@ -47,7 +47,7 @@ struct ListNotificationView: View {
                                     VStack(alignment: .leading) {
                                         Text("\(item.type) \(item.status)")
                                             .foregroundColor(Color("Green"))
-                                            .font(.system(size: 10))
+                                            .font(.system(size: 12))
                                             .fontWeight(.regular)
                                         
                                         Text("\(item.title)")

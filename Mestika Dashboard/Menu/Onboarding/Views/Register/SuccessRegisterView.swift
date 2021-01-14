@@ -116,7 +116,7 @@ struct SuccessRegisterView: View {
                                         getScheduleById(date: tanggalWawancara)
                                     }) {
                                         Text(data)
-                                            .font(.custom("Montserrat-Regular", size: 10))
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                 }
                             } label: {
@@ -144,7 +144,7 @@ struct SuccessRegisterView: View {
                                         pilihJam = data
                                     }) {
                                         Text(data)
-                                            .font(.custom("Montserrat-Regular", size: 10))
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                 }
                             } label: {

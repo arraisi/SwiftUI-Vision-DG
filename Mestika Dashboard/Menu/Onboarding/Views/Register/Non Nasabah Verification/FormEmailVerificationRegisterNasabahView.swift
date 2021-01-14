@@ -90,7 +90,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     
                     HStack {
                         Text(NSLocalizedString("*Email harus lebih dari 8 karakter", comment: ""))
-                            .font(.custom("Montserrat-SemiBold", size: 10))
+                            .font(.custom("Montserrat-SemiBold", size: 12))
                             .foregroundColor(.black)
                         
                         Spacer()

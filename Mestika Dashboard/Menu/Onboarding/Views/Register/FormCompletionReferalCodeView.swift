@@ -80,14 +80,14 @@ struct FormCompletionReferalCodeView: View {
                 
                 Text(NSLocalizedString("Dari mana Anda tahu informasi Digital Banking Bank mestika", comment: ""))
                     .multilineTextAlignment(.center)
-                    .font(.custom("Montserrat", size: 10))
+                    .font(.custom("Montserrat", size: 12))
                     .foregroundColor(Color("DarkStaleBlue"))
                     .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
                 
                 Group {
                     
                     Text("")
-                        .font(Font.system(size: 10))
+                        .font(Font.system(size: 12))
                         .fontWeight(.semibold)
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.leading)

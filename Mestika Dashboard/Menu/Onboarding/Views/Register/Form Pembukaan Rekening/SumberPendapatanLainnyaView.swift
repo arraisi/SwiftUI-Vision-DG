@@ -116,7 +116,7 @@ struct SumberPendapatanLainnyaView: View {
                                                     .frame(width: 19, height: 19)
                                                 
                                                 Text("Ya, Saya memiliki")
-                                                    .font(.custom("Montserrat-Regular", size: 10))
+                                                    .font(.custom("Montserrat-Regular", size: 12))
                                                 
                                                 Spacer()
                                                 
@@ -140,7 +140,7 @@ struct SumberPendapatanLainnyaView: View {
                                                             registerData.sumberPendapatanLainnya = sumberPendapatanLainnyaList[i]
                                                         }) {
                                                             Text(sumberPendapatanLainnyaList[i])
-                                                                .font(.custom("Montserrat-Regular", size: 10))
+                                                                .font(.custom("Montserrat-Regular", size: 12))
                                                         }
                                                     }
                                                 } label: {
@@ -171,7 +171,7 @@ struct SumberPendapatanLainnyaView: View {
                                                     .frame(width: 19, height: 19)
                                                 
                                                 Text("Tidak, Saya tidak memiliki")
-                                                    .font(.custom("Montserrat-Regular", size: 10))
+                                                    .font(.custom("Montserrat-Regular", size: 12))
                                                 
                                                 Spacer()
                                                 

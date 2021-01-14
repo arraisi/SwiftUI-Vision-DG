@@ -321,7 +321,7 @@ struct InformasiPerusahaanView: View {
             Group {
                 
                 Text("Alamat Perusahaan")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -354,7 +354,7 @@ struct InformasiPerusahaanView: View {
             VStack(alignment: .leading) {
                 
                 Text("Kode Pos")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -393,7 +393,7 @@ struct InformasiPerusahaanView: View {
             
             Group {
                 Text("Bidang Usaha")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -424,7 +424,7 @@ struct InformasiPerusahaanView: View {
             Group {
                 
                 Text("No. Telepon Perusahaan")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
