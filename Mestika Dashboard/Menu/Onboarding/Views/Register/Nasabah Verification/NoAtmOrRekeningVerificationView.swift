@@ -80,7 +80,7 @@ struct NoAtmOrRekeningVerificationView: View {
                                     jenisKartuCtrl = jenisKartuList[i].jenis
                                 }) {
                                     Text(jenisKartuList[i].jenis)
-                                        .font(.custom("Montserrat-Regular", size: 10))
+                                        .font(.custom("Montserrat-Regular", size: 12))
                                 }
                             }
                         } label: {
@@ -122,7 +122,7 @@ struct NoAtmOrRekeningVerificationView: View {
                     }
                     
                     Text(NSLocalizedString("*Pastikan kartu ATM atau Rekening Anda telah aktif, jika belum aktifasi kartu ATM silahkan kunjungi Kantor Bank Mestika terdekat.", comment: ""))
-                        .font(.custom("Montserrat-Regular", size: 10))
+                        .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#5A6876"))
                         .padding(.top, 5)
                         .padding(.bottom, 30)

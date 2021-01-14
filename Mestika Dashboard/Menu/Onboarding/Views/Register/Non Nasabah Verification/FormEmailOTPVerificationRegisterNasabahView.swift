@@ -96,7 +96,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     
                     HStack {
                         Text(NSLocalizedString("Tidak Menerima Kode?", comment: ""))
-                            .font(.custom("Montserrat-Regular", size: 10))
+                            .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
                             print("-> Resend OTP")
@@ -106,7 +106,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             getOTP()
                         }) {
                             Text("Resend OTP")
-                                .font(.custom("Montserrat-SemiBold", size: 10))
+                                .font(.custom("Montserrat-SemiBold", size: 12))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }
                         .disabled(isResendOtpDisabled)
@@ -117,7 +117,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             },
                             label: {
                                 Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
-                                    .font(.custom("Montserrat-Regular", size: 10))
+                                    .font(.custom("Montserrat-Regular", size: 12))
                             })
                             .disabled(true)
                     }

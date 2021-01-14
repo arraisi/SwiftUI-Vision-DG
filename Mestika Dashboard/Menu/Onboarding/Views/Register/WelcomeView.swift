@@ -111,6 +111,7 @@ struct WelcomeView: View {
                         
                         NavigationLink(destination:
                                         FirstLoginView().environmentObject(loginData),
+//                                       Term_ConditionView().environmentObject(registerData),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)

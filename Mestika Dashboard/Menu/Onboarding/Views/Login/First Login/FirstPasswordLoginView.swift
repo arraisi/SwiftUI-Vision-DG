@@ -99,7 +99,7 @@ struct FirstPasswordLoginView: View {
                                     self.securedPassword.toggle()
                                 }) {
                                     Text("show")
-                                        .font(.custom("Montserrat-Light", size: 10))
+                                        .font(.custom("Montserrat-Light", size: 12))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -123,7 +123,7 @@ struct FirstPasswordLoginView: View {
                                     self.securedPassword.toggle()
                                 }) {
                                     Text("show")
-                                        .font(.custom("Montserrat-Light", size: 10))
+                                        .font(.custom("Montserrat-Light", size: 12))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -150,7 +150,7 @@ struct FirstPasswordLoginView: View {
                                     self.securedConfirmation.toggle()
                                 }) {
                                     Text("show")
-                                        .font(.custom("Montserrat-Light", size: 10))
+                                        .font(.custom("Montserrat-Light", size: 12))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -172,7 +172,7 @@ struct FirstPasswordLoginView: View {
                                     self.securedConfirmation.toggle()
                                 }) {
                                     Text("show")
-                                        .font(.custom("Montserrat-Light", size: 10))
+                                        .font(.custom("Montserrat-Light", size: 12))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))

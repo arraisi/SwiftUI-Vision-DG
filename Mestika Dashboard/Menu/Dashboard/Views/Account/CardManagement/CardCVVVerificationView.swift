@@ -63,7 +63,7 @@ struct CardCVVVerificationView: View {
                         Divider()
                         
                         Text("Masukkan 3 digit angka dibelakang kartu ATM Anda")
-                            .font(.system(size: 10))
+                            .font(.system(size: 12))
                     }
                     .padding(.vertical, 25)
                     .padding(.horizontal, 15)

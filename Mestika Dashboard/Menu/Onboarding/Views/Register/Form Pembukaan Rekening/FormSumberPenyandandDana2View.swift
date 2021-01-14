@@ -203,7 +203,7 @@ struct FormSumberPenyandandDana2View: View {
             VStack(alignment: .leading) {
                 
                 Text("Hubungan Dengan Anda")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -222,7 +222,7 @@ struct FormSumberPenyandandDana2View: View {
                                 registerData.hubunganPenyandangDana = hubunganOptions[i]
                             }) {
                                 Text(hubunganOptions[i])
-                                    .font(.custom("Montserrat-Regular", size: 10))
+                                    .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
                     } label: {
@@ -241,7 +241,7 @@ struct FormSumberPenyandandDana2View: View {
             VStack(alignment: .leading) {
                 
                 Text("Profesi Penyandang Dana")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -260,7 +260,7 @@ struct FormSumberPenyandandDana2View: View {
                                 registerData.profesiPenyandangDana = profesiPenyandandDanaOptions[i]
                             }) {
                                 Text(profesiPenyandandDanaOptions[i])
-                                    .font(.custom("Montserrat-Regular", size: 10))
+                                    .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
                     } label: {

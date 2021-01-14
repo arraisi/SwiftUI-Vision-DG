@@ -106,7 +106,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     
                     HStack {
                         Text(NSLocalizedString("Tidak Menerima Kode?", comment: ""))
-                            .font(.custom("Montserrat-Regular", size: 10))
+                            .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
                             print("-> Resend OTP")
@@ -117,7 +117,7 @@ struct PhoneOTPRegisterNasabahView: View {
 //                            self.timeRemainingRsnd = 30
                         }) {
                             Text(NSLocalizedString("Resend OTP", comment: ""))
-                                .font(.custom("Montserrat-SemiBold", size: 10))
+                                .font(.custom("Montserrat-SemiBold", size: 12))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }
                         .disabled(isResendOtpDisabled)
@@ -126,7 +126,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             self.isOtpValid = true
                         }, label: {
                             Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!)")
-                                .font(.custom("Montserrat-Regular", size: 10))
+                                .font(.custom("Montserrat-Regular", size: 12))
                         })
                         .disabled(true) // false by pass to next page
                     }

@@ -128,7 +128,7 @@ struct VerificationAddressView: View {
                                     VStack(alignment: .leading) {
                                         
                                         Text(NSLocalizedString("Kode Pos", comment: ""))
-                                            .font(Font.system(size: 10))
+                                            .font(Font.system(size: 12))
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color(hex: "#707070"))
                                         

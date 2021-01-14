@@ -87,6 +87,7 @@ struct Term_ConditionView: View {
                                         
                                     })
                             )
+                            .padding(.horizontal, 12)
                         
                         Divider()
                             .padding(.horizontal, 20)
@@ -153,7 +154,6 @@ struct Term_ConditionView: View {
                     .shadow(radius: 30)
                 }
                 .padding(.horizontal, 30)
-                .padding(.top, 35)
                 .padding(.bottom, 35)
             }
         }

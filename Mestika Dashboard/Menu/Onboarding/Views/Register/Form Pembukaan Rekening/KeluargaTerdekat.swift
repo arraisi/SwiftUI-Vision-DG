@@ -244,7 +244,7 @@ struct KeluargaTerdekat: View {
             Group {
                 
                 Text("Hubungan Kekerabatan")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -270,7 +270,7 @@ struct KeluargaTerdekat: View {
                                 registerData.hubunganKekerabatanKeluarga = hubunganKekerabatanOptions[i]
                             }) {
                                 Text(hubunganKekerabatanOptions[i])
-                                    .font(.custom("Montserrat-Regular", size: 10))
+                                    .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
                     } label: {
@@ -294,7 +294,7 @@ struct KeluargaTerdekat: View {
             Group {
                 
                 Text("Alamat")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -324,7 +324,7 @@ struct KeluargaTerdekat: View {
             VStack(alignment: .leading) {
                 
                 Text("Kode Pos")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
@@ -361,7 +361,7 @@ struct KeluargaTerdekat: View {
             Group {
                 
                 Text("No. Telepon")
-                    .font(Font.system(size: 10))
+                    .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
