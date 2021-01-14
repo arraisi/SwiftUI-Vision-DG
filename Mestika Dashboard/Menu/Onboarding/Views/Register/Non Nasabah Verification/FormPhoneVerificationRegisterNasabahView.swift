@@ -176,6 +176,10 @@ struct FormPhoneVerificationRegisterNasabahView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .introspectNavigationController { nc in
+            nc.interactivePopGestureRecognizer?.isEnabled = true
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

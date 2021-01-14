@@ -13,6 +13,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     var productATMData = AddProductATM()
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @GestureState private var dragOffset = CGSize.zero
     
     /* Variable PIN OTP */
     var maxDigits: Int = 6
@@ -202,7 +204,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             if self.timeRemainingBtn < 1 {
                 isBtnValidationDisabled = false
             } else {
-//                isBtnValidationDisabled = true
+                //                isBtnValidationDisabled = true
             }
         }
         .alert(isPresented: $isShowAlert) {
@@ -219,6 +221,12 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
     
     private var pinDots: some View {
@@ -388,9 +396,9 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         print("EMAIL \(self.registerData.email)")
         self.otpVM.otpRequest(
             otpRequest: OtpRequest(
-                    destination: self.registerData.email,
-                    type: "email",
-                    trytime: self.tryCountResend
+                destination: self.registerData.email,
+                type: "email",
+                trytime: self.tryCountResend
             )
         ) { success in
             
@@ -450,30 +458,30 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 self.modalSelection = "OTPINCORRECT"
                 self.isShowModal.toggle()
                 
-//                if (self.tryCount == 1) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount == 2) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount == 3) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount > 3) {
-//                    self.tryCountResendDisable += 1
-//                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
+                //                if (self.tryCount == 1) {
+                //                    self.timeRemainingBtn = 0
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
+                //
+                //                if (self.tryCount == 2) {
+                //                    self.timeRemainingBtn = 0
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
+                //
+                //                if (self.tryCount == 3) {
+                //                    self.timeRemainingBtn = 0
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
+                //
+                //                if (self.tryCount > 3) {
+                //                    self.tryCountResendDisable += 1
+                //                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
                 
                 self.isBtnValidationDisabled = true
                 resetField()

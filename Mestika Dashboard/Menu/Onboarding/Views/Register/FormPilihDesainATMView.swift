@@ -190,6 +190,7 @@ struct FormPilihDesainATMView: View {
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .onAppear() {
                 self.fetchATMDesignList()
             }

@@ -83,7 +83,7 @@ struct FormCompletionKartuATMView: View {
                         
                         nameCard
                         addressCard
-//                        referalCodeCard
+                        //                        referalCodeCard
                         
                         Button(action: {
                             self.postData()
@@ -118,8 +118,7 @@ struct FormCompletionKartuATMView: View {
             }
         }
         .edgesIgnoringSafeArea(.top)
-        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        //        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -658,7 +657,7 @@ struct FormCompletionKartuATMView: View {
                 self.addressSugestion = self.addressVM.address
                 atmData.atmAddressInput = self.addressSugestion[0].formatted_address
                 atmData.atmAddressPostalCodeInput = self.addressSugestion[0].postalCode
-//                self.kodePos = self.addressSugestion[0].postalCode
+                //                self.kodePos = self.addressSugestion[0].postalCode
                 atmData.atmAddressKecamatanInput = self.addressSugestion[0].kecamatan
                 atmData.atmAddressKelurahanInput = self.addressSugestion[0].kelurahan
                 atmData.atmAddressRtInput = self.addressSugestion[0].rt
