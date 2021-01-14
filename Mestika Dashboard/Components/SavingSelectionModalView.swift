@@ -35,7 +35,7 @@ struct SavingSelectionModalView: View {
                 
                 Text(data.tabunganName)
                     .font(.custom("Montserrat-Regular", size: 18))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#2334D0"))
                     .padding(.horizontal, 15)
                     .padding(.bottom, 20)
@@ -89,7 +89,7 @@ struct SavingSelectionModalView: View {
             }) {
                 Text(NSLocalizedString("Pilih Tabungan lain", comment: ""))
                     .foregroundColor(Color(hex: "#5A6876"))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
