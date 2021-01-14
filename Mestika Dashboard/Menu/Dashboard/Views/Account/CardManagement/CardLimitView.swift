@@ -57,9 +57,9 @@ struct CardLimitView: View {
                             Divider()
                             HStack {
                                 Text("Maximal limit per Transaksi")
-                                    .font(.custom("Montserrat-Light", size: 8))
+                                    .font(.custom("Montserrat-Light", size: 10))
                                 Text("Rp. 50.000.000,-")
-                                    .font(.custom("Montserrat-SemiBold", size: 8))
+                                    .font(.custom("Montserrat-SemiBold", size: 10))
                             }
                             .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                         }
@@ -88,9 +88,9 @@ struct CardLimitView: View {
                             Divider()
                             HStack {
                                 Text("Maximal limit penarikan harian")
-                                    .font(.custom("Montserrat-Light", size: 8))
+                                    .font(.custom("Montserrat-Light", size: 10))
                                 Text("Rp. 20.000.000,-")
-                                    .font(.custom("Montserrat-SemiBold", size: 8))
+                                    .font(.custom("Montserrat-SemiBold", size: 10))
                             }
                             .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
                         }

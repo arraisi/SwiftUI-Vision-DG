@@ -100,7 +100,7 @@ struct ScanNPWPView: View {
                     HStack(alignment: .top) {
                         Image(systemName: alreadyHaveNpwp ? "checkmark.square": "square")
                         Text(NSLocalizedString("* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini", comment: ""))
-                            .font(.custom("Montserrat-Regular", size: 8))
+                            .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#707070"))
                     }
                     .padding(.top, 5)

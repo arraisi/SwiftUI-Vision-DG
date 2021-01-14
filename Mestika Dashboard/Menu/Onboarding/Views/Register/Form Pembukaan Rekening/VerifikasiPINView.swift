@@ -97,7 +97,7 @@ struct VerifikasiPINView: View {
                                 .padding(.top, 20)
                             
                             Text("Pin ini digunakan untuk setiap kegiatan transaksi keuangan")
-                                .font(.custom("Montserrat-Regular", size: 8))
+                                .font(.custom("Montserrat-Regular", size: 12))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 3)

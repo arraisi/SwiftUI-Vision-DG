@@ -92,7 +92,7 @@ struct ScanKTPView: View {
                     HStack(alignment: .top) {
                         Image(systemName: confirmNik ? "checkmark.square": "square")
                         Text(NSLocalizedString("* Periksa kembali dan pastikan Nomor Kartu Tanda Penduduk (KTP) Anda telah sesuai", comment: ""))
-                            .font(.custom("Montserrat-Regular", size: 8))
+                            .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#707070"))
                     }
                     //                    .padding(.horizontal, 30)

@@ -56,16 +56,16 @@ struct ListNotificationView: View {
                                         
                                         HStack {
                                             Text("\(item.time) :")
-                                                .font(.system(size: 8))
+                                                .font(.system(size: 12))
                                                 .fontWeight(.light)
                                                 .foregroundColor(Color("DarkStaleBlue"))
                                             Text("Rekening Tujuan :")
                                                 .foregroundColor(Color("DarkStaleBlue"))
-                                                .font(.system(size: 8))
+                                                .font(.system(size: 12))
                                                 .fontWeight(.ultraLight)
                                             Text("\(item.destinationAccount)")
                                                 .foregroundColor(Color("DarkStaleBlue"))
-                                                .font(.system(size: 8))
+                                                .font(.system(size: 12))
                                                 .fontWeight(.light)
                                         }
                                     }

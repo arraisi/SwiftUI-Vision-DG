@@ -97,7 +97,7 @@ struct OtpChangePinAtmView: View {
                         
                         VStack(alignment: .leading, spacing: 2) {
                             Text("No. telepon Anda berubah?")
-                                .font(.custom("Montserrat-Regular", size: 9))
+                                .font(.custom("Montserrat-Regular", size: 12))
                             Button(action: {
                                 
                             }, label: {
@@ -108,7 +108,7 @@ struct OtpChangePinAtmView: View {
                         
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Ganti cara validasi?")
-                                .font(.custom("Montserrat-Regular", size: 9))
+                                .font(.custom("Montserrat-Regular", size: 12))
                             Button(action: {
                                 
                             }, label: {
