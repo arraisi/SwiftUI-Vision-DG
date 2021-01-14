@@ -136,13 +136,13 @@ struct FormPilihJenisTabunganView: View {
         //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-            
-            if(value.startLocation.x < 20 && value.translation.width > 100) {
-                self.shouldPopToRootView = false
-            }
-            
-        }))
+//        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+//
+//            if(value.startLocation.x < 20 && value.translation.width > 100) {
+//                self.shouldPopToRootView = false
+//            }
+//
+//        }))
 //        .popup(isPresented: $showingModal, type: .`default`, animation: Animation.spring(), closeOnTapOutside: false) {
 //            createBottomFloater()
 //        }
