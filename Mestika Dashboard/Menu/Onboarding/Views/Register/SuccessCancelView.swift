@@ -54,7 +54,6 @@ struct SuccessCancelView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
     }
 }
 
