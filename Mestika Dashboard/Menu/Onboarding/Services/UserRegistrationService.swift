@@ -142,7 +142,6 @@ class UserRegistrationService {
             
             data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
             
-            
             URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
                 
                 if error == nil {
