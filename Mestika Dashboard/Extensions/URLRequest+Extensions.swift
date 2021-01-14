@@ -10,6 +10,7 @@ extension URLRequest {
 
     init(_ url: URL) {
         self.init(url: url)
+        self.timeoutInterval = 30
         self.setValue("*/*", forHTTPHeaderField: "accept")
         
         if let token = Messaging.messaging().fcmToken {

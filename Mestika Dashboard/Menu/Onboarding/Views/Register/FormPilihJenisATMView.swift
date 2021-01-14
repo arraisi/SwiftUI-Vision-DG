@@ -104,16 +104,6 @@ struct FormPilihJenisATMView: View {
             .onAppear() {
                 self.fetchATMList()
             }
-            .onAppear {
-                if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-                    self.appState.navigationController?.view.removeGestureRecognizer(gesture)
-                }
-            }
-            .onDisappear {
-                if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-                    self.appState.navigationController?.view.addGestureRecognizer(gesture)
-                }
-            }
         }
     }
     

@@ -11,6 +11,7 @@ import Indicators
 struct EmailOTPRegisterNasabahView: View {
     
     var productATMData = AddProductATM()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
@@ -40,6 +41,8 @@ struct EmailOTPRegisterNasabahView: View {
     @State private var isShowModal = false
     @State private var isShowAlert: Bool = false
     @State private var modalSelection = ""
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     var disableForm: Bool {
         if (pin.count < 6 || self.isBtnValidationDisabled) {
@@ -223,6 +226,12 @@ struct EmailOTPRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
     
     private var pinDots: some View {

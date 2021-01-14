@@ -177,37 +177,43 @@ struct VerificationRegisterDataView: View {
                                 .padding(.horizontal, 20)
                                 
                                 // NPWP ROW
-                                if self.registerData.npwp != "" {
-                                    VStack {
-                                        
-                                        Button(action: {
-                                            self.cameraFileName = "npwp"
-                                            self.shouldPresentCamera = true
-                                        }) {
-                                            HStack {
-                                                Text("NPWP")
-                                                    .font(.subheadline)
-                                                    .foregroundColor(Color(hex: "#232175"))
-                                                    .fontWeight(.bold)
-                                                Spacer()
-                                                
-                                                VStack {
+                                //                                if self.registerData.npwp != "" {
+                                VStack {
+                                    
+                                    Button(action: {
+                                        self.cameraFileName = "npwp"
+                                        self.shouldPresentCamera = true
+                                    }) {
+                                        HStack {
+                                            Text(self.registerData.fotoNPWP != Image("") ? "Your NPWP photo" : "Add NPWP")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color(hex: "#232175"))
+                                                .fontWeight(.bold)
+                                            Spacer()
+                                            
+                                            VStack {
+                                                if self.registerData.fotoNPWP != Image("") {
                                                     self.registerData.fotoNPWP
                                                         .resizable()
                                                         .frame(maxWidth: 80, maxHeight: 50)
                                                         .cornerRadius(8)
+                                                } else {
+                                                    Image("ic_camera")
+                                                        .resizable()
+                                                        .frame(maxWidth: 50, maxHeight: 36)
                                                 }
-                                                .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                             }
+                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
                                         }
-                                        .fullScreenCover(isPresented: $shouldPresentCamera) {
-                                            scanner
-                                        }
-                                        Divider()
                                     }
-                                    .padding([.top, .bottom], 20)
-                                    .padding(.horizontal, 20)
+                                    .fullScreenCover(isPresented: $shouldPresentCamera) {
+                                        scanner
+                                    }
+                                    Divider()
                                 }
+                                .padding([.top, .bottom], 20)
+                                .padding(.horizontal, 20)
+                                //                                }
                                 
                                 Group {
                                     
@@ -222,12 +228,12 @@ struct VerificationRegisterDataView: View {
                                         TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
                                             .disabled(true)
                                         
-//                                        Divider()
-//                                            .frame(height: 30)
-//
-//                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
-//                                            Text("Edit").foregroundColor(.blue)
-//                                        }
+                                        //                                        Divider()
+                                        //                                            .frame(height: 30)
+                                        //
+                                        //                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
+                                        //                                            Text("Edit").foregroundColor(.blue)
+                                        //                                        }
                                     }
                                     .frame(height: 20)
                                     .font(.subheadline)
@@ -738,40 +744,16 @@ struct VerificationRegisterDataView: View {
     
     /* Save User To Core Data */
     func saveUserToCoreData()  {
+        print("------SAVE TO CORE DATA-------")
         
-        if (user.isEmpty) {
-            print("------SAVE TO CORE DATA-------")
-            //
-            //            let data = User(context: managedObjectContext)
-            //            data.deviceId = UIDevice.current.identifierForVendor?.uuidString
-            //            data.nik = self.registerData.nik
-            //            data.email = self.registerData.email
-            //            data.phone = self.registerData.noTelepon
-            //            data.pin = self.registerData.pin
-            //            data.password = self.registerData.password
-            //            data.firstName = "Stevia"
-            //            data.lastName = "R"
-            //            data.email = self.registerData.email
-            //
-            //            UserDefaults.standard.set("true", forKey: "isFirstLogin")
-            
-            //            nextRoute = true
-            
-            if self.appState.nasabahIsExisting {
-                self.nextRouteNasabah = true
-            } else {
-                self.nextRouteNonNasabah = true
-            }
-            
-            do {
-                try self.managedObjectContext.save()
-            } catch {
-                print("Error saving managed object context: \(error)")
-            }
-        } else {
-            
-            print("GAGAL MENDAFTAR")
-            showingAlert = true
+        let data = User(context: managedObjectContext)
+        data.nik = self.registerData.nik
+        data.lastName = self.registerData.namaLengkapFromNik
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
         }
     }
     
@@ -782,8 +764,7 @@ struct VerificationRegisterDataView: View {
         
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
-//                UserDefaults.standard.set(self.registerData.nik, forKey: "nik_local")
-//                UserDefaults.standard.set(self.registerData.namaLengkapFromNik, forKey: "nama_local")
+                saveUserToCoreData()
                 if self.appState.nasabahIsExisting {
                     UserDefaults.standard.set("true", forKey: "register_nasabah")
                     UserDefaults.standard.set("false", forKey: "register_non_nasabah")

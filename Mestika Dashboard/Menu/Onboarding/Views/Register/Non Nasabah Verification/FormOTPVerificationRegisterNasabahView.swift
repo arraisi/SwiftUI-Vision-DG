@@ -26,6 +26,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var editModeForChooseATM: EditMode = .inactive
     @State var editModeForCancel: EditMode = .inactive
     
+    @GestureState private var dragOffset = CGSize.zero
+    
     /* HUD Variable */
     @State private var dim = true
     
@@ -82,9 +84,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
             }
             
             VStack {
-
+                
                 AppBarLogo(light: false, onCancel: {})
-
+                
                 if (self.isLoading) {
                     LinearWaitingIndicator()
                         .animated(true)
@@ -206,6 +208,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -254,6 +257,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
     
     private var pinDots: some View {
@@ -301,16 +310,16 @@ struct FormOTPVerificationRegisterNasabahView: View {
     }
     
     private func getImageName(at index: Int) -> String {
-         if index >= self.pin.count {
-             return "•"
-         }
-         
-         if self.showPin {
-             return self.pin.digits[index].numberString
-         }
-         
-         return ""
-     }
+        if index >= self.pin.count {
+            return "•"
+        }
+        
+        if self.showPin {
+            return self.pin.digits[index].numberString
+        }
+        
+        return ""
+    }
     
     private func replace(myString: String, _ index: [Int], _ newChar: Character) -> String {
         var chars = Array(myString)
@@ -511,30 +520,30 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 self.modalSelection = "OTPINCORRECT"
                 self.isShowModal.toggle()
                 
-//                if (self.tryCount == 1) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount == 2) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount == 3) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount > 3) {
-//                    self.tryCountResendDisable += 1
-//                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
+                //                if (self.tryCount == 1) {
+                //                    self.timeRemainingBtn = 0
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
+                //
+                //                if (self.tryCount == 2) {
+                //                    self.timeRemainingBtn = 0
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
+                //
+                //                if (self.tryCount == 3) {
+                //                    self.timeRemainingBtn = 0
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
+                //
+                //                if (self.tryCount > 3) {
+                //                    self.tryCountResendDisable += 1
+                //                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
+                //                    self.modalSelection = "OTPINCORRECT"
+                //                    self.isShowModal.toggle()
+                //                }
                 
                 self.isBtnValidationDisabled = true
                 resetField()
@@ -563,7 +572,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             return hud
         }
     }
-
+    
     private func resetField() {
         self.pin = "" /// return to empty pin
     }

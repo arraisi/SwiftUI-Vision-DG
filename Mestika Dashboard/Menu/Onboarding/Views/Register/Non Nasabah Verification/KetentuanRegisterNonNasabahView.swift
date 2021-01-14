@@ -25,6 +25,8 @@ struct KetentuanRegisterNonNasabahView: View {
     @State var readFinished = false
     @State var scrollToBottom = false
     
+    var isAllowBack: Bool = true
+    
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
@@ -120,8 +122,10 @@ struct KetentuanRegisterNonNasabahView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .introspectNavigationController { nc in
             nc.navigationBar.isHidden = false
+            nc.interactivePopGestureRecognizer?.isEnabled = false
         }
         .onAppear() {
             self.registerData.isNasabahmestika = false

@@ -15,6 +15,9 @@ struct FormDetailKartuATMView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    var user: FetchedResults<User>
+    
     @ObservedObject private var productVM = ATMProductViewModel()
     
     var isAllowBack: Bool = true
@@ -154,16 +157,6 @@ struct FormDetailKartuATMView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-                self.appState.navigationController?.view.removeGestureRecognizer(gesture)
-            }
-        }
-        .onDisappear {
-            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-                self.appState.navigationController?.view.addGestureRecognizer(gesture)
-            }
-        }
     }
 }
 

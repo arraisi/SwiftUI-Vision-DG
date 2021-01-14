@@ -124,19 +124,19 @@ struct FormEmailVerificationRegisterNasabahView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-        
-            if(value.startLocation.x < 20 && value.translation.width > 100) {
-                self.shouldPopToRootView2 = false
-            }
-            
-        }))
+//        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+//
+//            if(value.startLocation.x < 20 && value.translation.width > 100) {
+//                self.shouldPopToRootView2 = false
+//            }
+//
+//        }))
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .navigationBarHidden(true)
     }
 }
 

@@ -51,7 +51,7 @@ struct DetailsTypeSavingView: View {
                     .padding(.horizontal, 15)
                 }
             }
-            .frame(height: 120)
+//            .frame(height: 120)
             
             VStack(alignment: .trailing, spacing: nil, content: {
                 Button(action: {
@@ -60,8 +60,8 @@ struct DetailsTypeSavingView: View {
                     Text(NSLocalizedString("Saving Detail", comment: ""))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(minHeight: 30)
-                        .padding(.vertical, 10)
+//                        .frame(minHeight: 30)
+                        .padding(.vertical, 5)
                         .padding(.horizontal, 10)
                 })
             }).frame(maxWidth: .infinity, alignment: .trailing)
