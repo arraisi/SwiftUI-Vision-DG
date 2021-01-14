@@ -12,9 +12,7 @@ struct ATMDesignModel: Codable {
     let cardType: String?
     let cardImage: String
     let description: String
-//    let ignoreField, ignoreField1: String
-//    let ignoreField2, ignoreField3, ignoreField4: AnyObject
-    
+    let cardImageBase64: String
 }
 
 struct ATMDesignViewModel {
@@ -22,5 +20,6 @@ struct ATMDesignViewModel {
     var cardType: String?
     var cardImage: URL?
     var description: String
+    let cardImageBase64: String
     var isShow: Bool = false
 }

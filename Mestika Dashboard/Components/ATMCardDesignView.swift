@@ -65,6 +65,6 @@ struct ATMCardDesignView: View {
 
 struct ATMCardDesignView_Previews: PreviewProvider {
     static var previews: some View {
-        ATMCardDesignView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "test"), cardWidth: 315, cardHeight: 197, showContent: false)
+        ATMCardDesignView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "test", cardImageBase64: ""), cardWidth: 315, cardHeight: 197, showContent: false)
     }
 }

@@ -25,6 +25,10 @@ struct KetentuanRegisterNonNasabahView: View {
     @State var readFinished = false
     @State var scrollToBottom = false
     
+    @State var showingAlert: Bool = false
+    
+    @GestureState private var dragOffset = CGSize.zero
+    
     var isAllowBack: Bool = true
     
     // MARK: -MAIN CONTENT
@@ -123,13 +127,23 @@ struct KetentuanRegisterNonNasabahView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .introspectNavigationController { nc in
-            nc.navigationBar.isHidden = false
-            nc.interactivePopGestureRecognizer?.isEnabled = false
-        }
         .onAppear() {
             self.registerData.isNasabahmestika = false
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
 }
 

@@ -588,7 +588,7 @@ struct VerificationRegisterDataView: View {
                     
                     HStack {
                         TextField(NSLocalizedString("Industri", comment: ""), text: $registerData.industriTempatBekerja)
-                            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                            .disabled(true)
                         
                         Divider()
                             .frame(height: 30)

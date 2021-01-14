@@ -455,11 +455,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
             if !success {
                 print("OTP RESP \(self.otpVM.statusMessage)")
                 
-                if (self.otpVM.statusMessage == "Internal Server Error") {
-                    self.isShowAlert = true
-                    self.messageResponse = self.otpVM.statusMessage
-                }
-                
                 if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
                     print("OTP FAILED")
                     print(self.otpVM.timeCounter)
@@ -471,6 +466,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         self.referenceCode = self.otpVM.reference
                         self.timeRemainingRsnd = self.otpVM.timeCounter
                         self.isShowAlert = true
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.isLoading = self.otpVM.isLoading
+                        self.isShowAlert = true
+                        self.messageResponse = self.otpVM.statusMessage
                     }
                 }
             }

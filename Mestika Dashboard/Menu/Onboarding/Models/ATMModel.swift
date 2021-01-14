@@ -13,7 +13,7 @@ struct ATMModel: Codable {
     let cardImage: String
     let description: ATMDescriptionModel
     let ignoreField, ignoreField1: String
-//    let ignoreField2, ignoreField3, ignoreField4: AnyObject
+    let cardImageBase64: String
     
 }
 
