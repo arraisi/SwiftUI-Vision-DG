@@ -10,6 +10,7 @@ import Indicators
 
 struct PhoneOTPRegisterNasabahView: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
@@ -50,6 +51,8 @@ struct PhoneOTPRegisterNasabahView: View {
     
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     /* Disabled Form */
     var disableForm: Bool {
@@ -225,6 +228,12 @@ struct PhoneOTPRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
     
     private var pinDots: some View {
