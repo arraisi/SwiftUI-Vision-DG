@@ -35,7 +35,7 @@ struct PhoneOTPRegisterNasabahView: View {
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
-    @State var tryCountResend = 0
+    @State var tryCountResend = 1
     @State var tryCountResendDisable = 0
     
     /* Timer */
@@ -407,17 +407,15 @@ struct PhoneOTPRegisterNasabahView: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-                    //                    self.timeRemaining = self.otpVM.timeCounter
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
                     self.destinationNumber = self.otpVM.destination
                     self.registerData.noTelepon = self.otpVM.destination
+                    self.isShowAlert = false
+                    self.timeRemainingRsnd = self.otpVM.timeCounter
                     UserDefaults.standard.set(self.otpVM.destination, forKey: "phone_local")
                 }
-                
-                self.isShowAlert = false
-                self.timeRemainingRsnd = max(30, (self.tryCountResend+1) * 30)
             }
             
             if !success {

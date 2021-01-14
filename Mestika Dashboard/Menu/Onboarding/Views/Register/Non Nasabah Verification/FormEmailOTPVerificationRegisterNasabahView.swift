@@ -29,7 +29,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
-    @State var tryCountResend = 0
+    @State var tryCountResend = 1
     @State var tryCountResendDisable = 0
     
     @Binding var shouldPopToRootView : Bool
@@ -403,16 +403,9 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
-                    
-                    if (self.tryCountResend < 1) {
-                        self.timeRemainingRsnd = 30
-                    } else {
-                        self.timeRemainingRsnd = self.otpVM.timeCounter
-                    }
+                    self.isShowAlert = false
+                    self.timeRemainingRsnd = self.otpVM.timeCounter
                 }
-                
-                self.isShowAlert = false
-                self.timeRemainingRsnd = max(30, (self.tryCountResend+1) * 30)
             }
             
             if !success {
@@ -421,11 +414,13 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     print(self.otpVM.timeCounter)
                     
                     DispatchQueue.main.sync {
+                        self.isLoading = self.otpVM.isLoading
                         self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
+                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.isShowAlert = true
                     }
-                    self.isShowAlert = true
                 }
             }
         }

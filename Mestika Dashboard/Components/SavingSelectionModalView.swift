@@ -22,10 +22,11 @@ struct SavingSelectionModalView: View {
             Group {
                 Image(data.imageName)
                     .resizable()
-                    .frame(height: 130)
+                    .frame(height: 200)
+                    .padding()
                 
                 Text("Anda Telah memilih")
-                    .font(.custom("Montserrat-Regular", size: 14))
+                    .font(.custom("Montserrat-Regular", size: 18))
                     .padding(.horizontal, 15)
                     .padding(.top, 10)
                     .padding(.bottom, 10)
@@ -33,38 +34,18 @@ struct SavingSelectionModalView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 Text(data.tabunganName)
-                    .font(.title3)
+                    .font(.custom("Montserrat-Regular", size: 18))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(hex: "#2334D0"))
                     .padding(.horizontal, 15)
+                    .padding(.bottom, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                ScrollView {
-
-                    ForEach(data.description, id: \.id) { card in
-                        HStack(alignment: .top) {
-                            Text(card.id)
-                                .font(.caption)
-                                .foregroundColor(Color(hex: "#232175"))
-                                .fontWeight(.bold)
-                                .frame(width: 25, height: 18)
-                            Text(card.desc)
-                                .font(.caption2)
-                                .foregroundColor(Color(hex: "#5A6876"))
-                                .frame(minHeight: 18)
-                            Spacer()
-                        }
-                        .padding(.top, 1)
-                        .padding(.horizontal, 15)
-                    }
-                }
-                .frame(minHeight: 80)
-                
                 Text("Punya kode referal ?")
-                    .font(.title3)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-Regular", size: 18))
                     .foregroundColor(.black)
-                    .padding(.top, 10)
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
                     .padding(.horizontal, 15)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
@@ -81,7 +62,7 @@ struct SavingSelectionModalView: View {
                 .multilineTextAlignment(TextAlignment.center)
                 
                 Text(NSLocalizedString("Pastikan kamu memasukkan kode refferalmu dengan benar.", comment: ""))
-                    .font(.custom("Montserrat-Regular", size: 10))
+                    .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.black)
                     .padding(.horizontal, 15)
                 
@@ -95,13 +76,13 @@ struct SavingSelectionModalView: View {
             }) {
                 Text(NSLocalizedString("Pilih Tabungan Ini", comment: ""))
                     .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 12))
+                    .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.horizontal, 15)
-            .padding(.top, 15)
+            .padding(.top, 30)
             
             Button(action: {
                 self.isShowModal = false
@@ -109,12 +90,12 @@ struct SavingSelectionModalView: View {
                 Text(NSLocalizedString("Pilih Tabungan lain", comment: ""))
                     .foregroundColor(Color(hex: "#5A6876"))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 12))
+                    .font(.system(size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
             .cornerRadius(12)
             .padding(.horizontal, 15)
-            .padding(.bottom, 10)
+            .padding(.bottom, 15)
             .padding(.top, 5)
         }
         .frame(width: UIScreen.main.bounds.width - 40)

@@ -280,23 +280,22 @@ struct FormIdentitasDiriView: View {
                                 self.nik = matched[0]
                             }
                         }
-                        
-                        print("self.cameraFileName \(self.cameraFileName)")
-                        
-                        let scanResult = retrieveImage(forKey: self.cameraFileName)
-                        if let image = scanResult {
-                            switch self.cameraFileName {
-                            case "ktp":
-                                self.imageKTP = Image(uiImage: image)
-                                self.registerData.fotoKTP = imageKTP!
-                            case "npwp":
-                                self.imageNPWP = Image(uiImage: image)
-                                self.registerData.fotoNPWP = imageNPWP!
-                            default:
-                                print("retrieve image nil")
-                            }
+                    }
+                    
+                    print("self.cameraFileName \(self.cameraFileName)")
+                    
+                    let scanResult = retrieveImage(forKey: self.cameraFileName)
+                    if let image = scanResult {
+                        switch self.cameraFileName {
+                        case "ktp":
+                            self.imageKTP = Image(uiImage: image)
+                            self.registerData.fotoKTP = imageKTP!
+                        case "npwp":
+                            self.imageNPWP = Image(uiImage: image)
+                            self.registerData.fotoNPWP = imageNPWP!
+                        default:
+                            print("retrieve image nil")
                         }
-                        
                     }
                 })
             

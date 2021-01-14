@@ -47,7 +47,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var isResendOtpDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
-    @State var tryCountResend = 0
+    @State var tryCountResend = 1
     @State var tryCountResendDisable = 0
     @State var routingReschedule: Bool = false
     @State var routingChooseATM: Bool = false
@@ -435,20 +435,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-//                    self.timeRemaining = self.otpVM.timeCounter
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
-                    
-                    if (self.tryCountResend < 1) {
-                        self.timeRemainingRsnd = 30
-                    } else {
-                        self.timeRemainingRsnd = self.otpVM.timeCounter
-                    }
+                    self.timeRemainingRsnd = self.otpVM.timeCounter
+                    self.isShowAlert = true
                 }
-                
-                self.isShowAlert = true
-                self.timeRemainingRsnd = max(30, (self.tryCountResend+1) * 30)
             }
             
             if !success {
@@ -469,8 +461,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
                         self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.isShowAlert = true
                     }
-                    self.isShowAlert = true
                 }
             }
         }

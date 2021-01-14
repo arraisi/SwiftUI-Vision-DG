@@ -207,7 +207,6 @@ struct WelcomeView: View {
         self.isRescheduleInterview = false
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
-        self.isCancelViewActive = false
         self.appState.moveToWelcomeView = false
     }
     
