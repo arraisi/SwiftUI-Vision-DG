@@ -539,24 +539,48 @@ struct FormCompletionKartuATMView: View {
             .cornerRadius(10)
             
             
-            List(addressSugestionResult, id: \.formatted_address) {data in
-                
-                HStack {
-                    Text(data.formatted_address)
-                        .font(Font.system(size: 14))
-                    
-                    Spacer()
+//            List(addressSugestionResult, id: \.formatted_address) {data in
+//
+//                HStack {
+//                    Text(data.formatted_address)
+//                        .font(Font.system(size: 14))
+//
+//                    Spacer()
+//                }
+//                .contentShape(Rectangle())
+//                .onTapGesture(perform: {
+//                    searchAddress(data: data.formatted_address)
+//                    self.showingAddressModal.toggle()
+//                })
+//
+//            }
+//            .background(Color.white)
+//            .padding(.vertical)
+//            .frame(height: 150)
+            
+            ScrollView {
+                VStack {
+                    ForEach(addressSugestionResult, id: \.formatted_address) {data in
+                        Button(action: {
+                            searchAddress(data: data.formatted_address)
+                            self.showingAddressModal.toggle()
+                        }) {
+                            VStack {
+                                HStack{
+                                    Text(data.formatted_address)
+                                    Spacer()
+                                }
+                                Divider()
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 5)
+                        }
+                        .foregroundColor(.black)
+                    }
                 }
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    searchAddress(data: data.formatted_address)
-                    self.showingAddressModal.toggle()
-                })
-                
             }
-            .background(Color.white)
-            .padding(.vertical)
             .frame(height: 150)
+            .padding(.vertical)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -675,15 +699,19 @@ struct FormCompletionKartuATMView: View {
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
-                atmData.atmAddressInput = self.addressSugestion[0].formatted_address
-                atmData.atmAddressPostalCodeInput = self.addressSugestion[0].postalCode
-                //                self.kodePos = self.addressSugestion[0].postalCode
-                atmData.atmAddressKecamatanInput = self.addressSugestion[0].kecamatan
-                atmData.atmAddressKelurahanInput = self.addressSugestion[0].kelurahan
-                atmData.atmAddressRtInput = self.addressSugestion[0].rt
-                atmData.atmAddressRwInput = self.addressSugestion[0].rw
-                atmData.atmAddressKotaInput = self.addressSugestion[0].city
-                atmData.atmAddressPropinsiInput = self.addressSugestion[0].province
+                
+                DispatchQueue.main.async {
+                    atmData.atmAddressInput = self.addressSugestion[0].formatted_address
+                    atmData.atmAddressPostalCodeInput = self.addressSugestion[0].postalCode
+                    self.kodePos = self.addressSugestion[0].postalCode
+                    atmData.atmAddressKecamatanInput = self.addressSugestion[0].kecamatan
+                    atmData.atmAddressKelurahanInput = self.addressSugestion[0].kelurahan
+                    atmData.atmAddressRtInput = self.addressSugestion[0].rt
+                    atmData.atmAddressRwInput = self.addressSugestion[0].rw
+                    atmData.atmAddressKotaInput = self.addressSugestion[0].city
+                    atmData.atmAddressPropinsiInput = self.addressSugestion[0].province
+                }
+                
                 self.showingAddressModal = false
                 print("Success")
             }
