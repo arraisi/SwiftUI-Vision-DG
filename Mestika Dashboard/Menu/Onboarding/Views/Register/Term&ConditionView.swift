@@ -119,7 +119,7 @@ struct Term_ConditionView: View {
                             .padding(.horizontal, 20)
                             .padding(.bottom, 5)
                         }
-                        .disabled(disableAgree)
+                        .disabled(!readFinished)
                         
                         Button(action: toggleIsShareData) {
                             HStack(alignment: .top) {

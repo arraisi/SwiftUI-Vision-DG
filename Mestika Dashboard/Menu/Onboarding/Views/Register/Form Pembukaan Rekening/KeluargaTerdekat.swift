@@ -453,24 +453,49 @@ struct KeluargaTerdekat: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(addressSugestionResult, id: \.formatted_address) { data in
-                
-                HStack {
-                    Text(data.formatted_address)
-                        .font(Font.system(size: 14))
-                    
-                    Spacer()
+//            List(addressSugestionResult, id: \.formatted_address) { data in
+//
+//                HStack {
+//                    Text(data.formatted_address)
+//                        .font(Font.system(size: 14))
+//
+//                    Spacer()
+//                }
+//                .contentShape(Rectangle())
+//                .onTapGesture(perform: {
+//                    searchAddress(data: data.formatted_address)
+//                    self.showingModal.toggle()
+//                })
+//
+//            }
+//            .background(Color.white)
+//            .padding(.vertical)
+//            .frame(height: 150)
+//            
+            
+            ScrollView {
+                VStack {
+                    ForEach(addressSugestionResult, id: \.formatted_address) {data in
+                        Button(action: {
+                            searchAddress(data: data.formatted_address)
+                            self.showingModal.toggle()
+                        }) {
+                            VStack {
+                                HStack{
+                                    Text(data.formatted_address)
+                                    Spacer()
+                                }
+                                Divider()
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 5)
+                        }
+                        .foregroundColor(.black)
+                    }
                 }
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    searchAddress(data: data.formatted_address)
-                    self.showingModal.toggle()
-                })
-                
             }
-            .background(Color.white)
-            .padding(.vertical)
             .frame(height: 150)
+            .padding(.vertical)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -509,12 +534,13 @@ struct KeluargaTerdekat: View {
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
-                print(self.addressSugestion[0].postalCode)
-                registerData.alamatKeluarga = self.addressSugestion[0].formatted_address
-                registerData.kodePosKeluarga = self.addressSugestion[0].postalCode
-//                self.kodePos = "12345"
-                registerData.kecamatanKeluarga = self.addressSugestion[0].kecamatan
-                registerData.kelurahanKeluarga = self.addressSugestion[0].kelurahan
+                DispatchQueue.main.async {
+                    registerData.alamatKeluarga = self.addressSugestion[0].formatted_address
+                    registerData.kodePosKeluarga = self.addressSugestion[0].postalCode
+                    self.kodePos = self.addressSugestion[0].postalCode
+                    registerData.kecamatanKeluarga = self.addressSugestion[0].kecamatan
+                    registerData.kelurahanKeluarga = self.addressSugestion[0].kelurahan
+                }
                 self.showingModal = false
                 print("Success")
             }

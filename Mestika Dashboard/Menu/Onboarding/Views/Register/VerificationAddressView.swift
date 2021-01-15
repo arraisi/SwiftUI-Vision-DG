@@ -37,6 +37,17 @@ struct VerificationAddressView: View {
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State var addressSugestion = [AddressViewModel]()
+    @State var addressSugestionResult = [AddressResultViewModel]()
+    
+    @State var showingModal = false
+    
+    @State var isLoading: Bool = false
+    @State private var isShowAlert: Bool = false
+    
+    @State var messageResponse: String = ""
+    
     var body: some View {
         ZStack(alignment: .top) {
             Image("bg_blue")
@@ -94,14 +105,51 @@ struct VerificationAddressView: View {
                                     Divider()
                                         .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressInput, label: NSLocalizedString("Alamat", comment: ""), placeHolder: NSLocalizedString("Alamat", comment: ""), onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                        registerData.addressInput = self.addressInput
-                                    }, onCommit: {
-                                        print("on commit")
-                                        registerData.addressInput = self.addressInput
-                                    })
+                                    //                                    LabelTextField(value: $addressInput, label: NSLocalizedString("Alamat", comment: ""), placeHolder: NSLocalizedString("Alamat", comment: ""), onEditingChanged: { (Bool) in
+                                    //                                        print("on edit")
+                                    //                                        registerData.addressInput = self.addressInput
+                                    //                                    }, onCommit: {
+                                    //                                        print("on commit")
+                                    //                                        registerData.addressInput = self.addressInput
+                                    //                                    })
+                                    //                                    .padding(.horizontal, 20)
+                                    
+                                    Group {
+                                        HStack {
+                                            Text("Alamat")
+                                                .font(Font.system(size: 12))
+                                                .fontWeight(.semibold)
+                                                .foregroundColor(Color(hex: "#707070"))
+                                                .multilineTextAlignment(.leading)
+                                            
+                                            Spacer()
+                                        }
+                                        
+                                        HStack {
+                                            
+                                            TextField("Alamat", text: $registerData.addressInput) { changed in
+                                            } onCommit: {
+                                            }
+                                            .font(Font.system(size: 14))
+                                            .frame(height: 36)
+                                            .padding(.horizontal)
+                                            .background(Color.gray.opacity(0.1))
+                                            .cornerRadius(10)
+                                            
+                                            Button(action:{
+                                                //                        showingModal.toggle()
+                                                searchAddress()
+                                            }, label: {
+                                                Image(systemName: "magnifyingglass")
+                                                    .font(Font.system(size: 20))
+                                                    .foregroundColor(Color(hex: "#707070"))
+                                            })
+                                            
+                                        }
+                                        
+                                    }
                                     .padding(.horizontal, 20)
+                                    
                                     
                                     LabelTextField(value: $addressRtRwInput, label: "RT/RW", placeHolder: "RT/RW", onEditingChanged: { (Bool) in
                                         print("on edit")
@@ -212,12 +260,134 @@ struct VerificationAddressView: View {
                 }),
                 secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
+        .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
+            addressSuggestionPopUp()
+        }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
                 self.isShowingAlert = true
             }
         }))
+    }
+    
+    // MARK: -Fuction for Create Bottom Floater (Modal)
+    func addressSuggestionPopUp() -> some View {
+        VStack {
+            HStack {
+                Text("Alamat")
+                    .fontWeight(.bold)
+                    .font(.system(size: 19))
+                    .foregroundColor(Color(hex: "#232175"))
+                Spacer()
+            }
+            
+            HStack {
+                
+                TextField("Alamat", text: $addressInput)
+                    .font(Font.system(size: 14))
+                    .frame(height: 36)
+                
+                Button(action:{
+                    print("find location")
+                }, label: {
+                    Image(systemName: "location")
+                        .font(Font.system(size: 20))
+                        .foregroundColor(Color(hex: "#707070"))
+                })
+                
+            }
+            .padding(.horizontal)
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
+            
+            ScrollView {
+                VStack {
+                    ForEach(addressSugestionResult, id: \.formatted_address) {data in
+                        Button(action: {
+                            searchAddress(data: data.formatted_address)
+                            self.showingModal.toggle()
+                        }) {
+                            VStack {
+                                HStack{
+                                    Text(data.formatted_address)
+                                    Spacer()
+                                }
+                                Divider()
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 5)
+                        }
+                        .foregroundColor(.black)
+                    }
+                }
+            }
+            .frame(height: 150)
+            .padding(.vertical)
+            
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: - SEARCH LOCATION
+    @ObservedObject var addressVM = AddressSummaryViewModel()
+    func searchAddress() {
+        self.isLoading = true
+        
+        self.addressVM.getAddressSugestionResult(addressInput: registerData.addressInput) { success in
+            if success {
+                self.isLoading = self.addressVM.isLoading
+                self.addressSugestionResult = self.addressVM.addressResult
+                self.showingModal = true
+                print("Success")
+                print("addressSugestionResult => \(self.addressSugestionResult[0])")
+            }
+            
+            if !success {
+                self.isLoading = self.addressVM.isLoading
+                self.isShowAlert = true
+                self.messageResponse = self.addressVM.message
+                print("Not Found")
+            }
+        }
+    }
+    
+    // MARK: - SEARCH LOCATION COMPLETION
+    func searchAddress(data: String) {
+        self.isLoading = true
+        
+        self.addressVM.getAddressSugestion(addressInput: data) { success in
+            if success {
+                self.isLoading = self.addressVM.isLoading
+                self.addressSugestion = self.addressVM.address
+                DispatchQueue.main.async {
+                    registerData.addressInput = self.addressSugestion[0].formatted_address
+                    registerData.addressPostalCodeInput = self.addressSugestion[0].postalCode
+                    registerData.addressKecamatanInput = self.addressSugestion[0].kecamatan
+                    registerData.addressKelurahanInput = self.addressSugestion[0].kelurahan
+                    registerData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+                    
+                    self.addressInput = self.addressSugestion[0].formatted_address
+                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+                    self.addressKelurahanInput = self.addressSugestion[0].kelurahan
+                    self.addressKecamatanInput = self.addressSugestion[0].kecamatan
+                    self.addressKodePosInput = self.addressSugestion[0].postalCode
+                }
+                self.showingModal = false
+                print("Success")
+                print("self.addressSugestion[0].postalCode => \(self.addressSugestion[0].postalCode)")
+            }
+            
+            if !success {
+                self.isLoading = self.addressVM.isLoading
+                self.isShowAlert = true
+                self.messageResponse = self.addressVM.message
+                print("Not Found")
+            }
+        }
     }
 }
 

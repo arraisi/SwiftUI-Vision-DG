@@ -417,25 +417,52 @@ struct InformasiPerusahaanView: View {
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
+                
                 HStack {
+                    TextField("Bidang Usaha", text: $registerData.bidangUsaha)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
                     
-                    TextField("Bidang Usaha", text: $registerData.bidangUsaha) { changed in
-                    } onCommit: {
+                    Menu {
+                        ForEach(0..<bidangUsaha.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.bidangUsaha = bidangUsaha[i].nama
+                            }) {
+                                Text(bidangUsaha[i].nama)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
                     }
-                    .font(Font.system(size: 14))
-                    .frame(height: 36)
-                    .disabled(true)
-                    
-                    Button(action:{
-                        showingModalBidang.toggle()
-                    }, label: {
-                        Image(systemName: "chevron.right")
-                    })
                     
                 }
-                .padding(.horizontal)
+                .frame(height: 36)
+                .font(Font.system(size: 14))
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
+                
+//                HStack {
+//
+//                    TextField("Bidang Usaha", text: $registerData.bidangUsaha) { changed in
+//                    } onCommit: {
+//                    }
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 36)
+//                    .disabled(true)
+//
+//                    Button(action:{
+//                        showingModalBidang.toggle()
+//                    }, label: {
+//                        Image(systemName: "chevron.right")
+//                    })
+//                    
+//                }
+//                .padding(.horizontal)
+//                .background(Color.gray.opacity(0.1))
+//                .cornerRadius(10)
                 
             }
             .padding(.horizontal, 20)
@@ -568,24 +595,24 @@ struct InformasiPerusahaanView: View {
                 Spacer()
             }
             
-            HStack {
-                
-                TextField("Cari Bidang Usaha", text: $registerData.bidangUsaha)
-                    .font(Font.system(size: 14))
-                    .frame(height: 36)
-                
-                Button(action:{
-                    print("cari bidang usaha")
-                }, label: {
-                    Image(systemName: "magnifyingglass")
-                        .font(Font.system(size: 20))
-                        .foregroundColor(Color(hex: "#707070"))
-                })
-                
-            }
-            .padding(.horizontal)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
+//            HStack {
+//
+//                TextField("Cari Bidang Usaha", text: $registerData.bidangUsaha)
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 36)
+//
+//                Button(action:{
+//                    print("cari bidang usaha")
+//                }, label: {
+//                    Image(systemName: "magnifyingglass")
+//                        .font(Font.system(size: 20))
+//                        .foregroundColor(Color(hex: "#707070"))
+//                })
+//
+//            }
+//            .padding(.horizontal)
+//            .background(Color.gray.opacity(0.1))
+//            .cornerRadius(10)
             
             ScrollView {
                 VStack {
