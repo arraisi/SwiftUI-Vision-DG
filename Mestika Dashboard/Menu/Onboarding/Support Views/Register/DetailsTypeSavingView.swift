@@ -55,7 +55,9 @@ struct DetailsTypeSavingView: View {
             
             VStack(alignment: .trailing, spacing: nil, content: {
                 Button(action: {
-                    self.isShowModalDetail = true
+                    withAnimation {
+                        self.isShowModalDetail.toggle()
+                    }
                 }, label: {
                     Text(NSLocalizedString("Saving Detail", comment: ""))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -68,7 +70,9 @@ struct DetailsTypeSavingView: View {
             
             Button(
                 action: {
-                    self.isShowModal = true
+                    withAnimation {
+                        self.isShowModal.toggle()
+                    }
                 },
                 label: {
                     Text(NSLocalizedString("Pilih Tabungan ini", comment: ""))
