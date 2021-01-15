@@ -10,6 +10,12 @@ import SwiftUI
 struct SumberPendapatanLainnyaView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
+    
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
+    
     //    var registerData = RegistrasiModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -249,16 +255,26 @@ struct SumberPendapatanLainnyaView: View {
                 }
             }
         }
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .onAppear() {
             registerData.sumberPendapatanLainnyaId = self.selectedId
         }
-        //        .onTapGesture() {
-        //            UIApplication.shared.endEditing()
-        //        }
+        .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
         
     }
     

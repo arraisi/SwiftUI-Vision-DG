@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct SumberDanaView: View {
-    /*
-     Registrasi Environtment Object
-     */
+    
+    /* Registrasi Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     
     // Routing variables
     @State var editMode: EditMode = .inactive
+    
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
     
     // View variables
     let sumberDana: [MasterModel] = load("sumberDana.json")
@@ -163,6 +167,21 @@ struct SumberDanaView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
 }
 

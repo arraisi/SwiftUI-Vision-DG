@@ -10,6 +10,8 @@ import NavigationStack
 
 struct FormCompletionKartuATMView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     /* Environtment Object */
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
@@ -38,6 +40,10 @@ struct FormCompletionKartuATMView: View {
     
     @State var addressSugestion = [AddressViewModel]()
     @State var addressSugestionResult = [AddressResultViewModel]()
+    
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    @State var isShowingAlert: Bool = false
     
     //Dummy data
     
@@ -130,9 +136,9 @@ struct FormCompletionKartuATMView: View {
             createBottomSuggestionNameFloater()
         }
         .onAppear(){
-            registerData.namaLengkapFromNik = user.last?.lastName ?? "-"
+            registerData.namaLengkapFromNik = user.last?.namaLengkapFromNik ?? "-"
             registerData.nik = user.last?.nik ?? "-"
-            atmData.atmName = registerData.namaLengkapFromNik
+            atmData.atmName = user.last?.namaLengkapFromNik ?? "-"
             fetchAddressOption()
         }
         .alert(isPresented: $isShowAlert) {
@@ -142,6 +148,20 @@ struct FormCompletionKartuATMView: View {
                 dismissButton: .default(Text("Oke"))
             )
         }
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
     }
     
     var nameCard: some View {

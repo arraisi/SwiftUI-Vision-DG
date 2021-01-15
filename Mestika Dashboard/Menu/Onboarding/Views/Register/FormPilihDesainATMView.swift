@@ -14,6 +14,7 @@ struct FormPilihDesainATMView: View {
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject private var productVM = ATMProductViewModel()
+    @EnvironmentObject var appState: AppState
     
     @State var nextRoute: Bool = false
     
@@ -24,6 +25,10 @@ struct FormPilihDesainATMView: View {
     @State var firstOffset : CGFloat = 0
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
+    
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    @State var isShowingAlert: Bool = false
     
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
@@ -92,44 +97,6 @@ struct FormPilihDesainATMView: View {
                         refreshCarousel()
                     }
                     
-                    //                        TabView(selection: $selectedTab) {
-                    //                            ForEach(cards, id: \.id) {
-                    //                                TabItemView(card: $0) {card in
-                    //                                    print(card)
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                        .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
-                    //                        .frame(width: UIScreen.main.bounds.width, height: 200)
-                    //                        .tabViewStyle(PageTabViewStyle(
-                    //                                        indexDisplayMode: .always))
-                    //                        .padding(.bottom, 25)
-                    //                        .onAppear(perform: {
-                    //                            setupAppearance()
-                    //                        })
-                    //                        .gesture(
-                    //                            DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    //                                .onEnded({ value in
-                    //                                            if value.translation.width < 0 {
-                    //                                                print("left")
-                    //                                                withAnimation(.easeOut) {
-                    //                                                    if selectedTab != cards.count-1 {
-                    //                                                        selectedTab += 1
-                    //                                                    }
-                    //                                                }
-                    //                                                selectCard(selected: selectedTab)
-                    //                                            }
-                    //                                            if value.translation.width > 0 {
-                    //                                                print("right")
-                    //                                                withAnimation(.easeOut) {
-                    //                                                    if selectedTab != 0 {
-                    //                                                        selectedTab -= 1
-                    //                                                    }
-                    //                                                }
-                    //                                                selectCard(selected: selectedTab)
-                    //                                            }})
-                    //                        )
-                    
                     if cards.count > Int(count) {
                         VStack {
                             VStack {
@@ -194,6 +161,20 @@ struct FormPilihDesainATMView: View {
             .onAppear() {
                 self.fetchATMDesignList()
             }
+            .alert(isPresented: $isShowingAlert) {
+                return Alert(
+                    title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                    primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                        self.appState.moveToWelcomeView = true
+                    }),
+                    secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+            }
+            .gesture(DragGesture().onEnded({ value in
+                if(value.startLocation.x < 20 &&
+                    value.translation.width > 100) {
+                    self.isShowingAlert = true
+                }
+            }))
         }
     }
     
