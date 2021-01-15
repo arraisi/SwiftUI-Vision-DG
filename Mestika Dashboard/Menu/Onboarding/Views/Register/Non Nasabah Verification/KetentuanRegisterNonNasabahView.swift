@@ -139,7 +139,7 @@ struct KetentuanRegisterNonNasabahView: View {
                 }),
                 secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
-        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
                 self.showingAlert = true

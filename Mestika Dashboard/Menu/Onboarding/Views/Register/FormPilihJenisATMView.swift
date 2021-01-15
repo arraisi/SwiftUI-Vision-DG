@@ -15,6 +15,9 @@ struct FormPilihJenisATMView: View {
     
     @ObservedObject private var productVM = ATMProductViewModel()
     
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    
     /* Carousel Variables */
     @State var cards: [ATMViewModel] = []
     @State var firstOffset : CGFloat = 0
@@ -22,6 +25,7 @@ struct FormPilihJenisATMView: View {
     @State var count : CGFloat = 0
     @State var isLoading : Bool = false
     var isAllowBack: Bool = true
+    @State var isShowingAlert: Bool = false
     
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 60 // 100 is amount padding left and right
@@ -104,6 +108,20 @@ struct FormPilihJenisATMView: View {
             .onAppear() {
                 self.fetchATMList()
             }
+            .alert(isPresented: $isShowingAlert) {
+                return Alert(
+                    title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                    primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                        self.appState.moveToWelcomeView = true
+                    }),
+                    secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+            }
+            .gesture(DragGesture().onEnded({ value in
+                if(value.startLocation.x < 20 &&
+                    value.translation.width > 100) {
+                    self.isShowingAlert = true
+                }
+            }))
         }
     }
     

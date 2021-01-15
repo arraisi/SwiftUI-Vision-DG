@@ -15,6 +15,9 @@ struct SuccessRegisterView: View {
     @ObservedObject var regVM = UserRegistrationViewModel()
     var productATMData = AddProductATM()
     
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
     var user: FetchedResults<User>
     
@@ -49,6 +52,7 @@ struct SuccessRegisterView: View {
     
     @State var isLoading = false
     @State var showingAlert = false
+    @State var isShowingAlert: Bool = false
     
     @State var pilihJam: String = ""
     @State var tanggalWawancara: String = ""
@@ -302,7 +306,7 @@ struct SuccessRegisterView: View {
             self.registerData.nik = user.last?.nik ?? "-"
             self.registerData.noTelepon = phone_local ?? "-"
             self.registerData.email = email_local ?? "-"
-            self.registerData.namaLengkapFromNik = nama_local ?? "-"
+            self.registerData.namaLengkapFromNik = user.last?.namaLengkapFromNik ?? "-"
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -319,16 +323,20 @@ struct SuccessRegisterView: View {
                 message: Text("\(self.scheduleVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
-//        .onAppear {
-//            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-//                self.appState.navigationController?.view.removeGestureRecognizer(gesture)
-//            }
-//        }
-//        .onDisappear {
-//            if let gesture  = self.appState.navigationController?.interactivePopGestureRecognizer, !isAllowBack {
-//                self.appState.navigationController?.view.addGestureRecognizer(gesture)
-//            }
-//        }
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
     }
     
     func removeUser() {

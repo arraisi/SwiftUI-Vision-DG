@@ -22,6 +22,10 @@ struct FormDetailKartuATMView: View {
     
     var isAllowBack: Bool = true
     
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    @State var isShowingAlert: Bool = false
+    
     @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
 
     var body: some View {
@@ -157,6 +161,20 @@ struct FormDetailKartuATMView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
     }
 }
 

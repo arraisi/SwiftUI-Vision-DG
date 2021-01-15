@@ -10,6 +10,8 @@ import PopupView
 
 struct FormPilihJenisTabunganView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     /* Carousel Variables */
     @State var data = savingTypeData
     @State var firstOffset : CGFloat = 0
@@ -27,6 +29,8 @@ struct FormPilihJenisTabunganView: View {
     let itemHeight:CGFloat = 150
     let itemGapHeight:CGFloat = 10
     
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
     @GestureState private var dragOffset = CGSize.zero
     
     @Binding var shouldPopToRootView : Bool
@@ -133,22 +137,25 @@ struct FormPilihJenisTabunganView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-//        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-//
-//            if(value.startLocation.x < 20 && value.translation.width > 100) {
-//                self.shouldPopToRootView = false
-//            }
-//
-//        }))
-//        .popup(isPresented: $showingModal, type: .`default`, animation: Animation.spring(), closeOnTapOutside: false) {
-//            createBottomFloater()
-//        }
         .popup(isPresented: $showingModalDetail, type: .`default`, animation: Animation.spring(), closeOnTapOutside: true) {
             popupDetailSaving()
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
     
     // MARK: - REFRESH THE CARD ITEM OFFSET

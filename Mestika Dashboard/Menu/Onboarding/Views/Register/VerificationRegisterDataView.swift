@@ -14,6 +14,9 @@ struct VerificationRegisterDataView: View {
     var productATMData = AddProductATM()
     @EnvironmentObject var appState: AppState
     
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     
     /*
@@ -44,6 +47,7 @@ struct VerificationRegisterDataView: View {
     var user: FetchedResults<User>
     
     @State private var showingAlert: Bool = false
+    @State var isShowingAlert: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -477,6 +481,20 @@ struct VerificationRegisterDataView: View {
                 message: Text("\(self.userRegisterVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
         
     }
     
@@ -748,7 +766,7 @@ struct VerificationRegisterDataView: View {
         
         let data = User(context: managedObjectContext)
         data.nik = self.registerData.nik
-        data.lastName = self.registerData.namaLengkapFromNik
+        data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
         
         do {
             try self.managedObjectContext.save()
