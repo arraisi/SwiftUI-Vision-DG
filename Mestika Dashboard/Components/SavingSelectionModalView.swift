@@ -70,7 +70,11 @@ struct SavingSelectionModalView: View {
             
             Button(action: {
                 registerData.jenisTabungan = data.tabunganName
-                self.isShowModal = false
+                
+                withAnimation {
+                    self.isShowModal.toggle()
+                }
+                
 //                self.showingReferralCodeModal = true
                 goToNextPage = true
             }) {
@@ -85,7 +89,11 @@ struct SavingSelectionModalView: View {
             .padding(.top, 30)
             
             Button(action: {
-                self.isShowModal = false
+                
+                withAnimation {
+                    self.isShowModal.toggle()
+                }
+                
             }) {
                 Text(NSLocalizedString("Pilih Tabungan lain", comment: ""))
                     .foregroundColor(Color(hex: "#5A6876"))

@@ -92,18 +92,22 @@ extension OtpViewModel {
                     print("Success")
                     print(response.timeCounter)
                     print(response.tryCount)
-
+                    
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.destination = response.destination ?? ""
                         self.reference = response.reference ?? "0"
                         self.code = response.code ?? "0"
-                        self.statusMessage = (response.status?.message)!
+                        
+                        print(response.code)
+                        print(response.message)
+                        
+                        self.statusMessage = response.status?.message ?? "Internal Server Error"
                         self.timeCounter = response.timeCounter ?? 30
                         
                         completion(true)
                     }
-
+                    
                 } else {
                     print("Failed Request")
                     
@@ -118,11 +122,17 @@ extension OtpViewModel {
                 
             case .failure(let error):
                 print("ERROR-->")
-                self.isLoading = false
-                self.statusMessage = "Internal Server Error"
-                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    
+                    switch error {
+                    case .custom(code: 403):
+                        self.statusMessage = "Phone Number Registered"
+                    default:
+                        self.statusMessage = "Internal Server Error"
+                    }
+                }
                 completion(false)
-                print(error.localizedDescription)
             }
             
         }
@@ -199,7 +209,7 @@ extension OtpViewModel {
                     print("Success")
                     print(response.timeCounter)
                     print(response.tryCount)
-
+                    
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.destination = response.destination ?? ""
@@ -210,7 +220,7 @@ extension OtpViewModel {
                         
                         completion(true)
                     }
-
+                    
                 } else {
                     print("Failed Request")
                     

@@ -429,6 +429,12 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         self.timeRemainingRsnd = self.otpVM.timeCounter
                         self.isShowAlert = true
                     }
+                } else {
+                    DispatchQueue.main.async {
+                        self.isLoading = self.otpVM.isLoading
+                        self.isShowAlert = true
+                        self.messageResponse = self.otpVM.statusMessage
+                    }
                 }
             }
         }

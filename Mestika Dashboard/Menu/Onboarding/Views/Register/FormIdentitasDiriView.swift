@@ -23,9 +23,8 @@ struct FormIdentitasDiriView: View {
      Recognized Nomor Induk Ktp
      */
     @ObservedObject var recognizedText: RecognizedText = RecognizedText()
-    /*
-     KTP
-     */
+    
+    /* KTP */
     @State private var formKTP: Bool = true
     @State private var imageKTP: Image?
     @State private var nik: String = ""
@@ -33,26 +32,26 @@ struct FormIdentitasDiriView: View {
     @State private var shouldPresentKTP = true
     @State private var showKTPPreview: Bool = false
     
-    /*
-     Selfie
-     */
+    /* Selfie */
     @State private var formSelfie: Bool = false
     @State private var imageSelfie: Image?
     @State private var showSelfiePreview: Bool = false
-    /*
-     NPWP
-     */
+    
+    /* NPWP */
     @State private var formNPWP: Bool = false
     @State private var imageNPWP: Image?
     @State private var npwp: String = ""
     @State private var alreadyHaveNpwp: Bool = false
     @State private var showNPWPPreview: Bool = false
-    /*
-     Views Variables
-     */
+    
+    /* Views Variables */
     @State private var shouldPresentScanner = false
     @State private var shouldPresentCamera = false
     @State private var cameraFileName = "ktp"
+    
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
         
@@ -253,6 +252,20 @@ struct FormIdentitasDiriView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
     
     var camera: some View {

@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
-import PopupView
 
 struct FormPilihJenisTabunganView: View {
+    
+    @EnvironmentObject var appState: AppState
     
     /* Carousel Variables */
     @State var data = savingTypeData
@@ -27,6 +28,8 @@ struct FormPilihJenisTabunganView: View {
     let itemHeight:CGFloat = 150
     let itemGapHeight:CGFloat = 10
     
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
     @GestureState private var dragOffset = CGSize.zero
     
     @Binding var shouldPopToRootView : Bool
@@ -109,10 +112,17 @@ struct FormPilihJenisTabunganView: View {
             }
             
             if self.showingModalDetail {
-                ModalOverlay(tapAction: { withAnimation {
-                    self.showingModalDetail = false
-                } })
-                .edgesIgnoringSafeArea(.all)
+                ZStack {
+                    
+                    ModalOverlay(tapAction: { withAnimation {
+                        self.showingModalDetail = false
+                    } })
+                    .edgesIgnoringSafeArea(.all)
+                    
+                    
+                    popupDetailSaving()
+                }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
             }
             
             if self.showingModal {
@@ -126,6 +136,7 @@ struct FormPilihJenisTabunganView: View {
                     createBottomFloater()
 
                 }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
             }
             
             NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
@@ -133,22 +144,22 @@ struct FormPilihJenisTabunganView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-//        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-//
-//            if(value.startLocation.x < 20 && value.translation.width > 100) {
-//                self.shouldPopToRootView = false
-//            }
-//
-//        }))
-//        .popup(isPresented: $showingModal, type: .`default`, animation: Animation.spring(), closeOnTapOutside: false) {
-//            createBottomFloater()
-//        }
-        .popup(isPresented: $showingModalDetail, type: .`default`, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupDetailSaving()
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
     
     // MARK: - REFRESH THE CARD ITEM OFFSET
@@ -204,6 +215,17 @@ struct FormPilihJenisTabunganView: View {
             .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
+        //            .scaleEffect(scale)
+        //            .animation(.easeInOut(duration: 0.2))
+        //            .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
+        //            .onAppear {
+        //               withAnimation() {
+        //                    self.scale = 1
+        //                }
+        //            }
+        //            .onDisappear{
+        //                    self.scale = 0
+        //            }
     }
     
     // MARK: -Function Create Bottom Loader
@@ -214,16 +236,17 @@ struct FormPilihJenisTabunganView: View {
             .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
-            .scaleEffect(scale)
-            .animation(.easeInOut(duration: 0.2))
-            .onAppear {
-               withAnimation() {
-                    self.scale = 1
-                }
-            }
-            .onDisappear{
-                    self.scale = 0
-            }
+        //            .scaleEffect(scale)
+        //            .animation(.easeInOut(duration: 0.2))
+        //            .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
+        //            .onAppear {
+        //               withAnimation() {
+        //                    self.scale = 1
+        //                }
+        //            }
+        //            .onDisappear{
+        //                    self.scale = 0
+        //            }
         
     }
     

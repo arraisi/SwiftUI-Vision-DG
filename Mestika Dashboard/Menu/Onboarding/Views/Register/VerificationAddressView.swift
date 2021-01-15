@@ -9,6 +9,7 @@ import SwiftUI
 
 struct VerificationAddressView: View {
     
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var registerData: RegistrasiModel
     @State var isShowNextView : Bool = false
     
@@ -19,6 +20,10 @@ struct VerificationAddressView: View {
     @State var addressKodePosInput: String = ""
     
     let verificationAddress: [MasterModel] = load("verificationAddress.json")
+    
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    @State var isShowingAlert: Bool = false
     
     var disableForm: Bool {
         
@@ -199,6 +204,20 @@ struct VerificationAddressView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
     }
 }
 

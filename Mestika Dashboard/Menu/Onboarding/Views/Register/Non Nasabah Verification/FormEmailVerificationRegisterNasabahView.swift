@@ -20,6 +20,8 @@ struct FormEmailVerificationRegisterNasabahView: View {
     @State private var isEmailValid : Bool   = false
     @Environment(\.presentationMode) var presentationMode
     
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
     @GestureState private var dragOffset = CGSize.zero
     
     func textFieldValidatorEmail(_ string: String) -> Bool {
@@ -124,19 +126,26 @@ struct FormEmailVerificationRegisterNasabahView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-//        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-//
-//            if(value.startLocation.x < 20 && value.translation.width > 100) {
-//                self.shouldPopToRootView2 = false
-//            }
-//
-//        }))
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
 }
 

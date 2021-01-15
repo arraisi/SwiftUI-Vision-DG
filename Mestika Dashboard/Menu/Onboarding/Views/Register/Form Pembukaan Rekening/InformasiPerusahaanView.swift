@@ -15,6 +15,11 @@ struct BidangUsaha {
 struct InformasiPerusahaanView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
+    
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
     
     // Routing variables
     @State var editMode: EditMode = .inactive
@@ -266,6 +271,20 @@ struct InformasiPerusahaanView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
         .navigationBarHidden(true)
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
@@ -494,23 +513,42 @@ struct InformasiPerusahaanView: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(addressSugestionResult, id: \.formatted_address) { data in
-                HStack {
-                    Text(data.formatted_address)
-                        .font(Font.system(size: 14))
-                    
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    searchAddress(data: data.formatted_address)
-                    self.showingModal.toggle()
-                })
-            }
-            .background(Color.white)
-            .padding(.vertical)
-            .frame(height: 150)
+            //            List(addressSugestionResult, id: \.formatted_address) { data in
+            //
+            //                AddressSuggestionRow(address: data.formatted_address)
+            //                .onTapGesture(perform: {
+            //                    searchAddress(data: data.formatted_address)
+            //                    self.showingModal.toggle()
+            //                })
+            //
+            //            }
+            ////            .background(Color.white)
+            //            .padding(.vertical)
+            //            .frame(height: 150)
             
+            ScrollView {
+                VStack {
+                    ForEach(addressSugestionResult, id: \.formatted_address) {data in
+                        Button(action: {
+                            searchAddress(data: data.formatted_address)
+                            self.showingModal.toggle()
+                        }) {
+                            VStack {
+                                HStack{
+                                    Text(data.formatted_address)
+                                    Spacer()
+                                }
+                                Divider()
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 5)
+                        }
+                        .foregroundColor(.black)
+                    }
+                }
+            }
+            .frame(height: 150)
+            .padding(.vertical)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -549,24 +587,32 @@ struct InformasiPerusahaanView: View {
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
             
-            List(0...bidangUsaha.count-1, id: \.self) {index in
-                
-                HStack {
-                    Text(bidangUsaha[index].nama)
-                        .font(Font.system(size: 14))
-                    
-                    Spacer()
+            ScrollView {
+                VStack {
+                    ForEach(0...bidangUsaha.count-1, id: \.self) {index in
+                        Button(action: {
+                            registerData.bidangUsaha = bidangUsaha[index].nama
+                            self.showingModalBidang.toggle()
+                        }) {
+                            VStack(alignment: .center) {
+                                HStack {
+                                    Text(bidangUsaha[index].nama)
+                                        .font(Font.system(size: 14))
+                                    
+                                    Spacer()
+                                }
+                                Divider()
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 5)
+                            
+                        }
+                        .foregroundColor(.black)
+                    }
                 }
-                .contentShape(Rectangle())
-                .onTapGesture(perform: {
-                    registerData.bidangUsaha = bidangUsaha[index].nama
-                    self.showingModalBidang.toggle()
-                })
-                
             }
-            .background(Color.white)
-            .padding(.vertical)
             .frame(height: 150)
+            .padding(.vertical)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -586,6 +632,7 @@ struct InformasiPerusahaanView: View {
                 self.addressSugestionResult = self.addressVM.addressResult
                 self.showingModal = true
                 print("Success")
+                print("addressSugestionResult => \(self.addressSugestionResult[0])")
             }
             
             if !success {
@@ -605,14 +652,17 @@ struct InformasiPerusahaanView: View {
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
-                registerData.alamatPerusahaan = self.addressSugestion[0].formatted_address
-                registerData.kodePos = self.addressSugestion[0].postalCode
-//                kodePos = self.addressSugestion[0].postalCode
-                registerData.kecamatan = self.addressSugestion[0].kecamatan
-                registerData.kelurahan = self.addressSugestion[0].kelurahan
-                registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+                DispatchQueue.main.async {
+                    registerData.alamatPerusahaan = self.addressSugestion[0].formatted_address
+                    registerData.kodePos = self.addressSugestion[0].postalCode
+                    self.kodePos = self.addressSugestion[0].postalCode
+                    registerData.kecamatan = self.addressSugestion[0].kecamatan
+                    registerData.kelurahan = self.addressSugestion[0].kelurahan
+                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+                }
                 self.showingModal = false
                 print("Success")
+                print("self.addressSugestion[0].postalCode => \(self.addressSugestion[0].postalCode)")
             }
             
             if !success {

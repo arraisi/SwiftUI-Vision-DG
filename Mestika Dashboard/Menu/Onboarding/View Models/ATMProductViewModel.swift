@@ -96,16 +96,16 @@ extension ATMProductViewModel {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listATMDesign = response.data.content.filter({ (data: ATMDesignModel) -> Bool in
+                    self.listATMDesign = response.data.content.filter({ (data: ContentATM) -> Bool in
                         return data.cardType == type
-                    }).map({ (data: ATMDesignModel) -> ATMDesignViewModel in
+                    }).map({ (data: ContentATM) -> ATMDesignViewModel in
                         return ATMDesignViewModel (
                             id: data.id,
                             key: data.key,
                             title: data.title,
                             cardType: data.cardType,
                             cardImage: URL(string: data.cardImage),
-                            description: data.description
+                            description: data.contentDescription, cardImageBase64: data.cardImageBase64
                         )
                     })
                     completion(true)

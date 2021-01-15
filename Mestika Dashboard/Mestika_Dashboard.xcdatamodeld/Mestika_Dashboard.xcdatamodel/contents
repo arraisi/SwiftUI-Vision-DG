@@ -39,6 +39,7 @@
         <attribute name="monthlyDepositFrequency" optional="YES" attributeType="String"/>
         <attribute name="monthlyWithdrawalAmount" optional="YES" attributeType="String"/>
         <attribute name="monthlyWithdrawalFrequency" optional="YES" attributeType="String"/>
+        <attribute name="namaLengkapFromNik" optional="YES" attributeType="String"/>
         <attribute name="nik" optional="YES" attributeType="String"/>
         <attribute name="occupation" optional="YES" attributeType="String"/>
         <attribute name="otherSourceOfIncome" optional="YES" attributeType="String"/>
@@ -59,6 +60,6 @@
         <attribute name="tanggalInterview" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="869"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="884"/>
     </elements>
 </model>

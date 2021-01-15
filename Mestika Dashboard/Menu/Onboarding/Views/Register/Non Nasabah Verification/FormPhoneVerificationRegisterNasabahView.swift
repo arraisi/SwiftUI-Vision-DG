@@ -23,6 +23,10 @@ struct FormPhoneVerificationRegisterNasabahView: View {
     /* Variable Data */
     @State var phoneNumber: String = ""
     
+    /* Variable for Swipe Gesture to Back */
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
+    
     /* Disabled Form */
     var disableForm: Bool {
         phoneNumber.count < 10
@@ -190,6 +194,20 @@ struct FormPhoneVerificationRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupOTPInvalid() }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
     
     // MARK: -BOTTOM MESSAGE OTP IN CORRECT

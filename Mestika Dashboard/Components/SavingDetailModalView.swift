@@ -52,7 +52,11 @@ struct SavingDetailModalView: View {
             }
             
             Button(action: {
-                self.isShowModalDetail = false
+                
+                withAnimation {
+                    self.isShowModalDetail.toggle()
+                }
+                
             }) {
                 Text(NSLocalizedString("Kembali", comment: ""))
                     .foregroundColor(.white)

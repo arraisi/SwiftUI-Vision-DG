@@ -11,6 +11,9 @@ struct Term_ConditionView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    /* Variable for Swipe Gesture to Back */
+    @GestureState private var dragOffset = CGSize.zero
+    
     @State var scrollPosition: CGFloat = 0.0
     
     @State var isCheckedWni: Bool = false
@@ -168,6 +171,12 @@ struct Term_ConditionView: View {
                 }),
                 secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
 }
 

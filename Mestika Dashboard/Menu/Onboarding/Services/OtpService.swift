@@ -74,10 +74,10 @@ class OtpService {
     }
     
     /* GET CODE OTP */
-    func getRequestOtp(otpRequest: OtpRequest, completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
+    func getRequestOtp(otpRequest: OtpRequest, completion: @escaping(Result<OtpResponse, ErrorResult>) -> Void) {
         
         guard let url = URL.urlOTP() else {
-            return completion(.failure(.badUrl))
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         let finalUrl = url
@@ -91,19 +91,29 @@ class OtpService {
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             guard let data = data, error == nil else {
-                return completion(.failure(.noData))
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("OTP \(httpResponse.statusCode)")
-            }
-            
-            let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
-            
-            if otpResponse == nil {
-                completion(.failure(.decodingError))
-            } else {
-                completion(.success(otpResponse!))
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                    if otpResponse == nil {
+                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    } else {
+                        completion(.success(otpResponse!))
+                    }
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode > 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
             }
             
         }.resume()

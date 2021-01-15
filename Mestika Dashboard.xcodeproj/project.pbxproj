@@ -248,6 +248,7 @@
 		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
 		52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */; };
+		52E7740425B042CD00D5B010 /* ATMDesignNewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */; };
 		6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */; };
 		6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
@@ -590,6 +591,7 @@
 		52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResetPinScreen.swift; sourceTree = "<group>"; };
 		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
 		52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
+		52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignNewModel.swift; sourceTree = "<group>"; };
 		6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationResponse.swift; sourceTree = "<group>"; };
 		6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStatementView.swift; sourceTree = "<group>"; };
@@ -1427,6 +1429,7 @@
 				065DF51D25765ABE00255743 /* ATMDesignModel.swift */,
 				065DF52225765B5200255743 /* GeneralPaginationResponse.swift */,
 				524B396725A5C31500FE3ABE /* AddressSugestionResultResponse.swift */,
+				52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1899,6 +1902,7 @@
 				52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */,
 				0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */,
 				52ADFF8E2557DFDC00A1001F /* BesarPerkiraanPenarikanView.swift in Sources */,
+				52E7740425B042CD00D5B010 /* ATMDesignNewModel.swift in Sources */,
 				C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */,
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,

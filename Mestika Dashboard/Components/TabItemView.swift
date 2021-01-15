@@ -26,7 +26,7 @@ struct TabItemView: View {
 
 struct TabItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TabItemView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "")) { (id:ATMDesignViewModel) in
+        TabItemView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "", cardImageBase64: "")) { (id:ATMDesignViewModel) in
             
             }
     }
