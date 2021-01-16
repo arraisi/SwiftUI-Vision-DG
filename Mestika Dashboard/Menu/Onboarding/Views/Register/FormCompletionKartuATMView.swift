@@ -135,10 +135,13 @@ struct FormCompletionKartuATMView: View {
         .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomSuggestionNameFloater()
         }
+        .onAppear {
+            atmData.atmName = nama_local ?? "-"
+        }
         .onAppear(){
-            registerData.namaLengkapFromNik = user.last?.namaLengkapFromNik ?? "-"
+            registerData.namaLengkapFromNik = nama_local ?? "-"
             registerData.nik = user.last?.nik ?? "-"
-            atmData.atmName = user.last?.namaLengkapFromNik ?? "-"
+//            atmData.atmName = user.last?.namaLengkapFromNik ?? "-"
             fetchAddressOption()
         }
         .alert(isPresented: $isShowAlert) {
