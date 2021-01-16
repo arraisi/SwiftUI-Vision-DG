@@ -248,7 +248,7 @@ struct SuccessRegisterView: View {
                             
                             Button(
                                 action: {
-                                    self.showingModal.toggle()
+                                    self.showingModal = true
                                 },
                                 label: {
                                     Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
@@ -323,20 +323,20 @@ struct SuccessRegisterView: View {
                 message: Text("\(self.scheduleVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
-        .alert(isPresented: $isShowingAlert) {
-            return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-        }
-        .gesture(DragGesture().onEnded({ value in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.isShowingAlert = true
-            }
-        }))
+//        .alert(isPresented: $isShowingAlert) {
+//            return Alert(
+//                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+//                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+//                    self.appState.moveToWelcomeView = true
+//                }),
+//                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+//        }
+//        .gesture(DragGesture().onEnded({ value in
+//            if(value.startLocation.x < 20 &&
+//                value.translation.width > 100) {
+//                self.isShowingAlert = true
+//            }
+//        }))
     }
     
     func removeUser() {
