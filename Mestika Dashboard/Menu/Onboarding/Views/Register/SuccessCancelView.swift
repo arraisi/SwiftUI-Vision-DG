@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SuccessCancelView: View {
-    @Binding var rootIsActive : Bool
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -40,7 +40,7 @@ struct SuccessCancelView: View {
                 VStack(spacing: 5) {
                     
                     Button(action: {
-                        self.rootIsActive = false
+                        self.appState.moveToWelcomeView = true
                     }, label: {
                         Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
                             .foregroundColor(.white)
@@ -54,11 +54,17 @@ struct SuccessCancelView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+//                self.isShowingAlert = true
+            }
+        }))
     }
 }
 
 struct SuccessCancelView_Previews: PreviewProvider {
     static var previews: some View {
-        SuccessCancelView(rootIsActive: Binding.constant(true))
+        SuccessCancelView()
     }
 }

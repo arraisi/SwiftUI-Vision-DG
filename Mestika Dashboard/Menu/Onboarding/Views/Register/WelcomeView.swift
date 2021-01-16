@@ -27,7 +27,6 @@ struct WelcomeView: View {
     @State var isRescheduleInterview: Bool = false
     @State var isFormPilihSchedule: Bool = false
     @State var isIncomingVideoCall: Bool = false
-    @State var isCancelViewActive: Bool = false
     
     // View Variables
     @FetchRequest(entity: User.entity(), sortDescriptors: [])
@@ -140,13 +139,6 @@ struct WelcomeView: View {
                     label: {}
                 )
                 .isDetailLink(false)
-                
-                NavigationLink(
-                    destination: SuccessCancelView(rootIsActive: self.$isCancelViewActive),
-                    isActive: self.$isCancelViewActive,
-                    label: {}
-                )
-                .isDetailLink(false)
             }
             .navigationBarItems(trailing: EmptyView())
             .edgesIgnoringSafeArea(.all)
@@ -156,14 +148,6 @@ struct WelcomeView: View {
                     print("Move to Welcome: \(moveToWelcomeView)")
                     activateWelcomeView()
                     self.appState.moveToWelcomeView = false
-                }
-            }
-            .onReceive(self.appState.$moveToWelcomeViewThenCancel) { moveToWelcomeViewThenCancel in
-                if moveToWelcomeViewThenCancel {
-                    print("Move to Welcome: \(moveToWelcomeViewThenCancel)")
-                    activateWelcomeView()
-                    self.appState.moveToWelcomeViewThenCancel = false
-                    cancelRegistration()
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
@@ -1019,41 +1003,6 @@ struct WelcomeView: View {
                 self.isShowModal = true
             }
         }
-    }
-    
-    func cancelRegistration() {
-        self.isLoading = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.isLoading = false
-            self.modalSelection = ""
-            
-            let domain = Bundle.main.bundleIdentifier!
-            UserDefaults.standard.removePersistentDomain(forName: domain)
-            UserDefaults.standard.synchronize()
-            
-            self.isCancelViewActive = true
-        }
-        
-//        self.userVM.cancelRegistration(nik: user.last?.nik ?? "", completion: { (success:Bool) in
-//
-//            if success {
-//                self.isLoading = false
-//                self.modalSelection = ""
-//
-//                let domain = Bundle.main.bundleIdentifier!
-//                UserDefaults.standard.removePersistentDomain(forName: domain)
-//                UserDefaults.standard.synchronize()
-//
-//                self.isCancelViewActive = true
-//
-//            } else {
-//                self.isLoading = false
-//
-//                self.alertMessage = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
-//                self.showingAlert.toggle()
-//            }
-//        })
     }
 }
 

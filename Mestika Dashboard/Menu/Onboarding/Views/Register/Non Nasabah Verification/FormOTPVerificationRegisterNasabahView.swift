@@ -16,7 +16,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var userVM = UserRegistrationViewModel()
     @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
+    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
     
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
@@ -53,6 +55,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State var tryCountResendDisable = 0
     @State var routingReschedule: Bool = false
     @State var routingChooseATM: Bool = false
+    @State var isCancelViewActive: Bool = false
     
     /* Timer */
     @State private var timeRemainingRsnd = 30
@@ -168,6 +171,13 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         
                         NavigationLink(destination: FormPilihJenisATMView().environmentObject(atmData).environmentObject(registerData), isActive: self.$routingChooseATM, label: {EmptyView()})
                             .isDetailLink(false)
+                        
+                        NavigationLink(
+                            destination: SuccessCancelView(),
+                            isActive: self.$isCancelViewActive,
+                            label: {}
+                        )
+                        .isDetailLink(false)
                         
                         Button(action: {
                             self.tryCount += 1
@@ -480,77 +490,101 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     func validateOTP() {
         self.isLoading = true
-        self.otpVM.otpValidation(
-            code: self.pin,
-            destination: "+62" + self.registerData.noTelepon,
-            reference: referenceCode,
-            timeCounter: self.timeRemainingBtn,
-            tryCount: tryCount,
-            type: "hp")
-        { success in
-            
-            if success {
-                print("OTP VALID")
-                if (editModeForCreateSchedule == .active) {
-                    self.isLoading = false
-                    self.routingReschedule = true
-                } else if (editModeForReschedule == .active) {
-                    self.isLoading = false
-                    UserDefaults.standard.set("true", forKey: "routingSchedule")
-                    self.routingReschedule = true
-                } else if (editModeForChooseATM == .active) {
-                    self.isLoading = false
-                    UserDefaults.standard.set("false", forKey: "routingSchedule")
-                    self.routingChooseATM = true
-                } else if (editModeForCancel == .active) {
-                    self.isLoading = false
-                    self.appState.moveToWelcomeViewThenCancel = true
-                } else {
-                    UserDefaults.standard.set("false", forKey: "routingSchedule")
-                    self.isOtpValid = true
-                    self.isLoading = false
-                }
-            }
-            
-            if !success {
-                print("OTP INVALID")
-                
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            print("OTP VALID")
+            if (editModeForCreateSchedule == .active) {
                 self.isLoading = false
-                print(self.otpVM.timeRemaining)
-                self.timeRemainingBtn = self.otpVM.timeRemaining
-                self.modalSelection = "OTPINCORRECT"
-                self.isShowModal.toggle()
-                
-                //                if (self.tryCount == 1) {
-                //                    self.timeRemainingBtn = 0
-                //                    self.modalSelection = "OTPINCORRECT"
-                //                    self.isShowModal.toggle()
-                //                }
-                //
-                //                if (self.tryCount == 2) {
-                //                    self.timeRemainingBtn = 0
-                //                    self.modalSelection = "OTPINCORRECT"
-                //                    self.isShowModal.toggle()
-                //                }
-                //
-                //                if (self.tryCount == 3) {
-                //                    self.timeRemainingBtn = 0
-                //                    self.modalSelection = "OTPINCORRECT"
-                //                    self.isShowModal.toggle()
-                //                }
-                //
-                //                if (self.tryCount > 3) {
-                //                    self.tryCountResendDisable += 1
-                //                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
-                //                    self.modalSelection = "OTPINCORRECT"
-                //                    self.isShowModal.toggle()
-                //                }
-                
-                self.isBtnValidationDisabled = true
-                resetField()
+                self.routingReschedule = true
+            } else if (editModeForReschedule == .active) {
+                self.isLoading = false
+                UserDefaults.standard.set("true", forKey: "routingSchedule")
+                self.routingReschedule = true
+            } else if (editModeForChooseATM == .active) {
+                self.isLoading = false
+                UserDefaults.standard.set("false", forKey: "routingSchedule")
+                self.routingChooseATM = true
+            } else if (editModeForCancel == .active) {
+                self.isLoading = false
+                self.cancelRegistration()
+            } else {
+                UserDefaults.standard.set("false", forKey: "routingSchedule")
+                self.isOtpValid = true
+                self.isLoading = false
             }
-            
         }
+        
+//        self.otpVM.otpValidation(
+//            code: self.pin,
+//            destination: "+62" + self.registerData.noTelepon,
+//            reference: referenceCode,
+//            timeCounter: self.timeRemainingBtn,
+//            tryCount: tryCount,
+//            type: "hp")
+//        { success in
+//            
+//            if success {
+//                print("OTP VALID")
+//                if (editModeForCreateSchedule == .active) {
+//                    self.isLoading = false
+//                    self.routingReschedule = true
+//                } else if (editModeForReschedule == .active) {
+//                    self.isLoading = false
+//                    UserDefaults.standard.set("true", forKey: "routingSchedule")
+//                    self.routingReschedule = true
+//                } else if (editModeForChooseATM == .active) {
+//                    self.isLoading = false
+//                    UserDefaults.standard.set("false", forKey: "routingSchedule")
+//                    self.routingChooseATM = true
+//                } else if (editModeForCancel == .active) {
+//                    self.isLoading = false
+//                    self.appState.moveToWelcomeViewThenCancel = true
+//                } else {
+//                    UserDefaults.standard.set("false", forKey: "routingSchedule")
+//                    self.isOtpValid = true
+//                    self.isLoading = false
+//                }
+//            }
+//            
+//            if !success {
+//                print("OTP INVALID")
+//                
+//                self.isLoading = false
+//                print(self.otpVM.timeRemaining)
+//                self.timeRemainingBtn = self.otpVM.timeRemaining
+//                self.modalSelection = "OTPINCORRECT"
+//                self.isShowModal.toggle()
+//                
+//                //                if (self.tryCount == 1) {
+//                //                    self.timeRemainingBtn = 0
+//                //                    self.modalSelection = "OTPINCORRECT"
+//                //                    self.isShowModal.toggle()
+//                //                }
+//                //
+//                //                if (self.tryCount == 2) {
+//                //                    self.timeRemainingBtn = 0
+//                //                    self.modalSelection = "OTPINCORRECT"
+//                //                    self.isShowModal.toggle()
+//                //                }
+//                //
+//                //                if (self.tryCount == 3) {
+//                //                    self.timeRemainingBtn = 0
+//                //                    self.modalSelection = "OTPINCORRECT"
+//                //                    self.isShowModal.toggle()
+//                //                }
+//                //
+//                //                if (self.tryCount > 3) {
+//                //                    self.tryCountResendDisable += 1
+//                //                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
+//                //                    self.modalSelection = "OTPINCORRECT"
+//                //                    self.isShowModal.toggle()
+//                //                }
+//                
+//                self.isBtnValidationDisabled = true
+//                resetField()
+//            }
+//            
+//        }
     }
     
     @EnvironmentObject var hudCoordinator: JGProgressHUDCoordinator
@@ -576,6 +610,30 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     private func resetField() {
         self.pin = "" /// return to empty pin
+    }
+    
+    func cancelRegistration() {
+        self.isLoading = true
+        
+        self.userVM.cancelRegistration(nik: nik_local ?? "", completion: { (success:Bool) in
+
+            if success {
+                self.isLoading = false
+                self.modalSelection = ""
+
+                let domain = Bundle.main.bundleIdentifier!
+                UserDefaults.standard.removePersistentDomain(forName: domain)
+                UserDefaults.standard.synchronize()
+
+                self.isCancelViewActive = true
+
+            } else {
+                self.isLoading = false
+
+                self.messageResponse = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+                self.isShowAlert.toggle()
+            }
+        })
     }
 }
 
