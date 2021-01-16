@@ -119,6 +119,7 @@ struct ScanNPWPView: View {
                         print("NPWP YES")
                     } else {
                         self.onCommit()
+                        self.registerData.fotoNPWP = Image("")
                         self.registerData.hasNoNpwp = false
                         print("NPWP NO")
                     }
@@ -148,6 +149,7 @@ struct ScanNPWPView: View {
         if self.alreadyHaveNpwp {
             self.npwp = ""
             self.imageNPWP = nil
+            self.registerData.fotoNPWP = Image("")
         }
     }
     
