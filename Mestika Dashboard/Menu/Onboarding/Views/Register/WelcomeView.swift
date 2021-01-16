@@ -142,7 +142,7 @@ struct WelcomeView: View {
                 .isDetailLink(false)
                 
                 NavigationLink(
-                    destination: SuccessCancelView(),
+                    destination: SuccessCancelView(rootIsActive: self.$isCancelViewActive),
                     isActive: self.$isCancelViewActive,
                     label: {}
                 )
@@ -162,8 +162,8 @@ struct WelcomeView: View {
                 if moveToWelcomeViewThenCancel {
                     print("Move to Welcome: \(moveToWelcomeViewThenCancel)")
                     activateWelcomeView()
-                    cancelRegistration()
                     self.appState.moveToWelcomeViewThenCancel = false
+                    cancelRegistration()
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
@@ -230,7 +230,6 @@ struct WelcomeView: View {
         self.isRescheduleInterview = false
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
-        self.isCancelViewActive = false
     }
     
     var Header: some View {
@@ -420,7 +419,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\(dateInterview == "-" ? user.last?.tanggalInterview as! String : dateInterview)")
+                    Text("\(dateInterview == "-" ? (user.last?.tanggalInterview as? String) ?? "" : dateInterview)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -439,7 +438,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\(timeInterview == "-" ? user.last?.jamInterviewStart as! String : timeInterview)")
+                    Text("\(timeInterview == "-" ? (user.last?.jamInterviewStart ?? "") : timeInterview)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -1025,25 +1024,36 @@ struct WelcomeView: View {
     func cancelRegistration() {
         self.isLoading = true
         
-        self.userVM.cancelRegistration(nik: user.last?.nik ?? "", completion: { (success:Bool) in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.isLoading = false
+            self.modalSelection = ""
             
-            if success {
-                self.isLoading = false
-                self.modalSelection = ""
-                
-                let domain = Bundle.main.bundleIdentifier!
-                UserDefaults.standard.removePersistentDomain(forName: domain)
-                UserDefaults.standard.synchronize()
-                
-                self.isCancelViewActive = true
-                
-            } else {
-                self.isLoading = false
-                
-                self.alertMessage = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
-                self.showingAlert.toggle()
-            }
-        })
+            let domain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: domain)
+            UserDefaults.standard.synchronize()
+            
+            self.isCancelViewActive = true
+        }
+        
+//        self.userVM.cancelRegistration(nik: user.last?.nik ?? "", completion: { (success:Bool) in
+//
+//            if success {
+//                self.isLoading = false
+//                self.modalSelection = ""
+//
+//                let domain = Bundle.main.bundleIdentifier!
+//                UserDefaults.standard.removePersistentDomain(forName: domain)
+//                UserDefaults.standard.synchronize()
+//
+//                self.isCancelViewActive = true
+//
+//            } else {
+//                self.isLoading = false
+//
+//                self.alertMessage = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+//                self.showingAlert.toggle()
+//            }
+//        })
     }
 }
 

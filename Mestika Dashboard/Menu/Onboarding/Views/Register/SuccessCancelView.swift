@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SuccessCancelView: View {
-    @EnvironmentObject var appState: AppState
+    @Binding var rootIsActive : Bool
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -40,7 +40,7 @@ struct SuccessCancelView: View {
                 VStack(spacing: 5) {
                     
                     Button(action: {
-                        self.appState.moveToWelcomeView = true
+                        self.rootIsActive = false
                     }, label: {
                         Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
                             .foregroundColor(.white)
@@ -59,6 +59,6 @@ struct SuccessCancelView: View {
 
 struct SuccessCancelView_Previews: PreviewProvider {
     static var previews: some View {
-        SuccessCancelView()
+        SuccessCancelView(rootIsActive: Binding.constant(true))
     }
 }
