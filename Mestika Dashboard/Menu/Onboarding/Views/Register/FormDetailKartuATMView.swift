@@ -30,16 +30,16 @@ struct FormDetailKartuATMView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            VStack {
-                Color(hex: "#232175")
-                    .frame(height: 100)
-                    .edgesIgnoringSafeArea(.all)
-            }
+//            VStack {
+//                Color(hex: "#232175")
+//                    .frame(height: 100)
+//                    .edgesIgnoringSafeArea(.all)
+//            }
             
             VStack {
-                AppBarLogo(light: false, onCancel: {})
+                AppBarLogo(light: true, onCancel: {})
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack(spacing: 25){
                         HStack {
                             Text(NSLocalizedString("KARTU ATM ANDA \nAKAN SEGERA DIKIRIM", comment: ""))
@@ -95,51 +95,51 @@ struct FormDetailKartuATMView: View {
                                 .cornerRadius(10)
                             }
                             
-                            if (is_video_call == "true" || registerData.isNasabahmestika == false) {
-                                EmptyView()
-                            } else {
-                                Group {
-                                    HStack {
-                                        Text(NSLocalizedString("No. Kartu", comment: ""))
-                                            .font(.custom("Montserrat-Regular", size: 12))
-                                            .foregroundColor(Color(hex: "#707070"))
-
-                                        Spacer()
-
-                                        TextField(NSLocalizedString("No. Kartu", comment: ""), text: Binding.constant("")) { (isChanged) in
-
-                                        } onCommit: {
-
-                                        }
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .frame(width: 200, height: 36)
-                                        .padding(.horizontal)
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(10)
-                                        .disabled(true)
-                                    }
-                                    
-                                    HStack {
-                                        Text("Expired")
-                                            .font(.custom("Montserrat-Regular", size: 12))
-                                            .foregroundColor(Color(hex: "#707070"))
-
-                                        Spacer()
-
-                                        TextField("Expired", text: Binding.constant("")) { (isChanged) in
-
-                                        } onCommit: {
-
-                                        }
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .frame(width: 200, height: 36)
-                                        .padding(.horizontal)
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(10)
-                                        .disabled(true)
-                                    }
-                                }
-                            }
+//                            if (is_video_call == "true" || registerData.isNasabahmestika == false) {
+//                                EmptyView()
+//                            } else {
+//                                Group {
+//                                    HStack {
+//                                        Text(NSLocalizedString("No. Kartu", comment: ""))
+//                                            .font(.custom("Montserrat-Regular", size: 12))
+//                                            .foregroundColor(Color(hex: "#707070"))
+//
+//                                        Spacer()
+//
+//                                        TextField(NSLocalizedString("No. Kartu", comment: ""), text: Binding.constant("")) { (isChanged) in
+//
+//                                        } onCommit: {
+//
+//                                        }
+//                                        .font(.custom("Montserrat-Regular", size: 12))
+//                                        .frame(width: 200, height: 36)
+//                                        .padding(.horizontal)
+//                                        .background(Color.gray.opacity(0.1))
+//                                        .cornerRadius(10)
+//                                        .disabled(true)
+//                                    }
+//
+//                                    HStack {
+//                                        Text("Expired")
+//                                            .font(.custom("Montserrat-Regular", size: 12))
+//                                            .foregroundColor(Color(hex: "#707070"))
+//
+//                                        Spacer()
+//
+//                                        TextField("Expired", text: Binding.constant("")) { (isChanged) in
+//
+//                                        } onCommit: {
+//
+//                                        }
+//                                        .font(.custom("Montserrat-Regular", size: 12))
+//                                        .frame(width: 200, height: 36)
+//                                        .padding(.horizontal)
+//                                        .background(Color.gray.opacity(0.1))
+//                                        .cornerRadius(10)
+//                                        .disabled(true)
+//                                    }
+//                                }
+//                            }
                         }
                         
                         HStack {

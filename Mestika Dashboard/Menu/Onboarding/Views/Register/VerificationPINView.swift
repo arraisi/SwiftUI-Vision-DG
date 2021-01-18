@@ -44,10 +44,14 @@ struct VerificationPINView: View {
         return false
     }
     
+    @State var noAtmAndPinIsWrong = true
+    
     /* Timer */
     @State private var timeRemainingRsnd = 30
     @State private var timeRemainingBtn = 30
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State var noKartuCtrl: String = ""
     
     var body: some View {
         ZStack {
@@ -76,6 +80,28 @@ struct VerificationPINView: View {
                             .padding(.top, 30)
                             .padding(.horizontal, 20)
                             .fixedSize(horizontal: false, vertical: true)
+                        
+                        TextField(NSLocalizedString("Masukkan No Kartu ATM", comment: ""), text: $noKartuCtrl, onEditingChanged: { changed in
+                            self.registerData.noAtm = self.noKartuCtrl
+                            self.registerData.accNo = self.noKartuCtrl
+                        })
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .keyboardType(.numberPad)
+                        .disabled((self.registerData.accType == "ATM" || self.registerData.atmOrRekening == "ATM"))
+                        .padding(15)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 30)
+                        .padding(.top, 15)
+                        .onReceive(noKartuCtrl.publisher.collect()) {
+                            self.noKartuCtrl = String($0.prefix(16))
+                        }
+                        .onAppear{
+                            if (self.registerData.accType == "ATM" || self.registerData.atmOrRekening == "ATM") {
+                                self.noKartuCtrl = self.registerData.accNo
+                                self.noKartuCtrl = self.registerData.noAtm
+                            }
+                        }
                         
                         if (secured) {
                             
@@ -273,8 +299,11 @@ struct VerificationPINView: View {
     func validatePIN() {
         
         if pin == dummyPin {
-            self.nextToPilihJenisAtm = true
+//            self.nextToPilihJenisAtm = true
+            self.noAtmAndPinIsWrong = false
+            self.showingModal.toggle()
         } else {
+            self.noAtmAndPinIsWrong = true
             
             if (self.tryCount == 1) {
                 self.timeRemainingBtn = 30
@@ -309,6 +338,18 @@ struct VerificationPINView: View {
      Fuction for Create Bottom Floater (Modal)
      */
     func createBottomFloater() -> some View {
+        VStack {
+            if (noAtmAndPinIsWrong) {
+                NoAtmAndPinWrong
+            } else {
+                NoAtmAndPinApproved
+            }
+        }
+        
+    }
+    
+    var NoAtmAndPinWrong: some View {
+        
         VStack(alignment: .leading) {
             Image("Logo M")
                 .resizable()
@@ -352,10 +393,51 @@ struct VerificationPINView: View {
         .cornerRadius(20)
         .shadow(radius: 20)
     }
+    
+    var NoAtmAndPinApproved: some View {
+        
+        VStack(alignment: .leading) {
+            Image("ic_bells")
+                .resizable()
+                .frame(width: 80, height: 80)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text(NSLocalizedString("ACCOUNT OPENING APPROVED", comment: ""))
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.vertical, 20)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Text(NSLocalizedString("Congratulations, your new account opening has been approved.", comment: ""))
+                .font(.custom("Montserrat-SemiBold", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Button(action: {
+                self.nextToPilihJenisAtm = true
+            }) {
+                Text(NSLocalizedString("Continue to Create an ATM", comment: ""))
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+            }
+            .frame(maxWidth: .infinity, maxHeight: 50)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.vertical)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
 }
 
 struct VerificationPINView_Previews: PreviewProvider {
     static var previews: some View {
-        VerificationPINView().environmentObject(RegistrasiModel())
+        VerificationPINView().environmentObject(RegistrasiModel()).environmentObject(AddProductATM()).environmentObject(AppState())
     }
 }
