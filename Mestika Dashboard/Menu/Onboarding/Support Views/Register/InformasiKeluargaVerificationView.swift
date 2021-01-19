@@ -16,7 +16,7 @@ struct InformasiKeluargaVerificationView: View {
             HStack {
                 Text(NSLocalizedString("Keluarga Terdekat Anda", comment: ""))
                     .font(.subheadline)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                 
@@ -30,6 +30,7 @@ struct InformasiKeluargaVerificationView: View {
             .frame(height: 20)
             .font(.subheadline)
             .padding()
+            .padding(.top, 5)
             .cornerRadius(15)
             
             Group {

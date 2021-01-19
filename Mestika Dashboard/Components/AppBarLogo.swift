@@ -27,7 +27,9 @@ struct AppBarLogo: View {
                         .frame(width: 30, height: 25)
                 })
                 .frame(width: UIScreen.main.bounds.width * 0.2)
-            } else {Spacer().frame(width: UIScreen.main.bounds.width * 0.2)}
+            } else {
+                Spacer().frame(width: UIScreen.main.bounds.width * 0.2)
+            }
             
             logo
                 .frame(width: UIScreen.main.bounds.width * 0.6)
@@ -41,7 +43,9 @@ struct AppBarLogo: View {
                         .foregroundColor(light ? Color("DarkStaleBlue") : .white )
                 })
                 .frame(width: UIScreen.main.bounds.width * 0.2)
-            } else {Spacer().frame(width: UIScreen.main.bounds.width * 0.2)}
+            } else {
+                Spacer().frame(width: UIScreen.main.bounds.width * 0.2)
+            }
         }
         .padding(.top, 50)
         .padding(.bottom, 5)
@@ -53,16 +57,16 @@ struct AppBarLogo: View {
             if light {
                 Image("Logo M")
                     .resizable()
-                    .frame(width: 25, height: 25)
+                    .frame(width: 28, height: 28)
                 Text("BANK MESTIKA")
                     .foregroundColor(Color(hex: "#232175"))
-                    .font(.system(size: 20))
+                    .font(.system(size: 26))
                     .bold()
             } else {
                 Image("logo_mestika")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 25)
+                    .frame(height: 32)
             }
         }
     }

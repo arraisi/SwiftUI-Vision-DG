@@ -38,6 +38,7 @@ struct FormDetailKartuATMView: View {
             
             VStack {
                 AppBarLogo(light: false, onCancel: {})
+                    .frame(height: 100)
                 
                 ScrollView {
                     VStack(spacing: 25){

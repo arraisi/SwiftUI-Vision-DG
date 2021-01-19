@@ -110,7 +110,7 @@ struct WelcomeView: View {
                         
                         NavigationLink(destination:
                                         FirstLoginView().environmentObject(loginData),
-//                                       Term_ConditionView().environmentObject(registerData),
+//                                        FormPilihJenisATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
