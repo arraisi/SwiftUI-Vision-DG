@@ -299,6 +299,7 @@
 		C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */; };
 		C0BCDEB425B69A7500E1028F /* PinNoAtmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEB325B69A7500E1028F /* PinNoAtmViewModel.swift */; };
 		C0BCDEB925B69B3D00E1028F /* PinNoAtmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEB825B69B3D00E1028F /* PinNoAtmService.swift */; };
+		C0BCDEC625B6B99D00E1028F /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEC525B6B99D00E1028F /* BadgeView.swift */; };
 		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
@@ -647,6 +648,7 @@
 		C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCDEB325B69A7500E1028F /* PinNoAtmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinNoAtmViewModel.swift; sourceTree = "<group>"; };
 		C0BCDEB825B69B3D00E1028F /* PinNoAtmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinNoAtmService.swift; sourceTree = "<group>"; };
+		C0BCDEC525B6B99D00E1028F /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
@@ -1470,6 +1472,7 @@
 			isa = PBXGroup;
 			children = (
 				C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */,
+				C0BCDEC525B6B99D00E1028F /* BadgeView.swift */,
 				52BF57D82558E66600F009B5 /* Register */,
 			);
 			path = "Support Views";
@@ -1983,6 +1986,7 @@
 				C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
 				52ADFEF42557DC5C00A1001F /* CheckBoxGroup.swift in Sources */,
+				C0BCDEC625B6B99D00E1028F /* BadgeView.swift in Sources */,
 				C0BCDEB425B69A7500E1028F /* PinNoAtmViewModel.swift in Sources */,
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
