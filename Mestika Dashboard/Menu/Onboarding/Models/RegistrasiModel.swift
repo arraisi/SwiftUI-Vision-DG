@@ -87,7 +87,7 @@ class RegistrasiModel: ObservableObject {
     @Published var provinsiFromNik: String = ""
     @Published var kodePosFromNik: String = ""
     @Published var bidangUsaha: String = ""
-    @Published var desainKartuATMImage: URL = URL(fileURLWithPath: "")
+    @Published var desainKartuATMImage: UIImage = UIImage(named: "card_bg")!
     @Published var noRekening: String = ""
     @Published var noAtm: String = ""
     @Published var atmOrRekening: String = ""
