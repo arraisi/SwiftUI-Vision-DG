@@ -271,20 +271,6 @@ struct InformasiPerusahaanView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .alert(isPresented: $showingAlert) {
-            return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-        }
-        .gesture(DragGesture().onEnded({ value in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.showingAlert = true
-            }
-        }))
         .navigationBarHidden(true)
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
@@ -303,6 +289,20 @@ struct InformasiPerusahaanView: View {
                 dismissButton: .default(Text("Oke"))
             )
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
     
     // MARK : - Check form is fill
