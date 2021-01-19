@@ -575,6 +575,8 @@ struct VerificationRegisterDataView: View {
                     case "ktp":
                         self.registerData.fotoKTP = Image(uiImage: image)
                     case "npwp":
+                        self.registerData.hasNoNpwp = true
+                        self.registerData.npwp = "123456789"
                         self.registerData.fotoNPWP = Image(uiImage: image)
                     default:
                         print("retrieve image nil")

@@ -69,7 +69,9 @@ extension CitizenViewModel {
                 
                 switch error {
                 case .custom(code: 404):
-                    self.errorMessage = "Nik tidak terdaftar"
+                    self.errorMessage = "NIK TIDAK TERDAFTAR"
+                case .custom(code: 403):
+                    self.errorMessage = "USER STATUS NOT FOUND"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

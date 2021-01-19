@@ -126,7 +126,7 @@ struct FormPilihDesainATMView: View {
                                 }
                                 
                                 Button {
-                                    self.registerData.desainKartuATMImage = cards[Int(count)].cardImage!
+                                    self.registerData.desainKartuATMImage = cards[Int(count)].cardImageBase64!
                                     self.nextRoute = true
                                 } label: {
                                     Text(NSLocalizedString("PILIH DESAIN KARTU", comment: ""))

@@ -52,6 +52,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/otp")
     }
     
+    static func urlPINValidation() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/validatePin")
+    }
+    
     static func urlPasswordValidation() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/password/validation")
     }

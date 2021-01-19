@@ -16,21 +16,29 @@ struct ATMCardDesignView: View {
     
     let showContent: Bool
     
+    
+    
     var body: some View {
         ZStack {
-            WebImage(url: card.cardImage!)
-                .onSuccess { image, data, cacheType in
-                    // Success
-                    // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
-                }
-                .placeholder {
-                    Rectangle().foregroundColor(.gray).opacity(0.5)
-                }
+//            WebImage(url: card.cardImage!)
+//                .onSuccess { image, data, cacheType in
+//                    // Success
+//                    // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
+//                }
+//                .placeholder {
+//                    Rectangle().foregroundColor(.gray).opacity(0.5)
+//                }
+//                .resizable()
+//                .indicator(.activity) // Activity Indicator
+//                .transition(.fade(duration: 0.5)) // Fade Transition with duration
+//                .scaledToFill()
+//                .frame(width: cardWidth, height: cardHeight)
+            
+            Image(uiImage: card.cardImageBase64!)
                 .resizable()
-                .indicator(.activity) // Activity Indicator
-                .transition(.fade(duration: 0.5)) // Fade Transition with duration
-                .scaledToFill()
-                .frame(width: cardWidth, height: cardHeight)
+                    .frame(width: cardWidth, height: cardHeight)
+                    .background(Color.clear)
+
             
             if showContent {
                 VStack(){
@@ -65,6 +73,6 @@ struct ATMCardDesignView: View {
 
 struct ATMCardDesignView_Previews: PreviewProvider {
     static var previews: some View {
-        ATMCardDesignView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "test", cardImageBase64: ""), cardWidth: 315, cardHeight: 197, showContent: false)
+        ATMCardDesignView(card: ATMDesignViewModel(id: "0", key: "0", title: "0", cardImage: URL(string: ""), description: "test", cardImageBase64: UIImage(contentsOfFile: "")), cardWidth: 315, cardHeight: 197, showContent: false)
     }
 }

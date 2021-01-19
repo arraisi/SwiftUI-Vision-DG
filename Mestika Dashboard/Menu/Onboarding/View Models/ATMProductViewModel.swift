@@ -54,12 +54,17 @@ extension ATMProductViewModel {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.listATM = response.map({ (data: ATMModel) -> ATMViewModel in
+                        var image = UIImage(named: "card_bg")!
+                        if let img = data.cardImageBase64.base64ToImage() {
+                             image = img
+                         }
                         return ATMViewModel (
                             id: data.id,
                             key: data.key,
                             title: data.title,
                             cardImage: URL(string: data.cardImage),
-                            description: self.mapDescriptionLimit(data: data.description)
+                            description: self.mapDescriptionLimit(data: data.description),
+                            cardImageBase64: image
                         )
                     })
                     completion(true)
@@ -99,13 +104,17 @@ extension ATMProductViewModel {
                     self.listATMDesign = response.data.content.filter({ (data: ContentATM) -> Bool in
                         return data.cardType == type
                     }).map({ (data: ContentATM) -> ATMDesignViewModel in
+                        var image = UIImage(named: "card_bg")!
+                        if let img = data.cardImageBase64.base64ToImage() {
+                             image = img
+                         }
                         return ATMDesignViewModel (
                             id: data.id,
                             key: data.key,
                             title: data.title,
                             cardType: data.cardType,
                             cardImage: URL(string: data.cardImage),
-                            description: data.contentDescription, cardImageBase64: data.cardImageBase64
+                            description: data.contentDescription, cardImageBase64: image
                         )
                     })
                     completion(true)

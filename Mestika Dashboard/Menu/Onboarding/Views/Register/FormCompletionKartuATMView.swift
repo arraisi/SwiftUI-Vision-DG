@@ -135,10 +135,13 @@ struct FormCompletionKartuATMView: View {
         .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomSuggestionNameFloater()
         }
+        .onAppear {
+            atmData.atmName = nama_local ?? "-"
+        }
         .onAppear(){
-            registerData.namaLengkapFromNik = user.last?.namaLengkapFromNik ?? "-"
+            registerData.namaLengkapFromNik = nama_local ?? "-"
             registerData.nik = user.last?.nik ?? "-"
-            atmData.atmName = user.last?.namaLengkapFromNik ?? "-"
+//            atmData.atmName = user.last?.namaLengkapFromNik ?? "-"
             fetchAddressOption()
         }
         .alert(isPresented: $isShowAlert) {
@@ -148,20 +151,20 @@ struct FormCompletionKartuATMView: View {
                 dismissButton: .default(Text("Oke"))
             )
         }
-        .alert(isPresented: $isShowingAlert) {
-            return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-        }
-        .gesture(DragGesture().onEnded({ value in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.isShowingAlert = true
-            }
-        }))
+//        .alert(isPresented: $isShowingAlert) {
+//            return Alert(
+//                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+//                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+//                    self.appState.moveToWelcomeView = true
+//                }),
+//                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+//        }
+//        .gesture(DragGesture().onEnded({ value in
+//            if(value.startLocation.x < 20 &&
+//                value.translation.width > 100) {
+//                self.isShowingAlert = true
+//            }
+//        }))
     }
     
     var nameCard: some View {

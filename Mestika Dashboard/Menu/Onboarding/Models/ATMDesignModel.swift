@@ -20,6 +20,6 @@ struct ATMDesignViewModel {
     var cardType: String?
     var cardImage: URL?
     var description: String
-    let cardImageBase64: String
+    let cardImageBase64: UIImage?
     var isShow: Bool = false
 }

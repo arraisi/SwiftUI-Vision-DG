@@ -248,7 +248,7 @@ struct SuccessRegisterView: View {
                             
                             Button(
                                 action: {
-                                    self.showingModal.toggle()
+                                    self.showingModal = true
                                 },
                                 label: {
                                     Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
@@ -323,20 +323,20 @@ struct SuccessRegisterView: View {
                 message: Text("\(self.scheduleVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
-        .alert(isPresented: $isShowingAlert) {
-            return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-        }
-        .gesture(DragGesture().onEnded({ value in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.isShowingAlert = true
-            }
-        }))
+//        .alert(isPresented: $isShowingAlert) {
+//            return Alert(
+//                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+//                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+//                    self.appState.moveToWelcomeView = true
+//                }),
+//                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+//        }
+//        .gesture(DragGesture().onEnded({ value in
+//            if(value.startLocation.x < 20 &&
+//                value.translation.width > 100) {
+//                self.isShowingAlert = true
+//            }
+//        }))
     }
     
     func removeUser() {
@@ -435,21 +435,32 @@ struct SuccessRegisterView: View {
             .cornerRadius(12)
             .padding(.bottom, 5)
             
-            Button(
-                action: {
-                    cancelRegistration()
-                },
-                label: {
-                    Text(NSLocalizedString("YA", comment: ""))
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
-                }
-            )
+            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
+                Text(NSLocalizedString("YA", comment: ""))
+                    .foregroundColor(.white)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 40)
+            }
             .background(Color.gray)
             .cornerRadius(12)
             .padding(.bottom, 20)
+            
+//            Button(
+//                action: {
+//                    cancelRegistration()
+//                },
+//                label: {
+//                    Text(NSLocalizedString("YA", comment: ""))
+//                        .foregroundColor(.white)
+//                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+//                        .font(.system(size: 13))
+//                        .frame(maxWidth: .infinity, maxHeight: 40)
+//                }
+//            )
+//            .background(Color.gray)
+//            .cornerRadius(12)
+//            .padding(.bottom, 20)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding()
