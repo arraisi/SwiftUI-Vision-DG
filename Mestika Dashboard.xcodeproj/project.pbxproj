@@ -297,6 +297,8 @@
 		C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */; };
 		C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */; };
 		C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */; };
+		C0BCDEB425B69A7500E1028F /* PinNoAtmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEB325B69A7500E1028F /* PinNoAtmViewModel.swift */; };
+		C0BCDEB925B69B3D00E1028F /* PinNoAtmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEB825B69B3D00E1028F /* PinNoAtmService.swift */; };
 		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
@@ -643,6 +645,8 @@
 		C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
+		C0BCDEB325B69A7500E1028F /* PinNoAtmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinNoAtmViewModel.swift; sourceTree = "<group>"; };
+		C0BCDEB825B69B3D00E1028F /* PinNoAtmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinNoAtmService.swift; sourceTree = "<group>"; };
 		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
@@ -1165,6 +1169,7 @@
 				524CB11E256E1141006ED6F0 /* CitizenService.swift */,
 				5205861925723A2F005DB764 /* PasswordService.swift */,
 				528AE2CB2595B95E003AFD73 /* AddressService.swift */,
+				C0BCDEB825B69B3D00E1028F /* PinNoAtmService.swift */,
 			);
 			name = Services;
 			path = "Mestika Dashboard/Menu/Onboarding/Services";
@@ -1447,6 +1452,7 @@
 				524CB123256E1289006ED6F0 /* CitizenViewModel.swift */,
 				52058614257239AB005DB764 /* PasswordViewModel.swift */,
 				528AE2D02595BB01003AFD73 /* AddressViewModel.swift */,
+				C0BCDEB325B69A7500E1028F /* PinNoAtmViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1977,6 +1983,7 @@
 				C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
 				52ADFEF42557DC5C00A1001F /* CheckBoxGroup.swift in Sources */,
+				C0BCDEB425B69A7500E1028F /* PinNoAtmViewModel.swift in Sources */,
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
 				524746182547D157001F43C5 /* ListAllFavoriteTransactionView.swift in Sources */,
 				52468ACC25416D59007518AE /* ListEwalletView.swift in Sources */,
@@ -2043,6 +2050,7 @@
 				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
+				C0BCDEB925B69B3D00E1028F /* PinNoAtmService.swift in Sources */,
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
 				52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */,
 				0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */,
