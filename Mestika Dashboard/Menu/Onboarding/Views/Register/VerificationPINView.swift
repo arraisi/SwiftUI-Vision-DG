@@ -281,9 +281,9 @@ struct VerificationPINView: View {
             }
             
             if self.timeRemainingRsnd < 1 {
-                isResendOtpDisabled = false
+                isResendPinDisabled = false
             } else {
-                isResendOtpDisabled = true
+                isResendPinDisabled = true
             }
             
             if self.timeRemainingBtn > 0 {
