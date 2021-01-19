@@ -26,6 +26,7 @@ struct KetentuanRegisterNonNasabahView: View {
     @State var scrollToBottom = false
     
     @State var showingAlert: Bool = false
+    @State var showingBadge: Bool = false
     
     @GestureState private var dragOffset = CGSize.zero
     
@@ -65,23 +66,44 @@ struct KetentuanRegisterNonNasabahView: View {
                                 .padding(.top, 0)
                                 .padding(.bottom, 5)
                             
-                            WebView(readFinished: self.$readFinished, scrollToBottom: self.$scrollToBottom, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
-                                .onChange(of: readFinished, perform: { value in
-                                    scrollToBottom = true
-                                })
-                                .highPriorityGesture(
-                                    
-                                    DragGesture()
-                                        .onChanged({ (value) in
-                                            
-                                            if value.translation.height > 0 {
-                                                print("\(value.translation.height) > 0")
-                                                scrollToBottom = false
+                            ZStack {
+                                WebView(readFinished: self.$readFinished, scrollToBottom: self.$scrollToBottom, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                                    .onChange(of: readFinished, perform: { value in
+                                        scrollToBottom = true
+                                    })
+                                    .highPriorityGesture(
+                                        
+                                        DragGesture()
+                                            .onChanged({ (value) in
                                                 
+                                                if value.translation.height > 0 {
+                                                    print("\(value.translation.height) > 0")
+                                                    scrollToBottom = false
+                                                    
+                                                }
+                                                
+                                            })
+                                    )
+                                    .onAppear{
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            withAnimation {
+                                                showingBadge = true
                                             }
-                                            
-                                        })
-                                )
+                                        }
+                                    }
+                                
+                                if showingBadge {
+                                    BadgeView(text: "Silahkan scroll kebawah")
+                                        .animation(.easeIn)
+                                        .onAppear{
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                                withAnimation {
+                                                    showingBadge = false
+                                                }
+                                            }
+                                        }
+                                }
+                            }
                             
                             NavigationLink(
                                 destination: FormPhoneVerificationRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData),
