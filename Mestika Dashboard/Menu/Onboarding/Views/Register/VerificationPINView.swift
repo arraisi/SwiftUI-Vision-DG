@@ -7,12 +7,15 @@
 
 import SwiftUI
 import PopupView
+import Indicators
 
 struct VerificationPINView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var appState: AppState
+    
+    @ObservedObject private var pinNoAtmVM = PinNoAtmViewModel()
     /*
      Boolean for Show Modal
      */
@@ -32,9 +35,10 @@ struct VerificationPINView: View {
     let dummyPin = "123456"
     
     /* Variable Validation */
-    @State var isOtpValid = false
+    @State var isLoading = false
+    @State var isPINValid = false
     @State var otpInvalidCount = 0
-    @State var isResendOtpDisabled = true
+    @State var isResendPinDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
     var disableForm: Bool {
@@ -61,6 +65,13 @@ struct VerificationPINView: View {
             VStack {
                 
                 AppBarLogo(light: false, onCancel: {})
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
                 
                 VStack {
                     
@@ -226,7 +237,7 @@ struct VerificationPINView: View {
                                 self.nextToFormVideoCall = true
                             } else {
                                 UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
-                                validatePIN()
+                                validatePINBackEnd()
                             }
                         }) {
                             
@@ -331,6 +342,32 @@ struct VerificationPINView: View {
             }
             
             self.isBtnValidationDisabled = true
+        }
+    }
+    
+    func validatePINBackEnd() {
+        self.isLoading = true
+        
+        self.pinNoAtmVM.pinValidation(pin: self.pin, cardNo: self.noKartuCtrl, validateType: "YES")
+        { success in
+            
+            print("success \(success)")
+            if success {
+                print("PIN VALID")
+                self.isLoading = false
+                self.noAtmAndPinIsWrong = false
+                self.showingModal.toggle()
+                
+            } else {
+                print("PIN INVALID")
+                
+                self.isLoading = false
+                self.noAtmAndPinIsWrong = true
+                self.showingModal.toggle()
+//                self.isBtnValidationDisabled = true
+//                resetField()
+            }
+            
         }
     }
     
