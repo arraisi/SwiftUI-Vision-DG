@@ -27,6 +27,10 @@ struct VerificationAddressView: View {
     
     var disableForm: Bool {
         
+        if (registerData.verificationAddressId == 0) {
+            return true
+        }
+        
         if (registerData.verificationAddressId != 1) {
             if addressInput.isEmpty || addressRtRwInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
                 return true

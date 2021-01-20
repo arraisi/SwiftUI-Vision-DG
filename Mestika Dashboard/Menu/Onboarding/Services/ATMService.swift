@@ -19,10 +19,31 @@ class ATMService {
             return completion(.failure(.badUrl))
         }
         
+        var dataParam: [String : Any] = [
+            "atmAddressName": dataRequest.atmAddressName,
+            "atmAddresspostalReferral": dataRequest.atmAddresspostalReferral,
+            "nik": dataRequest.nik,
+            "isNasabahMestika": dataRequest.isNasabahMestika,
+            "isVcall": dataRequest.isVcall,
+            "codeClass": dataRequest.codeClass,
+            "imageDesign": dataRequest.imageDesign,
+            "atmName": dataRequest.atmName,
+            "atmAddressInput": dataRequest.atmAddressInput,
+            "atmAddressPostalCodeInput": dataRequest.atmAddressPostalCodeInput,
+            "atmAddressRtInput": dataRequest.atmAddressRtInput,
+            "atmAddressRwInput": dataRequest.atmAddressRwInput,
+            "atmAddressKelurahanInput": dataRequest.atmAddressKelurahanInput,
+            "atmAddressKecamatanInput": dataRequest.atmAddressKecamatanInput,
+            "atmAddressKotaInput": dataRequest.atmAddressKotaInput,
+            "atmAddressPropinsiInput": dataRequest.atmAddressPropinsiInput,
+            "addressEqualToDukcapil": dataRequest.addressEqualToDukcapil
+        ]
+        
         // MARK : serialize model data
         let finalBody = try! JSONEncoder().encode(dataRequest)
-        let json = String(data: finalBody, encoding: String.Encoding.utf8)
-        print(json)
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataParam, options: .prettyPrinted)
+        let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+        print(jsonString)
         
         var request = URLRequest(url)
         request.httpMethod = "POST"
