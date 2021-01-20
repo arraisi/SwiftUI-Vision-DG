@@ -109,7 +109,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(destination:
-                                        FirstLoginView().environmentObject(loginData),
+                                        FormIdentitasDiriView().environmentObject(registerData),
 //                                        Term_ConditionView().environmentObject(registerData).environmentObject(productATMData),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
