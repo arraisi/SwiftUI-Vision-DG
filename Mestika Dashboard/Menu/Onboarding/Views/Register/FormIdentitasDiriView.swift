@@ -88,7 +88,7 @@ struct FormIdentitasDiriView: View {
 //                                    self.nextViewActive = true
                                 }, label: {
                                     Text(NSLocalizedString("IDENTITAS DIRI", comment: ""))
-                                        .font(.custom("Montserrat-Bold", size: 18))
+                                        .font(.custom("Montserrat-ExtraBold", size: 24))
                                         .foregroundColor(.white)
                                 })
                                 

@@ -81,11 +81,11 @@ extension URL {
     }
     
     static func urlGetListATM() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/content/content-find-atm");
+        return URL(string: AppConstants().BASE_URL + "/content/content-find-atm2");
     }
     
     static func urlGetListATMDesign(type: String) -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design?type=\(type)");
+        return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design2?type=\(type)");
     }
     
     static func urlGetSuggestionAddressResult() -> URL? {

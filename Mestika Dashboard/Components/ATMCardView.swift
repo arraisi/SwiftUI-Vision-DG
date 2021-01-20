@@ -18,23 +18,23 @@ struct ATMCardView: View {
     
     var body: some View {
         ZStack {
-//            WebImage(url: card.cardImage!)
-//                .onSuccess { image, data, cacheType in
-//                    // Success
-//                }
-//                .placeholder {
-//                    Rectangle().foregroundColor(.gray).opacity(0.5)
-//                }
-//                .resizable()
-//                .indicator(.activity) // Activity Indicator
-//                .transition(.fade(duration: 0.5)) // Fade Transition with duration
-//                .scaledToFill()
-//                .frame(width: cardWidth, height: cardHeight)
-            
-            Image(uiImage: card.cardImageBase64!)
+            WebImage(url: card.cardImage!)
+                .onSuccess { image, data, cacheType in
+                    // Success
+                }
+                .placeholder {
+                    Rectangle().foregroundColor(.gray).opacity(0.5)
+                }
                 .resizable()
-                    .frame(width: cardWidth, height: cardHeight)
-                    .background(Color.clear)
+                .indicator(.activity) // Activity Indicator
+                .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                .scaledToFill()
+                .frame(width: cardWidth, height: cardHeight)
+            
+//            Image(uiImage: card.cardImageBase64!)
+//                .resizable()
+//                    .frame(width: cardWidth, height: cardHeight)
+//                    .background(Color.clear)
             
             if showContent {
                 VStack(){

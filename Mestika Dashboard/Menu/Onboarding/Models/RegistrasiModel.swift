@@ -59,7 +59,7 @@ class RegistrasiModel: ObservableObject {
     @Published var hubunganKekerabatan : String? = ""
     @Published var password = ""
     @Published var pin = ""
-    @Published var verificationAddressId: Int = 1
+    @Published var verificationAddressId: Int = 0
     @Published var confirmationPin = ""
     @Published var fotoKTP: Image = Image("")
     @Published var fotoSelfie: Image = Image("")
