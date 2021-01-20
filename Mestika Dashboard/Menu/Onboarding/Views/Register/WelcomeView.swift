@@ -10,6 +10,7 @@ import Combine
 import PopupView
 import JitsiMeet
 import Indicators
+import SystemConfiguration
 
 struct WelcomeView: View {
     
@@ -53,17 +54,11 @@ struct WelcomeView: View {
     // Modal Variables
     @State var isShowModal = false
     @State var modalSelection = ""
+    @State var isShowAlertInternetConnection = false
     
     @State var jitsiRoom = ""
     
-    //    CREATED
-    //    KYC_SCHEDULED
-    //    KYC_WAITING
-    //    WAITING
-    //    ACTIVE
-    //    NOT_APPROVED
-//        @State var modalSelection = ""
-//        @State var isShowModal = true
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     var body: some View {
         NavigationView {
@@ -96,8 +91,15 @@ struct WelcomeView: View {
                     VStack(spacing: 5) {
                         
                         Button(action : {
-//                            self.isShowModal.toggle()
-                            getUserStatus(deviceId: deviceId!)
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            
+                            if self.isNetworkReachability(with: flags) {
+                                getUserStatus(deviceId: deviceId!)
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
+                            
                         }) {
                             Text(NSLocalizedString("Register", comment: ""))
                                 .foregroundColor(.white)
@@ -179,8 +181,14 @@ struct WelcomeView: View {
             }
             .onAppear {
                 getMobileVersion()
-                print(nama_local)
-                print(nik_local)
+                var flags = SCNetworkReachabilityFlags()
+                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                
+                if self.isNetworkReachability(with: flags) {
+                    self.isShowAlertInternetConnection = false
+                } else {
+                    self.isShowAlertInternetConnection = true
+                }
             }
             .onAppear() {
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
@@ -199,6 +207,12 @@ struct WelcomeView: View {
                     message: Text(self.alertMessage),
                     dismissButton: .default(Text("Oke")))
             }
+            .alert(isPresented: $isShowAlertInternetConnection) {
+                return Alert(
+                    title: Text("No Internet Connection"),
+                    message: Text("please enable WiFi or Cellular Data"),
+                    dismissButton: .default(Text("Oke")))
+            }
             .introspectNavigationController { navigationController in
                 self.appState.navigationController = navigationController
             }
@@ -214,6 +228,16 @@ struct WelcomeView: View {
         self.isRescheduleInterview = false
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
     
     var Header: some View {
