@@ -13,9 +13,11 @@ struct SavingSelectionModalView: View {
     @EnvironmentObject var atmData: AddProductATM
     var data: SavingType
     
+    @Binding var editMode: EditMode
     @Binding var isShowModal: Bool
     @Binding var showingReferralCodeModal: Bool
     @Binding var goToNextPage: Bool
+    @Binding var backToSummary: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -50,14 +52,14 @@ struct SavingSelectionModalView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 TextField(NSLocalizedString("Masukkan kode referal", comment: ""), text: $atmData.atmAddresspostalReferral, onEditingChanged: { changed in
-                    }, onCommit: {})
-                    .frame(height: 20)
-                    .font(.custom("Montserrat-Regular", size: 14))
-                    .autocapitalization(.none)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+                }, onCommit: {})
+                .frame(height: 20)
+                .font(.custom("Montserrat-Regular", size: 14))
+                .autocapitalization(.none)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                 .padding(.horizontal, 15)
                 .multilineTextAlignment(TextAlignment.center)
                 
@@ -75,8 +77,13 @@ struct SavingSelectionModalView: View {
                     self.isShowModal.toggle()
                 }
                 
-//                self.showingReferralCodeModal = true
-                goToNextPage = true
+                //                self.showingReferralCodeModal = true
+                if (editMode == .inactive) {
+                    goToNextPage = true
+                } else {
+                    backToSummary = true
+                }
+                
             }) {
                 Text(NSLocalizedString("Pilih Tabungan Ini", comment: ""))
                     .foregroundColor(.white)
@@ -112,7 +119,7 @@ struct SavingSelectionModalView: View {
 
 struct SavingSelectionModalView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingSelectionModalView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tabungan_simpel", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false), showingReferralCodeModal: .constant(false), goToNextPage: Binding.constant(false)).environmentObject(RegistrasiModel())
+        SavingSelectionModalView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tabungan_simpel", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), editMode: .constant(.inactive), isShowModal: Binding.constant(false), showingReferralCodeModal: .constant(false), goToNextPage: Binding.constant(false), backToSummary: .constant(false)).environmentObject(RegistrasiModel())
             .environmentObject(AddProductATM())
     }
 }
