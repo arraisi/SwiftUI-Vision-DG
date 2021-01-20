@@ -125,7 +125,7 @@ struct PhoneOTPRegisterNasabahView: View {
                         Button(action: {
                             self.isOtpValid = true
                         }, label: {
-                            Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!)")
+                            Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
                                 .font(.custom("Montserrat-Regular", size: 12))
                         })
                         .disabled(true) // false by pass to next page

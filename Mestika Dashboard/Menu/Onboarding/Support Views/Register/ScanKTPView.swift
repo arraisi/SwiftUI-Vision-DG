@@ -165,7 +165,6 @@ struct ScanKTPView: View {
                 print("ERROR")
                 self.messageResponse = self.citizenVM.errorMessage
                 self.showingAlert = true
-//                self.onCommit()
             }
         }
     }
