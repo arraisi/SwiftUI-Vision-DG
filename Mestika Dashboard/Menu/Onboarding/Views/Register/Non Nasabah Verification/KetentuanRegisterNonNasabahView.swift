@@ -22,11 +22,10 @@ struct KetentuanRegisterNonNasabahView: View {
     @State var goToNext : Bool = false
     @Binding var rootIsActive : Bool
     
-    @State var readFinished = false
-    @State var scrollToBottom = false
+    @State var readed = false
     
     @State var showingAlert: Bool = false
-    @State var showingBadge: Bool = false
+    @State var showingBadge: Bool = true
     
     @GestureState private var dragOffset = CGSize.zero
     
@@ -67,36 +66,13 @@ struct KetentuanRegisterNonNasabahView: View {
                                 .padding(.bottom, 5)
                             
                             ZStack {
-                                WebView(readFinished: self.$readFinished, scrollToBottom: self.$scrollToBottom, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
-                                    .onChange(of: readFinished, perform: { value in
-                                        scrollToBottom = true
-                                    })
-                                    .highPriorityGesture(
-                                        
-                                        DragGesture()
-                                            .onChanged({ (value) in
-                                                
-                                                if value.translation.height > 0 {
-                                                    print("\(value.translation.height) > 0")
-                                                    scrollToBottom = false
-                                                    
-                                                }
-                                                
-                                            })
-                                    )
-                                    .onAppear{
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                            withAnimation {
-                                                showingBadge = true
-                                            }
-                                        }
-                                    }
+                                WebView(readed: self.$readed, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                                 
                                 if showingBadge {
                                     BadgeView(text: "Silahkan scroll kebawah")
                                         .animation(.easeIn)
                                         .onAppear{
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                                 withAnimation {
                                                     showingBadge = false
                                                 }
@@ -120,8 +96,8 @@ struct KetentuanRegisterNonNasabahView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             }
-                            .background(self.readFinished ? Color(hex: "#2334D0") : Color(.lightGray))
-                            .disabled(!self.readFinished)
+                            .background(self.readed ? Color(hex: "#2334D0") : Color(.lightGray))
+                            .disabled(!self.readed)
                             .cornerRadius(12)
                             .padding(.top, 10)
                             
