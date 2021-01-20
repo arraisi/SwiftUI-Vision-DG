@@ -25,7 +25,7 @@ struct Term_ConditionView: View {
     @State var isShowDataVerification: Bool = false
     
     @State var readFinished = false
-    @State var scrollToBottom = false
+    @State var showingBadge: Bool = true
     
     func toggleIsWni() {
         isCheckedWni = !isCheckedWni
@@ -73,24 +73,23 @@ struct Term_ConditionView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .leading) {
-                        WebView(readFinished: self.$readFinished, scrollToBottom: self.$scrollToBottom, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
-                            .onChange(of: readFinished, perform: { value in
-                                scrollToBottom = true
-                            })
-                            .highPriorityGesture(
-                                
-                                DragGesture()
-                                    .onChanged({ (value) in
-                                        
-                                        if value.translation.height > 0 {
-                                            print("\(value.translation.height) > 0")
-                                            scrollToBottom = false
-                                            
+                        ZStack {
+                            WebView(readed: self.$readFinished, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                                .padding(.horizontal, 12)
+                            
+                            if showingBadge {
+                                BadgeView(text: "Silahkan scroll kebawah")
+                                    .animation(.easeIn)
+                                    .onAppear{
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                            withAnimation {
+                                                showingBadge = false
+                                            }
                                         }
-                                        
-                                    })
-                            )
-                            .padding(.horizontal, 12)
+                                    }
+                            }
+                            
+                        }
                         
                         Divider()
                             .padding(.horizontal, 20)

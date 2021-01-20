@@ -48,6 +48,7 @@ struct VerificationRegisterDataView: View {
     
     @State private var showingAlert: Bool = false
     @State var isShowingAlert: Bool = false
+    @State var showCancelAlert = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -64,7 +65,7 @@ struct VerificationRegisterDataView: View {
             VStack {
                 
                 AppBarLogo(light: false, showCancel: true) {
-                    self.appState.moveToWelcomeView = true
+                    self.showCancelAlert = true
                 }
                 
                 if (self.isLoading) {
@@ -532,7 +533,7 @@ struct VerificationRegisterDataView: View {
                     )
                     
                     NavigationLink(
-                        destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData),
+                        destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData),
                         isActive: self.$nextRouteNasabah,
                         label: {EmptyView()}
                     )
@@ -549,6 +550,14 @@ struct VerificationRegisterDataView: View {
                 dismissButton: .default(Text("Oke")))
         }
         .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .alert(isPresented: $showCancelAlert) {
             return Alert(
                 title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
                 primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {

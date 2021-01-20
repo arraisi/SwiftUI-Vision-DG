@@ -109,8 +109,8 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(destination:
-                                        FirstLoginView().environmentObject(loginData),
-//                                        FormDetailKartuATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
+                                        PINView().environmentObject(registerData),
+//                                        FormPilihDesainATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
@@ -237,7 +237,11 @@ struct WelcomeView: View {
     func popupMenu() -> some View {
         switch modalSelection {
         case "CREATED" :
-            return AnyView(PopupCreated())
+            if (status_register_nasabah == "true") {
+                return AnyView(PopupKYCScheduled())
+            } else {
+                return AnyView(PopupCreated())
+            }
         case "KYC_SCHEDULED" :
             return AnyView(PopupKYCScheduled())
         case "KYC_WAITING" :

@@ -29,7 +29,6 @@ struct FormIdentitasDiriView: View {
     @State private var imageKTP: Image?
     @State private var nik: String = ""
     @State private var confirmNik: Bool = false
-    @State private var shouldPresentKTP = true
     @State private var showKTPPreview: Bool = false
     
     /* Selfie */
@@ -45,9 +44,9 @@ struct FormIdentitasDiriView: View {
     @State private var showNPWPPreview: Bool = false
     
     /* Views Variables */
-    @State private var shouldPresentScanner = false
+    @State private var shouldPresentScannerKtp = false
+    @State private var shouldPresentScannerNpwp = false
     @State private var shouldPresentCamera = false
-    @State private var cameraFileName = "ktp"
     
     /* Variable for Swipe Gesture to Back */
     @State var showingAlert: Bool = false
@@ -85,10 +84,10 @@ struct FormIdentitasDiriView: View {
                             VStack(spacing: 5) {
                                 
                                 Button(action: {
-//                                    self.nextViewActive = true
+                                    //                                    self.nextViewActive = true
                                 }, label: {
                                     Text(NSLocalizedString("IDENTITAS DIRI", comment: ""))
-                                        .font(.custom("Montserrat-Bold", size: 18))
+                                        .font(.custom("Montserrat-ExtraBold", size: 24))
                                         .foregroundColor(.white)
                                 })
                                 
@@ -105,7 +104,7 @@ struct FormIdentitasDiriView: View {
                                     ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik, preview: $showKTPPreview,
                                                 onChange: {
                                                     self.actionSelection("ktp")
-                                                    self.shouldPresentScanner = true
+                                                    self.shouldPresentScannerKtp = true
                                                 },
                                                 onCommit: {
                                                     self.actionSelection("selfie")
@@ -114,6 +113,9 @@ struct FormIdentitasDiriView: View {
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 25)
                                 .padding(.vertical)
+                                .fullScreenCover(isPresented: $shouldPresentScannerKtp) {
+                                    scannerKtp
+                                }
                             }
                             .background(Color.white)
                             .cornerRadius(15)
@@ -148,7 +150,7 @@ struct FormIdentitasDiriView: View {
                                     ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, preview: $showNPWPPreview,
                                                  onChange: {
                                                     self.actionSelection("npwp")
-                                                    self.shouldPresentScanner = true
+                                                    self.shouldPresentScannerNpwp = true
                                                  },
                                                  onCommit: {
                                                     self.actionSelection("")
@@ -157,8 +159,8 @@ struct FormIdentitasDiriView: View {
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 25)
                                 .padding(.vertical)
-                                .fullScreenCover(isPresented: $shouldPresentScanner) {
-                                    scanner
+                                .fullScreenCover(isPresented: $shouldPresentScannerNpwp) {
+                                    scannerNpwp
                                 }
                             }
                             .background(Color.white)
@@ -262,7 +264,7 @@ struct FormIdentitasDiriView: View {
 //        }
 //        .gesture(DragGesture().onEnded({ value in
 //            if(value.startLocation.x < 20 &&
-//                value.translation.width > 100) {
+//                value.translation.width > 50) {
 //                self.showingAlert = true
 //            }
 //        }))
@@ -282,52 +284,56 @@ struct FormIdentitasDiriView: View {
         }
     }
     
-    var scanner: some View {
+    var scannerKtp: some View {
         ZStack {
-            ScanningView(recognizedText: $recognizedText.value, cameraFileName: $cameraFileName)
+            ScanningView(recognizedText: $recognizedText.value, cameraFileName: .constant("ktp"))
                 .onDisappear(perform: {
                     if (recognizedText.value != "-") {
-                        if self.cameraFileName == "ktp" {
-                            let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
-                            
-                            if matched.count != 0 {
-                                self.nik = matched[0]
-                            }
+                        let matched = matches(for: "(\\d{13,16})", in: recognizedText.value)
+                        
+                        if matched.count != 0 {
+                            self.nik = matched[0]
                         }
                     }
                     
-                    print("self.cameraFileName \(self.cameraFileName)")
+                    print("recognizedText.value \(recognizedText.value)")
                     
-                    let scanResult = retrieveImage(forKey: self.cameraFileName)
+                    let scanResult = retrieveImage(forKey: "ktp")
                     if let image = scanResult {
-                        switch self.cameraFileName {
-                        case "ktp":
-                            self.imageKTP = Image(uiImage: image)
-                            self.registerData.fotoKTP = imageKTP!
-                        case "npwp":
-                            self.imageNPWP = Image(uiImage: image)
-                            self.registerData.fotoNPWP = imageNPWP!
-                        default:
-                            print("retrieve image nil")
-                        }
+                        self.imageKTP = Image(uiImage: image)
+                        self.registerData.fotoKTP = imageKTP!
                     }
                 })
             
-            if self.shouldPresentKTP {
-                VStack(alignment: .center){
-                    Spacer()
-                    HStack{
-                        Text("\(Image(systemName: "checkmark")) Pastikan e-KTP anda asli dan bukan versi scan, unggah dan fotokopi")
-                    }
-                    HStack{
-                        Text("\(Image(systemName: "checkmark")) Pastikan e-KTP tidak terpotong , data dan foto terlihat jelas")
-                    }
+            VStack(alignment: .center){
+                Spacer()
+                HStack{
+                    Text("\(Image(systemName: "checkmark")) Pastikan e-KTP anda asli dan bukan versi scan, unggah dan fotokopi")
                 }
-                .foregroundColor(.white)
-                .padding([.horizontal], 20)
-                .padding([.bottom], 140)
+                HStack{
+                    Text("\(Image(systemName: "checkmark")) Pastikan e-KTP tidak terpotong , data dan foto terlihat jelas")
+                }
             }
+            .foregroundColor(.white)
+            .padding([.horizontal], 20)
+            .padding([.bottom], 140)
             
+        }
+    }
+    
+    
+    var scannerNpwp: some View {
+        ZStack {
+            ScanningView(recognizedText: $recognizedText.value, cameraFileName: .constant("npwp"))
+                .onDisappear(perform: {
+                    let scanResult = retrieveImage(forKey: "npwp")
+                    if let image = scanResult {
+                        self.imageNPWP = Image(uiImage: image)
+                        self.registerData.fotoNPWP = imageNPWP!
+                    }
+                    
+                        
+                })
         }
     }
     
@@ -335,32 +341,26 @@ struct FormIdentitasDiriView: View {
      Fungsi untuk ambil Gambar dari Local Storage
      */
     private func actionSelection(_ selection: String) {
-        
-        self.cameraFileName = selection
-        
         switch selection {
         case "ktp":
             self.formSelfie = false
             self.formNPWP = false
             self.formKTP = true
-            self.shouldPresentKTP = true
         case "selfie":
             self.formKTP = false
             self.formNPWP = false
             self.formSelfie = true
-            self.shouldPresentKTP = false
         case "npwp":
             self.formKTP = false
             self.formSelfie = false
             self.formNPWP = true
-            self.shouldPresentKTP = false
         default:
             self.formKTP = false
             self.formSelfie = false
             self.formNPWP = false
-            self.shouldPresentKTP = true
-            self.shouldPresentScanner = false
+            self.shouldPresentScannerKtp = false
             self.shouldPresentCamera = false
+            self.shouldPresentScannerNpwp = false
         }
     }
     

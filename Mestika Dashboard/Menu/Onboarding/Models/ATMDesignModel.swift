@@ -12,7 +12,7 @@ struct ATMDesignModel: Codable {
     let cardType: String?
     let cardImage: String
     let description: String
-    let cardImageBase64: String
+    let cardImageBase64: String?
 }
 
 struct ATMDesignViewModel {

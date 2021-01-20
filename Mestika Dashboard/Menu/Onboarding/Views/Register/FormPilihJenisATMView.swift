@@ -28,8 +28,12 @@ struct FormPilihJenisATMView: View {
     @State var isShowingAlert: Bool = false
     
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 60 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 160
+//    let itemWidth:CGFloat = UIScreen.main.bounds.width - 60 // 100 is amount padding left and right
+//    let itemHeight:CGFloat = 160
+//    let itemGapHeight:CGFloat = 10
+    
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
+    let itemHeight:CGFloat = (160.0/290.0 * (UIScreen.main.bounds.width - 100))
     let itemGapHeight:CGFloat = 10
     
     var body: some View {
@@ -54,8 +58,8 @@ struct FormPilihJenisATMView: View {
                     Text(NSLocalizedString("Pilih Jenis Kartu ATM Anda", comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
-                        .padding(.top, 15)
-                        .padding(.bottom, 0)
+                        .padding(.top, 25)
+                        .padding(.bottom, 10)
                     
                     // MARK: - CAROUSEL
                     VStack{
@@ -107,6 +111,7 @@ struct FormPilihJenisATMView: View {
             .navigationBarHidden(true)
             .onAppear() {
                 self.fetchATMList()
+                print("\(itemWidth):\(itemHeight)")
             }
             .alert(isPresented: $isShowingAlert) {
                 return Alert(

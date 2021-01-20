@@ -32,7 +32,7 @@ struct FormPilihDesainATMView: View {
     
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 190
+    let itemHeight:CGFloat = (160.0/290.0 * (UIScreen.main.bounds.width - 100))
     let itemGapHeight:CGFloat = 10
     
     var body: some View {
@@ -92,7 +92,7 @@ struct FormPilihDesainATMView: View {
                     .edgesIgnoringSafeArea(.bottom)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .animation(.spring())
-                    .padding(.vertical,25)
+                    .padding(.vertical,10)
                     .onAppear {
                         refreshCarousel()
                     }
@@ -160,6 +160,7 @@ struct FormPilihDesainATMView: View {
             .navigationBarBackButtonHidden(true)
             .onAppear() {
                 self.fetchATMDesignList()
+                print("\(itemWidth):\(itemHeight)")
             }
             .alert(isPresented: $isShowingAlert) {
                 return Alert(
@@ -227,6 +228,7 @@ struct FormPilihDesainATMView: View {
             let card = cards[selected]
             print(card)
             atmData.atmDesignType = card.key
+            atmData.imageDesign = card.cardImage?.absoluteString ?? ""
         }
     }
     
@@ -250,7 +252,7 @@ struct FormPilihDesainATMView: View {
     private func fetchATMDesignList() {
         if cards.count == 0 {
             isLoading = true
-            productVM.getListATMDesign(type: atmData.productType) { (success: Bool) in
+            productVM.getListATMDesign(type: "DCT_GOLD") { (success: Bool) in
                 isLoading = false
                 if success {
                     self.cards = productVM.listATMDesign
