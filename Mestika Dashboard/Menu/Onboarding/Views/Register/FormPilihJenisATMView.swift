@@ -33,7 +33,7 @@ struct FormPilihJenisATMView: View {
 //    let itemGapHeight:CGFloat = 10
     
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
-    let itemHeight:CGFloat = (190.0/290.0 * (UIScreen.main.bounds.width - 100))
+    let itemHeight:CGFloat = (160.0/290.0 * (UIScreen.main.bounds.width - 100))
     let itemGapHeight:CGFloat = 10
     
     var body: some View {

@@ -101,7 +101,7 @@ struct VerificationAddressView: View {
                                 
                             }
                             
-                            if (registerData.verificationAddressId == 1) {
+                            if (registerData.verificationAddressId == 1 || registerData.verificationAddressId == 0) {
                                 EmptyView()
                             } else {
                                 
