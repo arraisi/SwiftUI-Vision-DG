@@ -30,14 +30,15 @@ struct FormDetailKartuATMView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            //            VStack {
-            //                Color(hex: "#232175")
-            //                    .frame(height: 100)
-            //                    .edgesIgnoringSafeArea(.all)
-            //            }
+            VStack {
+                Color(hex: "#232175")
+                    .frame(height: 100)
+                    .edgesIgnoringSafeArea(.all)
+            }
             
             VStack {
-                AppBarLogo(light: true, onCancel: {})
+                AppBarLogo(light: false, onCancel: {})
+                    .frame(height: 100)
                 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 25){

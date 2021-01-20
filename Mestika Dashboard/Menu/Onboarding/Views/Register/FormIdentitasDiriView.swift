@@ -85,14 +85,14 @@ struct FormIdentitasDiriView: View {
                             VStack(spacing: 5) {
                                 
                                 Button(action: {
-                                    self.nextViewActive = true
+//                                    self.nextViewActive = true
                                 }, label: {
                                     Text(NSLocalizedString("IDENTITAS DIRI", comment: ""))
-                                        .font(.custom("Montserrat-Bold", size: 24))
+                                        .font(.custom("Montserrat-Bold", size: 18))
                                         .foregroundColor(.white)
                                 })
                                 
-                                Text(NSLocalizedString("Silihkan isi dan lengkapi data identitas Anda", comment: ""))
+                                Text(NSLocalizedString("Silahkan isi dan lengkapi data identitas Anda", comment: ""))
                                     .font(.custom("Montserrat-Regular", size: 12))
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(Color(hex: "#F6F8FB"))

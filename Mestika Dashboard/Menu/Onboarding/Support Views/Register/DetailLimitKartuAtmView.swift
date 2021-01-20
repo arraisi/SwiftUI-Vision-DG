@@ -22,7 +22,7 @@ struct DetailLimitKartuAtmView: View {
                 
                 Spacer()
             }
-            .padding()
+            .padding(.horizontal)
             .padding(.top, 20)
             
             ScrollView {
@@ -45,7 +45,6 @@ struct DetailLimitKartuAtmView: View {
                 .background(Color(hex: "#2334D0"))
                 .cornerRadius(12)
                 .padding(.horizontal)
-                .padding(.vertical, 20)
             
         }
         .padding()

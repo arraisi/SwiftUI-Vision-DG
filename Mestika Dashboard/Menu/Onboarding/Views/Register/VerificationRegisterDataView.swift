@@ -113,8 +113,19 @@ struct VerificationRegisterDataView: View {
                                     print("on commit")
                                 }.padding(.top, 10)
                                 .padding(.horizontal, 20)
+                                .padding(.bottom, 20)
                                 .disabled(true)
                                 
+                            }
+                        }
+                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(15)
+                        .padding(.bottom, 10)
+                        .shadow(radius: 2)
+                        
+                        VStack(alignment: .leading) {
+                            Group {
                                 // KTP ROW
                                 VStack {
                                     
@@ -218,7 +229,16 @@ struct VerificationRegisterDataView: View {
                                 .padding([.top, .bottom], 20)
                                 .padding(.horizontal, 20)
                                 //                                }
-                                
+                            }
+                        }
+                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(15)
+                        .padding(.bottom, 10)
+                        .shadow(radius: 2)
+                        
+                        VStack(alignment: .leading) {
+                            Group {
                                 Group {
                                     
                                     Text(NSLocalizedString("Jenis Tabungan", comment: ""))
@@ -227,6 +247,7 @@ struct VerificationRegisterDataView: View {
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .padding(.horizontal, 20)
+                                        .padding(.top, 20)
                                     
                                     HStack {
                                         TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
@@ -398,13 +419,27 @@ struct VerificationRegisterDataView: View {
                                     .background(Color.gray.opacity(0.1))
                                     .cornerRadius(15)
                                     .padding(.horizontal, 20)
-                                    
+                                    .padding(.bottom, 20)
+                                }
+                            }
+                        }
+                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(15)
+                        .padding(.bottom, 10)
+                        .shadow(radius: 2)
+                        
+                        VStack(alignment: .leading) {
+                            Group {
+                                Group {
+                        
                                     Text(NSLocalizedString("Pekerjaan", comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .padding(.horizontal, 20)
+                                        .padding(.top, 20)
                                     
                                     HStack {
                                         TextField(NSLocalizedString("Pekerjaan", comment: ""), text: $registerData.pekerjaan)
@@ -431,9 +466,41 @@ struct VerificationRegisterDataView: View {
                             Spacer()
                         }
                         .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                        .background(Color.white)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
                         .cornerRadius(15)
-                        .shadow(radius: 30)
+                        .padding(.bottom, 10)
+                        .shadow(radius: 2)
+                        
+                        VStack(alignment: .leading) {
+                            Group {
+                                // MARK : Pekerjaan Wiraswasta
+                                if [10, 11, 12].contains(registerData.pekerjaanId) {
+                                    informasiPenyandangDanaFields
+                                } else {
+                                    InformasiPerusahaanVerificationView()
+                                        .padding(.bottom, 5)
+                                }
+                            }
+                            Spacer()
+                        }
+                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(15)
+                        .padding(.bottom, 10)
+                        .shadow(radius: 2)
+                        
+                        VStack(alignment: .leading) {
+                            Group {
+                                InformasiKeluargaVerificationView()
+                                    .padding(.bottom, 20)
+                            }
+                        }
+                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(15)
+                        .padding(.bottom, 10)
+                        .shadow(radius: 2)
+                        
                     }
                     .padding(.horizontal, 30)
                     .padding(.bottom, 35)
@@ -546,36 +613,6 @@ struct VerificationRegisterDataView: View {
             // MARK : Pekerjaan BUMN
             if [6 ,9, 10, 11, 12].contains(registerData.pekerjaanId) {
                 
-                // MARK : Pekerjaan Pensiunan, Pelajar, IRT
-                if (registerData.pekerjaanId == 10 || registerData.pekerjaanId == 11 || registerData.pekerjaanId == 12) {
-                    EmptyView()
-                } else {
-                    Text(NSLocalizedString("Penghasilan Kotor", comment: ""))
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.leading)
-                        .padding(.horizontal, 20)
-                    
-                    HStack {
-                        TextField(NSLocalizedString("Penghasilan Kotor", comment: ""), text: $registerData.penghasilanKotor)
-                            .disabled(true)
-                        
-                        Divider()
-                            .frame(height: 30)
-                        
-                        NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
-                            Text("Edit").foregroundColor(.blue)
-                        }
-                    }
-                    .frame(height: 20)
-                    .font(.subheadline)
-                    .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(15)
-                    .padding(.horizontal, 20)
-                }
-                
                 if registerData.pekerjaanId == 6 {
                     Text(NSLocalizedString("Jabatan", comment: ""))
                         .font(.caption)
@@ -603,9 +640,40 @@ struct VerificationRegisterDataView: View {
                     .padding(.horizontal, 20)
                 }
                 
-                // MARK : Pekerjaan Wiraswasta
-                if registerData.pekerjaanId == 9 {
-                    Text(NSLocalizedString("Industri", comment: ""))
+                // MARK : Pekerjaan Pensiunan, Pelajar, IRT
+                if (registerData.pekerjaanId == 10 || registerData.pekerjaanId == 11 || registerData.pekerjaanId == 12) {
+                    EmptyView()
+                } else {
+                    
+                    // MARK : Pekerjaan Wiraswasta
+                    if registerData.pekerjaanId == 9 {
+                        Text(NSLocalizedString("Industri", comment: ""))
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal, 20)
+                        
+                        HStack {
+                            TextField(NSLocalizedString("Industri", comment: ""), text: $registerData.industriTempatBekerja)
+                                .disabled(true)
+                            
+                            Divider()
+                                .frame(height: 30)
+                            
+                            NavigationLink(destination: FormIndustriTempatBekerjaView(editMode: .active).environmentObject(registerData)) {
+                                Text("Edit").foregroundColor(.blue)
+                            }
+                        }
+                        .frame(height: 20)
+                        .font(.subheadline)
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(15)
+                        .padding(.horizontal, 20)
+                    }
+                    
+                    Text(NSLocalizedString("Penghasilan Kotor", comment: ""))
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(.gray)
@@ -613,13 +681,13 @@ struct VerificationRegisterDataView: View {
                         .padding(.horizontal, 20)
                     
                     HStack {
-                        TextField(NSLocalizedString("Industri", comment: ""), text: $registerData.industriTempatBekerja)
+                        TextField(NSLocalizedString("Penghasilan Kotor", comment: ""), text: $registerData.penghasilanKotor)
                             .disabled(true)
                         
                         Divider()
                             .frame(height: 30)
                         
-                        NavigationLink(destination: FormIndustriTempatBekerjaView(editMode: .active).environmentObject(registerData)) {
+                        NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
                             Text("Edit").foregroundColor(.blue)
                         }
                     }
@@ -630,6 +698,7 @@ struct VerificationRegisterDataView: View {
                     .cornerRadius(15)
                     .padding(.horizontal, 20)
                 }
+                
             }
             
             Text(NSLocalizedString("Sumber Pendapatan Lainnya", comment: ""))
@@ -657,17 +726,6 @@ struct VerificationRegisterDataView: View {
             .cornerRadius(15)
             .padding(.horizontal, 20)
             .padding(.bottom, 10)
-            
-            // MARK : Pekerjaan Wiraswasta
-            if [10, 11, 12].contains(registerData.pekerjaanId) {
-                informasiPenyandangDanaFields
-            } else {
-                InformasiPerusahaanVerificationView()
-                    .padding(.bottom, 5)
-            }
-            
-            InformasiKeluargaVerificationView()
-                .padding(.bottom, 20)
         }
     }
     

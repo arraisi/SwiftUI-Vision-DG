@@ -54,8 +54,8 @@ struct FormPilihJenisATMView: View {
                     Text(NSLocalizedString("Pilih Jenis Kartu ATM Anda", comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
-                        .padding(.top, 25)
-                        .padding(.bottom, 10)
+                        .padding(.top, 15)
+                        .padding(.bottom, 0)
                     
                     // MARK: - CAROUSEL
                     VStack{
@@ -88,7 +88,7 @@ struct FormPilihJenisATMView: View {
                     .edgesIgnoringSafeArea(.bottom)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .animation(.spring())
-                    .padding(.vertical,25)
+                    .padding(.vertical,10)
                     .onAppear {
                         refreshCarousel()
                     }
@@ -97,7 +97,7 @@ struct FormPilihJenisATMView: View {
                         DetailLimitKartuAtmView(card: cards[Int(count)])
                             .shadow(color: Color(hex: "#2334D0").opacity(0.5), radius: 15, y: 4)
                             .padding(.horizontal, 30)
-                            .padding(.bottom, 50)
+                            .padding(.bottom, 20)
                     }
                     
                 }
