@@ -262,7 +262,7 @@ struct FormIdentitasDiriView: View {
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
+                value.translation.width > 50) {
                 self.showingAlert = true
             }
         }))

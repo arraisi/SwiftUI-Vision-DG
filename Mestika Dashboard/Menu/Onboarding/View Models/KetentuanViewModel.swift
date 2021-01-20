@@ -31,4 +31,6 @@ class KetentuanViewModel: ObservableObject {
             caption: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"
         ),
     ]
+    
+    @Published var readed: Bool = false
 }

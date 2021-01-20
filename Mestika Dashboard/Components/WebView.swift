@@ -12,10 +12,9 @@ import SwiftUI
 /// View created as a workaround implementation of UIWebView for SwiftUI
 struct WebView: UIViewRepresentable {
     
-    @Binding var readFinished: Bool
-    @Binding var scrollToBottom: Bool
+    @Binding var readed: Bool
     
-    /// String representation of the URL you want to open in the WebView.
+    // String representation of the URL you want to open in the WebView.
     let urlString: String?
     private let  webview = WKWebView()
     
@@ -45,14 +44,17 @@ struct WebView: UIViewRepresentable {
         }
         
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            if self.parent.scrollToBottom {
-                let scrollPoint = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.size.height)
-                scrollView.contentOffset = scrollPoint
-            }
             
             if (scrollView.contentOffset.y) > (scrollView.contentSize.height - scrollView.frame.size.height) {
-                //bottom reached
-                self.parent.readFinished = true
+                //                // bottom reached
+                self.parent.readed = true
+            }
+            
+            if !scrollView.isDragging && self.parent.readed {
+                let scrollPoint = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.frame.size.height)
+                
+                scrollView.contentOffset = scrollPoint
+                
             }
         }
     }

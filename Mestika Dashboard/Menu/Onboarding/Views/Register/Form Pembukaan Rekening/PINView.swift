@@ -176,12 +176,12 @@ struct PINView: View {
                 }),
                 secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
-//        .gesture(DragGesture().onEnded({ value in
-//            if(value.startLocation.x < 20 &&
-//                value.translation.width > 100) {
-//                self.showingAlert = true
-//            }
-//        }))
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 50) {
+                self.showingAlert = true
+            }
+        }))
     }
     
     private var pinDots: some View {
