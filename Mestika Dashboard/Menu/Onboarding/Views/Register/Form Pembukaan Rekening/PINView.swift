@@ -122,7 +122,9 @@ struct PINView: View {
                                     }
                                     
                                     if (!isPINValidated(with: pin)) {
-                                        self.showingModal.toggle()
+                                        withAnimation {
+                                            self.showingModal.toggle()
+                                        }
                                     }
                                 },
                                 label: {
@@ -156,7 +158,13 @@ struct PINView: View {
             }
             
             if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                ZStack {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    popupMessage()
+                }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -164,9 +172,9 @@ struct PINView: View {
             UIApplication.shared.endEditing()
         }
         .navigationBarHidden(true)
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessage()
-        }
+//        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+//            popupMessage()
+//        }
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
@@ -268,7 +276,9 @@ struct PINView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            Button(action: {}) {
+            Button(action: {
+                self.showingModal.toggle()
+            }) {
                 Text("Kembali")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
