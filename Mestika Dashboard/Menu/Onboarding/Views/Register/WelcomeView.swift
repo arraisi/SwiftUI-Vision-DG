@@ -109,7 +109,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(destination:
-                                        PINView().environmentObject(registerData),
+                                        FirstLoginView().environmentObject(loginData),
 //                                        FormPilihDesainATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))

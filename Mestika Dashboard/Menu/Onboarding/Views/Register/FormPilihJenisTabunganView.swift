@@ -18,6 +18,7 @@ struct FormPilihJenisTabunganView: View {
     @State var count : CGFloat = 0
     
     @State var goToNextPage: Bool = false
+    @State var backToSummary: Bool = false
     
     @State var referenceCode: String = ""
     
@@ -43,6 +44,9 @@ struct FormPilihJenisTabunganView: View {
     var disableSubmitReferralCodeBtn: Bool {
         atmData.atmAddresspostalReferral == ""
     }
+    
+    // Routing variables
+    @State var editMode: EditMode = .inactive
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -142,6 +146,11 @@ struct FormPilihJenisTabunganView: View {
             NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
                 EmptyView()
             }
+            
+            NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: $backToSummary) {
+                EmptyView()
+            }
+
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
@@ -230,23 +239,12 @@ struct FormPilihJenisTabunganView: View {
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal, goToNextPage: $goToNextPage)
+        SavingSelectionModalView(data: self.data[Int(self.count)], editMode: $editMode, isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal, goToNextPage: $goToNextPage, backToSummary: $backToSummary)
             .environmentObject(registerData)
             .environmentObject(atmData)
             .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
-        //            .scaleEffect(scale)
-        //            .animation(.easeInOut(duration: 0.2))
-        //            .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
-        //            .onAppear {
-        //               withAnimation() {
-        //                    self.scale = 1
-        //                }
-        //            }
-        //            .onDisappear{
-        //                    self.scale = 0
-        //            }
         
     }
     

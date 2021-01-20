@@ -254,12 +254,12 @@ struct VerificationRegisterDataView: View {
                                         TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
                                             .disabled(true)
                                         
-                                        //                                        Divider()
-                                        //                                            .frame(height: 30)
-                                        //
-                                        //                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
-                                        //                                            Text("Edit").foregroundColor(.blue)
-                                        //                                        }
+                                                                                Divider()
+                                                                                    .frame(height: 30)
+                                        
+                                        NavigationLink(destination: FormPilihJenisTabunganView(shouldPopToRootView: .constant(false), editMode: .active).environmentObject(registerData).environmentObject(productATMData)) {
+                                                                                    Text("Edit").foregroundColor(.blue)
+                                                                                }
                                     }
                                     .frame(height: 20)
                                     .font(.subheadline)
