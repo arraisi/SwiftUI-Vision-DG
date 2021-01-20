@@ -89,6 +89,7 @@ class ScheduleInterviewService {
             "date": date,
             "nik":  nik,
             "fireBaseToken": firebaseToken!,
+            "os": "ios",
             "timeEnd": endTime,
             "timeStart": startTime
         ]
