@@ -608,18 +608,21 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
             atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
+            atmData.addressEqualToDukcapil = true
         case 2: /// Surat Menyurat
             atmData.atmAddressInput = registerData.alamatKeluarga
             atmData.atmAddressPostalCodeInput = registerData.kodePosKeluarga
             atmData.atmAddressKecamatanInput = registerData.kecamatanKeluarga
             atmData.atmAddressKelurahanInput = registerData.kelurahanKeluarga
             atmData.atmAddressrtRwInput = ""
+            atmData.addressEqualToDukcapil = false
         case 3: /// Perusahaan
             atmData.atmAddressInput = registerData.alamatPerusahaan
             atmData.atmAddressPostalCodeInput = registerData.kodePos
             atmData.atmAddressKecamatanInput = registerData.kecamatan
             atmData.atmAddressKelurahanInput = registerData.kelurahan
             atmData.atmAddressrtRwInput = registerData.rtrw
+            atmData.addressEqualToDukcapil = false
         //            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:
             self.kodePos = ""
@@ -628,6 +631,7 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressKecamatanInput = ""
             atmData.atmAddressKelurahanInput = ""
             atmData.atmAddressrtRwInput = ""
+            atmData.addressEqualToDukcapil = false
         //            currentAddress = Address()
         }
     }
@@ -640,7 +644,6 @@ struct FormCompletionKartuATMView: View {
         atmData.isNasabahMestika = is_register_nasabah == "true" ? true : false
         atmData.isVcall = is_video_call == "true" ? true : false
         atmData.codeClass = ""
-        atmData.imageDesign = ""
         
         self.goToSuccessPage = true
         self.isLoading = true

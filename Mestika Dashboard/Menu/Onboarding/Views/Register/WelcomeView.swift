@@ -110,7 +110,7 @@ struct WelcomeView: View {
                         
                         NavigationLink(destination:
                                         FirstLoginView().environmentObject(loginData),
-//                                        FormDetailKartuATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
+//                                        VerificationAddressView().environmentObject(RegistrasiModel()),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)

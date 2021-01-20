@@ -23,7 +23,7 @@ struct ContentATM: Codable {
     let key, title, id, contentDescription: String
     let cardType: String
     let cardImage: String
-    let cardImageBase64: String
+    let cardImageBase64: String?
 
     enum CodingKeys: String, CodingKey {
         case key, title, id

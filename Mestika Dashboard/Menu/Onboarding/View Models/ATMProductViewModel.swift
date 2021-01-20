@@ -55,9 +55,9 @@ extension ATMProductViewModel {
                     self.isLoading = false
                     self.listATM = response.map({ (data: ATMModel) -> ATMViewModel in
                         var image = UIImage(named: "card_bg")!
-                        if let img = data.cardImageBase64.base64ToImage() {
+                        if let img = data.cardImageBase64?.base64ToImage() {
                              image = img
-                         }
+                        }
                         return ATMViewModel (
                             id: data.id,
                             key: data.key,
@@ -105,7 +105,7 @@ extension ATMProductViewModel {
                         return data.cardType == type
                     }).map({ (data: ContentATM) -> ATMDesignViewModel in
                         var image = UIImage(named: "card_bg")!
-                        if let img = data.cardImageBase64.base64ToImage() {
+                        if let img = data.cardImageBase64?.base64ToImage() {
                              image = img
                          }
                         return ATMDesignViewModel (
@@ -114,7 +114,8 @@ extension ATMProductViewModel {
                             title: data.title,
                             cardType: data.cardType,
                             cardImage: URL(string: data.cardImage),
-                            description: data.contentDescription, cardImageBase64: image
+                            description: data.contentDescription,
+                            cardImageBase64: image
                         )
                     })
                     completion(true)
