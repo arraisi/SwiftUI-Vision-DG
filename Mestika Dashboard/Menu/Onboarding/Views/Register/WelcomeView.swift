@@ -109,8 +109,8 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(destination:
-//                                        FirstLoginView().environmentObject(loginData),
-                                        FormPilihDesainATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
+                                        FirstLoginView().environmentObject(loginData),
+//                                        FormPilihDesainATMView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
                                        isActive: self.$isLoginViewActive){
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
