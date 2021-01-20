@@ -28,6 +28,7 @@ class MobileVersionService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
+                print("RTO")
                 return completion(.failure(.noData))
             }
             

@@ -32,6 +32,9 @@ extension UserRegistrationViewModel {
         let imageNpwp = registerData.fotoNPWP.asUIImage()
         let imageNpwpCompress = imageNpwp.resized(withPercentage: 0.1)
         
+        print("registerData.perkiraanPenarikan \(registerData.perkiraanPenarikan)")
+        print("registerData.besarPerkiraanPenarikan \(registerData.besarPerkiraanPenarikan)")
+        
         UserRegistrationService.shared.postUser(
             registerData: registerData,
             imageKtp: imageKtpCompress!,

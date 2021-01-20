@@ -30,6 +30,7 @@ struct SuccessRegisterView: View {
     @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
     @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
     @State private var routing_schedule = UserDefaults.standard.string(forKey: "routingSchedule")
+    @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var appState: AppState
@@ -568,7 +569,7 @@ struct SuccessRegisterView: View {
                 
             }
             
-            if (routing_schedule == "true") {
+            if (routing_schedule == "true" || status_register_nasabah == "true") {
                 Button(
                     action: {
                         self.appState.moveToDashboard = true

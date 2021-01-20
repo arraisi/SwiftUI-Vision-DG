@@ -533,7 +533,7 @@ struct VerificationRegisterDataView: View {
                     )
                     
                     NavigationLink(
-                        destination: VerificationPINView().environmentObject(registerData).environmentObject(productATMData),
+                        destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData),
                         isActive: self.$nextRouteNasabah,
                         label: {EmptyView()}
                     )
