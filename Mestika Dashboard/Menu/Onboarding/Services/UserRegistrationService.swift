@@ -100,6 +100,12 @@ class UserRegistrationService {
             userDetailParam["imageNpwp"] = "/storage/20201211_090631_.jpg"
         }
         
+        let monthlyWithdrawalFrequency = userDetailParam["monthlyWithdrawalFrequency"]
+        let monthlyWithdrawalAmount = userDetailParam["monthlyWithdrawalAmount"]
+        
+        print("monthlyWithdrawalFrequency +> \(monthlyWithdrawalFrequency ?? "no content")")
+        print("monthlyWithdrawalAmount +> \(monthlyWithdrawalAmount ?? "no content")")
+        
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userDetailParam, options: .prettyPrinted)
             
