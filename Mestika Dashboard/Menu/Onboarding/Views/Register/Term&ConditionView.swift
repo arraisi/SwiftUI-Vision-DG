@@ -77,17 +77,17 @@ struct Term_ConditionView: View {
                             WebView(readed: self.$readFinished, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                                 .padding(.horizontal, 12)
                             
-                            if showingBadge {
-                                BadgeView(text: "Silahkan scroll kebawah")
-                                    .animation(.easeIn)
-                                    .onAppear{
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                            withAnimation {
-                                                showingBadge = false
-                                            }
-                                        }
-                                    }
-                            }
+//                            if showingBadge {
+//                                BadgeView(text: "Silahkan scroll kebawah")
+//                                    .animation(.easeIn)
+//                                    .onAppear{
+//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                                            withAnimation {
+//                                                showingBadge = false
+//                                            }
+//                                        }
+//                                    }
+//                            }
                             
                         }
                         
