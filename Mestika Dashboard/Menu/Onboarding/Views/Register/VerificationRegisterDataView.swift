@@ -524,7 +524,7 @@ struct VerificationRegisterDataView: View {
                     .padding(.horizontal, 100)
                     .padding(.top, 10)
                     .padding(.bottom, 20)
-                    .disabled(self.userRegisterVM.isLoading)
+                    .disabled(self.isLoading)
                     
                     NavigationLink(
                         destination: SuccessRegisterView(isAllowBack: false).environmentObject(registerData),
