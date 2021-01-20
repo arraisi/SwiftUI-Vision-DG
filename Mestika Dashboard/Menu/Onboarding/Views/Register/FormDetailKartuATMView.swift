@@ -52,11 +52,28 @@ struct FormDetailKartuATMView: View {
                             Spacer()
                         }
                         .padding(.top, 10)
+                        //                    Image("atm_bromo")
+                        //                        .resizable()
+                        //                        .aspectRatio(contentMode: .fit)
                         
-                        Image(uiImage: registerData.desainKartuATMImage)
+                        WebImage(url: URL(string: atmData.imageDesign))
+                            .onSuccess { image, data, cacheType in
+                                // Success
+                                // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
+                            }
+                            .placeholder {
+                                Rectangle().foregroundColor(.gray).opacity(0.5)
+                            }
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .background(Color.clear)
+                            .indicator(.activity) // Activity Indicator
+                            .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                            .scaledToFill()
+                            .cornerRadius(10)
+                        
+//                        Image(uiImage: registerData.desainKartuATMImage)
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .background(Color.clear)
                         
                         HStack {
                             Text(NSLocalizedString("Selamat data kartu ATM baru Anda telah berhasil disimpan.", comment: ""))
