@@ -7,15 +7,22 @@
 
 import SwiftUI
 import JitsiMeet
+import AVFoundation
 
 struct IncomingVideoCallView: View {
     
+    @EnvironmentObject var appState: AppState
+
     var jitsiMeetView: JitsiMeetView?
     @State var isShowJitsi: Bool = false
     
     @Binding var jitsiRoom: String
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    let systemSoundID: SystemSoundID = 1104
+    @State var player: AVAudioPlayer?
+    
     var body: some View {
         ZStack {
             Color(hex: "#232175")
@@ -61,6 +68,7 @@ struct IncomingVideoCallView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .onAppear(perform: {
+            playSound()
             let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
                 builder.serverURL = URL(string: "https://meet.jit.si")
                 builder.welcomePageEnabled = false
@@ -102,6 +110,7 @@ struct IncomingVideoCallView: View {
         HStack {
             VStack {
                 Button(action: {
+                    player?.stop()
                     self.isShowJitsi = true
                 }) {
                     Image("ic_call")
@@ -114,13 +123,37 @@ struct IncomingVideoCallView: View {
             
             VStack {
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    player?.stop()
+                    appState.moveToWelcomeView = true
+//                    presentationMode.wrappedValue.dismiss()
                 }) {
                     Image("ic_hangup")
                 }
                 Text("Hang Up")
                     .foregroundColor(.white)
             }
+        }
+    }
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "ip7_ringtone", withExtension: "mp3") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            self.player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+
+            /* iOS 10 and earlier require the following line:
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+
+            guard let player = player else { return }
+            player.numberOfLoops = 5
+            player.play()
+
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
 }

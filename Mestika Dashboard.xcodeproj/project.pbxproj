@@ -33,6 +33,7 @@
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
+		0A8B775A25B8366B00819952 /* ip7_ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */; };
 		0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */; };
 		0AF48AD025778C760037942D /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACF25778C760037942D /* Formatter+Extensions.swift */; };
 		0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */; };
@@ -374,6 +375,7 @@
 		0A1411966ECFA789EAD26C4F /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
+		0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ip7_ringtone.mp3; sourceTree = "<group>"; };
 		0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMCardDesignView.swift; sourceTree = "<group>"; };
 		0AF48ACF25778C760037942D /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
 		0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Extensions.swift"; sourceTree = "<group>"; };
@@ -738,6 +740,7 @@
 		0658B5AB2563FAEE001B659D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0A8B775825B8364200819952 /* sound */,
 				5245F88D253FE705002E8B53 /* Images.xcassets */,
 				0658B5A62563FA6D001B659D /* Colors.xcassets */,
 			);
@@ -750,6 +753,14 @@
 				06AD57082570D3370071C4A9 /* term.html */,
 			);
 			path = Html;
+			sourceTree = "<group>";
+		};
+		0A8B775825B8364200819952 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */,
+			);
+			path = sound;
 			sourceTree = "<group>";
 		};
 		2D38FE9D601AF2B3B064B9C4 /* Pods */ = {
@@ -1756,6 +1767,7 @@
 				52ADFE9D2557D99F00A1001F /* pekerjaan.json in Resources */,
 				52ADFEA42557D99F00A1001F /* perkiraanPenarikan.json in Resources */,
 				52ADFE9F2557D99F00A1001F /* penghasilanKotor.json in Resources */,
+				0A8B775A25B8366B00819952 /* ip7_ringtone.mp3 in Resources */,
 				52ADFEA62557D99F00A1001F /* sumberPendapatanLainnya.json in Resources */,
 				5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */,
 				52ADFEA22557D99F00A1001F /* sumberPenyandangDana.json in Resources */,
