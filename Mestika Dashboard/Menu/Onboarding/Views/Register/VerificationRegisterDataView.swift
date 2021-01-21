@@ -65,7 +65,7 @@ struct VerificationRegisterDataView: View {
             VStack {
                 
                 AppBarLogo(light: false, showCancel: true) {
-                    self.showCancelAlert = true
+                    self.isShowingAlert = true
                 }
                 
                 if (self.isLoading) {
@@ -519,7 +519,7 @@ struct VerificationRegisterDataView: View {
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     })
-                    .background(Color(hex: "#2334D0"))
+                    .background(Color(hex: self.isLoading ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 100)
                     .padding(.top, 10)
@@ -543,6 +543,12 @@ struct VerificationRegisterDataView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),
@@ -557,21 +563,6 @@ struct VerificationRegisterDataView: View {
                 }),
                 secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
-        .alert(isPresented: $showCancelAlert) {
-            return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-        }
-        .gesture(DragGesture().onEnded({ value in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.isShowingAlert = true
-            }
-        }))
-        
     }
     
     var scanner: some View {

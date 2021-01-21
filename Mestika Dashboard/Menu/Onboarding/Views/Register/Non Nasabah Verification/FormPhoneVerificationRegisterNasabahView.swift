@@ -187,13 +187,6 @@ struct FormPhoneVerificationRegisterNasabahView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .popup(
-            isPresented: $isShowModal,
-            type: .floater(),
-            position: .bottom,
-            animation: Animation.spring(),
-            closeOnTap: true,
-            closeOnTapOutside: true) { popupOTPInvalid() }
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
@@ -208,6 +201,13 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 self.showingAlert = true
             }
         }))
+        .popup(
+            isPresented: $isShowModal,
+            type: .floater(),
+            position: .bottom,
+            animation: Animation.spring(),
+            closeOnTap: true,
+            closeOnTapOutside: true) { popupOTPInvalid() }
     }
     
     // MARK: -BOTTOM MESSAGE OTP IN CORRECT

@@ -260,6 +260,12 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 dismissButton: .default(Text("Oke"))
             )
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
         .popup(
             isPresented: $isShowModal,
             type: .floater(),
@@ -267,12 +273,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
-        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.presentationMode.wrappedValue.dismiss()
-            }
-        }))
     }
     
     private var pinDots: some View {
