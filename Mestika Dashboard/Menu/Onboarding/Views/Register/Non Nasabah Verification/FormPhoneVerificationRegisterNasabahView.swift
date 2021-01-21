@@ -138,6 +138,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         if self.isInvalidInput {
                             self.isShowModal = true
                             print("INVALID INPUT (Cannot Pass Screen)")
+                            UIApplication.shared.endEditing()
                         } else {
                             print("VALID")
                             self.root2IsActive = true

@@ -458,7 +458,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
                     self.timeRemainingRsnd = self.otpVM.timeCounter
-                    self.isShowAlert = true
+                    self.isShowAlert = false
                 }
             }
             

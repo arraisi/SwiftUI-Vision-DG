@@ -30,7 +30,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>eagle-development.apps.visiondg.bankmestika.co.id</key>
+			<key>eagle-dev.apps.visiondg.bankmestika.co.id</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
