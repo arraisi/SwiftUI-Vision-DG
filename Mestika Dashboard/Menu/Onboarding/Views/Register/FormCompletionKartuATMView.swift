@@ -89,10 +89,13 @@ struct FormCompletionKartuATMView: View {
                         
                         nameCard
                         addressCard
-                        //                        referalCodeCard
                         
                         Button(action: {
-                            self.postData()
+                            if (is_register_nasabah != "true") {
+                                self.postData()
+                            } else {
+                                self.goToSuccessPage = true
+                            }
                             self.atmData.atmAddressPostalCodeInput = self.kodePos
                         }, label: {
                             Text(NSLocalizedString("Submit Data", comment: ""))

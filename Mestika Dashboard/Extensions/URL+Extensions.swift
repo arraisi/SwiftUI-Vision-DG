@@ -68,6 +68,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/schedule")
     }
     
+    static func urlSheduleInterviewNasabahExisting() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/scheduleVCExistingCustomer")
+    }
+    
     static func urlSheduleInterviewFindById() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/schedule/find-byid")
     }

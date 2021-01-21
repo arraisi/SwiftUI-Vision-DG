@@ -180,6 +180,7 @@ struct WelcomeView: View {
                 getUserStatus(deviceId: deviceId!)
             }
             .onAppear {
+                print(status_register_nasabah)
                 getMobileVersion()
                 var flags = SCNetworkReachabilityFlags()
                 SCNetworkReachabilityGetFlags(self.reachability!, &flags)
@@ -383,9 +384,6 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
-            
-//            NavigationLink(destination: FormPilihJenisATMView().environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
-//                .isDetailLink(false)
             
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForChooseATM: .active).environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
                 .isDetailLink(false)

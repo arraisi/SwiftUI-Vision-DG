@@ -80,7 +80,78 @@ class ScheduleInterviewService {
         }.resume()
     }
     
-    // MARK:- API SUBMIT USER SCHEDULE
+    // MARK:- API SUBMIT USER SCHEDULE NASABAH EXISTING
+    func submitScheduleInterviewNasabahExisting(atmData: AddProductATM, date: String, nik: String, endTime: String, startTime: String, completion: @escaping(Result<UserCheckResponse?, ErrorResult>) -> Void) {
+        
+        let firebaseToken = Messaging.messaging().fcmToken
+        
+        let body: [String: Any] = [
+            "schedule": [
+                "date": date,
+                "nik":  nik,
+                "fireBaseToken": firebaseToken!,
+                "os": "ios",
+                "timeEnd": endTime,
+                "timeStart": startTime
+            ],
+            "atm": [
+                "atmAddressInput": atmData.atmAddressInput,
+                "atmAddressKelurahanInput": atmData.atmAddressKelurahanInput,
+                "atmAddressKecamatanInput": atmData.atmAddressKecamatanInput,
+                "atmAddressKotaInput": atmData.atmAddressKotaInput,
+                "atmAddressPropinsiInput": atmData.atmAddressPropinsiInput,
+                "atmAddressPostalCodeInput": atmData.atmAddressPostalCodeInput,
+                "atmAddressRtInput": atmData.atmAddressRtInput,
+                "atmAddressRwInput": atmData.atmAddressRwInput,
+                "atmName": atmData.atmName,
+                "isNasabahMestika": true,
+                "codeClass": atmData.codeClass,
+                "imageDesign": atmData.imageDesign,
+                "addressEqualToDukcapil": false
+            ]
+        ]
+        
+        print("body => \(body)")
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        guard let url = URL.urlSheduleInterviewNasabahExisting() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            print("response: \(String(describing: response))")
+            
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                } else if (httpResponse.statusCode == 200) {
+                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data!)
+                    completion(.success(userResponse!))
+                } else {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+        
+    }
+    
+    // MARK:- API SUBMIT USER SCHEDULE NASABAH NON EXISTING
     func submitScheduleInterview(date: String, nik: String, endTime: String, startTime: String, completion: @escaping(Result<UserCheckResponse?, ErrorResult>) -> Void) {
         
         let firebaseToken = Messaging.messaging().fcmToken

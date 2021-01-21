@@ -215,7 +215,7 @@ extension OtpViewModel {
                         self.destination = response.destination ?? ""
                         self.reference = response.reference ?? "0"
                         self.code = response.code ?? "0"
-                        self.statusMessage = (response.status?.message)!
+                        self.statusMessage = response.status?.message ?? ""
                         self.timeCounter = response.timeCounter ?? 30
                         
                         completion(true)

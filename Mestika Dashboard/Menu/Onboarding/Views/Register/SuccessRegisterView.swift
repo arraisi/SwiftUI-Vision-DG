@@ -13,6 +13,7 @@ struct SuccessRegisterView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
     @ObservedObject var regVM = UserRegistrationViewModel()
+    @EnvironmentObject var atmData: AddProductATM
     var productATMData = AddProductATM()
     
     /* Variable for Swipe Gesture to Back */
@@ -229,7 +230,11 @@ struct SuccessRegisterView: View {
                             
                             Button(action: {
                                 if pilihJam != "" {
-                                     submitSchedule()
+                                    if (status_register_nasabah == "true") {
+                                        submitScheduleNasabahExisting()
+                                    } else {
+                                        submitSchedule()
+                                    }
                                 }
                             }, label: {
                                 Text(NSLocalizedString("Buat Janji", comment: ""))
@@ -312,6 +317,20 @@ struct SuccessRegisterView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageCancelRegister()
         }
@@ -324,20 +343,6 @@ struct SuccessRegisterView: View {
                 message: Text("\(self.scheduleVM.message)"),
                 dismissButton: .default(Text("Oke")))
         }
-//        .alert(isPresented: $isShowingAlert) {
-//            return Alert(
-//                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-//                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-//                    self.appState.moveToWelcomeView = true
-//                }),
-//                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-//        }
-//        .gesture(DragGesture().onEnded({ value in
-//            if(value.startLocation.x < 20 &&
-//                value.translation.width > 100) {
-//                self.isShowingAlert = true
-//            }
-//        }))
     }
     
     func removeUser() {
@@ -349,66 +354,6 @@ struct SuccessRegisterView: View {
             print("DELETE SUCCESS")
             self.appState.moveToWelcomeView = true
         }
-    }
-    
-    func submitSchedule() {
-        self.isLoading = true
-        
-        let timeArr = pilihJam.components(separatedBy: "-")
-        print("time start \(timeArr[0])")
-        print("time end \(timeArr[1])")
-        
-        let data = User(context: managedObjectContext)
-        data.jamInterviewStart = self.pilihJam
-        data.tanggalInterview = self.tanggalWawancara
-        data.nik = self.registerData.nik
-        
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Error saving managed object context: \(error)")
-        }
-        
-        UserDefaults.standard.set(timeArr[0], forKey: "time_schedule_start")
-        UserDefaults.standard.set(timeArr[1], forKey: "time_schedule_end")
-        UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
-        
-        scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { success in
-            
-            let dataSchedule: [String: Any] = [
-                "dateInterview": self.tanggalWawancara,
-                "timeInterview": self.pilihJam
-            ]
-            
-            NotificationCenter.default.post(name: NSNotification.Name("Schedule"), object: nil, userInfo: dataSchedule)
-            
-            if success {
-                self.isLoading = false
-                self.showingModalInformation = true
-            }
-            
-            if !success {
-                self.isLoading = false
-                self.showingAlert.toggle()
-            }
-        }
-    }
-    
-    func cancelRegistration() {
-        self.isLoading = true
-        
-        regVM.cancelRegistration(nik: nik_local ?? "", completion: { (success:Bool) in
-            
-            if success {
-                self.isLoading = false
-                removeUser()
-            } else {
-                self.isLoading = false
-                
-                self.scheduleVM.message = NSLocalizedString("Gagal membatalkan permohonan. Silakan coba beberapa saat lagi.", comment: "")
-                self.showingAlert.toggle()
-            }
-        })
     }
     
     // MARK:- POPUP CANCEL REGISTER
@@ -447,21 +392,21 @@ struct SuccessRegisterView: View {
             .cornerRadius(12)
             .padding(.bottom, 20)
             
-//            Button(
-//                action: {
-//                    cancelRegistration()
-//                },
-//                label: {
-//                    Text(NSLocalizedString("YA", comment: ""))
-//                        .foregroundColor(.white)
-//                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-//                        .font(.system(size: 13))
-//                        .frame(maxWidth: .infinity, maxHeight: 40)
-//                }
-//            )
-//            .background(Color.gray)
-//            .cornerRadius(12)
-//            .padding(.bottom, 20)
+            //            Button(
+            //                action: {
+            //                    cancelRegistration()
+            //                },
+            //                label: {
+            //                    Text(NSLocalizedString("YA", comment: ""))
+            //                        .foregroundColor(.white)
+            //                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            //                        .font(.system(size: 13))
+            //                        .frame(maxWidth: .infinity, maxHeight: 40)
+            //                }
+            //            )
+            //            .background(Color.gray)
+            //            .cornerRadius(12)
+            //            .padding(.bottom, 20)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding()
@@ -640,6 +585,116 @@ struct SuccessRegisterView: View {
         }).map({ (data:ScheduleInterviewViewModel) -> String in
             return "\(data.timeStart)" + "-" + "\(data.timeEnd)"
         }))).sorted()
+    }
+    
+    // MARK:- SUBMIT SCHEDULE FOR NASABAH EXISTING
+    func submitScheduleNasabahExisting() {
+        
+        self.isLoading = true
+        
+        let timeArr = pilihJam.components(separatedBy: "-")
+        print("time start \(timeArr[0])")
+        print("time end \(timeArr[1])")
+        
+        let data = User(context: managedObjectContext)
+        data.jamInterviewStart = self.pilihJam
+        data.tanggalInterview = self.tanggalWawancara
+        data.nik = self.registerData.nik
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
+        UserDefaults.standard.set(timeArr[0], forKey: "time_schedule_start")
+        UserDefaults.standard.set(timeArr[1], forKey: "time_schedule_end")
+        UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
+        
+        atmData.nik = registerData.nik
+        atmData.isNasabahMestika = true
+        atmData.codeClass = ""
+        
+        scheduleVM.submitScheduleNasabahExisting(atmData: atmData, date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { (success) in
+            
+            let dataSchedule: [String: Any] = [
+                "dateInterview": self.tanggalWawancara,
+                "timeInterview": self.pilihJam
+            ]
+            
+            NotificationCenter.default.post(name: NSNotification.Name("Schedule"), object: nil, userInfo: dataSchedule)
+            
+            if success {
+                self.isLoading = false
+                self.showingModalInformation = true
+            }
+            
+            if !success {
+                self.isLoading = false
+                self.showingAlert.toggle()
+            }
+        }
+    }
+    
+    // MARK:- SUBMIT SCHEDULE FOR NASABAH
+    func submitSchedule() {
+        self.isLoading = true
+        
+        let timeArr = pilihJam.components(separatedBy: "-")
+        print("time start \(timeArr[0])")
+        print("time end \(timeArr[1])")
+        
+        let data = User(context: managedObjectContext)
+        data.jamInterviewStart = self.pilihJam
+        data.tanggalInterview = self.tanggalWawancara
+        data.nik = self.registerData.nik
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
+        UserDefaults.standard.set(timeArr[0], forKey: "time_schedule_start")
+        UserDefaults.standard.set(timeArr[1], forKey: "time_schedule_end")
+        UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
+        
+        scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { success in
+            
+            let dataSchedule: [String: Any] = [
+                "dateInterview": self.tanggalWawancara,
+                "timeInterview": self.pilihJam
+            ]
+            
+            NotificationCenter.default.post(name: NSNotification.Name("Schedule"), object: nil, userInfo: dataSchedule)
+            
+            if success {
+                self.isLoading = false
+                self.showingModalInformation = true
+            }
+            
+            if !success {
+                self.isLoading = false
+                self.showingAlert.toggle()
+            }
+        }
+    }
+    
+    func cancelRegistration() {
+        self.isLoading = true
+        
+        regVM.cancelRegistration(nik: nik_local ?? "", completion: { (success:Bool) in
+            
+            if success {
+                self.isLoading = false
+                removeUser()
+            } else {
+                self.isLoading = false
+                
+                self.scheduleVM.message = NSLocalizedString("Gagal membatalkan permohonan. Silakan coba beberapa saat lagi.", comment: "")
+                self.showingAlert.toggle()
+            }
+        })
     }
 }
 
