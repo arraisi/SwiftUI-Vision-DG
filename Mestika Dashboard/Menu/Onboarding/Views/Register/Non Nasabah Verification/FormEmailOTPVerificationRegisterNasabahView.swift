@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import SystemConfiguration
 
 struct FormEmailOTPVerificationRegisterNasabahView: View {
     
@@ -44,6 +45,9 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     @State private var isShowModal = false
     @State private var isShowAlert: Bool = false
     @State private var modalSelection = ""
+    
+    @State var isShowAlertInternetConnection = false
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     var disableForm: Bool {
         if (pin.count < 6 || self.isBtnValidationDisabled) {
@@ -99,11 +103,17 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
-                            print("-> Resend OTP")
-                            
-                            self.tryCountResend += 1
-                            self.resetField()
-                            getOTP()
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                print("-> Resend OTP")
+                                
+                                self.tryCountResend += 1
+                                self.resetField()
+                                getOTP()
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
                         }) {
                             Text("Resend OTP")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
@@ -142,8 +152,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         
                         
                         Button(action: {
-                            self.tryCount += 1
-                            validateOTP()
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                self.tryCount += 1
+                                validateOTP()
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
                         }) {
                             if (self.isBtnValidationDisabled) {
                                 Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
@@ -172,8 +188,11 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                 .padding(.vertical, 25)
             }
             
-            if self.isShowModal {
-                ModalOverlay(tapAction: { withAnimation { } })
+            if (self.isShowModal || self.isShowAlertInternetConnection) {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.isShowModal = false
+                    self.isShowAlertInternetConnection = false
+                } })
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -183,7 +202,13 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
         }
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                getOTP()
+                var flags = SCNetworkReachabilityFlags()
+                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                if self.isNetworkReachability(with: flags) {
+                    getOTP()
+                } else {
+                    self.isShowAlertInternetConnection = true
+                }
             }
         })
         .onReceive(timer) { time in
@@ -221,12 +246,51 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
+        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            PopupNoInternetConnection()
+        }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }))
+    }
+    
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.isShowAlertInternetConnection = false
+                    appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     private var pinDots: some View {
@@ -498,6 +562,14 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
     
     private func resetField() {
         self.pin = "" /// return to empty pin
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
 }
 

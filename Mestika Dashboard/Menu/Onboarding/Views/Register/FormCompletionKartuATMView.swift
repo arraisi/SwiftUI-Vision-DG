@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NavigationStack
+import SystemConfiguration
 
 struct FormCompletionKartuATMView: View {
     
@@ -44,6 +45,8 @@ struct FormCompletionKartuATMView: View {
     /* Variable for Swipe Gesture to Back */
     @GestureState private var dragOffset = CGSize.zero
     @State var isShowingAlert: Bool = false
+    @State var isShowAlertInternetConnection = false
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     //Dummy data
     
@@ -91,10 +94,13 @@ struct FormCompletionKartuATMView: View {
                         addressCard
                         
                         Button(action: {
-                            if (is_register_nasabah != "true") {
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
                                 self.postData()
+                                self.atmData.atmAddressPostalCodeInput = self.kodePos
                             } else {
-                                self.goToSuccessPage = true
+                                self.isShowAlertInternetConnection = true
                             }
                             self.atmData.atmAddressPostalCodeInput = self.kodePos
                         }, label: {
@@ -120,9 +126,10 @@ struct FormCompletionKartuATMView: View {
                 EmptyView()
             }
             
-            if self.showingAddressModal || self.showingSuggestionNameModal {
+            if self.showingAddressModal || self.showingSuggestionNameModal || self.isShowAlertInternetConnection {
                 ModalOverlay(tapAction: { withAnimation {
                     self.showingAddressModal = false
+                    self.isShowAlertInternetConnection = false
                 } })
             }
         }
@@ -138,14 +145,23 @@ struct FormCompletionKartuATMView: View {
         .popup(isPresented: $showingSuggestionNameModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomSuggestionNameFloater()
         }
+        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            PopupNoInternetConnection()
+        }
         .onAppear {
             atmData.atmName = nama_local ?? "-"
         }
         .onAppear(){
-            registerData.namaLengkapFromNik = nama_local ?? "-"
-            registerData.nik = user.last?.nik ?? "-"
+            var flags = SCNetworkReachabilityFlags()
+            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+            if self.isNetworkReachability(with: flags) {
+                registerData.namaLengkapFromNik = nama_local ?? "-"
+                registerData.nik = user.last?.nik ?? "-"
 //            atmData.atmName = user.last?.namaLengkapFromNik ?? "-"
-            fetchAddressOption()
+                fetchAddressOption()
+            } else {
+                self.isShowAlertInternetConnection = true
+            }
         }
         .alert(isPresented: $isShowAlert) {
             return Alert(
@@ -282,7 +298,13 @@ struct FormCompletionKartuATMView: View {
                     
                     if addressOptionId == 4 {
                         Button(action:{
-                            searchAddress()
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                searchAddress()
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
                         }, label: {
                             Image(systemName: "magnifyingglass")
                                 .font(Font.system(size: 20))
@@ -595,6 +617,42 @@ struct FormCompletionKartuATMView: View {
         .cornerRadius(20)
     }
     
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.isShowAlertInternetConnection = false
+                    appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
     func isValid() -> Bool {
         if addressOptionId == 4 {
             return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressKecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressKelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && (atmData.atmAddressPostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 || self.kodePos.trimmingCharacters(in: .whitespaces).count > 0)
@@ -732,6 +790,14 @@ struct FormCompletionKartuATMView: View {
                 print("Not Found")
             }
         }
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
 }
 
