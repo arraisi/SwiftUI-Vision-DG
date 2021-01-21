@@ -110,17 +110,24 @@ struct WelcomeView: View {
                         .cornerRadius(15)
                         .disabled(isLoading)
                         
-                        NavigationLink(destination:
-                                        FirstLoginView().environmentObject(loginData),
-//                                        PINView().environmentObject(AddProductATM()).environmentObject(RegistrasiModel()),
-                                       isActive: self.$isLoginViewActive){
+                        Button(action : {
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                self.isLoginViewActive = true
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
+                        }) {
                             Text(NSLocalizedString("Login", comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, maxHeight: 50)
                         }
+                        .disabled(isLoading)
+                        
+                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive, label: {})
                         .isDetailLink(false)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .cornerRadius(15)
                         .disabled(isLoading)
                     }
                     .padding(.horizontal, 20)
@@ -129,9 +136,10 @@ struct WelcomeView: View {
                 }
                 
                 
-                if self.isShowModal {
+                if (self.isShowModal||self.isShowAlertInternetConnection) {
                     ModalOverlay(tapAction: { withAnimation {
                         self.isShowModal = false
+                        self.isShowAlertInternetConnection = false
                     } })
                 }
                 
@@ -207,11 +215,8 @@ struct WelcomeView: View {
                     message: Text(self.alertMessage),
                     dismissButton: .default(Text("Oke")))
             }
-            .alert(isPresented: $isShowAlertInternetConnection) {
-                return Alert(
-                    title: Text("No Internet Connection"),
-                    message: Text("please enable WiFi or Cellular Data"),
-                    dismissButton: .default(Text("Oke")))
+            .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                PopupNoInternetConnection()
             }
             .introspectNavigationController { navigationController in
                 self.appState.navigationController = navigationController
@@ -658,8 +663,14 @@ struct WelcomeView: View {
             .isDetailLink(false)
             
             Button(action: {
-                self.appState.nasabahIsExisting = false
-                self.isKetentuanViewActive = true
+                var flags = SCNetworkReachabilityFlags()
+                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                if self.isNetworkReachability(with: flags) {
+                    self.appState.nasabahIsExisting = false
+                    self.isKetentuanViewActive = true
+                } else {
+                    self.isShowAlertInternetConnection = true
+                }
             }) {
                 Text("Tidak, saya bukan")
                     .foregroundColor(.white)
@@ -670,14 +681,20 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData), isActive: self.$isNoAtmOrRekViewActive) {
+            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData).environmentObject(appState), isActive: self.$isNoAtmOrRekViewActive) {
                 EmptyView()
             }
             .isDetailLink(false)
             
             Button(action: {
-                self.appState.nasabahIsExisting = true
-                self.isNoAtmOrRekViewActive = true
+                var flags = SCNetworkReachabilityFlags()
+                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                if self.isNetworkReachability(with: flags) {
+                    self.appState.nasabahIsExisting = true
+                    self.isNoAtmOrRekViewActive = true
+                } else {
+                    self.isShowAlertInternetConnection = true
+                }
             }) {
                 Text("Ya, saya nasabah Bank Mestika")
                     .foregroundColor(.black)
@@ -951,6 +968,42 @@ struct WelcomeView: View {
             .cornerRadius(12)
             .padding(.bottom, 20)
             
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            Button(
+                action: {
+                    self.isShowAlertInternetConnection = false
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)

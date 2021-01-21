@@ -9,6 +9,7 @@ import SwiftUI
 import NavigationStack
 import JGProgressHUD_SwiftUI
 import Indicators
+import SystemConfiguration
 
 struct FormOTPVerificationRegisterNasabahView: View {
     
@@ -67,6 +68,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
     @State private var isShowAlert: Bool = false
     @State private var modalSelection = ""
     
+    @State var isShowAlertInternetConnection = false
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
+    
     var atmData = AddProductATM()
     
     /* Disabled Form */
@@ -123,11 +127,17 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
-                            print("-> Resend OTP")
-                            self.tryCountResend += 1
-                            getOTP()
-                            
-                            self.resetField()
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                print("-> Resend OTP")
+                                self.tryCountResend += 1
+                                getOTP()
+                                
+                                self.resetField()
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
                         }) {
                             Text(NSLocalizedString("Resend OTP", comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 12))
@@ -180,8 +190,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         .isDetailLink(false)
                         
                         Button(action: {
-                            self.tryCount += 1
-                            validateOTP()
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                self.tryCount += 1
+                                validateOTP()
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
                         }) {
                             
                             if (self.isBtnValidationDisabled) {
@@ -212,8 +228,11 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 .padding(.vertical, 25)
             }
             
-            if self.isShowModal {
-                ModalOverlay(tapAction: { withAnimation {} })
+            if (self.isShowModal || self.isShowAlertInternetConnection) {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.isShowModal = false
+                    self.isShowAlertInternetConnection = false
+                } })
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -230,8 +249,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
             }
         }
         .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                getOTP()
+            var flags = SCNetworkReachabilityFlags()
+            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+            if self.isNetworkReachability(with: flags) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    getOTP()
+                }
+            } else {
+                self.isShowAlertInternetConnection = true
             }
         })
         .onReceive(timer) { time in
@@ -273,6 +298,10 @@ struct FormOTPVerificationRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
+        
+        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            PopupNoInternetConnection()
+        }
     }
     
     private var pinDots: some View {
@@ -438,6 +467,41 @@ struct FormOTPVerificationRegisterNasabahView: View {
         .cornerRadius(20)
     }
     
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
     @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
         self.otpVM.otpRequest(
@@ -537,8 +601,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.routingChooseATM = true
                 } else if (editModeForCancel == .active) {
-                    self.isLoading = false
-                    self.cancelRegistration()
+                    var flags = SCNetworkReachabilityFlags()
+                    SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                    if self.isNetworkReachability(with: flags) {
+                        self.isLoading = false
+                        self.cancelRegistration()
+                    } else {
+                        self.isShowAlertInternetConnection = true
+                    }
                 } else {
                     UserDefaults.standard.set("false", forKey: "routingSchedule")
                     self.isOtpValid = true
@@ -634,6 +704,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 self.isShowAlert.toggle()
             }
         })
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
 }
 

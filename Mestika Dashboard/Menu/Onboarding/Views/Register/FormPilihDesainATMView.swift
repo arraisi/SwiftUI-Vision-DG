@@ -8,6 +8,7 @@
 import SwiftUI
 import NavigationStack
 import JGProgressHUD_SwiftUI
+import SystemConfiguration
 
 struct FormPilihDesainATMView: View {
     
@@ -29,6 +30,8 @@ struct FormPilihDesainATMView: View {
     /* Variable for Swipe Gesture to Back */
     @GestureState private var dragOffset = CGSize.zero
     @State var isShowingAlert: Bool = false
+    @State var isShowAlertInternetConnection = false
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
@@ -154,13 +157,28 @@ struct FormPilihDesainATMView: View {
                         .padding(.vertical)
                     }
                 }
+                if (self.isShowAlertInternetConnection) {
+                    ModalOverlay(tapAction: { withAnimation {
+                    self.isShowAlertInternetConnection = false
+                    } })
+                }
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .onAppear() {
-                self.fetchATMDesignList()
-                print("\(itemWidth):\(itemHeight)")
+                var flags = SCNetworkReachabilityFlags()
+                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                if self.isNetworkReachability(with: flags) {
+                    self.fetchATMDesignList()
+                    print("\(itemWidth):\(itemHeight)")
+                } else {
+                    self.isShowAlertInternetConnection = true
+                }
+                
+            }
+            .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                PopupNoInternetConnection()
             }
             .alert(isPresented: $isShowingAlert) {
                 return Alert(
@@ -263,6 +281,50 @@ struct FormPilihDesainATMView: View {
                 }
             }
         }
+    }
+    
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.isShowAlertInternetConnection = false
+                    appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
 }
 

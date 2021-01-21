@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import SystemConfiguration
 
 struct SuccessRegisterView: View {
     
@@ -61,6 +62,9 @@ struct SuccessRegisterView: View {
     @State var showFormPilihJenisATM = false
     
     @State var date = Date()
+    
+    @State var isShowAlertInternetConnection = false
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     var disableForm: Bool {
         tanggalWawancara.isEmpty || pilihJam.isEmpty
@@ -228,8 +232,14 @@ struct SuccessRegisterView: View {
                         Group {
                             
                             Button(action: {
-                                if pilihJam != "" {
-                                     submitSchedule()
+                                var flags = SCNetworkReachabilityFlags()
+                                SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                                if self.isNetworkReachability(with: flags) {
+                                    if pilihJam != "" {
+                                         submitSchedule()
+                                    }
+                                } else {
+                                    self.isShowAlertInternetConnection = true
                                 }
                             }, label: {
                                 Text(NSLocalizedString("Buat Janji", comment: ""))
@@ -296,12 +306,24 @@ struct SuccessRegisterView: View {
             if self.showingModalInformation {
                 ModalOverlay(tapAction: { withAnimation { self.showingModalInformation = false } })
             }
+            
+            if self.isShowAlertInternetConnection {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.isShowAlertInternetConnection = false
+                } })
+            }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            getAllSchedule()
+            var flags = SCNetworkReachabilityFlags()
+            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+            if self.isNetworkReachability(with: flags) {
+                getAllSchedule()
+            } else {
+                self.isShowAlertInternetConnection = true
+            }
         }
         .onAppear {
             self.registerData.nik = user.last?.nik ?? "-"
@@ -317,6 +339,9 @@ struct SuccessRegisterView: View {
         }
         .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             showModalInformation()
+        }
+        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            PopupNoInternetConnection()
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
@@ -409,6 +434,42 @@ struct SuccessRegisterView: View {
                 self.showingAlert.toggle()
             }
         })
+    }
+    
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.isShowAlertInternetConnection = false
+                    appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     // MARK:- POPUP CANCEL REGISTER
@@ -640,6 +701,14 @@ struct SuccessRegisterView: View {
         }).map({ (data:ScheduleInterviewViewModel) -> String in
             return "\(data.timeStart)" + "-" + "\(data.timeEnd)"
         }))).sorted()
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
 }
 
