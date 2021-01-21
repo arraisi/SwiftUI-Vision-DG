@@ -49,6 +49,9 @@ struct VerificationRegisterDataView: View {
     @State private var showingAlert: Bool = false
     @State var isShowingAlert: Bool = false
     @State var showCancelAlert = false
+    @State var showingNpwpModal = false
+    
+    @State private var npwp = ""
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -108,6 +111,16 @@ struct VerificationRegisterDataView: View {
                                 .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                                 
                                 LabelTextFieldWithIcon(value: $registerData.email, label: "Email", placeHolder: "Email") {
+                                    (Bool) in
+                                    print("on edit")
+                                } onCommit: {
+                                    print("on commit")
+                                }.padding(.top, 10)
+                                .padding(.horizontal, 20)
+                                .padding(.bottom, 20)
+                                .disabled(true)
+                                
+                                LabelTextFieldWithIcon(value: $registerData.npwp, label: "NPWP", placeHolder: "NPWP") {
                                     (Bool) in
                                     print("on edit")
                                 } onCommit: {
@@ -254,12 +267,12 @@ struct VerificationRegisterDataView: View {
                                         TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
                                             .disabled(true)
                                         
-                                                                                Divider()
-                                                                                    .frame(height: 30)
+                                        Divider()
+                                            .frame(height: 30)
                                         
                                         NavigationLink(destination: FormPilihJenisTabunganView(shouldPopToRootView: .constant(false), editMode: .active).environmentObject(registerData).environmentObject(productATMData)) {
-                                                                                    Text("Edit").foregroundColor(.blue)
-                                                                                }
+                                            Text("Edit").foregroundColor(.blue)
+                                        }
                                     }
                                     .frame(height: 20)
                                     .font(.subheadline)
@@ -433,7 +446,7 @@ struct VerificationRegisterDataView: View {
                         VStack(alignment: .leading) {
                             Group {
                                 Group {
-                        
+                                    
                                     Text(NSLocalizedString("Pekerjaan", comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
@@ -540,6 +553,21 @@ struct VerificationRegisterDataView: View {
                 }
                 .background(Color.white)
             }
+            
+            if self.showingNpwpModal {
+                ZStack {
+                    ModalOverlay(tapAction: {
+                        withAnimation {
+                            self.showingNpwpModal = false
+                        }
+                    })
+                    .edgesIgnoringSafeArea(.all)
+                    
+                    popUpNpwp()
+                }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
+            }
+            
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
@@ -576,8 +604,9 @@ struct VerificationRegisterDataView: View {
                         self.registerData.fotoKTP = Image(uiImage: image)
                     case "npwp":
                         self.registerData.hasNoNpwp = true
-                        self.registerData.npwp = "123456789"
+                        self.registerData.npwp = ""
                         self.registerData.fotoNPWP = Image(uiImage: image)
+                        self.showingNpwpModal = true
                     default:
                         print("retrieve image nil")
                     }
@@ -809,6 +838,50 @@ struct VerificationRegisterDataView: View {
             
         }
         .padding(.bottom, 5)
+    }
+    
+    // MARK:- CREATE POPUP MESSAGE
+    func popUpNpwp() -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text(NSLocalizedString("Nomor NPWP", comment: ""))
+                .multilineTextAlignment(.leading)
+                .font(.custom("Montserrat-SemiBold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+            
+            //            TextFieldValidation(data: $registerData.npwp, title: "No. NPWP", disable: false, isValid: false, keyboardType: .numberPad) { (str: Array<Character>) in
+            //                self.registerData.npwp = String(str.prefix(15))
+            //            }
+            
+            TextField("No. NPWP", text: $npwp)
+                .frame(height: 10)
+                .font(.custom("Montserrat-SemiBold", size: 12))
+                .foregroundColor(.black)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                .keyboardType(.numberPad)
+                .onReceive(npwp.publisher.collect()) {
+                    self.npwp = String($0.prefix(15))
+                }
+            
+            Button(action: {
+                self.registerData.npwp = self.npwp
+                print("REGISTER DATA NPWP : \(self.registerData.npwp)")
+                self.showingNpwpModal.toggle()
+            }) {
+                Text("Save")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+        }
+        .padding()
+        .padding(.vertical, 25)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     private func retrieveImage(forKey key: String) -> UIImage? {
