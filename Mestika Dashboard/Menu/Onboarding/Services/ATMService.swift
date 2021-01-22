@@ -106,6 +106,37 @@ class ATMService {
         }.resume()
     }
     
+    // MARK : get response model of list Jenis Tabungan.
+    func getListJenisTabungan(completion: @escaping(Result<JenisTabunganModel, NetworkError>) -> Void) {
+        
+        guard let url = URL.urlGetListJenisTabungan() else {
+            return completion(.failure(.badUrl))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(.failure(.noData))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+            }
+            
+            // MARK : change model response.
+            let response = try? JSONDecoder().decode(JenisTabunganModel.self, from: data)
+            
+            if response == nil {
+                completion(.failure(.decodingError))
+            } else {
+                completion(.success(response!))
+            }
+        }.resume()
+    }
+    
     // MARK : get response model of list ATM Design.
     func getListATMDesign(type: String, completion: @escaping(Result<ATMDesignNewModel, NetworkError>) -> Void) {
         

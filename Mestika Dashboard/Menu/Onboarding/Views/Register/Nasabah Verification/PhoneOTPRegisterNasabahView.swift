@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import SystemConfiguration
 
 struct PhoneOTPRegisterNasabahView: View {
     
@@ -48,6 +49,8 @@ struct PhoneOTPRegisterNasabahView: View {
     @State private var isShowModal = false
     @State private var isShowAlert: Bool = false
     @State private var modalSelection = ""
+    @State var isShowAlertInternetConnection = false
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
@@ -109,12 +112,16 @@ struct PhoneOTPRegisterNasabahView: View {
                             .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
-                            print("-> Resend OTP")
-                            self.tryCountResend += 1
-                            getOTP()
-                            
-                            self.resetField()
-//                            self.timeRemainingRsnd = 30
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                print("-> Resend OTP")
+                                self.tryCountResend += 1
+                                getOTP()
+                                self.resetField()
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
                         }) {
                             Text(NSLocalizedString("Resend OTP", comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 12))
@@ -149,8 +156,15 @@ struct PhoneOTPRegisterNasabahView: View {
                         .isDetailLink(false)
                         
                         Button(action: {
-                            self.tryCount += 1
-                            validateOTP()
+                            var flags = SCNetworkReachabilityFlags()
+                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+                            if self.isNetworkReachability(with: flags) {
+                                self.tryCount += 1
+                                validateOTP()
+                            } else {
+                                self.isShowAlertInternetConnection = true
+                            }
+
                         }) {
                             if (self.isBtnValidationDisabled) {
                                 Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
@@ -180,8 +194,11 @@ struct PhoneOTPRegisterNasabahView: View {
                 
             }
             
-            if self.isShowModal {
-                ModalOverlay(tapAction: { withAnimation { } })
+            if self.isShowModal || self.isShowAlertInternetConnection {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.isShowModal = false
+                    self.isShowAlertInternetConnection = false
+                }})
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -190,8 +207,14 @@ struct PhoneOTPRegisterNasabahView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                getOTP()
+            var flags = SCNetworkReachabilityFlags()
+            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+            if self.isNetworkReachability(with: flags) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    getOTP()
+                }
+            } else {
+                self.isShowAlertInternetConnection = true
             }
         })
         .onReceive(timer) { time in
@@ -228,6 +251,9 @@ struct PhoneOTPRegisterNasabahView: View {
             animation: Animation.spring(),
             closeOnTap: true,
             closeOnTapOutside: true) { popupMenu() }
+        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            PopupNoInternetConnection()
+        }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
@@ -510,6 +536,53 @@ struct PhoneOTPRegisterNasabahView: View {
             }
             
         }
+    }
+    
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            Button(
+                action: {
+                    self.isShowAlertInternetConnection = false
+                    self.appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
     
     private func resetField() {

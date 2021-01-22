@@ -11,13 +11,13 @@ struct DetailsTypeSavingView: View {
     
     @EnvironmentObject var registerData: RegistrasiModel
     
-    var data: SavingType
+    var data: JenisTabunganViewModel
     @Binding var isShowModal: Bool
     @Binding var isShowModalDetail: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(data.tabunganName)
+            Text(data.name)
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#3756DF"))
@@ -32,24 +32,24 @@ struct DetailsTypeSavingView: View {
                 .padding(.horizontal, 15)
                 .foregroundColor(Color(hex: "#5A6876"))
             
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: false) {
 
-                ForEach(data.description, id: \.id) { card in
-                    HStack(alignment: .top) {
-                        Text(card.id)
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(.bold)
-                            .frame(width: 25, height: 18)
-                        Text(card.desc)
-                            .font(.caption2)
-                            .foregroundColor(Color(hex: "#5A6876"))
-                            .frame(minHeight: 18)
-                        Spacer()
-                    }
-                    .padding(.top, 1)
-                    .padding(.horizontal, 15)
-                }
+//                ForEach(data.description, id: \.id) { card in
+//                    HStack(alignment: .top) {
+//                        Text(card.id)
+//                            .font(.caption)
+//                            .foregroundColor(Color(hex: "#232175"))
+//                            .fontWeight(.bold)
+//                            .frame(width: 25, height: 18)
+//                        Text(card.desc)
+//                            .font(.caption2)
+//                            .foregroundColor(Color(hex: "#5A6876"))
+//                            .frame(minHeight: 18)
+//                        Spacer()
+//                    }
+//                    .padding(.top, 1)
+//                    .padding(.horizontal, 15)
+//                }
             }
 //            .frame(height: 120)
             
@@ -89,11 +89,5 @@ struct DetailsTypeSavingView: View {
         .padding(.horizontal, 10)
         .padding(.vertical, 20)
         .background(Color.white)
-    }
-}
-
-struct DetailsTypeSavingView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailsTypeSavingView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tames_batik", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModal: Binding.constant(false), isShowModalDetail: Binding.constant(false)).environmentObject(RegistrasiModel())
     }
 }

@@ -168,7 +168,11 @@ struct VerifikasiPINView: View {
             }
             
             if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                ZStack {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    createBottomFloater()
+                }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
             }
             
         }
@@ -184,9 +188,9 @@ struct VerifikasiPINView: View {
 //                self.presentationMode.wrappedValue.dismiss()
 //            }
 //        }))
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            createBottomFloater()
-        }
+//        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+//            createBottomFloater()
+//        }
         
     }
     
@@ -280,7 +284,9 @@ struct VerifikasiPINView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
-            Button(action: {}) {
+            Button(action: {
+                self.showingModal.toggle()
+            }) {
                 Text("Kembali")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

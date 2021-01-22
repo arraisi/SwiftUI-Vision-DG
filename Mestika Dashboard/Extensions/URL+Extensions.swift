@@ -56,6 +56,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/user/validatePin")
     }
     
+    static func urlPINValidationNasabahExisting() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/validatePinExistingCustomer")
+    }
+    
     static func urlPasswordValidation() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/password/validation")
     }
@@ -66,6 +70,10 @@ extension URL {
     
     static func urlSheduleInterview() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/schedule")
+    }
+    
+    static func urlSheduleInterviewNasabahExisting() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/scheduleVCExistingCustomer")
     }
     
     static func urlSheduleInterviewFindById() -> URL? {
@@ -86,6 +94,10 @@ extension URL {
     
     static func urlGetListATMDesign(type: String) -> URL? {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design2?type=\(type)");
+    }
+    
+    static func urlGetListJenisTabungan() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/content/content-find-product");
     }
     
     static func urlGetSuggestionAddressResult() -> URL? {

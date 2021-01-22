@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PopupView
+import SystemConfiguration
 
 struct JenisNoKartu {
     var jenis: String
@@ -20,6 +21,7 @@ struct NoAtmOrRekeningVerificationView: View {
     ]
     
     /* Environtment Object */
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var registerData: RegistrasiModel
     
     @State var jenisKartuCtrl: String = ""
@@ -28,6 +30,9 @@ struct NoAtmOrRekeningVerificationView: View {
     /* Root Binding */
     @State var isActive : Bool = false
     @Binding var rootIsActive : Bool
+    
+    @State var isShowAlertInternetConnection = false
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     /* Disabled Form */
     var disableForm: Bool {
@@ -152,22 +157,83 @@ struct NoAtmOrRekeningVerificationView: View {
                 .padding(.vertical, 25)
             }
             .padding(.horizontal, 30)
+            
+            if (self.isShowAlertInternetConnection) {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.isShowAlertInternetConnection = false
+                } })
+            }
         }
         .edgesIgnoringSafeArea(.all)
         //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
         .onAppear{
-            //            self.registerData.noTelepon = "85359117336"
-            self.registerData.isNasabahmestika = true
+            var flags = SCNetworkReachabilityFlags()
+            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+            if self.isNetworkReachability(with: flags) {
+                self.registerData.isNasabahmestika = true
+            } else {
+                self.isShowAlertInternetConnection = true
+            }
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            PopupNoInternetConnection()
+        }
+    }
+    
+    func PopupNoInternetConnection() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Please check your internet connection")
+                .font(.custom("Montserrat-SemiBold", size: 13))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            // MARK: change destination
+            Button(
+                action: {
+                    self.isShowAlertInternetConnection = false
+                    self.appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
 }
 
 struct RegisterRekeningCardView_Previews: PreviewProvider {
     static var previews: some View {
-        NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel())
+        NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(RegistrasiModel()).environmentObject(AppState())
     }
 }

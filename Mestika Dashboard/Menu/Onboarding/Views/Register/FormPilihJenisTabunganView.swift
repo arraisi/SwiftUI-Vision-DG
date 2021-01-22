@@ -6,26 +6,32 @@
 //
 
 import SwiftUI
+import JGProgressHUD_SwiftUI
 
 struct FormPilihJenisTabunganView: View {
     
     @EnvironmentObject var appState: AppState
     
     /* Carousel Variables */
-    @State var data = savingTypeData
+//    @State var data = savingTypeData
     @State var firstOffset : CGFloat = 0
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
     
     @State var goToNextPage: Bool = false
+    @State var backToSummary: Bool = false
     
     @State var referenceCode: String = ""
     
     @State var scale: CGFloat = 0
     
+    @ObservedObject private var productVM = ATMProductViewModel()
+    @State var cards: [JenisTabunganViewModel] = []
+    @State private var isLoading = false
+    
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 170 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 150
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
+    let itemHeight:CGFloat = (160.0/290.0 * (UIScreen.main.bounds.width - 100))
     let itemGapHeight:CGFloat = 10
     
     /* Variable for Swipe Gesture to Back */
@@ -44,19 +50,21 @@ struct FormPilihJenisTabunganView: View {
         atmData.atmAddresspostalReferral == ""
     }
     
+    // Routing variables
+    @State var editMode: EditMode = .inactive
+    
     var body: some View {
-        ZStack(alignment: .top) {
-            
-            VStack {
-                Color(hex: "#232175")
-                    .frame(height: 100)
-                    .edgesIgnoringSafeArea(.all)
-            }
-            
-            VStack {
-                AppBarLogo(light: false, onCancel: {})
+        LoadingView(isShowing: self.$isLoading) {
+            ZStack(alignment: .top) {
                 
-                VStack() {
+                VStack {
+                    Color(hex: "#232175")
+                        .frame(height: 100)
+                        .edgesIgnoringSafeArea(.all)
+                }
+                
+                VStack {
+                    AppBarLogo(light: false, onCancel: {})
                     
                     Text(NSLocalizedString("Pilih Jenis Tabungan Anda", comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 15))
@@ -69,8 +77,8 @@ struct FormPilihJenisTabunganView: View {
                         
                         HStack(spacing: itemWidth * 0.08){
                             
-                            ForEach(data, id: \.id){ card in
-                                CardTypeSavingView(image: Image(card.imageName), cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
+                            ForEach(cards, id: \.id){ card in
+                                CardTypeSavingView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight))
                                     .offset(x: self.offset)
                                     .highPriorityGesture(
                                         
@@ -95,57 +103,65 @@ struct FormPilihJenisTabunganView: View {
                     .edgesIgnoringSafeArea(.bottom)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                     .animation(.spring())
-                    .padding(.vertical, 15)
+                    .padding(.vertical,10)
                     .onAppear {
                         refreshCarousel()
                     }
                     
-                    if self.data.count > Int(self.count) {
-                        DetailsTypeSavingView(data: self.data[Int(self.count)], isShowModal: $showingModal, isShowModalDetail: $showingModalDetail)
+                    if self.cards.count > Int(self.count) {
+                        DetailsTypeSavingView(data: self.cards[Int(self.count)], isShowModal: $showingModal, isShowModalDetail: $showingModalDetail)
                             .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 30)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                            .padding(.bottom, 30)
                     }
                     Spacer()
                 }
-                .padding(.vertical, 20)
-            }
-            
-            if self.showingModalDetail {
-                ZStack {
-                    
-                    ModalOverlay(tapAction: { withAnimation {
-                        self.showingModalDetail = false
-                    } })
-                    .edgesIgnoringSafeArea(.all)
-                    
-                    
-                    popupDetailSaving()
-                }
-                .transition(.asymmetric(insertion: .opacity, removal: .fade))
-            }
-            
-            if self.showingModal {
-                ZStack {
-                    ModalOverlay(tapAction: { withAnimation {
-                        self.showingModal = false
+                
+                if self.showingModalDetail {
+                    ZStack {
                         
-                    } })
-                    .edgesIgnoringSafeArea(.all)
-                    
-                    createBottomFloater()
-
+                        ModalOverlay(tapAction: { withAnimation {
+                            self.showingModalDetail = false
+                        } })
+                        .edgesIgnoringSafeArea(.all)
+                        
+                        
+                        popupDetailSaving()
+                    }
+                    .transition(.asymmetric(insertion: .opacity, removal: .fade))
                 }
-                .transition(.asymmetric(insertion: .opacity, removal: .fade))
-            }
-            
-            NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
-                EmptyView()
+                
+                if self.showingModal {
+                    ZStack {
+                        ModalOverlay(tapAction: { withAnimation {
+                            self.showingModal = false
+                            
+                        } })
+                        .edgesIgnoringSafeArea(.all)
+                        
+                        createBottomFloater()
+                        
+                    }
+                    .transition(.asymmetric(insertion: .opacity, removal: .fade))
+                }
+                
+                NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
+                    EmptyView()
+                }
+                
+                NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: $backToSummary) {
+                    EmptyView()
+                }
+                
             }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            fetchJenisTabunganList()
+        }
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
@@ -164,12 +180,12 @@ struct FormPilihJenisTabunganView: View {
     
     // MARK: - REFRESH THE CARD ITEM OFFSET
     private func refreshCarousel() {
-        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2))
-        let offsetMiddleItem = (self.data.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.cards.count / 2))
+        let offsetMiddleItem = (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
         self.firstOffset = offsetFirstItem - offsetMiddleItem
         
-        if data.count > 0 {
-            self.data[0].isShow = true
+        if cards.count > 0 {
+            self.cards[0].isShow = true
         }
     }
     
@@ -209,44 +225,22 @@ struct FormPilihJenisTabunganView: View {
     }
     
     private func popupDetailSaving() -> some View {
-        SavingDetailModalView(data: self.data[Int(self.count)], isShowModalDetail: $showingModalDetail)
+        SavingDetailModalView(data: self.cards[Int(self.count)], isShowModalDetail: $showingModalDetail)
             .environmentObject(registerData)
             .environmentObject(atmData)
-            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
-        //            .scaleEffect(scale)
-        //            .animation(.easeInOut(duration: 0.2))
-        //            .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
-        //            .onAppear {
-        //               withAnimation() {
-        //                    self.scale = 1
-        //                }
-        //            }
-        //            .onDisappear{
-        //                    self.scale = 0
-        //            }
+            .padding(.horizontal, 25)
     }
     
     // MARK: -Function Create Bottom Loader
     private func createBottomFloater() -> some View {
-        SavingSelectionModalView(data: self.data[Int(self.count)], isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal, goToNextPage: $goToNextPage)
+        SavingSelectionModalView(data: self.cards[Int(self.count)], editMode: $editMode, isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal, goToNextPage: $goToNextPage, backToSummary: $backToSummary)
             .environmentObject(registerData)
             .environmentObject(atmData)
-            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
-        //            .scaleEffect(scale)
-        //            .animation(.easeInOut(duration: 0.2))
-        //            .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
-        //            .onAppear {
-        //               withAnimation() {
-        //                    self.scale = 1
-        //                }
-        //            }
-        //            .onDisappear{
-        //                    self.scale = 0
-        //            }
+            .padding(.horizontal, 25)
         
     }
     
@@ -267,7 +261,7 @@ struct FormPilihJenisTabunganView: View {
         }
         else{
             // dragThreshold -> distance of drag to next item
-            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.data.count - 1){
+            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.cards.count - 1){
                 
                 self.count += 1
                 self.updateHeight(value: Int(self.count))
@@ -284,11 +278,28 @@ struct FormPilihJenisTabunganView: View {
     // MARK: - UPDATE HEIGHT
     private func updateHeight(value : Int){
         
-        for i in 0..<data.count{
-            data[i].isShow = false
+        for i in 0..<cards.count{
+            cards[i].isShow = false
         }
         
-        data[value].isShow = true
+        cards[value].isShow = true
+    }
+    
+    // MARK: - FETCH JENIS TABUNGAN LIST DATA FROM API
+    private func fetchJenisTabunganList() {
+        if cards.count == 0 {
+            isLoading = true
+            productVM.getListJenisTabungan { (success: Bool) in
+                isLoading = false
+                if success {
+                    self.cards = productVM.listJenisTabungan
+                    self.refreshCarousel()
+                    //                    if cards.count > 0 {
+                    //                        self.selectCard(selected: 0)
+                    //                    }
+                }
+            }
+        }
     }
 }
 

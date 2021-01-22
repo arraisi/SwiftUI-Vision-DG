@@ -49,6 +49,7 @@
         <attribute name="position" optional="YES" attributeType="String"/>
         <attribute name="productName" optional="YES" attributeType="String"/>
         <attribute name="purposeOfAccountOpening" optional="YES" attributeType="String"/>
+        <attribute name="registerFrom" optional="YES" attributeType="String"/>
         <attribute name="relativeRelationship" optional="YES" attributeType="String"/>
         <attribute name="relativesAddress" optional="YES" attributeType="String"/>
         <attribute name="relativesKecamatan" optional="YES" attributeType="String"/>
@@ -60,6 +61,6 @@
         <attribute name="tanggalInterview" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="884"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="899"/>
     </elements>
 </model>

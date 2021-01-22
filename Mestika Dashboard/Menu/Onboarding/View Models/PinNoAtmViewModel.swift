@@ -18,7 +18,7 @@ class PinNoAtmViewModel: ObservableObject {
 
 extension PinNoAtmViewModel {
     
-    // MARK: - POST OTP
+    // MARK: - PIN VALIDATION
     func pinValidation (
         pin: String,
         cardNo: String,
@@ -33,6 +33,54 @@ extension PinNoAtmViewModel {
             pin: pin,
             cardNo: cardNo,
             validateType: validateType) { result in
+            
+            switch result {
+            case.success(let response):
+                
+                print("VALIDATE PIN response.status?.message : \(response.message ?? "no message")")
+                print("VALIDATE PIN response.status?.code : \(response.code ?? "no CODE")")
+                
+                if (response.message == "OK" || response.code == "200") {
+                    print("Success")
+                    self.isLoading = false
+                    completion(true)
+                } else {
+                    print("Failed")
+                    
+                    DispatchQueue.main.async {
+                        // self.timeRemaining = response.timeCounter!
+                        self.isLoading = false
+                        completion(false)
+                    }
+                }
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(false)
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: - PIN VALIDATION NASABAH EXISTING
+    func pinValidationNasabahExisting (
+        atmData: AddProductATM,
+        pin: String,
+        cardNo: String,
+        completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        PinNoAtmService.shared.validatePinNasabahExisting(
+            atmData: atmData,
+            pin: pin,
+            cardNo: cardNo) { result in
             
             switch result {
             case.success(let response):

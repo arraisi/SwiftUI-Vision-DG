@@ -6,27 +6,32 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CardTypeSavingView: View {
-    var image: Image
+    var card: JenisTabunganViewModel
     
     var cardWidth: CGFloat
     var cardHeight: CGFloat
     
     var body: some View {
         ZStack {
-            image
+            WebImage(url: card.image)
+                .onSuccess { image, data, cacheType in
+                    // Success
+                    // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
+                }
+                .placeholder {
+                    Rectangle().foregroundColor(.gray).opacity(0.5)
+                }
                 .resizable()
+                .indicator(.activity) // Activity Indicator
+                .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                .scaledToFill()
                 .frame(width: cardWidth, height: cardHeight)
         }
         .frame(width: cardWidth, height: cardHeight, alignment: .center)
         .cornerRadius(10)
         .background(Color.clear)
-    }
-}
-
-struct CardTypeSavingView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardTypeSavingView(image: Image("Saving Image"), cardWidth: 315, cardHeight: 197)
     }
 }

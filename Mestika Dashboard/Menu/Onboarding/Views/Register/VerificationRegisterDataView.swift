@@ -49,6 +49,9 @@ struct VerificationRegisterDataView: View {
     @State private var showingAlert: Bool = false
     @State var isShowingAlert: Bool = false
     @State var showCancelAlert = false
+    @State var showingNpwpModal = false
+    
+    @State private var npwp = ""
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -65,7 +68,7 @@ struct VerificationRegisterDataView: View {
             VStack {
                 
                 AppBarLogo(light: false, showCancel: true) {
-                    self.showCancelAlert = true
+                    self.isShowingAlert = true
                 }
                 
                 if (self.isLoading) {
@@ -108,6 +111,16 @@ struct VerificationRegisterDataView: View {
                                 .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                                 
                                 LabelTextFieldWithIcon(value: $registerData.email, label: "Email", placeHolder: "Email") {
+                                    (Bool) in
+                                    print("on edit")
+                                } onCommit: {
+                                    print("on commit")
+                                }.padding(.top, 10)
+                                .padding(.horizontal, 20)
+                                .padding(.bottom, 20)
+                                .disabled(true)
+                                
+                                LabelTextFieldWithIcon(value: $registerData.npwp, label: "NPWP", placeHolder: "NPWP") {
                                     (Bool) in
                                     print("on edit")
                                 } onCommit: {
@@ -254,12 +267,12 @@ struct VerificationRegisterDataView: View {
                                         TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
                                             .disabled(true)
                                         
-                                        //                                        Divider()
-                                        //                                            .frame(height: 30)
-                                        //
-                                        //                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
-                                        //                                            Text("Edit").foregroundColor(.blue)
-                                        //                                        }
+                                        Divider()
+                                            .frame(height: 30)
+                                        
+                                        NavigationLink(destination: FormPilihJenisTabunganView(shouldPopToRootView: .constant(false), editMode: .active).environmentObject(registerData).environmentObject(productATMData)) {
+                                            Text("Edit").foregroundColor(.blue)
+                                        }
                                     }
                                     .frame(height: 20)
                                     .font(.subheadline)
@@ -433,7 +446,7 @@ struct VerificationRegisterDataView: View {
                         VStack(alignment: .leading) {
                             Group {
                                 Group {
-                        
+                                    
                                     Text(NSLocalizedString("Pekerjaan", comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
@@ -519,12 +532,12 @@ struct VerificationRegisterDataView: View {
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     })
-                    .background(Color(hex: "#2334D0"))
+                    .background(Color(hex: self.isLoading ? "#CBD1D9" : "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 100)
                     .padding(.top, 10)
                     .padding(.bottom, 20)
-                    .disabled(self.userRegisterVM.isLoading)
+                    .disabled(self.isLoading)
                     
                     NavigationLink(
                         destination: SuccessRegisterView(isAllowBack: false).environmentObject(registerData),
@@ -540,9 +553,30 @@ struct VerificationRegisterDataView: View {
                 }
                 .background(Color.white)
             }
+            
+            if self.showingNpwpModal {
+                ZStack {
+                    ModalOverlay(tapAction: {
+                        withAnimation {
+                            self.showingNpwpModal = false
+                        }
+                    })
+                    .edgesIgnoringSafeArea(.all)
+                    
+                    popUpNpwp()
+                }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
+            }
+            
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.isShowingAlert = true
+            }
+        }))
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),
@@ -557,21 +591,6 @@ struct VerificationRegisterDataView: View {
                 }),
                 secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
-        .alert(isPresented: $showCancelAlert) {
-            return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-        }
-        .gesture(DragGesture().onEnded({ value in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.isShowingAlert = true
-            }
-        }))
-        
     }
     
     var scanner: some View {
@@ -585,8 +604,9 @@ struct VerificationRegisterDataView: View {
                         self.registerData.fotoKTP = Image(uiImage: image)
                     case "npwp":
                         self.registerData.hasNoNpwp = true
-                        self.registerData.npwp = "123456789"
+                        self.registerData.npwp = ""
                         self.registerData.fotoNPWP = Image(uiImage: image)
+                        self.showingNpwpModal = true
                     default:
                         print("retrieve image nil")
                     }
@@ -820,6 +840,50 @@ struct VerificationRegisterDataView: View {
         .padding(.bottom, 5)
     }
     
+    // MARK:- CREATE POPUP MESSAGE
+    func popUpNpwp() -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text(NSLocalizedString("Nomor NPWP", comment: ""))
+                .multilineTextAlignment(.leading)
+                .font(.custom("Montserrat-SemiBold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+            
+            //            TextFieldValidation(data: $registerData.npwp, title: "No. NPWP", disable: false, isValid: false, keyboardType: .numberPad) { (str: Array<Character>) in
+            //                self.registerData.npwp = String(str.prefix(15))
+            //            }
+            
+            TextField("No. NPWP", text: $npwp)
+                .frame(height: 10)
+                .font(.custom("Montserrat-SemiBold", size: 12))
+                .foregroundColor(.black)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                .keyboardType(.numberPad)
+                .onReceive(npwp.publisher.collect()) {
+                    self.npwp = String($0.prefix(15))
+                }
+            
+            Button(action: {
+                self.registerData.npwp = self.npwp
+                print("REGISTER DATA NPWP : \(self.registerData.npwp)")
+                self.showingNpwpModal.toggle()
+            }) {
+                Text("Save")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+        }
+        .padding()
+        .padding(.vertical, 25)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     private func retrieveImage(forKey key: String) -> UIImage? {
         if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
            let image = UIImage(data: imageData) {
@@ -836,6 +900,7 @@ struct VerificationRegisterDataView: View {
         let data = User(context: managedObjectContext)
         data.nik = self.registerData.nik
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
+        data.registerFrom = self.appState.nasabahIsExisting ? "Existing" : "Non Existing"
         
         do {
             try self.managedObjectContext.save()
@@ -868,80 +933,6 @@ struct VerificationRegisterDataView: View {
                 self.showingAlert = true
             }
         }
-    }
-    
-    func clearData() {
-        self.registerData.noTelepon = ""
-        self.registerData.jenisTabungan = ""
-        self.registerData.email = ""
-        self.registerData.tujuanPembukaanId = 0
-        self.registerData.tujuanPembukaan = ""
-        self.registerData.sumberDanaId = 0
-        self.registerData.sumberDana = ""
-        self.registerData.perkiraanPenarikanId = 0
-        self.registerData.perkiraanPenarikan = ""
-        self.registerData.besarPerkiraanPenarikanId = 0
-        self.registerData.besarPerkiraanPenarikan = ""
-        self.registerData.perkiraanSetoranId = 0
-        self.registerData.perkiraanSetoran = ""
-        self.registerData.pekerjaanId = 0
-        self.registerData.pekerjaan = ""
-        self.registerData.besarPerkiraanSetoranId = 0
-        self.registerData.besarPerkiraanSetoran = ""
-        self.registerData.jabatanProfesiId = 0
-        self.registerData.jabatanProfesi = ""
-        self.registerData.namaPenyandangDana = ""
-        self.registerData.hubunganPenyandangDana = ""
-        self.registerData.profesiPenyandangDana = ""
-        self.registerData.industriTempatBekerjaId = 0
-        self.registerData.industriTempatBekerja = ""
-        self.registerData.sumberPenyandangDanaId = 0
-        self.registerData.sumberPenyandangDana = ""
-        self.registerData.sumberPendapatanLainnyaId = 0
-        self.registerData.sumberPendapatanLainnya = ""
-        self.registerData.sumberPendapatanLain = ""
-        self.registerData.namaPerusahaan = ""
-        self.registerData.alamatPerusahaan = ""
-        self.registerData.alamatKeluarga = ""
-        self.registerData.kodePosKeluarga = ""
-        self.registerData.kecamatanKeluarga = ""
-        self.registerData.kelurahanKeluarga = ""
-        self.registerData.noTlpKeluarga = ""
-        self.registerData.kodePos = ""
-        self.registerData.kecamatan = ""
-        self.registerData.kelurahan = ""
-        self.registerData.rtrw = ""
-        self.registerData.noTeleponPerusahaan = ""
-        self.registerData.penghasilanKotorId = 0
-        self.registerData.penghasilanKotor = ""
-        self.registerData.namaKeluarga = ""
-        self.registerData.hubunganKekerabatanKeluarga = ""
-        self.registerData.hubunganKekerabatan = ""
-        self.registerData.password = ""
-        self.registerData.pin = ""
-        self.registerData.verificationAddressId = 1
-        self.registerData.confirmationPin = ""
-        self.registerData.npwp = ""
-        self.registerData.hasNoNpwp = false
-        self.registerData.namaLengkapFromNik = ""
-        self.registerData.nomorKKFromNik = ""
-        self.registerData.jenisKelaminFromNik = ""
-        self.registerData.tempatLahirFromNik = ""
-        self.registerData.tanggalLahirFromNik = ""
-        self.registerData.agamaFromNik = ""
-        self.registerData.statusPerkawinanFromNik = ""
-        self.registerData.pendidikanFromNik = ""
-        self.registerData.jenisPekerjaanFromNik = ""
-        self.registerData.namaIbuFromNik = ""
-        self.registerData.statusHubunganFromNik = ""
-        self.registerData.alamatKtpFromNik = ""
-        self.registerData.rtFromNik = ""
-        self.registerData.rwFromNik = ""
-        self.registerData.kelurahanFromNik = ""
-        self.registerData.kecamatanFromNik = ""
-        self.registerData.kabupatenKotaFromNik = ""
-        self.registerData.provinsiFromNik = ""
-        self.registerData.bidangUsaha = ""
     }
 }
 
