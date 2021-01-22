@@ -13,7 +13,7 @@ struct FormPilihJenisTabunganView: View {
     @EnvironmentObject var appState: AppState
     
     /* Carousel Variables */
-    @State var data = savingTypeData
+//    @State var data = savingTypeData
     @State var firstOffset : CGFloat = 0
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
@@ -113,6 +113,7 @@ struct FormPilihJenisTabunganView: View {
                             .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
                             .frame(width: UIScreen.main.bounds.width - 30)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                            .padding(.bottom, 30)
                     }
                     Spacer()
                 }
@@ -179,12 +180,12 @@ struct FormPilihJenisTabunganView: View {
     
     // MARK: - REFRESH THE CARD ITEM OFFSET
     private func refreshCarousel() {
-        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.data.count / 2))
-        let offsetMiddleItem = (self.data.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.cards.count / 2))
+        let offsetMiddleItem = (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
         self.firstOffset = offsetFirstItem - offsetMiddleItem
         
-        if data.count > 0 {
-            self.data[0].isShow = true
+        if cards.count > 0 {
+            self.cards[0].isShow = true
         }
     }
     
@@ -224,23 +225,11 @@ struct FormPilihJenisTabunganView: View {
     }
     
     private func popupDetailSaving() -> some View {
-        SavingDetailModalView(data: self.data[Int(self.count)], isShowModalDetail: $showingModalDetail)
+        SavingDetailModalView(data: self.cards[Int(self.count)], isShowModalDetail: $showingModalDetail)
             .environmentObject(registerData)
             .environmentObject(atmData)
-            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
-        //            .scaleEffect(scale)
-        //            .animation(.easeInOut(duration: 0.2))
-        //            .transition(AnyTransition.opacity.animation(.linear(duration: 0.5)))
-        //            .onAppear {
-        //               withAnimation() {
-        //                    self.scale = 1
-        //                }
-        //            }
-        //            .onDisappear{
-        //                    self.scale = 0
-        //            }
     }
     
     // MARK: -Function Create Bottom Loader
@@ -248,7 +237,6 @@ struct FormPilihJenisTabunganView: View {
         SavingSelectionModalView(data: self.cards[Int(self.count)], editMode: $editMode, isShowModal: $showingModal, showingReferralCodeModal: $showingReferralCodeModal, goToNextPage: $goToNextPage, backToSummary: $backToSummary)
             .environmentObject(registerData)
             .environmentObject(atmData)
-            .frame(width: UIScreen.main.bounds.width - 40)
             .background(Color(.white))
             .cornerRadius(15)
         
@@ -271,7 +259,7 @@ struct FormPilihJenisTabunganView: View {
         }
         else{
             // dragThreshold -> distance of drag to next item
-            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.data.count - 1){
+            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.cards.count - 1){
                 
                 self.count += 1
                 self.updateHeight(value: Int(self.count))
@@ -288,11 +276,11 @@ struct FormPilihJenisTabunganView: View {
     // MARK: - UPDATE HEIGHT
     private func updateHeight(value : Int){
         
-        for i in 0..<data.count{
-            data[i].isShow = false
+        for i in 0..<cards.count{
+            cards[i].isShow = false
         }
         
-        data[value].isShow = true
+        cards[value].isShow = true
     }
     
     // MARK: - FETCH JENIS TABUNGAN LIST DATA FROM API
