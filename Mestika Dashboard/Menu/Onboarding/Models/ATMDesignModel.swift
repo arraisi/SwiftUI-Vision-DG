@@ -23,3 +23,12 @@ struct ATMDesignViewModel {
     let cardImageBase64: UIImage?
     var isShow: Bool = false
 }
+
+struct JenisTabunganViewModel {
+    var id, name: String
+    var image: URL?
+    var description: String
+    var type: String
+    var codePlan: String
+    var isShow: Bool = false
+}

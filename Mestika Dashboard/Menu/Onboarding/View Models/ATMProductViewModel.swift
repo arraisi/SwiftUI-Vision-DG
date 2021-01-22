@@ -11,6 +11,7 @@ class ATMProductViewModel : ObservableObject {
     @Published var isLoading: Bool = false
     @Published var listATM: [ATMViewModel] = []
     @Published var listATMDesign: [ATMDesignViewModel] = []
+    @Published var listJenisTabungan: [JenisTabunganViewModel] = []
 }
 
 extension ATMProductViewModel {
@@ -65,6 +66,41 @@ extension ATMProductViewModel {
                             cardImage: URL(string: data.cardImage),
                             description: self.mapDescriptionLimit(data: data.description),
                             cardImageBase64: image
+                        )
+                    })
+                    completion(true)
+                }
+                break
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    completion(false)
+                }
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: - Get List Jenis Tabungan
+    func getListJenisTabungan(completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        ATMService.shared.getListJenisTabungan() { result in
+            switch result {
+            case.success(let response):
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.listJenisTabungan = response.content.map({ (data: ContentJenisTabungan) -> JenisTabunganViewModel in
+                        return JenisTabunganViewModel (
+                            id: data.id,
+                            name: data.name,
+                            image: URL(string: data.image),
+                            description: data.contentDescription,
+                            type: data.type,
+                            codePlan: data.codePlan
                         )
                     })
                     completion(true)

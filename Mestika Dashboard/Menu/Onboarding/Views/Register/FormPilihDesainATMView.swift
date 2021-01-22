@@ -69,7 +69,7 @@ struct FormPilihDesainATMView: View {
                         
                         HStack(spacing: itemWidth * 0.08){
                             
-                            ForEach(cards, id: \.id){card in
+                            ForEach(cards, id: \.id){ card in
                                 ATMCardDesignView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: false)
                                     .offset(x: self.offset)
                                     .highPriorityGesture(

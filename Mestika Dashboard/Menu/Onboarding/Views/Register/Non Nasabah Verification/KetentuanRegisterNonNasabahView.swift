@@ -68,17 +68,17 @@ struct KetentuanRegisterNonNasabahView: View {
                             ZStack {
                                 WebView(readed: self.$readed, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                                 
-//                                if showingBadge {
-//                                    BadgeView(text: "Silahkan scroll kebawah")
-//                                        .animation(.easeIn)
-//                                        .onAppear{
-//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                                withAnimation {
-//                                                    showingBadge = false
-//                                                }
-//                                            }
-//                                        }
-//                                }
+                                if showingBadge {
+                                    BadgeView(text: "Silahkan scroll kebawah")
+                                        .animation(.easeIn)
+                                        .onAppear{
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                                withAnimation {
+                                                    showingBadge = false
+                                                }
+                                            }
+                                        }
+                                }
                             }
                             
                             NavigationLink(

@@ -96,6 +96,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design2?type=\(type)");
     }
     
+    static func urlGetListJenisTabungan() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/content/content-find-product");
+    }
+    
     static func urlGetSuggestionAddressResult() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/google-maps/address/results")
     }

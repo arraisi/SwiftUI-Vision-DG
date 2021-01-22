@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct SavingSelectionModalView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var atmData: AddProductATM
-    var data: SavingType
+    var data: JenisTabunganViewModel
     
     @Binding var editMode: EditMode
     @Binding var isShowModal: Bool
@@ -22,10 +23,19 @@ struct SavingSelectionModalView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Group {
-                Image(data.imageName)
+                WebImage(url: data.image)
+                    .onSuccess { image, data, cacheType in
+                        // Success
+                        // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
+                    }
+                    .placeholder {
+                        Rectangle().foregroundColor(.gray).opacity(0.5)
+                    }
                     .resizable()
+                    .indicator(.activity) // Activity Indicator
+                    .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                    .scaledToFill()
                     .frame(height: 200)
-                    .padding()
                 
                 Text("Anda Telah memilih")
                     .font(.custom("Montserrat-Regular", size: 18))
@@ -35,7 +45,7 @@ struct SavingSelectionModalView: View {
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                Text(data.tabunganName)
+                Text(data.name)
                     .font(.custom("Montserrat-Regular", size: 18))
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#2334D0"))
@@ -71,7 +81,7 @@ struct SavingSelectionModalView: View {
             }
             
             Button(action: {
-                registerData.jenisTabungan = data.tabunganName
+                registerData.jenisTabungan = data.name
                 
                 withAnimation {
                     self.isShowModal.toggle()
@@ -114,12 +124,5 @@ struct SavingSelectionModalView: View {
             .padding(.top, 5)
         }
         .frame(width: UIScreen.main.bounds.width - 40)
-    }
-}
-
-struct SavingSelectionModalView_Previews: PreviewProvider {
-    static var previews: some View {
-        SavingSelectionModalView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tabungan_simpel", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), editMode: .constant(.inactive), isShowModal: Binding.constant(false), showingReferralCodeModal: .constant(false), goToNextPage: Binding.constant(false), backToSummary: .constant(false)).environmentObject(RegistrasiModel())
-            .environmentObject(AddProductATM())
     }
 }
