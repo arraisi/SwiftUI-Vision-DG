@@ -127,7 +127,7 @@ struct WelcomeView: View {
                         }
                         .disabled(isLoading)
                         
-                        NavigationLink(destination: FormPilihJenisTabunganView(shouldPopToRootView: .constant(false)).environmentObject(registerData).environmentObject(productATMData), isActive: self.$isLoginViewActive, label: {})
+                        NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isLoginViewActive, label: {})
                         .isDetailLink(false)
                         .disabled(isLoading)
                     }
