@@ -230,6 +230,7 @@ struct FormPilihJenisTabunganView: View {
             .environmentObject(atmData)
             .background(Color(.white))
             .cornerRadius(15)
+            .padding(.horizontal, 25)
     }
     
     // MARK: -Function Create Bottom Loader
@@ -239,6 +240,7 @@ struct FormPilihJenisTabunganView: View {
             .environmentObject(atmData)
             .background(Color(.white))
             .cornerRadius(15)
+            .padding(.horizontal, 25)
         
     }
     

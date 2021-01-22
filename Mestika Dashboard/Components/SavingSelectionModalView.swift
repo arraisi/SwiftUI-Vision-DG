@@ -33,21 +33,16 @@ struct SavingSelectionModalView: View {
                 .resizable()
                 .indicator(.activity) // Activity Indicator
                 .transition(.fade(duration: 0.5)) // Fade Transition with duration
-                //                    .scaledToFill()
                 .scaledToFit()
                 .frame(height: 200)
                 .padding()
             
-            Spacer()
-            
-            VStack {
+            VStack(alignment: .center, spacing: 10) {
                 Text("Anda Telah memilih")
                     .font(.custom("Montserrat-Regular", size: 14))
                     .padding(.horizontal, 20)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity, alignment: .center)
-                
-                Spacer()
                 
                 Text(data.name)
                     .font(.custom("Montserrat-Regular", size: 18))
@@ -55,18 +50,12 @@ struct SavingSelectionModalView: View {
                     .foregroundColor(Color(hex: "#2334D0"))
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
-            }
-            
-            Spacer()
-            
-            VStack(alignment: .center) {
+                
                 Text("Punya kode referal ?")
                     .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.black)
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
-                
-                Spacer()
                 
                 TextField(NSLocalizedString("Masukkan kode referal", comment: ""), text: $atmData.atmAddresspostalReferral, onEditingChanged: { changed in
                 }, onCommit: {})
@@ -90,8 +79,9 @@ struct SavingSelectionModalView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
             }
+            .padding(.bottom, 15)
             
-            VStack(alignment: .center, spacing: 10){
+            VStack(alignment: .center, spacing: 10) {
                 Button(action: {
                     registerData.jenisTabungan = data.name
                     
@@ -132,10 +122,8 @@ struct SavingSelectionModalView: View {
                 .cornerRadius(12)
                 .padding(.horizontal, 20)
             }
-            .padding(.vertical, 10)
-            
-            Spacer()
+            .padding(.vertical, 15)
         }
-        .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 100)
+        //        .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height * 0.8)
     }
 }

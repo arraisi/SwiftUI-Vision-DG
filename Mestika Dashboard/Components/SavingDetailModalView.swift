@@ -29,38 +29,35 @@ struct SavingDetailModalView: View {
                 .resizable()
                 .indicator(.activity) // Activity Indicator
                 .transition(.fade(duration: 0.5)) // Fade Transition with duration
-                //                    .scaledToFill()
                 .scaledToFit()
                 .frame(height: 200)
                 .padding()
             
             Group {
                 Text(NSLocalizedString("Produk Tabungan Mestika", comment: ""))
-                    .font(.title3)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
-                    .padding(.vertical, 15)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                ScrollView(.vertical, showsIndicators: false) {
-                    
-                    //                    ForEach(data.description, id: \.id) { card in
-                    //                        HStack(alignment: .top) {
-                    //                            Text(card.id)
-                    //                                .font(.custom("Montserrat-Regular", size: 12))
-                    //                                .foregroundColor(Color(hex: "#232175"))
-                    //                                .fontWeight(.bold)
-                    //                                .frame(width: 25, height: 18)
-                    //                            Text(card.desc)
-                    //                                .font(.custom("Montserrat-Regular", size: 12))
-                    //                                .foregroundColor(Color(hex: "#5A6876"))
-                    //                                .frame(minHeight: 18)
-                    //                            Spacer()
-                    //                        }
-                    //                        .padding(.top, 1)
-                    //                        .padding(.horizontal, 15)
-                    //                    }
-                }
+                //                ScrollView(.vertical, showsIndicators: false) {
+                
+                //                    ForEach(data.description, id: \.id) { card in
+                //                        HStack(alignment: .top) {
+                //                            Text(card.id)
+                //                                .font(.custom("Montserrat-Regular", size: 12))
+                //                                .foregroundColor(Color(hex: "#232175"))
+                //                                .fontWeight(.bold)
+                //                                .frame(width: 25, height: 18)
+                //                            Text(card.desc)
+                //                                .font(.custom("Montserrat-Regular", size: 12))
+                //                                .foregroundColor(Color(hex: "#5A6876"))
+                //                                .frame(minHeight: 18)
+                //                            Spacer()
+                //                        }
+                //                        .padding(.top, 1)
+                //                        .padding(.horizontal, 15)
+                //                    }
+                //                }
                 //                .frame(minHeight: 80, maxHeight: 200)
             }
             
@@ -79,11 +76,9 @@ struct SavingDetailModalView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.horizontal, 20)
-            .padding(.vertical, 15)
+            .padding(.vertical, 25)
             
-            Spacer()
         }
-        .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 100)
     }
 }
 
