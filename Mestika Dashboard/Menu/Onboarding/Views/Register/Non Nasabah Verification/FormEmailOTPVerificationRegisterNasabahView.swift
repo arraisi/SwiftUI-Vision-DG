@@ -476,7 +476,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
                     self.isShowAlert = false
-                    self.timeRemainingRsnd = self.otpVM.timeCounter
+//                    self.timeRemainingRsnd = self.otpVM.timeCounter
+                    self.timeRemainingRsnd = 30
                 }
             }
             
@@ -490,7 +491,8 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                         self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-                        self.timeRemainingRsnd = self.otpVM.timeCounter
+//                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.timeRemainingRsnd = 30
                         self.isShowAlert = true
                     }
                 } else {

@@ -348,7 +348,7 @@ struct VerificationPINView: View {
     func validatePINBackEnd() {
         self.isLoading = true
         
-        self.pinNoAtmVM.pinValidation(pin: self.pin, cardNo: self.noKartuCtrl, validateType: "YES")
+        self.pinNoAtmVM.pinValidationNasabahExisting(atmData: atmData, pin: self.pin, cardNo: self.noKartuCtrl)
         { success in
             
             print("success \(success)")
@@ -454,7 +454,7 @@ struct VerificationPINView: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
-                self.nextToPilihJenisAtm = true
+                self.appState.moveToDashboard = true
             }) {
                 Text(NSLocalizedString("Continue to Create an ATM", comment: ""))
                     .foregroundColor(.white)

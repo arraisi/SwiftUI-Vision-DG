@@ -90,7 +90,7 @@ class ScheduleInterviewService {
                 "date": date,
                 "nik":  nik,
                 "fireBaseToken": firebaseToken!,
-                "os": "ios",
+                "app": "ios-mestika",
                 "timeEnd": endTime,
                 "timeStart": startTime
             ],
@@ -160,7 +160,8 @@ class ScheduleInterviewService {
             "date": date,
             "nik":  nik,
             "fireBaseToken": firebaseToken!,
-            "os": "ios",
+            "app": "ios-mestika",
+            "isNasabahMestika": false,
             "timeEnd": endTime,
             "timeStart": startTime
         ]

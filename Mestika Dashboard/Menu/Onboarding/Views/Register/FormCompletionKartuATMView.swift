@@ -94,13 +94,10 @@ struct FormCompletionKartuATMView: View {
                         addressCard
                         
                         Button(action: {
-                            var flags = SCNetworkReachabilityFlags()
-                            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
-                            if self.isNetworkReachability(with: flags) {
-                                self.postData()
-                                self.atmData.atmAddressPostalCodeInput = self.kodePos
+                            if (is_register_nasabah == "true") {
+                                self.goToSuccessPage = true
                             } else {
-                                self.isShowAlertInternetConnection = true
+                                self.postData()
                             }
                             self.atmData.atmAddressPostalCodeInput = self.kodePos
                         }, label: {

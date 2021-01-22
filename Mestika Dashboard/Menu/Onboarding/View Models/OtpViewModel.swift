@@ -102,7 +102,7 @@ extension OtpViewModel {
                         print(response.code)
                         print(response.message)
                         
-                        self.statusMessage = response.status?.message ?? "Internal Server Error"
+                        self.statusMessage = response.status?.message ?? ""
                         self.timeCounter = response.timeCounter ?? 30
                         
                         completion(true)

@@ -305,7 +305,11 @@ struct SuccessRegisterView: View {
             }
             
             if self.showingModalInformation {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalInformation = false } })
+                ZStack {
+                    ModalOverlay(tapAction: { withAnimation { self.showingModalInformation = false } })
+                    showModalInformation()
+                }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
             }
             
             if self.isShowAlertInternetConnection {
@@ -318,13 +322,7 @@ struct SuccessRegisterView: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            var flags = SCNetworkReachabilityFlags()
-            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
-            if self.isNetworkReachability(with: flags) {
-                getAllSchedule()
-            } else {
-                self.isShowAlertInternetConnection = true
-            }
+            getAllSchedule()
         }
         .onAppear {
             self.registerData.nik = user.last?.nik ?? "-"
@@ -352,9 +350,9 @@ struct SuccessRegisterView: View {
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageCancelRegister()
         }
-        .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
-            showModalInformation()
-        }
+//        .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+//            showModalInformation()
+//        }
         .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             PopupNoInternetConnection()
         }

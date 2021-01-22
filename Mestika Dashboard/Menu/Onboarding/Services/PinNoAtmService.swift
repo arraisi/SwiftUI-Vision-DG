@@ -16,7 +16,7 @@ class PinNoAtmService {
     
     static let shared = PinNoAtmService()
     
-    // Service validation pin
+    // MARK : PIN VALIDATION.
     func validatePin(
         pin: String,
         cardNo: String,
@@ -43,6 +43,74 @@ class PinNoAtmService {
         
         // Method And Header
         var request = URLRequest(paramsUrl)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        // Execution
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(.failure(.noData))
+            }
+            
+            let pinResponse = try? JSONDecoder().decode(Status.self, from: data)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+            }
+            
+            if pinResponse == nil {
+                completion(.failure(.decodingError))
+            } else {
+                completion(.success(pinResponse!))
+            }
+            
+        }.resume()
+        
+    }
+    
+    // MARK : PIN VALIDATION EXISTING.
+    func validatePinNasabahExisting(
+        atmData: AddProductATM,
+        pin: String,
+        cardNo: String,
+        completion: @escaping(Result<Status, NetworkError>) -> Void) {
+        
+        // Body
+        let body: [String: Any] = [
+            "pin": [
+                "pin": pin,
+                "cardNo": cardNo
+            ],
+            "atm": [
+                "atmAddressInput": atmData.atmAddressInput,
+                "atmAddressKelurahanInput": atmData.atmAddressKelurahanInput,
+                "atmAddressKecamatanInput": atmData.atmAddressKecamatanInput,
+                "atmAddressKotaInput": atmData.atmAddressKotaInput,
+                "atmAddressPropinsiInput": atmData.atmAddressPropinsiInput,
+                "atmAddressPostalCodeInput": atmData.atmAddressPostalCodeInput,
+                "atmAddressRtInput": atmData.atmAddressRtInput,
+                "atmAddressRwInput": atmData.atmAddressRwInput,
+                "atmName": atmData.atmName,
+                "isNasabahMestika": true,
+                "codeClass": atmData.codeClass,
+                "imageDesign": atmData.imageDesign,
+                "addressEqualToDukcapil": false
+            ]
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        // Url
+        guard let url = URL.urlPINValidationNasabahExisting() else {
+            return completion(.failure(.badUrl))
+        }
+        
+        // Method And Header
+        var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = finalBody

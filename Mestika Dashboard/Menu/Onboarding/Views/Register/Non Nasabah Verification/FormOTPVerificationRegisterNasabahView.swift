@@ -521,7 +521,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
-                    self.timeRemainingRsnd = self.otpVM.timeCounter
+//                    self.timeRemainingRsnd = self.otpVM.timeCounter
+                    self.timeRemainingRsnd = 30
                     self.isShowAlert = false
                 }
             }
@@ -538,7 +539,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-                        self.timeRemainingRsnd = self.otpVM.timeCounter
+//                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.timeRemainingRsnd = 30
                         self.isShowAlert = true
                     }
                 } else {
@@ -580,7 +582,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
         
         self.otpVM.otpValidation(
             code: self.pin,
-            destination: "+62" + self.registerData.noTelepon,
+            destination: self.registerData.noTelepon,
             reference: referenceCode,
             timeCounter: self.timeRemainingBtn,
             tryCount: tryCount,

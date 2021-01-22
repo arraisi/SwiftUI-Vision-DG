@@ -25,6 +25,7 @@ struct WelcomeView: View {
     @State var isActiveRootLogin: Bool = false
     @State var isNoAtmOrRekViewActive: Bool = false
     @State var isFormPilihJenisAtm: Bool = false
+    @State var isFormPilihJenisAtmNasabah: Bool = false
     @State var isRescheduleInterview: Bool = false
     @State var isFormPilihSchedule: Bool = false
     @State var isIncomingVideoCall: Bool = false
@@ -377,7 +378,11 @@ struct WelcomeView: View {
             
             Button(
                 action: {
-                    self.isFormPilihJenisAtm = true
+                    if (self.status_register_nasabah == "true") {
+                        self.isFormPilihJenisAtmNasabah = true
+                    } else {
+                        self.isFormPilihJenisAtm = true
+                    }
                 },
                 label: {
                     Text("Halaman Submit Produk ATM")
@@ -389,6 +394,10 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 20)
+            
+            NavigationLink(
+                destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isFormPilihJenisAtmNasabah,
+                label: {})
             
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForChooseATM: .active).environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
                 .isDetailLink(false)

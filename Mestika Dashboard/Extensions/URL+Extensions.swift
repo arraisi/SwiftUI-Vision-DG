@@ -56,6 +56,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/user/validatePin")
     }
     
+    static func urlPINValidationNasabahExisting() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/validatePinExistingCustomer")
+    }
+    
     static func urlPasswordValidation() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/password/validation")
     }
