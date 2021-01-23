@@ -31,6 +31,7 @@
         <attribute name="isAddressEqualToDukcapil" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isAgreeTnc" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isAgreetoShare" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isNasabahMestika" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isWni" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="jamInterviewEnd" optional="YES" attributeType="String"/>
         <attribute name="jamInterviewStart" optional="YES" attributeType="String"/>
@@ -49,7 +50,6 @@
         <attribute name="position" optional="YES" attributeType="String"/>
         <attribute name="productName" optional="YES" attributeType="String"/>
         <attribute name="purposeOfAccountOpening" optional="YES" attributeType="String"/>
-        <attribute name="registerFrom" optional="YES" attributeType="String"/>
         <attribute name="relativeRelationship" optional="YES" attributeType="String"/>
         <attribute name="relativesAddress" optional="YES" attributeType="String"/>
         <attribute name="relativesKecamatan" optional="YES" attributeType="String"/>
