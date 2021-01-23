@@ -31,19 +31,21 @@ struct WelcomeView: View {
     @State var isIncomingVideoCall: Bool = false
     
     // View Variables
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
+    
+    @FetchRequest(entity: ScheduleInterview.entity(), sortDescriptors: [])
+    var schedule: FetchedResults<ScheduleInterview>
+    
     var registerData = RegistrasiModel()
     var loginData = LoginBindingModel()
     var productATMData = AddProductATM()
-    var deviceId = UIDevice.current.identifierForVendor?.uuidString
-    @State var images = ["slider_pic_1", "slider_pic_2", "slider_pic_3"]
     
-    // Local Storage Status Register Nasabah
-    @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
-    @State private var status_register_non_nasabah = UserDefaults.standard.string(forKey: "register_non_nasabah")
-    @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
-    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
+    // Device ID
+    var deviceId = UIDevice.current.identifierForVendor?.uuidString
+    
+    // Image Carousel
+    @State var images = ["slider_pic_1", "slider_pic_2", "slider_pic_3"]
     
     @State private var dateInterview = "-"
     @State private var timeInterview = "-"
@@ -163,6 +165,7 @@ struct WelcomeView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
                 print("RECEIVED SCHEDULE")
+//                self.appState.moveToWelcomeView = true
                 if let dateInfo = obj.userInfo, let info = dateInfo["dateInterview"] {
                     print(info)
                     dateInterview = info as! String
@@ -185,11 +188,10 @@ struct WelcomeView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
                 print("RECEIVED JITSI END")
-                
                 getUserStatus(deviceId: deviceId!)
             }
             .onAppear {
-                print(status_register_nasabah)
+                getCoreDataRegister()
                 getMobileVersion()
                 var flags = SCNetworkReachabilityFlags()
                 SCNetworkReachabilityGetFlags(self.reachability!, &flags)
@@ -226,27 +228,6 @@ struct WelcomeView: View {
         }
     }
     
-    func activateWelcomeView() {
-        self.isKetentuanViewActive = false
-        self.isLoginViewActive = false
-        self.isFirstLoginViewActive = false
-        self.isNoAtmOrRekViewActive = false
-        self.isFormPilihJenisAtm = false
-        self.isRescheduleInterview = false
-        self.isFormPilihSchedule = false
-        self.isIncomingVideoCall = false
-    }
-    
-    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
-        let isReachable = flags.contains(.reachable)
-        let needsConnection = flags.contains(.connectionRequired)
-        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
-        
-        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
-        
-        return isReachable && (!needsConnection || canConnectWithoutInteraction)
-    }
-    
     var Header: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -265,10 +246,11 @@ struct WelcomeView: View {
         }
     }
     
+    // MARK: - POPUP MENU SELECTION
     func popupMenu() -> some View {
         switch modalSelection {
         case "CREATED" :
-            if (status_register_nasabah == "true") {
+            if (self.user.first?.isNasabahMestika == true) {
                 return AnyView(PopupKYCScheduled())
             } else {
                 return AnyView(PopupCreated())
@@ -290,7 +272,7 @@ struct WelcomeView: View {
         }
     }
     
-    // MARK: # Status : CREATED
+    // MARK: - POPUP STATUS : CREATED
     func PopupCreated() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_bell")
@@ -311,7 +293,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            if (status_register_nasabah == "true") {
+            if (self.user.last?.isNasabahMestika == true) {
                 
                 Button(
                     action: {
@@ -355,7 +337,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: # Status : KYC_SCHEDULED
+    // MARK: - POPUP STATUS : KYC_SCHEDULED
     func PopupKYCScheduled() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_bell")
@@ -378,7 +360,7 @@ struct WelcomeView: View {
             
             Button(
                 action: {
-                    if (self.status_register_nasabah == "true") {
+                    if (self.user.last?.isNasabahMestika == true) {
                         self.isFormPilihJenisAtmNasabah = true
                     } else {
                         self.isFormPilihJenisAtm = true
@@ -398,6 +380,7 @@ struct WelcomeView: View {
             NavigationLink(
                 destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isFormPilihJenisAtmNasabah,
                 label: {})
+                .isDetailLink(false)
             
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForChooseATM: .active).environmentObject(productATMData).environmentObject(registerData), isActive: self.$isFormPilihJenisAtm, label: {EmptyView()})
                 .isDetailLink(false)
@@ -409,7 +392,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: # Status : KYC_WAITING
+    // MARK: - POPUP STATUS : KYC_WAITING
     func PopupKYCWaiting() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_cs")
@@ -443,7 +426,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\(dateInterview == "-" ? (user.last?.tanggalInterview as? String) ?? "" : dateInterview)")
+                    Text("\((self.schedule.last?.tanggalInterview)!)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -462,7 +445,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\(timeInterview == "-" ? (user.last?.jamInterviewStart ?? "") : timeInterview)")
+                    Text("\((self.schedule.last?.jamInterview)!)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -506,7 +489,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: # Status : WAITING
+    // MARK: - POPUP STATUS : WAITING
     func PopupWaiting() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_clock")
@@ -540,7 +523,6 @@ struct WelcomeView: View {
             .cornerRadius(12)
             .padding(.bottom, 5)
             
-            // MARK: change destination
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
                 Text("Batalkan Permohonan")
                     .foregroundColor(.black)
@@ -558,7 +540,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: # Status : ACTIVE
+    // MARK: - POPUP STATUS : ACTIVE
     func PopupActive() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_bell")
@@ -599,7 +581,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: # Status : NOT_APPROVED
+    // MARK: - POPUP STATUS : NOT_APPROVED
     func PopupNotApproved() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_warning")
@@ -620,7 +602,6 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            // MARK: change destination
             Button(
                 action: {
                     UserDefaults.standard.set("reset", forKey: "reset_register")
@@ -642,8 +623,7 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    // MARK: #OLD POPUP
-    // MARK: #ScreeningNasabahModal - Popup Message Menu (Modal)
+    // MARK: - POPUP SELECTOR REGISTER NASABAH
     func ScreeningNasabahModal() -> some View {
         VStack(alignment: .leading) {
             Image("ic_bells")
@@ -717,272 +697,7 @@ struct WelcomeView: View {
         .cornerRadius(20)
     }
     
-    // MARK: #SuccsessRegisterModal - Popup Message Success (Modal)
-    func SuccsessRegisterModal() -> some View {
-        VStack(alignment: .leading) {
-            Image("ic_highfive")
-                .resizable()
-                .frame(width: 95, height: 95)
-                .padding(.top, 20)
-                .padding(.bottom, 10)
-            
-            Text("REGISTRASI BERHASIL")
-                .font(.custom("Montserrat-Bold", size: 18))
-                .foregroundColor(Color(hex: "#2334D0"))
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Text("Permohonan Pembukaan Rekening Anda telah disetujui. Silahkan login untuk pertama kali.")
-                .font(.custom("Montserrat-SemiBold", size: 13))
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-            NavigationLink(destination: FirstLoginView().environmentObject(loginData), isActive: self.$isFirstLoginViewActive){
-                Text("Login")
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-            }
-            .isDetailLink(false)
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 20)
-    }
-    
-    // MARK: #ScheduleVideoCallModal - Popup Message Schedule Video Call (Modal)
-    func ScheduleVideoCallModal() -> some View {
-        VStack(alignment: .leading) {
-            Image("ic_highfive")
-                .resizable()
-                .frame(width: 95, height: 95)
-                .padding(.top, 20)
-                .padding(.bottom, 10)
-            
-            Text("Jadwal Wawancara sudah diterima")
-                .font(.custom("Montserrat-Bold", size: 20))
-                .foregroundColor(Color(hex: "#2334D0"))
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Text("Customer Service kami akan menghubungi anda untuk melakukan konfirmasi dan aktivasi, pastikan anda available pada jam yang telah anda tentukan.")
-                .font(.custom("Montserrat-SemiBold", size: 13))
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-            Button(
-                action: {},
-                label: {
-                    Text("Kembali")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-            )
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 20)
-    }
-    
-    // MARK: #ScheduleVideoCallMissedModal - Popup Message Missed Schedule (Modal)
-    func ScheduleVideoCallMissedModal() -> some View {
-        VStack(alignment: .leading) {
-            Image("ic_group")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .padding(.top, 20)
-                .padding(.bottom, 10)
-            
-            Text("REGISTRASI GAGAL")
-                .fontWeight(.heavy)
-                .font(.system(size: 22))
-                .foregroundColor(.red)
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Text("Anda telah melewati waktu wawancara pendaftaran (Jumat 11 September 2020).")
-                .font(.caption)
-                .fontWeight(.bold)
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-            Text("Silahkan lakukan registrasi kembali untuk mendaftar.")
-                .font(.caption)
-                .fontWeight(.bold)
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-            Button(
-                action: {},
-                label: {
-                    Text("Kembali ke Halaman Utama")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
-                }
-            )
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 20)
-    }
-    
-    // MARK: #RegisterRejectedModal - Popup Message Rejected (Modal)
-    func RegisterRejectedModal() -> some View {
-        VStack(alignment: .leading) {
-            Image("ic_group")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .padding(.top, 20)
-                .padding(.bottom, 10)
-            
-            Text("Pembukaan Rekening ditolak")
-                .font(.custom("Montserrat-Bold", size: 20))
-                .foregroundColor(.red)
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Text("Maaf, pembukaan rekening online Anda telah ditolak.")
-                .font(.custom("Montserrat-Bold", size: 16))
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-            Button(
-                action: {},
-                label: {
-                    Text("Kembali ke Halaman Utama")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-            )
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 20)
-    }
-    
-    // MARK: #RegisterApprovedModal - Popup Message Approve (Modal)
-    func RegisterApprovedModal() -> some View {
-        VStack(alignment: .leading) {
-            Image("ic_title_bell")
-                .resizable()
-                .frame(width: 75, height: 90)
-                .padding(.top, 20)
-                .padding(.bottom, 20)
-            
-            Text("PEMBUKAAN REKENING DISETUJUI")
-                .font(.custom("Montserrat-Bold", size: 20))
-                .foregroundColor(Color(hex: "#232175"))
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Text("Selamat pembukaan rekening baru Anda telah disetujui.")
-                .font(.custom("Montserrat-Bold", size: 16))
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 10)
-            
-            Text("Silakan pilih tombol \"Lanjutkan\" untuk ke tahap selanjutnya")
-                .font(.custom("Montserrat-SemiBold", size: 13))
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-            Button(
-                action: {},
-                label: {
-                    Text("Lanjutkan")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-            )
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 20)
-    }
-    
-    // MARK: #RegisterCreatedModal - Popup Message Create New (Modal)
-    func RegisterCreatedModal() -> some View {
-        VStack(alignment: .leading) {
-            Image("ic_group")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .padding(.top, 20)
-                .padding(.bottom, 10)
-            
-            Text("PERSETUJUAN SEDANG DALAM PROSES")
-                .font(.custom("Montserrat-Bold", size: 20))
-                .foregroundColor(.yellow)
-                .padding(.bottom, 20)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            Text("Persetujuan sedang dalam proses. Hasil akan dikirim melalui SMS atau email.")
-                .font(.custom("Montserrat-SemiBold", size: 13))
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-            Button(
-                action: {},
-                label: {
-                    Text("Saya Tunggu")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-            )
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 20)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(radius: 20)
-    }
-    
+    // MARK: - POPUP CHECK CONNECTION INTERNET
     func PopupNoInternetConnection() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_warning")
@@ -1019,29 +734,28 @@ struct WelcomeView: View {
         .shadow(radius: 20)
     }
     
-    /* Function Send Notification */
-    func sendVideoCallNotification() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in
-            
-        }
+    /* Function Activate Popup */
+    func activateWelcomeView() {
+        self.isKetentuanViewActive = false
+        self.isLoginViewActive = false
+        self.isFirstLoginViewActive = false
+        self.isNoAtmOrRekViewActive = false
+        self.isFormPilihJenisAtm = false
+        self.isFormPilihJenisAtmNasabah = false
+        self.isRescheduleInterview = false
+        self.isFormPilihSchedule = false
+        self.isIncomingVideoCall = false
+    }
+    
+    /* Function Check Network Reachability */
+    func isNetworkReachability(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
         
-        let content = UNMutableNotificationContent()
-        content.title = "Video Call Notification"
-        content.body = "Test Schedule Video Call"
+        let canConnectWithoutInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
         
-        let open = UNNotificationAction(identifier: "open", title: "Open", options: .foreground)
-        let cancel = UNNotificationAction(identifier: "cancel", title: "Cancel", options: .destructive)
-        
-        let categorys = UNNotificationCategory(identifier: "action", actions: [open, cancel], intentIdentifiers: [])
-        
-        UNUserNotificationCenter.current().setNotificationCategories([categorys])
-        
-        content.categoryIdentifier = "action"
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let req = UNNotificationRequest(identifier: "req", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(req, withCompletionHandler: nil)
+        return isReachable && (!needsConnection || canConnectWithoutInteraction)
     }
     
     /* Function GET Mobile Version */
@@ -1090,6 +804,46 @@ struct WelcomeView: View {
                 self.modalSelection = "DEFAULT"
                 self.isShowModal = true
             }
+        }
+    }
+    
+    /* Function Get From Code Data to Register Data */
+    func getCoreDataRegister() {
+        user.forEach { (data) in
+            self.registerData.nik = data.nik!
+            self.registerData.noTelepon = data.noTelepon!
+            self.registerData.email = data.email!
+            self.registerData.pekerjaanId = Int(data.pekerjaanId)
+            self.registerData.pekerjaan = data.pekerjaan!
+            
+            // Data From NIK
+            self.registerData.namaLengkapFromNik = data.namaLengkapFromNik!
+            self.registerData.nomorKKFromNik = data.nomorKKFromNik!
+            self.registerData.jenisKelaminFromNik = data.jenisKelaminFromNik!
+            self.registerData.tempatLahirFromNik = data.tempatLahirFromNik!
+            self.registerData.tanggalLahirFromNik = data.tanggalLahirFromNik!
+            self.registerData.agamaFromNik = data.agamaFromNik!
+            self.registerData.statusPerkawinanFromNik = data.statusPerkawinanFromNik!
+            self.registerData.pendidikanFromNik = data.pendidikanFromNik!
+            self.registerData.jenisPekerjaanFromNik = data.jenisPekerjaanFromNik!
+            self.registerData.namaIbuFromNik = data.namaIbuFromNik!
+            self.registerData.statusHubunganFromNik = data.statusHubunganFromNik!
+            
+            // Data Perusahaan
+            self.registerData.namaPerusahaan = data.namaPerusahaan!
+            self.registerData.alamatPerusahaan = data.alamatPerusahaan!
+            self.registerData.kodePos = data.kodePos!
+            self.registerData.kecamatan = data.kecamatan!
+            self.registerData.kelurahan = data.kelurahan!
+            self.registerData.rtrw = data.rtrw!
+            
+            // Data Surat Menyurat
+            self.registerData.alamatKeluarga = data.alamatKeluarga!
+            self.registerData.kodePosKeluarga = data.kodePosKeluarga!
+            self.registerData.kecamatanKeluarga = data.kecamatanKeluarga!
+            self.registerData.kelurahanKeluarga =  data.kelurahanKeluarga!
+            
+            self.registerData.isNasabahmestika = data.isNasabahMestika
         }
     }
 }

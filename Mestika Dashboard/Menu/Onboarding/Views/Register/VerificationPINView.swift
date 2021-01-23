@@ -41,6 +41,7 @@ struct VerificationPINView: View {
     @State var isResendPinDisabled = true
     @State var isBtnValidationDisabled = false
     @State var tryCount = 0
+    
     var disableForm: Bool {
         if (pin.count < 6 || self.isBtnValidationDisabled) {
             return true
@@ -229,6 +230,7 @@ struct VerificationPINView: View {
                             label: {
                                 EmptyView()
                             })
+                            .isDetailLink(false)
                         
                         Button(action: {
                             self.tryCount += 1
@@ -454,7 +456,7 @@ struct VerificationPINView: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
-                self.appState.moveToDashboard = true
+                self.appState.moveToWelcomeView = true
             }) {
                 Text(NSLocalizedString("Continue to Create an ATM", comment: ""))
                     .foregroundColor(.white)

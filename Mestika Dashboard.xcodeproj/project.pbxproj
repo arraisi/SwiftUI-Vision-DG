@@ -298,7 +298,6 @@
 		C0BCCB222577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */; };
 		C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */; };
 		C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */; };
-		C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */; };
 		C0BCDEB425B69A7500E1028F /* PinNoAtmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEB325B69A7500E1028F /* PinNoAtmViewModel.swift */; };
 		C0BCDEB925B69B3D00E1028F /* PinNoAtmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEB825B69B3D00E1028F /* PinNoAtmService.swift */; };
 		C0BCDEC625B6B99D00E1028F /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEC525B6B99D00E1028F /* BadgeView.swift */; };
@@ -649,7 +648,6 @@
 		C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
-		C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCDEB325B69A7500E1028F /* PinNoAtmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinNoAtmViewModel.swift; sourceTree = "<group>"; };
 		C0BCDEB825B69B3D00E1028F /* PinNoAtmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinNoAtmService.swift; sourceTree = "<group>"; };
 		C0BCDEC525B6B99D00E1028F /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
@@ -1124,7 +1122,6 @@
 				C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */,
 				C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */,
 				C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */,
-				C0BCCB362577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift */,
 			);
 			path = "Nasabah Verification";
 			sourceTree = "<group>";
@@ -2119,7 +2116,6 @@
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
-				C0BCCB372577E41100B9B07A /* JenisTabunganRegisterNasabahView.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,

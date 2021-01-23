@@ -42,10 +42,6 @@ struct VerificationRegisterDataView: View {
     /* GET DEVICE ID */
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     
-    /* CORE DATA */
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
-    
     @State private var showingAlert: Bool = false
     @State var isShowingAlert: Bool = false
     @State var showCancelAlert = false
@@ -621,18 +617,13 @@ struct VerificationRegisterDataView: View {
                     if let image = imageTaken {
                         registerData.fotoSelfie = image
                     }
-                    //                    self.shouldPresentMaskSelfie = false
                 }
-            
-            //            if shouldPresentMaskSelfie {
             Image("pattern_selfie")
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .opacity(0.5)
                 .offset(y: -(UIScreen.main.bounds.height * 0.12))
-            //            }
-            
         }
     }
     
@@ -897,10 +888,44 @@ struct VerificationRegisterDataView: View {
     func saveUserToCoreData()  {
         print("------SAVE TO CORE DATA-------")
         
-        let data = User(context: managedObjectContext)
+        let data = Registration(context: managedObjectContext)
+        data.id = 1
         data.nik = self.registerData.nik
+        data.noTelepon = self.registerData.noTelepon
+        data.jenisTabungan = self.registerData.jenisTabungan
+        data.email = self.registerData.email
+        data.pekerjaanId = Int16(self.registerData.pekerjaanId)
+        data.pekerjaan = self.registerData.pekerjaan
+        
+        // Data From NIK
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
+        data.nomorKKFromNik = self.registerData.nomorKKFromNik
+        data.jenisKelaminFromNik = self.registerData.jenisKelaminFromNik
+        data.tempatLahirFromNik = self.registerData.tempatLahirFromNik
+        data.tanggalLahirFromNik = self.registerData.tanggalLahirFromNik
+        data.agamaFromNik = self.registerData.agamaFromNik
+        data.statusPerkawinanFromNik = self.registerData.statusPerkawinanFromNik
+        data.pendidikanFromNik = self.registerData.pendidikanFromNik
+        data.jenisPekerjaanFromNik = self.registerData.jenisPekerjaanFromNik
+        data.namaIbuFromNik = self.registerData.namaIbuFromNik
+        data.statusHubunganFromNik = self.registerData.statusHubunganFromNik
+        
+        // Data Perusahaan
+        data.namaPerusahaan = self.registerData.namaPerusahaan
+        data.alamatPerusahaan = self.registerData.alamatPerusahaan
+        data.kodePos = self.registerData.kodePos
+        data.kecamatan = self.registerData.kecamatan
+        data.kelurahan = self.registerData.kelurahan
+        data.rtrw = self.registerData.rtrw
+        
+        // Data Surat Menyurat
+        data.alamatKeluarga = self.registerData.alamatKeluarga
+        data.kodePosKeluarga = self.registerData.kodePosKeluarga
+        data.kecamatanKeluarga = self.registerData.kecamatanKeluarga
+        data.kelurahanKeluarga = self.registerData.kelurahanKeluarga
+        
         data.isNasabahMestika = self.appState.nasabahIsExisting ? true : false
+        data.isAddressEqualToDukcapil = self.registerData.isAddressEqualToDukcapil
         
         do {
             try self.managedObjectContext.save()
@@ -911,19 +936,13 @@ struct VerificationRegisterDataView: View {
     
     /* Save User To DB */
     func saveUserToDb() {
-        
         self.isLoading = true
-        
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
                 saveUserToCoreData()
                 if self.appState.nasabahIsExisting {
-                    UserDefaults.standard.set("true", forKey: "register_nasabah")
-                    UserDefaults.standard.set("false", forKey: "register_non_nasabah")
                     self.nextRouteNasabah = true
                 } else {
-                    UserDefaults.standard.set("false", forKey: "register_nasabah")
-                    UserDefaults.standard.set("true", forKey: "register_non_nasabah")
                     self.nextRouteNonNasabah = true
                 }
             }

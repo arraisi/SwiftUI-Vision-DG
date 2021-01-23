@@ -30,11 +30,6 @@ struct FormPilihJenisATMView: View {
     @State var isShowAlertInternetConnection = false
     private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
-    /* Card Variables */
-//    let itemWidth:CGFloat = UIScreen.main.bounds.width - 60 // 100 is amount padding left and right
-//    let itemHeight:CGFloat = 160
-//    let itemGapHeight:CGFloat = 10
-    
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
     let itemHeight:CGFloat = (160.0/290.0 * (UIScreen.main.bounds.width - 100))
     let itemGapHeight:CGFloat = 10

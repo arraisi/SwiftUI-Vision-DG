@@ -1,5 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Registration" representedClassName="Registration" syncable="YES" codeGenerationType="class">
+        <attribute name="accNo" optional="YES" attributeType="String"/>
+        <attribute name="accType" optional="YES" attributeType="String"/>
+        <attribute name="addressInput" optional="YES" attributeType="String"/>
+        <attribute name="addressKecamatanInput" optional="YES" attributeType="String"/>
+        <attribute name="addressKelurahanInput" optional="YES" attributeType="String"/>
+        <attribute name="addressPostalCodeInput" optional="YES" attributeType="String"/>
+        <attribute name="addressRtRwInput" optional="YES" attributeType="String"/>
+        <attribute name="agamaFromNik" optional="YES" attributeType="String"/>
+        <attribute name="alamatKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="alamatKtpFromNik" optional="YES" attributeType="String"/>
+        <attribute name="alamatPerusahaan" optional="YES" attributeType="String"/>
+        <attribute name="besarPerkiraanPenarikan" optional="YES" attributeType="String"/>
+        <attribute name="besarPerkiraanPenarikanId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="besarPerkiraanSetoran" optional="YES" attributeType="String"/>
+        <attribute name="besarPerkiraanSetoranId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="bidangUsaha" optional="YES" attributeType="String"/>
+        <attribute name="confirmationPin" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="hasNoNpwp" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasSumberPendapatanLainnya" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hubunganKekerabatan" optional="YES" attributeType="String"/>
+        <attribute name="hubunganKekerabatanKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="hubunganPenyandangDana" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="industriTempatBekerja" optional="YES" attributeType="String"/>
+        <attribute name="industriTempatBekerjaId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isAddressEqualToDukcapil" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isAgree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isNasabahMestika" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isShareData" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isWni" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="jabatanProfesi" optional="YES" attributeType="String"/>
+        <attribute name="jabatanProfesiId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="jamInterview" optional="YES" attributeType="String"/>
+        <attribute name="jenisKelaminFromNik" optional="YES" attributeType="String"/>
+        <attribute name="jenisPekerjaanFromNik" optional="YES" attributeType="String"/>
+        <attribute name="jenisTabungan" optional="YES" attributeType="String"/>
+        <attribute name="kabupatenKotaFromNik" optional="YES" attributeType="String"/>
+        <attribute name="kecamatan" optional="YES" attributeType="String"/>
+        <attribute name="kecamatanFromNik" optional="YES" attributeType="String"/>
+        <attribute name="kecamatanKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="kelurahan" optional="YES" attributeType="String"/>
+        <attribute name="kelurahanFromNik" optional="YES" attributeType="String"/>
+        <attribute name="kelurahanKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="kodePos" optional="YES" attributeType="String"/>
+        <attribute name="kodePosFromNik" optional="YES" attributeType="String"/>
+        <attribute name="kodePosKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="namaIbuFromNik" optional="YES" attributeType="String"/>
+        <attribute name="namaKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="namaLengkapFromNik" optional="YES" attributeType="String"/>
+        <attribute name="namaPenyandangDana" optional="YES" attributeType="String"/>
+        <attribute name="namaPerusahaan" optional="YES" attributeType="String"/>
+        <attribute name="nik" optional="YES" attributeType="String"/>
+        <attribute name="noAtm" optional="YES" attributeType="String"/>
+        <attribute name="nomorKKFromNik" optional="YES" attributeType="String"/>
+        <attribute name="noRekening" optional="YES" attributeType="String"/>
+        <attribute name="noTelepon" optional="YES" attributeType="String"/>
+        <attribute name="noTeleponPerusahaan" optional="YES" attributeType="String"/>
+        <attribute name="noTlpKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="npwp" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="pekerjaan" optional="YES" attributeType="String"/>
+        <attribute name="pekerjaanId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pendidikanFromNik" optional="YES" attributeType="String"/>
+        <attribute name="penghasilanKotor" optional="YES" attributeType="String"/>
+        <attribute name="penghasilanKotorId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="perkiraanPenarikan" optional="YES" attributeType="String"/>
+        <attribute name="perkiraanPenarikanId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="perkiraanSetoran" optional="YES" attributeType="String"/>
+        <attribute name="perkiraanSetoranId" optional="YES" attributeType="String"/>
+        <attribute name="pin" optional="YES" attributeType="String"/>
+        <attribute name="profesiPenyandangDana" optional="YES" attributeType="String"/>
+        <attribute name="provinsiFromNik" optional="YES" attributeType="String"/>
+        <attribute name="rtFromNik" optional="YES" attributeType="String"/>
+        <attribute name="rtrw" optional="YES" attributeType="String"/>
+        <attribute name="rwFromNik" optional="YES" attributeType="String"/>
+        <attribute name="statusHubunganFromNik" optional="YES" attributeType="String"/>
+        <attribute name="statusPerkawinanFromNik" optional="YES" attributeType="String"/>
+        <attribute name="sumberDana" optional="YES" attributeType="String"/>
+        <attribute name="sumberDanaId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sumberPendapatanLain" optional="YES" attributeType="String"/>
+        <attribute name="sumberPendapatanLainnya" optional="YES" attributeType="String"/>
+        <attribute name="sumberPendapatanLainnyaId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sumberPenyandangDana" optional="YES" attributeType="String"/>
+        <attribute name="sumberPenyandangDanaId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tanggalInterview" optional="YES" attributeType="String"/>
+        <attribute name="tanggalLahirFromNik" optional="YES" attributeType="String"/>
+        <attribute name="tempatLahirFromNik" optional="YES" attributeType="String"/>
+        <attribute name="tujuanPembukaan" optional="YES" attributeType="String"/>
+        <attribute name="tujuanPembukaanId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="verificationAddressId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ScheduleInterview" representedClassName="ScheduleInterview" syncable="YES" codeGenerationType="class">
+        <attribute name="jamInterview" optional="YES" attributeType="String"/>
+        <attribute name="tanggalInterview" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="annualGrossIncome" optional="YES" attributeType="String"/>
         <attribute name="companyAddress" optional="YES" attributeType="String"/>
@@ -62,5 +159,7 @@
     </entity>
     <elements>
         <element name="User" positionX="-63" positionY="-18" width="128" height="899"/>
+        <element name="Registration" positionX="-63" positionY="144" width="128" height="1394"/>
+        <element name="ScheduleInterview" positionX="-54" positionY="153" width="128" height="59"/>
     </elements>
 </model>

@@ -15,20 +15,16 @@ struct FormDetailKartuATMView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
     @ObservedObject private var productVM = ATMProductViewModel()
     
     var isAllowBack: Bool = true
     
-    @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
-    
     /* Variable for Swipe Gesture to Back */
     @GestureState private var dragOffset = CGSize.zero
     @State var isShowingAlert: Bool = false
-    
-    @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -52,14 +48,10 @@ struct FormDetailKartuATMView: View {
                             Spacer()
                         }
                         .padding(.top, 10)
-                        //                    Image("atm_bromo")
-                        //                        .resizable()
-                        //                        .aspectRatio(contentMode: .fit)
                         
                         WebImage(url: URL(string: atmData.imageDesign))
                             .onSuccess { image, data, cacheType in
                                 // Success
-                                // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
                             }
                             .placeholder {
                                 Rectangle().foregroundColor(.gray).opacity(0.5)
@@ -113,7 +105,7 @@ struct FormDetailKartuATMView: View {
                         
                         Spacer()
                         
-                        if (status_register_nasabah == "true") {
+                        if (self.user.last?.isNasabahMestika == true) {
                             NavigationLink(
                                 destination: VerificationPINView().environmentObject(registerData).environmentObject(atmData),
                                 label: {
@@ -148,6 +140,7 @@ struct FormDetailKartuATMView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .alert(isPresented: $isShowingAlert) {
             return Alert(
                 title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),

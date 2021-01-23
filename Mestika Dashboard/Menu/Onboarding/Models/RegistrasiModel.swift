@@ -30,8 +30,8 @@ class RegistrasiModel: ObservableObject {
     @Published var jabatanProfesiId: Int = 0
     @Published var jabatanProfesi = ""
     @Published var namaPenyandangDana = ""
-    @Published var hubunganPenyandangDana:String = ""
-    @Published var profesiPenyandangDana:String = ""
+    @Published var hubunganPenyandangDana: String = ""
+    @Published var profesiPenyandangDana: String = ""
     @Published var industriTempatBekerjaId: Int = 0
     @Published var industriTempatBekerja = ""
     @Published var sumberPenyandangDanaId: Int = 0
@@ -39,7 +39,7 @@ class RegistrasiModel: ObservableObject {
     @Published var sumberPendapatanLainnyaId: Int = 0
     @Published var sumberPendapatanLainnya = ""
     @Published var hasSumberPendapatanLainnya: Bool = false
-    @Published var sumberPendapatanLain:String? = ""
+    @Published var sumberPendapatanLain: String? = ""
     @Published var namaPerusahaan = ""
     @Published var alamatPerusahaan = ""
     @Published var alamatKeluarga = ""

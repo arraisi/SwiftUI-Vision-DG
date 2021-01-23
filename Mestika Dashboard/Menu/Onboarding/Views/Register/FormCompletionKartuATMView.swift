@@ -25,13 +25,8 @@ struct FormCompletionKartuATMView: View {
     @State var goToSuccessPage = false
     @State var isLoading = false
     
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
-    
-    @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
-    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
-    @State private var is_video_call = UserDefaults.standard.string(forKey: "register_nasabah_video_call")
-    @State private var is_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
     @State var addressOptionId = 1
     
@@ -94,12 +89,12 @@ struct FormCompletionKartuATMView: View {
                         addressCard
                         
                         Button(action: {
-                            if (is_register_nasabah == "true") {
+                            self.atmData.atmAddressPostalCodeInput = self.kodePos
+                            if (self.user.last?.isNasabahMestika == true) {
                                 self.goToSuccessPage = true
                             } else {
                                 self.postData()
                             }
-                            self.atmData.atmAddressPostalCodeInput = self.kodePos
                         }, label: {
                             Text(NSLocalizedString("Submit Data", comment: ""))
                                 .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
@@ -146,15 +141,16 @@ struct FormCompletionKartuATMView: View {
             PopupNoInternetConnection()
         }
         .onAppear {
-            atmData.atmName = nama_local ?? "-"
+            user.forEach { (data) in
+                atmData.atmName = data.namaLengkapFromNik!
+                registerData.namaLengkapFromNik = data.namaLengkapFromNik!
+                registerData.nik = data.nik!
+            }
         }
         .onAppear(){
             var flags = SCNetworkReachabilityFlags()
             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
             if self.isNetworkReachability(with: flags) {
-                registerData.namaLengkapFromNik = nama_local ?? "-"
-                registerData.nik = user.last?.nik ?? "-"
-//            atmData.atmName = user.last?.namaLengkapFromNik ?? "-"
                 fetchAddressOption()
             } else {
                 self.isShowAlertInternetConnection = true
@@ -167,20 +163,6 @@ struct FormCompletionKartuATMView: View {
                 dismissButton: .default(Text("Oke"))
             )
         }
-//        .alert(isPresented: $isShowingAlert) {
-//            return Alert(
-//                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-//                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-//                    self.appState.moveToWelcomeView = true
-//                }),
-//                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
-//        }
-//        .gesture(DragGesture().onEnded({ value in
-//            if(value.startLocation.x < 20 &&
-//                value.translation.width > 100) {
-//                self.isShowingAlert = true
-//            }
-//        }))
     }
     
     var nameCard: some View {
@@ -681,7 +663,6 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressKelurahanInput = registerData.kelurahan
             atmData.atmAddressrtRwInput = registerData.rtrw
             atmData.addressEqualToDukcapil = false
-        //            currentAddress = Address(address: currentUser.companyAddress, city: currentUser.companyKecamatan, kodePos: currentUser.companyPostalCode, kecamatan: currentUser.companyKecamatan, kelurahan: currentUser.companyKelurahan, rtRw: "")
         default:
             self.kodePos = ""
             atmData.atmAddressInput = ""
@@ -690,18 +671,18 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressKelurahanInput = ""
             atmData.atmAddressrtRwInput = ""
             atmData.addressEqualToDukcapil = false
-        //            currentAddress = Address()
         }
     }
     
     func postData() {
         ///MARK : Complete data
-        let isVideoCall = UserDefaults.standard.string(forKey: "register_nasabah_video_call") ?? ""
+        var isVideoCall = UserDefaults.standard.string(forKey: "register_nasabah_video_call") ?? ""
         
         atmData.nik = registerData.nik
-        atmData.isNasabahMestika = is_register_nasabah == "true" ? true : false
-        atmData.isVcall = is_video_call == "true" ? true : false
+        atmData.isNasabahMestika = false
+        atmData.isVcall = isVideoCall == "true" ? true : false
         atmData.codeClass = ""
+        
         
         self.goToSuccessPage = true
         self.isLoading = true

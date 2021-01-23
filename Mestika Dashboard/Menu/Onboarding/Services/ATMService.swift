@@ -19,13 +19,13 @@ class ATMService {
             return completion(.failure(.badUrl))
         }
         
+        print("NIK \(dataRequest.nik)")
+        
         var dataParam: [String : Any] = [
-//            "atmAddressName": dataRequest.atmAddressName,
-//            "atmAddresspostalReferral": dataRequest.atmAddresspostalReferral,
             "nik": dataRequest.nik,
             "isNasabahMestika": dataRequest.isNasabahMestika,
             "isVcall": dataRequest.isVcall,
-            "codeClass": dataRequest.codeClass,
+            "codeClass": "02",
             "imageDesign": dataRequest.imageDesign,
             "atmName": dataRequest.atmName,
             "atmAddressInput": dataRequest.atmAddressInput,

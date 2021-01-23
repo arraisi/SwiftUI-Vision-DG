@@ -20,19 +20,14 @@ struct SuccessRegisterView: View {
     /* Variable for Swipe Gesture to Back */
     @GestureState private var dragOffset = CGSize.zero
     
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
     @State var schedule = [ScheduleInterviewViewModel]()
     @State var scheduleDates = [String]()
     @State var scheduleJamBasedOnDate = [String]()
     
-    @State private var nik_local = UserDefaults.standard.string(forKey: "nik_local_storage")
-    @State private var email_local = UserDefaults.standard.string(forKey: "email_local")
-    @State private var phone_local = UserDefaults.standard.string(forKey: "phone_local")
-    @State private var nama_local = UserDefaults.standard.string(forKey: "nama_local")
     @State private var routing_schedule = UserDefaults.standard.string(forKey: "routingSchedule")
-    @State private var status_register_nasabah = UserDefaults.standard.string(forKey: "register_nasabah")
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var appState: AppState
@@ -234,7 +229,7 @@ struct SuccessRegisterView: View {
                             
                             Button(action: {
                                 if pilihJam != "" {
-                                    if (status_register_nasabah == "true") {
+                                    if (self.user.last?.isNasabahMestika == true) {
                                         submitScheduleNasabahExisting()
                                     } else {
                                         submitSchedule()
@@ -325,10 +320,10 @@ struct SuccessRegisterView: View {
             getAllSchedule()
         }
         .onAppear {
-            self.registerData.nik = user.last?.nik ?? "-"
-            self.registerData.noTelepon = phone_local ?? "-"
-            self.registerData.email = email_local ?? "-"
-            self.registerData.namaLengkapFromNik = user.last?.namaLengkapFromNik ?? "-"
+            self.registerData.nik = self.user.last?.nik! ?? "-"
+            self.registerData.noTelepon = self.user.last?.noTelepon! ?? "-"
+            self.registerData.email = self.user.last?.email! ?? "-"
+            self.registerData.namaLengkapFromNik = self.user.last?.namaLengkapFromNik! ?? "-"
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -569,10 +564,11 @@ struct SuccessRegisterView: View {
                 
             }
             
-            if (routing_schedule == "true" || status_register_nasabah == "true") {
+            if (routing_schedule == "true" || self.user.last?.isNasabahMestika == true) {
                 Button(
                     action: {
-                        self.appState.moveToDashboard = true
+                        print("BACK")
+                        self.appState.moveToWelcomeView = true
                     },
                     label: {
                         Text("OK")
@@ -651,20 +647,15 @@ struct SuccessRegisterView: View {
         print("time start \(timeArr[0])")
         print("time end \(timeArr[1])")
         
-        let data = User(context: managedObjectContext)
-        data.jamInterviewStart = self.pilihJam
+        let data = ScheduleInterview(context: managedObjectContext)
+        data.jamInterview = self.pilihJam
         data.tanggalInterview = self.tanggalWawancara
-        data.nik = self.registerData.nik
         
         do {
             try self.managedObjectContext.save()
         } catch {
             print("Error saving managed object context: \(error)")
         }
-        
-        UserDefaults.standard.set(timeArr[0], forKey: "time_schedule_start")
-        UserDefaults.standard.set(timeArr[1], forKey: "time_schedule_end")
-        UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
         
         atmData.nik = registerData.nik
         atmData.isNasabahMestika = true
@@ -699,20 +690,15 @@ struct SuccessRegisterView: View {
         print("time start \(timeArr[0])")
         print("time end \(timeArr[1])")
         
-        let data = User(context: managedObjectContext)
-        data.jamInterviewStart = self.pilihJam
+        let data = ScheduleInterview(context: managedObjectContext)
+        data.jamInterview = self.pilihJam
         data.tanggalInterview = self.tanggalWawancara
-        data.nik = self.registerData.nik
         
         do {
             try self.managedObjectContext.save()
         } catch {
             print("Error saving managed object context: \(error)")
         }
-        
-        UserDefaults.standard.set(timeArr[0], forKey: "time_schedule_start")
-        UserDefaults.standard.set(timeArr[1], forKey: "time_schedule_end")
-        UserDefaults.standard.set(self.tanggalWawancara, forKey: "date_schedule_end")
         
         scheduleVM.submitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { success in
             
@@ -737,8 +723,7 @@ struct SuccessRegisterView: View {
     
     func cancelRegistration() {
         self.isLoading = true
-        
-        regVM.cancelRegistration(nik: nik_local ?? "", completion: { (success:Bool) in
+        regVM.cancelRegistration(nik: registerData.nik ?? "", completion: { (success:Bool) in
             
             if success {
                 self.isLoading = false
