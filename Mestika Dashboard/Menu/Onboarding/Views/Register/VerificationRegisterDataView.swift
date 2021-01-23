@@ -900,7 +900,7 @@ struct VerificationRegisterDataView: View {
         let data = User(context: managedObjectContext)
         data.nik = self.registerData.nik
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
-        data.registerFrom = self.appState.nasabahIsExisting ? "Existing" : "Non Existing"
+        data.isNasabahMestika = self.appState.nasabahIsExisting ? true : false
         
         do {
             try self.managedObjectContext.save()
