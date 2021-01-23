@@ -32,7 +32,7 @@ struct DetailsTypeSavingView: View {
                 .padding(.horizontal, 15)
                 .foregroundColor(Color(hex: "#5A6876"))
             
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: false) {
 
 //                ForEach(data.description, id: \.id) { card in
 //                    HStack(alignment: .top) {

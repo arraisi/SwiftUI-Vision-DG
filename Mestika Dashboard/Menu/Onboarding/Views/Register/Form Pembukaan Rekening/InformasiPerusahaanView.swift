@@ -319,6 +319,9 @@ struct InformasiPerusahaanView: View {
         if registerData.kecamatan == "" {
             return true
         }
+        if registerData.kelurahan == "" {
+            return true
+        }
         if noTlpPerusahaan.count < 10 {
             return true
         }

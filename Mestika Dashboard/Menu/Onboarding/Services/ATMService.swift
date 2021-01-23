@@ -20,8 +20,8 @@ class ATMService {
         }
         
         var dataParam: [String : Any] = [
-            "atmAddressName": dataRequest.atmAddressName,
-            "atmAddresspostalReferral": dataRequest.atmAddresspostalReferral,
+//            "atmAddressName": dataRequest.atmAddressName,
+//            "atmAddresspostalReferral": dataRequest.atmAddresspostalReferral,
             "nik": dataRequest.nik,
             "isNasabahMestika": dataRequest.isNasabahMestika,
             "isVcall": dataRequest.isVcall,
@@ -39,16 +39,20 @@ class ATMService {
             "addressEqualToDukcapil": dataRequest.addressEqualToDukcapil
         ]
         
-        // MARK : serialize model data
-        let finalBody = try! JSONEncoder().encode(dataRequest)
-        let jsonData = try! JSONSerialization.data(withJSONObject: dataParam, options: .prettyPrinted)
-        let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-        print(jsonString)
-        
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: dataParam, options: .prettyPrinted)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(.failure(.decodingError))
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             

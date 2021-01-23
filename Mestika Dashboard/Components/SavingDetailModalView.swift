@@ -6,49 +6,59 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct SavingDetailModalView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var atmData: AddProductATM
-    var data: SavingType
+    var data: JenisTabunganViewModel
     
     @Binding var isShowModalDetail: Bool
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
+            WebImage(url: data.image)
+                .onSuccess { image, data, cacheType in
+                    // Success
+                    // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
+                }
+                .placeholder {
+                    Rectangle().foregroundColor(.gray).opacity(0.5)
+                }
+                .resizable()
+                .indicator(.activity) // Activity Indicator
+                .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                .scaledToFit()
+                .frame(height: 200)
+                .padding()
+            
             Group {
-                Image(data.imageName)
-                    .resizable()
-                    .frame(height: 200)
-                
                 Text(NSLocalizedString("Produk Tabungan Mestika", comment: ""))
-                    .font(.title3)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
-                    .padding(.vertical, 15)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                ScrollView {
-
-                    ForEach(data.description, id: \.id) { card in
-                        HStack(alignment: .top) {
-                            Text(card.id)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .foregroundColor(Color(hex: "#232175"))
-                                .fontWeight(.bold)
-                                .frame(width: 25, height: 18)
-                            Text(card.desc)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                                .foregroundColor(Color(hex: "#5A6876"))
-                                .frame(minHeight: 18)
-                            Spacer()
-                        }
-                        .padding(.top, 1)
-                        .padding(.horizontal, 15)
-                    }
-                }
-                .frame(minHeight: 80, maxHeight: 200)
+                //                ScrollView(.vertical, showsIndicators: false) {
+                
+                //                    ForEach(data.description, id: \.id) { card in
+                //                        HStack(alignment: .top) {
+                //                            Text(card.id)
+                //                                .font(.custom("Montserrat-Regular", size: 12))
+                //                                .foregroundColor(Color(hex: "#232175"))
+                //                                .fontWeight(.bold)
+                //                                .frame(width: 25, height: 18)
+                //                            Text(card.desc)
+                //                                .font(.custom("Montserrat-Regular", size: 12))
+                //                                .foregroundColor(Color(hex: "#5A6876"))
+                //                                .frame(minHeight: 18)
+                //                            Spacer()
+                //                        }
+                //                        .padding(.top, 1)
+                //                        .padding(.horizontal, 15)
+                //                    }
+                //                }
+                //                .frame(minHeight: 80, maxHeight: 200)
             }
             
             Button(action: {
@@ -65,16 +75,16 @@ struct SavingDetailModalView: View {
             }
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
-            .padding(.horizontal, 15)
-            .padding(.vertical, 15)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 25)
+            
         }
-        .frame(width: UIScreen.main.bounds.width - 40)
     }
 }
 
 struct SavingDetailModalView_Previews: PreviewProvider {
     static var previews: some View {
-        SavingDetailModalView(data: SavingType(id: 1, tabunganName: "Tabungan Mestika Batik (TAMES BATIK)", rekeningNumber: "1234", imageName: "jt_tabungan_simpel", isShow: false, description: [SavingTypeDescription(id: "01", desc: "Test 1"),SavingTypeDescription(id: "02", desc: "Test 2")]), isShowModalDetail: Binding.constant(false)).environmentObject(RegistrasiModel())
+        SavingDetailModalView(data: JenisTabunganViewModel(id: "id", name: "Name", description: "description", type: "type", codePlan: "codeplan"), isShowModalDetail: Binding.constant(false)).environmentObject(RegistrasiModel())
             .environmentObject(AddProductATM())
     }
 }
