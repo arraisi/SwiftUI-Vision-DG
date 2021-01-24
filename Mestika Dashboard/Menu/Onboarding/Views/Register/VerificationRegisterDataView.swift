@@ -865,8 +865,9 @@ struct VerificationRegisterDataView: View {
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
-            .background(Color(hex: "#2334D0"))
+            .background(Color(hex: self.npwp.isEmpty ? "#CBD1D9" : "#2334D0"))
             .cornerRadius(12)
+            .disabled(self.npwp.isEmpty ? true : false)
         }
         .padding()
         .padding(.vertical, 25)

@@ -162,8 +162,9 @@ struct FormSumberPenyandandDana2View: View {
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
                                                 
                                             }
+                                            .disabled(isValid())
                                             .frame(height: 50)
-                                            .background(Color(hex: "#2334D0"))
+                                            .background(isValid() ? Color(.lightGray) : Color(hex: "#2334D0"))
                                             .cornerRadius(12)
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)

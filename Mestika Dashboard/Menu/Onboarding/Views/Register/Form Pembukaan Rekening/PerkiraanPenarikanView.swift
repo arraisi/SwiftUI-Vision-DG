@@ -143,8 +143,9 @@ struct PerkiraanPenarikanView: View {
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
                                                 
                                             }
+                                            .disabled(registerData.perkiraanPenarikanId == 0)
                                             .frame(height: 50)
-                                            .background(Color(hex: "#2334D0"))
+                                            .background(registerData.perkiraanPenarikanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
                                             .cornerRadius(12)
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
