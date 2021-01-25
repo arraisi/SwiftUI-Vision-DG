@@ -29,6 +29,7 @@ struct WelcomeView: View {
     @State var isRescheduleInterview: Bool = false
     @State var isFormPilihSchedule: Bool = false
     @State var isIncomingVideoCall: Bool = false
+    @State var isFormPilihScheduleAndATM: Bool = false
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -318,16 +319,25 @@ struct WelcomeView: View {
                 .isDetailLink(false)
                 
             } else  {
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCreateSchedule: .active).environmentObject(registerData)){
-                    Text("Halaman Submit Jadwal Videocall")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-                .isDetailLink(false)
+                Button(
+                    action: {
+                        self.isFormPilihScheduleAndATM = true
+                    }, label: {
+                        Text("Halaman Submit Jadwal Videocall")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                    }
+                )
                 .background(Color(hex: "#2334D0"))
                 .cornerRadius(12)
                 .padding(.bottom, 20)
+
+                NavigationLink(
+                    destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCreateSchedule: .active).environmentObject(registerData),
+                    isActive: self.$isFormPilihScheduleAndATM, label: {}
+                )
+                .isDetailLink(false)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -426,7 +436,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\((self.schedule.last?.tanggalInterview)!)")
+                    Text("\(self.schedule.last?.tanggalInterview ?? "")")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -445,7 +455,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\((self.schedule.last?.jamInterview)!)")
+                    Text("\(self.schedule.last?.jamInterview ?? "")")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -745,6 +755,7 @@ struct WelcomeView: View {
         self.isRescheduleInterview = false
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
+        self.isFormPilihScheduleAndATM = false
     }
     
     /* Function Check Network Reachability */
