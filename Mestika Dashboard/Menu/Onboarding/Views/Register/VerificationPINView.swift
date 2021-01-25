@@ -458,7 +458,7 @@ struct VerificationPINView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text(NSLocalizedString("Continue to Create an ATM", comment: ""))
+                Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
             }

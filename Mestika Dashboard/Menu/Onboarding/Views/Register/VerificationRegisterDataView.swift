@@ -552,11 +552,7 @@ struct VerificationRegisterDataView: View {
             
             if self.showingNpwpModal {
                 ZStack {
-                    ModalOverlay(tapAction: {
-                        withAnimation {
-                            self.showingNpwpModal = false
-                        }
-                    })
+                    ModalOverlay(tapAction: {})
                     .edgesIgnoringSafeArea(.all)
                     
                     popUpNpwp()

@@ -571,7 +571,7 @@ struct SuccessRegisterView: View {
                         self.appState.moveToWelcomeView = true
                     },
                     label: {
-                        Text("OK")
+                        Text("Kembali ke Halaman Utama")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
@@ -588,7 +588,7 @@ struct SuccessRegisterView: View {
                         self.showFormPilihJenisATM = true
                     },
                     label: {
-                        Text("OK")
+                        Text("Kembali ke Halaman Utama")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
