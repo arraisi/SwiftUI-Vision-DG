@@ -26,13 +26,19 @@ struct DetailsTypeSavingView: View {
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(NSLocalizedString("Keunggulan Tabungan :", comment: ""))
-                .font(.footnote)
-                .padding(.top, 10)
-                .padding(.horizontal, 15)
-                .foregroundColor(Color(hex: "#5A6876"))
+//            Text(NSLocalizedString("Keunggulan Tabungan :", comment: ""))
+//                .font(.footnote)
+//                .padding(.top, 10)
+//                .padding(.horizontal, 15)
+//                .foregroundColor(Color(hex: "#5A6876"))
             
             ScrollView(.vertical, showsIndicators: false) {
+                
+                Text(data.description)
+                    .font(.footnote)
+                    .padding(.top, 10)
+                    .padding(.horizontal, 15)
+                    .foregroundColor(Color(hex: "#5A6876"))
 
 //                ForEach(data.description, id: \.id) { card in
 //                    HStack(alignment: .top) {

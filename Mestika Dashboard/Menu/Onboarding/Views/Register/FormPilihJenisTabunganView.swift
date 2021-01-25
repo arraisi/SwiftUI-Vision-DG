@@ -111,7 +111,7 @@ struct FormPilihJenisTabunganView: View {
                     if self.cards.count > Int(self.count) {
                         DetailsTypeSavingView(data: self.cards[Int(self.count)], isShowModal: $showingModal, isShowModalDetail: $showingModalDetail)
                             .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                            .frame(width: UIScreen.main.bounds.width - 30)
+                            .frame(width: UIScreen.main.bounds.width - 50)
                             .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                             .padding(.bottom, 30)
                     }

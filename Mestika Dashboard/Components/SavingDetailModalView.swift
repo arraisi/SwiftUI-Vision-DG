@@ -39,26 +39,32 @@ struct SavingDetailModalView: View {
                     .foregroundColor(Color(hex: "#2334D0"))
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                //                ScrollView(.vertical, showsIndicators: false) {
-                
-                //                    ForEach(data.description, id: \.id) { card in
-                //                        HStack(alignment: .top) {
-                //                            Text(card.id)
-                //                                .font(.custom("Montserrat-Regular", size: 12))
-                //                                .foregroundColor(Color(hex: "#232175"))
-                //                                .fontWeight(.bold)
-                //                                .frame(width: 25, height: 18)
-                //                            Text(card.desc)
-                //                                .font(.custom("Montserrat-Regular", size: 12))
-                //                                .foregroundColor(Color(hex: "#5A6876"))
-                //                                .frame(minHeight: 18)
-                //                            Spacer()
-                //                        }
-                //                        .padding(.top, 1)
-                //                        .padding(.horizontal, 15)
-                //                    }
-                //                }
-                //                .frame(minHeight: 80, maxHeight: 200)
+                ScrollView(.vertical, showsIndicators: false) {
+                    
+                    Text(data.description)
+                        .font(.footnote)
+                        .padding(.top, 10)
+                        .padding(.horizontal, 15)
+                        .foregroundColor(Color(hex: "#5A6876"))
+                    
+                    //                    ForEach(data.description, id: \.id) { card in
+                    //                        HStack(alignment: .top) {
+                    //                            Text(card.id)
+                    //                                .font(.custom("Montserrat-Regular", size: 12))
+                    //                                .foregroundColor(Color(hex: "#232175"))
+                    //                                .fontWeight(.bold)
+                    //                                .frame(width: 25, height: 18)
+                    //                            Text(card.desc)
+                    //                                .font(.custom("Montserrat-Regular", size: 12))
+                    //                                .foregroundColor(Color(hex: "#5A6876"))
+                    //                                .frame(minHeight: 18)
+                    //                            Spacer()
+                    //                        }
+                    //                        .padding(.top, 1)
+                    //                        .padding(.horizontal, 15)
+                    //                    }
+                }
+                .frame(minHeight: 80, maxHeight: 200)
             }
             
             Button(action: {
