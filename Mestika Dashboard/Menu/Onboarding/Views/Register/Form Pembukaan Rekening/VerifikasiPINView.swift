@@ -182,15 +182,12 @@ struct VerifikasiPINView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-//        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-//            if(value.startLocation.x < 20 &&
-//                value.translation.width > 100) {
-//                self.presentationMode.wrappedValue.dismiss()
-//            }
-//        }))
-//        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-//            createBottomFloater()
-//        }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
         
     }
     
