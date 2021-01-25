@@ -16,6 +16,6 @@ class AppConstants {
     #elseif Release
     var BASE_URL = "http://eagle-dev.apps.visiondg.bankmestika.co.id/api/v1.0"
     #else
-    var BASE_URL = "http://eagle.visiondg.xyz:8765/api/v1.0"
+    var BASE_URL = "http://eagle-dev.apps.visiondg.bankmestika.co.id/api/v1.0"
     #endif
 }

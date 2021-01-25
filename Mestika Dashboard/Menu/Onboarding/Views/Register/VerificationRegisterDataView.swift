@@ -894,6 +894,11 @@ struct VerificationRegisterDataView: View {
         data.pekerjaanId = Int16(self.registerData.pekerjaanId)
         data.pekerjaan = self.registerData.pekerjaan
         
+        // Data ATM
+        data.atmOrRekening = self.registerData.atmOrRekening
+        data.noAtm = self.registerData.noAtm
+        data.noRekening = self.registerData.noRekening
+        
         // Data From NIK
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
         data.nomorKKFromNik = self.registerData.nomorKKFromNik

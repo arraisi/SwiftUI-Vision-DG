@@ -17,6 +17,11 @@ struct PhoneOTPRegisterNasabahView: View {
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    var productATMData = AddProductATM()
+    
+    /* Edit Mode */
+    @State var editModeForStatusCreated: EditMode = .inactive
+    
     /* HUD Variable */
     @State private var dim = true
     
@@ -148,12 +153,22 @@ struct PhoneOTPRegisterNasabahView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack {
-                        NavigationLink(
-                            destination: EmailRegisterNasabahView(shouldPopToRootView: self.$rootIsActive, shouldPopToRootView2: self.$root2IsActive).environmentObject(registerData),
-                            isActive: self.$isOtpValid) {
-                            EmptyView()
+                        
+                        if (editModeForStatusCreated == .active) {
+                            NavigationLink(
+                                destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData),
+                                isActive: self.$isOtpValid) {
+                                EmptyView()
+                            }
+                            .isDetailLink(false)
+                        } else {
+                            NavigationLink(
+                                destination: EmailRegisterNasabahView(shouldPopToRootView: self.$rootIsActive, shouldPopToRootView2: self.$root2IsActive).environmentObject(registerData),
+                                isActive: self.$isOtpValid) {
+                                EmptyView()
+                            }
+                            .isDetailLink(false)
                         }
-                        .isDetailLink(false)
                         
                         Button(action: {
                             var flags = SCNetworkReachabilityFlags()

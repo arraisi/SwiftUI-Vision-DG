@@ -245,10 +245,12 @@ struct VerificationPINView: View {
                             
                             if (self.isBtnValidationDisabled) {
                                 Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
+                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                             } else {
                                 Text("Berikutnya")
+                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                             }

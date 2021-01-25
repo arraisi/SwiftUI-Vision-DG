@@ -388,7 +388,7 @@ struct WelcomeView: View {
             .padding(.bottom, 20)
             
             NavigationLink(
-                destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData), isActive: self.$isFormPilihJenisAtmNasabah,
+                destination: PhoneOTPRegisterNasabahView(editModeForStatusCreated: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData).environmentObject(productATMData), isActive: self.$isFormPilihJenisAtmNasabah,
                 label: {})
                 .isDetailLink(false)
             
@@ -826,6 +826,11 @@ struct WelcomeView: View {
             self.registerData.email = data.email!
             self.registerData.pekerjaanId = Int(data.pekerjaanId)
             self.registerData.pekerjaan = data.pekerjaan!
+            
+            // Data ATM
+            self.registerData.atmOrRekening = data.atmOrRekening!
+            self.registerData.noAtm = data.noAtm!
+            self.registerData.noRekening = data.noRekening!
             
             // Data From NIK
             self.registerData.namaLengkapFromNik = data.namaLengkapFromNik!

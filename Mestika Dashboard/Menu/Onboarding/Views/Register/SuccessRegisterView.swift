@@ -588,7 +588,7 @@ struct SuccessRegisterView: View {
                         self.showFormPilihJenisATM = true
                     },
                     label: {
-                        Text("Kembali ke Halaman Utama")
+                        Text("Selanjutnya")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
