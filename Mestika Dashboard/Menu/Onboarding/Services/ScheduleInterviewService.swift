@@ -81,32 +81,38 @@ class ScheduleInterviewService {
     }
     
     // MARK:- API SUBMIT USER SCHEDULE NASABAH EXISTING
-    func submitScheduleInterviewNasabahExisting(atmData: AddProductATM, date: String, nik: String, endTime: String, startTime: String, completion: @escaping(Result<UserCheckResponse?, ErrorResult>) -> Void) {
+    func submitScheduleInterviewNasabahExisting(
+        atmData: AddProductATM,
+        date: String,
+        nik: String,
+        endTime: String,
+        startTime: String,
+        completion: @escaping(Result<Status, NetworkError>) -> Void) {
         
         let firebaseToken = Messaging.messaging().fcmToken
         
         let body: [String: Any] = [
             "schedule": [
                 "date": date,
-                "nik":  nik,
                 "fireBaseToken": firebaseToken!,
-                "app": "ios-mestika",
+                "nik": atmData.nik,
                 "timeEnd": endTime,
-                "timeStart": startTime
+                "timeStart": startTime,
+                "app": "ios-mestika"
             ],
             "atm": [
-                "atmAddressInput": atmData.atmAddressInput,
-                "atmAddressKelurahanInput": atmData.atmAddressKelurahanInput,
-                "atmAddressKecamatanInput": atmData.atmAddressKecamatanInput,
-                "atmAddressKotaInput": atmData.atmAddressKotaInput,
-                "atmAddressPropinsiInput": atmData.atmAddressPropinsiInput,
-                "atmAddressPostalCodeInput": atmData.atmAddressPostalCodeInput,
-                "atmAddressRtInput": atmData.atmAddressRtInput,
-                "atmAddressRwInput": atmData.atmAddressRwInput,
-                "atmName": atmData.atmName,
+                "atmAddressInput": "JL PROF DR LATUMETEN I GG.5/",
+                "atmAddressKelurahanInput": "KELURAHAn",
+                "atmAddressKecamatanInput": "KECAMATAN",
+                "atmAddressKotaInput": "KOTA",
+                "atmAddressPropinsiInput": "PROVINISI",
+                "atmAddressPostalCodeInput": "12345",
+                "atmAddressRtInput": "002",
+                "atmAddressRwInput": "003",
+                "atmName": "TEST",
                 "isNasabahMestika": true,
                 "codeClass": "02",
-                "imageDesign": atmData.imageDesign,
+                "imageDesign": "http://eagle.visiondg.xyz:8765/image/b5fb9a649b2c3670120343eb8dd85d03.png",
                 "addressEqualToDukcapil": false
             ]
         ]
@@ -115,7 +121,7 @@ class ScheduleInterviewService {
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
         guard let url = URL.urlSheduleInterviewNasabahExisting() else {
-            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            return completion(.failure(.badUrl))
         }
         
         var request = URLRequest(url)
@@ -125,26 +131,20 @@ class ScheduleInterviewService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
-            print("response: \(String(describing: response))")
-            
-            if error == nil {
-                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-                if let json = jsonData as? [String: Any] {
-                    print(json)
-                }
+            guard let data = data, error == nil else {
+                return completion(.failure(.noData))
             }
+            
+            let response = try? JSONDecoder().decode(Status.self, from: data)
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
-                
-                if (httpResponse.statusCode == 500) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
-                } else if (httpResponse.statusCode == 200) {
-                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data!)
-                    completion(.success(userResponse!))
-                } else {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
-                }
+            }
+            
+            if response == nil {
+                completion(.failure(.decodingError))
+            } else {
+                completion(.success(response!))
             }
             
         }.resume()

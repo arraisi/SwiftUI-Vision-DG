@@ -136,7 +136,13 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
     }
     
     // MARK:- SUBMIT SCHEDULE INTERVIEW NASABAH EXISTING
-    func submitScheduleNasabahExisting(atmData: AddProductATM, date: String, nik: String, endTime: String, startTime: String, completion: @escaping (Bool) -> Void) {
+    func submitScheduleNasabahExisting(
+        atmData: AddProductATM,
+        date: String,
+        nik: String,
+        endTime: String,
+        startTime: String,
+        completion: @escaping (Bool) -> Void) {
         ScheduleInterviewService.shared.submitScheduleInterviewNasabahExisting(atmData: atmData, date: date, nik: nik, endTime: endTime, startTime: startTime) { result in
             print(result)
             
@@ -145,8 +151,6 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
-                    self.code = schedule!.code!
-                    self.message = schedule!.message!
                 }
                 
                 completion(true)
@@ -157,14 +161,7 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
                 }
-                
-                switch error {
-                case .custom(code: 500):
-                    print("Internal Server Error")
-                    self.message = "Internal Server Error"
-                default:
-                    print("ERRROR")
-                }
+                self.message = "Internal Server Error"
                 completion(false)
             }
         }
