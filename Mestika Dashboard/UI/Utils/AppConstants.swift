@@ -18,4 +18,6 @@ class AppConstants {
     #else
     var BASE_URL = "http://eagle.visiondg.xyz:8765/api/v1.0"
     #endif
+    
+    var PUBLIC_KEY_RSA = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7l8gErdf9mYzocGvR0uiNUjQrx9hf8lbIAsFlL0fZXEgZ8Ba+ZXMhbXW4rTgnFZx8Bo6wIXIFoNjqn5eFGjLvtKn5LX+Ul9k4j85pgsW40n29HNG3MAf4gSd+gtRD5a/OxzF9GCmipOAPRFiitazLzAwme9A9J2i/SyIO+VlTVQIDAQAB"
 }

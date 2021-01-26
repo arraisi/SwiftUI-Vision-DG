@@ -78,11 +78,15 @@ PODS:
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
   - PromisesObjC (1.2.12)
+  - SwiftyRSA (1.6.0):
+    - SwiftyRSA/ObjC (= 1.6.0)
+  - SwiftyRSA/ObjC (1.6.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Messaging
   - JitsiMeetSDK (~> 2.11.0)
+  - SwiftyRSA
 
 SPEC REPOS:
   trunk:
@@ -99,6 +103,7 @@ SPEC REPOS:
     - JitsiMeetSDK
     - nanopb
     - PromisesObjC
+    - SwiftyRSA
 
 SPEC CHECKSUMS:
   Firebase: 26223c695fe322633274198cb19dca8cb7e54416
@@ -114,7 +119,8 @@ SPEC CHECKSUMS:
   JitsiMeetSDK: ddc915b751b0166aa4fdfee938bd60cc87aff9f3
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  SwiftyRSA: 3b9c9179744217951facc6a3e9ae8d8c97061ffa
 
-PODFILE CHECKSUM: ee655e2a5d291a853b276d631fbe6bcfc7fcda4e
+PODFILE CHECKSUM: 6fc10c170f4554951c01012b52b58fc4f1ffaa12
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.9.1

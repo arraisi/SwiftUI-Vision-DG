@@ -10,6 +10,7 @@ target 'Mestika Dashboard' do
   pod 'JitsiMeetSDK', '~> 2.11.0'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'SwiftyRSA'
 
   target 'Mestika DashboardTests' do
     inherit! :search_paths
