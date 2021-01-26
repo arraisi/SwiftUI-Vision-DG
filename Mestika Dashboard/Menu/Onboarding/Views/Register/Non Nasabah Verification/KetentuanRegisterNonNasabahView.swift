@@ -118,7 +118,7 @@ struct KetentuanRegisterNonNasabahView: View {
                         .cornerRadius(15)
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                         .padding(.top, 10)
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 40)
                     }
                 }
             }
