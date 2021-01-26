@@ -22,8 +22,8 @@ struct FirstPasswordLoginView: View {
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     
     /* CORE DATA */
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
     /* Boolean for Show Modal */
     @State var showingModal = false
@@ -218,18 +218,7 @@ struct FirstPasswordLoginView: View {
     }
     
     func checkPassword() {
-        if (deviceId == user.last?.deviceId && password == user.last?.password) {
-            
-            UserDefaults.standard.set("false", forKey: "isFirstLogin")
-            print("DATA READY")
-            nextRoute = true
-            
-        } else {
-            
-            print("NO DATA")
-            showingModal.toggle()
-            
-        }
+        
     }
     
     // MARK: -BOTTOM MESSAGE OTP IN CORRECT
