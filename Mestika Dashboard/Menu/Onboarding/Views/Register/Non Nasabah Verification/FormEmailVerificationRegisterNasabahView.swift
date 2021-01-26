@@ -77,7 +77,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                         self.registerData.email = self.email
                         UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
                     })
-                    .frame(height: 30)
+                    .frame(height: 20)
                     .font(.custom("Montserrat-Regular", size: 12))
                     .autocapitalization(.none)
                     .padding()
