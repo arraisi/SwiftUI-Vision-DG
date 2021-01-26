@@ -107,4 +107,14 @@ extension URL {
     static func urlGetSuggestionAddress() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/google-maps/address/geoloc-results")
     }
+    
+    //-------------------- AUTH SERVICE ----------------------//
+    
+    static func urlAuthRequestOTP() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/requestOtp")
+    }
+    
+    static func urlAuthValidationOTP() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/validateOtp")
+    }
 }

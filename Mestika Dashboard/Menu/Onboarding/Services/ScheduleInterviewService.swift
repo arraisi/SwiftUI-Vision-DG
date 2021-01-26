@@ -93,11 +93,11 @@ class ScheduleInterviewService {
         
         let body: [String: Any] = [
             "schedule": [
-                "date": date,
+                "date": "2020-12-11",
                 "fireBaseToken": firebaseToken!,
                 "nik": atmData.nik,
-                "timeEnd": endTime,
-                "timeStart": startTime,
+                "timeEnd": "09:00",
+                "timeStart": "08:00",
                 "app": "ios-mestika"
             ],
             "atm": [

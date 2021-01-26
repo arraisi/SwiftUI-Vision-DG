@@ -23,23 +23,26 @@ struct LoginScreen: View {
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     
     /* CORE DATA */
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
     /* Boolean for Show Modal */
     @State var showingModal = false
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             Image("bg_blue")
                 .resizable()
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
             VStack {
+                
+                AppBarLogo(light: false, onCancel: {})
+                
                 Text("LOGIN APPS")
                     .font(.title2)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.white)
+                    .padding(.top, 30)
                 
                 Text("Masukkan Password Akun Anda")
                     .font(.subheadline)
@@ -140,34 +143,35 @@ struct LoginScreen: View {
                 .padding(.bottom)
 
             }
-            .padding(.top, 60)
-            .navigationBarHidden(true)
             
             if self.showingModal {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
                     .edgesIgnoringSafeArea(.all)
             }
         }
+        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessage()
         }
     }
     
     func login() {
-        if (deviceId == user.last?.deviceId && passwordCtrl == user.last?.password) {
-            
-            print("DATA READY")
-            isActiveRoute = true
-            
-        } else {
-            
-            print("NO DATA")
-            showingModal.toggle()
-            
-        }
+//        if (deviceId == user.last?.deviceId && passwordCtrl == user.last?.password) {
+//
+//            print("DATA READY")
+//            isActiveRoute = true
+//
+//        } else {
+//
+//            print("NO DATA")
+//            showingModal.toggle()
+//
+//        }
     }
     
     // MARK: -Function Authentication
