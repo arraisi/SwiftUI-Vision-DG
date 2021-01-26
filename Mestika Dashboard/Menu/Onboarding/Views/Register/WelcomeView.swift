@@ -216,7 +216,7 @@ struct WelcomeView: View {
             }
             .alert(isPresented: $showingAlert) {
                 return Alert(
-                    title: Text("Message"),
+                    title: Text(NSLocalizedString("Message", comment: "")),
                     message: Text(self.alertMessage),
                     dismissButton: .default(Text("Oke")))
             }
@@ -282,13 +282,13 @@ struct WelcomeView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("INFORMASI SUBMIT JADWAL VIDEOCALL")
+            Text(NSLocalizedString("INFORMASI SUBMIT JADWAL VIDEOCALL", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Anda belum melakukan submit jadwal Videocall")
+            Text(NSLocalizedString("Anda belum melakukan submit jadwal Videocall", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -301,7 +301,7 @@ struct WelcomeView: View {
                         self.isFormPilihSchedule = true
                     },
                     label: {
-                        Text("Halaman Submit Jadwal Videocall")
+                        Text(NSLocalizedString("Halaman Submit Jadwal Videocall", comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, maxHeight: 50)
@@ -323,7 +323,7 @@ struct WelcomeView: View {
                     action: {
                         self.isFormPilihScheduleAndATM = true
                     }, label: {
-                        Text("Halaman Submit Jadwal Videocall")
+                        Text(NSLocalizedString("Halaman Submit Jadwal Videocall", comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, maxHeight: 50)
@@ -356,13 +356,13 @@ struct WelcomeView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("INFORMASI SUBMIT PRODUK ATM")
+            Text(NSLocalizedString("INFORMASI SUBMIT PRODUK ATM", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Anda belum melakukan submit produk dan desain ATM")
+            Text(NSLocalizedString("Anda belum melakukan submit produk dan desain ATM", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -377,7 +377,7 @@ struct WelcomeView: View {
                     }
                 },
                 label: {
-                    Text("Halaman Submit Produk ATM")
+                    Text(NSLocalizedString("Halaman Submit Produk ATM", comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -411,13 +411,13 @@ struct WelcomeView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("Mohon Tunggu")
+            Text(NSLocalizedString("Mohon Tunggu", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :")
+            Text(NSLocalizedString("Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -425,7 +425,7 @@ struct WelcomeView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Tanggal")
+                    Text(NSLocalizedString("Tanggal", comment: ""))
                         .frame(width: 100, alignment: .leading)
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -444,7 +444,7 @@ struct WelcomeView: View {
                 }
                 
                 HStack {
-                    Text("Jam")
+                    Text(NSLocalizedString("Jam", comment: ""))
                         .frame(width: 100, alignment: .leading)
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -465,7 +465,7 @@ struct WelcomeView: View {
             }
             
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
-                Text("Reschedule Jadwal")
+                Text(NSLocalizedString("Reschedule Jadwal", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -475,7 +475,7 @@ struct WelcomeView: View {
             .padding(.bottom, 5)
             
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
-                Text("Batalkan Permohonan")
+                Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -508,13 +508,13 @@ struct WelcomeView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("Persetujuan sedang dalam proses")
+            Text(NSLocalizedString("Persetujuan sedang dalam proses", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Persetujuan sedang dalam proses. Hasil akan dikirimkan melalui SMS atau email")
+            Text(NSLocalizedString("Persetujuan sedang dalam proses. Hasil akan dikirimkan melalui SMS atau email", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -524,7 +524,7 @@ struct WelcomeView: View {
             Button(action:{
                 self.isShowModal = false
             }, label: {
-                Text("Saya Tunggu")
+                Text(NSLocalizedString("Saya Tunggu", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -534,7 +534,7 @@ struct WelcomeView: View {
             .padding(.bottom, 5)
             
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
-                Text("Batalkan Permohonan")
+                Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -559,13 +559,13 @@ struct WelcomeView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("PEMBUKAAN REKENING DISETUJUI")
+            Text(NSLocalizedString("PEMBUKAAN REKENING DISETUJUI", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Selamat pembukaan rekening baru Anda telah disetujui")
+            Text(NSLocalizedString("Selamat pembukaan rekening baru Anda telah disetujui", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -575,7 +575,7 @@ struct WelcomeView: View {
             Button(action:{
                 self.isShowModal = false
             }, label: {
-                Text("Kembali ke halaman utama")
+                Text(NSLocalizedString("Kembali ke halaman utama", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -600,13 +600,13 @@ struct WelcomeView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("PEMBUKAAN REKENING TELAH DITOLAK")
+            Text(NSLocalizedString("PEMBUKAAN REKENING TELAH DITOLAK", comment: ""))
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Maaf, pembukaan rekening online Anda telah ditolak")
+            Text(NSLocalizedString("Maaf, pembukaan rekening online Anda telah ditolak", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -617,7 +617,7 @@ struct WelcomeView: View {
                     UserDefaults.standard.set("reset", forKey: "reset_register")
                 },
                 label: {
-                    Text("Kembali ke halaman utama")
+                    Text(NSLocalizedString("Kembali ke halaman utama", comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -669,7 +669,7 @@ struct WelcomeView: View {
                     self.isShowAlertInternetConnection = true
                 }
             }) {
-                Text("Tidak, saya bukan")
+                Text(NSLocalizedString("Tidak, saya bukan", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -693,7 +693,7 @@ struct WelcomeView: View {
                     self.isShowAlertInternetConnection = true
                 }
             }) {
-                Text("Ya, saya nasabah Bank Mestika")
+                Text(NSLocalizedString("Ya, saya nasabah Bank Mestika", comment: ""))
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -716,7 +716,7 @@ struct WelcomeView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("Please check your internet connection")
+            Text(NSLocalizedString("Please check your internet connection", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)

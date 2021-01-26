@@ -115,7 +115,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                                 self.isShowAlertInternetConnection = true
                             }
                         }) {
-                            Text("Resend OTP")
+                            Text(NSLocalizedString("Resend OTP", comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }

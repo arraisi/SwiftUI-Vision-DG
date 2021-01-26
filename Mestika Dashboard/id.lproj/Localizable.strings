@@ -12,13 +12,46 @@
 "Login" = "MASUK";
 "Before Starting..!!" = "Sebelum Memulai..!!";
 "Are you a customer of Bank Mestika?" = "Apakah Anda Merupakan Nasabah Bank Mestika?";
+"Message" = "Pesan";
+"INFORMASI SUBMIT JADWAL VIDEOCALL" = "";
+"Anda belum melakukan submit jadwal Videocall" = "";
+"Halaman Submit Jadwal Videocall" = "";
+"INFORMASI SUBMIT PRODUK ATM" = "";
+"Anda belum melakukan submit produk dan desain ATM" = "";
+"Halaman Submit Produk ATM" = "";
+"Mohon Tunggu" = "";
+"Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :" = "";
+"Tanggal" = "";
+"Jam" = "";
+"Reschedule Jadwal" = "";
+"Batalkan Permohonan" = "";
+"Persetujuan sedang dalam proses" = "";
+"Persetujuan sedang dalam proses. Hasil akan dikirimkan melalui SMS atau email" = "";
+"Saya Tunggu" = "";
+"Batalkan Permohonan" = "";
+"PEMBUKAAN REKENING DISETUJUI" = "";
+"Selamat pembukaan rekening baru Anda telah disetujui" = "";
+"Kembali ke halaman utama" = "";
+"PEMBUKAAN REKENING TELAH DITOLAK" = "";
+"Maaf, pembukaan rekening online Anda telah ditolak" = "";
+"Kembali ke halaman utama" = "";
+"Tidak, saya bukan" = "";
+"Ya, saya nasabah Bank Mestika" = "";
+"Please check your internet connection" = "";
+
 
 /*
  KetentuanRegisterNonNasabahView
  */
+"Silahkan scroll kebawah" = "";
 "Sebelum Memulai..!!" = "";
 "Lanjut Membuat Rekening" = "";
 "Batal Mendaftar" = "";
+"Apakah ingin membatalkan registrasi ?" = "";
+"YA" = "";
+"TIDAK" = "";
+"Tidak" = "";
+
 /*
  FormPhoneVerificationRegisterNasabahView
  */
@@ -26,14 +59,19 @@
 "Silahkan masukkan No. Telepon Anda" = "";
 "No. Telepon" = "";
 "Verifikasi No. Telepon" = "";
+"Mohon Periksa Nomor Handphone Anda" = "";
+"Kembali" = "";
+
 /*
  FormOTPVerificationRegisterNasabahView
  */
 "Kami telah mengirimkan OTP ke no." = "";
 "Silahkan masukkan kode OTP dengan REF #" = "";
+"Silahkan masukkan kode OTP dengan \nREF #" = "";
 "Tidak Menerima Kode?" = "";
 "Resend OTP" = "Resend OTP";
 "Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP" = "";
+"Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP" = "";
 "Verifikasi OTP" = "";
 "Kode OTP Salah" = "";
 "Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
@@ -41,6 +79,9 @@
 "Kode OTP Salah" = "";
 "Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
 "Kembali ke Halaman Utama" = "";
+"Please check your internet connection" = "";
+"Gagal membatalkan permohonan. Silakan coba beberapa saat lagi." = "";
+
 /*
  FormEmailVerificationRegisterNasabahView
  */
@@ -49,11 +90,14 @@
 "Masukkan alamat email anda" = "";
 "*Email harus lebih dari 8 karakter" = "";
 "Verifikasi Email" = "";
+
 /*
  FormEmailOTPVerificationRegisterNasabahView
  */
 "Kami telah mengirimkan Kode Verifikasi ke" = "";
 "Silahkan masukkan kode OTP dengan REF #" = "";
+"Silahkan masukkan kode OTP dengan \nREF #" = "";
+"Resend OTP" = "";
 "Tidak Menerima Kode?" = "";
 "Silahkan cek email Anda untuk melihat kode OTP" = "";
 "Verifikasi OTP" = "";
