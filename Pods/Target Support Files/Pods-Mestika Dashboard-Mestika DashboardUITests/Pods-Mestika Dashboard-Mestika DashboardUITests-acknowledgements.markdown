@@ -209,7 +209,7 @@ This application makes use of the following third party libraries:
 
 ## FirebaseAnalytics
 
-Copyright 2020 Google
+Copyright 2021 Google
 
 ## FirebaseCore
 
@@ -1243,7 +1243,7 @@ Copyright 2020 Google
 
 ## GoogleAppMeasurement
 
-Copyright 2020 Google
+Copyright 2021 Google
 
 ## GoogleDataTransport
 
