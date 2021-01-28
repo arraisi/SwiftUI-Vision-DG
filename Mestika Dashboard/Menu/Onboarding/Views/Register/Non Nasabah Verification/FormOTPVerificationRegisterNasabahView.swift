@@ -173,7 +173,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         .isDetailLink(false)
                         
                         NavigationLink(
-                            destination: SuccessRegisterView().environmentObject(registerData).environmentObject(atmData),
+                            destination: RescheduleRegisterView().environmentObject(registerData).environmentObject(atmData),
                             isActive: self.$routingReschedule,
                             label: {}
                         )

@@ -49,6 +49,11 @@ struct FirstOTPLoginView: View {
     
     /* Route */
     @State private var isRootToPasswordLogin = false
+    @State var isKetentuanViewActive: Bool = false
+    @State var isNoAtmOrRekViewActive: Bool = false
+    
+    @State var isShowModalUserNotRegister = false
+    @State var isShowModalSelectionRegister = false
     
     /* Disabled Form */
     var disableForm: Bool {
@@ -90,7 +95,7 @@ struct FirstOTPLoginView: View {
                 .padding(.top, 30)
             }
             
-            if self.isShowModal {
+            if self.isShowModal || self.isShowModalSelectionRegister || self.isShowModalUserNotRegister {
                 ModalOverlay(tapAction: { withAnimation { } })
             }
             
@@ -135,6 +140,9 @@ struct FirstOTPLoginView: View {
         }))
         .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMenu()
+        }
+        .popup(isPresented: $isShowModalSelectionRegister, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            ScreeningNasabahModal()
         }
     }
     
@@ -368,6 +376,127 @@ struct FirstOTPLoginView: View {
         .cornerRadius(20)
     }
     
+    // MARK: - POPUP SELECTOR REGISTER NASABAH
+    func ScreeningNasabahModal() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_bells")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+            
+            Text(NSLocalizedString("Before Starting..!!", comment: ""))
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 20)
+            
+            Text(NSLocalizedString("Are you a customer of Bank Mestika?", comment: ""))
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            NavigationLink(
+                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(loginData),
+                isActive: self.$isKetentuanViewActive) {
+                EmptyView()
+            }
+            
+            Button(action: {
+                self.appState.nasabahIsExisting = false
+                self.isKetentuanViewActive = true
+            }) {
+                Text("Tidak, saya bukan")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 2)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            NavigationLink(
+                destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(loginData).environmentObject(appState),
+                isActive: self.$isNoAtmOrRekViewActive) {
+                EmptyView()
+            }
+            
+            Button(action: {
+                self.appState.nasabahIsExisting = true
+                self.isNoAtmOrRekViewActive = true
+            }) {
+                Text("Ya, saya nasabah Bank Mestika")
+                    .foregroundColor(.black)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 30)
+            .cornerRadius(12)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: - POPUP SELECTOR REGISTER NASABAH
+    func ScreeningUserNotRegister() -> some View {
+        VStack(alignment: .leading) {
+            
+            Text("Anda belum terdaftar rekening online")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color.red)
+                .padding(.bottom, 20)
+                .padding(.top, 20)
+            
+            Text("Apakah anda ingin mendaftarkan aplikasi Digital Banking")
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            NavigationLink(
+                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(loginData),
+                isActive: self.$isKetentuanViewActive) {
+                EmptyView()
+            }
+            
+            Button(action: {
+                self.appState.nasabahIsExisting = false
+                self.isKetentuanViewActive = true
+            }) {
+                Text("Tidak, saya bukan")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 2)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            NavigationLink(
+                destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(loginData).environmentObject(appState),
+                isActive: self.$isNoAtmOrRekViewActive) {
+                EmptyView()
+            }
+            
+            Button(action: {
+                self.appState.nasabahIsExisting = true
+                self.isNoAtmOrRekViewActive = true
+            }) {
+                Text("Ya, saya nasabah Bank Mestika")
+                    .foregroundColor(.black)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 30)
+            .cornerRadius(12)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     func popupMenu() -> some View {
         switch modalSelection {
         case "OTPINCORRECT":
@@ -396,6 +525,8 @@ struct FirstOTPLoginView: View {
                 self.isLoading = false
                 self.timeRemainingRsnd = 0
                 print("ERROR")
+                
+                self.isShowModalSelectionRegister = true
             }
         }
     }

@@ -18,10 +18,8 @@ struct WelcomeView: View {
     
     @EnvironmentObject var appState: AppState
     
-    // Route Variables
+    // Route Variable Register
     @State var isKetentuanViewActive: Bool = false
-    @State var isLoginViewActive: Bool = false
-    @State var isFirstLoginViewActive: Bool = false
     @State var isActiveRootLogin: Bool = false
     @State var isNoAtmOrRekViewActive: Bool = false
     @State var isFormPilihJenisAtm: Bool = false
@@ -30,6 +28,10 @@ struct WelcomeView: View {
     @State var isFormPilihSchedule: Bool = false
     @State var isIncomingVideoCall: Bool = false
     @State var isFormPilihScheduleAndATM: Bool = false
+    
+    // Route Variable Login
+    @State var isLoginViewActive: Bool = false
+    @State var isFirstLoginViewActive: Bool = false
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -118,7 +120,8 @@ struct WelcomeView: View {
                             var flags = SCNetworkReachabilityFlags()
                             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                             if self.isNetworkReachability(with: flags) {
-                                self.isLoginViewActive = true
+//                                self.isLoginViewActive = true
+                                self.getUserStatusForLogin(deviceId: deviceId!)
                             } else {
                                 self.isShowAlertInternetConnection = true
                             }
@@ -130,7 +133,19 @@ struct WelcomeView: View {
                         }
                         .disabled(isLoading)
                         
-                        NavigationLink(destination: FirstOTPLoginView().environmentObject(registerData), isActive: self.$isLoginViewActive, label: {})
+                        NavigationLink(
+                            destination: FirstOTPLoginView().environmentObject(registerData),
+                            isActive: self.$isLoginViewActive,
+                            label: {}
+                        )
+                        .isDetailLink(false)
+                        .disabled(isLoading)
+                        
+                        NavigationLink(
+                            destination: FirstLoginView().environmentObject(registerData),
+                            isActive: self.$isFirstLoginViewActive,
+                            label: {}
+                        )
                         .isDetailLink(false)
                         .disabled(isLoading)
                     }
@@ -166,16 +181,16 @@ struct WelcomeView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
                 print("RECEIVED SCHEDULE")
-//                self.appState.moveToWelcomeView = true
                 if let dateInfo = obj.userInfo, let info = dateInfo["dateInterview"] {
-                    print(info)
-                    dateInterview = info as! String
-                }
-                
-                if let timeInfo = obj.userInfo, let info = timeInfo["timeInterview"] {
-                    print(info)
-                    timeInterview = info as! String
-                }
+                                  print(info)
+                                  dateInterview = info as! String
+                              }
+                              
+                              if let timeInfo = obj.userInfo, let info = timeInfo["timeInterview"] {
+                                  print(info)
+                                  timeInterview = info as! String
+                              }
+
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Detail"))) { obj in
                 print("RECEIVED JITSI START")
@@ -436,7 +451,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\(self.schedule.last?.tanggalInterview ?? "")")
+                    Text("\(dateInterview == "-" ? (schedule.last?.tanggalInterview as? String) ?? "" : dateInterview)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -455,7 +470,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\(self.schedule.last?.jamInterview ?? "")")
+                    Text("\(timeInterview == "-" ? (schedule.last?.jamInterview ?? "") : timeInterview)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -814,6 +829,30 @@ struct WelcomeView: View {
             if !success {
                 self.modalSelection = "DEFAULT"
                 self.isShowModal = true
+            }
+        }
+    }
+    
+    /* Function GET USER Status For Login */
+    func getUserStatusForLogin(deviceId: String) {
+        print("GET USER STATUS")
+        print("DEVICE ID : \(deviceId)")
+        
+        self.userVM.userCheck(deviceId: deviceId) { success in
+            
+            if success {
+                print("CODE STATUS : \(self.userVM.code)")
+                print("MESSAGE STATUS : \(self.userVM.message)")
+                
+                if userVM.message != "ACTIVE" {
+                    self.isFirstLoginViewActive = true
+                } else {
+                    self.isActiveRootLogin = true
+                }
+            }
+            
+            if !success {
+                self.isFirstLoginViewActive = true
             }
         }
     }
