@@ -135,6 +135,41 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
         }
     }
     
+    // MARK:- RESUBMIT SCHEDULE INTERVIEW NON NASABAH
+    func reSubmitSchedule(date: String, nik: String, endTime: String, startTime: String, completion: @escaping (Bool) -> Void) {
+        ScheduleInterviewService.shared.submitReScheduleInterview(date: date, nik: nik, endTime: endTime, startTime: startTime) { result in
+            print(result)
+            
+            switch result {
+            case .success(let schedule):
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                    self.code = schedule!.code!
+                    self.message = schedule!.message!
+                }
+                
+                completion(true)
+
+            case .failure(let error):
+                print("ERROR-->")
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    print("Internal Server Error")
+                    self.message = "Internal Server Error"
+                default:
+                    print("ERRROR")
+                }
+                completion(false)
+            }
+        }
+    }
+    
     // MARK:- SUBMIT SCHEDULE INTERVIEW NASABAH EXISTING
     func submitScheduleNasabahExisting(
         atmData: AddProductATM,

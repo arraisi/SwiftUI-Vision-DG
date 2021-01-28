@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftyRSA
 
 struct VerifikasiPINView: View {
     @EnvironmentObject var registerData: RegistrasiModel
@@ -123,7 +124,7 @@ struct VerifikasiPINView: View {
                                     showingModal.toggle()
                                     
                                 } else if (isPINValidated(with: pin)) {
-                                    
+                                    encryptPassword(password: pin)
                                     activeRoute = true
                                     
                                 } else if (!isPINValidated(with: pin)) {
@@ -133,6 +134,7 @@ struct VerifikasiPINView: View {
                                 }
                                 
                                 if (pin == self.registerData.pin) {
+                                    encryptPassword(password: pin)
                                     activeRoute = true
                                 }
                                 
@@ -299,6 +301,19 @@ struct VerifikasiPINView: View {
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    func encryptPassword(password: String) {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: password, using: .utf8)
+        
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        let data = encrypted.data
+        let base64String = encrypted.base64String
+        
+        print("Encript : \(base64String)")
+        
+        self.registerData.pin = base64String
     }
 }
 

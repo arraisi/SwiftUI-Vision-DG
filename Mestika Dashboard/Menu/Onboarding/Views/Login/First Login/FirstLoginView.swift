@@ -10,7 +10,7 @@ import SwiftUI
 struct FirstLoginView: View {
     
     /* Environtment Object */
-    @EnvironmentObject var loginData: LoginBindingModel
+    @EnvironmentObject var loginData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
     @State private var nextRoute: Bool = false
@@ -18,10 +18,6 @@ struct FirstLoginView: View {
     
     /* GET DEVICE ID */
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
-    
-    /* CORE DATA */
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
     
     /* Boolean for Show Modal */
     @State var showingModal = false
@@ -38,6 +34,8 @@ struct FirstLoginView: View {
             
             VStack {
                 
+                AppBarLogo(light: false, onCancel: {})
+                
                 VStack {
                     Text("LOGIN APPS")
                         .font(.title3)
@@ -53,7 +51,7 @@ struct FirstLoginView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 30)
-                .padding(.top, 100)
+                .padding(.top, 30)
             }
             
             if self.showingModal {
@@ -61,7 +59,8 @@ struct FirstLoginView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -90,7 +89,7 @@ struct FirstLoginView: View {
                 TextField("No. Telepon", text: $phoneNumber, onEditingChanged: { changed in
                     print("\($phoneNumber)")
                     
-                    self.loginData.noTelepon = "0" + phoneNumber
+                    self.loginData.noTelepon = phoneNumber
                 })
                 .onReceive(phoneNumber.publisher.collect()) {
                     if String($0).hasPrefix("0") {
@@ -146,22 +145,7 @@ struct FirstLoginView: View {
     }
     
     func checkPhoneNumber() {
-        print(deviceId)
-        print(user.last?.phone)
-        
-        var phone = "0" + phoneNumber
-        
-        if (deviceId == user.last?.deviceId && phone == user.last?.phone) {
-            
-            print("DATA READY")
-            nextRoute = true
-            
-        } else {
-            
-            print("NO DATA")
-            showingModal.toggle()
-            
-        }
+        self.nextRoute = true
     }
     
     // MARK:- POPUP MESSAGE

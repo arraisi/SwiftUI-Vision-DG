@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftyRSA
 
 struct PasswordView: View {
     
@@ -129,7 +130,7 @@ struct PasswordView: View {
                                                 TextField("Masukkan Password", text: $password, onEditingChanged: { changed in
                                                     print("\($password)")
                                                     
-                                                    self.registerData.password = password
+//                                                    self.registerData.password = password
                                                 })
                                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                                 .padding()
@@ -350,6 +351,7 @@ struct PasswordView: View {
                 case "R100":
                     self.activeRoute = true
                 case "200":
+                    encryptPassword(password: password)
                     self.activeRoute = true
                 default:
                     self.modalErrorMessage = self.passwordVM.message
@@ -361,6 +363,19 @@ struct PasswordView: View {
                 print(self.passwordVM.message)
             }
         }
+    }
+    
+    func encryptPassword(password: String) {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: password, using: .utf8)
+        
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        let data = encrypted.data
+        let base64String = encrypted.base64String
+        
+        print("Encript : \(base64String)")
+        
+        self.registerData.password = base64String
     }
 }
 

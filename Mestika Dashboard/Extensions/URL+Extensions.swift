@@ -110,6 +110,10 @@ extension URL {
     
     //-------------------- AUTH SERVICE ----------------------//
     
+    static func urlAuthLogin() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/login")
+    }
+    
     static func urlAuthRequestOTP() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/auth/requestOtp")
     }
