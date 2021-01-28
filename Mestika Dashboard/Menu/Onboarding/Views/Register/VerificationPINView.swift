@@ -127,11 +127,13 @@ struct VerificationPINView: View {
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
                                         .onReceive(pin.publisher.collect()) {
-                                            if String($0).hasPrefix("0") {
-                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
-                                            } else {
+//                                            if String($0).hasPrefix("0") {
+//                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
+//                                            } else {
+//                                                self.pin = String($0.prefix(6))
+//                                            }
+                                            
                                                 self.pin = String($0.prefix(6))
-                                            }
                                         }
                                     
                                     Spacer()
@@ -164,11 +166,13 @@ struct VerificationPINView: View {
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
                                         .onReceive(pin.publisher.collect()) {
-                                            if String($0).hasPrefix("0") {
-                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
-                                            } else {
-                                                self.pin = String($0.prefix(6))
-                                            }
+//                                            if String($0).hasPrefix("0") {
+//                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
+//                                            } else {
+//                                                self.pin = String($0.prefix(6))
+//                                            }
+                                            
+                                            self.pin = String($0.prefix(6))
                                         }
                                     
                                     Spacer()
