@@ -127,13 +127,13 @@ struct VerificationPINView: View {
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
                                         .onReceive(pin.publisher.collect()) {
-//                                            if String($0).hasPrefix("0") {
-//                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
-//                                            } else {
-//                                                self.pin = String($0.prefix(6))
-//                                            }
+                                            //                                            if String($0).hasPrefix("0") {
+                                            //                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
+                                            //                                            } else {
+                                            //                                                self.pin = String($0.prefix(6))
+                                            //                                            }
                                             
-                                                self.pin = String($0.prefix(6))
+                                            self.pin = String($0.prefix(6))
                                         }
                                     
                                     Spacer()
@@ -166,11 +166,11 @@ struct VerificationPINView: View {
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
                                         .onReceive(pin.publisher.collect()) {
-//                                            if String($0).hasPrefix("0") {
-//                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
-//                                            } else {
-//                                                self.pin = String($0.prefix(6))
-//                                            }
+                                            //                                            if String($0).hasPrefix("0") {
+                                            //                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
+                                            //                                            } else {
+                                            //                                                self.pin = String($0.prefix(6))
+                                            //                                            }
                                             
                                             self.pin = String($0.prefix(6))
                                         }
@@ -237,6 +237,10 @@ struct VerificationPINView: View {
                             .isDetailLink(false)
                         
                         Button(action: {
+                            
+                            UIApplication.shared.endEditing()
+                            self.isBtnValidationDisabled = true
+                            
                             self.tryCount += 1
                             if self.shouldVerificationWithVC {
                                 UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
@@ -247,17 +251,22 @@ struct VerificationPINView: View {
                             }
                         }) {
                             
-                            if (self.isBtnValidationDisabled) {
-                                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
-                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                            } else {
-                                Text("Berikutnya")
-                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                            }
+                            //                            if (self.isBtnValidationDisabled) {
+                            //                                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
+                            //                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                            //                                    .foregroundColor(.white)
+                            //                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                            //                            } else {
+                            //                                Text("Berikutnya")
+                            //                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                            //                                    .foregroundColor(.white)
+                            //                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                            //                            }
+                            
+                            Text("Berikutnya")
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
                         }
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         .background(Color(hex: disableButton() ? "#CBD1D9" : "#2334D0"))
@@ -283,32 +292,34 @@ struct VerificationPINView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .onReceive(timer) { time in
-            if self.timeRemainingRsnd > 0 {
-                self.timeRemainingRsnd -= 1
-            }
-            
-            if self.timeRemainingRsnd < 1 {
-                isResendPinDisabled = false
-            } else {
-                isResendPinDisabled = true
-            }
-            
-            if self.timeRemainingBtn > 0 {
-                self.timeRemainingBtn -= 1
-            }
-            
-            if self.timeRemainingBtn < 1 {
-                isBtnValidationDisabled = false
-            }
-        }
+        //        .onReceive(timer) { time in
+        //            if self.timeRemainingRsnd > 0 {
+        //                self.timeRemainingRsnd -= 1
+        //            }
+        //
+        //            if self.timeRemainingRsnd < 1 {
+        //                isResendPinDisabled = false
+        //            } else {
+        //                isResendPinDisabled = true
+        //            }
+        //
+        //            if self.timeRemainingBtn > 0 {
+        //                self.timeRemainingBtn -= 1
+        //            }
+        //
+        //            if self.timeRemainingBtn < 1 {
+        //                isBtnValidationDisabled = false
+        //            }
+        //        }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
         }
     }
     
     func disableButton() -> Bool {
-        if self.shouldVerificationWithVC || !disableForm {
+        if !disableForm {
+            return false
+        } else if self.shouldVerificationWithVC {
             return false
         } else {
             return true
@@ -318,7 +329,7 @@ struct VerificationPINView: View {
     func validatePIN() {
         
         if pin == dummyPin {
-//            self.nextToPilihJenisAtm = true
+            //            self.nextToPilihJenisAtm = true
             self.noAtmAndPinIsWrong = false
             self.showingModal.toggle()
         } else {
@@ -372,8 +383,8 @@ struct VerificationPINView: View {
                 self.isLoading = false
                 self.noAtmAndPinIsWrong = true
                 self.showingModal.toggle()
-//                self.isBtnValidationDisabled = true
-//                resetField()
+                //                self.isBtnValidationDisabled = true
+                //                resetField()
             }
             
         }
