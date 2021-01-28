@@ -69,7 +69,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                 WebView(readed: self.$readed, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                                 
                                 if showingBadge {
-                                    BadgeView(text: "Silahkan scroll kebawah")
+                                    BadgeView(text: NSLocalizedString("Silahkan scroll kebawah", comment: ""))
                                         .animation(.easeIn)
                                         .onAppear{
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -135,7 +135,7 @@ struct KetentuanRegisterNonNasabahView: View {
                 primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

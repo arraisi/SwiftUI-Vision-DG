@@ -49,6 +49,10 @@ struct VerificationRegisterDataView: View {
     
     @State private var npwp = ""
     
+    var disableSaveNpwpBtn: Bool {
+        self.npwp.count < 15
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             Color(hex: "#232175")
@@ -553,7 +557,7 @@ struct VerificationRegisterDataView: View {
             if self.showingNpwpModal {
                 ZStack {
                     ModalOverlay(tapAction: {})
-                    .edgesIgnoringSafeArea(.all)
+                        .edgesIgnoringSafeArea(.all)
                     
                     popUpNpwp()
                 }
@@ -861,9 +865,9 @@ struct VerificationRegisterDataView: View {
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
-            .background(Color(hex: self.npwp.isEmpty ? "#CBD1D9" : "#2334D0"))
+            .background(Color(hex: disableSaveNpwpBtn ? "#CBD1D9" : "#2334D0"))
             .cornerRadius(12)
-            .disabled(self.npwp.isEmpty ? true : false)
+            .disabled(disableSaveNpwpBtn)
         }
         .padding()
         .padding(.vertical, 25)

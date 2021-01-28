@@ -138,7 +138,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                 primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
