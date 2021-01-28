@@ -41,7 +41,11 @@ class AddressService {
                 
                 if (httpResponse.statusCode == 200) {
                     let addressResponse = try? JSONDecoder().decode([AddressSugestionResultResponse].self, from: data!)
-                    completion(.success(addressResponse!))
+                    if let address = addressResponse {
+                        completion(.success(address))
+                        print("Succsess")
+                        print(address[0].formatted_address)
+                    }
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
