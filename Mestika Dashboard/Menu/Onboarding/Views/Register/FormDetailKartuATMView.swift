@@ -119,17 +119,29 @@ struct FormDetailKartuATMView: View {
                             .background(Color(hex: "#2334D0"))
                             .cornerRadius(12)
                         } else {
-                            Button(action: {
-                                self.appState.moveToWelcomeView = true
-                            }) {
-                                Text(NSLocalizedString("KEMBALI KE HALAMAN UTAMA", comment: ""))
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                            }
+                            NavigationLink(
+                                destination: SuccessRegisterView().environmentObject(registerData).environmentObject(atmData),
+                                label: {
+                                    Text(NSLocalizedString("SELANJUTNYA", comment: ""))
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .foregroundColor(.white)
+                                        .frame(maxWidth: .infinity)
+                                }
+                            )
                             .frame(height: 50)
                             .background(Color(hex: "#2334D0"))
                             .cornerRadius(12)
+//                            Button(action: {
+//                                self.appState.moveToWelcomeView = true
+//                            }) {
+//                                Text(NSLocalizedString("SELANJUTNYA", comment: ""))
+//                                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                                    .foregroundColor(.white)
+//                                    .frame(maxWidth: .infinity)
+//                            }
+//                            .frame(height: 50)
+//                            .background(Color(hex: "#2334D0"))
+//                            .cornerRadius(12)
                         }
                     }
                     .padding(.horizontal, 30)

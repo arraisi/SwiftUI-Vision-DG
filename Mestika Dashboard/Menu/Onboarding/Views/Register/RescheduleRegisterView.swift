@@ -658,7 +658,7 @@ struct RescheduleRegisterView: View {
         }
         
         atmData.nik = registerData.nik
-        atmData.isNasabahMestika = true
+        atmData.isNasabahMestika = registerData.isNasabahmestika
         atmData.codeClass = ""
         
         scheduleVM.submitScheduleNasabahExisting(atmData: atmData, date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { (success) in
