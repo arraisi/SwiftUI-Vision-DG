@@ -10,6 +10,8 @@ import SwiftUI
 import NavigationStack
 
 struct LoginScreen: View {
+    /* Data Binding */
+    @ObservedObject private var authVM = AuthViewModel()
     
     @EnvironmentObject var appState: AppState
     
@@ -172,6 +174,19 @@ struct LoginScreen: View {
 //            showingModal.toggle()
 //
 //        }
+        
+        authVM.postLogin(password: self.passwordCtrl, phoneNumber: "", fingerCode: "") { success in
+            
+            if success {
+                print("LOGIN SUCCESS")
+                self.isActiveRoute = true
+            }
+            
+            if !success {
+                print("LOGIN FAILED")
+                
+            }
+        }
     }
     
     // MARK: -Function Authentication
