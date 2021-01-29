@@ -13,6 +13,10 @@ struct FirstLoginView: View {
     @EnvironmentObject var loginData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
+    // Backstage
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
+    
     @State private var nextRoute: Bool = false
     @State var phoneNumber: String = ""
     
@@ -67,6 +71,20 @@ struct FirstLoginView: View {
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessage()
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
     }
     
     var cardForm: some View {
@@ -139,6 +157,7 @@ struct FirstLoginView: View {
                 isActive: self.$nextRoute,
                 label: {}
             )
+            .isDetailLink(false)
             
         }
         .frame(width: UIScreen.main.bounds.width - 30)

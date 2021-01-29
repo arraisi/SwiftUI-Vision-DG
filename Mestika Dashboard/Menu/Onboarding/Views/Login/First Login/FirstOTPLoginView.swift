@@ -144,6 +144,9 @@ struct FirstOTPLoginView: View {
         .popup(isPresented: $isShowModalSelectionRegister, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ScreeningNasabahModal()
         }
+        .popup(isPresented: $isShowModalUserNotRegister, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            ScreeningUserNotRegister()
+        }
     }
     
     var cardForm: some View {
@@ -402,7 +405,6 @@ struct FirstOTPLoginView: View {
             }
             
             Button(action: {
-                self.appState.nasabahIsExisting = false
                 self.isKetentuanViewActive = true
             }) {
                 Text("Tidak, saya bukan")
@@ -421,7 +423,6 @@ struct FirstOTPLoginView: View {
             }
             
             Button(action: {
-                self.appState.nasabahIsExisting = true
                 self.isNoAtmOrRekViewActive = true
             }) {
                 Text("Ya, saya nasabah Bank Mestika")
@@ -461,10 +462,10 @@ struct FirstOTPLoginView: View {
             }
             
             Button(action: {
-                self.appState.nasabahIsExisting = false
-                self.isKetentuanViewActive = true
+                self.isShowModalUserNotRegister = false
+                self.isShowModalSelectionRegister = true
             }) {
-                Text("Tidak, saya bukan")
+                Text("YA")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -480,10 +481,9 @@ struct FirstOTPLoginView: View {
             }
             
             Button(action: {
-                self.appState.nasabahIsExisting = true
-                self.isNoAtmOrRekViewActive = true
+                self.appState.moveToDashboard = true
             }) {
-                Text("Ya, saya nasabah Bank Mestika")
+                Text("Tidak")
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -526,7 +526,7 @@ struct FirstOTPLoginView: View {
                 self.timeRemainingRsnd = 0
                 print("ERROR")
                 
-                self.isShowModalSelectionRegister = true
+                self.isShowModalUserNotRegister = true
             }
         }
     }

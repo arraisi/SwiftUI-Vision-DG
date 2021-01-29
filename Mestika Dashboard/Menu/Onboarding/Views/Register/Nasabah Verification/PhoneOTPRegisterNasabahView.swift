@@ -444,9 +444,8 @@ struct PhoneOTPRegisterNasabahView: View {
     func getOTP() {
         self.otpVM.otpRequestAccOrRek(
             otpRequest: OtpRequest(
-                destination: self.registerData.atmOrRekening == "ATM" ? self.registerData.noAtm : self.registerData
-                    .noRekening,
-                type: self.registerData.atmOrRekening == "ATM" ? "atm" : "rek",
+                destination: self.registerData.accNo,
+                type: "rek",
                 trytime: self.tryCountResend
             )
         ) { success in
@@ -504,9 +503,8 @@ struct PhoneOTPRegisterNasabahView: View {
             reference: referenceCode,
             timeCounter: self.timeRemainingBtn,
             tryCount: tryCount,
-            type: self.registerData.atmOrRekening == "ATM" ? "atm" : "rek",
-            accValue: self.registerData.atmOrRekening == "ATM" ? self.registerData.noAtm : self.registerData
-                .noRekening)
+            type: "rek",
+            accValue: self.registerData.accNo)
         { success in
             
             if success {

@@ -108,12 +108,12 @@ struct VerificationPINView: View {
                         .onReceive(noKartuCtrl.publisher.collect()) {
                             self.noKartuCtrl = String($0.prefix(16))
                         }
-                        .onAppear{
-                            if (self.registerData.accType == "ATM" || self.registerData.atmOrRekening == "ATM") {
-                                self.noKartuCtrl = self.registerData.accNo
-                                self.noKartuCtrl = self.registerData.noAtm
-                            }
-                        }
+//                        .onAppear{
+//                            if (self.registerData.accType == "ATM" || self.registerData.atmOrRekening == "ATM") {
+//                                self.noKartuCtrl = self.registerData.accNo
+//                                self.noKartuCtrl = self.registerData.noAtm
+//                            }
+//                        }
                         
                         if (secured) {
                             
@@ -243,10 +243,10 @@ struct VerificationPINView: View {
                             
                             self.tryCount += 1
                             if self.shouldVerificationWithVC {
-                                UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
+//                                UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
                                 self.nextToFormVideoCall = true
                             } else {
-                                UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
+//                                UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
                                 validatePINBackEnd()
                             }
                         }) {

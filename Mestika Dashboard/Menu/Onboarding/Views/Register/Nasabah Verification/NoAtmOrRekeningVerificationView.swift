@@ -24,6 +24,9 @@ struct NoAtmOrRekeningVerificationView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var registerData: RegistrasiModel
     
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
+    
     @State var jenisKartuCtrl: String = ""
     @State var noKartuCtrl: String = ""
     
@@ -98,19 +101,7 @@ struct NoAtmOrRekeningVerificationView: View {
                     .padding(.vertical, 5)
                     
                     TextField(NSLocalizedString("Masukkan no kartu", comment: ""), text: $noKartuCtrl, onEditingChanged: { changed in
-                        if (jenisKartuCtrl == "Kartu ATM") {
-                            self.registerData.atmOrRekening = "ATM"
-                            self.registerData.noAtm = self.noKartuCtrl
-                            
-                            self.registerData.accType = "ATM"
-                            self.registerData.accNo = self.noKartuCtrl
-                        } else {
-                            self.registerData.atmOrRekening = "REKENING"
-                            self.registerData.noRekening = self.noKartuCtrl
-                            
-                            self.registerData.accType = "REKENING"
-                            self.registerData.accNo = self.noKartuCtrl
-                        }
+                        self.registerData.accNo = self.noKartuCtrl
                     })
                     .font(.custom("Montserrat-Regular", size: 12))
                     .keyboardType(.numberPad)
@@ -165,8 +156,23 @@ struct NoAtmOrRekeningVerificationView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        //        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
         .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
+        }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                print(value.translation)
+                self.showingAlert = true
+            }
+        }))
         .onAppear{
             var flags = SCNetworkReachabilityFlags()
             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
@@ -179,9 +185,9 @@ struct NoAtmOrRekeningVerificationView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            PopupNoInternetConnection()
-        }
+//        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+//            PopupNoInternetConnection()
+//        }
     }
     
     func PopupNoInternetConnection() -> some View {

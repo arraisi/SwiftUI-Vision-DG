@@ -28,7 +28,7 @@ class OtpService {
         
         let body: [String: Any] = [
             "code": code,
-            "destination":  destination,
+            "destination": destination.trimmingCharacters(in: .whitespacesAndNewlines),
             "reference": reference,
             "timeCounter": timeCounter,
             "tryCount": tryCount,

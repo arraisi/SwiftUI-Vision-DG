@@ -91,13 +91,18 @@ class ScheduleInterviewService {
         
         let firebaseToken = Messaging.messaging().fcmToken
         
+        print(date)
+        print(firebaseToken)
+        print(atmData.nik)
+        print(endTime)
+        
         let body: [String: Any] = [
             "schedule": [
-                "date": "2020-12-11",
+                "date": date, // Kadang Jadi KYC_SCHEDULED
                 "fireBaseToken": firebaseToken!,
                 "nik": atmData.nik,
-                "timeEnd": "09:00",
-                "timeStart": "08:00",
+                "timeEnd": endTime.trimmingCharacters(in: .whitespaces),
+                "timeStart": startTime.trimmingCharacters(in: .whitespaces),
                 "app": "ios-mestika"
             ],
             "atm": [
@@ -109,16 +114,13 @@ class ScheduleInterviewService {
                 "atmAddressPostalCodeInput": "12345",
                 "atmAddressRtInput": "002",
                 "atmAddressRwInput": "003",
-                "atmName": "TEST",
+                "atmName": atmData.atmName,
                 "isNasabahMestika": true,
                 "codeClass": "02",
                 "imageDesign": "http://eagle.visiondg.xyz:8765/image/b5fb9a649b2c3670120343eb8dd85d03.png",
                 "addressEqualToDukcapil": false
             ]
         ]
-        
-        print("body => \(body)")
-        let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
         guard let url = URL.urlSheduleInterviewNasabahExisting() else {
             return completion(.failure(.badUrl))
@@ -127,7 +129,17 @@ class ScheduleInterviewService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: body)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(.failure(.decodingError))
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
