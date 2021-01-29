@@ -90,11 +90,12 @@ struct FormCompletionKartuATMView: View {
                         
                         Button(action: {
                             self.atmData.atmAddressPostalCodeInput = self.kodePos
-                            if (self.user.last?.isNasabahMestika == true) {
-                                self.goToSuccessPage = true
-                            } else {
-                                self.postData()
-                            }
+//                            if (self.user.last?.isNasabahMestika == true) {
+//                                self.goToSuccessPage = true
+//                            } else {
+//                                self.postData()
+//                            }
+                            self.goToSuccessPage = true
                         }, label: {
                             Text(NSLocalizedString("Submit Data", comment: ""))
                                 .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))

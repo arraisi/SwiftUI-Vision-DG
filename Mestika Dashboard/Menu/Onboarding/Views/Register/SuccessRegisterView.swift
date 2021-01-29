@@ -229,11 +229,12 @@ struct SuccessRegisterView: View {
                             
                             Button(action: {
                                 if pilihJam != "" {
-                                    if (self.user.last?.isNasabahMestika == true) {
-                                        submitScheduleNasabahExisting()
-                                    } else {
-                                        submitSchedule()
-                                    }
+//                                    if (self.user.last?.isNasabahMestika == true) {
+//                                        submitScheduleNasabahExisting()
+//                                    } else {
+//                                        submitSchedule()
+//                                    }
+                                    submitScheduleNasabahExisting()
                                 } else {
                                     self.isShowAlertInternetConnection = true
                                 }
@@ -586,10 +587,10 @@ struct SuccessRegisterView: View {
                 Button(
                     action: {
                         print(registerData.homeRoute)
-                        self.showFormPilihJenisATM = true
+                        self.appState.moveToWelcomeView = true
                     },
                     label: {
-                        Text("Selanjutnya")
+                        Text("Kembali ke Halaman Utama")
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))

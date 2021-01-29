@@ -949,7 +949,8 @@ struct VerificationRegisterDataView: View {
                 if self.appState.nasabahIsExisting {
                     self.nextRouteNasabah = true
                 } else {
-                    self.nextRouteNonNasabah = true
+                    self.nextRouteNasabah = true
+//                    self.nextRouteNonNasabah = true
                 }
             }
             
