@@ -9,6 +9,7 @@ class UserRegistrationViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var code: String = ""
     @Published var message: String = ""
+    @Published var phoneNumber: String = ""
     @Published var user: UserCheckResponse?
 }
 
@@ -89,6 +90,9 @@ extension UserRegistrationViewModel {
                     self.code = response.code ?? ""
 //                    self.code = "R05"
                     self.message = response.message ?? ""
+                    if let phone = response.phoneNumber {
+                        self.phoneNumber = phone
+                    }
                     self.user = response
                     
                     completion(true)

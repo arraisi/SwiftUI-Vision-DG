@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftyRSA
 
 class AuthViewModel: ObservableObject {
     @Published var isLoading: Bool = true
@@ -32,17 +33,17 @@ extension AuthViewModel {
             self.isLoading = true
         }
         
-        AuthService.shared.login(password: password, phoneNumber: phoneNumber, fingerCode: fingerCode) { result in
+        AuthService.shared.login(password: encryptPassword(password: password), phoneNumber: phoneNumber, fingerCode: fingerCode) { result in
             switch result {
             case .success(let response):
                 print("Success")
                 self.isLoading = false
-                self.nik = response.nik ?? ""
-                self.password = response.password ?? ""
-                self.phoneNumber = response.phoneNumber ?? ""
-                self.pinTransaction = response.pinTransaction ?? ""
-                self.status = response.status ?? ""
-                self.fingerprintFlag = response.fingerprintFlag ?? false
+                self.nik = response.nik
+                self.password = response.password
+                self.phoneNumber = response.phoneNumber
+                self.pinTransaction = response.pinTransaction
+                self.status = response.status
+                self.fingerprintFlag = response.fingerprintFlag
                 
                 completion(true)
                 
@@ -62,5 +63,19 @@ extension AuthViewModel {
             }
         }
         
+    }
+    
+    func encryptPassword(password: String) -> String {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: password, using: .utf8)
+        
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        let data = encrypted.data
+        let base64String = encrypted.base64String
+        
+        print("Encript : \(base64String)")
+        
+        return base64String
+//        self.registerData.password = base64String
     }
 }

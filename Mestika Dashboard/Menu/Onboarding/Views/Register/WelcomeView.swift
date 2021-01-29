@@ -32,6 +32,7 @@ struct WelcomeView: View {
     // Route Variable Login
     @State var isLoginViewActive: Bool = false
     @State var isFirstLoginViewActive: Bool = false
+    @State var isFirstOTPLoginViewActive: Bool = false
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -144,6 +145,14 @@ struct WelcomeView: View {
                         NavigationLink(
                             destination: FirstLoginView().environmentObject(registerData),
                             isActive: self.$isFirstLoginViewActive,
+                            label: {}
+                        )
+                        .isDetailLink(false)
+                        .disabled(isLoading)
+                        
+                        NavigationLink(
+                            destination: FirstOTPLoginView().environmentObject(registerData),
+                            isActive: self.$isFirstOTPLoginViewActive,
                             label: {}
                         )
                         .isDetailLink(false)
@@ -764,6 +773,7 @@ struct WelcomeView: View {
         self.isKetentuanViewActive = false
         self.isLoginViewActive = false
         self.isFirstLoginViewActive = false
+        self.isFirstOTPLoginViewActive = false
         self.isNoAtmOrRekViewActive = false
         self.isFormPilihJenisAtm = false
         self.isFormPilihJenisAtmNasabah = false
@@ -844,11 +854,27 @@ struct WelcomeView: View {
                 print("CODE STATUS : \(self.userVM.code)")
                 print("MESSAGE STATUS : \(self.userVM.message)")
                 
-                if userVM.message != "ACTIVE" {
+                switch userVM.message {
+                case "ACTIVE":
+                        self.isLoginViewActive = true
+                case "LOGGED_IN":
+                    registerData.noTelepon = self.userVM.phoneNumber
+                    self.isFirstOTPLoginViewActive = true
+                case "LOGGED_OUT":
+                    registerData.noTelepon = self.userVM.phoneNumber
+                    self.isFirstOTPLoginViewActive = true
+                default:
                     self.isFirstLoginViewActive = true
-                } else {
-                    self.isActiveRootLogin = true
                 }
+                
+//                if userVM.message == "ACTIVE" {
+//                    self.isLoginViewActive = true
+//                } else if (userVM.message == "LOGGED_IN" || userVM.message == "LOGGED_OUT") {
+//                    self.isFirstOTPLoginViewActive = true
+//                } else {
+//                    self.isFirstLoginViewActive = true
+////                    self.isActiveRootLogin = true
+//                }
             }
             
             if !success {

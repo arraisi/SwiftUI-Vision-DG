@@ -17,13 +17,23 @@ class AuthService {
         phoneNumber: String,
         fingerCode: String,
         completion: @escaping(Result<LoginCredentialResponse, ErrorResult>) -> Void) {
+        // Body
+        let body: [String: Any] = [
+            "pwd": password
+        ]
         
-        guard let url = URL.urlCitizen() else {
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        guard let url = URL.urlAuthLogin() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         var request = URLRequest(url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
