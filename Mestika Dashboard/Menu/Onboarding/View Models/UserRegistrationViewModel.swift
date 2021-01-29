@@ -79,7 +79,7 @@ extension UserRegistrationViewModel {
         UserRegistrationService.shared.getUser(deviceId: deviceId) { result in
             switch result {
             case .success(let response):
-                print(response.code)
+                print(response.code as Any)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false

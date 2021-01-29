@@ -114,6 +114,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/auth/login")
     }
     
+    static func urlAuthLogout() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/logout")
+    }
+    
     static func urlAuthRequestOTP() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/auth/requestOtp")
     }

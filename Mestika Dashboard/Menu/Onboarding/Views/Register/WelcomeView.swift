@@ -33,6 +33,7 @@ struct WelcomeView: View {
     @State var isLoginViewActive: Bool = false
     @State var isFirstLoginViewActive: Bool = false
     @State var isFirstOTPLoginViewActive: Bool = false
+    @State var isDashboardViewActive: Bool = false
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -157,6 +158,15 @@ struct WelcomeView: View {
                         )
                         .isDetailLink(false)
                         .disabled(isLoading)
+                        
+                        NavigationLink(
+                            destination: BottomNavigationView(),
+                            isActive: self.$isDashboardViewActive,
+                            label: {}
+                        )
+                        .isDetailLink(false)
+                        .disabled(isLoading)
+                        
                     }
                     .padding(.horizontal, 20)
                     
@@ -774,6 +784,7 @@ struct WelcomeView: View {
         self.isLoginViewActive = false
         self.isFirstLoginViewActive = false
         self.isFirstOTPLoginViewActive = false
+        self.isDashboardViewActive = false
         self.isNoAtmOrRekViewActive = false
         self.isFormPilihJenisAtm = false
         self.isFormPilihJenisAtmNasabah = false
@@ -858,9 +869,9 @@ struct WelcomeView: View {
                 case "ACTIVE":
                         self.isLoginViewActive = true
                 case "LOGGED_IN":
-                    registerData.noTelepon = self.userVM.phoneNumber
-                    self.isFirstOTPLoginViewActive = true
+                    self.isDashboardViewActive = true
                 case "LOGGED_OUT":
+                    print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
                     registerData.noTelepon = self.userVM.phoneNumber
                     self.isFirstOTPLoginViewActive = true
                 default:

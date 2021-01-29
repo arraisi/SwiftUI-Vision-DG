@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PopoverSettingsView: View {
     
+    @EnvironmentObject var appState: AppState
+    /* Data Binding */
+    @ObservedObject private var authVM = AuthViewModel()
     @State private var isFingerprint = false
     
     @State private var textHeight: Double = 20
@@ -108,12 +111,16 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     Button(action: {
-                        
+                        self.authVM.postLogout { success in
+                            if success {
+                                self.appState.moveToWelcomeView = true
+                            }
+                        }
                     }, label: {
                         Text("Sign Out")
                             .fontWeight(.light)
-                            .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
+                            .frame(height: CGFloat(self.textHeight))
                     })
                     .padding(.leading)
                     
@@ -135,6 +142,6 @@ struct PopoverSettingsView: View {
 
 struct PopoverSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopoverSettingsView()
+        PopoverSettingsView().environmentObject(AppState())
     }
 }
