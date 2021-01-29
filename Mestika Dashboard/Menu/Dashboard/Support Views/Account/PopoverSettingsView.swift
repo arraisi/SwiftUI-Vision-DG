@@ -107,7 +107,9 @@ struct PopoverSettingsView: View {
                 .padding(.vertical)
                 
                 HStack {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        
+                    }, label: {
                         Text("Sign Out")
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
