@@ -520,15 +520,27 @@ struct WelcomeView: View {
                 .padding(.bottom, 5)
             }
             
-            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
-                Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
-                    .foregroundColor(Color(hex: "#2334D0"))
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
+            if (self.registerData.isNasabahmestika == true) {
+                NavigationLink(destination: PhoneOTPRegisterNasabahView(editModeForCancel: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData)){
+                    Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .background(Color.white)
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+            } else {
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
+                    Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .background(Color.white)
+                .cornerRadius(12)
+                .padding(.bottom, 20)
             }
-            .background(Color.white)
-            .cornerRadius(12)
-            .padding(.bottom, 20)
             
             NavigationLink(
                 destination: SuccessRegisterView().environmentObject(registerData),
@@ -579,14 +591,26 @@ struct WelcomeView: View {
             .cornerRadius(12)
             .padding(.bottom, 5)
             
-            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
-                Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
-                    .foregroundColor(.black)
-                    .font(.custom("Montserrat-SemiBold", size: 13))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
+            
+            if (registerData.isNasabahmestika == true) {
+                NavigationLink(destination: PhoneOTPRegisterNasabahView(editModeForCancel: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData)){
+                    Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
+                        .foregroundColor(.black)
+                        .font(.custom("Montserrat-SemiBold", size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .padding(.bottom, 20)
+                .cornerRadius(12)
+            } else {
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
+                    Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
+                        .foregroundColor(.black)
+                        .font(.custom("Montserrat-SemiBold", size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .padding(.bottom, 20)
+                .cornerRadius(12)
             }
-            .padding(.bottom, 20)
-            .cornerRadius(12)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)

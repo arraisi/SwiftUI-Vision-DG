@@ -27,10 +27,6 @@ struct KetentuanRegisterNonNasabahView: View {
     @State var showingAlert: Bool = false
     @State var showingBadge: Bool = true
     
-    @GestureState private var dragOffset = CGSize.zero
-    
-    var isAllowBack: Bool = true
-    
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {

@@ -18,13 +18,17 @@ struct PhoneOTPRegisterNasabahView: View {
     @EnvironmentObject var appState: AppState
     
     var productATMData = AddProductATM()
+    @ObservedObject var userVM = UserRegistrationViewModel()
     
     /* Edit Mode */
     @State var editModeForStatusCreated: EditMode = .inactive
     @State var editModeForStatusKycWaiting: EditMode = .inactive
+    @State var editModeForCancel: EditMode = .inactive
     
     /* HUD Variable */
     @State private var dim = true
+    
+    @State var isCancelViewActive: Bool = false
     
     /* Variable PIN OTP */
     var maxDigits: Int = 6
@@ -154,6 +158,13 @@ struct PhoneOTPRegisterNasabahView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack {
+                        
+                        NavigationLink(
+                            destination: SuccessCancelView(),
+                            isActive: self.$isCancelViewActive,
+                            label: {}
+                        )
+                        .isDetailLink(false)
                         
                         if (editModeForStatusCreated == .active) {
                             NavigationLink(
@@ -517,8 +528,13 @@ struct PhoneOTPRegisterNasabahView: View {
             
             if success {
                 print("OTP VALID")
-                self.isOtpValid = true
-                self.isLoading = false
+                
+                if (editModeForCancel == .active) {
+                    cancelRegistration()
+                } else {
+                    self.isOtpValid = true
+                    self.isLoading = false
+                }
             }
             
             if !success {
@@ -528,31 +544,6 @@ struct PhoneOTPRegisterNasabahView: View {
                 self.timeRemainingBtn = self.otpVM.timeRemaining
                 self.modalSelection = "OTPINCORRECT"
                 self.isShowModal.toggle()
-                
-//                if (self.tryCount == 1) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount == 2) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount == 3) {
-//                    self.timeRemainingBtn = 0
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
-//
-//                if (self.tryCount > 3) {
-//                    self.tryCountResendDisable += 1
-//                    self.timeRemainingBtn = max(30, (tryCountResendDisable) * 30)
-//                    self.modalSelection = "OTPINCORRECT"
-//                    self.isShowModal.toggle()
-//                }
                 
                 self.isBtnValidationDisabled = true
                 resetField()
@@ -610,6 +601,30 @@ struct PhoneOTPRegisterNasabahView: View {
     
     private func resetField() {
         self.pin = "" /// return to empty pin
+    }
+    
+    func cancelRegistration() {
+        self.isLoading = true
+        
+        self.userVM.cancelRegistration(nik: registerData.nik, completion: { (success:Bool) in
+
+            if success {
+                self.isLoading = false
+                self.modalSelection = ""
+
+                let domain = Bundle.main.bundleIdentifier!
+                UserDefaults.standard.removePersistentDomain(forName: domain)
+                UserDefaults.standard.synchronize()
+
+                self.isCancelViewActive = true
+
+            } else {
+                self.isLoading = false
+
+                self.messageResponse = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+                self.isShowAlert.toggle()
+            }
+        })
     }
 }
 

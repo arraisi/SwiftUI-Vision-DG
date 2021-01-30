@@ -24,15 +24,16 @@ struct NoAtmOrRekeningVerificationView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var registerData: RegistrasiModel
     
-    @State var showingAlert: Bool = false
-    @GestureState private var dragOffset = CGSize.zero
-    
     @State var jenisKartuCtrl: String = ""
     @State var noKartuCtrl: String = ""
     
     /* Root Binding */
     @State var isActive : Bool = false
     @Binding var rootIsActive : Bool
+    
+    /* Backstage */
+    @State var showingAlert: Bool = false
+    @GestureState private var dragOffset = CGSize.zero
     
     @State var isShowAlertInternetConnection = false
     private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
@@ -52,9 +53,8 @@ struct NoAtmOrRekeningVerificationView: View {
             }
             
             VStack {
-                AppBarLogo(light: false) {
-                    
-                }
+                
+                AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
                     Text(NSLocalizedString("No. Kartu ATM atau Rekening", comment: ""))
@@ -172,6 +172,12 @@ struct NoAtmOrRekeningVerificationView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            self.registerData.isNasabahmestika = true
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
@@ -180,28 +186,12 @@ struct NoAtmOrRekeningVerificationView: View {
                 }),
                 secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
         }
-        .gesture(DragGesture().onEnded({ value in
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
-                print(value.translation)
                 self.showingAlert = true
             }
         }))
-        .onAppear{
-            var flags = SCNetworkReachabilityFlags()
-            SCNetworkReachabilityGetFlags(self.reachability!, &flags)
-            if self.isNetworkReachability(with: flags) {
-                self.registerData.isNasabahmestika = true
-            } else {
-                self.isShowAlertInternetConnection = true
-            }
-        }
-        .onTapGesture() {
-            UIApplication.shared.endEditing()
-        }
-        //        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-        //            PopupNoInternetConnection()
-        //        }
     }
     
     func PopupNoInternetConnection() -> some View {
