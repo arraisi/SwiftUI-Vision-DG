@@ -9,9 +9,15 @@ import SwiftUI
 
 struct FormInputAtmForgotPasswordScreen: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State private var atmNumberCtrl = ""
     @State private var pinAtmCtrl = ""
     @State private var showPassword: Bool = false
+    
+    @GestureState private var dragOffset = CGSize.zero
+    
+    @State var showingModalError: Bool = false
     
     /* Route */
     @State var isNextRoute: Bool = false
@@ -87,7 +93,6 @@ struct FormInputAtmForgotPasswordScreen: View {
                     
                     Button(
                         action: {
-//                            self.isNextRoute = true
                             validatePinTrx()
                         },
                         label: {
@@ -109,6 +114,10 @@ struct FormInputAtmForgotPasswordScreen: View {
                 }
                 .padding(.bottom, 20)
                 
+                if self.showingModalError {
+                    ModalOverlay(tapAction: { withAnimation { } })
+                }
+                
             }
             
         }
@@ -118,6 +127,50 @@ struct FormInputAtmForgotPasswordScreen: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
+        .popup(isPresented: $showingModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            modalError()
+        }
+    }
+    
+    // MARK: -Bottom modal for error
+    func modalError() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Nomor Akun / PIN salah, silahkan ulangi kembali.")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showingModalError = false
+            }) {
+                Text("Kembali")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     @ObservedObject private var authVM = AuthViewModel()

@@ -94,6 +94,7 @@ class ScheduleInterviewService {
         print(date)
         print(firebaseToken)
         print(atmData.nik)
+        print(atmData.isNasabahMestika)
         print(endTime)
         
         let body: [String: Any] = [
@@ -103,7 +104,8 @@ class ScheduleInterviewService {
                 "nik": atmData.nik,
                 "timeEnd": endTime.trimmingCharacters(in: .whitespaces),
                 "timeStart": startTime.trimmingCharacters(in: .whitespaces),
-                "app": "ios-mestika"
+                "app": "ios-mestika",
+                "isNasabahMestika": atmData.isNasabahMestika
             ],
             "atm": [
                 "atmAddressInput": "JL PROF DR LATUMETEN I GG.5/",

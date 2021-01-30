@@ -30,6 +30,10 @@ struct LoginScreen: View {
     
     /* Boolean for Show Modal */
     @State var showingModal = false
+    @State var showingModalForgotPassword = false
+    
+    @State var routeAccountNumberPin: Bool = false
+    @State var routeATMNumberPin: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -74,12 +78,17 @@ struct LoginScreen: View {
                     .cornerRadius(15)
                     .shadow(color: Color.gray.opacity(0.3), radius: 10)
                     
-                    NavigationLink(destination: PhoneNumberVerificationForgotPasswordView().environmentObject(RegistrasiModel()), label: {
-                        Text("Forgot Password?")
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                    })
+                    Button(
+                        action: {
+                            self.showingModalForgotPassword = true
+                        },
+                        label: {
+                            Text("Forgot Password?")
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                    )
                 }
                 .padding()
                 
@@ -146,7 +155,7 @@ struct LoginScreen: View {
 
             }
             
-            if self.showingModal {
+            if self.showingModal || self.showingModalForgotPassword {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
                     .edgesIgnoringSafeArea(.all)
             }
@@ -159,6 +168,9 @@ struct LoginScreen: View {
         .navigationBarBackButtonHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessage()
+        }
+        .popup(isPresented: $showingModalForgotPassword, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageForgotPassword()
         }
     }
     
@@ -232,6 +244,62 @@ struct LoginScreen: View {
             .cornerRadius(12)
             
             Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: - POPUP SELECTOR REGISTER NASABAH
+    func popupMessageForgotPassword() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_bells")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+            
+            Text("Do you still remember your transaction PIN?")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 20)
+            
+            NavigationLink(
+                destination: FormInputAtmPinForgotPasswordView(),
+                isActive: self.$routeAccountNumberPin) {
+                EmptyView()
+            }
+            .isDetailLink(false)
+            
+            Button(action: {
+                self.routeAccountNumberPin = true
+            }) {
+                Text("Yes, i'am Still Remember")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 2)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            NavigationLink(
+                destination: FormInputAtmForgotPasswordScreen().environmentObject(RegistrasiModel()),
+                isActive: self.$routeATMNumberPin) {
+                EmptyView()
+            }
+            .isDetailLink(false)
+            
+            Button(action: {
+                self.routeATMNumberPin = true
+            }) {
+                Text("No, I do not remember")
+                    .foregroundColor(.black)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 30)
+            .cornerRadius(12)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)

@@ -99,6 +99,41 @@ extension AuthViewModel {
         
     }
     
+    // MARK: - POST VALIDATE PIN VRF
+    func validatePinVrf(
+        accountNumber: String,
+        pinTrx: String,
+        completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.validatePinVerf(accountNumber: accountNumber, pinTrx: encryptPassword(password: pinTrx)) { result in
+            switch result {
+            case .success(let response):
+                print("Success")
+                self.status = response.message!
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+        
+    }
+    
     // MARK: - POST VALIDATE PIN TRX
     func validatePinTrx(
         accountNumber: String,
@@ -133,6 +168,7 @@ extension AuthViewModel {
         }
         
     }
+    
     
     // MARK: - POST SET PWD
     func setPwd(
