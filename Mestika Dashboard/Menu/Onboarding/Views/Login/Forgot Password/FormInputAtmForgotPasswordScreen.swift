@@ -13,17 +13,23 @@ struct FormInputAtmForgotPasswordScreen: View {
     @State private var pinAtmCtrl = ""
     @State private var showPassword: Bool = false
     
+    /* Route */
+    @State var isNextRoute: Bool = false
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
                 .resizable()
-                .edgesIgnoringSafeArea(.all)
             
             VStack {
+                
+                AppBarLogo(light: false, onCancel: {})
+                
                 Text("INPUT DATA ATM")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                    .padding(.top, 30)
                 
                 Text("Masukkan nomor kartu ATM dan PIN ATM Anda yang sudah terdaftar")
                     .font(.subheadline)
@@ -36,6 +42,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                 VStack {
                     HStack {
                         TextField("Masukkan nomor ATM Anda", text: self.$atmNumberCtrl)
+                            .keyboardType(.numberPad)
                     }
                     .frame(height: 25)
                     .padding()
@@ -48,6 +55,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                 VStack {
                     HStack {
                         TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                            .keyboardType(.numberPad)
                     }
                     .frame(height: 25)
                     .padding()
@@ -59,45 +67,72 @@ struct FormInputAtmForgotPasswordScreen: View {
                 
                 Spacer()
                 
-                VStack {
-                    NavigationLink(destination: FormInputAtmPinForgotPasswordView(), label: {
-                        Text("AKTIVASI KARTU ATM BARU")
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        
-                    })
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
-                }
-                .padding(.bottom, 10)
+//                VStack {
+//                    NavigationLink(destination: FormInputAtmPinForgotPasswordView(), label: {
+//                        Text("AKTIVASI KARTU ATM BARU")
+//                            .foregroundColor(Color(hex: "#232175"))
+//                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+//                            .font(.system(size: 13))
+//                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+//
+//                    })
+//                    .background(Color.white)
+//                    .cornerRadius(12)
+//                    .padding(.leading, 20)
+//                    .padding(.trailing, 10)
+//                }
+//                .padding(.bottom, 10)
                 
                 VStack {
-                    NavigationLink(destination: FormInputNewPasswordForgotPasswordView(), label: {
-                        Text("KONFIRMASI DATA")
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        
-                    })
+                    
+                    Button(
+                        action: {
+//                            self.isNextRoute = true
+                            validatePinTrx()
+                        },
+                        label: {
+                            Text("KONFIRMASI DATA")
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        }
+                    )
                     .background(Color.white)
                     .cornerRadius(12)
                     .padding(.leading, 20)
                     .padding(.trailing, 10)
+                    
+                    NavigationLink(
+                        destination: FormInputNewPasswordForgotPasswordView(),
+                        isActive: self.$isNextRoute) {}
                 }
                 .padding(.bottom, 20)
                 
             }
-            .padding(.top, 60)
+            
         }
-        .navigationBarTitle("Lupa Password", displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {}, label: {
-            Text("Cancel")
-        }))
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+    }
+    
+    @ObservedObject private var authVM = AuthViewModel()
+    func validatePinTrx() {
+        self.authVM.validatePinTrx(accountNumber: atmNumberCtrl, pinTrx: pinAtmCtrl) { success in
+            
+            if success {
+                print("SUCCESS")
+                self.isNextRoute = true
+            }
+            
+            if !success {
+                print("NOT SUCCESS")
+            }
+        }
     }
 }
 

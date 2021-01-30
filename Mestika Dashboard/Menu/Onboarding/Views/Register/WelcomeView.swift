@@ -913,15 +913,6 @@ struct WelcomeView: View {
                 default:
                     self.isFirstLoginViewActive = true
                 }
-                
-//                if userVM.message == "ACTIVE" {
-//                    self.isLoginViewActive = true
-//                } else if (userVM.message == "LOGGED_IN" || userVM.message == "LOGGED_OUT") {
-//                    self.isFirstOTPLoginViewActive = true
-//                } else {
-//                    self.isFirstLoginViewActive = true
-////                    self.isActiveRootLogin = true
-//                }
             }
             
             if !success {

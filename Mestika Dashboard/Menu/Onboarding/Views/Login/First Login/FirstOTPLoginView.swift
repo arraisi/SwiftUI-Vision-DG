@@ -153,7 +153,7 @@ struct FirstOTPLoginView: View {
         VStack(alignment: .center) {
             HStack {
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "+62\(loginData.noTelepon)")
+                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "+62\(loginData.noTelepon.trimmingCharacters(in: .whitespaces))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -481,7 +481,7 @@ struct FirstOTPLoginView: View {
             }
             
             Button(action: {
-                self.appState.moveToDashboard = true
+                self.appState.moveToWelcomeView = true
             }) {
                 Text("Tidak")
                     .foregroundColor(.black)

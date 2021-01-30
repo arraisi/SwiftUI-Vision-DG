@@ -125,4 +125,12 @@ extension URL {
     static func urlAuthValidationOTP() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/auth/validateOtp")
     }
+    
+    static func urlAuthValidationPinTrx() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/pinVerify")
+    }
+    
+    static func urlAuthSetPassword() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/setPwd")
+    }
 }

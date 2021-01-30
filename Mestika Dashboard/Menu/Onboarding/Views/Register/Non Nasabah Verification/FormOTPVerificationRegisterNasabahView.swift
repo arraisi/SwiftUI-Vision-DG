@@ -84,6 +84,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
+            
             VStack {
                 Color(hex: "#232175")
                     .frame(height: 300)

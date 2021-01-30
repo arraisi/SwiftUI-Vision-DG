@@ -74,7 +74,7 @@ struct LoginScreen: View {
                     .cornerRadius(15)
                     .shadow(color: Color.gray.opacity(0.3), radius: 10)
                     
-                    NavigationLink(destination: PhoneNumberVerificationForgotPasswordView(), label: {
+                    NavigationLink(destination: PhoneNumberVerificationForgotPasswordView().environmentObject(RegistrasiModel()), label: {
                         Text("Forgot Password?")
                             .font(.subheadline)
                             .fontWeight(.bold)
@@ -163,18 +163,6 @@ struct LoginScreen: View {
     }
     
     func login() {
-//        if (deviceId == user.last?.deviceId && passwordCtrl == user.last?.password) {
-//
-//            print("DATA READY")
-//            isActiveRoute = true
-//
-//        } else {
-//
-//            print("NO DATA")
-//            showingModal.toggle()
-//
-//        }
-        
         authVM.postLogin(password: self.passwordCtrl, phoneNumber: "", fingerCode: "") { success in
             
             if success {
@@ -184,7 +172,7 @@ struct LoginScreen: View {
             
             if !success {
                 print("LOGIN FAILED")
-                
+                self.showingModal = true
             }
         }
     }
