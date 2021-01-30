@@ -569,8 +569,8 @@ struct SuccessRegisterView: View {
                 Button(
                     action: {
                         print("BACK")
-//                        self.appState.moveToWelcomeView = true
-                        reSubmitScheduleNasabahExisting()
+                        self.appState.moveToWelcomeView = true
+//                        reSubmitScheduleNasabahExisting()
                     },
                     label: {
                         Text("Kembali ke Halaman Utama")
@@ -663,7 +663,7 @@ struct SuccessRegisterView: View {
         }
         
         atmData.nik = registerData.nik
-        atmData.isNasabahMestika = true
+        atmData.isNasabahMestika = registerData.isNasabahmestika
         atmData.codeClass = ""
         
         scheduleVM.submitScheduleNasabahExisting(atmData: atmData, date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { (success) in
@@ -678,52 +678,6 @@ struct SuccessRegisterView: View {
             if success {
                 self.isLoading = false
                 self.showingModalInformation = true
-            }
-            
-            if !success {
-                self.isLoading = false
-                self.showingAlert.toggle()
-            }
-        }
-    }
-    
-    // MARK:- SUBMIT SCHEDULE FOR NASABAH EXISTING
-    func reSubmitScheduleNasabahExisting() {
-        
-        print("SUBMIT SCHEDULE NASABAH EXISTING")
-        
-        self.isLoading = true
-        
-        let timeArr = pilihJam.components(separatedBy: "-")
-        print("time start \(timeArr[0])")
-        print("time end \(timeArr[1])")
-        print("tanggal wawancara \(self.tanggalWawancara)")
-        
-        let data = ScheduleInterview(context: managedObjectContext)
-        data.jamInterview = self.pilihJam
-        data.tanggalInterview = self.tanggalWawancara
-        
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Error saving managed object context: \(error)")
-        }
-        
-        atmData.nik = registerData.nik
-        atmData.isNasabahMestika = true
-        atmData.codeClass = ""
-        
-        scheduleVM.submitScheduleNasabahExisting(atmData: atmData, date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { (success) in
-            
-            let dataSchedule: [String: Any] = [
-                "dateInterview": self.tanggalWawancara,
-                "timeInterview": self.pilihJam
-            ]
-            
-            NotificationCenter.default.post(name: NSNotification.Name("Schedule"), object: nil, userInfo: dataSchedule)
-            
-            if success {
-                self.appState.moveToWelcomeView = true
             }
             
             if !success {

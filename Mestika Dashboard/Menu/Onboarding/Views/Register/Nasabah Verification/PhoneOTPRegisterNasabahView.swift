@@ -21,6 +21,7 @@ struct PhoneOTPRegisterNasabahView: View {
     
     /* Edit Mode */
     @State var editModeForStatusCreated: EditMode = .inactive
+    @State var editModeForStatusKycWaiting: EditMode = .inactive
     
     /* HUD Variable */
     @State private var dim = true
@@ -157,6 +158,13 @@ struct PhoneOTPRegisterNasabahView: View {
                         if (editModeForStatusCreated == .active) {
                             NavigationLink(
                                 destination: FormPilihJenisATMView().environmentObject(registerData).environmentObject(productATMData),
+                                isActive: self.$isOtpValid) {
+                                EmptyView()
+                            }
+                            .isDetailLink(false)
+                        } else if (editModeForStatusKycWaiting == .active) {
+                            NavigationLink(
+                                destination: SuccessRegisterView().environmentObject(registerData).environmentObject(productATMData),
                                 isActive: self.$isOtpValid) {
                                 EmptyView()
                             }

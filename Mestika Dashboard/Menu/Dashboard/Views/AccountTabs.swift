@@ -10,7 +10,12 @@ import SwiftUI
 struct AccountTabs: View {
     
     @Binding var showingSettingMenu : Bool
-    @State var username: String = "Example User"
+    @State var username: String = ""
+    @State var phoneNumber: String = ""
+    
+    /* CORE DATA */
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
     var body: some View {
         ZStack {
@@ -64,7 +69,7 @@ struct AccountTabs: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("+62 858 7507 4351")
+                Text("+62\(self.phoneNumber)")
                     .font(.caption)
                     .fontWeight(.light)
             }
@@ -130,7 +135,17 @@ struct AccountTabs: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .onAppear {
+            getUserInfo()
+        }
 
+    }
+    
+    func getUserInfo() {
+        self.user.forEach { (data) in
+            self.username = data.namaLengkapFromNik!
+            self.phoneNumber = data.noTelepon!
+        }
     }
 }
 

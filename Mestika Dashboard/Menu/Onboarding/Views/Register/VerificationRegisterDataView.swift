@@ -902,6 +902,7 @@ struct VerificationRegisterDataView: View {
         data.atmOrRekening = self.registerData.atmOrRekening
         data.noAtm = self.registerData.noAtm
         data.noRekening = self.registerData.noRekening
+        data.accNo = self.registerData.accNo
         
         // Data From NIK
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik

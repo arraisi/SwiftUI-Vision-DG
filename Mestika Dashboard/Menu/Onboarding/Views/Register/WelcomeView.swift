@@ -498,15 +498,27 @@ struct WelcomeView: View {
                 
             }
             
-            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
-                Text(NSLocalizedString("Reschedule Jadwal", comment: ""))
-                    .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
+            if (self.registerData.isNasabahmestika == true) {
+                NavigationLink(destination: PhoneOTPRegisterNasabahView(editModeForStatusCreated: .inactive, editModeForStatusKycWaiting: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData)){
+                    Text(NSLocalizedString("Reschedule Jadwal", comment: ""))
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 5)
+            } else {
+                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
+                    Text(NSLocalizedString("Reschedule Jadwal", comment: ""))
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 5)
             }
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            .padding(.bottom, 5)
             
             NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
                 Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
@@ -907,6 +919,7 @@ struct WelcomeView: View {
             self.registerData.atmOrRekening = data.atmOrRekening!
             self.registerData.noAtm = data.noAtm!
             self.registerData.noRekening = data.noRekening!
+            self.registerData.accNo = data.accNo!
             
             // Data From NIK
             self.registerData.namaLengkapFromNik = data.namaLengkapFromNik!

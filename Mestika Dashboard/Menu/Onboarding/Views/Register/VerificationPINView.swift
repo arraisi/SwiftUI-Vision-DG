@@ -108,12 +108,12 @@ struct VerificationPINView: View {
                         .onReceive(noKartuCtrl.publisher.collect()) {
                             self.noKartuCtrl = String($0.prefix(16))
                         }
-//                        .onAppear{
-//                            if (self.registerData.accType == "ATM" || self.registerData.atmOrRekening == "ATM") {
-//                                self.noKartuCtrl = self.registerData.accNo
-//                                self.noKartuCtrl = self.registerData.noAtm
-//                            }
-//                        }
+                        .onAppear{
+                            if (self.registerData.accType == "ATM" || self.registerData.atmOrRekening == "ATM") {
+                                self.noKartuCtrl = self.registerData.accNo
+                                self.noKartuCtrl = self.registerData.noAtm
+                            }
+                        }
                         
                         if (secured) {
                             
@@ -250,18 +250,6 @@ struct VerificationPINView: View {
                                 validatePINBackEnd()
                             }
                         }) {
-                            
-                            //                            if (self.isBtnValidationDisabled) {
-                            //                                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
-                            //                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                            //                                    .foregroundColor(.white)
-                            //                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                            //                            } else {
-                            //                                Text("Berikutnya")
-                            //                                    .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                            //                                    .foregroundColor(.white)
-                            //                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                            //                            }
                             
                             Text("Berikutnya")
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

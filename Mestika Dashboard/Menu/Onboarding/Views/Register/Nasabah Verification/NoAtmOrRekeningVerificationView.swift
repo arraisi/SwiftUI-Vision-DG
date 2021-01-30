@@ -101,7 +101,21 @@ struct NoAtmOrRekeningVerificationView: View {
                     .padding(.vertical, 5)
                     
                     TextField(NSLocalizedString("Masukkan no kartu", comment: ""), text: $noKartuCtrl, onEditingChanged: { changed in
-                        self.registerData.accNo = self.noKartuCtrl
+                        //                        self.registerData.accNo = self.noKartuCtrl
+                        if (jenisKartuCtrl == "Kartu ATM") {
+                            self.registerData.atmOrRekening = "ATM"
+                            self.registerData.noAtm = self.noKartuCtrl
+                            
+                            self.registerData.accType = "ATM"
+                            self.registerData.accNo = self.noKartuCtrl
+                        } else {
+                            self.registerData.atmOrRekening = "REKENING"
+                            self.registerData.noRekening = self.noKartuCtrl
+                            
+                            self.registerData.accType = "REKENING"
+                            self.registerData.accNo = self.noKartuCtrl
+                        }
+                        
                     })
                     .font(.custom("Montserrat-Regular", size: 12))
                     .keyboardType(.numberPad)
@@ -185,9 +199,9 @@ struct NoAtmOrRekeningVerificationView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-//        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-//            PopupNoInternetConnection()
-//        }
+        //        .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        //            PopupNoInternetConnection()
+        //        }
     }
     
     func PopupNoInternetConnection() -> some View {

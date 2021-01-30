@@ -10,10 +10,10 @@ import SwiftUI
 struct DashboardTabs: View {
     
     /* CORE DATA */
-    @FetchRequest(entity: User.entity(), sortDescriptors: [])
-    var user: FetchedResults<User>
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
-    @State var username: String = "Example User"
+    @State var username: String = ""
     
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
@@ -49,11 +49,8 @@ struct DashboardTabs: View {
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
         .onAppear {
-            if ((user.last?.email) != nil) {
-                username = (user.last?.email)!
-            } else {
-                username = "Example"
-            }
+            print("GET")
+            getUserInfo()
         }
     }
     
@@ -129,6 +126,12 @@ struct DashboardTabs: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         
+    }
+    
+    func getUserInfo() {
+        self.user.forEach { (data) in
+            self.username = data.namaLengkapFromNik!
+        }
     }
 }
 
