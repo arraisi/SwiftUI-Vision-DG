@@ -33,7 +33,7 @@ struct WelcomeView: View {
     @State var isLoginViewActive: Bool = false
     @State var isFirstLoginViewActive: Bool = false
     @State var isFirstOTPLoginViewActive: Bool = false
-    @State var isDashboardViewActive: Bool = false
+    @State var isPasswordViewActive: Bool = false
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -122,7 +122,7 @@ struct WelcomeView: View {
                             var flags = SCNetworkReachabilityFlags()
                             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                             if self.isNetworkReachability(with: flags) {
-//                                self.isLoginViewActive = true
+                                //                                self.isLoginViewActive = true
                                 self.getUserStatusForLogin(deviceId: deviceId!)
                             } else {
                                 self.isShowAlertInternetConnection = true
@@ -160,8 +160,8 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: BottomNavigationView(),
-                            isActive: self.$isDashboardViewActive,
+                            destination: FirstPasswordAppLoginView(),
+                            isActive: self.$isPasswordViewActive,
                             label: {}
                         )
                         .isDetailLink(false)
@@ -201,15 +201,15 @@ struct WelcomeView: View {
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Schedule"))) { obj in
                 print("RECEIVED SCHEDULE")
                 if let dateInfo = obj.userInfo, let info = dateInfo["dateInterview"] {
-                                  print(info)
-                                  dateInterview = info as! String
-                              }
-                              
-                              if let timeInfo = obj.userInfo, let info = timeInfo["timeInterview"] {
-                                  print(info)
-                                  timeInterview = info as! String
-                              }
-
+                    print(info)
+                    dateInterview = info as! String
+                }
+                
+                if let timeInfo = obj.userInfo, let info = timeInfo["timeInterview"] {
+                    print(info)
+                    timeInterview = info as! String
+                }
+                
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Detail"))) { obj in
                 print("RECEIVED JITSI START")
@@ -366,7 +366,7 @@ struct WelcomeView: View {
                 .background(Color(hex: "#2334D0"))
                 .cornerRadius(12)
                 .padding(.bottom, 20)
-
+                
                 NavigationLink(
                     destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCreateSchedule: .active).environmentObject(registerData),
                     isActive: self.$isFormPilihScheduleAndATM, label: {}
@@ -820,7 +820,7 @@ struct WelcomeView: View {
         self.isLoginViewActive = false
         self.isFirstLoginViewActive = false
         self.isFirstOTPLoginViewActive = false
-        self.isDashboardViewActive = false
+        self.isPasswordViewActive = false
         self.isNoAtmOrRekViewActive = false
         self.isFormPilihJenisAtm = false
         self.isFormPilihJenisAtmNasabah = false
@@ -903,9 +903,9 @@ struct WelcomeView: View {
                 
                 switch userVM.message {
                 case "ACTIVE":
-                        self.isLoginViewActive = true
+                    self.isLoginViewActive = true
                 case "LOGGED_IN":
-                    self.isDashboardViewActive = true
+                    self.isPasswordViewActive = true
                 case "LOGGED_OUT":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
                     registerData.noTelepon = self.userVM.phoneNumber

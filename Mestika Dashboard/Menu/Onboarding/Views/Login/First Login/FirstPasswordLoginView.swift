@@ -40,6 +40,8 @@ struct FirstPasswordLoginView: View {
             
             VStack {
                 
+                AppBarLogo(light: false, onCancel: {})
+                
                 VStack {
                     Text("MASUKKAN PASSWORD")
                         .font(.title2)
@@ -54,7 +56,6 @@ struct FirstPasswordLoginView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 30)
-                .padding(.top, 100)
             }
             
             if self.showingModal {
@@ -62,7 +63,8 @@ struct FirstPasswordLoginView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -98,8 +100,8 @@ struct FirstPasswordLoginView: View {
                                 Button(action: {
                                     self.securedPassword.toggle()
                                 }) {
-                                    Text("show")
-                                        .font(.custom("Montserrat-Light", size: 12))
+                                    Image(systemName: "eye.slash")
+                                        .font(.custom("Montserrat-Light", size: 14))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -122,8 +124,8 @@ struct FirstPasswordLoginView: View {
                                 Button(action: {
                                     self.securedPassword.toggle()
                                 }) {
-                                    Text("show")
-                                        .font(.custom("Montserrat-Light", size: 12))
+                                    Image(systemName: "eye.fill")
+                                        .font(.custom("Montserrat-Light", size: 14))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -149,8 +151,8 @@ struct FirstPasswordLoginView: View {
                                 Button(action: {
                                     self.securedConfirmation.toggle()
                                 }) {
-                                    Text("show")
-                                        .font(.custom("Montserrat-Light", size: 12))
+                                    Image(systemName: "eye.slash")
+                                        .font(.custom("Montserrat-Light", size: 14))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -171,8 +173,8 @@ struct FirstPasswordLoginView: View {
                                 Button(action: {
                                     self.securedConfirmation.toggle()
                                 }) {
-                                    Text("show")
-                                        .font(.custom("Montserrat-Light", size: 12))
+                                    Image(systemName: "eye.fill")
+                                        .font(.custom("Montserrat-Light", size: 14))
                                         .frame(width: 80, height: 50)
                                         .cornerRadius(10)
                                         .foregroundColor(Color(hex: "#3756DF"))
@@ -198,7 +200,7 @@ struct FirstPasswordLoginView: View {
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 })
                 .background(disableForm ? Color.gray.opacity(0.3) : Color.white)
                 .cornerRadius(12)
@@ -260,7 +262,12 @@ struct FirstPasswordLoginView: View {
 #if DEBUG
 struct FirstPasswordLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstPasswordLoginView()
+        NavigationView {
+            FirstPasswordLoginView()
+        }
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 #endif
