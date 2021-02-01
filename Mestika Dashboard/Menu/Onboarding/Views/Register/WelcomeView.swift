@@ -28,6 +28,7 @@ struct WelcomeView: View {
     @State var isFormPilihSchedule: Bool = false
     @State var isIncomingVideoCall: Bool = false
     @State var isFormPilihScheduleAndATM: Bool = false
+    @State var isFormOTPForRescheduleActive: Bool = false
     
     // Route Variable Login
     @State var isLoginViewActive: Bool = false
@@ -470,7 +471,7 @@ struct WelcomeView: View {
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("\(dateInterview == "-" ? (schedule.last?.tanggalInterview as? String) ?? "" : dateInterview)")
+                    Text("\(dateInterview == "-" ? (schedule.last?.tanggalInterview) ?? "" : dateInterview)")
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding(.bottom, 5)
@@ -498,6 +499,11 @@ struct WelcomeView: View {
                 
             }
             
+            NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData), isActive: self.$isFormOTPForRescheduleActive) {
+                EmptyView()
+            }
+            .isDetailLink(false)
+            
             if (self.registerData.isNasabahmestika == true) {
                 NavigationLink(destination: PhoneOTPRegisterNasabahView(editModeForStatusCreated: .inactive, editModeForStatusKycWaiting: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData)){
                     Text(NSLocalizedString("Reschedule Jadwal", comment: ""))
@@ -509,7 +515,9 @@ struct WelcomeView: View {
                 .cornerRadius(12)
                 .padding(.bottom, 5)
             } else {
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForReschedule: .active).environmentObject(registerData)){
+                Button(action: {
+                    self.isFormOTPForRescheduleActive.toggle()
+                }){
                     Text(NSLocalizedString("Reschedule Jadwal", comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
@@ -828,6 +836,7 @@ struct WelcomeView: View {
         self.isFormPilihSchedule = false
         self.isIncomingVideoCall = false
         self.isFormPilihScheduleAndATM = false
+        self.isFormOTPForRescheduleActive = false
     }
     
     /* Function Check Network Reachability */

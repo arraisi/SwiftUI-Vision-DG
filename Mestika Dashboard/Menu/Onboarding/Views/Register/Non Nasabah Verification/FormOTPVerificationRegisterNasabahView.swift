@@ -176,9 +176,8 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         NavigationLink(
                             destination: RescheduleRegisterView().environmentObject(registerData).environmentObject(atmData),
                             isActive: self.$routingReschedule,
-                            label: {}
+                            label: {EmptyView()}
                         )
-                        .isDetailLink(false)
                         
                         NavigationLink(destination: FormPilihJenisATMView().environmentObject(atmData).environmentObject(registerData), isActive: self.$routingChooseATM, label: {EmptyView()})
                             .isDetailLink(false)
