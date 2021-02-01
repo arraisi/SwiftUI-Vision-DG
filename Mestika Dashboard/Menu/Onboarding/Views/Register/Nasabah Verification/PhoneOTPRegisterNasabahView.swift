@@ -145,7 +145,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
                                 .font(.custom("Montserrat-Regular", size: 12))
                         })
-                        .disabled(true) // false by pass to next page
+                        .disabled(AppConstants().BYPASS_OTP) // false by pass to next page
                     }
                     .padding(.top, 5)
                     
@@ -175,7 +175,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             .isDetailLink(false)
                         } else if (editModeForStatusKycWaiting == .active) {
                             NavigationLink(
-                                destination: SuccessRegisterView().environmentObject(registerData).environmentObject(productATMData),
+                                destination: RescheduleRegisterView().environmentObject(registerData).environmentObject(productATMData),
                                 isActive: self.$isOtpValid) {
                                 EmptyView()
                             }
@@ -461,10 +461,11 @@ struct PhoneOTPRegisterNasabahView: View {
     
     @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
+        print(self.registerData.atmOrRekening)
         self.otpVM.otpRequestAccOrRek(
             otpRequest: OtpRequest(
                 destination: self.registerData.accNo,
-                type: "rek",
+                type: self.registerData.atmOrRekening == "ATM" ? "atm" : "rek",
                 trytime: self.tryCountResend
             )
         ) { success in
@@ -522,7 +523,7 @@ struct PhoneOTPRegisterNasabahView: View {
             reference: referenceCode,
             timeCounter: self.timeRemainingBtn,
             tryCount: tryCount,
-            type: "rek",
+            type: self.registerData.atmOrRekening == "ATM" ? "atm" : "rek",
             accValue: self.registerData.accNo)
         { success in
             

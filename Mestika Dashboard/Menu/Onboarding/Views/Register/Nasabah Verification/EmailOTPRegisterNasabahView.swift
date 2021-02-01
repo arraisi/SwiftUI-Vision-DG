@@ -122,7 +122,7 @@ struct EmailOTPRegisterNasabahView: View {
                                 Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
                                     .font(.custom("Montserrat-Regular", size: 12))
                             })
-                            .disabled(true) // false to by pass to next view
+                            .disabled(AppConstants().BYPASS_OTP) // false to by pass to next view
                     }
                     .padding(.top, 5)
                     

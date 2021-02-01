@@ -229,11 +229,7 @@ struct RescheduleRegisterView: View {
                             
                             Button(action: {
                                 if pilihJam != "" {
-                                    if (self.user.last?.isNasabahMestika == true) {
-                                        submitScheduleNasabahExisting()
-                                    } else {
-                                        submitSchedule()
-                                    }
+                                    submitSchedule()
                                 } else {
                                     self.isShowAlertInternetConnection = true
                                 }
@@ -564,41 +560,22 @@ struct RescheduleRegisterView: View {
                 
             }
             
-            if (routing_schedule == "true" || self.user.last?.isNasabahMestika == true) {
-                Button(
-                    action: {
-                        print("BACK")
-                        self.appState.moveToWelcomeView = true
-                    },
-                    label: {
-                        Text("Kembali ke Halaman Utama")
-                            .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, maxHeight: 40)
-                    }
-                )
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.bottom, 20)
-            } else {
-                Button(
-                    action: {
-                        print(registerData.homeRoute)
-                        self.showFormPilihJenisATM = true
-                    },
-                    label: {
-                        Text("Selanjutnya")
-                            .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, maxHeight: 40)
-                    }
-                )
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.bottom, 20)
-            }
+            Button(
+                action: {
+                    print("BACK")
+                    self.appState.moveToWelcomeView = true
+                },
+                label: {
+                    Text("Kembali ke Halaman Utama")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, maxHeight: 40)
+                }
+            )
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom, 20)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -638,50 +615,6 @@ struct RescheduleRegisterView: View {
         }))).sorted()
     }
     
-    // MARK:- SUBMIT SCHEDULE FOR NASABAH EXISTING
-    func submitScheduleNasabahExisting() {
-        
-        self.isLoading = true
-        
-        let timeArr = pilihJam.components(separatedBy: "-")
-        print("time start \(timeArr[0])")
-        print("time end \(timeArr[1])")
-        
-        let data = ScheduleInterview(context: managedObjectContext)
-        data.jamInterview = self.pilihJam
-        data.tanggalInterview = self.tanggalWawancara
-        
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Error saving managed object context: \(error)")
-        }
-        
-        atmData.nik = registerData.nik
-        atmData.isNasabahMestika = registerData.isNasabahmestika
-        atmData.codeClass = ""
-        
-        scheduleVM.submitScheduleNasabahExisting(atmData: atmData, date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { (success) in
-            
-            let dataSchedule: [String: Any] = [
-                "dateInterview": self.tanggalWawancara,
-                "timeInterview": self.pilihJam
-            ]
-            
-            NotificationCenter.default.post(name: NSNotification.Name("Schedule"), object: nil, userInfo: dataSchedule)
-            
-            if success {
-                self.isLoading = false
-                self.showingModalInformation = true
-            }
-            
-            if !success {
-                self.isLoading = false
-                self.showingAlert.toggle()
-            }
-        }
-    }
-    
     // MARK:- SUBMIT SCHEDULE FOR NASABAH
     func submitSchedule() {
         self.isLoading = true
@@ -700,7 +633,12 @@ struct RescheduleRegisterView: View {
             print("Error saving managed object context: \(error)")
         }
         
-        scheduleVM.reSubmitSchedule(date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { success in
+        scheduleVM.reSubmitSchedule(
+            isNasabahMestika: registerData.isNasabahmestika,
+            date: self.tanggalWawancara,
+            nik: registerData.nik,
+            endTime: timeArr[1],
+            startTime: timeArr[0]) { success in
             
             let dataSchedule: [String: Any] = [
                 "dateInterview": self.tanggalWawancara,
@@ -721,6 +659,7 @@ struct RescheduleRegisterView: View {
         }
     }
     
+    // MARK:- CANCEL REGISTER FOR NASABAH
     func cancelRegistration() {
         self.isLoading = true
         regVM.cancelRegistration(nik: registerData.nik ?? "", completion: { (success:Bool) in

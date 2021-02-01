@@ -129,7 +129,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                                 Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
                                     .font(.custom("Montserrat-Regular", size: 12))
                             })
-                            .disabled(true)
+                            .disabled(AppConstants().BYPASS_OTP)
                     }
                     .padding(.top, 5)
                     

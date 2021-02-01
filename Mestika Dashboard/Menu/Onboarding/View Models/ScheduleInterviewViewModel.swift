@@ -136,8 +136,21 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
     }
     
     // MARK:- RESUBMIT SCHEDULE INTERVIEW NON NASABAH
-    func reSubmitSchedule(date: String, nik: String, endTime: String, startTime: String, completion: @escaping (Bool) -> Void) {
-        ScheduleInterviewService.shared.submitReScheduleInterview(date: date, nik: nik, endTime: endTime, startTime: startTime) { result in
+    func reSubmitSchedule(
+        isNasabahMestika: Bool,
+        date: String,
+        nik: String,
+        endTime: String,
+        startTime: String,
+        completion: @escaping (Bool) -> Void) {
+        
+        ScheduleInterviewService.shared.submitReScheduleInterview(
+            isNasabahMestika: isNasabahMestika,
+            date: date,
+            nik: nik,
+            endTime: endTime,
+            startTime: startTime) { result in
+            
             print(result)
             
             switch result {

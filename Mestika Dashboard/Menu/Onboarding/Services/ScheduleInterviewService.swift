@@ -223,7 +223,13 @@ class ScheduleInterviewService {
     }
     
     // MARK:- API RESCHEDULE
-    func submitReScheduleInterview(date: String, nik: String, endTime: String, startTime: String, completion: @escaping(Result<UserCheckResponse?, ErrorResult>) -> Void) {
+    func submitReScheduleInterview(
+        isNasabahMestika: Bool,
+        date: String,
+        nik: String,
+        endTime: String,
+        startTime: String,
+        completion: @escaping(Result<UserCheckResponse?, ErrorResult>) -> Void) {
         
         let firebaseToken = Messaging.messaging().fcmToken
         
@@ -232,7 +238,7 @@ class ScheduleInterviewService {
             "nik":  nik,
             "fireBaseToken": firebaseToken!,
             "app": "ios-mestika",
-            "isNasabahMestika": false,
+            "isNasabahMestika": isNasabahMestika,
             "timeEnd": endTime,
             "timeStart": startTime
         ]

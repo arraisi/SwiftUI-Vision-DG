@@ -269,7 +269,6 @@ struct LoginScreen: View {
                 isActive: self.$routeAccountNumberPin) {
                 EmptyView()
             }
-            .isDetailLink(false)
             
             Button(action: {
                 self.routeAccountNumberPin = true
@@ -288,7 +287,6 @@ struct LoginScreen: View {
                 isActive: self.$routeATMNumberPin) {
                 EmptyView()
             }
-            .isDetailLink(false)
             
             Button(action: {
                 self.routeATMNumberPin = true
