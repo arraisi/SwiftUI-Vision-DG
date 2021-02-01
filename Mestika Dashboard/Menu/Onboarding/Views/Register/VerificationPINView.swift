@@ -239,7 +239,6 @@ struct VerificationPINView: View {
                         Button(action: {
                             
                             UIApplication.shared.endEditing()
-                            self.isBtnValidationDisabled = true
                             
                             self.tryCount += 1
                             if self.shouldVerificationWithVC {
@@ -364,6 +363,7 @@ struct VerificationPINView: View {
                 self.isLoading = false
                 self.noAtmAndPinIsWrong = false
                 self.showingModal.toggle()
+                self.isBtnValidationDisabled = true
                 
             } else {
                 print("PIN INVALID")
