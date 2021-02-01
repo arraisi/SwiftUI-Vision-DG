@@ -39,6 +39,7 @@
 		0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */; };
 		0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */; };
 		0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */; };
+		24313CB4FB81D7738AF550E8 /* Pods_Mestika_DashboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA304AD8E315DFBE8BD2F4D3 /* Pods_Mestika_DashboardTests.framework */; };
 		520585F525721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* SwiftPackageProductDependency */; };
 		520585F625721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* SwiftPackageProductDependency */; };
 		520585F725721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* SwiftPackageProductDependency */; };
@@ -259,9 +260,7 @@
 		6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
 		6122BB4B73F6658A6EC4DFED /* UserRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */; };
-		82108E3EF8B5C005DDF317A5 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250DBC7B4C42463F75F4BED1 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */; };
-		A5AA5078593050B99AA25E73 /* Pods_Mestika_Dashboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1438BB1322373234E4AC13 /* Pods_Mestika_Dashboard.framework */; };
-		BF819C9C49B70DF8796598DB /* Pods_Mestika_DashboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BFEB5849F92CD112489B4F2 /* Pods_Mestika_DashboardTests.framework */; };
+		8939EB1BF8B6E012376FD001 /* Pods_Mestika_Dashboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8FA96F839B34A0C97E2DE4 /* Pods_Mestika_Dashboard.framework */; };
 		C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702B42554E2B60089DBD1 /* CardLimitView.swift */; };
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
@@ -325,6 +324,7 @@
 		C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB90D22553D7E2004DBCF5 /* CardView.swift */; };
 		C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */; };
 		C0FE1E3E255A67D400B3AAE0 /* NumbersPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */; };
+		DED2752510EEE0BA9CA35EED /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FB5DA35E9350A8ED2FEDD24 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */; };
 		FA1B142D25AC66E50000152A /* SuccessCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1B142C25AC66E50000152A /* SuccessCancelView.swift */; };
 		FA42F2C325A8089D00C14A47 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA42F2C225A8089D00C14A47 /* View+Extensions.swift */; };
 		FA486B1925AF4E9100EDBD88 /* SavingDetailModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA486B1825AF4E9100EDBD88 /* SavingDetailModalView.swift */; };
@@ -381,12 +381,12 @@
 		0AF48AD725778C9C0037942D /* Numeric+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Extensions.swift"; sourceTree = "<group>"; };
 		0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
 		0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extensions.swift"; sourceTree = "<group>"; };
-		1F66D7FF708B7D1B9C45E337 /* Pods-Mestika DashboardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.release.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.release.xcconfig"; sourceTree = "<group>"; };
-		250DBC7B4C42463F75F4BED1 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		26551E657E7235403F7BAF6A /* Pods-Mestika DashboardTests.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugmestika.xcconfig"; sourceTree = "<group>"; };
-		2A1438BB1322373234E4AC13 /* Pods_Mestika_Dashboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_Dashboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4BFEB5849F92CD112489B4F2 /* Pods_Mestika_DashboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_DashboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		51FFFFEF80BAFC17110C0DEF /* Pods-Mestika Dashboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.debug.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.debug.xcconfig"; sourceTree = "<group>"; };
+		0FBE000C5518637FB0FAB9C6 /* Pods-Mestika DashboardTests.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugmestika.xcconfig"; sourceTree = "<group>"; };
+		1EDEA8CEBFF0F1B866BDA5AB /* Pods-Mestika DashboardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.release.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.release.xcconfig"; sourceTree = "<group>"; };
+		1F257CABBD67799929ABF2F2 /* Pods-Mestika Dashboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.debug.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.debug.xcconfig"; sourceTree = "<group>"; };
+		235D41CBFAF3B1015F160BAD /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
+		48FBA1A8000A439CAA67AC1E /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig"; sourceTree = "<group>"; };
+		4E8FA96F839B34A0C97E2DE4 /* Pods_Mestika_Dashboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_Dashboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
@@ -606,17 +606,13 @@
 		52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignNewModel.swift; sourceTree = "<group>"; };
 		52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganModel.swift; sourceTree = "<group>"; };
-		565F8E04E068924EAE2F77A5 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig"; sourceTree = "<group>"; };
-		5EE91C6C59425863DCF6ED6F /* Pods-Mestika Dashboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.release.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.release.xcconfig"; sourceTree = "<group>"; };
 		6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationResponse.swift; sourceTree = "<group>"; };
 		6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStatementView.swift; sourceTree = "<group>"; };
 		6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationViewModel.swift; sourceTree = "<group>"; };
-		63552BBC34CF4B315E19D479 /* Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig"; sourceTree = "<group>"; };
-		68BA1806EB3FF7781A32FBA9 /* Pods-Mestika Dashboard.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.debugqa.xcconfig"; sourceTree = "<group>"; };
-		93DD84BFCDC5AB639A6C22E3 /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
-		B0DACFD8FD8913F088793C04 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig"; sourceTree = "<group>"; };
-		B1628B16374274165DB16A3A /* Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6FB5DA35E9350A8ED2FEDD24 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75DFD50E030D39500A02741C /* Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AA304AD8E315DFBE8BD2F4D3 /* Pods_Mestika_DashboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_DashboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C00702B42554E2B60089DBD1 /* CardLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitView.swift; sourceTree = "<group>"; };
 		C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithToolBarKeyBoard.swift; sourceTree = "<group>"; };
 		C00702C6255531280089DBD1 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
@@ -679,8 +675,12 @@
 		C0EB90D22553D7E2004DBCF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPINConfigurationView.swift; sourceTree = "<group>"; };
 		C0FE1E3D255A67D400B3AAE0 /* NumbersPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersPadView.swift; sourceTree = "<group>"; };
-		DEB3EF9108A6804A257E457A /* Pods-Mestika Dashboard.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.debugmestika.xcconfig"; sourceTree = "<group>"; };
-		EE191ADA0EAD6D84E36B53B9 /* Pods-Mestika DashboardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debug.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C702D1CAC61BB3F565D7451D /* Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C80E1342281F960F83FE43B4 /* Pods-Mestika Dashboard.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.debugqa.xcconfig"; sourceTree = "<group>"; };
+		D74493CF43C315BDF7099B91 /* Pods-Mestika Dashboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.release.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.release.xcconfig"; sourceTree = "<group>"; };
+		D842FA45745B9664910084AB /* Pods-Mestika Dashboard.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.debugmestika.xcconfig"; sourceTree = "<group>"; };
+		DDCE8368EAD97F6BEA165DA6 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig"; sourceTree = "<group>"; };
+		EA8078BACCAB214FA15B4864 /* Pods-Mestika DashboardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debug.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA1B142C25AC66E50000152A /* SuccessCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessCancelView.swift; sourceTree = "<group>"; };
 		FA42F2C225A8089D00C14A47 /* View+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		FA486B1825AF4E9100EDBD88 /* SavingDetailModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavingDetailModalView.swift; sourceTree = "<group>"; };
@@ -702,7 +702,7 @@
 				520585F925721F00005DB764 /* BuildFile in Frameworks */,
 				520585F625721F00005DB764 /* BuildFile in Frameworks */,
 				520585F825721F00005DB764 /* BuildFile in Frameworks */,
-				A5AA5078593050B99AA25E73 /* Pods_Mestika_Dashboard.framework in Frameworks */,
+				8939EB1BF8B6E012376FD001 /* Pods_Mestika_Dashboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,7 +710,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF819C9C49B70DF8796598DB /* Pods_Mestika_DashboardTests.framework in Frameworks */,
+				24313CB4FB81D7738AF550E8 /* Pods_Mestika_DashboardTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,7 +718,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82108E3EF8B5C005DDF317A5 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework in Frameworks */,
+				DED2752510EEE0BA9CA35EED /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,16 +763,6 @@
 			path = Html;
 			sourceTree = "<group>";
 		};
-		07F3A607D0D6CC87B7ED477C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2A1438BB1322373234E4AC13 /* Pods_Mestika_Dashboard.framework */,
-				250DBC7B4C42463F75F4BED1 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */,
-				4BFEB5849F92CD112489B4F2 /* Pods_Mestika_DashboardTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		0A8B775825B8364200819952 /* sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -784,20 +774,30 @@
 		2D38FE9D601AF2B3B064B9C4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				51FFFFEF80BAFC17110C0DEF /* Pods-Mestika Dashboard.debug.xcconfig */,
-				DEB3EF9108A6804A257E457A /* Pods-Mestika Dashboard.debugmestika.xcconfig */,
-				68BA1806EB3FF7781A32FBA9 /* Pods-Mestika Dashboard.debugqa.xcconfig */,
-				5EE91C6C59425863DCF6ED6F /* Pods-Mestika Dashboard.release.xcconfig */,
-				B1628B16374274165DB16A3A /* Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig */,
-				B0DACFD8FD8913F088793C04 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig */,
-				565F8E04E068924EAE2F77A5 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig */,
-				63552BBC34CF4B315E19D479 /* Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig */,
-				EE191ADA0EAD6D84E36B53B9 /* Pods-Mestika DashboardTests.debug.xcconfig */,
-				26551E657E7235403F7BAF6A /* Pods-Mestika DashboardTests.debugmestika.xcconfig */,
-				93DD84BFCDC5AB639A6C22E3 /* Pods-Mestika DashboardTests.debugqa.xcconfig */,
-				1F66D7FF708B7D1B9C45E337 /* Pods-Mestika DashboardTests.release.xcconfig */,
+				1F257CABBD67799929ABF2F2 /* Pods-Mestika Dashboard.debug.xcconfig */,
+				D842FA45745B9664910084AB /* Pods-Mestika Dashboard.debugmestika.xcconfig */,
+				C80E1342281F960F83FE43B4 /* Pods-Mestika Dashboard.debugqa.xcconfig */,
+				D74493CF43C315BDF7099B91 /* Pods-Mestika Dashboard.release.xcconfig */,
+				C702D1CAC61BB3F565D7451D /* Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig */,
+				48FBA1A8000A439CAA67AC1E /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig */,
+				DDCE8368EAD97F6BEA165DA6 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig */,
+				75DFD50E030D39500A02741C /* Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig */,
+				EA8078BACCAB214FA15B4864 /* Pods-Mestika DashboardTests.debug.xcconfig */,
+				0FBE000C5518637FB0FAB9C6 /* Pods-Mestika DashboardTests.debugmestika.xcconfig */,
+				235D41CBFAF3B1015F160BAD /* Pods-Mestika DashboardTests.debugqa.xcconfig */,
+				1EDEA8CEBFF0F1B866BDA5AB /* Pods-Mestika DashboardTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		4F7E270C26BE9FEC99FBDF72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4E8FA96F839B34A0C97E2DE4 /* Pods_Mestika_Dashboard.framework */,
+				6FB5DA35E9350A8ED2FEDD24 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */,
+				AA304AD8E315DFBE8BD2F4D3 /* Pods_Mestika_DashboardTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		523A86282542BE8600ADFE25 /* Components */ = {
@@ -852,7 +852,7 @@
 				5245F8A8253FE706002E8B53 /* Mestika DashboardUITests */,
 				5245F882253FE702002E8B53 /* Products */,
 				2D38FE9D601AF2B3B064B9C4 /* Pods */,
-				07F3A607D0D6CC87B7ED477C /* Frameworks */,
+				4F7E270C26BE9FEC99FBDF72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1635,11 +1635,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5245F8AE253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika Dashboard" */;
 			buildPhases = (
-				3D418F24903B4FC231FD1046 /* [CP] Check Pods Manifest.lock */,
+				138386F96EEFB065C0D53CC5 /* [CP] Check Pods Manifest.lock */,
 				5245F87D253FE702002E8B53 /* Sources */,
 				5245F87E253FE702002E8B53 /* Frameworks */,
 				5245F87F253FE702002E8B53 /* Resources */,
-				D76FE2433EEF5581DEF3D567 /* [CP] Embed Pods Frameworks */,
+				954CD3D0F06E42409D80FEDD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1665,7 +1665,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5245F8B1253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika DashboardTests" */;
 			buildPhases = (
-				02363047F61898F2DE715A04 /* [CP] Check Pods Manifest.lock */,
+				5B2F0F663F06651D805823BE /* [CP] Check Pods Manifest.lock */,
 				5245F896253FE706002E8B53 /* Sources */,
 				5245F897253FE706002E8B53 /* Frameworks */,
 				5245F898253FE706002E8B53 /* Resources */,
@@ -1684,11 +1684,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5245F8B4253FE706002E8B53 /* Build configuration list for PBXNativeTarget "Mestika DashboardUITests" */;
 			buildPhases = (
-				CE788F8018117208D05F0041 /* [CP] Check Pods Manifest.lock */,
+				AE07E1DFB6C981F5F2916355 /* [CP] Check Pods Manifest.lock */,
 				5245F8A1253FE706002E8B53 /* Sources */,
 				5245F8A2253FE706002E8B53 /* Frameworks */,
 				5245F8A3253FE706002E8B53 /* Resources */,
-				DF3EAC1F11EF54589299B945 /* [CP] Embed Pods Frameworks */,
+				D8B63A15557C36450C776263 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1815,29 +1815,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02363047F61898F2DE715A04 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Mestika DashboardTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3D418F24903B4FC231FD1046 /* [CP] Check Pods Manifest.lock */ = {
+		138386F96EEFB065C0D53CC5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1859,7 +1837,46 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CE788F8018117208D05F0041 /* [CP] Check Pods Manifest.lock */ = {
+		5B2F0F663F06651D805823BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mestika DashboardTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		954CD3D0F06E42409D80FEDD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE07E1DFB6C981F5F2916355 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1881,24 +1898,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D76FE2433EEF5581DEF3D567 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF3EAC1F11EF54589299B945 /* [CP] Embed Pods Frameworks */ = {
+		D8B63A15557C36450C776263 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2377,7 +2377,7 @@
 		};
 		5245F8AF253FE706002E8B53 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 51FFFFEF80BAFC17110C0DEF /* Pods-Mestika Dashboard.debug.xcconfig */;
+			baseConfigurationReference = 1F257CABBD67799929ABF2F2 /* Pods-Mestika Dashboard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2424,7 +2424,7 @@
 		};
 		5245F8B0253FE706002E8B53 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EE91C6C59425863DCF6ED6F /* Pods-Mestika Dashboard.release.xcconfig */;
+			baseConfigurationReference = D74493CF43C315BDF7099B91 /* Pods-Mestika Dashboard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2471,7 +2471,7 @@
 		};
 		5245F8B2253FE706002E8B53 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE191ADA0EAD6D84E36B53B9 /* Pods-Mestika DashboardTests.debug.xcconfig */;
+			baseConfigurationReference = EA8078BACCAB214FA15B4864 /* Pods-Mestika DashboardTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2494,7 +2494,7 @@
 		};
 		5245F8B3253FE706002E8B53 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F66D7FF708B7D1B9C45E337 /* Pods-Mestika DashboardTests.release.xcconfig */;
+			baseConfigurationReference = 1EDEA8CEBFF0F1B866BDA5AB /* Pods-Mestika DashboardTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2517,7 +2517,7 @@
 		};
 		5245F8B5253FE706002E8B53 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1628B16374274165DB16A3A /* Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig */;
+			baseConfigurationReference = C702D1CAC61BB3F565D7451D /* Pods-Mestika Dashboard-Mestika DashboardUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2538,7 +2538,7 @@
 		};
 		5245F8B6253FE706002E8B53 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 63552BBC34CF4B315E19D479 /* Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig */;
+			baseConfigurationReference = 75DFD50E030D39500A02741C /* Pods-Mestika Dashboard-Mestika DashboardUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2622,7 +2622,7 @@
 		};
 		52F6FA1825A3052D00B47F5F /* DebugMestika */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DEB3EF9108A6804A257E457A /* Pods-Mestika Dashboard.debugmestika.xcconfig */;
+			baseConfigurationReference = D842FA45745B9664910084AB /* Pods-Mestika Dashboard.debugmestika.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2669,7 +2669,7 @@
 		};
 		52F6FA1925A3052D00B47F5F /* DebugMestika */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26551E657E7235403F7BAF6A /* Pods-Mestika DashboardTests.debugmestika.xcconfig */;
+			baseConfigurationReference = 0FBE000C5518637FB0FAB9C6 /* Pods-Mestika DashboardTests.debugmestika.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2692,7 +2692,7 @@
 		};
 		52F6FA1A25A3052D00B47F5F /* DebugMestika */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0DACFD8FD8913F088793C04 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig */;
+			baseConfigurationReference = 48FBA1A8000A439CAA67AC1E /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2776,7 +2776,7 @@
 		};
 		52F6FA1C25A3054500B47F5F /* DebugQA */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68BA1806EB3FF7781A32FBA9 /* Pods-Mestika Dashboard.debugqa.xcconfig */;
+			baseConfigurationReference = C80E1342281F960F83FE43B4 /* Pods-Mestika Dashboard.debugqa.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2823,7 +2823,7 @@
 		};
 		52F6FA1D25A3054500B47F5F /* DebugQA */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93DD84BFCDC5AB639A6C22E3 /* Pods-Mestika DashboardTests.debugqa.xcconfig */;
+			baseConfigurationReference = 235D41CBFAF3B1015F160BAD /* Pods-Mestika DashboardTests.debugqa.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2846,7 +2846,7 @@
 		};
 		52F6FA1E25A3054500B47F5F /* DebugQA */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 565F8E04E068924EAE2F77A5 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig */;
+			baseConfigurationReference = DDCE8368EAD97F6BEA165DA6 /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugqa.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
