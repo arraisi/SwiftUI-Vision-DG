@@ -31,6 +31,7 @@
 		06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */; };
 		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
+		0A2079DC25C895F400471C15 /* TransferOnUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
 		0A8B775A25B8366B00819952 /* ip7_ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */; };
@@ -374,6 +375,7 @@
 		06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarLogo.swift; sourceTree = "<group>"; };
 		0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductATM.swift; sourceTree = "<group>"; };
 		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
+		0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsModel.swift; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ip7_ringtone.mp3; sourceTree = "<group>"; };
@@ -763,6 +765,14 @@
 				06AD57082570D3370071C4A9 /* term.html */,
 			);
 			path = Html;
+			sourceTree = "<group>";
+		};
+		0A2079DA25C895D000471C15 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */,
+			);
+			path = Transfer;
 			sourceTree = "<group>";
 		};
 		0A8B775825B8364200819952 /* sound */ = {
@@ -1537,6 +1547,7 @@
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0A2079DA25C895D000471C15 /* Transfer */,
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
@@ -2136,6 +2147,7 @@
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
+				0A2079DC25C895F400471C15 /* TransferOnUsModel.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
 				C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */,

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct TransferOnUsSuccessInformationScreen: View {
     
+    @EnvironmentObject var transferData: TransferOnUsModel
+
     @State private var showPopover: Bool = false
-    @State var receivedName = "NOVI PAHMALIA"
     @State var receivedBank = "Mestika"
-    @State var receivedRekening = "88091293900"
     
     var body: some View {
         ZStack {
@@ -35,7 +35,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                     receivedInfo
                     
                     Spacer(minLength: 0)
-                    NavigationLink(destination: TransferOnUsDetailsInformation(), label: {
+                    NavigationLink(destination: TransferOnUsDetailsInformation().environmentObject(transferData), label: {
                         Text("Lihat Detail Transaksi")
                             .foregroundColor(Color(hex: "#2334D0"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -70,7 +70,7 @@ struct TransferOnUsSuccessInformationScreen: View {
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
                 Text("Tambahkan ke Favorit?")
-                    .font(.caption)
+//                    .font(.caption)
                     .foregroundColor(.white)
                 
                 Button(action: {
@@ -94,7 +94,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     var dateInfo: some View {
         VStack {
             Text("13 September 2020")
-                .font(.caption)
+//                .font(.caption)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
@@ -108,14 +108,14 @@ struct TransferOnUsSuccessInformationScreen: View {
     var nominalInfo: some View {
         VStack {
             Text("Nominal Transaksi")
-                .font(.caption)
+//                .font(.caption)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             HStack(alignment: .top) {
                 Text("Rp.")
                     .foregroundColor(.white)
                     .fontWeight(.bold)
-                Text("200.000")
+                Text(self.transferData.amount.thousandSeparator())
                     .foregroundColor(.white)
                     .font(.system(size: 30, weight: .bold, design: .default))
             }
@@ -126,21 +126,21 @@ struct TransferOnUsSuccessInformationScreen: View {
     var destinationInfo: some View {
         VStack(alignment: .leading) {
             Text("Ke")
-                .font(.caption2)
+//                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
-            Text("NOVI PAHMALIA")
+            Text(self.transferData.destinationName.uppercased())
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
             
             HStack {
                 Text("Mestika :")
-                    .font(.caption2)
+//                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
                 
-                Text("988989123093")
-                    .font(.caption2)
+                Text(self.transferData.destinationNumber)
+//                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
             }
         }
@@ -152,7 +152,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     var receivedInfo: some View {
         VStack(alignment: .leading) {
             Text("Dari")
-                .font(.caption2)
+//                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             Text("PRIMA JATNIKA")
@@ -161,12 +161,12 @@ struct TransferOnUsSuccessInformationScreen: View {
                 .fontWeight(.bold)
             
             HStack {
-                Text("90909012903")
-                    .font(.caption2)
+                Text(self.transferData.sourceNumber)
+//                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
                 
-                Text("(Rekening Utama)")
-                    .font(.caption2)
+                Text("(\(self.transferData.sourceAccountName))")
+//                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
             }
         }
@@ -177,7 +177,7 @@ struct TransferOnUsSuccessInformationScreen: View {
 
 struct TransferOnUsSuccessInformationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsSuccessInformationScreen()
+        TransferOnUsSuccessInformationScreen().environmentObject(TransferOnUsModel())
     }
 }
 
