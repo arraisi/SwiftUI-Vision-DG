@@ -60,6 +60,7 @@ extension OtpViewModel {
                     
                     DispatchQueue.main.async {
                         self.timeRemaining = response.timeCounter!
+                        self.code = response.code ?? ""
                         self.isLoading = false
                         completion(false)
                     }
