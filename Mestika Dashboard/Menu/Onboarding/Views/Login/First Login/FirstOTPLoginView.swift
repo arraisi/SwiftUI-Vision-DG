@@ -24,6 +24,7 @@ struct FirstOTPLoginView: View {
     @State var isDisabled = false
     
     /* Data Binding */
+    @ObservedObject var userVM = UserRegistrationViewModel()
     @ObservedObject private var otpVM = OtpViewModel()
     
     /* Variable Validation */
@@ -193,9 +194,17 @@ struct FirstOTPLoginView: View {
                 }
                 .disabled(isResendOtpDisabled)
                 
-                Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
-                    .font(.caption2)
-                    .foregroundColor(.white)
+                Button(
+                    action: {
+                        self.isRootToPasswordLogin = true
+                    },
+                    label: {
+                        Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
+                            .font(.caption2)
+                            .foregroundColor(.white)
+                    }
+                )
+                .disabled(AppConstants().BYPASS_OTP)
             }
             .padding(.top, 5)
             
@@ -505,6 +514,25 @@ struct FirstOTPLoginView: View {
             return AnyView(bottomMessageOTPVailure())
         default:
             return AnyView(bottomMessageOTPinCorrect())
+        }
+    }
+    
+    // MARK: - FUNCTION GET STATUS USER
+    func getUserStatus(deviceId: String) {
+        print("GET USER STATUS")
+        print("DEVICE ID : \(deviceId)")
+        
+        self.userVM.userCheck(deviceId: deviceId) { success in
+            
+            if success {
+                print("CODE STATUS : \(self.userVM.code)")
+                print("MESSAGE STATUS : \(self.userVM.message)")
+            }
+            
+            if !success {
+                self.modalSelection = "DEFAULT"
+                self.isShowModal = true
+            }
         }
     }
     

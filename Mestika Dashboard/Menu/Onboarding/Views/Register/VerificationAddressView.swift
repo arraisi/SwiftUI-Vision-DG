@@ -133,6 +133,7 @@ struct VerificationAddressView: View {
                                             
                                             TextField("Alamat", text: $registerData.addressInput) { changed in
                                             } onCommit: {
+                                                self.addressInput = self.registerData.addressInput
                                             }
                                             .font(Font.system(size: 14))
                                             .frame(height: 36)

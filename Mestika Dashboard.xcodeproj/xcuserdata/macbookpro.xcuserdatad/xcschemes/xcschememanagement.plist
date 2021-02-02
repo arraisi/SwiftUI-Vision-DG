@@ -7,12 +7,12 @@
 		<key>DebugMestika.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>43</integer>
+			<integer>2</integer>
 		</dict>
 		<key>DebugQA.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>42</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Mestika Dashboard.xcscheme_^#shared#^_</key>
 		<dict>
