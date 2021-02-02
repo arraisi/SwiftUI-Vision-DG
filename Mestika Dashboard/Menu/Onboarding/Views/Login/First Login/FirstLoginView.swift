@@ -153,7 +153,7 @@ struct FirstLoginView: View {
                 .disabled(disableForm)
             
             NavigationLink(
-                destination: FirstOTPLoginView().environmentObject(loginData),
+                destination: FirstOTPLoginView(isNewDeviceLogin: .constant(true)).environmentObject(loginData),
                 isActive: self.$nextRoute,
                 label: {}
             )
@@ -164,6 +164,7 @@ struct FirstLoginView: View {
     }
     
     func checkPhoneNumber() {
+        // TODO: CHECK NUMBER IS NUMBER OF NASABAH
         self.nextRoute = true
     }
     

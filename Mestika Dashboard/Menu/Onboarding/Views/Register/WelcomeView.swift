@@ -35,6 +35,7 @@ struct WelcomeView: View {
     @State var isFirstLoginViewActive: Bool = false
     @State var isFirstOTPLoginViewActive: Bool = false
     @State var isPasswordViewActive: Bool = false
+    @State var isLoginNewDevice: Bool = false
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -137,7 +138,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: FirstOTPLoginView().environmentObject(registerData),
+                            destination: FirstOTPLoginView(isNewDeviceLogin: self.$isLoginNewDevice).environmentObject(registerData),
                             isActive: self.$isLoginViewActive,
                             label: {}
                         )
@@ -153,7 +154,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: FirstOTPLoginView().environmentObject(registerData),
+                            destination: FirstOTPLoginView(isNewDeviceLogin: self.$isLoginNewDevice).environmentObject(registerData),
                             isActive: self.$isFirstOTPLoginViewActive,
                             label: {}
                         )
@@ -161,7 +162,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: FirstPasswordAppLoginView(),
+                            destination: LoginScreen(),
                             isActive: self.$isPasswordViewActive,
                             label: {}
                         )
@@ -912,14 +913,19 @@ struct WelcomeView: View {
                 
                 switch userVM.message {
                 case "ACTIVE":
-                    self.isLoginViewActive = true
+                    print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
+                    self.isLoginNewDevice = true
+                    registerData.noTelepon = self.userVM.phoneNumber
+                    self.isFirstOTPLoginViewActive = true
                 case "LOGGED_IN":
                     self.isFirstOTPLoginViewActive = true
                 case "LOGGED_OUT":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
+                    self.isLoginNewDevice = true
                     registerData.noTelepon = self.userVM.phoneNumber
                     self.isFirstOTPLoginViewActive = true
                 default:
+                    print("USER NOT FOUND")
                     self.isFirstLoginViewActive = true
                 }
             }
