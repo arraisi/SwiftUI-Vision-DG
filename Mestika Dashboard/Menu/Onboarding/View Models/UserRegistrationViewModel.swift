@@ -10,6 +10,7 @@ class UserRegistrationViewModel: ObservableObject {
     @Published var code: String = ""
     @Published var message: String = ""
     @Published var phoneNumber: String = ""
+    @Published var reference: String = ""
     @Published var user: UserCheckResponse?
 }
 
@@ -93,6 +94,11 @@ extension UserRegistrationViewModel {
                     if let phone = response.phoneNumber {
                         self.phoneNumber = phone
                     }
+                    
+                    if let reference = response.reference {
+                        self.reference = reference
+                    }
+                    
                     self.user = response
                     
                     completion(true)

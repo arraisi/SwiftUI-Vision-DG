@@ -38,12 +38,6 @@ extension AuthViewModel {
             case .success(let response):
                 print("Success")
                 self.isLoading = false
-                self.nik = response.nik
-                self.password = response.password
-                self.phoneNumber = response.phoneNumber
-                self.pinTransaction = response.pinTransaction
-                self.status = response.status
-                self.fingerprintFlag = response.fingerprintFlag
                 
                 completion(true)
                 
@@ -173,13 +167,21 @@ extension AuthViewModel {
     // MARK: - POST SET PWD
     func setPwd(
         pwd: String,
+        accountNumber: String,
+        nik: String,
+        pinTrx: String,
         completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        AuthService.shared.setPassword(pwd: encryptPassword(password: pwd)) { result in
+        AuthService.shared.setPassword(
+            pwd: encryptPassword(password: pwd),
+            accountNumber: accountNumber,
+            nik: nik,
+            pinTrx: encryptPassword(password: pinTrx)) { result in
+            
             switch result {
             case .success(let response):
                 print("Success")
@@ -195,6 +197,8 @@ extension AuthViewModel {
                 switch error {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
+                case .custom(code: 400):
+                    self.errorMessage = "Password lemah,silahkan ganti password anda"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

@@ -7,13 +7,6 @@ import Foundation
 
 // MARK: - LoginCredentialModel
 struct LoginCredentialResponse: Codable {
-    let deviceID: String
-    let fingerprintFlag: Bool
-    let id, nik, password, phoneNumber: String
-    let pinTransaction, status: String
-
-    enum CodingKeys: String, CodingKey {
-        case deviceID = "deviceId"
-        case fingerprintFlag, id, nik, password, phoneNumber, pinTransaction, status
-    }
+    let code: String
+    let message: String
 }

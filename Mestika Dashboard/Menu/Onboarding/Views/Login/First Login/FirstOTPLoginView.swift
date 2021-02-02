@@ -24,6 +24,7 @@ struct FirstOTPLoginView: View {
     @State var isDisabled = false
     
     /* Data Binding */
+    @ObservedObject var userVM = UserRegistrationViewModel()
     @ObservedObject private var otpVM = OtpViewModel()
     
     /* Variable Validation */
@@ -54,6 +55,13 @@ struct FirstOTPLoginView: View {
     
     @State var isShowModalUserNotRegister = false
     @State var isShowModalSelectionRegister = false
+    
+    /*
+     variables otp new device
+     */
+    @Binding var isNewDeviceLogin: Bool
+    @State var messageResponse: String = ""
+    @State var pinShare: String = ""
     
     /* Disabled Form */
     var disableForm: Bool {
@@ -193,9 +201,17 @@ struct FirstOTPLoginView: View {
                 }
                 .disabled(isResendOtpDisabled)
                 
-                Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
-                    .font(.caption2)
-                    .foregroundColor(.white)
+                Button(
+                    action: {
+                        self.isRootToPasswordLogin = true
+                    },
+                    label: {
+                        Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
+                            .font(.caption2)
+                            .foregroundColor(.white)
+                    }
+                )
+                .disabled(AppConstants().BYPASS_OTP)
             }
             .padding(.top, 5)
             
@@ -214,7 +230,7 @@ struct FirstOTPLoginView: View {
                 }
                 
                 Button(action: {
-                   validateOTP()
+                    validateOTP()
                 }) {
                     
                     if (self.isBtnValidationDisabled) {
@@ -268,15 +284,15 @@ struct FirstOTPLoginView: View {
         })
         
         return TextField("", text: boundPin, onCommit: submitPin)
-           .accentColor(.clear)
-           .foregroundColor(.clear)
-           .keyboardType(.numberPad)
-           .disabled(isDisabled)
+            .accentColor(.clear)
+            .foregroundColor(.clear)
+            .keyboardType(.numberPad)
+            .disabled(isDisabled)
     }
     
     private func submitPin() {
         if pin.count == maxDigits {
-           isDisabled = true
+            isDisabled = true
         }
         
         if pin.count > maxDigits {
@@ -448,6 +464,7 @@ struct FirstOTPLoginView: View {
                 .foregroundColor(Color.red)
                 .padding(.bottom, 20)
                 .padding(.top, 20)
+                .fixedSize(horizontal: false, vertical: true)
             
             Text("Apakah anda ingin mendaftarkan aplikasi Digital Banking")
                 .font(.custom("Montserrat-Bold", size: 20))
@@ -508,33 +525,111 @@ struct FirstOTPLoginView: View {
         }
     }
     
-    // MARK: - FUNCTION REQUEST OTP
-    func getOTP() {
-        self.otpVM.otpRequestLogin() { success in
+    // MARK: - FUNCTION GET STATUS USER
+    func getUserStatus(deviceId: String) {
+        print("GET USER STATUS")
+        print("DEVICE ID : \(deviceId)")
+        
+        self.userVM.userCheck(deviceId: deviceId) { success in
             
             if success {
-                self.isLoading = false
-                self.timeRemainingRsnd = 30
-                
-                print(self.otpVM.isLoading)
-                print(self.otpVM.reference)
-                self.referenceCode = self.otpVM.reference
+                print("CODE STATUS : \(self.userVM.code)")
+                print("MESSAGE STATUS : \(self.userVM.message)")
             }
             
             if !success {
-                self.isLoading = false
-                self.timeRemainingRsnd = 0
-                print("ERROR")
-                
-                self.isShowModalUserNotRegister = true
+                self.modalSelection = "DEFAULT"
+                self.isShowModal = true
             }
         }
+    }
+    
+    // MARK: - FUNCTION REQUEST OTP
+    func getOTP() {
+        
+        if isNewDeviceLogin {
+            
+            self.otpVM.otpRequest(
+                otpRequest: OtpRequest(
+                    destination: self.loginData.noTelepon,
+                    type: "hp",
+                    trytime: self.tryCountResend
+                )
+            ) { success in
+                
+                if success {
+                    print("isLoading \(self.otpVM.isLoading)")
+                    print("otpRef \(self.otpVM.reference)")
+                    print("status \(self.otpVM.statusMessage)")
+                    
+                    DispatchQueue.main.async {
+                        self.isLoading = self.otpVM.isLoading
+                        self.referenceCode = self.otpVM.reference
+                        self.messageResponse = self.otpVM.statusMessage
+                        //                    self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.timeRemainingRsnd = 30
+                        self.isShowAlert = false
+                    }
+                }
+                
+                if !success {
+                    print("OTP RESP \(self.otpVM.statusMessage)")
+                    
+                    if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
+                        print("OTP FAILED")
+                        print(self.otpVM.timeCounter)
+                        
+                        DispatchQueue.main.sync {
+                            self.isLoading = self.otpVM.isLoading
+                            self.messageResponse = self.otpVM.statusMessage
+                            self.pinShare = self.otpVM.code
+                            self.referenceCode = self.otpVM.reference
+                            //                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                            self.timeRemainingRsnd = 30
+                            self.isShowAlert = true
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.isLoading = self.otpVM.isLoading
+                            self.isShowAlert = true
+                            self.messageResponse = self.otpVM.statusMessage
+                        }
+                    }
+                }
+            }
+            
+        } else {
+            
+            self.otpVM.otpRequestLogin() { success in
+                
+                if success {
+                    self.isLoading = false
+                    self.timeRemainingRsnd = 30
+                    
+                    print(self.otpVM.isLoading)
+                    print(self.otpVM.reference)
+                    self.referenceCode = self.otpVM.reference
+                }
+                
+                if !success {
+                    self.isLoading = false
+                    self.timeRemainingRsnd = 0
+                    print("ERROR GET OTP")
+                    
+                }
+            }
+            
+        }
+        
     }
     
     // MARK: - FUNCTION VALIDATE OTP
     func validateOTP() {
         self.isLoading = true
         
+        print("self.loginData.noTelepon \(self.loginData.noTelepon)")
+        
+        // VALIDATE OTP LOGIN
         self.otpVM.otpValidationLogin(
             code: self.pin,
             destination: self.loginData.noTelepon,
@@ -553,16 +648,23 @@ struct FirstOTPLoginView: View {
                 print("OTP INVALID")
                 
                 self.isLoading = false
-                print(self.otpVM.timeRemaining)
-                self.timeRemainingBtn = self.otpVM.timeRemaining
-                self.modalSelection = "OTPINCORRECT"
-                self.isShowModal = true
-                
-                self.isBtnValidationDisabled = true
-                resetField()
+                if self.otpVM.code == "403" {
+                    self.isShowModalUserNotRegister = true
+                } else {
+                    print("unauthorized")
+                    
+                    print(self.otpVM.timeRemaining)
+                    self.timeRemainingBtn = self.otpVM.timeRemaining
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal = true
+                    
+                    self.isBtnValidationDisabled = true
+                    resetField()
+                }
             }
             
         }
+        
     }
     
     private func resetField() {
@@ -573,7 +675,7 @@ struct FirstOTPLoginView: View {
 #if DEBUG
 struct FirstOTPLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstOTPLoginView().environmentObject(RegistrasiModel())
+        FirstOTPLoginView(isNewDeviceLogin: .constant(false)).environmentObject(RegistrasiModel())
     }
 }
 #endif

@@ -9,15 +9,22 @@ import SwiftUI
 
 struct FormInputAtmPinForgotPasswordView: View {
     
+    @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var atmNumberCtrl = ""
     @State private var pinAtmCtrl = ""
     @State private var showPassword: Bool = false
     
+    @State var errorMessage: String = ""
     @State var showingModalError: Bool = false
     
     @GestureState private var dragOffset = CGSize.zero
+    
+    /* CORE DATA */
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
     
     /* Route */
     @State var isNextRoute: Bool = false
@@ -75,7 +82,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                 
                 VStack {
                     Button(action: {
-                        validatePinVrf()
+                        setPassword()
                     }, label: {
                         Text("KONFIRMASI DATA")
                             .foregroundColor(Color(hex: "#232175"))
@@ -90,14 +97,14 @@ struct FormInputAtmPinForgotPasswordView: View {
                     .padding(.trailing, 10)
                     
                     NavigationLink(
-                        destination: FormInputNewPasswordForgotPasswordView(),
+                        destination: LoginScreen().environmentObject(registerData),
                         isActive: self.$isNextRoute) {}
                 }
                 .padding(.bottom, 20)
-                
-                if self.showingModalError {
-                    ModalOverlay(tapAction: { withAnimation { } })
-                }
+            }
+            
+            if self.showingModalError {
+                ModalOverlay(tapAction: { withAnimation { } })
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -126,8 +133,8 @@ struct FormInputAtmPinForgotPasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Nomor Akun / PIN salah, silahkan ulangi kembali.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text("\(self.errorMessage)")
+                .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
@@ -153,16 +160,20 @@ struct FormInputAtmPinForgotPasswordView: View {
     }
     
     @ObservedObject private var authVM = AuthViewModel()
-    func validatePinVrf() {
-        self.authVM.validatePinVrf(accountNumber: atmNumberCtrl, pinTrx: pinAtmCtrl) { success in
-            
+    func setPassword() {
+        self.authVM.setPwd(
+            pwd: registerData.password,
+            accountNumber: atmNumberCtrl,
+            nik: "",
+            pinTrx: pinAtmCtrl) { success in
             if success {
-                print("SUCCESS")
+                print("SUCCESS CHANGE PASSWORD")
                 self.isNextRoute = true
             }
             
             if !success {
-                print("NOT SUCCESS")
+                print("NOT SUCCESS CHANGE PASSWORD")
+                self.errorMessage = self.authVM.errorMessage
                 self.showingModalError = true
             }
         }

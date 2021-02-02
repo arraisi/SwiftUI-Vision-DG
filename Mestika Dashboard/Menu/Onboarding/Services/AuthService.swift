@@ -91,7 +91,7 @@ class AuthService {
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 
-                if (httpResponse.statusCode == 401) {
+                if (httpResponse.statusCode == 200) {
                     completion(.success("Success"))
                 }
                 
@@ -237,11 +237,19 @@ class AuthService {
     // MARK: - SET PWD
     func setPassword(
         pwd: String,
+        accountNumber: String,
+        nik: String,
+        pinTrx: String,
         completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         // Body
         let body: [String: Any] = [
-            "pwd": pwd,
+            "nik": nik,
+            "accountNumber": accountNumber,
+            "pinTrx": pinTrx,
+            "pwdSet": pwd,
         ]
+        
+        print(pwd)
         
         print("body => \(body)")
         
@@ -279,6 +287,10 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 400) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 

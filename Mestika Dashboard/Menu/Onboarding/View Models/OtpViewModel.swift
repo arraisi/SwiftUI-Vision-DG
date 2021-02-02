@@ -54,11 +54,13 @@ extension OtpViewModel {
                     completion(true)
                 } else {
                     print("Failed")
-                    print(response.status?.message)
-                    print(response.status?.code)
+                 
+                    print(response.code ?? "no code")
+                    print(response.message ?? "no message")
                     
                     DispatchQueue.main.async {
                         self.timeRemaining = response.timeCounter!
+                        self.code = response.code ?? ""
                         self.isLoading = false
                         completion(false)
                     }
@@ -86,12 +88,12 @@ extension OtpViewModel {
         OtpService.shared.getRequestOtp(otpRequest: otpRequest) { result in
             switch result {
             case.success(let response):
-                print(response.status?.message!)
+                print(response.status?.message! ?? "no message")
                 
                 if (response.status?.message != "OTP_REQUESTED_FAILED") {
                     print("Success")
-                    print(response.timeCounter)
-                    print(response.tryCount)
+                    print(response.timeCounter ?? "no timeCounter")
+                    print(response.tryCount ?? "no tryCount")
                     
                     DispatchQueue.main.async {
                         self.isLoading = false
@@ -99,8 +101,8 @@ extension OtpViewModel {
                         self.reference = response.reference ?? "0"
                         self.code = response.code ?? "0"
                         
-                        print(response.code)
-                        print(response.message)
+                        print(response.code ?? "no code")
+                        print(response.message ?? "no message")
                         
                         self.statusMessage = response.status?.message ?? ""
                         self.timeCounter = response.timeCounter ?? 30
@@ -172,8 +174,8 @@ extension OtpViewModel {
                     completion(true)
                 } else {
                     print("Failed")
-                    print(response.status?.message)
-                    print(response.status?.code)
+                    print(response.code ?? "no code")
+                    print(response.message ?? "no message")
                     
                     
                     self.timeRemaining = response.timeCounter!
@@ -203,12 +205,12 @@ extension OtpViewModel {
         OtpService.shared.getRequestOtpAccOrRek(otpRequest: otpRequest) { result in
             switch result {
             case.success(let response):
-                print(response.status?.message!)
+                print(response.status?.message! ?? "no message")
                 
                 if (response.status?.message != "OTP_REQUESTED_FAILED") {
                     print("Success")
-                    print(response.timeCounter)
-                    print(response.tryCount)
+                    print(response.timeCounter ?? "no timeCounter")
+                    print(response.tryCount ?? "no tryCount")
                     
                     DispatchQueue.main.async {
                         self.isLoading = false
@@ -257,12 +259,12 @@ extension OtpViewModel {
         OtpService.shared.getRequestOtpLogin() { result in
             switch result {
             case.success(let response):
-                print(response.status?.message!)
+                print(response.status?.message! ?? "no message")
                 
                 if (response.status?.message != "OTP_REQUESTED_FAILED") {
                     print("Success")
-                    print(response.timeCounter)
-                    print(response.tryCount)
+                    print(response.timeCounter ?? "no timeCounter")
+                    print(response.tryCount ?? "no tryCount")
                     
                     DispatchQueue.main.async {
                         self.isLoading = false
@@ -270,8 +272,8 @@ extension OtpViewModel {
                         self.reference = response.reference ?? "0"
                         self.code = response.code ?? "0"
                         
-                        print(response.code)
-                        print(response.message)
+                        print(response.code ?? "no code")
+                        print(response.message ?? "no message")
                         
                         self.statusMessage = response.status?.message ?? ""
                         self.timeCounter = response.timeCounter ?? 30
@@ -341,8 +343,8 @@ extension OtpViewModel {
                     completion(true)
                 } else {
                     print("Failed")
-                    print(response.status?.message)
-                    print(response.status?.code)
+                    print(response.code ?? "no code")
+                    print(response.message ?? "no message")
                     
                     DispatchQueue.main.async {
                         self.timeRemaining = response.timeCounter!

@@ -35,6 +35,7 @@ struct WelcomeView: View {
     @State var isFirstLoginViewActive: Bool = false
     @State var isFirstOTPLoginViewActive: Bool = false
     @State var isPasswordViewActive: Bool = false
+    @State var isLoginNewDevice: Bool = false
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -137,7 +138,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: FirstOTPLoginView().environmentObject(registerData),
+                            destination: FirstOTPLoginView(isNewDeviceLogin: self.$isLoginNewDevice).environmentObject(registerData),
                             isActive: self.$isLoginViewActive,
                             label: {}
                         )
@@ -153,7 +154,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: FirstOTPLoginView().environmentObject(registerData),
+                            destination: FirstOTPLoginView(isNewDeviceLogin: self.$isLoginNewDevice).environmentObject(registerData),
                             isActive: self.$isFirstOTPLoginViewActive,
                             label: {}
                         )
@@ -161,7 +162,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: FirstPasswordAppLoginView(),
+                            destination: LoginScreen().environmentObject(registerData),
                             isActive: self.$isPasswordViewActive,
                             label: {}
                         )
@@ -301,6 +302,10 @@ struct WelcomeView: View {
             return AnyView(PopupActive())
         case "NOT_APPROVED" :
             return AnyView(PopupNotApproved())
+        case "LOGGED_IN" :
+            return AnyView(ScreeningLoggedModal())
+        case "LOGGED_OUT" :
+            return AnyView(ScreeningLoggedModal())
         case "DEFAULT" :
             return AnyView(ScreeningNasabahModal())
         default:
@@ -785,6 +790,53 @@ struct WelcomeView: View {
         .cornerRadius(20)
     }
     
+    // MARK: - POPUP SELECTOR LOGGED_IN OR LOGGED_OUT
+    func ScreeningLoggedModal() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_bells")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+            
+            Text("You Have Registered")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 20)
+            
+            Text("Please log in into your Account")
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            NavigationLink(
+                destination: LoginScreen().environmentObject(registerData),
+                isActive: self.$isKetentuanViewActive) {
+                EmptyView()
+            }
+            .isDetailLink(false)
+            
+            Button(action: {
+                self.isPasswordViewActive = true
+            }) {
+                Text(NSLocalizedString("LOGIN", comment: ""))
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 2)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     // MARK: - POPUP CHECK CONNECTION INTERNET
     func PopupNoInternetConnection() -> some View {
         VStack(alignment: .leading) {
@@ -912,14 +964,26 @@ struct WelcomeView: View {
                 
                 switch userVM.message {
                 case "ACTIVE":
-                    self.isLoginViewActive = true
-                case "LOGGED_IN":
-                    self.isPasswordViewActive = true
-                case "LOGGED_OUT":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
+                    self.isLoginNewDevice = true
                     registerData.noTelepon = self.userVM.phoneNumber
                     self.isFirstOTPLoginViewActive = true
+                    
+                    print("CASE ACTIVE")
+                case "LOGGED_IN":
+//                    self.isFirstOTPLoginViewActive = true
+                    self.isPasswordViewActive = true
+                    
+                    print("CASE LOGGED_IN")
+                case "LOGGED_OUT":
+                    print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
+                    self.isLoginNewDevice = true
+                    registerData.noTelepon = self.userVM.phoneNumber
+                    self.isFirstOTPLoginViewActive = true
+                    
+                    print("CASE LOGGED_OUT")
                 default:
+                    print("USER NOT FOUND")
                     self.isFirstLoginViewActive = true
                 }
             }
