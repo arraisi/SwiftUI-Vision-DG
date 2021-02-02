@@ -240,7 +240,9 @@ struct AccountTabs: View {
                         action: {
                             self.authVM.postLogout { success in
                                 if success {
+                                    print("SUCCESS LOGOUT")
                                     self.appState.moveToWelcomeView = true
+//                                    self.isNextRoute = true
                                 }
                             }
                         },
