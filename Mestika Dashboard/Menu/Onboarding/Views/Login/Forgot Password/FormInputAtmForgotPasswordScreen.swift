@@ -9,11 +9,15 @@ import SwiftUI
 
 struct FormInputAtmForgotPasswordScreen: View {
     
+    @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var atmNumberCtrl = ""
     @State private var pinAtmCtrl = ""
     @State private var showPassword: Bool = false
+    
+    @State var errorMessage: String = ""
     
     @GestureState private var dragOffset = CGSize.zero
     
@@ -93,7 +97,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                     
                     Button(
                         action: {
-                            validatePinTrx()
+                            setPassword()
                         },
                         label: {
                             Text("KONFIRMASI DATA")
@@ -109,15 +113,14 @@ struct FormInputAtmForgotPasswordScreen: View {
                     .padding(.trailing, 10)
                     
                     NavigationLink(
-                        destination: FormInputNewPasswordForgotPasswordView(),
+                        destination: LoginScreen().environmentObject(registerData),
                         isActive: self.$isNextRoute) {}
                 }
                 .padding(.bottom, 20)
-                
-                if self.showingModalError {
-                    ModalOverlay(tapAction: { withAnimation { } })
-                }
-                
+            }
+            
+            if self.showingModalError {
+                ModalOverlay(tapAction: { withAnimation { } })
             }
             
         }
@@ -174,16 +177,21 @@ struct FormInputAtmForgotPasswordScreen: View {
     }
     
     @ObservedObject private var authVM = AuthViewModel()
-    func validatePinTrx() {
-        self.authVM.validatePinTrx(accountNumber: atmNumberCtrl, pinTrx: pinAtmCtrl) { success in
-            
+    func setPassword() {
+        self.authVM.setPwd(
+            pwd: registerData.password,
+            accountNumber: "",
+            nik: atmNumberCtrl,
+            pinTrx: pinAtmCtrl) { success in
             if success {
-                print("SUCCESS")
+                print("SUCCESS CHANGE PASSWORD")
                 self.isNextRoute = true
             }
             
             if !success {
-                print("NOT SUCCESS")
+                print("NOT SUCCESS CHANGE PASSWORD")
+                self.errorMessage = self.authVM.errorMessage
+                self.showingModalError = true
             }
         }
     }

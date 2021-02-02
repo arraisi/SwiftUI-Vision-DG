@@ -918,7 +918,7 @@ struct WelcomeView: View {
                     registerData.noTelepon = self.userVM.phoneNumber
                     self.isFirstOTPLoginViewActive = true
                 case "LOGGED_IN":
-                    self.isPasswordViewActive = true
+                    self.isFirstOTPLoginViewActive = true
                 case "LOGGED_OUT":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
                     self.isLoginNewDevice = true

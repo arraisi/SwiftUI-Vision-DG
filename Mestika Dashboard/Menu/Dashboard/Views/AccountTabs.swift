@@ -9,9 +9,16 @@ import SwiftUI
 
 struct AccountTabs: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @Binding var showingSettingMenu : Bool
     @State var username: String = ""
     @State var phoneNumber: String = ""
+    
+    /* Data Binding */
+    @ObservedObject private var authVM = AuthViewModel()
+    @State private var isFingerprint = false
+    @State private var isNextRoute = false
     
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -19,9 +26,7 @@ struct AccountTabs: View {
     
     var body: some View {
         ZStack {
-//            Color(hex: "#F6F8FB")
-            
-            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+            ScrollView(.vertical, showsIndicators: false, content: {
                 
                 GeometryReader { geometry in
                     Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
@@ -33,9 +38,6 @@ struct AccountTabs: View {
                         profileInfo
                         menuGrid
                             .padding(.bottom)
-                        
-                        ListHistoryTransferView()
-                        ListHistoryTransactionView()
                     }
                 }
             })
@@ -45,35 +47,26 @@ struct AccountTabs: View {
     
     var profileInfo: some View {
         VStack {
-            HStack(alignment: .top) {
+            HStack(alignment: .center) {
                 Image("foryou-card-1")
                     .resizable()
-                    .frame(width: 70, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    .frame(width: 75, height: 75, alignment: .center)
+                    .clipShape(Circle())
+                
+                VStack(alignment: .leading) {
+                    Text("\(self.username)")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(hex: "#2334D0"))
+                    
+                    Text("+62\(self.phoneNumber)")
+                        .font(.caption)
+                        .fontWeight(.light)
+                }
                 
                 Spacer()
-                
-                Button(action: {
-                    withAnimation(.easeIn) {
-                        self.showingSettingMenu = true
-                    }
-                }, label: {
-                    Image("ic_settings")
-                })
             }
             .padding(.bottom)
-            
-            VStack(alignment: .leading) {
-                Text("\(self.username)")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color(hex: "#2334D0"))
-                
-                Text("+62\(self.phoneNumber)")
-                    .font(.caption)
-                    .fontWeight(.light)
-            }
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         }
         .padding()
     }
@@ -81,54 +74,195 @@ struct AccountTabs: View {
     // MARK: -MENU GRID VIEW
     var menuGrid: some View {
         VStack {
-            HStack(alignment: .top) {
-                Divider()
-                    .frame(width: 3, height: 90)
-                    .background(Color(hex: "#232175"))
-                    .padding(.trailing, 5)
-                
-                VStack(alignment: .leading) {
-                    Text("\(self.username)")
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color(hex: "#232175"))
-                        .padding(.bottom, 5)
-                    
-                    VStack(alignment: .leading) {
-                        Text("Total Saldo")
-                            .font(.caption)
-                            .fontWeight(.ultraLight)
+            ZStack {
+                VStack {
+                    HStack {
+                        Text("Account")
+                            .foregroundColor(Color(hex: "#232175"))
+                            .font(.title)
+                            .fontWeight(.bold)
                         
-                        HStack {
-                            Text("Rp.")
-                                .fontWeight(.light)
-                                .foregroundColor(Color(hex: "#2334D0"))
-                            
-                            Text("750.000")
-                                .font(.title3)
-                                .bold()
-                                .foregroundColor(Color(hex: "#2334D0"))
-                        }
+                        Spacer()
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Personal Data")
+                                .foregroundColor(Color(hex: "#1D2238"))
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Address")
+                                .foregroundColor(Color(hex: "#1D2238"))
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Contact")
+                                .foregroundColor(Color(hex: "#1D2238"))
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Language")
+                                .foregroundColor(Color(hex: "#1D2238"))
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
                 }
-                
-                Spacer(minLength: 0)
-                
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Image("ic_more")
-                        .padding(.top, 5)
-                })
+                .frame(width: UIScreen.main.bounds.width - 30)
             }
-            .padding([.leading, .trailing], 15)
-            .padding(.top, 25)
-            .padding(.bottom, 20)
             
-            GridMenuView()
-                
-                .padding(.bottom, 15)
-            
-            ListMySavingsView()
-                .padding(.bottom, 25)
+            ZStack {
+                VStack {
+                    HStack {
+                        Text("Security")
+                            .foregroundColor(Color(hex: "#232175"))
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Toggle(
+                                isOn: $isFingerprint,
+                                label: {
+                                    Text("Aktifasi Fingerprint")
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                            )
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Change Password")
+                                .foregroundColor(Color(hex: "#1D2238"))
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Change PIN Transaction")
+                                .foregroundColor(Color(hex: "#1D2238"))
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Forgot Pin Transaction")
+                                .foregroundColor(Color(hex: "#1D2238"))
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    Button(
+                        action: {
+                            self.authVM.postLogout { success in
+                                if success {
+                                    self.appState.moveToWelcomeView = true
+                                }
+                            }
+                        },
+                        label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Logout")
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 15)
+                        }
+                    )
+                }
+                .frame(width: UIScreen.main.bounds.width - 30)
+            }
         }
         .navigationBarHidden(true)
         .frame(width: UIScreen.main.bounds.width - 30)

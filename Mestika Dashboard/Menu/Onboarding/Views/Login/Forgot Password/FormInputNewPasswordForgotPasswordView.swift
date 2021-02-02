@@ -9,6 +9,10 @@ import SwiftUI
 
 struct FormInputNewPasswordForgotPasswordView: View {
     
+    /* Environtment Object */
+    @EnvironmentObject var registerData: RegistrasiModel
+    @EnvironmentObject var appState: AppState
+    
     @State private var passwordCtrl = ""
     @State private var confirmPasswordCtrl = ""
     
@@ -19,6 +23,8 @@ struct FormInputNewPasswordForgotPasswordView: View {
     @State var showingModalSuccess: Bool = false
     
     @State var isNextRoute: Bool = false
+    @State var routeATMNumberPin: Bool = false
+    @State var routeAccountNumberPin: Bool = false
     
     var disableForm: Bool {
         passwordCtrl.isEmpty || confirmPasswordCtrl.isEmpty || passwordCtrl.count < 6 || confirmPasswordCtrl.count < 6
@@ -107,7 +113,8 @@ struct FormInputNewPasswordForgotPasswordView: View {
                             if (passwordCtrl != confirmPasswordCtrl) {
                                 self.showingModalError = true
                             } else {
-                                setPassword()
+                                self.registerData.password = passwordCtrl
+                                self.showingModalSuccess = true
                             }
                         },
                         label: {
@@ -123,16 +130,14 @@ struct FormInputNewPasswordForgotPasswordView: View {
                     .padding(.leading, 20)
                     .padding(.trailing, 10)
                     .disabled(disableForm)
-                    
-                    NavigationLink(
-                        destination: LoginScreen().environmentObject(RegistrasiModel()),
-                        isActive: self.$isNextRoute,
-                        label: {EmptyView()}
-                    )
-
                 }
                 .padding(.bottom, 20)
                 
+            }
+            
+            if self.showingModalSuccess {
+                ModalOverlay(tapAction: { withAnimation { self.showingModalSuccess = false } })
+                    .edgesIgnoringSafeArea(.all)
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -145,7 +150,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
             modalPasswordNotMatched()
         }
         .popup(isPresented: $showingModalSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            modalPasswordSuccess()
+            popupMessageForgotPassword()
         }
     }
     
@@ -214,17 +219,58 @@ struct FormInputNewPasswordForgotPasswordView: View {
         .cornerRadius(20)
     }
     
-    @ObservedObject private var authVM = AuthViewModel()
-    func setPassword() {
-        self.authVM.setPwd(pwd: passwordCtrl) { success in
-            if success {
-                self.showingModalSuccess = true
+    // MARK: - POPUP SELECTOR REGISTER NASABAH
+    func popupMessageForgotPassword() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_bells")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+            
+            Text("Do you still remember your transaction PIN?")
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 20)
+            
+            NavigationLink(
+                destination: FormInputAtmPinForgotPasswordView().environmentObject(registerData),
+                isActive: self.$routeAccountNumberPin) {
+                EmptyView()
             }
             
-            if !success {
-                
+            Button(action: {
+                self.routeAccountNumberPin = true
+            }) {
+                Text("Yes, i'am Still Remember")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
             }
+            .padding(.bottom, 2)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            NavigationLink(
+                destination: FormInputAtmForgotPasswordScreen().environmentObject(registerData),
+                isActive: self.$routeATMNumberPin) {
+                EmptyView()
+            }
+            
+            Button(action: {
+                self.routeATMNumberPin = true
+            }) {
+                Text("No, I do not remember")
+                    .foregroundColor(.black)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 30)
+            .cornerRadius(12)
         }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
