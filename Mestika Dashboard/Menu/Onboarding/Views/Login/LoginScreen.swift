@@ -97,6 +97,7 @@ struct LoginScreen: View {
                     Button(
                         action: {
                             login()
+                            UIApplication.shared.endEditing()
                         },
                         label: {
                             Text("LOGIN APPS")
@@ -104,7 +105,7 @@ struct LoginScreen: View {
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    })
+                        })
                         .background(Color.white)
                         .cornerRadius(12)
                         .padding(.leading, 20)
@@ -115,7 +116,7 @@ struct LoginScreen: View {
                         isActive: self.$isActiveRoute,
                         label: {}
                     )
-                  
+                    
                     
                     Button(action: {
                         authenticate()
@@ -152,7 +153,7 @@ struct LoginScreen: View {
                     }
                 }
                 .padding(.bottom)
-
+                
             }
             
             if self.showingModal || self.showingModalForgotPassword {
