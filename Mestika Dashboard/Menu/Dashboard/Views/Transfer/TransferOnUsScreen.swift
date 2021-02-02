@@ -9,10 +9,21 @@ import SwiftUI
 import BottomSheet
 
 struct TransferOnUsScreen: View {
+
+    var transferData = TransferOnUsModel()
+    
+    @State var destinationNumber: String = ""
+    @State var amountTransfer: String = ""
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", noRekening: "", saldo: "0.0")
     
     @State private var showBottomSheet = false
-    @State var norek: String = ""
-    @State var nominal: String = ""
+    @State var showDialogSelectAccount = false
+    
+    var _listBankAccount = [
+        BankAccount(id: 1, namaRekening: "Rekening 01", noRekening: "9090123133", saldo: "430.000"),
+        BankAccount(id: 2, namaRekening: "Rekening 02", noRekening: "009012033", saldo: "200.000"),
+        BankAccount(id: 3, namaRekening: "Rekening 03", noRekening: "900912303", saldo: "0.0")
+    ]
     
     var body: some View {
         ZStack {
@@ -58,9 +69,18 @@ struct TransferOnUsScreen: View {
                 Text("Cancel")
             }))
             
+            if (self.showDialogSelectAccount) {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showDialogSelectAccount = false
+                }})
+            }
+
         }
         .bottomSheet(isPresented: $showBottomSheet, height: 300) {
             bottomSheetCard
+        }
+        .popup(isPresented: $showDialogSelectAccount, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalSelectBankAccount()
         }
     }
     
@@ -77,8 +97,9 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Rekening", text: $norek, onEditingChanged: { changed in
-                    print("\($norek)")
+                TextField("Rekening", text: $destinationNumber, onEditingChanged: { changed in
+                    print("\($destinationNumber)")
+                    self.transferData.destinationNumber = destinationNumber
                 })
                 .keyboardType(.numberPad)
                 .frame(height: 10)
@@ -89,8 +110,6 @@ struct TransferOnUsScreen: View {
                 .padding(.horizontal, 20)
             }
             .padding(.bottom, 25)
-            
-            
         }
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
@@ -115,7 +134,11 @@ struct TransferOnUsScreen: View {
                 Text("Rp.")
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)
-                TextField("0", text: $nominal)
+                
+                TextField("0", text: $amountTransfer, onEditingChanged: { changed in
+                    print("\($amountTransfer)")
+                    self.transferData.nominal = amountTransfer
+                })
                     .foregroundColor(Color(hex: "#232175"))
                     .font(.system(size: 40, weight: .bold, design: .default))
                     .keyboardType(.numbersAndPunctuation)
@@ -136,7 +159,7 @@ struct TransferOnUsScreen: View {
                 HStack(alignment: .top) {
                     Text("Rp.")
                         .foregroundColor(.red)
-                        .font(.caption2)
+//                        .font(.caption2)
                         .fontWeight(.bold)
                     Text("900.000")
                         .foregroundColor(.red)
@@ -151,7 +174,8 @@ struct TransferOnUsScreen: View {
                 .padding(.horizontal, 25)
                 .padding(.bottom, 10)
             
-            ListBankAccountView()
+//            ListBankAccountView()
+            bankAccountCard
                 .padding(.bottom, 25)
             
         }
@@ -160,6 +184,41 @@ struct TransferOnUsScreen: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .padding()
+    }
+    
+    var bankAccountCard: some View {
+        ZStack {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(self.selectedAccount.namaRekening)
+                        .font(.subheadline)
+                        .foregroundColor(Color(hex: "#232175"))
+                        .fontWeight(.bold)
+                    
+                    HStack {
+                        Text("Saldo Aktif :")
+//                            .font(.caption)
+                            .fontWeight(.ultraLight)
+                        Text(self.selectedAccount.saldo)
+//                            .font(.caption)
+                            .foregroundColor(Color(hex: "#232175"))
+                            .fontWeight(.semibold)
+                    }
+                }
+                
+                Spacer()
+                
+//                Image(systemName: "chevron.down")
+            }
+            .padding()
+            .onTapGesture {
+                self.showDialogSelectAccount = true
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.gray.opacity(0.3), radius: 10)
     }
     
     var calendarCard: some View {
@@ -196,7 +255,7 @@ struct TransferOnUsScreen: View {
                 
                 Spacer()
                 
-                Image(systemName: "chevron.down")
+//                Image(systemName: "chevron.down")
             }
             .padding()
         }
@@ -218,7 +277,7 @@ struct TransferOnUsScreen: View {
                 
                 Spacer()
                 
-                Image(systemName: "chevron.down")
+//                Image(systemName: "chevron.down")
             }
             .padding()
         }
@@ -241,8 +300,8 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Tulis keterangan Transaksi disini", text: $norek, onEditingChanged: { changed in
-                    print("\($norek)")
+                TextField("Tulis keterangan Transaksi disini", text: $destinationNumber, onEditingChanged: { changed in
+                    print("\($destinationNumber)")
                 })
                 .lineLimit(5)
                 .multilineTextAlignment(.leading)
@@ -291,10 +350,10 @@ struct TransferOnUsScreen: View {
                     
                     HStack {
                         Text("Mestika :")
-                            .font(.caption)
+//                            .font(.caption)
                             .fontWeight(.ultraLight)
                         Text("8809091230903")
-                            .font(.caption)
+//                            .font(.caption)
                             .fontWeight(.ultraLight)
                     }
                 }
@@ -323,6 +382,56 @@ struct TransferOnUsScreen: View {
             }
             .padding(.bottom, 20)
         }
+    }
+    
+    func modalSelectBankAccount() -> some View {
+        VStack {
+            HStack {
+                Text("Pilih Akun")
+                    .font(.title3)
+                    .fontWeight(.ultraLight)
+                
+                Spacer()
+            }
+            
+            ForEach(_listBankAccount) { data in
+                VStack {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(data.namaRekening)
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.bold)
+                            
+                            HStack {
+                                Text("Saldo Aktif :")
+                                    .font(.caption)
+                                    .fontWeight(.ultraLight)
+                                Text("Rp. \(data.saldo)")
+                                    .font(. caption)
+                                    .foregroundColor(Color(hex: "#232175"))
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    Divider()
+                        .padding(.horizontal, 25)
+                        .padding(.bottom, 10)
+                }
+//                .background(Color(hex: "#FF00FF"))
+                .onTapGesture {
+                    self.selectedAccount = data
+                    print(data.noRekening)
+                    self.showDialogSelectAccount = false
+                }
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
