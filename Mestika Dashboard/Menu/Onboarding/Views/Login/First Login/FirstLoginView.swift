@@ -164,7 +164,6 @@ struct FirstLoginView: View {
     }
     
     func checkPhoneNumber() {
-        // TODO: CHECK NUMBER IS NUMBER OF NASABAH
         self.nextRoute = true
     }
     

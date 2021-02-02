@@ -616,10 +616,6 @@ struct FirstOTPLoginView: View {
                     self.timeRemainingRsnd = 0
                     print("ERROR GET OTP")
                     
-                    if loginData.noTelepon == "" {
-                        self.isShowModalUserNotRegister = true
-                    }
-                    
                 }
             }
             
@@ -631,60 +627,32 @@ struct FirstOTPLoginView: View {
     func validateOTP() {
         self.isLoading = true
         
-        if isNewDeviceLogin {
+        print("self.loginData.noTelepon \(self.loginData.noTelepon)")
+        
+        // VALIDATE OTP LOGIN
+        self.otpVM.otpValidationLogin(
+            code: self.pin,
+            destination: self.loginData.noTelepon,
+            reference: referenceCode,
+            timeCounter: self.timeRemainingBtn,
+            tryCount: tryCount)
+        { success in
             
-            // VALIDATE OTP EKYC
-            self.otpVM.otpValidation(
-                code: self.pin,
-                destination: self.loginData.noTelepon,
-                reference: referenceCode,
-                timeCounter: self.timeRemainingBtn,
-                tryCount: tryCount,
-                type: "hp")
-            { success in
-                
-                if success {
-                    print("OTP VALID")
-                    self.isLoading = false
-                    self.isRootToPasswordLogin = true
-                }
-                
-                if !success {
-                    print("OTP INVALID")
-                    
-                    self.isLoading = false
-                    print(self.otpVM.timeRemaining)
-                    self.timeRemainingBtn = self.otpVM.timeRemaining
-                    self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal = true
-                    
-                    self.isBtnValidationDisabled = true
-                    resetField()
-                }
-                
+            if success {
+                print("OTP VALID")
+                self.isLoading = false
+                self.isRootToPasswordLogin = true
             }
             
-        } else {
-            
-            // VALIDATE OTP LOGIN
-            self.otpVM.otpValidationLogin(
-                code: self.pin,
-                destination: self.loginData.noTelepon,
-                reference: referenceCode,
-                timeCounter: self.timeRemainingBtn,
-                tryCount: tryCount)
-            { success in
+            if !success {
+                print("OTP INVALID")
                 
-                if success {
-                    print("OTP VALID")
-                    self.isLoading = false
-                    self.isRootToPasswordLogin = true
-                }
-                
-                if !success {
-                    print("OTP INVALID")
+                self.isLoading = false
+                if self.otpVM.code == "403" {
+                    self.isShowModalUserNotRegister = true
+                } else {
+                    print("unauthorized")
                     
-                    self.isLoading = false
                     print(self.otpVM.timeRemaining)
                     self.timeRemainingBtn = self.otpVM.timeRemaining
                     self.modalSelection = "OTPINCORRECT"
@@ -693,7 +661,6 @@ struct FirstOTPLoginView: View {
                     self.isBtnValidationDisabled = true
                     resetField()
                 }
-                
             }
             
         }
