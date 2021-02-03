@@ -82,7 +82,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                 isActive: $goToNext,
                                 label: {}
                             )
-                            .isDetailLink(false)
+//                            .isDetailLink(false)
                             
                             Button(action : {
                                 self.goToNext = true
