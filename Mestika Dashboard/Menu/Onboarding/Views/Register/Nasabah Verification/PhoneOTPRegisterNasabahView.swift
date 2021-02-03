@@ -11,6 +11,8 @@ import SystemConfiguration
 
 struct PhoneOTPRegisterNasabahView: View {
     
+    @State var initHasRun = false
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Environtment Object */
@@ -65,6 +67,7 @@ struct PhoneOTPRegisterNasabahView: View {
     @Binding var rootIsActive : Bool
     @Binding var root2IsActive : Bool
     
+    @State var showingAlert: Bool = false
     @GestureState private var dragOffset = CGSize.zero
     
     /* Disabled Form */
@@ -244,8 +247,11 @@ struct PhoneOTPRegisterNasabahView: View {
             var flags = SCNetworkReachabilityFlags()
             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
             if self.isNetworkReachability(with: flags) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                print(initHasRun)
+                if !initHasRun {
+                    print("GET OTP NASABAH")
                     getOTP()
+                    self.initHasRun = true
                 }
             } else {
                 self.isShowAlertInternetConnection = true
@@ -278,6 +284,12 @@ struct PhoneOTPRegisterNasabahView: View {
                     self.isLoading = false
                 }))
         }
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.showingAlert = true
+            }
+        }))
         .popup(
             isPresented: $isShowModal,
             type: .floater(),
@@ -288,12 +300,14 @@ struct PhoneOTPRegisterNasabahView: View {
         .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             PopupNoInternetConnection()
         }
-        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-            if(value.startLocation.x < 20 &&
-                value.translation.width > 100) {
-                self.presentationMode.wrappedValue.dismiss()
-            }
-        }))
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
+        }
     }
     
     private var pinDots: some View {
