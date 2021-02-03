@@ -31,8 +31,10 @@
 		06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */; };
 		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
-		0A2079DC25C895F400471C15 /* TransferOnUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
+		0A566A0325CA68970008E752 /* TransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A566A0225CA68960008E752 /* TransferViewModel.swift */; };
+		0A566A0825CA6A4E0008E752 /* TransferOnUsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A566A0725CA6A4E0008E752 /* TransferOnUsResponse.swift */; };
+		0A566A0E25CA6E940008E752 /* TransferServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A566A0D25CA6E940008E752 /* TransferServices.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
 		0A8B775A25B8366B00819952 /* ip7_ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */; };
 		0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */; };
@@ -376,8 +378,10 @@
 		06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarLogo.swift; sourceTree = "<group>"; };
 		0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductATM.swift; sourceTree = "<group>"; };
 		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
-		0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsModel.swift; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
+		0A566A0225CA68960008E752 /* TransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModel.swift; sourceTree = "<group>"; };
+		0A566A0725CA6A4E0008E752 /* TransferOnUsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsResponse.swift; sourceTree = "<group>"; };
+		0A566A0D25CA6E940008E752 /* TransferServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferServices.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ip7_ringtone.mp3; sourceTree = "<group>"; };
 		0AF48ACA2577834D0037942D /* ATMCardDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMCardDesignView.swift; sourceTree = "<group>"; };
@@ -769,12 +773,12 @@
 			path = Html;
 			sourceTree = "<group>";
 		};
-		0A2079DA25C895D000471C15 /* Transfer */ = {
+		0A566A0C25CA6E7A0008E752 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */,
+				0A566A0D25CA6E940008E752 /* TransferServices.swift */,
 			);
-			path = Transfer;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		0A8B775825B8364200819952 /* sound */ = {
@@ -818,6 +822,7 @@
 			isa = PBXGroup;
 			children = (
 				522101B025C9213100C9566A /* TransferOnUsModel.swift */,
+				0A566A0725CA6A4E0008E752 /* TransferOnUsResponse.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -940,6 +945,7 @@
 		5245F8BC253FE82E002E8B53 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0A566A0C25CA6E7A0008E752 /* Services */,
 				C04B421F25540FB000DDE4C7 /* Models */,
 				C0EB654B255E4D67009ADFFE /* View Models */,
 				C01C67A4255E38180019D06F /* Views */,
@@ -1648,6 +1654,7 @@
 			isa = PBXGroup;
 			children = (
 				C0EB654C255E4D81009ADFFE /* DbViewModel.swift */,
+				0A566A0225CA68960008E752 /* TransferViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2008,6 +2015,7 @@
 				526B6607254FFA4600C13C36 /* CardManagementScreen.swift in Sources */,
 				526B65F8254FF1BC00C13C36 /* PopoverSettingsView.swift in Sources */,
 				525FA115255289B0007EADCB /* GridMenuManyUsedView.swift in Sources */,
+				0A566A0825CA6A4E0008E752 /* TransferOnUsResponse.swift in Sources */,
 				52ADFFA32557DFDC00A1001F /* Term&ConditionView.swift in Sources */,
 				52ADFFA62557DFDC00A1001F /* VerificationDataPersonalView.swift in Sources */,
 				C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */,
@@ -2190,6 +2198,7 @@
 				5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */,
 				52BF57CF2558E34100F009B5 /* FormPilihJenisTabunganView.swift in Sources */,
 				52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */,
+				0A566A0325CA68970008E752 /* TransferViewModel.swift in Sources */,
 				52ADFFA42557DFDC00A1001F /* VerificationPINView.swift in Sources */,
 				527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */,
 				FA486B1925AF4E9100EDBD88 /* SavingDetailModalView.swift in Sources */,
@@ -2216,6 +2225,7 @@
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
 				0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */,
 				52C05570255F687300A57400 /* UserRegistrationService.swift in Sources */,
+				0A566A0E25CA6E940008E752 /* TransferServices.swift in Sources */,
 				52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */,
 				6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */,
 				6122BB4B73F6658A6EC4DFED /* UserRegistrationResponse.swift in Sources */,
