@@ -8,14 +8,21 @@
 import Foundation
 
 class TransferOnUsModel: ObservableObject {
+    @Published var transferType = "Antar Sesama Bank"
     @Published var cardNo = ""
     @Published var ref = "1"
-    @Published var nominal = ""
+    @Published var amount = ""
     @Published var currency = "360"
     @Published var sourceNumber = ""
+    @Published var sourceAccountName = ""
     @Published var destinationNumber = ""
-    @Published var berita = ""
+    @Published var destinationName = ""
+    @Published var notes = ""
     @Published var pin = ""
+    
+    @Published var transactionDate = "Sekarang"
+    @Published var transactionFrequency = "Pilih Frekuensi Transaksi"
+    @Published var transactionVoucher = "Pilih Voucher"
     
     static let shared = TransferOnUsModel()
 }

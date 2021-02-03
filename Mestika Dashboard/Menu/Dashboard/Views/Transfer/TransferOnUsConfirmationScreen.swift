@@ -9,25 +9,13 @@ import SwiftUI
 
 struct TransferOnUsConfirmationScreen: View {
     
-    @State private var jenisRekeningCtrl = "Antar Sesama Bank"
-    @State private var penerimaCtrl = "Prima Jatnika"
-    @State private var rekeningPenerimaCtrl = "20091289812"
-    @State private var nominalTransferCtrl = "200.000"
-    @State private var rekeningCtrl = "Rekening Utama / 01"
-    @State private var waktuTransaksiCtrl = "20 Oktober 2020"
-    @State private var frekuensiCtrl = "Sekali Pengiriman"
-    @State private var voucherCtrl = "VCR-100K"
-    @State private var catatanCtrl = "-"
+    @EnvironmentObject var transferData: TransferOnUsModel
 
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
             
             VStack {
-//                Color(hex: "#2334D0")
-//                    .edgesIgnoringSafeArea(.top)
-//                    .frame(height: 0)
-                
                 ScrollView {
                     VStack {
                         formCard
@@ -77,8 +65,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Jenis Rekening", text: $jenisRekeningCtrl, onEditingChanged: { changed in
-                        print("\($jenisRekeningCtrl)")
+                    TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
+                        print("\(self.$transferData.transferType)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -96,8 +84,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Penerima", text: $penerimaCtrl, onEditingChanged: { changed in
-                        print("\($penerimaCtrl)")
+                    TextField("Penerima", text: self.$transferData.destinationName, onEditingChanged: { changed in
+                        print("\(self.$transferData.destinationName)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -115,8 +103,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Rekening Penerima", text: $rekeningPenerimaCtrl, onEditingChanged: { changed in
-                        print("\($rekeningPenerimaCtrl)")
+                    TextField("Rekening Penerima", text: self.$transferData.destinationNumber, onEditingChanged: { changed in
+                        print("\(self.$transferData.destinationNumber)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -134,8 +122,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Nominal Transfer", text: $nominalTransferCtrl, onEditingChanged: { changed in
-                        print("\($nominalTransferCtrl)")
+                    TextField("Nominal Transfer", text: self.$transferData.amount, onEditingChanged: { changed in
+                        print("\(self.$transferData.destinationNumber)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -153,8 +141,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Rekening", text: $rekeningCtrl, onEditingChanged: { changed in
-                        print("\($rekeningCtrl)")
+                    TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
+                        print("\(self.$transferData.sourceAccountName)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -172,8 +160,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Waktu Transaksi", text: $waktuTransaksiCtrl, onEditingChanged: { changed in
-                        print("\($waktuTransaksiCtrl)")
+                    TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
+                        print("\(self.$transferData.transactionDate)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -191,8 +179,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Frekuensi", text: $frekuensiCtrl, onEditingChanged: { changed in
-                        print("\($frekuensiCtrl)")
+                    TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
+                        print("\(self.$transferData.transactionFrequency)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -210,8 +198,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Voucher", text: $voucherCtrl, onEditingChanged: { changed in
-                        print("\($voucherCtrl)")
+                    TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
+                        print("\(self.$transferData.transactionVoucher)")
                     })
                     .frame(height: 20)
                     .padding()
@@ -229,8 +217,8 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Catatan", text: $catatanCtrl, onEditingChanged: { changed in
-                        print("\($catatanCtrl)")
+                    TextField("Catatan", text: self.$transferData.notes, onEditingChanged: { changed in
+                        print("\(self.$transferData.notes)")
                     })
                     .frame(height: 50)
                     .padding()
@@ -243,7 +231,7 @@ struct TransferOnUsConfirmationScreen: View {
             }
             
             VStack {
-                NavigationLink(destination: TransferOnUsPinConfirmationScreen(unLocked: false), label: {
+                NavigationLink(destination: TransferOnUsPinConfirmationScreen(unLocked: false).environmentObject(transferData), label: {
                     Text("Lakukan Transfer")
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -267,6 +255,6 @@ struct TransferOnUsConfirmationScreen: View {
 
 struct TransferOnUsConfirmationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsConfirmationScreen()
+        TransferOnUsConfirmationScreen().environmentObject(TransferOnUsModel())
     }
 }

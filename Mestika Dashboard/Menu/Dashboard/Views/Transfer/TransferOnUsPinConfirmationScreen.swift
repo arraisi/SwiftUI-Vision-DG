@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TransferOnUsPinConfirmationScreen: View {
     
+    @EnvironmentObject var transferData: TransferOnUsModel
+    
     @State var password = ""
     
     @AppStorage("lock_Password") var key = "123456"
@@ -17,7 +19,7 @@ struct TransferOnUsPinConfirmationScreen: View {
     
     var body: some View {
         if unLocked {
-            TransferOnUsSuccessInformationScreen()
+            TransferOnUsSuccessInformationScreen().environmentObject(transferData)
         } else {
             ZStack {
                 Image("bg_blue")
@@ -76,7 +78,7 @@ struct TransferOnUsPinConfirmationScreen: View {
 #if DEBUG
 struct TransferOnUsPinConfirmationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsPinConfirmationScreen(password: "", key: "", unLocked: false, wrongPassword: false)
+        TransferOnUsPinConfirmationScreen(password: "", key: "", unLocked: false, wrongPassword: false).environmentObject(TransferOnUsModel())
     }
 }
 #endif
