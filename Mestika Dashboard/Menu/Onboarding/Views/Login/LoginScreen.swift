@@ -66,18 +66,8 @@ struct LoginScreen: View {
                         Button(action: {
                             self.showPassword.toggle()
                         }, label: {
-                            
-                            if showPassword {
-                                Image(systemName: "eye.fill")
-                                    .frame(width: 80, height: 50)
-                                    .cornerRadius(10)
-                                    .foregroundColor(Color(hex: "#3756DF"))
-                            } else {
-                                Image(systemName: "eye.slash")
-                                    .frame(width: 80, height: 50)
-                                    .foregroundColor(Color(hex: "#3756DF"))
-                            }
-                            
+                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+                                .foregroundColor(Color(hex: "#3756DF"))
                         })
                     }
                     .frame(height: 25)

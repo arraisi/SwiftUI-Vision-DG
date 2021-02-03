@@ -11,4 +11,5 @@ enum ErrorResult: Error {
     case network(string: String)
     case parser(string: String)
     case custom(code: Int)
+    case customWithMsg(code: Int, message: String)
 }

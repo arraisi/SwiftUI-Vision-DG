@@ -26,6 +26,13 @@ struct FormInputAtmForgotPasswordScreen: View {
     /* Route */
     @State var isNextRoute: Bool = false
     
+    var disableForm: Bool {
+        if (atmNumberCtrl.isEmpty || pinAtmCtrl.isEmpty) {
+            return true
+        }
+        return false
+    }
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
@@ -53,6 +60,9 @@ struct FormInputAtmForgotPasswordScreen: View {
                     HStack {
                         TextField("Masukkan nomor ATM Anda", text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
+                            .onReceive(atmNumberCtrl.publisher.collect()) {
+                                self.pinAtmCtrl = String($0.prefix(11))
+                            }
                     }
                     .frame(height: 25)
                     .padding()
@@ -64,8 +74,26 @@ struct FormInputAtmForgotPasswordScreen: View {
                 
                 VStack {
                     HStack {
-                        TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
-                            .keyboardType(.numberPad)
+                        if (showPassword) {
+                            TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                                .keyboardType(.numberPad)
+                                .onReceive(pinAtmCtrl.publisher.collect()) {
+                                    self.pinAtmCtrl = String($0.prefix(5))
+                                }
+                        } else {
+                            SecureField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                                .keyboardType(.numberPad)
+                                .onReceive(pinAtmCtrl.publisher.collect()) {
+                                    self.pinAtmCtrl = String($0.prefix(5))
+                                }
+                        }
+                        
+                        Button(action: {
+                            self.showPassword.toggle()
+                        }, label: {
+                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+                                .foregroundColor(Color(hex: "#3756DF"))
+                        })
                     }
                     .frame(height: 25)
                     .padding()
@@ -101,16 +129,17 @@ struct FormInputAtmForgotPasswordScreen: View {
                         },
                         label: {
                             Text("KONFIRMASI DATA")
-                                .foregroundColor(Color(hex: "#232175"))
+                                .foregroundColor(disableForm ? Color.black : Color(hex: "#232175"))
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
                     )
-                    .background(Color.white)
+                    .background(disableForm ? Color.gray : Color.white)
                     .cornerRadius(12)
                     .padding(.leading, 20)
                     .padding(.trailing, 10)
+                    .disabled(disableForm)
                     
                     NavigationLink(
                         destination: LoginScreen().environmentObject(registerData),

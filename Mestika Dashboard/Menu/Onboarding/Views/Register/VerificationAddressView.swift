@@ -32,7 +32,7 @@ struct VerificationAddressView: View {
         }
         
         if (registerData.verificationAddressId != 1) {
-            if addressInput.isEmpty || addressRtRwInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
+            if addressRtRwInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
                 return true
             }
         } 

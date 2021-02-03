@@ -29,6 +29,13 @@ struct FormInputAtmPinForgotPasswordView: View {
     /* Route */
     @State var isNextRoute: Bool = false
     
+    var disableForm: Bool {
+        if (atmNumberCtrl.isEmpty || pinAtmCtrl.isEmpty) {
+            return true
+        }
+        return false
+    }
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
@@ -38,13 +45,13 @@ struct FormInputAtmPinForgotPasswordView: View {
                 
                 AppBarLogo(light: false, onCancel: {})
                 
-                Text("INPUT DATA ATM")
+                Text("INPUT DATA KTP")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text("Masukkan nomor kartu ATM dan PIN ATM Anda yang sudah terdaftar")
+                Text("Masukkan nomor akun / KTP dan PIN ATM Anda yang sudah terdaftar")
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -56,6 +63,9 @@ struct FormInputAtmPinForgotPasswordView: View {
                     HStack {
                         TextField("Masukkan nomor Akun / KTP", text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
+                            .onReceive(atmNumberCtrl.publisher.collect()) {
+                                self.atmNumberCtrl = String($0.prefix(16))
+                            }
                     }
                     .frame(height: 25)
                     .padding()
@@ -67,8 +77,27 @@ struct FormInputAtmPinForgotPasswordView: View {
                 
                 VStack {
                     HStack {
-                        TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
-                            .keyboardType(.numberPad)
+                        
+                        if (showPassword) {
+                            TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                                .keyboardType(.numberPad)
+                                .onReceive(pinAtmCtrl.publisher.collect()) {
+                                    self.pinAtmCtrl = String($0.prefix(5))
+                                }
+                        } else {
+                            SecureField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                                .keyboardType(.numberPad)
+                                .onReceive(pinAtmCtrl.publisher.collect()) {
+                                    self.pinAtmCtrl = String($0.prefix(5))
+                                }
+                        }
+                        
+                        Button(action: {
+                            self.showPassword.toggle()
+                        }, label: {
+                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+                                .foregroundColor(Color(hex: "#3756DF"))
+                        })
                     }
                     .frame(height: 25)
                     .padding()
@@ -85,16 +114,17 @@ struct FormInputAtmPinForgotPasswordView: View {
                         setPassword()
                     }, label: {
                         Text("KONFIRMASI DATA")
-                            .foregroundColor(Color(hex: "#232175"))
+                            .foregroundColor(disableForm ? Color.black : Color(hex: "#232175"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         
                     })
-                    .background(Color.white)
+                    .background(disableForm ? Color.gray : Color.white)
                     .cornerRadius(12)
                     .padding(.leading, 20)
                     .padding(.trailing, 10)
+                    .disabled(disableForm)
                     
                     NavigationLink(
                         destination: LoginScreen().environmentObject(registerData),

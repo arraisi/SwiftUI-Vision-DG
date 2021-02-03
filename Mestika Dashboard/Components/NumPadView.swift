@@ -14,8 +14,9 @@ struct NumPadView: View {
     @Binding var key: String
     @Binding var unlocked: Bool
     @Binding var wrongPass: Bool
-    
     @Binding var keyDeleteColor: Color
+    
+    var isTransferOnUs: Bool = false
     
     var body: some View {
         Button(action: setPassword, label: {
@@ -66,9 +67,14 @@ struct NumPadView: View {
                                 print(password)
                                 print(key)
                                 if password == key{
-                                    
-                                    unlocked = true
-                                    wrongPass = false
+                                    if (isTransferOnUs) {
+                                        unlocked = false
+                                        wrongPass = false
+                                        NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+                                    } else {
+                                        unlocked = true
+                                        wrongPass = false
+                                    }
                                 }
                                 else{
                                     wrongPass = true
