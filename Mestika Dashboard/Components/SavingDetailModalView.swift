@@ -34,7 +34,7 @@ struct SavingDetailModalView: View {
                 .padding()
             
             Group {
-                Text(NSLocalizedString("Produk Tabungan Mestika", comment: ""))
+                Text(NSLocalizedString(data.name, comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .frame(maxWidth: .infinity, alignment: .center)

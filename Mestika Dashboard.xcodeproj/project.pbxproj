@@ -1534,12 +1534,21 @@
 			path = json;
 			sourceTree = "<group>";
 		};
+		C0377B9625C96EC9002FE52C /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				C0377B9125C96EC5002FE52C /* TransferOnUsModel.swift */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
+				C0377B9625C96EC9002FE52C /* Transfer */,
 			);
 			name = Models;
 			path = "Mestika Dashboard/Menu/Dashboard/Models";
@@ -2136,6 +2145,7 @@
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
+				C0377B9225C96EC5002FE52C /* TransferOnUsModel.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
 				C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */,
