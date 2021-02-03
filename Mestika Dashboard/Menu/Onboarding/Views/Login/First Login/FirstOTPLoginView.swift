@@ -472,11 +472,11 @@ struct FirstOTPLoginView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 30)
             
-            NavigationLink(
-                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(loginData),
-                isActive: self.$isKetentuanViewActive) {
-                EmptyView()
-            }
+//            NavigationLink(
+//                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(loginData),
+//                isActive: self.$isKetentuanViewActive) {
+//                EmptyView()
+//            }
             
             Button(action: {
                 self.isShowModalUserNotRegister = false
@@ -491,11 +491,11 @@ struct FirstOTPLoginView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-            NavigationLink(
-                destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(loginData).environmentObject(appState),
-                isActive: self.$isNoAtmOrRekViewActive) {
-                EmptyView()
-            }
+//            NavigationLink(
+//                destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(loginData).environmentObject(appState),
+//                isActive: self.$isNoAtmOrRekViewActive) {
+//                EmptyView()
+//            }
             
             Button(action: {
                 self.appState.moveToWelcomeView = true
@@ -639,13 +639,13 @@ struct FirstOTPLoginView: View {
         { success in
             
             if success {
-                print("OTP VALID")
+                print("OTP VALID | code: \(otpVM.code)")
                 self.isLoading = false
                 self.isRootToPasswordLogin = true
             }
             
             if !success {
-                print("OTP INVALID")
+                print("OTP INVALID | code: \(otpVM.code)")
                 
                 self.isLoading = false
                 if self.otpVM.code == "403" {

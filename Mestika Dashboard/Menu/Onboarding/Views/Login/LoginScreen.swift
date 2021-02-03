@@ -66,9 +66,18 @@ struct LoginScreen: View {
                         Button(action: {
                             self.showPassword.toggle()
                         }, label: {
-                            Text("show")
-                                .foregroundColor(Color(hex: "#3756DF"))
-                                .fontWeight(.light)
+                            
+                            if showPassword {
+                                Image(systemName: "eye.fill")
+                                    .frame(width: 80, height: 50)
+                                    .cornerRadius(10)
+                                    .foregroundColor(Color(hex: "#3756DF"))
+                            } else {
+                                Image(systemName: "eye.slash")
+                                    .frame(width: 80, height: 50)
+                                    .foregroundColor(Color(hex: "#3756DF"))
+                            }
+                            
                         })
                     }
                     .frame(height: 25)
@@ -79,7 +88,7 @@ struct LoginScreen: View {
                     
                     Button(
                         action: {
-//                            self.showingModalForgotPassword = true
+                            //                            self.showingModalForgotPassword = true
                             self.routeNewPassword = true
                         },
                         label: {
@@ -102,32 +111,31 @@ struct LoginScreen: View {
                         label: {
                             Text("LOGIN APPS")
                                 .foregroundColor(Color(hex: "#232175"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                                 .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         })
                         .background(Color.white)
                         .cornerRadius(12)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 10)
+                        .padding(.horizontal, 25)
                     
                     NavigationLink(
                         destination: BottomNavigationView(),
                         isActive: self.$isActiveRoute,
                         label: {}
                     )
-                  
+                    
                     NavigationLink(
                         destination: FormInputNewPasswordForgotPasswordView().environmentObject(RegistrasiModel()),
                         isActive: self.$routeNewPassword,
                         label: {})
                     
-//                    Button(action: {
-//                        authenticate()
-//                    }, label: {
-//                        Image("ic_fingerprint")
-//                            .padding(.trailing, 20)
-//                    })
+                    //                    Button(action: {
+                    //                        authenticate()
+                    //                    }, label: {
+                    //                        Image("ic_fingerprint")
+                    //                            .padding(.trailing, 20)
+                    //                    })
                 }
                 .padding(.vertical)
                 
@@ -140,23 +148,20 @@ struct LoginScreen: View {
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
-                        .padding(.bottom, 10)
-                        .padding(.leading, 20)
                     
                     Button(action: {
                         self.appState.moveToWelcomeView = true
                     }) {
                         Text("Register Here")
                             .font(.subheadline)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
                             .padding(.top, 5)
-                            .padding(.bottom, 10)
-                            .padding(.trailing, 20)
                     }
                 }
-                .padding(.bottom)
+                .padding(.bottom, 30)
+                .padding(.horizontal, 20)
                 
             }
             
@@ -165,7 +170,7 @@ struct LoginScreen: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .edgesIgnoringSafeArea(.all)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -224,13 +229,13 @@ struct LoginScreen: View {
                 .padding(.top, 20)
             
             Text("Password salah")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
             Text("Silahkan masukkan password anda dengan benar, atau login dengan cara lain.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -238,7 +243,7 @@ struct LoginScreen: View {
             Button(action: {}) {
                 Text("Kembali")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
