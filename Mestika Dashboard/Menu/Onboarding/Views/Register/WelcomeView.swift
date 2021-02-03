@@ -230,6 +230,7 @@ struct WelcomeView: View {
             .onAppear {
                 getCoreDataRegister()
                 getMobileVersion()
+                getUserStatusKyc(deviceId: deviceId!)
                 var flags = SCNetworkReachabilityFlags()
                 SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                 
@@ -990,6 +991,32 @@ struct WelcomeView: View {
             
             if !success {
                 self.isFirstLoginViewActive = true
+            }
+        }
+    }
+    
+    /* Function GET USER Status For KYC STATUS */
+    func getUserStatusKyc(deviceId: String) {
+        print("GET USER STATUS")
+        print("DEVICE ID : \(deviceId)")
+        
+        self.userVM.userCheck(deviceId: deviceId) { success in
+            
+            if success {
+                print("CODE STATUS : \(self.userVM.code)")
+                print("MESSAGE STATUS : \(self.userVM.message)")
+                
+                let reset = UserDefaults.standard.string(forKey: "reset_register")
+                
+                if (self.userVM.message == "KYC_WAITING" || self.userVM.message == "WAITING" || self.userVM.message == "ACTIVE") {
+                    self.modalSelection = self.userVM.message
+                    self.isShowModal = true
+                }
+            }
+            
+            if !success {
+                self.modalSelection = "DEFAULT"
+                self.isShowModal = true
             }
         }
     }

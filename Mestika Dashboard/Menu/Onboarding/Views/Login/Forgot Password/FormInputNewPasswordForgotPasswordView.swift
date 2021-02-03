@@ -242,12 +242,11 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 self.routeAccountNumberPin = true
             }) {
                 Text("Yes, i'am Still Remember")
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
             .padding(.bottom, 2)
-            .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
             NavigationLink(
@@ -260,12 +259,13 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 self.routeATMNumberPin = true
             }) {
                 Text("No, I do not remember")
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
-            .padding(.bottom, 30)
             .cornerRadius(12)
+            .background(Color(hex: "#2334D0"))
+            .padding(.bottom, 30)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)

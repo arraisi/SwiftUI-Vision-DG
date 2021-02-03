@@ -248,7 +248,7 @@ struct PasswordView: View {
                 .KeyboardAwarePadding()
             }
             
-            if self.showingModal {
+            if self.showingModal || self.showingModalPasswordError {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
             }
         }
