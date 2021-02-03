@@ -31,6 +31,7 @@
 		06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */; };
 		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
+		0A2079DC25C895F400471C15 /* TransferOnUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
 		0A5A8B18256518FE00D1A76B /* LabelTextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */; };
 		0A8B775A25B8366B00819952 /* ip7_ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */; };
@@ -375,6 +376,7 @@
 		06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarLogo.swift; sourceTree = "<group>"; };
 		0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductATM.swift; sourceTree = "<group>"; };
 		0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMProductViewModel.swift; sourceTree = "<group>"; };
+		0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsModel.swift; sourceTree = "<group>"; };
 		0A4010712563E00B00983B16 /* TextFieldValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldValidation.swift; sourceTree = "<group>"; };
 		0A5A8B17256518FE00D1A76B /* LabelTextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldWithIcon.swift; sourceTree = "<group>"; };
 		0A8B775925B8366B00819952 /* ip7_ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ip7_ringtone.mp3; sourceTree = "<group>"; };
@@ -765,6 +767,14 @@
 				06AD57082570D3370071C4A9 /* term.html */,
 			);
 			path = Html;
+			sourceTree = "<group>";
+		};
+		0A2079DA25C895D000471C15 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				0A2079DB25C895F300471C15 /* TransferOnUsModel.swift */,
+			);
+			path = Transfer;
 			sourceTree = "<group>";
 		};
 		0A8B775825B8364200819952 /* sound */ = {
