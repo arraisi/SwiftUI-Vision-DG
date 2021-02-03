@@ -66,9 +66,8 @@ struct LoginScreen: View {
                         Button(action: {
                             self.showPassword.toggle()
                         }, label: {
-                            Text("show")
+                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
                                 .foregroundColor(Color(hex: "#3756DF"))
-                                .fontWeight(.light)
                         })
                     }
                     .frame(height: 25)
