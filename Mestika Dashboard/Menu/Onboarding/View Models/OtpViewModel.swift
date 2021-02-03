@@ -334,20 +334,21 @@ extension OtpViewModel {
             tryCount: tryCount) { result in
             
             switch result {
-            case.success(let response):
+            case .success(let response):
                 
-                if (response.status?.message != "OTP_INVALID") {
+                print("response.code validateOtpLogin : \(response.code ?? "no code")")
+                print("response.message validateOtpLogin : \(response.message ?? "no message")")
+                
+                if (response.code == "200") {
                     print("Success")
                     
                     self.isLoading = false
                     completion(true)
                 } else {
                     print("Failed")
-                    print(response.code ?? "no code")
-                    print(response.message ?? "no message")
-                    
                     DispatchQueue.main.async {
-                        self.timeRemaining = response.timeCounter!
+                        self.timeRemaining = response.timeCounter ?? 0
+                        self.code = response.code ?? ""
                         self.isLoading = false
                         completion(false)
                     }

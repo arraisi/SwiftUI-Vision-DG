@@ -100,7 +100,9 @@ struct TransferOnUsScreen: View {
             .navigationBarItems(trailing: Button(action: {}, label: {
                 Text("Cancel")
             }))
-
+            .onAppear() {
+                self.selectedAccount = _listBankAccount[0]
+            }
             .bottomSheet(isPresented: $showDialogConfirmation, height: 300) {
                 bottomSheetCard
             }

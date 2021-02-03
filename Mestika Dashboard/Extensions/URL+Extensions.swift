@@ -137,4 +137,8 @@ extension URL {
     static func urlAuthSetPassword() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/auth/setPwd")
     }
+    
+    static func urlTransferOverbooking() -> URL? {
+        return URL(string: "http://eagle.visiondg.xyz:8765/api/v1.0/transper/overbooking")
+    }
 }
