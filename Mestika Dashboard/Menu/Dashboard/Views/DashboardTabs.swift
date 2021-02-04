@@ -15,6 +15,7 @@ struct DashboardTabs: View {
     
     @State var username: String = ""
     @State var balance: String = ""
+    @State var productName: String = "-"
     
     @State var isHiddenBalance: Bool = false
     
@@ -88,7 +89,7 @@ struct DashboardTabs: View {
                     .padding(.trailing, 5)
                 
                 VStack(alignment: .leading) {
-                    Text("\(self.username)")
+                    Text("\(self.productName)")
                         .font(.title2)
                         .bold()
                         .foregroundColor(Color(hex: "#232175"))
@@ -150,6 +151,7 @@ struct DashboardTabs: View {
                 print(self.profileVM.balance)
                 self.username = self.profileVM.name
                 self.balance = self.profileVM.balance
+                self.productName = self.profileVM.nameOnCard
             }
         }
     }

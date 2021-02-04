@@ -40,7 +40,7 @@ class UserRegistrationService {
         
         var userDetailParam: [String : Any] = [
             "mobileNumber": registerData.noTelepon,
-            "productName": "Bank Mestika Product",
+            "productName": registerData.jenisTabungan,
             "imageKtp": "/storage/20201211_090631_.jpg",
             "nik": registerData.nik,
             "imageSelfie": "/storage/20201211_090631_.jpg",

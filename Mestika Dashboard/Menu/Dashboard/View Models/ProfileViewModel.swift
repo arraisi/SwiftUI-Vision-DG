@@ -35,6 +35,7 @@ extension ProfileViewModel {
                 
                 self.name = response.personal.name
                 self.telepon = response.profileResponseModelID.telepon
+                self.nameOnCard = response.products.last!.productName
                 self.balance = response.chipProfileDto.last!.balance
                 completion(true)
                 
