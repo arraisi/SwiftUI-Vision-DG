@@ -161,7 +161,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         isActive: self.$root2IsActive,
                         label: {}
                     )
-//                    .isDetailLink(false)
+                    .isDetailLink(false)
   
                 }
                 .padding(.horizontal, 30)
