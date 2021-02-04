@@ -18,6 +18,7 @@ class OtpViewModel: ObservableObject {
     @Published var timeRemaining: Int = 0
     @Published var code: String = ""
     @Published var statusMessage: String = ""
+    @Published var errorCode: Int = 0
 }
 
 extension OtpViewModel {
@@ -68,12 +69,24 @@ extension OtpViewModel {
                 
             case .failure(let error):
                 print("ERROR-->")
-                DispatchQueue.main.async {
+                
+                switch error {
+                case .custom(code: 403):
                     self.isLoading = false
+                    self.errorCode = 403
+                    self.statusMessage = "Phone Number Registered - VisionDG"
+                case .custom(code: 401):
+                    self.isLoading = false
+                    self.errorCode = 401
+                    self.statusMessage = "Otp Invalid"
+                default:
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                        self.statusMessage = "Internal Server Error"
+                    }
                 }
                 
                 completion(false)
-                print(error.localizedDescription)
             }
         }
     }

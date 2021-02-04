@@ -248,6 +248,7 @@
 		52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3489025428CB000F08F37 /* NavigationConfigurator.swift */; };
 		52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348992542ACC500F08F37 /* ListBankAccountView.swift */; };
 		52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348A12542ACF400F08F37 /* BankAccount.swift */; };
+		52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */; };
 		52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8889B258B16B100D637F2 /* JitsiView.swift */; };
 		52DA20852551069C00CC048A /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20842551069C00CC048A /* Statement.swift */; };
 		52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */; };
@@ -603,6 +604,7 @@
 		52C3489025428CB000F08F37 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		52C348992542ACC500F08F37 /* ListBankAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBankAccountView.swift; sourceTree = "<group>"; };
 		52C348A12542ACF400F08F37 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
+		52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseModel.swift; sourceTree = "<group>"; };
 		52D8889B258B16B100D637F2 /* JitsiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiView.swift; sourceTree = "<group>"; };
 		52DA20842551069C00CC048A /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputOldPasswordScreen.swift; sourceTree = "<group>"; };
@@ -1563,7 +1565,6 @@
 		C0377B9625C96EC9002FE52C /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
-				C0377B9125C96EC5002FE52C /* TransferOnUsModel.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -1576,6 +1577,7 @@
 				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
 				C0377B9625C96EC9002FE52C /* Transfer */,
+				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
 			);
 			name = Models;
 			path = "Mestika Dashboard/Menu/Dashboard/Models";
@@ -2008,6 +2010,7 @@
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
 				0620291E256D914500A830EA /* GeneralResponse.swift in Sources */,
 				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
+				52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
 				52ADFFAD2557DFDC00A1001F /* KetentuanRegisterNonNasabahView.swift in Sources */,

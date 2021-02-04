@@ -20,6 +20,8 @@ struct FirstOTPLoginView: View {
     @State var pin: String = ""
     @State var showPin = true
     @State var referenceCode: String = ""
+    @State var phoneNumber: String = ""
+    @State var fingerprintFlag: Bool = false
     
     @State var isDisabled = false
     
@@ -161,7 +163,7 @@ struct FirstOTPLoginView: View {
         VStack(alignment: .center) {
             HStack {
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "+62\(loginData.noTelepon.trimmingCharacters(in: .whitespaces))")
+                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "\(loginData.noTelepon.trimmingCharacters(in: .whitespaces))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -546,56 +548,79 @@ struct FirstOTPLoginView: View {
     
     // MARK: - FUNCTION REQUEST OTP
     func getOTP() {
-        print("Destination \(self.loginData.noTelepon)")
-        self.otpVM.otpRequest(
-            otpRequest: OtpRequest(
-                destination: self.loginData.noTelepon,
-                type: "hp",
-                trytime: self.tryCountResend
-            )
-        ) { success in
-            
-            if success {
-                print("isLoading \(self.otpVM.isLoading)")
-                print("otpRef \(self.otpVM.reference)")
-                print("status \(self.otpVM.statusMessage)")
+        if isNewDeviceLogin {
+            print("NEW DEVICE LOGIN REQ OTP")
+            print("Destination \(self.loginData.noTelepon)")
+            self.otpVM.otpRequest(
+                otpRequest: OtpRequest(
+                    destination: self.loginData.noTelepon,
+                    type: "hp",
+                    trytime: self.tryCountResend
+                )
+            ) { success in
                 
-                DispatchQueue.main.async {
-                    self.isLoading = self.otpVM.isLoading
-                    self.referenceCode = self.otpVM.reference
-                    self.messageResponse = self.otpVM.statusMessage
-                    //                    self.timeRemainingRsnd = self.otpVM.timeCounter
-                    self.timeRemainingRsnd = 30
-                    self.isShowAlert = false
-                }
-            }
-            
-            if !success {
-                print("OTP RESP \(self.otpVM.statusMessage)")
-                
-                if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
-                    print("OTP FAILED")
-                    print(self.otpVM.timeCounter)
+                if success {
+                    print("isLoading \(self.otpVM.isLoading)")
+                    print("otpRef \(self.otpVM.reference)")
+                    print("status \(self.otpVM.statusMessage)")
                     
-                    DispatchQueue.main.sync {
-                        self.isLoading = self.otpVM.isLoading
-                        self.messageResponse = self.otpVM.statusMessage
-                        self.pinShare = self.otpVM.code
-                        self.referenceCode = self.otpVM.reference
-                        //                        self.timeRemainingRsnd = self.otpVM.timeCounter
-                        self.timeRemainingRsnd = 30
-                        self.isShowAlert = true
-                    }
-                } else {
                     DispatchQueue.main.async {
                         self.isLoading = self.otpVM.isLoading
-                        self.isShowAlert = true
+                        self.referenceCode = self.otpVM.reference
                         self.messageResponse = self.otpVM.statusMessage
+                        //                    self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.timeRemainingRsnd = 30
+                        self.isShowAlert = false
+                    }
+                }
+                
+                if !success {
+                    print("OTP RESP \(self.otpVM.statusMessage)")
+                    
+                    if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
+                        print("OTP FAILED")
+                        print(self.otpVM.timeCounter)
+                        
+                        DispatchQueue.main.sync {
+                            self.isLoading = self.otpVM.isLoading
+                            self.messageResponse = self.otpVM.statusMessage
+                            self.pinShare = self.otpVM.code
+                            self.referenceCode = self.otpVM.reference
+                            //                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                            self.timeRemainingRsnd = 30
+                            self.isShowAlert = true
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.isLoading = self.otpVM.isLoading
+                            self.isShowAlert = true
+                            self.messageResponse = self.otpVM.statusMessage
+                        }
                     }
                 }
             }
+        } else {
+            print("CURRECT DEVICE OTP REQUEST")
+            self.otpVM.otpRequestLogin() { success in
+                   
+                   if success {
+                       self.isLoading = false
+                       self.timeRemainingRsnd = 30
+                       
+                       print(self.otpVM.isLoading)
+                       print(self.otpVM.reference)
+                       self.referenceCode = self.otpVM.reference
+                   }
+                   
+                   if !success {
+                       self.isLoading = false
+                       self.timeRemainingRsnd = 0
+                       print("ERROR GET OTP")
+                       
+                   }
+               }
+
         }
-        
     }
     
     // MARK: - FUNCTION VALIDATE OTP

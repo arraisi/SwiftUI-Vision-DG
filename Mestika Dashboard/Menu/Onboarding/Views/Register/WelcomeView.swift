@@ -307,7 +307,7 @@ struct WelcomeView: View {
         case "WAITING" :
             return AnyView(PopupWaiting())
         case "ACTIVE" :
-            return AnyView(PopupActive())
+            return AnyView(ScreeningLoggedModal())
         case "NOT_APPROVED" :
             return AnyView(PopupNotApproved())
         case "LOGGED_IN" :

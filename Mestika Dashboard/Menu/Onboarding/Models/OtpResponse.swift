@@ -10,6 +10,7 @@ import Foundation
 // MARK: - OtpResponse
 struct OtpResponse: Decodable {
     let destination, reference, code: String?
+    let fingerprintFlag: Bool?
     let message: String?
     let timeCounter: Int?
     let tryCount: Int?

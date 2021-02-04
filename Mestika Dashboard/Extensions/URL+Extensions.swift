@@ -143,6 +143,12 @@ extension URL {
     }
     
     static func urlTransferOverbooking() -> URL? {
-        return URL(string: "http://eagle.visiondg.xyz:8765/api/v1.0/transper/overbooking")
+        return URL(string: AppConstants().BASE_URL + "/transper/overbooking")
+    }
+    
+    //-------------------- PROFILE SERVICE ----------------------//
+    
+    static func urlGetProfile() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/profiles")
     }
 }

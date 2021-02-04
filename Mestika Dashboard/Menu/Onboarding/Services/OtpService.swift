@@ -24,7 +24,7 @@ class OtpService {
         timeCounter: Int,
         tryCount: Int,
         type: String,
-        completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
+        completion: @escaping(Result<OtpResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "code": code,
@@ -41,7 +41,7 @@ class OtpService {
         
         
         guard let url = URL.urlOTP() else {
-            return completion(.failure(.badUrl))
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         let paramsUrl = url.appending("type", value: type)
@@ -54,19 +54,24 @@ class OtpService {
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             guard let data = data, error == nil else {
-                return completion(.failure(.noData))
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
-            }
-            
-            let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
-            
-            if otpResponse == nil {
-                completion(.failure(.decodingError))
-            } else {
-                completion(.success(otpResponse!))
+                
+                if (httpResponse.statusCode == 200) {
+                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                    completion(.success(otpResponse!))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()
