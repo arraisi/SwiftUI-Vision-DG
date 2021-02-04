@@ -33,6 +33,9 @@ struct LoginScreen: View {
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
     var user: FetchedResults<Registration>
     
+    @FetchRequest(entity: NewDevice.entity(), sortDescriptors: [])
+    var device: FetchedResults<NewDevice>
+    
     /* Boolean for Show Modal */
     @State var showingModal = false
     @State var showingModalForgotPassword = false
@@ -125,12 +128,17 @@ struct LoginScreen: View {
                         isActive: self.$routeNewPassword,
                         label: {})
                     
-                    //                    Button(action: {
-                    //                        authenticate()
-                    //                    }, label: {
-                    //                        Image("ic_fingerprint")
-                    //                            .padding(.trailing, 20)
-                    //                    })
+                    if let value = device.last?.fingerprintFlag {
+                        if value { 
+                            Button(action: {
+                                authenticate()
+                            }, label: {
+                                Image("ic_fingerprint")
+                                    .padding(.trailing, 20)
+                            })
+                        }
+                    }
+                    
                 }
                 .padding(.vertical)
                 
@@ -240,7 +248,9 @@ struct LoginScreen: View {
                     if success {
                         self.isUnlocked = true
                         self.isActiveRoute = true
+                        print("YES U CAN UNLOCK")
                     } else {
+                        print("NO U CAN'T UNLOCK")
                         
                     }
                 }
