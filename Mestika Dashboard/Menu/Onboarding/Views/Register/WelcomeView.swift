@@ -604,27 +604,9 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 5)
-            
-            
-            if (registerData.isNasabahmestika == true) {
-                NavigationLink(destination: PhoneOTPRegisterNasabahView(editModeForCancel: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData)){
-                    Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
-                        .foregroundColor(.black)
-                        .font(.custom("Montserrat-SemiBold", size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-                .padding(.bottom, 20)
-                .cornerRadius(12)
-            } else {
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
-                    Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
-                        .foregroundColor(.black)
-                        .font(.custom("Montserrat-SemiBold", size: 13))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
-                .padding(.bottom, 20)
-                .cornerRadius(12)
-            }
+        
+            Text("")
+                .padding(.bottom, 15)
             
         }
         .frame(width: UIScreen.main.bounds.width - 60)

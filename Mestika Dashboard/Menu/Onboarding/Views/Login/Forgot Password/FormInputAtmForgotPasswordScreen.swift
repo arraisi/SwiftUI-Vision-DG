@@ -78,13 +78,13 @@ struct FormInputAtmForgotPasswordScreen: View {
                             TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
-                                    self.pinAtmCtrl = String($0.prefix(5))
+                                    self.pinAtmCtrl = String($0.prefix(6))
                                 }
                         } else {
                             SecureField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
-                                    self.pinAtmCtrl = String($0.prefix(5))
+                                    self.pinAtmCtrl = String($0.prefix(6))
                                 }
                         }
                         
