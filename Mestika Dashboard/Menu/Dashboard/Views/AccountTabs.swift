@@ -302,9 +302,23 @@ struct AccountTabs: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .onAppear {
+            getProfile()
             getUserInfo()
         }
         
+    }
+    
+    /* Function GET USER Status */
+    @ObservedObject var profileVM = ProfileViewModel()
+    func getProfile() {
+        self.profileVM.getProfile { success in
+            if success {
+                print("Name \(self.profileVM.name)")
+                print(self.profileVM.balance)
+                self.username = self.profileVM.name
+                self.phoneNumber = self.profileVM.telepon
+            }
+        }
     }
     
     func getUserInfo() {

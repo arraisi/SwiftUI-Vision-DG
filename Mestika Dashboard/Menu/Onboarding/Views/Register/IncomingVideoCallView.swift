@@ -70,7 +70,7 @@ struct IncomingVideoCallView: View {
         .onAppear(perform: {
             playSound()
             let defaultOptions = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-                builder.serverURL = URL(string: "https://meet.jit.si")
+                builder.serverURL = URL(string: "https://10.1.222.14:7443")
                 builder.welcomePageEnabled = false
             }
             

@@ -116,7 +116,7 @@ struct BottomNavigationView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
     }
     
