@@ -30,7 +30,7 @@ struct ContentView: View {
 //                        .environmentObject(appState)
 //                }
                 
-                BottomNavigationView()
+                WelcomeView()
                     .environmentObject(appState)
             }
             .edgesIgnoringSafeArea(.top)

@@ -16,7 +16,7 @@ struct DashboardTabs: View {
     @State var username: String = ""
     @State var balance: String = ""
     
-    @State var isHiddenBalance: Bool = true
+    @State var isHiddenBalance: Bool = false
     
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
@@ -111,7 +111,7 @@ struct DashboardTabs: View {
                                     .fontWeight(.light)
                                     .foregroundColor(Color(hex: "#2334D0"))
                                 
-                                Text(String(format: "%.2f", "25000000"))
+                                Text(balance.thousandSeparator())
                                     .font(.title3)
                                     .bold()
                                     .foregroundColor(Color(hex: "#2334D0"))
