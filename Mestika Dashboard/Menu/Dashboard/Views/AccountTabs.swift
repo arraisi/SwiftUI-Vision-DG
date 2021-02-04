@@ -11,6 +11,10 @@ struct AccountTabs: View {
     
     @EnvironmentObject var appState: AppState
     
+    /* CORE DATA */
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
+    
     @Binding var showingSettingMenu : Bool
     @State var username: String = ""
     @State var phoneNumber: String = ""
@@ -43,6 +47,12 @@ struct AccountTabs: View {
             })
             .navigationBarHidden(true)
         }
+        .onAppear(perform: {
+            if let value = device.last?.fingerprintFlag {
+                print("CORE DATA - Finger Print = \(value)")
+                self.isFingerprint = value
+            }
+        })
     }
     
     var profileInfo: some View {
@@ -178,6 +188,26 @@ struct AccountTabs: View {
                                         .fontWeight(.bold)
                                 }
                             )
+                            .onChange(of: self.isFingerprint) { value in
+                                //perform your action here...
+                                saveDataNewDeviceToCoreData()
+                                
+                                if value {
+                                    
+                                    self.authVM.setFingerPrint { result in
+                                        print("result : \(result)")
+                                        if result {
+                                            print("SET FINGER PRINT SUCCESS")
+                                        }
+                                        
+                                        if !result {
+                                            print("SET FINGER PRINT")
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
                         }
                         
                         Spacer()
@@ -242,7 +272,7 @@ struct AccountTabs: View {
                                 if success {
                                     print("SUCCESS LOGOUT")
                                     self.appState.moveToWelcomeView = true
-//                                    self.isNextRoute = true
+                                    //                                    self.isNextRoute = true
                                 }
                             }
                         },
@@ -274,7 +304,7 @@ struct AccountTabs: View {
         .onAppear {
             getUserInfo()
         }
-
+        
     }
     
     func getUserInfo() {
@@ -282,6 +312,20 @@ struct AccountTabs: View {
             self.username = data.namaLengkapFromNik!
             self.phoneNumber = data.noTelepon!
         }
+    }
+    
+    func saveDataNewDeviceToCoreData()  {
+        print("------SAVE TO CORE DATA-------")
+        
+        let data = NewDevice(context: managedObjectContext)
+        data.fingerprintFlag = self.isFingerprint
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
     }
 }
 
