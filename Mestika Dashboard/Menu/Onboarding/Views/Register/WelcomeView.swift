@@ -611,7 +611,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.bottom, 5)
-        
+            
             Text("")
                 .padding(.bottom, 15)
             
@@ -1058,7 +1058,9 @@ struct WelcomeView: View {
     
     func getCoreDataNewDevice() {
         newDevice.forEach { (data) in
-            self.phoneNumber = data.noTelepon!
+            if let telepon = data.noTelepon {
+                self.phoneNumber = telepon
+            }
         }
     }
 }
