@@ -48,7 +48,7 @@ struct JitsiView: UIViewControllerRepresentable {
         self.jitsiMeetView = jitsiMeetView
         
         let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
-            builder.serverURL = URL(string: "https://video.visiondg.xyz")
+            builder.serverURL = URL(string: AppConstants().JITSI_URL)
             builder.welcomePageEnabled = false
             builder.room = self.jitsi_room
         }

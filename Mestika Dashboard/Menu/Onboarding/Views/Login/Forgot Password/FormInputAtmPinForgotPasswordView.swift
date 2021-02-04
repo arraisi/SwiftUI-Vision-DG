@@ -127,7 +127,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                     .disabled(disableForm)
                     
                     NavigationLink(
-                        destination: LoginScreen().environmentObject(registerData),
+                        destination: LoginScreen(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
                         isActive: self.$isNextRoute) {}
                 }
                 .padding(.bottom, 20)

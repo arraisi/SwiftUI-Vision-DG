@@ -59,6 +59,42 @@ extension AuthViewModel {
         
     }
     
+    // MARK: - POST LOGIN NEW DEVICE
+    func postLoginNewDevice(
+        password: String,
+        phoneNumber: String,
+        completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.loginNewDevice(password: encryptPassword(password: password), phoneNumber: phoneNumber) { result in
+            switch result {
+            case .success(let response):
+                print("Success")
+                self.isLoading = false
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+        
+    }
+    
     // MARK: - POST LOGOUT
     func postLogout(completion: @escaping (Bool) -> Void) {
         

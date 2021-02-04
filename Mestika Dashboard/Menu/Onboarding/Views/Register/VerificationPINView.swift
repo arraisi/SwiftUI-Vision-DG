@@ -111,7 +111,6 @@ struct VerificationPINView: View {
                         .onAppear{
                             if (self.registerData.accType == "ATM" || self.registerData.atmOrRekening == "ATM") {
                                 self.noKartuCtrl = self.registerData.accNo
-                                self.noKartuCtrl = self.registerData.noAtm
                             }
                         }
                         

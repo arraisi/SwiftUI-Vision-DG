@@ -19,6 +19,7 @@ struct FirstLoginView: View {
     
     @State private var nextRoute: Bool = false
     @State var phoneNumber: String = ""
+    @State var isNewDevice: Bool = false
     
     /* GET DEVICE ID */
     var deviceId = UIDevice.current.identifierForVendor?.uuidString

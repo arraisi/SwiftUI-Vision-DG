@@ -60,7 +60,7 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 Spacer()
                 
                 VStack {
-                    NavigationLink(destination: LoginScreen(), label: {
+                    NavigationLink(destination: LoginScreen(isNewDeviceLogin: .constant(false)), label: {
                         Text("KONFIRMASI DATA")
                             .foregroundColor(Color(hex: "#232175"))
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

@@ -210,7 +210,7 @@ struct FirstPasswordLoginView: View {
                 .disabled(disableForm)
             
             NavigationLink(
-                destination: LoginScreen(),
+                destination: LoginScreen(isNewDeviceLogin: .constant(false)),
                 isActive: self.$nextRoute,
                 label: {}
             )

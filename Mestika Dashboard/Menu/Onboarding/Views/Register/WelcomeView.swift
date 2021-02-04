@@ -44,6 +44,9 @@ struct WelcomeView: View {
     @FetchRequest(entity: ScheduleInterview.entity(), sortDescriptors: [])
     var schedule: FetchedResults<ScheduleInterview>
     
+    @FetchRequest(entity: NewDevice.entity(), sortDescriptors: [])
+    var newDevice: FetchedResults<NewDevice>
+    
     var registerData = RegistrasiModel()
     var loginData = LoginBindingModel()
     var productATMData = AddProductATM()
@@ -67,6 +70,8 @@ struct WelcomeView: View {
     @State var isShowAlertInternetConnection = false
     
     @State var jitsiRoom = ""
+    
+    @State var phoneNumber = ""
     
     private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
@@ -162,7 +167,7 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: LoginScreen().environmentObject(registerData),
+                            destination: LoginScreen(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
                             isActive: self.$isPasswordViewActive,
                             label: {}
                         )
@@ -195,6 +200,7 @@ struct WelcomeView: View {
             .navigationBarHidden(true)
             .onReceive(self.appState.$moveToWelcomeView) { moveToWelcomeView in
                 if moveToWelcomeView {
+                    getCoreDataNewDevice()
                     print("Move to Welcome: \(moveToWelcomeView)")
                     activateWelcomeView()
                     self.appState.moveToWelcomeView = false
@@ -228,6 +234,7 @@ struct WelcomeView: View {
                 getUserStatus(deviceId: deviceId!)
             }
             .onAppear {
+                getCoreDataNewDevice()
                 getCoreDataRegister()
                 getMobileVersion()
                 getUserStatusKyc(deviceId: deviceId!)
@@ -793,7 +800,7 @@ struct WelcomeView: View {
                 .padding(.bottom, 30)
             
             NavigationLink(
-                destination: LoginScreen().environmentObject(registerData),
+                destination: LoginScreen(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
                 isActive: self.$isKetentuanViewActive) {
                 EmptyView()
             }
@@ -948,25 +955,24 @@ struct WelcomeView: View {
                 switch userVM.message {
                 case "ACTIVE":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
-                    self.isLoginNewDevice = true
-                    registerData.noTelepon = self.userVM.phoneNumber
+                    self.isLoginNewDevice = false
+                    registerData.noTelepon = self.phoneNumber
                     self.isFirstOTPLoginViewActive = true
                     
                     print("CASE ACTIVE")
                 case "LOGGED_IN":
-//                    self.isFirstOTPLoginViewActive = true
                     self.isPasswordViewActive = true
-                    
                     print("CASE LOGGED_IN")
                 case "LOGGED_OUT":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
-                    self.isLoginNewDevice = true
-                    registerData.noTelepon = self.userVM.phoneNumber
+                    self.isLoginNewDevice = false
+                    registerData.noTelepon = self.phoneNumber
                     self.isFirstOTPLoginViewActive = true
                     
                     print("CASE LOGGED_OUT")
                 default:
                     print("USER NOT FOUND")
+                    self.isLoginNewDevice = true
                     self.isFirstLoginViewActive = true
                 }
             }
@@ -1006,6 +1012,7 @@ struct WelcomeView: View {
     /* Function Get From Code Data to Register Data */
     func getCoreDataRegister() {
         user.forEach { (data) in
+            self.phoneNumber = data.noTelepon!
             self.registerData.nik = data.nik!
             self.registerData.noTelepon = data.noTelepon!
             self.registerData.email = data.email!
@@ -1046,6 +1053,12 @@ struct WelcomeView: View {
             self.registerData.kelurahanKeluarga =  data.kelurahanKeluarga!
             
             self.registerData.isNasabahmestika = data.isNasabahMestika
+        }
+    }
+    
+    func getCoreDataNewDevice() {
+        newDevice.forEach { (data) in
+            self.phoneNumber = data.noTelepon!
         }
     }
 }

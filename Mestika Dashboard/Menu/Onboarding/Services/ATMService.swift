@@ -130,6 +130,7 @@ class ATMService {
             let response = try? JSONDecoder().decode(JenisTabunganModel.self, from: data)
             
             if response == nil {
+                print("Error Decoding")
                 completion(.failure(.decodingError))
             } else {
                 completion(.success(response!))

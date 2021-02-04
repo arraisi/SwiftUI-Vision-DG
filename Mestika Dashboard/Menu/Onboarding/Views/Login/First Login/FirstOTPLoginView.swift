@@ -108,7 +108,7 @@ struct FirstOTPLoginView: View {
             }
             
             NavigationLink(
-                destination: LoginScreen(),
+                destination: LoginScreen(phoneNumber: loginData.noTelepon, isNewDeviceLogin: self.$isNewDeviceLogin),
                 isActive: self.$isRootToPasswordLogin,
                 label: {}
             )
@@ -546,79 +546,54 @@ struct FirstOTPLoginView: View {
     
     // MARK: - FUNCTION REQUEST OTP
     func getOTP() {
-        
-        if isNewDeviceLogin {
+        print("Destination \(self.loginData.noTelepon)")
+        self.otpVM.otpRequest(
+            otpRequest: OtpRequest(
+                destination: self.loginData.noTelepon,
+                type: "hp",
+                trytime: self.tryCountResend
+            )
+        ) { success in
             
-            self.otpVM.otpRequest(
-                otpRequest: OtpRequest(
-                    destination: self.loginData.noTelepon,
-                    type: "hp",
-                    trytime: self.tryCountResend
-                )
-            ) { success in
+            if success {
+                print("isLoading \(self.otpVM.isLoading)")
+                print("otpRef \(self.otpVM.reference)")
+                print("status \(self.otpVM.statusMessage)")
                 
-                if success {
-                    print("isLoading \(self.otpVM.isLoading)")
-                    print("otpRef \(self.otpVM.reference)")
-                    print("status \(self.otpVM.statusMessage)")
+                DispatchQueue.main.async {
+                    self.isLoading = self.otpVM.isLoading
+                    self.referenceCode = self.otpVM.reference
+                    self.messageResponse = self.otpVM.statusMessage
+                    //                    self.timeRemainingRsnd = self.otpVM.timeCounter
+                    self.timeRemainingRsnd = 30
+                    self.isShowAlert = false
+                }
+            }
+            
+            if !success {
+                print("OTP RESP \(self.otpVM.statusMessage)")
+                
+                if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
+                    print("OTP FAILED")
+                    print(self.otpVM.timeCounter)
                     
+                    DispatchQueue.main.sync {
+                        self.isLoading = self.otpVM.isLoading
+                        self.messageResponse = self.otpVM.statusMessage
+                        self.pinShare = self.otpVM.code
+                        self.referenceCode = self.otpVM.reference
+                        //                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.timeRemainingRsnd = 30
+                        self.isShowAlert = true
+                    }
+                } else {
                     DispatchQueue.main.async {
                         self.isLoading = self.otpVM.isLoading
-                        self.referenceCode = self.otpVM.reference
+                        self.isShowAlert = true
                         self.messageResponse = self.otpVM.statusMessage
-                        //                    self.timeRemainingRsnd = self.otpVM.timeCounter
-                        self.timeRemainingRsnd = 30
-                        self.isShowAlert = false
-                    }
-                }
-                
-                if !success {
-                    print("OTP RESP \(self.otpVM.statusMessage)")
-                    
-                    if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
-                        print("OTP FAILED")
-                        print(self.otpVM.timeCounter)
-                        
-                        DispatchQueue.main.sync {
-                            self.isLoading = self.otpVM.isLoading
-                            self.messageResponse = self.otpVM.statusMessage
-                            self.pinShare = self.otpVM.code
-                            self.referenceCode = self.otpVM.reference
-                            //                        self.timeRemainingRsnd = self.otpVM.timeCounter
-                            self.timeRemainingRsnd = 30
-                            self.isShowAlert = true
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.isLoading = self.otpVM.isLoading
-                            self.isShowAlert = true
-                            self.messageResponse = self.otpVM.statusMessage
-                        }
                     }
                 }
             }
-            
-        } else {
-            
-            self.otpVM.otpRequestLogin() { success in
-                
-                if success {
-                    self.isLoading = false
-                    self.timeRemainingRsnd = 30
-                    
-                    print(self.otpVM.isLoading)
-                    print(self.otpVM.reference)
-                    self.referenceCode = self.otpVM.reference
-                }
-                
-                if !success {
-                    self.isLoading = false
-                    self.timeRemainingRsnd = 0
-                    print("ERROR GET OTP")
-                    
-                }
-            }
-            
         }
         
     }

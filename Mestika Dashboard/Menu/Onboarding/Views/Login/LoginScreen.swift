@@ -10,7 +10,9 @@ import SwiftUI
 import NavigationStack
 
 struct LoginScreen: View {
+    
     /* Data Binding */
+    @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject private var authVM = AuthViewModel()
     
     @EnvironmentObject var appState: AppState
@@ -20,6 +22,7 @@ struct LoginScreen: View {
     
     @State private var passwordCtrl = ""
     @State private var showPassword: Bool = false
+    @State var phoneNumber: String = ""
     
     @State var routeNewPassword: Bool = false
     
@@ -33,6 +36,8 @@ struct LoginScreen: View {
     /* Boolean for Show Modal */
     @State var showingModal = false
     @State var showingModalForgotPassword = false
+    
+    @Binding var isNewDeviceLogin: Bool
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -171,17 +176,51 @@ struct LoginScreen: View {
         }
     }
     
+    func saveDataNewDeviceToCoreData()  {
+        print("------SAVE TO CORE DATA-------")
+        
+        let data = NewDevice(context: managedObjectContext)
+        data.noTelepon = self.phoneNumber
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
+    }
+    
+    // MARK: - LOGIN AUTH
     func login() {
-        authVM.postLogin(password: self.passwordCtrl, phoneNumber: "", fingerCode: "") { success in
-            
-            if success {
-                print("LOGIN SUCCESS")
-                self.isActiveRoute = true
+        
+        if self.isNewDeviceLogin {
+            print("LOGIN NEW DEVICE")
+            authVM.postLoginNewDevice(password: self.passwordCtrl, phoneNumber: self.phoneNumber) { success in
+                saveDataNewDeviceToCoreData()
+                if success {
+                    print("LOGIN SUCCESS")
+                    self.isActiveRoute = true
+                }
+                
+                if !success {
+                    print("LOGIN FAILED")
+                    self.showingModal = true
+                }
             }
             
-            if !success {
-                print("LOGIN FAILED")
-                self.showingModal = true
+        } else {
+            print("LOGIN CURRENT DEVICE")
+            authVM.postLogin(password: self.passwordCtrl, phoneNumber: "", fingerCode: "") { success in
+                
+                if success {
+                    print("LOGIN SUCCESS")
+                    self.isActiveRoute = true
+                }
+                
+                if !success {
+                    print("LOGIN FAILED")
+                    self.showingModal = true
+                }
             }
         }
     }
@@ -251,6 +290,6 @@ struct LoginScreen: View {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        LoginScreen(isNewDeviceLogin: .constant(true))
     }
 }
