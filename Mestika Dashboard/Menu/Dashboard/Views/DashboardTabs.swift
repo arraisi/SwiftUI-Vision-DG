@@ -14,6 +14,9 @@ struct DashboardTabs: View {
     var user: FetchedResults<Registration>
     
     @State var username: String = ""
+    @State var balance: String = ""
+    
+    @State var isHiddenBalance: Bool = true
     
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
@@ -27,23 +30,26 @@ struct DashboardTabs: View {
                 usernameInfo
                 menuGrid
                 
+                GridMenuView()
+                    .padding(.top, 10)
+                
                 ListRekeningView()
-                    .padding(.top, 30)
+                    .padding(.top, 10)
                 
-                ListEwalletView()
-                    .padding(.top, 30)
-                
-                ListContactTransferOnUs()
-                    .padding(.top, 30)
-                
-                ListPromoForYouView()
-                    .padding(.top, 30)
-                
-                ListPurchasePaymentView()
-                    .padding(.top, 30)
-                
-                VoucherView()
-                    .padding(.top, 50)
+//                ListEwalletView()
+//                    .padding(.top, 30)
+//
+//                ListContactTransferOnUs()
+//                    .padding(.top, 30)
+//
+//                ListPromoForYouView()
+//                    .padding(.top, 30)
+//
+//                ListPurchasePaymentView()
+//                    .padding(.top, 30)
+//
+//                VoucherView()
+//                    .padding(.top, 50)
             }
         })
         .navigationBarHidden(true)
@@ -51,6 +57,7 @@ struct DashboardTabs: View {
         .onAppear {
             print("GET")
             getUserInfo()
+            getProfile()
         }
     }
     
@@ -76,7 +83,7 @@ struct DashboardTabs: View {
         VStack {
             HStack(alignment: .top) {
                 Divider()
-                    .frame(width: 3, height: 90)
+                    .frame(width: 3, height: isHiddenBalance ? 60 : 90)
                     .background(Color(hex: "#232175"))
                     .padding(.trailing, 5)
                 
@@ -87,38 +94,44 @@ struct DashboardTabs: View {
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.bottom, 5)
                     
-                    VStack(alignment: .leading) {
-                        Text("Total Saldo")
-                            .font(.caption)
-                            .fontWeight(.ultraLight)
-                        
-                        HStack {
-                            Text("Rp.")
-                                .fontWeight(.light)
-                                .foregroundColor(Color(hex: "#2334D0"))
+                    if (isHiddenBalance) {
+                        VStack(alignment: .leading) {
+                            Text("Saldo disembunyikan")
+                                .font(.caption)
+                                .fontWeight(.ultraLight)
+                        }
+                    } else {
+                        VStack(alignment: .leading) {
+                            Text("Saldo Rekening Utama")
+                                .font(.caption)
+                                .fontWeight(.ultraLight)
                             
-                            Text("750.000")
-                                .font(.title3)
-                                .bold()
-                                .foregroundColor(Color(hex: "#2334D0"))
+                            HStack {
+                                Text("Rp.")
+                                    .fontWeight(.light)
+                                    .foregroundColor(Color(hex: "#2334D0"))
+                                
+                                Text(String(format: "%.2f", "25000000"))
+                                    .font(.title3)
+                                    .bold()
+                                    .foregroundColor(Color(hex: "#2334D0"))
+                            }
                         }
                     }
                 }
                 
                 Spacer(minLength: 0)
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Image("ic_more")
+                Button(action: {
+                    self.isHiddenBalance.toggle()
+                }, label: {
+                    Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
                         .padding(.top, 5)
                 })
             }
             .padding([.leading, .trailing], 15)
             .padding(.top, 25)
             .padding(.bottom, 20)
-            
-            GridMenuView()
-                
-                .padding(.bottom, 25)
         }
         .navigationBarHidden(true)
         .frame(width: UIScreen.main.bounds.width - 30)
@@ -126,6 +139,19 @@ struct DashboardTabs: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         
+    }
+    
+    /* Function GET USER Status */
+    @ObservedObject var profileVM = ProfileViewModel()
+    func getProfile() {
+        self.profileVM.getProfile { success in
+            if success {
+                print("Name \(self.profileVM.name)")
+                print(self.profileVM.balance)
+                self.username = self.profileVM.name
+                self.balance = self.profileVM.balance
+            }
+        }
     }
     
     func getUserInfo() {

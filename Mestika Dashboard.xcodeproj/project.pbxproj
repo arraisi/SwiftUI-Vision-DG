@@ -249,6 +249,9 @@
 		52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348992542ACC500F08F37 /* ListBankAccountView.swift */; };
 		52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C348A12542ACF400F08F37 /* BankAccount.swift */; };
 		52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */; };
+		52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF125CBEA480012DDAB /* ProfileService.swift */; };
+		52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */; };
+		52CB5DFC25CBF15B0012DDAB /* CurrencyFormat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DFB25CBF15A0012DDAB /* CurrencyFormat+Extensions.swift */; };
 		52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8889B258B16B100D637F2 /* JitsiView.swift */; };
 		52DA20852551069C00CC048A /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20842551069C00CC048A /* Statement.swift */; };
 		52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */; };
@@ -605,6 +608,9 @@
 		52C348992542ACC500F08F37 /* ListBankAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBankAccountView.swift; sourceTree = "<group>"; };
 		52C348A12542ACF400F08F37 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
 		52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseModel.swift; sourceTree = "<group>"; };
+		52CB5DF125CBEA480012DDAB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		52CB5DFB25CBF15A0012DDAB /* CurrencyFormat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyFormat+Extensions.swift"; sourceTree = "<group>"; };
 		52D8889B258B16B100D637F2 /* JitsiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiView.swift; sourceTree = "<group>"; };
 		52DA20842551069C00CC048A /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputOldPasswordScreen.swift; sourceTree = "<group>"; };
@@ -779,6 +785,7 @@
 			isa = PBXGroup;
 			children = (
 				0A566A0D25CA6E940008E752 /* TransferServices.swift */,
+				52CB5DF125CBEA480012DDAB /* ProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1074,6 +1081,7 @@
 				FA42F2C225A8089D00C14A47 /* View+Extensions.swift */,
 				FAF5869225AB302F00ABDA3E /* UINavigationController+Extensions.swift */,
 				FA486B1D25AF528D00EDBD88 /* Font+Extensions.swift */,
+				52CB5DFB25CBF15A0012DDAB /* CurrencyFormat+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1666,6 +1674,7 @@
 			children = (
 				C0EB654C255E4D81009ADFFE /* DbViewModel.swift */,
 				0A566A0225CA68960008E752 /* TransferViewModel.swift */,
+				52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2034,6 +2043,7 @@
 				C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */,
 				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
+				52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */,
 				528AE2C72595B89A003AFD73 /* AddressSugestionResponse.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
 				06409F73256798D7008ABB20 /* AddressOptionsView.swift in Sources */,
@@ -2056,6 +2066,7 @@
 				C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
 				52ADFEF42557DC5C00A1001F /* CheckBoxGroup.swift in Sources */,
+				52CB5DFC25CBF15B0012DDAB /* CurrencyFormat+Extensions.swift in Sources */,
 				C0BCDEC625B6B99D00E1028F /* BadgeView.swift in Sources */,
 				C0BCDEB425B69A7500E1028F /* PinNoAtmViewModel.swift in Sources */,
 				52468AD72541727B007518AE /* ContactTransferOnUs.swift in Sources */,
@@ -2123,6 +2134,7 @@
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
 				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
+				52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
 				C0BCDEB925B69B3D00E1028F /* PinNoAtmService.swift in Sources */,

@@ -6,18 +6,18 @@
 import Foundation
 
 // MARK: - ProfileModel
-struct ProfileModel: Codable {
+struct ProfileResponseModel: Codable {
     let id: String
     let personal: Personal
     let status: String
     let products: [Product]
     let chipProfileDto: [ChipProfileDto]
-    let profileModelID: ID
+    let profileResponseModelID: ID
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case personal, status, products, chipProfileDto
-        case profileModelID = "id"
+        case profileResponseModelID = "id"
     }
 }
 
