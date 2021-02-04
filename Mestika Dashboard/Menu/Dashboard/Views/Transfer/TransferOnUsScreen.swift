@@ -13,13 +13,15 @@ struct TransferOnUsScreen: View {
     @State var transferData = TransferOnUsModel()
     @State var transactionFrequency = "Pilih Frekuensi Transaksi"
     @State var transactionVoucher = "Pilih Voucher"
-    
+    @State var destinationNumber = ""
     @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", noRekening: "", saldo: "0.0")
     
     @State private var showDialogConfirmation = false
     @State private var showDialogSelectAccount = false
     @State private var showDialogMaxReached = false
     @State private var showDialogMinReached = false
+    
+    @State private var disabledButton = true
     
     private var maxLimit: Int = 900000
     
@@ -77,6 +79,7 @@ struct TransferOnUsScreen: View {
                                         .font(.system(size: 13))
                                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                                 })
+                                .disabled(disabledButton)
                                 .background(Color(hex: "#2334D0"))
                                 .cornerRadius(12)
                                 .padding(.leading, 20)
@@ -101,7 +104,11 @@ struct TransferOnUsScreen: View {
                 Text("Cancel")
             }))
             .onAppear() {
+                self.transferData = TransferOnUsModel()
                 self.selectedAccount = _listBankAccount[0]
+            }
+            .onTapGesture() {
+                UIApplication.shared.endEditing()
             }
             .bottomSheet(isPresented: $showDialogConfirmation, height: 300) {
                 bottomSheetCard
@@ -130,8 +137,13 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Rekening", text: self.$transferData.destinationNumber, onEditingChanged: { changed in
+                TextField("Rekening", text: $destinationNumber, onEditingChanged: { changed in
+                    self.transferData.destinationNumber = destinationNumber
+                    validateForm()
                 })
+                .onReceive(destinationNumber.publisher.collect()) {
+                    self.destinationNumber = String($0.prefix(16))
+                }
                 .keyboardType(.numberPad)
                 .frame(height: 10)
                 .font(.subheadline)
@@ -167,6 +179,7 @@ struct TransferOnUsScreen: View {
                     .fontWeight(.bold)
                 
                 TextField("0", text: self.$transferData.amount, onEditingChanged: { changed in
+                    self.transferData.amount = self.transferData.amount.thousandSeparator()
                 })
                     .foregroundColor(Color(hex: "#232175"))
                     .font(.system(size: 40, weight: .bold, design: .default))
@@ -288,6 +301,7 @@ struct TransferOnUsScreen: View {
                         Button(action: {
                             self.transactionFrequency = data
                             self.transferData.transactionFrequency = data
+                            validateForm()
                         }) {
                             Text(data)
                                 .font(.custom("Montserrat-Regular", size: 12))
@@ -321,6 +335,7 @@ struct TransferOnUsScreen: View {
                         Button(action: {
                             self.transactionVoucher = data
                             self.transferData.transactionVoucher = data
+                            validateForm()
                         }) {
                             Text(data)
                                 .font(.custom("Montserrat-Regular", size: 12))
@@ -590,6 +605,14 @@ struct TransferOnUsScreen: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    func validateForm() {
+        if (self.transferData.amount != "" && self.transferData.destinationNumber != "" && self.transferData.transactionDate != "" && self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi" && self.transferData.transactionVoucher != "") {
+            disabledButton = false
+        } else {
+            disabledButton = true
+        }
     }
 }
 
