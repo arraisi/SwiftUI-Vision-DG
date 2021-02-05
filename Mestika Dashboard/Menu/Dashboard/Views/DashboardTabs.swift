@@ -17,6 +17,9 @@ struct DashboardTabs: View {
     @State var balance: String = ""
     @State var productName: String = "-"
     
+    @State var cardNo: String = "-"
+    @State var cardName: String = "-"
+    
     @State var isHiddenBalance: Bool = false
     
     var body: some View {
@@ -34,8 +37,72 @@ struct DashboardTabs: View {
                 GridMenuView()
                     .padding(.top, 10)
                 
-                ListRekeningView()
-                    .padding(.top, 10)
+                VStack {
+                    HStack {
+                        Text("Rekening")
+                            .font(.title3)
+                            .fontWeight(.ultraLight)
+                        
+                        Spacer()
+                        
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("See All")
+                                .bold()
+                                .foregroundColor(Color(hex: "#2334D0"))
+                        })
+                    }
+                    .padding([.leading, .trailing], 15)
+                    
+                    ScrollView(.horizontal, showsIndicators: false, content: {
+                        HStack{
+                            VStack {
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Image("ic_btn_add_rekening")
+                                })
+                                
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Image("ic_rekening_list")
+                                })
+                            }
+                            
+                            ZStack {
+        //                        Image("rekening-card-1")
+                                Image("card_bg")
+                                    .padding(.trailing, 10)
+                                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                                
+                                VStack(alignment: .leading) {
+                                    
+                                    Image("logo_m_mestika")
+                                        .resizable()
+                                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                                        .frame(width: 30, height: 30)
+                                    
+                                    Text(self.cardName)
+                                        .font(.subheadline)
+                                        .foregroundColor(Color.white)
+                                    
+                                    HStack {
+                                        Text("Rp")
+                                            .font(.headline)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Text(self.balance.thousandSeparator())
+                                            .bold()
+                                            .font(.title)
+                                            .foregroundColor(Color.white)
+                                    }
+                                    
+                                    Text(self.cardNo)
+                                        .font(.caption2)
+                                        .foregroundColor(Color.white)
+                                        .padding(.top, 15)
+                                }
+                                .padding(.trailing, 70)
+                            }
+                        }
+                    })
+                }
                 
 //                ListEwalletView()
 //                    .padding(.top, 30)
@@ -152,6 +219,9 @@ struct DashboardTabs: View {
                 self.username = self.profileVM.name
                 self.balance = self.profileVM.balance
                 self.productName = self.profileVM.nameOnCard
+                
+                self.cardNo = self.profileVM.cardNo
+                self.cardName = self.profileVM.cardName
             }
         }
     }
@@ -160,11 +230,5 @@ struct DashboardTabs: View {
         self.user.forEach { (data) in
             self.username = data.namaLengkapFromNik!
         }
-    }
-}
-
-struct DashboardTabs_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardTabs()
     }
 }
