@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "ic_faceid.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "iPhone_120pt_@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

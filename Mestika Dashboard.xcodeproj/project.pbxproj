@@ -148,6 +148,7 @@
 		527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E3124256613EB004FF5ED /* MobileVersionService.swift */; };
 		527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312925661644004FF5ED /* MobileVersionViewModel.swift */; };
 		527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312E25663289004FF5ED /* UserCheckResponse.swift */; };
+		5283AF5D25CD28E100111C75 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283AF5C25CD28E100111C75 /* UIDevice+Extensions.swift */; };
 		528AE2C225959B8C003AFD73 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2C125959B8C003AFD73 /* AppConstants.swift */; };
 		528AE2C72595B89A003AFD73 /* AddressSugestionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2C62595B89A003AFD73 /* AddressSugestionResponse.swift */; };
 		528AE2CC2595B95E003AFD73 /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2CB2595B95E003AFD73 /* AddressService.swift */; };
@@ -506,6 +507,7 @@
 		527E3124256613EB004FF5ED /* MobileVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionService.swift; sourceTree = "<group>"; };
 		527E312925661644004FF5ED /* MobileVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionViewModel.swift; sourceTree = "<group>"; };
 		527E312E25663289004FF5ED /* UserCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCheckResponse.swift; sourceTree = "<group>"; };
+		5283AF5C25CD28E100111C75 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		528AE2C125959B8C003AFD73 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		528AE2C62595B89A003AFD73 /* AddressSugestionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSugestionResponse.swift; sourceTree = "<group>"; };
 		528AE2CB2595B95E003AFD73 /* AddressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; };
@@ -1079,6 +1081,7 @@
 				FA42F2C225A8089D00C14A47 /* View+Extensions.swift */,
 				FAF5869225AB302F00ABDA3E /* UINavigationController+Extensions.swift */,
 				FA486B1D25AF528D00EDBD88 /* Font+Extensions.swift */,
+				5283AF5C25CD28E100111C75 /* UIDevice+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1978,6 +1981,7 @@
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
 				C0E40BAE2564E59200259612 /* FormIndustriTempatBekerjaView.swift in Sources */,
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
+				5283AF5D25CD28E100111C75 /* UIDevice+Extensions.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				065DF51E25765ABE00255743 /* ATMDesignModel.swift in Sources */,
 				52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */,

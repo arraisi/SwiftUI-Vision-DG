@@ -19,6 +19,7 @@ struct FormInputAtmPinForgotPasswordView: View {
     
     @State var errorMessage: String = ""
     @State var showingModalError: Bool = false
+    @State var showingModalSuccess: Bool = false
     
     @GestureState private var dragOffset = CGSize.zero
     
@@ -133,7 +134,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                 .padding(.bottom, 20)
             }
             
-            if self.showingModalError {
+            if self.showingModalError || self.showingModalSuccess {
                 ModalOverlay(tapAction: { withAnimation { } })
             }
         }
@@ -151,6 +152,9 @@ struct FormInputAtmPinForgotPasswordView: View {
         }))
         .popup(isPresented: $showingModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             modalError()
+        }
+        .popup(isPresented: $showingModalSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            modalSuccess()
         }
     }
     
@@ -189,16 +193,51 @@ struct FormInputAtmPinForgotPasswordView: View {
         .cornerRadius(20)
     }
     
+    // MARK: -Bottom modal for error
+    func modalSuccess() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Password berhasil diganti.")
+                .fontWeight(.bold)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.isNextRoute = true
+            }) {
+                Text("Ke Halaman Login")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     @ObservedObject private var authVM = AuthViewModel()
     func setPassword() {
         self.authVM.setPwd(
             pwd: registerData.password,
-            accountNumber: atmNumberCtrl,
-            nik: "",
+            accountNumber: "",
+            nik: atmNumberCtrl,
             pinTrx: pinAtmCtrl) { success in
             if success {
                 print("SUCCESS CHANGE PASSWORD")
-                self.isNextRoute = true
+                self.showingModalSuccess = true
             }
             
             if !success {

@@ -135,7 +135,7 @@ struct LoginScreen: View {
                             Button(action: {
                                 authenticate()
                             }, label: {
-                                Image("ic_fingerprint")
+                                Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
                                     .padding(.trailing, 20)
                             })
                         }
@@ -184,18 +184,6 @@ struct LoginScreen: View {
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessage()
         }
-    }
-    
-    func faceIDAvailable() -> Bool {
-        
-        if #available(iOS 11.0, *) {
-            let context = LAContext()
-            print("With FaceID")
-            return (context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: nil) && context.biometryType == .faceID)
-        }
-        
-        print("No FaceID")
-        return false
     }
     
     func saveDataNewDeviceToCoreData()  {
