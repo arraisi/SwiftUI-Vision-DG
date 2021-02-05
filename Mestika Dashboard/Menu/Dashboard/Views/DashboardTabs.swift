@@ -67,8 +67,8 @@ struct DashboardTabs: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("Hi, \(self.username)")
-                    .font(.title)
-                    .fontWeight(.heavy)
+                    .font(.headline)
+                    .fontWeight(.medium)
                 
                 Text("Apakah ada yang bisa bantu?")
                     .font(.subheadline)

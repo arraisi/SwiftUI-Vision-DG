@@ -235,6 +235,8 @@ extension AuthViewModel {
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
                     self.errorMessage = "Password lemah,silahkan ganti password anda"
+                case .custom(code: 403):
+                    self.errorMessage = "Password not changed"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -271,6 +273,8 @@ extension AuthViewModel {
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
                     self.errorMessage = "Password lemah,silahkan ganti password anda"
+                case .custom(code: 403):
+                    self.errorMessage = "Password not changed"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
