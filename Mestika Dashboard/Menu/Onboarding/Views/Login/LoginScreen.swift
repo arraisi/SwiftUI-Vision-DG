@@ -42,6 +42,8 @@ struct LoginScreen: View {
     
     @Binding var isNewDeviceLogin: Bool
     
+    @State var iconSecure: String = ""
+    
     var body: some View {
         ZStack(alignment: .top) {
             Image("bg_blue")
@@ -184,6 +186,18 @@ struct LoginScreen: View {
         }
     }
     
+    func faceIDAvailable() -> Bool {
+        
+        if #available(iOS 11.0, *) {
+            let context = LAContext()
+            print("With FaceID")
+            return (context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: nil) && context.biometryType == .faceID)
+        }
+        
+        print("No FaceID")
+        return false
+    }
+    
     func saveDataNewDeviceToCoreData()  {
         print("------SAVE TO CORE DATA-------")
         
@@ -302,4 +316,10 @@ struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginScreen(isNewDeviceLogin: .constant(true))
     }
+}
+
+enum BiometricType{
+    case touch
+    case face
+    case none
 }
