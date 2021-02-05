@@ -60,6 +60,8 @@
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Required access to the Audio</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Our application needs permission to write photos...</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Black.ttf</string>
