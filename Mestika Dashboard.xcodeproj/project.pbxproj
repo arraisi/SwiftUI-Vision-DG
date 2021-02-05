@@ -276,6 +276,12 @@
 		C02C2DE825876BAA00CED248 /* PhotoCropping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C2DE725876BAA00CED248 /* PhotoCropping.swift */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
+		C043CF9925CD1F6600328C91 /* FormChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */; };
+		C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CFB425CD34BD00328C91 /* FormChangePinTransactionView.swift */; };
+		C043CFBD25CD3F9000328C91 /* languages.json in Resources */ = {isa = PBXBuildFile; fileRef = C043CFBC25CD3F9000328C91 /* languages.json */; };
+		C043CFC225CD43B700328C91 /* FormChangeContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CFC125CD43B700328C91 /* FormChangeContactView.swift */; };
+		C043CFCA25CD4BD000328C91 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CFC925CD4BD000328C91 /* BiometricType.swift */; };
+		C043CFCF25CD4E5300328C91 /* FormChangeAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CFCE25CD4E5300328C91 /* FormChangeAddressView.swift */; };
 		C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B958A255450D0006690C2 /* PopUpBubble.swift */; };
 		C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */; };
 		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
@@ -636,6 +642,12 @@
 		C02C2DE725876BAA00CED248 /* PhotoCropping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCropping.swift; sourceTree = "<group>"; };
 		C02E9BAC256E814C00622E7A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCarousel.swift; sourceTree = "<group>"; };
+		C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePasswordView.swift; sourceTree = "<group>"; };
+		C043CFB425CD34BD00328C91 /* FormChangePinTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePinTransactionView.swift; sourceTree = "<group>"; };
+		C043CFBC25CD3F9000328C91 /* languages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = languages.json; sourceTree = "<group>"; };
+		C043CFC125CD43B700328C91 /* FormChangeContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangeContactView.swift; sourceTree = "<group>"; };
+		C043CFC925CD4BD000328C91 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
+		C043CFCE25CD4E5300328C91 /* FormChangeAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangeAddressView.swift; sourceTree = "<group>"; };
 		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
 		C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewModel.swift; sourceTree = "<group>"; };
 		C0587B7B255BED2600F82D9D /* SelfieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieView.swift; sourceTree = "<group>"; };
@@ -875,6 +887,7 @@
 				C02C2DE725876BAA00CED248 /* PhotoCropping.swift */,
 				C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */,
 				FA486B1825AF4E9100EDBD88 /* SavingDetailModalView.swift */,
+				C043CFC925CD4BD000328C91 /* BiometricType.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -1130,6 +1143,8 @@
 				526B6601254FF9FC00C13C36 /* StatementScreen.swift */,
 				526B660B254FFA7900C13C36 /* TransactionFeesScreen.swift */,
 				526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */,
+				C043CFC125CD43B700328C91 /* FormChangeContactView.swift */,
+				C043CFCE25CD4E5300328C91 /* FormChangeAddressView.swift */,
 				526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */,
 			);
 			path = Account;
@@ -1355,6 +1370,7 @@
 		52DA20A72551215200CC048A /* ChangePassword */ = {
 			isa = PBXGroup;
 			children = (
+				C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */,
 				52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */,
 				52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */,
 			);
@@ -1364,6 +1380,7 @@
 		52DA20A82551216200CC048A /* ChangePINTransaction */ = {
 			isa = PBXGroup;
 			children = (
+				C043CFB425CD34BD00328C91 /* FormChangePinTransactionView.swift */,
 				52DA20982551156400CC048A /* FormInputOldPinScreen.swift */,
 				52DA209D25511A9F00CC048A /* FormInputNewPinScreen.swift */,
 			);
@@ -1565,6 +1582,7 @@
 				52ADFE842557D99F00A1001F /* Pembukaan Rekening */,
 				C092ABFE2553B5850051CE3E /* myCardData.json */,
 				52BF57D32558E57D00F009B5 /* savingTypeData.json */,
+				C043CFBC25CD3F9000328C91 /* languages.json */,
 				52ADFE772557D99F00A1001F /* masterData.json */,
 			);
 			path = json;
@@ -1838,6 +1856,7 @@
 				0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */,
 				C0E40B822564D90700259612 /* jabatanProfesi.json in Resources */,
 				52ADFEA72557D99F00A1001F /* besarPerkiraanSetoran.json in Resources */,
+				C043CFBD25CD3F9000328C91 /* languages.json in Resources */,
 				C0A4F99C25528C0700566A11 /* Montserrat-Medium.ttf in Resources */,
 				52ADFE9E2557D99F00A1001F /* besarPerkiraanPenarikan.json in Resources */,
 				C0A4F99D25528C0700566A11 /* Montserrat-Black.ttf in Resources */,
@@ -2019,6 +2038,7 @@
 				C0E6C8FB255F87BB00A79237 /* FormPilihJenisATMView.swift in Sources */,
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
 				0620291E256D914500A830EA /* GeneralResponse.swift in Sources */,
+				C043CFCF25CD4E5300328C91 /* FormChangeAddressView.swift in Sources */,
 				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
 				52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
@@ -2124,6 +2144,7 @@
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
 				064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */,
+				C043CFC225CD43B700328C91 /* FormChangeContactView.swift in Sources */,
 				0658B5972563F8A2001B659D /* NotificationScreen.swift in Sources */,
 				C0E40BBE2564E76000259612 /* FormSumberPenyandandDana2View.swift in Sources */,
 				525FA11D25528D9A007EADCB /* GridMenuAllPaymentPurchaseView.swift in Sources */,
@@ -2132,6 +2153,7 @@
 				C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */,
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
+				C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
 				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
 				52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */,
@@ -2157,9 +2179,11 @@
 				52ADFF4A2557DE8000A1001F /* TabItemView.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
 				C05BA90825821A7D00E115D6 /* FormPINTransaksiATMView.swift in Sources */,
+				C043CFCA25CD4BD000328C91 /* BiometricType.swift in Sources */,
 				C0E6C91A255F934D00A79237 /* DetailLimitKartuAtmView.swift in Sources */,
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */,
+				C043CF9925CD1F6600328C91 /* FormChangePasswordView.swift in Sources */,
 				C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */,
 				52ADFEC82557DA3700A1001F /* SliderAssetsViewModel.swift in Sources */,
 				52ADFF0D2557DCB800A1001F /* KeyboardAwareModifier.swift in Sources */,
