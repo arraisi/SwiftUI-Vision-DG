@@ -14,6 +14,7 @@ struct TransferOnUsScreen: View {
     @State var transactionFrequency = "Pilih Frekuensi Transaksi"
     @State var transactionVoucher = "Pilih Voucher"
     @State var destinationNumber = ""
+    @State var amount = ""
     @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", noRekening: "", saldo: "0.0")
     
     @State private var showDialogConfirmation = false
@@ -80,7 +81,7 @@ struct TransferOnUsScreen: View {
                                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                                 })
                                 .disabled(disabledButton)
-                                .background(Color(hex: "#2334D0"))
+                                .background(Color(hex: disabledButton ? "#CBD1D9" : "#232175"))
                                 .cornerRadius(12)
                                 .padding(.leading, 20)
                                 .padding(.trailing, 10)
@@ -178,12 +179,17 @@ struct TransferOnUsScreen: View {
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)
                 
-                TextField("0", text: self.$transferData.amount, onEditingChanged: { changed in
-                    self.transferData.amount = self.transferData.amount.thousandSeparator()
+                TextField("0", text: self.$amount, onEditingChanged: { changed in
+                    self.amount = amount.thousandSeparator()
+                    self.transferData.amount = self.amount
                 })
-                    .foregroundColor(Color(hex: "#232175"))
-                    .font(.system(size: 40, weight: .bold, design: .default))
-                    .keyboardType(.numbersAndPunctuation)
+                .onReceive(amount.publisher.collect()) {
+                    self.amount = String($0.prefix(13))
+                    self.amount = amount.replacingOccurrences(of: ".", with: "").thousandSeparator()
+                }
+                .foregroundColor(Color(hex: "#232175"))
+                .font(.system(size: 30, weight: .bold, design: .default))
+                .keyboardType(.numbersAndPunctuation)
                 
                 Spacer()
             }
