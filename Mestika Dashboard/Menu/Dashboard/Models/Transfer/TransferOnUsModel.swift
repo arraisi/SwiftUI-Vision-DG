@@ -21,8 +21,8 @@ class TransferOnUsModel: ObservableObject {
     @Published var pin = ""
     
     @Published var transactionDate = "Sekarang"
-    @Published var transactionFrequency = "Pilih Frekuensi Transaksi"
-    @Published var transactionVoucher = "Pilih Voucher"
+    @Published var transactionFrequency = ""
+    @Published var transactionVoucher = ""
     
     static let shared = TransferOnUsModel()
 }

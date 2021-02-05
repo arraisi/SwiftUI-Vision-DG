@@ -11,7 +11,7 @@ import BottomSheet
 struct TransferOnUsScreen: View {
 
     @State var transferData = TransferOnUsModel()
-    @State var transactionFrequency = "Pilih Frekuensi Transaksi"
+    @State var transactionFrequency = ""
     @State var transactionVoucher = "Pilih Voucher"
     @State var destinationNumber = ""
     @State var amount = ""
@@ -57,6 +57,7 @@ struct TransferOnUsScreen: View {
                             
                             VStack {
                                 Button(action: {
+                                    UIApplication.shared.endEditing()
                                     let amount = Int(self.transferData.amount) ?? 0
                                     let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
 
@@ -70,8 +71,6 @@ struct TransferOnUsScreen: View {
                                     
 //                                    MARK: To be replaced with actual data
                                     self.transferData.destinationName = "Ismail Haq"
-                                    
-                                    
                                     
                                 }, label: {
                                     Text("KONFIRMASI TRANSFER")
@@ -106,7 +105,11 @@ struct TransferOnUsScreen: View {
             }))
             .onAppear() {
                 self.transferData = TransferOnUsModel()
+                self.transactionFrequency = _listFrequency[0]
+                self.transferData.transactionFrequency = _listFrequency[0]
                 self.selectedAccount = _listBankAccount[0]
+                self.transferData.sourceNumber = selectedAccount.noRekening
+                self.transferData.sourceAccountName = selectedAccount.namaRekening
             }
             .onTapGesture() {
                 UIApplication.shared.endEditing()
@@ -138,12 +141,11 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Rekening", text: $destinationNumber, onEditingChanged: { changed in
-                    self.transferData.destinationNumber = destinationNumber
-                    validateForm()
-                })
+                TextField("Rekening", text: $destinationNumber, onEditingChanged: {_ in })
                 .onReceive(destinationNumber.publisher.collect()) {
                     self.destinationNumber = String($0.prefix(16))
+                    self.transferData.destinationNumber = destinationNumber
+                    validateForm()
                 }
                 .keyboardType(.numberPad)
                 .frame(height: 10)
@@ -179,17 +181,17 @@ struct TransferOnUsScreen: View {
                     .foregroundColor(Color(hex: "#232175"))
                     .fontWeight(.bold)
                 
-                TextField("0", text: self.$amount, onEditingChanged: { changed in
-                    self.amount = amount.thousandSeparator()
-                    self.transferData.amount = self.amount
-                })
+                TextField("0", text: self.$amount, onEditingChanged: {_ in })
                 .onReceive(amount.publisher.collect()) {
-                    self.amount = String($0.prefix(13))
-                    self.amount = amount.replacingOccurrences(of: ".", with: "").thousandSeparator()
+                    let amountString = String($0.prefix(13))
+                    let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                    self.amount = cleanAmount.thousandSeparator()
+                    self.transferData.amount = cleanAmount
+                    validateForm()
                 }
                 .foregroundColor(Color(hex: "#232175"))
                 .font(.system(size: 30, weight: .bold, design: .default))
-                .keyboardType(.numbersAndPunctuation)
+                .keyboardType(.numberPad)
                 
                 Spacer()
             }
@@ -259,6 +261,7 @@ struct TransferOnUsScreen: View {
             }
             .padding()
             .onTapGesture {
+                UIApplication.shared.endEditing()
                 self.showDialogSelectAccount = true
             }
         }
@@ -614,9 +617,15 @@ struct TransferOnUsScreen: View {
     }
     
     func validateForm() {
-        if (self.transferData.amount != "" && self.transferData.destinationNumber != "" && self.transferData.transactionDate != "" && self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi" && self.transferData.transactionVoucher != "") {
+        if (self.transferData.destinationNumber.count == 16 &&
+                self.transferData.amount != "" &&
+                self.transferData.transactionDate != "" &&
+                self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi") {
             disabledButton = false
         } else {
+            if (self.transferData.transactionVoucher == "Pilih Voucher") {
+                self.transferData.transactionVoucher = "-"
+            }
             disabledButton = true
         }
     }

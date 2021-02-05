@@ -23,7 +23,7 @@ struct TransferOnUsPinConfirmationScreen: View {
     
     var body: some View {
         if unLocked {
-            TransferOnUsSuccessInformationScreen().environmentObject(transferData)
+            TransferOnUsSuccessInformationScreen(transferData: transferData)
         } else {
             ZStack {
                 Image("bg_blue")

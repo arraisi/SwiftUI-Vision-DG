@@ -9,86 +9,96 @@ import SwiftUI
 
 struct TransferOnUsSuccessInformationScreen: View {
     
-    @EnvironmentObject var transferData: TransferOnUsModel
-
+//    @EnvironmentObject var transferData: TransferOnUsModel
+    var transferData: TransferOnUsModel
+    
     @State private var showPopover: Bool = false
     @State var receivedBank = "Mestika"
     
-    var body: some View {
-        ZStack {
-            Image("bg_blue")
-                .resizable()
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            
-            ZStack {
-                
-                VStack {
-                    Spacer()
-                    Image("logo_m_mestika")
-                        .resizable()
-                        .frame(width: 70, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .padding()
-                    
-                    dateInfo
-                    nominalInfo
-                    destinationInfo
-                    receivedInfo
-                    
-                    Spacer(minLength: 0)
-                    NavigationLink(destination: TransferOnUsDetailsInformation().environmentObject(transferData), label: {
-                        Text("Lihat Detail Transaksi")
-                            .foregroundColor(Color(hex: "#2334D0"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        
-                    })
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
-                    
-                    Spacer(minLength: 0)
-                }
+    @State private var uiImage: UIImage = UIImage()
+    @State private var sheet = false
     
-                if self.showPopover {
-                    ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
-                        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                }
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                Image("bg_blue")
+                    .resizable()
+                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 
-                if showPopover {
-                    PopOverFavoriteView()
-                        .onTapGesture {
+                ZStack {
+                    
+                    VStack {
+                        Spacer()
+                        Image("logo_m_mestika")
+                            .resizable()
+                            .frame(width: 70, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .padding()
+                        
+                        dateInfo
+                        nominalInfo
+                        destinationInfo
+                        receivedInfo
+                        
+                        Spacer(minLength: 0)
+                        NavigationLink(destination: TransferOnUsDetailsInformation().environmentObject(transferData), label: {
+                            Text("Lihat Detail Transaksi")
+                                .foregroundColor(Color(hex: "#2334D0"))
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            
+                        })
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 10)
+                        
+                        Spacer(minLength: 0)
+                    }
+        
+                    if self.showPopover {
+                        ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
+                            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    }
+                    
+                    if showPopover {
+                        PopOverFavoriteView()
+                            .onTapGesture {
+                                self.showPopover.toggle()
+                            }
+                    }
+                }
+            
+            }
+            .navigationTitle("")
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(trailing: HStack(spacing: 30) {
+                HStack {
+                    Text("Tambahkan ke Favorit?")
+    //                    .font(.caption)
+                        .foregroundColor(.white)
+                    
+                    Button(action: {
+                        withAnimation(.easeIn) {
                             self.showPopover.toggle()
                         }
+                    }, label: {
+                        Image(systemName: "pin")
+                            .foregroundColor(.white)
+                    })
+                    
                 }
-            }
-        
-        }
-        .navigationTitle("")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing: HStack(spacing: 30) {
-            HStack {
-                Text("Tambahkan ke Favorit?")
-//                    .font(.caption)
-                    .foregroundColor(.white)
                 
                 Button(action: {
-                    withAnimation(.easeIn) {
-                        self.showPopover.toggle()
-                    }
+                    self.uiImage = self.asUIImage()
+                    shareImage()
                 }, label: {
-                    Image(systemName: "pin")
+                    Image(systemName: "square.and.arrow.up")
                         .foregroundColor(.white)
                 })
-                
-            }
-            
-            Button(action: {}, label: {
-                Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(.white)
             })
-        })
+        }.onAppear() {
+        }
     }
     
     var dateInfo: some View {
@@ -173,11 +183,17 @@ struct TransferOnUsSuccessInformationScreen: View {
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 20)
     }
+    
+    func shareImage() {
+        sheet.toggle()
+        let av = UIActivityViewController(activityItems: [uiImage], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+    }
 }
 
 struct TransferOnUsSuccessInformationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsSuccessInformationScreen().environmentObject(TransferOnUsModel())
+        TransferOnUsSuccessInformationScreen(transferData: TransferOnUsModel())
     }
 }
 
