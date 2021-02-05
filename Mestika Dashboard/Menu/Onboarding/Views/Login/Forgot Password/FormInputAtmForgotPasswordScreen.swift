@@ -60,9 +60,9 @@ struct FormInputAtmForgotPasswordScreen: View {
                     HStack {
                         TextField("Masukkan nomor ATM Anda", text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
-                            .onReceive(atmNumberCtrl.publisher.collect()) {
-                                self.pinAtmCtrl = String($0.prefix(11))
-                            }
+//                            .onReceive(atmNumberCtrl.publisher.collect()) {
+//                                self.pinAtmCtrl = String($0.prefix(11))
+//                            }
                     }
                     .frame(height: 25)
                     .padding()
@@ -179,7 +179,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Nomor Akun / PIN salah, silahkan ulangi kembali.")
+            Text(self.errorMessage)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
@@ -209,8 +209,8 @@ struct FormInputAtmForgotPasswordScreen: View {
     func setPassword() {
         self.authVM.setPwd(
             pwd: registerData.password,
-            accountNumber: "",
-            nik: atmNumberCtrl,
+            accountNumber: atmNumberCtrl,
+            nik: "",
             pinTrx: pinAtmCtrl) { success in
             if success {
                 print("SUCCESS CHANGE PASSWORD")

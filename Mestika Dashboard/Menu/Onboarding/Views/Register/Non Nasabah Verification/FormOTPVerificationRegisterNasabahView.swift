@@ -556,7 +556,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     func validateOTP() {
         self.isLoading = true
-        
+        print(tryCount)
         self.otpVM.otpValidation(
             code: self.pin,
             destination: self.registerData.noTelepon,
@@ -606,12 +606,19 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.isShowModal.toggle()
                     self.isBtnValidationDisabled = true
                     resetField()
-                }
-                
-                if (self.otpVM.errorCode == 403) {
+                } else if (self.otpVM.errorCode == 403) {
                     self.isLoading = false
                     self.messageResponse = self.otpVM.statusMessage
                     self.isShowAlert = true
+                } else {
+                    print("OTP INVALID")
+                    self.isLoading = false
+                    print(self.otpVM.timeRemaining)
+                    self.timeRemainingBtn = self.otpVM.timeRemaining
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal.toggle()
+                    self.isBtnValidationDisabled = true
+                    resetField()
                 }
             }
             

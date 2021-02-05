@@ -42,6 +42,8 @@ struct LoginScreen: View {
     
     @Binding var isNewDeviceLogin: Bool
     
+    @State var iconSecure: String = ""
+    
     var body: some View {
         ZStack(alignment: .top) {
             Image("bg_blue")
@@ -133,7 +135,7 @@ struct LoginScreen: View {
                             Button(action: {
                                 authenticate()
                             }, label: {
-                                Image("ic_fingerprint")
+                                Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
                                     .padding(.trailing, 20)
                             })
                         }
@@ -302,4 +304,10 @@ struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginScreen(isNewDeviceLogin: .constant(true))
     }
+}
+
+enum BiometricType{
+    case touch
+    case face
+    case none
 }

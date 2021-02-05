@@ -16,6 +16,9 @@ class ProfileViewModel: ObservableObject {
     @Published var nameOnCard: String = ""
     @Published var telepon: String = ""
     
+    @Published var cardNo: String = ""
+    @Published var cardName: String = ""
+    
     @Published var errorMessage: String = ""
 }
 
@@ -35,7 +38,12 @@ extension ProfileViewModel {
                 
                 self.name = response.personal.name
                 self.telepon = response.profileResponseModelID.telepon
+                self.nameOnCard = response.products.last!.productName
                 self.balance = response.chipProfileDto.last!.balance
+                
+                self.cardName = response.chipProfileDto.last!.nameOnCard
+                self.cardNo = response.chipProfileDto.last!.cardNo
+                
                 completion(true)
                 
             case .failure(let error):

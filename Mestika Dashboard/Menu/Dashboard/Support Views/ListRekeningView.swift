@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ListRekeningView: View {
+    
+    @State var cardNo: String = "-"
+    @State var cardName: String = "-"
+    
     var body: some View {
         VStack {
             HStack {
@@ -36,20 +40,23 @@ struct ListRekeningView: View {
                             Image("ic_rekening_list")
                         })
                     }
-                    Image("rekening-card-1")
-                        .padding(.trailing, 10)
-                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                    Image("rekening-card-2")
-                        .padding(.trailing, 15)
-                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                    
+                    ZStack {
+//                        Image("rekening-card-1")
+                        Image("card_bg")
+                            .padding(.trailing, 10)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                        
+                        VStack {
+                            Text(self.cardName)
+                                .foregroundColor(Color.white)
+                            
+                            Text(self.cardNo)
+                                .foregroundColor(Color.white)
+                        }
+                    }
                 }
             })
         }
-    }
-}
-
-struct ListRekeningView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListRekeningView()
     }
 }

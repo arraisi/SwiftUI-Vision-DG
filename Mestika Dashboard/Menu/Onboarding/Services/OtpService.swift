@@ -60,16 +60,12 @@ class OtpService {
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 
-                if (httpResponse.statusCode == 200) {
+                if (httpResponse.statusCode == 200 || httpResponse.statusCode == 401) {
                     let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
                     completion(.success(otpResponse!))
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
-                }
-                
-                if (httpResponse.statusCode == 401) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }
