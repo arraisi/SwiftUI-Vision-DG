@@ -68,6 +68,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
                         print("\(self.$transferData.transferType)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -87,6 +88,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Penerima", text: self.$transferData.destinationName, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationName)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -106,6 +108,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Rekening Penerima", text: self.$transferData.destinationNumber, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -125,6 +128,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Nominal Transfer", text: self.$transferData.amount, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -144,6 +148,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
                         print("\(self.$transferData.sourceAccountName)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -163,6 +168,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionDate)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -182,6 +188,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionFrequency)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -201,6 +208,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionVoucher)")
                     })
+                    .disabled(true)
                     .frame(height: 20)
                     .padding()
                     .font(.subheadline)
@@ -220,6 +228,7 @@ struct TransferOnUsConfirmationScreen: View {
                     TextField("Catatan", text: self.$transferData.notes, onEditingChanged: { changed in
                         print("\(self.$transferData.notes)")
                     })
+                    .disabled(true)
                     .frame(height: 50)
                     .padding()
                     .font(.subheadline)

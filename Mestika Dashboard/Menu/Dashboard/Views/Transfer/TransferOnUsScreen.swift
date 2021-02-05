@@ -26,14 +26,15 @@ struct TransferOnUsScreen: View {
     
     private var maxLimit: Int = 900000
     
-    var _listBankAccount = [
-        BankAccount(id: 1, namaRekening: "Rekening 01", noRekening: "9090123133", saldo: "430.000"),
-        BankAccount(id: 2, namaRekening: "Rekening 02", noRekening: "009012033", saldo: "10.200.000"),
-        BankAccount(id: 3, namaRekening: "Rekening 03", noRekening: "900912303", saldo: "0.0")
-    ]
+    /* Function GET USER Status */
+    @ObservedObject var profileVM = ProfileViewModel()
+    
+    @State var balance: String = ""
+    @State var productName: String = "-"
+    
+    @State var listBankAccount: [BankAccount] = []
     
     var _listVoucher = ["VCR-50K","VCR-100K","VCR-150K","VCR-250K"]
-    
     var _listFrequency = ["Sekali","Berkali-kali"]
     
     var body: some View {
@@ -107,9 +108,7 @@ struct TransferOnUsScreen: View {
                 self.transferData = TransferOnUsModel()
                 self.transactionFrequency = _listFrequency[0]
                 self.transferData.transactionFrequency = _listFrequency[0]
-                self.selectedAccount = _listBankAccount[0]
-                self.transferData.sourceNumber = selectedAccount.noRekening
-                self.transferData.sourceAccountName = selectedAccount.namaRekening
+                self.getProfile()
             }
             .onTapGesture() {
                 UIApplication.shared.endEditing()
@@ -574,7 +573,7 @@ struct TransferOnUsScreen: View {
                 Spacer()
             }
             
-            ForEach(_listBankAccount) { data in
+            ForEach(listBankAccount) { data in
                 VStack {
                     HStack {
                         VStack(alignment: .leading) {
@@ -627,6 +626,21 @@ struct TransferOnUsScreen: View {
                 self.transferData.transactionVoucher = "-"
             }
             disabledButton = true
+        }
+    }
+    
+    func getProfile() {
+        self.profileVM.getProfile { success in
+            if success {
+                print("Name \(self.profileVM.name)")
+                print(self.profileVM.balance)
+                self.transferData.username = self.profileVM.name
+                self.listBankAccount.removeAll()
+                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                self.selectedAccount = self.listBankAccount[0]
+                self.transferData.sourceNumber = selectedAccount.noRekening
+                self.transferData.sourceAccountName = selectedAccount.namaRekening
+            }
         }
     }
 }

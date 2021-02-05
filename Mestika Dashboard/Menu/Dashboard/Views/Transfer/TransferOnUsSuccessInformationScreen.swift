@@ -17,93 +17,93 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     @State private var uiImage: UIImage = UIImage()
     @State private var sheet = false
+    @State private var dateString = ""
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                Image("bg_blue")
-                    .resizable()
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                
-                ZStack {
-                    
-                    VStack {
-                        Spacer()
-                        Image("logo_m_mestika")
-                            .resizable()
-                            .frame(width: 70, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .padding()
-                        
-                        dateInfo
-                        nominalInfo
-                        destinationInfo
-                        receivedInfo
-                        
-                        Spacer(minLength: 0)
-                        NavigationLink(destination: TransferOnUsDetailsInformation().environmentObject(transferData), label: {
-                            Text("Lihat Detail Transaksi")
-                                .foregroundColor(Color(hex: "#2334D0"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                            
-                        })
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 10)
-                        
-                        Spacer(minLength: 0)
-                    }
-        
-                    if self.showPopover {
-                        ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
-                            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                    }
-                    
-                    if showPopover {
-                        PopOverFavoriteView()
-                            .onTapGesture {
-                                self.showPopover.toggle()
-                            }
-                    }
-                }
+        ZStack {
+            Image("bg_blue")
+                .resizable()
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
-            }
-            .navigationTitle("")
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(trailing: HStack(spacing: 30) {
-                HStack {
-                    Text("Tambahkan ke Favorit?")
-    //                    .font(.caption)
-                        .foregroundColor(.white)
+            ZStack {
+                
+                VStack {
+                    Spacer()
+                    Image("logo_m_mestika")
+                        .resizable()
+                        .frame(width: 70, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .padding()
                     
-                    Button(action: {
-                        withAnimation(.easeIn) {
+                    dateInfo
+                    nominalInfo
+                    destinationInfo
+                    receivedInfo
+                    
+                    Spacer(minLength: 0)
+                    NavigationLink(destination: TransferOnUsDetailsInformation().environmentObject(transferData), label: {
+                        Text("Lihat Detail Transaksi")
+                            .foregroundColor(Color(hex: "#2334D0"))
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        
+                    })
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 10)
+                    
+                    Spacer(minLength: 0)
+                }
+    
+                if self.showPopover {
+                    ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
+                        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                }
+                
+                if showPopover {
+                    PopOverFavoriteView()
+                        .onTapGesture {
                             self.showPopover.toggle()
                         }
-                    }, label: {
-                        Image(systemName: "pin")
-                            .foregroundColor(.white)
-                    })
-                    
                 }
+            }
+        
+        }
+        .navigationTitle("")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(trailing: HStack(spacing: 30) {
+            HStack {
+                Text("Tambahkan ke Favorit?")
+//                    .font(.caption)
+                    .foregroundColor(.white)
                 
                 Button(action: {
-                    self.uiImage = self.asUIImage()
-                    shareImage()
+                    withAnimation(.easeIn) {
+                        self.showPopover.toggle()
+                    }
                 }, label: {
-                    Image(systemName: "square.and.arrow.up")
+                    Image(systemName: "pin")
                         .foregroundColor(.white)
                 })
+                
+            }
+            
+            Button(action: {
+                self.uiImage = self.asUIImage()
+                shareImage()
+            }, label: {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(.white)
             })
-        }.onAppear() {
+        }).onAppear() {
+            initDate()
         }
     }
     
     var dateInfo: some View {
         VStack {
-            Text("13 September 2020")
+            Text(self.dateString)
 //                .font(.caption)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
@@ -165,7 +165,7 @@ struct TransferOnUsSuccessInformationScreen: View {
 //                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
-            Text("PRIMA JATNIKA")
+            Text(self.transferData.username)
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -188,6 +188,14 @@ struct TransferOnUsSuccessInformationScreen: View {
         sheet.toggle()
         let av = UIActivityViewController(activityItems: [uiImage], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+    }
+    
+    func initDate() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "in_ID")
+        self.dateString = formatter.string(from: Date())
     }
 }
 

@@ -8,6 +8,7 @@
 import Foundation
 
 class TransferOnUsModel: ObservableObject {
+    @Published var username = ""
     @Published var transferType = "Antar Sesama Bank"
     @Published var cardNo = ""
     @Published var ref = "1"
