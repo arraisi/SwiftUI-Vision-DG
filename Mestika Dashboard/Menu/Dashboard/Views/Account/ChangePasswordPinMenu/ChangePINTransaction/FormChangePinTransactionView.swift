@@ -1,18 +1,21 @@
 //
-//  FormInputResetNewPinScreen.swift
+//  FormChangePinView.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 03/11/20.
+//  Created by Abdul R. Arraisi on 05/02/21.
 //
 
 import SwiftUI
 
-struct FormInputResetNewPinScreen: View {
+struct FormChangePinTransactionView: View {
+    
+    @State private var oldPinCtrl = ""
     
     @State private var pinCtrl = ""
     @State private var pinConfirmCtrl = ""
     
     @State private var showPin: Bool = false
+    @State private var showOldPin: Bool = false
     @State private var showPinConfirm: Bool = false
     @State private var showModal: Bool = false
     @State private var isPinChanged: Bool = false
@@ -21,29 +24,56 @@ struct FormInputResetNewPinScreen: View {
         ZStack {
             
             ScrollView(showsIndicators: false) {
-                Text("LUPA PIN")
+                Text("Ubah PIN")
                     .font(.custom("Montserrat-Bold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .padding(.top, 30)
                 
-                Text("Silahkan masukkan PIN baru Anda")
-                    .font(.custom("Montserrat-Regular", size: 14))
-                    .foregroundColor(Color(hex: "#002251"))
-                    .padding(.top, 10)
+                VStack(alignment: .leading) {
+                    Text("Silahkan masukkan PIN lama dan baru Anda")
+                        .font(.custom("Montserrat-Regular", size: 14))
+                        .foregroundColor(Color(hex: "#002251"))
+                        .padding(.top, 5)
+                    
+                    Text("PIN Lama")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .padding(.top, 5)
+                    
+                    HStack {
+                        if (showOldPin) {
+                            TextField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                        } else {
+                            SecureField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                        }
+                        
+                        Button(action: {
+                            self.showOldPin.toggle()
+                        }, label: {
+                            Image(systemName: showOldPin ? "eye.fill" : "eye.slash")
+                                .foregroundColor(Color(hex: "#3756DF"))
+                        })
+                    }
+                    .frame(height: 25)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                }
+                .padding()
                 
                 VStack(alignment: .leading) {
                     
                     Text("PIN Baru")
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
-                        .padding(.top, 10)
                     
                     VStack {
                         HStack {
                             if (showPin) {
                                 TextField("Input PIN baru Anda", text: self.$pinCtrl)
                             } else {
-                                SecureField("Input PIN baru Anda", text: self.$pinCtrl)
+                                SecureField("Input Ulang PIN baru Anda", text: self.$pinCtrl)
                             }
                             
                             Button(action: {
@@ -60,9 +90,9 @@ struct FormInputResetNewPinScreen: View {
                         
                         HStack {
                             if (showPinConfirm) {
-                                TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                TextField("Confirm PIN", text: self.$pinConfirmCtrl)
                             } else {
-                                SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                SecureField("Confirm PIN", text: self.$pinConfirmCtrl)
                             }
                             
                             Button(action: {
@@ -107,7 +137,7 @@ struct FormInputResetNewPinScreen: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .navigationBarTitle("Lupa PIN", displayMode: .inline)
+        .navigationBarTitle("Ubah PIN", displayMode: .inline)
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ZStack {
                 if isPinChanged {
@@ -183,8 +213,8 @@ struct FormInputResetNewPinScreen: View {
     }
 }
 
-struct FormInputResetNewPinScreen_Previews: PreviewProvider {
+struct FormChangePinView_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputResetNewPinScreen()
+        FormChangePinTransactionView()
     }
 }

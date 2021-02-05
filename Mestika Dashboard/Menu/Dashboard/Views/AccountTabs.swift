@@ -11,10 +11,6 @@ struct AccountTabs: View {
     
     @EnvironmentObject var appState: AppState
     
-    /* CORE DATA */
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
-    
     @Binding var showingSettingMenu : Bool
     @State var username: String = ""
     @State var phoneNumber: String = ""
@@ -25,8 +21,12 @@ struct AccountTabs: View {
     @State private var isNextRoute = false
     
     /* CORE DATA */
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
     var user: FetchedResults<Registration>
+    
+    @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
     
     var body: some View {
         ZStack {
@@ -65,13 +65,11 @@ struct AccountTabs: View {
                 
                 VStack(alignment: .leading) {
                     Text("\(self.username)")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#2334D0"))
                     
                     Text("+62\(self.phoneNumber)")
-                        .font(.caption)
-                        .fontWeight(.light)
+                        .font(.custom("Montserrat-SemiBold", size: 16))
                 }
                 
                 Spacer()
@@ -97,66 +95,72 @@ struct AccountTabs: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Personal Data")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                    //                    HStack {
+                    //                        VStack(alignment: .leading) {
+                    //                            Text("Personal Data")
+                    //                                .foregroundColor(Color(hex: "#1D2238"))
+                    //                                .font(.subheadline)
+                    //                                .fontWeight(.bold)
+                    //                        }
+                    //
+                    //                        Spacer()
+                    //                    }
+                    //                    .padding(.vertical, 5)
+                    //                    .padding(.horizontal, 20)
+                    //
+                    //                    Divider()
+                    //                        .padding(.horizontal, 10)
+                    
+                    NavigationLink(destination : FormChangeAddressView()){
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Address")
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
                     
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Address")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                    NavigationLink(destination : FormChangeContactView()){
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Contact")
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
                     
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Contact")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                    NavigationLink(destination : LanguageSettingScreen()){
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Language")
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
-                    
-                    Divider()
-                        .padding(.horizontal, 10)
-                    
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Language")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.subheadline)
-                                .fontWeight(.bold)
-                        }
-                        
-                        Spacer()
-                    }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
                     
                     Divider()
                         .padding(.horizontal, 10)
@@ -182,7 +186,7 @@ struct AccountTabs: View {
                             Toggle(
                                 isOn: $isFingerprint,
                                 label: {
-                                    Text("Aktifasi Fingerprint")
+                                    Text("Aktifasi \(Biometric().type() == .faceID ? "Face ID" : "Finger Print")")
                                         .foregroundColor(Color(hex: "#1D2238"))
                                         .font(.subheadline)
                                         .fontWeight(.bold)
@@ -218,50 +222,58 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Change Password")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.subheadline)
-                                .fontWeight(.bold)
-                        }
+                    NavigationLink(destination : FormChangePasswordView()) {
                         
-                        Spacer()
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Change Password")
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
+                        }
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
+                        
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
                     
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Change PIN Transaction")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                    NavigationLink(destination : FormChangePinTransactionView()) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Change PIN Transaction")
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
                     
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Forgot Pin Transaction")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                    NavigationLink(destination : FormInputResetNewPinScreen()){
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Forgot Pin Transaction")
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 20)
                     
                     Divider()
                         .padding(.horizontal, 10)
@@ -271,8 +283,9 @@ struct AccountTabs: View {
                             self.authVM.postLogout { success in
                                 if success {
                                     print("SUCCESS LOGOUT")
-                                    self.appState.moveToWelcomeView = true
-                                    //                                    self.isNextRoute = true
+                                    DispatchQueue.main.async {
+                                        self.appState.moveToWelcomeView = true
+                                    }
                                 }
                             }
                         },
