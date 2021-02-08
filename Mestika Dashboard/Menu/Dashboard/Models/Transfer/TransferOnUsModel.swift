@@ -13,6 +13,7 @@ class TransferOnUsModel: ObservableObject {
     @Published var cardNo = ""
     @Published var ref = "1"
     @Published var amount = ""
+    @Published var adminFee = ""
     @Published var currency = "360"
     @Published var sourceNumber = ""
     @Published var sourceAccountName = ""

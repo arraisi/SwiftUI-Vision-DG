@@ -75,13 +75,13 @@ struct FormInputAtmForgotPasswordScreen: View {
                 VStack {
                     HStack {
                         if (showPassword) {
-                            TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                            TextField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))
                                 }
                         } else {
-                            SecureField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                            SecureField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))

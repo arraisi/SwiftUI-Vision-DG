@@ -461,24 +461,32 @@ struct FirstOTPLoginView: View {
     func ScreeningUserNotRegister() -> some View {
         VStack(alignment: .leading) {
             
-            Text("Anda belum terdaftar rekening online")
-                .font(.custom("Montserrat-Bold", size: 18))
-                .foregroundColor(Color.red)
-                .padding(.bottom, 20)
-                .padding(.top, 20)
-                .fixedSize(horizontal: false, vertical: true)
+            HStack {
+                Spacer()
+                
+                Text("Anda belum terdaftar rekening online")
+                    .multilineTextAlignment(.center)
+                    .font(.custom("Montserrat-Bold", size: 20))
+                    .foregroundColor(Color.red)
+                    .padding(.bottom, 20)
+                    .padding(.top, 20)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Spacer()
+            }
             
-            Text("Apakah anda ingin mendaftarkan aplikasi Digital Banking")
-                .font(.custom("Montserrat-Bold", size: 20))
-                .foregroundColor(Color(hex: "#232175"))
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 30)
-            
-//            NavigationLink(
-//                destination: KetentuanRegisterNonNasabahView(rootIsActive: .constant(false)).environmentObject(loginData),
-//                isActive: self.$isKetentuanViewActive) {
-//                EmptyView()
-//            }
+            HStack {
+                Spacer()
+                
+                Text("Apakah anda ingin mendaftarkan aplikasi Digital Banking")
+                    .multilineTextAlignment(.center)
+                    .font(.custom("Montserrat-Bold", size: 20))
+                    .foregroundColor(Color(hex: "#232175"))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom, 30)
+                
+                Spacer()
+            }
             
             Button(action: {
                 self.isShowModalUserNotRegister = false

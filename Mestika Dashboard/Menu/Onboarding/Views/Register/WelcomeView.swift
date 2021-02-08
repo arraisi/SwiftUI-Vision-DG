@@ -807,7 +807,9 @@ struct WelcomeView: View {
             .isDetailLink(false)
             
             Button(action: {
-                self.isPasswordViewActive = true
+                self.isLoginNewDevice = false
+                registerData.noTelepon = self.phoneNumber
+                self.isFirstOTPLoginViewActive = true
             }) {
                 Text(NSLocalizedString("LOGIN", comment: ""))
                     .foregroundColor(.white)
@@ -958,7 +960,6 @@ struct WelcomeView: View {
                     self.isLoginNewDevice = false
                     registerData.noTelepon = self.phoneNumber
                     self.isFirstOTPLoginViewActive = true
-                    
                     print("CASE ACTIVE")
                 case "LOGGED_IN":
                     self.isPasswordViewActive = true
@@ -968,7 +969,6 @@ struct WelcomeView: View {
                     self.isLoginNewDevice = false
                     registerData.noTelepon = self.phoneNumber
                     self.isFirstOTPLoginViewActive = true
-                    
                     print("CASE LOGGED_OUT")
                 default:
                     print("USER NOT FOUND")

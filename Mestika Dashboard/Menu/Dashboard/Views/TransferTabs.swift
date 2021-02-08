@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TransferTabs: View {
+    
+    @State private var isRouteTransferOnUs: Bool = false
+    
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
             
@@ -50,8 +53,15 @@ struct TransferTabs: View {
     
     var buttonLink: some View {
         VStack {
+            NavigationLink(
+                destination: TransferOnUsScreen(),
+                isActive: self.$isRouteTransferOnUs,
+                label: {EmptyView()})
             
-            NavigationLink(destination: TransferOnUsScreen(), label: {
+            Button(action: {
+                print("ONUS")
+                self.isRouteTransferOnUs = true
+            }, label: {
                 Text("SESAMA BANK MESTIKA")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

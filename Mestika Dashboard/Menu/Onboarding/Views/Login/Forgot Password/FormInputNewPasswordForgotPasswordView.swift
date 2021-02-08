@@ -65,7 +65,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                             Button(action: {
                                 self.showPassword.toggle()
                             }, label: {
-                                Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+                                Image(systemName: showPassword ? "eye.fill" : "eye.slash")
                                     .font(.custom("Montserrat-Light", size: 14))
                                     .frame(width: 80, height: 50)
                                     .cornerRadius(10)
@@ -87,7 +87,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                             Button(action: {
                                 self.showConfirmPassword.toggle()
                             }, label: {
-                                Image(systemName: showConfirmPassword ? "eye.slash" : "eye.fill")
+                                Image(systemName: showConfirmPassword ? "eye.fill" : "eye.slash")
                                     .font(.custom("Montserrat-Light", size: 14))
                                     .frame(width: 80, height: 50)
                                     .cornerRadius(10)
