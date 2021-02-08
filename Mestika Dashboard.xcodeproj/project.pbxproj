@@ -290,6 +290,7 @@
 		C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068A5AF256CF3C100CE96C4 /* UIApplication.swift */; };
 		C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2F92563726700D06EE3 /* KetentuanModel.swift */; };
 		C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */; };
+		C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */; };
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
 		C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */; };
@@ -656,6 +657,7 @@
 		C068A5AF256CF3C100CE96C4 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		C06AC2F92563726700D06EE3 /* KetentuanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanModel.swift; sourceTree = "<group>"; };
 		C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanViewModel.swift; sourceTree = "<group>"; };
+		C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateFingerPrintResponseModel.swift; sourceTree = "<group>"; };
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
 		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
@@ -1598,6 +1600,7 @@
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C06ED63625D0F27000F68FC1 /* Account */,
 				522101AF25C9213100C9566A /* Transfer */,
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52BF57E12558E80700F009B5 /* SavingType */,
@@ -1615,6 +1618,14 @@
 				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
 			);
 			path = "Kartu-Ku";
+			sourceTree = "<group>";
+		};
+		C06ED63625D0F27000F68FC1 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		C092ABFD2553B51B0051CE3E /* Resources */ = {
@@ -2122,6 +2133,7 @@
 				C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */,
 				C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */,
 				528AE2C225959B8C003AFD73 /* AppConstants.swift in Sources */,
+				C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */,
 				064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,

@@ -146,6 +146,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/auth/generateFinger")
     }
     
+    static func urlAuthClearFingerPrint() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/clearFinger")
+    }
+    
     static func urlTransferOverbooking() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/transper/overbooking")
     }

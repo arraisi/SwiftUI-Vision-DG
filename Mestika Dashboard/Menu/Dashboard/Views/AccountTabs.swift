@@ -198,15 +198,31 @@ struct AccountTabs: View {
                                 
                                 if value {
                                     
-                                    self.authVM.setFingerPrint { result in
+                                    self.authVM.enableBiometricLogin { result in
                                         print("result : \(result)")
                                         if result {
-                                            print("SET FINGER PRINT SUCCESS")
+                                            print("ENABLE FINGER PRINT SUCCESS")
                                         }
                                         
                                         if !result {
-                                            print("SET FINGER PRINT")
+                                            self.isFingerprint = false
+                                            print("ENABLE FINGER PRINT FAILED")
                                         }
+                                    }
+                                    
+                                } else {
+                                    
+                                    self.authVM.disableBiometricLogin { result in
+
+                                            print("result : \(result)")
+                                            if result {
+                                                print("DISABLE FINGER PRINT SUCCESS")
+                                            }
+
+                                            if !result {
+                                                self.isFingerprint = true
+                                                print("DISABLE FINGER PRINT FAILED")
+                                            }
                                     }
                                     
                                 }
@@ -342,7 +358,7 @@ struct AccountTabs: View {
     }
     
     func saveDataNewDeviceToCoreData()  {
-        print("------SAVE TO CORE DATA-------")
+        print("------SAVE ACCOUNT TO CORE DATA-------")
         
         let data = NewDevice(context: managedObjectContext)
         data.fingerprintFlag = self.isFingerprint

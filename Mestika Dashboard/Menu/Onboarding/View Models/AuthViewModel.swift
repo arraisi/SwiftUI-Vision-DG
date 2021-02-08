@@ -248,13 +248,13 @@ extension AuthViewModel {
     
     
     // MARK: - POST SET FINGER PRINT
-    func setFingerPrint(completion: @escaping (Bool) -> Void) {
+    func enableBiometricLogin(completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        AuthService.shared.setFingerPrint() { result in
+        AuthService.shared.enableBiometricLogin() { result in
             
             switch result {
             case .success(let response):
@@ -284,6 +284,48 @@ extension AuthViewModel {
         
     }
     
+    // MARK: - POST SET FINGER PRINT
+    func disableBiometricLogin(completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.disableBiometricLogin() { result in
+            
+            switch result {
+            case .success(let response):
+                print("Success \(response)")
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                case .custom(code: 400):
+                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                case .custom(code: 401):
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Unauthorized"
+                    }
+                case .custom(code: 403):
+                    self.errorMessage = "Password not changed"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                completion(false)
+            }
+        }
+        
+    }
+    
     func encryptPassword(password: String) -> String {
         let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
         let clear = try! ClearMessage(string: password, using: .utf8)
@@ -295,6 +337,6 @@ extension AuthViewModel {
         print("Encript : \(base64String)")
         
         return base64String
-//        self.registerData.password = base64String
+        //        self.registerData.password = base64String
     }
 }
