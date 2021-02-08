@@ -20,36 +20,47 @@ struct FormChangeAddressView: View {
     @State private var province: String = ""
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack {
-                Text("Address Data")
-                    .font(.custom("Montserrat-Bold", size: 24))
-                    .foregroundColor(Color(hex: "#2334D0"))
+        VStack {
+            AppBarLogo(light: true) {
                 
-                FormAddress
-                    .padding(.top, 30)
-                
-                Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Back")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                }
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.top, 30)
             }
-            .padding(30)
-            .background(Color.white)
-            .cornerRadius(15)
-            .shadow(color: Color.gray.opacity(0.3), radius: 10)
-            .padding(25)
-            .padding(.top, 30)
+            
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    
+                    Text("Address Data")
+                        .font(.custom("Montserrat-Bold", size: 24))
+                        .foregroundColor(Color(hex: "#232175"))
+                    
+                    FormAddress
+                        .padding(.top, 30)
+                    
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Back")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                    }
+                    .background(Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.top, 30)
+                }
+                .padding(30)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                .padding(25)
+                //            .padding(.top, 30)
+            }
         }
-        .navigationBarTitle("Address", displayMode: .inline)
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
         
     }
     
@@ -104,6 +115,7 @@ struct FormChangeAddressView: View {
 
 struct FormChangeAddressView_Previews: PreviewProvider {
     static var previews: some View {
+        
         FormChangeAddressView()
     }
 }

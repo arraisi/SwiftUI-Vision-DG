@@ -21,112 +21,121 @@ struct FormChangePasswordView: View {
     @State private var isPasswordChanged: Bool = false
     
     var body: some View {
+        
         ZStack {
             
-            ScrollView(showsIndicators: false) {
-                Text("Ubah Password")
-                    .font(.custom("Montserrat-Bold", size: 24))
-                    .foregroundColor(Color(hex: "#2334D0"))
-                    .padding(.top, 30)
+            VStack {
+                AppBarLogo(light: true) {}
                 
-                VStack(alignment: .leading) {
-                    Text("Silahkan masukkan password lama dan baru Anda")
-                        .font(.custom("Montserrat-Regular", size: 14))
-                        .foregroundColor(Color(hex: "#002251"))
-                        .padding(.top, 5)
-                    
-                    Text("Password Lama")
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .padding(.top, 5)
-                    
-                    HStack {
-                        if (showOldPassword) {
-                            TextField("Input Password lama Anda", text: self.$oldPasswordCtrl)
-                        } else {
-                            SecureField("Input Password lama Anda", text: self.$oldPasswordCtrl)
-                        }
-                        
-                        Button(action: {
-                            self.showOldPassword.toggle()
-                        }, label: {
-                            Image(systemName: showOldPassword ? "eye.fill" : "eye.slash")
-                                .foregroundColor(Color(hex: "#3756DF"))
-                        })
-                    }
-                    .frame(height: 25)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                }
-                .padding()
-                
-                VStack(alignment: .leading) {
-                    
-                    Text("Password Baru")
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .foregroundColor(Color(hex: "#2334D0"))
+                ScrollView(showsIndicators: false) {
                     
                     VStack {
-                        HStack {
-                            if (showPassword) {
-                                TextField("Input Password baru Anda", text: self.$passwordCtrl)
-                            } else {
-                                SecureField("Input Password baru Anda", text: self.$passwordCtrl)
-                            }
-                            
-                            Button(action: {
-                                self.showPassword.toggle()
-                            }, label: {
-                                Image(systemName: showPassword ? "eye.fill" : "eye.slash")
-                                    .foregroundColor(Color(hex: "#3756DF"))
-                            })
-                        }
-                        .frame(height: 25)
-                        .padding(.vertical, 10)
+                        Text("Ubah Password")
+                            .font(.custom("Montserrat-Bold", size: 24))
+                            .foregroundColor(Color(hex: "#232175"))
                         
-                        Divider()
-                        
-                        HStack {
-                            if (showConfirmPassword) {
-                                TextField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
-                            } else {
-                                SecureField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
-                            }
+                        VStack(alignment: .leading) {
+                            Text("Silahkan masukkan password lama dan baru Anda")
+                                .font(.custom("Montserrat-Regular", size: 14))
+                                .foregroundColor(Color(hex: "#002251"))
+                                .padding(.top, 5)
                             
-                            Button(action: {
-                                self.showConfirmPassword.toggle()
-                            }, label: {
-                                Image(systemName: showConfirmPassword ? "eye.fill" : "eye.slash")
-                                    .foregroundColor(Color(hex: "#3756DF"))
-                            })
+                            Text("Password Lama")
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .foregroundColor(Color(hex: "#2334D0"))
+                                .padding(.top, 5)
+                            
+                            HStack {
+                                if (showOldPassword) {
+                                    TextField("Input Password lama Anda", text: self.$oldPasswordCtrl)
+                                } else {
+                                    SecureField("Input Password lama Anda", text: self.$oldPasswordCtrl)
+                                }
+                                
+                                Button(action: {
+                                    self.showOldPassword.toggle()
+                                }, label: {
+                                    Image(systemName: showOldPassword ? "eye.fill" : "eye.slash")
+                                        .foregroundColor(Color(hex: "#3756DF"))
+                                })
+                            }
+                            .frame(height: 25)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
                         }
-                        .frame(height: 25)
-                        .padding(.vertical, 10)
+                        .padding()
+                        
+                        VStack(alignment: .leading) {
+                            
+                            Text("Password Baru")
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .foregroundColor(Color(hex: "#2334D0"))
+                            
+                            VStack {
+                                HStack {
+                                    if (showPassword) {
+                                        TextField("Input Password baru Anda", text: self.$passwordCtrl)
+                                    } else {
+                                        SecureField("Input Password baru Anda", text: self.$passwordCtrl)
+                                    }
+                                    
+                                    Button(action: {
+                                        self.showPassword.toggle()
+                                    }, label: {
+                                        Image(systemName: showPassword ? "eye.fill" : "eye.slash")
+                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    })
+                                }
+                                .frame(height: 25)
+                                .padding(.vertical, 10)
+                                
+                                Divider()
+                                
+                                HStack {
+                                    if (showConfirmPassword) {
+                                        TextField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
+                                    } else {
+                                        SecureField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
+                                    }
+                                    
+                                    Button(action: {
+                                        self.showConfirmPassword.toggle()
+                                    }, label: {
+                                        Image(systemName: showConfirmPassword ? "eye.fill" : "eye.slash")
+                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    })
+                                }
+                                .frame(height: 25)
+                                .padding(.vertical, 10)
+                            }
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                        }
+                        .padding()
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            self.showModal.toggle()
+                        }, label: {
+                            Text("Simpan Password Baru")
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                            
+                        })
+                        .background(Color(hex: "#2334D0"))
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                        .padding(.vertical, 30)
                     }
                     .padding()
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                }
-                .padding()
-                
-                Spacer()
-                
-                Button(action: {
-                    self.showModal.toggle()
-                }, label: {
-                    Text("Simpan Password Baru")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     
-                })
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.horizontal)
-                .padding(.vertical, 30)
+                }
             }
             
             if self.showModal {
@@ -134,10 +143,11 @@ struct FormChangePasswordView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .navigationBarTitle("Ubah Password", displayMode: .inline)
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ZStack {
                 if isPasswordChanged {

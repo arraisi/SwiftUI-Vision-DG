@@ -21,112 +21,126 @@ struct FormChangePinTransactionView: View {
     @State private var isPinChanged: Bool = false
     
     var body: some View {
+        
         ZStack {
             
-            ScrollView(showsIndicators: false) {
-                Text("Ubah PIN")
-                    .font(.custom("Montserrat-Bold", size: 24))
-                    .foregroundColor(Color(hex: "#2334D0"))
-                    .padding(.top, 30)
+            VStack {
                 
-                VStack(alignment: .leading) {
-                    Text("Silahkan masukkan PIN lama dan baru Anda")
-                        .font(.custom("Montserrat-Regular", size: 14))
-                        .foregroundColor(Color(hex: "#002251"))
-                        .padding(.top, 5)
-                    
-                    Text("PIN Lama")
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .padding(.top, 5)
-                    
-                    HStack {
-                        if (showOldPin) {
-                            TextField("Input PIN lama Anda", text: self.$oldPinCtrl)
-                        } else {
-                            SecureField("Input PIN lama Anda", text: self.$oldPinCtrl)
-                        }
-                        
-                        Button(action: {
-                            self.showOldPin.toggle()
-                        }, label: {
-                            Image(systemName: showOldPin ? "eye.fill" : "eye.slash")
-                                .foregroundColor(Color(hex: "#3756DF"))
-                        })
-                    }
-                    .frame(height: 25)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                }
-                .padding()
+                AppBarLogo(light: true) {}
                 
-                VStack(alignment: .leading) {
-                    
-                    Text("PIN Baru")
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .foregroundColor(Color(hex: "#2334D0"))
+                ScrollView(showsIndicators: false) {
                     
                     VStack {
-                        HStack {
-                            if (showPin) {
-                                TextField("Input PIN baru Anda", text: self.$pinCtrl)
-                            } else {
-                                SecureField("Input Ulang PIN baru Anda", text: self.$pinCtrl)
-                            }
-                            
-                            Button(action: {
-                                self.showPin.toggle()
-                            }, label: {
-                                Image(systemName: showPin ? "eye.fill" : "eye.slash")
-                                    .foregroundColor(Color(hex: "#3756DF"))
-                            })
-                        }
-                        .frame(height: 25)
-                        .padding(.vertical, 10)
                         
-                        Divider()
+                        Text("Ubah PIN")
+                            .font(.custom("Montserrat-Bold", size: 24))
+                            .foregroundColor(Color(hex: "#232175"))
                         
-                        HStack {
-                            if (showPinConfirm) {
-                                TextField("Confirm PIN", text: self.$pinConfirmCtrl)
-                            } else {
-                                SecureField("Confirm PIN", text: self.$pinConfirmCtrl)
-                            }
+                        VStack(alignment: .leading) {
                             
-                            Button(action: {
-                                self.showPinConfirm.toggle()
-                            }, label: {
-                                Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
-                                    .foregroundColor(Color(hex: "#3756DF"))
-                            })
+                            Text("Silahkan masukkan PIN lama dan baru Anda")
+                                .font(.custom("Montserrat-Regular", size: 14))
+                                .foregroundColor(Color(hex: "#002251"))
+                                .padding(.top, 5)
+                            
+                            Text("PIN Lama")
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .foregroundColor(Color(hex: "#2334D0"))
+                                .padding(.top, 5)
+                            
+                            HStack {
+                                if (showOldPin) {
+                                    TextField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                                } else {
+                                    SecureField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                                }
+                                
+                                Button(action: {
+                                    self.showOldPin.toggle()
+                                }, label: {
+                                    Image(systemName: showOldPin ? "eye.fill" : "eye.slash")
+                                        .foregroundColor(Color(hex: "#3756DF"))
+                                })
+                            }
+                            .frame(height: 25)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                            
                         }
-                        .frame(height: 25)
-                        .padding(.vertical, 10)
+                        .padding()
+                        
+                        VStack(alignment: .leading) {
+                            
+                            Text("PIN Baru")
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .foregroundColor(Color(hex: "#2334D0"))
+                            
+                            VStack {
+                                HStack {
+                                    if (showPin) {
+                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
+                                    } else {
+                                        SecureField("Input Ulang PIN baru Anda", text: self.$pinCtrl)
+                                    }
+                                    
+                                    Button(action: {
+                                        self.showPin.toggle()
+                                    }, label: {
+                                        Image(systemName: showPin ? "eye.fill" : "eye.slash")
+                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    })
+                                }
+                                .frame(height: 25)
+                                .padding(.vertical, 10)
+                                
+                                Divider()
+                                
+                                HStack {
+                                    if (showPinConfirm) {
+                                        TextField("Confirm PIN", text: self.$pinConfirmCtrl)
+                                    } else {
+                                        SecureField("Confirm PIN", text: self.$pinConfirmCtrl)
+                                    }
+                                    
+                                    Button(action: {
+                                        self.showPinConfirm.toggle()
+                                    }, label: {
+                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
+                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    })
+                                }
+                                .frame(height: 25)
+                                .padding(.vertical, 10)
+                            }
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                        }
+                        .padding()
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            self.showModal.toggle()
+                        }, label: {
+                            Text("Simpan PIN Baru")
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                            
+                        })
+                        .background(Color(hex: "#2334D0"))
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                        .padding(.vertical, 30)
                     }
                     .padding()
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                }
-                .padding()
-                
-                Spacer()
-                
-                Button(action: {
-                    self.showModal.toggle()
-                }, label: {
-                    Text("Simpan PIN Baru")
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     
-                })
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.horizontal)
-                .padding(.vertical, 30)
+                }
+                
             }
             
             if self.showModal {
@@ -134,10 +148,12 @@ struct FormChangePinTransactionView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .navigationBarTitle("Ubah PIN", displayMode: .inline)
+        //        .navigationBarTitle("Ubah PIN", displayMode: .inline)
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ZStack {
                 if isPinChanged {
