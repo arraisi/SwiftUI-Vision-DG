@@ -20,10 +20,8 @@ struct FavoriteTransferScreen: View {
                     VStack {
                         searchCard
                         
-                        ListAllFavoriteTransactionView() { data in
-                            print(data.username)
-                        }
-                        .padding(.bottom)
+                        ListAllFavoriteTransactionView()
+                            .padding(.bottom)
                     }
                     .padding(.bottom, 25)
                 })

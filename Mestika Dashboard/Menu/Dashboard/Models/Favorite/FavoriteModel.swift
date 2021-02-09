@@ -12,8 +12,6 @@
 
 import Foundation
 
-import Foundation
-
 // MARK: - FavoriteModelElement
 struct FavoriteModelElement: Codable {
     let id, bankAccountNumber, bankName, name: String
