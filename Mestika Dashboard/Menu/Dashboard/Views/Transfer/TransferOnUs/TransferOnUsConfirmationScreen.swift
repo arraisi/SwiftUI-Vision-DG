@@ -27,9 +27,6 @@ struct TransferOnUsConfirmationScreen: View {
                 }
             }
         }
-        .navigationBarItems(trailing: Button(action: {}, label: {
-            Text("Cancel")
-        }))
     }
     
     var formCard: some View {
@@ -127,6 +124,26 @@ struct TransferOnUsConfirmationScreen: View {
                     
                     TextField("Nominal Transfer", text: self.$transferData.amount, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
+                // Admin Fee
+                HStack(spacing: 20) {
+                    Text("Biaya Admin")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100)
+                    
+                    TextField("Biaya Admin", text: self.$transferData.adminFee, onEditingChanged: { changed in
+//                        print("\(self.$transferData.destinationNumber)")
                     })
                     .disabled(true)
                     .frame(height: 20)

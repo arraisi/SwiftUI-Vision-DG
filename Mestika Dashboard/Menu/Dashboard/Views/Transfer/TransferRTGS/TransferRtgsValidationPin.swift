@@ -1,15 +1,14 @@
 //
-//  TransferOnUsPinConfirmationScreen.swift
+//  TransferRtgsValidationPin.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 26/10/20.
+//  Created by Prima Jatnika on 08/02/21.
 //
 
 import SwiftUI
 
-struct TransferOnUsPinConfirmationScreen: View {
-    
-    @EnvironmentObject var transferData: TransferOnUsModel
+struct TransferRtgsValidationPin: View {
+    @EnvironmentObject var transferData: TransferOffUsModel
     
     @State var password = ""
     @State var isLoading = false
@@ -23,7 +22,7 @@ struct TransferOnUsPinConfirmationScreen: View {
     
     var body: some View {
         if unLocked {
-            TransferOnUsSuccessInformationScreen(transferData: transferData)
+            TransferRtgsSuccess(transferData: transferData)
         } else {
             ZStack {
                 Image("bg_blue")
@@ -72,9 +71,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                     .padding(.horizontal, 30)
                 }
             }
-            .navigationBarItems(trailing: Button(action: {}, label: {
-                Text("Cancel")
-            }))
+            .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
             .alert(isPresented: $showingAlert) {
                 return Alert(
                     title: Text("Message"),
@@ -89,28 +86,27 @@ struct TransferOnUsPinConfirmationScreen: View {
     }
     
     func submitTransfer() {
-        self.isLoading = true
-        self.transferVM.transferOnUs(transferData: transferData) { success in
-            DispatchQueue.main.async {
-                if success {
-                    self.isLoading = false
-                    self.unLocked = true
-                }
-                
-                if !success {
-                    self.isLoading = false
-                    self.showingAlert = true
-                }
-            }
-        }
+//        self.isLoading = true
+        self.isLoading = false
+        self.unLocked = true
+//        self.transferVM.transferOnUs(transferData: transferData) { success in
+//            DispatchQueue.main.async {
+//                if success {
+//                    self.isLoading = false
+//                    self.unLocked = true
+//                }
+//
+//                if !success {
+//                    self.isLoading = false
+//                    self.showingAlert = true
+//                }
+//            }
+//        }
     }
 }
 
-
-#if DEBUG
-struct TransferOnUsPinConfirmationScreen_Previews: PreviewProvider {
+struct TransferRtgsValidationPin_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsPinConfirmationScreen(password: "", isLoading: false, key: "", unLocked: false, wrongPassword: false).environmentObject(TransferOnUsModel())
+        TransferRtgsValidationPin(password: "", isLoading: false, key: "", unLocked: false, wrongPassword: false).environmentObject(TransferOffUsModel())
     }
 }
-#endif

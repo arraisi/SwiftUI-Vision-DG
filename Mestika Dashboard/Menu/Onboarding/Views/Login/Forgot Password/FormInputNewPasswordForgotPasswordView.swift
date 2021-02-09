@@ -26,6 +26,10 @@ struct FormInputNewPasswordForgotPasswordView: View {
     @State var routeATMNumberPin: Bool = false
     @State var routeAccountNumberPin: Bool = false
     
+    @State var phoneNumber: String = ""
+    
+    @Binding var isNewDeviceLogin: Bool
+    
     var disableForm: Bool {
         passwordCtrl.isEmpty || confirmPasswordCtrl.isEmpty || passwordCtrl.count < 6 || confirmPasswordCtrl.count < 6
     }
@@ -65,7 +69,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                             Button(action: {
                                 self.showPassword.toggle()
                             }, label: {
-                                Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+                                Image(systemName: showPassword ? "eye.fill" : "eye.slash")
                                     .font(.custom("Montserrat-Light", size: 14))
                                     .frame(width: 80, height: 50)
                                     .cornerRadius(10)
@@ -87,7 +91,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                             Button(action: {
                                 self.showConfirmPassword.toggle()
                             }, label: {
-                                Image(systemName: showConfirmPassword ? "eye.slash" : "eye.fill")
+                                Image(systemName: showConfirmPassword ? "eye.fill" : "eye.slash")
                                     .font(.custom("Montserrat-Light", size: 14))
                                     .frame(width: 80, height: 50)
                                     .cornerRadius(10)
@@ -233,7 +237,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 .padding(.bottom, 20)
             
             NavigationLink(
-                destination: FormInputAtmPinForgotPasswordView().environmentObject(registerData),
+                destination: FormInputAtmPinForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                 isActive: self.$routeAccountNumberPin) {
                 EmptyView()
             }
@@ -276,6 +280,6 @@ struct FormInputNewPasswordForgotPasswordView: View {
 
 struct FormInputNewPasswordForgotPasswordScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputNewPasswordForgotPasswordView()
+        FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(false))
     }
 }

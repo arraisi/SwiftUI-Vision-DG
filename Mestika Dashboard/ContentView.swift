@@ -13,10 +13,37 @@ struct ContentView: View {
     
     let appState = AppState()
     
-    @State var status: String = ""
-    
-    // Device ID
-    var deviceId = UIDevice.current.identifierForVendor?.uuidString
+    init() {
+            // this is not the same as manipulating the proxy directly
+            let appearance = UINavigationBarAppearance()
+            
+            // this overrides everything you have set up earlier.
+            appearance.configureWithTransparentBackground()
+            
+            appearance.backgroundColor = #colorLiteral(red: 0.1223579869, green: 0.1184208766, blue: 0.4122344553, alpha: 1)
+            
+            //        // this only applies to big titles
+            //        appearance.largeTitleTextAttributes = [
+            //            .font : UIFont.systemFont(ofSize: 20),
+            //            NSAttributedString.Key.foregroundColor : UIColor.white
+            //        ]
+            
+            // this only applies to small titles
+            appearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor : UIColor.white
+            ]
+            
+            //In the following two lines you make sure that you apply the style for good
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UINavigationBar.appearance().standardAppearance = appearance
+            
+            
+            // This property is not present on the UINavigationBarAppearance
+            // object for some reason and you have to leave it til the end
+            UINavigationBar.appearance().tintColor = .white
+            
+        }
+
     
     var body: some View {
         JGProgressHUDPresenter(userInteractionOnHUD: false) {
@@ -34,30 +61,6 @@ struct ContentView: View {
                     .environmentObject(appState)
             }
             .edgesIgnoringSafeArea(.top)
-        }
-        .onAppear {
-            getUserStatus(deviceId: deviceId!)
-        }
-    }
-    
-    /* Function GET USER Status */
-    @ObservedObject var userVM = UserRegistrationViewModel()
-    func getUserStatus(deviceId: String) {
-        print("GET USER STATUS")
-        print("DEVICE ID : \(deviceId)")
-        
-        self.userVM.userCheck(deviceId: deviceId) { success in
-            
-            if success {
-                print("CODE STATUS : \(self.userVM.code)")
-                print("MESSAGE STATUS : \(self.userVM.message)")
-                
-                self.status = self.userVM.message
-            }
-            
-            if !success {
-                self.status = "USER_NOT_FOUND"
-            }
         }
     }
 }

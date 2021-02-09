@@ -22,9 +22,15 @@ struct TransferOnUsScreen: View {
     @State private var showDialogMaxReached = false
     @State private var showDialogMinReached = false
     
+    @State private var isShowName: Bool = false
+    @State private var showName: String = "JHON LENNON"
+    
     @State private var disabledButton = true
     
+    @State private var routeConfirmation: Bool = false
+    
     private var maxLimit: Int = 900000
+    private var minLimit: Int = 10000
     
     /* Function GET USER Status */
     @ObservedObject var profileVM = ProfileViewModel()
@@ -56,23 +62,31 @@ struct TransferOnUsScreen: View {
                             
                             Spacer()
                             
+                            NavigationLink(
+                                destination: TransferOnUsConfirmationScreen().environmentObject(transferData),
+                                isActive: self.$routeConfirmation) {
+                                EmptyView()
+                            }
+                            
                             VStack {
                                 Button(action: {
+                                    //                                    MARK: To be replaced with actual data
+                                                                        self.transferData.destinationName = "JOHN LENNON"
+                                    
                                     UIApplication.shared.endEditing()
                                     let amount = Int(self.transferData.amount) ?? 0
                                     let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
-
-                                    if (amount <= self.maxLimit && amount <= myCredit) {
-                                        self.showDialogConfirmation.toggle()
+                                    
+                                    if (amount <= self.minLimit) {
+                                        self.showDialogMinReached = true
+                                    } else if (amount <= self.maxLimit && amount <= myCredit) {
+                                        self.routeConfirmation = true
                                     } else if (amount > myCredit ) {
                                         self.showDialogMinReached = true
                                     } else {
                                         self.showDialogMaxReached = true
                                     }
-                                    
-//                                    MARK: To be replaced with actual data
-                                    self.transferData.destinationName = "Ismail Haq"
-                                    
+
                                 }, label: {
                                     Text("KONFIRMASI TRANSFER")
                                         .foregroundColor(.white)
@@ -98,12 +112,10 @@ struct TransferOnUsScreen: View {
                         self.showDialogMaxReached = false
                         self.showDialogMinReached = false
                     }})
+                    .edgesIgnoringSafeArea(.all)
                 }
             })
             .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {}, label: {
-                Text("Cancel")
-            }))
             .onAppear() {
                 self.transferData = TransferOnUsModel()
                 self.transactionFrequency = _listFrequency[0]
@@ -153,6 +165,20 @@ struct TransferOnUsScreen: View {
                 .background(Color(hex: "#F6F8FB"))
                 .cornerRadius(15)
                 .padding(.horizontal, 20)
+                
+                if isShowName {
+                    HStack {
+                        Text(self.showName)
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 25)
+                    .padding(.top, 5)
+                } else {
+                    EmptyView()
+                }
             }
             .padding(.bottom, 25)
         }
@@ -621,6 +647,7 @@ struct TransferOnUsScreen: View {
                 self.transferData.transactionDate != "" &&
                 self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi") {
             disabledButton = false
+            self.isShowName = true
         } else {
             if (self.transferData.transactionVoucher == "Pilih Voucher") {
                 self.transferData.transactionVoucher = "-"

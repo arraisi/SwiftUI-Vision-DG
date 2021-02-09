@@ -1,15 +1,15 @@
 //
-//  TransferOnUsModel.swift
+//  TransferOffUsModel.swift
 //  Mestika Dashboard
 //
-//  Created by Ismail Haq on 02/02/21.
+//  Created by Prima Jatnika on 09/02/21.
 //
 
 import Foundation
 
-class TransferOnUsModel: ObservableObject {
+class TransferOffUsModel: ObservableObject {
     @Published var username = ""
-    @Published var transferType = "Antar Sesama Bank"
+    @Published var transferType = "ke Bank Lain"
     @Published var cardNo = ""
     @Published var ref = "1"
     @Published var amount = ""
@@ -26,5 +26,14 @@ class TransferOnUsModel: ObservableObject {
     @Published var transactionFrequency = ""
     @Published var transactionVoucher = ""
     
-    static let shared = TransferOnUsModel()
+    @Published var transactionType = ""
+    @Published var bankName = ""
+    
+    @Published var typeDestination = ""
+    @Published var citizenship = ""
+    @Published var provinceOfDestination = ""
+    @Published var cityOfDestination = ""
+    @Published var addressOfDestination = ""
+    
+    static let shared = TransferOffUsModel()
 }

@@ -11,6 +11,9 @@ import NavigationStack
 
 struct LoginScreen: View {
     
+    /* Environtment Object */
+    @EnvironmentObject var registerData: RegistrasiModel
+    
     /* Data Binding */
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject private var authVM = AuthViewModel()
@@ -76,7 +79,7 @@ struct LoginScreen: View {
                         Button(action: {
                             self.showPassword.toggle()
                         }, label: {
-                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+                            Image(systemName: showPassword ? "eye.fill" : "eye.slash")
                                 .foregroundColor(Color(hex: "#3756DF"))
                         })
                     }
@@ -126,7 +129,7 @@ struct LoginScreen: View {
                     )
                     
                     NavigationLink(
-                        destination: FormInputNewPasswordForgotPasswordView().environmentObject(RegistrasiModel()),
+                        destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                         isActive: self.$routeNewPassword,
                         label: {})
                     
@@ -178,6 +181,9 @@ struct LoginScreen: View {
         .edgesIgnoringSafeArea(.all)
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear {
+            self.phoneNumber = self.registerData.noTelepon
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)

@@ -12,6 +12,8 @@ struct TransferOnUsSuccessInformationScreen: View {
 //    @EnvironmentObject var transferData: TransferOnUsModel
     var transferData: TransferOnUsModel
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State private var showPopover: Bool = false
     @State var receivedBank = "Mestika"
     
@@ -23,11 +25,29 @@ struct TransferOnUsSuccessInformationScreen: View {
         ZStack {
             Image("bg_blue")
                 .resizable()
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
-            ZStack {
+            VStack {
                 
-                VStack {
+                FavoriteAppBar(barItems: AnyView(HStack(spacing: 20) {
+//                    Button(action: {
+//                        withAnimation(.easeIn) {
+//                            self.showPopover.toggle()
+//                        }
+//                    }, label: {
+//                        Image(systemName: "pin")
+//                            .foregroundColor(.white)
+//                    })
+                    
+                    Button(action: {
+                        self.uiImage = self.asUIImage()
+                        shareImage()
+                    }, label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(.white)
+                    })
+                }))
+                
+                VStack(alignment: .center) {
                     Spacer()
                     Image("logo_m_mestika")
                         .resizable()
@@ -40,63 +60,49 @@ struct TransferOnUsSuccessInformationScreen: View {
                     receivedInfo
                     
                     Spacer(minLength: 0)
-                    NavigationLink(destination: TransferOnUsDetailsInformation().environmentObject(transferData), label: {
-                        Text("Lihat Detail Transaksi")
-                            .foregroundColor(Color(hex: "#2334D0"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        
-                    })
-                    .background(Color.white)
-                    .cornerRadius(12)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
+                    
+                    Button(
+                        action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
+                        },
+                        label: {
+                            Text("Kembali Ke Halaman Utama")
+                                .foregroundColor(Color(hex: "#2334D0"))
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        })
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 10)
+      
                     
                     Spacer(minLength: 0)
                 }
-    
-                if self.showPopover {
-                    ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
-                        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                }
-                
-                if showPopover {
-                    PopOverFavoriteView()
-                        .onTapGesture {
-                            self.showPopover.toggle()
-                        }
-                }
+
+            }
+            
+            if self.showPopover {
+                ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
+            if showPopover {
+                PopOverFavoriteView()
+                    .onTapGesture {
+                        self.showPopover.toggle()
+                    }
             }
         
         }
-        .navigationTitle("")
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing: HStack(spacing: 30) {
-            HStack {
-                Text("Tambahkan ke Favorit?")
-//                    .font(.caption)
-                    .foregroundColor(.white)
-                
-                Button(action: {
-                    withAnimation(.easeIn) {
-                        self.showPopover.toggle()
-                    }
-                }, label: {
-                    Image(systemName: "pin")
-                        .foregroundColor(.white)
-                })
-                
-            }
-            
-            Button(action: {
-                self.uiImage = self.asUIImage()
-                shareImage()
-            }, label: {
-                Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(.white)
-            })
-        }).onAppear() {
+        .onAppear() {
             initDate()
         }
     }
