@@ -159,4 +159,22 @@ extension URL {
     static func urlGetProfile() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/user/profiles")
     }
+    
+    //-------------------- FAVORITE SERVICE ----------------------//
+    
+    static func urlGetListFavorite() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/favorit/transfer/get")
+    }
+    
+    static func urlSaveFavorite() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/favorit/transfer/save")
+    }
+    
+    static func urlUpdateFavorite() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/favorit/transfer/update")
+    }
+    
+    static func urlRemoveFavorite() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/favorit/transfer/remove")
+    }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoriteTabs: View {
     var body: some View {
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+        ScrollView(.vertical, showsIndicators: false, content: {
             
             GeometryReader { geometry in
                 Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
@@ -23,7 +23,7 @@ struct FavoriteTabs: View {
                     .padding(.bottom)
                 
                 ListFavoriteTransactionView()
-                    .padding(.bottom)
+                    .padding()
             }
         })
         .navigationBarHidden(true)
@@ -44,7 +44,7 @@ struct FavoriteTabs: View {
             }
             Spacer()
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {}, label: {
                 Image("ic_search")
             })
         }

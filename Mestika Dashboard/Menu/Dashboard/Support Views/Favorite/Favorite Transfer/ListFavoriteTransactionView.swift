@@ -9,76 +9,74 @@ import SwiftUI
 
 struct ListFavoriteTransactionView: View {
     
-    var _listFavorite = [
-        TransactionFavorit(id: 1, username: "Prima Jatnika", namaBank: "BNI", norek: "89898912383"),
-        TransactionFavorit(id: 2, username: "Ilmal Yakin", namaBank: "BNI", norek: "1212312333"),
-        TransactionFavorit(id: 3, username: "M. Yusuf", namaBank: "BCA", norek: "90909021333"),
-        TransactionFavorit(id: 4, username: "Abdul Arraisi", namaBank: "BRI", norek: "89899899812")
-    ]
+    @StateObject private var favoriteVM = FavoritesViewModel()
     
     var body: some View {
         VStack {
             HStack {
                 Text("Favorit Transfer")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .fontWeight(.light)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
                 
                 Spacer()
             }
             .padding(.horizontal, 20)
-            .padding(.top, 20)
+            .padding(.top, 15)
             
             Divider()
                 .padding(.horizontal, 10)
-                .padding(.bottom, 20)
+                .padding(.bottom)
             
-            List {
-                ForEach(_listFavorite) { data in
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .fill(Color.secondary)
-                                .frame(width: 30, height: 30)
-                            
-                            Text("A")
-                                .foregroundColor(.white)
-                                .fontWeight(.heavy)
-                        }
+            ForEach(self.favoriteVM.favorites, id: \.id) { data in
+                
+                HStack {
+                    ZStack {
+                        Circle()
+                            .fill(Color.secondary)
+                            .frame(width: 30, height: 30)
                         
-                        VStack(alignment: .leading) {
-                            Text("\(data.username)")
-                                .font(.subheadline)
-                            
-                            HStack {
-                                Text("\(data.namaBank) :")
-                                    .font(.caption)
-                                    .fontWeight(.ultraLight)
-                                Text("\(data.norek)")
-                                    .font(.caption)
-                                    .fontWeight(.ultraLight)
-                            }
+                        Text(data.name.prefix(1))
+                            .foregroundColor(.white)
+                            .fontWeight(.heavy)
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("\(data.name)")
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                        
+                        HStack {
+                            Text("\(data.bankName) :")
+                                .font(.custom("Montserrat-Light", size: 14))
+                            Text("\(data.cardNo)")
+                                .font(.custom("Montserrat-Light", size: 14))
                         }
-                    }.padding(.vertical, 5)
+                    }
+                    Spacer()
                 }
-            }.frame(height: 300)
+            }
+            .padding(.vertical, 5)
+            .padding(.horizontal, 20)
             
             HStack {
                 Spacer()
                 
                 NavigationLink(destination: FavoriteTransferScreen(), label: {
                     Text("Cari kontak lain")
-                        .font(.caption)
-                        .fontWeight(.semibold)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding()
                 })
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .onAppear(perform: getList)
+    }
+    
+    func getList() {
+        self.favoriteVM.getList(cardNo: "", sourceNumber: "", completion: { result in
+            print(result)
+        })
     }
 }
 
