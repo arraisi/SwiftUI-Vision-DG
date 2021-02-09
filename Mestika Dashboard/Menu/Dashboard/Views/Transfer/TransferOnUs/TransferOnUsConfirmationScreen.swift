@@ -27,7 +27,6 @@ struct TransferOnUsConfirmationScreen: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
     }
     
     var formCard: some View {

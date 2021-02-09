@@ -27,6 +27,8 @@ struct TransferOnUsScreen: View {
     
     @State private var disabledButton = true
     
+    @State private var routeConfirmation: Bool = false
+    
     private var maxLimit: Int = 900000
     private var minLimit: Int = 10000
     
@@ -60,8 +62,17 @@ struct TransferOnUsScreen: View {
                             
                             Spacer()
                             
+                            NavigationLink(
+                                destination: TransferOnUsConfirmationScreen().environmentObject(transferData),
+                                isActive: self.$routeConfirmation) {
+                                EmptyView()
+                            }
+                            
                             VStack {
                                 Button(action: {
+                                    //                                    MARK: To be replaced with actual data
+                                                                        self.transferData.destinationName = "JOHN LENNON"
+                                    
                                     UIApplication.shared.endEditing()
                                     let amount = Int(self.transferData.amount) ?? 0
                                     let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
@@ -69,18 +80,13 @@ struct TransferOnUsScreen: View {
                                     if (amount <= self.minLimit) {
                                         self.showDialogMinReached = true
                                     } else if (amount <= self.maxLimit && amount <= myCredit) {
-                                        self.showDialogConfirmation.toggle()
+                                        self.routeConfirmation = true
                                     } else if (amount > myCredit ) {
                                         self.showDialogMinReached = true
                                     } else {
                                         self.showDialogMaxReached = true
                                     }
 
-                                    
-                                    
-//                                    MARK: To be replaced with actual data
-                                    self.transferData.destinationName = "Ismail Haq"
-                                    
                                 }, label: {
                                     Text("KONFIRMASI TRANSFER")
                                         .foregroundColor(.white)
@@ -110,9 +116,6 @@ struct TransferOnUsScreen: View {
                 }
             })
             .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {}, label: {
-                Text("Cancel")
-            }))
             .onAppear() {
                 self.transferData = TransferOnUsModel()
                 self.transactionFrequency = _listFrequency[0]

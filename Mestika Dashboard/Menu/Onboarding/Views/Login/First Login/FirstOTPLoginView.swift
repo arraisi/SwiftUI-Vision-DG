@@ -110,7 +110,7 @@ struct FirstOTPLoginView: View {
             }
             
             NavigationLink(
-                destination: LoginScreen(phoneNumber: loginData.noTelepon, isNewDeviceLogin: self.$isNewDeviceLogin),
+                destination: LoginScreen(phoneNumber: loginData.noTelepon, isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(loginData),
                 isActive: self.$isRootToPasswordLogin,
                 label: {}
             )

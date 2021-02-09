@@ -21,6 +21,8 @@ struct FormInputAtmPinForgotPasswordView: View {
     @State var showingModalError: Bool = false
     @State var showingModalSuccess: Bool = false
     
+    @Binding var isNewDeviceLogin: Bool
+    
     @GestureState private var dragOffset = CGSize.zero
     
     /* CORE DATA */
@@ -80,13 +82,13 @@ struct FormInputAtmPinForgotPasswordView: View {
                     HStack {
                         
                         if (showPassword) {
-                            TextField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                            TextField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))
                                 }
                         } else {
-                            SecureField("Masukkan PIN ATM Anda", text: self.$pinAtmCtrl)
+                            SecureField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))
@@ -128,7 +130,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                     .disabled(disableForm)
                     
                     NavigationLink(
-                        destination: LoginScreen(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
+                        destination: LoginScreen(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                         isActive: self.$isNextRoute) {}
                 }
                 .padding(.bottom, 20)
@@ -251,6 +253,6 @@ struct FormInputAtmPinForgotPasswordView: View {
 
 struct FormInputAtmActivationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputAtmPinForgotPasswordView()
+        FormInputAtmPinForgotPasswordView(isNewDeviceLogin: .constant(false))
     }
 }

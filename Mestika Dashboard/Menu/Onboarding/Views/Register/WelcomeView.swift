@@ -51,6 +51,8 @@ struct WelcomeView: View {
     var loginData = LoginBindingModel()
     var productATMData = AddProductATM()
     
+    @State private var statusLogin: String = ""
+    
     // Device ID
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     
@@ -807,9 +809,17 @@ struct WelcomeView: View {
             .isDetailLink(false)
             
             Button(action: {
-                self.isLoginNewDevice = false
-                registerData.noTelepon = self.phoneNumber
-                self.isFirstOTPLoginViewActive = true
+                
+                if (self.statusLogin == "LOGGED_IN") {
+                    self.isPasswordViewActive = true
+                } else if (self.statusLogin == "LOGGED_OUT") {
+                    self.isPasswordViewActive = true
+                } else {
+                    self.isLoginNewDevice = false
+                    registerData.noTelepon = self.phoneNumber
+                    self.isFirstOTPLoginViewActive = true
+                }
+                
             }) {
                 Text(NSLocalizedString("LOGIN", comment: ""))
                     .foregroundColor(.white)
@@ -966,9 +976,7 @@ struct WelcomeView: View {
                     print("CASE LOGGED_IN")
                 case "LOGGED_OUT":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
-                    self.isLoginNewDevice = false
-                    registerData.noTelepon = self.phoneNumber
-                    self.isFirstOTPLoginViewActive = true
+                    self.isPasswordViewActive = true
                     print("CASE LOGGED_OUT")
                 default:
                     print("USER NOT FOUND")
@@ -995,6 +1003,8 @@ struct WelcomeView: View {
                 print("MESSAGE STATUS : \(self.userVM.message)")
                 
                 let reset = UserDefaults.standard.string(forKey: "reset_register")
+                
+                self.statusLogin = self.userVM.message
                 
                 if (self.userVM.message == "KYC_WAITING" || self.userVM.message == "WAITING" || self.userVM.message == "ACTIVE") {
                     self.modalSelection = self.userVM.message

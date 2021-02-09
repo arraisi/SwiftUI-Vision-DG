@@ -26,6 +26,10 @@ struct FormInputNewPasswordForgotPasswordView: View {
     @State var routeATMNumberPin: Bool = false
     @State var routeAccountNumberPin: Bool = false
     
+    @State var phoneNumber: String = ""
+    
+    @Binding var isNewDeviceLogin: Bool
+    
     var disableForm: Bool {
         passwordCtrl.isEmpty || confirmPasswordCtrl.isEmpty || passwordCtrl.count < 6 || confirmPasswordCtrl.count < 6
     }
@@ -233,7 +237,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 .padding(.bottom, 20)
             
             NavigationLink(
-                destination: FormInputAtmPinForgotPasswordView().environmentObject(registerData),
+                destination: FormInputAtmPinForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                 isActive: self.$routeAccountNumberPin) {
                 EmptyView()
             }
@@ -276,6 +280,6 @@ struct FormInputNewPasswordForgotPasswordView: View {
 
 struct FormInputNewPasswordForgotPasswordScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputNewPasswordForgotPasswordView()
+        FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(false))
     }
 }

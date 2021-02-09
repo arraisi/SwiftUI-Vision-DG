@@ -72,9 +72,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                     .padding(.horizontal, 30)
                 }
             }
-            .navigationBarItems(trailing: Button(action: {}, label: {
-                Text("Cancel")
-            }))
+            .navigationBarHidden(true)
             .alert(isPresented: $showingAlert) {
                 return Alert(
                     title: Text("Message"),
