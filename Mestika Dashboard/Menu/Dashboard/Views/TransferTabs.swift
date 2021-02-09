@@ -10,6 +10,7 @@ import SwiftUI
 struct TransferTabs: View {
     
     @State private var isRouteTransferOnUs: Bool = false
+    @State private var isRouteTransferOffUs: Bool = false
     
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
@@ -53,9 +54,17 @@ struct TransferTabs: View {
     
     var buttonLink: some View {
         VStack {
+            
+            // Link Transfer ONUS
             NavigationLink(
                 destination: TransferOnUsScreen(),
                 isActive: self.$isRouteTransferOnUs,
+                label: {EmptyView()})
+            
+            // Link Transfer OFFUS
+            NavigationLink(
+                destination: TransferRtgsScreen(),
+                isActive: self.$isRouteTransferOffUs,
                 label: {EmptyView()})
             
             Button(action: {
@@ -77,7 +86,10 @@ struct TransferTabs: View {
             
             Spacer(minLength: 10)
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {
+                print("OFFUS")
+                self.isRouteTransferOffUs = true
+            }, label: {
                 Text("TRANSFER KE BANK LAIN")
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

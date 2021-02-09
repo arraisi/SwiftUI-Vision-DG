@@ -239,7 +239,7 @@ struct WelcomeView: View {
                 getCoreDataNewDevice()
                 getCoreDataRegister()
                 getMobileVersion()
-                getUserStatusKyc(deviceId: deviceId!)
+//                getUserStatusKyc(deviceId: deviceId!)
                 var flags = SCNetworkReachabilityFlags()
                 SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                 
@@ -810,16 +810,33 @@ struct WelcomeView: View {
             
             Button(action: {
                 
-                if (self.statusLogin == "LOGGED_IN") {
-                    self.isPasswordViewActive = true
-                } else if (self.statusLogin == "LOGGED_OUT") {
-                    self.isPasswordViewActive = true
-                } else {
-                    self.isLoginNewDevice = false
-                    registerData.noTelepon = self.phoneNumber
-                    self.isFirstOTPLoginViewActive = true
+                self.userVM.userCheck(deviceId: deviceId!) { success in
+                    
+                    if success {
+                        print("CODE STATUS : \(self.userVM.code)")
+                        print("MESSAGE STATUS : \(self.userVM.message)")
+                        
+                        self.statusLogin = self.userVM.message
+                        
+                        if (self.statusLogin == "LOGGED_IN") {
+                            self.isPasswordViewActive = true
+                        } else if (self.statusLogin == "LOGGED_OUT") {
+                            self.isPasswordViewActive = true
+                        } else {
+                            self.isLoginNewDevice = false
+                            
+                            user.forEach { (data) in
+                                registerData.noTelepon = data.noTelepon!
+                            }
+                            
+                            self.isFirstOTPLoginViewActive = true
+                        }
+                    }
+                    
+                    if !success {
+                        print("NOT SUCCESS")
+                    }
                 }
-                
             }) {
                 Text(NSLocalizedString("LOGIN", comment: ""))
                     .foregroundColor(.white)
@@ -966,9 +983,11 @@ struct WelcomeView: View {
                 
                 switch userVM.message {
                 case "ACTIVE":
-                    print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
                     self.isLoginNewDevice = false
-                    registerData.noTelepon = self.phoneNumber
+                    user.forEach { (data) in
+                        registerData.noTelepon = data.noTelepon!
+                    }
+                    print(registerData.noTelepon)
                     self.isFirstOTPLoginViewActive = true
                     print("CASE ACTIVE")
                 case "LOGGED_IN":

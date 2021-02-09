@@ -43,6 +43,7 @@
 		0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48ADC2577AC8F0037942D /* Image+Extensions.swift */; };
 		0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */; };
 		24313CB4FB81D7738AF550E8 /* Pods_Mestika_DashboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA304AD8E315DFBE8BD2F4D3 /* Pods_Mestika_DashboardTests.framework */; };
+		5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */; };
 		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
 		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
@@ -412,6 +413,7 @@
 		235D41CBFAF3B1015F160BAD /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
 		48FBA1A8000A439CAA67AC1E /* Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard-Mestika DashboardUITests/Pods-Mestika Dashboard-Mestika DashboardUITests.debugmestika.xcconfig"; sourceTree = "<group>"; };
 		4E8FA96F839B34A0C97E2DE4 /* Pods_Mestika_Dashboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_Dashboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOffUsModel.swift; sourceTree = "<group>"; };
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
@@ -1627,6 +1629,7 @@
 		C0377B9625C96EC9002FE52C /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -2151,6 +2154,7 @@
 				C068A5A8256CED8300CE96C4 /* AppState.swift in Sources */,
 				52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */,
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
+				5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */,
 				52ADFEFE2557DC7A00A1001F /* CustomNavigationBarView.swift in Sources */,
 				52ADFFAB2557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift in Sources */,
 				C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */,
