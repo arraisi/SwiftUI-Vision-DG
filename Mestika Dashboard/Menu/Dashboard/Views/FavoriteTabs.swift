@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct FavoriteTabs: View {
+    
+    @Binding var cardNo: String
+    @Binding var sourceNumber: String
+    
     var body: some View {
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+        ScrollView(.vertical, showsIndicators: false, content: {
             
             GeometryReader { geometry in
                 Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
@@ -22,8 +26,8 @@ struct FavoriteTabs: View {
                 ListFavoritePurchasePaymentView()
                     .padding(.bottom)
                 
-                ListFavoriteTransactionView()
-                    .padding(.bottom)
+                ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
+                    .padding()
             }
         })
         .navigationBarHidden(true)
@@ -44,7 +48,7 @@ struct FavoriteTabs: View {
             }
             Spacer()
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {}, label: {
                 Image("ic_search")
             })
         }
@@ -54,6 +58,6 @@ struct FavoriteTabs: View {
 
 struct FavoriteTabs_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteTabs()
+        FavoriteTabs(cardNo: .constant(""), sourceNumber: .constant(""))
     }
 }

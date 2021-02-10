@@ -28,7 +28,7 @@ struct TransferOnUsPinConfirmationScreen: View {
             ZStack {
                 Image("bg_blue")
                     .resizable()
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer(minLength: 0)

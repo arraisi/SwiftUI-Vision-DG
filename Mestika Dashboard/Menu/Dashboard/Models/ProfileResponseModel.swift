@@ -28,7 +28,7 @@ struct ChipProfileDto: Codable {
     let postalAddress, accountNumber, nameOnCard, cardNo: String
     let cardDesign, classCode, nik, id: String
     let imageNameAlias, balance: String
-    let status: JSONNull?
+    let status: String?
     let mainCard: String
 }
 
@@ -44,8 +44,7 @@ struct Personal: Codable {
 // MARK: - Product
 struct Product: Codable {
     let planCode: String
-    let accountNo: JSONNull?
-    let productName: String
+    let accountNo, productName: String?
 }
 
 // MARK: - ID

@@ -10,6 +10,7 @@ import SwiftUI
 struct BankAccount: Identifiable {
     var id: Int
     var namaRekening: String
+    var sourceNumber: String
     var noRekening: String
     var saldo: String
 }

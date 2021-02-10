@@ -12,8 +12,11 @@ struct TransferTabs: View {
     @State private var isRouteTransferOnUs: Bool = false
     @State private var isRouteTransferOffUs: Bool = false
     
+    @Binding var cardNo: String
+    @Binding var sourceNumber: String
+    
     var body: some View {
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+        ScrollView(.vertical, showsIndicators: false, content: {
             
             GeometryReader { geometry in
                 Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
@@ -24,7 +27,7 @@ struct TransferTabs: View {
                 titleInfo
                 buttonLink
 
-                ListTransactionFavoriteView()
+                ListTransactionFavoriteView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
                     .padding(.bottom)
             }
         })
@@ -109,6 +112,6 @@ struct TransferTabs: View {
 
 struct TransferTabs_Previews: PreviewProvider {
     static var previews: some View {
-        TransferTabs()
+        TransferTabs(cardNo: .constant(""), sourceNumber: .constant(""))
     }
 }

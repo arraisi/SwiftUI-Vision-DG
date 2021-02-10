@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BottomNavigationView: View {
     
+    @ObservedObject private var profileVM = ProfileViewModel()
+    
     @State private var showingSlideMenu = false
     @State private var showingSettingMenu = false
     
@@ -34,11 +36,11 @@ struct BottomNavigationView: View {
                 }
                 
                 if (selected == 1) {
-                    TransferTabs()
+                    TransferTabs(cardNo: self.$profileVM.cardNo, sourceNumber: self.$profileVM.accountNumber)
                 }
                 
                 if (selected == 2) {
-                    FavoriteTabs()
+                    FavoriteTabs(cardNo: self.$profileVM.cardNo, sourceNumber: self.$profileVM.accountNumber)
                 }
                 
                 if (selected == 3) {
@@ -118,6 +120,11 @@ struct BottomNavigationView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .onAppear {
+            self.profileVM.getProfile { result in
+                print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+            }
+        }
     }
     
     var appbar: some View {
@@ -133,9 +140,9 @@ struct BottomNavigationView: View {
     
     var navBarItem: some View {
         HStack(spacing: 30) {
-//            NavigationLink(destination: NotificationScreen(), label: {
-//                Image("ic_bell")
-//            })
+            //            NavigationLink(destination: NotificationScreen(), label: {
+            //                Image("ic_bell")
+            //            })
             Button(action: {}, label: {
                 Image("ic_bell")
             })

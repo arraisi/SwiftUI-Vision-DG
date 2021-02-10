@@ -11,6 +11,9 @@ struct FavoriteTransferScreen: View {
     
     @State private var searchCtrl = ""
     
+    var cardNo: String = ""
+    var sourceNumber: String = ""
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -20,10 +23,8 @@ struct FavoriteTransferScreen: View {
                     VStack {
                         searchCard
                         
-                        ListAllFavoriteTransactionView() { data in
-                            print(data.username)
-                        }
-                        .padding(.bottom)
+                        ListAllFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
+                            .padding(.bottom)
                     }
                     .padding(.bottom, 25)
                 })

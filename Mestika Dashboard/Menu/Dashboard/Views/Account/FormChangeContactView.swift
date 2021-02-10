@@ -12,8 +12,8 @@ struct FormChangeContactView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var txtPhone: String = ""
-    @State private var txtEmail: String = ""
+    @Binding var txtPhone: String
+    @Binding var txtEmail: String
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct FormChangeContactView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     Text("Contact Data")
-                        .font(.custom("Montserrat-Bold", size: 24))
+                        .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
                     
                     VStack(alignment: .leading) {
@@ -34,9 +34,14 @@ struct FormChangeContactView: View {
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(.black)
                             
-                            TextField(NSLocalizedString("Input Number Phone", comment: ""), text: $txtPhone, onEditingChanged: { changed in
+                            HStack{
+                                Text("+62")
+                                Divider()
+                                TextField(NSLocalizedString("Input Number Phone", comment: ""), text: $txtPhone, onEditingChanged: { changed in
+                                    
+                                })
                                 
-                            })
+                            }
                             .font(.custom("Montserrat-Regular", size: 12))
                             .keyboardType(.numberPad)
                             .padding(15)
@@ -78,13 +83,13 @@ struct FormChangeContactView: View {
                         .padding(.top, 30)
                         
                     }
-                    .padding(.top)
+//                    .padding(.top)
                     
                 }
                 .padding(30)
                 .background(Color.white)
                 .cornerRadius(15)
-                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                 .padding(25)
             }
             
@@ -99,6 +104,6 @@ struct FormChangeContactView: View {
 
 struct FormChangeContactView_Previews: PreviewProvider {
     static var previews: some View {
-        FormChangeContactView()
+        FormChangeContactView(txtPhone: .constant(""), txtEmail: .constant(""))
     }
 }

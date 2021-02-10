@@ -304,6 +304,8 @@
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
 		C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */; };
+		C08758D225D2394E008ED730 /* FavoriteServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08758D125D2394E008ED730 /* FavoriteServices.swift */; };
+		C08758D825D2398E008ED730 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08758D725D2398E008ED730 /* FavoriteModel.swift */; };
 		C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0884939255BC12E00E2F927 /* ScanKTPView.swift */; };
 		C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* MyCard.swift */; };
 		C092ABFF2553B5850051CE3E /* myCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = C092ABFE2553B5850051CE3E /* myCardData.json */; };
@@ -320,6 +322,7 @@
 		C0A4F99E25528C0700566A11 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */; };
 		C0A4F9AC25529A9700566A11 /* ArrowDownShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */; };
 		C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */; };
+		C0A76A6625D247A4005BD60C /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A76A6525D247A4005BD60C /* FavoriteViewModel.swift */; };
 		C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */; };
 		C0AC4A6F2582116500848AC7 /* InformasiPerusahaanVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */; };
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
@@ -681,6 +684,8 @@
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
 		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
+		C08758D125D2394E008ED730 /* FavoriteServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteServices.swift; sourceTree = "<group>"; };
+		C08758D725D2398E008ED730 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 		C0884939255BC12E00E2F927 /* ScanKTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanKTPView.swift; sourceTree = "<group>"; };
 		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
 		C092ABFE2553B5850051CE3E /* myCardData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myCardData.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
@@ -697,6 +702,7 @@
 		C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowDownShape.swift; sourceTree = "<group>"; };
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
+		C0A76A6525D247A4005BD60C /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiKeluargaVerificationView.swift; sourceTree = "<group>"; };
 		C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiPerusahaanVerificationView.swift; sourceTree = "<group>"; };
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
@@ -1638,9 +1644,11 @@
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				52ADFEAB2557D9A800A1001F /* Card.swift */,
+				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
+				C08758D625D2397C008ED730 /* Favorite */,
 				C06ED63625D0F27000F68FC1 /* Account */,
 				522101AF25C9213100C9566A /* Transfer */,
-				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
 				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
@@ -1663,6 +1671,14 @@
 				C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		C08758D625D2397C008ED730 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				C08758D725D2398E008ED730 /* FavoriteModel.swift */,
+			);
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 		C092ABFD2553B51B0051CE3E /* Resources */ = {
@@ -2155,6 +2171,7 @@
 				525DB51F2546869B00D48075 /* PinView.swift in Sources */,
 				525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */,
 				C068A5A8256CED8300CE96C4 /* AppState.swift in Sources */,
+				C08758D825D2398E008ED730 /* FavoriteModel.swift in Sources */,
 				52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */,
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
 				5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */,
@@ -2177,6 +2194,7 @@
 				C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */,
 				528AE2C225959B8C003AFD73 /* AppConstants.swift in Sources */,
 				C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */,
+				C0A76A6625D247A4005BD60C /* FavoriteViewModel.swift in Sources */,
 				064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,
@@ -2290,6 +2308,7 @@
 				C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */,
 				06AD57002570CAC50071C4A9 /* WebView.swift in Sources */,
 				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,
+				C08758D225D2394E008ED730 /* FavoriteServices.swift in Sources */,
 				525950252553E03000C8CA5D /* FormNoRekeningPinForgotPasswordScreen.swift in Sources */,
 				52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */,
 				52ADFFA92557DFDC00A1001F /* IncomingVideoCallView.swift in Sources */,
