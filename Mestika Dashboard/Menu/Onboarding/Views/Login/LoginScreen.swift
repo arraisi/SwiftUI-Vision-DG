@@ -47,6 +47,10 @@ struct LoginScreen: View {
     
     @State var iconSecure: String = ""
     
+    var disableForm: Bool {
+        passwordCtrl.isEmpty
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             Image("bg_blue")
@@ -113,12 +117,13 @@ struct LoginScreen: View {
                         },
                         label: {
                             Text("LOGIN APPS")
-                                .foregroundColor(Color(hex: "#232175"))
+                                .foregroundColor(disableForm ? Color.white : Color(hex: "#232175"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         })
-                        .background(Color.white)
+                        .disabled(disableForm)
+                        .background(disableForm ? Color.gray : Color.white)
                         .cornerRadius(12)
                         .padding(.horizontal, 25)
                     

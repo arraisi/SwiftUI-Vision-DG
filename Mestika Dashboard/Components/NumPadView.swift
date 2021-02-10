@@ -66,20 +66,23 @@ struct NumPadView: View {
                             if password.count == 6{
                                 print(password)
                                 print(key)
-                                if password == key{
-                                    if (isTransferOnUs) {
-                                        unlocked = false
-                                        wrongPass = false
-                                        NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
-                                    } else {
-                                        unlocked = true
-                                        wrongPass = false
-                                    }
-                                }
-                                else{
-                                    wrongPass = true
-                                    password.removeAll()
-                                }
+                                unlocked = false
+                                wrongPass = false
+                                NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+//                                if password == key{
+//                                    if (isTransferOnUs) {
+//                                        unlocked = false
+//                                        wrongPass = false
+//                                        NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+//                                    } else {
+//                                        unlocked = true
+//                                        wrongPass = false
+//                                    }
+//                                }
+//                                else{
+//                                    wrongPass = true
+//                                    password.removeAll()
+//                                }
                             }
                         }
                     }

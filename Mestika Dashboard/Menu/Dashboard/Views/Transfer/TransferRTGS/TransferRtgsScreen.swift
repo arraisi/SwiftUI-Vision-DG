@@ -13,12 +13,11 @@ struct TransferRtgsScreen: View {
     @State var transferData = TransferOffUsModel()
     
     // Variable Transfer Type
-    var _listTransferType = ["Online", "RTGS", "SKN"]
-    @State private var transferType: String = "Online"
+    var _listTransferType = ["RTGS", "SKN"]
+    @State private var transferType: String = ""
     
     // Variable List BANK
-    var _listBank = ["Mandiri", "BNI", "BCA", "BRI"]
-    @State private var bankSelector: String = "Mandiri"
+    @State private var bankSelector: String = ""
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
@@ -44,8 +43,12 @@ struct TransferRtgsScreen: View {
     // Variable Modal
     @State private var showDialogMinReached: Bool = false
     @State private var showDialogMaxReached: Bool = false
+    @State private var showDialogMinTransaction: Bool = false
     @State private var showDialogConfirmation: Bool = false
     @State private var showDialogSelectAccount: Bool = false
+    
+    // Variable Disable
+    @State private var disabledButton = true
     
     // Variable Route
     @State private var isRouteTransaction: Bool = false
@@ -71,13 +74,12 @@ struct TransferRtgsScreen: View {
                         Spacer()
                         
                         Button(action: {
-                            self.transferData.destinationName = "JOHN LENNON"
                             
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
                             if (amount <= self.minLimit) {
-                                self.showDialogMinReached = true
+                                self.showDialogMinTransaction = true
                             } else if (amount <= self.maxLimit && amount <= myCredit) {
                                 
                                 if (self.transferData.transactionType == "Online") {
@@ -100,19 +102,20 @@ struct TransferRtgsScreen: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
-                        .disabled(disableBtn())
-                        .background(disableBtn() ? Color.gray : Color(hex: "#232175"))
+                        .disabled(disabledButton)
+                        .background(disabledButton ? Color.gray : Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                     }
                 })
             }
             
-            if (self.showDialogMinReached || self.showDialogMaxReached || self.showDialogSelectAccount) {
+            if (self.showDialogMinReached || self.showDialogMaxReached || self.showDialogSelectAccount || self.showDialogMinTransaction) {
                 ModalOverlay(tapAction: { withAnimation {
                     self.showDialogMaxReached = false
                     self.showDialogMinReached = false
                     self.showDialogSelectAccount = false
+                    self.showDialogMinTransaction = false
                 }})
                 .edgesIgnoringSafeArea(.all)
             }
@@ -137,16 +140,20 @@ struct TransferRtgsScreen: View {
         .popup(isPresented: $showDialogMinReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
             modalMinReached()
         }
+        .popup(isPresented: $showDialogMinTransaction, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMinTransaction()
+        }
         .popup(isPresented: $showDialogSelectAccount, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
             modalSelectBankAccount()
         }
         .onAppear {
             self.transferData = TransferOffUsModel()
+            self.transferType = _listTransferType[0]
             self.transactionFrequency = _listFrequency[0]
             self.transferData.transactionFrequency = _listFrequency[0]
             self.transferData.transactionType = _listTransferType[0]
-            self.transferData.bankName = _listBank[0]
             getProfile()
+            getListBank()
         }
     }
     
@@ -209,12 +216,15 @@ struct TransferRtgsScreen: View {
                     
                     Spacer()
                     Menu {
-                        ForEach(self._listBank, id: \.self) { data in
+                        ForEach(0..<self.referenceVM._listBank.count) { index in
+                            
                             Button(action: {
-                                self.bankSelector = data
-                                self.transferData.bankName = data
+                                self.bankSelector = self.referenceVM._listBank[index].bankName
+                                self.transferData.bankName = self.referenceVM._listBank[index].bankName
+                                self.transferData.combinationBankName = self.referenceVM._listBank[index].combinationName
+                                self.transferData.destinationBankCode = self.referenceVM._listBank[index].swiftCode
                             }) {
-                                Text(data)
+                                Text(self.referenceVM._listBank[index].bankName)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -288,6 +298,7 @@ struct TransferRtgsScreen: View {
                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                         self.amount = cleanAmount.thousandSeparator()
                         self.transferData.amount = cleanAmount
+                        validateForm()
                     }
                     .foregroundColor(Color(hex: "#232175"))
                     .font(.system(size: 30, weight: .bold, design: .default))
@@ -374,6 +385,7 @@ struct TransferRtgsScreen: View {
                         Button(action: {
                             self.transactionFrequency = data
                             self.transferData.transactionFrequency = data
+                            validateForm()
                         }) {
                             Text(data)
                                 .font(.custom("Montserrat-Regular", size: 12))
@@ -407,6 +419,7 @@ struct TransferRtgsScreen: View {
                         Button(action: {
                             self.transactionVoucher = data
                             self.transferData.transactionVoucher = data
+                            validateForm()
                         }) {
                             Text(data)
                                 .font(.custom("Montserrat-Regular", size: 12))
@@ -557,6 +570,59 @@ struct TransferRtgsScreen: View {
         }
     }
     
+    func modalMinTransaction() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_limit_min")
+                .resizable()
+                .frame(width: 127, height: 81)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text(NSLocalizedString("Transaksi ada kurang dari minimum transaksi.", comment: ""))
+                .font(.custom("Montserrat-SemiBold", size: 18))
+                .foregroundColor(.red)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text(NSLocalizedString("Transaksi minimum Rp. \(self.minLimit),- . Silahkan mengganti nominal transaksi.", comment: ""))
+                .font(.custom("Montserrat-Light", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("UBAH NOMINAL")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 10)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("BATALKAN TRANSAKSI")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
     func modalMinReached() -> some View {
         VStack(alignment: .leading) {
             Image("ic_limit_min")
@@ -700,7 +766,7 @@ struct TransferRtgsScreen: View {
                         .padding(.horizontal, 25)
                         .padding(.bottom, 10)
                 }
-//                .background(Color(hex: "#FF00FF"))
+                //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
                     self.transferData.sourceNumber = data.noRekening
@@ -717,15 +783,17 @@ struct TransferRtgsScreen: View {
     
     // MARK: - FUNCTION DATA
     
-    func disableBtn() -> Bool {
-        if (self.transferData.destinationNumber.isEmpty
-                && self.transferData.amount.isEmpty
-                && self.transferData.transactionFrequency.isEmpty
-                && self.transferData.transactionVoucher.isEmpty) {
-            return true
+    func validateForm() {
+        if (self.transferData.destinationNumber.count == 16 &&
+                self.transferData.amount != "" &&
+                self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi") {
+            disabledButton = false
+        } else {
+            if (self.transferData.transactionVoucher == "Pilih Voucher") {
+                self.transferData.transactionVoucher = "-"
+            }
+            disabledButton = true
         }
-        
-        return false
     }
     
     @ObservedObject var profileVM = ProfileViewModel()
@@ -740,6 +808,22 @@ struct TransferRtgsScreen: View {
                 self.selectedAccount = self.listBankAccount[0]
                 self.transferData.sourceNumber = selectedAccount.noRekening
                 self.transferData.sourceAccountName = selectedAccount.namaRekening
+            }
+        }
+    }
+    
+    @ObservedObject var referenceVM = ReferenceSummaryViewModel()
+    func getListBank() {
+        self.referenceVM.getAllSchedule { success in
+            
+            if success {
+                print("SUCCESS")
+                self.bankSelector = self.referenceVM._listBank[0].bankName
+                print(self.referenceVM._listBank.count)
+            }
+            
+            if !success {
+                print("!SUCCESS")
             }
         }
     }

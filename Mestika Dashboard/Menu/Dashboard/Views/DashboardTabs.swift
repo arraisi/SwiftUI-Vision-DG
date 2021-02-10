@@ -45,7 +45,7 @@ struct DashboardTabs: View {
                         
                         Spacer()
                         
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        NavigationLink(destination: CardManagementScreen(), label: {
                             Text("See All")
                                 .bold()
                                 .foregroundColor(Color(hex: "#2334D0"))
@@ -56,7 +56,7 @@ struct DashboardTabs: View {
                     ScrollView(.horizontal, showsIndicators: false, content: {
                         HStack{
                             VStack {
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                NavigationLink(destination: CardManagementScreen(), label: {
                                     Image("ic_btn_add_rekening")
                                 })
                                 

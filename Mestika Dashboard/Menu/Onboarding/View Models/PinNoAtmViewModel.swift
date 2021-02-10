@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftyRSA
 
 class PinNoAtmViewModel: ObservableObject {
     @Published var isLoading: Bool = false
@@ -79,7 +80,7 @@ extension PinNoAtmViewModel {
         
         PinNoAtmService.shared.validatePinNasabahExisting(
             atmData: atmData,
-            pin: pin,
+            pin: encryptPassword(password: pin),
             cardNo: cardNo) { result in
             
             switch result {
@@ -112,5 +113,19 @@ extension PinNoAtmViewModel {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func encryptPassword(password: String) -> String {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: password, using: .utf8)
+        
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        _ = encrypted.data
+        let base64String = encrypted.base64String
+        
+        print("Encript : \(base64String)")
+        
+        return base64String
+        //        self.registerData.password = base64String
     }
 }

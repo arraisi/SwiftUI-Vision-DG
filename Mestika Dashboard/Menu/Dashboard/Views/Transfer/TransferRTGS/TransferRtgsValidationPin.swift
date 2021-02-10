@@ -18,6 +18,9 @@ struct TransferRtgsValidationPin: View {
     @State var wrongPassword = false
     @State var showingAlert = false
     
+    @State var messageError: String = ""
+    @State var statusError: String = ""
+    
     @ObservedObject var transferVM = TransferViewModel()
     
     var body: some View {
@@ -27,7 +30,7 @@ struct TransferRtgsValidationPin: View {
             ZStack {
                 Image("bg_blue")
                     .resizable()
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer(minLength: 0)
@@ -74,34 +77,59 @@ struct TransferRtgsValidationPin: View {
             .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
             .alert(isPresented: $showingAlert) {
                 return Alert(
-                    title: Text("Message"),
-                    message: Text("\(self.transferVM.message)"),
+                    title: Text("\(self.statusError)"),
+                    message: Text("\(self.messageError)"),
                     dismissButton: .default(Text("Oke")))
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOnUs"))) { obj in
                 print("SUCCESS PIN")
+                self.transferData.pin = password
                 submitTransfer()
             }
         }
     }
     
     func submitTransfer() {
-//        self.isLoading = true
-        self.isLoading = false
-        self.unLocked = true
-//        self.transferVM.transferOnUs(transferData: transferData) { success in
-//            DispatchQueue.main.async {
-//                if success {
-//                    self.isLoading = false
-//                    self.unLocked = true
-//                }
-//
-//                if !success {
-//                    self.isLoading = false
-//                    self.showingAlert = true
-//                }
-//            }
-//        }
+        self.isLoading = true
+        if (transferData.transactionType == "RTGS") {
+            self.transferVM.transferRtgs(transferData: transferData) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        self.isLoading = false
+                        self.unLocked = true
+                    }
+
+                    if !success {
+                        self.isLoading = false
+                        self.statusError = self.transferVM.code
+                        self.messageError = self.transferVM.message
+                        self.showingAlert = true
+                        resetField()
+                    }
+                }
+            }
+        } else if (transferData.transactionType == "SKN") {
+            self.transferVM.transferSkn(transferData: transferData) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        self.isLoading = false
+                        self.unLocked = true
+                    }
+
+                    if !success {
+                        self.isLoading = false
+                        self.statusError = self.transferVM.code
+                        self.messageError = self.transferVM.message
+                        self.showingAlert = true
+                        resetField()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func resetField() {
+        self.password = "" /// return to empty pin
     }
 }
 

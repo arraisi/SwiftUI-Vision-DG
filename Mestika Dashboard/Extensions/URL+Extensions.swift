@@ -150,8 +150,22 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/auth/clearFinger")
     }
     
+    //-------------------- TRANSFER SERVICE ----------------------//
+    
+    static func urlBankReference() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/reference/kliringAndRtgsBank")
+    }
+    
     static func urlTransferOverbooking() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/transper/overbooking")
+    }
+    
+    static func urlTransferRtgs() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/transper/rtgs")
+    }
+    
+    static func urlTransferSkn() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/transper/skn")
     }
     
     //-------------------- PROFILE SERVICE ----------------------//

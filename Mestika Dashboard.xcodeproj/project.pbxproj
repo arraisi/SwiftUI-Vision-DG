@@ -155,6 +155,9 @@
 		528AE2CC2595B95E003AFD73 /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2CB2595B95E003AFD73 /* AddressService.swift */; };
 		528AE2D12595BB01003AFD73 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2D02595BB01003AFD73 /* AddressViewModel.swift */; };
 		528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */ = {isa = PBXBuildFile; fileRef = 528AE2DD2595DCB0003AFD73 /* bidangUsaha.json */; };
+		529190BC25D3C8FC005A4898 /* BankReferenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */; };
+		529190C425D3C9A5005A4898 /* ReferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190C325D3C9A5005A4898 /* ReferenceService.swift */; };
+		529190CC25D3CB2D005A4898 /* ReferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
 		52ADFE932557D99F00A1001F /* masterData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE772557D99F00A1001F /* masterData.json */; };
@@ -528,6 +531,9 @@
 		528AE2CB2595B95E003AFD73 /* AddressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; };
 		528AE2D02595BB01003AFD73 /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		528AE2DD2595DCB0003AFD73 /* bidangUsaha.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bidangUsaha.json; sourceTree = "<group>"; };
+		529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankReferenceResponse.swift; sourceTree = "<group>"; };
+		529190C325D3C9A5005A4898 /* ReferenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceService.swift; sourceTree = "<group>"; };
+		529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceViewModel.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE772557D99F00A1001F /* masterData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masterData.json; sourceTree = "<group>"; };
@@ -814,6 +820,7 @@
 			children = (
 				0A566A0D25CA6E940008E752 /* TransferServices.swift */,
 				52CB5DF125CBEA480012DDAB /* ProfileService.swift */,
+				529190C325D3C9A5005A4898 /* ReferenceService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -858,8 +865,10 @@
 		522101AF25C9213100C9566A /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */,
 				522101B025C9213100C9566A /* TransferOnUsModel.swift */,
 				0A566A0725CA6A4E0008E752 /* TransferOnUsResponse.swift */,
+				529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -1626,14 +1635,6 @@
 			path = json;
 			sourceTree = "<group>";
 		};
-		C0377B9625C96EC9002FE52C /* Transfer */ = {
-			isa = PBXGroup;
-			children = (
-				5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */,
-			);
-			path = Transfer;
-			sourceTree = "<group>";
-		};
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1642,7 +1643,6 @@
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
-				C0377B9625C96EC9002FE52C /* Transfer */,
 				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
 			);
 			name = Models;
@@ -1741,6 +1741,7 @@
 				C0EB654C255E4D81009ADFFE /* DbViewModel.swift */,
 				0A566A0225CA68960008E752 /* TransferViewModel.swift */,
 				52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */,
+				529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2061,6 +2062,7 @@
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,
 				52C362A325D12DC0000374AA /* TransferRtgsValidationPin.swift in Sources */,
 				C0BFB51E2576375500676B95 /* Address.swift in Sources */,
+				529190C425D3C9A5005A4898 /* ReferenceService.swift in Sources */,
 				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
 				0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */,
 				52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */,
@@ -2106,6 +2108,7 @@
 				FAF5869325AB302F00ABDA3E /* UINavigationController+Extensions.swift in Sources */,
 				526B6607254FFA4600C13C36 /* CardManagementScreen.swift in Sources */,
 				526B65F8254FF1BC00C13C36 /* PopoverSettingsView.swift in Sources */,
+				529190CC25D3CB2D005A4898 /* ReferenceViewModel.swift in Sources */,
 				525FA115255289B0007EADCB /* GridMenuManyUsedView.swift in Sources */,
 				0A566A0825CA6A4E0008E752 /* TransferOnUsResponse.swift in Sources */,
 				52ADFFA32557DFDC00A1001F /* Term&ConditionView.swift in Sources */,
@@ -2222,6 +2225,7 @@
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
 				0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */,
+				529190BC25D3C8FC005A4898 /* BankReferenceResponse.swift in Sources */,
 				526A81672560B2B200D614CB /* FirstLoginView.swift in Sources */,
 				C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */,
 				52ADFF912557DFDC00A1001F /* PerkiraanSetoranView.swift in Sources */,

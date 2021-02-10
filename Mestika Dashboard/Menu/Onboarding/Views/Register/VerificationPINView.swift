@@ -20,11 +20,13 @@ struct VerificationPINView: View {
      Boolean for Show Modal
      */
     @State var showingModal = false
+    @State var showingModalBlockAtm = false
     @State var nextToFormVideoCall = false
     @State var nextToPilihJenisAtm = false
     
     @State var shouldVerificationWithVC:Bool = false
     
+    @State var tryCount: Int = 0
     
     /* HUD Variable */
     @State private var dim = true
@@ -40,7 +42,6 @@ struct VerificationPINView: View {
     @State var otpInvalidCount = 0
     @State var isResendPinDisabled = true
     @State var isBtnValidationDisabled = false
-    @State var tryCount = 0
     
     var disableForm: Bool {
         if (pin.count < 6 || self.isBtnValidationDisabled) {
@@ -269,8 +270,12 @@ struct VerificationPINView: View {
                 Spacer()
             }
             
-            if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+            if (self.showingModal || self.showingModalBlockAtm) {
+                ModalOverlay(tapAction: { withAnimation {
+                                self.showingModal = false
+                    self.showingModalBlockAtm = false
+                    
+                } })
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -278,27 +283,11 @@ struct VerificationPINView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        //        .onReceive(timer) { time in
-        //            if self.timeRemainingRsnd > 0 {
-        //                self.timeRemainingRsnd -= 1
-        //            }
-        //
-        //            if self.timeRemainingRsnd < 1 {
-        //                isResendPinDisabled = false
-        //            } else {
-        //                isResendPinDisabled = true
-        //            }
-        //
-        //            if self.timeRemainingBtn > 0 {
-        //                self.timeRemainingBtn -= 1
-        //            }
-        //
-        //            if self.timeRemainingBtn < 1 {
-        //                isBtnValidationDisabled = false
-        //            }
-        //        }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             createBottomFloater()
+        }
+        .popup(isPresented: $showingModalBlockAtm, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            NoAtmAndBlock
         }
     }
     
@@ -309,44 +298,6 @@ struct VerificationPINView: View {
             return false
         } else {
             return true
-        }
-    }
-    
-    func validatePIN() {
-        
-        if pin == dummyPin {
-            //            self.nextToPilihJenisAtm = true
-            self.noAtmAndPinIsWrong = false
-            self.showingModal.toggle()
-        } else {
-            self.noAtmAndPinIsWrong = true
-            
-            if (self.tryCount == 1) {
-                self.timeRemainingBtn = 30
-                self.showingModal.toggle()
-            }
-            
-            if (self.tryCount == 2) {
-                self.timeRemainingBtn = 60
-                self.showingModal.toggle()
-            }
-            
-            if (self.tryCount == 3) {
-                self.timeRemainingBtn = 120
-                self.showingModal.toggle()
-            }
-            
-            if (self.tryCount == 4) {
-                self.timeRemainingBtn = 240
-                self.showingModal.toggle()
-            }
-            
-            if (self.tryCount >= 5) {
-                self.timeRemainingBtn = 480
-                self.showingModal.toggle()
-            }
-            
-            self.isBtnValidationDisabled = true
         }
     }
     
@@ -367,11 +318,15 @@ struct VerificationPINView: View {
             } else {
                 print("PIN INVALID")
                 
-                self.isLoading = false
-                self.noAtmAndPinIsWrong = true
-                self.showingModal.toggle()
-                //                self.isBtnValidationDisabled = true
-                //                resetField()
+                if (self.tryCount >= 3) {
+                    self.showingModalBlockAtm = true
+                } else {
+                    self.isLoading = false
+                    self.noAtmAndPinIsWrong = true
+                    self.showingModal.toggle()
+                    //                self.isBtnValidationDisabled = true
+                    //                resetField()
+                }
             }
             
         }
@@ -389,6 +344,42 @@ struct VerificationPINView: View {
             }
         }
         
+    }
+    
+    var NoAtmAndBlock: some View {
+        
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
+            
+            Text("Kartu ATM Anda Diblokir")
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#DF1C1C"))
+                .padding(.bottom, 30)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Button(action: {
+                self.nextToFormVideoCall = true
+            }) {
+                Text("Verifikasi Video Call")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+            }
+            .frame(maxWidth: .infinity, maxHeight: 50)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            .padding(.bottom)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     var NoAtmAndPinWrong: some View {

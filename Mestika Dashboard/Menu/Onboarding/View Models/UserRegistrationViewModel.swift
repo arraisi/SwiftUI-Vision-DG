@@ -61,8 +61,10 @@ extension UserRegistrationViewModel {
                 
                 switch error {
                 case .custom(code: 500):
-                    print("Internal Server Error")
-                    self.message = "Internal Server Error"
+                    print("Something Happen With System")
+                    DispatchQueue.main.async {
+                        self.message = "Something Happen With System"
+                    }
                 default:
                     print("ERRROR")
                 }

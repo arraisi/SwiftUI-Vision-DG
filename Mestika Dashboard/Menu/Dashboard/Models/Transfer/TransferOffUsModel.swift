@@ -25,9 +25,13 @@ class TransferOffUsModel: ObservableObject {
     @Published var transactionDate = "Sekarang"
     @Published var transactionFrequency = ""
     @Published var transactionVoucher = ""
+    @Published var destinationBankCode = ""
+    @Published var swiftCode = ""
+    @Published var kliringCode = ""
     
     @Published var transactionType = ""
     @Published var bankName = ""
+    @Published var combinationBankName = ""
     
     @Published var typeDestination = ""
     @Published var citizenship = ""

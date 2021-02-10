@@ -95,8 +95,8 @@ struct TransferRtgsDestination: View {
                         if (self.transferData.transactionType == "SKN") {
                             EmptyView()
                         } else {
-                            provinceCard
-                            cityCard
+//                            provinceCard
+//                            cityCard
                             addressCard
                         }
                         

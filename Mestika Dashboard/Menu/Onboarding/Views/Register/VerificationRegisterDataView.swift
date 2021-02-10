@@ -31,6 +31,8 @@ struct VerificationRegisterDataView: View {
     @State private var shouldPresentCamera = false
     @State private var shouldPresentCameraSelfie = false
     
+    @State private var errorMessage: String = ""
+    
     @State private var cameraFileName = ""
     
     @State private var imageTaken: Image?
@@ -576,7 +578,7 @@ struct VerificationRegisterDataView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Message"),
-                message: Text("\(self.userRegisterVM.message)"),
+                message: Text("\(self.errorMessage)"),
                 dismissButton: .default(Text("Oke")))
         }
         .alert(isPresented: $isShowingAlert) {
@@ -957,6 +959,7 @@ struct VerificationRegisterDataView: View {
             
             if !success {
                 self.isLoading = false
+                self.errorMessage = self.userRegisterVM.message
                 self.showingAlert = true
             }
         }

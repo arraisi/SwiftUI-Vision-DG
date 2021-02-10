@@ -148,7 +148,7 @@ struct SuccessRegisterView: View {
                                     Button(action: {
                                         pilihJam = data
                                     }) {
-                                        Text(data)
+                                        Text(data + " WIB ")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                 }
