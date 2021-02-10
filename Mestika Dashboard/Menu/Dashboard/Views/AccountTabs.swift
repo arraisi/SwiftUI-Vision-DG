@@ -9,6 +9,9 @@ import SwiftUI
 
 struct AccountTabs: View {
     
+    /* Function GET USER Status */
+    @StateObject var profileVM = ProfileViewModel()
+    
     @EnvironmentObject var appState: AppState
     
     @Binding var showingSettingMenu : Bool
@@ -64,11 +67,11 @@ struct AccountTabs: View {
                     .clipShape(Circle())
                 
                 VStack(alignment: .leading) {
-                    Text("\(self.username)")
+                    Text("\(self.profileVM.name)")
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#2334D0"))
                     
-                    Text("+62\(self.phoneNumber)")
+                    Text("+62\(self.profileVM.telepon)")
                         .font(.custom("Montserrat-SemiBold", size: 16))
                 }
                 
@@ -129,7 +132,7 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormChangeContactView()){
+                    NavigationLink(destination : FormChangeContactView(txtPhone: self.$profileVM.telepon, txtEmail: self.$profileVM.email)){
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("Contact")
@@ -331,24 +334,25 @@ struct AccountTabs: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .onAppear {
-            getProfile()
+//            getProfile()
+            self.profileVM.getProfile { result in
+                print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+            }
             getUserInfo()
         }
         
     }
     
-    /* Function GET USER Status */
-    @ObservedObject var profileVM = ProfileViewModel()
-    func getProfile() {
-        self.profileVM.getProfile { success in
-            if success {
-                print("Name \(self.profileVM.name)")
-                print(self.profileVM.balance)
-                self.username = self.profileVM.name
-                self.phoneNumber = self.profileVM.telepon
-            }
-        }
-    }
+//    func getProfile() {
+//        self.profileVM.getProfile { success in
+//            if success {
+//                print("Name \(self.profileVM.name)")
+//                print(self.profileVM.balance)
+//                self.username = self.profileVM.name
+//                self.phoneNumber = self.profileVM.telepon
+//            }
+//        }
+//    }
     
     func getUserInfo() {
         self.user.forEach { (data) in

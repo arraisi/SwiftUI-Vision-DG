@@ -14,6 +14,9 @@ struct ListAllFavoriteTransactionView: View {
     
     @StateObject private var favoriteVM = FavoritesViewModel()
     
+    var cardNo: String = ""
+    var sourceNumber: String = ""
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -77,7 +80,7 @@ struct ListAllFavoriteTransactionView: View {
     }
     
     func getList() {
-        self.favoriteVM.getList(cardNo: "", sourceNumber: "", completion: { result in
+        self.favoriteVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
             print(result)
         })
     }

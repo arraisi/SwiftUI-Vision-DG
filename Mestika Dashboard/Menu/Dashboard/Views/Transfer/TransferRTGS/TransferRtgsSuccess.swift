@@ -73,10 +73,10 @@ struct TransferRtgsSuccess: View {
             }
             
             if showPopover {
-                PopOverFavoriteView()
-                    .onTapGesture {
-                        self.showPopover.toggle()
-                    }
+//                PopOverFavoriteView(transferData: transferData)
+//                    .onTapGesture {
+//                        self.showPopover.toggle()
+//                    }
             }
             
         }

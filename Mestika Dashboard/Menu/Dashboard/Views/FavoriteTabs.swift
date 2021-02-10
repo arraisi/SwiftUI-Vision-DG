@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct FavoriteTabs: View {
+    
+    @Binding var cardNo: String
+    @Binding var sourceNumber: String
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
             
@@ -22,7 +26,7 @@ struct FavoriteTabs: View {
                 ListFavoritePurchasePaymentView()
                     .padding(.bottom)
                 
-                ListFavoriteTransactionView()
+                ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
                     .padding()
             }
         })
@@ -54,6 +58,6 @@ struct FavoriteTabs: View {
 
 struct FavoriteTabs_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteTabs()
+        FavoriteTabs(cardNo: .constant(""), sourceNumber: .constant(""))
     }
 }

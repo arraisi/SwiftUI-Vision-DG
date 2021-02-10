@@ -11,6 +11,9 @@ struct ListFavoriteTransactionView: View {
     
     @StateObject private var favoriteVM = FavoritesViewModel()
     
+    var cardNo = ""
+    var sourceNumber = ""
+    
     var body: some View {
         VStack {
             HStack {
@@ -59,7 +62,7 @@ struct ListFavoriteTransactionView: View {
             HStack {
                 Spacer()
                 
-                NavigationLink(destination: FavoriteTransferScreen(), label: {
+                NavigationLink(destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber), label: {
                     Text("Cari kontak lain")
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -74,7 +77,7 @@ struct ListFavoriteTransactionView: View {
     }
     
     func getList() {
-        self.favoriteVM.getList(cardNo: "", sourceNumber: "", completion: { result in
+        self.favoriteVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
             print(result)
         })
     }
@@ -82,6 +85,6 @@ struct ListFavoriteTransactionView: View {
 
 struct ListFavoriteTransactionView_Previews: PreviewProvider {
     static var previews: some View {
-        ListFavoriteTransactionView()
+        ListFavoriteTransactionView(cardNo: "", sourceNumber: "")
     }
 }

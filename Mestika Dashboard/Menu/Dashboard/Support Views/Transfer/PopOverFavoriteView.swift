@@ -9,6 +9,11 @@ import SwiftUI
 
 struct PopOverFavoriteView: View {
     
+    @StateObject var favoriteVM = FavoritesViewModel()
+    
+    var transferData: TransferOnUsModel
+    
+    @Binding var show: Bool
     @State var receivedName = "NOVI PAHMALIA"
     @State var receivedBank = "Mestika"
     @State var receivedRekening = "88091293900"
@@ -36,10 +41,10 @@ struct PopOverFavoriteView: View {
                     .padding(.horizontal, 20)
                     
                     VStack {
-                        TextField("Nama Kontak Penerima", text: $receivedName, onEditingChanged: { changed in
+                        TextField("Nama Kontak Penerima", text: .constant(transferData.destinationName), onEditingChanged: { changed in
                             print("\($receivedName)")
                         })
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .disabled(true)
                         .frame(height: 10)
                         .font(.system(size: 15, weight: .bold, design: .default))
                         .padding()
@@ -68,7 +73,7 @@ struct PopOverFavoriteView: View {
                         TextField("Bank", text: $receivedBank, onEditingChanged: { changed in
                             print("\($receivedBank)")
                         })
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .disabled(true)
                         .frame(height: 10)
                         .padding()
                         .font(.subheadline)
@@ -84,10 +89,10 @@ struct PopOverFavoriteView: View {
                             .fontWeight(.light)
                             .frame(width: 100)
                         
-                        TextField("No. Rekening", text: $receivedRekening, onEditingChanged: { changed in
+                        TextField("No. Rekening", text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
                             print("\($receivedRekening)")
                         })
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .disabled(true)
                         .frame(height: 10)
                         .padding()
                         .font(.subheadline)
@@ -97,20 +102,48 @@ struct PopOverFavoriteView: View {
                     .padding(.vertical, 5)
                     .padding(.horizontal)
                     
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: {
+                        
+                        // MARK: BODY
+                        let body: [String: Any] = [
+                            "bankAccountNumber" : "001",
+                            "bankName" : "MESTIKA",
+                            "name" : transferData.destinationName,
+                            "sourceNumber" : transferData.sourceNumber,
+                            "cardNo" : transferData.cardNo,
+                            "type" : transferData.transferType,
+                            "transferOnUs" : [
+                                "cardNo" : transferData.cardNo,
+                                "ref": transferData.ref,
+                                "nominal": transferData.amount,
+                                "currency": transferData.currency,
+                                "sourceNumber": transferData.sourceNumber,
+                                "destinationNumber": transferData.destinationNumber,
+                                "berita": "testing"
+                            ],
+                            "transactionDate" : "2020-01-10 10:20:57",
+                            "nominal" : transferData.amount,
+                            "nominalSign" : transferData.amount
+                        ]
+                        
+                        print("TRANSFER ON US body => \(body)")
+                        
+                        self.favoriteVM.transferOnUs(data: transferData) { result in
+                            print("Berhasil simpan ke favorite")
+                            self.show = false
+                        }
+                    }, label: {
                         Text("SIMPAN KE FAVORIT")
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         
                     })
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
-                    .padding(.top, 20)
-                    .padding(.bottom, 40)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 40)
                 }
             }
             .frame(width: UIScreen.main.bounds.width - 30, alignment: .top)
@@ -125,6 +158,6 @@ struct PopOverFavoriteView: View {
 
 struct PopOverFavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        PopOverFavoriteView()
+        PopOverFavoriteView(transferData: TransferOnUsModel(), show: .constant(false))
     }
 }

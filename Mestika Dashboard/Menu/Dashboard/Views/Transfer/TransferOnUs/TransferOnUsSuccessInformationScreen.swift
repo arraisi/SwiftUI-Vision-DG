@@ -29,14 +29,14 @@ struct TransferOnUsSuccessInformationScreen: View {
             VStack {
                 
                 FavoriteAppBar(barItems: AnyView(HStack(spacing: 20) {
-//                    Button(action: {
-//                        withAnimation(.easeIn) {
-//                            self.showPopover.toggle()
-//                        }
-//                    }, label: {
-//                        Image(systemName: "pin")
-//                            .foregroundColor(.white)
-//                    })
+                    Button(action: {
+                        withAnimation(.easeIn) {
+                            self.showPopover.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "pin")
+                            .foregroundColor(.white)
+                    })
                     
                     Button(action: {
                         self.uiImage = self.asUIImage()
@@ -79,8 +79,6 @@ struct TransferOnUsSuccessInformationScreen: View {
                         .cornerRadius(12)
                         .padding(.leading, 20)
                         .padding(.trailing, 10)
-      
-                    
                     Spacer(minLength: 0)
                 }
 
@@ -92,10 +90,8 @@ struct TransferOnUsSuccessInformationScreen: View {
             }
             
             if showPopover {
-                PopOverFavoriteView()
-                    .onTapGesture {
-                        self.showPopover.toggle()
-                    }
+                PopOverFavoriteView(transferData: transferData, show: self.$showPopover)
+                    .padding(30)
             }
         
         }

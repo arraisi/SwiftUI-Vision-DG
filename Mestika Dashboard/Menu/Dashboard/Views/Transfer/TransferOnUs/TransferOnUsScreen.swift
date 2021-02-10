@@ -9,13 +9,13 @@ import SwiftUI
 import BottomSheet
 
 struct TransferOnUsScreen: View {
-
+    
     @State var transferData = TransferOnUsModel()
     @State var transactionFrequency = ""
     @State var transactionVoucher = "Pilih Voucher"
     @State var destinationNumber = ""
     @State var amount = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", sourceNumber: "", noRekening: "", saldo: "0.0")
     
     @State private var showDialogConfirmation = false
     @State private var showDialogSelectAccount = false
@@ -44,99 +44,99 @@ struct TransferOnUsScreen: View {
     var _listFrequency = ["Sekali","Berkali-kali"]
     
     var body: some View {
-            ZStack(alignment: .top, content: {
-                VStack {
-                    Color(hex: "#F6F8FB")
-                        .edgesIgnoringSafeArea(.all)
-                }
-                VStack {
-                    ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
-                        VStack {
-                            noRekeningCard
-                            nominalCard
-                            
-                            calendarCard
-                            frekuensiTransaksiCard
-                            chooseVoucherCard
-                            notesCard
-                            
-                            Spacer()
-                            
-                            NavigationLink(
-                                destination: TransferOnUsConfirmationScreen().environmentObject(transferData),
-                                isActive: self.$routeConfirmation) {
-                                EmptyView()
-                            }
-                            
-                            VStack {
-                                Button(action: {
-                                    //                                    MARK: To be replaced with actual data
-                                                                        self.transferData.destinationName = "JOHN LENNON"
-                                    
-                                    UIApplication.shared.endEditing()
-                                    let amount = Int(self.transferData.amount) ?? 0
-                                    let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
-                                    
-                                    if (amount <= self.minLimit) {
-                                        self.showDialogMinReached = true
-                                    } else if (amount <= self.maxLimit && amount <= myCredit) {
-                                        self.routeConfirmation = true
-                                    } else if (amount > myCredit ) {
-                                        self.showDialogMinReached = true
-                                    } else {
-                                        self.showDialogMaxReached = true
-                                    }
-
-                                }, label: {
-                                    Text("KONFIRMASI TRANSFER")
-                                        .foregroundColor(.white)
-                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                        .font(.system(size: 13))
-                                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                                })
-                                .disabled(disabledButton)
-                                .background(Color(hex: disabledButton ? "#CBD1D9" : "#232175"))
-                                .cornerRadius(12)
-                                .padding(.leading, 20)
-                                .padding(.trailing, 10)
-                                .padding(.bottom)
-                            }
-                        }
-                    })
-                }
-                
-                if (self.showDialogSelectAccount || self.showDialogConfirmation || self.showDialogMinReached || self.showDialogMaxReached) {
-                    ModalOverlay(tapAction: { withAnimation {
-                        self.showDialogSelectAccount = false
-                        self.showDialogConfirmation = false
-                        self.showDialogMaxReached = false
-                        self.showDialogMinReached = false
-                    }})
+        ZStack(alignment: .top, content: {
+            VStack {
+                Color(hex: "#F6F8FB")
                     .edgesIgnoringSafeArea(.all)
-                }
-            })
-            .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
-            .onAppear() {
-                self.transferData = TransferOnUsModel()
-                self.transactionFrequency = _listFrequency[0]
-                self.transferData.transactionFrequency = _listFrequency[0]
-                self.getProfile()
             }
-            .onTapGesture() {
-                UIApplication.shared.endEditing()
+            VStack {
+                ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+                    VStack {
+                        noRekeningCard
+                        nominalCard
+                        
+                        calendarCard
+                        frekuensiTransaksiCard
+                        chooseVoucherCard
+                        notesCard
+                        
+                        Spacer()
+                        
+                        NavigationLink(
+                            destination: TransferOnUsConfirmationScreen().environmentObject(transferData),
+                            isActive: self.$routeConfirmation) {
+                            EmptyView()
+                        }
+                        
+                        VStack {
+                            Button(action: {
+                                //                                    MARK: To be replaced with actual data
+                                self.transferData.destinationName = "JOHN LENNON"
+                                
+                                UIApplication.shared.endEditing()
+                                let amount = Int(self.transferData.amount) ?? 0
+                                let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
+                                
+                                if (amount <= self.minLimit) {
+                                    self.showDialogMinReached = true
+                                } else if (amount <= self.maxLimit && amount <= myCredit) {
+                                    self.routeConfirmation = true
+                                } else if (amount > myCredit ) {
+                                    self.showDialogMinReached = true
+                                } else {
+                                    self.showDialogMaxReached = true
+                                }
+                                
+                            }, label: {
+                                Text("KONFIRMASI TRANSFER")
+                                    .foregroundColor(.white)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .font(.system(size: 13))
+                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            })
+                            .disabled(disabledButton)
+                            .background(Color(hex: disabledButton ? "#CBD1D9" : "#232175"))
+                            .cornerRadius(12)
+                            .padding(.leading, 20)
+                            .padding(.trailing, 10)
+                            .padding(.bottom)
+                        }
+                    }
+                })
             }
-            .bottomSheet(isPresented: $showDialogConfirmation, height: 300) {
-                bottomSheetCard
+            
+            if (self.showDialogSelectAccount || self.showDialogConfirmation || self.showDialogMinReached || self.showDialogMaxReached) {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showDialogSelectAccount = false
+                    self.showDialogConfirmation = false
+                    self.showDialogMaxReached = false
+                    self.showDialogMinReached = false
+                }})
+                .edgesIgnoringSafeArea(.all)
             }
-            .popup(isPresented: $showDialogSelectAccount, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
-                modalSelectBankAccount()
-            }
-            .popup(isPresented: $showDialogMaxReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
-                modalMaxReached()
-            }
-            .popup(isPresented: $showDialogMinReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
-                modalMinReached()
-            }
+        })
+        .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
+        .onAppear() {
+            self.transferData = TransferOnUsModel()
+            self.transactionFrequency = _listFrequency[0]
+            self.transferData.transactionFrequency = _listFrequency[0]
+            self.getProfile()
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .bottomSheet(isPresented: $showDialogConfirmation, height: 300) {
+            bottomSheetCard
+        }
+        .popup(isPresented: $showDialogSelectAccount, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalSelectBankAccount()
+        }
+        .popup(isPresented: $showDialogMaxReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMaxReached()
+        }
+        .popup(isPresented: $showDialogMinReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMinReached()
+        }
     }
     
     var noRekeningCard: some View {
@@ -153,18 +153,18 @@ struct TransferOnUsScreen: View {
             
             VStack {
                 TextField("Rekening", text: $destinationNumber, onEditingChanged: {_ in })
-                .onReceive(destinationNumber.publisher.collect()) {
-                    self.destinationNumber = String($0.prefix(16))
-                    self.transferData.destinationNumber = destinationNumber
-                    validateForm()
-                }
-                .keyboardType(.numberPad)
-                .frame(height: 10)
-                .font(.subheadline)
-                .padding()
-                .background(Color(hex: "#F6F8FB"))
-                .cornerRadius(15)
-                .padding(.horizontal, 20)
+                    .onReceive(destinationNumber.publisher.collect()) {
+                        self.destinationNumber = String($0.prefix(16))
+                        self.transferData.destinationNumber = destinationNumber
+                        validateForm()
+                    }
+                    .keyboardType(.numberPad)
+                    .frame(height: 10)
+                    .font(.subheadline)
+                    .padding()
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                    .padding(.horizontal, 20)
                 
                 if isShowName {
                     HStack {
@@ -207,16 +207,16 @@ struct TransferOnUsScreen: View {
                     .fontWeight(.bold)
                 
                 TextField("0", text: self.$amount, onEditingChanged: {_ in })
-                .onReceive(amount.publisher.collect()) {
-                    let amountString = String($0.prefix(13))
-                    let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                    self.amount = cleanAmount.thousandSeparator()
-                    self.transferData.amount = cleanAmount
-                    validateForm()
-                }
-                .foregroundColor(Color(hex: "#232175"))
-                .font(.system(size: 30, weight: .bold, design: .default))
-                .keyboardType(.numberPad)
+                    .onReceive(amount.publisher.collect()) {
+                        let amountString = String($0.prefix(13))
+                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                        self.amount = cleanAmount.thousandSeparator()
+                        self.transferData.amount = cleanAmount
+                        validateForm()
+                    }
+                    .foregroundColor(Color(hex: "#232175"))
+                    .font(.system(size: 30, weight: .bold, design: .default))
+                    .keyboardType(.numberPad)
                 
                 Spacer()
             }
@@ -249,7 +249,7 @@ struct TransferOnUsScreen: View {
                 .padding(.horizontal, 25)
                 .padding(.bottom, 10)
             
-//            ListBankAccountView()
+            //            ListBankAccountView()
             bankAccountCard
                 .padding(.bottom, 25)
             
@@ -307,7 +307,7 @@ struct TransferOnUsScreen: View {
                 }
                 
                 Spacer()
-
+                
                 Image("ic_calendar_dark")
             }
             .padding()
@@ -626,10 +626,11 @@ struct TransferOnUsScreen: View {
                         .padding(.horizontal, 25)
                         .padding(.bottom, 10)
                 }
-//                .background(Color(hex: "#FF00FF"))
+                //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-                    self.transferData.sourceNumber = data.noRekening
+                    self.transferData.cardNo = data.noRekening
+                    self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.namaRekening
                     print(data.noRekening)
                     self.showDialogSelectAccount = false
@@ -662,10 +663,15 @@ struct TransferOnUsScreen: View {
                 print("Name \(self.profileVM.name)")
                 print(self.profileVM.balance)
                 self.transferData.username = self.profileVM.name
+                
                 self.listBankAccount.removeAll()
-                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                
+                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.cardName, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                
                 self.selectedAccount = self.listBankAccount[0]
-                self.transferData.sourceNumber = selectedAccount.noRekening
+                
+                self.transferData.cardNo = selectedAccount.noRekening
+                self.transferData.sourceNumber = selectedAccount.sourceNumber
                 self.transferData.sourceAccountName = selectedAccount.namaRekening
             }
         }

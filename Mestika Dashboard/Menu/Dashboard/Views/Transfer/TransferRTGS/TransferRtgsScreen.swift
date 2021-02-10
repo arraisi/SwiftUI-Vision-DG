@@ -22,7 +22,7 @@ struct TransferRtgsScreen: View {
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", sourceNumber: "", noRekening: "", saldo: "0.0")
     @State var listBankAccount: [BankAccount] = []
     
     // Variable Amount
@@ -703,7 +703,8 @@ struct TransferRtgsScreen: View {
 //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-                    self.transferData.sourceNumber = data.noRekening
+                    self.transferData.cardNo = data.noRekening
+                    self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.namaRekening
                     print(data.noRekening)
                     self.showDialogSelectAccount = false
@@ -736,9 +737,10 @@ struct TransferRtgsScreen: View {
                 print(self.profileVM.balance)
                 self.transferData.username = self.profileVM.name
                 self.listBankAccount.removeAll()
-                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
                 self.selectedAccount = self.listBankAccount[0]
-                self.transferData.sourceNumber = selectedAccount.noRekening
+                self.transferData.cardNo = selectedAccount.noRekening
+                self.transferData.sourceNumber = selectedAccount.sourceNumber
                 self.transferData.sourceAccountName = selectedAccount.namaRekening
             }
         }

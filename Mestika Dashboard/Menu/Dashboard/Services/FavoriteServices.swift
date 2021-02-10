@@ -18,8 +18,8 @@ class FavoriteServices {
         
         // MARK: BODY
         let body: [String: Any] = [
-            "cardNo" : "5058200000000758",
-            "sourceNumber" : "87000000126"
+            "cardNo" : cardNo,
+            "sourceNumber" : sourceNumber
         ]
         
         print("body => \(body)")
@@ -126,7 +126,7 @@ class FavoriteServices {
     }
     
     // MARK: - REMOVE FAVORITE
-    func remove(data: FavoriteModelElement, completion: @escaping(Result<Int, ErrorResult>) -> Void) {
+    func remove(data: FavoriteModelElement, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
         // MARK: BODY
         let body: [String: Any] = [
@@ -154,12 +154,24 @@ class FavoriteServices {
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("RESPONSE SERVICE REMOVE FAVORITE : CODE \(httpResponse.statusCode)")
-                if (httpResponse.statusCode == 200) {
-                    completion(.success(httpResponse.statusCode))
-                    
-                } else {
-                    // if we're still here it means there was a problem
-                    print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                
+                guard let data = data, error == nil else {
+                    return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+                }
+                
+                // MARK : change model response.
+                let response = try? JSONDecoder().decode(Status.self, from: data)
+                
+                print(response?.code ?? "NO CODE")
+                
+                if let status = response {
+                    if status.code == "200 OK" || httpResponse.statusCode == 400  {
+                        completion(.success(status))
+                    } else {
+                        // if we're still here it means there was a problem
+                        print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    }
                 }
                 
                 if (httpResponse.statusCode == 404) {
@@ -176,25 +188,31 @@ class FavoriteServices {
     }
     
     // MARK: - SAVE FAVORITE
-    func save(requestData: FavoriteModelElement, completion: @escaping(Result<Int, ErrorResult>) -> Void) {
+    func save(data: TransferOnUsModel, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
         // MARK: BODY
         let body: [String: Any] = [
-            "bankAccountNumber" : requestData.bankAccountNumber,
-            "bankName" : requestData.bankName,
-            "name" : requestData.name,
-            "sourceNumber" : requestData.sourceNumber,
-            "cardNo" : requestData.cardNo,
-            "type" : requestData.type,
-            "transferOnUs" : requestData.transferOnUs as Any,
-            "transferOffUsSkn" : requestData.transferOffUsSkn as Any,
-            //            "transferOffUsRtgs" : requestData.transferOffUsRtgs,
-            "transactionDate" : requestData.transactionDate,
-            "nominal" : requestData.nominal,
-            "nominalSign" : requestData.nominalSign
+            "bankAccountNumber" : "001",
+            "bankName" : "MESTIKA",
+            "name" : data.destinationName,
+            "sourceNumber" : data.sourceNumber,
+            "cardNo" : data.cardNo,
+            "type" : data.transferType,
+            "transferOnUs" : [
+                "cardNo" : data.cardNo,
+                "ref": data.ref,
+                "nominal": data.amount,
+                "currency": data.currency,
+                "sourceNumber": data.sourceNumber,
+                "destinationNumber": data.destinationNumber,
+                "berita": "testing"
+            ],
+            "transactionDate" : "2020-01-10 10:20:57",
+            "nominal" : data.amount,
+            "nominalSign" : data.amount
         ]
         
-        print("body => \(body)")
+        print("TRANSFER ON US body => \(body)")
         
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
@@ -210,12 +228,23 @@ class FavoriteServices {
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("SAVE FAVORITE SERVICE RESULST : \(httpResponse.statusCode)")
                 
-                if (httpResponse.statusCode == 200) {
-                    completion(.success(httpResponse.statusCode))
+                print("\nSAVE FAVORITE SERVICE RESULST : \(httpResponse.statusCode)\n")
+                
+                // MARK : change model response.
+                let response = try? JSONDecoder().decode(Status.self, from: data)
+                
+                print(response?.code ?? "NO CODE")
+                
+                if let status = response {
+                    if status.code == "200 OK" || httpResponse.statusCode == 400  {
+                        completion(.success(status))
+                    }
                 }
                 
                 if (httpResponse.statusCode == 404) {

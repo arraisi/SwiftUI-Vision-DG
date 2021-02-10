@@ -14,9 +14,9 @@ struct ListBankAccountView: View {
     @State private var showDialog = false
     
     var _listBankAccount = [
-        BankAccount(id: 1, namaRekening: "Rekening 01", noRekening: "9090123133", saldo: "430.000"),
-        BankAccount(id: 2, namaRekening: "Rekening 02", noRekening: "009012033", saldo: "200.000"),
-        BankAccount(id: 3, namaRekening: "Rekening 03", noRekening: "900912303", saldo: "0.0")
+        BankAccount(id: 1, namaRekening: "Rekening 01", sourceNumber: "", noRekening: "9090123133", saldo: "430.000"),
+        BankAccount(id: 2, namaRekening: "Rekening 02", sourceNumber: "", noRekening: "009012033", saldo: "200.000"),
+        BankAccount(id: 3, namaRekening: "Rekening 03", sourceNumber: "", noRekening: "900912303", saldo: "0.0")
     ]
     
     var body: some View {

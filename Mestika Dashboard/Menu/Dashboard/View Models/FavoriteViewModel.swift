@@ -126,4 +126,42 @@ class FavoritesViewModel : ObservableObject {
             
         }
     }
+    
+    func transferOnUs(data: TransferOnUsModel, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        FavoriteServices.shared.save(data: data) { result in
+            
+            switch result {
+            case .success( _):
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                
+                print("ERROR GET LIST FAVORITES-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(false)
+            }
+            
+        }
+    }
 }
