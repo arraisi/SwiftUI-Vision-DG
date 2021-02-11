@@ -1,15 +1,15 @@
 //
-//  FavoriteViewModel.swift
+//  FavoritViewModel.swift
 //  Mestika Dashboard
 //
-//  Created by Abdul R. Arraisi on 09/02/21.
+//  Created by Abdul R. Arraisi on 11/02/21.
 //
 
 import Foundation
 
-class FavoritesViewModel : ObservableObject {
+class FavoritViewModel : ObservableObject {
     @Published var isLoading: Bool = false
-    @Published var favorites = [FavoriteModelElement]()
+    @Published var favorites = [FavoritModelElement]()
     
     @Published var errorMessage: String = ""
     
@@ -19,7 +19,7 @@ class FavoritesViewModel : ObservableObject {
             self.isLoading = true
         }
         
-        FavoriteServices.shared.getList(cardNo: cardNo, sourceNumber: sourceNumber) { result in
+        FavoritService.shared.getList(cardNo: cardNo, sourceNumber: sourceNumber) { result in
             
             switch result {
             case .success(let response):
@@ -52,13 +52,13 @@ class FavoritesViewModel : ObservableObject {
         }
     }
     
-    func update(data: FavoriteModelElement, name: String, completion: @escaping (Bool) -> Void) {
+    func update(data: FavoritModelElement, name: String, completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        FavoriteServices.shared.update(data: data, name: name) { result in
+        FavoritService.shared.update(data: data, name: name) { result in
             
             switch result {
             case .success(let status):
@@ -89,13 +89,13 @@ class FavoritesViewModel : ObservableObject {
         }
     }
     
-    func remove(data: FavoriteModelElement, completion: @escaping (Bool) -> Void) {
+    func remove(data: FavoritModelElement, completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        FavoriteServices.shared.remove(data: data) { result in
+        FavoritService.shared.remove(data: data) { result in
             
             switch result {
             case .success( _):
@@ -133,7 +133,7 @@ class FavoritesViewModel : ObservableObject {
             self.isLoading = true
         }
         
-        FavoriteServices.shared.save(data: data) { result in
+        FavoritService.shared.save(data: data) { result in
             
             switch result {
             case .success( _):

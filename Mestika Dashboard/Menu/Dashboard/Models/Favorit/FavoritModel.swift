@@ -1,5 +1,5 @@
 //
-//  FavoriteModel.swift
+//  FavoritModel.swift
 //  Mestika Dashboard
 //
 //  Created by Abdul R. Arraisi on 09/02/21.
@@ -8,12 +8,12 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
-//   let favoriteModel = try? newJSONDecoder().decode(FavoriteModel.self, from: jsonData)
+//   let favoritModel = try? newJSONDecoder().decode(FavoritModel.self, from: jsonData)
 
 import Foundation
 
-// MARK: - FavoriteModelElement
-struct FavoriteModelElement: Codable {
+// MARK: - FavoritModelElement
+struct FavoritModelElement: Codable {
     let id, bankAccountNumber, bankName, name: String
     let sourceNumber, cardNo, type: String
     let transferOnUs: TransferOnUs?
@@ -59,4 +59,4 @@ struct TransferOnUs: Codable {
     let nominal, ref, cardNo: String
 }
 
-typealias FavoriteModel = [FavoriteModelElement]
+typealias FavoritModel = [FavoritModelElement]

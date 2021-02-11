@@ -1,20 +1,20 @@
 //
-//  FavoriteServices.swift
+//  FavoritService.swift
 //  Mestika Dashboard
 //
-//  Created by Abdul R. Arraisi on 09/02/21.
+//  Created by Abdul R. Arraisi on 11/02/21.
 //
 
 import Foundation
 
-class FavoriteServices {
+class FavoritService {
     
     private init() {}
     
-    static let shared = FavoriteServices()
+    static let shared = FavoritService()
     
     // MARK: - GET LIST FAVORITE
-    func getList(cardNo: String, sourceNumber: String, completion: @escaping(Result<[FavoriteModelElement], ErrorResult>) -> Void) {
+    func getList(cardNo: String, sourceNumber: String, completion: @escaping(Result<[FavoritModelElement], ErrorResult>) -> Void) {
         
         // MARK: BODY
         let body: [String: Any] = [
@@ -49,7 +49,7 @@ class FavoriteServices {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let favoriteListResponse = try? JSONDecoder().decode([FavoriteModelElement].self, from: data)
+                    let favoriteListResponse = try? JSONDecoder().decode([FavoritModelElement].self, from: data)
                     print("Favorites Count \(String(describing: favoriteListResponse?.count))\n\n")
                     
                     if let _response = favoriteListResponse {
@@ -75,7 +75,7 @@ class FavoriteServices {
     }
     
     // MARK: - REMOVE FAVORITE
-    func update(data: FavoriteModelElement, name: String, completion: @escaping(Result<Int, ErrorResult>) -> Void) {
+    func update(data: FavoritModelElement, name: String, completion: @escaping(Result<Int, ErrorResult>) -> Void) {
         
         // MARK: BODY
         let body: [String: Any] = [
@@ -126,7 +126,7 @@ class FavoriteServices {
     }
     
     // MARK: - REMOVE FAVORITE
-    func remove(data: FavoriteModelElement, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+    func remove(data: FavoritModelElement, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
         // MARK: BODY
         let body: [String: Any] = [

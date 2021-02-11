@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PopOverFavoriteView: View {
     
-    @StateObject var favoriteVM = FavoritesViewModel()
+    @StateObject var favoritVM = FavoritViewModel()
     
     var transferData: TransferOnUsModel
     
@@ -128,7 +128,7 @@ struct PopOverFavoriteView: View {
                         
                         print("TRANSFER ON US body => \(body)")
                         
-                        self.favoriteVM.transferOnUs(data: transferData) { result in
+                        self.favoritVM.transferOnUs(data: transferData) { result in
                             print("Berhasil simpan ke favorite")
                             self.show = false
                         }
