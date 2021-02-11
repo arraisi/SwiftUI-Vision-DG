@@ -17,7 +17,8 @@ struct TransferRtgsDestination: View {
     @State private var destinationType: String = "Tipe Penerima"
     
     // Variable Citizen Ship
-    @State private var citizenShipCtrl: String = ""
+    var _listCitizenShip = ["WNI", "WNA"]
+    @State private var citizenShipCtrl: String = "Kewarganegaraan"
     
     // Variable Province
     var _listProvince = ["Jawa Barat", "Jawa Timur", "Jawa Tengah"]
@@ -32,6 +33,9 @@ struct TransferRtgsDestination: View {
     
     // Variable Route
     @State private var isRouteTransaction: Bool = false
+    
+    // Variable Disable
+    @State private var disabledButton = true
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -109,7 +113,8 @@ struct TransferRtgsDestination: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
-                        .background(Color(hex: "#232175"))
+                        .disabled(disabledButton)
+                        .background(disabledButton ? Color.gray : Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                     }
@@ -168,6 +173,7 @@ struct TransferRtgsDestination: View {
                         Button(action: {
                             self.destinationType = data
                             self.transferData.typeDestination = data
+                            validateForm()
                         }) {
                             Text(data)
                                 .font(.custom("Montserrat-Regular", size: 12))
@@ -187,18 +193,35 @@ struct TransferRtgsDestination: View {
     var citizenshipCard: some View {
         VStack {
             HStack {
-                TextField("Kewarganegaraan", text: self.$citizenShipCtrl, onEditingChanged: { changed in
-                    self.transferData.citizenship = self.citizenShipCtrl
-                })
-                .font(.subheadline)
+                VStack(alignment: .leading) {
+                    Text(citizenShipCtrl)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .fontWeight(.light)
+                }
                 .padding()
+                
+                Spacer()
+                Menu {
+                    ForEach(self._listCitizenShip, id: \.self) { data in
+                        Button(action: {
+                            self.citizenShipCtrl = data
+                            self.transferData.citizenship = data
+                            validateForm()
+                        }) {
+                            Text(data)
+                                .font(.custom("Montserrat-Regular", size: 12))
+                        }
+                    }
+                } label: {
+                    Image("ic_expand").padding()
+                }
             }
         }
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
-        .padding()
     }
     
     var provinceCard: some View {
@@ -282,6 +305,7 @@ struct TransferRtgsDestination: View {
             VStack {
                 TextField("Tulis alamat penerima", text: self.$addressCtrl, onEditingChanged: { changed in
                     self.transferData.addressOfDestination = self.addressCtrl
+                    validateForm()
                 })
                 .lineLimit(5)
                 .multilineTextAlignment(.leading)
@@ -298,6 +322,22 @@ struct TransferRtgsDestination: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .padding()
+    }
+    
+    func validateForm() {
+        if (self.transferData.transactionType == "SKN") {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
+                disabledButton = false
+            } else {
+                disabledButton = true
+            }
+        } else {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl != "") {
+                disabledButton = false
+            } else {
+                disabledButton = true
+            }
+        }
     }
 }
 

@@ -11,7 +11,7 @@ import BottomSheet
 struct TransferOnUsScreen: View {
     
     @State var transferData = TransferOnUsModel()
-    @State var transactionFrequency = ""
+    @State var transactionFrequency = "Pilih Frekuensi Transaksi"
     @State var transactionVoucher = "Pilih Voucher"
     @State var destinationNumber = ""
     @State var amount = ""
@@ -21,6 +21,7 @@ struct TransferOnUsScreen: View {
     @State private var showDialogSelectAccount = false
     @State private var showDialogMaxReached = false
     @State private var showDialogMinReached = false
+    @State private var showDialogMinTransaction: Bool = false
     
     @State private var isShowName: Bool = false
     @State private var showName: String = "JHON LENNON"
@@ -77,9 +78,11 @@ struct TransferOnUsScreen: View {
                                 let amount = Int(self.transferData.amount) ?? 0
                                 let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                                 
-                                if (amount <= self.minLimit) {
-                                    self.showDialogMinReached = true
+                                if (amount < self.minLimit) {
+                                    self.showDialogMinTransaction = true
                                 } else if (amount <= self.maxLimit && amount <= myCredit) {
+                                    self.transferData.transactionFrequency = transactionFrequency
+                                    self.transferData.transactionVoucher = transactionVoucher
                                     self.routeConfirmation = true
                                 } else if (amount > myCredit ) {
                                     self.showDialogMinReached = true
@@ -105,8 +108,9 @@ struct TransferOnUsScreen: View {
                 })
             }
             
-            if (self.showDialogSelectAccount || self.showDialogConfirmation || self.showDialogMinReached || self.showDialogMaxReached) {
+            if (self.showDialogSelectAccount || self.showDialogConfirmation || self.showDialogMinReached || self.showDialogMaxReached || self.showDialogMinTransaction) {
                 ModalOverlay(tapAction: { withAnimation {
+                    self.showDialogMinTransaction = false
                     self.showDialogSelectAccount = false
                     self.showDialogConfirmation = false
                     self.showDialogMaxReached = false
@@ -118,8 +122,6 @@ struct TransferOnUsScreen: View {
         .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
         .onAppear() {
             self.transferData = TransferOnUsModel()
-            self.transactionFrequency = _listFrequency[0]
-            self.transferData.transactionFrequency = _listFrequency[0]
             self.getProfile()
         }
         .onTapGesture() {
@@ -136,6 +138,9 @@ struct TransferOnUsScreen: View {
         }
         .popup(isPresented: $showDialogMinReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
             modalMinReached()
+        }
+        .popup(isPresented: $showDialogMinTransaction, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMinTransaction()
         }
     }
     
@@ -154,7 +159,7 @@ struct TransferOnUsScreen: View {
             VStack {
                 TextField("Rekening", text: $destinationNumber, onEditingChanged: {_ in })
                     .onReceive(destinationNumber.publisher.collect()) {
-                        self.destinationNumber = String($0.prefix(16))
+                        self.destinationNumber = String($0.prefix(11))
                         self.transferData.destinationNumber = destinationNumber
                         validateForm()
                     }
@@ -483,6 +488,59 @@ struct TransferOnUsScreen: View {
         }
     }
     
+    func modalMinTransaction() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_limit_min")
+                .resizable()
+                .frame(width: 127, height: 81)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text(NSLocalizedString("Transaksi ada kurang dari minimum transaksi.", comment: ""))
+                .font(.custom("Montserrat-SemiBold", size: 18))
+                .foregroundColor(.red)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text(NSLocalizedString("Transaksi minimum Rp. \(self.minLimit),- . Silahkan mengganti nominal transaksi.", comment: ""))
+                .font(.custom("Montserrat-Light", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("UBAH NOMINAL")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 10)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("BATALKAN TRANSAKSI")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
     func modalMinReached() -> some View {
         VStack(alignment: .leading) {
             Image("ic_limit_min")
@@ -643,16 +701,13 @@ struct TransferOnUsScreen: View {
     }
     
     func validateForm() {
-        if (self.transferData.destinationNumber.count == 16 &&
-                self.transferData.amount != "" &&
-                self.transferData.transactionDate != "" &&
-                self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi") {
-            disabledButton = false
+        if (self.destinationNumber.count == 11) {
             self.isShowName = true
+        }
+        
+        if (self.destinationNumber.count == 11 && self.amount != "" && self.transactionFrequency != "Pilih Frekuensi Transaksi" && self.transactionVoucher != "Pilih Voucher") {
+            disabledButton = false
         } else {
-            if (self.transferData.transactionVoucher == "Pilih Voucher") {
-                self.transferData.transactionVoucher = "-"
-            }
             disabledButton = true
         }
     }

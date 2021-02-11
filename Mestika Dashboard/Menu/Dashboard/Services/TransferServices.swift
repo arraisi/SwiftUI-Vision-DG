@@ -6,28 +6,44 @@
 //
 
 import Foundation
+import Combine
+import SwiftyRSA
 
 class TransferServices {
     private init() {}
     static let shared = TransferServices()
     
+    func encryptPassword(password: String) -> String {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: password, using: .utf8)
+        
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        _ = encrypted.data
+        let base64String = encrypted.base64String
+        
+        print("Encript : \(base64String)")
+        
+        return base64String
+        //        self.registerData.password = base64String
+    }
+    
     // MARK: - POST TRANSFER ONUS
     func transferOnUs(transferData: TransferOnUsModel,
-                      completion: @escaping(Result<TransferOnUsResponse, NetworkError>) -> Void) {
+                      completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "cardNo": "5058200000000758",
+            "cardNo": transferData.cardNo,
             "ref": "1",
-            "nominal": "500000",
+            "nominal": transferData.amount,
             "currency": "360",
-            "sourceNumber": "87000000126",
-            "destinationNumber": "87000000142",
-            "berita": "testing",
-            "pin": "pin"
+            "sourceNumber": transferData.sourceNumber,
+            "destinationNumber": transferData.destinationNumber,
+            "berita": transferData.notes,
+            "pin": encryptPassword(password: transferData.pin)
         ]
         
         guard let url = URL.urlTransferOverbooking() else {
-            return completion(.failure(.badUrl))
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         var request = URLRequest(url)
@@ -42,25 +58,30 @@ class TransferServices {
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
-            completion(.failure(.decodingError))
+            completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
         }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             guard let data = data, error == nil else {
-                return completion(.failure(.noData))
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
-            
-            let response = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
-            }
-            
-            if response == nil {
-                completion(.failure(.decodingError))
-            } else {
-                completion(.success(response!))
+                
+                if (httpResponse.statusCode == 200) {
+                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    completion(.success(transferResponse!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()
@@ -71,7 +92,7 @@ class TransferServices {
                       completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "ref": "",
+            "ref": "1",
             "cardNo": transferData.sourceNumber,
             "nominal": transferData.amount,
             "currency": "360",
@@ -89,7 +110,7 @@ class TransferServices {
             "addressBeneficiary2": "BANDUNG",
             "addressBeneficiary3": "",
             "typeOfBeneficiary": transferData.typeDestination,
-            "pin": transferData.pin
+            "pin": encryptPassword(password: transferData.pin)
         ]
         
         guard let url = URL.urlTransferRtgs() else {
@@ -128,6 +149,10 @@ class TransferServices {
                 if (httpResponse.statusCode == 401) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()
@@ -145,13 +170,13 @@ class TransferServices {
             "clearingCode": transferData.kliringCode,
             "currency": "360",
             "description": transferData.notes,
-            "destinationBankCode": transferData.combinationBankName,
+            "destinationBankCode": "123",
             "digitSign": "C",
             "flagResidenceCreditur": "R",
             "flagResidenceDebitur": "R",
             "flagWargaNegara": "W",
             "nominal": transferData.amount,
-            "pin": transferData.pin,
+            "pin": encryptPassword(password: transferData.pin),
             "provinceCode": "1234",
             "ref": "",
             "typeOfBeneficiary": transferData.typeDestination,
@@ -194,6 +219,10 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }

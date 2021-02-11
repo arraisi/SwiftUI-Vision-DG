@@ -32,10 +32,21 @@ class TransferViewModel : ObservableObject {
             case .failure(let error):
                 print("ERROR-->")
                 print(error)
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
                 }
-                self.message = "Internal Server Error"
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                default:
+                    self.message = "Internal Server Error"
+                }
                 completion(false)
             }
         }
@@ -69,6 +80,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 401):
                     self.code = "401"
                     self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -105,6 +119,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 401):
                     self.code = "401"
                     self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
                 default:
                     self.message = "Internal Server Error"
                 }

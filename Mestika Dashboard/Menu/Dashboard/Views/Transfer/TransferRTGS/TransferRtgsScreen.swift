@@ -53,6 +53,9 @@ struct TransferRtgsScreen: View {
     // Variable Route
     @State private var isRouteTransaction: Bool = false
     
+    // Variable Date
+    @State var date = Date()
+    
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -78,13 +81,15 @@ struct TransferRtgsScreen: View {
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
-                            if (amount <= self.minLimit) {
+                            if (amount < self.minLimit) {
                                 self.showDialogMinTransaction = true
                             } else if (amount <= self.maxLimit && amount <= myCredit) {
                                 
                                 if (self.transferData.transactionType == "Online") {
                                     self.showDialogConfirmation = true
                                 } else {
+                                    self.transferData.destinationNumber = self.noRekeningCtrl
+                                    self.transferData.transactionType = self.transferType
                                     print("OKE")
                                     self.isRouteTransaction = true
                                 }
@@ -149,8 +154,8 @@ struct TransferRtgsScreen: View {
         .onAppear {
             self.transferData = TransferOffUsModel()
             self.transferType = _listTransferType[0]
-            self.transactionFrequency = _listFrequency[0]
             self.transferData.transactionFrequency = _listFrequency[0]
+            self.transferData.transactionVoucher = _listVoucher[0]
             self.transferData.transactionType = _listTransferType[0]
             getProfile()
             getListBank()
@@ -358,7 +363,8 @@ struct TransferRtgsScreen: View {
                 
                 Spacer()
                 
-                Image("ic_calendar_dark")
+                DatePicker("", selection: self.$date, in: ...Date(), displayedComponents: .date)
+                    .labelsHidden()
             }
             .padding()
         }
@@ -554,17 +560,19 @@ struct TransferRtgsScreen: View {
                 .padding(.bottom, 20)
             
             VStack {
-                NavigationLink(destination: TransferRtgsConfirmation().environmentObject(transferData), label: {
-                    Text("KONFIRMASI TRANSFER")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                })
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.leading, 20)
-                .padding(.trailing, 10)
+                NavigationLink(
+                    destination: TransferRtgsConfirmation().environmentObject(transferData),
+                    label: {
+                        Text("KONFIRMASI TRANSFER")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    })
+                    .background(Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 10)
             }
             .padding(.bottom, 20)
         }
@@ -785,14 +793,9 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     func validateForm() {
-        if (self.transferData.destinationNumber.count == 16 &&
-                self.transferData.amount != "" &&
-                self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi") {
+        if (self.noRekeningCtrl.count == 16 && self.amount != "" && self.transactionFrequency != "Pilih Frekuensi Transaksi" && self.transactionVoucher != "Pilih Voucher") {
             disabledButton = false
         } else {
-            if (self.transferData.transactionVoucher == "Pilih Voucher") {
-                self.transferData.transactionVoucher = "-"
-            }
             disabledButton = true
         }
     }
@@ -821,6 +824,9 @@ struct TransferRtgsScreen: View {
             if success {
                 print("SUCCESS")
                 self.bankSelector = self.referenceVM._listBank[0].bankName
+                self.transferData.bankName = self.referenceVM._listBank[0].bankName
+                self.transferData.destinationBankCode = self.referenceVM._listBank[0].swiftCode
+                self.transferData.combinationBankName = self.referenceVM._listBank[0].combinationName
                 print(self.referenceVM._listBank.count)
             }
             

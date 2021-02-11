@@ -54,7 +54,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text("Masukkan nomor akun / KTP dan PIN ATM Anda yang sudah terdaftar")
+                Text("Masukkan nomor akun / KTP dan PIN Transaksi Anda yang sudah terdaftar")
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -81,26 +81,32 @@ struct FormInputAtmPinForgotPasswordView: View {
                 VStack {
                     HStack {
                         
-                        if (showPassword) {
-                            TextField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
-                                .keyboardType(.numberPad)
-                                .onReceive(pinAtmCtrl.publisher.collect()) {
-                                    self.pinAtmCtrl = String($0.prefix(6))
-                                }
-                        } else {
-                            SecureField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
-                                .keyboardType(.numberPad)
-                                .onReceive(pinAtmCtrl.publisher.collect()) {
-                                    self.pinAtmCtrl = String($0.prefix(6))
-                                }
-                        }
+//                        if (showPassword) {
+//                            TextField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
+//                                .keyboardType(.numberPad)
+//                                .onReceive(pinAtmCtrl.publisher.collect()) {
+//                                    self.pinAtmCtrl = String($0.prefix(6))
+//                                }
+//                        } else {
+//                            SecureField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
+//                                .keyboardType(.numberPad)
+//                                .onReceive(pinAtmCtrl.publisher.collect()) {
+//                                    self.pinAtmCtrl = String($0.prefix(6))
+//                                }
+//                        }
                         
-                        Button(action: {
-                            self.showPassword.toggle()
-                        }, label: {
-                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
-                                .foregroundColor(Color(hex: "#3756DF"))
-                        })
+                        SecureField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
+                            .keyboardType(.numberPad)
+                            .onReceive(pinAtmCtrl.publisher.collect()) {
+                                self.pinAtmCtrl = String($0.prefix(6))
+                            }
+                        
+//                        Button(action: {
+//                            self.showPassword.toggle()
+//                        }, label: {
+//                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+//                                .foregroundColor(Color(hex: "#3756DF"))
+//                        })
                     }
                     .frame(height: 25)
                     .padding()

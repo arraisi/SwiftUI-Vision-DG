@@ -158,6 +158,7 @@
 		529190BC25D3C8FC005A4898 /* BankReferenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */; };
 		529190C425D3C9A5005A4898 /* ReferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190C325D3C9A5005A4898 /* ReferenceService.swift */; };
 		529190CC25D3CB2D005A4898 /* ReferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */; };
+		5291914425D40154005A4898 /* FavoriteServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5291914325D40154005A4898 /* FavoriteServices.swift */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
 		52ADFE932557D99F00A1001F /* masterData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE772557D99F00A1001F /* masterData.json */; };
@@ -263,6 +264,7 @@
 		52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF125CBEA480012DDAB /* ProfileService.swift */; };
 		52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */; };
 		52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8889B258B16B100D637F2 /* JitsiView.swift */; };
+		52D8DBCE25D506BC004DF85E /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DBCD25D506BC004DF85E /* FavoriteViewModel.swift */; };
 		52DA20852551069C00CC048A /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20842551069C00CC048A /* Statement.swift */; };
 		52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */; };
 		52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */; };
@@ -304,7 +306,6 @@
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
 		C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */; };
-		C08758D225D2394E008ED730 /* FavoriteServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08758D125D2394E008ED730 /* FavoriteServices.swift */; };
 		C08758D825D2398E008ED730 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08758D725D2398E008ED730 /* FavoriteModel.swift */; };
 		C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0884939255BC12E00E2F927 /* ScanKTPView.swift */; };
 		C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* MyCard.swift */; };
@@ -322,7 +323,6 @@
 		C0A4F99E25528C0700566A11 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */; };
 		C0A4F9AC25529A9700566A11 /* ArrowDownShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */; };
 		C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */; };
-		C0A76A6625D247A4005BD60C /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A76A6525D247A4005BD60C /* FavoriteViewModel.swift */; };
 		C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */; };
 		C0AC4A6F2582116500848AC7 /* InformasiPerusahaanVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */; };
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
@@ -537,6 +537,7 @@
 		529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankReferenceResponse.swift; sourceTree = "<group>"; };
 		529190C325D3C9A5005A4898 /* ReferenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceService.swift; sourceTree = "<group>"; };
 		529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceViewModel.swift; sourceTree = "<group>"; };
+		5291914325D40154005A4898 /* FavoriteServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteServices.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE772557D99F00A1001F /* masterData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masterData.json; sourceTree = "<group>"; };
@@ -642,6 +643,7 @@
 		52CB5DF125CBEA480012DDAB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		52D8889B258B16B100D637F2 /* JitsiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiView.swift; sourceTree = "<group>"; };
+		52D8DBCD25D506BC004DF85E /* FavoriteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		52DA20842551069C00CC048A /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputOldPasswordScreen.swift; sourceTree = "<group>"; };
 		52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordScreen.swift; sourceTree = "<group>"; };
@@ -684,7 +686,6 @@
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
 		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
-		C08758D125D2394E008ED730 /* FavoriteServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteServices.swift; sourceTree = "<group>"; };
 		C08758D725D2398E008ED730 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 		C0884939255BC12E00E2F927 /* ScanKTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanKTPView.swift; sourceTree = "<group>"; };
 		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
@@ -702,7 +703,6 @@
 		C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowDownShape.swift; sourceTree = "<group>"; };
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
-		C0A76A6525D247A4005BD60C /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiKeluargaVerificationView.swift; sourceTree = "<group>"; };
 		C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiPerusahaanVerificationView.swift; sourceTree = "<group>"; };
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
@@ -824,6 +824,7 @@
 		0A566A0C25CA6E7A0008E752 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5291914325D40154005A4898 /* FavoriteServices.swift */,
 				0A566A0D25CA6E940008E752 /* TransferServices.swift */,
 				52CB5DF125CBEA480012DDAB /* ProfileService.swift */,
 				529190C325D3C9A5005A4898 /* ReferenceService.swift */,
@@ -934,6 +935,7 @@
 				5245F882253FE702002E8B53 /* Products */,
 				2D38FE9D601AF2B3B064B9C4 /* Pods */,
 				4F7E270C26BE9FEC99FBDF72 /* Frameworks */,
+				5291912825D3FF11005A4898 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1217,6 +1219,13 @@
 				C0BCCB2E2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift */,
 			);
 			path = "Nasabah Verification";
+			sourceTree = "<group>";
+		};
+		5291912825D3FF11005A4898 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		52ADFE762557D99F00A1001F /* Master */ = {
@@ -1645,7 +1654,6 @@
 			isa = PBXGroup;
 			children = (
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
-				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
 				C08758D625D2397C008ED730 /* Favorite */,
 				C06ED63625D0F27000F68FC1 /* Account */,
 				522101AF25C9213100C9566A /* Transfer */,
@@ -1754,6 +1762,7 @@
 		C0EB654B255E4D67009ADFFE /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				52D8DBCD25D506BC004DF85E /* FavoriteViewModel.swift */,
 				C0EB654C255E4D81009ADFFE /* DbViewModel.swift */,
 				0A566A0225CA68960008E752 /* TransferViewModel.swift */,
 				52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */,
@@ -2194,7 +2203,6 @@
 				C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */,
 				528AE2C225959B8C003AFD73 /* AppConstants.swift in Sources */,
 				C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */,
-				C0A76A6625D247A4005BD60C /* FavoriteViewModel.swift in Sources */,
 				064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,
@@ -2238,6 +2246,7 @@
 				0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */,
 				0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */,
 				526A81682560B2B200D614CB /* FirstOTPLoginView.swift in Sources */,
+				5291914425D40154005A4898 /* FavoriteServices.swift in Sources */,
 				FA486B1E25AF528D00EDBD88 /* Font+Extensions.swift in Sources */,
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
@@ -2308,10 +2317,10 @@
 				C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */,
 				06AD57002570CAC50071C4A9 /* WebView.swift in Sources */,
 				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,
-				C08758D225D2394E008ED730 /* FavoriteServices.swift in Sources */,
 				525950252553E03000C8CA5D /* FormNoRekeningPinForgotPasswordScreen.swift in Sources */,
 				52468AED25417B3B007518AE /* ListPurchasePaymentView.swift in Sources */,
 				52ADFFA92557DFDC00A1001F /* IncomingVideoCallView.swift in Sources */,
+				52D8DBCE25D506BC004DF85E /* FavoriteViewModel.swift in Sources */,
 				C0FE1E3E255A67D400B3AAE0 /* NumbersPadView.swift in Sources */,
 				526A81652560B2B200D614CB /* FirstATMLoginView.swift in Sources */,
 				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,

@@ -11,6 +11,8 @@ struct TransferRtgsConfirmation: View {
     
     @EnvironmentObject var transferData: TransferOffUsModel
     
+    @State var adminFeeCtrl = "Rp.0, (Gratis)"
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -200,44 +202,44 @@ struct TransferRtgsConfirmation: View {
                     .padding(.horizontal)
                     
                     // Province Form
-                    HStack(spacing: 20) {
-                        Text("Provinsi Penerima")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .frame(width: 100)
-                        
-                        TextField("Provinsi Penerima", text: self.$transferData.provinceOfDestination, onEditingChanged: { changed in
-                            print("\(self.$transferData.provinceOfDestination)")
-                        })
-                        .disabled(true)
-                        .frame(height: 20)
-                        .padding()
-                        .font(.subheadline)
-                        .background(Color(hex: "#F6F8FB"))
-                        .cornerRadius(15)
-                    }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
+//                    HStack(spacing: 20) {
+//                        Text("Provinsi Penerima")
+//                            .font(.caption)
+//                            .fontWeight(.light)
+//                            .frame(width: 100)
+//
+//                        TextField("Provinsi Penerima", text: self.$transferData.provinceOfDestination, onEditingChanged: { changed in
+//                            print("\(self.$transferData.provinceOfDestination)")
+//                        })
+//                        .disabled(true)
+//                        .frame(height: 20)
+//                        .padding()
+//                        .font(.subheadline)
+//                        .background(Color(hex: "#F6F8FB"))
+//                        .cornerRadius(15)
+//                    }
+//                    .padding(.vertical, 5)
+//                    .padding(.horizontal)
                     
                     // City Form
-                    HStack(spacing: 20) {
-                        Text("Kota Penerima")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .frame(width: 100)
-                        
-                        TextField("Kota Penerima", text: self.$transferData.cityOfDestination, onEditingChanged: { changed in
-                            print("\(self.$transferData.cityOfDestination)")
-                        })
-                        .disabled(true)
-                        .frame(height: 20)
-                        .padding()
-                        .font(.subheadline)
-                        .background(Color(hex: "#F6F8FB"))
-                        .cornerRadius(15)
-                    }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
+//                    HStack(spacing: 20) {
+//                        Text("Kota Penerima")
+//                            .font(.caption)
+//                            .fontWeight(.light)
+//                            .frame(width: 100)
+//
+//                        TextField("Kota Penerima", text: self.$transferData.cityOfDestination, onEditingChanged: { changed in
+//                            print("\(self.$transferData.cityOfDestination)")
+//                        })
+//                        .disabled(true)
+//                        .frame(height: 20)
+//                        .padding()
+//                        .font(.subheadline)
+//                        .background(Color(hex: "#F6F8FB"))
+//                        .cornerRadius(15)
+//                    }
+//                    .padding(.vertical, 5)
+//                    .padding(.horizontal)
                     
                     // Alamat Penerima Form
                     HStack(spacing: 20) {
@@ -334,8 +336,46 @@ struct TransferRtgsConfirmation: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Biaya Admin", text: self.$transferData.adminFee, onEditingChanged: { changed in
+                    TextField("Biaya Admin", text: self.$adminFeeCtrl, onEditingChanged: { changed in
 //                        print("\(self.$transferData.destinationNumber)")
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
+                // Total Transaksi Form
+                HStack(spacing: 20) {
+                    Text("Total Transaksi")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100)
+                    
+                    TextField("Total Transaksi", text: self.$transferData.amount, onEditingChanged: { changed in
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
+                // Waktu Transaksi
+                HStack(spacing: 20) {
+                    Text("Waktu Transaksi")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100)
+                    
+                    TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)

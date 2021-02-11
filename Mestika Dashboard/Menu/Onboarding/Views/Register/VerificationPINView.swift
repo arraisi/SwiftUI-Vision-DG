@@ -272,8 +272,8 @@ struct VerificationPINView: View {
             
             if (self.showingModal || self.showingModalBlockAtm) {
                 ModalOverlay(tapAction: { withAnimation {
-                                self.showingModal = false
-                    self.showingModalBlockAtm = false
+//                                self.showingModal = false
+//                    self.showingModalBlockAtm = false
                     
                 } })
             }
@@ -283,7 +283,7 @@ struct VerificationPINView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             createBottomFloater()
         }
         .popup(isPresented: $showingModalBlockAtm, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
