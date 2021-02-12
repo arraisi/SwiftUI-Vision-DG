@@ -415,6 +415,9 @@ struct TransferOnUsScreen: View {
             VStack {
                 MultilineTextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onCommit: {
                 })
+                .onReceive(notesCtrl.publisher.collect()) {
+                    self.notesCtrl = String($0.prefix(50))
+                }
             }
             .padding(.horizontal, 20)
             .padding(.top, 5)
