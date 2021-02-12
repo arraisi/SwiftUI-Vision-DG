@@ -12,14 +12,14 @@ struct LastFavoriteTransferScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @StateObject private var favoriteVM = FavoritesViewModel()
+    @StateObject private var favoritVM = FavoritViewModel()
     
     @State private var isLoading: Bool = false
     
     @State private var name: String = ""
     @State private var nameTextFieldDisabled: Bool = true
     
-    var data: FavoriteModelElement
+    var data: FavoritModelElement
     
     var body: some View {
         
@@ -64,7 +64,7 @@ struct LastFavoriteTransferScreen: View {
                                     
                                     self.isLoading.toggle()
                                     
-                                    self.favoriteVM.update(data: data, name: self.name) { result in
+                                    self.favoritVM.update(data: data, name: self.name) { result in
                                         self.nameTextFieldDisabled.toggle()
                                         self.isLoading.toggle()
                                     }
@@ -87,7 +87,7 @@ struct LastFavoriteTransferScreen: View {
                             
                             Button(action: {
                                 self.isLoading.toggle()
-                                self.favoriteVM.remove(data: data) { result in
+                                self.favoritVM.remove(data: data) { result in
                                     print("result remove favorite \(result)")
                                     if result {
                                         DispatchQueue.main.async {
@@ -144,7 +144,7 @@ struct LastFavoriteTransferScreen: View {
 //struct LastFavoriteTransferScreen_Previews: PreviewProvider {
 //    static var previews: some View {
 //
-//        let data = FavoriteModelElement
+//        let data = FavoritModelElement
 //
 //        LastFavoriteTransferScreen(dataFavorit: .constant(data))
 //    }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListTransactionFavoriteView: View {
     
-    @StateObject private var favoriteVM = FavoritesViewModel()
+    @StateObject private var favoritVM = FavoritViewModel()
     var cardNo = ""
     var sourceNumber = ""
     
@@ -36,7 +36,7 @@ struct ListTransactionFavoriteView: View {
                 .padding(.horizontal, 10)
                 .padding(.bottom, 20)
             
-            ForEach(self.favoriteVM.favorites, id: \.id) { data in
+            ForEach(self.favoritVM.favorites, id: \.id) { data in
                 
                 HStack {
                     ZStack {
@@ -75,7 +75,7 @@ struct ListTransactionFavoriteView: View {
     }
     
     func getList() {
-        self.favoriteVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
+        self.favoritVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
             print(result)
         })
     }
