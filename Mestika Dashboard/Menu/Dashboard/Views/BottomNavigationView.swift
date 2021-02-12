@@ -16,9 +16,14 @@ struct BottomNavigationView: View {
     
     @State var selected = 0
     
+    @State
+    
     @State var initialOffset: CGFloat?
     @State var offset: CGFloat?
     @State var viewIsShown: Bool = true
+    
+    @State var cardNo: String = ""
+    @State var sourceNumber: String = ""
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
@@ -36,11 +41,11 @@ struct BottomNavigationView: View {
                 }
                 
                 if (selected == 1) {
-                    TransferTabs(cardNo: self.$profileVM.cardNo, sourceNumber: self.$profileVM.accountNumber)
+                    TransferTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
                 }
                 
                 if (selected == 2) {
-                    FavoriteTabs(cardNo: self.$profileVM.cardNo, sourceNumber: self.$profileVM.accountNumber)
+                    FavoriteTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
                 }
                 
                 if (selected == 3) {
@@ -122,6 +127,8 @@ struct BottomNavigationView: View {
         .navigationBarHidden(true)
         .onAppear {
             self.profileVM.getProfile { result in
+                self.cardNo = self.profileVM.cardNo
+                self.sourceNumber = self.profileVM.accountNumber
                 print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
             }
         }

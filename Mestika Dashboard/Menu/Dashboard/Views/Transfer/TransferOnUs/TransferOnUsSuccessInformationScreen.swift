@@ -11,6 +11,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
 //    @EnvironmentObject var transferData: TransferOnUsModel
     var transferData: TransferOnUsModel
+    @EnvironmentObject var appState: AppState
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -63,6 +64,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                     
                     Button(
                         action: {
+                            self.presentationMode.wrappedValue.dismiss()
                             self.presentationMode.wrappedValue.dismiss()
                             self.presentationMode.wrappedValue.dismiss()
                             self.presentationMode.wrappedValue.dismiss()

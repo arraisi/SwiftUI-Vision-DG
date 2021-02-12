@@ -44,6 +44,11 @@ struct TransferOnUsScreen: View {
     var _listVoucher = ["VCR-50K","VCR-100K","VCR-150K","VCR-250K"]
     var _listFrequency = ["Sekali","Berkali-kali"]
     
+    // Variable Date
+    @State var date = Date()
+    
+    @State private var notesCtrl: String = ""
+    
     var body: some View {
         ZStack(alignment: .top, content: {
             VStack {
@@ -68,6 +73,7 @@ struct TransferOnUsScreen: View {
                             isActive: self.$routeConfirmation) {
                             EmptyView()
                         }
+//                        .isDetailLink(false)
                         
                         VStack {
                             Button(action: {
@@ -81,8 +87,10 @@ struct TransferOnUsScreen: View {
                                 if (amount < self.minLimit) {
                                     self.showDialogMinTransaction = true
                                 } else if (amount <= self.maxLimit && amount <= myCredit) {
+                                    self.transferData.notes = self.notesCtrl
                                     self.transferData.transactionFrequency = transactionFrequency
                                     self.transferData.transactionVoucher = transactionVoucher
+                                    self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     self.routeConfirmation = true
                                 } else if (amount > myCredit ) {
                                     self.showDialogMinReached = true
@@ -305,7 +313,7 @@ struct TransferOnUsScreen: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Sekarang")
+                    Text("Pilih Tanggal")
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
@@ -313,7 +321,8 @@ struct TransferOnUsScreen: View {
                 
                 Spacer()
                 
-                Image("ic_calendar_dark")
+                DatePicker("", selection: self.$date, in: Date()..., displayedComponents: .date)
+                    .labelsHidden()
             }
             .padding()
         }
@@ -404,12 +413,8 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Tulis keterangan Transaksi disini", text: self.$transferData.notes, onEditingChanged: { changed in
-                    
+                MultilineTextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onCommit: {
                 })
-                .lineLimit(5)
-                .multilineTextAlignment(.leading)
-                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
             }
             .padding(.horizontal, 20)
             .padding(.top, 5)
@@ -449,7 +454,7 @@ struct TransferOnUsScreen: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Ismail Haq")
+                    Text("\(self.transferData.destinationName)")
                         .font(.subheadline)
                     
                     HStack {
@@ -710,6 +715,14 @@ struct TransferOnUsScreen: View {
         } else {
             disabledButton = true
         }
+    }
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "in_ID")
+        return formatter
     }
     
     func getProfile() {

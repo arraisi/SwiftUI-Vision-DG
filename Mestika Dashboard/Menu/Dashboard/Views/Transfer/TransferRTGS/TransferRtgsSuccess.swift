@@ -48,6 +48,7 @@ struct TransferRtgsSuccess: View {
                             self.presentationMode.wrappedValue.dismiss()
                             self.presentationMode.wrappedValue.dismiss()
                             self.presentationMode.wrappedValue.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
                         },
                         label: {
                             Text("Kembali Ke Halaman Utama")
@@ -73,10 +74,8 @@ struct TransferRtgsSuccess: View {
             }
             
             if showPopover {
-//                PopOverFavoriteView(transferData: transferData)
-//                    .onTapGesture {
-//                        self.showPopover.toggle()
-//                    }
+                PopOverFavoriteTransactionOffUsView(transferData: transferData, show: self.$showPopover)
+                    .padding(30)
             }
             
         }
@@ -119,7 +118,7 @@ struct TransferRtgsSuccess: View {
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
-            Text("Transfer Sesama Berhasil")
+            Text("Transfer \(self.transferData.transferType) Berhasil")
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -129,7 +128,7 @@ struct TransferRtgsSuccess: View {
     var nominalInfo: some View {
         VStack {
             Text("Nominal Transaksi")
-                //                .font(.caption)
+                                .font(.caption)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             HStack(alignment: .top) {
@@ -147,7 +146,7 @@ struct TransferRtgsSuccess: View {
     var destinationInfo: some View {
         VStack(alignment: .leading) {
             Text("Ke")
-                //                .font(.caption2)
+                                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             Text(self.transferData.destinationName.uppercased())
@@ -157,7 +156,6 @@ struct TransferRtgsSuccess: View {
             
             HStack {
                 Text("Mestika :")
-                    //                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
                 
                 Text(self.transferData.destinationNumber)
@@ -173,7 +171,7 @@ struct TransferRtgsSuccess: View {
     var receivedInfo: some View {
         VStack(alignment: .leading) {
             Text("Dari")
-                //                .font(.caption2)
+                                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             Text(self.transferData.username)

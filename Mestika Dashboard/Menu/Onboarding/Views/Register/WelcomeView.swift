@@ -224,11 +224,20 @@ struct WelcomeView: View {
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Detail"))) { obj in
                 print("RECEIVED JITSI START")
                 if let userInfo = obj.userInfo, let info = userInfo["room_id"] {
-                    print(info)
-                    self.jitsiRoom = info as! String ?? ""
-                    print(jitsiRoom)
+                    print("Ini Info \(info)")
                     
-                    self.isIncomingVideoCall = true
+                    let foo: String? = info as? String
+                    let bar = foo as Any
+                    
+                    if bar as? String == nil {
+                        print("INFO DOANG")
+                    } else {
+                        self.jitsiRoom = info as! String
+                        print(jitsiRoom)
+
+                        self.isIncomingVideoCall = true
+                        print("VCALL")
+                    }
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in

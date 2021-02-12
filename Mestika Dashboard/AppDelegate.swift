@@ -60,14 +60,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         print("OPEN FROM Backgroud")
         
-        let userInfo = response.notification.request.content.userInfo
-        
-        let jitsiRoom = userInfo["room"]
-        print(jitsiRoom)
-        
-        let dataRoom: [String: Any] = ["room_id": jitsiRoom]
-        
-        NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+//        let userInfo = response.notification.request.content.userInfo
+//        var jitsiRoom = "123"
+//        
+//        if (userInfo["room"] != nil) {
+//            jitsiRoom = userInfo["room"] as! String
+//        } else {
+//            jitsiRoom = "No Room"
+//        }
+//        
+////        let jitsiRoom = userInfo["room"]
+//        print(jitsiRoom)
+//        
+//        let dataRoom: [String: Any] = ["room_id": jitsiRoom]
+//        
+//        NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
     }
     
     // [START receive_message]

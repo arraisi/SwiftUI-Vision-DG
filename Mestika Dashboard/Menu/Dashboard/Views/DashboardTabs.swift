@@ -104,20 +104,20 @@ struct DashboardTabs: View {
                     })
                 }
                 
-                ListEwalletView()
-                    .padding(.top, 30)
-
-                ListContactTransferOnUs()
-                    .padding(.top, 30)
-
-                ListPromoForYouView()
-                    .padding(.top, 30)
-
-                ListPurchasePaymentView()
-                    .padding(.top, 30)
-
-                VoucherView()
-                    .padding(.top, 50)
+//                ListEwalletView()
+//                    .padding(.top, 30)
+//
+//                ListContactTransferOnUs()
+//                    .padding(.top, 30)
+//
+//                ListPromoForYouView()
+//                    .padding(.top, 30)
+//
+//                ListPurchasePaymentView()
+//                    .padding(.top, 30)
+//
+//                VoucherView()
+//                    .padding(.top, 50)
             }
         })
         .navigationBarHidden(true)

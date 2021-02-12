@@ -89,7 +89,7 @@ class TransferServices {
     
     // MARK: - POST TRANSFER RTGS
     func transferRtgs(transferData: TransferOffUsModel,
-                      completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
+                      completion: @escaping(Result<TransferRtgsExecResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "ref": "1",
@@ -142,7 +142,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferRtgsExecResponse.self, from: data)
                     completion(.success(transferResponse!))
                 }
                 
@@ -160,7 +160,7 @@ class TransferServices {
     
     // MARK: - POST TRANSFER SKN
     func transferSkn(transferData: TransferOffUsModel,
-                     completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
+                     completion: @escaping(Result<TransferSknExecResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "accountTo": transferData.destinationNumber,
@@ -214,7 +214,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferSknExecResponse.self, from: data)
                     completion(.success(transferResponse!))
                 }
                 

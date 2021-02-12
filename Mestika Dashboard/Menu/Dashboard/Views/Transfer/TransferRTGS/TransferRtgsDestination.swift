@@ -50,14 +50,14 @@ struct TransferRtgsDestination: View {
                         HStack {
                             Text("Rekening Tujuan")
                                 .foregroundColor(.white)
-                                .font(.subheadline)
+                                .font(.caption)
                                 .padding(.leading)
                             Spacer()
                         }
                         
                         HStack {
                             Text("\(self.transferData.bankName) - \(self.transferData.destinationNumber)")
-                                .font(.headline)
+                                .font(.subheadline)
                                 .foregroundColor(.white)
                                 .padding(.leading)
                             Spacer()
@@ -69,7 +69,7 @@ struct TransferRtgsDestination: View {
                         HStack {
                             Text("Nominal Transaksi")
                                 .foregroundColor(.white)
-                                .font(.subheadline)
+                                .font(.caption)
                                 .padding(.leading)
                             Spacer()
                         }
@@ -81,7 +81,7 @@ struct TransferRtgsDestination: View {
                                 .padding(.leading)
                             
                             Text("\(self.transferData.amount.thousandSeparator())")
-                                .font(.headline)
+                                .font(.subheadline)
                                 .foregroundColor(.white)
                             Spacer()
                         }
@@ -98,6 +98,7 @@ struct TransferRtgsDestination: View {
                         
                         if (self.transferData.transactionType == "SKN") {
                             EmptyView()
+                                .padding(.bottom, 30)
                         } else {
 //                            provinceCard
 //                            cityCard
@@ -105,6 +106,7 @@ struct TransferRtgsDestination: View {
                         }
                         
                         Button(action: {
+                            self.transferData.addressOfDestination = self.addressCtrl
                             self.isRouteTransaction = true
                         }, label: {
                             Text("KONFIRMASI TRANSFER")
@@ -145,7 +147,9 @@ struct TransferRtgsDestination: View {
                 }
                 .padding([.leading, .top, .bottom])
                 
-                TextField("", text: self.$transferData.destinationName)
+                TextField("", text: self.$transferData.destinationName, onEditingChanged: { changed in
+                    validateForm()
+                })
                     .font(.subheadline)
             }
         }
@@ -303,13 +307,8 @@ struct TransferRtgsDestination: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Tulis alamat penerima", text: self.$addressCtrl, onEditingChanged: { changed in
-                    self.transferData.addressOfDestination = self.addressCtrl
-                    validateForm()
+                MultilineTextField("Tulis alamat penerima", text: self.$addressCtrl, onCommit: {
                 })
-                .lineLimit(5)
-                .multilineTextAlignment(.leading)
-                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
             }
             .padding(.horizontal, 20)
             .padding(.top, 5)
@@ -332,7 +331,7 @@ struct TransferRtgsDestination: View {
                 disabledButton = true
             }
         } else {
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl != "") {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
                 disabledButton = false
             } else {
                 disabledButton = true

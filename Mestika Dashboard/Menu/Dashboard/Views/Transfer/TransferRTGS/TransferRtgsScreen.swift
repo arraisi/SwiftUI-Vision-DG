@@ -90,6 +90,8 @@ struct TransferRtgsScreen: View {
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
                                     self.transferData.transactionType = self.transferType
+                                    self.transferData.notes = self.notesCtrl
+                                    self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     print("OKE")
                                     self.isRouteTransaction = true
                                 }
@@ -355,7 +357,7 @@ struct TransferRtgsScreen: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Sekarang")
+                    Text("Pilih Tanggal")
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
@@ -363,7 +365,7 @@ struct TransferRtgsScreen: View {
                 
                 Spacer()
                 
-                DatePicker("", selection: self.$date, in: ...Date(), displayedComponents: .date)
+                DatePicker("", selection: self.$date, in: Date()..., displayedComponents: .date)
                     .labelsHidden()
             }
             .padding()
@@ -394,6 +396,7 @@ struct TransferRtgsScreen: View {
                             validateForm()
                         }) {
                             Text(data)
+                                .bold()
                                 .font(.custom("Montserrat-Regular", size: 12))
                         }
                     }
@@ -428,6 +431,7 @@ struct TransferRtgsScreen: View {
                             validateForm()
                         }) {
                             Text(data)
+                                .bold()
                                 .font(.custom("Montserrat-Regular", size: 12))
                         }
                     }
@@ -455,12 +459,8 @@ struct TransferRtgsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onEditingChanged: { changed in
-                    self.transferData.notes = self.notesCtrl
+                MultilineTextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onCommit: {
                 })
-                .lineLimit(5)
-                .multilineTextAlignment(.leading)
-                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
             }
             .padding(.horizontal, 20)
             .padding(.top, 5)
@@ -798,6 +798,14 @@ struct TransferRtgsScreen: View {
         } else {
             disabledButton = true
         }
+    }
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "in_ID")
+        return formatter
     }
     
     @ObservedObject var profileVM = ProfileViewModel()

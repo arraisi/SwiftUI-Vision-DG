@@ -55,29 +55,10 @@ struct TransferOnUsConfirmationScreen: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             Group {
-                // Jenis Transfer Form
-                HStack(spacing: 20) {
-                    Text("Jenis Transfer")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100)
-                    
-                    TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
-                        print("\(self.$transferData.transferType)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
                 
                 // Penerima Form
                 HStack(spacing: 20) {
-                    Text("Penerima")
+                    Text("Nama Penerima")
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
@@ -115,6 +96,26 @@ struct TransferOnUsConfirmationScreen: View {
                 .padding(.vertical, 5)
                 .padding(.horizontal)
                 
+                // Rekening Pengirim Form
+                HStack(spacing: 20) {
+                    Text("Rekening Pengirim")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100)
+                    
+                    TextField("Rekening Pengirim", text: self.$transferData.sourceNumber, onEditingChanged: { changed in
+                        print("\(self.$transferData.sourceNumber)")
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
                 // Nominal Transfer
                 HStack(spacing: 20) {
                     Text("Nominal Transfer")
@@ -135,15 +136,35 @@ struct TransferOnUsConfirmationScreen: View {
                 .padding(.vertical, 5)
                 .padding(.horizontal)
                 
-                // Admin Fee
+//                // Jenis Transfer Form
 //                HStack(spacing: 20) {
-//                    Text("Biaya Admin")
+//                    Text("Jenis Transfer")
 //                        .font(.caption)
 //                        .fontWeight(.light)
 //                        .frame(width: 100)
 //
-//                    TextField("Biaya Admin", text: self.$transferData.adminFee, onEditingChanged: { changed in
-////                        print("\(self.$transferData.destinationNumber)")
+//                    TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
+//                        print("\(self.$transferData.transferType)")
+//                    })
+//                    .disabled(true)
+//                    .frame(height: 20)
+//                    .padding()
+//                    .font(.subheadline)
+//                    .background(Color(hex: "#F6F8FB"))
+//                    .cornerRadius(15)
+//                }
+//                .padding(.vertical, 5)
+//                .padding(.horizontal)
+//
+//                // Rekeking Form
+//                HStack(spacing: 20) {
+//                    Text("Rekening")
+//                        .font(.caption)
+//                        .fontWeight(.light)
+//                        .frame(width: 100)
+//
+//                    TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
+//                        print("\(self.$transferData.sourceAccountName)")
 //                    })
 //                    .disabled(true)
 //                    .frame(height: 20)
@@ -155,15 +176,55 @@ struct TransferOnUsConfirmationScreen: View {
 //                .padding(.vertical, 5)
 //                .padding(.horizontal)
                 
-                // Rekeking Form
+//                // Frekuensi Form
+//                HStack(spacing: 20) {
+//                    Text("Frekuensi")
+//                        .font(.caption)
+//                        .fontWeight(.light)
+//                        .frame(width: 100)
+//
+//                    TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
+//                        print("\(self.$transferData.transactionFrequency)")
+//                    })
+//                    .disabled(true)
+//                    .frame(height: 20)
+//                    .padding()
+//                    .font(.subheadline)
+//                    .background(Color(hex: "#F6F8FB"))
+//                    .cornerRadius(15)
+//                }
+//                .padding(.vertical, 5)
+//                .padding(.horizontal)
+                
+                // Voucher Form
                 HStack(spacing: 20) {
-                    Text("Rekening")
+                    Text("Voucher")
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
-                        print("\(self.$transferData.sourceAccountName)")
+                    TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
+                        print("\(self.$transferData.transactionVoucher)")
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
+                // Total Transfer Form
+                HStack(spacing: 20) {
+                    Text("Total Transfer")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100)
+                    
+                    TextField("Total", text: self.$transferData.amount, onEditingChanged: { changed in
+                        print("\(self.$transferData.amount)")
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -184,46 +245,6 @@ struct TransferOnUsConfirmationScreen: View {
                     
                     TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionDate)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
-                
-                // Frekuensi Form
-                HStack(spacing: 20) {
-                    Text("Frekuensi")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100)
-                    
-                    TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
-                        print("\(self.$transferData.transactionFrequency)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
-                
-                // Voucher Form
-                HStack(spacing: 20) {
-                    Text("Voucher")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100)
-                    
-                    TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
-                        print("\(self.$transferData.transactionVoucher)")
                     })
                     .disabled(true)
                     .frame(height: 20)
