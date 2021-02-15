@@ -27,8 +27,8 @@ struct FormChangePasswordView: View {
     private var simpanBtnDisabled: Bool {
         oldPasswordCtrl.count == 0 || passwordCtrl.count == 0 || confirmPasswordCtrl.count == 0 || passwordCtrl != confirmPasswordCtrl
     }
+    
     @GestureState private var dragOffset = CGSize.zero
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         

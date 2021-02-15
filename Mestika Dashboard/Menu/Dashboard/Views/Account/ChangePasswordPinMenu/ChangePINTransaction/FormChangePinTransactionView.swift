@@ -27,8 +27,8 @@ struct FormChangePinTransactionView: View {
     private var verificationBtnDisabled: Bool {
         pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || oldPinCtrl.count == 0 || pinCtrl != pinConfirmCtrl
     }
+    
     @GestureState private var dragOffset = CGSize.zero
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         
