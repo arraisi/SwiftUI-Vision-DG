@@ -308,6 +308,7 @@ struct TransferRtgsDestination: View {
             
             VStack {
                 MultilineTextField("Tulis alamat penerima", text: self.$addressCtrl, onCommit: {
+                    validateForm()
                 })
             }
             .padding(.horizontal, 20)
@@ -325,13 +326,13 @@ struct TransferRtgsDestination: View {
     
     func validateForm() {
         if (self.transferData.transactionType == "SKN") {
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl.isNotEmpty()) {
                 disabledButton = false
             } else {
                 disabledButton = true
             }
         } else {
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl.isNotEmpty()) {
                 disabledButton = false
             } else {
                 disabledButton = true

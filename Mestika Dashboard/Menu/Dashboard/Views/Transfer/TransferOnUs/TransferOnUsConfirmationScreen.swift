@@ -61,7 +61,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Nama Penerima")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Penerima", text: self.$transferData.destinationName, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationName)")
@@ -81,7 +81,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Rekening Penerima")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Rekening Penerima", text: self.$transferData.destinationNumber, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
@@ -101,7 +101,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Rekening Pengirim")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Rekening Pengirim", text: self.$transferData.sourceNumber, onEditingChanged: { changed in
                         print("\(self.$transferData.sourceNumber)")
@@ -121,7 +121,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Nominal Transfer")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Nominal Transfer", text: self.$transferData.amount, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
@@ -201,7 +201,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Voucher")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionVoucher)")
@@ -221,7 +221,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Total Transfer")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Total", text: self.$transferData.amount, onEditingChanged: { changed in
                         print("\(self.$transferData.amount)")
@@ -241,7 +241,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Waktu Transaksi")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionDate)")
@@ -261,7 +261,7 @@ struct TransferOnUsConfirmationScreen: View {
                     Text("Catatan")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     MultilineTextField("Catatan", text: self.$transferData.notes, onCommit: {
                     })

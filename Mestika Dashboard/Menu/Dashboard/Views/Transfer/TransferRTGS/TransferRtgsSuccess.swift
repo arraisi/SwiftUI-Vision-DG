@@ -114,7 +114,6 @@ struct TransferRtgsSuccess: View {
     var dateInfo: some View {
         VStack {
             Text(self.dateString)
-                //                .font(.caption)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
@@ -128,7 +127,7 @@ struct TransferRtgsSuccess: View {
     var nominalInfo: some View {
         VStack {
             Text("Nominal Transaksi")
-                                .font(.caption)
+                .font(.caption)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             HStack(alignment: .top) {
@@ -146,7 +145,7 @@ struct TransferRtgsSuccess: View {
     var destinationInfo: some View {
         VStack(alignment: .leading) {
             Text("Ke")
-                                .font(.caption2)
+                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             Text(self.transferData.destinationName.uppercased())
@@ -155,11 +154,10 @@ struct TransferRtgsSuccess: View {
                 .fontWeight(.bold)
             
             HStack {
-                Text("Mestika :")
+                Text("\(self.transferData.bankName) :")
                     .foregroundColor(Color(hex: "#FFFFFF"))
                 
                 Text(self.transferData.destinationNumber)
-                    //                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
             }
         }
@@ -171,7 +169,7 @@ struct TransferRtgsSuccess: View {
     var receivedInfo: some View {
         VStack(alignment: .leading) {
             Text("Dari")
-                                .font(.caption2)
+                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
             Text(self.transferData.username)
@@ -181,11 +179,9 @@ struct TransferRtgsSuccess: View {
             
             HStack {
                 Text(self.transferData.sourceNumber)
-                    //                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
                 
                 Text("(\(self.transferData.sourceAccountName))")
-                    //                    .font(.caption2)
                     .foregroundColor(Color(hex: "#FFFFFF"))
             }
         }

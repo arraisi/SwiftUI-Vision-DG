@@ -40,6 +40,8 @@ struct TransferRtgsScreen: View {
     // Variable Notes
     @State private var notesCtrl: String = ""
     
+    @State private var selectedCalendar: String = "Now"
+    
     // Variable Modal
     @State private var showDialogMinReached: Bool = false
     @State private var showDialogMaxReached: Bool = false
@@ -55,6 +57,28 @@ struct TransferRtgsScreen: View {
     
     // Variable Date
     @State var date = Date()
+    private var selectedDate: Binding<Date> {
+      Binding<Date>(get: { self.date}, set : {
+          self.date = $0
+          self.setDateString()
+      })
+    }
+    
+    func setDateString() {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd"
+        print(formatter.string(from: self.now))
+        print(formatter.string(from: self.date))
+        
+        if (formatter.string(from: self.now) == formatter.string(from: self.date)) {
+            self.selectedCalendar = "Now"
+        } else {
+            self.selectedCalendar = "Next"
+        }
+        
+    }
+    
+    let now = Date()
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -357,7 +381,7 @@ struct TransferRtgsScreen: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Pilih Tanggal")
+                    Text(self.selectedCalendar)
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
@@ -365,8 +389,9 @@ struct TransferRtgsScreen: View {
                 
                 Spacer()
                 
-                DatePicker("", selection: self.$date, in: Date()..., displayedComponents: .date)
+                DatePicker("", selection: selectedDate, in: Date()..., displayedComponents: .date)
                     .labelsHidden()
+                
             }
             .padding()
         }

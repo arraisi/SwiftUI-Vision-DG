@@ -13,8 +13,6 @@ struct PopOverFavoriteView: View {
     
     var transferData: TransferOnUsModel
     
-    @State private var disabledButton = true
-    
     @Binding var show: Bool
     @State var receivedName = ""
     @State var receivedBank = "Mestika"
@@ -46,7 +44,6 @@ struct PopOverFavoriteView: View {
                         TextField("Nama Kontak Penerima", text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
                             print("\($receivedName)")
-                            validateForm()
                         })
                         .disabled(false)
                         .frame(height: 10)
@@ -144,8 +141,8 @@ struct PopOverFavoriteView: View {
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         
                     })
-                    .disabled(disabledButton)
-                    .background(disabledButton ? Color.gray : Color(hex: "#2334D0"))
+                    .disabled(disableForm)
+                    .background(disableForm ? Color.gray : Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 40)
@@ -163,12 +160,8 @@ struct PopOverFavoriteView: View {
         }
     }
     
-    func validateForm() {
-        if (self.receivedName.isNotEmpty()) {
-            disabledButton = false
-        } else {
-            disabledButton = true
-        }
+    var disableForm: Bool {
+        receivedName.isEmpty
     }
 }
 

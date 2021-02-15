@@ -107,7 +107,6 @@ struct BottomNavigationView: View {
                     print("show")
                 }
             }
-            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
             
             if (showingSettingMenu) {
@@ -123,7 +122,7 @@ struct BottomNavigationView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
         .onAppear {
             self.profileVM.getProfile { result in

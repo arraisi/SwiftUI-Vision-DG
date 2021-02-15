@@ -16,7 +16,9 @@ struct PopOverFavoriteTransactionOffUsView: View {
     
     @State var receivedName = ""
     
-    @State private var disabledButton = true
+    var disableForm: Bool {
+        receivedName.isEmpty
+    }
     
     var body: some View {
         VStack {
@@ -127,8 +129,8 @@ struct PopOverFavoriteTransactionOffUsView: View {
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         
                     })
-                    .disabled(disabledButton)
-                    .background(disabledButton ? Color.gray : Color(hex: "#2334D0"))
+                    .disabled(disableForm)
+                    .background(disableForm ? Color.gray : Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 40)
@@ -143,14 +145,6 @@ struct PopOverFavoriteTransactionOffUsView: View {
         }
         .onAppear {
             self.receivedName = self.transferData.destinationName
-        }
-    }
-    
-    func validateForm() {
-        if (self.receivedName.isNotEmpty()) {
-            disabledButton = false
-        } else {
-            disabledButton = true
         }
     }
 }

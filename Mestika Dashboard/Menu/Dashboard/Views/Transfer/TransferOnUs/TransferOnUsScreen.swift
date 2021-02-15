@@ -44,8 +44,31 @@ struct TransferOnUsScreen: View {
     var _listVoucher = ["VCR-50K","VCR-100K","VCR-150K","VCR-250K"]
     var _listFrequency = ["Sekali","Berkali-kali"]
     
+    @State private var selectedCalendar: String = "Now"
+    
     // Variable Date
+    let now = Date()
     @State var date = Date()
+    private var selectedDate: Binding<Date> {
+      Binding<Date>(get: { self.date}, set : {
+          self.date = $0
+          self.setDateString()
+      })
+    }
+    
+    func setDateString() {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd"
+        print(formatter.string(from: self.now))
+        print(formatter.string(from: self.date))
+        
+        if (formatter.string(from: self.now) == formatter.string(from: self.date)) {
+            self.selectedCalendar = "Now"
+        } else {
+            self.selectedCalendar = "Next"
+        }
+        
+    }
     
     @State private var notesCtrl: String = ""
     
@@ -313,7 +336,7 @@ struct TransferOnUsScreen: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Pilih Tanggal")
+                    Text(self.selectedCalendar)
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
@@ -321,7 +344,7 @@ struct TransferOnUsScreen: View {
                 
                 Spacer()
                 
-                DatePicker("", selection: self.$date, in: Date()..., displayedComponents: .date)
+                DatePicker("", selection: selectedDate, in: Date()..., displayedComponents: .date)
                     .labelsHidden()
             }
             .padding()
