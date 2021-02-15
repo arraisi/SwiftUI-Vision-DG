@@ -6,93 +6,43 @@
 //
 
 import Foundation
+import Combine
+import SwiftyRSA
 
 class TransferServices {
     private init() {}
     static let shared = TransferServices()
     
-    // MARK: - POST TRANSFER ONUS
-    func transferOnUs(transferData: TransferOnUsModel,
-                      completion: @escaping(Result<TransferOnUsResponse, NetworkError>) -> Void) {
+    func encryptPassword(password: String) -> String {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: password, using: .utf8)
         
-        let body: [String: Any] = [
-            "cardNo": "5058200000000758",
-            "ref": "1",
-            "nominal": "500000",
-            "currency": "360",
-            "sourceNumber": "87000000126",
-            "destinationNumber": "87000000142",
-            "berita": "testing",
-            "pin": "pin"
-        ]
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        _ = encrypted.data
+        let base64String = encrypted.base64String
         
-        guard let url = URL.urlTransferOverbooking() else {
-            return completion(.failure(.badUrl))
-        }
+        print("Encript : \(base64String)")
         
-        var request = URLRequest(url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("URL ABSOLUTE : \(url.absoluteURL)")
-        do {
-            // MARK : serialize model data
-            let jsonData = try JSONSerialization.data(withJSONObject: body)
-            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
-            request.httpBody = jsonData
-        } catch let error {
-            print(error.localizedDescription)
-            completion(.failure(.decodingError))
-        }
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            guard let data = data, error == nil else {
-                return completion(.failure(.noData))
-            }
-            
-            let response = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                print("\(httpResponse.statusCode)")
-            }
-            
-            if response == nil {
-                completion(.failure(.decodingError))
-            } else {
-                completion(.success(response!))
-            }
-            
-        }.resume()
+        return base64String
+        //        self.registerData.password = base64String
     }
     
-    // MARK: - POST TRANSFER RTGS
-    func transferRtgs(transferData: TransferOffUsModel,
+    // MARK: - POST TRANSFER ONUS
+    func transferOnUs(transferData: TransferOnUsModel,
                       completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "ref": "",
-            "cardNo": transferData.sourceNumber,
+            "cardNo": transferData.cardNo,
+            "ref": "1",
             "nominal": transferData.amount,
             "currency": "360",
             "sourceNumber": transferData.sourceNumber,
-            "destinationBankCode": transferData.destinationBankCode,
-            "ultimateBeneficiaryName": transferData.destinationName,
-            "description": transferData.notes,
-            "flagWargaNegara": "W",
-            "flagResidenceDebitur": "R",
-            "destinationBankMemberName": transferData.combinationBankName,
-            "destinationBankName": transferData.bankName,
-            "destinationBankBranchName": "DAGO",
-            "accountTo": transferData.destinationNumber,
-            "addressBeneficiary1": transferData.addressOfDestination,
-            "addressBeneficiary2": "BANDUNG",
-            "addressBeneficiary3": "",
-            "typeOfBeneficiary": transferData.typeDestination,
-            "pin": transferData.pin
+            "destinationNumber": transferData.destinationNumber,
+            "berita": transferData.notes,
+            "pin": encryptPassword(password: transferData.pin)
         ]
         
-        guard let url = URL.urlTransferRtgs() else {
+        guard let url = URL.urlTransferOverbooking() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
@@ -128,6 +78,89 @@ class TransferServices {
                 if (httpResponse.statusCode == 401) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
+    // MARK: - POST TRANSFER RTGS
+    func transferRtgs(transferData: TransferOffUsModel,
+                      completion: @escaping(Result<TransferRtgsExecResponse, ErrorResult>) -> Void) {
+        
+        let body: [String: Any] = [
+            "ref": "1",
+            "cardNo": transferData.sourceNumber,
+            "nominal": transferData.amount,
+            "currency": "360",
+            "sourceNumber": transferData.sourceNumber,
+            "destinationBankCode": transferData.destinationBankCode,
+            "ultimateBeneficiaryName": transferData.destinationName,
+            "description": transferData.notes,
+            "flagWargaNegara": "W",
+            "flagResidenceDebitur": "R",
+            "destinationBankMemberName": transferData.combinationBankName,
+            "destinationBankName": transferData.bankName,
+            "destinationBankBranchName": "DAGO",
+            "accountTo": transferData.destinationNumber,
+            "addressBeneficiary1": transferData.addressOfDestination,
+            "addressBeneficiary2": "BANDUNG",
+            "addressBeneficiary3": "",
+            "typeOfBeneficiary": transferData.typeDestination,
+            "pin": encryptPassword(password: transferData.pin)
+        ]
+        
+        guard let url = URL.urlTransferRtgs() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("URL ABSOLUTE : \(url.absoluteURL)")
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: body)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let transferResponse = try? JSONDecoder().decode(TransferRtgsExecResponse.self, from: data)
+                    completion(.success(transferResponse!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()
@@ -135,7 +168,7 @@ class TransferServices {
     
     // MARK: - POST TRANSFER SKN
     func transferSkn(transferData: TransferOffUsModel,
-                     completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
+                     completion: @escaping(Result<TransferSknExecResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "accountTo": transferData.destinationNumber,
@@ -145,13 +178,13 @@ class TransferServices {
             "clearingCode": transferData.kliringCode,
             "currency": "360",
             "description": transferData.notes,
-            "destinationBankCode": transferData.combinationBankName,
+            "destinationBankCode": "123",
             "digitSign": "C",
             "flagResidenceCreditur": "R",
             "flagResidenceDebitur": "R",
             "flagWargaNegara": "W",
             "nominal": transferData.amount,
-            "pin": transferData.pin,
+            "pin": encryptPassword(password: transferData.pin),
             "provinceCode": "1234",
             "ref": "",
             "typeOfBeneficiary": transferData.typeDestination,
@@ -189,11 +222,19 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferSknExecResponse.self, from: data)
                     completion(.success(transferResponse!))
                 }
                 
                 if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }

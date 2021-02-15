@@ -27,6 +27,8 @@ struct FormChangePinTransactionView: View {
     private var verificationBtnDisabled: Bool {
         pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || oldPinCtrl.count == 0 || pinCtrl != pinConfirmCtrl
     }
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         
@@ -168,7 +170,12 @@ struct FormChangePinTransactionView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        //        .navigationBarTitle("Ubah PIN", displayMode: .inline)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ZStack {
                 if isPinChanged {

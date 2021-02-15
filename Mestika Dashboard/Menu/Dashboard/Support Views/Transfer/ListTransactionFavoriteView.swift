@@ -34,7 +34,6 @@ struct ListTransactionFavoriteView: View {
             
             Divider()
                 .padding(.horizontal, 10)
-                .padding(.bottom, 20)
             
             ForEach(self.favoritVM.favorites, id: \.id) { data in
                 
@@ -66,6 +65,9 @@ struct ListTransactionFavoriteView: View {
             }
             .padding(.vertical, 5)
             .padding(.horizontal, 20)
+            
+            EmptyView()
+                .padding(.bottom)
         }
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)

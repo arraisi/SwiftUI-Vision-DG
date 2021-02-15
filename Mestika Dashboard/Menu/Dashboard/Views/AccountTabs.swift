@@ -23,6 +23,8 @@ struct AccountTabs: View {
     @State private var isFingerprint = false
     @State private var isNextRoute = false
     
+    @State private var isShowingAlert = false
+    
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -299,14 +301,7 @@ struct AccountTabs: View {
                     
                     Button(
                         action: {
-                            self.authVM.postLogout { success in
-                                if success {
-                                    print("SUCCESS LOGOUT")
-                                    DispatchQueue.main.async {
-                                        self.appState.moveToWelcomeView = true
-                                    }
-                                }
-                            }
+                            self.isShowingAlert = true
                         },
                         label: {
                             HStack {
@@ -333,6 +328,21 @@ struct AccountTabs: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Anda yakin ingin keluar aplikasi Bank Mestika?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.authVM.postLogout { success in
+                        if success {
+                            print("SUCCESS LOGOUT")
+                            DispatchQueue.main.async {
+                                self.appState.moveToWelcomeView = true
+                            }
+                        }
+                    }
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
         .onAppear {
 //            getProfile()
             self.profileVM.getProfile { result in

@@ -57,6 +57,7 @@ extension ProfileViewModel {
                 }
                 
                 print("\n\nVM PROFILE \(response.personal.name)\n\n")
+                print("\n\nVM PROFILE \(response.chipProfileDto.last!.cardNo)\n\n")
                 self.name = response.personal.name
                 self.telepon = response.profileResponseModelID.telepon
                 self.email = response.profileResponseModelID.surel

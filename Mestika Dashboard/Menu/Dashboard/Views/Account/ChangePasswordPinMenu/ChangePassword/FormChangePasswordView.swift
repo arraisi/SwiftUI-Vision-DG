@@ -27,6 +27,8 @@ struct FormChangePasswordView: View {
     private var simpanBtnDisabled: Bool {
         oldPasswordCtrl.count == 0 || passwordCtrl.count == 0 || confirmPasswordCtrl.count == 0 || passwordCtrl != confirmPasswordCtrl
     }
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         
@@ -164,6 +166,12 @@ struct FormChangePasswordView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ZStack {
                 if isPasswordChanged {

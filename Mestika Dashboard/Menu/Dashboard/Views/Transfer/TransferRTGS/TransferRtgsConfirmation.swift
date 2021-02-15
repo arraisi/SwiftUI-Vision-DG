@@ -11,6 +11,8 @@ struct TransferRtgsConfirmation: View {
     
     @EnvironmentObject var transferData: TransferOffUsModel
     
+    @State var adminFeeCtrl = "Rp.0, (Gratis)"
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -61,7 +63,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Jenis Transfer")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
                         print("\(self.$transferData.transferType)")
@@ -81,7 +83,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Tipe Transaksi")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Tipe Transaksi", text: self.$transferData.transactionType, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionType)")
@@ -101,7 +103,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Nama Penerima")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Penerima", text: self.$transferData.destinationName, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationName)")
@@ -121,10 +123,9 @@ struct TransferRtgsConfirmation: View {
                     Text("Nama Bank")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
-                    TextField("Bank", text: self.$transferData.bankName, onEditingChanged: { changed in
-                        print("\(self.$transferData.bankName)")
+                    MultilineTextField("Bank", text: self.$transferData.bankName, onCommit: {
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -141,7 +142,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Rekening Penerima")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Rekening Penerima", text: self.$transferData.destinationNumber, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
@@ -164,7 +165,7 @@ struct TransferRtgsConfirmation: View {
                         Text("Tipe Penerima")
                             .font(.caption)
                             .fontWeight(.light)
-                            .frame(width: 100)
+                            .frame(width: 100, alignment: .leading)
                         
                         TextField("Tipe Penerima", text: self.$transferData.typeDestination, onEditingChanged: { changed in
                             print("\(self.$transferData.typeDestination)")
@@ -181,10 +182,10 @@ struct TransferRtgsConfirmation: View {
                     
                     // Kewarganegaraan Form
                     HStack(spacing: 20) {
-                        Text("Kewarganegaraan")
+                        Text("Warganegara")
                             .font(.caption)
                             .fontWeight(.light)
-                            .frame(width: 100)
+                            .frame(width: 100, alignment: .leading)
                         
                         TextField("Kewarganegaraan", text: self.$transferData.citizenship, onEditingChanged: { changed in
                             print("\(self.$transferData.citizenship)")
@@ -200,51 +201,51 @@ struct TransferRtgsConfirmation: View {
                     .padding(.horizontal)
                     
                     // Province Form
-                    HStack(spacing: 20) {
-                        Text("Provinsi Penerima")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .frame(width: 100)
-                        
-                        TextField("Provinsi Penerima", text: self.$transferData.provinceOfDestination, onEditingChanged: { changed in
-                            print("\(self.$transferData.provinceOfDestination)")
-                        })
-                        .disabled(true)
-                        .frame(height: 20)
-                        .padding()
-                        .font(.subheadline)
-                        .background(Color(hex: "#F6F8FB"))
-                        .cornerRadius(15)
-                    }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
+//                    HStack(spacing: 20) {
+//                        Text("Provinsi Penerima")
+//                            .font(.caption)
+//                            .fontWeight(.light)
+//                            .frame(width: 100)
+//
+//                        TextField("Provinsi Penerima", text: self.$transferData.provinceOfDestination, onEditingChanged: { changed in
+//                            print("\(self.$transferData.provinceOfDestination)")
+//                        })
+//                        .disabled(true)
+//                        .frame(height: 20)
+//                        .padding()
+//                        .font(.subheadline)
+//                        .background(Color(hex: "#F6F8FB"))
+//                        .cornerRadius(15)
+//                    }
+//                    .padding(.vertical, 5)
+//                    .padding(.horizontal)
                     
                     // City Form
-                    HStack(spacing: 20) {
-                        Text("Kota Penerima")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .frame(width: 100)
-                        
-                        TextField("Kota Penerima", text: self.$transferData.cityOfDestination, onEditingChanged: { changed in
-                            print("\(self.$transferData.cityOfDestination)")
-                        })
-                        .disabled(true)
-                        .frame(height: 20)
-                        .padding()
-                        .font(.subheadline)
-                        .background(Color(hex: "#F6F8FB"))
-                        .cornerRadius(15)
-                    }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
+//                    HStack(spacing: 20) {
+//                        Text("Kota Penerima")
+//                            .font(.caption)
+//                            .fontWeight(.light)
+//                            .frame(width: 100)
+//
+//                        TextField("Kota Penerima", text: self.$transferData.cityOfDestination, onEditingChanged: { changed in
+//                            print("\(self.$transferData.cityOfDestination)")
+//                        })
+//                        .disabled(true)
+//                        .frame(height: 20)
+//                        .padding()
+//                        .font(.subheadline)
+//                        .background(Color(hex: "#F6F8FB"))
+//                        .cornerRadius(15)
+//                    }
+//                    .padding(.vertical, 5)
+//                    .padding(.horizontal)
                     
                     // Alamat Penerima Form
                     HStack(spacing: 20) {
                         Text("Alamat Penerima")
                             .font(.caption)
                             .fontWeight(.light)
-                            .frame(width: 100)
+                            .frame(width: 100, alignment: .leading)
                         
                         TextField("Alamat Penerima", text: self.$transferData.addressOfDestination, onEditingChanged: { changed in
                             print("\(self.$transferData.addressOfDestination)")
@@ -269,7 +270,7 @@ struct TransferRtgsConfirmation: View {
                         Text("Tipe Penerima")
                             .font(.caption)
                             .fontWeight(.light)
-                            .frame(width: 100)
+                            .frame(width: 100, alignment: .leading)
                         
                         TextField("Tipe Penerima", text: self.$transferData.typeDestination, onEditingChanged: { changed in
                             print("\(self.$transferData.typeDestination)")
@@ -286,10 +287,10 @@ struct TransferRtgsConfirmation: View {
                     
                     // Kewarganegaraan Form
                     HStack(spacing: 20) {
-                        Text("Kewarganegaraan")
+                        Text("Warganegara")
                             .font(.caption)
                             .fontWeight(.light)
-                            .frame(width: 100)
+                            .frame(width: 100, alignment: .leading)
                         
                         TextField("Kewarganegaraan", text: self.$transferData.citizenship, onEditingChanged: { changed in
                             print("\(self.$transferData.citizenship)")
@@ -312,7 +313,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Nominal Transfer")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Nominal Transfer", text: self.$transferData.amount, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
@@ -332,10 +333,48 @@ struct TransferRtgsConfirmation: View {
                     Text("Biaya Admin")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
-                    TextField("Biaya Admin", text: self.$transferData.adminFee, onEditingChanged: { changed in
+                    TextField("Biaya Admin", text: self.$adminFeeCtrl, onEditingChanged: { changed in
 //                        print("\(self.$transferData.destinationNumber)")
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
+                // Total Transaksi Form
+                HStack(spacing: 20) {
+                    Text("Total Transaksi")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100, alignment: .leading)
+                    
+                    TextField("Total Transaksi", text: self.$transferData.amount, onEditingChanged: { changed in
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
+                // Waktu Transaksi
+                HStack(spacing: 20) {
+                    Text("Waktu Transaksi")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100, alignment: .leading)
+                    
+                    TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -352,7 +391,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Rekening")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
                         print("\(self.$transferData.sourceAccountName)")
@@ -372,7 +411,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Frekuensi")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionFrequency)")
@@ -392,7 +431,7 @@ struct TransferRtgsConfirmation: View {
                     Text("Voucher")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
                     TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionVoucher)")
@@ -412,10 +451,9 @@ struct TransferRtgsConfirmation: View {
                     Text("Catatan")
                         .font(.caption)
                         .fontWeight(.light)
-                        .frame(width: 100)
+                        .frame(width: 100, alignment: .leading)
                     
-                    TextField("Catatan", text: self.$transferData.notes, onEditingChanged: { changed in
-                        print("\(self.$transferData.notes)")
+                    MultilineTextField("Catatan", text: self.$transferData.notes, onCommit: {
                     })
                     .disabled(true)
                     .frame(height: 50)
@@ -453,6 +491,6 @@ struct TransferRtgsConfirmation: View {
 
 struct TransferRtgsConfirmation_Previews: PreviewProvider {
     static var previews: some View {
-        TransferRtgsConfirmation()
+        TransferRtgsConfirmation().environmentObject(TransferOffUsModel())
     }
 }

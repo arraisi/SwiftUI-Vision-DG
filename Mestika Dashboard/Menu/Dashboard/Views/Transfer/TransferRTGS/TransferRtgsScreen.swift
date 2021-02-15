@@ -40,6 +40,8 @@ struct TransferRtgsScreen: View {
     // Variable Notes
     @State private var notesCtrl: String = ""
     
+    @State private var selectedCalendar: String = "Now"
+    
     // Variable Modal
     @State private var showDialogMinReached: Bool = false
     @State private var showDialogMaxReached: Bool = false
@@ -52,6 +54,31 @@ struct TransferRtgsScreen: View {
     
     // Variable Route
     @State private var isRouteTransaction: Bool = false
+    
+    // Variable Date
+    @State var date = Date()
+    private var selectedDate: Binding<Date> {
+      Binding<Date>(get: { self.date}, set : {
+          self.date = $0
+          self.setDateString()
+      })
+    }
+    
+    func setDateString() {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd"
+        print(formatter.string(from: self.now))
+        print(formatter.string(from: self.date))
+        
+        if (formatter.string(from: self.now) == formatter.string(from: self.date)) {
+            self.selectedCalendar = "Now"
+        } else {
+            self.selectedCalendar = "Next"
+        }
+        
+    }
+    
+    let now = Date()
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -78,13 +105,17 @@ struct TransferRtgsScreen: View {
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
-                            if (amount <= self.minLimit) {
+                            if (amount < self.minLimit) {
                                 self.showDialogMinTransaction = true
                             } else if (amount <= self.maxLimit && amount <= myCredit) {
                                 
                                 if (self.transferData.transactionType == "Online") {
                                     self.showDialogConfirmation = true
                                 } else {
+                                    self.transferData.destinationNumber = self.noRekeningCtrl
+                                    self.transferData.transactionType = self.transferType
+                                    self.transferData.notes = self.notesCtrl
+                                    self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     print("OKE")
                                     self.isRouteTransaction = true
                                 }
@@ -149,8 +180,8 @@ struct TransferRtgsScreen: View {
         .onAppear {
             self.transferData = TransferOffUsModel()
             self.transferType = _listTransferType[0]
-            self.transactionFrequency = _listFrequency[0]
             self.transferData.transactionFrequency = _listFrequency[0]
+            self.transferData.transactionVoucher = _listVoucher[0]
             self.transferData.transactionType = _listTransferType[0]
             getProfile()
             getListBank()
@@ -350,7 +381,7 @@ struct TransferRtgsScreen: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Sekarang")
+                    Text(self.selectedCalendar)
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
@@ -358,7 +389,9 @@ struct TransferRtgsScreen: View {
                 
                 Spacer()
                 
-                Image("ic_calendar_dark")
+                DatePicker("", selection: selectedDate, in: Date()..., displayedComponents: .date)
+                    .labelsHidden()
+                
             }
             .padding()
         }
@@ -388,6 +421,7 @@ struct TransferRtgsScreen: View {
                             validateForm()
                         }) {
                             Text(data)
+                                .bold()
                                 .font(.custom("Montserrat-Regular", size: 12))
                         }
                     }
@@ -422,6 +456,7 @@ struct TransferRtgsScreen: View {
                             validateForm()
                         }) {
                             Text(data)
+                                .bold()
                                 .font(.custom("Montserrat-Regular", size: 12))
                         }
                     }
@@ -449,12 +484,11 @@ struct TransferRtgsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onEditingChanged: { changed in
-                    self.transferData.notes = self.notesCtrl
+                MultilineTextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onCommit: {
                 })
-                .lineLimit(5)
-                .multilineTextAlignment(.leading)
-                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
+                .onReceive(notesCtrl.publisher.collect()) {
+                    self.notesCtrl = String($0.prefix(40))
+                }
             }
             .padding(.horizontal, 20)
             .padding(.top, 5)
@@ -554,17 +588,19 @@ struct TransferRtgsScreen: View {
                 .padding(.bottom, 20)
             
             VStack {
-                NavigationLink(destination: TransferRtgsConfirmation().environmentObject(transferData), label: {
-                    Text("KONFIRMASI TRANSFER")
-                        .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .font(.system(size: 13))
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                })
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .padding(.leading, 20)
-                .padding(.trailing, 10)
+                NavigationLink(
+                    destination: TransferRtgsConfirmation().environmentObject(transferData),
+                    label: {
+                        Text("KONFIRMASI TRANSFER")
+                            .foregroundColor(.white)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 13))
+                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    })
+                    .background(Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 10)
             }
             .padding(.bottom, 20)
         }
@@ -785,16 +821,19 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     func validateForm() {
-        if (self.transferData.destinationNumber.count == 16 &&
-                self.transferData.amount != "" &&
-                self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi") {
+        if (self.noRekeningCtrl.count == 16 && self.amount != "" && self.transactionFrequency != "Pilih Frekuensi Transaksi" && self.transactionVoucher != "Pilih Voucher") {
             disabledButton = false
         } else {
-            if (self.transferData.transactionVoucher == "Pilih Voucher") {
-                self.transferData.transactionVoucher = "-"
-            }
             disabledButton = true
         }
+    }
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "in_ID")
+        return formatter
     }
     
     @ObservedObject var profileVM = ProfileViewModel()
@@ -821,6 +860,9 @@ struct TransferRtgsScreen: View {
             if success {
                 print("SUCCESS")
                 self.bankSelector = self.referenceVM._listBank[0].bankName
+                self.transferData.bankName = self.referenceVM._listBank[0].bankName
+                self.transferData.destinationBankCode = self.referenceVM._listBank[0].swiftCode
+                self.transferData.combinationBankName = self.referenceVM._listBank[0].combinationName
                 print(self.referenceVM._listBank.count)
             }
             

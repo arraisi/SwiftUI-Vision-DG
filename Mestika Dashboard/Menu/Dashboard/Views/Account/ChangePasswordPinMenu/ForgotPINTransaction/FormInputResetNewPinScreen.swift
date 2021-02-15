@@ -22,6 +22,8 @@ struct FormInputResetNewPinScreen: View {
     private var simpanBtnDisabled: Bool {
         pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || pinCtrl != pinConfirmCtrl
     }
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         ZStack {
@@ -124,6 +126,12 @@ struct FormInputResetNewPinScreen: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ZStack {
                 if isPinChanged {

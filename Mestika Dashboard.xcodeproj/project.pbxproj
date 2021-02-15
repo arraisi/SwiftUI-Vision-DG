@@ -263,6 +263,10 @@
 		52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF125CBEA480012DDAB /* ProfileService.swift */; };
 		52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */; };
 		52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8889B258B16B100D637F2 /* JitsiView.swift */; };
+		52D8DC0425D61135004DF85E /* TransferRtgsExecResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DC0325D61135004DF85E /* TransferRtgsExecResponse.swift */; };
+		52D8DC0925D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DC0825D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift */; };
+		52D8DC0E25D62415004DF85E /* TransferSknExecResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DC0D25D62415004DF85E /* TransferSknExecResponse.swift */; };
+		52D8DC2725D65A4B004DF85E /* TextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DC2625D65A4B004DF85E /* TextArea.swift */; };
 		52DA20852551069C00CC048A /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20842551069C00CC048A /* Statement.swift */; };
 		52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */; };
 		52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */; };
@@ -643,6 +647,10 @@
 		52CB5DF125CBEA480012DDAB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		52D8889B258B16B100D637F2 /* JitsiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiView.swift; sourceTree = "<group>"; };
+		52D8DC0325D61135004DF85E /* TransferRtgsExecResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRtgsExecResponse.swift; sourceTree = "<group>"; };
+		52D8DC0825D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverFavoriteTransactionOffUsView.swift; sourceTree = "<group>"; };
+		52D8DC0D25D62415004DF85E /* TransferSknExecResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferSknExecResponse.swift; sourceTree = "<group>"; };
+		52D8DC2625D65A4B004DF85E /* TextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArea.swift; sourceTree = "<group>"; };
 		52DA20842551069C00CC048A /* Statement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
 		52DA208B25510CB100CC048A /* FormInputOldPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputOldPasswordScreen.swift; sourceTree = "<group>"; };
 		52DA20932551115700CC048A /* FormInputNewPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordScreen.swift; sourceTree = "<group>"; };
@@ -687,7 +695,6 @@
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
 		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
-		C08758D125D2394E008ED730 /* FavoriteServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteServices.swift; sourceTree = "<group>"; };
 		C08758D725D2398E008ED730 /* FavoritModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritModel.swift; sourceTree = "<group>"; };
 		C0884939255BC12E00E2F927 /* ScanKTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanKTPView.swift; sourceTree = "<group>"; };
 		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
@@ -705,7 +712,6 @@
 		C0A4F99525528C0700566A11 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C0A4F9AB25529A9700566A11 /* ArrowDownShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowDownShape.swift; sourceTree = "<group>"; };
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
-		C0A76A6525D247A4005BD60C /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiKeluargaVerificationView.swift; sourceTree = "<group>"; };
 		C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiPerusahaanVerificationView.swift; sourceTree = "<group>"; };
 		C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptPasswordView.swift; sourceTree = "<group>"; };
@@ -880,6 +886,8 @@
 				522101B025C9213100C9566A /* TransferOnUsModel.swift */,
 				0A566A0725CA6A4E0008E752 /* TransferOnUsResponse.swift */,
 				529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */,
+				52D8DC0325D61135004DF85E /* TransferRtgsExecResponse.swift */,
+				52D8DC0D25D62415004DF85E /* TransferSknExecResponse.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -925,6 +933,7 @@
 				FA486B1825AF4E9100EDBD88 /* SavingDetailModalView.swift */,
 				C043CFC925CD4BD000328C91 /* BiometricType.swift */,
 				52C2FA2225D1A6F900AC3CF7 /* FavoriteAppBar.swift */,
+				52D8DC2625D65A4B004DF85E /* TextArea.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -939,6 +948,7 @@
 				5245F882253FE702002E8B53 /* Products */,
 				2D38FE9D601AF2B3B064B9C4 /* Pods */,
 				4F7E270C26BE9FEC99FBDF72 /* Frameworks */,
+				5291912825D3FF11005A4898 /* Recovered References */,
 				C01800A925D4DF4E00766E41 /* Recovered References */,
 			);
 			sourceTree = "<group>";
@@ -1226,6 +1236,13 @@
 			path = "Nasabah Verification";
 			sourceTree = "<group>";
 		};
+		5291912825D3FF11005A4898 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		52ADFE762557D99F00A1001F /* Master */ = {
 			isa = PBXGroup;
 			children = (
@@ -1370,6 +1387,7 @@
 				52C348712542878700F08F37 /* ListTransactionFavoriteView.swift */,
 				52C348992542ACC500F08F37 /* ListBankAccountView.swift */,
 				525DB5282546B16A00D48075 /* PopOverFavoriteView.swift */,
+				52D8DC0825D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -1549,8 +1567,6 @@
 		C01800A925D4DF4E00766E41 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				C0A76A6525D247A4005BD60C /* FavoriteViewModel.swift */,
-				C08758D125D2394E008ED730 /* FavoriteServices.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -2284,12 +2300,14 @@
 				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
 				52ADFFAC2557DFDC00A1001F /* FormDetailKartuATMView.swift in Sources */,
 				C0E40B7A2564D83F00259612 /* FormJabatanProfesiView.swift in Sources */,
+				52D8DC2725D65A4B004DF85E /* TextArea.swift in Sources */,
 				52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */,
 				52ADFF922557DFDC00A1001F /* BesarPerkiraanSetoranView.swift in Sources */,
 				528AE2CC2595B95E003AFD73 /* AddressService.swift in Sources */,
 				52ADFEAD2557D9A800A1001F /* Card.swift in Sources */,
 				C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */,
 				52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */,
+				52D8DC0925D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift in Sources */,
 				52DA20852551069C00CC048A /* Statement.swift in Sources */,
 				526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */,
 				52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */,
@@ -2312,6 +2330,7 @@
 				C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */,
 				524B396825A5C31500FE3ABE /* AddressSugestionResultResponse.swift in Sources */,
 				52ADFF402557DE6000A1001F /* SnapCarouselView.swift in Sources */,
+				52D8DC0E25D62415004DF85E /* TransferSknExecResponse.swift in Sources */,
 				C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */,
 				C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */,
 				52BF57E32558E81F00F009B5 /* SavingType.swift in Sources */,
@@ -2375,6 +2394,7 @@
 				6122BB4B73F6658A6EC4DFED /* UserRegistrationResponse.swift in Sources */,
 				526A81762560B46800D614CB /* FirstPasswordLoginView.swift in Sources */,
 				06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */,
+				52D8DC0425D61135004DF85E /* TransferRtgsExecResponse.swift in Sources */,
 				52BB539C25C108080045DBE6 /* LoginCredentialResponse.swift in Sources */,
 				6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */,
 				6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */,
