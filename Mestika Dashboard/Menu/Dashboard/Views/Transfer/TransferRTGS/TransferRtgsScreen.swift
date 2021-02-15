@@ -462,7 +462,7 @@ struct TransferRtgsScreen: View {
                 MultilineTextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onCommit: {
                 })
                 .onReceive(notesCtrl.publisher.collect()) {
-                    self.notesCtrl = String($0.prefix(50))
+                    self.notesCtrl = String($0.prefix(40))
                 }
             }
             .padding(.horizontal, 20)

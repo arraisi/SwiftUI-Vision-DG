@@ -44,6 +44,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "Over Booking failed"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -83,6 +86,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "RTGS failed"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -122,6 +128,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "SKN failed"
                 default:
                     self.message = "Internal Server Error"
                 }

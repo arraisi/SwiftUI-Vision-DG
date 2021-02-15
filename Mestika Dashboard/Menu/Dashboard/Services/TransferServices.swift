@@ -82,6 +82,10 @@ class TransferServices {
                 if (httpResponse.statusCode == 404) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()
@@ -151,6 +155,10 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }
@@ -223,6 +231,10 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }

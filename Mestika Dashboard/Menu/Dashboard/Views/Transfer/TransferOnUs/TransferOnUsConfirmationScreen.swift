@@ -263,8 +263,7 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField("Catatan", text: self.$transferData.notes, onEditingChanged: { changed in
-                        print("\(self.$transferData.notes)")
+                    MultilineTextField("Catatan", text: self.$transferData.notes, onCommit: {
                     })
                     .disabled(true)
                     .frame(height: 50)
