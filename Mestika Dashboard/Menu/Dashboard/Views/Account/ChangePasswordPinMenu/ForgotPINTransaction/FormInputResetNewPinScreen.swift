@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FormInputResetNewPinScreen: View {
     
+    var cardNo = ""
+    
     @State private var pinCtrl = ""
     @State private var pinConfirmCtrl = ""
     
@@ -16,6 +18,10 @@ struct FormInputResetNewPinScreen: View {
     @State private var showPinConfirm: Bool = false
     @State private var showModal: Bool = false
     @State private var isPinChanged: Bool = false
+    
+    private var simpanBtnDisabled: Bool {
+        pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || pinCtrl != pinConfirmCtrl
+    }
     
     var body: some View {
         ZStack {
@@ -90,16 +96,16 @@ struct FormInputResetNewPinScreen: View {
                         
                         Spacer()
                         
-                        Button(action: {
-                            self.showModal.toggle()
-                        }, label: {
+                        NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl), label: {
                             Text("Simpan PIN Baru")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             
                         })
-                        .background(Color(hex: "#2334D0"))
+                        .isDetailLink(false)
+                        .disabled(simpanBtnDisabled)
+                        .background(simpanBtnDisabled ? Color(.lightGray) : Color(hex: "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.vertical, 30)

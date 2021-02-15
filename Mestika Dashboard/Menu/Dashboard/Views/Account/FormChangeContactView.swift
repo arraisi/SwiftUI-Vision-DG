@@ -42,6 +42,7 @@ struct FormChangeContactView: View {
                                 })
                                 
                             }
+                            .disabled(true)
                             .font(.custom("Montserrat-Regular", size: 12))
                             .keyboardType(.numberPad)
                             .padding(15)
@@ -59,6 +60,7 @@ struct FormChangeContactView: View {
                             TextField(NSLocalizedString("Input Email", comment: ""), text: $txtEmail, onEditingChanged: { changed in
                                 
                             })
+                            .disabled(true)
                             .font(.custom("Montserrat-Regular", size: 12))
                             .keyboardType(.numberPad)
                             .padding(15)

@@ -150,6 +150,18 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/auth/clearFinger")
     }
     
+    static func urlAuthChangePassword() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/changePwd")
+    }
+    
+    static func urlAuthChangePinTrx() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/changePinTrx")
+    }
+    
+    static func urlAuthForgotPinTrx() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/forgotPinTrx?channel=vlink")
+    }
+    
     //-------------------- TRANSFER SERVICE ----------------------//
     
     static func urlBankReference() -> URL? {

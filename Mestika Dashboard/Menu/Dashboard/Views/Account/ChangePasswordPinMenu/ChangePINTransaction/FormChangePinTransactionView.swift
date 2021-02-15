@@ -9,6 +9,10 @@ import SwiftUI
 
 struct FormChangePinTransactionView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
+    @StateObject private var authVM = AuthViewModel()
+    
     @State private var oldPinCtrl = ""
     
     @State private var pinCtrl = ""
@@ -19,6 +23,10 @@ struct FormChangePinTransactionView: View {
     @State private var showPinConfirm: Bool = false
     @State private var showModal: Bool = false
     @State private var isPinChanged: Bool = false
+    
+    private var verificationBtnDisabled: Bool {
+        pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || oldPinCtrl.count == 0 || pinCtrl != pinConfirmCtrl
+    }
     
     var body: some View {
         
@@ -32,7 +40,7 @@ struct FormChangePinTransactionView: View {
                     
                     VStack {
                         
-                        Text("Ubah PIN")
+                        Text("Ubah PIN Transaksi")
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
@@ -124,7 +132,12 @@ struct FormChangePinTransactionView: View {
                         Spacer()
                         
                         Button(action: {
-                            self.showModal.toggle()
+                            self.authVM.changePinTrx(currentPinTrx: oldPinCtrl, newPinTrx: pinCtrl) { result in
+                                if result {
+                                    self.isPinChanged = true
+                                    self.showModal.toggle()
+                                }
+                            }
                         }, label: {
                             Text("Simpan PIN Baru")
                                 .foregroundColor(.white)
@@ -132,10 +145,12 @@ struct FormChangePinTransactionView: View {
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             
                         })
-                        .background(Color(hex: "#2334D0"))
+                        .disabled(verificationBtnDisabled)
+                        .background(verificationBtnDisabled ? Color(.lightGray) : Color(hex: "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.vertical, 30)
+                        
                     }
                     .padding()
                     
@@ -181,6 +196,7 @@ struct FormChangePinTransactionView: View {
             
             Button(action: {
                 self.showModal = false
+                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("OK")
                     .foregroundColor(.white)

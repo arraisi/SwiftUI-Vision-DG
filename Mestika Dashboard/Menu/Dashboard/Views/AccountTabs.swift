@@ -279,7 +279,7 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormInputResetNewPinScreen()){
+                    NavigationLink(destination : FormInputResetNewPinScreen(cardNo: self.profileVM.cardNo)){
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("Forgot Pin Transaction")
