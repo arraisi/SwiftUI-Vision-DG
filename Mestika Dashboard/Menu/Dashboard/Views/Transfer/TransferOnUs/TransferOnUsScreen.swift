@@ -24,7 +24,7 @@ struct TransferOnUsScreen: View {
     @State private var showDialogMinTransaction: Bool = false
     
     @State private var isShowName: Bool = false
-    @State private var showName: String = "JHON LENNON"
+    @State private var showName: String = ""
     
     @State private var disabledButton = true
     
@@ -41,8 +41,8 @@ struct TransferOnUsScreen: View {
     
     @State var listBankAccount: [BankAccount] = []
     
-    var _listVoucher = ["VCR-50K","VCR-100K","VCR-150K","VCR-250K"]
-    var _listFrequency = ["Sekali","Berkali-kali"]
+    var _listVoucher = ["Voucher Tidak Tersedia"]
+    var _listFrequency = ["Sekali", "Berkali-kali"]
     
     @State private var selectedCalendar: String = "Now"
     
@@ -85,7 +85,7 @@ struct TransferOnUsScreen: View {
                         nominalCard
                         
                         calendarCard
-                        frekuensiTransaksiCard
+//                        frekuensiTransaksiCard
                         chooseVoucherCard
                         notesCard
                         
@@ -188,7 +188,11 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Rekening", text: $destinationNumber, onEditingChanged: {_ in })
+                TextField("Rekening", text: $destinationNumber, onEditingChanged: {_ in
+                    inquiryTransfer()
+                }, onCommit: {
+                    
+                })
                     .onReceive(destinationNumber.publisher.collect()) {
                         self.destinationNumber = String($0.prefix(11))
                         self.transferData.destinationNumber = destinationNumber
@@ -318,12 +322,19 @@ struct TransferOnUsScreen: View {
                 }
                 
                 Spacer()
-                Image("ic_expand")
+                
+                Button(
+                    action: {
+                        self.showDialogSelectAccount = true
+                    },
+                    label: {
+                        Image("ic_expand")
+                    }
+                )
             }
             .padding()
             .onTapGesture {
                 UIApplication.shared.endEditing()
-                self.showDialogSelectAccount = true
             }
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -736,7 +747,7 @@ struct TransferOnUsScreen: View {
             self.isShowName = true
         }
         
-        if (self.destinationNumber.count == 11 && self.amount != "" && self.transactionFrequency != "Pilih Frekuensi Transaksi" && self.transactionVoucher != "Pilih Voucher") {
+        if (self.destinationNumber.count == 11 && self.amount != "" && self.transactionVoucher != "Pilih Voucher") {
             disabledButton = false
         } else {
             disabledButton = true
@@ -749,6 +760,23 @@ struct TransferOnUsScreen: View {
         formatter.timeStyle = .none
         formatter.locale = Locale(identifier: "in_ID")
         return formatter
+    }
+    
+    @ObservedObject var transferVM = TransferViewModel()
+    func inquiryTransfer() {
+        self.transferVM.transferOnUsInquiry(transferData: transferData) { success in
+            DispatchQueue.main.async {
+                if success {
+                    print("SUCCESS")
+                    self.showName = self.transferVM.destinationName
+                }
+                
+                if !success {
+                    print("NOT SUCCESS")
+                    self.showName = "Akun Tidak Ditemukan"
+                }
+            }
+        }
     }
     
     func getProfile() {

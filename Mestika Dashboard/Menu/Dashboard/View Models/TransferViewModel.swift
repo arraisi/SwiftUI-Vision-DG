@@ -13,19 +13,20 @@ class TransferViewModel : ObservableObject {
     @Published var timeEnd: String = ""
     @Published var message: String = ""
     @Published var code: String = ""
+    @Published var destinationName: String = ""
     
     // MARK: - Transfer ONUS INQUIRY
     func transferOnUsInquiry(transferData: TransferOnUsModel,
                       completion: @escaping (Bool) -> Void) {
-        TransferServices.shared.transferOnUs(transferData: transferData) {result in
+        TransferServices.shared.transferOnUsInquiry(transferData: transferData) {result in
             print(result)
             
             switch result {
             case .success(let response):
                 print(response)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.isLoading = false
-                }
+                
+                self.isLoading = false
+                self.destinationName = response.destinationAccountName
                 
                 completion(true)
 

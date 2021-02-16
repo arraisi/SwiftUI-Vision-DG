@@ -29,17 +29,15 @@ class TransferServices {
     
     // MARK: - POST TRANSFER ONUS INQUIRY
     func transferOnUsInquiry(transferData: TransferOnUsModel,
-                      completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
+                      completion: @escaping(Result<InquiryTransferResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "cardNo": transferData.cardNo,
-            "ref": "1",
-            "nominal": transferData.amount,
+            "cardNo": transferData.destinationNumber,
+            "nominal": "1",
             "currency": "360",
-            "sourceNumber": transferData.sourceNumber,
-            "destinationNumber": transferData.destinationNumber,
-            "berita": transferData.notes,
-            "pin": encryptPassword(password: transferData.pin)
+            "sourceNumber": "1",
+            "destinationNumber": "1",
+            "pin": "pin"
         ]
         
         guard let url = URL.urlTransferOverbookingInquiry() else {
@@ -71,7 +69,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(InquiryTransferResponse.self, from: data)
                     completion(.success(transferResponse!))
                 }
                 
