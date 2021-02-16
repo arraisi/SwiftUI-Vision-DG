@@ -71,6 +71,8 @@ struct WelcomeView: View {
     @State var modalSelection = ""
     @State var isShowAlertInternetConnection = false
     
+    @State private var isShowAlert: Bool = false
+    
     @State var jitsiRoom = ""
     
     @State var phoneNumber = ""
@@ -154,6 +156,7 @@ struct WelcomeView: View {
                         
                         NavigationLink(
                             destination: FirstLoginView().environmentObject(registerData),
+//                            destination: VerificationAddressView().environmentObject(registerData),
                             isActive: self.$isFirstLoginViewActive,
                             label: {}
                         )
@@ -243,6 +246,13 @@ struct WelcomeView: View {
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
                 print("RECEIVED JITSI END")
                 getUserStatus(deviceId: deviceId!)
+            }
+            .alert(isPresented: $isShowAlert) {
+                return Alert(
+                    title: Text("MESSAGE"),
+                    message: Text("\(jitsiRoom)"),
+                    dismissButton: .default(Text("Oke"))
+                )
             }
             .onAppear {
                 getCoreDataNewDevice()

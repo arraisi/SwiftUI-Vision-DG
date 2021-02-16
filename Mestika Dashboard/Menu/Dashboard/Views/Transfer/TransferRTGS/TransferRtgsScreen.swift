@@ -407,7 +407,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionFrequency)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(transactionFrequency == "Pilih Frekuensi Transaksi" ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -442,7 +442,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionVoucher)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(transactionVoucher == "Pilih Voucher" ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()

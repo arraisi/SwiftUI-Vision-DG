@@ -27,6 +27,7 @@ struct TransferOnUsConfirmationScreen: View {
                 }
             }
         }
+        .navigationBarTitle("Konfirmasi", displayMode: .inline)
     }
     
     var formCard: some View {
