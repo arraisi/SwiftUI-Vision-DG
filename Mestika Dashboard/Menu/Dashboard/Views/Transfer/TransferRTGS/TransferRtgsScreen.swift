@@ -21,7 +21,7 @@ struct TransferRtgsScreen: View {
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", sourceNumber: "", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     @State var listBankAccount: [BankAccount] = []
     
     // Variable Amount
@@ -505,39 +505,38 @@ struct TransferRtgsScreen: View {
     
     var bankAccountCard: some View {
         ZStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(self.selectedAccount.namaRekening)
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(.bold)
-                    
+            
+            Button(
+                action: {
+                    UIApplication.shared.endEditing()
+                    self.showDialogSelectAccount = true
+                },
+                label: {
                     HStack {
-                        Text("Saldo Aktif :")
-                            .font(.caption)
-                            .fontWeight(.ultraLight)
-                        Text(self.selectedAccount.saldo)
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(.semibold)
-                    }
-                }
-                
-                Spacer()
-                
-                Button(
-                    action: {
-                        self.showDialogSelectAccount = true
-                    },
-                    label: {
+                        VStack(alignment: .leading) {
+                            Text(self.selectedAccount.namaRekening)
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.bold)
+                            
+                            HStack {
+                                Text("Saldo Aktif :")
+                                    .font(.caption)
+                                    .fontWeight(.ultraLight)
+                                Text(self.selectedAccount.saldo)
+                                    .font(.caption)
+                                    .foregroundColor(Color(hex: "#232175"))
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                        
+                        Spacer()
+                        
                         Image("ic_expand")
                     }
-                )
-            }
-            .padding()
-            .onTapGesture {
-                UIApplication.shared.endEditing()
-            }
+                    .padding()
+                }
+            )
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color(hex: "#F6F8FB"))
@@ -851,7 +850,7 @@ struct TransferRtgsScreen: View {
                 print(self.profileVM.balance)
                 self.transferData.username = self.profileVM.name
                 self.listBankAccount.removeAll()
-                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, productName: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
                 self.selectedAccount = self.listBankAccount[0]
                 self.transferData.cardNo = selectedAccount.noRekening
                 self.transferData.sourceNumber = selectedAccount.sourceNumber

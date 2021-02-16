@@ -20,6 +20,7 @@ class ProfileViewModel: ObservableObject {
     @Published var cardNo: String = ""
     @Published var cardName: String = ""
     @Published var accountNumber: String = ""
+    @Published var productName: String = ""
     
     // Address
     @Published var alamat: String = ""

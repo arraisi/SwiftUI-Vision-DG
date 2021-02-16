@@ -154,10 +154,7 @@ struct TransferRtgsSuccess: View {
                 .fontWeight(.bold)
             
             HStack {
-                Text("\(self.transferData.bankName) :")
-                    .foregroundColor(Color(hex: "#FFFFFF"))
-                
-                Text(self.transferData.destinationNumber)
+                Text("\(self.transferData.bankName) : \(self.transferData.destinationNumber)")
                     .foregroundColor(Color(hex: "#FFFFFF"))
             }
         }

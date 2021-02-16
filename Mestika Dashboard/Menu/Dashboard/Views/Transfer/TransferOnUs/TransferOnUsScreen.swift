@@ -15,7 +15,7 @@ struct TransferOnUsScreen: View {
     @State var transactionVoucher = "Pilih Voucher"
     @State var destinationNumber = ""
     @State var amount = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", sourceNumber: "", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     
     @State private var showDialogConfirmation = false
     @State private var showDialogSelectAccount = false
@@ -101,7 +101,7 @@ struct TransferOnUsScreen: View {
                         VStack {
                             Button(action: {
                                 //                                    MARK: To be replaced with actual data
-                                self.transferData.destinationName = "JOHN LENNON"
+                                self.transferData.destinationName = self.showName
                                 
                                 UIApplication.shared.endEditing()
                                 let amount = Int(self.transferData.amount) ?? 0
@@ -303,39 +303,36 @@ struct TransferOnUsScreen: View {
     
     var bankAccountCard: some View {
         ZStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(self.selectedAccount.namaRekening)
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(.bold)
-                    
+            Button(
+                action: {
+                    UIApplication.shared.endEditing()
+                    self.showDialogSelectAccount = true
+                },
+                label: {
                     HStack {
-                        Text("Saldo Aktif :")
-                            .font(.caption)
-                            .fontWeight(.ultraLight)
-                        Text(self.selectedAccount.saldo)
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(.semibold)
-                    }
-                }
-                
-                Spacer()
-                
-                Button(
-                    action: {
-                        self.showDialogSelectAccount = true
-                    },
-                    label: {
+                        VStack(alignment: .leading) {
+                            Text(self.selectedAccount.productName)
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.bold)
+                            
+                            HStack {
+                                Text("Saldo Aktif :")
+                                    .font(.caption)
+                                    .fontWeight(.ultraLight)
+                                Text(self.selectedAccount.saldo)
+                                    .font(.caption)
+                                    .foregroundColor(Color(hex: "#232175"))
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                        
+                        Spacer()
                         Image("ic_expand")
                     }
-                )
-            }
-            .padding()
-            .onTapGesture {
-                UIApplication.shared.endEditing()
-            }
+                    .padding()
+                }
+            )
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color.white)
@@ -703,7 +700,7 @@ struct TransferOnUsScreen: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(data.namaRekening)
+                            Text(data.productName)
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
@@ -731,7 +728,7 @@ struct TransferOnUsScreen: View {
                     self.selectedAccount = data
                     self.transferData.cardNo = data.noRekening
                     self.transferData.sourceNumber = data.sourceNumber
-                    self.transferData.sourceAccountName = data.namaRekening
+                    self.transferData.sourceAccountName = data.productName
                     print(data.noRekening)
                     self.showDialogSelectAccount = false
                 }
@@ -788,13 +785,13 @@ struct TransferOnUsScreen: View {
                 
                 self.listBankAccount.removeAll()
                 
-                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.cardName, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.cardName, productName: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
                 
                 self.selectedAccount = self.listBankAccount[0]
                 
                 self.transferData.cardNo = selectedAccount.noRekening
                 self.transferData.sourceNumber = selectedAccount.sourceNumber
-                self.transferData.sourceAccountName = selectedAccount.namaRekening
+                self.transferData.sourceAccountName = selectedAccount.productName
             }
         }
     }
