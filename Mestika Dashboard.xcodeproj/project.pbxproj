@@ -262,6 +262,7 @@
 		52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */; };
 		52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF125CBEA480012DDAB /* ProfileService.swift */; };
 		52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */; };
+		52D6AD0125DBA0080079B48C /* InquiryTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D6AD0025DBA0080079B48C /* InquiryTransferResponse.swift */; };
 		52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8889B258B16B100D637F2 /* JitsiView.swift */; };
 		52D8DC0425D61135004DF85E /* TransferRtgsExecResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DC0325D61135004DF85E /* TransferRtgsExecResponse.swift */; };
 		52D8DC0925D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DC0825D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift */; };
@@ -646,6 +647,7 @@
 		52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseModel.swift; sourceTree = "<group>"; };
 		52CB5DF125CBEA480012DDAB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		52D6AD0025DBA0080079B48C /* InquiryTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryTransferResponse.swift; sourceTree = "<group>"; };
 		52D8889B258B16B100D637F2 /* JitsiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiView.swift; sourceTree = "<group>"; };
 		52D8DC0325D61135004DF85E /* TransferRtgsExecResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRtgsExecResponse.swift; sourceTree = "<group>"; };
 		52D8DC0825D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverFavoriteTransactionOffUsView.swift; sourceTree = "<group>"; };
@@ -888,6 +890,7 @@
 				529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */,
 				52D8DC0325D61135004DF85E /* TransferRtgsExecResponse.swift */,
 				52D8DC0D25D62415004DF85E /* TransferSknExecResponse.swift */,
+				52D6AD0025DBA0080079B48C /* InquiryTransferResponse.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -2136,6 +2139,7 @@
 				526A81582560B1F900D614CB /* LoginBindingModel.swift in Sources */,
 				C018012E25D4E40F00766E41 /* FavoritViewModel.swift in Sources */,
 				52AE1A8C255A448100B011B7 /* OtpRequest.swift in Sources */,
+				52D6AD0125DBA0080079B48C /* InquiryTransferResponse.swift in Sources */,
 				C0E6C8FB255F87BB00A79237 /* FormPilihJenisATMView.swift in Sources */,
 				525FA10A25524F29007EADCB /* CustomBottomNavigationView.swift in Sources */,
 				0620291E256D914500A830EA /* GeneralResponse.swift in Sources */,

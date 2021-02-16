@@ -90,6 +90,7 @@ struct TransferRtgsValidationPin: View {
     }
     
     func submitTransfer() {
+        print("Submit Transfer")
         self.isLoading = true
         if (transferData.transactionType == "RTGS") {
             self.transferVM.transferRtgs(transferData: transferData) { success in

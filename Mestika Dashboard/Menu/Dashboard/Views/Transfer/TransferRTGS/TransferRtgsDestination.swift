@@ -147,7 +147,7 @@ struct TransferRtgsDestination: View {
                 }
                 .padding([.leading, .top, .bottom])
                 
-                TextField("", text: self.$transferData.destinationName, onEditingChanged: { changed in
+                TextField("Nama Tujuan", text: self.$transferData.destinationName, onEditingChanged: { changed in
                     validateForm()
                 })
                     .font(.subheadline)
@@ -166,7 +166,7 @@ struct TransferRtgsDestination: View {
                 VStack(alignment: .leading) {
                     Text(destinationType)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -200,7 +200,7 @@ struct TransferRtgsDestination: View {
                 VStack(alignment: .leading) {
                     Text(citizenShipCtrl)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.black)
                         .fontWeight(.light)
                 }
                 .padding()

@@ -27,6 +27,60 @@ class TransferServices {
         //        self.registerData.password = base64String
     }
     
+    // MARK: - POST TRANSFER ONUS INQUIRY
+    func transferOnUsInquiry(transferData: TransferOnUsModel,
+                      completion: @escaping(Result<InquiryTransferResponse, ErrorResult>) -> Void) {
+        
+        let body: [String: Any] = [
+            "cardNo": transferData.destinationNumber,
+            "nominal": "1",
+            "currency": "360",
+            "sourceNumber": "1",
+            "destinationNumber": "1",
+            "pin": "pin"
+        ]
+        
+        guard let url = URL.urlTransferOverbookingInquiry() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("URL ABSOLUTE : \(url.absoluteURL)")
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: body)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let transferResponse = try? JSONDecoder().decode(InquiryTransferResponse.self, from: data)
+                    completion(.success(transferResponse!))
+                }
+                
+                if (httpResponse.statusCode > 300) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
     // MARK: - POST TRANSFER ONUS
     func transferOnUs(transferData: TransferOnUsModel,
                       completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {

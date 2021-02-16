@@ -34,7 +34,7 @@ struct TransferRtgsScreen: View {
     @State var transactionFrequency = "Pilih Frekuensi Transaksi"
     
     // Variable Voucher
-    var _listVoucher = ["VCR-50K", "VCR-100K", "VCR-150K", "VCR-250K"]
+    var _listVoucher = ["Voucher Tidak Tersedia"]
     @State var transactionVoucher = "Pilih Voucher"
     
     // Variable Notes
@@ -94,7 +94,7 @@ struct TransferRtgsScreen: View {
                         cardBankAndRekening
                         nominalCard
                         calendarCard
-                        frekuensiTransaksiCard
+//                        frekuensiTransaksiCard
                         chooseVoucherCard
                         notesCard
                         
@@ -407,7 +407,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionFrequency)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(transactionFrequency == "Pilih Frekuensi Transaksi" ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -442,7 +442,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionVoucher)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(transactionVoucher == "Pilih Voucher" ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -524,12 +524,19 @@ struct TransferRtgsScreen: View {
                 }
                 
                 Spacer()
-                Image("ic_expand")
+                
+                Button(
+                    action: {
+                        self.showDialogSelectAccount = true
+                    },
+                    label: {
+                        Image("ic_expand")
+                    }
+                )
             }
             .padding()
             .onTapGesture {
                 UIApplication.shared.endEditing()
-                self.showDialogSelectAccount = true
             }
         }
         .frame(width: UIScreen.main.bounds.width - 60)
@@ -821,7 +828,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     func validateForm() {
-        if (self.noRekeningCtrl.count == 16 && self.amount != "" && self.transactionFrequency != "Pilih Frekuensi Transaksi" && self.transactionVoucher != "Pilih Voucher") {
+        if (self.noRekeningCtrl.count == 16 && self.amount != "" && self.transactionVoucher != "Pilih Voucher") {
             disabledButton = false
         } else {
             disabledButton = true

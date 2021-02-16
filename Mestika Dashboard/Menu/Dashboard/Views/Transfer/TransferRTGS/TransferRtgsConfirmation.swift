@@ -407,24 +407,24 @@ struct TransferRtgsConfirmation: View {
                 .padding(.horizontal)
                 
                 // Frekuensi Form
-                HStack(spacing: 20) {
-                    Text("Frekuensi")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100, alignment: .leading)
-                    
-                    TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
-                        print("\(self.$transferData.transactionFrequency)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
+//                HStack(spacing: 20) {
+//                    Text("Frekuensi")
+//                        .font(.caption)
+//                        .fontWeight(.light)
+//                        .frame(width: 100, alignment: .leading)
+//                    
+//                    TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
+//                        print("\(self.$transferData.transactionFrequency)")
+//                    })
+//                    .disabled(true)
+//                    .frame(height: 20)
+//                    .padding()
+//                    .font(.subheadline)
+//                    .background(Color(hex: "#F6F8FB"))
+//                    .cornerRadius(15)
+//                }
+//                .padding(.vertical, 5)
+//                .padding(.horizontal)
                 
                 // Voucher Form
                 HStack(spacing: 20) {
