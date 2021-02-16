@@ -139,18 +139,19 @@ struct LoginScreen: View {
                         isActive: self.$routeNewPassword,
                         label: {})
                     
-                    Button(action: {
-                        if let value = device.last?.fingerprintFlag {
-                            if value {
-                                authenticate()
-                            } else {
-                                self.showingModalBiometricLogin = true
-                            }
+                    if let value = device.last?.fingerprintFlag {
+                        
+                        if value {
+                            
+                            Button(action: {
+                                        authenticate()
+                            }, label: {
+                                Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
+                                    .padding(.trailing, 20)
+                            })
                         }
-                    }, label: {
-                        Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
-                            .padding(.trailing, 20)
-                    })
+                        
+                    }
                     
                 }
                 .padding(.vertical)
@@ -274,6 +275,12 @@ struct LoginScreen: View {
                     }
                 }
             }
+        } else {
+            guard let settingUrl = URL(string : "App-Prefs:") else {
+                return
+            }
+            
+            UIApplication.shared.open(settingUrl)
         }
     }
     
