@@ -90,10 +90,11 @@ struct FormInputResetPinScreen: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinForgotPinTrx"))) { obj in
             print("SUCCESS PIN")
-            
             self.authVM.forgotPinTransaksi(cardNo: cardNo, pin: pin, newPinTrx: newPin) { (result) in
                 if result {
-                    self.appState.moveToWelcomeView = true
+                    DispatchQueue.main.async {
+                        self.appState.moveToAccountTab = true
+                    }
                 }
             }
         }

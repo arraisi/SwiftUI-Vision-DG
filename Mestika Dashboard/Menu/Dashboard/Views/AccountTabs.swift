@@ -25,6 +25,8 @@ struct AccountTabs: View {
     
     @State private var isShowingAlert = false
     
+    @State private var forgotPasswordActived = false
+    
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -51,6 +53,15 @@ struct AccountTabs: View {
                 }
             })
             .navigationBarHidden(true)
+        }
+        .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
+            if moveToAccountTab {
+//                getCoreDataNewDevice()
+                print("Move to moveToDashboard: \(moveToAccountTab)")
+//                activateWelcomeView()
+                self.forgotPasswordActived = false
+                self.appState.moveToAccountTab = false
+            }
         }
         .onAppear(perform: {
             if let value = device.last?.fingerprintFlag {
@@ -281,19 +292,26 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormInputResetNewPinScreen(cardNo: self.profileVM.cardNo)){
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Forgot Pin Transaction")
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
-                            }
-                            
-                            Spacer()
+                    ZStack {
+                        NavigationLink(destination: FormInputResetNewPinScreen(cardNo: self.profileVM.cardNo), isActive: self.$forgotPasswordActived) {
+                            EmptyView()
                         }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 20)
+                        .isDetailLink(false)
+                        
+                        Button(action : {self.forgotPasswordActived=true}){
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Forgot Pin Transaction")
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                        }
                     }
                     
                     Divider()
