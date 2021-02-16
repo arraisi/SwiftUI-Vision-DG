@@ -11,7 +11,7 @@ struct ProfileResponseModel: Codable {
     let personal: Personal
     let status: String
     let products: [Product]
-    let chipProfileDto: [ChipProfileDto]
+    let chipProfileDto: [ChipProfileDto]?
     let profileResponseModelID: ID
 
     enum CodingKeys: String, CodingKey {
