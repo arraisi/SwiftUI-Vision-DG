@@ -69,6 +69,7 @@ struct NumPadView: View {
                                 unlocked = false
                                 wrongPass = false
                                 NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+                                NotificationCenter.default.post(name: NSNotification.Name("PinForgotPinTrx"), object: nil, userInfo: nil)
 //                                if password == key{
 //                                    if (isTransferOnUs) {
 //                                        unlocked = false

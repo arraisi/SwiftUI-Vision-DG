@@ -11,6 +11,8 @@ import Combine
 class AppState: ObservableObject {
     @Published var moveToWelcomeView: Bool = false
     @Published var moveToDashboard: Bool = false
+    @Published var moveToAccountTab: Bool = false
+    @Published var moveToTransferTab: Bool = false
     @Published var skipOTP: Bool = false
     @Published var nasabahIsExisting: Bool = false
     

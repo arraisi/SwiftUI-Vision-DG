@@ -16,8 +16,6 @@ struct BottomNavigationView: View {
     
     @State var selected = 0
     
-    @State
-    
     @State var initialOffset: CGFloat?
     @State var offset: CGFloat?
     @State var viewIsShown: Bool = true

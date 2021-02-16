@@ -60,45 +60,45 @@ struct FormChangeAddressView: View {
     
     var FormAddress: some View {
         VStack {
-            LabelTextField(value: self.$profileVM.alamat, label: "Address", placeHolder: "Address", onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.alamat, label: "Address", placeHolder: "Address", disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
             HStack(spacing: 20) {
-                LabelTextField(value: self.$profileVM.rt, label: "RT", placeHolder: "RT", onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.rt, label: "RT", placeHolder: "RT", disabled: true, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.rw, label: "RW", placeHolder: "RW", onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.rw, label: "RW", placeHolder: "RW", disabled: true, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
             }
             
-            LabelTextField(value: self.$profileVM.kelurahanName, label: "Sub-District", placeHolder: "Sub-District", onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.kelurahanName, label: "Sub-District", placeHolder: "Sub-District", disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.kecamatanName, label: "District", placeHolder: "District", onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.kecamatanName, label: "District", placeHolder: "District", disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.kabupatenName, label: "City", placeHolder: "City", onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.kabupatenName, label: "City", placeHolder: "City", disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.provinsiName, label: "Province", placeHolder: "Province", onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.provinsiName, label: "Province", placeHolder: "Province", disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")

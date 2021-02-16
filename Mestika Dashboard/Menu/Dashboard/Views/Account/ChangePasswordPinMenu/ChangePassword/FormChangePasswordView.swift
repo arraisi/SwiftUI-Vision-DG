@@ -9,6 +9,10 @@ import SwiftUI
 
 struct FormChangePasswordView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
+    @StateObject private var authVM = AuthViewModel()
+    
     @State private var oldPasswordCtrl = ""
     
     @State private var passwordCtrl = ""
@@ -20,8 +24,11 @@ struct FormChangePasswordView: View {
     @State private var showModal: Bool = false
     @State private var isPasswordChanged: Bool = false
     
+    private var simpanBtnDisabled: Bool {
+        oldPasswordCtrl.count == 0 || passwordCtrl.count == 0 || confirmPasswordCtrl.count == 0 || passwordCtrl != confirmPasswordCtrl
+    }
+    
     @GestureState private var dragOffset = CGSize.zero
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         
@@ -33,7 +40,7 @@ struct FormChangePasswordView: View {
                 ScrollView(showsIndicators: false) {
                     
                     VStack {
-                        Text("Ubah Password")
+                        Text("Ubah Password Aplikasi")
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
@@ -123,7 +130,14 @@ struct FormChangePasswordView: View {
                         Spacer()
                         
                         Button(action: {
-                            self.showModal.toggle()
+                            //                            self.showModal.toggle()
+                            self.authVM.changePasswordApp(currentPwd: self.oldPasswordCtrl, newPwd: self.passwordCtrl) { result in
+                                if result {
+                                    isPasswordChanged = true
+                                }
+                                self.showModal.toggle()
+                                
+                            }
                         }, label: {
                             Text("Simpan Password Baru")
                                 .foregroundColor(.white)
@@ -131,7 +145,8 @@ struct FormChangePasswordView: View {
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             
                         })
-                        .background(Color(hex: "#2334D0"))
+                        .disabled(simpanBtnDisabled)
+                        .background(simpanBtnDisabled ? Color(.lightGray) : Color(hex: "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.vertical, 30)
@@ -184,6 +199,7 @@ struct FormChangePasswordView: View {
             
             Button(action: {
                 self.showModal = false
+                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("OK")
                     .foregroundColor(.white)

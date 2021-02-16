@@ -329,6 +329,7 @@
 		C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */; };
 		C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */; };
 		C0AC4A6F2582116500848AC7 /* InformasiPerusahaanVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */; };
+		C0AEAC2725D516B600B6A20C /* EncryptPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */; };
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
 		C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347D22559422B000754C4 /* CardBlockView.swift */; };
 		C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */; };
@@ -713,6 +714,7 @@
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
 		C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiKeluargaVerificationView.swift; sourceTree = "<group>"; };
 		C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiPerusahaanVerificationView.swift; sourceTree = "<group>"; };
+		C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptPasswordView.swift; sourceTree = "<group>"; };
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
 		C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppBar.swift; sourceTree = "<group>"; };
@@ -1192,6 +1194,7 @@
 				C043CFC125CD43B700328C91 /* FormChangeContactView.swift */,
 				C043CFCE25CD4E5300328C91 /* FormChangeAddressView.swift */,
 				526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */,
+				C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -2361,6 +2364,7 @@
 				527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */,
 				FA486B1925AF4E9100EDBD88 /* SavingDetailModalView.swift in Sources */,
 				52C3629E25D12DA3000374AA /* TransferRtgsConfirmation.swift in Sources */,
+				C0AEAC2725D516B600B6A20C /* EncryptPasswordView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
 				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */,

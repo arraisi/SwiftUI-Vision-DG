@@ -448,4 +448,173 @@ class AuthService {
             
         }.resume()
     }
+    
+    // MARK: - CHANGE PASSWORD
+    func changePassword(currentPwd: String, newPwd: String, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+        
+        // Body
+        let body: [String: Any] = [
+            "currentPwd": currentPwd,
+            "newPwd": newPwd
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        guard let url = URL.urlAuthChangePassword() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\n\n\nHTTP RESPONSE CHANGE PASSWORD => \(httpResponse.statusCode)\n\n\n")
+                
+                if (httpResponse.statusCode == 201) {
+                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    if let response = status {
+                        print("\n\(String(describing: response.code))\n")
+                        print("\n\(String(describing: response.message))\n")
+                    }
+                    completion(.success(status!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
+    // MARK: - CHANGE PIN TRANSAKSI
+    func changePinTransaksi(currentPinTrx: String, newPinTrx: String, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+        
+        // Body
+        let body: [String: Any] = [
+            "currentPinTrx": currentPinTrx,
+            "newPinTrx": newPinTrx
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        guard let url = URL.urlAuthChangePinTrx() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\n\n\nHTTP RESPONSE CHANGE PIN TRX => \(httpResponse.statusCode)\n\n\n")
+                
+                if (httpResponse.statusCode == 201) {
+                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    if let response = status {
+                        print("\n\(String(describing: response.code))\n")
+                        print("\n\(String(describing: response.message))\n")
+                    }
+                    completion(.success(status!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
+    // MARK: - FORGOT PIN TRANSAKSI
+    func forgotPinTransaksi(cardNo: String, pin: String, newPinTrx: String, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+        
+        // Body
+        let body: [String: Any] = [
+            "cardNo": cardNo,
+            "pin": pin,
+            "newPinTrx": newPinTrx
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        guard let url = URL.urlAuthForgotPinTrx() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\n\n\nHTTP RESPONSE FORGOT PIN TRX => \(httpResponse.statusCode)\n\n\n")
+                
+                if (httpResponse.statusCode == 201) {
+                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    if let response = status {
+                        print("\n\(String(describing: response.code))\n")
+                        print("\n\(String(describing: response.message))\n")
+                    }
+                    completion(.success(status!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
 }
