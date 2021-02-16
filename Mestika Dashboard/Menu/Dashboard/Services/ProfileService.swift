@@ -29,7 +29,7 @@ class ProfileService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("\(httpResponse.statusCode)")
+                print("\n\n RESPONSE GET PROFILES = \(httpResponse.statusCode)\n")
                 
                 if (httpResponse.statusCode == 200) {
                     let profileResponse = try? JSONDecoder().decode(ProfileResponseModel.self, from: data)

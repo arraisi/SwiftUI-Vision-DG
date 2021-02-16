@@ -57,16 +57,16 @@ extension ProfileViewModel {
                 }
                 
                 print("\n\nVM PROFILE \(response.personal.name)\n\n")
-                print("\n\nVM PROFILE \(response.chipProfileDto.last!.cardNo)\n\n")
+                print("\n\nVM PROFILE \(String(describing: response.chipProfileDto?.last!.cardNo))\n\n")
                 self.name = response.personal.name
                 self.telepon = response.profileResponseModelID.telepon
                 self.email = response.profileResponseModelID.surel
                 self.nameOnCard = response.products.last!.productName ?? ""
-                self.balance = response.chipProfileDto.last!.balance
+                self.balance = response.chipProfileDto?.last!.balance ?? "0"
                 
-                self.cardName = response.chipProfileDto.last!.nameOnCard
-                self.cardNo = response.chipProfileDto.last!.cardNo
-                self.accountNumber = response.chipProfileDto.last!.accountNumber
+                self.cardName = response.chipProfileDto?.last!.nameOnCard ?? ""
+                self.cardNo = response.chipProfileDto?.last!.cardNo ?? ""
+                self.accountNumber = response.chipProfileDto?.last!.accountNumber ?? ""
                 
                 completion(true)
                 
