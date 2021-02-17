@@ -67,20 +67,12 @@ struct FormChangePinTransactionView: View {
                                 .padding(.top, 5)
                             
                             HStack {
-                                if (showOldPin) {
-                                    TextField("Input PIN lama Anda", text: self.$oldPinCtrl)
-                                        .keyboardType(.numberPad)
-                                } else {
-                                    SecureField("Input PIN lama Anda", text: self.$oldPinCtrl)
-                                        .keyboardType(.numberPad)
-                                }
                                 
-                                Button(action: {
-                                    self.showOldPin.toggle()
-                                }, label: {
-                                    Image(systemName: showOldPin ? "eye.fill" : "eye.slash")
-                                        .foregroundColor(Color(hex: "#3756DF"))
-                                })
+                                SecureField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                                    .keyboardType(.numberPad)
+                                    .onReceive(oldPinCtrl.publisher.collect()) {
+                                        self.oldPinCtrl = String($0.prefix(6))
+                                    }
                             }
                             .frame(height: 25)
                             .padding()
@@ -99,20 +91,12 @@ struct FormChangePinTransactionView: View {
                             
                             VStack {
                                 HStack {
-                                    if (showPin) {
-                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
-                                            .keyboardType(.numberPad)
-                                    } else {
-                                        SecureField("Input PIN baru Anda", text: self.$pinCtrl)
-                                            .keyboardType(.numberPad)
-                                    }
                                     
-                                    Button(action: {
-                                        self.showPin.toggle()
-                                    }, label: {
-                                        Image(systemName: showPin ? "eye.fill" : "eye.slash")
-                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    })
+                                    SecureField("Input PIN baru Anda", text: self.$pinCtrl)
+                                        .keyboardType(.numberPad)
+                                        .onReceive(pinCtrl.publisher.collect()) {
+                                            self.pinCtrl = String($0.prefix(6))
+                                        }
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)
@@ -120,20 +104,12 @@ struct FormChangePinTransactionView: View {
                                 Divider()
                                 
                                 HStack {
-                                    if (showPinConfirm) {
-                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
-                                            .keyboardType(.numberPad)
-                                    } else {
-                                        SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
-                                            .keyboardType(.numberPad)
-                                    }
                                     
-                                    Button(action: {
-                                        self.showPinConfirm.toggle()
-                                    }, label: {
-                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
-                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    })
+                                    SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                        .keyboardType(.numberPad)
+                                        .onReceive(pinConfirmCtrl.publisher.collect()) {
+                                            self.pinConfirmCtrl = String($0.prefix(6))
+                                        }
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)
@@ -148,9 +124,14 @@ struct FormChangePinTransactionView: View {
                         Spacer()
                         
                         Button(action: {
-                            self.authVM.changePinTrx(currentPinTrx: oldPinCtrl, newPinTrx: pinCtrl) { result in
-                                if result {
+                            self.authVM.changePinTrx(currentPinTrx: oldPinCtrl, newPinTrx: pinCtrl) { success in
+                                if success {
                                     self.isPinChanged = true
+                                    self.showModal.toggle()
+                                }
+                                
+                                if !success {
+                                    self.isPinChanged = false
                                     self.showModal.toggle()
                                 }
                             }
@@ -176,7 +157,7 @@ struct FormChangePinTransactionView: View {
             }
             
             if self.showModal {
-                ModalOverlay(tapAction: { withAnimation { self.showModal = false } })
+                ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
         }

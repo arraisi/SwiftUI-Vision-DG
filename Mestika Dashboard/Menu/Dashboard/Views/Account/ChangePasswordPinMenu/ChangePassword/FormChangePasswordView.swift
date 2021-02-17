@@ -175,7 +175,7 @@ struct FormChangePasswordView: View {
             }
             
             if self.showModal {
-                ModalOverlay(tapAction: { withAnimation { self.showModal = false } })
+                ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
         }

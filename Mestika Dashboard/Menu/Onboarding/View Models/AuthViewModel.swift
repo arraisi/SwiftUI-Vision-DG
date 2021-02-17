@@ -402,7 +402,10 @@ extension AuthViewModel {
                         self.errorMessage = "Unauthorized"
                     }
                 case .custom(code: 403):
-                    self.errorMessage = "Password not changed"
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Password not changed"
+                        self.isLoading = false
+                    }
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
