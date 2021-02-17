@@ -211,7 +211,23 @@ struct AccountTabs: View {
                             )
                             .onChange(of: self.isFingerprint) { value in
                                 //perform your action here...
-                                BiometricAuthCheck(value)
+                                saveDataNewDeviceToCoreData()
+                                if !value {
+                                    self.authVM.disableBiometricLogin { result in
+                                        
+                                        print("result : \(result)")
+                                        if result {
+                                            print("DISABLE FINGER PRINT SUCCESS")
+                                        }
+                                        
+                                        if !result {
+                                            self.isFingerprint = true
+                                            print("DISABLE FINGER PRINT FAILED")
+                                        }
+                                    }
+                                } else {
+                                    BiometricAuthCheck(value)
+                                }
                             }
                         }
                         
@@ -345,40 +361,21 @@ struct AccountTabs: View {
         let context = LAContext()
         var error: NSError?
         
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)  {
-            saveDataNewDeviceToCoreData()
-            
-            if value {
-                
-                self.authVM.enableBiometricLogin { result in
-                    print("result : \(result)")
-                    if result {
-                        print("ENABLE FINGER PRINT SUCCESS")
-                    }
-                    
-                    if !result {
-                        self.isFingerprint = false
-                        print("ENABLE FINGER PRINT FAILED")
-                    }
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            self.authVM.enableBiometricLogin { result in
+                print("result : \(result)")
+                if result {
+                    print("ENABLE FINGER PRINT SUCCESS")
                 }
                 
-            } else {
-                
-                self.authVM.disableBiometricLogin { result in
-                    
-                    print("result : \(result)")
-                    if result {
-                        print("DISABLE FINGER PRINT SUCCESS")
-                    }
-                    
-                    if !result {
-                        self.isFingerprint = true
-                        print("DISABLE FINGER PRINT FAILED")
-                    }
+                if !result {
+                    self.isFingerprint = false
+                    print("ENABLE FINGER PRINT FAILED")
                 }
-                
             }
+            
         } else {
+            
             guard let settingUrl = URL(string : "App-Prefs:") else {
                 return
             }
