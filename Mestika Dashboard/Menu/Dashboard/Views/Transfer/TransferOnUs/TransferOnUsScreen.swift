@@ -50,15 +50,15 @@ struct TransferOnUsScreen: View {
     let now = Date()
     @State var date = Date()
     private var selectedDate: Binding<Date> {
-      Binding<Date>(get: { self.date}, set : {
-          self.date = $0
-          self.setDateString()
-      })
+        Binding<Date>(get: { self.date}, set : {
+            self.date = $0
+            self.setDateString()
+        })
     }
     
     func setDateString() {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy-MM-dd"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
         print(formatter.string(from: self.now))
         print(formatter.string(from: self.date))
         
@@ -85,7 +85,7 @@ struct TransferOnUsScreen: View {
                         nominalCard
                         
                         calendarCard
-//                        frekuensiTransaksiCard
+                        //                        frekuensiTransaksiCard
                         chooseVoucherCard
                         notesCard
                         
@@ -96,7 +96,7 @@ struct TransferOnUsScreen: View {
                             isActive: self.$routeConfirmation) {
                             EmptyView()
                         }
-//                        .isDetailLink(false)
+                        //                        .isDetailLink(false)
                         
                         VStack {
                             Button(action: {
@@ -115,7 +115,7 @@ struct TransferOnUsScreen: View {
                                 } else if (amount <= self.maxLimit && amount <= myCredit) {
                                     self.transferData.notes = self.notesCtrl
                                     self.transferData.transactionFrequency = transactionFrequency
-                                    self.transferData.transactionVoucher = transactionVoucher
+                                    self.transferData.transactionVoucher = ""
                                     self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     self.routeConfirmation = true
                                 } else if (amount > myCredit ) {
@@ -196,18 +196,18 @@ struct TransferOnUsScreen: View {
                 }, onCommit: {
                     
                 })
-                    .onReceive(destinationNumber.publisher.collect()) {
-                        self.destinationNumber = String($0.prefix(11))
-                        self.transferData.destinationNumber = destinationNumber
-                        validateForm()
-                    }
-                    .keyboardType(.numberPad)
-                    .frame(height: 10)
-                    .font(.subheadline)
-                    .padding()
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                    .padding(.horizontal, 20)
+                .onReceive(destinationNumber.publisher.collect()) {
+                    self.destinationNumber = String($0.prefix(11))
+                    self.transferData.destinationNumber = destinationNumber
+                    validateForm()
+                }
+                .keyboardType(.numberPad)
+                .frame(height: 10)
+                .font(.subheadline)
+                .padding()
+                .background(Color(hex: "#F6F8FB"))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
                 
                 if isShowName {
                     HStack {

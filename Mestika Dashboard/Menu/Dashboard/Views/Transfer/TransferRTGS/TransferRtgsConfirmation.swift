@@ -11,7 +11,7 @@ struct TransferRtgsConfirmation: View {
     
     @EnvironmentObject var transferData: TransferOffUsModel
     
-    @State var adminFeeCtrl = "Rp.0, (Gratis)"
+    @State var adminFeeCtrl = "Rp. 1.000,00"
     
     var body: some View {
         ZStack {
@@ -59,44 +59,44 @@ struct TransferRtgsConfirmation: View {
             
             Group {
                 // Jenis Transfer Form
-                HStack(spacing: 20) {
-                    Text("Jenis Transfer")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100, alignment: .leading)
-                    
-                    TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
-                        print("\(self.$transferData.transferType)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
+//                HStack(spacing: 20) {
+//                    Text("Jenis Transfer")
+//                        .font(.caption)
+//                        .fontWeight(.light)
+//                        .frame(width: 100, alignment: .leading)
+//
+//                    TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
+//                        print("\(self.$transferData.transferType)")
+//                    })
+//                    .disabled(true)
+//                    .frame(height: 20)
+//                    .padding()
+//                    .font(.subheadline)
+//                    .background(Color(hex: "#F6F8FB"))
+//                    .cornerRadius(15)
+//                }
+//                .padding(.vertical, 5)
+//                .padding(.horizontal)
                 
                 // Form Tipe Transaksi
-                HStack(spacing: 20) {
-                    Text("Tipe Transaksi")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100, alignment: .leading)
-                    
-                    TextField("Tipe Transaksi", text: self.$transferData.transactionType, onEditingChanged: { changed in
-                        print("\(self.$transferData.transactionType)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
+//                HStack(spacing: 20) {
+//                    Text("Tipe Transaksi")
+//                        .font(.caption)
+//                        .fontWeight(.light)
+//                        .frame(width: 100, alignment: .leading)
+//
+//                    TextField("Tipe Transaksi", text: self.$transferData.transactionType, onEditingChanged: { changed in
+//                        print("\(self.$transferData.transactionType)")
+//                    })
+//                    .disabled(true)
+//                    .frame(height: 20)
+//                    .padding()
+//                    .font(.subheadline)
+//                    .background(Color(hex: "#F6F8FB"))
+//                    .cornerRadius(15)
+//                }
+//                .padding(.vertical, 5)
+//                .padding(.horizontal)
                 
                 // Penerima Form
                 HStack(spacing: 20) {
@@ -260,6 +260,26 @@ struct TransferRtgsConfirmation: View {
                     .padding(.vertical, 5)
                     .padding(.horizontal)
                     
+                    
+                    // Rekeking Form
+                    HStack(spacing: 20) {
+                        Text("Rekening")
+                            .font(.caption)
+                            .fontWeight(.light)
+                            .frame(width: 100, alignment: .leading)
+                        
+                        TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
+                            print("\(self.$transferData.sourceAccountName)")
+                        })
+                        .disabled(true)
+                        .frame(height: 20)
+                        .padding()
+                        .font(.subheadline)
+                        .background(Color(hex: "#F6F8FB"))
+                        .cornerRadius(15)
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
                 }
             } else if (self.transferData.transactionType == "Online") {
                 EmptyView()
@@ -348,6 +368,26 @@ struct TransferRtgsConfirmation: View {
                 .padding(.vertical, 5)
                 .padding(.horizontal)
                 
+                // Voucher Form
+                HStack(spacing: 20) {
+                    Text("Voucher")
+                        .font(.caption)
+                        .fontWeight(.light)
+                        .frame(width: 100, alignment: .leading)
+                    
+                    TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
+                        print("\(self.$transferData.transactionVoucher)")
+                    })
+                    .disabled(true)
+                    .frame(height: 20)
+                    .padding()
+                    .font(.subheadline)
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(15)
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+                
                 // Total Transaksi Form
                 HStack(spacing: 20) {
                     Text("Total Transaksi")
@@ -386,26 +426,6 @@ struct TransferRtgsConfirmation: View {
                 .padding(.vertical, 5)
                 .padding(.horizontal)
                 
-                // Rekeking Form
-                HStack(spacing: 20) {
-                    Text("Rekening")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100, alignment: .leading)
-                    
-                    TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
-                        print("\(self.$transferData.sourceAccountName)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
-                
                 // Frekuensi Form
 //                HStack(spacing: 20) {
 //                    Text("Frekuensi")
@@ -425,26 +445,6 @@ struct TransferRtgsConfirmation: View {
 //                }
 //                .padding(.vertical, 5)
 //                .padding(.horizontal)
-                
-                // Voucher Form
-                HStack(spacing: 20) {
-                    Text("Voucher")
-                        .font(.caption)
-                        .fontWeight(.light)
-                        .frame(width: 100, alignment: .leading)
-                    
-                    TextField("Voucher", text: self.$transferData.transactionVoucher, onEditingChanged: { changed in
-                        print("\(self.$transferData.transactionVoucher)")
-                    })
-                    .disabled(true)
-                    .frame(height: 20)
-                    .padding()
-                    .font(.subheadline)
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(15)
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal)
                 
                 // Catatan Form
                 HStack(spacing: 20) {
