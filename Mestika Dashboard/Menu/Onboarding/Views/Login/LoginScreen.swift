@@ -138,15 +138,16 @@ struct LoginScreen: View {
                         destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                         isActive: self.$routeNewPassword,
                         label: {})
-                    
-                    if biometricCheck() {
-                        
-                        Button(action: {
-                            authenticate()
-                        }, label: {
-                            Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
-                                .padding(.trailing, 20)
-                        })
+                    if let value = device.last?.fingerprintFlag {
+                        if biometricCheck() && value {
+                            
+                            Button(action: {
+                                authenticate()
+                            }, label: {
+                                Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
+                                    .padding(.trailing, 20)
+                            })
+                        }
                     }
                     
                 }
