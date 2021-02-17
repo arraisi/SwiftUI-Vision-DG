@@ -246,6 +246,7 @@ struct FormChangePasswordView: View {
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
+                .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
                 self.showModal = false

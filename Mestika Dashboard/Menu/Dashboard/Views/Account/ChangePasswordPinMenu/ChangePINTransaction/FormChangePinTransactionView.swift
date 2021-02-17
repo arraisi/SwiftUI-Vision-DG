@@ -124,6 +124,7 @@ struct FormChangePinTransactionView: View {
                         Spacer()
                         
                         Button(action: {
+                            UIApplication.shared.endEditing()
                             self.authVM.changePinTrx(currentPinTrx: oldPinCtrl, newPinTrx: pinCtrl) { success in
                                 if success {
                                     self.isPinChanged = true
