@@ -9,23 +9,34 @@ import SwiftUI
 
 struct GridMenuView: View {
     
+    @Binding var cardNo: String
+    @Binding var sourceNumber: String
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false, content: {
             HStack {
-                Button(action: {}, label: {
-                    Image("ic_menu_tarik_tunai")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
                 
-                Button(action: {}, label: {
-                    Image("ic_menu_tarik_tunai")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
-                
-                Button(action: {}, label: {
-                    Image("ic_menu_tambah_saldo")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                Group {
+                    NavigationLink(destination: FavoriteTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber), label: {
+                        Image("ic_favorit")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_tarik_tunai")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_tarik_tunai")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_tambah_saldo")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                }
                 
                 Button(action: {}, label: {
                     Image("ic_menu_pindah_saldo")
@@ -69,6 +80,6 @@ struct GridMenuView: View {
 
 struct GridMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        GridMenuView()
+        GridMenuView(cardNo: .constant(""), sourceNumber: .constant(""))
     }
 }

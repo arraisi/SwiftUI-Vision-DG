@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormInputResetPinScreen: View {
     
@@ -29,6 +30,13 @@ struct FormInputResetPinScreen: View {
             VStack {
                 
                 AppBarLogo(light: true) {}
+                
+                if (self.authVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
                 
                 VStack {
                     
