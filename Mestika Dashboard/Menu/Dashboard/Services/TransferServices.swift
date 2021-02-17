@@ -229,7 +229,7 @@ class TransferServices {
         let body: [String: Any] = [
             "accountTo": transferData.destinationNumber,
             "branchCode": "1234",
-            "cardNo": transferData.sourceNumber,
+            "cardNo": transferData.cardNo,
             "cityCode": "1234",
             "clearingCode": transferData.kliringCode,
             "currency": "360",
@@ -245,7 +245,7 @@ class TransferServices {
             "ref": "",
             "typeOfBeneficiary": transferData.typeDestination,
             "typeOfBusiness": "A",
-            "sourceNumber": "87000000126",
+            "sourceNumber": transferData.sourceNumber,
             "ultimateBeneficiaryName": transferData.destinationName
         ]
         
