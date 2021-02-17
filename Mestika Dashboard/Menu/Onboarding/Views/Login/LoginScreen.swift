@@ -139,18 +139,14 @@ struct LoginScreen: View {
                         isActive: self.$routeNewPassword,
                         label: {})
                     
-                    if let value = device.last?.fingerprintFlag {
+                    if biometricCheck() {
                         
-                        if value {
-                            
-                            Button(action: {
-                                        authenticate()
-                            }, label: {
-                                Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
-                                    .padding(.trailing, 20)
-                            })
-                        }
-                        
+                        Button(action: {
+                            authenticate()
+                        }, label: {
+                            Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
+                                .padding(.trailing, 20)
+                        })
                     }
                     
                 }
@@ -276,6 +272,14 @@ struct LoginScreen: View {
                 }
             }
         }
+    }
+    
+    // MARK: -Function Authentication
+    func biometricCheck() -> Bool {
+        let context = LAContext()
+        var error: NSError?
+        
+        return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
     }
     
     // MARK: POPUP MESSAGE

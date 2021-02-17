@@ -191,7 +191,7 @@ struct FormChangePinTransactionView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }))
-        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             ZStack {
                 if isPinChanged {
                     SuccessChangePinModal()
