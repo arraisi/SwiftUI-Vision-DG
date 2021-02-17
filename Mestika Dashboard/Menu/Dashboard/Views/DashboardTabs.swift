@@ -17,8 +17,9 @@ struct DashboardTabs: View {
     @State var balance: String = ""
     @State var productName: String = "-"
     
-    @State var cardNo: String = "-"
+    @Binding var cardNo: String
     @State var cardName: String = "-"
+    @Binding var sourceNumber: String
     
     @State var isHiddenBalance: Bool = false
     
@@ -34,7 +35,7 @@ struct DashboardTabs: View {
                 usernameInfo
                 menuGrid
                 
-                GridMenuView()
+                GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
                     .padding(.top, 10)
                 
                 VStack {

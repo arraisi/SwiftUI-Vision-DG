@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormChangePasswordView: View {
     
@@ -23,6 +24,7 @@ struct FormChangePasswordView: View {
     @State private var showConfirmPassword: Bool = false
     @State private var showModal: Bool = false
     @State private var isPasswordChanged: Bool = false
+    @State var isLoading = false
     
     private var simpanBtnDisabled: Bool {
         oldPasswordCtrl.count == 0 || passwordCtrl.count == 0 || confirmPasswordCtrl.count == 0 || passwordCtrl != confirmPasswordCtrl
@@ -36,6 +38,13 @@ struct FormChangePasswordView: View {
             
             VStack {
                 AppBarLogo(light: true) {}
+                
+                if (self.authVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
                 
                 ScrollView(showsIndicators: false) {
                     
@@ -58,8 +67,10 @@ struct FormChangePasswordView: View {
                             HStack {
                                 if (showOldPassword) {
                                     TextField("Input Password lama Anda", text: self.$oldPasswordCtrl)
+                                        .font(.custom("Montserrat-Regular", size: 12))
                                 } else {
                                     SecureField("Input Password lama Anda", text: self.$oldPasswordCtrl)
+                                        .font(.custom("Montserrat-Regular", size: 12))
                                 }
                                 
                                 Button(action: {
@@ -87,8 +98,10 @@ struct FormChangePasswordView: View {
                                 HStack {
                                     if (showPassword) {
                                         TextField("Input Password baru Anda", text: self.$passwordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     } else {
                                         SecureField("Input Password baru Anda", text: self.$passwordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                     
                                     Button(action: {
@@ -106,8 +119,10 @@ struct FormChangePasswordView: View {
                                 HStack {
                                     if (showConfirmPassword) {
                                         TextField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     } else {
                                         SecureField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                     
                                     Button(action: {
@@ -130,14 +145,16 @@ struct FormChangePasswordView: View {
                         Spacer()
                         
                         Button(action: {
-                            //                            self.showModal.toggle()
+                            UIApplication.shared.endEditing()
                             self.authVM.changePasswordApp(currentPwd: self.oldPasswordCtrl, newPwd: self.passwordCtrl) { result in
+                                
                                 if result {
                                     isPasswordChanged = true
                                 }
-                                self.showModal.toggle()
                                 
+                                self.showModal.toggle()
                             }
+                            
                         }, label: {
                             Text("Simpan Password Baru")
                                 .foregroundColor(.white)
@@ -154,6 +171,7 @@ struct FormChangePasswordView: View {
                     .padding()
                     
                 }
+                .KeyboardAwarePadding()
             }
             
             if self.showModal {
@@ -224,7 +242,7 @@ struct FormChangePasswordView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("Password not Changed")
+            Text(self.authVM.errorMessage)
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)

@@ -485,15 +485,31 @@ class AuthService {
                     if let response = status {
                         print("\n\(String(describing: response.code))\n")
                         print("\n\(String(describing: response.message))\n")
+                        
+                        completion(.success(response))
                     }
-                    completion(.success(status!))
                 }
                 
-                if (httpResponse.statusCode == 401) {
+                if httpResponse.statusCode == 400 {
+                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    if let response = status {
+                        print("\n\(String(describing: response.code))\n")
+                        print("\n\(String(describing: response.message))\n")
+                        
+                        if response.code == "406" {
+                            completion(Result.failure(ErrorResult.custom(code: 406)))
+                        }
+                        
+                    } else {
+                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    }
+                }
+                
+                if (httpResponse.statusCode == 406) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
-                if (httpResponse.statusCode == 404) {
+                if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 

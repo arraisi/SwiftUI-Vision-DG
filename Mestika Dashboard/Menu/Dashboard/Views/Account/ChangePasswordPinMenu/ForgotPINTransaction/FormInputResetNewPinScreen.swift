@@ -75,16 +75,18 @@ struct FormInputResetNewPinScreen: View {
                                 HStack {
                                     if (showPinConfirm) {
                                         TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                            .keyboardType(.numberPad)
                                     } else {
                                         SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                            .keyboardType(.numberPad)
                                     }
                                     
-                                    Button(action: {
-                                        self.showPinConfirm.toggle()
-                                    }, label: {
-                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
-                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    })
+//                                    Button(action: {
+//                                        self.showPinConfirm.toggle()
+//                                    }, label: {
+//                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
+//                                            .foregroundColor(Color(hex: "#3756DF"))
+//                                    })
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormChangePinTransactionView: View {
     
@@ -38,6 +39,13 @@ struct FormChangePinTransactionView: View {
                 
                 AppBarLogo(light: true) {}
                 
+                if (self.authVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
+                
                 ScrollView(showsIndicators: false) {
                     
                     VStack {
@@ -61,8 +69,10 @@ struct FormChangePinTransactionView: View {
                             HStack {
                                 if (showOldPin) {
                                     TextField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                                        .keyboardType(.numberPad)
                                 } else {
                                     SecureField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                                        .keyboardType(.numberPad)
                                 }
                                 
                                 Button(action: {
@@ -91,8 +101,10 @@ struct FormChangePinTransactionView: View {
                                 HStack {
                                     if (showPin) {
                                         TextField("Input PIN baru Anda", text: self.$pinCtrl)
+                                            .keyboardType(.numberPad)
                                     } else {
-                                        SecureField("Input Ulang PIN baru Anda", text: self.$pinCtrl)
+                                        SecureField("Input PIN baru Anda", text: self.$pinCtrl)
+                                            .keyboardType(.numberPad)
                                     }
                                     
                                     Button(action: {
@@ -109,9 +121,11 @@ struct FormChangePinTransactionView: View {
                                 
                                 HStack {
                                     if (showPinConfirm) {
-                                        TextField("Confirm PIN", text: self.$pinConfirmCtrl)
+                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                            .keyboardType(.numberPad)
                                     } else {
-                                        SecureField("Confirm PIN", text: self.$pinConfirmCtrl)
+                                        SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                            .keyboardType(.numberPad)
                                     }
                                     
                                     Button(action: {
@@ -157,6 +171,7 @@ struct FormChangePinTransactionView: View {
                     .padding()
                     
                 }
+                .KeyboardAwarePadding()
                 
             }
             

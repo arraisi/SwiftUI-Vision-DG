@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct AccountTabs: View {
     
@@ -56,9 +57,9 @@ struct AccountTabs: View {
         }
         .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
             if moveToAccountTab {
-//                getCoreDataNewDevice()
+                //                getCoreDataNewDevice()
                 print("Move to moveToDashboard: \(moveToAccountTab)")
-//                activateWelcomeView()
+                //                activateWelcomeView()
                 self.forgotPasswordActived = false
                 self.appState.moveToAccountTab = false
             }
@@ -210,39 +211,7 @@ struct AccountTabs: View {
                             )
                             .onChange(of: self.isFingerprint) { value in
                                 //perform your action here...
-                                saveDataNewDeviceToCoreData()
-                                
-                                if value {
-                                    
-                                    self.authVM.enableBiometricLogin { result in
-                                        print("result : \(result)")
-                                        if result {
-                                            print("ENABLE FINGER PRINT SUCCESS")
-                                        }
-                                        
-                                        if !result {
-                                            self.isFingerprint = false
-                                            print("ENABLE FINGER PRINT FAILED")
-                                        }
-                                    }
-                                    
-                                } else {
-                                    
-                                    self.authVM.disableBiometricLogin { result in
-
-                                            print("result : \(result)")
-                                            if result {
-                                                print("DISABLE FINGER PRINT SUCCESS")
-                                            }
-
-                                            if !result {
-                                                self.isFingerprint = true
-                                                print("DISABLE FINGER PRINT FAILED")
-                                            }
-                                    }
-                                    
-                                }
-                                
+                                BiometricAuthCheck(value)
                             }
                         }
                         
@@ -362,7 +331,7 @@ struct AccountTabs: View {
                 secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
         }
         .onAppear {
-//            getProfile()
+            //            getProfile()
             self.profileVM.getProfile { result in
                 print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
             }
@@ -371,16 +340,52 @@ struct AccountTabs: View {
         
     }
     
-//    func getProfile() {
-//        self.profileVM.getProfile { success in
-//            if success {
-//                print("Name \(self.profileVM.name)")
-//                print(self.profileVM.balance)
-//                self.username = self.profileVM.name
-//                self.phoneNumber = self.profileVM.telepon
-//            }
-//        }
-//    }
+    // MARK: Biometric Authentication Check
+    func BiometricAuthCheck(_ value: Bool) {
+        let context = LAContext()
+        var error: NSError?
+        
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)  {
+            saveDataNewDeviceToCoreData()
+            
+            if value {
+                
+                self.authVM.enableBiometricLogin { result in
+                    print("result : \(result)")
+                    if result {
+                        print("ENABLE FINGER PRINT SUCCESS")
+                    }
+                    
+                    if !result {
+                        self.isFingerprint = false
+                        print("ENABLE FINGER PRINT FAILED")
+                    }
+                }
+                
+            } else {
+                
+                self.authVM.disableBiometricLogin { result in
+                    
+                    print("result : \(result)")
+                    if result {
+                        print("DISABLE FINGER PRINT SUCCESS")
+                    }
+                    
+                    if !result {
+                        self.isFingerprint = true
+                        print("DISABLE FINGER PRINT FAILED")
+                    }
+                }
+                
+            }
+        } else {
+            guard let settingUrl = URL(string : "App-Prefs:") else {
+                return
+            }
+            
+            UIApplication.shared.open(settingUrl)
+        }
+    }
     
     func getUserInfo() {
         self.user.forEach { (data) in
@@ -392,8 +397,12 @@ struct AccountTabs: View {
     func saveDataNewDeviceToCoreData()  {
         print("------SAVE ACCOUNT TO CORE DATA-------")
         
-        let data = NewDevice(context: managedObjectContext)
-        data.fingerprintFlag = self.isFingerprint
+        if device.count == 0 {
+            let data = NewDevice(context: managedObjectContext)
+            data.fingerprintFlag = self.isFingerprint
+        } else {
+            device.last?.fingerprintFlag = self.isFingerprint
+        }
         
         do {
             try self.managedObjectContext.save()

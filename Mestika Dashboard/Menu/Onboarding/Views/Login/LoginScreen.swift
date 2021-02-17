@@ -275,12 +275,6 @@ struct LoginScreen: View {
                     }
                 }
             }
-        } else {
-            guard let settingUrl = URL(string : "App-Prefs:") else {
-                return
-            }
-            
-            UIApplication.shared.open(settingUrl)
         }
     }
     
