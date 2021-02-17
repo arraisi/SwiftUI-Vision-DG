@@ -93,6 +93,7 @@ struct TransferRtgsValidationPin: View {
         print("Submit Transfer")
         self.isLoading = true
         if (transferData.transactionType == "RTGS") {
+            print("RTGS")
             self.transferVM.transferRtgs(transferData: transferData) { success in
                 DispatchQueue.main.async {
                     if success {
@@ -110,6 +111,7 @@ struct TransferRtgsValidationPin: View {
                 }
             }
         } else if (transferData.transactionType == "SKN") {
+            print("SKN")
             self.transferVM.transferSkn(transferData: transferData) { success in
                 DispatchQueue.main.async {
                     if success {

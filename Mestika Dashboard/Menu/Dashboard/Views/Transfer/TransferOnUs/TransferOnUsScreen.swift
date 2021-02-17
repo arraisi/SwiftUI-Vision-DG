@@ -744,7 +744,7 @@ struct TransferOnUsScreen: View {
             self.isShowName = true
         }
         
-        if (self.destinationNumber.count == 11 && self.amount != "" && self.transactionVoucher != "Pilih Voucher") {
+        if (self.destinationNumber.count == 11 && self.amount != "") {
             disabledButton = false
         } else {
             disabledButton = true

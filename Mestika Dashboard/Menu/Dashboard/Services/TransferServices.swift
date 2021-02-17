@@ -125,6 +125,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
+                    print("ON Success")
                     let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
                     completion(.success(transferResponse!))
                 }
@@ -200,6 +201,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
+                    print("On Success")
                     let transferResponse = try? JSONDecoder().decode(TransferRtgsExecResponse.self, from: data)
                     completion(.success(transferResponse!))
                 }

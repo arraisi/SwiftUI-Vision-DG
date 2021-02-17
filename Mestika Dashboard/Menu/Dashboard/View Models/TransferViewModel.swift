@@ -105,10 +105,7 @@ class TransferViewModel : ObservableObject {
             
             switch result {
             case .success(let response):
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.isLoading = false
-                }
-                
+                self.isLoading = false
                 completion(true)
 
             case .failure(let error):

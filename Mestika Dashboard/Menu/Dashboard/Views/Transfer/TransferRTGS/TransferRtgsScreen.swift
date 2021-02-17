@@ -827,7 +827,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     func validateForm() {
-        if (self.noRekeningCtrl.count == 16 && self.amount != "" && self.transactionVoucher != "Pilih Voucher") {
+        if (self.noRekeningCtrl.count == 16 && self.amount != "") {
             disabledButton = false
         } else {
             disabledButton = true

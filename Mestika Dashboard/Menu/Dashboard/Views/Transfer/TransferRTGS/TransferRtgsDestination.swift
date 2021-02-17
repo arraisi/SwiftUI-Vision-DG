@@ -162,28 +162,29 @@ struct TransferRtgsDestination: View {
     
     var destinationTypeCard: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(destinationType)
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                        .fontWeight(.light)
-                }
-                .padding()
-                
-                Spacer()
-                Menu {
-                    ForEach(self._listDestinationType, id: \.self) { data in
-                        Button(action: {
-                            self.destinationType = data
-                            self.transferData.typeDestination = data
-                            validateForm()
-                        }) {
-                            Text(data)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                        }
+            Menu {
+                ForEach(self._listDestinationType, id: \.self) { data in
+                    Button(action: {
+                        self.destinationType = data
+                        self.transferData.typeDestination = data
+                        validateForm()
+                    }) {
+                        Text(data)
+                            .font(.custom("Montserrat-Regular", size: 12))
                     }
-                } label: {
+                }
+            } label: {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(destinationType)
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .fontWeight(.light)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
                     Image("ic_expand").padding()
                 }
             }
@@ -196,28 +197,29 @@ struct TransferRtgsDestination: View {
     
     var citizenshipCard: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(citizenShipCtrl)
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                        .fontWeight(.light)
-                }
-                .padding()
-                
-                Spacer()
-                Menu {
-                    ForEach(self._listCitizenShip, id: \.self) { data in
-                        Button(action: {
-                            self.citizenShipCtrl = data
-                            self.transferData.citizenship = data
-                            validateForm()
-                        }) {
-                            Text(data)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                        }
+            Menu {
+                ForEach(self._listCitizenShip, id: \.self) { data in
+                    Button(action: {
+                        self.citizenShipCtrl = data
+                        self.transferData.citizenship = data
+                        validateForm()
+                    }) {
+                        Text(data)
+                            .font(.custom("Montserrat-Regular", size: 12))
                     }
-                } label: {
+                }
+            } label: {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(citizenShipCtrl)
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .fontWeight(.light)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
                     Image("ic_expand").padding()
                 }
             }
@@ -326,7 +328,7 @@ struct TransferRtgsDestination: View {
     
     func validateForm() {
         if (self.transferData.transactionType == "SKN") {
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl.isNotEmpty()) {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
                 disabledButton = false
             } else {
                 disabledButton = true
