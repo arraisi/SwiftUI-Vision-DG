@@ -100,8 +100,11 @@ struct TransferOnUsScreen: View {
                         
                         VStack {
                             Button(action: {
-                                //                                    MARK: To be replaced with actual data
                                 self.transferData.destinationName = self.showName
+                                
+                                if (transactionVoucher == "Pilih Voucher" || transactionVoucher == "Voucher Tidak Tersedia") {
+                                    self.transferData.transactionVoucher = ""
+                                }
                                 
                                 UIApplication.shared.endEditing()
                                 let amount = Int(self.transferData.amount) ?? 0

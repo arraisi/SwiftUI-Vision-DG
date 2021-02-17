@@ -105,6 +105,10 @@ struct TransferRtgsScreen: View {
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
+                            if (transactionVoucher == "Pilih Voucher" || transactionVoucher == "Voucher Tidak Tersedia") {
+                                self.transferData.transactionVoucher = ""
+                            }
+                            
                             if (amount < self.minLimit) {
                                 self.showDialogMinTransaction = true
                             } else if (amount <= self.maxLimit && amount <= myCredit) {
@@ -190,27 +194,28 @@ struct TransferRtgsScreen: View {
     
     var chooseTransactionType: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(transferType)
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                }
-                .padding()
-                
-                Spacer()
-                Menu {
-                    ForEach(self._listTransferType, id: \.self) { data in
-                        Button(action: {
-                            self.transferType = data
-                            self.transferData.transactionType = data
-                        }) {
-                            Text(data)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                        }
+            Menu {
+                ForEach(self._listTransferType, id: \.self) { data in
+                    Button(action: {
+                        self.transferType = data
+                        self.transferData.transactionType = data
+                    }) {
+                        Text(data)
+                            .font(.custom("Montserrat-Regular", size: 12))
                     }
-                } label: {
+                }
+            } label: {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(transferType)
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .fontWeight(.bold)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
                     Image("ic_expand").padding()
                 }
             }
@@ -237,15 +242,6 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 25)
                 
                 HStack {
-                    VStack(alignment: .leading) {
-                        Text(bankSelector)
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                            .fontWeight(.bold)
-                    }
-                    .padding()
-                    
-                    Spacer()
                     Menu {
                         ForEach(0..<self.referenceVM._listBank.count) { index in
                             
@@ -260,6 +256,16 @@ struct TransferRtgsScreen: View {
                             }
                         }
                     } label: {
+                        VStack(alignment: .leading) {
+                            Text(bankSelector)
+                                .font(.subheadline)
+                                .foregroundColor(.black)
+                                .fontWeight(.bold)
+                        }
+                        .padding()
+                        
+                        Spacer()
+                        
                         Image("ic_expand").padding()
                     }
                 }
