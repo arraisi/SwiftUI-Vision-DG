@@ -9,7 +9,17 @@ import SwiftUI
 
 struct HistoryTabs: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Image("ic_favorite")
+                .resizable()
+                .scaledToFill()
+                .padding(5)
+        }
+        .background(Color.green)
+        .frame(width: 40, height: 40)
+        .cornerRadius(5)
+        .shadow(radius: 2)
+        
     }
 }
 
