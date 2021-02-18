@@ -12,6 +12,9 @@ struct FavoriteTabs: View {
     @Binding var cardNo: String
     @Binding var sourceNumber: String
     
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
             
@@ -31,6 +34,12 @@ struct FavoriteTabs: View {
             }
         })
         .navigationBarHidden(true)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
     
     // MARK: -USERNAME INFO VIEW
