@@ -26,7 +26,8 @@ struct TransferRtgsScreen: View {
     
     // Variable Amount
     @State var amount = ""
-    private var maxLimit: Int = 900000
+    @State private var maxLimit: Int = 0
+    @State private var limitTrx: String = ""
     private var minLimit: Int = 10000
     
     // Variable Transaction Frequecy
@@ -359,7 +360,7 @@ struct TransferRtgsScreen: View {
                         .foregroundColor(.red)
                         .font(.caption2)
                         .fontWeight(.bold)
-                    Text("900.000")
+                    Text("\(limitTrx.thousandSeparator())")
                         .foregroundColor(.red)
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -861,6 +862,8 @@ struct TransferRtgsScreen: View {
                 self.transferData.cardNo = selectedAccount.noRekening
                 self.transferData.sourceNumber = selectedAccount.sourceNumber
                 self.transferData.sourceAccountName = selectedAccount.namaRekening
+                
+                getLimit(code: self.profileVM.classCode)
             }
         }
     }
@@ -880,6 +883,16 @@ struct TransferRtgsScreen: View {
             
             if !success {
                 print("!SUCCESS")
+            }
+        }
+    }
+    
+    @ObservedObject var limitVM = TransferViewModel()
+    func getLimit(code: String) {
+        self.limitVM.getLimitTransaction(classCode: code) { success in
+            if success {
+                self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
+                self.limitTrx = self.limitVM.limitIbft
             }
         }
     }

@@ -17,6 +17,7 @@ class ProfileViewModel: ObservableObject {
     @Published var telepon: String = ""
     @Published var email: String = ""
     
+    @Published var classCode: String = ""
     @Published var cardNo: String = ""
     @Published var cardName: String = ""
     @Published var accountNumber: String = ""
@@ -64,6 +65,7 @@ extension ProfileViewModel {
                 self.email = response.profileResponseModelID.surel
                 self.nameOnCard = response.products.last!.productName ?? ""
                 self.balance = response.chipProfileDto?.last!.balance ?? "0"
+                self.classCode = response.chipProfileDto?.last?.classCode ?? ""
                 
                 self.cardName = response.chipProfileDto?.last!.nameOnCard ?? ""
                 self.cardNo = response.chipProfileDto?.last!.cardNo ?? ""

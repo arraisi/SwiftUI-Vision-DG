@@ -59,7 +59,7 @@ struct NumPadView: View {
                     
                     password.append(value)
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    DispatchQueue.main.async {
                         
                         withAnimation{
                             
@@ -68,22 +68,13 @@ struct NumPadView: View {
                                 print(key)
                                 unlocked = false
                                 wrongPass = false
-                                NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+                                
+                                if isTransferOnUs {
+                                    NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+                                } else {
+                                    NotificationCenter.default.post(name: NSNotification.Name("PinOffUs"), object: nil, userInfo: nil)
+                                }
                                 NotificationCenter.default.post(name: NSNotification.Name("PinForgotPinTrx"), object: nil, userInfo: nil)
-//                                if password == key{
-//                                    if (isTransferOnUs) {
-//                                        unlocked = false
-//                                        wrongPass = false
-//                                        NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
-//                                    } else {
-//                                        unlocked = true
-//                                        wrongPass = false
-//                                    }
-//                                }
-//                                else{
-//                                    wrongPass = true
-//                                    password.removeAll()
-//                                }
                             }
                         }
                     }

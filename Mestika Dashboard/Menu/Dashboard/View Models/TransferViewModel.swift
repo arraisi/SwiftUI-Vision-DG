@@ -14,11 +14,56 @@ class TransferViewModel : ObservableObject {
     @Published var message: String = ""
     @Published var code: String = ""
     @Published var destinationName: String = ""
+    @Published var limitOnUs: String = ""
+    @Published var limitIbft: String = ""
+    
+    // MARK: - GET LIMIT TRANSACTION
+    func getLimitTransaction(classCode: String,
+                      completion: @escaping (Bool) -> Void) {
+        
+        TransferServices.shared.getLimitTransaction(classCode: classCode) { result in
+            print(result)
+            
+            switch result {
+            case .success(let response):
+                print(response)
+                
+                self.isLoading = false
+                self.limitIbft = response.limitIbft
+                self.limitOnUs = response.limitOnUs
+                
+                completion(true)
+
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "Over Booking failed"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
     
     // MARK: - Transfer ONUS INQUIRY
     func transferOnUsInquiry(transferData: TransferOnUsModel,
                       completion: @escaping (Bool) -> Void) {
-        TransferServices.shared.transferOnUsInquiry(transferData: transferData) {result in
+        TransferServices.shared.transferOnUsInquiry(transferData: transferData) { result in
             print(result)
             
             switch result {
