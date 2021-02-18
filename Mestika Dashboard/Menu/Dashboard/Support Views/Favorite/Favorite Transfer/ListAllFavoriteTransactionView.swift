@@ -9,10 +9,13 @@ import SwiftUI
 
 struct ListAllFavoriteTransactionView: View {
     
-    //    var action: ((FavoriteModelElement) -> Void)?
+    //    var action: ((FavoritModelElement) -> Void)?
     @State private var activeDetails: Bool = false
     
-    @StateObject private var favoriteVM = FavoritesViewModel()
+    @StateObject private var favoritVM = FavoritViewModel()
+    
+    var cardNo: String = ""
+    var sourceNumber: String = ""
     
     var body: some View {
         ZStack {
@@ -33,7 +36,7 @@ struct ListAllFavoriteTransactionView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 20)
                 
-                List(self.favoriteVM.favorites, id: \.id) { data in
+                List(self.favoritVM.favorites, id: \.id) { data in
                     NavigationLink(
                         destination: LastFavoriteTransferScreen(data: data),
                         label: {
@@ -77,7 +80,7 @@ struct ListAllFavoriteTransactionView: View {
     }
     
     func getList() {
-        self.favoriteVM.getList(cardNo: "", sourceNumber: "", completion: { result in
+        self.favoritVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
             print(result)
         })
     }

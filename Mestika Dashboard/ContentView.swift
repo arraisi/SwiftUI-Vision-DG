@@ -59,6 +59,10 @@ struct ContentView: View {
                 
                 WelcomeView()
                     .environmentObject(appState)
+                
+//                NavigationView{
+//                    EncryptPasswordView()
+//                }
             }
             .edgesIgnoringSafeArea(.top)
         }

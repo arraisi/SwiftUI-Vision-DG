@@ -47,10 +47,10 @@ struct CustomBottomNavigationView: View {
             Spacer().frame(width: 120)
             
             Button(action: {
-                self.selected = 2
+                self.selected = 4
                 
             }) {
-                
+//                EmptyView()
                 VStack {
                     Image("ic_favorit")
                         .renderingMode(.template)

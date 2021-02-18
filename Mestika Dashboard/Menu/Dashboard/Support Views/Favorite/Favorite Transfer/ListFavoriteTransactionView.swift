@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ListFavoriteTransactionView: View {
     
-    @StateObject private var favoriteVM = FavoritesViewModel()
+    @StateObject private var favoritVM = FavoritViewModel()
+    
+    var cardNo = ""
+    var sourceNumber = ""
     
     var body: some View {
         VStack {
@@ -26,7 +29,7 @@ struct ListFavoriteTransactionView: View {
                 .padding(.horizontal, 10)
                 .padding(.bottom)
             
-            ForEach(self.favoriteVM.favorites, id: \.id) { data in
+            ForEach(self.favoritVM.favorites, id: \.id) { data in
                 
                 HStack {
                     ZStack {
@@ -59,7 +62,7 @@ struct ListFavoriteTransactionView: View {
             HStack {
                 Spacer()
                 
-                NavigationLink(destination: FavoriteTransferScreen(), label: {
+                NavigationLink(destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber), label: {
                     Text("Cari kontak lain")
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -74,7 +77,7 @@ struct ListFavoriteTransactionView: View {
     }
     
     func getList() {
-        self.favoriteVM.getList(cardNo: "", sourceNumber: "", completion: { result in
+        self.favoritVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
             print(result)
         })
     }
@@ -82,6 +85,6 @@ struct ListFavoriteTransactionView: View {
 
 struct ListFavoriteTransactionView_Previews: PreviewProvider {
     static var previews: some View {
-        ListFavoriteTransactionView()
+        ListFavoriteTransactionView(cardNo: "", sourceNumber: "")
     }
 }

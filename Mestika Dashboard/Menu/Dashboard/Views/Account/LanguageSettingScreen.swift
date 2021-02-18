@@ -13,6 +13,8 @@ struct LanguageSettingScreen: View {
     let languages: [MasterModel] = load("languages.json")
     @State private var language: Int = 2
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var body: some View {
         VStack {
             AppBarLogo(light: true) {
@@ -35,7 +37,7 @@ struct LanguageSettingScreen: View {
                             selectedId: $language) { selected in }
                         
                         Button(action: {
-                            //                    self.showModal = false
+                            self.presentationMode.wrappedValue.dismiss()
                             print("language \(language)")
                         }) {
                             Text("Use this Language")

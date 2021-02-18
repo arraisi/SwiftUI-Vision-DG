@@ -19,6 +19,9 @@ struct TransferOnUsPinConfirmationScreen: View {
     @State var wrongPassword = false
     @State var showingAlert = false
     
+    @State var messageError: String = ""
+    @State var statusError: String = ""
+    
     @ObservedObject var transferVM = TransferViewModel()
     
     var body: some View {
@@ -28,7 +31,7 @@ struct TransferOnUsPinConfirmationScreen: View {
             ZStack {
                 Image("bg_blue")
                     .resizable()
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer(minLength: 0)
@@ -72,15 +75,16 @@ struct TransferOnUsPinConfirmationScreen: View {
                     .padding(.horizontal, 30)
                 }
             }
-            .navigationBarHidden(true)
+            .navigationBarTitle("Transfer ONUS", displayMode: .inline)
             .alert(isPresented: $showingAlert) {
                 return Alert(
-                    title: Text("Message"),
-                    message: Text("\(self.transferVM.message)"),
+                    title: Text("\(self.statusError)"),
+                    message: Text("\(self.messageError)"),
                     dismissButton: .default(Text("Oke")))
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOnUs"))) { obj in
                 print("SUCCESS PIN")
+                self.transferData.pin = password
                 submitTransfer()
             }
         }
@@ -96,11 +100,18 @@ struct TransferOnUsPinConfirmationScreen: View {
                 }
                 
                 if !success {
+                    self.statusError = self.transferVM.code
+                    self.messageError = self.transferVM.message
                     self.isLoading = false
                     self.showingAlert = true
+                    resetField()
                 }
             }
         }
+    }
+    
+    private func resetField() {
+        self.password = "" /// return to empty pin
     }
 }
 

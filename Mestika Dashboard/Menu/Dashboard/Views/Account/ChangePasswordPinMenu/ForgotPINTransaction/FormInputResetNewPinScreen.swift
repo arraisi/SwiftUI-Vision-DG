@@ -9,13 +9,21 @@ import SwiftUI
 
 struct FormInputResetNewPinScreen: View {
     
+    var cardNo = ""
+    
     @State private var pinCtrl = ""
     @State private var pinConfirmCtrl = ""
     
-    @State private var showPin: Bool = false
-    @State private var showPinConfirm: Bool = false
+//    @State private var showPin: Bool = false
+//    @State private var showPinConfirm: Bool = false
     @State private var showModal: Bool = false
     @State private var isPinChanged: Bool = false
+    
+    private var simpanBtnDisabled: Bool {
+        pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || pinCtrl != pinConfirmCtrl
+    }
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         ZStack {
@@ -46,18 +54,18 @@ struct FormInputResetNewPinScreen: View {
                             
                             VStack {
                                 HStack {
-                                    if (showPin) {
-                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
-                                    } else {
+//                                    if (showPin) {
+//                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
+//                                    } else {
                                         SecureField("Input PIN baru Anda", text: self.$pinCtrl)
-                                    }
+//                                    }
                                     
-                                    Button(action: {
-                                        self.showPin.toggle()
-                                    }, label: {
-                                        Image(systemName: showPin ? "eye.fill" : "eye.slash")
-                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    })
+//                                    Button(action: {
+//                                        self.showPin.toggle()
+//                                    }, label: {
+//                                        Image(systemName: showPin ? "eye.fill" : "eye.slash")
+//                                            .foregroundColor(Color(hex: "#3756DF"))
+//                                    })
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)
@@ -65,18 +73,20 @@ struct FormInputResetNewPinScreen: View {
                                 Divider()
                                 
                                 HStack {
-                                    if (showPinConfirm) {
-                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
-                                    } else {
+//                                    if (showPinConfirm) {
+//                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+//                                            .keyboardType(.numberPad)
+//                                    } else {
                                         SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
-                                    }
+                                            .keyboardType(.numberPad)
+//                                    }
                                     
-                                    Button(action: {
-                                        self.showPinConfirm.toggle()
-                                    }, label: {
-                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
-                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    })
+//                                    Button(action: {
+//                                        self.showPinConfirm.toggle()
+//                                    }, label: {
+//                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
+//                                            .foregroundColor(Color(hex: "#3756DF"))
+//                                    })
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)
@@ -90,16 +100,16 @@ struct FormInputResetNewPinScreen: View {
                         
                         Spacer()
                         
-                        Button(action: {
-                            self.showModal.toggle()
-                        }, label: {
+                        NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl), label: {
                             Text("Simpan PIN Baru")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             
                         })
-                        .background(Color(hex: "#2334D0"))
+                        .isDetailLink(false)
+                        .disabled(simpanBtnDisabled)
+                        .background(simpanBtnDisabled ? Color(.lightGray) : Color(hex: "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.vertical, 30)
@@ -118,7 +128,13 @@ struct FormInputResetNewPinScreen: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
+        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             ZStack {
                 if isPinChanged {
                     SuccessChangePinModal()

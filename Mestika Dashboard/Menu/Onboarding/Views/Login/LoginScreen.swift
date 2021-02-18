@@ -41,11 +41,16 @@ struct LoginScreen: View {
     
     /* Boolean for Show Modal */
     @State var showingModal = false
+    @State var showingModalBiometricLogin = false
     @State var showingModalForgotPassword = false
     
     @Binding var isNewDeviceLogin: Bool
     
     @State var iconSecure: String = ""
+    
+    var disableForm: Bool {
+        passwordCtrl.isEmpty
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -113,12 +118,13 @@ struct LoginScreen: View {
                         },
                         label: {
                             Text("LOGIN APPS")
-                                .foregroundColor(Color(hex: "#232175"))
+                                .foregroundColor(disableForm ? Color.white : Color(hex: "#232175"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         })
-                        .background(Color.white)
+                        .disabled(disableForm)
+                        .background(disableForm ? Color(.lightGray) : Color.white)
                         .cornerRadius(12)
                         .padding(.horizontal, 25)
                     
@@ -132,9 +138,9 @@ struct LoginScreen: View {
                         destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                         isActive: self.$routeNewPassword,
                         label: {})
-                    
                     if let value = device.last?.fingerprintFlag {
-                        if value { 
+                        if biometricCheck() && value {
+                            
                             Button(action: {
                                 authenticate()
                             }, label: {
@@ -189,6 +195,9 @@ struct LoginScreen: View {
         .navigationBarBackButtonHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessage()
+        }
+        .popup(isPresented: $showingModalBiometricLogin, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupBiometricLogin()
         }
     }
     
@@ -266,7 +275,15 @@ struct LoginScreen: View {
         }
     }
     
-    // MARK:- POPUP MESSAGE
+    // MARK: -Function Authentication
+    func biometricCheck() -> Bool {
+        let context = LAContext()
+        var error: NSError?
+        
+        return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+    }
+    
+    // MARK: POPUP MESSAGE
     func popupMessage() -> some View {
         VStack(alignment: .leading) {
             Image(systemName: "xmark.octagon.fill")
@@ -299,6 +316,77 @@ struct LoginScreen: View {
             
             Text("")
         }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: POPUP MESSAGE BIOMETRIC LOGIN
+    func popupBiometricLogin() -> some View {
+        VStack(alignment: .center) {
+            Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Login dengan Biometric")
+                .font(.custom("Montserrat-SemiBold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Text("Dapatkan kemudahan dengan login hanya dengan Biometric.")
+                .font(.custom("Montserrat-Regular", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+                .multilineTextAlignment(.center)
+            
+            HStack {
+                
+                Button(action: {}) {
+                    Text("Kembali")
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .fontWeight(.bold)
+                        .font(.system(size: 12))
+                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                }
+                .cornerRadius(12)
+                
+                Button(action: {
+                    
+                    self.authVM.enableBiometricLogin { result in
+                        print("result : \(result)")
+                        if result {
+                            device.last?.fingerprintFlag = true
+                            
+                            do {
+                                try self.managedObjectContext.save()
+                            } catch {
+                                print("Error saving managed object context: \(error)")
+                            }
+                            
+                            print("ENABLE FINGER PRINT SUCCESS")
+                        }
+                        
+                        if !result {
+                            print("ENABLE FINGER PRINT FAILED")
+                        }
+                    }
+                    
+                    
+                }) {
+                    Text("Aktifkan")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .font(.system(size: 12))
+                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                }
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+            }
+        }
+        .padding()
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding(.horizontal, 15)
         .background(Color.white)

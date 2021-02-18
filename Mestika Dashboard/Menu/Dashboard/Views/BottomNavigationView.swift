@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BottomNavigationView: View {
     
+    @ObservedObject private var profileVM = ProfileViewModel()
+    
     @State private var showingSlideMenu = false
     @State private var showingSettingMenu = false
     
@@ -17,6 +19,9 @@ struct BottomNavigationView: View {
     @State var initialOffset: CGFloat?
     @State var offset: CGFloat?
     @State var viewIsShown: Bool = true
+    
+    @State var cardNo: String = ""
+    @State var sourceNumber: String = ""
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
@@ -30,15 +35,15 @@ struct BottomNavigationView: View {
                 appbar
                 
                 if (selected == 0) {
-                    DashboardTabs()
+                    DashboardTabs(cardNo: $cardNo, sourceNumber: $sourceNumber)
                 }
                 
                 if (selected == 1) {
-                    TransferTabs()
+                    TransferTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
                 }
                 
                 if (selected == 2) {
-                    FavoriteTabs()
+                    FavoriteTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
                 }
                 
                 if (selected == 3) {
@@ -100,7 +105,6 @@ struct BottomNavigationView: View {
                     print("show")
                 }
             }
-            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
             
             if (showingSettingMenu) {
@@ -116,8 +120,15 @@ struct BottomNavigationView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
+        .onAppear {
+            self.profileVM.getProfile { result in
+                self.cardNo = self.profileVM.cardNo
+                self.sourceNumber = self.profileVM.accountNumber
+                print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+            }
+        }
     }
     
     var appbar: some View {
@@ -134,9 +145,9 @@ struct BottomNavigationView: View {
     
     var navBarItem: some View {
         HStack(spacing: 30) {
-//            NavigationLink(destination: NotificationScreen(), label: {
-//                Image("ic_bell")
-//            })
+            //            NavigationLink(destination: NotificationScreen(), label: {
+            //                Image("ic_bell")
+            //            })
             Button(action: {}, label: {
                 Image("ic_bell")
             })

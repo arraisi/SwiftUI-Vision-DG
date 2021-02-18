@@ -15,7 +15,6 @@ class TransferOnUsResponse: Decodable {
     var transactionDate: String
     var sourceNumber: String
     var currency: String
-    var berita: String
     var nominal: String
     var nominalstr: String
 }

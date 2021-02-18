@@ -9,11 +9,16 @@ import SwiftUI
 
 struct TransferTabs: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @State private var isRouteTransferOnUs: Bool = false
     @State private var isRouteTransferOffUs: Bool = false
     
+    @Binding var cardNo: String
+    @Binding var sourceNumber: String
+    
     var body: some View {
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+        ScrollView(.vertical, showsIndicators: false, content: {
             
             GeometryReader { geometry in
                 Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
@@ -23,12 +28,39 @@ struct TransferTabs: View {
             VStack {
                 titleInfo
                 buttonLink
-
-                ListTransactionFavoriteView()
-                    .padding(.bottom)
+                
+                VStack {
+                    HStack {
+                        Text("Last Transaction")
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    EmptyView()
+                        .padding(.bottom)
+                }
+                .frame(width: UIScreen.main.bounds.width - 30)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.3), radius: 10)
             }
         })
         .navigationBarHidden(true)
+//        .onReceive(self.appState.$moveToTransfer) { moveToTransfer in
+//            if moveToTransfer {
+//                print("Move to Transfer: \(moveToTransfer)")
+//                self.isRouteTransferOnUs = false
+//                self.isRouteTransferOffUs = false
+//                self.appState.moveToTransfer = false
+//            }
+//        }
     }
     
     // MARK: -USERNAME INFO VIEW
@@ -58,8 +90,9 @@ struct TransferTabs: View {
             // Link Transfer ONUS
             NavigationLink(
                 destination: TransferOnUsScreen(),
-                isActive: self.$isRouteTransferOnUs,
-                label: {EmptyView()})
+                isActive: self.$isRouteTransferOnUs) {
+                EmptyView()
+            }
             
             // Link Transfer OFFUS
             NavigationLink(
@@ -109,6 +142,6 @@ struct TransferTabs: View {
 
 struct TransferTabs_Previews: PreviewProvider {
     static var previews: some View {
-        TransferTabs()
+        TransferTabs(cardNo: .constant(""), sourceNumber: .constant(""))
     }
 }

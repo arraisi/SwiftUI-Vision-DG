@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListTransactionFavoriteView: View {
     
+    @StateObject private var favoritVM = FavoritViewModel()
+    var cardNo = ""
+    var sourceNumber = ""
+    
     var _listFavorite = [
         TransactionFavorit(id: 1, username: "Prima Jatnika", namaBank: "BNI", norek: "89898912383"),
         TransactionFavorit(id: 2, username: "Ilmal Yakin", namaBank: "BNI", norek: "1212312333"),
@@ -30,47 +34,57 @@ struct ListTransactionFavoriteView: View {
             
             Divider()
                 .padding(.horizontal, 10)
-                .padding(.bottom, 20)
             
-            List {
-                ForEach(_listFavorite) { data in
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .fill(Color.secondary)
-                                .frame(width: 30, height: 30)
-                            
-                            Text("A")
-                                .foregroundColor(.white)
-                                .fontWeight(.heavy)
-                        }
+            ForEach(self.favoritVM.favorites, id: \.id) { data in
+                
+                HStack {
+                    ZStack {
+                        Circle()
+                            .fill(Color.secondary)
+                            .frame(width: 30, height: 30)
                         
-                        VStack(alignment: .leading) {
-                            Text("\(data.username)")
-                                .font(.subheadline)
-                            
-                            HStack {
-                                Text("\(data.namaBank) :")
-                                    .font(.caption)
-                                    .fontWeight(.ultraLight)
-                                Text("\(data.norek)")
-                                    .font(.caption)
-                                    .fontWeight(.ultraLight)
-                            }
+                        Text(data.name.prefix(1))
+                            .foregroundColor(.white)
+                            .fontWeight(.heavy)
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("\(data.name)")
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                        
+                        HStack {
+                            Text("\(data.bankName) :")
+                                .font(.custom("Montserrat-Light", size: 14))
+                            Text("\(data.cardNo)")
+                                .font(.custom("Montserrat-Light", size: 14))
                         }
-                    }.padding(.vertical, 5)
+                    }
+                    Spacer()
                 }
-            }.frame(height: 300)
+                
+            }
+            .padding(.vertical, 5)
+            .padding(.horizontal, 20)
+            
+            EmptyView()
+                .padding(.bottom)
         }
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .onAppear(perform: getList)
+    }
+    
+    func getList() {
+        self.favoritVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
+            print(result)
+        })
     }
 }
 
 struct ListTransactionFavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        ListTransactionFavoriteView()
+        ListTransactionFavoriteView(cardNo: "", sourceNumber: "")
     }
 }

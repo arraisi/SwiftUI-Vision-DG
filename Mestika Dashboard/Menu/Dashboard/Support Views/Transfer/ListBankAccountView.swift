@@ -14,9 +14,9 @@ struct ListBankAccountView: View {
     @State private var showDialog = false
     
     var _listBankAccount = [
-        BankAccount(id: 1, namaRekening: "Rekening 01", noRekening: "9090123133", saldo: "430.000"),
-        BankAccount(id: 2, namaRekening: "Rekening 02", noRekening: "009012033", saldo: "200.000"),
-        BankAccount(id: 3, namaRekening: "Rekening 03", noRekening: "900912303", saldo: "0.0")
+        BankAccount(id: 1, namaRekening: "Rekening 01", productName: "", sourceNumber: "", noRekening: "9090123133", saldo: "430.000"),
+        BankAccount(id: 2, namaRekening: "Rekening 02", productName: "", sourceNumber: "", noRekening: "009012033", saldo: "200.000"),
+        BankAccount(id: 3, namaRekening: "Rekening 03", productName: "", sourceNumber: "", noRekening: "900912303", saldo: "0.0")
     ]
     
     var body: some View {
@@ -70,7 +70,7 @@ struct ListBankAccountView: View {
                 ForEach(_listBankAccount) { data in
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(data.namaRekening)
+                            Text(data.productName)
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)

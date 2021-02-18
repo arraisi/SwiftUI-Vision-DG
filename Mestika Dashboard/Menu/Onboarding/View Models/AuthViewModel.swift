@@ -10,7 +10,7 @@ import Combine
 import SwiftyRSA
 
 class AuthViewModel: ObservableObject {
-    @Published var isLoading: Bool = true
+    @Published var isLoading: Bool = false
     @Published var fingerprintFlag: Bool = false
     @Published var nik: String = ""
     @Published var password: String = ""
@@ -71,7 +71,7 @@ extension AuthViewModel {
         
         AuthService.shared.loginNewDevice(password: encryptPassword(password: password), phoneNumber: phoneNumber) { result in
             switch result {
-            case .success(let response):
+            case .success( _):
                 print("Success")
                 self.isLoading = false
                 
@@ -304,6 +304,139 @@ extension AuthViewModel {
                 DispatchQueue.main.async {
                     self.isLoading = false
                 }
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                case .custom(code: 400):
+                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                case .custom(code: 401):
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Unauthorized"
+                    }
+                case .custom(code: 403):
+                    self.errorMessage = "Password not changed"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                completion(false)
+            }
+        }
+        
+    }
+    
+    // MARK: - POST SET FINGER PRINT
+    func changePasswordApp(currentPwd: String, newPwd: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.changePassword(currentPwd: encryptPassword(password: currentPwd), newPwd: encryptPassword(password: newPwd)) { result in
+            
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            
+            switch result {
+            case .success(let response):
+                print("Success \(response)")
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    switch error {
+                    case .custom(code: 401):
+                        DispatchQueue.main.async {
+                            self.errorMessage = "Unauthorized"
+                        }
+                    case .custom(code: 403):
+                        self.errorMessage = "Password not changed"
+                    case .custom(code: 406):
+                        self.errorMessage = "Password lemah, silahkan ganti password anda"
+                    case .custom(code: 500):
+                        self.errorMessage = "Internal Server Error"
+                    default:
+                        self.errorMessage = "Internal Server Error"
+                    }
+                }
+                completion(false)
+            }
+        }
+        
+    }
+    
+    // MARK: - POST SET FINGER PRINT
+    func changePinTrx(currentPinTrx: String, newPinTrx: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.changePinTransaksi(currentPinTrx: encryptPassword(password: currentPinTrx), newPinTrx: encryptPassword(password: newPinTrx)) { result in
+            
+            
+            DispatchQueue.main.async {
+                self.isLoading = true
+            }
+            
+            switch result {
+            case .success(let response):
+                print("Success \(response)")
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                case .custom(code: 400):
+                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                case .custom(code: 401):
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Unauthorized"
+                    }
+                case .custom(code: 403):
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Password not changed"
+                        self.isLoading = false
+                    }
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                completion(false)
+            }
+        }
+        
+    }
+    
+    // MARK: - POST SET FINGER PRINT
+    func forgotPinTransaksi(cardNo: String, pin: String, newPinTrx: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.forgotPinTransaksi(cardNo: cardNo, pin: encryptPassword(password: pin), newPinTrx: encryptPassword(password: newPinTrx)) { result in
+            
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            
+            switch result {
+            case .success(let response):
+                print("Success \(response)")
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
                 
                 switch error {
                 case .custom(code: 500):

@@ -9,21 +9,22 @@ import SwiftUI
 import BottomSheet
 
 struct TransferOnUsScreen: View {
-
+    
     @State var transferData = TransferOnUsModel()
-    @State var transactionFrequency = ""
+    @State var transactionFrequency = "Pilih Frekuensi Transaksi"
     @State var transactionVoucher = "Pilih Voucher"
     @State var destinationNumber = ""
     @State var amount = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     
     @State private var showDialogConfirmation = false
     @State private var showDialogSelectAccount = false
     @State private var showDialogMaxReached = false
     @State private var showDialogMinReached = false
+    @State private var showDialogMinTransaction: Bool = false
     
     @State private var isShowName: Bool = false
-    @State private var showName: String = "JHON LENNON"
+    @State private var showName: String = ""
     
     @State private var disabledButton = true
     
@@ -40,103 +41,141 @@ struct TransferOnUsScreen: View {
     
     @State var listBankAccount: [BankAccount] = []
     
-    var _listVoucher = ["VCR-50K","VCR-100K","VCR-150K","VCR-250K"]
-    var _listFrequency = ["Sekali","Berkali-kali"]
+    var _listVoucher = ["Voucher Tidak Tersedia"]
+    var _listFrequency = ["Sekali", "Berkali-kali"]
+    
+    @State private var selectedCalendar: String = "Now"
+    
+    // Variable Date
+    let now = Date()
+    @State var date = Date()
+    private var selectedDate: Binding<Date> {
+        Binding<Date>(get: { self.date}, set : {
+            self.date = $0
+            self.setDateString()
+        })
+    }
+    
+    func setDateString() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        print(formatter.string(from: self.now))
+        print(formatter.string(from: self.date))
+        
+        if (formatter.string(from: self.now) == formatter.string(from: self.date)) {
+            self.selectedCalendar = "Now"
+        } else {
+            self.selectedCalendar = "Next"
+        }
+        
+    }
+    
+    @State private var notesCtrl: String = ""
     
     var body: some View {
-            ZStack(alignment: .top, content: {
-                VStack {
-                    Color(hex: "#F6F8FB")
-                        .edgesIgnoringSafeArea(.all)
-                }
-                VStack {
-                    ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
-                        VStack {
-                            noRekeningCard
-                            nominalCard
-                            
-                            calendarCard
-                            frekuensiTransaksiCard
-                            chooseVoucherCard
-                            notesCard
-                            
-                            Spacer()
-                            
-                            NavigationLink(
-                                destination: TransferOnUsConfirmationScreen().environmentObject(transferData),
-                                isActive: self.$routeConfirmation) {
-                                EmptyView()
-                            }
-                            
-                            VStack {
-                                Button(action: {
-                                    //                                    MARK: To be replaced with actual data
-                                                                        self.transferData.destinationName = "JOHN LENNON"
-                                    
-                                    UIApplication.shared.endEditing()
-                                    let amount = Int(self.transferData.amount) ?? 0
-                                    let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
-                                    
-                                    if (amount <= self.minLimit) {
-                                        self.showDialogMinReached = true
-                                    } else if (amount <= self.maxLimit && amount <= myCredit) {
-                                        self.routeConfirmation = true
-                                    } else if (amount > myCredit ) {
-                                        self.showDialogMinReached = true
-                                    } else {
-                                        self.showDialogMaxReached = true
-                                    }
-
-                                }, label: {
-                                    Text("KONFIRMASI TRANSFER")
-                                        .foregroundColor(.white)
-                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                        .font(.system(size: 13))
-                                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                                })
-                                .disabled(disabledButton)
-                                .background(Color(hex: disabledButton ? "#CBD1D9" : "#232175"))
-                                .cornerRadius(12)
-                                .padding(.leading, 20)
-                                .padding(.trailing, 10)
-                                .padding(.bottom)
-                            }
-                        }
-                    })
-                }
-                
-                if (self.showDialogSelectAccount || self.showDialogConfirmation || self.showDialogMinReached || self.showDialogMaxReached) {
-                    ModalOverlay(tapAction: { withAnimation {
-                        self.showDialogSelectAccount = false
-                        self.showDialogConfirmation = false
-                        self.showDialogMaxReached = false
-                        self.showDialogMinReached = false
-                    }})
+        ZStack(alignment: .top, content: {
+            VStack {
+                Color(hex: "#F6F8FB")
                     .edgesIgnoringSafeArea(.all)
-                }
-            })
-            .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
-            .onAppear() {
-                self.transferData = TransferOnUsModel()
-                self.transactionFrequency = _listFrequency[0]
-                self.transferData.transactionFrequency = _listFrequency[0]
-                self.getProfile()
             }
-            .onTapGesture() {
-                UIApplication.shared.endEditing()
+            VStack {
+                ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+                    VStack {
+                        noRekeningCard
+                        nominalCard
+                        
+                        calendarCard
+                        //                        frekuensiTransaksiCard
+                        chooseVoucherCard
+                        notesCard
+                        
+                        Spacer()
+                        
+                        NavigationLink(
+                            destination: TransferOnUsConfirmationScreen().environmentObject(transferData),
+                            isActive: self.$routeConfirmation) {
+                            EmptyView()
+                        }
+                        //                        .isDetailLink(false)
+                        
+                        VStack {
+                            Button(action: {
+                                self.transferData.destinationName = self.showName
+                                
+                                if (transactionVoucher == "Pilih Voucher" || transactionVoucher == "Voucher Tidak Tersedia") {
+                                    self.transferData.transactionVoucher = ""
+                                }
+                                
+                                UIApplication.shared.endEditing()
+                                let amount = Int(self.transferData.amount) ?? 0
+                                let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
+                                
+                                if (amount < self.minLimit) {
+                                    self.showDialogMinTransaction = true
+                                } else if (amount <= self.maxLimit && amount <= myCredit) {
+                                    self.transferData.notes = self.notesCtrl
+                                    self.transferData.transactionFrequency = transactionFrequency
+                                    self.transferData.transactionVoucher = ""
+                                    self.transferData.transactionDate = dateFormatter.string(from: self.date)
+                                    self.routeConfirmation = true
+                                } else if (amount > myCredit ) {
+                                    self.showDialogMinReached = true
+                                } else {
+                                    self.showDialogMaxReached = true
+                                }
+                                
+                            }, label: {
+                                Text("KONFIRMASI TRANSFER")
+                                    .foregroundColor(.white)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .font(.system(size: 13))
+                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            })
+                            .disabled(disabledButton)
+                            .background(Color(hex: disabledButton ? "#CBD1D9" : "#232175"))
+                            .cornerRadius(12)
+                            .padding(.leading, 20)
+                            .padding(.trailing, 10)
+                            .padding(.bottom)
+                        }
+                    }
+                })
             }
-            .bottomSheet(isPresented: $showDialogConfirmation, height: 300) {
-                bottomSheetCard
+            
+            if (self.showDialogSelectAccount || self.showDialogConfirmation || self.showDialogMinReached || self.showDialogMaxReached || self.showDialogMinTransaction) {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showDialogMinTransaction = false
+                    self.showDialogSelectAccount = false
+                    self.showDialogConfirmation = false
+                    self.showDialogMaxReached = false
+                    self.showDialogMinReached = false
+                }})
+                .edgesIgnoringSafeArea(.all)
             }
-            .popup(isPresented: $showDialogSelectAccount, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
-                modalSelectBankAccount()
-            }
-            .popup(isPresented: $showDialogMaxReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
-                modalMaxReached()
-            }
-            .popup(isPresented: $showDialogMinReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
-                modalMinReached()
-            }
+        })
+        .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
+        .onAppear() {
+            self.transferData = TransferOnUsModel()
+            self.getProfile()
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .bottomSheet(isPresented: $showDialogConfirmation, height: 300) {
+            bottomSheetCard
+        }
+        .popup(isPresented: $showDialogSelectAccount, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalSelectBankAccount()
+        }
+        .popup(isPresented: $showDialogMaxReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMaxReached()
+        }
+        .popup(isPresented: $showDialogMinReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMinReached()
+        }
+        .popup(isPresented: $showDialogMinTransaction, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMinTransaction()
+        }
     }
     
     var noRekeningCard: some View {
@@ -152,9 +191,13 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Rekening", text: $destinationNumber, onEditingChanged: {_ in })
+                TextField("Rekening", text: $destinationNumber, onEditingChanged: {_ in
+                    inquiryTransfer()
+                }, onCommit: {
+                    
+                })
                 .onReceive(destinationNumber.publisher.collect()) {
-                    self.destinationNumber = String($0.prefix(16))
+                    self.destinationNumber = String($0.prefix(11))
                     self.transferData.destinationNumber = destinationNumber
                     validateForm()
                 }
@@ -207,16 +250,16 @@ struct TransferOnUsScreen: View {
                     .fontWeight(.bold)
                 
                 TextField("0", text: self.$amount, onEditingChanged: {_ in })
-                .onReceive(amount.publisher.collect()) {
-                    let amountString = String($0.prefix(13))
-                    let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                    self.amount = cleanAmount.thousandSeparator()
-                    self.transferData.amount = cleanAmount
-                    validateForm()
-                }
-                .foregroundColor(Color(hex: "#232175"))
-                .font(.system(size: 30, weight: .bold, design: .default))
-                .keyboardType(.numberPad)
+                    .onReceive(amount.publisher.collect()) {
+                        let amountString = String($0.prefix(13))
+                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                        self.amount = cleanAmount.thousandSeparator()
+                        self.transferData.amount = cleanAmount
+                        validateForm()
+                    }
+                    .foregroundColor(Color(hex: "#232175"))
+                    .font(.system(size: 30, weight: .bold, design: .default))
+                    .keyboardType(.numberPad)
                 
                 Spacer()
             }
@@ -249,7 +292,7 @@ struct TransferOnUsScreen: View {
                 .padding(.horizontal, 25)
                 .padding(.bottom, 10)
             
-//            ListBankAccountView()
+            //            ListBankAccountView()
             bankAccountCard
                 .padding(.bottom, 25)
             
@@ -263,32 +306,36 @@ struct TransferOnUsScreen: View {
     
     var bankAccountCard: some View {
         ZStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(self.selectedAccount.namaRekening)
-                        .font(.subheadline)
-                        .foregroundColor(Color(hex: "#232175"))
-                        .fontWeight(.bold)
-                    
+            Button(
+                action: {
+                    UIApplication.shared.endEditing()
+                    self.showDialogSelectAccount = true
+                },
+                label: {
                     HStack {
-                        Text("Saldo Aktif :")
-                            .font(.caption)
-                            .fontWeight(.ultraLight)
-                        Text(self.selectedAccount.saldo)
-                            .font(.caption)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(.semibold)
+                        VStack(alignment: .leading) {
+                            Text(self.selectedAccount.productName)
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.bold)
+                            
+                            HStack {
+                                Text("Saldo Aktif :")
+                                    .font(.caption)
+                                    .fontWeight(.ultraLight)
+                                Text(self.selectedAccount.saldo)
+                                    .font(.caption)
+                                    .foregroundColor(Color(hex: "#232175"))
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                        
+                        Spacer()
+                        Image("ic_expand")
                     }
+                    .padding()
                 }
-                
-                Spacer()
-                Image("ic_expand")
-            }
-            .padding()
-            .onTapGesture {
-                UIApplication.shared.endEditing()
-                self.showDialogSelectAccount = true
-            }
+            )
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color.white)
@@ -300,15 +347,16 @@ struct TransferOnUsScreen: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Sekarang")
+                    Text(self.selectedCalendar)
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
                 }
                 
                 Spacer()
-
-                Image("ic_calendar_dark")
+                
+                DatePicker("", selection: selectedDate, in: Date()..., displayedComponents: .date)
+                    .labelsHidden()
             }
             .padding()
         }
@@ -399,12 +447,11 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Tulis keterangan Transaksi disini", text: self.$transferData.notes, onEditingChanged: { changed in
-                    
+                MultilineTextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onCommit: {
                 })
-                .lineLimit(5)
-                .multilineTextAlignment(.leading)
-                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
+                .onReceive(notesCtrl.publisher.collect()) {
+                    self.notesCtrl = String($0.prefix(40))
+                }
             }
             .padding(.horizontal, 20)
             .padding(.top, 5)
@@ -444,7 +491,7 @@ struct TransferOnUsScreen: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Ismail Haq")
+                    Text("\(self.transferData.destinationName)")
                         .font(.subheadline)
                     
                     HStack {
@@ -481,6 +528,59 @@ struct TransferOnUsScreen: View {
             }
             .padding(.bottom, 20)
         }
+    }
+    
+    func modalMinTransaction() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_limit_min")
+                .resizable()
+                .frame(width: 127, height: 81)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text(NSLocalizedString("Transaksi ada kurang dari minimum transaksi.", comment: ""))
+                .font(.custom("Montserrat-SemiBold", size: 18))
+                .foregroundColor(.red)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text(NSLocalizedString("Transaksi minimum Rp. \(self.minLimit),- . Silahkan mengganti nominal transaksi.", comment: ""))
+                .font(.custom("Montserrat-Light", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("UBAH NOMINAL")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 10)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("BATALKAN TRANSAKSI")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     func modalMinReached() -> some View {
@@ -603,7 +703,7 @@ struct TransferOnUsScreen: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(data.namaRekening)
+                            Text(data.productName)
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
@@ -626,11 +726,12 @@ struct TransferOnUsScreen: View {
                         .padding(.horizontal, 25)
                         .padding(.bottom, 10)
                 }
-//                .background(Color(hex: "#FF00FF"))
+                //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-                    self.transferData.sourceNumber = data.noRekening
-                    self.transferData.sourceAccountName = data.namaRekening
+                    self.transferData.cardNo = data.noRekening
+                    self.transferData.sourceNumber = data.sourceNumber
+                    self.transferData.sourceAccountName = data.productName
                     print(data.noRekening)
                     self.showDialogSelectAccount = false
                 }
@@ -642,17 +743,39 @@ struct TransferOnUsScreen: View {
     }
     
     func validateForm() {
-        if (self.transferData.destinationNumber.count == 16 &&
-                self.transferData.amount != "" &&
-                self.transferData.transactionDate != "" &&
-                self.transferData.transactionFrequency != "Pilih Frekuensi Transaksi") {
-            disabledButton = false
+        if (self.destinationNumber.count == 11) {
             self.isShowName = true
+        }
+        
+        if (self.destinationNumber.count == 11 && self.amount != "") {
+            disabledButton = false
         } else {
-            if (self.transferData.transactionVoucher == "Pilih Voucher") {
-                self.transferData.transactionVoucher = "-"
-            }
             disabledButton = true
+        }
+    }
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "in_ID")
+        return formatter
+    }
+    
+    @ObservedObject var transferVM = TransferViewModel()
+    func inquiryTransfer() {
+        self.transferVM.transferOnUsInquiry(transferData: transferData) { success in
+            DispatchQueue.main.async {
+                if success {
+                    print("SUCCESS")
+                    self.showName = self.transferVM.destinationName
+                }
+                
+                if !success {
+                    print("NOT SUCCESS")
+                    self.showName = "Akun Tidak Ditemukan"
+                }
+            }
         }
     }
     
@@ -662,11 +785,16 @@ struct TransferOnUsScreen: View {
                 print("Name \(self.profileVM.name)")
                 print(self.profileVM.balance)
                 self.transferData.username = self.profileVM.name
+                
                 self.listBankAccount.removeAll()
-                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                
+                self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.cardName, productName: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
+                
                 self.selectedAccount = self.listBankAccount[0]
-                self.transferData.sourceNumber = selectedAccount.noRekening
-                self.transferData.sourceAccountName = selectedAccount.namaRekening
+                
+                self.transferData.cardNo = selectedAccount.noRekening
+                self.transferData.sourceNumber = selectedAccount.sourceNumber
+                self.transferData.sourceAccountName = selectedAccount.productName
             }
         }
     }

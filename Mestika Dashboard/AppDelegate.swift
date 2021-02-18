@@ -61,13 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("OPEN FROM Backgroud")
         
         let userInfo = response.notification.request.content.userInfo
-        
         let jitsiRoom = userInfo["room"]
         print(jitsiRoom)
         
         let dataRoom: [String: Any] = ["room_id": jitsiRoom]
         
-        NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+        }
     }
     
     // [START receive_message]
@@ -108,8 +109,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        UserDefaults.standard.set(jitsiRoom ?? "-", forKey: "jitsi_room")
         // Print full message.
         print(userInfo)
-        NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
-        
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+        }
         completionHandler(UIBackgroundFetchResult.newData)
     }
     // [END receive_message]

@@ -9,78 +9,360 @@ import SwiftUI
 
 struct CardActivationView: View {
     
-    @AppStorage("lock_Password") var key = "123456"
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var atmNumber: String = ""
-    @State var pin: String = ""
+    @AppStorage("lock_Password") var key = "123456"
     
     @State var nextView: Bool = false
     
     var card: MyCard
     
+    // Variable NoRekening
+    @State private var noAtmCtrl: String = "8719200092801200"
+    
+    // Variable CVV Code
+    @State private var noCvvCtrl: String = ""
+    
+    // Variable New PIN
+    @State private var pinCtrl: String = ""
+    @State private var cPinCtrl: String = ""
+    @State private var disableIncorrectPin: Bool = true
+    
+    // Variable POPUP
+    @State private var isShowingWrongCvv: Bool = false
+    @State private var isShowingWrong3TimeCvv: Bool = false
+    @State private var isShowingSuccess: Bool = false
+    
+    var disableForm: Bool {
+        noCvvCtrl.count < 3 || pinCtrl.count < 6 || cPinCtrl.count < 6
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
-            Image("bg_blue")
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 20) {
-                Text("INPUT DATA ATM")
-                    .font(.custom("Montserrat-Bold", size: 24))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                Text("Masukkan nomor kartu ATM dan PIN ATM Anda yang sudah terdaftar")
-                    .font(.custom("Montserrat-Regular", size: 12))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(.vertical, 5)
-                
-                TextField("Masukkan nomor ATM Anda", text: $atmNumber, onEditingChanged: { changed in
-                    print("\($atmNumber)")
-                })
-                .keyboardType(.numberPad)
-                .frame(height: 50)
-                .font(.custom("Montserrat-Regular", size: 14))
-                .padding(.horizontal)
-                .background(Color.white)
-                .cornerRadius(15)
-                
-                TextField("Masukkan PIN ATM Anda", text: $pin, onEditingChanged: { changed in
-                    print("\($pin)")
-                })
-                .keyboardType(.numberPad)
-                .frame(height: 50)
-                .font(.custom("Montserrat-Regular", size: 14))
-                .padding(.horizontal)
-                .background(Color.white)
-                .cornerRadius(15)
-                
-                NavigationLink(destination: CardOTPVerificationView(card: card), isActive: $nextView) {
-                    Text("")
-                }
-                
-                Button(action: {
-                    if atmNumber != "" && pin == key {
-                        nextView.toggle()
-                    } else {
-                        pin = ""
-                    }
-                }, label: {
-                    Text("AKTIVASI KARTU ATM BARU")
-                        .font(.custom("Montserrat-Bold", size: 14))
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                })
-                .background(Color.white)
-                .cornerRadius(12)
-                .padding(.top, 20)
+            VStack {
+                Color(hex: "#F6F8FB")
+                    .edgesIgnoringSafeArea(.all)
             }
-            .padding(.horizontal, 30)
-            .padding(.top, 35)
+            
+            VStack {
+                ScrollView(.vertical, showsIndicators: false, content: {
+                    VStack {
+                        noAtmAndCvvCard
+                        createNewPinCard
+                        
+                        Button(action: {
+                            if (pinCtrl != cPinCtrl) {
+                                disableIncorrectPin = false
+                            } else if (noCvvCtrl != "123") {
+                                disableIncorrectPin = true
+                                isShowingWrongCvv = true
+                            } else {
+                                isShowingSuccess = true
+                            }
+                        }, label: {
+                            Text("AKTIVASI KARTU ATM")
+                                .foregroundColor(.white)
+                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        })
+                        .disabled(disableForm)
+                        .background(disableForm ? Color.gray : Color(hex: "#232175"))
+                        .cornerRadius(12)
+                        .padding(.top, 30)
+                        .padding(.horizontal)
+                    }
+                })
+            }
+            
+            if self.isShowingSuccess || self.isShowingWrongCvv || self.isShowingWrong3TimeCvv {
+                ModalOverlay(tapAction: { withAnimation {} })
+                    .edgesIgnoringSafeArea(.all)
+            }
         }
-        .navigationBarTitle("Aktivasi Kartu ATM Baru", displayMode: .inline)
+        .navigationBarTitle("Aktivasi Kartu", displayMode: .inline)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .popup(isPresented: $isShowingWrongCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            modalCodeCVVWrong()
+        }
+        .popup(isPresented: $isShowingWrong3TimeCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            modalCodeCVVWrong3Time()
+        }
+        .popup(isPresented: $isShowingSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            modalSuccessActivation()
+        }
+    }
+    
+    var noAtmAndCvvCard: some View {
+        VStack {
+            
+            // Field No ATM
+            VStack {
+                HStack {
+                    Text("No. Kartu ATM")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.top, 15)
+                
+                HStack {
+                    TextField("Rekening", text: self.$noAtmCtrl, onEditingChanged: { changed in
+                    })
+                    .disabled(true)
+                    .keyboardType(.numberPad)
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                    .padding()
+                    .onReceive(noAtmCtrl.publisher.collect()) {
+                        self.noAtmCtrl = String($0.prefix(16))
+                    }
+                }
+                .background(Color.gray.opacity(0.4))
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                .padding(.bottom, 15)
+            }
+            
+            // Field CVV Code
+            VStack {
+                HStack {
+                    Text("Masukkan Kode CVV")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
+                VStack {
+                    SecureField("Kode CVV", text: self.$noCvvCtrl)
+                    .keyboardType(.numberPad)
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 15)
+                    .padding(.bottom, 10)
+                    .onReceive(noCvvCtrl.publisher.collect()) {
+                        self.noCvvCtrl = String($0.prefix(3))
+                    }
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    Text("Masukkan 3 digit angka dibelakang kartu ATM Anda")
+                        .font(.system(size: 12))
+                        .padding(.bottom, 10)
+                }
+                .background(Color(hex: "#F6F8FB"))
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                .padding(.bottom, 25)
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width - 30)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .padding(.vertical)
+    }
+    
+    var createNewPinCard: some View {
+        VStack {
+            
+            // Field No ATM
+            VStack {
+                HStack {
+                    Text("Pembuatan PIN ATM baru")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.top, 15)
+                
+                HStack {
+                    SecureField("PIN ATM baru", text: self.$pinCtrl)
+                    .keyboardType(.numberPad)
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                    .padding()
+                    .onReceive(pinCtrl.publisher.collect()) {
+                        self.pinCtrl = String($0.prefix(6))
+                    }
+                }
+                .background(Color(hex: "#F6F8FB"))
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                .padding(.bottom, 15)
+            }
+            
+            // Field CVV Code
+            VStack {
+                HStack {
+                    Text("Masukkan kembali PIN ATM")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
+                HStack {
+                    SecureField("Konfirmasi PIN ATM baru", text: self.$cPinCtrl)
+                    .keyboardType(.numberPad)
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                    .padding()
+                    .onReceive(cPinCtrl.publisher.collect()) {
+                        self.cPinCtrl = String($0.prefix(6))
+                    }
+                }
+                .background(Color(hex: "#F6F8FB"))
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                
+                if disableIncorrectPin {
+                    Text("")
+                } else {
+                    HStack {
+                        Text("PIN ATM yang Anda masukkan tidak sesuai.")
+                            .font(.system(size: 12))
+                            .foregroundColor(.red)
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 15)
+                }
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width - 30)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .padding(.bottom)
+    }
+    
+    // MARK: -Bottom modal for error
+    func modalCodeCVVWrong() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("KODE CVV SALAH")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(.red)
+                .padding([.bottom, .top], 20)
+            
+            Text("3 digit nomor terakhir dibelakang kartu ATM Anda tidak sesuai dengan nomor kartu yang terdaftar.")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {}) {
+                Text("MASUKKAN KEMBALI KODE CVV")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: -Bottom modal for success
+    func modalSuccessActivation() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_check")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("AKTIVASI KARTU ATM ANDA TELAH BERHASIL")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(.red)
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("KEMBALI KE HALAMAN UTAMA")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: -Bottom modal for error
+    func modalCodeCVVWrong3Time() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("KODE CVV SALAH 3 KALI")
+                .fontWeight(.bold)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(.red)
+                .padding([.bottom, .top], 20)
+            
+            Text("Kode CVV yang Anda masukkan salah. Kesempatan Anda telah habis. Silahkan kembali mencoba Besok.")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("KEMBALI KE HALAMAN UTAMA")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

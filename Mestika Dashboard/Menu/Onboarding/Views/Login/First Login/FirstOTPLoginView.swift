@@ -637,6 +637,18 @@ struct FirstOTPLoginView: View {
         
         print("self.loginData.noTelepon \(self.loginData.noTelepon)")
         
+        var data = self.loginData.noTelepon
+        
+        if (data.substring(to: 1) == "0") {
+            print(data.substring(to: 1))
+            self.loginData.noTelepon = String(data.dropFirst())
+        } else {
+            print(data.substring(to: 1))
+            print("Bukan 0")
+        }
+        
+        print(self.loginData.noTelepon)
+        
         // VALIDATE OTP LOGIN
         self.otpVM.otpValidationLogin(
             code: self.pin,

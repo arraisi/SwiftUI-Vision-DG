@@ -17,7 +17,8 @@ struct TransferRtgsDestination: View {
     @State private var destinationType: String = "Tipe Penerima"
     
     // Variable Citizen Ship
-    @State private var citizenShipCtrl: String = ""
+    var _listCitizenShip = ["WNI", "WNA"]
+    @State private var citizenShipCtrl: String = "Kewarganegaraan"
     
     // Variable Province
     var _listProvince = ["Jawa Barat", "Jawa Timur", "Jawa Tengah"]
@@ -33,6 +34,9 @@ struct TransferRtgsDestination: View {
     // Variable Route
     @State private var isRouteTransaction: Bool = false
     
+    // Variable Disable
+    @State private var disabledButton = true
+    
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -46,14 +50,14 @@ struct TransferRtgsDestination: View {
                         HStack {
                             Text("Rekening Tujuan")
                                 .foregroundColor(.white)
-                                .font(.subheadline)
+                                .font(.caption)
                                 .padding(.leading)
                             Spacer()
                         }
                         
                         HStack {
                             Text("\(self.transferData.bankName) - \(self.transferData.destinationNumber)")
-                                .font(.headline)
+                                .font(.subheadline)
                                 .foregroundColor(.white)
                                 .padding(.leading)
                             Spacer()
@@ -65,7 +69,7 @@ struct TransferRtgsDestination: View {
                         HStack {
                             Text("Nominal Transaksi")
                                 .foregroundColor(.white)
-                                .font(.subheadline)
+                                .font(.caption)
                                 .padding(.leading)
                             Spacer()
                         }
@@ -77,7 +81,7 @@ struct TransferRtgsDestination: View {
                                 .padding(.leading)
                             
                             Text("\(self.transferData.amount.thousandSeparator())")
-                                .font(.headline)
+                                .font(.subheadline)
                                 .foregroundColor(.white)
                             Spacer()
                         }
@@ -94,13 +98,15 @@ struct TransferRtgsDestination: View {
                         
                         if (self.transferData.transactionType == "SKN") {
                             EmptyView()
+                                .padding(.bottom, 30)
                         } else {
-                            provinceCard
-                            cityCard
+//                            provinceCard
+//                            cityCard
                             addressCard
                         }
                         
                         Button(action: {
+                            self.transferData.addressOfDestination = self.addressCtrl
                             self.isRouteTransaction = true
                         }, label: {
                             Text("KONFIRMASI TRANSFER")
@@ -109,7 +115,8 @@ struct TransferRtgsDestination: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
-                        .background(Color(hex: "#232175"))
+                        .disabled(disabledButton)
+                        .background(disabledButton ? Color.gray : Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                     }
@@ -140,7 +147,9 @@ struct TransferRtgsDestination: View {
                 }
                 .padding([.leading, .top, .bottom])
                 
-                TextField("", text: self.$transferData.destinationName)
+                TextField("Nama Tujuan", text: self.$transferData.destinationName, onEditingChanged: { changed in
+                    validateForm()
+                })
                     .font(.subheadline)
             }
         }
@@ -153,27 +162,29 @@ struct TransferRtgsDestination: View {
     
     var destinationTypeCard: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(destinationType)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .fontWeight(.light)
-                }
-                .padding()
-                
-                Spacer()
-                Menu {
-                    ForEach(self._listDestinationType, id: \.self) { data in
-                        Button(action: {
-                            self.destinationType = data
-                            self.transferData.typeDestination = data
-                        }) {
-                            Text(data)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                        }
+            Menu {
+                ForEach(self._listDestinationType, id: \.self) { data in
+                    Button(action: {
+                        self.destinationType = data
+                        self.transferData.typeDestination = data
+                        validateForm()
+                    }) {
+                        Text(data)
+                            .font(.custom("Montserrat-Regular", size: 12))
                     }
-                } label: {
+                }
+            } label: {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(destinationType)
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .fontWeight(.light)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
                     Image("ic_expand").padding()
                 }
             }
@@ -186,19 +197,37 @@ struct TransferRtgsDestination: View {
     
     var citizenshipCard: some View {
         VStack {
-            HStack {
-                TextField("Kewarganegaraan", text: self.$citizenShipCtrl, onEditingChanged: { changed in
-                    self.transferData.citizenship = self.citizenShipCtrl
-                })
-                .font(.subheadline)
-                .padding()
+            Menu {
+                ForEach(self._listCitizenShip, id: \.self) { data in
+                    Button(action: {
+                        self.citizenShipCtrl = data
+                        self.transferData.citizenship = data
+                        validateForm()
+                    }) {
+                        Text(data)
+                            .font(.custom("Montserrat-Regular", size: 12))
+                    }
+                }
+            } label: {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(citizenShipCtrl)
+                            .font(.subheadline)
+                            .foregroundColor(.black)
+                            .fontWeight(.light)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
+                    Image("ic_expand").padding()
+                }
             }
         }
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
-        .padding()
     }
     
     var provinceCard: some View {
@@ -280,12 +309,9 @@ struct TransferRtgsDestination: View {
             .padding(.top, 25)
             
             VStack {
-                TextField("Tulis alamat penerima", text: self.$addressCtrl, onEditingChanged: { changed in
-                    self.transferData.addressOfDestination = self.addressCtrl
+                MultilineTextField("Tulis alamat penerima", text: self.$addressCtrl, onCommit: {
+                    validateForm()
                 })
-                .lineLimit(5)
-                .multilineTextAlignment(.leading)
-                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
             }
             .padding(.horizontal, 20)
             .padding(.top, 5)
@@ -298,6 +324,22 @@ struct TransferRtgsDestination: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .padding()
+    }
+    
+    func validateForm() {
+        if (self.transferData.transactionType == "SKN") {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
+                disabledButton = false
+            } else {
+                disabledButton = true
+            }
+        } else {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl.isNotEmpty()) {
+                disabledButton = false
+            } else {
+                disabledButton = true
+            }
+        }
     }
 }
 

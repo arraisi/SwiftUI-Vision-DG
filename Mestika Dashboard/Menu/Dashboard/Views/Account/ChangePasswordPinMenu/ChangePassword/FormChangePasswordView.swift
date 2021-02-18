@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormChangePasswordView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    @StateObject private var authVM = AuthViewModel()
     
     @State private var oldPasswordCtrl = ""
     
@@ -19,6 +24,14 @@ struct FormChangePasswordView: View {
     @State private var showConfirmPassword: Bool = false
     @State private var showModal: Bool = false
     @State private var isPasswordChanged: Bool = false
+    @State var isLoading = false
+    @State private var showModalError = false
+    
+    private var simpanBtnDisabled: Bool {
+        oldPasswordCtrl.count == 0 || passwordCtrl.count == 0 || confirmPasswordCtrl.count == 0
+    }
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
         
@@ -27,10 +40,17 @@ struct FormChangePasswordView: View {
             VStack {
                 AppBarLogo(light: true) {}
                 
+                if (self.authVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
+                
                 ScrollView(showsIndicators: false) {
                     
                     VStack {
-                        Text("Ubah Password")
+                        Text("Ubah Password Aplikasi")
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
@@ -48,8 +68,10 @@ struct FormChangePasswordView: View {
                             HStack {
                                 if (showOldPassword) {
                                     TextField("Input Password lama Anda", text: self.$oldPasswordCtrl)
+                                        .font(.custom("Montserrat-Regular", size: 12))
                                 } else {
                                     SecureField("Input Password lama Anda", text: self.$oldPasswordCtrl)
+                                        .font(.custom("Montserrat-Regular", size: 12))
                                 }
                                 
                                 Button(action: {
@@ -77,8 +99,10 @@ struct FormChangePasswordView: View {
                                 HStack {
                                     if (showPassword) {
                                         TextField("Input Password baru Anda", text: self.$passwordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     } else {
                                         SecureField("Input Password baru Anda", text: self.$passwordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                     
                                     Button(action: {
@@ -96,8 +120,10 @@ struct FormChangePasswordView: View {
                                 HStack {
                                     if (showConfirmPassword) {
                                         TextField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     } else {
                                         SecureField("Input Ulang Password baru Anda", text: self.$confirmPasswordCtrl)
+                                            .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                     
                                     Button(action: {
@@ -120,7 +146,19 @@ struct FormChangePasswordView: View {
                         Spacer()
                         
                         Button(action: {
-                            self.showModal.toggle()
+                            UIApplication.shared.endEditing()
+                            if passwordCtrl != confirmPasswordCtrl {
+                                self.showModalError.toggle()
+                            } else {
+                                self.authVM.changePasswordApp(currentPwd: self.oldPasswordCtrl, newPwd: self.passwordCtrl) { result in
+                                    
+                                    if result {
+                                        isPasswordChanged = true
+                                    }
+                                    
+                                    self.showModal.toggle()
+                                }
+                            }
                         }, label: {
                             Text("Simpan Password Baru")
                                 .foregroundColor(.white)
@@ -128,7 +166,8 @@ struct FormChangePasswordView: View {
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             
                         })
-                        .background(Color(hex: "#2334D0"))
+                        .disabled(simpanBtnDisabled)
+                        .background(simpanBtnDisabled ? Color(.lightGray) : Color(hex: "#2334D0"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.vertical, 30)
@@ -136,10 +175,11 @@ struct FormChangePasswordView: View {
                     .padding()
                     
                 }
+                .KeyboardAwarePadding()
             }
             
-            if self.showModal {
-                ModalOverlay(tapAction: { withAnimation { self.showModal = false } })
+            if self.showModal || self.showModalError {
+                ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
         }
@@ -148,7 +188,13 @@ struct FormChangePasswordView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
+        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             ZStack {
                 if isPasswordChanged {
                     SuccessChangePasswordModal()
@@ -157,7 +203,45 @@ struct FormChangePasswordView: View {
                 }
             }
         }
+        .popup(isPresented: $showModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            modalPasswordNotMatched()
+        }
     }
+    
+    // MARK: Bottom modal for error
+    func modalPasswordNotMatched() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Password tidak sama, silahkan ketik ulang")
+                .fontWeight(.bold)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showModalError = false
+            }) {
+                Text("Kembali")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+        }
+        .padding(.bottom, 30)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     // MARK: POPUP SUCCSESS CHANGE PASSWORD
     func SuccessChangePasswordModal() -> some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -175,6 +259,7 @@ struct FormChangePasswordView: View {
             
             Button(action: {
                 self.showModal = false
+                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("OK")
                     .foregroundColor(.white)
@@ -199,10 +284,11 @@ struct FormChangePasswordView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("Password not Changed")
+            Text(self.authVM.errorMessage)
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
+                .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
                 self.showModal = false

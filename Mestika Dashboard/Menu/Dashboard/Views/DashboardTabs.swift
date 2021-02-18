@@ -17,8 +17,9 @@ struct DashboardTabs: View {
     @State var balance: String = ""
     @State var productName: String = "-"
     
-    @State var cardNo: String = "-"
+    @Binding var cardNo: String
     @State var cardName: String = "-"
+    @Binding var sourceNumber: String
     
     @State var isHiddenBalance: Bool = false
     
@@ -34,7 +35,7 @@ struct DashboardTabs: View {
                 usernameInfo
                 menuGrid
                 
-                GridMenuView()
+                GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
                     .padding(.top, 10)
                 
                 VStack {
@@ -45,7 +46,7 @@ struct DashboardTabs: View {
                         
                         Spacer()
                         
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        NavigationLink(destination: CardManagementScreen(), label: {
                             Text("See All")
                                 .bold()
                                 .foregroundColor(Color(hex: "#2334D0"))
@@ -55,16 +56,16 @@ struct DashboardTabs: View {
                     
                     ScrollView(.horizontal, showsIndicators: false, content: {
                         HStack{
+                            Spacer().frame(width: 20)
 //                            VStack {
-//                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+//                                NavigationLink(destination: CardManagementScreen(), label: {
 //                                    Image("ic_btn_add_rekening")
 //                                })
-//
+//                                
 //                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
 //                                    Image("ic_rekening_list")
 //                                })
 //                            }
-                            Spacer().frame(width: 20)
                             
                             ZStack {
         //                        Image("rekening-card-1")

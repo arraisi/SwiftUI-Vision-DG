@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct AccountTabs: View {
+    
+    /* Function GET USER Status */
+    @StateObject var profileVM = ProfileViewModel()
     
     @EnvironmentObject var appState: AppState
     
@@ -19,6 +23,10 @@ struct AccountTabs: View {
     @ObservedObject private var authVM = AuthViewModel()
     @State private var isFingerprint = false
     @State private var isNextRoute = false
+    
+    @State private var isShowingAlert = false
+    
+    @State private var forgotPasswordActived = false
     
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -47,6 +55,15 @@ struct AccountTabs: View {
             })
             .navigationBarHidden(true)
         }
+        .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
+            if moveToAccountTab {
+                //                getCoreDataNewDevice()
+                print("Move to moveToDashboard: \(moveToAccountTab)")
+                //                activateWelcomeView()
+                self.forgotPasswordActived = false
+                self.appState.moveToAccountTab = false
+            }
+        }
         .onAppear(perform: {
             if let value = device.last?.fingerprintFlag {
                 print("CORE DATA - Finger Print = \(value)")
@@ -64,11 +81,11 @@ struct AccountTabs: View {
                     .clipShape(Circle())
                 
                 VStack(alignment: .leading) {
-                    Text("\(self.username)")
+                    Text("\(self.profileVM.name)")
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#2334D0"))
                     
-                    Text("+62\(self.phoneNumber)")
+                    Text("+62\(self.profileVM.telepon)")
                         .font(.custom("Montserrat-SemiBold", size: 16))
                 }
                 
@@ -129,7 +146,7 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormChangeContactView()){
+                    NavigationLink(destination : FormChangeContactView(txtPhone: self.$profileVM.telepon, txtEmail: self.$profileVM.email)){
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("Contact")
@@ -195,38 +212,22 @@ struct AccountTabs: View {
                             .onChange(of: self.isFingerprint) { value in
                                 //perform your action here...
                                 saveDataNewDeviceToCoreData()
-                                
-                                if value {
-                                    
-                                    self.authVM.enableBiometricLogin { result in
+                                if !value {
+                                    self.authVM.disableBiometricLogin { result in
+                                        
                                         print("result : \(result)")
                                         if result {
-                                            print("ENABLE FINGER PRINT SUCCESS")
+                                            print("DISABLE FINGER PRINT SUCCESS")
                                         }
                                         
                                         if !result {
-                                            self.isFingerprint = false
-                                            print("ENABLE FINGER PRINT FAILED")
+                                            self.isFingerprint = true
+                                            print("DISABLE FINGER PRINT FAILED")
                                         }
                                     }
-                                    
                                 } else {
-                                    
-                                    self.authVM.disableBiometricLogin { result in
-
-                                            print("result : \(result)")
-                                            if result {
-                                                print("DISABLE FINGER PRINT SUCCESS")
-                                            }
-
-                                            if !result {
-                                                self.isFingerprint = true
-                                                print("DISABLE FINGER PRINT FAILED")
-                                            }
-                                    }
-                                    
+                                    BiometricAuthCheck(value)
                                 }
-                                
                             }
                         }
                         
@@ -276,19 +277,26 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormInputResetNewPinScreen()){
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Forgot Pin Transaction")
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
-                            }
-                            
-                            Spacer()
+                    ZStack {
+                        NavigationLink(destination: FormInputResetNewPinScreen(cardNo: self.profileVM.cardNo), isActive: self.$forgotPasswordActived) {
+                            EmptyView()
                         }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 20)
+                        .isDetailLink(false)
+                        
+                        Button(action : {self.forgotPasswordActived=true}){
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Forgot Pin Transaction")
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                        }
                     }
                     
                     Divider()
@@ -296,14 +304,7 @@ struct AccountTabs: View {
                     
                     Button(
                         action: {
-                            self.authVM.postLogout { success in
-                                if success {
-                                    print("SUCCESS LOGOUT")
-                                    DispatchQueue.main.async {
-                                        self.appState.moveToWelcomeView = true
-                                    }
-                                }
-                            }
+                            self.isShowingAlert = true
                         },
                         label: {
                             HStack {
@@ -330,23 +331,56 @@ struct AccountTabs: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text(NSLocalizedString("Anda yakin ingin keluar aplikasi Bank Mestika?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    self.authVM.postLogout { success in
+                        if success {
+                            print("SUCCESS LOGOUT")
+                            DispatchQueue.main.async {
+                                self.appState.moveToWelcomeView = true
+                            }
+                        }
+                    }
+                }),
+                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+        }
         .onAppear {
-            getProfile()
+            //            getProfile()
+            self.profileVM.getProfile { result in
+                print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+            }
             getUserInfo()
         }
         
     }
     
-    /* Function GET USER Status */
-    @ObservedObject var profileVM = ProfileViewModel()
-    func getProfile() {
-        self.profileVM.getProfile { success in
-            if success {
-                print("Name \(self.profileVM.name)")
-                print(self.profileVM.balance)
-                self.username = self.profileVM.name
-                self.phoneNumber = self.profileVM.telepon
+    // MARK: Biometric Authentication Check
+    func BiometricAuthCheck(_ value: Bool) {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            self.authVM.enableBiometricLogin { result in
+                print("result : \(result)")
+                if result {
+                    print("ENABLE FINGER PRINT SUCCESS")
+                }
+                
+                if !result {
+                    self.isFingerprint = false
+                    print("ENABLE FINGER PRINT FAILED")
+                }
             }
+            
+        } else {
+            
+            guard let settingUrl = URL(string : "App-Prefs:") else {
+                return
+            }
+            
+            UIApplication.shared.open(settingUrl)
         }
     }
     
@@ -360,8 +394,12 @@ struct AccountTabs: View {
     func saveDataNewDeviceToCoreData()  {
         print("------SAVE ACCOUNT TO CORE DATA-------")
         
-        let data = NewDevice(context: managedObjectContext)
-        data.fingerprintFlag = self.isFingerprint
+        if device.count == 0 {
+            let data = NewDevice(context: managedObjectContext)
+            data.fingerprintFlag = self.isFingerprint
+        } else {
+            device.last?.fingerprintFlag = self.isFingerprint
+        }
         
         do {
             try self.managedObjectContext.save()

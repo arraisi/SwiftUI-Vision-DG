@@ -150,8 +150,38 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/auth/clearFinger")
     }
     
+    static func urlAuthChangePassword() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/changePwd")
+    }
+    
+    static func urlAuthChangePinTrx() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/changePinTrx")
+    }
+    
+    static func urlAuthForgotPinTrx() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/forgotPinTrx?channel=vlink")
+    }
+    
+    //-------------------- TRANSFER SERVICE ----------------------//
+    
+    static func urlBankReference() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/reference/kliringAndRtgsBank")
+    }
+    
+    static func urlTransferOverbookingInquiry() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/transper/overbookingInquiry")
+    }
+    
     static func urlTransferOverbooking() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/transper/overbooking")
+    }
+    
+    static func urlTransferRtgs() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/transper/rtgs")
+    }
+    
+    static func urlTransferSkn() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/transper/skn")
     }
     
     //-------------------- PROFILE SERVICE ----------------------//
