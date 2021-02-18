@@ -807,7 +807,7 @@ struct TransferOnUsScreen: View {
     
     @ObservedObject var limitVM = TransferViewModel()
     func getLimit(code: String) {
-        self.limitVM.getLimitTransaction(classCode: code) { success in
+        self.limitVM.getLimitTransaction(classCode: "70") { success in
             if success {
                 self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
                 self.limitTrx = self.limitVM.limitIbft

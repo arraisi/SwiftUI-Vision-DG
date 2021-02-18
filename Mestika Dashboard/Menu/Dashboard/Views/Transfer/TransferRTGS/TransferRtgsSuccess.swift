@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TransferRtgsSuccess: View {
     
+    @EnvironmentObject var appState: AppState
+    
     //    @EnvironmentObject var transferData: TransferOnUsModel
     var transferData: TransferOffUsModel
     
@@ -44,11 +46,7 @@ struct TransferRtgsSuccess: View {
                     
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.appState.moveToTransfer = true
                         },
                         label: {
                             Text("Kembali Ke Halaman Utama")
