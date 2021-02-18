@@ -25,9 +25,10 @@ struct FormChangePasswordView: View {
     @State private var showModal: Bool = false
     @State private var isPasswordChanged: Bool = false
     @State var isLoading = false
+    @State private var showModalError = false
     
     private var simpanBtnDisabled: Bool {
-        oldPasswordCtrl.count == 0 || passwordCtrl.count == 0 || confirmPasswordCtrl.count == 0 || passwordCtrl != confirmPasswordCtrl
+        oldPasswordCtrl.count == 0 || passwordCtrl.count == 0 || confirmPasswordCtrl.count == 0
     }
     
     @GestureState private var dragOffset = CGSize.zero
@@ -146,15 +147,18 @@ struct FormChangePasswordView: View {
                         
                         Button(action: {
                             UIApplication.shared.endEditing()
-                            self.authVM.changePasswordApp(currentPwd: self.oldPasswordCtrl, newPwd: self.passwordCtrl) { result in
-                                
-                                if result {
-                                    isPasswordChanged = true
+                            if passwordCtrl != confirmPasswordCtrl {
+                                self.showModalError.toggle()
+                            } else {
+                                self.authVM.changePasswordApp(currentPwd: self.oldPasswordCtrl, newPwd: self.passwordCtrl) { result in
+                                    
+                                    if result {
+                                        isPasswordChanged = true
+                                    }
+                                    
+                                    self.showModal.toggle()
                                 }
-                                
-                                self.showModal.toggle()
                             }
-                            
                         }, label: {
                             Text("Simpan Password Baru")
                                 .foregroundColor(.white)
@@ -174,7 +178,7 @@ struct FormChangePasswordView: View {
                 .KeyboardAwarePadding()
             }
             
-            if self.showModal {
+            if self.showModal || self.showModalError {
                 ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
@@ -199,7 +203,45 @@ struct FormChangePasswordView: View {
                 }
             }
         }
+        .popup(isPresented: $showModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            modalPasswordNotMatched()
+        }
     }
+    
+    // MARK: Bottom modal for error
+    func modalPasswordNotMatched() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Password tidak sama, silahkan ketik ulang")
+                .fontWeight(.bold)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showModalError = false
+            }) {
+                Text("Kembali")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+        }
+        .padding(.bottom, 30)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     // MARK: POPUP SUCCSESS CHANGE PASSWORD
     func SuccessChangePasswordModal() -> some View {
         VStack(alignment: .leading, spacing: 20) {

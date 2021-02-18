@@ -40,7 +40,7 @@ struct DashboardTabs: View {
                 
                 VStack {
                     HStack {
-                        Text("Rekening")
+                        Text("Kartu-Ku")
                             .font(.title3)
                             .fontWeight(.ultraLight)
                         
@@ -56,15 +56,16 @@ struct DashboardTabs: View {
                     
                     ScrollView(.horizontal, showsIndicators: false, content: {
                         HStack{
-                            VStack {
-                                NavigationLink(destination: CardManagementScreen(), label: {
-                                    Image("ic_btn_add_rekening")
-                                })
-                                
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                    Image("ic_rekening_list")
-                                })
-                            }
+                            Spacer().frame(width: 20)
+//                            VStack {
+//                                NavigationLink(destination: CardManagementScreen(), label: {
+//                                    Image("ic_btn_add_rekening")
+//                                })
+//                                
+//                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+//                                    Image("ic_rekening_list")
+//                                })
+//                            }
                             
                             ZStack {
         //                        Image("rekening-card-1")
