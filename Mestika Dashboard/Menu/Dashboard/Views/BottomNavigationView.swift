@@ -122,12 +122,13 @@ struct BottomNavigationView: View {
     
     var appbar: some View {
         VStack {
+            ZStack{ Color(hex: "#232175") }.frame(height: 40)
+            Spacer().frame(height: 10)
             HStack {
                 Spacer()
                 navBarItem
             }
         }
-        .padding(.top, 50)
         .padding(.bottom, 10)
     }
     
