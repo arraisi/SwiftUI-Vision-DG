@@ -28,7 +28,7 @@
 		06AD57002570CAC50071C4A9 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AD56FF2570CAC50071C4A9 /* WebView.swift */; };
 		06AD57092570D3370071C4A9 /* term.html in Resources */ = {isa = PBXBuildFile; fileRef = 06AD57082570D3370071C4A9 /* term.html */; };
 		06AF29D7256BC0CC008872E6 /* AppBarLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AF29D6256BC0CC008872E6 /* AppBarLogo.swift */; };
-		06E8A4AB2578F22400E61002 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 06E8A4AA2578F22400E61002 /* SwiftPackageProductDependency */; };
+		06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */; };
 		0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC5A256C3E17005B1BB0 /* AddProductATM.swift */; };
 		0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FC65256C4404005B1BB0 /* ATMProductViewModel.swift */; };
 		0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4010712563E00B00983B16 /* TextFieldValidation.swift */; };
@@ -44,13 +44,13 @@
 		0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */; };
 		2E7F032F95A05771F41E14EF /* Pods_Mestika_Dashboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D6479A09A0661EF063B4B /* Pods_Mestika_Dashboard.framework */; };
 		5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */; };
-		520585F525721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* SwiftPackageProductDependency */; };
-		520585F625721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* SwiftPackageProductDependency */; };
-		520585F725721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* SwiftPackageProductDependency */; };
-		520585F825721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C06AC3102563770700D06EE3 /* SwiftPackageProductDependency */; };
-		520585F925721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* SwiftPackageProductDependency */; };
-		520585FA25721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* SwiftPackageProductDependency */; };
-		520585FB25721F00005DB764 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* SwiftPackageProductDependency */; };
+		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
+		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
+		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
+		520585F825721F00005DB764 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = C06AC3102563770700D06EE3 /* SwiftUIX */; };
+		520585F925721F00005DB764 /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = 52E0557D2563C307009294DA /* NavigationStack */; };
+		520585FA25721F00005DB764 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 520E467A2568B5A800DE9205 /* Introspect */; };
+		520585FB25721F00005DB764 /* Indicators in Frameworks */ = {isa = PBXBuildFile; productRef = 520E46802568BEF100DE9205 /* Indicators */; };
 		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
 		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
 		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
@@ -279,6 +279,7 @@
 		52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */; };
 		52E7740425B042CD00D5B010 /* ATMDesignNewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */; };
 		52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */; };
+		52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */; };
 		6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */; };
 		6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
@@ -290,7 +291,7 @@
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
 		C018012E25D4E40F00766E41 /* FavoritViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018012D25D4E40F00766E41 /* FavoritViewModel.swift */; };
 		C018014725D4E47F00766E41 /* FavoritService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018014625D4E47F00766E41 /* FavoritService.swift */; };
-		C02C2DE025875B0C00CED248 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C02C2DDF25875B0C00CED248 /* SwiftPackageProductDependency */; };
+		C02C2DE025875B0C00CED248 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = C02C2DDF25875B0C00CED248 /* Mantis */; };
 		C02C2DE825876BAA00CED248 /* PhotoCropping.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C2DE725876BAA00CED248 /* PhotoCropping.swift */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
@@ -343,6 +344,7 @@
 		C0BCDEC625B6B99D00E1028F /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCDEC525B6B99D00E1028F /* BadgeView.swift */; };
 		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
+		C0D142D225DE50540015175D /* HistoryTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D142D125DE50540015175D /* HistoryTabs.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */; };
@@ -662,6 +664,7 @@
 		52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignNewModel.swift; sourceTree = "<group>"; };
 		52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganModel.swift; sourceTree = "<group>"; };
+		52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTransactionResponse.swift; sourceTree = "<group>"; };
 		5EAE1B20BC82E123A232853A /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
 		6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationResponse.swift; sourceTree = "<group>"; };
 		6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
@@ -730,6 +733,7 @@
 		C0BCDEC525B6B99D00E1028F /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
+		C0D142D125DE50540015175D /* HistoryTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabs.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOTPVerificationView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCVVVerificationView.swift; sourceTree = "<group>"; };
@@ -763,15 +767,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C02C2DE025875B0C00CED248 /* BuildFile in Frameworks */,
-				520585F725721F00005DB764 /* BuildFile in Frameworks */,
-				520585FA25721F00005DB764 /* BuildFile in Frameworks */,
-				06E8A4AB2578F22400E61002 /* BuildFile in Frameworks */,
-				520585FB25721F00005DB764 /* BuildFile in Frameworks */,
-				520585F525721F00005DB764 /* BuildFile in Frameworks */,
-				520585F925721F00005DB764 /* BuildFile in Frameworks */,
-				520585F625721F00005DB764 /* BuildFile in Frameworks */,
-				520585F825721F00005DB764 /* BuildFile in Frameworks */,
+				C02C2DE025875B0C00CED248 /* Mantis in Frameworks */,
+				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
+				520585FA25721F00005DB764 /* Introspect in Frameworks */,
+				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
+				520585FB25721F00005DB764 /* Indicators in Frameworks */,
+				520585F525721F00005DB764 /* PopupView in Frameworks */,
+				520585F925721F00005DB764 /* NavigationStack in Frameworks */,
+				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
+				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				2E7F032F95A05771F41E14EF /* Pods_Mestika_Dashboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -881,6 +885,7 @@
 				52D8DC0325D61135004DF85E /* TransferRtgsExecResponse.swift */,
 				52D8DC0D25D62415004DF85E /* TransferSknExecResponse.swift */,
 				52D6AD0025DBA0080079B48C /* InquiryTransferResponse.swift */,
+				52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -1638,6 +1643,7 @@
 		C01C67A4255E38180019D06F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C0D142D025DE503B0015175D /* History */,
 				0658B58C2563F8A1001B659D /* Notification */,
 				52BF57F52559279100F009B5 /* PaymentTransaction */,
 				526B657A254FB20800C13C36 /* Account */,
@@ -1650,6 +1656,7 @@
 				52474D78254028CD0094B758 /* AccountTabs.swift */,
 				52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */,
 				525FA10925524F29007EADCB /* CustomBottomNavigationView.swift */,
+				C0D142D125DE50540015175D /* HistoryTabs.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1751,6 +1758,13 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		C0D142D025DE503B0015175D /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		C0D7B5D92552AF25009C3976 /* CardManagement */ = {
 			isa = PBXGroup;
 			children = (
@@ -1816,15 +1830,15 @@
 			);
 			name = "Mestika Dashboard";
 			packageProductDependencies = (
-				523A86232542B67900ADFE25 /* SwiftPackageProductDependency */,
-				523A86322542CC6E00ADFE25 /* SwiftPackageProductDependency */,
-				522563832562549900BCAB67 /* SwiftPackageProductDependency */,
-				C06AC3102563770700D06EE3 /* SwiftPackageProductDependency */,
-				52E0557D2563C307009294DA /* SwiftPackageProductDependency */,
-				520E467A2568B5A800DE9205 /* SwiftPackageProductDependency */,
-				520E46802568BEF100DE9205 /* SwiftPackageProductDependency */,
-				06E8A4AA2578F22400E61002 /* SwiftPackageProductDependency */,
-				C02C2DDF25875B0C00CED248 /* SwiftPackageProductDependency */,
+				523A86232542B67900ADFE25 /* PopupView */,
+				523A86322542CC6E00ADFE25 /* BottomSheet */,
+				522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */,
+				C06AC3102563770700D06EE3 /* SwiftUIX */,
+				52E0557D2563C307009294DA /* NavigationStack */,
+				520E467A2568B5A800DE9205 /* Introspect */,
+				520E46802568BEF100DE9205 /* Indicators */,
+				06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */,
+				C02C2DDF25875B0C00CED248 /* Mantis */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -1902,18 +1916,18 @@
 			);
 			mainGroup = 5245F878253FE702002E8B53;
 			packageReferences = (
-				523A86222542B67900ADFE25 /* RemoteSwiftPackageReference */,
-				523A86312542CC6E00ADFE25 /* RemoteSwiftPackageReference */,
-				52C05577255F6B9900A57400 /* RemoteSwiftPackageReference */,
-				522563822562549900BCAB67 /* RemoteSwiftPackageReference */,
-				C06AC30F2563770700D06EE3 /* RemoteSwiftPackageReference */,
-				52E0557C2563C307009294DA /* RemoteSwiftPackageReference */,
-				0658B59D2563F904001B659D /* RemoteSwiftPackageReference */,
-				0658B5AC256401BA001B659D /* RemoteSwiftPackageReference */,
-				C01B3DEE2564203300BD3C06 /* RemoteSwiftPackageReference */,
-				520E467F2568BEF100DE9205 /* RemoteSwiftPackageReference */,
-				06E8A4A92578F22300E61002 /* RemoteSwiftPackageReference */,
-				C02C2DDE25875B0C00CED248 /* RemoteSwiftPackageReference */,
+				523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */,
+				523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
+				52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */,
+				522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */,
+				C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
+				06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				C02C2DDE25875B0C00CED248 /* XCRemoteSwiftPackageReference "Mantis" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -2220,6 +2234,7 @@
 				0A09FC66256C4404005B1BB0 /* ATMProductViewModel.swift in Sources */,
 				525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */,
 				525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */,
+				C0D142D225DE50540015175D /* HistoryTabs.swift in Sources */,
 				C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				52ADFEAE2557D9A800A1001F /* SliderAssetsResponse.swift in Sources */,
@@ -2281,6 +2296,7 @@
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
 				0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */,
 				529190BC25D3C8FC005A4898 /* BankReferenceResponse.swift in Sources */,
+				52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */,
 				526A81672560B2B200D614CB /* FirstLoginView.swift in Sources */,
 				C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */,
 				52ADFF912557DFDC00A1001F /* PerkiraanSetoranView.swift in Sources */,
@@ -3119,7 +3135,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0658B59D2563F904001B659D /* RemoteSwiftPackageReference */ = {
+		0658B59D2563F904001B659D /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
 			requirement = {
@@ -3127,7 +3143,7 @@
 				minimumVersion = 1.0.2;
 			};
 		};
-		0658B5AC256401BA001B659D /* RemoteSwiftPackageReference */ = {
+		0658B5AC256401BA001B659D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -3135,7 +3151,7 @@
 				minimumVersion = 7.1.0;
 			};
 		};
-		06E8A4A92578F22300E61002 /* RemoteSwiftPackageReference */ = {
+		06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
 			requirement = {
@@ -3143,7 +3159,7 @@
 				minimumVersion = 1.5.0;
 			};
 		};
-		520E467F2568BEF100DE9205 /* RemoteSwiftPackageReference */ = {
+		520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Connapptivity/SwiftUI-Indicators";
 			requirement = {
@@ -3151,7 +3167,7 @@
 				minimumVersion = 1.3.1;
 			};
 		};
-		522563822562549900BCAB67 /* RemoteSwiftPackageReference */ = {
+		522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD-SwiftUI";
 			requirement = {
@@ -3159,7 +3175,7 @@
 				minimumVersion = 0.1.1;
 			};
 		};
-		523A86222542B67900ADFE25 /* RemoteSwiftPackageReference */ = {
+		523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView";
 			requirement = {
@@ -3167,7 +3183,7 @@
 				minimumVersion = 0.0.10;
 			};
 		};
-		523A86312542CC6E00ADFE25 /* RemoteSwiftPackageReference */ = {
+		523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weitieda/bottom-sheet";
 			requirement = {
@@ -3175,7 +3191,7 @@
 				minimumVersion = 1.0.5;
 			};
 		};
-		52C05577255F6B9900A57400 /* RemoteSwiftPackageReference */ = {
+		52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davbeck/MultipartForm";
 			requirement = {
@@ -3183,7 +3199,7 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		52E0557C2563C307009294DA /* RemoteSwiftPackageReference */ = {
+		52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack";
 			requirement = {
@@ -3191,7 +3207,7 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		C01B3DEE2564203300BD3C06 /* RemoteSwiftPackageReference */ = {
+		C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
@@ -3199,7 +3215,7 @@
 				minimumVersion = 0.1.1;
 			};
 		};
-		C02C2DDE25875B0C00CED248 /* RemoteSwiftPackageReference */ = {
+		C02C2DDE25875B0C00CED248 /* XCRemoteSwiftPackageReference "Mantis" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/guoyingtao/Mantis.git";
 			requirement = {
@@ -3207,7 +3223,7 @@
 				minimumVersion = 1.4.7;
 			};
 		};
-		C06AC30F2563770700D06EE3 /* RemoteSwiftPackageReference */ = {
+		C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
 			requirement = {
@@ -3218,49 +3234,49 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		06E8A4AA2578F22400E61002 /* SwiftPackageProductDependency */ = {
+		06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 06E8A4A92578F22300E61002 /* RemoteSwiftPackageReference */;
+			package = 06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
-		520E467A2568B5A800DE9205 /* SwiftPackageProductDependency */ = {
+		520E467A2568B5A800DE9205 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C01B3DEE2564203300BD3C06 /* RemoteSwiftPackageReference */;
+			package = C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		520E46802568BEF100DE9205 /* SwiftPackageProductDependency */ = {
+		520E46802568BEF100DE9205 /* Indicators */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 520E467F2568BEF100DE9205 /* RemoteSwiftPackageReference */;
+			package = 520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */;
 			productName = Indicators;
 		};
-		522563832562549900BCAB67 /* SwiftPackageProductDependency */ = {
+		522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 522563822562549900BCAB67 /* RemoteSwiftPackageReference */;
+			package = 522563822562549900BCAB67 /* XCRemoteSwiftPackageReference "JGProgressHUD-SwiftUI" */;
 			productName = "JGProgressHUD-SwiftUI";
 		};
-		523A86232542B67900ADFE25 /* SwiftPackageProductDependency */ = {
+		523A86232542B67900ADFE25 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 523A86222542B67900ADFE25 /* RemoteSwiftPackageReference */;
+			package = 523A86222542B67900ADFE25 /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
 		};
-		523A86322542CC6E00ADFE25 /* SwiftPackageProductDependency */ = {
+		523A86322542CC6E00ADFE25 /* BottomSheet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 523A86312542CC6E00ADFE25 /* RemoteSwiftPackageReference */;
+			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
 			productName = BottomSheet;
 		};
-		52E0557D2563C307009294DA /* SwiftPackageProductDependency */ = {
+		52E0557D2563C307009294DA /* NavigationStack */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 52E0557C2563C307009294DA /* RemoteSwiftPackageReference */;
+			package = 52E0557C2563C307009294DA /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
 			productName = NavigationStack;
 		};
-		C02C2DDF25875B0C00CED248 /* SwiftPackageProductDependency */ = {
+		C02C2DDF25875B0C00CED248 /* Mantis */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C02C2DDE25875B0C00CED248 /* RemoteSwiftPackageReference */;
+			package = C02C2DDE25875B0C00CED248 /* XCRemoteSwiftPackageReference "Mantis" */;
 			productName = Mantis;
 		};
-		C06AC3102563770700D06EE3 /* SwiftPackageProductDependency */ = {
+		C06AC3102563770700D06EE3 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C06AC30F2563770700D06EE3 /* RemoteSwiftPackageReference */;
+			package = C06AC30F2563770700D06EE3 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */

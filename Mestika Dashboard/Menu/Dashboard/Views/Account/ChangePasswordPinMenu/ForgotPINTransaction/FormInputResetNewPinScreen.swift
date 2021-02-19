@@ -14,13 +14,16 @@ struct FormInputResetNewPinScreen: View {
     @State private var pinCtrl = ""
     @State private var pinConfirmCtrl = ""
     
-//    @State private var showPin: Bool = false
-//    @State private var showPinConfirm: Bool = false
+    //    @State private var showPin: Bool = false
+    //    @State private var showPinConfirm: Bool = false
     @State private var showModal: Bool = false
     @State private var isPinChanged: Bool = false
+    @State private var showModalError: Bool = false
+    @State private var nextViewActive: Bool = false
+    @State private var showPinWeakModal: Bool = false
     
     private var simpanBtnDisabled: Bool {
-        pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || pinCtrl != pinConfirmCtrl
+        pinCtrl.count == 0 || pinConfirmCtrl.count == 0
     }
     @GestureState private var dragOffset = CGSize.zero
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -54,18 +57,22 @@ struct FormInputResetNewPinScreen: View {
                             
                             VStack {
                                 HStack {
-//                                    if (showPin) {
-//                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
-//                                    } else {
-                                        SecureField("Input PIN baru Anda", text: self.$pinCtrl)
-//                                    }
+                                    //                                    if (showPin) {
+                                    //                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
+                                    //                                    } else {
+                                    SecureField("Input PIN baru Anda", text: self.$pinCtrl)
+                                        .keyboardType(.numberPad)
+                                        .onReceive(pinCtrl.publisher.collect()) {
+                                            self.pinCtrl = String($0.prefix(6))
+                                        }
+                                    //                                    }
                                     
-//                                    Button(action: {
-//                                        self.showPin.toggle()
-//                                    }, label: {
-//                                        Image(systemName: showPin ? "eye.fill" : "eye.slash")
-//                                            .foregroundColor(Color(hex: "#3756DF"))
-//                                    })
+                                    //                                    Button(action: {
+                                    //                                        self.showPin.toggle()
+                                    //                                    }, label: {
+                                    //                                        Image(systemName: showPin ? "eye.fill" : "eye.slash")
+                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    //                                    })
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)
@@ -73,20 +80,23 @@ struct FormInputResetNewPinScreen: View {
                                 Divider()
                                 
                                 HStack {
-//                                    if (showPinConfirm) {
-//                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
-//                                            .keyboardType(.numberPad)
-//                                    } else {
-                                        SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
-                                            .keyboardType(.numberPad)
-//                                    }
+                                    //                                    if (showPinConfirm) {
+                                    //                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                    //                                            .keyboardType(.numberPad)
+                                    //                                    } else {
+                                    SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                        .keyboardType(.numberPad)
+                                        .onReceive(pinConfirmCtrl.publisher.collect()) {
+                                            self.pinConfirmCtrl = String($0.prefix(6))
+                                        }
+                                    //                                    }
                                     
-//                                    Button(action: {
-//                                        self.showPinConfirm.toggle()
-//                                    }, label: {
-//                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
-//                                            .foregroundColor(Color(hex: "#3756DF"))
-//                                    })
+                                    //                                    Button(action: {
+                                    //                                        self.showPinConfirm.toggle()
+                                    //                                    }, label: {
+                                    //                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
+                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    //                                    })
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)
@@ -100,14 +110,27 @@ struct FormInputResetNewPinScreen: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl), label: {
+                        NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl), isActive: $nextViewActive) {EmptyView()}
+                            .isDetailLink(false)
+                        
+                        Button(action: {
+                            UIApplication.shared.endEditing()
+                            if pinCtrl != pinConfirmCtrl {
+                                self.showModalError = true
+                            } else {
+                                if isPinValid(with: pinCtrl) && isPinValid(with: pinConfirmCtrl) {
+                                    self.nextViewActive = true
+                                } else {
+                                    self.showPinWeakModal = true
+                                }
+                            }
+                        }){
                             Text("Simpan PIN Baru")
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             
-                        })
-                        .isDetailLink(false)
+                        }
                         .disabled(simpanBtnDisabled)
                         .background(simpanBtnDisabled ? Color(.lightGray) : Color(hex: "#2334D0"))
                         .cornerRadius(12)
@@ -118,7 +141,7 @@ struct FormInputResetNewPinScreen: View {
                 }
             }
             
-            if self.showModal {
+            if self.showModal || self.showModalError || showPinWeakModal {
                 ModalOverlay(tapAction: { withAnimation { self.showModal = false } })
                     .edgesIgnoringSafeArea(.all)
             }
@@ -143,7 +166,90 @@ struct FormInputResetNewPinScreen: View {
                 }
             }
         }
+        .popup(isPresented: $showModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            modalPinNotMatched()
+        }
+        .popup(isPresented: $showPinWeakModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            PinWeakModal()
+        }
     }
+    
+    private func isPinValid(with pin: String) -> Bool {
+        let pattern = #"^(?!(.)\1{3})(?!19|20)(?!012345|123456|234567|345678|456789|567890|098765|987654|876543|765432|654321|543210)\d{6}$"#
+        
+        let pinPredicate = NSPredicate(format:"SELF MATCHES %@", pattern)
+        return pinPredicate.evaluate(with: pin)
+    }
+    
+    // MARK: Bottom modal for error
+    func modalPinNotMatched() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("PIN tidak sama, silahkan ketik ulang")
+                .fontWeight(.bold)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showModalError = false
+            }) {
+                Text("Kembali")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: POPUP PIN WEAK
+    func PinWeakModal() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("PIN terdiri dari 6 karakter, tidak boleh berurutan dari 6 angka yang sama")
+                .font(.custom("Montserrat-SemiBold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {
+                self.showPinWeakModal = false
+            }) {
+                Text("OK")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     // MARK: POPUP SUCCSESS CHANGE PIN
     func SuccessChangePinModal() -> some View {
         VStack(alignment: .leading, spacing: 20) {

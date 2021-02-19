@@ -53,14 +53,14 @@ struct TransferTabs: View {
             }
         })
         .navigationBarHidden(true)
-//        .onReceive(self.appState.$moveToTransfer) { moveToTransfer in
-//            if moveToTransfer {
-//                print("Move to Transfer: \(moveToTransfer)")
-//                self.isRouteTransferOnUs = false
-//                self.isRouteTransferOffUs = false
-//                self.appState.moveToTransfer = false
-//            }
-//        }
+        .onReceive(self.appState.$moveToTransfer) { moveToTransfer in
+            if moveToTransfer {
+                print("Move to Transfer: \(moveToTransfer)")
+                self.isRouteTransferOnUs = false
+                self.isRouteTransferOffUs = false
+                self.appState.moveToTransfer = false
+            }
+        }
     }
     
     // MARK: -USERNAME INFO VIEW
@@ -93,12 +93,15 @@ struct TransferTabs: View {
                 isActive: self.$isRouteTransferOnUs) {
                 EmptyView()
             }
+            .isDetailLink(false)
             
             // Link Transfer OFFUS
             NavigationLink(
                 destination: TransferRtgsScreen(),
                 isActive: self.$isRouteTransferOffUs,
-                label: {EmptyView()})
+                label: {EmptyView()}
+            )
+            .isDetailLink(false)
             
             Button(action: {
                 print("ONUS")

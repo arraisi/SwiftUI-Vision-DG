@@ -164,6 +164,10 @@ extension URL {
     
     //-------------------- TRANSFER SERVICE ----------------------//
     
+    static func urlLimitTransaction() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/card/card-profile")
+    }
+    
     static func urlBankReference() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/reference/kliringAndRtgsBank")
     }

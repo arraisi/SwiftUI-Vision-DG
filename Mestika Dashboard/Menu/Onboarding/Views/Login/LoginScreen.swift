@@ -133,6 +133,7 @@ struct LoginScreen: View {
                         isActive: self.$isActiveRoute,
                         label: {}
                     )
+                    .isDetailLink(false)
                     
                     NavigationLink(
                         destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),

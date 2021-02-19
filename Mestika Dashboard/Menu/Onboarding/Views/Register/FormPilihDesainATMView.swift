@@ -270,7 +270,7 @@ struct FormPilihDesainATMView: View {
     private func fetchATMDesignList() {
         if cards.count == 0 {
             isLoading = true
-            productVM.getListATMDesign(type: "DCT_GOLD") { (success: Bool) in
+            productVM.getListATMDesign(type: atmData.productType) { (success: Bool) in
                 isLoading = false
                 if success {
                     self.cards = productVM.listATMDesign

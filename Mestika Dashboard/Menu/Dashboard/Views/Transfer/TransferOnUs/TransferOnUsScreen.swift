@@ -30,7 +30,8 @@ struct TransferOnUsScreen: View {
     
     @State private var routeConfirmation: Bool = false
     
-    private var maxLimit: Int = 900000
+    @State private var maxLimit: Int = 10000000
+    @State private var limitTrx: String = "10000000"
     private var minLimit: Int = 10000
     
     /* Function GET USER Status */
@@ -45,6 +46,9 @@ struct TransferOnUsScreen: View {
     var _listFrequency = ["Sekali", "Berkali-kali"]
     
     @State private var selectedCalendar: String = "Now"
+    
+    // Variable Get Name
+    @State private var isGetName: Bool = true
     
     // Variable Date
     let now = Date()
@@ -96,7 +100,7 @@ struct TransferOnUsScreen: View {
                             isActive: self.$routeConfirmation) {
                             EmptyView()
                         }
-                        //                        .isDetailLink(false)
+                        .isDetailLink(false)
                         
                         VStack {
                             Button(action: {
@@ -157,6 +161,7 @@ struct TransferOnUsScreen: View {
         .onAppear() {
             self.transferData = TransferOnUsModel()
             self.getProfile()
+            self.getLimit(code: "70")
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -279,7 +284,7 @@ struct TransferOnUsScreen: View {
                         .foregroundColor(.red)
                         .font(.caption2)
                         .fontWeight(.bold)
-                    Text("900.000")
+                    Text("\(limitTrx.thousandSeparator())")
                         .foregroundColor(.red)
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -650,7 +655,7 @@ struct TransferOnUsScreen: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Limit nilai transaksi Rp.900.000,- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
+            Text(NSLocalizedString("Limit nilai transaksi Rp.\(limitTrx.thousandSeparator()),- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -747,7 +752,7 @@ struct TransferOnUsScreen: View {
             self.isShowName = true
         }
         
-        if (self.destinationNumber.count == 11 && self.amount != "") {
+        if (self.destinationNumber.count == 11 && self.amount != "" && self.showName != "Akun Tidak Ditemukan") {
             disabledButton = false
         } else {
             disabledButton = true
@@ -795,6 +800,18 @@ struct TransferOnUsScreen: View {
                 self.transferData.cardNo = selectedAccount.noRekening
                 self.transferData.sourceNumber = selectedAccount.sourceNumber
                 self.transferData.sourceAccountName = selectedAccount.productName
+                
+                
+            }
+        }
+    }
+    
+    @ObservedObject var limitVM = TransferViewModel()
+    func getLimit(code: String) {
+        self.limitVM.getLimitTransaction(classCode: "70") { success in
+            if success {
+                self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
+                self.limitTrx = self.limitVM.limitIbft
             }
         }
     }

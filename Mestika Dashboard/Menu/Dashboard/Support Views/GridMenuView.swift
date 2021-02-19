@@ -18,9 +18,17 @@ struct GridMenuView: View {
                 
                 Group {
                     NavigationLink(destination: FavoriteTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber), label: {
-                        Image("ic_favorit")
+                        ZStack {
+                            Image("ic_favorite")
+                                .resizable()
+                                .scaledToFill()
+                                .padding(5)
+                        }
+                        .background(Color.white)
+                        .frame(width: 58, height: 58)
+                        .cornerRadius(10)
+                        .shadow(color: Color.gray.opacity(0.5), radius: 2)
                     })
-                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
                     
                     Button(action: {}, label: {
                         Image("ic_menu_tarik_tunai")
