@@ -100,7 +100,7 @@ struct TransferOnUsScreen: View {
                             isActive: self.$routeConfirmation) {
                             EmptyView()
                         }
-                        //                        .isDetailLink(false)
+                        .isDetailLink(false)
                         
                         VStack {
                             Button(action: {

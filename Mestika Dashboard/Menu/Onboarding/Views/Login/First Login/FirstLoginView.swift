@@ -158,6 +158,7 @@ struct FirstLoginView: View {
                 isActive: self.$nextRoute,
                 label: {}
             )
+            .isDetailLink(false)
             
         }
         .frame(width: UIScreen.main.bounds.width - 30)

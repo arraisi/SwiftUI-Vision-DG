@@ -162,6 +162,7 @@ struct TransferRtgsScreen: View {
                 label: {
                     EmptyView()
                 })
+                .isDetailLink(false)
         }
         .navigationBarTitle("Transfer ke Bank Lain", displayMode: .inline)
         .onTapGesture() {
