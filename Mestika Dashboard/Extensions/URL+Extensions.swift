@@ -211,4 +211,10 @@ extension URL {
     static func urlRemoveFavorite() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/favorit/transfer/remove")
     }
+    
+    //-------------------- HISTORY SERVICE ----------------------//
+    
+    static func urlGetListHistory() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/channel/transactionHistory")
+    }
 }
