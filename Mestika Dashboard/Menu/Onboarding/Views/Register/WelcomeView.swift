@@ -155,7 +155,8 @@ struct WelcomeView: View {
                         .disabled(isLoading)
                         
                         NavigationLink(
-                            destination: FirstLoginView().environmentObject(registerData),
+//                            destination: FirstLoginView().environmentObject(registerData),
+                            destination: BottomNavigationView(),
 //                            destination: VerificationAddressView().environmentObject(registerData),
                             isActive: self.$isFirstLoginViewActive,
                             label: {}

@@ -30,7 +30,7 @@ struct FormInputResetNewPinScreen: View {
             
             VStack {
                 
-                AppBarLogo(light: true) {}
+                AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {}
                 
                 ScrollView(showsIndicators: false) {
                     
