@@ -336,6 +336,8 @@
 		C0AD115225DF74E6003FF920 /* HistoryTransactionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD115125DF74E6003FF920 /* HistoryTransactionRow.swift */; };
 		C0AD115A25DF7951003FF920 /* HistoryTransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD115925DF7951003FF920 /* HistoryTransactionList.swift */; };
 		C0AD116025DF89D3003FF920 /* HistoryTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD115F25DF89D3003FF920 /* HistoryTransactionModel.swift */; };
+		C0AD11A725DFA60F003FF920 /* HistoryTransactionServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD11A625DFA60F003FF920 /* HistoryTransactionServices.swift */; };
+		C0AD11AC25DFA98E003FF920 /* HistoryTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD11AB25DFA98E003FF920 /* HistoryTransactionViewModel.swift */; };
 		C0AEAC2725D516B600B6A20C /* EncryptPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */; };
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
 		C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347D22559422B000754C4 /* CardBlockView.swift */; };
@@ -729,6 +731,8 @@
 		C0AD115125DF74E6003FF920 /* HistoryTransactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionRow.swift; sourceTree = "<group>"; };
 		C0AD115925DF7951003FF920 /* HistoryTransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionList.swift; sourceTree = "<group>"; };
 		C0AD115F25DF89D3003FF920 /* HistoryTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionModel.swift; sourceTree = "<group>"; };
+		C0AD11A625DFA60F003FF920 /* HistoryTransactionServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionServices.swift; sourceTree = "<group>"; };
+		C0AD11AB25DFA98E003FF920 /* HistoryTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionViewModel.swift; sourceTree = "<group>"; };
 		C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptPasswordView.swift; sourceTree = "<group>"; };
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
@@ -852,6 +856,7 @@
 				52CB5DF125CBEA480012DDAB /* ProfileService.swift */,
 				529190C325D3C9A5005A4898 /* ReferenceService.swift */,
 				C018014625D4E47F00766E41 /* FavoritService.swift */,
+				C0AD11A625DFA60F003FF920 /* HistoryTransactionServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1825,6 +1830,7 @@
 				52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */,
 				529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */,
 				C018012D25D4E40F00766E41 /* FavoritViewModel.swift */,
+				C0AD11AB25DFA98E003FF920 /* HistoryTransactionViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2367,6 +2373,7 @@
 				C02C2DE825876BAA00CED248 /* PhotoCropping.swift in Sources */,
 				52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */,
 				52BB53A125C108680045DBE6 /* AuthService.swift in Sources */,
+				C0AD11AC25DFA98E003FF920 /* HistoryTransactionViewModel.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
 				528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */,
@@ -2429,6 +2436,7 @@
 				FA42F2C325A8089D00C14A47 /* View+Extensions.swift in Sources */,
 				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,
+				C0AD11A725DFA60F003FF920 /* HistoryTransactionServices.swift in Sources */,
 				52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */,
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,

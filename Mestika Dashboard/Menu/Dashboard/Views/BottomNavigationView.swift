@@ -43,7 +43,7 @@ struct BottomNavigationView: View {
                 }
                 
                 if (selected == 2) {
-                    HistoryTabs()
+                    HistoryTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
                 }
                 
                 if (selected == 3) {
