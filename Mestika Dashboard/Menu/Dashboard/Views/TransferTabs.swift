@@ -29,27 +29,7 @@ struct TransferTabs: View {
                 titleInfo
                 buttonLink
                 
-                VStack {
-                    HStack {
-                        Text("Last Transaction")
-                            .font(.subheadline)
-                            .fontWeight(.light)
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                    
-                    Divider()
-                        .padding(.horizontal, 10)
-                    
-                    EmptyView()
-                        .padding(.bottom)
-                }
-                .frame(width: UIScreen.main.bounds.width - 30)
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                ListLastTransactionView(sourceNumber: sourceNumber)
             }
         })
         .navigationBarHidden(true)

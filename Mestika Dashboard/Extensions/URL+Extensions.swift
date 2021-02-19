@@ -188,6 +188,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/transper/skn")
     }
     
+    static func urlLastTransaction() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/channel/lastTransactionHistory")
+    }
+    
     //-------------------- PROFILE SERVICE ----------------------//
     
     static func urlGetProfile() -> URL? {

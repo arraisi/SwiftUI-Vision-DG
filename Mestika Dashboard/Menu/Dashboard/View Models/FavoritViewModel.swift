@@ -10,8 +10,48 @@ import Foundation
 class FavoritViewModel : ObservableObject {
     @Published var isLoading: Bool = false
     @Published var favorites = [FavoritModelElement]()
+    @Published var lastTransaction = [HistoryList]()
     
     @Published var errorMessage: String = ""
+    
+    func getListLastTransaction(sourceNumber: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        FavoritService.shared.getListLastTransaction(sourceNumber: sourceNumber) { result in
+            
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+                    self.lastTransaction = response.historyList
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                
+                print("ERROR GET LIST FAVORITES-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(false)
+            }
+            
+        }
+    }
     
     func getList(cardNo: String, sourceNumber: String, completion: @escaping (Bool) -> Void) {
         

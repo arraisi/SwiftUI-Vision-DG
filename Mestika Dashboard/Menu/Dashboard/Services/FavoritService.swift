@@ -13,6 +13,65 @@ class FavoritService {
     
     static let shared = FavoritService()
     
+    // MARK: - GET LIST LAST TRANSACTION
+    func getListLastTransaction(sourceNumber: String, completion: @escaping(Result<LastTransactionResponse, ErrorResult>) -> Void) {
+        
+        // MARK: BODY
+        let body: [String: Any] = [
+            "sourceNumber" : sourceNumber
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        // MARK: URL
+        guard let url = URL.urlLastTransaction() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        // MARK: TASK
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                print("\n\nGET LIST LAST TRANSACTION SERVICE RESULT : \(httpResponse.statusCode)")
+                
+                guard let data = data, error == nil else {
+                    return completion(Result.failure(ErrorResult.network(string: "NO DATA")))
+                }
+                
+                if (httpResponse.statusCode == 200) {
+                    
+                    let lastTrxResponse = try? JSONDecoder().decode(LastTransactionResponse.self, from: data)
+                    
+                    if let _response = lastTrxResponse {
+                        completion(.success(_response))
+                    }
+                    
+                } else {
+                    // if we're still here it means there was a problem
+                    print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+            
+        }.resume()
+    }
+    
     // MARK: - GET LIST FAVORITE
     func getList(cardNo: String, sourceNumber: String, completion: @escaping(Result<[FavoritModelElement], ErrorResult>) -> Void) {
         

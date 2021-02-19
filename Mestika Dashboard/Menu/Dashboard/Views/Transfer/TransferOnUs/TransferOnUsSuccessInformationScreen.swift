@@ -26,28 +26,9 @@ struct TransferOnUsSuccessInformationScreen: View {
         ZStack {
             Image("bg_blue")
                 .resizable()
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-                
-                FavoriteAppBar(barItems: AnyView(HStack(spacing: 20) {
-                    Button(action: {
-                        withAnimation(.easeIn) {
-                            self.showPopover.toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "pin")
-                            .foregroundColor(.white)
-                    })
-                    
-                    Button(action: {
-                        self.uiImage = self.asUIImage()
-                        shareImage()
-                    }, label: {
-                        Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(.white)
-                    })
-                }))
-                
                 VStack(alignment: .center) {
                     Spacer()
                     Image("logo_m_mestika")
@@ -79,7 +60,6 @@ struct TransferOnUsSuccessInformationScreen: View {
                         .padding(.trailing, 10)
                     Spacer(minLength: 0)
                 }
-
             }
             
             if self.showPopover {
@@ -93,18 +73,40 @@ struct TransferOnUsSuccessInformationScreen: View {
             }
         
         }
-        .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
+        .navigationTitle("")
         .navigationBarBackButtonHidden(true)
-        .onAppear() {
+        .navigationBarItems(trailing: HStack(spacing: 30) {
+            HStack {
+                Text("Tambahkan ke Favorit?")
+                    .font(.caption)
+                    .foregroundColor(.white)
+                
+                Button(action: {
+                    withAnimation(.easeIn) {
+                        self.showPopover.toggle()
+                    }
+                }, label: {
+                    Image(systemName: "pin")
+                        .foregroundColor(.white)
+                })
+                
+            }
+            
+            Button(action: {
+                self.uiImage = self.asUIImage()
+                shareImage()
+            }, label: {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(.white)
+            })
+        }).onAppear() {
             initDate()
         }
     }
     
     var dateInfo: some View {
         VStack {
-            Text(self.dateString)
-//                .font(.caption)
+            Text(self.transferData.transactionDate)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             

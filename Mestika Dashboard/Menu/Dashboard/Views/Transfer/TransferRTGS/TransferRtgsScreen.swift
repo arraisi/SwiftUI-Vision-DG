@@ -102,7 +102,7 @@ struct TransferRtgsScreen: View {
                         Spacer()
                         
                         Button(action: {
-                            
+                            UIApplication.shared.endEditing()
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
@@ -735,13 +735,13 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Limit Nilai transaksi terlampaui", comment: ""))
+            Text(NSLocalizedString("Limit transaksi terlampaui", comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Limit nilai transaksi Rp.\(limitTrx.thousandSeparator()),- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
+            Text(NSLocalizedString("Limit transaksi Rp.\(limitTrx.thousandSeparator()),- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)

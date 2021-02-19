@@ -277,6 +277,7 @@
 		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
 		52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */; };
+		52E4310A25DF97AC0050DB22 /* LastTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4310925DF97AC0050DB22 /* LastTransactionResponse.swift */; };
 		52E7740425B042CD00D5B010 /* ATMDesignNewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */; };
 		52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */; };
 		52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */; };
@@ -662,6 +663,7 @@
 		52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResetPinScreen.swift; sourceTree = "<group>"; };
 		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
 		52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
+		52E4310925DF97AC0050DB22 /* LastTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTransactionResponse.swift; sourceTree = "<group>"; };
 		52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignNewModel.swift; sourceTree = "<group>"; };
 		52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganModel.swift; sourceTree = "<group>"; };
 		52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTransactionResponse.swift; sourceTree = "<group>"; };
@@ -1708,6 +1710,7 @@
 			isa = PBXGroup;
 			children = (
 				C08758D725D2398E008ED730 /* FavoritModel.swift */,
+				52E4310925DF97AC0050DB22 /* LastTransactionResponse.swift */,
 			);
 			path = Favorit;
 			sourceTree = "<group>";
@@ -2145,6 +2148,7 @@
 				06202919256D905500A830EA /* ATMService.swift in Sources */,
 				52ADFF892557DFDC00A1001F /* FormEmailVerificationRegisterNasabahView.swift in Sources */,
 				C0BCCB222577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift in Sources */,
+				52E4310A25DF97AC0050DB22 /* LastTransactionResponse.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
