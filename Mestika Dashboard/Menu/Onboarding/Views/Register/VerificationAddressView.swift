@@ -294,7 +294,7 @@ struct VerificationAddressView: View {
                     .frame(height: 36)
                 
                 Button(action:{
-                    print("find location")
+                    searchAddress(keyword: addressInput)
                 }, label: {
                     Image(systemName: "location")
                         .font(Font.system(size: 20))
@@ -339,10 +339,10 @@ struct VerificationAddressView: View {
     
     // MARK: - SEARCH LOCATION
     @ObservedObject var addressVM = AddressSummaryViewModel()
-    func searchAddress() {
+    func searchAddress(keyword: String? = nil) {
         self.isLoading = true
         
-        self.addressVM.getAddressSugestionResult(addressInput: registerData.addressInput) { success in
+        self.addressVM.getAddressSugestionResult(addressInput: keyword ?? registerData.addressInput) { success in
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestionResult = self.addressVM.addressResult

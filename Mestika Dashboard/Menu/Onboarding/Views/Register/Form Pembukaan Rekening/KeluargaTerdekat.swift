@@ -441,7 +441,7 @@ struct KeluargaTerdekat: View {
                     .frame(height: 36)
                 
                 Button(action:{
-                    print("find location")
+                    searchAddress(keyword: location)
                 }, label: {
                     Image(systemName: "location.viewfinder")
                         .font(Font.system(size: 20))
@@ -506,10 +506,10 @@ struct KeluargaTerdekat: View {
     
     // MARK: - SEARCH LOCATION
     @ObservedObject var addressVM = AddressSummaryViewModel()
-    func searchAddress() {
+    func searchAddress(keyword: String? = nil) {
         self.isLoading = true
         
-        self.addressVM.getAddressSugestionResult(addressInput: registerData.alamatKeluarga) { success in
+        self.addressVM.getAddressSugestionResult(addressInput: keyword ?? registerData.alamatKeluarga) { success in
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestionResult = self.addressVM.addressResult
