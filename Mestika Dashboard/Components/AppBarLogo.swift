@@ -14,40 +14,46 @@ struct AppBarLogo: View {
     var light: Bool = true
     var showBack: Bool = false
     var showCancel: Bool = false
+    var showBackgroundBlueOnStatusBar: Bool = false
     let onCancel: ()->()
     
     var body: some View {
-        HStack(spacing: 0) {
-            if showBack {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Image("ic_back")
-                        .foregroundColor(light ? Color("DarkStaleBlue") : .white)
-                        .frame(width: 30, height: 25)
-                })
-                .frame(width: UIScreen.main.bounds.width * 0.2)
-            } else {
-                Spacer().frame(width: UIScreen.main.bounds.width * 0.2)
+        VStack {
+            if showBackgroundBlueOnStatusBar {
+                ZStack{ Color("DarkStaleBlue") }.frame(height: 40)
             }
-            
-            logo
-                .frame(width: UIScreen.main.bounds.width * 0.6)
-            
-            if showCancel {
-                Button(action: {
-                    self.onCancel()
-                }, label: {
-                    Text("Cancel")
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .foregroundColor(light ? Color("DarkStaleBlue") : .white )
-                })
-                .frame(width: UIScreen.main.bounds.width * 0.2)
-            } else {
-                Spacer().frame(width: UIScreen.main.bounds.width * 0.2)
+            HStack(spacing: 0) {
+                if showBack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image("ic_back")
+                            .foregroundColor(light ? Color("DarkStaleBlue") : .white)
+                            .frame(width: 30, height: 25)
+                    })
+                    .frame(width: UIScreen.main.bounds.width * 0.2)
+                } else {
+                    Spacer().frame(width: UIScreen.main.bounds.width * 0.2)
+                }
+                
+                logo
+                    .frame(width: UIScreen.main.bounds.width * 0.6)
+                
+                if showCancel {
+                    Button(action: {
+                        self.onCancel()
+                    }, label: {
+                        Text("Cancel")
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .foregroundColor(light ? Color("DarkStaleBlue") : .white )
+                    })
+                    .frame(width: UIScreen.main.bounds.width * 0.2)
+                } else {
+                    Spacer().frame(width: UIScreen.main.bounds.width * 0.2)
+                }
             }
+            .padding(.top, showBackgroundBlueOnStatusBar ? 10 : 50)
         }
-        .padding(.top, 50)
         .padding(.bottom, 5)
     }
     

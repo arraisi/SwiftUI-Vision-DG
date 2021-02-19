@@ -17,7 +17,7 @@ struct FormChangeContactView: View {
     
     var body: some View {
         VStack {
-            AppBarLogo(light: true) {
+            AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {
                 
             }
             
