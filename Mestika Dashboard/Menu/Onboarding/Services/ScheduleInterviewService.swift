@@ -108,18 +108,18 @@ class ScheduleInterviewService {
                 "isNasabahMestika": atmData.isNasabahMestika
             ],
             "atm": [
-                "atmAddressInput": "JL PROF DR LATUMETEN I GG.5/",
-                "atmAddressKelurahanInput": "KELURAHAn",
-                "atmAddressKecamatanInput": "KECAMATAN",
-                "atmAddressKotaInput": "KOTA",
-                "atmAddressPropinsiInput": "PROVINISI",
-                "atmAddressPostalCodeInput": "12345",
-                "atmAddressRtInput": "002",
-                "atmAddressRwInput": "003",
+                "atmAddressInput": atmData.atmAddressInput,
+                "atmAddressKelurahanInput": atmData.atmAddressKelurahanInput,
+                "atmAddressKecamatanInput": atmData.atmAddressKecamatanInput,
+                "atmAddressKotaInput": atmData.atmAddressKotaInput,
+                "atmAddressPropinsiInput": atmData.atmAddressPropinsiInput,
+                "atmAddressPostalCodeInput": atmData.atmAddressPostalCodeInput,
+                "atmAddressRtInput": atmData.atmAddressRtInput,
+                "atmAddressRwInput": atmData.atmAddressRwInput,
                 "atmName": atmData.atmName,
                 "isNasabahMestika": atmData.isNasabahMestika,
                 "codeClass": atmData.codeClass,
-                "imageDesign": atmData.imageDesign,
+                "imageDesign": "70",
                 "addressEqualToDukcapil": false
             ]
         ]

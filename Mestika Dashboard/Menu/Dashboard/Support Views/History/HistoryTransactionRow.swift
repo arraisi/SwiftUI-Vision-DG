@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HistoryTransactionRow: View {
     
-    var data: HistoryList
+    var data: HistoryLists
     
     var body: some View {
         HStack(spacing: 5) {
@@ -54,6 +54,6 @@ struct HistoryTransactionRow: View {
 
 struct HistoryRow_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryTransactionRow(data: HistoryList.init(availableBalance: "99998062858799", transactionInfo: "TAGIHAN TAF ATM 08111111111111111 0811111111111111113", effectiveDate: "20201207", branch: "114", postingDate: "20201207", cheque: "         ", sign: "+", transactionAmount: "484285300", traceNo: "148602610", digitSign: "D"))
+        HistoryTransactionRow(data: HistoryLists.init(availableBalance: "99998062858799", transactionInfo: "TAGIHAN TAF ATM 08111111111111111 0811111111111111113", effectiveDate: "20201207", branch: "114", postingDate: "20201207", cheque: "         ", sign: "+", transactionAmount: "484285300", traceNo: "148602610", digitSign: "D"))
     }
 }

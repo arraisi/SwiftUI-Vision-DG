@@ -13,12 +13,12 @@ struct HistoryTransactionModel: Codable {
     let lastRecordPostingDate, ref, balanceSaldoSign, totalSendData: String
     let customerName, cardNo, transactionDate, sourceNumber: String
     let dateFrom, totalDebitTransaction, lastRecordDate: String
-    let historyList: [HistoryList]
+    let historyList: [HistoryLists]
     let lastRecordTraceNo: String
 }
 
 // MARK: - HistoryList
-struct HistoryList: Codable {
+struct HistoryLists: Codable {
     let availableBalance, transactionInfo, effectiveDate, branch: String
     let postingDate, cheque, sign, transactionAmount: String
     let traceNo, digitSign: String
