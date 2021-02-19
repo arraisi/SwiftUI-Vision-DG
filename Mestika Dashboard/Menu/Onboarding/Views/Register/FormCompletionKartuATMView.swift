@@ -534,7 +534,7 @@ struct FormCompletionKartuATMView: View {
                     .frame(height: 36)
                 
                 Button(action:{
-                    print("find location")
+                    searchAddress(keyword: location)
                 }, label: {
                     Image(systemName: "location.viewfinder")
                         .font(Font.system(size: 20))
@@ -722,10 +722,10 @@ struct FormCompletionKartuATMView: View {
     
     // MARK: - SEARCH LOCATION
     @ObservedObject var addressVM = AddressSummaryViewModel()
-    func searchAddress() {
+    func searchAddress(keyword: String? = nil) {
         self.isLoading = true
         
-        self.addressVM.getAddressSugestionResult(addressInput: atmData.atmAddressInput) { success in
+        self.addressVM.getAddressSugestionResult(addressInput: keyword ?? atmData.atmAddressInput) { success in
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestionResult = self.addressVM.addressResult

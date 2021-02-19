@@ -40,7 +40,7 @@ struct FormChangePinTransactionView: View {
             
             VStack {
                 
-                AppBarLogo(light: true) {}
+                AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {}
                 
                 if (self.authVM.isLoading) {
                     LinearWaitingIndicator()

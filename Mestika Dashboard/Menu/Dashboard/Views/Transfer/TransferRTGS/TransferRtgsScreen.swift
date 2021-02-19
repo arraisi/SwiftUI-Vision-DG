@@ -26,8 +26,8 @@ struct TransferRtgsScreen: View {
     
     // Variable Amount
     @State var amount = ""
-    @State private var maxLimit: Int = 0
-    @State private var limitTrx: String = ""
+    @State private var maxLimit: Int = 10000000
+    @State private var limitTrx: String = "10000000"
     private var minLimit: Int = 10000
     
     // Variable Transaction Frequecy
@@ -162,6 +162,7 @@ struct TransferRtgsScreen: View {
                 label: {
                     EmptyView()
                 })
+                .isDetailLink(false)
         }
         .navigationBarTitle("Transfer ke Bank Lain", displayMode: .inline)
         .onTapGesture() {
@@ -190,6 +191,7 @@ struct TransferRtgsScreen: View {
             self.transferData.transactionType = _listTransferType[0]
             getProfile()
             getListBank()
+            self.getLimit(code: "70")
         }
     }
     
@@ -739,7 +741,7 @@ struct TransferRtgsScreen: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Limit nilai transaksi Rp.900.000,- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
+            Text(NSLocalizedString("Limit nilai transaksi Rp.\(limitTrx.thousandSeparator()),- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -863,7 +865,7 @@ struct TransferRtgsScreen: View {
                 self.transferData.sourceNumber = selectedAccount.sourceNumber
                 self.transferData.sourceAccountName = selectedAccount.namaRekening
                 
-                getLimit(code: self.profileVM.classCode)
+//                getLimit(code: self.profileVM.classCode)
             }
         }
     }
@@ -889,7 +891,7 @@ struct TransferRtgsScreen: View {
     
     @ObservedObject var limitVM = TransferViewModel()
     func getLimit(code: String) {
-        self.limitVM.getLimitTransaction(classCode: code) { success in
+        self.limitVM.getLimitTransaction(classCode: "70") { success in
             if success {
                 self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
                 self.limitTrx = self.limitVM.limitIbft

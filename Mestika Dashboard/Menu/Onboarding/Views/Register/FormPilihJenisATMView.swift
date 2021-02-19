@@ -227,6 +227,7 @@ struct FormPilihJenisATMView: View {
     // MARK: - SELECT CARD HANDLER
     func selectCard(card: ATMViewModel) {
         atmData.productType = card.key
+        atmData.codeClass = card.description.codeClass
     }
     
     // MARK: - UPDATE HEIGHT

@@ -34,7 +34,7 @@ class TransferServices {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
-        let paramsUrl = url.appending("classCode", value: classCode)
+        let paramsUrl = url.appending("classCode", value: "70")
         
         var request = URLRequest(paramsUrl)
         request.httpMethod = "GET"

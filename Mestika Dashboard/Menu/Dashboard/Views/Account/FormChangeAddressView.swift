@@ -15,7 +15,7 @@ struct FormChangeAddressView: View {
     
     var body: some View {
         VStack {
-            AppBarLogo(light: true) {
+            AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {
                 
             }
             

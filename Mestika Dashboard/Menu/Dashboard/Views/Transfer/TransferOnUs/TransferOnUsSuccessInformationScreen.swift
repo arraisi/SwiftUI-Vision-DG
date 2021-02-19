@@ -64,11 +64,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                     
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.appState.moveToTransfer = true
                         },
                         label: {
                             Text("Kembali Ke Halaman Utama")

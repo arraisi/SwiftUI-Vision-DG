@@ -17,7 +17,7 @@ struct LanguageSettingScreen: View {
     
     var body: some View {
         VStack {
-            AppBarLogo(light: true) {
+            AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {
                 
             }
             ScrollView(showsIndicators: false) {

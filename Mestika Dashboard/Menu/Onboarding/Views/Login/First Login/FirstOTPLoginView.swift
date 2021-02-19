@@ -114,6 +114,7 @@ struct FirstOTPLoginView: View {
                 isActive: self.$isRootToPasswordLogin,
                 label: {}
             )
+            .isDetailLink(false)
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("BANK MESTIKA", displayMode: .inline)
