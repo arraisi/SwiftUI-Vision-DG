@@ -9,12 +9,8 @@ import SwiftUI
 
 struct ListLastTransactionView: View {
     
-    @State var _listLast = [
-        LastTransaction(id: 1, tanggalTransaksi: "08 September 2020", jenisTransaksi: "in", nilaiTransaksi: "240.000"),
-        LastTransaction(id: 2, tanggalTransaksi: "28 September 2020", jenisTransaksi: "in", nilaiTransaksi: "40.000"),
-        LastTransaction(id: 3, tanggalTransaksi: "1 Oktober 2020", jenisTransaksi: "out", nilaiTransaksi: "4.000.000"),
-        LastTransaction(id: 4, tanggalTransaksi: "5 Oktober 2020", jenisTransaksi: "in", nilaiTransaksi: "1.000.000"),
-    ]
+    var sourceNumber = ""
+    @StateObject private var favoritVM = FavoritViewModel()
     
     var body: some View {
         ZStack {
@@ -35,7 +31,7 @@ struct ListLastTransactionView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 20)
                 
-                List(0..._listLast.count - 1, id: \.self) { index in
+                ForEach(self.favoritVM.lastTransaction, id: \.trace) { data in
                     HStack {
                         ZStack {
                             Circle()
@@ -48,53 +44,42 @@ struct ListLastTransactionView: View {
                         }
                         
                         VStack(alignment: .leading) {
-                            Text("\(_listLast[index].tanggalTransaksi)")
-                                .foregroundColor(Color(hex: "#1D2238"))
-                                .font(.caption)
-                                .fontWeight(.ultraLight)
+                            Text("\(data.date)")
+                                .font(.caption2)
                             
-                            if (_listLast[index].jenisTransaksi == "in") {
-                                Text("Transfer Masuk")
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                            } else {
-                                Text("Transfer Keluar")
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                            }
+                            Text("\(data.historyListDescription)")
+                                .font(.subheadline)
                         }
                         
                         Spacer()
                         
-                        if (_listLast[index].jenisTransaksi == "in") {
-                            HStack {
-                                Text("- Rp.")
-                                    .font(.subheadline)
-                                    .foregroundColor(.green)
-                                
-                                Text("\(_listLast[index].nilaiTransaksi)")
-                                    .font(.subheadline)
-                                    .foregroundColor(.green)
-                            }
-                        } else {
-                            HStack {
-                                Text("- Rp.")
-                                    .font(.subheadline)
-                                    .foregroundColor(.red)
-                                
-                                Text("\(_listLast[index].nilaiTransaksi)")
-                                    .font(.subheadline)
-                                    .foregroundColor(.red)
-                            }
+                        HStack {
+                            Text("- Rp.")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                            
+                            Text("\(data.amount.thousandSeparator())")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
                         }
+                        
+                        
                     }
                     .padding(.vertical, 5)
                 }
                 .colorMultiply(Color(hex: "#F6F8FB"))
-                .frame(height: 500)
             }
             .frame(width: UIScreen.main.bounds.width - 30)
         }
+        .onAppear {
+            getList()
+        }
+    }
+    
+    func getList() {
+        self.favoritVM.getListLastTransaction(sourceNumber: self.sourceNumber, completion: { result in
+            print(result)
+        })
     }
 }
 

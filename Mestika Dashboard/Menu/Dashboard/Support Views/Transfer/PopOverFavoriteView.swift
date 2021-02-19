@@ -148,11 +148,11 @@ struct PopOverFavoriteView: View {
                     .padding(.vertical, 40)
                 }
             }
-            .frame(width: UIScreen.main.bounds.width - 30, alignment: .top)
             .background(Color.white)
             .cornerRadius(15)
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
             .padding(.top, 20)
+            
             Spacer()
         }
         .onAppear {

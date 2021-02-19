@@ -111,7 +111,7 @@ struct TransferRtgsSuccess: View {
     
     var dateInfo: some View {
         VStack {
-            Text(self.dateString)
+            Text(self.transferData.transactionDate)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
