@@ -332,6 +332,9 @@
 		C0A4F9B425529EF800566A11 /* DetailKartuAktifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */; };
 		C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */; };
 		C0AC4A6F2582116500848AC7 /* InformasiPerusahaanVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */; };
+		C0AD115225DF74E6003FF920 /* HistoryTransactionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD115125DF74E6003FF920 /* HistoryTransactionRow.swift */; };
+		C0AD115A25DF7951003FF920 /* HistoryTransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD115925DF7951003FF920 /* HistoryTransactionList.swift */; };
+		C0AD116025DF89D3003FF920 /* HistoryTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AD115F25DF89D3003FF920 /* HistoryTransactionModel.swift */; };
 		C0AEAC2725D516B600B6A20C /* EncryptPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */; };
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
 		C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347D22559422B000754C4 /* CardBlockView.swift */; };
@@ -721,6 +724,9 @@
 		C0A4F9B325529EF800566A11 /* DetailKartuAktifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailKartuAktifView.swift; sourceTree = "<group>"; };
 		C0AC4A5D25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiKeluargaVerificationView.swift; sourceTree = "<group>"; };
 		C0AC4A6E2582116400848AC7 /* InformasiPerusahaanVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformasiPerusahaanVerificationView.swift; sourceTree = "<group>"; };
+		C0AD115125DF74E6003FF920 /* HistoryTransactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionRow.swift; sourceTree = "<group>"; };
+		C0AD115925DF7951003FF920 /* HistoryTransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionList.swift; sourceTree = "<group>"; };
+		C0AD115F25DF89D3003FF920 /* HistoryTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTransactionModel.swift; sourceTree = "<group>"; };
 		C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptPasswordView.swift; sourceTree = "<group>"; };
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
@@ -1025,6 +1031,7 @@
 		52468ABC25413604007518AE /* Support Views */ = {
 			isa = PBXGroup;
 			children = (
+				C0AD115025DF74B3003FF920 /* History */,
 				525FA1132552898A007EADCB /* PaymentTransaction */,
 				526B657E254FB70200C13C36 /* Account */,
 				524745F42547C52E001F43C5 /* Favorite */,
@@ -1676,6 +1683,7 @@
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C0AD115E25DF89C2003FF920 /* History */,
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				C08758D625D2397C008ED730 /* Favorit */,
 				C06ED63625D0F27000F68FC1 /* Account */,
@@ -1747,6 +1755,23 @@
 				C0A4F98E25528C0600566A11 /* Montserrat-Thin.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		C0AD115025DF74B3003FF920 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				C0AD115125DF74E6003FF920 /* HistoryTransactionRow.swift */,
+				C0AD115925DF7951003FF920 /* HistoryTransactionList.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		C0AD115E25DF89C2003FF920 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				C0AD115F25DF89D3003FF920 /* HistoryTransactionModel.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		C0BFB51C2576373700676B95 /* Register */ = {
@@ -2113,6 +2138,7 @@
 				528AE2D12595BB01003AFD73 /* AddressViewModel.swift in Sources */,
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
 				C0E40BAE2564E59200259612 /* FormIndustriTempatBekerjaView.swift in Sources */,
+				C0AD115225DF74E6003FF920 /* HistoryTransactionRow.swift in Sources */,
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
 				5283AF5D25CD28E100111C75 /* UIDevice+Extensions.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
@@ -2266,6 +2292,7 @@
 				C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */,
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
 				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
+				C0AD115A25DF7951003FF920 /* HistoryTransactionList.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
 				064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */,
@@ -2340,6 +2367,7 @@
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
 				528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */,
 				C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */,
+				C0AD116025DF89D3003FF920 /* HistoryTransactionModel.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
