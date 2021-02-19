@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoryTransactionList: View {
-    var histories: [HistoryList]
+    var histories: [HistoryLists]
     
     var body: some View {
         List(histories, id: \.traceNo) { item in

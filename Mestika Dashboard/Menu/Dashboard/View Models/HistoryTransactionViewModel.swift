@@ -11,7 +11,7 @@ class HistoryTransactionViewModel : ObservableObject {
     
     @Published var isLoading: Bool = false
     @Published var errorMessage: String = ""
-    @Published var histories = [HistoryList]()
+    @Published var histories = [HistoryLists]()
     
     func getList(cardNo: String,
                  sourceNumber: String,
