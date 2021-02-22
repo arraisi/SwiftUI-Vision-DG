@@ -9,11 +9,14 @@ import Foundation
 
 // MARK: - HistoryTransactionModel
 struct HistoryTransactionModel: Codable {
+    let status: Status
     let creditDebit, balanceSaldo, dateTo, balance: String
     let lastRecordPostingDate, ref, balanceSaldoSign, totalSendData: String
-    let customerName, cardNo, transactionDate, sourceNumber: String
-    let dateFrom, totalDebitTransaction, lastRecordDate: String
-    let historyList: [HistoryLists]
+    let customerName: String
+    let cardNo: String?
+    let transactionDate, sourceNumber, dateFrom, totalDebitTransaction: String
+    let lastRecordDate: String
+    let historyList: [HistoryLists]?
     let lastRecordTraceNo: String
 }
 

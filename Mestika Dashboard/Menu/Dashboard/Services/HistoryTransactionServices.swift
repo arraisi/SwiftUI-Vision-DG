@@ -35,7 +35,7 @@ class HistoryTransactionServices {
             "sourceNumber": sourceNumber
         ]
         
-        print("body => \(body)")
+        print("\n\nbody get list history => \(body)\n\n")
         
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
@@ -63,7 +63,8 @@ class HistoryTransactionServices {
                 if (httpResponse.statusCode == 200) {
                     
                     let historyListResponse = try? JSONDecoder().decode(HistoryTransactionModel.self, from: data)
-                    print("HISTORY Count \(String(describing: historyListResponse?.historyList.count))\n\n")
+                    print("HISTORY balance \(String(describing: historyListResponse?.balance))\n\n")
+                    print("HISTORY Count \(String(describing: historyListResponse?.historyList?.count))\n\n")
                     
                     if let histories = historyListResponse {
                         completion(.success(histories))
