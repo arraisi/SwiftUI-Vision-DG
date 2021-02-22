@@ -57,27 +57,35 @@ struct BottomNavigationView: View {
                 Spacer()
                 
                 if (viewIsShown) {
-                    ZStack(alignment: .top){
+                    ZStack(alignment: .bottom){
                         
                         CustomBottomNavigationView(selected: self.$selected)
-                            .padding()
-                            .padding(.horizontal, 22)
-                            .background(CurvedShape())
+                            .padding(.top)
+                            .padding(.horizontal, 20)
+                            .background(
+                                CurvedShape()
+                            )
                         
-                        Button(action: {
-                            selected = 4
-                        }) {
+                        
+                        VStack {
+                            Button(action: {
+                                selected = 4
+                            }) {
+                                Image("ic_dashboard")
+                                    .renderingMode(.template)
+                                    .foregroundColor(.white)
+                                    .padding(18)
+                                
+                            }
+                            .background(selected == 4 ? Color(hex: "#2334D0") : Color(hex: "#C0C0C0"))
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
                             
-                            Image("ic_dashboard")
-                                .renderingMode(.template)
-                                .foregroundColor(.white)
-                                .padding(18)
-                            
+                            Text("Buy & Pay")
+                                .foregroundColor(self.selected == 4 ? Color(hex: "#2334D0") : .white)
+                                .font(.system(size: 12))
                         }
-                        .background(selected == 4 ? Color(hex: "#2334D0") : Color(hex: "#C0C0C0"))
-                        .clipShape(Circle())
-                        .offset(y: -32)
-                        .shadow(radius: 5)
+                        .offset(y: -5)
                         
                     }
                     .animation(.easeIn)
@@ -159,6 +167,25 @@ struct BottomNavigationView: View {
     }
     
 }
+
+struct CurvedShape : View {
+    var body : some View{
+        
+        Path{path in
+            
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 0))
+            path.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 55))
+            
+            path.addArc(center: CGPoint(x: UIScreen.main.bounds.width / 2, y: 55), radius: 34, startAngle: .zero, endAngle: .init(degrees: 180), clockwise: true)
+            
+            path.addLine(to: CGPoint(x: 0, y: 55))
+            
+        }.fill(Color.white)
+        .rotationEffect(.init(degrees: 180))
+    }
+}
+
 
 class BottomNavigationView_Previews: PreviewProvider {
     static var previews: some View {
