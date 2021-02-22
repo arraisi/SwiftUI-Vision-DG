@@ -39,7 +39,9 @@ class HistoryTransactionViewModel : ObservableObject {
             case .success(let response):
                 
                 DispatchQueue.main.async {
-                    self.histories = response.historyList
+                    if let _histories = response.historyList {
+                        self.histories = _histories
+                    }
                     self.isLoading = false
                 }
                 
