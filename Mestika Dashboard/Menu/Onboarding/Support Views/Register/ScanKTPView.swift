@@ -138,6 +138,8 @@ struct ScanKTPView: View {
             if success {
                 print("isLoading \(self.citizenVM.isLoading)")
                 print("nikValid \(self.citizenVM.nik)")
+                print(self.citizenVM.alamatKtp)
+                print(self.citizenVM.rt)
                 self.messageResponse = self.citizenVM.errorMessage
 //                self.showingAlert = true
                 self.registerData.nik = nik

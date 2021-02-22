@@ -12,6 +12,13 @@ struct ListLastTransactionView: View {
     var sourceNumber = ""
     @StateObject private var favoritVM = FavoritViewModel()
     
+    func formatDate() {
+        let string = "2021/0216"
+        let formatter4 = DateFormatter()
+        formatter4.dateFormat = "dd-mm-yyyy"
+        print(formatter4.date(from: string) ?? "Unknown date")
+    }
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -44,7 +51,7 @@ struct ListLastTransactionView: View {
                         }
                         
                         VStack(alignment: .leading) {
-                            Text("\(data.date)")
+                            Text("\(data.date.subStringRange(from: 6, to: 8)) - \(data.date.subStringRange(from: 4, to: 6)) - \(data.date.subStringRange(from: 0, to: 4))")
                                 .font(.caption2)
                             
                             Text("\(data.historyListDescription)")
@@ -67,12 +74,21 @@ struct ListLastTransactionView: View {
                     }
                     .padding(.vertical, 5)
                 }
-                .colorMultiply(Color(hex: "#F6F8FB"))
+                .padding()
+                .frame(width: UIScreen.main.bounds.width - 60)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.3), radius: 10)
             }
+            .padding(.bottom)
             .frame(width: UIScreen.main.bounds.width - 30)
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(color: Color.gray.opacity(0.3), radius: 10)
         }
         .onAppear {
             getList()
+            formatDate()
         }
     }
     
