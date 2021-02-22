@@ -19,6 +19,12 @@ struct HistoryTabs: View {
     @State private var dateFrom = Date()
     @State private var dateTo = Date()
     
+    var dateClosedRange: ClosedRange<Date> {
+        let min = Calendar.current.date(byAdding: .month, value: -3, to: Date())!
+        let max = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
+        return min...max
+    }
+    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -75,6 +81,7 @@ struct HistoryTabs: View {
                         DatePicker(
                             "From",
                             selection: $dateFrom,
+                            in: dateClosedRange,
                             displayedComponents: [.date]
                         )
                         .labelsHidden()
@@ -87,7 +94,7 @@ struct HistoryTabs: View {
                         DatePicker(
                             "To",
                             selection: $dateTo,
-                            in: dateFrom...,
+                            in: dateFrom...Date(),
                             displayedComponents: [.date]
                         )
                         .labelsHidden()
