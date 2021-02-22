@@ -145,6 +145,11 @@ struct FormCompletionKartuATMView: View {
             user.forEach { (data) in
                 atmData.atmName = data.namaLengkapFromNik!
                 registerData.namaLengkapFromNik = data.namaLengkapFromNik!
+                registerData.alamatKtpFromNik = data.addressInput!
+                registerData.addressKecamatanInput = data.addressKecamatanInput!
+                registerData.addressKelurahanInput = data.addressKelurahanInput!
+                registerData.addressPostalCodeInput = data.addressPostalCodeInput!
+                registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
                 registerData.nik = data.nik!
             }
         }
@@ -653,6 +658,7 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressPostalCodeInput = registerData.kodePos
             atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
             atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
+            atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
             atmData.addressEqualToDukcapil = true
         case 2: /// Surat Menyurat

@@ -113,14 +113,14 @@ class ScheduleInterviewService {
                 "atmAddressKecamatanInput": atmData.atmAddressKecamatanInput,
                 "atmAddressKotaInput": atmData.atmAddressKotaInput,
                 "atmAddressPropinsiInput": atmData.atmAddressPropinsiInput,
-                "atmAddressPostalCodeInput": atmData.atmAddressPostalCodeInput,
+                "atmAddressPostalCodeInput": "12345",
                 "atmAddressRtInput": atmData.atmAddressRtInput,
                 "atmAddressRwInput": atmData.atmAddressRwInput,
                 "atmName": atmData.atmName,
                 "isNasabahMestika": atmData.isNasabahMestika,
-                "codeClass": atmData.codeClass,
-                "imageDesign": "70",
-                "addressEqualToDukcapil": false
+                "codeClass": "70",
+                "imageDesign": atmData.imageDesign,
+                "addressEqualToDukcapil": atmData.isNasabahMestika
             ]
         ]
         

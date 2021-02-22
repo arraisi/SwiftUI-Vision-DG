@@ -52,6 +52,12 @@ extension String {
         return String(self[startIndex..<endIndex])
     }
     
+    func subStringRange(from: Int, to: Int) -> String {
+       let startIndex = self.index(self.startIndex, offsetBy: from)
+       let endIndex = self.index(self.startIndex, offsetBy: to)
+       return String(self[startIndex..<endIndex])
+    }
+    
     func fromBase64() -> String? {
         guard let data = Data(base64Encoded: self) else {
             return nil
@@ -84,5 +90,16 @@ extension String {
     
     func isNotEmpty() -> Bool {
         return !self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
+    func toDate(withFormat format: String = "dd-MM-YYYY")-> Date?{
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "in_ID")
+        dateFormatter.dateFormat = format
+        let date = dateFormatter.date(from: self)
+
+        return date
+
     }
 }

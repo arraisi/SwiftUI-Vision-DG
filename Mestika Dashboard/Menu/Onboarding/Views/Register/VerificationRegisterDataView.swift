@@ -908,6 +908,13 @@ struct VerificationRegisterDataView: View {
         
         // Data From NIK
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
+        data.addressInput = self.registerData.alamatKtpFromNik
+        data.addressKecamatanInput = self.registerData.addressKecamatanInput
+        data.addressKelurahanInput = self.registerData.addressKelurahanInput
+        data.addressPostalCodeInput = self.registerData.addressPostalCodeInput
+        data.rtFromNik = self.registerData.rtFromNik
+        data.kabupatenKotaFromNik = self.registerData.kabupatenKotaFromNik
+        data.provinsiFromNik = self.registerData.provinsiFromNik
         data.nomorKKFromNik = self.registerData.nomorKKFromNik
         data.jenisKelaminFromNik = self.registerData.jenisKelaminFromNik
         data.tempatLahirFromNik = self.registerData.tempatLahirFromNik
