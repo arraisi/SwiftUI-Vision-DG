@@ -59,15 +59,21 @@ struct TransferRtgsScreen: View {
     // Variable Date
     @State var date = Date()
     private var selectedDate: Binding<Date> {
-      Binding<Date>(get: { self.date}, set : {
-          self.date = $0
-          self.setDateString()
-      })
+        Binding<Date>(get: { self.date}, set : {
+            self.date = $0
+            self.setDateString()
+        })
+    }
+    
+    var dateClosedRange: ClosedRange<Date> {
+        let min = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let max = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
+        return min...max
     }
     
     func setDateString() {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy-MM-dd"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
         print(formatter.string(from: self.now))
         print(formatter.string(from: self.date))
         
@@ -95,7 +101,7 @@ struct TransferRtgsScreen: View {
                         cardBankAndRekening
                         nominalCard
                         calendarCard
-//                        frekuensiTransaksiCard
+                        //                        frekuensiTransaksiCard
                         chooseVoucherCard
                         notesCard
                         
@@ -389,17 +395,13 @@ struct TransferRtgsScreen: View {
     var calendarCard: some View {
         VStack {
             HStack {
-                VStack(alignment: .leading) {
+                
+                DatePicker(selection: selectedDate, in: dateClosedRange, displayedComponents: .date) {
                     Text(self.selectedCalendar)
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
                 }
-                
-                Spacer()
-                
-                DatePicker("", selection: selectedDate, in: Date()..., displayedComponents: .date)
-                    .labelsHidden()
                 
             }
             .padding()
@@ -865,7 +867,7 @@ struct TransferRtgsScreen: View {
                 self.transferData.sourceNumber = selectedAccount.sourceNumber
                 self.transferData.sourceAccountName = selectedAccount.namaRekening
                 
-//                getLimit(code: self.profileVM.classCode)
+                //                getLimit(code: self.profileVM.classCode)
             }
         }
     }

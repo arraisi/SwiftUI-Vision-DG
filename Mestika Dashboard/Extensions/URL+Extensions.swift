@@ -221,4 +221,10 @@ extension URL {
     static func urlGetListHistory() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/channel/transactionHistory")
     }
+    
+    //-------------------- KARTU-KU SERVICE ----------------------//
+    
+    static func urlGetListKartuKu() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/getBalance")
+    }
 }

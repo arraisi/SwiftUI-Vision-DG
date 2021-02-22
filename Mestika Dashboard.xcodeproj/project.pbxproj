@@ -279,6 +279,8 @@
 		52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */; };
 		52E4310A25DF97AC0050DB22 /* LastTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4310925DF97AC0050DB22 /* LastTransactionResponse.swift */; };
 		52E7740425B042CD00D5B010 /* ATMDesignNewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */; };
+		52EC009F25E395860003ED71 /* KartuKuResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC009E25E395860003ED71 /* KartuKuResponse.swift */; };
+		52EC00A425E397E10003ED71 /* KartuKuService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC00A325E397E10003ED71 /* KartuKuService.swift */; };
 		52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */; };
 		52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */; };
 		6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */; };
@@ -670,6 +672,8 @@
 		52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		52E4310925DF97AC0050DB22 /* LastTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTransactionResponse.swift; sourceTree = "<group>"; };
 		52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignNewModel.swift; sourceTree = "<group>"; };
+		52EC009E25E395860003ED71 /* KartuKuResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuResponse.swift; sourceTree = "<group>"; };
+		52EC00A325E397E10003ED71 /* KartuKuService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuService.swift; sourceTree = "<group>"; };
 		52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganModel.swift; sourceTree = "<group>"; };
 		52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTransactionResponse.swift; sourceTree = "<group>"; };
 		5EAE1B20BC82E123A232853A /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
@@ -857,6 +861,7 @@
 				529190C325D3C9A5005A4898 /* ReferenceService.swift */,
 				C018014625D4E47F00766E41 /* FavoritService.swift */,
 				C0AD11A625DFA60F003FF920 /* HistoryTransactionServices.swift */,
+				52EC00A325E397E10003ED71 /* KartuKuService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1707,6 +1712,7 @@
 			isa = PBXGroup;
 			children = (
 				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
+				52EC009E25E395860003ED71 /* KartuKuResponse.swift */,
 			);
 			path = "Kartu-Ku";
 			sourceTree = "<group>";
@@ -2211,6 +2217,7 @@
 				FAF5869325AB302F00ABDA3E /* UINavigationController+Extensions.swift in Sources */,
 				526B6607254FFA4600C13C36 /* CardManagementScreen.swift in Sources */,
 				526B65F8254FF1BC00C13C36 /* PopoverSettingsView.swift in Sources */,
+				52EC00A425E397E10003ED71 /* KartuKuService.swift in Sources */,
 				529190CC25D3CB2D005A4898 /* ReferenceViewModel.swift in Sources */,
 				525FA115255289B0007EADCB /* GridMenuManyUsedView.swift in Sources */,
 				0A566A0825CA6A4E0008E752 /* TransferOnUsResponse.swift in Sources */,
@@ -2441,6 +2448,7 @@
 				52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */,
 				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,
 				0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */,
+				52EC009F25E395860003ED71 /* KartuKuResponse.swift in Sources */,
 				52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				064BC26325760DA200F15CA9 /* ATMCardView.swift in Sources */,

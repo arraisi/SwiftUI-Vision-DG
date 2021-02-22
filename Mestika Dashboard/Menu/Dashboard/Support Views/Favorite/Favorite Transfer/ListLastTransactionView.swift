@@ -12,13 +12,6 @@ struct ListLastTransactionView: View {
     var sourceNumber = ""
     @StateObject private var favoritVM = FavoritViewModel()
     
-    func formatDate() {
-        let string = "2021/0216"
-        let formatter4 = DateFormatter()
-        formatter4.dateFormat = "dd-mm-yyyy"
-        print(formatter4.date(from: string) ?? "Unknown date")
-    }
-    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -88,7 +81,6 @@ struct ListLastTransactionView: View {
         }
         .onAppear {
             getList()
-            formatDate()
         }
     }
     

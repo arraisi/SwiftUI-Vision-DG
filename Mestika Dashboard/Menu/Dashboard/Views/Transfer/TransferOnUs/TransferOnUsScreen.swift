@@ -60,6 +60,12 @@ struct TransferOnUsScreen: View {
         })
     }
     
+    var dateClosedRange: ClosedRange<Date> {
+        let min = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let max = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
+        return min...max
+      }
+    
     func setDateString() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -351,17 +357,12 @@ struct TransferOnUsScreen: View {
     var calendarCard: some View {
         VStack {
             HStack {
-                VStack(alignment: .leading) {
+                DatePicker(selection: selectedDate, in: dateClosedRange, displayedComponents: .date) {
                     Text(self.selectedCalendar)
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.semibold)
                 }
-                
-                Spacer()
-                
-                DatePicker("", selection: selectedDate, in: Date()..., displayedComponents: .date)
-                    .labelsHidden()
             }
             .padding()
         }
