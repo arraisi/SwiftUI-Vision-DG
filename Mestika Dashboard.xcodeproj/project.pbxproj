@@ -281,6 +281,8 @@
 		52E7740425B042CD00D5B010 /* ATMDesignNewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */; };
 		52EC009F25E395860003ED71 /* KartuKuResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC009E25E395860003ED71 /* KartuKuResponse.swift */; };
 		52EC00A425E397E10003ED71 /* KartuKuService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC00A325E397E10003ED71 /* KartuKuService.swift */; };
+		52EC00A925E39F530003ED71 /* KartuKuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC00A825E39F530003ED71 /* KartuKuViewModel.swift */; };
+		52EC00AE25E3B1370003ED71 /* KartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */; };
 		52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */; };
 		52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */; };
 		6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */; };
@@ -674,6 +676,8 @@
 		52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignNewModel.swift; sourceTree = "<group>"; };
 		52EC009E25E395860003ED71 /* KartuKuResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuResponse.swift; sourceTree = "<group>"; };
 		52EC00A325E397E10003ED71 /* KartuKuService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuService.swift; sourceTree = "<group>"; };
+		52EC00A825E39F530003ED71 /* KartuKuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuViewModel.swift; sourceTree = "<group>"; };
+		52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuModel.swift; sourceTree = "<group>"; };
 		52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganModel.swift; sourceTree = "<group>"; };
 		52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTransactionResponse.swift; sourceTree = "<group>"; };
 		5EAE1B20BC82E123A232853A /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
@@ -1713,6 +1717,7 @@
 			children = (
 				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
 				52EC009E25E395860003ED71 /* KartuKuResponse.swift */,
+				52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */,
 			);
 			path = "Kartu-Ku";
 			sourceTree = "<group>";
@@ -1837,6 +1842,7 @@
 				529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */,
 				C018012D25D4E40F00766E41 /* FavoritViewModel.swift */,
 				C0AD11AB25DFA98E003FF920 /* HistoryTransactionViewModel.swift */,
+				52EC00A825E39F530003ED71 /* KartuKuViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2346,12 +2352,14 @@
 				52ADFF912557DFDC00A1001F /* PerkiraanSetoranView.swift in Sources */,
 				525DB5292546B16A00D48075 /* PopOverFavoriteView.swift in Sources */,
 				526B65FD254FF4C300C13C36 /* CornerRadius+Extensions.swift in Sources */,
+				52EC00A925E39F530003ED71 /* KartuKuViewModel.swift in Sources */,
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
 				52C2FA2325D1A6F900AC3CF7 /* FavoriteAppBar.swift in Sources */,
 				52ADFF4A2557DE8000A1001F /* TabItemView.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
 				C05BA90825821A7D00E115D6 /* FormPINTransaksiATMView.swift in Sources */,
 				C043CFCA25CD4BD000328C91 /* BiometricType.swift in Sources */,
+				52EC00AE25E3B1370003ED71 /* KartuKuModel.swift in Sources */,
 				C0E6C91A255F934D00A79237 /* DetailLimitKartuAtmView.swift in Sources */,
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */,

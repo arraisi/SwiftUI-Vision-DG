@@ -22,7 +22,27 @@ class KartuKuService {
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
+            print("response: \(String(describing: response))")
             
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let kartuKuResponse = try? JSONDecoder().decode(KartuKuResponse.self, from: data!)
+                    if let kartuKu = kartuKuResponse {
+                        completion(.success(kartuKu))
+                    }
+                } else {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
         }.resume()
     }
 }

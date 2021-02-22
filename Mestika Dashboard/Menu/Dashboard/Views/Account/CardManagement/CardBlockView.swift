@@ -19,52 +19,52 @@ struct CardBlockView: View {
         ZStack {
             ScrollView(.vertical, showsIndicators: false) {
                 
-                VStack {
-                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202, showContent: true)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    
-                    VStack(alignment: .leading, spacing: 25) {
-                        Image("credit-card-locked")
-                            .resizable()
-                            .frame(width: 75.48, height: 60)
-                        
-                        Text(card.blocked ? "Kartu Rekening Terblokir" : "Apakah Anda Yakin Untuk Memblokir Kartu Anda")
-                            .font(.custom("Montserrat-Bold", size: 18))
-                            .foregroundColor(Color(hex: "#232175"))
-                        
-                        Text(card.blocked ? "Kartu Anda terblokir sementara, Silahkan aktifkan kembali kartu Anda untuk menggunakannya." : "Pemblokiran Kartu dapat mengakibatkan Kartu tidak dapat digunakan pada mesin ATM dan juga tidak dapat digunakan untuk transaksi di Toko Online melalui GPN (Gerbang Pembayaran Nasional)")
-                            .font(.custom("Montserrat-Regular", size: 12))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .lineSpacing(10)
-                        
-                        NavigationLink(
-                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardBlockView(card: card, showingModal: true))),
-                            isActive: $showConfirmationPIN,
-                            label: {})
-                        
-                        
-                        Button (action: {
-                            
-                            card.blocked ? self.showConfirmationPIN.toggle() : self.showingModal.toggle()
-                            
-                        }, label: {
-                            Text(card.blocked ? "BUKA BLOKIR KARTU" : "BLOKIR KARTU")
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                .frame(maxWidth: .infinity, maxHeight: 50)
-                        })
-                        .frame(height: 50)
-                        .background(Color(hex: "#2334D0"))
-                        .cornerRadius(12)
-                    }
-                    .padding(20)
-                    .padding(.top, 20)
-                    .background(Color.white)
-                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    .padding(30)
-                }
-                .padding(.top, 30)
+//                VStack {
+//                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202, showContent: true)
+//                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+//                    
+//                    VStack(alignment: .leading, spacing: 25) {
+//                        Image("credit-card-locked")
+//                            .resizable()
+//                            .frame(width: 75.48, height: 60)
+//                        
+//                        Text(card.blocked ? "Kartu Rekening Terblokir" : "Apakah Anda Yakin Untuk Memblokir Kartu Anda")
+//                            .font(.custom("Montserrat-Bold", size: 18))
+//                            .foregroundColor(Color(hex: "#232175"))
+//                        
+//                        Text(card.blocked ? "Kartu Anda terblokir sementara, Silahkan aktifkan kembali kartu Anda untuk menggunakannya." : "Pemblokiran Kartu dapat mengakibatkan Kartu tidak dapat digunakan pada mesin ATM dan juga tidak dapat digunakan untuk transaksi di Toko Online melalui GPN (Gerbang Pembayaran Nasional)")
+//                            .font(.custom("Montserrat-Regular", size: 12))
+//                            .foregroundColor(Color(hex: "#232175"))
+//                            .lineSpacing(10)
+//                        
+//                        NavigationLink(
+//                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardBlockView(card: card, showingModal: true))),
+//                            isActive: $showConfirmationPIN,
+//                            label: {})
+//                        
+//                        
+//                        Button (action: {
+//                            
+//                            card.blocked ? self.showConfirmationPIN.toggle() : self.showingModal.toggle()
+//                            
+//                        }, label: {
+//                            Text(card.blocked ? "BUKA BLOKIR KARTU" : "BLOKIR KARTU")
+//                                .foregroundColor(.white)
+//                                .font(.custom("Montserrat-SemiBold", size: 14))
+//                                .frame(maxWidth: .infinity, maxHeight: 50)
+//                        })
+//                        .frame(height: 50)
+//                        .background(Color(hex: "#2334D0"))
+//                        .cornerRadius(12)
+//                    }
+//                    .padding(20)
+//                    .padding(.top, 20)
+//                    .background(Color.white)
+//                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+//                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+//                    .padding(30)
+//                }
+//                .padding(.top, 30)
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
             .navigationBarTitle("Blokir Kartu", displayMode: .inline)
