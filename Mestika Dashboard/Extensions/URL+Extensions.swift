@@ -231,4 +231,9 @@ extension URL {
     static func urlActivateKartuKu() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/channel/cardActivation")
     }
+    
+    static func urlBrokenKartuKu() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/channel/cardBroken")
+    }
+    
 }

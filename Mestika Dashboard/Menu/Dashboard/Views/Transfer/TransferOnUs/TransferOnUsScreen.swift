@@ -32,7 +32,7 @@ struct TransferOnUsScreen: View {
     
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 10000
+    private var minLimit: Int = 0
     
     /* Function GET USER Status */
     @ObservedObject var profileVM = ProfileViewModel()

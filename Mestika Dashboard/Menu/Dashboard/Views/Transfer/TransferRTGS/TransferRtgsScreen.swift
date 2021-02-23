@@ -28,7 +28,7 @@ struct TransferRtgsScreen: View {
     @State var amount = ""
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 10000
+    private var minLimit: Int = 0
     
     // Variable Transaction Frequecy
     var _listFrequency = ["Sekali", "Berkali-kali"]

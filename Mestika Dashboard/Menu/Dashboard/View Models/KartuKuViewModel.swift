@@ -32,32 +32,30 @@ extension KartuKuViewModel {
             case .success(let response):
                 print("SUCCESS")
                 
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    
-                    self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
-                        return KartuKuDesignViewModel(
-                            cardFlag: data.cardFlag,
-                            kodepos: data.kodepos,
-                            provinsi: data.provinsi,
-                            kabupatenKota: data.kabupatenKota,
-                            kecamatan: data.kecamatan,
-                            kelurahan: data.kelurahan,
-                            rw: data.rw,
-                            rt: data.rt,
-                            postalAddress: data.postalAddress,
-                            accountNumber: data.accountNumber,
-                            nameOnCard: data.nameOnCard,
-                            cardNo: data.cardNo,
-                            cardDesign: data.cardDesign,
-                            classCode: data.classCode,
-                            nik: data.nik,
-                            id: data.id,
-                            imageNameAlias: data.imageNameAlias,
-                            mainCard: data.mainCard!,
-                            status: data.status ?? "")
-                    })
-                }
+                self.isLoading = false
+                
+                self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
+                    return KartuKuDesignViewModel(
+                        cardFlag: data.cardFlag,
+                        kodepos: data.kodepos,
+                        provinsi: data.provinsi,
+                        kabupatenKota: data.kabupatenKota,
+                        kecamatan: data.kecamatan,
+                        kelurahan: data.kelurahan,
+                        rw: data.rw,
+                        rt: data.rt,
+                        postalAddress: data.postalAddress,
+                        accountNumber: data.accountNumber,
+                        nameOnCard: data.nameOnCard,
+                        cardNo: data.cardNo,
+                        cardDesign: data.cardDesign,
+                        classCode: data.classCode,
+                        nik: data.nik,
+                        id: data.id,
+                        imageNameAlias: data.imageNameAlias,
+                        mainCard: data.mainCard!,
+                        status: data.status ?? "")
+                })
                 
                 print(self.listKartuKu.count)
                 
@@ -89,6 +87,49 @@ extension KartuKuViewModel {
         }
         
         KartuKuService.shared.postActivateKartKu(data: data) { result in
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "400"
+                    self.message = "Message parametr tidak valid"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - BROKEN KARTU KU
+    func brokenKartuKu(data: BrokenKartuKuModel, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        KartuKuService.shared.postBrokenKartKu(data: data) { result in
             switch result {
             case .success(let response):
                 
