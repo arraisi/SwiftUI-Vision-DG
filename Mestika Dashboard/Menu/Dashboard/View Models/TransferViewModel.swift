@@ -13,13 +13,15 @@ class TransferViewModel : ObservableObject {
     @Published var timeEnd: String = ""
     @Published var message: String = ""
     @Published var code: String = ""
-    @Published var destinationName: String = ""
     @Published var limitOnUs: String = ""
     @Published var limitIbft: String = ""
     
+    @Published var destinationName: String = ""
+    @Published var destinationNumber: String = ""
+    
     // MARK: - GET LIMIT TRANSACTION
     func getLimitTransaction(classCode: String,
-                      completion: @escaping (Bool) -> Void) {
+                             completion: @escaping (Bool) -> Void) {
         
         TransferServices.shared.getLimitTransaction(classCode: classCode) { result in
             print(result)
@@ -27,13 +29,14 @@ class TransferViewModel : ObservableObject {
             switch result {
             case .success(let response):
                 print(response)
-                
-                self.isLoading = false
-                self.limitIbft = response.limitIbft
-                self.limitOnUs = response.limitOnUs
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.limitIbft = response.limitIbft
+                    self.limitOnUs = response.limitOnUs
+                }
                 
                 completion(true)
-
+                
             case .failure(let error):
                 print("ERROR-->")
                 print(error)
@@ -42,19 +45,22 @@ class TransferViewModel : ObservableObject {
                     self.isLoading = false
                 }
                 
-                switch error {
-                case .custom(code: 401):
-                    self.code = "401"
-                    self.message = "Invalid Pin Trx"
-                case .custom(code: 404):
-                    self.code = "404"
-                    self.message = "Data tidak ditemukan"
-                case .custom(code: 403):
-                    self.code = "403"
-                    self.message = "Over Booking failed"
-                default:
-                    self.message = "Internal Server Error"
+                DispatchQueue.main.async {
+                    switch error {
+                    case .custom(code: 401):
+                        self.code = "401"
+                        self.message = "Invalid Pin Trx"
+                    case .custom(code: 404):
+                        self.code = "404"
+                        self.message = "Data tidak ditemukan"
+                    case .custom(code: 403):
+                        self.code = "403"
+                        self.message = "Over Booking failed"
+                    default:
+                        self.message = "Internal Server Error"
+                    }
                 }
+                
                 completion(false)
             }
         }
@@ -62,26 +68,27 @@ class TransferViewModel : ObservableObject {
     
     // MARK: - Transfer ONUS INQUIRY
     func transferOnUsInquiry(transferData: TransferOnUsModel,
-                      completion: @escaping (Bool) -> Void) {
+                             completion: @escaping (Bool) -> Void) {
         TransferServices.shared.transferOnUsInquiry(transferData: transferData) { result in
             print(result)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.isLoading = false
+            }
             
             switch result {
             case .success(let response):
                 print(response)
                 
-                self.isLoading = false
-                self.destinationName = response.destinationAccountName
+                DispatchQueue.main.async {
+                    self.destinationName = response.destinationAccountName
+                }
                 
                 completion(true)
-
+                
             case .failure(let error):
                 print("ERROR-->")
                 print(error)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.isLoading = false
-                }
                 
                 switch error {
                 case .custom(code: 401):
@@ -115,7 +122,7 @@ class TransferViewModel : ObservableObject {
                 }
                 
                 completion(true)
-
+                
             case .failure(let error):
                 print("ERROR-->")
                 print(error)
@@ -149,10 +156,12 @@ class TransferViewModel : ObservableObject {
             print(result)
             
             switch result {
-            case .success(let response):
-                self.isLoading = false
+            case .success( _):
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
                 completion(true)
-
+                
             case .failure(let error):
                 print("ERROR-->")
                 print(error)
@@ -181,7 +190,7 @@ class TransferViewModel : ObservableObject {
     
     // MARK: - Transfer SKN
     func transferSkn(transferData: TransferOffUsModel,
-                      completion: @escaping (Bool) -> Void) {
+                     completion: @escaping (Bool) -> Void) {
         TransferServices.shared.transferSkn(transferData: transferData) { result in
             print(result)
             
@@ -194,7 +203,7 @@ class TransferViewModel : ObservableObject {
                 }
                 
                 completion(true)
-
+                
             case .failure(let error):
                 print("ERROR-->")
                 print(error)

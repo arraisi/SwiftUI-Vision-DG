@@ -10,7 +10,7 @@ import SwiftUI
 struct TransferOnUsConfirmationScreen: View {
     
     @EnvironmentObject var transferData: TransferOnUsModel
-
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -28,6 +28,7 @@ struct TransferOnUsConfirmationScreen: View {
             }
         }
         .navigationBarTitle("Konfirmasi", displayMode: .inline)
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     var formCard: some View {
@@ -137,65 +138,65 @@ struct TransferOnUsConfirmationScreen: View {
                 .padding(.vertical, 5)
                 .padding(.horizontal)
                 
-//                // Jenis Transfer Form
-//                HStack(spacing: 20) {
-//                    Text("Jenis Transfer")
-//                        .font(.caption)
-//                        .fontWeight(.light)
-//                        .frame(width: 100)
-//
-//                    TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
-//                        print("\(self.$transferData.transferType)")
-//                    })
-//                    .disabled(true)
-//                    .frame(height: 20)
-//                    .padding()
-//                    .font(.subheadline)
-//                    .background(Color(hex: "#F6F8FB"))
-//                    .cornerRadius(15)
-//                }
-//                .padding(.vertical, 5)
-//                .padding(.horizontal)
-//
-//                // Rekeking Form
-//                HStack(spacing: 20) {
-//                    Text("Rekening")
-//                        .font(.caption)
-//                        .fontWeight(.light)
-//                        .frame(width: 100)
-//
-//                    TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
-//                        print("\(self.$transferData.sourceAccountName)")
-//                    })
-//                    .disabled(true)
-//                    .frame(height: 20)
-//                    .padding()
-//                    .font(.subheadline)
-//                    .background(Color(hex: "#F6F8FB"))
-//                    .cornerRadius(15)
-//                }
-//                .padding(.vertical, 5)
-//                .padding(.horizontal)
+                //                // Jenis Transfer Form
+                //                HStack(spacing: 20) {
+                //                    Text("Jenis Transfer")
+                //                        .font(.caption)
+                //                        .fontWeight(.light)
+                //                        .frame(width: 100)
+                //
+                //                    TextField("Jenis Rekening", text: self.$transferData.transferType, onEditingChanged: { changed in
+                //                        print("\(self.$transferData.transferType)")
+                //                    })
+                //                    .disabled(true)
+                //                    .frame(height: 20)
+                //                    .padding()
+                //                    .font(.subheadline)
+                //                    .background(Color(hex: "#F6F8FB"))
+                //                    .cornerRadius(15)
+                //                }
+                //                .padding(.vertical, 5)
+                //                .padding(.horizontal)
+                //
+                //                // Rekeking Form
+                //                HStack(spacing: 20) {
+                //                    Text("Rekening")
+                //                        .font(.caption)
+                //                        .fontWeight(.light)
+                //                        .frame(width: 100)
+                //
+                //                    TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
+                //                        print("\(self.$transferData.sourceAccountName)")
+                //                    })
+                //                    .disabled(true)
+                //                    .frame(height: 20)
+                //                    .padding()
+                //                    .font(.subheadline)
+                //                    .background(Color(hex: "#F6F8FB"))
+                //                    .cornerRadius(15)
+                //                }
+                //                .padding(.vertical, 5)
+                //                .padding(.horizontal)
                 
-//                // Frekuensi Form
-//                HStack(spacing: 20) {
-//                    Text("Frekuensi")
-//                        .font(.caption)
-//                        .fontWeight(.light)
-//                        .frame(width: 100)
-//
-//                    TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
-//                        print("\(self.$transferData.transactionFrequency)")
-//                    })
-//                    .disabled(true)
-//                    .frame(height: 20)
-//                    .padding()
-//                    .font(.subheadline)
-//                    .background(Color(hex: "#F6F8FB"))
-//                    .cornerRadius(15)
-//                }
-//                .padding(.vertical, 5)
-//                .padding(.horizontal)
+                //                // Frekuensi Form
+                //                HStack(spacing: 20) {
+                //                    Text("Frekuensi")
+                //                        .font(.caption)
+                //                        .fontWeight(.light)
+                //                        .frame(width: 100)
+                //
+                //                    TextField("Frekuensi", text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
+                //                        print("\(self.$transferData.transactionFrequency)")
+                //                    })
+                //                    .disabled(true)
+                //                    .frame(height: 20)
+                //                    .padding()
+                //                    .font(.subheadline)
+                //                    .background(Color(hex: "#F6F8FB"))
+                //                    .cornerRadius(15)
+                //                }
+                //                .padding(.vertical, 5)
+                //                .padding(.horizontal)
                 
                 // Voucher Form
                 HStack(spacing: 20) {
@@ -281,7 +282,7 @@ struct TransferOnUsConfirmationScreen: View {
                 NavigationLink(destination: TransferOnUsPinConfirmationScreen(unLocked: false).environmentObject(transferData), label: {
                     Text("Lakukan Transfer")
                         .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     
@@ -303,6 +304,8 @@ struct TransferOnUsConfirmationScreen: View {
 
 struct TransferOnUsConfirmationScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsConfirmationScreen().environmentObject(TransferOnUsModel())
+        NavigationView {
+            TransferOnUsConfirmationScreen().environmentObject(TransferOnUsModel())
+        }
     }
 }

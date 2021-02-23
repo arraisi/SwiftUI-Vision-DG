@@ -9,6 +9,10 @@ import SwiftUI
 
 struct BottomNavigationView: View {
     
+    @EnvironmentObject var appState: AppState
+    @State private var isRouteTransferOnUs: Bool = false
+    @State private var isRouteTransferOffUs: Bool = false
+    
     @ObservedObject private var profileVM = ProfileViewModel()
     
     @State private var showingSlideMenu = false
@@ -39,7 +43,7 @@ struct BottomNavigationView: View {
                     }
                     
                     if (selected == 1) {
-                        TransferTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
+                        TransferTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber, transferOnUsActive: self.$isRouteTransferOnUs, transferOffUsActive: self.$isRouteTransferOffUs)
                     }
                     
                     if (selected == 2) {
@@ -127,7 +131,7 @@ struct BottomNavigationView: View {
             if showingSettingMenu {
                 withAnimation {
                     PopoverSettingsView()
-                        .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
+                        .animation(.easeIn)
                         .transition(.move(edge: .trailing))
                 }
             }
@@ -139,6 +143,16 @@ struct BottomNavigationView: View {
                 self.cardNo = self.profileVM.cardNo
                 self.sourceNumber = self.profileVM.accountNumber
                 print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+            }
+        }
+        .onReceive(self.appState.$moveToTransfer) { moveToTransfer in
+            if moveToTransfer {
+                print("Move to Transfer: \(moveToTransfer)")
+                self.selected = 0
+                self.isRouteTransferOnUs = false
+                self.isRouteTransferOffUs = false
+                self.appState.moveToTransfer = false
+                
             }
         }
     }

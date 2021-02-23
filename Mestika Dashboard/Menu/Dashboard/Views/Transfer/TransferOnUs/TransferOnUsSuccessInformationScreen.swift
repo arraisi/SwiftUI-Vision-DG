@@ -33,7 +33,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                     Spacer()
                     Image("logo_m_mestika")
                         .resizable()
-                        .frame(width: 70, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: 70, height: 70, alignment: .center)
                         .padding()
                     
                     dateInfo
@@ -50,7 +50,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                         label: {
                             Text("Kembali Ke Halaman Utama")
                                 .foregroundColor(Color(hex: "#2334D0"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })

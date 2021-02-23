@@ -89,7 +89,7 @@ class TransferServices {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString as Any)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -145,7 +145,7 @@ class TransferServices {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString as Any)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -221,7 +221,7 @@ class TransferServices {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString as Any)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -298,7 +298,7 @@ class TransferServices {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString as Any)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
