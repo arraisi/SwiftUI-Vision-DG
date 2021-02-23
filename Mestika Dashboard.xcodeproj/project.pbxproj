@@ -59,6 +59,8 @@
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
 		522B8C2A25E4B62F003D17F1 /* CardPinVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */; };
 		522B8C2F25E4BA16003D17F1 /* ActivateKartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */; };
+		522B8C3725E4E505003D17F1 /* BrokenKartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C3625E4E504003D17F1 /* BrokenKartuKuModel.swift */; };
+		522B8C3C25E4E993003D17F1 /* CardBrokenPinVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C3B25E4E993003D17F1 /* CardBrokenPinVerificationView.swift */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
@@ -444,6 +446,8 @@
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
 		522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPinVerificationView.swift; sourceTree = "<group>"; };
 		522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateKartuKuModel.swift; sourceTree = "<group>"; };
+		522B8C3625E4E504003D17F1 /* BrokenKartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokenKartuKuModel.swift; sourceTree = "<group>"; };
+		522B8C3B25E4E993003D17F1 /* CardBrokenPinVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrokenPinVerificationView.swift; sourceTree = "<group>"; };
 		5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mestika Dashboard.entitlements"; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1716,6 +1720,7 @@
 				52EC009E25E395860003ED71 /* KartuKuResponse.swift */,
 				52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */,
 				522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */,
+				522B8C3625E4E504003D17F1 /* BrokenKartuKuModel.swift */,
 			);
 			path = "Kartu-Ku";
 			sourceTree = "<group>";
@@ -1819,6 +1824,7 @@
 				C0B347D22559422B000754C4 /* CardBlockView.swift */,
 				C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */,
 				522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */,
+				522B8C3B25E4E993003D17F1 /* CardBrokenPinVerificationView.swift */,
 			);
 			path = CardManagement;
 			sourceTree = "<group>";
@@ -2290,6 +2296,7 @@
 				528AE2C225959B8C003AFD73 /* AppConstants.swift in Sources */,
 				C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */,
 				064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */,
+				522B8C3725E4E505003D17F1 /* BrokenKartuKuModel.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,
 				527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */,
@@ -2381,6 +2388,7 @@
 				525950232553E03000C8CA5D /* PhoneNumberVerificationForgotPasswordView.swift in Sources */,
 				52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */,
 				52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */,
+				522B8C3C25E4E993003D17F1 /* CardBrokenPinVerificationView.swift in Sources */,
 				52BB53A125C108680045DBE6 /* AuthService.swift in Sources */,
 				C0AD11AC25DFA98E003FF920 /* HistoryTransactionViewModel.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
