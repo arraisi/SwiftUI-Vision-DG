@@ -30,66 +30,70 @@ struct BottomNavigationView: View {
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
-            
-            VStack {
-                appbar
-                
-                if (selected == 0) {
-                    DashboardTabs(cardNo: $cardNo, sourceNumber: $sourceNumber)
+            ZStack {
+                VStack {
+                    appbar
+                    
+                    if (selected == 0) {
+                        DashboardTabs(cardNo: $cardNo, sourceNumber: $sourceNumber)
+                    }
+                    
+                    if (selected == 1) {
+                        TransferTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
+                    }
+                    
+                    if (selected == 2) {
+                        HistoryTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
+                    }
+                    
+                    if (selected == 3) {
+                        AccountTabs(showingSettingMenu: self.$showingSettingMenu)
+                    }
+                    
+                    if (selected == 4) {
+                        PaymentTransactionTabs()
+                    }
+                    
+                    Spacer()
                 }
-                
-                if (selected == 1) {
-                    TransferTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
-                }
-                
-                if (selected == 2) {
-                    HistoryTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber)
-                }
-                
-                if (selected == 3) {
-                    AccountTabs(showingSettingMenu: self.$showingSettingMenu)
-                }
-                
-                if (selected == 4) {
-                    PaymentTransactionTabs()
-                }
-                
-                Spacer()
                 
                 if (viewIsShown) {
-                    ZStack(alignment: .bottom){
-                        
-                        CustomBottomNavigationView(selected: self.$selected)
-                            .padding(.top)
-                            .padding(.horizontal, 20)
-                            .background(
-                                CurvedShape()
-                            )
-                        
-                        
-                        VStack {
-                            Button(action: {
-                                selected = 4
-                            }) {
-                                Image("ic_dashboard")
-                                    .renderingMode(.template)
-                                    .foregroundColor(.white)
-                                    .padding(18)
-                                
-                            }
-                            .background(selected == 4 ? Color(hex: "#2334D0") : Color(hex: "#C0C0C0"))
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
+                    VStack {
+                        Spacer()
+                        ZStack(alignment: .bottom){
                             
-                            Text("Buy & Pay")
-                                .foregroundColor(self.selected == 4 ? Color(hex: "#2334D0") : .white)
-                                .font(.system(size: 12))
+                            CustomBottomNavigationView(selected: self.$selected)
+//                                .padding(.top, 5)
+                                .padding(.horizontal, 20)
+                                .background(
+                                    CurvedShape()
+                                )
+                            
+                            
+                            VStack {
+                                Button(action: {
+                                    selected = 4
+                                }) {
+                                    Image("ic_dashboard")
+                                        .renderingMode(.template)
+                                        .foregroundColor(.white)
+                                        .padding(18)
+                                    
+                                }
+                                .background(selected == 4 ? Color(hex: "#2334D0") : Color(hex: "#C0C0C0"))
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                                
+                                Text("Buy & Pay")
+                                    .foregroundColor(self.selected == 4 ? Color(hex: "#2334D0") : .white)
+                                    .font(.system(size: 12))
+                            }
+                            .offset(y: -5)
+                            
                         }
-                        .offset(y: -5)
-                        
+                        .animation(.easeIn)
+                        .transition(.move(edge: .bottom))
                     }
-                    .animation(.easeIn)
-                    .transition(.move(edge: .bottom))
                 }
             }
             .onPreferenceChange(OffsetKey.self) {
@@ -189,7 +193,8 @@ struct CurvedShape : View {
 
 class BottomNavigationView_Previews: PreviewProvider {
     static var previews: some View {
-        BottomNavigationView()
+        BottomNavigationView().previewDevice(PreviewDevice(rawValue: "iPhone 12"))
+        BottomNavigationView().previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
     }
     
     #if DEBUG

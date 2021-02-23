@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NavigationStack
 import JGProgressHUD_SwiftUI
 import SystemConfiguration
 
