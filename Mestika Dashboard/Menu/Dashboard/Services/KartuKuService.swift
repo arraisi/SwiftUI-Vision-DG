@@ -67,7 +67,7 @@ class KartuKuService {
         
         let body: [String: Any] = [
             "cardNo": data.cardNo,
-            "cvv": data.cvv,
+            "cvv": encryptPassword(password: data.cvv),
             "pin": encryptPassword(password: data.newPin),
             "pinTrx": encryptPassword(password: data.pinTrx),
         ]

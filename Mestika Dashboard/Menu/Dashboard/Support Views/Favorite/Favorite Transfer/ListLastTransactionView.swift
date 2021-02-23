@@ -35,7 +35,7 @@ struct ListLastTransactionView: View {
                     HStack {
                         ZStack {
                             Circle()
-                                .fill(data.sign == "D" ? Color.green : Color.red)
+                                .fill(data.sign == "D" ? Color.red : Color.green)
                                 .frame(width: 30, height: 30)
                             
                             Text("\(data.sign)")
@@ -58,19 +58,19 @@ struct ListLastTransactionView: View {
                             if (data.sign == "D") {
                                 Text("+ Rp.")
                                     .font(.subheadline)
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.red)
                                 
                                 Text("\(data.amount.thousandSeparator())")
                                     .font(.subheadline)
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.red)
                             } else {
                                 Text("- Rp.")
                                     .font(.subheadline)
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.green)
                                 
                                 Text("\(data.amount.thousandSeparator())")
                                     .font(.subheadline)
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.green)
                             }
                             
                         }
