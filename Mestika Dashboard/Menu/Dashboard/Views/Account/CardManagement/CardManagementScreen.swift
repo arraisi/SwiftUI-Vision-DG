@@ -38,7 +38,7 @@ struct CardManagementScreen: View {
                             HStack(spacing: itemWidth * itemGapWidth){
                                 
                                 ForEach(self.cards, id: \.id){ card in
-                                    CardView(card: card, cardWidth: itemWidth, cardHeight: itemHeight, showContent: true)
+                                    CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: true)
                                         .offset(x: self.offset)
                                         .highPriorityGesture(
                                             
@@ -68,19 +68,34 @@ struct CardManagementScreen: View {
                             refreshCarousel()
                         }
                         
-    //                    if !cards[Int(self.count)].activeStatus {
-    //                        DetailKartuTidakAktifView(card: cards[Int(self.count)])
-    //                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-    //                            .frame(width: UIScreen.main.bounds.width - 60)
-    //                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-    //                    }
-    //
-    //                    else {
-    //                        DetailKartuAktifView(card: cards[Int(self.count)])
-    //                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-    //                            .frame(width: UIScreen.main.bounds.width - 60)
-    //                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-    //                    }
+                        if cards.count > Int(count) {
+                            if cards[Int(self.count)].status == "ACTIVE" {
+                                DetailKartuAktifView(card: cards[Int(self.count)])
+                                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                                    .frame(width: UIScreen.main.bounds.width - 60)
+                                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                            } else {
+                                DetailKartuTidakAktifView(card: cards[Int(self.count)])
+                                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                                    .frame(width: UIScreen.main.bounds.width - 60)
+                                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                            }
+                        }
+                        
+                        
+                        //                    if !cards[Int(self.count)].activeStatus {
+                        //                        DetailKartuTidakAktifView(card: cards[Int(self.count)])
+                        //                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+                        //                            .frame(width: UIScreen.main.bounds.width - 60)
+                        //                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                        //                    }
+                        //
+                        //                    else {
+//                                                DetailKartuAktifView(card: cards[Int(self.count)])
+//                                                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+//                                                    .frame(width: UIScreen.main.bounds.width - 60)
+//                                                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+                        //                    }
                         
                         Spacer()
                     }
@@ -91,7 +106,7 @@ struct CardManagementScreen: View {
                 }
             }
             .background(Color(hex: "#F6F8FB")
-            .edgesIgnoringSafeArea(.all))
+                            .edgesIgnoringSafeArea(.all))
         }
     }
     
@@ -155,7 +170,7 @@ struct CardManagementScreen: View {
     // MARK: - UPDATE HEIGHT
     private func updateHeight(value : Int){
         
-        for i in 0..<3{
+        for i in 0..<cards.count{
             cards[i].isShow = false
         }
         

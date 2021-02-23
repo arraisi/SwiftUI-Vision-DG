@@ -13,6 +13,9 @@ class KartuKuViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var kartuKu = KartuKuResponse()
     @Published var listKartuKu: [KartuKuDesignViewModel] = []
+    
+    @Published var message: String = ""
+    @Published var code: String = ""
 }
 
 extension KartuKuViewModel {
@@ -34,12 +37,6 @@ extension KartuKuViewModel {
                     
                     self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
                         return KartuKuDesignViewModel(
-                            maxIbftPerTrans: data.maxIbftPerTrans,
-                            limitOnUs: data.limitOnUs,
-                            limitWd: data.limitWd,
-                            limitPayment: data.limitPayment,
-                            limitPurchase: data.limitPurchase,
-                            limitIbft: data.limitIbft,
                             cardFlag: data.cardFlag,
                             kodepos: data.kodepos,
                             provinsi: data.provinsi,
@@ -57,9 +54,8 @@ extension KartuKuViewModel {
                             nik: data.nik,
                             id: data.id,
                             imageNameAlias: data.imageNameAlias,
-                            balance: data.balance,
-                            status: data.status,
-                            mainCard: data.mainCard)
+                            mainCard: data.mainCard!,
+                            status: data.status ?? "")
                     })
                 }
                 
@@ -80,6 +76,49 @@ extension KartuKuViewModel {
                     self.isLoading = false
                 }
                 
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - ACTIVATE KARTU KU
+    func activateKartuKu(data: ActivateKartuKuModel, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        KartuKuService.shared.postActivateKartKu(data: data) { result in
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "400"
+                    self.message = "Message parametr tidak valid"
+                default:
+                    self.message = "Internal Server Error"
+                }
                 completion(false)
             }
         }

@@ -58,6 +58,8 @@
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
+		522B8C2A25E4B62F003D17F1 /* CardPinVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */; };
+		522B8C2F25E4BA16003D17F1 /* ActivateKartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
@@ -443,6 +445,8 @@
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
+		522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPinVerificationView.swift; sourceTree = "<group>"; };
+		522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateKartuKuModel.swift; sourceTree = "<group>"; };
 		5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mestika Dashboard.entitlements"; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1718,6 +1722,7 @@
 				C092ABEF2553B3CF0051CE3E /* MyCard.swift */,
 				52EC009E25E395860003ED71 /* KartuKuResponse.swift */,
 				52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */,
+				522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */,
 			);
 			path = "Kartu-Ku";
 			sourceTree = "<group>";
@@ -1820,6 +1825,7 @@
 				C0B347CA25593688000754C4 /* CardDamageView.swift */,
 				C0B347D22559422B000754C4 /* CardBlockView.swift */,
 				C0FE1E2A255A49F600B3AAE0 /* CardPINConfigurationView.swift */,
+				522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */,
 			);
 			path = CardManagement;
 			sourceTree = "<group>";
@@ -2380,6 +2386,7 @@
 				C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */,
 				52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */,
 				52D8DC0925D61506004DF85E /* PopOverFavoriteTransactionOffUsView.swift in Sources */,
+				522B8C2A25E4B62F003D17F1 /* CardPinVerificationView.swift in Sources */,
 				52DA20852551069C00CC048A /* Statement.swift in Sources */,
 				526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */,
 				52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */,
@@ -2457,6 +2464,7 @@
 				5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */,
 				0A4010722563E00B00983B16 /* TextFieldValidation.swift in Sources */,
 				52EC009F25E395860003ED71 /* KartuKuResponse.swift in Sources */,
+				522B8C2F25E4BA16003D17F1 /* ActivateKartuKuModel.swift in Sources */,
 				52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
 				064BC26325760DA200F15CA9 /* ATMCardView.swift in Sources */,
