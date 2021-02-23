@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailKartuTidakAktifView: View {
     
-    var card: MyCard
+    var card: KartuKuDesignViewModel
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -58,10 +58,10 @@ struct DetailKartuTidakAktifView: View {
     }
 }
 
-struct DetailKartuTidakAktifView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailKartuTidakAktifView(card: myCardData[0])
-            .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width, height: 400))
-            .environment(\.colorScheme, .dark)
-    }
-}
+//struct DetailKartuTidakAktifView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailKartuTidakAktifView(card: myCardData[0])
+//            .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width, height: 400))
+//            .environment(\.colorScheme, .dark)
+//    }
+//}

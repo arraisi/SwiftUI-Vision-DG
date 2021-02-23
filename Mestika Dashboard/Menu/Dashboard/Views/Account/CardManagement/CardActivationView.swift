@@ -10,15 +10,17 @@ import SwiftUI
 struct CardActivationView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var kartKuVM = KartuKuViewModel()
     
-    @AppStorage("lock_Password") var key = "123456"
+    // Observable Object
+    @State var activateData = ActivateKartuKuModel()
     
     @State var nextView: Bool = false
     
-    var card: MyCard
+    var card: KartuKuDesignViewModel
     
     // Variable NoRekening
-    @State private var noAtmCtrl: String = "8719200092801200"
+    @State private var noAtmCtrl: String = "0"
     
     // Variable CVV Code
     @State private var noCvvCtrl: String = ""
@@ -50,14 +52,21 @@ struct CardActivationView: View {
                         noAtmAndCvvCard
                         createNewPinCard
                         
+                        NavigationLink(
+                            destination: CardPinVerificationView(unLocked: false).environmentObject(activateData),
+                            isActive: self.$nextView,
+                            label: {
+                                EmptyView()
+                            })
+                        
                         Button(action: {
+                            self.activateData.cvv = self.noCvvCtrl
+                            self.activateData.newPin = self.pinCtrl
+                            
                             if (pinCtrl != cPinCtrl) {
                                 disableIncorrectPin = false
-                            } else if (noCvvCtrl != "123") {
-                                disableIncorrectPin = true
-                                isShowingWrongCvv = true
-                            } else {
-                                isShowingSuccess = true
+                            } else  {
+                                self.nextView = true
                             }
                         }, label: {
                             Text("AKTIVASI KARTU ATM")
@@ -81,8 +90,26 @@ struct CardActivationView: View {
             }
         }
         .navigationBarTitle("Aktivasi Kartu", displayMode: .inline)
+        .onAppear {
+            self.noAtmCtrl = card.cardNo
+            self.activateData.cardNo = card.cardNo
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ActivatedKartuKu"))) { obj in
+            print("ON RESUME")
+            
+            if let pinTrx = obj.userInfo, let info = pinTrx["pinTrx"] {
+                print(info)
+                self.activateData.pinTrx = info as! String
+            }
+            
+            print(self.activateData.cardNo)
+            print(self.activateData.cvv)
+            print(self.activateData.pinTrx)
+            
+            activateKartuKu()
         }
         .popup(isPresented: $isShowingWrongCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             modalCodeCVVWrong()
@@ -122,7 +149,7 @@ struct CardActivationView: View {
                         self.noAtmCtrl = String($0.prefix(16))
                     }
                 }
-                .background(Color.gray.opacity(0.4))
+                .background(Color.gray.opacity(0.2))
                 .cornerRadius(10)
                 .padding(.horizontal, 15)
                 .padding(.bottom, 15)
@@ -141,15 +168,15 @@ struct CardActivationView: View {
                 
                 VStack {
                     SecureField("Kode CVV", text: self.$noCvvCtrl)
-                    .keyboardType(.numberPad)
-                    .font(.subheadline)
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 15)
-                    .padding(.bottom, 10)
-                    .onReceive(noCvvCtrl.publisher.collect()) {
-                        self.noCvvCtrl = String($0.prefix(3))
-                    }
+                        .keyboardType(.numberPad)
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 15)
+                        .padding(.bottom, 10)
+                        .onReceive(noCvvCtrl.publisher.collect()) {
+                            self.noCvvCtrl = String($0.prefix(3))
+                        }
                     
                     Divider()
                         .padding(.horizontal, 10)
@@ -169,6 +196,7 @@ struct CardActivationView: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .padding(.vertical)
+        .padding(.top, 15)
     }
     
     var createNewPinCard: some View {
@@ -188,13 +216,13 @@ struct CardActivationView: View {
                 
                 HStack {
                     SecureField("PIN ATM baru", text: self.$pinCtrl)
-                    .keyboardType(.numberPad)
-                    .font(.subheadline)
-                    .foregroundColor(.black)
-                    .padding()
-                    .onReceive(pinCtrl.publisher.collect()) {
-                        self.pinCtrl = String($0.prefix(6))
-                    }
+                        .keyboardType(.numberPad)
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .padding()
+                        .onReceive(pinCtrl.publisher.collect()) {
+                            self.pinCtrl = String($0.prefix(6))
+                        }
                 }
                 .background(Color(hex: "#F6F8FB"))
                 .cornerRadius(10)
@@ -215,13 +243,13 @@ struct CardActivationView: View {
                 
                 HStack {
                     SecureField("Konfirmasi PIN ATM baru", text: self.$cPinCtrl)
-                    .keyboardType(.numberPad)
-                    .font(.subheadline)
-                    .foregroundColor(.black)
-                    .padding()
-                    .onReceive(cPinCtrl.publisher.collect()) {
-                        self.cPinCtrl = String($0.prefix(6))
-                    }
+                        .keyboardType(.numberPad)
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .padding()
+                        .onReceive(cPinCtrl.publisher.collect()) {
+                            self.cPinCtrl = String($0.prefix(6))
+                        }
                 }
                 .background(Color(hex: "#F6F8FB"))
                 .cornerRadius(10)
@@ -364,10 +392,27 @@ struct CardActivationView: View {
         .background(Color.white)
         .cornerRadius(20)
     }
-}
-
-struct CardActivationView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardActivationView(card: myCardData[0])
+    
+    func activateKartuKu() {
+        self.kartKuVM.activateKartuKu(data: activateData) { success in
+            if success {
+                print("SUCCESS")
+                self.isShowingSuccess = true
+            }
+            
+            if !success {
+                print("!SUCCESS")
+                
+                if (self.kartKuVM.code == "400") {
+                    self.isShowingWrongCvv = true
+                }
+            }
+        }
     }
 }
+
+//struct CardActivationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardActivationView(card: myCardData[0])
+//    }
+//}

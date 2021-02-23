@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailKartuAktifView: View {
     
-    var card: MyCard
+    var card: KartuKuDesignViewModel
     
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
@@ -106,51 +106,51 @@ struct DetailKartuAktifView: View {
                     }
                 })
             
-            NavigationLink(
-                destination: CardBlockView(card: card),
-                label: {
-                    HStack{
-                        Image("ic_list")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                        VStack(alignment: .leading){
-                            Text("Blokir Kartu")
-                                .font(.custom("Montserrat-SemiBold", size: 15))
-                                .fixedSize(horizontal: false, vertical: true)
-                                .foregroundColor(Color(hex: "#232175"))
-                            
-                            
-                            Text("Blokir kartu sementara")
-                                .font(.custom("Montserrat-Light", size: 12))
-                                .fixedSize(horizontal: false, vertical: true)
-                                .foregroundColor(Color(hex: "#232175"))
-                        }
-                        Spacer()
-                    }
-                })
+//            NavigationLink(
+//                destination: CardBlockView(card: card),
+//                label: {
+//                    HStack{
+//                        Image("ic_list")
+//                            .resizable()
+//                            .frame(width: 25, height: 25)
+//                        VStack(alignment: .leading){
+//                            Text("Blokir Kartu")
+//                                .font(.custom("Montserrat-SemiBold", size: 15))
+//                                .fixedSize(horizontal: false, vertical: true)
+//                                .foregroundColor(Color(hex: "#232175"))
+//
+//
+//                            Text("Blokir kartu sementara")
+//                                .font(.custom("Montserrat-Light", size: 12))
+//                                .fixedSize(horizontal: false, vertical: true)
+//                                .foregroundColor(Color(hex: "#232175"))
+//                        }
+//                        Spacer()
+//                    }
+//                })
             
-            NavigationLink(
-                destination: CardDamageView(card: card),
-                label: {
-                    HStack{
-                        Image("ic_list")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                        VStack(alignment: .leading){
-                            Text("Kartu Rusak")
-                                .font(.custom("Montserrat-SemiBold", size: 15))
-                                .fixedSize(horizontal: false, vertical: true)
-                                .foregroundColor(Color(hex: "#232175"))
-                            
-                            
-                            Text("Laporkan kerusakan kartu")
-                                .font(.custom("Montserrat-Light", size: 12))
-                                .fixedSize(horizontal: false, vertical: true)
-                                .foregroundColor(Color(hex: "#232175"))
-                        }
-                        Spacer()
-                    }
-                })
+//            NavigationLink(
+//                destination: CardDamageView(card: card),
+//                label: {
+//                    HStack{
+//                        Image("ic_list")
+//                            .resizable()
+//                            .frame(width: 25, height: 25)
+//                        VStack(alignment: .leading){
+//                            Text("Kartu Rusak")
+//                                .font(.custom("Montserrat-SemiBold", size: 15))
+//                                .fixedSize(horizontal: false, vertical: true)
+//                                .foregroundColor(Color(hex: "#232175"))
+//                            
+//                            
+//                            Text("Laporkan kerusakan kartu")
+//                                .font(.custom("Montserrat-Light", size: 12))
+//                                .fixedSize(horizontal: false, vertical: true)
+//                                .foregroundColor(Color(hex: "#232175"))
+//                        }
+//                        Spacer()
+//                    }
+//                })
             
         }
         .padding(.top, 25)
@@ -160,9 +160,9 @@ struct DetailKartuAktifView: View {
     }
 }
 
-struct DetailKartuAktifView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailKartuAktifView(card: myCardData[0])
-            .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width-60, height: 400))
-    }
-}
+//struct DetailKartuAktifView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailKartuAktifView(card: myCardData[0])
+//            .previewLayout(PreviewLayout.fixed(width: UIScreen.main.bounds.width-60, height: 400))
+//    }
+//}

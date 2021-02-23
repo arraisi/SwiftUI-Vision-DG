@@ -44,7 +44,7 @@ struct CardView: View {
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Bold", size: 20))
                         
-                        Text("10000".thousandSeparator())
+                        Text("0".thousandSeparator())
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Bold", size: 30))
                         Spacer()
@@ -62,7 +62,7 @@ struct CardView: View {
                     
                     HStack{
                         Spacer()
-                        Text("Tidak Aktif")
+                        Text(self.card.status == "" ? "Tidak Aktif" : self.card.status)
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 10))
 //                        if card.status {
