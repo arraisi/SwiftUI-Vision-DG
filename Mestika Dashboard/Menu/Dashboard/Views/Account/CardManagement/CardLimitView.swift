@@ -26,97 +26,97 @@ struct CardLimitView: View {
         ZStack {
             ScrollView(.vertical, showsIndicators: false) {
                 
-                VStack {
-                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202, showContent: true)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    
-                    VStack(alignment: .leading, spacing: 30, content: {
-                        
-                        Text("Limit Kartu")
-                            .font(.custom("Montserrat-SemiBold", size: 15))
-                        
-                        // Limit per Transaksi
-                        VStack(alignment: .leading) {
-                            Text("per Transaksi (Debit Card)")
-                                .font(.custom("Montserrat-Light", size: 12))
-                            HStack(alignment:.top){
-                                Text("Rp.")
-                                    .font(.custom("Montserrat-Bold", size: 20))
-                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                                
-                                TextField("", value: $limitPerTransaksi,
-                                          formatter: NumberFormatter.decimal) { (value) in
-                                    print("onChange : \(value)")
-                                } onCommit: {
-                                    print("onCommit : \(limitPerTransaksi)")
-                                    
-                                }.keyboardType(.decimalPad)
-                                .font(.custom("Montserrat-Bold", size: 30))
-                                .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                            }
-                            Divider()
-                            HStack {
-                                Text("Maximal limit per Transaksi")
-                                    .font(.custom("Montserrat-Light", size: 10))
-                                Text("Rp. 50.000.000,-")
-                                    .font(.custom("Montserrat-SemiBold", size: 10))
-                            }
-                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                        }
-                        
-                        // Maximal limit penarikan per Hari
-                        VStack(alignment: .leading) {
-                            
-                            Text("per Transaksi (Debit Card)")
-                                .font(.custom("Montserrat-Light", size: 12))
-                            HStack(alignment:.top){
-                                Text("Rp.")
-                                    .font(.custom("Montserrat-Bold", size: 20))
-                                    .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
-                                
-                                TextField("", value: $limitPerHari,
-                                          formatter: NumberFormatter.decimal) { (value) in
-                                    
-                                    print("onChange : \(value)")
-                                } onCommit: {
-                                    print("onCommit : \(limitPerTransaksi)")
-                                    
-                                }.keyboardType(.decimalPad)
-                                .font(.custom("Montserrat-Bold", size: 30))
-                                .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
-                            }
-                            Divider()
-                            HStack {
-                                Text("Maximal limit penarikan harian")
-                                    .font(.custom("Montserrat-Light", size: 10))
-                                Text("Rp. 20.000.000,-")
-                                    .font(.custom("Montserrat-SemiBold", size: 10))
-                            }
-                            .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
-                        }
-                        
-                        NavigationLink(
-                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
-                            label: {
-                                Text("SIMPAN PERUBAHAN")
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .frame(maxWidth: .infinity, maxHeight: 50)
-                            })
-                            .frame(height: 50)
-                            .background(Color(hex: "#2334D0"))
-                            .cornerRadius(12)
-                    })
-                    .padding(20)
-                    .padding(.top, 20)
-                    .background(Color.white)
-                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    .padding(30)
-                }
-                .padding(.top, 30)
-                .padding(.bottom, self.keyboardOffset)
-                .animation(.spring())
+//                VStack {
+//                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202, showContent: true)
+//                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+//                    
+//                    VStack(alignment: .leading, spacing: 30, content: {
+//                        
+//                        Text("Limit Kartu")
+//                            .font(.custom("Montserrat-SemiBold", size: 15))
+//                        
+//                        // Limit per Transaksi
+//                        VStack(alignment: .leading) {
+//                            Text("per Transaksi (Debit Card)")
+//                                .font(.custom("Montserrat-Light", size: 12))
+//                            HStack(alignment:.top){
+//                                Text("Rp.")
+//                                    .font(.custom("Montserrat-Bold", size: 20))
+//                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+//                                
+//                                TextField("", value: $limitPerTransaksi,
+//                                          formatter: NumberFormatter.decimal) { (value) in
+//                                    print("onChange : \(value)")
+//                                } onCommit: {
+//                                    print("onCommit : \(limitPerTransaksi)")
+//                                    
+//                                }.keyboardType(.decimalPad)
+//                                .font(.custom("Montserrat-Bold", size: 30))
+//                                .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+//                            }
+//                            Divider()
+//                            HStack {
+//                                Text("Maximal limit per Transaksi")
+//                                    .font(.custom("Montserrat-Light", size: 10))
+//                                Text("Rp. 50.000.000,-")
+//                                    .font(.custom("Montserrat-SemiBold", size: 10))
+//                            }
+//                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+//                        }
+//                        
+//                        // Maximal limit penarikan per Hari
+//                        VStack(alignment: .leading) {
+//                            
+//                            Text("per Transaksi (Debit Card)")
+//                                .font(.custom("Montserrat-Light", size: 12))
+//                            HStack(alignment:.top){
+//                                Text("Rp.")
+//                                    .font(.custom("Montserrat-Bold", size: 20))
+//                                    .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+//                                
+//                                TextField("", value: $limitPerHari,
+//                                          formatter: NumberFormatter.decimal) { (value) in
+//                                    
+//                                    print("onChange : \(value)")
+//                                } onCommit: {
+//                                    print("onCommit : \(limitPerTransaksi)")
+//                                    
+//                                }.keyboardType(.decimalPad)
+//                                .font(.custom("Montserrat-Bold", size: 30))
+//                                .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+//                            }
+//                            Divider()
+//                            HStack {
+//                                Text("Maximal limit penarikan harian")
+//                                    .font(.custom("Montserrat-Light", size: 10))
+//                                Text("Rp. 20.000.000,-")
+//                                    .font(.custom("Montserrat-SemiBold", size: 10))
+//                            }
+//                            .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+//                        }
+//                        
+//                        NavigationLink(
+//                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
+//                            label: {
+//                                Text("SIMPAN PERUBAHAN")
+//                                    .foregroundColor(.white)
+//                                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                                    .frame(maxWidth: .infinity, maxHeight: 50)
+//                            })
+//                            .frame(height: 50)
+//                            .background(Color(hex: "#2334D0"))
+//                            .cornerRadius(12)
+//                    })
+//                    .padding(20)
+//                    .padding(.top, 20)
+//                    .background(Color.white)
+//                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+//                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+//                    .padding(30)
+//                }
+//                .padding(.top, 30)
+//                .padding(.bottom, self.keyboardOffset)
+//                .animation(.spring())
                 
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))

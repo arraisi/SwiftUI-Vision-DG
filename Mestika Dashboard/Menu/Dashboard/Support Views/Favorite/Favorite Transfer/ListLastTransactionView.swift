@@ -35,10 +35,10 @@ struct ListLastTransactionView: View {
                     HStack {
                         ZStack {
                             Circle()
-                                .fill(Color.green)
+                                .fill(data.sign == "D" ? Color.green : Color.red)
                                 .frame(width: 30, height: 30)
                             
-                            Text("B")
+                            Text("\(data.sign)")
                                 .foregroundColor(.white)
                                 .fontWeight(.heavy)
                         }
@@ -54,13 +54,25 @@ struct ListLastTransactionView: View {
                         Spacer()
                         
                         HStack {
-                            Text("- Rp.")
-                                .font(.subheadline)
-                                .foregroundColor(.green)
                             
-                            Text("\(data.amount.thousandSeparator())")
-                                .font(.subheadline)
-                                .foregroundColor(.green)
+                            if (data.sign == "D") {
+                                Text("+ Rp.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.green)
+                                
+                                Text("\(data.amount.thousandSeparator())")
+                                    .font(.subheadline)
+                                    .foregroundColor(.green)
+                            } else {
+                                Text("- Rp.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.red)
+                                
+                                Text("\(data.amount.thousandSeparator())")
+                                    .font(.subheadline)
+                                    .foregroundColor(.red)
+                            }
+                            
                         }
                         
                         

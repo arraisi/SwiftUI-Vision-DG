@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
-    var card: MyCard
+    var card: KartuKuDesignViewModel
     
     var cardWidth: CGFloat
     var cardHeight: CGFloat
@@ -17,7 +17,7 @@ struct CardView: View {
     
     var body: some View {
         ZStack {
-            Image(card.imageName)
+            Image("card_bg")
                 .resizable()
                 .frame(width: cardWidth, height: cardHeight)
             
@@ -33,7 +33,7 @@ struct CardView: View {
                     .padding(.vertical, 10)
                     
                     HStack{
-                        Text(card.rekeningName)
+                        Text(card.nameOnCard)
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Regular", size: 12))
                         Spacer()
@@ -44,7 +44,7 @@ struct CardView: View {
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Bold", size: 20))
                         
-                        Text(card.saldo)
+                        Text("10000".thousandSeparator())
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Bold", size: 30))
                         Spacer()
@@ -54,7 +54,7 @@ struct CardView: View {
                         Text("****")
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Regular", size: 12))
-                        Text(card.rekeningNumber)
+                        Text(card.accountNumber)
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Regular", size: 12))
                         Spacer()
@@ -62,21 +62,24 @@ struct CardView: View {
                     
                     HStack{
                         Spacer()
-                        if card.blocked {
-                            Text("Blokir Sementara")
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 10))
-                        }
-                        else if card.activeStatus {
-                            Text("Aktif")
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 10))
-                        }
-                        else {
-                            Text("Tidak Aktif")
-                                .foregroundColor(.white)
-                                .font(.custom("Montserrat-SemiBold", size: 10))
-                        }
+                        Text("Tidak Aktif")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 10))
+//                        if card.status {
+//                            Text("Blokir Sementara")
+//                                .foregroundColor(.white)
+//                                .font(.custom("Montserrat-SemiBold", size: 10))
+//                        }
+//                        else if card.activeStatus {
+//                            Text("Aktif")
+//                                .foregroundColor(.white)
+//                                .font(.custom("Montserrat-SemiBold", size: 10))
+//                        }
+//                        else {
+//                            Text("Tidak Aktif")
+//                                .foregroundColor(.white)
+//                                .font(.custom("Montserrat-SemiBold", size: 10))
+//                        }
                     }
                     .padding(.top)
                     
@@ -90,8 +93,8 @@ struct CardView: View {
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(card: myCardData[1], cardWidth: 315, cardHeight: 197, showContent: true)
-    }
-}
+//struct CardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardView(card: KartuKuResponse[0], cardWidth: 315, cardHeight: 197, showContent: true)
+//    }
+//}

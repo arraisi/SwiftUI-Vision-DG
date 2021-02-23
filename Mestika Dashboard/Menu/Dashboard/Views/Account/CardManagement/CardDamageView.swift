@@ -20,74 +20,74 @@ struct CardDamageView: View {
         ZStack {
             ScrollView(.vertical, showsIndicators: false) {
                 
-                VStack {
-                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202, showContent: true)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    
-                    
-                    VStack(alignment: .leading, spacing: 25, content: {
-                        
-                        Text("Laporan / Aduan Kerusakan")
-                            .font(.custom("Montserrat-SemiBold", size: 15))
-                        
-                        VStack(alignment: .leading) {
-                            Text("Akan Diberikan Kartu Baru")
-                                .font(.custom("Montserrat-Regular", size: 12))
-                            
-                            Button(action: {
-                                self.marked.toggle()
-                            }, label: {
-                                HStack(alignment: .center, spacing: 10) {
-                                    
-                                    Image(systemName: self.marked ? "checkmark.square" : "square")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 18, height: 18)
-                                    
-                                    HStack {
-                                        Text("Biaya pengganti sebesar")
-                                            .font(.custom("Montserrat-Regular", size: 10))
-                                        Text("Rp. 20.000,-")
-                                            .font(.custom("Montserrat-Bold", size: 10))
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                }
-                            })
-                            .foregroundColor(.black)
-                        }
-                        
-                        NavigationLink(
-                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardDamageView(card: card, showingModal: true))),
-                            isActive: $showConfirmationPIN,
-                            label: {})
-                        
-                        Button(
-                            action: {
-                                if marked {
-                                    self.showConfirmationPIN.toggle()
-                                }
-                            },
-                            label: {
-                                Text("LAPORKAN KERUSAKAN")
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .frame(maxWidth: .infinity, maxHeight: 50)
-                            })
-                            .frame(height: 50)
-                            .background(Color(hex: "#2334D0"))
-                            .cornerRadius(12)
-                        
-                    })
-                    .padding(20)
-                    .padding(.top, 20)
-                    .background(Color.white)
-                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                    .padding(30)
-                }
-                .padding(.top, 30)
+//                VStack {
+//                    CardView(card: card, cardWidth: UIScreen.main.bounds.width - 60, cardHeight: 202, showContent: true)
+//                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+//                    
+//                    
+//                    VStack(alignment: .leading, spacing: 25, content: {
+//                        
+//                        Text("Laporan / Aduan Kerusakan")
+//                            .font(.custom("Montserrat-SemiBold", size: 15))
+//                        
+//                        VStack(alignment: .leading) {
+//                            Text("Akan Diberikan Kartu Baru")
+//                                .font(.custom("Montserrat-Regular", size: 12))
+//                            
+//                            Button(action: {
+//                                self.marked.toggle()
+//                            }, label: {
+//                                HStack(alignment: .center, spacing: 10) {
+//                                    
+//                                    Image(systemName: self.marked ? "checkmark.square" : "square")
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .frame(width: 18, height: 18)
+//                                    
+//                                    HStack {
+//                                        Text("Biaya pengganti sebesar")
+//                                            .font(.custom("Montserrat-Regular", size: 10))
+//                                        Text("Rp. 20.000,-")
+//                                            .font(.custom("Montserrat-Bold", size: 10))
+//                                    }
+//                                    
+//                                    Spacer()
+//                                    
+//                                }
+//                            })
+//                            .foregroundColor(.black)
+//                        }
+//                        
+//                        NavigationLink(
+//                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardDamageView(card: card, showingModal: true))),
+//                            isActive: $showConfirmationPIN,
+//                            label: {})
+//                        
+//                        Button(
+//                            action: {
+//                                if marked {
+//                                    self.showConfirmationPIN.toggle()
+//                                }
+//                            },
+//                            label: {
+//                                Text("LAPORKAN KERUSAKAN")
+//                                    .foregroundColor(.white)
+//                                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                                    .frame(maxWidth: .infinity, maxHeight: 50)
+//                            })
+//                            .frame(height: 50)
+//                            .background(Color(hex: "#2334D0"))
+//                            .cornerRadius(12)
+//                        
+//                    })
+//                    .padding(20)
+//                    .padding(.top, 20)
+//                    .background(Color.white)
+//                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
+//                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
+//                    .padding(30)
+//                }
+//                .padding(.top, 30)
                 
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
