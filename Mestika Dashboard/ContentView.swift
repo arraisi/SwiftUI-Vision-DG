@@ -7,7 +7,6 @@
 
 import SwiftUI
 import JGProgressHUD_SwiftUI
-import NavigationStack
 
 struct ContentView: View {
     

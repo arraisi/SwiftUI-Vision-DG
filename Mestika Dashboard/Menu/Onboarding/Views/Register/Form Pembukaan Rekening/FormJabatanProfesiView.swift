@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct FormJabatanProfesiView: View {
     /* Registrasi Environtment Object */

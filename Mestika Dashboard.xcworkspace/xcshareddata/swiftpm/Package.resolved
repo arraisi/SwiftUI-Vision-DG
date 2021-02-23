@@ -83,15 +83,6 @@
         }
       },
       {
-        "package": "Mantis",
-        "repositoryURL": "https://github.com/guoyingtao/Mantis.git",
-        "state": {
-          "branch": null,
-          "revision": "693d958630122e81b097c719b515de7e9e68402c",
-          "version": "1.4.7"
-        }
-      },
-      {
         "package": "MultipartForm",
         "repositoryURL": "https://github.com/davbeck/MultipartForm",
         "state": {
@@ -146,15 +137,6 @@
         }
       },
       {
-        "package": "SlidingTabView",
-        "repositoryURL": "https://github.com/QuynhNguyen/SlidingTabView.git",
-        "state": {
-          "branch": null,
-          "revision": "b0f0662977418824d50546b2850a523dcd793bb0",
-          "version": "1.0.2"
-        }
-      },
-      {
         "package": "Indicators",
         "repositoryURL": "https://github.com/Connapptivity/SwiftUI-Indicators",
         "state": {
@@ -170,15 +152,6 @@
           "branch": null,
           "revision": "36ecf80429d00a4cd1e81fbfe4655b1d99ebd651",
           "version": "0.1.2"
-        }
-      },
-      {
-        "package": "NavigationStack",
-        "repositoryURL": "https://github.com/matteopuc/swiftui-navigation-stack",
-        "state": {
-          "branch": null,
-          "revision": "7b1dd956e4eed27780311520b31f6831ec87a820",
-          "version": "0.1.0"
         }
       },
       {

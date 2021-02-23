@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct AppBarLogo: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>

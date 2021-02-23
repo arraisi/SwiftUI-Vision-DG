@@ -7,7 +7,6 @@
 
 import LocalAuthentication
 import SwiftUI
-import NavigationStack
 
 struct LoginScreen: View {
     
