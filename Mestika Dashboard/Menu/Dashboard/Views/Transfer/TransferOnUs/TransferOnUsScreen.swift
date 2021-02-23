@@ -10,32 +10,37 @@ import BottomSheet
 
 struct TransferOnUsScreen: View {
     
+    /* Function GET USER Status */
+    @ObservedObject var profileVM = ProfileViewModel()
+    @StateObject var transferVM = TransferViewModel()
+    
     @State var transferData = TransferOnUsModel()
     @State var transactionFrequency = "Pilih Frekuensi Transaksi"
     @State var transactionVoucher = "Pilih Voucher"
+    @State var destinationName = ""
     @State var destinationNumber = ""
     @State var amount = ""
     @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     
+    /*
+     Dialog's Variables
+     */
     @State private var showDialogConfirmation = false
     @State private var showDialogSelectAccount = false
     @State private var showDialogMaxReached = false
     @State private var showDialogMinReached = false
     @State private var showDialogMinTransaction: Bool = false
     
+    /*
+     View Variables
+     */
     @State private var isShowName: Bool = false
-    @State private var showName: String = ""
-    
     @State private var disabledButton = true
-    
     @State private var routeConfirmation: Bool = false
     
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
     private var minLimit: Int = 0
-    
-    /* Function GET USER Status */
-    @ObservedObject var profileVM = ProfileViewModel()
     
     @State var balance: String = ""
     @State var productName: String = "-"
@@ -61,10 +66,10 @@ struct TransferOnUsScreen: View {
     }
     
     var dateClosedRange: ClosedRange<Date> {
-        let min = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let min = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
         let max = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
         return min...max
-      }
+    }
     
     func setDateString() {
         let formatter = DateFormatter()
@@ -89,7 +94,7 @@ struct TransferOnUsScreen: View {
                     .edgesIgnoringSafeArea(.all)
             }
             VStack {
-                ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+                ScrollView(.vertical, showsIndicators: false, content: {
                     VStack {
                         noRekeningCard
                         nominalCard
@@ -110,13 +115,14 @@ struct TransferOnUsScreen: View {
                         
                         VStack {
                             Button(action: {
-                                self.transferData.destinationName = self.showName
+                                self.transferData.destinationName = self.destinationName
                                 
                                 if (transactionVoucher == "Pilih Voucher" || transactionVoucher == "Voucher Tidak Tersedia") {
                                     self.transferData.transactionVoucher = ""
                                 }
                                 
                                 UIApplication.shared.endEditing()
+                                
                                 let amount = Int(self.transferData.amount) ?? 0
                                 let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                                 
@@ -137,7 +143,7 @@ struct TransferOnUsScreen: View {
                             }, label: {
                                 Text("KONFIRMASI TRANSFER")
                                     .foregroundColor(.white)
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .fontWeight(.bold)
                                     .font(.system(size: 13))
                                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                             })
@@ -210,7 +216,9 @@ struct TransferOnUsScreen: View {
                 .onReceive(destinationNumber.publisher.collect()) {
                     self.destinationNumber = String($0.prefix(11))
                     self.transferData.destinationNumber = destinationNumber
-                    validateForm()
+                    if self.destinationNumber.count == 11 {
+                        validateForm()
+                    }
                 }
                 .keyboardType(.numberPad)
                 .frame(height: 10)
@@ -222,7 +230,7 @@ struct TransferOnUsScreen: View {
                 
                 if isShowName {
                     HStack {
-                        Text(self.showName)
+                        Text(self.transferVM.destinationName)
                             .font(.subheadline)
                             .fontWeight(.light)
                         
@@ -497,7 +505,7 @@ struct TransferOnUsScreen: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("\(self.transferData.destinationName)")
+                    Text("\(self.destinationName)")
                         .font(.subheadline)
                     
                     HStack {
@@ -749,11 +757,7 @@ struct TransferOnUsScreen: View {
     }
     
     func validateForm() {
-        if (self.destinationNumber.count == 11) {
-            self.isShowName = true
-        }
-        
-        if (self.destinationNumber.count == 11 && self.amount != "" && self.showName != "Akun Tidak Ditemukan") {
+        if (self.destinationNumber.count == 11 && self.amount != "" && self.transferVM.destinationName != "Akun Tidak Ditemukan") {
             disabledButton = false
         } else {
             disabledButton = true
@@ -768,18 +772,23 @@ struct TransferOnUsScreen: View {
         return formatter
     }
     
-    @ObservedObject var transferVM = TransferViewModel()
+    // MARK: GET DESTINATION NAME
     func inquiryTransfer() {
-        self.transferVM.transferOnUsInquiry(transferData: transferData) { success in
-            DispatchQueue.main.async {
-                if success {
-                    print("SUCCESS")
-                    self.showName = self.transferVM.destinationName
-                }
+        if transferData.destinationNumber.count == 11  {
+            self.isShowName = true
+            
+            self.transferVM.transferOnUsInquiry(transferData: transferData) { success in
                 
-                if !success {
-                    print("NOT SUCCESS")
-                    self.showName = "Akun Tidak Ditemukan"
+                DispatchQueue.main.async {
+                    if success {
+                        print("\nSUCCESS DESTINATION NAME : \(self.transferVM.destinationName)\n")
+                        self.destinationName = self.transferVM.destinationName
+                    }
+                    
+                    if !success {
+                        print("NOT SUCCESS")
+                        self.transferVM.destinationName = "Akun Tidak Ditemukan"
+                    }
                 }
             }
         }
@@ -791,6 +800,9 @@ struct TransferOnUsScreen: View {
                 print("Name \(self.profileVM.name)")
                 print(self.profileVM.balance)
                 self.transferData.username = self.profileVM.name
+                self.transferData.cardNo = selectedAccount.noRekening
+                self.transferData.sourceNumber = selectedAccount.sourceNumber
+                self.transferData.sourceAccountName = selectedAccount.productName
                 
                 self.listBankAccount.removeAll()
                 
@@ -798,21 +810,16 @@ struct TransferOnUsScreen: View {
                 
                 self.selectedAccount = self.listBankAccount[0]
                 
-                self.transferData.cardNo = selectedAccount.noRekening
-                self.transferData.sourceNumber = selectedAccount.sourceNumber
-                self.transferData.sourceAccountName = selectedAccount.productName
-                
                 
             }
         }
     }
     
-    @ObservedObject var limitVM = TransferViewModel()
     func getLimit(code: String) {
-        self.limitVM.getLimitTransaction(classCode: "70") { success in
+        self.transferVM.getLimitTransaction(classCode: "70") { success in
             if success {
-                self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
-                self.limitTrx = self.limitVM.limitIbft
+                self.maxLimit = Int(self.transferVM.limitIbft) ?? 0
+                self.limitTrx = self.transferVM.limitIbft
             }
         }
     }

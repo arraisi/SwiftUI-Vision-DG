@@ -55,7 +55,7 @@ struct NumPadView: View {
             }
             else{
                 
-                if password.count != 6{
+                if password.count != 6 {
                     
                     password.append(value)
                     

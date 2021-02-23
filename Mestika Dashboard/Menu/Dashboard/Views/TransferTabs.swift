@@ -9,13 +9,11 @@ import SwiftUI
 
 struct TransferTabs: View {
     
-    @EnvironmentObject var appState: AppState
-    
-    @State private var isRouteTransferOnUs: Bool = false
-    @State private var isRouteTransferOffUs: Bool = false
-    
     @Binding var cardNo: String
     @Binding var sourceNumber: String
+    
+    @Binding var transferOnUsActive: Bool
+    @Binding var transferOffUsActive: Bool
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
@@ -33,14 +31,6 @@ struct TransferTabs: View {
             }
         })
         .navigationBarHidden(true)
-        .onReceive(self.appState.$moveToTransfer) { moveToTransfer in
-            if moveToTransfer {
-                print("Move to Transfer: \(moveToTransfer)")
-                self.isRouteTransferOnUs = false
-                self.isRouteTransferOffUs = false
-                self.appState.moveToTransfer = false
-            }
-        }
     }
     
     // MARK: -USERNAME INFO VIEW
@@ -57,7 +47,7 @@ struct TransferTabs: View {
             }
             Spacer()
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {}, label: {
                 Image("ic_search")
             })
         }
@@ -70,7 +60,7 @@ struct TransferTabs: View {
             // Link Transfer ONUS
             NavigationLink(
                 destination: TransferOnUsScreen(),
-                isActive: self.$isRouteTransferOnUs) {
+                isActive: self.$transferOnUsActive) {
                 EmptyView()
             }
             .isDetailLink(false)
@@ -78,14 +68,14 @@ struct TransferTabs: View {
             // Link Transfer OFFUS
             NavigationLink(
                 destination: TransferRtgsScreen(),
-                isActive: self.$isRouteTransferOffUs,
+                isActive: self.$transferOffUsActive,
                 label: {EmptyView()}
             )
             .isDetailLink(false)
             
             Button(action: {
                 print("ONUS")
-                self.isRouteTransferOnUs = true
+                self.transferOnUsActive = true
             }, label: {
                 Text("SESAMA BANK MESTIKA")
                     .foregroundColor(.white)
@@ -104,7 +94,7 @@ struct TransferTabs: View {
             
             Button(action: {
                 print("OFFUS")
-                self.isRouteTransferOffUs = true
+                self.transferOffUsActive = true
             }, label: {
                 Text("TRANSFER KE BANK LAIN")
                     .foregroundColor(Color(hex: "#2334D0"))
@@ -125,6 +115,6 @@ struct TransferTabs: View {
 
 struct TransferTabs_Previews: PreviewProvider {
     static var previews: some View {
-        TransferTabs(cardNo: .constant(""), sourceNumber: .constant(""))
+        TransferTabs(cardNo: .constant(""), sourceNumber: .constant(""), transferOnUsActive: .constant(false), transferOffUsActive: .constant(false))
     }
 }

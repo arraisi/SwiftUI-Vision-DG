@@ -60,9 +60,9 @@ struct FormInputAtmForgotPasswordScreen: View {
                     HStack {
                         TextField("Masukkan nomor ATM Anda", text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
-//                            .onReceive(atmNumberCtrl.publisher.collect()) {
-//                                self.pinAtmCtrl = String($0.prefix(11))
-//                            }
+                            .onReceive(atmNumberCtrl.publisher.collect()) {
+                                self.atmNumberCtrl = String($0.prefix(16))
+                            }
                     }
                     .frame(height: 25)
                     .padding()
@@ -129,13 +129,13 @@ struct FormInputAtmForgotPasswordScreen: View {
                         },
                         label: {
                             Text("KONFIRMASI DATA")
-                                .foregroundColor(disableForm ? Color.black : Color(hex: "#232175"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(disableForm ? Color.white : Color(hex: "#232175"))
+                                .fontWeight(.bold)
                                 .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                         }
                     )
-                    .background(disableForm ? Color.gray : Color.white)
+                    .background(disableForm ? Color(.lightGray) : Color.white)
                     .cornerRadius(12)
                     .padding(.leading, 20)
                     .padding(.trailing, 10)
@@ -145,7 +145,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                         destination: LoginScreen(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
                         isActive: self.$isNextRoute) {}
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 50)
             }
             
             if self.showingModalError {
@@ -180,7 +180,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                 .padding(.top, 20)
             
             Text(self.errorMessage)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
@@ -191,7 +191,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                 Text("Kembali")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
             }
             .background(Color(hex: "#2334D0"))
