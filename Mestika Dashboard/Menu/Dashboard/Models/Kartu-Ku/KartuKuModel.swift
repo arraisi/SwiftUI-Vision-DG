@@ -11,7 +11,7 @@ struct KartuKuDesignViewModel {
     var cardFlag, kodepos, provinsi, kabupatenKota: String
     var kecamatan, kelurahan, rw, rt: String
     var postalAddress, accountNumber, nameOnCard, cardNo: String
-    var cardDesign: String
+    var cardDesign: URL?
     var classCode, nik, id, imageNameAlias: String
     var mainCard, status: String
     var isShow: Bool = false

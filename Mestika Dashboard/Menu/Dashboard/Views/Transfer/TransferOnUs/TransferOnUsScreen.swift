@@ -38,9 +38,9 @@ struct TransferOnUsScreen: View {
     @State private var disabledButton = true
     @State private var routeConfirmation: Bool = false
     
-    @State private var maxLimit: Int = 10000000
+    @State private var maxLimit: Int = 0
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 0
+    private var minLimit: Int = 10000
     
     @State var balance: String = ""
     @State var productName: String = "-"
@@ -128,7 +128,7 @@ struct TransferOnUsScreen: View {
                                 
                                 if (amount < self.minLimit) {
                                     self.showDialogMinTransaction = true
-                                } else if (amount <= self.maxLimit && amount <= myCredit) {
+                                } else if (amount <= myCredit) {
                                     self.transferData.notes = self.notesCtrl
                                     self.transferData.transactionFrequency = transactionFrequency
                                     self.transferData.transactionVoucher = ""
@@ -298,7 +298,7 @@ struct TransferOnUsScreen: View {
                         .foregroundColor(.red)
                         .font(.caption2)
                         .fontWeight(.bold)
-                    Text("\(limitTrx.thousandSeparator())")
+                    Text("\(self.selectedAccount.saldo.thousandSeparator())")
                         .foregroundColor(.red)
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -664,7 +664,7 @@ struct TransferOnUsScreen: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Limit transaksi Rp.\(limitTrx.thousandSeparator()),- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
+            Text(NSLocalizedString("Limit transaksi Rp.\(self.selectedAccount.saldo.thousandSeparator()),- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)

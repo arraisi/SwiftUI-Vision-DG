@@ -31,59 +31,62 @@ struct ListLastTransactionView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 20)
                 
-                ForEach(self.favoritVM.lastTransaction, id: \.trace) { data in
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .fill(data.sign == "D" ? Color.red : Color.green)
-                                .frame(width: 30, height: 30)
-                            
-                            Text("\(data.sign)")
-                                .foregroundColor(.white)
-                                .fontWeight(.heavy)
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            Text("\(data.date.subStringRange(from: 6, to: 8)) - \(data.date.subStringRange(from: 4, to: 6)) - \(data.date.subStringRange(from: 0, to: 4))")
-                                .font(.caption2)
-                            
-                            Text("\(data.historyListDescription)")
-                                .font(.subheadline)
-                        }
-                        
-                        Spacer()
-                        
+                ScrollView(showsIndicators: true) {
+                    ForEach(self.favoritVM.lastTransaction, id: \.trace) { data in
                         HStack {
-                            
-                            if (data.sign == "D") {
-                                Text("+ Rp.")
-                                    .font(.subheadline)
-                                    .foregroundColor(.red)
+                            ZStack {
+                                Circle()
+                                    .fill(data.sign == "D" ? Color.red : Color.green)
+                                    .frame(width: 30, height: 30)
                                 
-                                Text("\(data.amount.thousandSeparator())")
-                                    .font(.subheadline)
-                                    .foregroundColor(.red)
-                            } else {
-                                Text("- Rp.")
-                                    .font(.subheadline)
-                                    .foregroundColor(.green)
-                                
-                                Text("\(data.amount.thousandSeparator())")
-                                    .font(.subheadline)
-                                    .foregroundColor(.green)
+                                Text("\(data.sign)")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.heavy)
                             }
                             
+                            VStack(alignment: .leading) {
+                                Text("\(data.date.subStringRange(from: 6, to: 8)) - \(data.date.subStringRange(from: 4, to: 6)) - \(data.date.subStringRange(from: 0, to: 4))")
+                                    .font(.caption2)
+                                
+                                Text("\(data.historyListDescription)")
+                                    .font(.subheadline)
+                            }
+                            
+                            Spacer()
+                            
+                            HStack {
+                                
+                                if (data.sign == "D") {
+                                    Text("- Rp.")
+                                        .font(.subheadline)
+                                        .foregroundColor(.red)
+                                    
+                                    Text("\(data.amount.thousandSeparator())")
+                                        .font(.subheadline)
+                                        .foregroundColor(.red)
+                                } else {
+                                    Text("+ Rp.")
+                                        .font(.subheadline)
+                                        .foregroundColor(.green)
+                                    
+                                    Text("\(data.amount.thousandSeparator())")
+                                        .font(.subheadline)
+                                        .foregroundColor(.green)
+                                }
+                                
+                            }
+                            
+                            
                         }
-                        
-                        
+                        .padding(.vertical, 5)
+                        .padding()
+                        .frame(width: UIScreen.main.bounds.width - 60)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
                     }
-                    .padding(.vertical, 5)
                 }
-                .padding()
-                .frame(width: UIScreen.main.bounds.width - 60)
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                .frame(height: 400)
             }
             .padding(.bottom)
             .frame(width: UIScreen.main.bounds.width - 30)

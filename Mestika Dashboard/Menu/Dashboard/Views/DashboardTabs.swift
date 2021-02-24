@@ -16,111 +16,120 @@ struct DashboardTabs: View {
     @State var username: String = ""
     @State var balance: String = ""
     @State var productName: String = "-"
+    @State var accountNumber: String = "-"
     
     @Binding var cardNo: String
     @State var cardName: String = "-"
     @Binding var sourceNumber: String
     
     @State var isHiddenBalance: Bool = false
+    @State var isLoading: Bool = true
     
     var body: some View {
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
-            
-            GeometryReader { geometry in
-                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
-                    .frame(height: 0)
-            }
-            
-            VStack {
-                usernameInfo
-                menuGrid
+        LoadingView(isShowing: self.$isLoading, content: {
+            ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
                 
-                GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
-                    .padding(.top, 10)
-                
-                VStack {
-                    HStack {
-                        Text("Kartu-Ku")
-                            .font(.title3)
-                            .fontWeight(.ultraLight)
-                        
-                        Spacer()
-                        
-                        NavigationLink(destination: CardManagementScreen(), label: {
-                            Text("See All")
-                                .bold()
-                                .foregroundColor(Color(hex: "#2334D0"))
-                        })
-                    }
-                    .padding([.leading, .trailing], 15)
-                    
-                    ScrollView(.horizontal, showsIndicators: false, content: {
-                        HStack{
-                            Spacer().frame(width: 20)
-//                            VStack {
-//                                NavigationLink(destination: CardManagementScreen(), label: {
-//                                    Image("ic_btn_add_rekening")
-//                                })
-//                                
-//                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-//                                    Image("ic_rekening_list")
-//                                })
-//                            }
-                            
-                            ZStack {
-        //                        Image("rekening-card-1")
-                                Image("card_bg")
-                                    .padding(.trailing, 10)
-                                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                                
-                                VStack(alignment: .leading) {
-                                    
-                                    Image("logo_m_mestika")
-                                        .resizable()
-                                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                                        .frame(width: 30, height: 30)
-                                    
-                                    Text(self.cardName)
-                                        .font(.subheadline)
-                                        .foregroundColor(Color.white)
-                                    
-                                    HStack {
-                                        Text("Rp")
-                                            .font(.headline)
-                                            .foregroundColor(Color.white)
-                                        
-                                        Text(self.balance.thousandSeparator())
-                                            .bold()
-                                            .font(.title)
-                                            .foregroundColor(Color.white)
-                                    }
-                                    
-                                    Text(self.cardNo)
-                                        .font(.caption2)
-                                        .foregroundColor(Color.white)
-                                        .padding(.top, 15)
-                                }
-                                .padding(.trailing, 70)
-                            }
-                        }
-                    })
+                GeometryReader { geometry in
+                    Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                        .frame(height: 0)
                 }
                 
-//                ListEwalletView()
-//                    .padding(.top, 30)
-//
-//                ListContactTransferOnUs()
-//                    .padding(.top, 30)
-//
-//                ListPromoForYouView()
-//                    .padding(.top, 30)
-//
-//                ListPurchasePaymentView()
-//                    .padding(.top, 30)
-//
-//                VoucherView()
-//                    .padding(.top, 50)
-            }
+                VStack {
+                    usernameInfo
+                    menuGrid
+                    
+                    GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
+                        .padding(.top, 10)
+                    
+                    VStack {
+                        HStack {
+                            Text("Kartu-Ku")
+                                .font(.title3)
+                                .fontWeight(.ultraLight)
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: CardManagementScreen(), label: {
+                                Text("See All")
+                                    .bold()
+                                    .foregroundColor(Color(hex: "#2334D0"))
+                            })
+                        }
+                        .padding([.leading, .trailing], 15)
+                        
+                        ScrollView(.horizontal, showsIndicators: false, content: {
+                            HStack{
+                                Spacer().frame(width: 20)
+    //                            VStack {
+    //                                NavigationLink(destination: CardManagementScreen(), label: {
+    //                                    Image("ic_btn_add_rekening")
+    //                                })
+    //
+    //                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+    //                                    Image("ic_rekening_list")
+    //                                })
+    //                            }
+                                
+                                ZStack {
+                                    Image("card_bg")
+                                        .padding(.trailing, 10)
+                                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                                    
+                                    VStack(alignment: .leading) {
+                                        
+                                        HStack {
+                                            Spacer()
+                                            Image("logo_mestika")
+                                                .resizable()
+                                                .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                                                .frame(width: 100, height: 15)
+                                        }
+                                        .padding(.trailing, 20)
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("GOLD")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color.white)
+                                                .fontWeight(.bold)
+                                            
+                                            Text(self.accountNumber)
+                                                .font(.caption2)
+                                                .foregroundColor(Color.white)
+                                                .padding(.top, 15)
+                                            
+                                            Text(self.cardNo)
+                                                .font(.caption2)
+                                                .foregroundColor(Color.white)
+                                                .padding(.top, 10)
+                                            
+                                            Text(self.cardName)
+                                                .font(.subheadline)
+                                                .foregroundColor(Color.white)
+                                                .fontWeight(.bold)
+                                        }
+                                        .padding(.leading, 20)
+                                    }
+                                }
+                            }
+                        })
+                    }
+                    
+    //                ListEwalletView()
+    //                    .padding(.top, 30)
+    //
+    //                ListContactTransferOnUs()
+    //                    .padding(.top, 30)
+    //
+    //                ListPromoForYouView()
+    //                    .padding(.top, 30)
+    //
+    //                ListPurchasePaymentView()
+    //                    .padding(.top, 30)
+    //
+    //                VoucherView()
+    //                    .padding(.top, 50)
+                }
+            })
         })
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
@@ -216,14 +225,20 @@ struct DashboardTabs: View {
     func getProfile() {
         self.profileVM.getProfile { success in
             if success {
+                self.isLoading = false
                 print("Name \(self.profileVM.name)")
                 print(self.profileVM.balance)
                 self.username = self.profileVM.name
                 self.balance = self.profileVM.balance
                 self.productName = self.profileVM.nameOnCard
+                self.accountNumber = self.profileVM.accountNumber
                 
                 self.cardNo = self.profileVM.cardNo
                 self.cardName = self.profileVM.cardName
+            }
+            
+            if !success {
+                self.isLoading = false
             }
         }
     }

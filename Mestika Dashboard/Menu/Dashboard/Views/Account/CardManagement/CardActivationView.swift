@@ -35,60 +35,64 @@ struct CardActivationView: View {
     @State private var isShowingWrong3TimeCvv: Bool = false
     @State private var isShowingSuccess: Bool = false
     
+    @State private var isLoading: Bool = false
+    
     var disableForm: Bool {
         noCvvCtrl.count < 3 || pinCtrl.count < 6 || cPinCtrl.count < 6
     }
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                Color(hex: "#F6F8FB")
-                    .edgesIgnoringSafeArea(.all)
-            }
-            
-            VStack {
-                ScrollView(.vertical, showsIndicators: false, content: {
-                    VStack {
-                        noAtmAndCvvCard
-                        createNewPinCard
-                        
-                        NavigationLink(
-                            destination: CardPinVerificationView(unLocked: false).environmentObject(activateData),
-                            isActive: self.$nextView,
-                            label: {
-                                EmptyView()
-                            })
-                        
-                        Button(action: {
-                            self.activateData.cvv = self.noCvvCtrl
-                            self.activateData.newPin = self.pinCtrl
+        LoadingView(isShowing: self.$isLoading, content: {
+            ZStack(alignment: .top) {
+                VStack {
+                    Color(hex: "#F6F8FB")
+                        .edgesIgnoringSafeArea(.all)
+                }
+                
+                VStack {
+                    ScrollView(.vertical, showsIndicators: false, content: {
+                        VStack {
+                            noAtmAndCvvCard
+                            createNewPinCard
                             
-                            if (pinCtrl != cPinCtrl) {
-                                disableIncorrectPin = false
-                            } else  {
-                                self.nextView = true
-                            }
-                        }, label: {
-                            Text("AKTIVASI KARTU ATM")
-                                .foregroundColor(.white)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                .font(.system(size: 13))
-                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        })
-                        .disabled(disableForm)
-                        .background(disableForm ? Color.gray : Color(hex: "#232175"))
-                        .cornerRadius(12)
-                        .padding(.top, 30)
-                        .padding(.horizontal)
-                    }
-                })
+                            NavigationLink(
+                                destination: CardPinVerificationView(unLocked: false).environmentObject(activateData),
+                                isActive: self.$nextView,
+                                label: {
+                                    EmptyView()
+                                })
+                            
+                            Button(action: {
+                                self.activateData.cvv = self.noCvvCtrl
+                                self.activateData.newPin = self.pinCtrl
+                                
+                                if (pinCtrl != cPinCtrl) {
+                                    disableIncorrectPin = false
+                                } else  {
+                                    self.nextView = true
+                                }
+                            }, label: {
+                                Text("AKTIVASI KARTU ATM")
+                                    .foregroundColor(.white)
+                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                    .font(.system(size: 13))
+                                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                            })
+                            .disabled(disableForm)
+                            .background(disableForm ? Color.gray : Color(hex: "#232175"))
+                            .cornerRadius(12)
+                            .padding(.top, 30)
+                            .padding(.horizontal)
+                        }
+                    })
+                }
+                
+                if self.isShowingSuccess || self.isShowingWrongCvv || self.isShowingWrong3TimeCvv {
+                    ModalOverlay(tapAction: { withAnimation {} })
+                        .edgesIgnoringSafeArea(.all)
+                }
             }
-            
-            if self.isShowingSuccess || self.isShowingWrongCvv || self.isShowingWrong3TimeCvv {
-                ModalOverlay(tapAction: { withAnimation {} })
-                    .edgesIgnoringSafeArea(.all)
-            }
-        }
+        })
         .navigationBarTitle("Aktivasi Kartu", displayMode: .inline)
         .onAppear {
             self.noAtmCtrl = card.cardNo
@@ -100,6 +104,7 @@ struct CardActivationView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ActivatedKartuKu"))) { obj in
             print("ON RESUME")
             
+            self.isLoading = true
             if let pinTrx = obj.userInfo, let info = pinTrx["pinTrx"] {
                 print(info)
                 self.activateData.pinTrx = info as! String
@@ -117,7 +122,7 @@ struct CardActivationView: View {
         .popup(isPresented: $isShowingWrong3TimeCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             modalCodeCVVWrong3Time()
         }
-        .popup(isPresented: $isShowingSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $isShowingSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             modalSuccessActivation()
         }
     }
@@ -397,12 +402,14 @@ struct CardActivationView: View {
         self.kartKuVM.activateKartuKu(data: activateData) { success in
             if success {
                 print("SUCCESS")
+                self.isLoading = false
                 self.isShowingSuccess = true
             }
             
             if !success {
                 print("!SUCCESS")
                 
+                self.isLoading = false
                 if (self.kartKuVM.code == "400") {
                     self.isShowingWrongCvv = true
                 }

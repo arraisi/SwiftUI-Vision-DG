@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CardView: View {
     var card: KartuKuDesignViewModel
@@ -17,48 +18,67 @@ struct CardView: View {
     
     var body: some View {
         ZStack {
-            Image("card_bg")
+            WebImage(url: card.cardDesign!)
+                .onSuccess { image, data, cacheType in
+                    // Success
+                }
+                .placeholder {
+                    Image("card_bg")
+                        .resizable()
+                        .frame(width: cardWidth, height: cardHeight)
+                }
                 .resizable()
+                .indicator(.activity) // Activity Indicator
+                .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                .scaledToFill()
                 .frame(width: cardWidth, height: cardHeight)
+            
+//            Image("card_bg")
+//                .resizable()
+//                .frame(width: cardWidth, height: cardHeight)
             
             if showContent {
                 VStack(){
                     
-                    HStack {
-                        Image("logo_m_mestika")
-                            .resizable()
-                            .frame(width: 30, height: 30, alignment: .center)
-                        Spacer()
-                    }
-                    .padding(.vertical, 10)
+//                    HStack {
+//                        Spacer()
+//                        Image("logo_mestika")
+//                            .resizable()
+//                            .frame(width: 100, height: 15, alignment: .center)
+//                    }
+//                    .padding(.vertical, 10)
                     
                     HStack{
-                        Text(card.nameOnCard)
+                        Text("GOLD")
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-Regular", size: 12))
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
+                    .padding(.bottom)
+                    
+                    HStack{
+                        Text(card.cardNo)
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Regular", size: 12))
                         Spacer()
                     }
                     
-                    HStack(alignment:.top){
-                        Text("Rp.")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-Bold", size: 20))
-                        
-                        Text("0".thousandSeparator())
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-Bold", size: 30))
-                        Spacer()
-                    }
-                    
                     HStack{
-                        Text("****")
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-Regular", size: 12))
                         Text(card.accountNumber)
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Regular", size: 12))
                         Spacer()
                     }
+                    
+                    HStack{
+                        Text(card.nameOnCard)
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-Regular", size: 15))
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
+                    .padding(.top, 10)
                     
                     HStack{
                         Spacer()
