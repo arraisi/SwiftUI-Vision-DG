@@ -23,7 +23,8 @@ struct HistoryTransactionRow: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Text(data.digitSign == "D" ? "Debit" : "Kredit")
-                    .font(.custom("Montserrat-Regular", size: 12))
+                    .font(.custom("Montserrat-Regular", size: 14))
+                    .fontWeight(.bold)
                     .foregroundColor(data.digitSign == "D" ? Color.red : Color.green)
             }
             
