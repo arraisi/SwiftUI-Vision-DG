@@ -9,8 +9,10 @@ import SwiftUI
 
 struct CardLimitView: View {
     
-    @State var limitPerTransaksi: Double = 50000000
+    @State var limitPerTransaksi: Double = 0
     @State var limitPerHari: Double = 20000000
+    
+    @State var limitPerTransaksiCtrl: String = ""
     
     let maxTransaksi: Double = 50000000
     let maxPenarikanHarian: Double = 20000000
@@ -44,15 +46,17 @@ struct CardLimitView: View {
                                     .font(.custom("Montserrat-Bold", size: 20))
                                     .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                                 
-                                TextField("", value: $limitPerTransaksi,
-                                          formatter: NumberFormatter.decimal) { (value) in
-                                    print("onChange : \(value)")
-                                } onCommit: {
-                                    print("onCommit : \(limitPerTransaksi)")
-                                    
-                                }.keyboardType(.decimalPad)
-                                .font(.custom("Montserrat-Bold", size: 30))
-                                .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                TextField("0", text: self.$limitPerTransaksiCtrl, onEditingChanged: {_ in })
+                                    .onReceive(limitPerTransaksiCtrl.publisher.collect()) {
+                                        let amountString = String($0.prefix(13))
+                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                        self.limitPerTransaksiCtrl = cleanAmount.thousandSeparator()
+                                        self.limitPerTransaksi = Double(cleanAmount)!
+                                    }
+                                    .keyboardType(.decimalPad)
+                                    .font(.custom("Montserrat-Bold", size: 30))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
                             }
                             Divider()
                             HStack {

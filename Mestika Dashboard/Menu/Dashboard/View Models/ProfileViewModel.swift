@@ -71,6 +71,8 @@ extension ProfileViewModel {
                 self.cardNo = response.chipProfileDto?.last!.cardNo ?? ""
                 self.accountNumber = response.chipProfileDto?.last!.accountNumber ?? ""
                 
+                print(response.chipProfileDto?.last!.accountNumber)
+                
                 completion(true)
                 
             case .failure(let error):
