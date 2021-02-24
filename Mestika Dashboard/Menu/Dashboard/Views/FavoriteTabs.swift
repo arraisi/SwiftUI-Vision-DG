@@ -18,10 +18,10 @@ struct FavoriteTabs: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
             
-            GeometryReader { geometry in
-                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
-                    .frame(height: 0)
-            }
+//            GeometryReader { geometry in
+//                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+//                    .frame(height: 0)
+//            }
             
             VStack {
                 titleInfo

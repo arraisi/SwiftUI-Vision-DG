@@ -155,7 +155,7 @@ struct FirstOTPLoginView: View {
         .popup(isPresented: $isShowModalSelectionRegister, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             ScreeningNasabahModal()
         }
-        .popup(isPresented: $isShowModalUserNotRegister, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $isShowModalUserNotRegister, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             ScreeningUserNotRegister()
         }
     }

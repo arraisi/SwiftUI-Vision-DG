@@ -122,27 +122,32 @@ struct PopOverFavoriteView: View {
                                 "destinationNumber": transferData.destinationNumber,
                                 "berita": "testing"
                             ],
-                            "transactionDate" : "2020-01-10 10:20:57",
+                            "transactionDate" : transferData.transactionDate,
                             "nominal" : transferData.amount,
                             "nominalSign" : transferData.amount
                         ]
                         
                         print("TRANSFER ON US body => \(body)")
                         
+                        print("\nTRANSFER ON US trx date => \(transferData.transactionDate)")
+                        
                         self.favoritVM.transferOnUs(data: transferData) { result in
                             print("Berhasil simpan ke favorite")
                             self.show = false
                         }
                     }, label: {
-                        Text("SIMPAN KE FAVORIT")
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        
+                        if self.favoritVM.isLoading {
+                            ProgressView()
+                        } else {
+                            Text("SIMPAN KE FAVORIT")
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                        }
                     })
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     .disabled(disableForm)
-                    .background(disableForm ? Color.gray : Color(hex: "#2334D0"))
+                    .background(disableForm ? Color(.lightGray) : Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 40)
@@ -161,7 +166,7 @@ struct PopOverFavoriteView: View {
     }
     
     var disableForm: Bool {
-        receivedName.isEmpty
+        receivedName.isEmpty || self.favoritVM.isLoading
     }
 }
 
