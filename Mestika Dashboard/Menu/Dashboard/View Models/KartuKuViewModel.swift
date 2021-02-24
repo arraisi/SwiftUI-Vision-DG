@@ -48,7 +48,7 @@ extension KartuKuViewModel {
                         accountNumber: data.accountNumber,
                         nameOnCard: data.nameOnCard,
                         cardNo: data.cardNo,
-                        cardDesign: URL(string: data.cardDesign),
+                        cardDesign: URL(string: "https://bo-dev.apps.visiondg.bankmestika.co.id/huskar/image/df5289f5573dbf4055afc525e949522b.png"),
                         classCode: data.classCode,
                         nik: data.nik,
                         id: data.id,
