@@ -35,7 +35,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                 VStack {
                     HStack {
                         Text("Nama Kontrak Penerima")
-                            .font(.caption)
+                            .font(.subheadline)
                             .fontWeight(.ultraLight)
                         
                         Spacer()
@@ -58,7 +58,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     
                     HStack {
                         Text("Detail Rekening")
-                            .font(.caption)
+                            .font(.subheadline)
                             .fontWeight(.ultraLight)
                         
                         Spacer()
@@ -67,18 +67,21 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     
                     // Bank Form
                     HStack(alignment: VerticalAlignment.firstTextBaseline) {
-                        Text("Bank")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .frame(width: 100)
-                            .multilineTextAlignment(.leading)
+                        
+                        HStack {
+                            Text("Bank")
+                                .font(.callout)
+                                .fontWeight(.light)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .padding(.trailing, 60)
                         
                         Spacer()
                         
-                        TextField("Bank", text: .constant(transferData.bankName), onEditingChanged: { changed in
+                        MultilineTextField("Bank", text: .constant(transferData.bankName), onCommit: {
+                            
                         })
                         .disabled(true)
-                        .frame(height: 10)
                         .padding()
                         .font(.subheadline)
                         .background(Color(hex: "#F6F8FB"))
@@ -89,9 +92,8 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     // No. Rekening Form
                     HStack(alignment: VerticalAlignment.firstTextBaseline) {
                         Text("No. Rekening")
-                            .font(.caption)
+                            .font(.callout)
                             .fontWeight(.light)
-                            .frame(width: 100)
                         
                         Spacer()
                         

@@ -66,10 +66,14 @@ struct PopOverFavoriteView: View {
                     
                     // Bank Form
                     HStack(spacing: 20) {
-                        Text("Bank")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .frame(width: 100)
+                        
+                        HStack {
+                            Text("Bank")
+                                .font(.caption)
+                                .fontWeight(.light)
+                        }
+                        .padding(.leading, 10)
+                        .padding(.trailing, 60)
                         
                         TextField("Bank", text: $receivedBank, onEditingChanged: { changed in
                             print("\($receivedBank)")
