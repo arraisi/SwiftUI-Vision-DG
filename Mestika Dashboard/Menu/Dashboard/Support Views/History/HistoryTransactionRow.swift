@@ -37,7 +37,7 @@ struct HistoryTransactionRow: View {
                 
                 HStack {
                     Text("Rp ")
-                    Text("\(data.availableBalance.thousandSeparator()),00")
+                    Text("\(data.availableBalance.subStringRange(from: 0, to: data.availableBalance.count-2).thousandSeparator()),00")
                         .autocapitalization(.allCharacters)
                         .fixedSize(horizontal: false, vertical: true)
                 }

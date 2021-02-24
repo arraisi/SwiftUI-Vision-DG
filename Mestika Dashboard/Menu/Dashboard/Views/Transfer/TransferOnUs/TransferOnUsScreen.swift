@@ -801,7 +801,7 @@ struct TransferOnUsScreen: View {
                 print(self.profileVM.balance)
                 print(self.selectedAccount.sourceNumber)
                 self.transferData.username = self.profileVM.name
-                self.transferData.cardNo = selectedAccount.noRekening
+                self.transferData.cardNo = self.profileVM.cardNo
                 self.transferData.sourceNumber = self.profileVM.accountNumber
                 self.transferData.sourceAccountName = self.profileVM.nameOnCard
                 

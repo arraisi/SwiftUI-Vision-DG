@@ -66,7 +66,7 @@ struct TransferRtgsScreen: View {
     }
     
     var dateClosedRange: ClosedRange<Date> {
-        let min = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let min = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
         let max = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
         return min...max
     }
@@ -863,9 +863,9 @@ struct TransferRtgsScreen: View {
                 self.listBankAccount.removeAll()
                 self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, productName: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
                 self.selectedAccount = self.listBankAccount[0]
-                self.transferData.cardNo = selectedAccount.noRekening
-                self.transferData.sourceNumber = selectedAccount.sourceNumber
-                self.transferData.sourceAccountName = selectedAccount.namaRekening
+                self.transferData.cardNo = self.profileVM.cardNo
+                self.transferData.sourceNumber = self.profileVM.accountNumber
+                self.transferData.sourceAccountName = self.profileVM.nameOnCard
                 
                 //                getLimit(code: self.profileVM.classCode)
             }
