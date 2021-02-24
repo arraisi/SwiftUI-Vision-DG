@@ -12,7 +12,10 @@ struct ListLastTransactionView: View {
     var sourceNumber = ""
     @StateObject private var favoritVM = FavoritViewModel()
     
+    @State var isLoading: Bool = true
+    
     var body: some View {
+        
         ZStack {
             Color(hex: "#F6F8FB")
             VStack {
@@ -31,64 +34,70 @@ struct ListLastTransactionView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 10)
                 
-                ScrollView(showsIndicators: false) {
-                    ForEach(self.favoritVM.lastTransaction, id: \.trace) { data in
-                        HStack {
-                            ZStack {
-                                Circle()
-                                    .fill(data.sign == "D" ? Color.red : Color.green)
-                                    .frame(width: 30, height: 30)
-                                
-                                Text("\(data.sign)")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.heavy)
-                            }
-                            
-                            VStack(alignment: .leading) {
-                                Text("\(data.date.subStringRange(from: 6, to: 8)) - \(data.date.subStringRange(from: 4, to: 6)) - \(data.date.subStringRange(from: 0, to: 4))")
-                                    .font(.caption2)
-                                
-                                Text("\(data.historyListDescription)")
-                                    .font(.subheadline)
-                            }
-                            
-                            Spacer()
-                            
+                if isLoading {
+                    ProgressView()
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        ForEach(self.favoritVM.lastTransaction, id: \.trace) { data in
                             HStack {
-                                
-                                if (data.sign == "D") {
-                                    Text("- Rp.")
-                                        .font(.subheadline)
-                                        .foregroundColor(.red)
+                                ZStack {
+                                    Circle()
+                                        .fill(data.sign == "D" ? Color.red : Color.green)
+                                        .frame(width: 30, height: 30)
                                     
-                                    Text("\(data.amount.thousandSeparator())")
-                                        .font(.subheadline)
-                                        .foregroundColor(.red)
-                                } else {
-                                    Text("+ Rp.")
-                                        .font(.subheadline)
-                                        .foregroundColor(.green)
-                                    
-                                    Text("\(data.amount.thousandSeparator())")
-                                        .font(.subheadline)
-                                        .foregroundColor(.green)
+                                    Text("\(data.sign)")
+                                        .foregroundColor(.white)
+                                        .fontWeight(.heavy)
                                 }
                                 
+                                VStack(alignment: .leading) {
+                                    Text("\(data.date.subStringRange(from: 6, to: 8)) - \(data.date.subStringRange(from: 4, to: 6)) - \(data.date.subStringRange(from: 0, to: 4))")
+                                        .font(.caption2)
+                                    
+                                    Text("\(data.historyListDescription)")
+                                        .font(.subheadline)
+                                }
+                                
+                                Spacer()
+                                
+                                HStack {
+                                    
+                                    if (data.sign == "D") {
+                                        Text("- Rp.")
+                                            .font(.subheadline)
+                                            .foregroundColor(.red)
+                                        
+                                        Text("\(data.amount.thousandSeparator())")
+                                            .font(.subheadline)
+                                            .foregroundColor(.red)
+                                    } else {
+                                        Text("+ Rp.")
+                                            .font(.subheadline)
+                                            .foregroundColor(.green)
+                                        
+                                        Text("\(data.amount.thousandSeparator())")
+                                            .font(.subheadline)
+                                            .foregroundColor(.green)
+                                    }
+                                    
+                                }
+                                
+                                
                             }
-                            
-                            
+                            .padding(.vertical, 5)
+                            .padding()
+                            .frame(width: UIScreen.main.bounds.width - 60)
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 8)
+                            .padding(.horizontal)
+                            .padding(.vertical, 5)
                         }
-                        .padding(.vertical, 5)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width - 60)
-                        .background(Color.white)
-                        .cornerRadius(15)
-                        .shadow(color: Color.gray.opacity(0.3), radius: 8)
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
                     }
+                    .frame(height: 400)
                 }
-                .frame(height: 400)
+                
+                
             }
             .padding(.bottom)
             .frame(width: UIScreen.main.bounds.width - 30)
@@ -103,6 +112,7 @@ struct ListLastTransactionView: View {
     
     func getList() {
         self.favoritVM.getListLastTransaction(sourceNumber: self.sourceNumber, completion: { result in
+            self.isLoading = false
             print(result)
         })
     }

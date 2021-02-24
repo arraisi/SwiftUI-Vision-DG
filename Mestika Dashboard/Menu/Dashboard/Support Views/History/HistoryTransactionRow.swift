@@ -13,6 +13,7 @@ struct HistoryTransactionRow: View {
     
     var body: some View {
         HStack(spacing: 5) {
+            
             VStack(alignment: .leading, spacing: 3) {
                 Text(stringToDateFormat(data.postingDate))
                     .font(.custom("Montserrat-Regular", size: 10))

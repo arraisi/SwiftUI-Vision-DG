@@ -12,6 +12,7 @@ struct HistoryTransactionList: View {
     
     var body: some View {
         List(histories, id: \.traceNo) { item in
+            
             HistoryTransactionRow(data: item)
         }
         .listStyle(PlainListStyle())
