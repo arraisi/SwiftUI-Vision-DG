@@ -28,7 +28,7 @@ struct TransferRtgsScreen: View {
     @State var amount = ""
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 0
+    private var minLimit: Int = 10000
     
     // Variable Transaction Frequecy
     var _listFrequency = ["Sekali", "Berkali-kali"]
@@ -118,7 +118,7 @@ struct TransferRtgsScreen: View {
                             
                             if (amount < self.minLimit) {
                                 self.showDialogMinTransaction = true
-                            } else if (amount <= self.maxLimit && amount <= myCredit) {
+                            } else if (amount <= myCredit) {
                                 
                                 if (self.transferData.transactionType == "Online") {
                                     self.showDialogConfirmation = true
@@ -368,7 +368,7 @@ struct TransferRtgsScreen: View {
                         .foregroundColor(.red)
                         .font(.caption2)
                         .fontWeight(.bold)
-                    Text("\(limitTrx.thousandSeparator())")
+                    Text("\(self.selectedAccount.saldo.thousandSeparator())")
                         .foregroundColor(.red)
                         .font(.subheadline)
                         .fontWeight(.bold)

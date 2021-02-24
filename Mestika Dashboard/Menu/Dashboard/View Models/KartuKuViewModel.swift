@@ -48,7 +48,7 @@ extension KartuKuViewModel {
                         accountNumber: data.accountNumber,
                         nameOnCard: data.nameOnCard,
                         cardNo: data.cardNo,
-                        cardDesign: data.cardDesign,
+                        cardDesign: URL(string: data.cardDesign),
                         classCode: data.classCode,
                         nik: data.nik,
                         id: data.id,

@@ -28,6 +28,8 @@ struct AccountTabs: View {
     
     @State private var forgotPasswordActived = false
     
+    @State private var isLoading: Bool = true
+    
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -37,24 +39,26 @@ struct AccountTabs: View {
     @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
     
     var body: some View {
-        ZStack {
-            ScrollView(.vertical, showsIndicators: false, content: {
-                
-                GeometryReader { geometry in
-                    Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
-                        .frame(height: 0)
-                }
-                
-                ZStack {
-                    VStack {
-                        profileInfo
-                        menuGrid
-                            .padding(.bottom)
+        LoadingView(isShowing: self.$isLoading, content: {
+            ZStack {
+                ScrollView(.vertical, showsIndicators: false, content: {
+                    
+                    GeometryReader { geometry in
+                        Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                            .frame(height: 0)
                     }
-                }
-            })
-            .navigationBarHidden(true)
-        }
+                    
+                    ZStack {
+                        VStack {
+                            profileInfo
+                            menuGrid
+                                .padding(.bottom)
+                        }
+                    }
+                })
+                .navigationBarHidden(true)
+            }
+        })
         .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
             if moveToAccountTab {
                 //                getCoreDataNewDevice()
@@ -348,8 +352,16 @@ struct AccountTabs: View {
         }
         .onAppear {
             //            getProfile()
-            self.profileVM.getProfile { result in
-                print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+            self.profileVM.getProfile { success in
+                
+                if success {
+                    print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+                    self.isLoading = false
+                }
+                
+                if !success {
+                    self.isLoading = false
+                }
             }
             getUserInfo()
         }
