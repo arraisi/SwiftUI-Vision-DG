@@ -11,6 +11,14 @@ struct TransferOnUsConfirmationScreen: View {
     
     @EnvironmentObject var transferData: TransferOnUsModel
     
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "in_ID")
+        return formatter
+    }
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -245,7 +253,7 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
+                    TextField("Waktu Transaksi", text: self.transferData.transactionDate == dateFormatter.string(from: Date()) ? .constant("Now") : self.$transferData.transactionDate, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionDate)")
                     })
                     .disabled(true)
