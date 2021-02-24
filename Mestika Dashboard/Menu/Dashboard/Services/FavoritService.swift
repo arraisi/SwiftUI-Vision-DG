@@ -298,10 +298,11 @@ class FavoritService {
                 // MARK : change model response.
                 let response = try? JSONDecoder().decode(Status.self, from: data)
                 
+                print("HTTP RESPONSE SAVE FAVORITE \(httpResponse.statusCode)")
                 print(response?.code ?? "NO CODE")
                 
                 if let status = response {
-                    if status.code == "200 OK" || httpResponse.statusCode == 400  {
+                    if status.code == "200" || httpResponse.statusCode == 200  {
                         completion(.success(status))
                     }
                 }

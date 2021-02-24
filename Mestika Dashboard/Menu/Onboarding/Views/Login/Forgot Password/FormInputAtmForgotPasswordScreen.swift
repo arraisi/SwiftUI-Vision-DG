@@ -88,12 +88,12 @@ struct FormInputAtmForgotPasswordScreen: View {
                                 }
                         }
                         
-                        Button(action: {
-                            self.showPassword.toggle()
-                        }, label: {
-                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
-                                .foregroundColor(Color(hex: "#3756DF"))
-                        })
+//                        Button(action: {
+//                            self.showPassword.toggle()
+//                        }, label: {
+//                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
+//                                .foregroundColor(Color(hex: "#3756DF"))
+//                        })
                     }
                     .frame(height: 25)
                     .padding()
