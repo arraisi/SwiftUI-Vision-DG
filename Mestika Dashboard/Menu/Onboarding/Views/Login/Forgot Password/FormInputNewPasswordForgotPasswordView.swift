@@ -241,6 +241,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 isActive: self.$routeAccountNumberPin) {
                 EmptyView()
             }
+            .isDetailLink(false)
             
             Button(action: {
                 self.routeAccountNumberPin = true
@@ -258,6 +259,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 isActive: self.$routeATMNumberPin) {
                 EmptyView()
             }
+            .isDetailLink(false)
             
             Button(action: {
                 self.routeATMNumberPin = true

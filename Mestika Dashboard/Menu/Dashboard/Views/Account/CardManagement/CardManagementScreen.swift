@@ -82,21 +82,6 @@ struct CardManagementScreen: View {
                             }
                         }
                         
-                        
-                        //                    if !cards[Int(self.count)].activeStatus {
-                        //                        DetailKartuTidakAktifView(card: cards[Int(self.count)])
-                        //                            .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-                        //                            .frame(width: UIScreen.main.bounds.width - 60)
-                        //                            .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                        //                    }
-                        //
-                        //                    else {
-//                                                DetailKartuAktifView(card: cards[Int(self.count)])
-//                                                    .clipShape(PopupBubbleShape(cornerRadius: 25, arrowEdge: .leading, arrowHeight: 15))
-//                                                    .frame(width: UIScreen.main.bounds.width - 60)
-//                                                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
-                        //                    }
-                        
                         Spacer()
                     }
                 }

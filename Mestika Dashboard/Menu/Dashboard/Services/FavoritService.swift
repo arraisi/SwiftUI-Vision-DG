@@ -384,7 +384,7 @@ class FavoritService {
                 print(response?.code ?? "NO CODE")
                 
                 if let status = response {
-                    if status.code == "200 OK" || httpResponse.statusCode == 400  {
+                    if httpResponse.statusCode == 200 || httpResponse.statusCode == 400  {
                         completion(.success(status))
                     }
                 }

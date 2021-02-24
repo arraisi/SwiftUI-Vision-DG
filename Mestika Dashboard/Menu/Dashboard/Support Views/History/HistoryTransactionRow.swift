@@ -16,28 +16,43 @@ struct HistoryTransactionRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(stringToDateFormat(data.postingDate))
                     .font(.custom("Montserrat-Regular", size: 10))
+                
                 Text(data.transactionInfo)
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .autocapitalization(.allCharacters)
                     .fixedSize(horizontal: false, vertical: true)
+                
                 Text(data.digitSign == "D" ? "Debit" : "Kredit")
                     .font(.custom("Montserrat-Regular", size: 12))
+                    .foregroundColor(data.digitSign == "D" ? Color.red : Color.green)
             }
             
             Spacer()
             
             VStack(alignment: .trailing, spacing: 10) {
                 HStack {
-                    Text("Rp ")
+                    
+                    if (data.digitSign == "D") {
+                        Text("- Rp ")
+                            .foregroundColor(data.digitSign == "D" ? Color.red : Color.green)
+                    } else {
+                        Text("+ Rp ")
+                            .foregroundColor(data.digitSign == "D" ? Color.red : Color.green)
+                    }
+                    
+                    
+                    
                     Text("\(data.transactionAmount.subStringRange(from: 0, to: data.transactionAmount.count-2).thousandSeparator()),00")
                         .autocapitalization(.allCharacters)
                         .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(data.digitSign == "D" ? Color.red : Color.green)
                 }
                 .font(.custom("Montserrat-SemiBold", size: 12))
                 
                 HStack {
                     Text("Rp ")
-                    Text("\(data.availableBalance.thousandSeparator()),00")
+                    
+                    Text("\(data.availableBalance.subStringRange(from: 0, to: data.availableBalance.count-2).thousandSeparator()),00")
                         .autocapitalization(.allCharacters)
                         .fixedSize(horizontal: false, vertical: true)
                 }

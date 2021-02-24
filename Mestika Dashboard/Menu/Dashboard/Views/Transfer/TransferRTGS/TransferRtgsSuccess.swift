@@ -87,7 +87,7 @@ struct TransferRtgsSuccess: View {
                 
                 Button(action: {
                     withAnimation(.easeIn) {
-                        self.showPopover.toggle()
+                        self.showPopover = true
                     }
                 }, label: {
                     Image(systemName: "pin")
