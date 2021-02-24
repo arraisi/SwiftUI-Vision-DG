@@ -56,7 +56,7 @@ struct ListLastTransactionView: View {
                         HStack {
                             
                             if (data.sign == "D") {
-                                Text("+ Rp.")
+                                Text("- Rp.")
                                     .font(.subheadline)
                                     .foregroundColor(.red)
                                 
@@ -64,7 +64,7 @@ struct ListLastTransactionView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.red)
                             } else {
-                                Text("- Rp.")
+                                Text("+ Rp.")
                                     .font(.subheadline)
                                     .foregroundColor(.green)
                                 
