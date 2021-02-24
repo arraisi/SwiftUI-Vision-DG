@@ -19,15 +19,11 @@ struct FavoriteTransferScreen: View {
             Color(hex: "#F6F8FB")
             
             VStack {
-                ScrollView(.vertical, showsIndicators: false, content: {
-                    VStack {
-                        searchCard
-                        
-                        ListAllFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
-                            .padding(.bottom)
-                    }
+                searchCard
+                
+                ListAllFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
+                    .padding(.bottom)
                     .padding(.bottom, 25)
-                })
             }
             .navigationBarTitle("Favorit Transfer", displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {}, label: {

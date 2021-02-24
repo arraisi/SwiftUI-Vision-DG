@@ -30,9 +30,9 @@ struct ListFavoritePurchasePaymentView: View {
             
             Divider()
                 .padding(.horizontal, 10)
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
             
-            List {
+            ScrollView(showsIndicators: false) {
                 ForEach(_listFavorite) { data in
                     HStack {
                         ZStack {
@@ -48,9 +48,13 @@ struct ListFavoritePurchasePaymentView: View {
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                         }
-                    }.padding(.vertical, 5)
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
                 }
-            }.frame(height: 300)
+            }
+            .padding(.horizontal)
             
             HStack {
                 Spacer()
