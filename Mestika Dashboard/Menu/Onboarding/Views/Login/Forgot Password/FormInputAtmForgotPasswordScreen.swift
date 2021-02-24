@@ -144,6 +144,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                     NavigationLink(
                         destination: LoginScreen(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
                         isActive: self.$isNextRoute) {}
+                        .isDetailLink(false)
                 }
                 .padding(.bottom, 50)
             }

@@ -23,8 +23,7 @@ struct CardView: View {
                     // Success
                 }
                 .placeholder {
-                    Image("card_bg")
-                        .resizable()
+                    Rectangle().foregroundColor(.gray).opacity(0.5)
                         .frame(width: cardWidth, height: cardHeight)
                 }
                 .resizable()

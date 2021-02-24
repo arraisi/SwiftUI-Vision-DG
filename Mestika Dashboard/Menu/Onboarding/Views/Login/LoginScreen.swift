@@ -137,7 +137,11 @@ struct LoginScreen: View {
                     NavigationLink(
                         destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                         isActive: self.$routeNewPassword,
-                        label: {})
+                        label: {}
+                    )
+                    .isDetailLink(false)
+                    
+                    
                     if let value = device.last?.fingerprintFlag {
                         if biometricCheck() && value {
                             
