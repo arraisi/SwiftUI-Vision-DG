@@ -27,37 +27,41 @@ struct ListFavoriteTransactionView: View {
             
             Divider()
                 .padding(.horizontal, 10)
-                .padding(.bottom)
+                .padding(.bottom, 10)
             
-            ForEach(self.favoritVM.favorites, id: \.id) { data in
-                
-                HStack {
-                    ZStack {
-                        Circle()
-                            .fill(Color.secondary)
-                            .frame(width: 30, height: 30)
-                        
-                        Text(data.name.prefix(1))
-                            .foregroundColor(.white)
-                            .fontWeight(.heavy)
-                    }
+            
+            ScrollView(showsIndicators: false) {
+                ForEach(self.favoritVM.favorites, id: \.id) { data in
                     
-                    VStack(alignment: .leading) {
-                        Text("\(data.name)")
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                        
-                        HStack {
-                            Text("\(data.bankName) :")
-                                .font(.custom("Montserrat-Light", size: 14))
-                            Text("\(data.cardNo)")
-                                .font(.custom("Montserrat-Light", size: 14))
+                    HStack {
+                        ZStack {
+                            Circle()
+                                .fill(Color.secondary)
+                                .frame(width: 30, height: 30)
+                            
+                            Text(data.name.prefix(1))
+                                .foregroundColor(.white)
+                                .fontWeight(.heavy)
                         }
+                        
+                        VStack(alignment: .leading) {
+                            Text("\(data.name)")
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                            
+                            HStack {
+                                Text("\(data.bankName) :")
+                                    .font(.custom("Montserrat-Light", size: 14))
+                                Text("\(data.cardNo)")
+                                    .font(.custom("Montserrat-Light", size: 14))
+                            }
+                        }
+                        Spacer()
                     }
-                    Spacer()
                 }
+                .padding(.vertical, 5)
+                .padding(.horizontal, 20)
+                
             }
-            .padding(.vertical, 5)
-            .padding(.horizontal, 20)
             
             HStack {
                 Spacer()

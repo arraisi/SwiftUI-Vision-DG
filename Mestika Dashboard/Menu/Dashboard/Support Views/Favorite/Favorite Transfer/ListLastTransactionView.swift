@@ -29,9 +29,9 @@ struct ListLastTransactionView: View {
                 
                 Divider()
                     .padding(.horizontal, 10)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
                 
-                ScrollView(showsIndicators: true) {
+                ScrollView(showsIndicators: false) {
                     ForEach(self.favoritVM.lastTransaction, id: \.trace) { data in
                         HStack {
                             ZStack {
@@ -83,7 +83,9 @@ struct ListLastTransactionView: View {
                         .frame(width: UIScreen.main.bounds.width - 60)
                         .background(Color.white)
                         .cornerRadius(15)
-                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                        .shadow(color: Color.gray.opacity(0.3), radius: 8)
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
                     }
                 }
                 .frame(height: 400)

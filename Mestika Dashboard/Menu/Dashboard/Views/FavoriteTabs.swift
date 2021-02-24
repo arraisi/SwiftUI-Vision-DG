@@ -16,7 +16,7 @@ struct FavoriteTabs: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false, content: {
+//        ScrollView(.vertical, showsIndicators: false, content: {
             
 //            GeometryReader { geometry in
 //                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
@@ -27,12 +27,12 @@ struct FavoriteTabs: View {
                 titleInfo
                 
                 ListFavoritePurchasePaymentView()
-                    .padding(.bottom)
+                    .padding()
                 
                 ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
                     .padding()
             }
-        })
+//        })
         .navigationBarHidden(true)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&

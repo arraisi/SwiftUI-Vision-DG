@@ -34,7 +34,7 @@ struct ListAllFavoriteTransactionView: View {
                 
                 Divider()
                     .padding(.horizontal, 10)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
                 
                 List(self.favoritVM.favorites, id: \.id) { data in
                     NavigationLink(
@@ -71,6 +71,7 @@ struct ListAllFavoriteTransactionView: View {
                         })
                         .padding(.vertical, 5)
                 }
+                .listStyle(PlainListStyle())
                 .colorMultiply(Color(hex: "#F6F8FB"))
                 .frame(height: 500)
             }

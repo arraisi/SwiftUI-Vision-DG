@@ -108,10 +108,8 @@ struct LastFavoriteTransferScreen: View {
                     .padding(.vertical, 20)
                     .background(Color(hex: "#232175"))
                     
-                    ScrollView(.vertical, showsIndicators: false, content: {
                         ListLastTransactionView()
-                            .padding(.bottom, 25)
-                    })
+                            .padding(.vertical)
                     
                     VStack {
                         Button(action: {}, label: {
