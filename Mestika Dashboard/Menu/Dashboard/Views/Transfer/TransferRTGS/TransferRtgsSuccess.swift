@@ -23,6 +23,8 @@ struct TransferRtgsSuccess: View {
     @State private var sheet = false
     @State private var dateString = ""
     
+    @State var showingBadge: Bool = true
+    
     var body: some View {
         ZStack {
             Image("bg_blue")

@@ -14,6 +14,8 @@ struct FormInputResetPinScreen: View {
     
     @EnvironmentObject var appState: AppState
     
+    @State private var showSuccess: Bool = false
+    
     var cardNo = ""
     var newPin = ""
     
@@ -27,6 +29,7 @@ struct FormInputResetPinScreen: View {
         ZStack {
             Color(hex: "#F6F8FB")
                 .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 
                 AppBarLogo(light: true) {}
@@ -95,23 +98,66 @@ struct FormInputResetPinScreen: View {
                 .padding(.vertical)
                 
             }
+            
+            if self.showSuccess{
+                ModalOverlay(tapAction: { withAnimation { } })
+                    .edgesIgnoringSafeArea(.all)
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinForgotPinTrx"))) { obj in
             print("SUCCESS PIN")
-            self.authVM.forgotPinTransaksi(cardNo: cardNo, pin: pin, newPinTrx: newPin) { (result) in
-                if result {
-                    DispatchQueue.main.async {
-                        self.appState.moveToAccountTab = true
-                    }
+            self.authVM.forgotPinTransaksi(cardNo: cardNo, pin: pin, newPinTrx: newPin) { success in
+                if success {
+                    self.showSuccess = true
+                }
+                
+                if !success {
+                    print("Error Pin TRX")
                 }
             }
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
-        //        .navigationBarTitle("Reset PIN Transaksi", displayMode: .inline)
-        //        .navigationBarItems(trailing: Button(action: {}, label: {
-        //            Text("Cancel")
-        //        }))
+        .popup(isPresented: $showSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            SuccessChangePasswordModal()
+        }
+    }
+    
+    // MARK: POPUP SUCCSESS CHANGE PASSWORD
+    func SuccessChangePasswordModal() -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Image("ic_check")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+            
+            Text("PIN TRANSAKSI YANG BARU TELAH BERHASIL DISIMPAN")
+                .font(.custom("Montserrat-ExtraBold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.vertical)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Button(action: {
+                self.showSuccess = false
+                
+                DispatchQueue.main.async {
+                    self.appState.moveToAccountTab = true
+                }
+            }) {
+                Text("OK")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+        }
+        .padding(.bottom, 30)
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

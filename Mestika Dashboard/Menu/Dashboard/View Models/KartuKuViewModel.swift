@@ -35,6 +35,7 @@ extension KartuKuViewModel {
                 self.isLoading = false
                 
                 self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
+                    print(data.cardDesign)
                     return KartuKuDesignViewModel(
                         cardFlag: data.cardFlag,
                         kodepos: data.kodepos,
@@ -47,7 +48,7 @@ extension KartuKuViewModel {
                         postalAddress: data.postalAddress,
                         accountNumber: data.accountNumber,
                         nameOnCard: data.nameOnCard,
-                        cardNo: data.cardNo,
+                        cardNo: data.cardNo ?? "",
                         cardDesign: URL(string: data.cardDesign),
                         classCode: data.classCode,
                         nik: data.nik,
