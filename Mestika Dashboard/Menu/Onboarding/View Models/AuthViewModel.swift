@@ -246,6 +246,50 @@ extension AuthViewModel {
         
     }
     
+    // MARK: - POST FORGOT PASSWORD WITHOUT PIN TRX
+    func forgotPassword(
+        newPwd: String,
+        cardNo: String,
+        pinAtm: String,
+        completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.forgotPassword(
+            newPwd: encryptPassword(password: newPwd),
+            cardNo: cardNo,
+            pinAtm: encryptPassword(password: pinAtm)) { result in
+            
+            switch result {
+            case .success(let response):
+                print("Success")
+                self.status = response.message!
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                case .custom(code: 400):
+                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                case .custom(code: 403):
+                    self.errorMessage = "PIN not changed"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+        
+    }
+    
     
     // MARK: - POST SET FINGER PRINT
     func enableBiometricLogin(completion: @escaping (Bool) -> Void) {

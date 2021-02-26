@@ -162,6 +162,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/auth/forgotPinTrx?channel=vlink")
     }
     
+    static func urlAuthForgotPassword() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/forgotPwd")
+    }
+    
     //-------------------- TRANSFER SERVICE ----------------------//
     
     static func urlLimitTransaction() -> URL? {

@@ -205,7 +205,7 @@ struct FormInputAtmPinForgotPasswordView: View {
     // MARK: -Bottom modal for error
     func modalSuccess() -> some View {
         VStack(alignment: .leading) {
-            Image("ic_title_warning")
+            Image("ic_check")
                 .resizable()
                 .frame(width: 101, height: 99)
                 .foregroundColor(.red)
@@ -239,20 +239,41 @@ struct FormInputAtmPinForgotPasswordView: View {
     
     @ObservedObject private var authVM = AuthViewModel()
     func setPassword() {
-        self.authVM.setPwd(
-            pwd: registerData.password,
-            accountNumber: "",
-            nik: atmNumberCtrl,
-            pinTrx: pinAtmCtrl) { success in
-            if success {
-                print("SUCCESS CHANGE PASSWORD")
-                self.showingModalSuccess = true
+        if (atmNumberCtrl.count < 16) {
+            print("WITH ACCOUNT NUMBER")
+            self.authVM.setPwd(
+                pwd: registerData.password,
+                accountNumber: atmNumberCtrl,
+                nik: "",
+                pinTrx: pinAtmCtrl) { success in
+                if success {
+                    print("SUCCESS CHANGE PASSWORD")
+                    self.showingModalSuccess = true
+                }
+                
+                if !success {
+                    print("NOT SUCCESS CHANGE PASSWORD")
+                    self.errorMessage = self.authVM.errorMessage
+                    self.showingModalError = true
+                }
             }
-            
-            if !success {
-                print("NOT SUCCESS CHANGE PASSWORD")
-                self.errorMessage = self.authVM.errorMessage
-                self.showingModalError = true
+        } else {
+            print("WITH NIK")
+            self.authVM.setPwd(
+                pwd: registerData.password,
+                accountNumber: "",
+                nik: atmNumberCtrl,
+                pinTrx: pinAtmCtrl) { success in
+                if success {
+                    print("SUCCESS CHANGE PASSWORD")
+                    self.showingModalSuccess = true
+                }
+                
+                if !success {
+                    print("NOT SUCCESS CHANGE PASSWORD")
+                    self.errorMessage = self.authVM.errorMessage
+                    self.showingModalError = true
+                }
             }
         }
     }
