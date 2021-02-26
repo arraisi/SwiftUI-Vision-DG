@@ -14,10 +14,10 @@ struct TransferRtgsScreen: View {
     
     // Variable Transfer Type
     var _listTransferType = ["RTGS", "SKN"]
-    @State private var transferType: String = ""
+    @State private var transferType: String = "Pilih Tipe Transaksi"
     
     // Variable List BANK
-    @State private var bankSelector: String = ""
+    @State private var bankSelector: String = "Pilih Bank Tujuan"
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
@@ -28,7 +28,7 @@ struct TransferRtgsScreen: View {
     @State var amount = ""
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 10000
+    private var minLimit: Int = 0
     
     // Variable Transaction Frequecy
     var _listFrequency = ["Sekali", "Berkali-kali"]
@@ -191,7 +191,7 @@ struct TransferRtgsScreen: View {
         }
         .onAppear {
             self.transferData = TransferOffUsModel()
-            self.transferType = _listTransferType[0]
+//            self.transferType = _listTransferType[0]
             self.transferData.transactionFrequency = _listFrequency[0]
             self.transferData.transactionVoucher = _listVoucher[0]
             self.transferData.transactionType = _listTransferType[0]
@@ -835,7 +835,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     var disableForm: Bool {
-        if (self.noRekeningCtrl.count >= 9 && self.amount != "") {
+        if (self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Pilih Tipe Transaksi" && self.bankSelector != "Pilih Bank Tujuan") {
             return false
         }
         return true
@@ -874,7 +874,7 @@ struct TransferRtgsScreen: View {
             
             if success {
                 print("SUCCESS")
-                self.bankSelector = self.referenceVM._listBank[0].bankName
+//                self.bankSelector = self.referenceVM._listBank[0].bankName
                 self.transferData.bankName = self.referenceVM._listBank[0].bankName
                 self.transferData.destinationBankCode = self.referenceVM._listBank[0].swiftCode
                 self.transferData.combinationBankName = self.referenceVM._listBank[0].combinationName

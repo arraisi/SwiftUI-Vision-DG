@@ -46,7 +46,7 @@ struct PopOverFavoriteView: View {
                             self.transferData.destinationName = self.receivedName
                             print("\($receivedName)")
                         })
-                        .disabled(false)
+                        .disabled(true)
                         .frame(height: 10)
                         .font(.system(size: 15, weight: .bold, design: .default))
                         .padding()

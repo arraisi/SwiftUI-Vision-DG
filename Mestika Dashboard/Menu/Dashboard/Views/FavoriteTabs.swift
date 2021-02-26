@@ -31,6 +31,7 @@ struct FavoriteTabs: View {
                 
                 ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
                     .padding()
+                
             }
 //        })
         .navigationBarHidden(true)
