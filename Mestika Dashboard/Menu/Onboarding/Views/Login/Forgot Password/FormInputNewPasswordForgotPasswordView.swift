@@ -12,6 +12,8 @@ struct FormInputNewPasswordForgotPasswordView: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -32,6 +34,8 @@ struct FormInputNewPasswordForgotPasswordView: View {
     @State var phoneNumber: String = ""
     
     @Binding var isNewDeviceLogin: Bool
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     var disableForm: Bool {
         passwordCtrl.isEmpty || confirmPasswordCtrl.isEmpty || passwordCtrl.count < 6 || confirmPasswordCtrl.count < 6
@@ -153,6 +157,12 @@ struct FormInputNewPasswordForgotPasswordView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
         .popup(isPresented: $showingModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             modalPasswordNotMatched()
         }

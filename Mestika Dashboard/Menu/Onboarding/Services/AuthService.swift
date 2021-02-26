@@ -360,6 +360,71 @@ class AuthService {
         }.resume()
     }
     
+    // MARK: - FORGOT PASSWORD WIHTOUT PIN TRX
+    func forgotPassword(
+        newPwd: String,
+        cardNo: String,
+        pinAtm: String,
+        completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+        // Body
+        let body: [String: Any] = [
+            "cardNo": cardNo,
+            "newPwd": newPwd,
+            "pinAtm": pinAtm,
+        ]
+        
+        print(newPwd)
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        guard let url = URL.urlAuthForgotPassword() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    completion(.success(validateResponse!))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 400) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
     
     // MARK: - GENERATE FINGER PRINT
     func enableBiometricLogin(completion: @escaping(Result<GenerateFingerPrintResponseModel, ErrorResult>) -> Void) {

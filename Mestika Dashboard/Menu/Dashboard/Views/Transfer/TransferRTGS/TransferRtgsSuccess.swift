@@ -23,6 +23,8 @@ struct TransferRtgsSuccess: View {
     @State private var sheet = false
     @State private var dateString = ""
     
+    @State var showingBadge: Bool = false
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
@@ -72,13 +74,20 @@ struct TransferRtgsSuccess: View {
             }
             
             if showPopover {
-                PopOverFavoriteTransactionOffUsView(transferData: transferData, show: self.$showPopover)
+                PopOverFavoriteTransactionOffUsView(transferData: transferData, show: self.$showPopover, showAlert: self.$showingBadge)
                     .padding(30)
             }
             
         }
         .navigationTitle("")
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $showingBadge) {
+            return Alert(
+                title: Text("Berhasil"),
+                message: Text("Favorit berhasil ditambahkan"),
+                dismissButton: .default(Text("Oke"))
+            )
+        }
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
                 Text("Tambahkan ke Favorit?")

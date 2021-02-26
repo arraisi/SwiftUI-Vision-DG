@@ -115,8 +115,8 @@ struct TransferRtgsDestination: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
-                        .disabled(disabledButton)
-                        .background(disabledButton ? Color.gray : Color(hex: "#232175"))
+                        .disabled(disableForm)
+                        .background(disableForm ? Color.gray : Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                     }
@@ -148,7 +148,7 @@ struct TransferRtgsDestination: View {
                 .padding([.leading, .top, .bottom])
                 
                 TextField("Nama Tujuan", text: self.$transferData.destinationName, onEditingChanged: { changed in
-                    validateForm()
+//                    validateForm()
                 })
                     .font(.subheadline)
             }
@@ -167,7 +167,7 @@ struct TransferRtgsDestination: View {
                     Button(action: {
                         self.destinationType = data
                         self.transferData.typeDestination = data
-                        validateForm()
+//                        validateForm()
                     }) {
                         Text(data)
                             .font(.custom("Montserrat-Regular", size: 12))
@@ -202,7 +202,7 @@ struct TransferRtgsDestination: View {
                     Button(action: {
                         self.citizenShipCtrl = data
                         self.transferData.citizenship = data
-                        validateForm()
+//                        validateForm()
                     }) {
                         Text(data)
                             .font(.custom("Montserrat-Regular", size: 12))
@@ -310,7 +310,7 @@ struct TransferRtgsDestination: View {
             
             VStack {
                 MultilineTextField("Tulis alamat penerima", text: self.$addressCtrl, onCommit: {
-                    validateForm()
+//                    validateForm()
                 })
             }
             .padding(.horizontal, 20)
@@ -326,20 +326,21 @@ struct TransferRtgsDestination: View {
         .padding()
     }
     
-    func validateForm() {
+    var disableForm: Bool {
         if (self.transferData.transactionType == "SKN") {
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
-                disabledButton = false
-            } else {
-                disabledButton = true
+            
+            if (            self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
+                return false
             }
+            
         } else {
+            
             if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl.isNotEmpty()) {
-                disabledButton = false
-            } else {
-                disabledButton = true
+                return false
             }
         }
+        
+        return true
     }
 }
 

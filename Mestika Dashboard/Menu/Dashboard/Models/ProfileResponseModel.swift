@@ -25,7 +25,8 @@ struct ProfileResponseModel: Codable {
 struct ChipProfileDto: Codable {
     let cardFlag, kodepos, provinsi, kabupatenKota: String
     let kecamatan, kelurahan, rw, rt: String
-    let postalAddress, accountNumber, nameOnCard, cardNo: String
+    let postalAddress, accountNumber, nameOnCard: String
+    let cardNo: String?
     let cardDesign, classCode, nik, id: String
     let imageNameAlias, balance: String
     let status: String?

@@ -32,6 +32,7 @@ class ProfileService {
                 print("\n\n RESPONSE GET PROFILES = \(httpResponse.statusCode)\n")
                 
                 if (httpResponse.statusCode == 200) {
+                    print("OK 200")
                     if let profileResponse = try? JSONDecoder().decode(ProfileResponseModel.self, from: data) {
                         completion(.success(profileResponse))
                     }

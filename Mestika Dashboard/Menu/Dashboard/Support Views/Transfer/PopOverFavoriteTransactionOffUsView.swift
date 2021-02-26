@@ -13,6 +13,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
     var transferData: TransferOffUsModel
     
     @Binding var show: Bool
+    @Binding var showAlert: Bool
     
     @State var receivedName = ""
     
@@ -115,11 +116,13 @@ struct PopOverFavoriteTransactionOffUsView: View {
                             self.favoritVM.transferRtgs(data: transferData) { result in
                                 print("Berhasil simpan ke favorite")
                                 self.show = false
+                                self.showAlert = true
                             }
                         } else {
                             self.favoritVM.transferSkn(data: transferData) { result in
                                 print("Berhasil simpan ke favorite")
                                 self.show = false
+                                self.showAlert = true
                             }
                         }
                         
@@ -153,6 +156,6 @@ struct PopOverFavoriteTransactionOffUsView: View {
 
 struct PopOverFavoriteTransactionOffUsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopOverFavoriteTransactionOffUsView(transferData: TransferOffUsModel(), show: .constant(false))
+        PopOverFavoriteTransactionOffUsView(transferData: TransferOffUsModel(), show: .constant(false), showAlert: .constant(false))
     }
 }
