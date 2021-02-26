@@ -69,7 +69,7 @@ extension ProfileViewModel {
                 
                 if let _chipProfileDto = response.chipProfileDto?.last {
                     self.cardName = _chipProfileDto.nameOnCard
-                    self.cardNo = _chipProfileDto.cardNo
+                    self.cardNo = _chipProfileDto.cardNo ?? ""
                     self.accountNumber = _chipProfileDto.accountNumber
                     print(_chipProfileDto.accountNumber)
                 }
