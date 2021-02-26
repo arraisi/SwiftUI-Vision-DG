@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormNoRekeningPinForgotPasswordScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State private var atmNumberCtrl = ""
     @State private var pinAtmCtrl = ""
     @State private var showPassword: Bool = false
@@ -17,15 +20,15 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
         ZStack {
             Image("bg_blue")
                 .resizable()
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("INPUT NO REKENING / KTP")
+                Text(NSLocalizedString("INPUT NO ACCOUNT / ID CARD".localized(language), comment: ""))
                     .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                 
-                Text("Masukkan nomor rekening / KTP dan PIN Transaksi Anda.")
+                Text(NSLocalizedString("Enter your account number / KTP and Transaction PIN.".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -35,7 +38,7 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 
                 VStack {
                     HStack {
-                        TextField("Masukkan nomor rekening / KTP", text: self.$atmNumberCtrl)
+                        TextField(NSLocalizedString("Enter your account number / ID CARD".localized(language), comment: ""), text: self.$atmNumberCtrl)
                     }
                     .frame(height: 25)
                     .padding()
@@ -47,7 +50,7 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 
                 VStack {
                     HStack {
-                        TextField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
+                        TextField(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""), text: self.$pinAtmCtrl)
                     }
                     .frame(height: 25)
                     .padding()
@@ -61,9 +64,9 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 
                 VStack {
                     NavigationLink(destination: LoginScreen(isNewDeviceLogin: .constant(false)), label: {
-                        Text("KONFIRMASI DATA")
+                        Text(NSLocalizedString("DATA CONFIRMATION".localized(language), comment: ""))
                             .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         
@@ -78,7 +81,7 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
             }
             .padding(.top, 60)
         }
-        .navigationBarTitle("Lupa Password", displayMode: .inline)
+        .navigationBarTitle("Forgot Password".localized(language), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
             Text("Cancel")
         }))

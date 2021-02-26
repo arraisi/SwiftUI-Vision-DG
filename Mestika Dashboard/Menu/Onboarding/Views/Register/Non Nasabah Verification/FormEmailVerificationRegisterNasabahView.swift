@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormEmailVerificationRegisterNasabahView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
@@ -55,20 +58,20 @@ struct FormEmailVerificationRegisterNasabahView: View {
                             self.shouldPopToRootView2 = false
                         },
                         label: {
-                            Text(NSLocalizedString("Email Verification", comment: ""))
+                            Text(NSLocalizedString("Email Verification".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .padding(.top, 30)
                         }
                     )
                     
-                    Text(NSLocalizedString("Silahkan masukkan Alamat Email Anda", comment: ""))
+                    Text(NSLocalizedString("Please enter your Email Address".localized(language), comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
                     
-                    TextField(NSLocalizedString("Masukkan alamat email anda", comment: ""), text: $email, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Please enter your Email Address".localized(language), comment: ""), text: $email, onEditingChanged: { changed in
                         print("Changed")
                         self.registerData.email = self.email
                         UserDefaults.standard.set(self.registerData.email, forKey: "email_local")
@@ -91,7 +94,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("*Email harus lebih dari 8 karakter", comment: ""))
+                        Text(NSLocalizedString("* Email must be more than 8 characters".localized(language), comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 12))
                             .foregroundColor(.black)
                         
@@ -104,7 +107,7 @@ struct FormEmailVerificationRegisterNasabahView: View {
                         destination: FormEmailOTPVerificationRegisterNasabahView(shouldPopToRootView: self.$activeRoute).environmentObject(registerData),
                         isActive: self.$activeRoute) {
                         
-                        Text(NSLocalizedString("Verifikasi Email", comment: ""))
+                        Text(NSLocalizedString("Email Verification".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -134,11 +137,11 @@ struct FormEmailVerificationRegisterNasabahView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO", comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

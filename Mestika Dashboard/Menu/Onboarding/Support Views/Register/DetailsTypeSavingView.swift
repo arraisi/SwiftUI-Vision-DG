@@ -9,6 +9,9 @@ import SwiftUI
 
 struct DetailsTypeSavingView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     
     var data: JenisTabunganViewModel
@@ -65,7 +68,7 @@ struct DetailsTypeSavingView: View {
                         self.isShowModalDetail.toggle()
                     }
                 }, label: {
-                    Text(NSLocalizedString("Saving Detail", comment: ""))
+                    Text(NSLocalizedString("Saving Detail".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .font(.custom("Montserrat-SemiBold", size: 14))
 //                        .frame(minHeight: 30)
@@ -81,7 +84,7 @@ struct DetailsTypeSavingView: View {
                     }
                 },
                 label: {
-                    Text(NSLocalizedString("Pilih Tabungan ini", comment: ""))
+                    Text(NSLocalizedString("Choose this Savings".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)

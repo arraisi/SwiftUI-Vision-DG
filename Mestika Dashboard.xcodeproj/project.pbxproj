@@ -315,6 +315,8 @@
 		C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068A5AF256CF3C100CE96C4 /* UIApplication.swift */; };
 		C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2F92563726700D06EE3 /* KetentuanModel.swift */; };
 		C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */; };
+		C06CDABC25E8A0FB00899CC8 /* LocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */; };
+		C06CDAC725E8A17700899CC8 /* String+Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06CDAC625E8A17700899CC8 /* String+Localisation.swift */; };
 		C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */; };
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
@@ -717,6 +719,8 @@
 		C068A5AF256CF3C100CE96C4 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		C06AC2F92563726700D06EE3 /* KetentuanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanModel.swift; sourceTree = "<group>"; };
 		C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanViewModel.swift; sourceTree = "<group>"; };
+		C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationService.swift; sourceTree = "<group>"; };
+		C06CDAC625E8A17700899CC8 /* String+Localisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localisation.swift"; sourceTree = "<group>"; };
 		C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateFingerPrintResponseModel.swift; sourceTree = "<group>"; };
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
@@ -862,6 +866,7 @@
 		0A566A0C25CA6E7A0008E752 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */,
 				0A566A0D25CA6E940008E752 /* TransferServices.swift */,
 				52CB5DF125CBEA480012DDAB /* ProfileService.swift */,
 				529190C325D3C9A5005A4898 /* ReferenceService.swift */,
@@ -1165,6 +1170,7 @@
 				FAF5869225AB302F00ABDA3E /* UINavigationController+Extensions.swift */,
 				FA486B1D25AF528D00EDBD88 /* Font+Extensions.swift */,
 				5283AF5C25CD28E100111C75 /* UIDevice+Extensions.swift */,
+				C06CDAC625E8A17700899CC8 /* String+Localisation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1667,7 +1673,6 @@
 		C01C67A4255E38180019D06F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C0D142D025DE503B0015175D /* History */,
 				0658B58C2563F8A1001B659D /* Notification */,
 				52BF57F52559279100F009B5 /* PaymentTransaction */,
 				526B657A254FB20800C13C36 /* Account */,
@@ -1803,13 +1808,6 @@
 				528AE2C62595B89A003AFD73 /* AddressSugestionResponse.swift */,
 			);
 			path = Register;
-			sourceTree = "<group>";
-		};
-		C0D142D025DE503B0015175D /* History */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = History;
 			sourceTree = "<group>";
 		};
 		C0D7B5D92552AF25009C3976 /* CardManagement */ = {
@@ -2357,6 +2355,7 @@
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
 				52C2FA2325D1A6F900AC3CF7 /* FavoriteAppBar.swift in Sources */,
 				52ADFF4A2557DE8000A1001F /* TabItemView.swift in Sources */,
+				C06CDAC725E8A17700899CC8 /* String+Localisation.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
 				C05BA90825821A7D00E115D6 /* FormPINTransaksiATMView.swift in Sources */,
 				C043CFCA25CD4BD000328C91 /* BiometricType.swift in Sources */,
@@ -2443,6 +2442,7 @@
 				C0AEAC2725D516B600B6A20C /* EncryptPasswordView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
+				C06CDABC25E8A0FB00899CC8 /* LocalizationService.swift in Sources */,
 				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */,
 				FA1B142D25AC66E50000152A /* SuccessCancelView.swift in Sources */,
 				52ADFEBC2557DA0700A1001F /* RecognizedText.swift in Sources */,

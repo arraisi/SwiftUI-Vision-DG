@@ -10,6 +10,9 @@ import Introspect
 
 struct KetentuanRegisterNonNasabahView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -55,7 +58,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                 .frame(width: 70, height: 70)
                                 .padding(.top, 20)
                             
-                            Text(NSLocalizedString("Sebelum Memulai..!!", comment: ""))
+                            Text(NSLocalizedString("Before Starting..!!".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Bold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .padding(.top, 0)
@@ -65,7 +68,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                 WebView(readed: self.$readed, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                                 
                                 if showingBadge {
-                                    BadgeView(text: NSLocalizedString("Silahkan scroll kebawah", comment: ""))
+                                    BadgeView(text: NSLocalizedString("Please scroll down".localized(language), comment: ""))
                                         .animation(.easeIn)
                                         .onAppear{
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -87,7 +90,7 @@ struct KetentuanRegisterNonNasabahView: View {
                             Button(action : {
                                 self.goToNext = true
                             }) {
-                                Text(NSLocalizedString("Lanjut Membuat Rekening", comment: ""))
+                                Text(NSLocalizedString("Continue to Create Account".localized(language), comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -100,7 +103,7 @@ struct KetentuanRegisterNonNasabahView: View {
                             Button(action : {
                                 self.appState.moveToWelcomeView = true
                             }) {
-                                Text(NSLocalizedString("Batal Mendaftar", comment: ""))
+                                Text(NSLocalizedString("Cancel Register".localized(language), comment: ""))
                                     .foregroundColor(.gray)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -127,11 +130,11 @@ struct KetentuanRegisterNonNasabahView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO", comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

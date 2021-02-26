@@ -10,6 +10,9 @@ import Indicators
 
 struct FormChangePasswordView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject private var authVM = AuthViewModel()
@@ -217,7 +220,7 @@ struct FormChangePasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Password tidak sama, silahkan ketik ulang")
+            Text(NSLocalizedString("Password is not the same, please retype".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))

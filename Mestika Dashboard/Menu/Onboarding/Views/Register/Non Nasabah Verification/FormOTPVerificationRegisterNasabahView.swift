@@ -12,6 +12,9 @@ import SystemConfiguration
 
 struct FormOTPVerificationRegisterNasabahView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -102,14 +105,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "+62\(registerData.noTelepon.trimmingCharacters(in: .whitespaces))")
+                    Text(NSLocalizedString("We have sent OTP to no.\n".localized(language), comment: "") + "+62\(registerData.noTelepon.trimmingCharacters(in: .whitespaces))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Silahkan masukkan kode OTP dengan \nREF #", comment: "")+"\(referenceCode)")
+                    Text(NSLocalizedString("Please enter the OTP code with \nREF #".localized(language), comment: "")+"\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -123,7 +126,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("Tidak Menerima Kode?", comment: ""))
+                        Text(NSLocalizedString("Didn't Receive Code?".localized(language), comment: ""))
                             .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
@@ -139,7 +142,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                                 self.isShowAlertInternetConnection = true
                             }
                         }) {
-                            Text(NSLocalizedString("Resend OTP", comment: ""))
+                            Text(NSLocalizedString("Resend OTP".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }
@@ -157,7 +160,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text(NSLocalizedString("Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP", comment: ""))
+                    Text(NSLocalizedString("Make sure you are connected to the Internet and have sufficient credit to receive OTP".localized(language), comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
@@ -205,7 +208,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             } else {
-                                Text(NSLocalizedString("Verifikasi OTP", comment: ""))
+                                Text(NSLocalizedString("OTP Verification", comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -392,14 +395,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukkan salah silahkan ulangi lagi", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered is incorrect, please try again".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -408,9 +411,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 self.isLoading = false
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Kembali", comment: ""))
+                Text(NSLocalizedString("Back", comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -434,14 +437,14 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered was incorrect 5 times, please try again next week.".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -449,9 +452,9 @@ struct FormOTPVerificationRegisterNasabahView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
+                Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -474,7 +477,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("Please check your internet connection")
+            Text(NSLocalizedString("Please check your internet connection".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -667,7 +670,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             } else {
                 self.isLoading = false
 
-                self.messageResponse = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+                self.messageResponse = NSLocalizedString("Failed to cancel the application. Please try again later.".localized(language), comment: "")
                 self.isShowAlert.toggle()
             }
         })

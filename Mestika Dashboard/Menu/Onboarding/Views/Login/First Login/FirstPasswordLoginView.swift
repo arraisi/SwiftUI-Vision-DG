@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FirstPasswordLoginView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var appState: AppState
     
     @State private var nextRoute: Bool = false
@@ -43,7 +46,7 @@ struct FirstPasswordLoginView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack {
-                    Text("MASUKKAN PASSWORD")
+                    Text(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""))
                         .font(.title2)
                         .bold()
                         .foregroundColor(.white)
@@ -75,7 +78,7 @@ struct FirstPasswordLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text("Password Aplikasi harus berjumlah minimal 8 karakter huruf. Terdiri dari Uppercase, Number, etc.")
+            Text(NSLocalizedString("The Application Password must be at least 8 characters long. It consists of Uppercase, Number, etc.".localized(language), comment: ""))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -89,7 +92,7 @@ struct FirstPasswordLoginView: View {
                     if (securedPassword) {
                         ZStack {
                             HStack (spacing: 0) {
-                                SecureField("Masukkan Password", text: $password)
+                                SecureField(NSLocalizedString("Masukkan Password".localized(language), comment: ""), text: $password)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -111,7 +114,7 @@ struct FirstPasswordLoginView: View {
                     } else {
                         ZStack {
                             HStack (spacing: 0) {
-                                TextField("Masukkan Password", text: $password, onEditingChanged: { changed in
+                                TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password, onEditingChanged: { changed in
                                     print("\($password)")
                                 })
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -140,7 +143,7 @@ struct FirstPasswordLoginView: View {
                     if (securedConfirmation) {
                         ZStack {
                             HStack (spacing: 0) {
-                                SecureField("Konfirmasi Password", text: $confirmationPassword)
+                                SecureField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -162,7 +165,7 @@ struct FirstPasswordLoginView: View {
                     } else {
                         ZStack {
                             HStack (spacing: 0) {
-                                TextField("Konfirmasi Password", text: $confirmationPassword)
+                                TextField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -196,9 +199,9 @@ struct FirstPasswordLoginView: View {
                     checkPassword()
                 },
                 label: {
-                    Text("SIMPAN DATA LOGIN")
+                    Text(NSLocalizedString("SAVE LOGIN DATA".localized(language), comment: ""))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                 })
@@ -232,8 +235,8 @@ struct FirstPasswordLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Password tidak sama, silahkan ketik ulang")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Password is not the same, please retype", comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
@@ -241,9 +244,9 @@ struct FirstPasswordLoginView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text("Kembali")
+                Text("Back")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }

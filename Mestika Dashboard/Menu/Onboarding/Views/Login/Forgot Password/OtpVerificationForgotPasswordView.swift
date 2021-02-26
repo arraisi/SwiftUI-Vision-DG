@@ -10,6 +10,9 @@ import Indicators
 
 struct OtpVerificationForgotPasswordView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var registerData: RegistrasiModel
@@ -69,20 +72,20 @@ struct OtpVerificationForgotPasswordView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text("VERIFIKASI KODE OTP")
+                    Text(NSLocalizedString("OTP CODE VERIFICATION".localized(language), comment: ""))
                         .font(.title2)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "+62\(registerData.noTelepon.trimmingCharacters(in: .whitespaces))")
+                    Text(NSLocalizedString("We have sent OTP to no.\n".localized(language), comment: "") + "+62\(registerData.noTelepon.trimmingCharacters(in: .whitespaces))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Silahkan masukkan kode OTP dengan \nREF #", comment: "")+"\(referenceCode)")
+                    Text(NSLocalizedString("Please enter the OTP code with \nREF #".localized(language), comment: "")+"\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
@@ -97,7 +100,7 @@ struct OtpVerificationForgotPasswordView: View {
                     .padding(.top, 30)
                     
                     HStack {
-                        Text("Tidak Menerima Kode?")
+                        Text(NSLocalizedString("Didn't Receive Code?".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.caption)
                             .fontWeight(.light)
@@ -107,9 +110,9 @@ struct OtpVerificationForgotPasswordView: View {
                             self.tryCountResend += 1
                             getOTP()
                         }) {
-                            Text("Resend OTP")
+                            Text(NSLocalizedString("Resend OTP".localized(language), comment: ""))
                                 .font(.caption)
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                                 .foregroundColor(isResendOtpDisabled ? Color(hex: "#232175") : Color.white)
                         }
                         .disabled(isResendOtpDisabled)
@@ -129,7 +132,7 @@ struct OtpVerificationForgotPasswordView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
+                    Text(NSLocalizedString("Make sure you are connected to the Internet and have sufficient credit to receive OTP".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                         .foregroundColor(.white)
@@ -156,7 +159,7 @@ struct OtpVerificationForgotPasswordView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             } else {
-                                Text(NSLocalizedString("MASUKKAN KODE OTP", comment: ""))
+                                Text(NSLocalizedString("ENTER KODE OTP", comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -301,14 +304,14 @@ struct OtpVerificationForgotPasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukkan salah silahkan ulangi lagi", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered is incorrect, please try again".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -316,9 +319,9 @@ struct OtpVerificationForgotPasswordView: View {
             Button(action: {
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Kembali", comment: ""))
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -342,14 +345,14 @@ struct OtpVerificationForgotPasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered was incorrect 5 times, please try again next week.".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -357,9 +360,9 @@ struct OtpVerificationForgotPasswordView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
+                Text(NSLocalizedString("Back to Main page".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }

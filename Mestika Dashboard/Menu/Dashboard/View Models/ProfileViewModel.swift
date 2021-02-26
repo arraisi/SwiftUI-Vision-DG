@@ -67,12 +67,13 @@ extension ProfileViewModel {
                 self.balance = response.chipProfileDto?.last!.balance ?? "0"
                 self.classCode = response.chipProfileDto?.last?.classCode ?? ""
                 
-                self.cardName = response.chipProfileDto?.last!.nameOnCard ?? ""
-                self.cardNo = response.chipProfileDto?.last!.cardNo ?? ""
-                self.accountNumber = response.chipProfileDto?.last!.accountNumber ?? ""
-                
-                print(response.chipProfileDto?.last!.accountNumber)
-                
+                if let _chipProfileDto = response.chipProfileDto?.last {
+                    self.cardName = _chipProfileDto.nameOnCard
+                    self.cardNo = _chipProfileDto.cardNo
+                    self.accountNumber = _chipProfileDto.accountNumber
+                    print(_chipProfileDto.accountNumber)
+                }
+                 
                 completion(true)
                 
             case .failure(let error):

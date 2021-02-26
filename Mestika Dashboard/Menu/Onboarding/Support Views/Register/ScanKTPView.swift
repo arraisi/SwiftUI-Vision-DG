@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ScanKTPView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /*
      Environtment Object
      */
@@ -33,7 +36,7 @@ struct ScanKTPView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(NSLocalizedString("Mohon siapkan terlebih dahulu \nKartu Tanda Penduduk (KTP) Anda", comment: ""))
+            Text(NSLocalizedString("Please prepare your \nIdentity Card (KTP) in advance".localized(language), comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
@@ -60,7 +63,7 @@ struct ScanKTPView: View {
             Button(action: {
                 self.onChange()
             }, label: {
-                Text(imageKTP == nil ? NSLocalizedString("Ambil Foto KTP", comment: "") : NSLocalizedString("Ganti Foto Lain", comment: ""))
+                Text(imageKTP == nil ? NSLocalizedString("Take Photo Identity Card (KTP)".localized(language), comment: "") : NSLocalizedString("Change Another Photo".localized(language), comment: ""))
                     .foregroundColor(imageKTP == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -77,12 +80,12 @@ struct ScanKTPView: View {
             
             VStack(alignment: .leading) {
                 
-                Text(NSLocalizedString("Nomor Kartu Tanda Penduduk", comment: ""))
+                Text(NSLocalizedString("Identity Card Number".localized(language), comment: ""))
                     .multilineTextAlignment(.leading)
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $nik, title: NSLocalizedString("No. KTP (Otomatis terisi)", comment: ""), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $nik, title: NSLocalizedString("No. KTP (Otomatis terisi)".localized(language), comment: ""), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.nik = String(str.prefix(16))
                     self.isValidKtp = str.count == 16
                     
@@ -91,7 +94,7 @@ struct ScanKTPView: View {
                 Button(action: {self.confirmNik.toggle()}) {
                     HStack(alignment: .top) {
                         Image(systemName: confirmNik ? "checkmark.square": "square")
-                        Text(NSLocalizedString("* Periksa kembali dan pastikan Nomor Kartu Tanda Penduduk (KTP) Anda telah sesuai", comment: ""))
+                        Text(NSLocalizedString("* Check again and make sure your Identity Card Number (KTP) is correct".localized(language), comment: ""))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#707070"))
                     }
@@ -106,7 +109,7 @@ struct ScanKTPView: View {
                     Button(action: {
                         getCitizen(nik: self.nik)
                     }) {
-                        Text(NSLocalizedString("Simpan", comment: ""))
+                        Text(NSLocalizedString("Save".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

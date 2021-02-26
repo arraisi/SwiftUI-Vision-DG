@@ -10,6 +10,9 @@ import SwiftUI
 
 struct LoginScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     
@@ -60,13 +63,13 @@ struct LoginScreen: View {
                 
                 AppBarLogo(light: false, onCancel: {})
                 
-                Text("LOGIN APPS")
+                Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
                     .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text("Masukkan Password Akun Anda")
+                Text(NSLocalizedString("Enter Your Account Password".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -75,9 +78,9 @@ struct LoginScreen: View {
                 VStack {
                     HStack {
                         if (showPassword) {
-                            TextField("Password account Anda", text: self.$passwordCtrl)
+                            TextField(NSLocalizedString("Your account password".localized(language), comment: ""), text: self.$passwordCtrl)
                         } else {
-                            SecureField("Password account Anda", text: self.$passwordCtrl)
+                            SecureField(NSLocalizedString("Your account password".localized(language), comment: ""), text: self.$passwordCtrl)
                         }
                         
                         Button(action: {
@@ -99,7 +102,7 @@ struct LoginScreen: View {
                             self.routeNewPassword = true
                         },
                         label: {
-                            Text("Forgot Password?")
+                            Text(NSLocalizedString("Forgot Password?".localized(language), comment: ""))
                                 .font(.subheadline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -116,7 +119,7 @@ struct LoginScreen: View {
                             UIApplication.shared.endEditing()
                         },
                         label: {
-                            Text("LOGIN APPS")
+                            Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
                                 .foregroundColor(disableForm ? Color.white : Color(hex: "#232175"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -160,7 +163,7 @@ struct LoginScreen: View {
                 Spacer()
                 
                 HStack {
-                    Text("Don't have an account yet?")
+                    Text(NSLocalizedString("Don't have an account yet?".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                         .foregroundColor(.white)
@@ -170,7 +173,7 @@ struct LoginScreen: View {
                     Button(action: {
                         self.appState.moveToWelcomeView = true
                     }) {
-                        Text("Register Here")
+                        Text(NSLocalizedString("Register Here".localized(language), comment: ""))
                             .font(.subheadline)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -261,7 +264,7 @@ struct LoginScreen: View {
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             
-            let reason = "We need to unlock your data."
+            let reason = NSLocalizedString("We need to unlock your data.".localized(language), comment: "")
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 
@@ -296,20 +299,20 @@ struct LoginScreen: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Password salah")
+            Text(NSLocalizedString("Wrong password".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Silahkan masukkan password anda dengan benar, atau login dengan cara lain.")
+            Text(NSLocalizedString("Please enter your password correctly or login in another way.".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
             Button(action: {}) {
-                Text("Kembali")
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))
@@ -335,12 +338,12 @@ struct LoginScreen: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Login dengan Biometric")
+            Text(NSLocalizedString("Login dengan Biometric".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Dapatkan kemudahan dengan login hanya dengan Biometric.")
+            Text(NSLocalizedString("It's easy to log in only with Biometrics.".localized(language), comment: ""))
                 .font(.custom("Montserrat-Regular", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -349,7 +352,7 @@ struct LoginScreen: View {
             HStack {
                 
                 Button(action: {}) {
-                    Text("Kembali")
+                    Text(NSLocalizedString("Back".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .fontWeight(.bold)
                         .font(.system(size: 12))
@@ -380,7 +383,7 @@ struct LoginScreen: View {
                     
                     
                 }) {
-                    Text("Aktifkan")
+                    Text(NSLocalizedString("Activate".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .font(.system(size: 12))

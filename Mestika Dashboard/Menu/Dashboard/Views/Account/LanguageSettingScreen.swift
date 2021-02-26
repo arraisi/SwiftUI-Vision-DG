@@ -11,9 +11,12 @@ struct LanguageSettingScreen: View {
     
     // View variables
     let languages: [MasterModel] = load("languages.json")
-    @State private var language: Int = 2
+    @State private var languageId: Int = 2
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
     
     var body: some View {
         VStack {
@@ -22,25 +25,29 @@ struct LanguageSettingScreen: View {
             }
             ScrollView(showsIndicators: false) {
                 VStack {
-                    Text("Choose Language")
+                    Text(NSLocalizedString("Choose Language".localized(language), comment: ""))
                         .font(.custom("Montserrat-Bold", size: 24))
                         .foregroundColor(Color(hex: "#232175"))
                     
                     VStack(alignment: .leading, spacing: 30) {
-                        Text("Select this Language to use for the Application")
+                        Text(NSLocalizedString("Select this Language to use for the Application".localized(language), comment: ""))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#002251"))
                             .padding(.top, 5)
                         
                         RadioButtonGroup(
                             items: languages,
-                            selectedId: $language) { selected in }
+                            selectedId: $languageId) { selected in
+                        }
                         
                         Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                            print("language \(language)")
+                            if languageId == 1 {
+                                LocalizationService.shared.language = .indonesia
+                            } else {
+                                LocalizationService.shared.language = .english_us
+                            }
                         }) {
-                            Text("Use this Language")
+                            Text(NSLocalizedString("Use this Language".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 16))
                                 .frame(maxWidth: .infinity, maxHeight: 50)
@@ -63,8 +70,21 @@ struct LanguageSettingScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .gesture(DragGesture().onEnded({ value in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 50) {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }))
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear {
+            print("User language : \(LocalizationService.shared.language)")
+            if language == .indonesia {
+                self.languageId = 1
+            } else { self.languageId = 2 }
+            
         }
     }
 }
