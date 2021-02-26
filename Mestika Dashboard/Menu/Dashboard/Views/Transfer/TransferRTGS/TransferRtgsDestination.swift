@@ -342,22 +342,6 @@ struct TransferRtgsDestination: View {
         
         return true
     }
-    
-    func validateForm() {
-        if (self.transferData.transactionType == "SKN") {
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
-                disabledButton = false
-            } else {
-                disabledButton = true
-            }
-        } else {
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl.isNotEmpty()) {
-                disabledButton = false
-            } else {
-                disabledButton = true
-            }
-        }
-    }
 }
 
 struct TransferRtgsDestination_Previews: PreviewProvider {

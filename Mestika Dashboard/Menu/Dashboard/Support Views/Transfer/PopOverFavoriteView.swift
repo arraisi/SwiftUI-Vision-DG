@@ -14,6 +14,7 @@ struct PopOverFavoriteView: View {
     var transferData: TransferOnUsModel
     
     @Binding var show: Bool
+    @Binding var showAlert: Bool
     @State var receivedName = ""
     @State var receivedBank = "MESTIKA"
     //    @State var receivedRekening = "88091293900"
@@ -138,6 +139,7 @@ struct PopOverFavoriteView: View {
                         self.favoritVM.transferOnUs(data: transferData) { result in
                             print("Berhasil simpan ke favorite")
                             self.show = false
+                            self.showAlert = true
                         }
                     }, label: {
                         if self.favoritVM.isLoading {
@@ -176,6 +178,6 @@ struct PopOverFavoriteView: View {
 
 struct PopOverFavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        PopOverFavoriteView(transferData: TransferOnUsModel(), show: .constant(false))
+        PopOverFavoriteView(transferData: TransferOnUsModel(), show: .constant(false), showAlert: .constant(false))
     }
 }

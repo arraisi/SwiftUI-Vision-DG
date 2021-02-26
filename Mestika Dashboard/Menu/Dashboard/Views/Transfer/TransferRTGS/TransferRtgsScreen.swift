@@ -144,8 +144,8 @@ struct TransferRtgsScreen: View {
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         })
-                        .disabled(disabledButton)
-                        .background(disabledButton ? Color.gray : Color(hex: "#232175"))
+                        .disabled(disableForm)
+                        .background(disableForm ? Color.gray : Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                     }
@@ -344,7 +344,6 @@ struct TransferRtgsScreen: View {
                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                         self.amount = cleanAmount.thousandSeparator()
                         self.transferData.amount = cleanAmount
-                        validateForm()
                     }
                     .foregroundColor(Color(hex: "#232175"))
                     .font(.system(size: 30, weight: .bold, design: .default))
@@ -429,7 +428,6 @@ struct TransferRtgsScreen: View {
                         Button(action: {
                             self.transactionFrequency = data
                             self.transferData.transactionFrequency = data
-                            validateForm()
                         }) {
                             Text(data)
                                 .bold()
@@ -464,7 +462,6 @@ struct TransferRtgsScreen: View {
                         Button(action: {
                             self.transactionVoucher = data
                             self.transferData.transactionVoucher = data
-                            validateForm()
                         }) {
                             Text(data)
                                 .bold()
@@ -837,12 +834,11 @@ struct TransferRtgsScreen: View {
     
     // MARK: - FUNCTION DATA
     
-    func validateForm() {
-        if (self.noRekeningCtrl.count == 16 && self.amount != "") {
-            disabledButton = false
-        } else {
-            disabledButton = true
+    var disableForm: Bool {
+        if (self.noRekeningCtrl.count >= 9 && self.amount != "") {
+            return false
         }
+        return true
     }
     
     var dateFormatter: DateFormatter {

@@ -39,26 +39,24 @@ struct AccountTabs: View {
     @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
     
     var body: some View {
-        LoadingView(isShowing: self.$isLoading, content: {
-            ZStack {
-                ScrollView(.vertical, showsIndicators: false, content: {
-                    
-                    GeometryReader { geometry in
-                        Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
-                            .frame(height: 0)
+        ZStack {
+            ScrollView(.vertical, showsIndicators: false, content: {
+                
+                GeometryReader { geometry in
+                    Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                        .frame(height: 0)
+                }
+                
+                ZStack {
+                    VStack {
+                        profileInfo
+                        menuGrid
+                            .padding(.bottom)
                     }
-                    
-                    ZStack {
-                        VStack {
-                            profileInfo
-                            menuGrid
-                                .padding(.bottom)
-                        }
-                    }
-                })
-                .navigationBarHidden(true)
-            }
-        })
+                }
+            })
+            .navigationBarHidden(true)
+        }
         .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
             if moveToAccountTab {
                 //                getCoreDataNewDevice()
@@ -84,13 +82,18 @@ struct AccountTabs: View {
                     .frame(width: 75, height: 75, alignment: .center)
                     .clipShape(Circle())
                 
-                VStack(alignment: .leading) {
-                    Text("\(self.profileVM.name)")
-                        .font(.custom("Montserrat-Bold", size: 22))
-                        .foregroundColor(Color(hex: "#2334D0"))
-                    
-                    Text("+62\(self.profileVM.telepon)")
-                        .font(.custom("Montserrat-SemiBold", size: 16))
+                if isLoading {
+                    ProgressView()
+                        .padding(.leading)
+                } else {
+                    VStack(alignment: .leading) {
+                        Text("\(self.profileVM.name)")
+                            .font(.custom("Montserrat-Bold", size: 22))
+                            .foregroundColor(Color(hex: "#2334D0"))
+                        
+                        Text("+62\(self.profileVM.telepon)")
+                            .font(.custom("Montserrat-SemiBold", size: 16))
+                    }
                 }
                 
                 Spacer()
