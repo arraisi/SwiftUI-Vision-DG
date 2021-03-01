@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PINView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
@@ -54,7 +57,7 @@ struct PINView: View {
                 AppBarLogo(light: false, onCancel: {})
                 ScrollView {
                     // Title
-                    Text("DATA PEMBUKAAN REKENING")
+                    Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -87,7 +90,7 @@ struct PINView: View {
                             Spacer()
                             
                             // Sub title
-                            Text("Masukkan PIN \nTransaksi Baru Anda")
+                            Text(NSLocalizedString("Enter your \nnew transaction PIN".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.semibold)
@@ -95,7 +98,7 @@ struct PINView: View {
                                 .padding(.horizontal, 20)
                                 .padding(.top, 20)
                             
-                            Text("Pin ini digunakan untuk setiap kegiatan transaksi keuangan")
+                            Text(NSLocalizedString("This pin is used for every financial transaction activity".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
@@ -128,7 +131,7 @@ struct PINView: View {
                                     }
                                 },
                                 label: {
-                                    Text("Konfirmasi PIN Transaksi")
+                                    Text(NSLocalizedString("Confirm Transaction PIN".localized(language), comment: ""))
                                         .foregroundColor(.white)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .frame(maxWidth: .infinity, maxHeight: 40)
@@ -178,11 +181,11 @@ struct PINView: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -270,8 +273,8 @@ struct PINView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("PIN terdiri dari 6 karakter, tidak boleh berurutan dari 6 angka yang sama")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("PIN consists of 6 characters, cannot be sequential from the same 6 digits".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -279,9 +282,9 @@ struct PINView: View {
             Button(action: {
                 self.showingModal.toggle()
             }) {
-                Text("Kembali")
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }

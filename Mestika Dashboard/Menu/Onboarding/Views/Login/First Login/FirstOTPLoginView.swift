@@ -9,6 +9,10 @@ import SwiftUI
 import Indicators
 
 struct FirstOTPLoginView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var loginData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -89,7 +93,7 @@ struct FirstOTPLoginView: View {
                 }
                 
                 VStack {
-                    Text("MASUKKAN KODE OTP")
+                    Text(NSLocalizedString("ENTER OTP CODE".localized(language), comment: ""))
                         .font(.title3)
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
@@ -164,14 +168,14 @@ struct FirstOTPLoginView: View {
         VStack(alignment: .center) {
             HStack {
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke no.\n", comment: "") + "\(loginData.noTelepon.trimmingCharacters(in: .whitespaces))")
+                    Text(NSLocalizedString("We have sent OTP to no.\n".localized(language), comment: "") + "\(loginData.noTelepon.trimmingCharacters(in: .whitespaces))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Silahkan masukkan kode OTP dengan \nREF #", comment: "")+"\(referenceCode)")
+                    Text(NSLocalizedString("Please enter the OTP code with \nREF #".localized(language), comment: "")+"\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -187,7 +191,7 @@ struct FirstOTPLoginView: View {
             }
             
             HStack {
-                Text("Tidak Menerima Kode?")
+                Text(NSLocalizedString("Didn't Receive Code?".localized(language), comment: ""))
                     .font(.caption2)
                     .foregroundColor(.white)
                 
@@ -197,9 +201,9 @@ struct FirstOTPLoginView: View {
                     getOTP()
                     resetField()
                 }) {
-                    Text("Resend OTP")
+                    Text(NSLocalizedString("Resend OTP".localized(language), comment: ""))
                         .font(.caption2)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .foregroundColor(isResendOtpDisabled ? Color(hex: "#232175") : Color.white)
                 }
                 .disabled(isResendOtpDisabled)
@@ -218,7 +222,7 @@ struct FirstOTPLoginView: View {
             }
             .padding(.top, 5)
             
-            Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
+            Text(NSLocalizedString("Make sure you are connected to the Internet and have sufficient credit to receive OTP".localized(language), comment: ""))
                 .font(.caption)
                 .bold()
                 .foregroundColor(.white)
@@ -325,14 +329,14 @@ struct FirstOTPLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Kode OTP Salah")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Kode OTP yang anda masukkan salah silahkan ulangi lagi")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered is incorrect, please try again".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -340,7 +344,7 @@ struct FirstOTPLoginView: View {
             Button(action: {
                 self.isShowModal = false
             }) {
-                Text("Kembali")
+                Text("Back")
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 12))
@@ -366,14 +370,14 @@ struct FirstOTPLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Kode OTP Salah")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered was incorrect 5 times, please try again next week.".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -381,9 +385,9 @@ struct FirstOTPLoginView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text("Kembali ke Halaman Utama")
+                Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -406,12 +410,12 @@ struct FirstOTPLoginView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Before Starting..!!", comment: ""))
+            Text(NSLocalizedString("Before Starting..!!".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Are you a customer of Bank Mestika?", comment: ""))
+            Text(NSLocalizedString("Are you a customer of Bank Mestika?".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -426,7 +430,7 @@ struct FirstOTPLoginView: View {
             Button(action: {
                 self.isKetentuanViewActive = true
             }) {
-                Text("Tidak, saya bukan")
+                Text(NSLocalizedString("No, I'am not".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -444,7 +448,7 @@ struct FirstOTPLoginView: View {
             Button(action: {
                 self.isNoAtmOrRekViewActive = true
             }) {
-                Text("Ya, saya nasabah Bank Mestika")
+                Text(NSLocalizedString("Yes, I am a customer of Bank Mestika".localized(language), comment: ""))
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -465,7 +469,7 @@ struct FirstOTPLoginView: View {
             HStack {
                 Spacer()
                 
-                Text("Anda belum terdaftar rekening online")
+                Text(NSLocalizedString("You have not registered an online account".localized(language), comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat-Bold", size: 20))
                     .foregroundColor(Color.red)
@@ -479,7 +483,7 @@ struct FirstOTPLoginView: View {
             HStack {
                 Spacer()
                 
-                Text("Apakah anda ingin mendaftarkan aplikasi Digital Banking")
+                Text(NSLocalizedString("Do you want to register a Digital Banking application".localized(language), comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat-Bold", size: 20))
                     .foregroundColor(Color(hex: "#232175"))
@@ -493,7 +497,7 @@ struct FirstOTPLoginView: View {
                 self.isShowModalUserNotRegister = false
                 self.isShowModalSelectionRegister = true
             }) {
-                Text("YA")
+                Text(NSLocalizedString("YES".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -511,7 +515,7 @@ struct FirstOTPLoginView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text("Tidak")
+                Text(NSLocalizedString("No".localized(language), comment: ""))
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)

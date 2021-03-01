@@ -9,142 +9,37 @@
 /* WELCOME SCREEN LOCALIZATION */
 "Welcome to" = "Selamat Datang di";
 "Register" = "DAFTAR";
-"Login" = "MASUK";
-"Before Starting..!!" = "Sebelum Memulai..!!";
-"Are you a customer of Bank Mestika?" = "Apakah Anda Merupakan Nasabah Bank Mestika?";
-"Message" = "Pesan";
-"INFORMASI SUBMIT JADWAL VIDEOCALL" = "";
-"Anda belum melakukan submit jadwal Videocall" = "";
-"Halaman Submit Jadwal Videocall" = "";
-"INFORMASI SUBMIT PRODUK ATM" = "";
-"Anda belum melakukan submit produk dan desain ATM" = "";
-"Halaman Submit Produk ATM" = "";
-"Mohon Tunggu" = "";
-"Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :" = "";
-"Tanggal" = "";
-"Jam" = "";
-"Reschedule Jadwal" = "";
-"Batalkan Permohonan" = "";
-"Persetujuan sedang dalam proses" = "";
-"Persetujuan sedang dalam proses. Hasil akan dikirimkan melalui SMS atau email" = "";
-"Saya Tunggu" = "";
-"Batalkan Permohonan" = "";
-"PEMBUKAAN REKENING DISETUJUI" = "";
-"Selamat pembukaan rekening baru Anda telah disetujui" = "";
-"Kembali ke halaman utama" = "";
-"PEMBUKAAN REKENING TELAH DITOLAK" = "";
-"Maaf, pembukaan rekening online Anda telah ditolak" = "";
-"Kembali ke halaman utama" = "";
-"Tidak, saya bukan" = "";
-"Ya, saya nasabah Bank Mestika" = "";
-"Please check your internet connection" = "";
+"REGISTER" = "DAFTAR";
+"Login" = "Masuk";
+"LOGIN" = "MASUK";
+"MESSAGE" = "PESAN";
+"Before Starting..!!" = "Sebelum Mulai..!!";
+"Are you a customer of Bank Mestika?" = "Apakah Anda pelanggan Bank Mestika?";
+"Do you want to cancel registration?" = "Apakah ingin membatalkan registrasi ?";
+"Are you sure want to go back home ?" = "Apakah kamu yakin ingin pulang ke rumah?";
+"INFORMATION SUBMIT VIDEO SCHEDULE" = "INFORMASI SUBMIT JADWAL VIDEOCALL";
+"You haven't submitted Videocall schedule" = "Anda belum melakukan submit jadwal Videocall";
+"Submit Videocall Schedule" = "Halaman Submit Jadwal Videocall";
+"ATM PRODUCT SUBMIT INFORMATION" = "INFORMASI SUBMIT PRODUK ATM";
+"You haven't submitted your product and ATM design" = "Anda belum melakukan submit produk dan desain ATM";
+"ATM Product Submit Page" = "Halaman Submit Produk ATM";
+"Please wait" = "Mohon Tunggu";
+"We have received your data, please wait for our CS to contact you at:" = "Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :";
+"Date" = "Tanggal";
+"Hour" = "Jam";
+"Reschedule Schedule" = "Reschedule Jadwal";
+"Cancel Request" = "Batalkan Permohonan";
+"Approval in progress" = "Persetujuan sedang dalam proses";
+"Approval is in process. Results will be sent via SMS or email" = "Persetujuan sedang dalam proses. Hasil akan dikirimkan melalui SMS atau email";
+"I wait" = "Saya Tunggu";
+"ACCOUNT OPENING APPROVED" = "PEMBUKAAN REKENING DISETUJUI";
+"Congratulations, your new account opening has been approved" = "Selamat pembukaan rekening baru Anda telah disetujui";
+"OPENING OF ACCOUNTS HAS DENIED" = "PEMBUKAAN REKENING TELAH DITOLAK";
+"Sorry, your online account opening has been declined" = "Maaf, pembukaan rekening online Anda telah ditolak";
+"You Have Registered" = "Anda Telah Mendaftar";
+"Please log in into your Account" = "Silakan masuk ke Akun Anda";
+"Please check your internet connection" = "Silakan periksa koneksi internet Anda";
 
-
-/*
- KetentuanRegisterNonNasabahView
- */
-"Silahkan scroll kebawah" = "";
-"Sebelum Memulai..!!" = "";
-"Lanjut Membuat Rekening" = "";
-"Batal Mendaftar" = "";
-"Apakah ingin membatalkan registrasi ?" = "";
-"YA" = "";
-"TIDAK" = "";
-"Tidak" = "";
-
-/*
- FormPhoneVerificationRegisterNasabahView
- */
-"Phone Verification" = "";
-"Silahkan masukkan No. Telepon Anda" = "";
-"No. Telepon" = "";
-"Verifikasi No. Telepon" = "";
-"Mohon Periksa Nomor Handphone Anda" = "";
-"Kembali" = "";
-
-/*
- FormOTPVerificationRegisterNasabahView
- */
-"Kami telah mengirimkan OTP ke no." = "";
-"Silahkan masukkan kode OTP dengan REF #" = "";
-"Silahkan masukkan kode OTP dengan \nREF #" = "";
-"Tidak Menerima Kode?" = "";
-"Resend OTP" = "Resend OTP";
-"Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP" = "";
-"Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP" = "";
-"Verifikasi OTP" = "";
-"Kode OTP Salah" = "";
-"Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
-"Kembali" = "";
-"Kode OTP Salah" = "";
-"Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
-"Kembali ke Halaman Utama" = "";
-"Please check your internet connection" = "";
-"Gagal membatalkan permohonan. Silakan coba beberapa saat lagi." = "";
-
-/*
- FormEmailVerificationRegisterNasabahView
- */
-"Email Verification" = "";
-"Silahkan masukkan Alamat Email Anda" = "";
-"Masukkan alamat email anda" = "";
-"*Email harus lebih dari 8 karakter" = "";
-"Verifikasi Email" = "";
-
-/*
- FormEmailOTPVerificationRegisterNasabahView
- */
-"Kami telah mengirimkan Kode Verifikasi ke" = "";
-"Silahkan masukkan kode OTP dengan REF #" = "";
-"Silahkan masukkan kode OTP dengan \nREF #" = "";
-"Resend OTP" = "";
-"Tidak Menerima Kode?" = "";
-"Silahkan cek email Anda untuk melihat kode OTP" = "";
-"Verifikasi OTP" = "";
-"Kode OTP Salah" = "";
-"Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
-"Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
-"Kembali" = "";
-
-/**
- Verifikasi Register Nasabah
- **/
-
-/*
- NoAtmOrRekeningVerificationView
- */
-"No. Kartu ATM atau Rekening" = "";
-"Silahkan masukkan no kartu ATM atau Rekening anda" = "";
-"Pilih jenis no kartu yang diinput" = "";
-"Masukkan no kartu" = "";
-"*Pastikan kartu ATM atau Rekening Anda telah aktif, jika belum aktifasi kartu ATM silahkan kunjungi Kantor Bank Mestika terdekat." = "";
-"Verifikasi No. Kartu" = "";
-/*
- PhoneOTPRegisterNasabahView
- */
-"Kami telah mengirimkan OTP \nke No." = "";
-"Silahkan masukkan kode OTP dengan" = "";
-"Tidak Menerima Kode?" = "";
-"Resend OTP" = "";
-"Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP" = "";
-"Verifikasi OTP" = "";
-"Kode OTP Salah" = "";
-"Kode OTP yang anda masukkan salah silahkan ulangi lagi" = "";
-"Kembali" = "";
-"Kode OTP Salah" = "";
-"Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan." = "";
-"Kembali ke Halaman Utama" = "";
-/*
- EmailRegisterNasabahView
- */
-"Email Verification" = "";
-"Silahkan masukkan Alamat Email Anda" = "";
-"Masukkan alamat email anda" = "";
-"*Email harus lebih dari 8 karakter" = "";
-"Verifikasi Email" = "";
-"Kami telah mengirimkan Kode Verifikasi \nke" = "";
-"Silahkan masukkan kode OTP dengan" = "";
-"Kode OTP Salah" = "";
 /*
  JenisTabunganRegisterNasabahView
  */
@@ -352,3 +247,250 @@
  */
 "Alamat Pengiriman" = "";
 "Keluarga Terdekat Anda" = "";
+
+/* Register PEMBUKAAN REKENING */
+/* KetentuanRegisterNonNasabahView */
+"Please scroll down" = "Silahkan scroll kebawah";
+"Continue to Create Account" = "Lanjut Membuat Rekening";
+"Cancel Register" = "Batal Mendaftar";
+"Do you want to cancel registration?" = "Apakah ingin membatalkan registrasi?";
+"NO" = "TIDAK";
+
+/* FormPhoneVerificationRegisterNasabahView */
+"Phone Verification" = "Phone Verification";
+"Please enter your Phone Number" = "Silahkan masukkan No. Telepon Anda";
+"Phone Number Verification" = "Verifikasi No. Telepon";
+"Please Check Your Mobile Number" = "Mohon Periksa Nomor Handphone Anda";
+
+/* FormOTPVerificationRegisterNasabahView */
+"OTP Verification" = "Verifikasi OTP";
+"Failed to cancel the application. Please try again later." = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi.";
+"We have sent OTP to no.\n" = "Kami telah mengirimkan OTP ke no.";
+
+/* FormEmailVerificationRegisterNasabahView */
+"Email Verification" = "Email Verification";
+"Verify email" = "Verify email";
+"Please enter your Email Address" = "Masukkan alamat email anda";
+"* Email must be more than 8 characters" = "*Email harus lebih dari 8 karakter";
+
+/*FormEmailOTPVerificationRegisterNasabahView*/
+"We have sent the Verification Code to" = "Kami telah mengirimkan Kode Verifikasi ke\n";
+"Please check your email to see the OTP code" = "Silahkan cek email Anda untuk melihat kode OTP";
+
+/* NoAtmOrRekeningVerificationView */
+"ATM Card or Account No." = "No. Kartu ATM atau Rekening";
+"Please enter your ATM card or account number" = "Silahkan masukkan no kartu ATM atau Rekening anda";
+"Select the type of card no. Inputted" = "Pilih jenis no kartu yang diinput";
+"Enter card no." = "Masukkan no kartu";
+"* Make sure your ATM card or account is active, if you haven't activated your ATM card, please visit the nearest Mestika Bank Office." = "*Pastikan kartu ATM atau Rekening Anda telah aktif, jika belum aktifasi kartu ATM silahkan kunjungi Kantor Bank Mestika terdekat.";
+"Verification Card No." = "Verifikasi No. Kartu";
+
+/* TujuanPembukaanRekeningView */
+"OPENING ACCOUNT DATA" = "DATA PEMBUKAAN REKENING";
+"Account Opening Purpose" = "Tujuan Pembukaan Rekening";
+"Next" = "Berikutnya";
+"Choose Your Fund Source" = "Pilih Sumber Dana Kamu";
+"How Many Times Are Estimated Withdrawal of Funds in a Month" = "Berapa Kali Perkiraan Penarikan Dana dalam Sebulan";
+"How Much Your Estimated Withdrawal of Funds Each Month" = "Berapa Besar Perkiraan Penarikan Dana Anda Setiap Bulannya";
+"How many times are estimated for the deposit of funds in a month" = "Berapa Kali Perkiraan Setoran Dana Dalam Sebulan";
+"How Much Your Estimated Deposit Funds Each Month" = "Berapa Besar Perkiraan Setoran Dana Anda Setiap Bulannya";
+"What do you do for a living" = "Apa Pekerjaan Anda";
+"Professional Position" = "Jabatan Profesi";
+"Workplace Industry" = "Industri Tempat Bekerja";
+"Funding Resources - 01" = "Sumber Penyandang Dana - 01";
+"Funding Resources" = "Sumber Penyandang Dana";
+"Name of Funder" = "Nama Penyandang Dana";
+"Relationship With You" = "Hubungan Dengan Anda";
+"Choose relationship" = "Pilih hubungan";
+"Profession Funders" = "Profesi Penyandang Dana";
+"Choose a profession" = "Pilih profesi";
+"How Much is Your Gross Income" = "Berapa Penghasilan Kotor Anda";
+"Do You Have Other Sources of Income" = "Apakah Anda Memiliki Sumber Pendapatan Lainnya";
+"Select other income" = "Pilih pendapatan lainnya";
+"Do not have" = "Tidak memiliki";
+"No, I don't have" = "Tidak, Saya tidak memiliki";
+"Genetic Relationship" = "Hubungan Kekerabatan";
+"Your Nearest Family Data" = "Data Keluarga Terdekat Anda";
+"Address" = "Alamat";
+"Enter your \nnew transaction PIN" = "Masukkan PIN \nTransaksi Baru Anda";
+"This pin is used for every financial transaction activity" = "Pin ini digunakan untuk setiap kegiatan transaksi keuangan";
+"Confirm Transaction PIN" = "Konfirmasi PIN Transaksi";
+"PIN consists of 6 characters, cannot be sequential from the same 6 digits" = "PIN terdiri dari 6 karakter, tidak boleh berurutan dari 6 angka yang sama";
+"Enter Company Information" = "Masukkan Informasi Perusahaan";
+"Company name" = "Nama Perusahaan";
+"Company Telephone Number" = "No. Telepon Perusahaan";
+"Enter Digital Banking Application Password" = "Masukkan Password Aplikasi Digital Banking";
+"This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)" = "Password ini digunakan saat anda masuk kedalam Aplikasi Mobile Banking Mestika Bank (mengandung huruf kecil,angka,kapital,karakter khusus)";
+"Re-enter your new \nPIN Transaction" = "Masukkan Kembali \nPIN Transaksi Baru Anda";
+"This pin is used for every financial transaction activity" = "Pin ini digunakan untuk setiap kegiatan transaksi keuangan";
+"Save Transaction PIN" = "Simpan PIN Transaksi";
+"PIN is not the same" = "PIN tidak sama";
+"The transaction PIN that you entered is not the same as the initial, please re-enter it" = "PIN Transaksi yang anda masukkan tidak sama dengan awal, silahkan masukkan kembali";
+
+/* LOGIN SCREEN */
+"LOGIN APPS" = "MASUK APLIKASI";
+"Enter Your Account Password" = "Masukkan Password Akun Anda";
+"Your account password" = "Password akun Anda";
+"Forgot Password?" = "Lupa password";
+"Don't have an account yet?" = "Belum memiliki akun?";
+"Register Here" = "Daftar disini";
+"We need to unlock your data." = "Kami perlu akses data anda.";
+"Wrong password" = "Password salah";
+"Please enter your password correctly or login in another way." = "Silahkan masukkan password anda dengan benar, atau login dengan cara lain.";
+"Back" = "Kembali";
+"Login with Biometric" = "Masuk dengan Biometrik";
+"It's easy to log in only with Biometrics." = "Dapatkan kemudahan dengan login hanya dengan Biometrik.";
+"Activate" = "Aktifkan";
+
+/* FormInputNewPasswordForgotPasswordView */
+"NEW PASSWORD" = "PASSWORD BARU";
+"The application password must be at least 8 characters long. Consists of Uppercase, Number, etc." = "Kata sandi aplikasi harus berjumlah minimal 8 karakter huruf. Terdiri dari Uppercase, Number, etc.";
+"Your new password" = "Kata sandi baru Anda";
+"Confirm password" = "Konfirmasi kata sandi";
+"Save New Password" = "Simpan Kata Sandi Baru";
+"Password is not the same, please retype it." = "Kata sandi tidak sama, silahkan ketik ulang.";
+"Your password has been successfully changed" = "Password anda berhasil di ganti.";
+"Back to the login page" = "Kembali ke halaman login";
+"Do you still remember your transaction PIN?" = "Apakah and masih ingat PIN transaksi?";
+"Yes, i'am Still Remember" = "Ya, Saya masih ingat";
+"No, I do not remember" = "Tidak, Saya tidak ingat";
+
+/* FormInputAtmPinForgotPasswordView */
+"ENTER ID CARD DATA" = "INPUT DATA KTP";
+"Enter your registered account number / ID CARD and Transaction PIN" = "Masukkan nomor akun / KTP dan PIN Transaksi Anda yang sudah terdaftar";
+"Enter your account number / ID CARD" = "Masukkan nomor Akun / KTP";
+"Enter your Transaction PIN" = "Masukkan PIN Transaksi Anda";
+"DATA CONFIRMATION" = "KONFIRMASI DATA";
+"Password changed successfully." = "Kata sandi berhasil diganti.";
+
+/* FormInputAtmForgotPasswordScreen */
+"INPUT ATM DATA" = "MASUKKAN DATA ATM";
+"Enter your registered ATM card number and ATM PIN" = "Masukkan nomor kartu ATM dan PIN ATM Anda yang sudah terdaftar";
+"Enter your ATM number" = "Masukkan nomor ATM Anda";
+"Enter your ATM PIN" = "Masukkan PIN ATM Anda";
+
+/* OtpVerificationForgotPasswordView */
+"OTP CODE VERIFICATION" = "VERIFIKASI KODE OTP";
+"We have sent OTP to no.\n" = "Kami telah mengirimkan OTP ke no.\n";
+"Please enter the OTP code with \nREF #" = "Silahkan masukkan kode OTP dengan \nREF #";
+"Didn't Receive Code?" = "Tidak Menerima Kode?";
+"Resend OTP" = "Kirim Ulang OTP";
+"Make sure you are connected to the Internet and have sufficient credit to receive OTP" = "Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP";
+"ENTER OTP CODE" = "MASUKKAN KODE OTP";
+"Incorrect OTP Code" = "Kode OTP Salah";
+"The OTP code you entered is incorrect, please try again" = "Kode OTP yang anda masukkan salah silahkan ulangi lagi";
+"The OTP code you entered was incorrect 5 times, please try again next week." = "Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.";
+"Back to Main Page" = "Kembali ke Halaman Utama";
+
+/* PhoneNumberVerificationForgotPasswordView */
+"VERIFY YOUR PHONE NUMBER" = "VERIFIKASI NO. HP ANDA";
+"Please Enter Your Mobile Number" = "Silahkan Masukkan Nomor Handphone Anda";
+"Phone Number" = "No. Telepon";
+"Make sure your cellphone number is correct before proceeding to the next stage." = "Pastikan nomor handphone Anda telah sesuai sebelum melanjutkan ketahap berikutnya.";
+"ENTER YOUR PHONE NUMBER" = "MASUKKAN NO. HP ANDA";
+"Do you want to cancel changing password?" = "Apakah ingin membatalkan ubah password?";
+"YES" = "YA";
+"No" = "Tidak";
+"Please Check Your Mobile Number" = "Mohon Periksa Nomor Handphone Anda";
+
+/* FormPasswordVerificationForgotPasswordView */
+"ENTER PASSWORD" = "MASUKKAN KATA SANDI";
+"The verification process is successful. Please enter your application password." = "Proses verifikasi berhasil, Silahkan masukkan password aplikasi Anda.";
+"Enter Password" = "Masukkan Kata Sandi";
+"Forgot Password" = "Lupa Kata Sandi";
+
+/* FormNoRekeningPinForgotPasswordScreen */
+"INPUT NO ACCOUNT / ID CARD" = "INPUT NO REKENING / KTP";
+"Enter your account number / KTP and Transaction PIN." = "Masukkan nomor rekening / KTP dan PIN Transaksi Anda.";
+"Enter your account number / ID CARD" = "Masukkan nomor rekening / KTP";
+
+/* FirstLoginView */
+"Make sure your cellphone number is correct before proceeding to the next stage" = "Pastikan nomor handphone Anda telah sesuai sebelum melanjutkan ketahap berikutnya";
+"Enter your mobile number" = "Masukkan No. HP Anda";
+"Phone number not registered" = "No. Telepon belum terdaftar";
+"The number you have is not registered, please register." = "Nomor yang anda masukkan tidak terdaftar silahkan lakukan registrasi.";
+
+/* FirstOTPLoginView */
+"You have not registered an online account" = "Anda belum terdaftar rekening online";
+"No, I'am not" = "Tidak, saya bukan";
+"Yes, I am a customer of Bank Mestika" = "Ya, saya nasabah Bank Mestika";
+"Do you want to register a Digital Banking application" = "Apakah anda ingin mendaftarkan aplikasi Digital Banking";
+
+/* FirstATMLoginView */
+"ENTER YOUR DATA" = "MASUKKAN DATA ANDA";
+"Enter Your ATM Card Data" = "Masukkan Data Kartu ATM Anda";
+"Your PIN or ATM Number is wrong" = "PIN atau Nomor ATM anda salah";
+"Data yang anda masukkan tidak sesuai, silahkan masukkan kembali.";
+
+/* FirstPasswordLoginView */
+"ENTER PASSWORD" = "MASUKKAN PASSWORD";
+"The Application Password must be at least 8 characters long. It consists of Uppercase, Number, etc." = "Password Aplikasi harus berjumlah minimal 8 karakter huruf. Terdiri dari Uppercase, Number, etc.";
+"Enter Password" = "Masukkan Password";
+"Confirm Password" = "Konfirmasi Password";
+"SAVE LOGIN DATA" = "SIMPAN DATA LOGIN";
+"Password is not the same, please retype" = "Password tidak sama, silahkan ketik ulang";
+
+/*
+ Support Views
+ 
+ DetailsTypeSavingView
+ */
+"Saving Detail" = "Detail Tabungan";
+"Choose this Savings" = "Pilih Tabungan ini";
+
+/* ScanKTPView */
+"Please prepare your \nIdentity Card (KTP) in advance" = "Mohon siapkan terlebih dahulu \nKartu Tanda Penduduk (KTP) Anda";
+"Take Photo Identity Card (KTP)" = "Ambil Foto KTP";
+"Change Another Photo" = "Ganti Foto Lain";
+"Identity Card Number" = "Nomor Kartu Tanda Penduduk";
+"* Check again and make sure your Identity Card Number (KTP) is correct" = "* Periksa kembali dan pastikan Nomor Kartu Tanda Penduduk (KTP) Anda telah sesuai";
+"Save" = "Simpan";
+
+/* SelfieView */
+"Please Do a Selfie" = "Silahkan Lakukan Selfie";
+"Take a Selfie" = "Ambil Gambar Selfie";
+
+/* ScanNPWPView */
+"Please enter a photo of your NPWP card" = "Silahkan masukkan Foto kartu NPWP Anda";
+"Upload Image of NPWP" = "Unggah Gambar NPWP";
+"NPWP Number" = "Nomor NPWP";
+"* I declare that I do not have an NPWP card.\n Skip this stage" = "* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini";
+
+/* ScanNPWPView */
+"ATM Card Limit Details" = "Detail Limit Kartu ATM";
+"Daily Withdrawals" = "Penarikan Harian";
+"Daily Transfer" = "Transfer Harian";
+"Transfer Between Bank Mestika" = "Transfer Antar Sesama Bank Mestika";
+"Transfer to Other Bank" = "Transfer ke Bank Lain";
+"Payment" = "Pembayaran";
+"Purchase" = "Pembelian";
+"CHOOSE THIS ATM CARD" = "PILIH KARTU ATM INI";
+
+/* ScanNPWPView */
+"Address according to Identity Card/(KTP)" = "Alamat Sesuai KTP";
+"Mailing address" = "Alamat Surat Menyurat";
+"Company's address" = "Alamat Perusahaan";
+"Other Address" = "Alamat Lainnya";
+"Shipping address" = "Alamat Pengiriman";
+
+/* ScanNPWPView */
+"Your Nearest Family" = "Keluarga Terdekat Anda";
+"Relationship With You" = "Hubungan Dengan Anda";
+"Name" = "Nama";
+"Address" = "Alamat";
+"Postal code" = "Kode Pos";
+"Sub-district" = "Kecamatan";
+"Village" = "Kelurahan";
+"Phone number" = "Nomor Telepon";
+"Family address" = "Alamat keluarga";
+
+/* InformasiPerusahaanVerificationView */
+"Company Information" = "Informasi Perusahaan";
+"Company name" = "Nama Perusahaan";
+"Business fields" = "Bidang Usaha";
+"Company's address" = "Alamat Perusahaan";
+
+/* LanguageSettingScreen */
+"Choose Language" = "Pilih bahasa";
+"Select this Language to use for the Application" = "Pilih Bahasa ini untuk digunakan untuk Aplikasi";
+"Use this Language" = "Gunakan Bahasa ini";

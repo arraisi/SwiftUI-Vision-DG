@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormInputNewPasswordForgotPasswordView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /* Environtment Object */
@@ -48,13 +51,13 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 
                 AppBarLogo(light: false, onCancel: {})
                 
-                Text("PASSWORD BARU")
+                Text(NSLocalizedString("NEW PASSWORD".localized(language), comment: ""))
                     .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text("Pasword aplikasi harus berjumlah minimal 8 karakter huruf. Terdiri dari Uppercase, Number, etc.")
+                Text(NSLocalizedString("The application password must be at least 8 characters long. Consists of Uppercase, Number, etc.".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -65,9 +68,9 @@ struct FormInputNewPasswordForgotPasswordView: View {
                     VStack {
                         HStack {
                             if (showPassword) {
-                                TextField("Password baru Anda", text: self.$passwordCtrl)
+                                TextField(NSLocalizedString("Your new password".localized(language), comment: ""), text: self.$passwordCtrl)
                             } else {
-                                SecureField("Password baru Anda", text: self.$passwordCtrl)
+                                SecureField(NSLocalizedString("Your new password".localized(language), comment: ""), text: self.$passwordCtrl)
                             }
                             
                             Button(action: {
@@ -87,9 +90,9 @@ struct FormInputNewPasswordForgotPasswordView: View {
                         
                         HStack {
                             if (showConfirmPassword) {
-                                TextField("Confirm password", text: self.$confirmPasswordCtrl)
+                                TextField(NSLocalizedString("Confirm password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
                             } else {
-                                SecureField("Confirm password", text: self.$confirmPasswordCtrl)
+                                SecureField(NSLocalizedString("Confirm password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
                             }
                             
                             Button(action: {
@@ -126,9 +129,9 @@ struct FormInputNewPasswordForgotPasswordView: View {
                             }
                         },
                         label: {
-                            Text("Simpan Password Baru")
+                            Text(NSLocalizedString("Save New Password".localized(language), comment: ""))
                                 .foregroundColor(disableForm ? Color.white : Color(hex: "#2334D0"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
@@ -177,8 +180,8 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Password tidak sama, silahkan ketik ulang")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Password is not the same, please retype it.".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
@@ -186,7 +189,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
             Button(action: {
                 self.showingModalError = false
             }) {
-                Text("Kembali")
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -207,8 +210,8 @@ struct FormInputNewPasswordForgotPasswordView: View {
     func modalPasswordSuccess() -> some View {
         VStack(alignment: .leading) {
             
-            Text("Password anda berhasil di ganti.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Your password has been successfully changed.".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
@@ -216,7 +219,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
             Button(action: {
                 self.isNextRoute = true
             }) {
-                Text("Kembali ke halaman login")
+                Text(NSLocalizedString("Back to login screen".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -241,7 +244,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("Do you still remember your transaction PIN?")
+            Text(NSLocalizedString("Do you still remember your transaction PIN?".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 20)
@@ -256,7 +259,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
             Button(action: {
                 self.routeAccountNumberPin = true
             }) {
-                Text("Yes, i'am Still Remember")
+                Text(NSLocalizedString("Yes, i'am Still Remember".localized(language), comment: ""))
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -274,7 +277,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
             Button(action: {
                 self.routeATMNumberPin = true
             }) {
-                Text("No, I do not remember")
+                Text(NSLocalizedString("No, I do not remember".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 50)

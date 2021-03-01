@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FirstATMLoginView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Routing Bool */
     @State private var nextRoute: Bool = false
     @EnvironmentObject var appState: AppState
@@ -40,7 +43,7 @@ struct FirstATMLoginView: View {
             VStack {
                 
                 VStack {
-                    Text("MASUKKAN DATA ANDA")
+                    Text(NSLocalizedString("ENTER YOUR DATA".localized(language), comment: ""))
                         .font(.title2)
                         .bold()
                         .foregroundColor(.white)
@@ -72,7 +75,7 @@ struct FirstATMLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text("Masukkan nomor kartu ATM dan PIN ATM Anda yang sudah terdaftar")
+            Text(NSLocalizedString("Enter your registered ATM card number and ATM PIN".localized(language), comment: ""))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -80,7 +83,7 @@ struct FirstATMLoginView: View {
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
             
-            TextField("Masukkan nomor ATM Anda", text: $atmNumber, onEditingChanged: { changed in
+            TextField(NSLocalizedString("Enter your ATM number".localized(language), comment: ""), text: $atmNumber, onEditingChanged: { changed in
                 print("\($atmNumber)")
             })
             .frame(height: 20)
@@ -91,7 +94,7 @@ struct FirstATMLoginView: View {
             .cornerRadius(20)
             .padding(.horizontal, 20)
             
-            TextField("Masukkan PIN ATM Anda", text: $pin, onEditingChanged: { changed in
+            TextField(NSLocalizedString("Enter your ATM PIN".localized(language), comment: ""), text: $pin, onEditingChanged: { changed in
                 print("\($pin)")
             })
             .frame(height: 20)
@@ -107,9 +110,9 @@ struct FirstATMLoginView: View {
                     checkPinAndAtm()
                 },
                 label: {
-                    Text("Masukkan Data Kartu ATM Anda")
+                    Text(NSLocalizedString("Enter Your ATM Card Data".localized(language), comment: ""))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                 })
@@ -153,14 +156,14 @@ struct FirstATMLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("PIN atau Nomor ATM anda salah")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Your PIN or ATM Number is wrong".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Data yang anda masukkan tidak sesuai, silahkan masukkan kembali.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The data you entered is not correct, please re-enter it.".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -169,7 +172,7 @@ struct FirstATMLoginView: View {
 //                self.rootIsActive = true
                 self.appState.moveToWelcomeView = true
             }) {
-                Text("Kembali")
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 12))

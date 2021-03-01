@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PhoneNumberVerificationForgotPasswordView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var registerData: RegistrasiModel
@@ -35,13 +38,13 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                 
                 AppBarLogo(light: false, onCancel: {})
                 
-                Text("VERIFIKASI NO. HP ANDA")
+                Text(NSLocalizedString("VERIFY YOUR PHONE NUMBER".localized(language), comment: ""))
                     .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text("Silahkan Masukkan Nomor Handphone Anda")
+                Text(NSLocalizedString("Please Enter Your Mobile Number".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -58,7 +61,7 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                     Divider()
                         .frame(height: 20)
                     
-                    TextField("Phone Number", text: $phoneNumberCtrl, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Phone Number".localized(language), comment: ""), text: $phoneNumberCtrl, onEditingChanged: { changed in
                         print("\($phoneNumberCtrl)")
                         self.registerData.noTelepon = phoneNumberCtrl
                     }, onCommit: {
@@ -123,7 +126,7 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                 .padding(.top, 20)
                 .padding()
                 
-                Text("Pastikan nomor handphone Anda telah sesuai sebelum melanjutkan ketahap berikutnya.")
+                Text(NSLocalizedString("Make sure your cellphone number is correct before proceeding to the next stage.".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -149,9 +152,9 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                             }
                         },
                         label: {
-                            Text("MASUKKAN NO. HP ANDA")
+                            Text(NSLocalizedString("ENTER YOUR PHONE NUMBER".localized(language), comment: ""))
                                 .foregroundColor(Color(hex: "#232175"))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
@@ -182,11 +185,11 @@ struct PhoneNumberVerificationForgotPasswordView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan ubah password ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel changing password?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("No", comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -212,8 +215,8 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Mohon Periksa Nomor Handphone Anda")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Please Check Your Mobile Number".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
@@ -221,9 +224,9 @@ struct PhoneNumberVerificationForgotPasswordView: View {
             Button(action: {
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Kembali", comment: ""))
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }

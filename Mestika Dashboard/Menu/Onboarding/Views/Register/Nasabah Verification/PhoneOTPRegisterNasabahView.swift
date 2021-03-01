@@ -11,6 +11,9 @@ import SystemConfiguration
 
 struct PhoneOTPRegisterNasabahView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State var initHasRun = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -100,14 +103,14 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text(NSLocalizedString("Kami telah mengirimkan OTP ke No.\n", comment: "") + " \(destinationNumber)")
+                    Text(NSLocalizedString("We have sent OTP to no.\n".localized(language), comment: "") + " \(destinationNumber)")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Silahkan masukkan kode OTP dengan", comment: "") + "\nREF #\(referenceCode)")
+                    Text(NSLocalizedString("Please enter the OTP code with \nREF #", comment: "") + "\nREF #\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -121,7 +124,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("Tidak Menerima Kode?", comment: ""))
+                        Text(NSLocalizedString("Didn't Receive Code?", comment: ""))
                             .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
@@ -152,7 +155,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text(NSLocalizedString("Pastikan Anda terkoneksi ke Internet dan \npulsa mencukupi untuk menerima OTP", comment: ""))
+                    Text(NSLocalizedString("Make sure you are connected to the Internet and have sufficient credit to receive OTP", comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
@@ -209,7 +212,7 @@ struct PhoneOTPRegisterNasabahView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             } else {
-                                Text(NSLocalizedString("Verifikasi OTP", comment: ""))
+                                Text(NSLocalizedString("OTP Verification", comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -302,11 +305,11 @@ struct PhoneOTPRegisterNasabahView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO", comment: ""))))
         }
     }
     
@@ -399,14 +402,14 @@ struct PhoneOTPRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code", comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukkan salah silahkan ulangi lagi", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered is incorrect, please try again", comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -415,9 +418,9 @@ struct PhoneOTPRegisterNasabahView: View {
                 self.isLoading = false
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Kembali", comment: ""))
+                Text(NSLocalizedString("Back", comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -441,14 +444,14 @@ struct PhoneOTPRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Kode OTP Salah", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Incorrect OTP Code", comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("Kode OTP yang anda masukkan telah salah 5 kali, silahkan ulangi lagi minggu depan.", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The OTP code you entered was incorrect 5 times, please try again next week.", comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -456,9 +459,9 @@ struct PhoneOTPRegisterNasabahView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
+                Text(NSLocalizedString("Back to Main Page", comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }
@@ -636,7 +639,7 @@ struct PhoneOTPRegisterNasabahView: View {
             } else {
                 self.isLoading = false
 
-                self.messageResponse = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi."
+                self.messageResponse = NSLocalizedString("Failed to cancel the application. Please try again later.".localized(language), comment: "")
                 self.isShowAlert.toggle()
             }
         })

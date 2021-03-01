@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormInputAtmPinForgotPasswordView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -48,13 +51,13 @@ struct FormInputAtmPinForgotPasswordView: View {
                 
                 AppBarLogo(light: false, onCancel: {})
                 
-                Text("INPUT DATA KTP")
+                Text(NSLocalizedString("ENTER ID CARD DATA".localized(language), comment: ""))
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text("Masukkan nomor akun / KTP dan PIN Transaksi Anda yang sudah terdaftar")
+                Text(NSLocalizedString("Enter your registered account number / ID CARD and Transaction PIN".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -64,7 +67,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                 
                 VStack {
                     HStack {
-                        TextField("Masukkan nomor Akun / KTP", text: self.$atmNumberCtrl)
+                        TextField(NSLocalizedString("Enter your account number / ID CARD".localized(language), comment: ""), text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
                             .onReceive(atmNumberCtrl.publisher.collect()) {
                                 self.atmNumberCtrl = String($0.prefix(16))
@@ -95,7 +98,7 @@ struct FormInputAtmPinForgotPasswordView: View {
 //                                }
 //                        }
                         
-                        SecureField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
+                        SecureField(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""), text: self.$pinAtmCtrl)
                             .keyboardType(.numberPad)
                             .onReceive(pinAtmCtrl.publisher.collect()) {
                                 self.pinAtmCtrl = String($0.prefix(6))
@@ -122,7 +125,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                     Button(action: {
                         setPassword()
                     }, label: {
-                        Text("KONFIRMASI DATA")
+                        Text(NSLocalizedString("DATA CONFIRMATION".localized(language), comment: ""))
                             .foregroundColor(disableForm ? Color.black : Color(hex: "#232175"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))
@@ -185,10 +188,10 @@ struct FormInputAtmPinForgotPasswordView: View {
             Button(action: {
                 self.showingModalError = false
             }) {
-                Text("Kembali")
+                Text(NSLocalizedString("Back", comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
             }
             .background(Color(hex: "#2334D0"))
@@ -211,7 +214,7 @@ struct FormInputAtmPinForgotPasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Password berhasil diganti.")
+            Text(NSLocalizedString("Password changed successfully.".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
@@ -220,10 +223,10 @@ struct FormInputAtmPinForgotPasswordView: View {
             Button(action: {
                 self.isNextRoute = true
             }) {
-                Text("Ke Halaman Login")
+                Text(NSLocalizedString("Back to the login page".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(.custom("Montserrat-SemiBold".localized(language), size: 14))
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
             }
             .background(Color(hex: "#2334D0"))

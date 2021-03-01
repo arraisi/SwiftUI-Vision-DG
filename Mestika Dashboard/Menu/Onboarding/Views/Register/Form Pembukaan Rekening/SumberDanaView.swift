@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SumberDanaView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Registrasi Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -51,7 +54,7 @@ struct SumberDanaView: View {
                         
                         VStack {
                             // Title
-                            Text("DATA PEMBUKAAN REKENING")
+                            Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
                                 .padding(.vertical, 30)
@@ -84,7 +87,7 @@ struct SumberDanaView: View {
                                         Spacer()
                                         
                                         // Sub title
-                                        Text("Pilih Sumber Dana Kamu")
+                                        Text(NSLocalizedString("Choose Your Fund Source".localized(language), comment: ""))
                                             .font(.custom("Montserrat-SemiBold", size: 18))
                                             .font(Font.system(size: 18))
                                             .foregroundColor(Color(hex: "#232175"))
@@ -118,7 +121,7 @@ struct SumberDanaView: View {
                                         if (editMode == .inactive) {
                                             NavigationLink(destination: PerkiraanPenarikanView().environmentObject(registerData)) {
                                                 
-                                                Text("Berikutnya")
+                                                Text("Next")
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
@@ -133,7 +136,7 @@ struct SumberDanaView: View {
                                         } else {
                                             NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
                                                 
-                                                Text("Simpan")
+                                                Text("Save")
                                                     .foregroundColor(.white)
                                                     .fontWeight(.bold)
                                                     .font(.system(size: 14))
@@ -171,11 +174,11 @@ struct SumberDanaView: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

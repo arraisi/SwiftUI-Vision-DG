@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormPasswordVerificationForgotPasswordView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State private var oldPasswordCtrl = ""
     @State private var showPassword: Bool = false
     
@@ -20,12 +23,12 @@ struct FormPasswordVerificationForgotPasswordView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("MASUKKAN PASSWORD")
+                Text(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""))
                     .font(.title2)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                 
-                Text("Proses verifikasi berhasil, Silahkan masukkan password aplikasi Anda.")
+                Text(NSLocalizedString("Proses verifikasi berhasil, Silahkan masukkan password aplikasi Anda.".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -35,9 +38,9 @@ struct FormPasswordVerificationForgotPasswordView: View {
                 VStack {
                     HStack {
                         if (showPassword) {
-                            TextField("Masukkan Password", text: self.$oldPasswordCtrl)
+                            TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: self.$oldPasswordCtrl)
                         } else {
-                            SecureField("Masukkan Password", text: self.$oldPasswordCtrl)
+                            SecureField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: self.$oldPasswordCtrl)
                         }
                         
                         Button(action: {
@@ -60,9 +63,9 @@ struct FormPasswordVerificationForgotPasswordView: View {
                 
                 VStack {
                     NavigationLink(destination: FormNoRekeningPinForgotPasswordScreen(), label: {
-                        Text("MASUKKAN PASSWORD")
+                        Text(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""))
                             .foregroundColor(Color(hex: "#2334D0"))
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         
@@ -77,7 +80,7 @@ struct FormPasswordVerificationForgotPasswordView: View {
             }
             .padding(.top, 60)
         }
-        .navigationBarTitle("Lupa Password", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Forgot Password".localized(language), comment: ""), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
             Text("Cancel")
         }))

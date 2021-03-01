@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SumberPendapatanLainnyaView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
@@ -61,7 +64,7 @@ struct SumberPendapatanLainnyaView: View {
                 AppBarLogo(light: false, onCancel: {})
                 ScrollView {
                     // Title
-                    Text("DATA PEMBUKAAN REKENING")
+                    Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -92,7 +95,7 @@ struct SumberPendapatanLainnyaView: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text("Apakah Anda Memiliki Sumber Pendapatan Lainnya")
+                                Text(NSLocalizedString("Do You Have Other Sources of Income".localized(language), comment: ""))
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .multilineTextAlignment(.center)
@@ -133,7 +136,7 @@ struct SumberPendapatanLainnyaView: View {
                                         if self.selectedId == 1 {
                                             
                                             HStack {
-                                                TextField("Pilih pendapatan lainnya", text: $registerData.sumberPendapatanLainnya)
+                                                TextField(NSLocalizedString("Select other income".localized(language), comment: ""), text: $registerData.sumberPendapatanLainnya)
                                                     .font(.custom("Montserrat-Regular", size: 12))
                                                     .frame(height: 50)
                                                     .padding(.leading, 15)
@@ -164,7 +167,7 @@ struct SumberPendapatanLainnyaView: View {
                                         Button(action:{
                                             
                                             self.selectedId = 2
-                                            registerData.sumberPendapatanLainnya = "Tidak memiliki"
+                                            registerData.sumberPendapatanLainnya = NSLocalizedString("Do not have".localized(language), comment: "")
                                             registerData.hasSumberPendapatanLainnya = false
                                             
                                         }) {
@@ -176,7 +179,7 @@ struct SumberPendapatanLainnyaView: View {
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(width: 19, height: 19)
                                                 
-                                                Text("Tidak, Saya tidak memiliki")
+                                                Text(NSLocalizedString("No, I don't have".localized(language), comment: ""))
                                                     .font(.custom("Montserrat-Regular", size: 12))
                                                 
                                                 Spacer()
@@ -212,7 +215,7 @@ struct SumberPendapatanLainnyaView: View {
                                         self.selection = "keluargaTerdekat"
                                     }, label:{
                                         
-                                        Text("Berikutnya")
+                                        Text(NSLocalizedString("Next".localized(language), comment: ""))
                                             .foregroundColor(.white)
                                             .font(.custom("Montserrat-SemiBold", size: 14))
                                             .frame(maxWidth: .infinity, maxHeight: 40)
@@ -230,7 +233,7 @@ struct SumberPendapatanLainnyaView: View {
                                         self.selection = "verificationView"
                                     }, label:{
                                         
-                                        Text("Simpan")
+                                        Text(NSLocalizedString("Save".localized(language), comment: ""))
                                             .foregroundColor(.white)
                                             .font(.custom("Montserrat-SemiBold", size: 14))
                                             .frame(maxWidth: .infinity, maxHeight: 40)
@@ -263,11 +266,11 @@ struct SumberPendapatanLainnyaView: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct FormJabatanProfesiView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Registrasi Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -53,7 +57,7 @@ struct FormJabatanProfesiView: View {
                         VStack{
                             
                             // Title
-                            Text("DATA PEMBUKAAN REKENING")
+                            Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
@@ -87,7 +91,7 @@ struct FormJabatanProfesiView: View {
                                     Spacer()
                                     
                                     // Sub title
-                                    Text("Jabatan Profesi")
+                                    Text(NSLocalizedString("Professional Position".localized(language), comment: ""))
                                         .font(.custom("Montserrat-SemiBold", size: 18))
                                         .foregroundColor(Color(hex: "#232175"))
                                         .padding(.horizontal, 20)
@@ -118,7 +122,7 @@ struct FormJabatanProfesiView: View {
                                     if (editMode == .inactive) {
                                         NavigationLink(destination: InformasiPerusahaanView().environmentObject(registerData)) {
                                             
-                                            Text("Berikutnya")
+                                            Text(NSLocalizedString("Next".localized(language), comment: ""))
                                                 .foregroundColor(.white)
                                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                                 .frame(maxWidth: .infinity, maxHeight: 40)
@@ -133,7 +137,7 @@ struct FormJabatanProfesiView: View {
                                     } else {
                                         NavigationLink(destination: InformasiPerusahaanView(editMode: self.editMode).environmentObject(registerData)) {
                                             
-                                            Text("Simpan")
+                                            Text(NSLocalizedString("Save".localized(language), comment: ""))
                                                 .foregroundColor(.white)
                                                 .fontWeight(.bold)
                                                 .font(.system(size: 14))
@@ -168,11 +172,11 @@ struct FormJabatanProfesiView: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

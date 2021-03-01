@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FirstLoginView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var loginData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -42,7 +45,7 @@ struct FirstLoginView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack {
-                    Text("LOGIN APPS")
+                    Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
                         .font(.title3)
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
@@ -74,11 +77,11 @@ struct FirstLoginView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("No", comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -90,7 +93,7 @@ struct FirstLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text("Silahkan Masukkan Nomor Handphone Anda")
+            Text(NSLocalizedString("Please Enter Your Mobile Number".localized(language), comment: ""))
                 .font(.caption)
                 .bold()
                 .foregroundColor(.white)
@@ -105,7 +108,7 @@ struct FirstLoginView: View {
                 Divider()
                     .frame(height: 20)
                 
-                TextField("No. Telepon", text: $phoneNumber, onEditingChanged: { changed in
+                TextField("Phone Number".localized(language), text: $phoneNumber, onEditingChanged: { changed in
                     print("\($phoneNumber)")
                     
                     self.loginData.noTelepon = phoneNumber
@@ -126,7 +129,7 @@ struct FirstLoginView: View {
             .cornerRadius(15)
             .padding(.horizontal, 20)
             
-            Text("Pastikan nomor handphone Anda telah sesuai sebelum melanjutkan ketahap berikutnya")
+            Text(NSLocalizedString("Make sure your cellphone number is correct before proceeding to the next stage".localized(language), comment: ""))
                 .font(.caption)
                 .bold()
                 .foregroundColor(.white)
@@ -140,7 +143,7 @@ struct FirstLoginView: View {
                     checkPhoneNumber()
                 },
                 label: {
-                    Text("Masukkan No. HP Anda")
+                    Text(NSLocalizedString("Enter your mobile number".localized(language), comment: ""))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
                         .fontWeight(.bold)
                         .font(.system(size: 13))
@@ -177,14 +180,14 @@ struct FirstLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("No. Telepon belum terdaftar")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Phone number not registered".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text("Nomor yang anda masukkan tidak terdaftar silahkan lakukan registrasi.")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("The number you have is not registered, please register.".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -193,9 +196,9 @@ struct FirstLoginView: View {
 //                self.rootIsActive = true
                 self.appState.moveToWelcomeView = true
             }) {
-                Text("Kembali")
+                Text("Back")
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }

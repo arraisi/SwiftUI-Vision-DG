@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ScanNPWPView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /*
      Environtment Object
      */
@@ -26,7 +29,7 @@ struct ScanNPWPView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(NSLocalizedString("Silahkan masukkan Foto kartu NPWP Anda", comment: ""))
+            Text(NSLocalizedString("Please enter a photo of your NPWP card".localized(language), comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
@@ -55,7 +58,7 @@ struct ScanNPWPView: View {
             Button(action: {
                 self.onChange()
             }, label: {
-                Text(imageNPWP == nil ? NSLocalizedString("Upload Gambar NPWP", comment: "") : NSLocalizedString("Ganti Foto Lain", comment: ""))
+                Text(imageNPWP == nil ? NSLocalizedString("Upload Image of NPWP".localized(language), comment: "") : NSLocalizedString("Change Another Photo".localized(language), comment: ""))
                     .foregroundColor(imageNPWP == nil && !alreadyHaveNpwp ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -73,12 +76,12 @@ struct ScanNPWPView: View {
             
             VStack(alignment: .leading) {
                 
-                Text(NSLocalizedString("Nomor NPWP", comment: ""))
+                Text(NSLocalizedString("NPWP Number".localized(language), comment: ""))
                     .multilineTextAlignment(.leading)
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $npwp, title: "No. NPWP", disable: alreadyHaveNpwp, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $npwp, title: "NPWP Number".localized(language), disable: alreadyHaveNpwp, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.npwp = String(str.prefix(15))
                     self.isValidNPWP = str.count == 15
                 }
@@ -99,7 +102,7 @@ struct ScanNPWPView: View {
                 Button(action: toggleHasNpwp) {
                     HStack(alignment: .top) {
                         Image(systemName: alreadyHaveNpwp ? "checkmark.square": "square")
-                        Text(NSLocalizedString("* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini", comment: ""))
+                        Text(NSLocalizedString("* I declare that I do not have an NPWP card.\n Skip this stage".localized(language), comment: ""))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#707070"))
                     }
@@ -126,7 +129,7 @@ struct ScanNPWPView: View {
                     
                     print("REGISTER DATA NPWP : \(self.registerData.npwp)")
                 }) {
-                    Text(NSLocalizedString("Simpan", comment: ""))
+                    Text(NSLocalizedString("Save".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

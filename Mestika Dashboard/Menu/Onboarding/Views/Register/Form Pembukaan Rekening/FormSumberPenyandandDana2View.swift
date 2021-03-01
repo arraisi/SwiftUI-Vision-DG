@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormSumberPenyandandDana2View: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Registrasi Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -88,7 +91,7 @@ struct FormSumberPenyandandDana2View: View {
                         
                         VStack{
                             // Title
-                            Text("DATA PEMBUKAAN REKENING")
+                            Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
@@ -119,7 +122,7 @@ struct FormSumberPenyandandDana2View: View {
                                         Spacer()
                                         
                                         // Sub title
-                                        Text("Sumber Penyandang Dana")
+                                        Text(NSLocalizedString("Funding Resources".localized(language), comment: ""))
                                             .font(.custom("Montserrat-SemiBold", size: 18))
                                             .foregroundColor(Color(hex: "#232175"))
                                             .padding(.horizontal, 20)
@@ -140,7 +143,7 @@ struct FormSumberPenyandandDana2View: View {
                                         if (editMode == .inactive) {
                                             NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
                                                 
-                                                Text("Berikutnya")
+                                                Text(NSLocalizedString("Next".localized(language), comment: ""))
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -155,7 +158,7 @@ struct FormSumberPenyandandDana2View: View {
                                         } else {
                                             NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
                                                 
-                                                Text("Simpan")
+                                                Text(NSLocalizedString("Save".localized(language), comment: ""))
                                                     .foregroundColor(.white)
                                                     .fontWeight(.bold)
                                                     .font(.system(size: 14))
@@ -193,11 +196,11 @@ struct FormSumberPenyandandDana2View: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -213,7 +216,7 @@ struct FormSumberPenyandandDana2View: View {
         
         VStack(alignment: .leading) {
             
-            LabelTextField(value: $registerData.namaPenyandangDana, label: "Nama Penyandang Dana", placeHolder: "Nama"){ (changed) in
+            LabelTextField(value: $registerData.namaPenyandangDana, label: NSLocalizedString("Name of Funder".localized(language), comment: ""), placeHolder: NSLocalizedString("Name".localized(language), comment: "")){ (changed) in
                 print("on edit")
             } onCommit: {
                 print("on commit")
@@ -222,14 +225,14 @@ struct FormSumberPenyandandDana2View: View {
             
             VStack(alignment: .leading) {
                 
-                Text("Hubungan Dengan Anda")
+                Text(NSLocalizedString("Relationship With You".localized(language), comment: ""))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    TextField("Pilih hubungan", text: $registerData.hubunganPenyandangDana)
+                    TextField(NSLocalizedString("Choose relationship".localized(language), comment: ""), text: $registerData.hubunganPenyandangDana)
                         .font(.custom("Montserrat-Regular", size: 12))
                         .frame(height: 50)
                         .padding(.leading, 15)
@@ -260,14 +263,14 @@ struct FormSumberPenyandandDana2View: View {
             
             VStack(alignment: .leading) {
                 
-                Text("Profesi Penyandang Dana")
+                Text(NSLocalizedString("Profession Funders".localized(language), comment: ""))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    TextField("Pilih profesi", text: $registerData.profesiPenyandangDana)
+                    TextField(NSLocalizedString("Choose a profession".localized(language), comment: ""), text: $registerData.profesiPenyandangDana)
                         .font(.custom("Montserrat-Regular", size: 12))
                         .frame(height: 50)
                         .padding(.leading, 15)

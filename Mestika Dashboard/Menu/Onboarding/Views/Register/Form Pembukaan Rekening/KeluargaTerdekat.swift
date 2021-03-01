@@ -9,6 +9,9 @@ import SwiftUI
 
 struct KeluargaTerdekat: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -72,7 +75,7 @@ struct KeluargaTerdekat: View {
                         VStack {
                             
                             // Title
-                            Text("DATA PEMBUKAAN REKENING")
+                            Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
@@ -103,7 +106,7 @@ struct KeluargaTerdekat: View {
                                         Spacer()
                                         
                                         // Sub title
-                                        Text("Data Keluarga Terdekat Anda")
+                                        Text(NSLocalizedString("Your Nearest Family Data".localized(language), comment: ""))
                                             .font(.custom("Montserrat-SemiBold", size: 18))
                                             .foregroundColor(Color(hex: "#232175"))
                                             .padding(.horizontal, 20)
@@ -133,7 +136,7 @@ struct KeluargaTerdekat: View {
                                                         self.nextViewActive = true
                                                         
                                                     }, label: {
-                                                        Text("Berikutnya")
+                                                        Text(NSLocalizedString("Next".localized(language), comment: ""))
                                                             .foregroundColor(.white)
                                                             .font(.custom("Montserrat-SemiBold", size: 14))
                                                             .frame(maxWidth: .infinity, maxHeight: 40)
@@ -158,7 +161,7 @@ struct KeluargaTerdekat: View {
                                                         self.verificationViewActive = true
                                                         
                                                     }, label: {
-                                                        Text("Simpan")
+                                                        Text(NSLocalizedString("Save".localized(language), comment: ""))
                                                             .foregroundColor(.white)
                                                             .font(.custom("Montserrat-SemiBold", size: 14))
                                                             .frame(maxWidth: .infinity, maxHeight: 40)
@@ -217,11 +220,11 @@ struct KeluargaTerdekat: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -264,7 +267,7 @@ struct KeluargaTerdekat: View {
         VStack(alignment: .leading) {
             Group {
                 
-                Text("Hubungan Kekerabatan")
+                Text(NSLocalizedString("Genetic Relationship".localized(language), comment: ""))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -278,7 +281,7 @@ struct KeluargaTerdekat: View {
                 //                    .cornerRadius(10)
                 
                 HStack {
-                    TextField("Hubungan Kekerabatan", text: $registerData.hubunganKekerabatanKeluarga)
+                    TextField(NSLocalizedString("Genetic Relationship".localized(language), comment: ""), text: $registerData.hubunganKekerabatanKeluarga)
                         .font(Font.system(size: 14))
                         .frame(height: 50)
                         .padding(.leading, 15)
@@ -306,7 +309,7 @@ struct KeluargaTerdekat: View {
                 
             }
             
-            LabelTextField(value: $registerData.namaKeluarga, label: "Nama", placeHolder: "Nama") { (change) in
+            LabelTextField(value: $registerData.namaKeluarga, label: NSLocalizedString("Name".localized(language), comment: ""), placeHolder: NSLocalizedString("Name".localized(language), comment: "")) { (change) in
                 
             } onCommit: {
                 
@@ -314,7 +317,7 @@ struct KeluargaTerdekat: View {
             
             Group {
                 
-                Text("Alamat")
+                Text(NSLocalizedString("Address".localized(language), comment: ""))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -322,7 +325,7 @@ struct KeluargaTerdekat: View {
                 
                 HStack {
                     
-                    TextField("Alamat", text: $registerData.alamatKeluarga) { changed in
+                    TextField(NSLocalizedString("Address".localized(language), comment: ""), text: $registerData.alamatKeluarga) { changed in
                     } onCommit: {
                     }
                     .font(Font.system(size: 14))
@@ -344,7 +347,7 @@ struct KeluargaTerdekat: View {
             
             VStack(alignment: .leading) {
                 
-                Text("Kode Pos")
+                Text(NSLocalizedString("Postal code".localized(language), comment: ""))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -367,13 +370,13 @@ struct KeluargaTerdekat: View {
                 
             }
             
-            LabelTextField(value: $registerData.kecamatanKeluarga, label: "Kecamatan", placeHolder: "Kecamatan") { (change) in
+            LabelTextField(value: $registerData.kecamatanKeluarga, label: NSLocalizedString("Sub-district".localized(language), comment: ""), placeHolder: NSLocalizedString("Sub-district".localized(language), comment: "")) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $registerData.kelurahanKeluarga, label: "Kelurahan", placeHolder: "Kelurahan") { (change) in
+            LabelTextField(value: $registerData.kelurahanKeluarga, label: NSLocalizedString("Village".localized(language), comment: ""), placeHolder: NSLocalizedString("Village".localized(language), comment: "")) { (change) in
                 
             } onCommit: {
                 
@@ -381,7 +384,7 @@ struct KeluargaTerdekat: View {
             
             Group {
                 
-                Text("No. Telepon")
+                Text(NSLocalizedString("Phone number".localized(language), comment: ""))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -397,7 +400,7 @@ struct KeluargaTerdekat: View {
                     Divider()
                         .frame(height: 30)
                     
-                    TextField("No. Telepon", text: $noTelepon) {change in
+                    TextField(NSLocalizedString("Phone number".localized(language), comment: ""), text: $noTelepon) {change in
                     } onCommit: {
                         self.registerData.noTlpKeluarga = self.noTelepon
                     }
@@ -427,8 +430,8 @@ struct KeluargaTerdekat: View {
     func createBottomFloater() -> some View {
         VStack {
             HStack {
-                Text("Alamat")
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                Text(NSLocalizedString("Address".localized(language), comment: ""))
+                    .fontWeight(.bold)
                     .font(.system(size: 19))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -436,7 +439,7 @@ struct KeluargaTerdekat: View {
             
             HStack {
                 
-                TextField("Alamat Perusahaan", text: $location)
+                TextField(NSLocalizedString("Company's address".localized(language), comment: ""), text: $location)
                     .font(Font.system(size: 14))
                     .frame(height: 36)
                 

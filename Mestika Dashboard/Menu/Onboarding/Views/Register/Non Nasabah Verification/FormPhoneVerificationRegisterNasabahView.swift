@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormPhoneVerificationRegisterNasabahView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     /* Environtment Object */
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -47,12 +50,12 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Phone Verification", comment: ""))
+                    Text(NSLocalizedString("Phone Verification".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Silahkan masukkan No. Telepon Anda", comment: ""))
+                    Text(NSLocalizedString("Please enter your Phone Number".localized(language), comment: ""))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -65,7 +68,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         Divider()
                             .frame(height: 30)
                         
-                        TextField(NSLocalizedString("No. Telepon", comment: ""), text: $phoneNumber, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Phone Number".localized(language), comment: ""), text: $phoneNumber, onEditingChanged: { changed in
                             print("\($phoneNumber)")
                             
                             self.registerData.noTelepon = phoneNumber
@@ -145,7 +148,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         }
                         
                     }, label: {
-                        Text(NSLocalizedString("Verifikasi No. Telepon", comment: ""))
+                        Text(NSLocalizedString("Phone Number Verification".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -190,11 +193,11 @@ struct FormPhoneVerificationRegisterNasabahView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -220,8 +223,8 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Mohon Periksa Nomor Handphone Anda")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Please Check Your Mobile Number".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
@@ -229,9 +232,9 @@ struct FormPhoneVerificationRegisterNasabahView: View {
             Button(action: {
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Kembali", comment: ""))
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
             }

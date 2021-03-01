@@ -9,20 +9,23 @@ import SwiftUI
 
 struct AddressOptionsView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     
     let addressOptions: [MasterModel] = [
-        MasterModel(id: 1, name: "Alamat Sesuai KTP"),
-        MasterModel(id: 3, name: "Alamat Surat Menyurat"),
-        MasterModel(id: 4, name: "Alamat Perusahaan"),
-        MasterModel(id: 5, name: "Alamat Lainnya"),
+        MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
+        MasterModel(id: 3, name: "Mailing address".localized(LocalizationService.shared.language)),
+        MasterModel(id: 4, name: "Company's address".localized(LocalizationService.shared.language)),
+        MasterModel(id: 5, name: "Other Address".localized(LocalizationService.shared.language)),
     ]
     
     @State var addressOptionId: Int = 1
     
     var body: some View {
         VStack {
-            Text(NSLocalizedString("Alamat Pengiriman", comment: ""))
+            Text(NSLocalizedString("Shipping address".localized(language), comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Bold", size: 14))
                 .foregroundColor(Color("DarkStaleBlue"))

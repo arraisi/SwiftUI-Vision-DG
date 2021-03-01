@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FirstPasswordAppLoginView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State var nextRoute: Bool = false
     @State var password: String = ""
     
@@ -29,7 +32,7 @@ struct FirstPasswordAppLoginView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack {
-                    Text("LOGIN APP")
+                    Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
                         .font(.custom("Montserrat-Bold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -54,7 +57,7 @@ struct FirstPasswordAppLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text("Enter your Account Password")
+            Text(NSLocalizedString("Enter your Account Password".localized(language), comment: ""))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -68,7 +71,7 @@ struct FirstPasswordAppLoginView: View {
                     if (securedPassword) {
                         ZStack {
                             HStack (spacing: 0) {
-                                SecureField("Masukkan Password", text: $password)
+                                SecureField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -90,7 +93,7 @@ struct FirstPasswordAppLoginView: View {
                     } else {
                         ZStack {
                             HStack (spacing: 0) {
-                                TextField("Masukkan Password", text: $password, onEditingChanged: { changed in
+                                TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password, onEditingChanged: { changed in
                                     print("\($password)")
                                 })
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -126,7 +129,7 @@ struct FirstPasswordAppLoginView: View {
                     checkPassword()
                 },
                 label: {
-                    Text("LOGIN APP")
+                    Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

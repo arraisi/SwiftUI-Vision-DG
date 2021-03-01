@@ -10,6 +10,281 @@
 "Welcome to" = "Welcome to";
 "Register" = "REGISTER";
 "Login" = "LOGIN";
+"LOGIN" = "LOGIN";
+"MESSAGE" = "MESSAGE";
 "Before Starting..!!" = "Before Starting..!!";
 "Are you a customer of Bank Mestika?" = "Are you a customer of Bank Mestika?";
-"Are you sure want to go back home ?" = "Apakah ingin membatalkan registrasi ?";
+"Do you want to cancel registration?" = "Do you want to cancel registration?";
+"Are you sure want to go back home ?" = "Are you sure want to go back home ?";
+"INFORMATION SUBMIT VIDEO SCHEDULE" = "INFORMATION SUBMIT VIDEO SCHEDULE";
+"You haven't submitted Videocall schedule" = "You haven't submitted Videocall schedule";
+"No, I am not" = "No, I am not";
+"Yes, I am a customer of Bank Mestika" = "Yes, I am a customer of Bank Mestika";
+
+"Submit Videocall Schedule" = "Submit Videocall Schedule";
+"ATM PRODUCT SUBMIT INFORMATION" = "ATM PRODUCT SUBMIT INFORMATION";
+"You haven't submitted your product and ATM design" = "You haven't submitted your product and ATM design";
+"ATM Product Submit Page" = "ATM Product Submit Page";
+"Please wait" = "Please wait";
+"We have received your data, please wait for our CS to contact you at:" = "We have received your data, please wait for our CS to contact you at:";
+"Date" = "Date";
+"Hour" = "Hour";
+"Reschedule Schedule" = "Reschedule Schedule";
+"Cancel Request" = "Cancel Request";
+"Approval in progress" = "Approval in progress";
+"Approval is in process. Results will be sent via SMS or email" = "Approval is in process. Results will be sent via SMS or email";
+"I wait" = "I wait";
+"ACCOUNT OPENING APPROVED" = "ACCOUNT OPENING APPROVED";
+"Congratulations, your new account opening has been approved" = "Congratulations, your new account opening has been approved";
+"OPENING OF ACCOUNTS HAS DENIED" = "OPENING OF ACCOUNTS HAS DENIED";
+"Sorry, your online account opening has been declined" = "Sorry, your online account opening has been declined";
+"You Have Registered" = "You Have Registered";
+"Please log in into your Account" = "Please log in into your Account";
+"Please check your internet connection" = "Please check your internet connection";
+
+/* LOGIN SCREEN */
+"LOGIN APPS" = "LOGIN APPS";
+"Enter Your Account Password" = "Enter Your Account Password";
+"Your account password" = "Your account password";
+"Forgot Password?" = "Forgot Password?";
+"Don't have an account yet?" = "Don't have an account yet?";
+"Register Here" = "Register Here";
+"We need to unlock your data." = "We need to unlock your data.";
+"Wrong password" = "Wrong password";
+"Please enter your password correctly or login in another way." = "Please enter your password correctly or login in another way.";
+"Back" = "Back";
+"Login with Biometric" = "Login with Biometric";
+"It's easy to log in only with Biometrics." = "It's easy to log in only with Biometrics.";
+"Activate" = "Activate";
+
+/* FormInputNewPasswordForgotPasswordView */
+"NEW PASSWORD" = "NEW PASSWORD";
+"The application password must be at least 8 characters long. Consists of Uppercase, Number, etc." = "The application password must be at least 8 characters long. Consists of Uppercase, Number, etc.";
+"Your new password" = "Your new password";
+"Confirm password" = "Confirm password";
+"Save New Password" = "Save New Password";
+"Password is not the same, please retype it." = "Password is not the same, please retype it.";
+"Your password has been successfully changed" = "Your password has been successfully changed";
+"Back to the login page" = "Back to the login page";
+"Do you still remember your transaction PIN?" = "Do you still remember your transaction PIN?";
+"Yes, i'am Still Remember" = "Yes, i'am Still Remember";
+"No, I do not remember" = "No, I do not remember";
+
+/* FormInputAtmPinForgotPasswordView */
+"ENTER ID CARD DATA" = "ENTER ID CARD DATA";
+"Enter your registered account number / ID CARD and Transaction PIN" = "Enter your registered account number / ID CARD and Transaction PIN";
+"Enter your account number / ID CARD" = "Enter your account number / ID CARD";
+"Enter your Transaction PIN" = "Enter your Transaction PIN";
+"DATA CONFIRMATION" = "DATA CONFIRMATION";
+"Password changed successfully." = "Password changed successfully.";
+
+/* FormInputAtmForgotPasswordScreen */
+"INPUT ATM DATA" = "INPUT ATM DATA";
+"Enter your registered ATM card number and ATM PIN" = "Enter your registered ATM card number and ATM PIN";
+"Enter your ATM number" = "Enter your ATM number";
+"Enter your ATM PIN" = "Enter your ATM PIN";
+
+/* OtpVerificationForgotPasswordView */
+"OTP CODE VERIFICATION" = "OTP CODE VERIFICATION";
+"We have sent OTP to no.\n" = "We have sent OTP to no.\n";
+"Please enter the OTP code with \nREF #" = "Please enter the OTP code with \nREF #";
+"Didn't Receive Code?" = "Didn't Receive Code?";
+"Resend OTP" = "Resend OTP";
+"Make sure you are connected to the Internet and have sufficient credit to receive OTP" = "Make sure you are connected to the Internet and have sufficient credit to receive OTP";
+"ENTER OTP CODE" = "ENTER OTP CODE";
+"Incorrect OTP Code" = "Incorrect OTP Code";
+"The OTP code you entered is incorrect, please try again" = "The OTP code you entered is incorrect, please try again";
+"The OTP code you entered was incorrect 5 times, please try again next week." = "The OTP code you entered was incorrect 5 times, please try again next week.";
+"Back to Main Page" = "Back to Main Page";
+
+/* PhoneNumberVerificationForgotPasswordView */
+"VERIFY YOUR PHONE NUMBER" = "VERIFY YOUR PHONE NUMBER";
+"Please Enter Your Mobile Number" = "Please Enter Your Mobile Number";
+"Phone Number" = "Phone Number";
+"Make sure your cellphone number is correct before proceeding to the next stage." = "Make sure your cellphone number is correct before proceeding to the next stage.";
+"ENTER YOUR PHONE NUMBER" = "ENTER YOUR PHONE NUMBER";
+"Do you want to cancel changing password?" = "Do you want to cancel changing password?";
+"YES" = "YES";
+"No" = "No";
+"Please Check Your Mobile Number" = "Please Check Your Mobile Number";
+
+/* FormPasswordVerificationForgotPasswordView */
+"ENTER PASSWORD" = "ENTER PASSWORD";
+"The verification process is successful. Please enter your application password." = "The verification process is successful. Please enter your application password.";
+"Enter Password" = "Enter Password";
+"Forgot Password" = "Forgot Password";
+
+/* FormNoRekeningPinForgotPasswordScreen */
+"INPUT NO ACCOUNT / ID CARD" = "INPUT NO ACCOUNT / ID CARD";
+"Enter your account number / KTP and Transaction PIN." = "Enter your account number / KTP and Transaction PIN.";
+"Enter your account number / ID CARD" = "Enter your account number / ID CARD";
+
+/* FirstLoginView */
+"Make sure your cellphone number is correct before proceeding to the next stage" = "Make sure your cellphone number is correct before proceeding to the next stage";
+"Enter your mobile number" = "Enter your mobile number";
+"Phone number not registered" = "Phone number not registered";
+"The number you have is not registered, please register." = "The number you have is not registered, please register.";
+
+/* FirstOTPLoginView */
+"You have not registered an online account" = "You have not registered an online account";
+"No, I'am not" = "No, I'am not";
+"Yes, I am a customer of Bank Mestika" = "Yes, I am a customer of Bank Mestika";
+"Do you want to register a Digital Banking application" = "Do you want to register a Digital Banking application";
+
+/* FirstATMLoginView */
+"ENTER YOUR DATA" = "ENTER YOUR DATA";
+"Enter Your ATM Card Data" = "Enter Your ATM Card Data";
+"Your PIN or ATM Number is wrong" = "Your PIN or ATM Number is wrong";
+"The data you entered is not correct, please re-enter it." = "The data you entered is not correct, please re-enter it.";
+
+/* FirstPasswordLoginView */
+"ENTER PASSWORD" = "ENTER PASSWORD";
+"The Application Password must be at least 8 characters long. It consists of Uppercase, Number, etc." = "The Application Password must be at least 8 characters long. It consists of Uppercase, Number, etc.";
+"Enter Password" = "Enter Password";
+"Confirm Password" = "Confirm Password";
+"SAVE LOGIN DATA" = "SAVE LOGIN DATA";
+"Password is not the same, please retype" = "Password is not the same, please retype";
+
+/*
+ Support Views
+ 
+ DetailsTypeSavingView
+ */
+"Saving Detail" = "Saving Detail";
+"Choose this Savings" = "Choose this Savings";
+
+/* ScanKTPView */
+"Please prepare your \nIdentity Card (KTP) in advance" = "Please prepare your \nIdentity Card (KTP) in advance";
+"Take Photo Identity Card (KTP)" = "Take Photo Identity Card (KTP)";
+"Change Another Photo" = "Change Another Photo";
+"Identity Card Number" = "Identity Card Number";
+"* Check again and make sure your Identity Card Number (KTP) is correct" = "* Check again and make sure your Identity Card Number (KTP) is correct";
+"Save" = "Save";
+
+/* SelfieView */
+"Please Do a Selfie" = "Please Do a Selfie";
+"Take a Selfie" = "Take a Selfie";
+
+/* ScanNPWPView */
+"Please enter a photo of your NPWP card" = "Please enter a photo of your NPWP card";
+"Upload Image of NPWP" = "Upload Image of NPWP";
+"NPWP Number" = "NPWP Number";
+"* I declare that I do not have an NPWP card.\n Skip this stage" = "* I declare that I do not have an NPWP card.\n Skip this stage" ;
+
+/* ScanNPWPView */
+"ATM Card Limit Details" = "ATM Card Limit Details";
+"Daily Withdrawals" = "Daily Withdrawals";
+"Daily Transfer" = "Daily Transfer";
+"Transfer Between Bank Mestika" = "Transfer Between Bank Mestika";
+"Transfer to Other Bank" = "Transfer to Other Bank";
+"Payment" = "Payment";
+"Purchase" = "Purchase";
+"CHOOSE THIS ATM CARD" = "CHOOSE THIS ATM CARD";
+
+/* ScanNPWPView */
+"Address according to Identity Card/(KTP)" = "Address according to Identity Card/(KTP)";
+"Mailing address" = "Mailing address";
+"Other Address" = "Other Address";
+"Shipping address" = "Shipping address";
+
+/* ScanNPWPView */
+"Your Nearest Family" = "Your Nearest Family";
+"Relationship With You" = "Relationship With You";
+"Name" = "Name";
+"Address" = "Address";
+"Postal code" = "Postal code";
+"Sub-district" = "Sub-district";
+"Village" = "Village";
+"Phone number" = "Phone number";
+"Family address" = "Family address";
+
+/* InformasiPerusahaanVerificationView */
+"Company Information" = "Company Information";
+"Company name" = "Company name";
+"Business fields" = "Business fields";
+"Company's address" = "Company's address";
+
+/* Account View*/
+/* LanguageSettingScreen */
+"Choose Language" = "Choose Language";
+"Select this Language to use for the Application" = "Select this Language to use for the Application";
+"Use this Language" = "Use this Language";
+
+/* Register */
+/* KetentuanRegisterNonNasabahView */
+"Please scroll down" = "Please scroll down";
+"Continue to Create Account" = "Continue to Create Account";
+"Cancel Register" = "Cancel Register";
+"Do you want to cancel registration?" = "Do you want to cancel registration?";
+"NO" = "NO";
+
+/* FormPhoneVerificationRegisterNasabahView */
+"Phone Verification" = "Phone Verification";
+"Please enter your Phone Number" = "Please enter your Phone Number";
+"Phone Number Verification" = "Phone Number Verification";
+"Please Check Your Mobile Number" = "Please Check Your Mobile Number";
+
+/* FormOTPVerificationRegisterNasabahView */
+"OTP Verification" = "OTP Verification";
+"Failed to cancel the application. Please try again later." = "Failed to cancel the application. Please try again later.";
+
+/* FormEmailVerificationRegisterNasabahView */
+"Email Verification" = "Email Verification";
+"Verify email" = "Verify email";
+"Please enter your Email Address" = "Please enter your Email Address";
+"* Email must be more than 8 characters" = "* Email must be more than 8 characters";
+
+/*FormEmailOTPVerificationRegisterNasabahView*/
+"We have sent the Verification Code to" = "We have sent the Verification Code to";
+"Please check your email to see the OTP code" = "Please check your email to see the OTP code";
+
+/* NoAtmOrRekeningVerificationView */
+"ATM Card or Account No." = "ATM Card or Account No.";
+"Please enter your ATM card or account number" = "Please enter your ATM card or account number";
+"Select the type of card no. Inputted" = "Select the type of card no. Inputted";
+"Enter card no." = "Enter card no.";
+"* Make sure your ATM card or account is active, if you haven't activated your ATM card, please visit the nearest Mestika Bank Office." = "* Make sure your ATM card or account is active, if you haven't activated your ATM card, please visit the nearest Mestika Bank Office.";
+"Verification Card No." = "Verification Card No.";
+
+/* TujuanPembukaanRekeningView */
+"OPENING ACCOUNT DATA" = "OPENING ACCOUNT DATA";
+"Account Opening Purpose" = "Account Opening Purpose";
+"Next" = "Next";
+
+"Choose Your Fund Source" = "Choose Your Fund Source";
+"How Many Times Are Estimated Withdrawal of Funds in a Month" = "How Many Times Are Estimated Withdrawal of Funds in a Month";
+"How Much Your Estimated Withdrawal of Funds Each Month" = "How Much Your Estimated Withdrawal of Funds Each Month";
+"How many times are estimated for the deposit of funds in a month" = "How many times are estimated for the deposit of funds in a month";
+"How Much Your Estimated Deposit Funds Each Month" = "How Much Your Estimated Deposit Funds Each Month";
+"What do you do for a living" = "What do you do for a living";
+"Professional Position" = "Professional Position";
+"Workplace Industry" = "Workplace Industry";
+"Funding Resources - 01" = "Funding Resources - 01";
+"Funding Resources" = "Funding Resources";
+"Name of Funder" = "Name of Funder";
+"Relationship With You" = "Relationship With You";
+"Choose relationship" = "Choose relationship";
+"Profession Funders" = "Profession Funders";
+"Choose a profession" = "Choose a profession";
+"How Much is Your Gross Income" = "How Much is Your Gross Income";
+"Do You Have Other Sources of Income" = "Do You Have Other Sources of Income";
+"Select other income" = "Select other income";
+"Do not have" = "Do not have";
+"No, I don't have" = "No, I don't have";
+"Genetic Relationship" = "Relationship";
+"Your Nearest Family Data" = "Your Nearest Family Data";
+"Address" = "Address";
+"Enter your \nnew transaction PIN" = "Enter your \nnew transaction PIN";
+"This pin is used for every financial transaction activity" = "This pin is used for every financial transaction activity";
+"Confirm Transaction PIN" = "Confirm Transaction PIN";
+"PIN consists of 6 characters, cannot be sequential from the same 6 digits" = "PIN consists of 6 characters, cannot be sequential from the same 6 digits";
+"Enter Company Information" = "Enter Company Information";
+"Company name" = "Company name";
+"Company Telephone Number" = "Company Telephone Number";
+"Enter Digital Banking Application Password" = "Enter Digital Banking Application Password";
+"This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)" = "This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)";
+"Re-enter your new \nPIN Transaction" = "Re-enter your new \nPIN Transaction";
+"This pin is used for every financial transaction activity" = "This pin is used for every financial transaction activity";
+"Save Transaction PIN" = "Save Transaction PIN";
+"PIN is not the same" = "PIN is not the same";
+"The transaction PIN that you entered is not the same as the initial, please re-enter it" = "The transaction PIN that you entered is not the same as the initial, please re-enter it";

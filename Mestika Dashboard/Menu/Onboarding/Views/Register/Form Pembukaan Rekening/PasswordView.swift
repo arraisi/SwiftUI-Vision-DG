@@ -10,6 +10,9 @@ import SwiftyRSA
 
 struct PasswordView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     
@@ -55,7 +58,7 @@ struct PasswordView: View {
                 
                 ScrollView {
                     // Title
-                    Text("DATA PEMBUKAAN REKENING")
+                    Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -86,7 +89,7 @@ struct PasswordView: View {
                         
                         VStack {
                             // Sub title
-                            Text("Masukkan Password Aplikasi Digital Banking")
+                            Text(NSLocalizedString("Enter Digital Banking Application Password".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .multilineTextAlignment(.center)
@@ -94,7 +97,7 @@ struct PasswordView: View {
                                 .padding(.top, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            Text("Password ini digunakan saat anda masuk kedalam Aplikasi Mobile Banking Mestika Bank (mengandung huruf kecil,angka,kapital,karakter khusus)")
+                            Text(NSLocalizedString("This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
@@ -107,7 +110,7 @@ struct PasswordView: View {
                                     if (securedPassword) {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                SecureField("Masukkan Password", text: $password)
+                                                SecureField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .padding()
                                                     .frame(width: 200, height: 50)
@@ -127,10 +130,10 @@ struct PasswordView: View {
                                     } else {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                TextField("Masukkan Password", text: $password, onEditingChanged: { changed in
+                                                TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password, onEditingChanged: { changed in
                                                     print("\($password)")
                                                     
-//                                                    self.registerData.password = password
+                                                    //                                                    self.registerData.password = password
                                                 })
                                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                                 .padding()
@@ -156,7 +159,7 @@ struct PasswordView: View {
                                     if (securedConfirmation) {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                SecureField("Konfirmasi Password", text: $confirmationPassword)
+                                                SecureField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .padding()
                                                     .frame(width: 200, height: 50)
@@ -176,7 +179,7 @@ struct PasswordView: View {
                                     } else {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                TextField("Konfirmasi Password", text: $confirmationPassword)
+                                                TextField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .padding()
                                                     .frame(width: 200, height: 50)
@@ -220,7 +223,7 @@ struct PasswordView: View {
                                     }
                                 },
                                 label:{
-                                    Text("Berikutnya")
+                                    Text(NSLocalizedString("Next".localized(language), comment: ""))
                                         .foregroundColor(.white)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .frame(maxWidth: .infinity, maxHeight: 40)
@@ -256,11 +259,11 @@ struct PasswordView: View {
         .navigationBarHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -289,17 +292,17 @@ struct PasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("Password tidak sama, silahkan ketik ulang")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Password is not the same, please retype".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
             Button(action: {}) {
-                Text("Kembali")
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
             }
             .background(Color(hex: "#2334D0"))
@@ -323,7 +326,7 @@ struct PasswordView: View {
                 .padding(20)
             
             Text(modalErrorMessage)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(20)
@@ -332,7 +335,7 @@ struct PasswordView: View {
                 Text("OK")
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
             }
             .background(Color(hex: "#2334D0"))
@@ -370,7 +373,7 @@ struct PasswordView: View {
         let clear = try! ClearMessage(string: password, using: .utf8)
         
         let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
-        let data = encrypted.data
+        _ = encrypted.data
         let base64String = encrypted.base64String
         
         print("Encript : \(base64String)")
