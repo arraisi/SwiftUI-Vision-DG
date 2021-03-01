@@ -59,39 +59,39 @@ struct ListAllFavoriteTransactionView: View {
                 .isDetailLink(false)
                 
                 List(self.favoritVM.favorites, id: \.id) { data in
-//                    NavigationLink(
-//                        destination: LastFavoriteTransferScreen(data: data),
-//                        label: {
-//                            Button(action: {
-//                                // self.action!(data)
-//                            }, label: {
-//                                HStack {
-//                                    ZStack {
-//                                        Circle()
-//                                            .fill(Color.secondary)
-//                                            .frame(width: 30, height: 30)
-//
-//                                        Text(data.name.prefix(1))
-//                                            .foregroundColor(.white)
-//                                            .fontWeight(.heavy)
-//                                    }
-//
-//                                    VStack(alignment: .leading) {
-//                                        Text("\(data.name)")
-//                                            .font(.custom("Montserrat-SemiBold", size: 14))
-//
-//                                        HStack {
-//                                            Text("\(data.bankName) :")
-//                                                .font(.custom("Montserrat-Light", size: 14))
-//                                            Text("\(data.sourceNumber)")
-//                                                .font(.custom("Montserrat-Light", size: 14))
-//                                        }
-//                                    }
-//                                    Spacer()
-//                                }
-//                            })
-//                        })
-//                        .padding(.vertical, 5)
+                    //                    NavigationLink(
+                    //                        destination: LastFavoriteTransferScreen(data: data),
+                    //                        label: {
+                    //                            Button(action: {
+                    //                                // self.action!(data)
+                    //                            }, label: {
+                    //                                HStack {
+                    //                                    ZStack {
+                    //                                        Circle()
+                    //                                            .fill(Color.secondary)
+                    //                                            .frame(width: 30, height: 30)
+                    //
+                    //                                        Text(data.name.prefix(1))
+                    //                                            .foregroundColor(.white)
+                    //                                            .fontWeight(.heavy)
+                    //                                    }
+                    //
+                    //                                    VStack(alignment: .leading) {
+                    //                                        Text("\(data.name)")
+                    //                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                    //
+                    //                                        HStack {
+                    //                                            Text("\(data.bankName) :")
+                    //                                                .font(.custom("Montserrat-Light", size: 14))
+                    //                                            Text("\(data.sourceNumber)")
+                    //                                                .font(.custom("Montserrat-Light", size: 14))
+                    //                                        }
+                    //                                    }
+                    //                                    Spacer()
+                    //                                }
+                    //                            })
+                    //                        })
+                    //                        .padding(.vertical, 5)
                     HStack {
                         
                         Button(
@@ -134,6 +134,20 @@ struct ListAllFavoriteTransactionView: View {
                             Image(systemName: "ellipsis")
                         })
                         .buttonStyle(PlainButtonStyle())
+                        .actionSheet(isPresented: self.$showingDetail) {
+                            ActionSheet(title: Text("Pilihan"), message: Text("Pilih menu dibawah ini"), buttons: [.default(Text("Hapus"), action: {
+                                print("Hapus")
+                                
+                                                self.favoritVM.remove(data: data) { result in
+                                                    print("result remove favorite \(result)")
+                                                    if result {
+                                                        getList()
+                                                    }
+                                                }
+                            }), .cancel({
+                                
+                            })])
+                        }
                         
                     }
                 }
@@ -144,18 +158,6 @@ struct ListAllFavoriteTransactionView: View {
             .frame(width: UIScreen.main.bounds.width - 10)
         }
         .onAppear(perform: getList)
-        .actionSheet(isPresented: self.$showingDetail) {
-            ActionSheet(title: Text("Pilihan"), message: Text("Pilih menu dibawah ini"), buttons: [.default(Text("Hapus"), action: {
-                print("Hapus")
-                
-//                self.favoritVM.remove(data: data) { result in
-//                    print("result remove favorite \(result)")
-//                    if result {
-//                        
-//                    }
-//                }
-            })])
-        }
     }
     
     func getList() {
