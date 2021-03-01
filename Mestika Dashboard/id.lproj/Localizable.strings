@@ -46,19 +46,7 @@
 "Pilih Jenis Tabungan Anda" = "";
 "Deposit Tabungan" = "";
 "Keunggulan Tabungan :" = "";
-/*
- FormPilihJenisTabunganView
- */
-"Pilih Tabungan ini" = "";
-/*
- FormIdentitasDiriView
- */
-"Identitas Diri" = "";
-"Silahkan isi dan lengkapi data identitas Anda" = "";
-"Foto KTP dan No. Induk Penduduk" = "";
-"Ambil Foto sendiri atau Selfie" = "";
-"Masukkan NPWP Anda" = "";
-"Lanjut Pembukaan Rekening Baru" = "";
+
 /*
  Term_ConditionView
  */
@@ -311,7 +299,6 @@
 "No, I don't have" = "Tidak, Saya tidak memiliki";
 "Genetic Relationship" = "Hubungan Kekerabatan";
 "Your Nearest Family Data" = "Data Keluarga Terdekat Anda";
-"Address" = "Alamat";
 "Enter your \nnew transaction PIN" = "Masukkan PIN \nTransaksi Baru Anda";
 "This pin is used for every financial transaction activity" = "Pin ini digunakan untuk setiap kegiatan transaksi keuangan";
 "Confirm Transaction PIN" = "Konfirmasi PIN Transaksi";
@@ -494,3 +481,29 @@
 "Choose Language" = "Pilih bahasa";
 "Select this Language to use for the Application" = "Pilih Bahasa ini untuk digunakan untuk Aplikasi";
 "Use this Language" = "Gunakan Bahasa ini";
+
+/* FormPilihJenisTabunganView */
+"Choose Your Savings Type" = "Pilih Jenis Tabungan Anda";
+"Deposit Savings" = "Deposit Tabungan";
+"Savings Advantages:" = "Keunggulan Tabungan :";
+"Choose this Savings" = "Pilih Tabungan ini";
+
+/* FormIdentitasDiriView */
+"PERSONAL IDENTITY" = "IDENTITAS DIRI";
+"Please fill in and complete your identity data" = "Silahkan isi dan lengkapi data identitas Anda";
+"Photo of KTP and ID Number of Population" = "Foto KTP dan No. Induk Penduduk";
+"Take Self Photo or Selfie" = "Ambil Foto sendiri atau Selfie";
+"Enter your NPWP" = "Masukkan NPWP Anda";
+"Continue to Open New Account" = "Lanjut Pembukaan Rekening Baru";
+"Make sure your e-KTP is genuine and not a scanned, uploaded or photocopy version" = "Pastikan e-KTP anda asli dan bukan versi scan, unggah dan fotokopi";
+"Make sure the e-KTP is not cut off, data and photos are clearly visible" = "Pastikan e-KTP tidak terpotong , data dan foto terlihat jelas";
+"Account" = "Akun";
+"Contact" = "Kontak";
+"Language" = "Bahasa";
+"Security" = "Keamanan";
+"Activation" = "Aktifasi";
+"Change Password" = "Ubah Kata Sandi";
+"Change PIN Transaction" = "Ubah PIN Transaksi";
+"Forgot PIN Transaction" = "Lupa PIN Transaksi";
+"Logout" = "Keluar";
+"Are you sure you want to exit the Bank Mestika application?" = "Anda yakin ingin keluar aplikasi Bank Mestika?";

@@ -10,6 +10,9 @@ import JGProgressHUD_SwiftUI
 
 struct FormPilihJenisTabunganView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var appState: AppState
     
     /* Carousel Variables */
@@ -66,7 +69,7 @@ struct FormPilihJenisTabunganView: View {
                 VStack {
                     AppBarLogo(light: false, onCancel: {})
                     
-                    Text(NSLocalizedString("Pilih Jenis Tabungan Anda", comment: ""))
+                    Text(NSLocalizedString("Choose Your Savings Type".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 15))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.horizontal, 15)
@@ -164,11 +167,11 @@ struct FormPilihJenisTabunganView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -191,13 +194,13 @@ struct FormPilihJenisTabunganView: View {
     
     var detailsTypeSaving: some View {
         VStack(alignment: .leading) {
-            Text(NSLocalizedString("Deposit Tabungan", comment: ""))
+            Text(NSLocalizedString("Deposit Savings".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 22))
                 .foregroundColor(Color(hex: "#3756DF"))
                 .padding(.top, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(NSLocalizedString("Keunggulan Tabungan :", comment: ""))
+            Text(NSLocalizedString("Savings Advantages:".localized(language), comment: ""))
                 .font(.custom("Montserrat-Regular", size: 12))
                 .padding(.vertical, 10)
                 .foregroundColor(Color(hex: "#5A6876"))
@@ -207,7 +210,7 @@ struct FormPilihJenisTabunganView: View {
             
             NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
                 
-                Text(NSLocalizedString("Pilih Tabungan ini", comment: ""))
+                Text(NSLocalizedString("Choose this Savings".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
