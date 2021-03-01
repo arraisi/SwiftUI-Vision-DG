@@ -354,7 +354,7 @@ struct AccountTabs: View {
                         }
                     }
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .onAppear {
             //            getProfile()
