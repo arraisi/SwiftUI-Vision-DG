@@ -46,6 +46,7 @@ struct LanguageSettingScreen: View {
                             } else {
                                 LocalizationService.shared.language = .english_us
                             }
+                            self.presentationMode.wrappedValue.dismiss()
                         }) {
                             Text(NSLocalizedString("Use this Language".localized(language), comment: ""))
                                 .foregroundColor(.white)
