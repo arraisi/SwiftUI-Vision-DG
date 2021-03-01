@@ -19,6 +19,8 @@ struct TransferRtgsScreen: View {
     // Variable List BANK
     @State private var bankSelector: String = "Pilih Bank Tujuan"
     
+    @Binding var dest: String
+    
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
     @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
@@ -28,7 +30,7 @@ struct TransferRtgsScreen: View {
     @State var amount = ""
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 0
+    @State private var minLimit: Int = 0
     
     // Variable Transaction Frequecy
     var _listFrequency = ["Sekali", "Berkali-kali"]
@@ -192,6 +194,9 @@ struct TransferRtgsScreen: View {
         .onAppear {
             self.transferData = TransferOffUsModel()
 //            self.transferType = _listTransferType[0]
+            if (dest != "") {
+                self.noRekeningCtrl = self.dest
+            }
             self.transferData.transactionFrequency = _listFrequency[0]
             self.transferData.transactionVoucher = _listVoucher[0]
             self.transferData.transactionType = _listTransferType[0]
@@ -900,6 +905,6 @@ struct TransferRtgsScreen: View {
 
 struct TransferRtgsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferRtgsScreen()
+        TransferRtgsScreen(dest: .constant(""))
     }
 }

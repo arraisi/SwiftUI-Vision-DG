@@ -31,7 +31,7 @@ struct ListFavoriteTransactionView: View {
             
             
             ScrollView(showsIndicators: false) {
-                ForEach(self.favoritVM.favorites, id: \.id) { data in
+                ForEach(self.favoritVM.favorites.reversed(), id: \.id) { data in
                     
                     HStack {
                         ZStack {

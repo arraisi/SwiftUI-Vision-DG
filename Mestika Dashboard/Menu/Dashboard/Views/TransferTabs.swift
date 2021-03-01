@@ -59,7 +59,7 @@ struct TransferTabs: View {
             
             // Link Transfer ONUS
             NavigationLink(
-                destination: TransferOnUsScreen(),
+                destination: TransferOnUsScreen(dest: .constant("")),
                 isActive: self.$transferOnUsActive) {
                 EmptyView()
             }
@@ -67,7 +67,7 @@ struct TransferTabs: View {
             
             // Link Transfer OFFUS
             NavigationLink(
-                destination: TransferRtgsScreen(),
+                destination: TransferRtgsScreen(dest: .constant("")),
                 isActive: self.$transferOffUsActive,
                 label: {EmptyView()}
             )

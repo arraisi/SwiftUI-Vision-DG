@@ -1,31 +1,29 @@
 //
-//  PopOverFavoriteTransactionOffUsView.swift
+//  PopOverEditFavoriteOnUsView.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 12/02/21.
+//  Created by Prima Jatnika on 01/03/21.
 //
 
 import SwiftUI
 
-struct PopOverFavoriteTransactionOffUsView: View {
+struct PopOverEditFavoriteOnUsView: View {
     
     @StateObject var favoritVM = FavoritViewModel()
-    var transferData: TransferOffUsModel
+    
+    var transferData: TransferOnUsModel
     
     @Binding var show: Bool
     @Binding var showAlert: Bool
-    
     @State var receivedName = ""
-    
-    var disableForm: Bool {
-        receivedName.isEmpty
-    }
+    @State var receivedBank = "MESTIKA"
+    //    @State var receivedRekening = "88091293900"
     
     var body: some View {
         VStack {
             VStack {
                 HStack {
-                    Text("Tambahkan ke Favorit?")
+                    Text("Edit Kontrak Transfer")
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -33,10 +31,10 @@ struct PopOverFavoriteTransactionOffUsView: View {
                 }
                 .padding()
                 
-                VStack {
+                VStack(alignment: .leading) {
                     HStack {
                         Text("Nama Kontrak Penerima")
-                            .font(.subheadline)
+                            .font(.caption)
                             .fontWeight(.ultraLight)
                         
                         Spacer()
@@ -46,6 +44,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     VStack {
                         TextField("Nama Kontak Penerima", text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
+                            print("\($receivedName)")
                         })
                         .disabled(false)
                         .frame(height: 10)
@@ -59,7 +58,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     
                     HStack {
                         Text("Detail Rekening")
-                            .font(.subheadline)
+                            .font(.caption)
                             .fontWeight(.ultraLight)
                         
                         Spacer()
@@ -67,22 +66,21 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     .padding(.horizontal, 20)
                     
                     // Bank Form
-                    HStack(alignment: VerticalAlignment.firstTextBaseline) {
+                    HStack(spacing: 20) {
                         
                         HStack {
                             Text("Bank")
-                                .font(.callout)
+                                .font(.caption)
                                 .fontWeight(.light)
-                                .multilineTextAlignment(.leading)
                         }
+                        .padding(.leading, 10)
                         .padding(.trailing, 60)
                         
-                        Spacer()
-                        
-                        MultilineTextField("Bank", text: .constant(transferData.bankName), onCommit: {
-                            
+                        TextField("Bank", text: $receivedBank, onEditingChanged: { changed in
+                            print("\($receivedBank)")
                         })
                         .disabled(true)
+                        .frame(height: 10)
                         .padding()
                         .font(.subheadline)
                         .background(Color(hex: "#F6F8FB"))
@@ -91,14 +89,14 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     .padding(.horizontal)
                     
                     // No. Rekening Form
-                    HStack(alignment: VerticalAlignment.firstTextBaseline) {
+                    HStack(spacing: 20) {
                         Text("No. Rekening")
-                            .font(.callout)
+                            .font(.caption)
                             .fontWeight(.light)
-                        
-                        Spacer()
+                            .frame(width: 100)
                         
                         TextField("No. Rekening", text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
+                            //                            print("\($receivedRekening)")
                         })
                         .disabled(true)
                         .frame(height: 10)
@@ -111,31 +109,23 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     .padding(.horizontal)
                     
                     Button(action: {
+                        self.transferData.destinationName = self.receivedName
                         
-                        if (self.transferData.transactionType == "RTGS") {
-                            self.favoritVM.transferRtgs(data: transferData) { result in
-                                print("Berhasil simpan ke favorite")
-                                self.show = false
-                                self.showAlert = true
-                            }
-                        } else {
-                            self.favoritVM.transferSkn(data: transferData) { result in
-                                print("Berhasil simpan ke favorite")
-                                self.show = false
-                                self.showAlert = true
-                            }
-                        }
-                        
+                        self.show = false
+                        self.showAlert = true
                     }, label: {
-                        Text("SIMPAN KE FAVORIT")
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        
+                        if self.favoritVM.isLoading {
+                            ProgressView()
+                        } else {
+                            Text("SIMPAN PERUBAHAN")
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                        }
                     })
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     .disabled(disableForm)
-                    .background(disableForm ? Color.gray : Color(hex: "#2334D0"))
+                    .background(disableForm ? Color(.lightGray) : Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 40)
@@ -152,10 +142,8 @@ struct PopOverFavoriteTransactionOffUsView: View {
             self.receivedName = self.transferData.destinationName
         }
     }
-}
-
-struct PopOverFavoriteTransactionOffUsView_Previews: PreviewProvider {
-    static var previews: some View {
-        PopOverFavoriteTransactionOffUsView(transferData: TransferOffUsModel(), show: .constant(false), showAlert: .constant(false))
+    
+    var disableForm: Bool {
+        receivedName.isEmpty || self.favoritVM.isLoading
     }
 }

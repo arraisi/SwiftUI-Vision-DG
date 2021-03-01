@@ -22,6 +22,8 @@ class TransferOnUsModel: ObservableObject {
     @Published var notes = ""
     @Published var pin = ""
     
+    @Published var idEdit = ""
+    
     @Published var transactionDate = "Sekarang"
     @Published var transactionFrequency = ""
     @Published var transactionVoucher = ""

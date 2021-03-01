@@ -14,6 +14,8 @@ struct TransferOnUsScreen: View {
     @ObservedObject var profileVM = ProfileViewModel()
     @StateObject var transferVM = TransferViewModel()
     
+    @Binding var dest: String
+    
     @State var transferData = TransferOnUsModel()
     @State var transactionFrequency = "Pilih Frekuensi Transaksi"
     @State var transactionVoucher = "Pilih Voucher"
@@ -40,7 +42,7 @@ struct TransferOnUsScreen: View {
     
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 10000
+    @State private var minLimit: Int = 10000
     
     @State var balance: String = ""
     @State var productName: String = "-"
@@ -172,6 +174,9 @@ struct TransferOnUsScreen: View {
         .navigationBarTitle("Transfer Antar Sesama", displayMode: .inline)
         .onAppear() {
             self.transferData = TransferOnUsModel()
+            if (dest != "") {
+                self.destinationNumber = self.dest
+            }
             self.getProfile()
             self.getLimit(code: "70")
         }
@@ -828,6 +833,6 @@ struct TransferOnUsScreen: View {
 
 struct TransferOnUsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsScreen()
+        TransferOnUsScreen(dest: .constant(""))
     }
 }
