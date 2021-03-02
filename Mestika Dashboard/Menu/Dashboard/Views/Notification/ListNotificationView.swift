@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ListNotificationView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State var _listHistory = [
         NotificationMonthly(id: 1, month: "November 2020", list:[
             NotificationModel(id: 1, type: "Transfer", status: "Berhasil", title: "RTGS", time: "02 - November - 2020", destinationAccount: "Mandiri - 320000288188211", amount: "100000"),
@@ -30,7 +34,7 @@ struct ListNotificationView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text("Tandai Semua Telah Dibaca")
+                        Text(NSLocalizedString("Mark All Read".localized(language), comment: ""))
                             .foregroundColor(Color("DarkStaleBlue"))
                             .font(.caption2)
                             .padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 20))
@@ -59,7 +63,7 @@ struct ListNotificationView: View {
                                                 .font(.system(size: 12))
                                                 .fontWeight(.light)
                                                 .foregroundColor(Color("DarkStaleBlue"))
-                                            Text("Rekening Tujuan :")
+                                            Text(NSLocalizedString("Destination account:".localized(language), comment: ""))
                                                 .foregroundColor(Color("DarkStaleBlue"))
                                                 .font(.system(size: 12))
                                                 .fontWeight(.ultraLight)

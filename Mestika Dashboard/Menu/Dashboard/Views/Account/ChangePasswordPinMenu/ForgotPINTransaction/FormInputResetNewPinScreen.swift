@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormInputResetNewPinScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var cardNo = ""
     
     @State private var pinCtrl = ""
@@ -39,18 +42,18 @@ struct FormInputResetNewPinScreen: View {
                     
                     VStack {
                         
-                        Text("LUPA PIN")
+                        Text(NSLocalizedString("FORGOT PIN".localized(language), comment: ""))
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
-                        Text("Silahkan masukkan PIN baru Anda")
+                        Text(NSLocalizedString("Please enter your new PIN".localized(language), comment: ""))
                             .font(.custom("Montserrat-Regular", size: 14))
                             .foregroundColor(Color(hex: "#002251"))
                             .padding(.top, 10)
                         
                         VStack(alignment: .leading) {
                             
-                            Text("PIN Baru")
+                            Text(NSLocalizedString("New PIN".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .padding(.top, 10)
@@ -60,7 +63,7 @@ struct FormInputResetNewPinScreen: View {
                                     //                                    if (showPin) {
                                     //                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
                                     //                                    } else {
-                                    SecureField("Input PIN baru Anda", text: self.$pinCtrl)
+                                    SecureField(NSLocalizedString("Enter your new PIN".localized(language), comment: ""), text: self.$pinCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinCtrl.publisher.collect()) {
                                             self.pinCtrl = String($0.prefix(6))
@@ -84,7 +87,7 @@ struct FormInputResetNewPinScreen: View {
                                     //                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
                                     //                                            .keyboardType(.numberPad)
                                     //                                    } else {
-                                    SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                    SecureField(NSLocalizedString("Enter your new PIN".localized(language), comment: ""), text: self.$pinConfirmCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinConfirmCtrl.publisher.collect()) {
                                             self.pinConfirmCtrl = String($0.prefix(6))
@@ -125,7 +128,7 @@ struct FormInputResetNewPinScreen: View {
                                 }
                             }
                         }){
-                            Text("Simpan PIN Baru")
+                            Text(NSLocalizedString("Save New PIN".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -190,7 +193,7 @@ struct FormInputResetNewPinScreen: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("PIN tidak sama, silahkan ketik ulang")
+            Text(NSLocalizedString("PIN is not the same, please retype it".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
@@ -199,7 +202,7 @@ struct FormInputResetNewPinScreen: View {
             Button(action: {
                 self.showModalError = false
             }) {
-                Text("Kembali")
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(.bold)
@@ -225,7 +228,7 @@ struct FormInputResetNewPinScreen: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("PIN terdiri dari 6 karakter, tidak boleh berurutan dari 6 angka yang sama")
+            Text(NSLocalizedString("PIN consists of 6 characters, cannot be sequential from the same 6 digits".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -258,7 +261,7 @@ struct FormInputResetNewPinScreen: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("PIN APLIKASI YANG BARU TELAH BERHASIL DISIMPAN")
+            Text(NSLocalizedString("NEW APPLICATION PIN HAS BEEN SUCCESSFULLY SAVED".localized(language), comment: ""))
                 .font(.custom("Montserrat-ExtraBold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
@@ -291,7 +294,7 @@ struct FormInputResetNewPinScreen: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("PIN not Changed")
+            Text(NSLocalizedString("PIN not Changed".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)

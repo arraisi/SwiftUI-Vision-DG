@@ -10,6 +10,9 @@ import SystemConfiguration
 
 struct FormPilihJenisATMView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -53,7 +56,7 @@ struct FormPilihJenisATMView: View {
                 VStack {
                     AppBarLogo(light: false, onCancel: {})
                     
-                    Text(NSLocalizedString("Pilih Jenis Kartu ATM Anda", comment: ""))
+                    Text(NSLocalizedString("Choose Your ATM Card Type".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.top, 25)
@@ -128,11 +131,11 @@ struct FormPilihJenisATMView: View {
             }
             .alert(isPresented: $isShowingAlert) {
                 return Alert(
-                    title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                    primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                    title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                    primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                         self.appState.moveToWelcomeView = true
                     }),
-                    secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                    secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
             }
             .gesture(DragGesture().onEnded({ value in
                 if(value.startLocation.x < 20 &&
@@ -151,7 +154,7 @@ struct FormPilihJenisATMView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("Please check your internet connection")
+            Text(NSLocalizedString("Please check your internet connection".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)

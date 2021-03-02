@@ -11,6 +11,8 @@ struct ListAllFavoriteTransactionView: View {
     
     @State var receivedName = ""
     @State var receivedBank = "MESTIKA"
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
     
     @State private var searchCtrl = ""
     

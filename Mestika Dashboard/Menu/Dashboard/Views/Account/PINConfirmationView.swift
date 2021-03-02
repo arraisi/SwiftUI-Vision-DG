@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PINConfirmationView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @AppStorage("lock_Password") var key = "123456"
     
     @State var pin = ""
@@ -29,11 +32,11 @@ struct PINConfirmationView: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text("MASUKKAN PIN ATM")
+                Text(NSLocalizedString("Enter the ATM PIN".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("Silahkan masukkan PIN ATM Anda")
+                Text(NSLocalizedString("Please enter your ATM PIN".localized(language), comment: ""))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
@@ -45,7 +48,7 @@ struct PINConfirmationView: View {
                 }
                 .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
                 
-                Text(wrongPin ? "Incorrect Pin" : "")
+                Text(wrongPin ? NSLocalizedString("Incorrect Pin".localized(language), comment: "") : "")
                     .foregroundColor(.red)
                     .fontWeight(.heavy)
                     .padding()
@@ -74,7 +77,7 @@ struct PINConfirmationView: View {
             }
             
         }
-        .navigationBarTitle("Reset PIN Transaksi", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Reset Transaction PIN".localized(language), comment: ""), displayMode: .inline)
         .navigationBarItems(trailing: NavigationLink(destination: CardManagementScreen(), label: {
             Text("Cancel")
         }))
@@ -94,7 +97,7 @@ struct PINConfirmationView: View {
                     .foregroundColor(Color(hex: "#F32424"))
                 
                 
-                Text("PIN ATM Salah")
+                Text(NSLocalizedString("Wrong ATM PIN".localized(language), comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#F32424"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -103,14 +106,14 @@ struct PINConfirmationView: View {
             .padding(.top, 25)
             
             HStack {
-                Text("PIN ATM Anda telah salah 3 kali, silahkan ulangi lagi minggu depan.")
+                Text(NSLocalizedString("Your ATM PIN has been wrong 3 times, please try again next week.".localized(language), comment: ""))
                     .font(.custom("Montserrat-Light", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
             }
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text("Kembali ke Halaman Utama")
+                Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)

@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListHistoryTransactionView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @State var _listHistory = [
         HistoryTransaction(id: 1, jenisTransaksi: "PLN Pra Bayar", username: "BAMBANG", namaPembayaran: "ID Pembayaran", nomorPembayaran: "8091203901239"),
         HistoryTransaction(id: 2, jenisTransaksi: "e-Wallet", username: "ASEP", namaPembayaran: "OVO", nomorPembayaran: "085875074351"),
@@ -20,7 +24,7 @@ struct ListHistoryTransactionView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text("Riwayat Transaksi")
+                    Text(NSLocalizedString("Transaction History".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -28,7 +32,7 @@ struct ListHistoryTransactionView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text("Selengkapnya")
+                        Text(NSLocalizedString("More".localized(language), comment: ""))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.caption2)
                             .fontWeight(.bold)

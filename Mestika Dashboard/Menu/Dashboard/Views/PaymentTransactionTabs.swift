@@ -9,6 +9,10 @@ import SwiftUI
 
 struct PaymentTransactionTabs: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
             
@@ -37,12 +41,12 @@ struct PaymentTransactionTabs: View {
     var titleInfo: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Pembayaran  &  Pembelian")
+                Text(NSLocalizedString("Payments & Purchases".localized(language), comment: ""))
                     .font(.title)
                     .fontWeight(.heavy)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 
-                Text("Lakukan segala bentuk pembayaran dan transaksi dengan cepat, mudah dan aman")
+                Text(NSLocalizedString("Make all forms of payments and transactions quickly, easily and safely".localized(language), comment: ""))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)

@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftyRSA
 
 struct EncryptPasswordView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
     @State private var input: String = ""
     @State private var output: String = ""
     var body: some View {

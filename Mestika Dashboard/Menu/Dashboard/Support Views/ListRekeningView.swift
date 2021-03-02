@@ -9,13 +9,17 @@ import SwiftUI
 
 struct ListRekeningView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @State var cardNo: String = "-"
     @State var cardName: String = "-"
     
     var body: some View {
         VStack {
             HStack {
-                Text("Rekening")
+                Text(NSLocalizedString("Account".localized(language), comment: ""))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct VoucherView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var body: some View {
         VStack {
             HStack {
@@ -17,7 +21,7 @@ struct VoucherView: View {
                         .fontWeight(.bold)
                         .padding(.bottom, 5)
                     
-                    Text("Transaksi lebih menguntungkan dengan menggunakan voucher.")
+                    Text(NSLocalizedString("Transactions are more profitable by using vouchers.".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.ultraLight)
                 }
@@ -32,7 +36,7 @@ struct VoucherView: View {
             
             VStack {
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Tampilkan Semua Voucher")
+                    Text(NSLocalizedString("Show All Vouchers".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 13))

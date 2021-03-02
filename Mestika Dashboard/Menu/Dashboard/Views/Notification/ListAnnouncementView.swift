@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ListAnnouncementView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State var _listHistory = [
         HistoryTransaction(id: 1, jenisTransaksi: "PLN Pra Bayar", username: "BAMBANG", namaPembayaran: "ID Pembayaran", nomorPembayaran: "8091203901239"),
         HistoryTransaction(id: 2, jenisTransaksi: "e-Wallet", username: "ASEP", namaPembayaran: "OVO", nomorPembayaran: "085875074351"),
@@ -23,7 +27,7 @@ struct ListAnnouncementView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text("Tandai Semua Telah Dibaca")
+                        Text(NSLocalizedString("Mark All Read".localized(language), comment: ""))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.caption2)
                             .padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 20))

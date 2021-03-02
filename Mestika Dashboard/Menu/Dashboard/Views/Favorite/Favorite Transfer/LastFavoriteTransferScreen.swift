@@ -10,6 +10,9 @@ import Introspect
 
 struct LastFavoriteTransferScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject private var favoritVM = FavoritViewModel()
@@ -32,7 +35,7 @@ struct LastFavoriteTransferScreen: View {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {
                             
-                            TextField("Name", text: $name).introspectTextField { textField in
+                            TextField(NSLocalizedString("Name".localized(language), comment: ""), text: $name).introspectTextField { textField in
                                 textField.becomeFirstResponder()
                             }
                             .foregroundColor(.white)
@@ -115,7 +118,7 @@ struct LastFavoriteTransferScreen: View {
                     
                     VStack {
                         Button(action: {}, label: {
-                            Text("Lakukan Transfer")
+                            Text(NSLocalizedString("Lakukan Transfer".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))

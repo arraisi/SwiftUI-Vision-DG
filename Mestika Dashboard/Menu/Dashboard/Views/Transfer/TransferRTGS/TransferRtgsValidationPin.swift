@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct TransferRtgsValidationPin: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var transferData: TransferOffUsModel
     
     @State var password = ""
@@ -35,7 +39,7 @@ struct TransferRtgsValidationPin: View {
                 VStack {
                     Spacer(minLength: 0)
                     
-                    Text("Masukkan PIN Transaksi anda")
+                    Text(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .foregroundColor(.white)

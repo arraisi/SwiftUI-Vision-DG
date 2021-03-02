@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListMySavingsView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @State var _listMySavings = [
         MySavings(id: 1, namaRekening: "Rekening Utama", norek: "89098192389", saldo: "350.000"),
         MySavings(id: 2, namaRekening: "Rekening 2", norek: "9090989812", saldo: "0.0"),
@@ -18,7 +22,7 @@ struct ListMySavingsView: View {
         ZStack {
             VStack {
                 HStack {
-                    Text("Tabungan Ku")
+                    Text(NSLocalizedString("My Savings".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.light)
@@ -26,7 +30,7 @@ struct ListMySavingsView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text("detail selengkapnya")
+                        Text(NSLocalizedString("more details".localized(language), comment: ""))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.caption2)
                             .fontWeight(.bold)

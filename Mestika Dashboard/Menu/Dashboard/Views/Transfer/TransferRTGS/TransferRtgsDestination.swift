@@ -9,24 +9,27 @@ import SwiftUI
 
 struct TransferRtgsDestination: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     // Environtment Object
     @EnvironmentObject var transferData: TransferOffUsModel
     
     // Variale Destination Type
-    var _listDestinationType = ["Personal", "Perusahaan", "Kelompok", "Yayasan"]
-    @State private var destinationType: String = "Tipe Penerima"
+    var _listDestinationType = ["Personal", NSLocalizedString("Company".localized(LocalizationService.shared.language), comment: ""), NSLocalizedString("Group".localized(LocalizationService.shared.language), comment: ""), NSLocalizedString("Foundation".localized(LocalizationService.shared.language), comment: "")]
+    @State private var destinationType: String = NSLocalizedString("Receiver Type".localized(LocalizationService.shared.language), comment: "")
     
     // Variable Citizen Ship
     var _listCitizenShip = ["WNI", "WNA"]
-    @State private var citizenShipCtrl: String = "Kewarganegaraan"
+    @State private var citizenShipCtrl: String = NSLocalizedString("Citizenship".localized(LocalizationService.shared.language), comment: "")
     
     // Variable Province
     var _listProvince = ["Jawa Barat", "Jawa Timur", "Jawa Tengah"]
-    @State private var provinceChoose: String = "Provinsi Penerima"
+    @State private var provinceChoose: String = NSLocalizedString("Recipient Province".localized(LocalizationService.shared.language), comment: "")
     
     // Variable City
     var _listCity = ["Bandung"]
-    @State private var cityChoose: String = "Kota Penerima"
+    @State private var cityChoose: String = NSLocalizedString("Receiving City".localized(LocalizationService.shared.language), comment: "")
     
     // Variable Notes
     @State private var addressCtrl: String = ""
@@ -48,7 +51,7 @@ struct TransferRtgsDestination: View {
                 VStack {
                     VStack {
                         HStack {
-                            Text("Rekening Tujuan")
+                            Text(NSLocalizedString("Destination account".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .font(.caption)
                                 .padding(.leading)
@@ -67,7 +70,7 @@ struct TransferRtgsDestination: View {
                     
                     VStack {
                         HStack {
-                            Text("Nominal Transaksi")
+                            Text(NSLocalizedString("Nominal Transaction".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .font(.caption)
                                 .padding(.leading)
@@ -109,7 +112,7 @@ struct TransferRtgsDestination: View {
                             self.transferData.addressOfDestination = self.addressCtrl
                             self.isRouteTransaction = true
                         }, label: {
-                            Text("KONFIRMASI TRANSFER")
+                            Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.system(size: 13))
@@ -148,7 +151,7 @@ struct TransferRtgsDestination: View {
                 }
                 .padding([.leading, .top, .bottom])
                 
-                TextField("Nama Tujuan", text: self.$transferData.destinationName, onEditingChanged: { changed in
+                TextField(NSLocalizedString("Destination Name".localized(language), comment: ""), text: self.$transferData.destinationName, onEditingChanged: { changed in
 //                    validateForm()
                 })
                     .font(.subheadline)
@@ -300,7 +303,7 @@ struct TransferRtgsDestination: View {
     var addressCard: some View {
         VStack {
             HStack {
-                Text("Alamat Penerima")
+                Text(NSLocalizedString("Recipient Address".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
@@ -310,7 +313,7 @@ struct TransferRtgsDestination: View {
             .padding(.top, 25)
             
             VStack {
-                MultilineTextField("Tulis alamat penerima", text: self.$addressCtrl, onCommit: {
+                MultilineTextField(NSLocalizedString("Write the recipient's address".localized(language), comment: ""), text: self.$addressCtrl, onCommit: {
 //                    validateForm()
                 })
             }
@@ -330,13 +333,13 @@ struct TransferRtgsDestination: View {
     var disableForm: Bool {
         if (self.transferData.transactionType == "SKN") {
             
-            if (            self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan") {
+            if (            self.transferData.destinationName.isNotEmpty() && self.destinationType != NSLocalizedString("Receiver Type".localized(language), comment: "") && self.citizenShipCtrl != NSLocalizedString("Citizenship".localized(language), comment: "")) {
                 return false
             }
             
         } else {
             
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != "Tipe Penerima" && self.citizenShipCtrl != "Kewarganegaraan" && self.addressCtrl.isNotEmpty()) {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != NSLocalizedString("Receiver Type".localized(language), comment: "") && self.citizenShipCtrl != NSLocalizedString("Citizenship".localized(language), comment: "") && self.addressCtrl.isNotEmpty()) {
                 return false
             }
         }

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct GridMenuAllPaymentPurchaseView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     let gridItems = [
         GridItem(.fixed(80), spacing: 20),
         GridItem(.fixed(80), spacing: 20),
@@ -19,14 +22,14 @@ struct GridMenuAllPaymentPurchaseView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("All payment & purchase")
+                Text(NSLocalizedString("All payment & purchase".localized(language), comment: ""))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 
                 Spacer()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("See All category")
+                Button(action: {}, label: {
+                    Text(NSLocalizedString("See All category".localized(language), comment: ""))
                         .bold()
                         .foregroundColor(Color(hex: "#2334D0"))
                 })

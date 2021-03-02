@@ -9,6 +9,10 @@ import SwiftUI
 
 struct TransferRtgsSuccess: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @EnvironmentObject var appState: AppState
     
     //    @EnvironmentObject var transferData: TransferOnUsModel
@@ -51,7 +55,7 @@ struct TransferRtgsSuccess: View {
                             self.appState.moveToTransfer = true
                         },
                         label: {
-                            Text("Kembali Ke Halaman Utama")
+                            Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.system(size: 13))
@@ -83,14 +87,14 @@ struct TransferRtgsSuccess: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingBadge) {
             return Alert(
-                title: Text("Berhasil"),
-                message: Text("Favorit berhasil ditambahkan"),
-                dismissButton: .default(Text("Oke"))
+                title: Text(NSLocalizedString("Succeed".localized(language), comment: "")),
+                message: Text(NSLocalizedString("Favorite added successfully".localized(language), comment: "")),
+                dismissButton: .default(Text(NSLocalizedString("Okay".localized(language), comment: "")))
             )
         }
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
-                Text("Tambahkan ke Favorit?")
+                Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
                     .font(.caption)
                     .foregroundColor(.white)
                 
@@ -124,7 +128,7 @@ struct TransferRtgsSuccess: View {
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
-            Text("Transfer \(self.transferData.transferType) Berhasil")
+            Text("Transfer" + "\(self.transferData.transferType)" + NSLocalizedString("Succeed".localized(language), comment: ""))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -133,7 +137,7 @@ struct TransferRtgsSuccess: View {
     
     var nominalInfo: some View {
         VStack {
-            Text("Nominal Transaksi")
+            Text(NSLocalizedString("Nominal Transaction".localized(language), comment: ""))
                 .font(.caption)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
@@ -151,7 +155,7 @@ struct TransferRtgsSuccess: View {
     
     var destinationInfo: some View {
         VStack(alignment: .leading) {
-            Text("Ke")
+            Text(NSLocalizedString("To".localized(language), comment: ""))
                 .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
@@ -172,7 +176,7 @@ struct TransferRtgsSuccess: View {
     
     var receivedInfo: some View {
         VStack(alignment: .leading) {
-            Text("Dari")
+            Text(NSLocalizedString("From".localized(language), comment: ""))
                 .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             

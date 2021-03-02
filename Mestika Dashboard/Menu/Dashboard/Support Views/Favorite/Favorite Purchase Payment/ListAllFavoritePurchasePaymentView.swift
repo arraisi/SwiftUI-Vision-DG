@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListAllFavoritePurchasePaymentView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     var action: ((PurchasePaymentFavorite) -> Void)?
     @State private var activeDetails: Bool = false
     
@@ -24,7 +28,7 @@ struct ListAllFavoritePurchasePaymentView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text("Favorit Purchase & Payment")
+                    Text(NSLocalizedString("Favorite Purchase & Payment".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)

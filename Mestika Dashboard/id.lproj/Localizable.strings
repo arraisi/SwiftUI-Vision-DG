@@ -46,160 +46,6 @@
 "Pilih Jenis Tabungan Anda" = "";
 "Deposit Tabungan" = "";
 "Keunggulan Tabungan :" = "";
-
-/*
- Term_ConditionView
- */
-"SYARAT DAN KETENTUAN" = "";
-"* Saya Adalah Warga Negara Indonesia dan tidak memiliki kewajiban pajak di Negara lain" = "";
-"* Saya setuju" = "";
-"Saya memberikan hak kepada Bank Mestika untuk memberikan data kepada pihak ketiga yang berkerjasama dengan Bank Mestika" = "";
-"Berikutnya" = "";
-"Apakah ingin membatalkan registrasi ?" = "Apakah kamu yakin ingin kembali ke halaman awal ?";
-"YA" = "";
-"Tidak" = "";
-/*
- VerificationRegisterDataView
- */
-"PASTIKAN INFORMASI ANDA BENAR" = "";
-"KTP" = "";
-"No. Telepon" = "";
-"Foto KTP" = "";
-"Tujuan Pembukaan Rekening" = "";
-"Sumber Dana" = "";
-"Perkiraan Penarikan" = "";
-"Besar Perkiraan Penarikan" = "";
-"Perkiraan Setoran" = "";
-"Besar Perkiraan Setoran" = "";
-"Submit Data" = "";
-"Penghasilan Kotor" = "";
-"Jabatan" = "";
-"Industri" = "";
-"Sumber Pendapatan Lainnya" = "";
-"Informasi Penyandang Dana" = "";
-"Nama Penyandang Dana" = "";
-"Hubungan Dengan Anda" = "";
-"Profesi Penyandang Dana" = "";
-/*
- VerificationPINView
- */
-"VERIFIKASI PIN \nKARTU ATM ANDA" = "";
-"Silahkan Masukkan PIN \nkartu ATM Anda" = "";
-"Masukkan PIN ATM" = "";
-"Rekening Anda tidak memiliki kartu ATM?" = "";
-"Verifikasi Lewat Video Call" = "";
-"PIN ATM yang anda Masukkan Salah!" = "";
-"PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar." = "";
-"Silahkan coba kembali.." = "";
-"Kembali" = "";
-/*
- SuccessRegisterView
- */
-"Pendaftaran Rekening Baru Telah Berhasil" = "";
-"Silahkan pilih waktu untuk dihubungi." = "";
-"Pilih Tanggal Wawancara" = "";
-"Pilih Jam" = "";
-"Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru" = "";
-"KTP." = "";
-"No KTP" = "";
-"No. HP." = "";
-"Nomor Handphone" = "";
-"Alamat Email" = "";
-"Buat Janji" = "";
-"Batalkan Permohonan" = "";
-"Gagal membatalkan permohonan. Silakan coba beberapa saat lagi." = "";
-"Batalkan Permohonan" = "";
-"TIDAK" = "";
-"YA" = "";
-"Terimakasih telah memilih Bank Mestika" = "";
-"Permohonan Pembukaan Rekening Anda sedang dalam proses persetujuan. Pihak kami akan menghubungi Anda untuk memverifikasi data." = "";
-"Informasi" = "";
-"Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :" = "";
-"Tanggal" = "";
-"Jam" = "";
-/*
- FormPilihJenisATMView
- */
-"Pilih Jenis Kartu ATM Anda" = "";
-/*
- FormPilihDesainATMView
- */
-"Pilih Desain Kartu ATM Anda" = "";
-"PILIH DESAIN KARTU" = "";
-/*
- FormCompletionKartuATMView
- */
-"Alamat Sesuai KTP" = "";
-"Alamat Surat Menyurat" = "";
-"Alamat Perusahaan" = "";
-"Alamat Lainnya" = "";
-"LENGKAPI DATA" = "";
-"Submit Data" = "";
-"Nama Pada Kartu ATM" = "";
-"Nama ini akan dicetak pada kartu ATM baru Anda" = "";
-"Masukkan Nama" = "";
-"Alamat Pengiriman" = "";
-"Alamat" = "";
-"Kelurahan" = "";
-"Kecamatan" = "";
-"Kode Pos" = "";
-"Masukkan Kode Referal" = "";
-"Dari mana Anda tahu informasi Digital Banking Bank mestika" = "";
-"Masukkan kode referal" = "";
-"Nama Kartu" = "";
-"Alamat Perusahaan" = "";
-"Alamat" = "";
-/*
- FormDetailKartuATMView
- */
-"KARTU ATM ANDA \nAKAN SEGERA DIKIRIM" = "";
-"Selamat data kartu ATM baru Anda telah berhasil disimpan." = "";
-"Nama" = "";
-"No. Kartu" = "";
-"Silahkan tunggu beberapa saat sampai kartu ATM Anda diterima." = "";
-"KEMBALI KE HALAMAN UTAMA" = "";
-/*
- VerificationDataPersonalView
- */
-"Template" = "";
-"Anda telah memilih mendaftar jenis tabungan" = "";
-"Deposit Tabungan." = "";
-"Sebelum melanjutkan proses pendaftaran, silahkan terlebih dahulu memverifikasi data yang telah Anda Isi." = "";
-"Jenis Tabungan" = "";
-"Tujuan Pembukaan Rekening" = "";
-"Sumber Dana" = "";
-"Pekerjaan" = "";
-"Jabatan" = "";
-"Nama Perusahaan" = "";
-"Alamat Perusahaan" = "";
-"Kecamatan Perusahaan" = "";
-"Kelurahan Perusahaan" = "";
-"Kode Pos Perusahaan" = "";
-"No. Perusahaan" = "";
-"Bidang Usaha" = "";
-"Penghasilan" = "";
-"Data Valid" = "";
-/*
- VerificationAddressView
- */
-"PASTIKAN INFORMASI ANDA BENAR" = "";
-"Apakah Alamat Surat Menyurat Anda Sesuai KTP?" = "";
-/*
- IncomingVideoCallView
- */
-"Incoming Video Call" = "";
-"Call Center Mestika Bank" = "";
-/*
- FormCompletionReferalCodeView
- */
-"LENGKAPI DATA" = "";
-"Masukkan Kode Referal" = "";
-"Dari mana Anda tahu informasi Digital Banking Bank mestika" = "";
-/*
- FormPINTransaksiATMView
- */
-"Masukkan PIN Transaksi anda" = "";
-"Ubah PIN Transaksi" = "";
 /*
  DetailsTypeSavingView
  */
@@ -226,7 +72,7 @@
 "Detail Limit Kartu ATM" = "";
 "Penarikan Harian" = "";
 "Transfer Antar Sesama Bank Mestika" = "";
-"Transfer ke Bank Lain" = "";
+"Transfer to Other Bank" = "Transfer ke Bank Lain";
 "Penarikan Harian" = "";
 "Payment" = "";
 "Purchase" = "";
@@ -325,6 +171,7 @@
 "Wrong password" = "Password salah";
 "Please enter your password correctly or login in another way." = "Silahkan masukkan password anda dengan benar, atau login dengan cara lain.";
 "Back" = "Kembali";
+"BACK" = "KEMBALI";
 "Login with Biometric" = "Masuk dengan Biometrik";
 "It's easy to log in only with Biometrics." = "Dapatkan kemudahan dengan login hanya dengan Biometrik.";
 "Activate" = "Aktifkan";
@@ -507,3 +354,355 @@
 "Forgot PIN Transaction" = "Lupa PIN Transaksi";
 "Logout" = "Keluar";
 "Are you sure you want to exit the Bank Mestika application?" = "Anda yakin ingin keluar aplikasi Bank Mestika?";
+
+/* Term_ConditionView */
+"TERMS AND CONDITIONS" = "SYARAT DAN KETENTUAN";
+"* I am an Indonesian citizen and do not have tax obligations in other countries" = "* Saya Adalah Warga Negara Indonesia dan tidak memiliki kewajiban pajak di Negara lain";
+"* I agree" = "* Saya setuju";
+"I give the right to Bank Mestika to provide data to third parties that cooperate with Bank Mestika" = "Saya memberikan hak kepada Bank Mestika untuk memberikan data kepada pihak ketiga yang berkerjasama dengan Bank Mestika";
+
+/* VerificationRegisterDataView */
+"MAKE SURE YOUR INFORMATION IS CORRECT" = "PASTIKAN INFORMASI ANDA BENAR";
+"Identity Card/(KTP)" = "KTP";
+"Photo Identity Card/(KTP)" = "Foto KTP";
+"Your NPWP photo" = "Foto NPWP Anda";
+"Add NPWP" = "Tambahkan NPWP";
+"Source of funds" = "Sumber Dana";
+"Estimated Withdrawal" = "Perkiraan Penarikan";
+"Estimated Withdrawal Size" = "Besar Perkiraan Penarikan";
+"Estimated Deposit" = "Perkiraan Setoran";
+"Estimated Deposit Size" = "Besar Perkiraan Setoran";
+"Kirim Data" = "Submit Data";
+"Gross Income" = "Penghasilan Kotor";
+"Industry" = "Industri";
+"Other Sources of Income" = "Sumber Pendapatan Lainnya";
+"Funder Information" = "Informasi Penyandang Dana";
+"NPWP Number" = "Nomor NPWP";
+
+/* VerificationPINView */
+"VERIFY YOUR PIN \nCARD OF ATM" = "VERIFIKASI PIN \nKARTU ATM ANDA";
+"Please enter your PIN \nATM card" = "Silahkan Masukkan PIN \nkartu ATM Anda";
+"Insert ATM Card Number" = "Masukkan No Kartu ATM";
+"Enter the ATM PIN" = "Masukkan PIN ATM";
+"Your account doesn't have an ATM card?" = "Rekening Anda tidak memiliki kartu ATM?";
+"Verification Via Video Call" = "Verifikasi Lewat Video Call";
+"Your ATM Card Is Blocked" = "Kartu ATM Anda Diblokir";
+"Video Call Verification" = "Verifikasi Video Call";
+"The ATM PIN you entered is wrong!" = "PIN ATM yang anda Masukkan Salah!";
+"The ATM PIN you entered does not match the registered account ATM PIN." = "PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar.";
+"Please try again .." = "Silahkan coba kembali..";
+"Congratulations, your new account opening has been approved." = "Selamat, pembukaan akun baru Anda telah disetujui.";
+
+/* SuccessRegisterView */
+"New Account Registration Successful" = "Pendaftaran Rekening Baru Telah Berhasil";
+"Please select a time to contact." = "Silahkan pilih waktu untuk dihubungi.";
+"Choose an interview date" = "Pilih Tanggal Wawancara";
+"Choose Time" = "Pilih Jam";
+"Make sure your data is still the same. If not, then please fill in the data for new account creation again" = "Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru";
+"Identity Card/(KTP) Number" = "Nomor KTP";
+"Make schedule" = "Buat Janji";
+"Failed to cancel the application. Please try again later." = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi.";
+"Cancel Request" = "Batalkan Permohonan";
+"Thank you for choosing Bank Mestika" = "Terimakasih telah memilih Bank Mestika";
+"Your application to open an account is in the process of approval. Our party will contact you to verify the data." = "Permohonan Pembukaan Rekening Anda sedang dalam proses persetujuan. Pihak kami akan menghubungi Anda untuk memverifikasi data.";
+"Information" = "Informasi";
+"We have received the interview schedule, please wait for our CS to contact you at:" = "Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :";
+
+/* FormPilihJenisATMView */
+"Choose Your ATM Card Type" = "Pilih Jenis Kartu ATM Anda";
+
+/* FormPilihDesainATMView */
+"Choose Your ATM Card Design" = "Pilih Desain Kartu ATM Anda";
+"CHOOSE A CARD DESIGN" = "PILIH DESAIN KARTU";
+
+/* FormCompletionKartuATMView */
+"COMPLETE DATA" = "LENGKAPI DATA";
+"Name on ATM Card" = "Nama Pada Kartu ATM";
+"This name will be printed on your new ATM card" = "Nama ini akan dicetak pada kartu ATM baru Anda";
+"Enter Name" = "Masukkan Nama";
+"Enter Referral Code" = "Masukkan Kode Referal";
+"How do you know the information on Digital Banking Bank mestika" = "Dari mana Anda tahu informasi Digital Banking Bank mestika";
+"Enter the referral code" = "Masukkan kode referal";
+"Name Card" = "Nama Kartu";
+"City" = "Kota";
+"Province" = "Provinsi";
+
+/* FormDetailKartuATMView */
+"YOUR ATM CARD WILL BE SENT IMMEDIATELY" = "KARTU ATM ANDA \nAKAN SEGERA DIKIRIM";
+"Congratulations, your new ATM card data has been successfully saved." = "Selamat data kartu ATM baru Anda telah berhasil disimpan.";
+"Please wait a few moments until your ATM card is accepted." = "Silahkan tunggu beberapa saat sampai kartu ATM Anda diterima.";
+"BACK TO MAIN PAGE" = "KEMBALI KE HALAMAN UTAMA";
+"NEXT" = "SELANJUTNYA";
+
+/* VerificationDataPersonalView */
+"You have chosen to register the savings type" = "Anda telah memilih mendaftar jenis tabungan";
+"Savings Deposit." = "Deposit Tabungan.";
+"Before continuing the registration process, please first verify the data that you have filled in." = "Sebelum melanjutkan proses pendaftaran, silahkan terlebih dahulu memverifikasi data yang telah Anda Isi.";
+"Types of Savings" = "Jenis Tabungan";
+"Profession" = "Pekerjaan";
+"Position" = "Jabatan";
+"Income" = "Penghasilan";
+"Valid Data" = "Data Valid";
+"Company Number" = "No. Perusahaan";
+
+/* VerificationAddressView */
+"MAKE SURE YOUR INFORMATION IS CORRECT" = "PASTIKAN INFORMASI ANDA BENAR";
+"Does Your Mailing Address Match Your Identity Card/(KTP)?" = "Apakah Alamat Surat Menyurat Anda Sesuai KTP?";
+
+/* IncomingVideoCallView */
+"Incoming Video Call" = "Video Call";
+"Accept" = "Terima Panggilan";
+"Hang Up" = "Tutup Panggilan";
+
+/* FormCompletionReferalCodeView */
+"Please wait" = "Harap Tunggu";
+"SUBMIT" = "KIRIMKAN";
+
+/* FormPINTransaksiATMView */
+"Enter your Transaction PIN" = "Masukkan PIN Transaksi anda";
+"Change Transaction PIN" = "Ubah PIN Transaksi";
+"Incorrect Pin" = "Pin Salah";
+
+/* SuccessCancelView */
+"Succeed" = "Berhasil";
+"Application For Account Opening Has Been Canceled" = "Permohonan Pembukaan Rekening Telah Dibatalkan";
+
+/*
+ DASHBOARD
+ */
+/* ListAnnouncementView */
+"Mark All Read" = "Tandai Semua Telah Dibaca";
+"Destination account:" = "Rekening Tujuan :";
+"Payment" = "Pembayaran";
+"Make bill payments and purchase electricity easily, quickly and in a planned manner" = "Lakukan pembayaran tagihan dan pembelian listrik dengan mudah, cepat dan terencana";
+"Add Another PLN ID" = "Tambah ID PLN Lain";
+"Please enter your ATM PIN" = "Silahkan masukkan PIN ATM Anda";
+"Reset Transaction PIN" = "Reset PIN Transaksi";
+"Wrong ATM PIN" = "PIN ATM Salah";
+"Your ATM PIN has been wrong 3 times, please try again next week." = "PIN ATM Anda telah salah 3 kali, silahkan ulangi lagi minggu depan.";
+"ENTER YOUR NEW ATM PIN" = "MASUKKAN PIN ATM \nBARU ANDA";
+"Please enter your new ATM PIN" = "Silahkan masukkan PIN ATM baru Anda";
+"Your new PIN" = "PIN baru Anda";
+"Confirm PIN" = "Konfirmasi PIN";
+"Save New Transaction PIN" = "Simpan PIN Transaksi Baru";
+"Reset Transaction PIN" = "Reset PIN Transaksi";
+"New Transaction PIN Has Been Successfully Saved." = "PIN Transaksi Baru Telah Berhasil di Simpan.";
+"Your phone number changed?" = "No. telepon Anda berubah?";
+"Input Your New Phone Number" = "Input No. Telepon Baru Anda";
+"Change the validation method?" = "Ganti cara validasi?";
+"Send Verification Code / Link via Email" = "Kirim Kode/Link Verifikasi melalui Email";
+"NEW TRANSACTION PIN HAS BEEN SAVED" = "PIN TRANSAKSI YANG BARU TELAH BERHASIL DISIMPAN";
+"FORGOT PIN" = "LUPA PIN";
+"Please enter your new PIN" = "Silahkan masukkan PIN baru Anda";
+"New PIN" = "PIN Baru";
+"Enter your new PIN" = "Input PIN baru Anda";
+"Save New PIN" = "Simpan PIN Baru";
+"PIN is not the same, please retype it" = "PIN tidak sama, silahkan ketik ulang";
+"NEW APPLICATION PIN HAS BEEN SUCCESSFULLY SAVED" = "PIN APLIKASI YANG BARU TELAH BERHASIL DISIMPAN";
+"PIN not Changed" = "PIN tidak Berubah";
+"Silahkan Kebebasan PIN lama dan baru Anda" = "Silahkan masukkan PIN lama dan baru Anda";
+"Old PIN" = "PIN Lama";
+"Enter your old PIN" = "Input PIN lama Anda";
+"Re-enter your new PIN" = "Input Ulang PIN baru Anda";
+"ENTER OLD PIN" = "MASUKKAN PIN LAMA";
+"Please enter your old transaction PIN" = "Silahkan masukkan PIN transaksi lama Anda";
+"Cancel" = "Batal";
+"ENTER NEW PIN" = "MASUKKAN PIN BARU";
+"Please enter your new transaction PIN" = "Silahkan masukkan PIN transaksi baru Anda";
+"Change Application Password" = "Ubah Password Aplikasi";
+"Please enter your old and new passwords" = "Silahkan masukkan password lama dan baru Anda";
+"Old password" = "Password Lama";
+"Enter your old password" = "Input Password lama Anda";
+"New Password" = "Password Baru";
+"Enter your new password" = "Input Password baru Anda";
+"Re-enter your new password" = "Input Ulang Password baru Anda";
+"Save New Password" = "Simpan Password Baru";
+"NEW APPLICATION PASSWORD HAS BEEN SUCCESSFULLY SAVED" = "PASSWORD APLIKASI YANG BARU TELAH BERHASIL DISIMPAN";
+"OLD PASSWORD" = "PASSWORD LAMA";
+"Please enter your old account password" = "Silahkan masukkan password akun lama Anda";
+"Your account password" = "Password account Anda";
+"Change Password" = "Ubah Password";
+"ATM CARD ACTIVATION" = "AKTIVASI KARTU ATM";
+"Card Activation" = "Aktivasi Kartu";
+"ATM Card No." = "No. Kartu ATM";
+"Account" = "Rekening";
+"Enter CVV Code" = "Masukkan Kode CVV";
+"CVV Code" = "Kode CVV";
+"Enter the 3 digit number on the back of your ATM card" = "Masukkan 3 digit angka dibelakang kartu ATM Anda";
+"Making a new ATM PIN" = "Pembuatan PIN ATM baru";
+"New ATM PIN" = "PIN ATM baru";
+"Re-enter the ATM PIN" = "Masukkan kembali PIN ATM";
+"Confirm new ATM PIN" = "Konfirmasi PIN ATM baru";
+"The ATM PIN you entered does not match." = "PIN ATM yang Anda masukkan tidak sesuai.";
+"WRONG CVV CODE" = "KODE CVV SALAH";
+"The last 3 digit number on the back of your ATM card does not match the registered card number." = "3 digit nomor terakhir dibelakang kartu ATM Anda tidak sesuai dengan nomor kartu yang terdaftar.";
+"RETURN THE CVV CODE" = "MASUKKAN KEMBALI KODE CVV";
+"YOUR ATM CARD ACTIVATION HAS WORKED" = "AKTIVASI KARTU ATM ANDA TELAH BERHASIL";
+"WRONG 3 TIMES CVV CODE" = "KODE CVV SALAH 3 KALI";
+"The CVV code you entered is incorrect. Your chances have expired. Please try again Tomorrow." = "Kode CVV yang Anda masukkan salah. Kesempatan Anda telah habis. Silahkan kembali mencoba Besok.";
+"Activate Card" = "Aktifkan Kartu";
+"Enter the OTP code has been sent to your number to continue to the next stage" = "Masukkan kode OTP telah dikirim ke nomor Anda untuk melanjutkan ke tahap berikutnya";
+"ENTER OTP CODE" = "MASUKAN KODE OTP";
+"Your ATM Card Activation Is Successful" = "Aktifasi Kartu ATM Anda Telah Berhasil";
+"The CVV code you entered is incorrect. Your chance has expired. Please try again Tomorrow." = "Kode CVV yang Anda masukkan salah, Kesempatan Anda telah habis, Silahkan kembali mencoba lagi Besok.";
+"BACK TO MY CARD" = "KEMBALI KE KARTU-KU";
+"RETURN THE CARD NUMBER" = "MASUKAN KEMBALI NOMOR KARTU";
+"Card Limit" = "Limit Kartu";
+"per Transaction (Debit Card)" = "per Transaksi (Debit Card)";
+"Maximum limit per Transaction" = "Maximal limit per Transaksi";
+"Maximum daily withdrawal limit" = "Maximal limit penarikan harian";
+"SAVE CHANGES" = "SIMPAN PERUBAHAN";
+"Changes to Your Card Transaction Limit Has Been Successfully Saved." = "Perubahan Limit Transaksi Kartu Anda Telah Berhasil di Simpan.";
+"Damage Report / Complaint" = "Laporan / Aduan Kerusakan";
+"A New Card Will Be Given" = "Akan Diberikan Kartu Baru";
+"Replacement fee of" = "Biaya pengganti sebesar";
+"REPORT DAMAGE" = "LAPORKAN KERUSAKAN";
+"Broken Card" = "Kartu Rusak";
+"Broken My Card" = "BrokenKartuKu";
+"We have successfully kept your ATM card damage report / complaint" = "Laporan / Aduan Kerusakan Kartu ATM Anda Telah Berhasil Kami Simpan";
+"Thank you for sending information about the damage to your card to us. Please wait a few moments, we will immediately contact you to follow up on your report." = "Terimakasih telah mengirimkan informasi kerusakan kartu Anda kepada Kami. Silahkan tunggu beberapa saat, pihak Kami akan segera menghubungi Anda untuk menindak lanjutin laporan Anda.";
+"The ATM PIN you entered is wrong." = "PIN ATM yang Anda masukkan salah.";
+"Block Card" = "Blokir Kartu";
+"Success, Your ATM Card Has Been Blocked For A While" = "Berhasil, Kartu ATM Anda Sudah Diblokir Untuk Sementara Waktu";
+"Success, Your ATM Card Is Back Active" = "Berhasil, Kartu ATM Anda Sudah Kembali Aktif";
+"Change your ATM PIN" = "Ubah PIN ATM Anda";
+"Change Your Transaction PIN" = "Ubah PIN Transaksi Anda";
+"Forgot Your Transaction PIN" = "Lupa PIN Transaksi Anda";
+"ENTER PIN \n TRANSACTION" = "MASUKKAN PIN \n TRANSAKSI";
+"Transaction PIN Verification" = "Verifikasi PIN Transaksi";
+"Damage Report" = "Laporan Kerusakan";
+"Contact Data" = "Data kontak";
+"Input Number Phone" = "Masukkan Nomor Telepon";
+"Address Data" = "Alamat Data";
+"Change Password / PIN" = "Ubah Password / PIN";
+"Favorit Purchase" = "Pembelian Favorit";
+"Search for Transfer contacts" = "Cari kontak Transfer";
+"Make a Transfer" = "Lakukan Transfer";
+"Transfer Favorites" = "Favorit Transfer";
+"Select Transaction Type" = "Pilih Tipe Transaksi";
+"Choose Destination Bank" = "Pilih Bank Tujuan";
+"Select Account" = "Pilih Rekening";
+"Once" = "Sekali";
+"Many times" = "Berkali-kali";
+"Select Transaction Frequency" = "Pilih Frekuensi Transaksi";
+"Voucher Not Available" = "Voucher Tidak Tersedia";
+"Select Voucher" = "Pilih Voucher";
+"Now" = "Sekarang";
+"CONFIRM TRANSFER" = "KONFIRMASI TRANSFER";
+"Choose Bank" = "Pilih Bank";
+"Destination Account No" = "No Rekening Tujuan";
+"Amount (Rp)" = "Jumlah Besaran (Rp)";
+"Transaction Limit" = "Limit Transaksi";
+"Notes" = "Catatan";
+"Write a transaction description here" = "Tulis keterangan Transaksi disini";
+"Active Balance:" = "Saldo Aktif :";
+"Confirmed Account Number" = "Nomor Rekening Terkonfirmasi";
+"There are transactions less than the minimum transaction." = "Transaksi ada kurang dari minimum transaksi.";
+"Minimum transaction" = "Transaksi minimum";
+"Please change the transaction nominal." = "Silahkan mengganti nominal transaksi.";
+"CHANGE THE NOMINAL" = "UBAH NOMINAL";
+"CANCEL TRANSACTION" = "BATALKAN TRANSAKSI";
+"Minimum Balance Exceeded" = "Saldo Minimum Terlampaui";
+"Minimum balance in your account" = "Saldo minimum rekening Anda";
+"exceeded. Please change the transaction amount or add a balance to your account." = "terlampaui. Silahkan mengganti nomfinal tranfsaksi atau menambahkan saldo ke rekening Anda.";
+"Transaction limit exceeded" = "Limit transaksi terlampaui";
+"Exceeded. Please reduce the nominal amount of the transaction or cancel the transaction." = "terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.";
+"Select Account" = "Pilih Akun";
+"Company" = "Perusahaan";
+"Group" = "Kelompok";
+"Foundation" = "Yayasan";
+"Receiver Type" = "Tipe Penerima";
+"Citizenship" = "Kewarganegaraan";
+"Recipient Province" = "Provinsi Penerima";
+"Receiving City" = "Kota Penerima";
+"Destination account" = "Rekening Tujuan";
+"Nominal Transaction" = "Nominal Transaksi";
+"CONFIRM TRANSFER" = "KONFIRMASI TRANSFER";
+"Destination Name" = "Nama Tujuan";
+"Recipient Address" = "Alamat Penerima";
+"Write the recipient's address" = "Tulis alamat penerima";
+"Make sure the recipient data and the nominal amount inputted are correct," = "Pastikan data penerima dan jumlah nominal yang di input telah sesuai,";
+"Recipient's name" = "Nama Penerima";
+"Receiver" = "Penerima";
+"Bank name" = "Nama Bank";
+"Beneficiary's Account" = "Rekening Penerima";
+"Citizen" = "Warganegara";
+"Admin Fee" = "Biaya Admin";
+"Total Transactions" = "Total Transaksi";
+"Transaction Time" = "Waktu Transaksi";
+"Favorite added successfully" = "Favorit berhasil ditambahkan";
+"Okay" = "Oke";
+"Add to favorites?" = "Tambahkan ke Favorit?";
+"To" = "Ke";
+"From" = "Dari";
+"Transfer Successful" = "Transfer Berhasil";
+"Transfer Type" = "Jenis Transfer";
+"Account Type" = "Jenis Rekening";
+"Frequency" = "Frekuensi";
+"Transaction Details" = "Detail Transaksi";
+"Peer Transfer Successfully" = "Transfer Sesama Berhasil";
+"Confirmation" = "Konfirmasi";
+"Sender's Account" = "Rekening Pengirim";
+"Inter-peer Transfer" = "Transfer Antar Sesama";
+"Minimum transaction of Rp." = "Transaksi minimum Rp.";
+"Your minimum account balance is Rp." = "Saldo minimum rekening Anda Rp.";
+"exceeded. Please change the transaction amount or add a balance to your account." = "terlampaui. Silahkan mengganti nominal transaksi atau menambahkan saldo ke rekening Anda.";
+"Transaction limit of Rp." = "Limit transaksi Rp.";
+"My Card" = "Kartu-Ku";
+"Is there anything I can help you with?" = "Apakah ada yang bisa kami bantu?";
+"Balance hidden" = "Saldo disembunyikan";
+"Main Account Balance" = "Saldo Rekening Utama";
+"Please select the type of transaction to be used" = "Silahkan Pilih Jenis Transaksi Untuk Digunakan";
+"Favorite" = "Favorit";
+"The following is a list of transactions that you have saved in the favorites menu" = "Berikut merupakan daftar-daftar transaksi yang telah anda simpan ke dalam menu favorit";
+"Payments & Purchases" = "Pembayaran & Pembelian";
+"Make all forms of payments and transactions quickly, easily and safely" = "Lakukan segala bentuk pembayaran dan transaksi dengan cepat, mudah dan aman";
+"Transaction Filter" = "Filter Transaksi";
+"Last Payment / Purchase" = "Pembayaran / Pembelian Terakhir";
+"Many used" = "Banyak digunakan";
+"Last transaction" = "Transaksi Terakhir";
+"Inactive Account Card" = "Kartu Rekening Tidak Aktif";
+"Activate your card first to see the settings." = "Aktifkan terlebih dahulu kartu Anda untuk melihat pengaturan.";
+"ACTIVATE MY CARDS" = "AKTIFKAN KARTU-KU";
+"Set card transaction limit" = "Atur limit transaksi kartu";
+"ATM PIN Settings" = "Pengaturan PIN ATM";
+"Change ATM PIN / Reset ATM PIN" = "Ubah PIN ATM / Reset PIN ATM";
+"Report card damage" = "Laporkan kerusakan kartu";
+"Transaction History" = "Riwayat Transaksi";
+"More" = "Selengkapnya";
+"My Savings" = "Tabungan Ku";
+"more details" = "detail selengkapnya";
+"Transfer History" = "Riwayat Transfer";
+"Card Management" = "Manajemen Kartu";
+"Transaction Fee" = "Biaya Transaksi";
+"Fingerprint Activation" = "Aktifasi Fingerprint";
+"Language setting" = "Pengaturan Bahasa";
+"Monthly financial reports" = "Laporan keuangan bulanan";
+"Favorite Purchase & Payment" = "Favorit Purchase & Payment";
+"See Full List" = "Lihat Daftar Selengkapnya";
+"Selection" = "Pilihan";
+"Select the menu below" = "Pilih menu dibawah ini";
+"Delete" = "Hapus";
+"Find another contact" = "Cari kontak lain";
+"Favorite Transaction" = "Favorit Transaksi";
+"Beneficiary Contract Name" = "Nama Kontrak Penerima";
+"Account Details" = "Detail Rekening";
+"Account number" = "No. Rekening";
+"Save to favorites" = "Berhasil simpan ke favorite";
+"SAVE TO FAVORITE" = "SIMPAN KE FAVORIT";
+"Money transfers to fellow Bank Mestika customers or to other Bank customers are now easier and faster." = "Transfer uang ke sesama nasabah Bank Mestika atau ke nasabah Bank Lain kini lebih mudah dan cepat.";
+"Transfer to" = "Transfer ke";
+"Find another contract" = "Cari kontrak lain";
+"Just for you!" = "Hanya Untuk Anda!";
+"Prepaid Credit" = "Pulsa Pra-Bayar";
+"TV & Cable Internet" = "TV & Internet Kabel";
+"Purchasing and Payment of a wide variety of products." = "Pembelian dan Pembayaran berbagai macam produk.";
+"Transactions are more profitable by using vouchers." = "Transaksi lebih menguntungkan dengan menggunakan voucher.";
+"Show All Vouchers" = "Tampilkan Semua Voucher";
+"Purchase & Payment" = "Pembelian & Pembayaran";
+"FELLOW BANK MESTIKA" = "SESAMA BANK MESTIKA";
+"Fellow Bank Mestika" = "Sesama Bank Mestika";
+"View Search Results" = "Lihat Hasil Pencarian";
+"Period of time" = "Periode waktu";
+"All payment & purchase" = "Semua pembayaran & pembelian";
+"See All category" = "Lihat Semua kategori";

@@ -6,6 +6,10 @@ import SwiftUI
 
 struct ListStatementView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @State var _listStatement = [
         Statement(id: 1, bulan: "Agustus", tahun: "2020"),
         Statement(id: 2, bulan: "September", tahun: "2020"),
@@ -27,7 +31,7 @@ struct ListStatementView: View {
             .padding(.top, 20)
             
             HStack {
-                Text("Laporan keuangan bulanan")
+                Text(NSLocalizedString("Monthly financial reports".localized(language), comment: ""))
                     .font(.caption)
                     .fontWeight(.light)
                 

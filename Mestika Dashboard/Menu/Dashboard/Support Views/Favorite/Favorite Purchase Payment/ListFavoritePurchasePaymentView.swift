@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListFavoritePurchasePaymentView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     var _listFavorite = [
         PurchasePaymentFavorite(id: 1, username: "Prima Jatnika", namaPembayaran: "PLN Pra-Bayar", tujuan: "No. ID PLN", jenisPembayaran: "PLN", nomorTransaksi: "991203909090123"),
         PurchasePaymentFavorite(id: 2, username: "Prima Jatnika", namaPembayaran: "Top Up e-Wallet", tujuan: "OVO Prima", jenisPembayaran: "OVO", nomorTransaksi: "001209309123"),
@@ -19,7 +23,7 @@ struct ListFavoritePurchasePaymentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Favorit Purchase & Payment")
+                Text(NSLocalizedString("Favorite Purchase & Payment".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.bold)
                 
@@ -60,7 +64,7 @@ struct ListFavoritePurchasePaymentView: View {
                 Spacer()
                 
                 NavigationLink(destination: FavoritePurchasePaymentScreen(), label: {
-                    Text("Lihat Daftar Selengkapnya")
+                    Text(NSLocalizedString("See Full List".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(Color(hex: "#2334D0"))

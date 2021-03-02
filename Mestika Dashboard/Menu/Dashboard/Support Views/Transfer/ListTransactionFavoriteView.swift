@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListTransactionFavoriteView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @StateObject private var favoritVM = FavoritViewModel()
     var cardNo = ""
     var sourceNumber = ""
@@ -23,7 +27,7 @@ struct ListTransactionFavoriteView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Favorit Transaksi")
+                Text(NSLocalizedString("Favorite Transaction".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                 

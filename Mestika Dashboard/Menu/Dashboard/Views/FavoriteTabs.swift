@@ -9,6 +9,10 @@ import SwiftUI
 
 struct FavoriteTabs: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @Binding var cardNo: String
     @Binding var sourceNumber: String
     
@@ -49,11 +53,11 @@ struct FavoriteTabs: View {
     var titleInfo: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Favorit")
+                Text(NSLocalizedString("Favorite".localized(language), comment: ""))
                     .font(.title)
                     .fontWeight(.heavy)
                 
-                Text("Berikut merupakan daftar-daftar transaksi yang telah anda simpan ke dalam menu favorit")
+                Text(NSLocalizedString("The following is a list of transactions that you have saved in the favorites menu".localized(language), comment: ""))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: true)

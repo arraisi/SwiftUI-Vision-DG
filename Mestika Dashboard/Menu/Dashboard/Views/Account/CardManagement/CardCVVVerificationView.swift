@@ -21,6 +21,9 @@ class TextFieldManager: ObservableObject {
 
 struct CardCVVVerificationView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @ObservedObject var cvv = TextFieldManager()
     
     var card: MyCard
@@ -44,13 +47,13 @@ struct CardCVVVerificationView: View {
                         Image(systemName: "largecircle.fill.circle")
                             .foregroundColor(.blue)
                         
-                        Text("Kode CVV")
+                        Text(NSLocalizedString("CVV Code".localized(language), comment: ""))
                     }
                     
                     VStack(alignment: .leading) {
                         
                         HStack (spacing: 0) {
-                            TextField("Masukkan Password", text: $cvv.text, onEditingChanged: { changed in
+                            TextField(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""), text: $cvv.text, onEditingChanged: { changed in
                                 print("input \($cvv.text)")
                             })
                             .font(.custom("Montserrat-Regular", size: 14))
@@ -62,7 +65,7 @@ struct CardCVVVerificationView: View {
                         
                         Divider()
                         
-                        Text("Masukkan 3 digit angka dibelakang kartu ATM Anda")
+                        Text(NSLocalizedString("Enter the 3 digit number on the back of your ATM card".localized(language), comment: ""))
                             .font(.system(size: 12))
                     }
                     .padding(.vertical, 25)
@@ -87,7 +90,7 @@ struct CardCVVVerificationView: View {
                     self.showingModal.toggle()
                     
                 }, label: {
-                    Text("AKTIFKAN KARTU")
+                    Text(NSLocalizedString("Activate Card".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -109,7 +112,7 @@ struct CardCVVVerificationView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .navigationBarTitle("Aktifkan Kartu")
+        .navigationBarTitle(NSLocalizedString("Activate Card".localized(language), comment: ""))
         .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             createBottomFloater()
         }
@@ -128,7 +131,7 @@ struct CardCVVVerificationView: View {
             
             HStack {
                 Text(
-                    !backView ? "Aktifasi Kartu ATM Anda Telah Berhasil" : falseCount < 3 ? "KODE CVV SALAH" : "KODE CVV SALAH 3 KALI")
+                    !backView ? NSLocalizedString("Your ATM Card Activation Is Successful".localized(language), comment: "") : falseCount < 3 ? NSLocalizedString("WRONG CVV CODE".localized(language), comment: "") : NSLocalizedString("WRONG 3 TIMES CVV CODE".localized(language), comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(!backView ? Color(hex: "#2334D0") : Color(hex: "#F32424"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -137,7 +140,7 @@ struct CardCVVVerificationView: View {
             .padding(.top, 25)
             
             HStack {
-                Text(!backView ? "" : falseCount < 3 ? "3 digit nomor terakhir dibelakang kartu ATM Anda tidak sesuai dengan nomor kartu yang terdaftar." : "Kode CVV yang Anda masukkan salah, Kesempatan Anda telah habis, Silahkan kembali mencoba lagi Besok.")
+                Text(!backView ? "" : falseCount < 3 ? NSLocalizedString("The last 3 digit number on the back of your ATM card does not match the registered card number.".localized(language), comment: "") : NSLocalizedString("The CVV code you entered is incorrect. Your chance has expired. Please try again Tomorrow.".localized(language), comment: ""))
                     .font(.custom("Montserrat-Light", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -162,7 +165,7 @@ struct CardCVVVerificationView: View {
                     }
                 }
             }) {
-                Text(!backView ? "KEMBALI KE KARTU-KU" : falseCount < 3 ? "MASUKAN KEMBALI NOMOR KARTU":"KEMBALI KE HALAMAN UTAMA")
+                Text(!backView ? NSLocalizedString("BACK TO MY CARD".localized(language), comment: "") : falseCount < 3 ? NSLocalizedString("RETURN THE CARD NUMBER".localized(language), comment: ""):NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)

@@ -10,6 +10,9 @@ import SDWebImageSwiftUI
 
 struct FormDetailKartuATMView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
@@ -40,7 +43,7 @@ struct FormDetailKartuATMView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 25){
                         HStack {
-                            Text(NSLocalizedString("KARTU ATM ANDA \nAKAN SEGERA DIKIRIM", comment: ""))
+                            Text(NSLocalizedString("YOUR ATM CARD WILL BE SENT IMMEDIATELY".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Bold", size: 24))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .fixedSize(horizontal: false, vertical: true)
@@ -61,13 +64,13 @@ struct FormDetailKartuATMView: View {
                             .scaledToFill()
                             .cornerRadius(10)
                         
-//                        Image(uiImage: registerData.desainKartuATMImage)
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .background(Color.clear)
+                        //                        Image(uiImage: registerData.desainKartuATMImage)
+                        //                            .resizable()
+                        //                            .aspectRatio(contentMode: .fit)
+                        //                            .background(Color.clear)
                         
                         HStack {
-                            Text(NSLocalizedString("Selamat data kartu ATM baru Anda telah berhasil disimpan.", comment: ""))
+                            Text(NSLocalizedString("Congratulations, your new ATM card data has been successfully saved.".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .foregroundColor(Color(hex: "#1D2238"))
                             Spacer()
@@ -75,13 +78,13 @@ struct FormDetailKartuATMView: View {
                         
                         VStack {
                             HStack{
-                                Text(NSLocalizedString("Nama", comment: ""))
+                                Text(NSLocalizedString("Name".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Regular", size: 12))
                                     .foregroundColor(Color(hex: "#707070"))
                                 
                                 Spacer()
                                 
-                                TextField(NSLocalizedString("Nama", comment: ""), text: $atmData.atmName) { (isChanged) in
+                                TextField(NSLocalizedString("Name".localized(language), comment: ""), text: $atmData.atmName) { (isChanged) in
                                     
                                 } onCommit: {
                                     
@@ -96,7 +99,7 @@ struct FormDetailKartuATMView: View {
                         }
                         
                         HStack {
-                            Text(NSLocalizedString("Silahkan tunggu beberapa saat sampai kartu ATM Anda diterima.", comment: ""))
+                            Text(NSLocalizedString("Please wait a few moments until your ATM card is accepted.".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .foregroundColor(Color(hex: "#1D2238"))
                             Spacer()
@@ -108,7 +111,7 @@ struct FormDetailKartuATMView: View {
                             NavigationLink(
                                 destination: VerificationPINView().environmentObject(registerData).environmentObject(atmData),
                                 label: {
-                                    Text(NSLocalizedString("SELANJUTNYA", comment: ""))
+                                    Text(NSLocalizedString("NEXT".localized(language), comment: ""))
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
@@ -121,7 +124,7 @@ struct FormDetailKartuATMView: View {
                             NavigationLink(
                                 destination: SuccessRegisterView().environmentObject(registerData).environmentObject(atmData),
                                 label: {
-                                    Text(NSLocalizedString("SELANJUTNYA", comment: ""))
+                                    Text(NSLocalizedString("NEXT".localized(language), comment: ""))
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
@@ -130,17 +133,17 @@ struct FormDetailKartuATMView: View {
                             .frame(height: 50)
                             .background(Color(hex: "#2334D0"))
                             .cornerRadius(12)
-//                            Button(action: {
-//                                self.appState.moveToWelcomeView = true
-//                            }) {
-//                                Text(NSLocalizedString("SELANJUTNYA", comment: ""))
-//                                    .font(.custom("Montserrat-SemiBold", size: 14))
-//                                    .foregroundColor(.white)
-//                                    .frame(maxWidth: .infinity)
-//                            }
-//                            .frame(height: 50)
-//                            .background(Color(hex: "#2334D0"))
-//                            .cornerRadius(12)
+                            //                            Button(action: {
+                            //                                self.appState.moveToWelcomeView = true
+                            //                            }) {
+                            //                                Text(NSLocalizedString("SELANJUTNYA", comment: ""))
+                            //                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                            //                                    .foregroundColor(.white)
+                            //                                    .frame(maxWidth: .infinity)
+                            //                            }
+                            //                            .frame(height: 50)
+                            //                            .background(Color(hex: "#2334D0"))
+                            //                            .cornerRadius(12)
                         }
                     }
                     .padding(.horizontal, 30)
@@ -154,11 +157,11 @@ struct FormDetailKartuATMView: View {
         .navigationBarHidden(true)
         .alert(isPresented: $isShowingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

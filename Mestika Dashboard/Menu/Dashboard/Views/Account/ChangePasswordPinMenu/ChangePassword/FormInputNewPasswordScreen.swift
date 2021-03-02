@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormInputNewPasswordScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State private var passwordCtrl = ""
     @State private var confirmPasswordCtrl = ""
     
@@ -17,12 +20,12 @@ struct FormInputNewPasswordScreen: View {
     
     var body: some View {
         VStack {
-            Text("PASSWORD BARU")
+            Text(NSLocalizedString("NEW PASSWORD".localized(language), comment: ""))
                 .font(.title2)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#2334D0"))
             
-            Text("Silahkan masukkan password baru Anda")
+            Text(NSLocalizedString("Enter your new password".localized(language), comment: ""))
                 .font(.subheadline)
                 .fontWeight(.light)
                 .foregroundColor(Color(hex: "#002251"))
@@ -32,15 +35,15 @@ struct FormInputNewPasswordScreen: View {
                 VStack {
                     HStack {
                         if (showPassword) {
-                            TextField("Password baru Anda", text: self.$passwordCtrl)
+                            TextField(NSLocalizedString("New Password".localized(language), comment: ""), text: self.$passwordCtrl)
                         } else {
-                            SecureField("Password baru Anda", text: self.$passwordCtrl)
+                            SecureField(NSLocalizedString("New Password".localized(language), comment: ""), text: self.$passwordCtrl)
                         }
                         
                         Button(action: {
                             self.showPassword.toggle()
                         }, label: {
-                            Text("show")
+                            Text(NSLocalizedString("show".localized(language), comment: ""))
                                 .foregroundColor(Color(hex: "#3756DF"))
                                 .fontWeight(.light)
                         })
@@ -52,15 +55,15 @@ struct FormInputNewPasswordScreen: View {
                     
                     HStack {
                         if (showConfirmPassword) {
-                            TextField("Confirm password", text: self.$confirmPasswordCtrl)
+                            TextField(NSLocalizedString("Confirm password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
                         } else {
-                            SecureField("Confirm password", text: self.$confirmPasswordCtrl)
+                            SecureField(NSLocalizedString("Confirm password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
                         }
                         
                         Button(action: {
                             self.showConfirmPassword.toggle()
                         }, label: {
-                            Text("show")
+                            Text(NSLocalizedString("show".localized(language), comment: ""))
                                 .foregroundColor(Color(hex: "#3756DF"))
                                 .fontWeight(.light)
                         })
@@ -78,10 +81,10 @@ struct FormInputNewPasswordScreen: View {
             Spacer()
             
             VStack {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Simpan Password Baru")
+                Button(action: {}, label: {
+                    Text(NSLocalizedString("Save New Password".localized(language), comment: ""))
                         .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     
@@ -95,9 +98,9 @@ struct FormInputNewPasswordScreen: View {
             
         }
         .padding(.top, 60)
-        .navigationBarTitle("Ubah Password", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Change Password".localized(language), comment: ""), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
-            Text("Cancel")
+            Text(NSLocalizedString("Cancel".localized(language), comment: ""))
         }))
     }
 }

@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct ListPromoForYouView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var body: some View {
         VStack {
             HStack {
-                Text("Hanya Untuk Anda!")
+                Text(NSLocalizedString("Just for you!".localized(language), comment: ""))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 

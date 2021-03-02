@@ -9,6 +9,9 @@ import SwiftUI
 
 struct OtpChangePinAtmView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var maxDigits: Int = 6
     @State private var pin: String = ""
     @State private var showPin = true
@@ -33,11 +36,11 @@ struct OtpChangePinAtmView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("MASUKKAN KODE OTP")
+                Text(NSLocalizedString("ENTER OTP CODE".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("Kami telah mengirimkan OTP ke no. telepon Anda")
+                Text(NSLocalizedString("We have sent OTP to no.\n".localized(language), comment: ""))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
@@ -49,7 +52,7 @@ struct OtpChangePinAtmView: View {
                 .padding(.top, 30)
                 
                 HStack {
-                    Text("Tidak Menerima Kode?")
+                    Text(NSLocalizedString("Didn't Receive Code?".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                     
@@ -57,7 +60,7 @@ struct OtpChangePinAtmView: View {
                         print("-> Resend OTP")
                         self.timeRemaining = 60
                     }) {
-                        Text("Resend OTP")
+                        Text(NSLocalizedString("Resend OTP".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
@@ -70,7 +73,7 @@ struct OtpChangePinAtmView: View {
                 }
                 .padding(.top, 5)
                 
-                Text("Pastikan Anda terkoneksi ke Internet dan pulsa mencukupi untuk menerima OTP")
+                Text(NSLocalizedString("Make sure you are connected to the Internet and have sufficient credit to receive OTP".localized(language), comment: ""))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .multilineTextAlignment(.center)
@@ -80,7 +83,7 @@ struct OtpChangePinAtmView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 
                 NavigationLink(destination: AnyView(nextView), label: {
-                    Text("Reset PIN Transaksi")
+                    Text(NSLocalizedString("Reset Transaction PIN".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 16))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -96,23 +99,23 @@ struct OtpChangePinAtmView: View {
                     VStack(alignment: .leading, spacing: 15) {
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("No. telepon Anda berubah?")
+                            Text(NSLocalizedString("Your phone number changed?".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                             Button(action: {
                                 
                             }, label: {
-                                Text("Input No. Telepon Baru Anda")
+                                Text(NSLocalizedString("Input Your New Phone Number".localized(language), comment: ""))
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                             })
                         }
                         
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Ganti cara validasi?")
+                            Text(NSLocalizedString("Change the validation method?".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                             Button(action: {
                                 
                             }, label: {
-                                Text("Kirim Kode/Link Verifikasi melalui Email")
+                                Text(NSLocalizedString("Send Verification Code / Link via Email".localized(language), comment: ""))
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                             })
                         }
@@ -132,7 +135,7 @@ struct OtpChangePinAtmView: View {
                     isResendOtpDisabled = false
                 }
             }
-            .navigationBarTitle("Reset PIN Transaksi", displayMode: .inline)
+            .navigationBarTitle(NSLocalizedString("Reset Transaction PIN".localized(language), comment: ""), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {}, label: {
                 Text("Cancel")
             }))

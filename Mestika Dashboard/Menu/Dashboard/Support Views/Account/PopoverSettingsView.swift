@@ -9,6 +9,10 @@ import SwiftUI
 
 struct PopoverSettingsView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @EnvironmentObject var appState: AppState
     /* Data Binding */
     @ObservedObject private var authVM = AuthViewModel()
@@ -22,12 +26,12 @@ struct PopoverSettingsView: View {
     }
     
     var _listMenu = [
-        SettingMenu(id: 1, namaMenu: "Manajemen Kartu"),
+        SettingMenu(id: 1, namaMenu: NSLocalizedString("Card Management".localized(LocalizationService.shared.language), comment: "")),
         SettingMenu(id: 2, namaMenu: "e-Statement"),
-        SettingMenu(id: 3, namaMenu: "Biaya Transaksi"),
-        SettingMenu(id: 4, namaMenu: "Aktifasi Fingerprint"),
-        SettingMenu(id: 5, namaMenu: "Pengaturan Bahasa"),
-        SettingMenu(id: 6, namaMenu: "Ubah Password / PIN"),
+        SettingMenu(id: 3, namaMenu: NSLocalizedString("Transaction Fee".localized(LocalizationService.shared.language), comment: "")),
+        SettingMenu(id: 4, namaMenu: NSLocalizedString("Fingerprint Activation".localized(LocalizationService.shared.language), comment: "")),
+        SettingMenu(id: 5, namaMenu: NSLocalizedString("Language setting".localized(LocalizationService.shared.language), comment: "")),
+        SettingMenu(id: 6, namaMenu: NSLocalizedString("Change Password / PIN".localized(LocalizationService.shared.language), comment: "")),
         SettingMenu(id: 7, namaMenu: "Sign Out"),
     ]
     
@@ -36,7 +40,7 @@ struct PopoverSettingsView: View {
             VStack {
                 HStack {
                     NavigationLink(destination: CardManagementScreen(), label: {
-                        Text("Manajemen Kartu")
+                        Text(NSLocalizedString("Card Management".localized(language), comment: ""))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -62,7 +66,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     NavigationLink(destination: TransactionFeesScreen(), label: {
-                        Text("Biaya Transaksi")
+                        Text(NSLocalizedString("Transaction Fee".localized(language), comment: ""))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -75,7 +79,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     Toggle(isOn: $isFingerprint) {
-                        Text("Aktifasi Fingerprint")
+                        Text(NSLocalizedString("Fingerprint Activation".localized(language), comment: ""))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -85,7 +89,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     NavigationLink(destination: LanguageSettingScreen(), label: {
-                        Text("Pengaturan Bahasa")
+                        Text(NSLocalizedString("Language setting".localized(language), comment: ""))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -98,7 +102,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     NavigationLink(destination: ChangePasswordOrPinSettingScreen(), label: {
-                        Text("Ubah Password / PIN")
+                        Text(NSLocalizedString("Change Password / PIN".localized(language), comment: ""))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))

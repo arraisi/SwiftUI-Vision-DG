@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TransferRtgsConfirmation: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var transferData: TransferOffUsModel
     
     @State var adminFeeCtrl = "Rp. 1.000,00"
@@ -40,7 +43,7 @@ struct TransferRtgsConfirmation: View {
                 .padding(.top, 40)
                 .padding(.horizontal, 15)
             
-            Text("Konfirmasi Transfer")
+            Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
                 .font(.title2)
                 .foregroundColor(Color(hex: "#232175"))
                 .fontWeight(.bold)
@@ -49,7 +52,7 @@ struct TransferRtgsConfirmation: View {
                 .padding(.bottom, 5)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Pastikan data penerima dan jumlah nominal yang di input telah sesuai,")
+            Text(NSLocalizedString("Make sure the recipient data and the nominal amount inputted are correct,".localized(language), comment: ""))
                 .font(.subheadline)
                 .fontWeight(.light)
                 .foregroundColor(Color(hex: "#707070"))
@@ -100,12 +103,12 @@ struct TransferRtgsConfirmation: View {
                 
                 // Penerima Form
                 HStack(spacing: 20) {
-                    Text("Nama Penerima")
+                    Text(NSLocalizedString("Recipient's name".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Penerima", text: self.$transferData.destinationName, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Receiver".localized(language), comment: ""), text: self.$transferData.destinationName, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationName)")
                     })
                     .disabled(true)
@@ -120,7 +123,7 @@ struct TransferRtgsConfirmation: View {
                 
                 // Form Nama Bank
                 HStack(spacing: 20) {
-                    Text("Nama Bank")
+                    Text(NSLocalizedString("Bank name".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
@@ -139,12 +142,12 @@ struct TransferRtgsConfirmation: View {
                 
                 // Rekening Penerima Form
                 HStack(spacing: 20) {
-                    Text("Rekening Penerima")
+                    Text(NSLocalizedString("Beneficiary's Account".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Rekening Penerima", text: self.$transferData.destinationNumber, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Beneficiary's Account".localized(language), comment: ""), text: self.$transferData.destinationNumber, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
                     })
                     .disabled(true)
@@ -162,12 +165,12 @@ struct TransferRtgsConfirmation: View {
                 Group {
                     // Tipe Penerima Form
                     HStack(spacing: 20) {
-                        Text("Tipe Penerima")
+                        Text(NSLocalizedString("Receiver Type".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100, alignment: .leading)
                         
-                        TextField("Tipe Penerima", text: self.$transferData.typeDestination, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Receiver Type".localized(language), comment: ""), text: self.$transferData.typeDestination, onEditingChanged: { changed in
                             print("\(self.$transferData.typeDestination)")
                         })
                         .disabled(true)
@@ -182,12 +185,12 @@ struct TransferRtgsConfirmation: View {
                     
                     // Kewarganegaraan Form
                     HStack(spacing: 20) {
-                        Text("Warganegara")
+                        Text(NSLocalizedString("Citizen".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100, alignment: .leading)
                         
-                        TextField("Kewarganegaraan", text: self.$transferData.citizenship, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Citizenship".localized(language), comment: ""), text: self.$transferData.citizenship, onEditingChanged: { changed in
                             print("\(self.$transferData.citizenship)")
                         })
                         .disabled(true)
@@ -242,12 +245,12 @@ struct TransferRtgsConfirmation: View {
                     
                     // Alamat Penerima Form
                     HStack(spacing: 20) {
-                        Text("Alamat Penerima")
+                        Text(NSLocalizedString("Recipient Address".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100, alignment: .leading)
                         
-                        TextField("Alamat Penerima", text: self.$transferData.addressOfDestination, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Recipient Address".localized(language), comment: ""), text: self.$transferData.addressOfDestination, onEditingChanged: { changed in
                             print("\(self.$transferData.addressOfDestination)")
                         })
                         .disabled(true)
@@ -263,12 +266,12 @@ struct TransferRtgsConfirmation: View {
                     
                     // Rekeking Form
                     HStack(spacing: 20) {
-                        Text("Rekening")
+                        Text(NSLocalizedString("Account".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100, alignment: .leading)
                         
-                        TextField("Rekening", text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Account".localized(language), comment: ""), text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
                             print("\(self.$transferData.sourceAccountName)")
                         })
                         .disabled(true)
@@ -287,12 +290,12 @@ struct TransferRtgsConfirmation: View {
                 Group {
                     // Tipe Penerima Form
                     HStack(spacing: 20) {
-                        Text("Tipe Penerima")
+                        Text(NSLocalizedString("Receiver Type".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100, alignment: .leading)
                         
-                        TextField("Tipe Penerima", text: self.$transferData.typeDestination, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Receiver Type".localized(language), comment: ""), text: self.$transferData.typeDestination, onEditingChanged: { changed in
                             print("\(self.$transferData.typeDestination)")
                         })
                         .disabled(true)
@@ -307,12 +310,12 @@ struct TransferRtgsConfirmation: View {
                     
                     // Kewarganegaraan Form
                     HStack(spacing: 20) {
-                        Text("Warganegara")
+                        Text(NSLocalizedString("Citizen".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100, alignment: .leading)
                         
-                        TextField("Kewarganegaraan", text: self.$transferData.citizenship, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Citizenship".localized(language), comment: ""), text: self.$transferData.citizenship, onEditingChanged: { changed in
                             print("\(self.$transferData.citizenship)")
                         })
                         .disabled(true)
@@ -350,12 +353,12 @@ struct TransferRtgsConfirmation: View {
                 
                 // Admin Fee
                 HStack(spacing: 20) {
-                    Text("Biaya Admin")
+                    Text(NSLocalizedString("Admin Fee".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Biaya Admin", text: self.$adminFeeCtrl, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Admin Fee".localized(language), comment: ""), text: self.$adminFeeCtrl, onEditingChanged: { changed in
 //                        print("\(self.$transferData.destinationNumber)")
                     })
                     .disabled(true)
@@ -390,12 +393,12 @@ struct TransferRtgsConfirmation: View {
                 
                 // Total Transaksi Form
                 HStack(spacing: 20) {
-                    Text("Total Transaksi")
+                    Text(NSLocalizedString("Total Transactions".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Total Transaksi", text: self.$transferData.amount, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Total Transactions".localized(language), comment: ""), text: self.$transferData.amount, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -409,12 +412,12 @@ struct TransferRtgsConfirmation: View {
                 
                 // Waktu Transaksi
                 HStack(spacing: 20) {
-                    Text("Waktu Transaksi")
+                    Text(NSLocalizedString("Transaction Time".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Waktu Transaksi", text: self.$transferData.transactionDate, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Transaction Time".localized(language), comment: ""), text: self.$transferData.transactionDate, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -448,12 +451,12 @@ struct TransferRtgsConfirmation: View {
                 
                 // Catatan Form
                 HStack(spacing: 20) {
-                    Text("Catatan")
+                    Text(NSLocalizedString("Notes".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    MultilineTextField("Catatan", text: self.$transferData.notes, onCommit: {
+                    MultilineTextField(NSLocalizedString("Notes".localized(language), comment: ""), text: self.$transferData.notes, onCommit: {
                     })
                     .disabled(true)
                     .frame(height: 50)
@@ -468,7 +471,7 @@ struct TransferRtgsConfirmation: View {
             
             VStack {
                 NavigationLink(destination: TransferRtgsValidationPin(unLocked: false).environmentObject(transferData), label: {
-                    Text("Lakukan Transfer")
+                    Text(NSLocalizedString("Make a Transfer".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 13))

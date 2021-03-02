@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormNewPinAtmView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State private var passwordCtrl = ""
     @State private var confirmPasswordCtrl = ""
     
@@ -21,12 +24,12 @@ struct FormNewPinAtmView: View {
     var body: some View {
         ZStack {
             VStack {
-                Text("MASUKKAN PIN ATM \nBARU ANDA")
+                Text(NSLocalizedString("ENTER YOUR NEW ATM PIN".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 24))
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("Silahkan masukkan PIN ATM baru Anda")
+                Text(NSLocalizedString("Please enter your new ATM PIN".localized(language), comment: ""))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
@@ -35,17 +38,17 @@ struct FormNewPinAtmView: View {
                     VStack {
                         HStack {
                             if (showPassword) {
-                                TextField("PIN baru Anda", text: self.$passwordCtrl)
+                                TextField(NSLocalizedString("Your new PIN".localized(language), comment: ""), text: self.$passwordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             } else {
-                                SecureField("PIN baru Anda", text: self.$passwordCtrl)
+                                SecureField(NSLocalizedString("Your new PIN".localized(language), comment: ""), text: self.$passwordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             }
                             
                             Button(action: {
                                 self.showPassword.toggle()
                             }, label: {
-                                Text("show")
+                            Text(NSLocalizedString("show".localized(language), comment: ""))
                                     .foregroundColor(Color(hex: "#3756DF"))
                                     .font(.custom("Montserrat-Light", size: 12))
                             })
@@ -57,17 +60,17 @@ struct FormNewPinAtmView: View {
                         
                         HStack {
                             if (showConfirmPassword) {
-                                TextField("Confirm PIN", text: self.$confirmPasswordCtrl)
+                                TextField(NSLocalizedString("Confirm PIN".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             } else {
-                                SecureField("Confirm PIN", text: self.$confirmPasswordCtrl)
+                                SecureField(NSLocalizedString("Confirm PIN".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             }
                             
                             Button(action: {
                                 self.showConfirmPassword.toggle()
                             }, label: {
-                                Text("show")
+                            Text(NSLocalizedString("show".localized(language), comment: ""))
                                     .foregroundColor(Color(hex: "#3756DF"))
                                     .font(.custom("Montserrat-Light", size: 12))
                             })
@@ -86,7 +89,7 @@ struct FormNewPinAtmView: View {
                 
                 VStack {
                     NavigationLink(destination: OtpChangePinAtmView(nextView: AnyView(FormNewPinAtmView(showingModal: true))), label: {
-                        Text("Simpan PIN Transaksi Baru")
+                        Text(NSLocalizedString("Save New Transaction PIN".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 16))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -101,7 +104,7 @@ struct FormNewPinAtmView: View {
                 
             }
             .padding(.top, 60)
-            .navigationBarTitle("Reset PIN Transaksi", displayMode: .inline)
+            .navigationBarTitle(NSLocalizedString("Reset Transaction PIN".localized(language), comment: ""), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {}, label: {
                 Text("Cancel")
             }))
@@ -131,7 +134,7 @@ struct FormNewPinAtmView: View {
             
             HStack {
                 
-                Text("PIN Transaksi Baru Telah Berhasil di Simpan.")
+                Text(NSLocalizedString("New Transaction PIN Has Been Successfully Saved.".localized(language), comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -140,7 +143,7 @@ struct FormNewPinAtmView: View {
             .padding(.top, 25)
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text("KEMBALI")
+                Text(NSLocalizedString("BACK".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)

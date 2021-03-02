@@ -9,6 +9,10 @@ import SwiftUI
 
 struct TransferTabs: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @Binding var cardNo: String
     @Binding var sourceNumber: String
     
@@ -41,7 +45,7 @@ struct TransferTabs: View {
                     .font(.title)
                     .fontWeight(.heavy)
                 
-                Text("Silahkan Pilih Jenis Transaksi Untuk Digunakan")
+                Text(NSLocalizedString("Please select the type of transaction to be used".localized(language), comment: ""))
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
@@ -77,7 +81,7 @@ struct TransferTabs: View {
                 print("ONUS")
                 self.transferOnUsActive = true
             }, label: {
-                Text("SESAMA BANK MESTIKA")
+                Text(NSLocalizedString("FELLOW BANK MESTIKA".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 13))
@@ -96,7 +100,7 @@ struct TransferTabs: View {
                 print("OFFUS")
                 self.transferOffUsActive = true
             }, label: {
-                Text("TRANSFER KE BANK LAIN")
+                Text(NSLocalizedString("Transfer to Other Bank".localized(language), comment: ""))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 13))

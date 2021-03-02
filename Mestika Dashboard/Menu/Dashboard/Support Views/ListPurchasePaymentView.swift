@@ -9,27 +9,31 @@ import SwiftUI
 
 struct ListPurchasePaymentView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @State var date = Date()
     
     var _listTransaksi = [
-        PurchasePayment(id: 1, tanggalTransaksi: "21 November 2020", namaTransaksi: "Pulsa Pra-Bayar", total: "600.000"),
-        PurchasePayment(id: 2, tanggalTransaksi: "4 Oktober 2020", namaTransaksi: "TV & Internet Kabel", total: "1.200.000")
+        PurchasePayment(id: 1, tanggalTransaksi: "21 November 2020", namaTransaksi: NSLocalizedString("Prepaid Credit".localized(LocalizationService.shared.language), comment: ""), total: "600.000"),
+        PurchasePayment(id: 2, tanggalTransaksi: "4 Oktober 2020", namaTransaksi: NSLocalizedString("TV & Cable Internet".localized(LocalizationService.shared.language), comment: ""), total: "1.200.000")
     ]
     
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Purchase & Payment")
+                    Text(NSLocalizedString("Purchase & Payment".localized(language), comment: ""))
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.bottom, 5)
-                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .fixedSize(horizontal: false, vertical: true)
                     
-                    Text("Pembelian dan Pembayaran berbagai macam produk.")
+                    Text(NSLocalizedString("Purchasing and Payment of a wide variety of products.".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.ultraLight)
-                        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.leading, 20)
                 
@@ -41,14 +45,14 @@ struct ListPurchasePaymentView: View {
             .padding(.vertical, 20)
             
             HStack {
-                Text("Transaksi terakhir")
+                Text(NSLocalizedString("Last transaction".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
                 Spacer()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Lihat daftar selengkapnya")
+                Button(action: {}, label: {
+                    Text(NSLocalizedString("See Full List".localized(language), comment: ""))
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#2334D0"))
                 })
