@@ -133,7 +133,7 @@ class FavoritService {
         }.resume()
     }
     
-    // MARK: - REMOVE FAVORITE
+    // MARK: - UPDATE FAVORITE
     func update(data: FavoritModelElement, name: String, completion: @escaping(Result<Int, ErrorResult>) -> Void) {
         
         // MARK: BODY
@@ -141,6 +141,57 @@ class FavoritService {
             "id" : data.id,
             "cardNo": data.cardNo,
             "sourceNumber": data.sourceNumber,
+            "name": name
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        // MARK: URL
+        guard let url = URL.urlUpdateFavorite() else {
+            return completion(Result.failure(ErrorResult.network(string: "NETWORK ERROR")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        // MARK: TASK
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("RESPONSE SERVICE UPDATE FAVORITE : CODE \(httpResponse.statusCode)")
+                if (httpResponse.statusCode == 200) {
+                    completion(.success(httpResponse.statusCode))
+                    
+                } else {
+                    // if we're still here it means there was a problem
+                    print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+            
+        }.resume()
+    }
+    
+    // MARK: - UPDATE FAVORITE
+    func updateWithParam(id: String, cardNo: String, sourceNumber: String, name: String, completion: @escaping(Result<Int, ErrorResult>) -> Void) {
+        
+        // MARK: BODY
+        let body: [String: Any] = [
+            "id" : id,
+            "cardNo": cardNo,
+            "sourceNumber": sourceNumber,
             "name": name
         ]
         

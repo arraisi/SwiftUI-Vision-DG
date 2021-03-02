@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ListAllFavoriteTransactionView: View {
     
+    @State var receivedName = ""
+    @State var receivedBank = "MESTIKA"
+    
     @State private var searchCtrl = ""
     
     //    var action: ((FavoritModelElement) -> Void)?
@@ -25,6 +28,8 @@ struct ListAllFavoriteTransactionView: View {
     var cardNo: String = ""
     var sourceNumber: String = ""
     @State var destinationNumber: String = ""
+    @State var type: String = ""
+    @State var destinationBank: String = ""
     
     @State var isRouteOnUs: Bool = false
     @State var isRouteOffUs: Bool = false
@@ -36,7 +41,7 @@ struct ListAllFavoriteTransactionView: View {
         ZStack {
             Color(hex: "#F6F8FB")
             
-            VStack {
+            ScrollView {
                 searchCard
                 
                 VStack {
@@ -63,7 +68,7 @@ struct ListAllFavoriteTransactionView: View {
                     .isDetailLink(false)
                     
                     NavigationLink(
-                        destination: TransferRtgsScreen(dest: .constant(destinationNumber)).environmentObject(transferDataOffUs),
+                        destination: TransferRtgsScreen(dest: .constant(destinationNumber), type: .constant(type), destBank: .constant(destinationBank)).environmentObject(transferDataOffUs),
                         isActive: self.$isRouteOffUs,
                         label: {EmptyView()}
                     )
@@ -75,15 +80,20 @@ struct ListAllFavoriteTransactionView: View {
                             Button(
                                 action: {
                                     if (data.type == "TRANSFER_SESAMA") {
+                                        print("ON US")
                                         self.destinationNumber = data.transferOnUs!.destinationNumber
                                         self.isRouteOnUs = true
                                     } else {
-                                        
+                                        print("OFF US")
                                         if (data.transferOffUsRtgs == nil) {
                                             self.destinationNumber = data.transferOffUsSkn!.accountTo
+                                            self.destinationBank = data.bankName
+                                            self.type = "SKN"
                                             self.isRouteOffUs = true
                                         } else {
                                             self.destinationNumber = data.transferOffUsRtgs!.accountTo
+                                            self.destinationBank = data.bankName
+                                            self.type = "RTGS"
                                             self.isRouteOffUs = true
                                         }
                                     }
@@ -125,43 +135,58 @@ struct ListAllFavoriteTransactionView: View {
                             Spacer()
                             
                             Button(action: {
+                                print("\(data.name)")
+                                if (data.type == "TRANSFER_SESAMA") {
+                                    self.receivedName = data.name
+                                    self.transferDataOnUs.destinationName = data.name
+                                    self.transferDataOnUs.sourceNumber = data.transferOnUs!.sourceNumber
+                                    self.transferDataOnUs.cardNo = data.cardNo
+                                    self.transferDataOnUs.idEdit = data.id
+                                } else {
+                                    
+                                    if (data.transferOffUsRtgs == nil) {
+                                        self.transferDataOnUs.destinationName = data.name
+                                        self.transferDataOnUs.sourceNumber = data.transferOffUsSkn!.sourceNumber
+                                        self.transferDataOnUs.cardNo = data.cardNo
+                                        self.transferDataOnUs.idEdit = data.id
+                                    } else {
+                                        self.transferDataOnUs.destinationName = data.name
+                                        self.transferDataOnUs.sourceNumber = data.transferOffUsRtgs!.sourceNumber
+                                        self.transferDataOnUs.cardNo = data.cardNo
+                                        self.transferDataOnUs.idEdit = data.id
+                                    }
+                                    
+                                }
                                 self.showingDetail = true
                             }, label: {
                                 Image(systemName: "ellipsis")
                             })
                             .buttonStyle(PlainButtonStyle())
-                            .alert(isPresented: $isShowingAlert) {
-                                return Alert(
-                                    title: Text("Anda Yakin ingin menghapus \(data.name)"),
-                                    primaryButton: .default(Text("IYA"), action: {
-                                        self.favoritVM.remove(data: data) { result in
-                                            print("result remove favorite \(result)")
-                                            if result {
-                                                getList()
-                                            }
+                        }
+                        .alert(isPresented: $isShowingAlert) {
+                            return Alert(
+                                title: Text("Anda Yakin ingin menghapus \(data.name)"),
+                                primaryButton: .default(Text("IYA"), action: {
+                                    self.favoritVM.remove(data: data) { result in
+                                        print("result remove favorite \(result)")
+                                        if result {
+                                            getList()
                                         }
-                                    }),
-                                    secondaryButton: .cancel(Text("TIDAK")))
-                            }
-                            .actionSheet(isPresented: self.$showingDetail) {
-                                ActionSheet(title: Text("Pilihan"), message: Text("Pilih menu dibawah ini"), buttons: [.default(Text("Hapus"), action: {
-                                    print("Hapus")
-                                    self.isShowingAlert = true
-                                }), .default(Text("Edit"), action: {
-                                    print("Edit")
-                                    if (data.type == "TRANSFER_SESAMA") {
-                                        self.transferDataOnUs.destinationName = data.name
-                                        self.transferDataOnUs.destinationNumber = data.transferOnUs!.destinationNumber
-                                        self.transferDataOnUs.cardNo = data.cardNo
-                                        self.transferDataOnUs.idEdit = data.id
-                                        self.showPopover = true
-                                    } else {
                                     }
-                                }), .cancel({
-                                    
-                                })])
-                            }
-                            
+                                }),
+                                secondaryButton: .cancel(Text("TIDAK")))
+                        }
+                        .actionSheet(isPresented: self.$showingDetail) {
+                            ActionSheet(title: Text("Pilihan"), message: Text("Pilih menu dibawah ini"), buttons: [.default(Text("Hapus"), action: {
+                                print("Hapus")
+                                self.isShowingAlert = true
+                            }), .default(Text("Edit"), action: {
+                                print("Edit")
+                                self.showPopover = true
+                               
+                            }), .cancel({
+                                
+                            })])
                         }
                     }
                     .listStyle(PlainListStyle())
@@ -169,6 +194,8 @@ struct ListAllFavoriteTransactionView: View {
                     .frame(height: 500)
                 }
                 .frame(width: UIScreen.main.bounds.width - 10)
+                
+                Spacer()
             }
             
             if self.showPopover {
@@ -176,11 +203,150 @@ struct ListAllFavoriteTransactionView: View {
             }
             
             if showPopover {
-                PopOverEditFavoriteOnUsView(transferData: transferDataOnUs, show: self.$showPopover, showAlert: .constant(false))
+                popupEdit
                     .padding(30)
+                    
             }
         }
-        .onAppear(perform: getList)
+        .onAppear {
+            self.isRouteOnUs = false
+            self.isRouteOffUs = false
+            getList()
+        }
+    }
+    
+    var popupEdit: some View {
+        VStack {
+            VStack {
+                HStack {
+                    Text("Edit Kontrak Transfer")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding()
+                
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("Nama Kontrak Penerima")
+                            .font(.caption)
+                            .fontWeight(.ultraLight)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    VStack {
+                        TextField("Nama Kontak Penerima", text: self.$receivedName, onEditingChanged: { changed in
+                            self.transferDataOnUs.destinationName = self.receivedName
+                            print("\($receivedName)")
+                        })
+                        .disabled(false)
+                        .frame(height: 10)
+                        .font(.system(size: 15, weight: .bold, design: .default))
+                        .padding()
+                        .background(Color(hex: "#F6F8FB"))
+                        .cornerRadius(15)
+                        .padding(.horizontal, 15)
+                    }
+                    .padding(.bottom, 25)
+                    
+                    HStack {
+                        Text("Detail Rekening")
+                            .font(.caption)
+                            .fontWeight(.ultraLight)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    // Bank Form
+                    HStack(spacing: 20) {
+                        
+                        HStack {
+                            Text("Bank")
+                                .font(.caption)
+                                .fontWeight(.light)
+                        }
+                        .padding(.leading, 10)
+                        .padding(.trailing, 60)
+                        
+                        TextField("Bank", text: $receivedBank, onEditingChanged: { changed in
+                            print("\($receivedBank)")
+                        })
+                        .disabled(true)
+                        .frame(height: 10)
+                        .padding()
+                        .font(.subheadline)
+                        .background(Color(hex: "#F6F8FB"))
+                        .cornerRadius(15)
+                    }
+                    .padding(.horizontal)
+                    
+                    // No. Rekening Form
+                    HStack(spacing: 20) {
+                        Text("No. Rekening")
+                            .font(.caption)
+                            .fontWeight(.light)
+                            .frame(width: 100)
+                        
+                        TextField("No. Rekening", text: .constant(transferDataOnUs.sourceNumber), onEditingChanged: { changed in
+                            //                            print("\($receivedRekening)")
+                        })
+                        .disabled(true)
+                        .frame(height: 10)
+                        .padding()
+                        .font(.subheadline)
+                        .background(Color(hex: "#F6F8FB"))
+                        .cornerRadius(15)
+                    }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
+                    
+                    Button(action: {
+                        self.transferDataOnUs.destinationName = self.receivedName
+                        
+                        self.favoritVM.updateWithParam(id: self.transferDataOnUs.idEdit, cardNo: self.transferDataOnUs.cardNo, sourceNumber: self.transferDataOnUs.sourceNumber, name: self.transferDataOnUs.destinationName) { success in
+                            
+                            if success {
+                                self.showPopover = false
+                                getList()
+                            }
+                            
+                            if !success {
+                                
+                            }
+                            
+                        }
+                    }, label: {
+                        if self.favoritVM.isLoading {
+                            ProgressView()
+                        } else {
+                            Text("SIMPAN PERUBAHAN")
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                        }
+                    })
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    .disabled(disableForm)
+                    .background(disableForm ? Color(.lightGray) : Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 40)
+                }
+            }
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+            .padding(.top, 20)
+            
+            Spacer()
+        }
+        .onAppear {
+            self.receivedName = self.transferDataOnUs.destinationName
+        }
     }
     
     var searchCard: some View {
@@ -194,7 +360,6 @@ struct ListAllFavoriteTransactionView: View {
                     .renderingMode(.template)
                     .foregroundColor(.gray)
             }
-            .keyboardType(.numberPad)
             .frame(height: 10)
             .font(.subheadline)
             .padding()
@@ -215,7 +380,7 @@ struct ListAllFavoriteTransactionView: View {
             .padding(.trailing, 20)
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
         }
-        .padding([.bottom], 20)
+        .padding([.bottom, .top], 20)
     }
     
     func getList() {
@@ -223,10 +388,8 @@ struct ListAllFavoriteTransactionView: View {
             print(result)
         })
     }
-}
-
-struct ListAllFavoriteTransactionView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListAllFavoriteTransactionView()
+    
+    var disableForm: Bool {
+        receivedName.isEmpty || self.favoritVM.isLoading
     }
 }

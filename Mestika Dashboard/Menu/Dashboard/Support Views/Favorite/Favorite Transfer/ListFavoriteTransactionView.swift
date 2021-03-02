@@ -14,6 +14,8 @@ struct ListFavoriteTransactionView: View {
     var cardNo = ""
     var sourceNumber = ""
     
+    @State var isNextRoute: Bool = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -74,7 +76,18 @@ struct ListFavoriteTransactionView: View {
             HStack {
                 Spacer()
                 
-                NavigationLink(destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber), label: {
+                NavigationLink(
+                    destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber),
+                    isActive: self.$isNextRoute,
+                    label: {
+                        EmptyView()
+                    })
+                    .isDetailLink(false)
+                
+                Button(action: {
+                    print("See All")
+                    self.isNextRoute = true
+                }, label: {
                     Text("Lihat Daftar Selengkapnya")
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -85,7 +98,10 @@ struct ListFavoriteTransactionView: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
-        .onAppear(perform: getList)
+        .onAppear {
+            self.isNextRoute = false
+            getList()
+        }
     }
     
     func getList() {
