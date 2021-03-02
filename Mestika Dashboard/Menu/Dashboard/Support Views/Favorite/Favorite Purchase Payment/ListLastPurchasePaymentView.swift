@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListLastPurchasePaymentView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @State var _listLast = [
         LastPurchasePayment(id: 1, tanggalTransaksi: "27 September 2020", username: "Prima Jatnika", nominalPembayaran: "121.000", nominal: "120.000"),
         LastPurchasePayment(id: 2, tanggalTransaksi: "15 Oktober 2020", username: "Prima Jatnika", nominalPembayaran: "52.500", nominal: "50.000"),
@@ -20,7 +24,7 @@ struct ListLastPurchasePaymentView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text("Transaksi Terakhir")
+                    Text(NSLocalizedString("Last transaction".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)

@@ -11,6 +11,9 @@ import SystemConfiguration
 
 struct SuccessRegisterView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @ObservedObject var scheduleVM = ScheduleInterviewSummaryViewModel()
     @ObservedObject var regVM = UserRegistrationViewModel()
@@ -91,7 +94,7 @@ struct SuccessRegisterView: View {
                             .padding(.top, 40)
                             .padding(.horizontal, 20)
                         
-                        Text(NSLocalizedString("Pendaftaran Rekening Baru Telah Berhasil", comment: ""))
+                        Text(NSLocalizedString("New Account Registration Successful".localized(language), comment: ""))
                             .font(.title)
                             .foregroundColor(Color(hex: "#232175"))
                             .fontWeight(.bold)
@@ -99,7 +102,7 @@ struct SuccessRegisterView: View {
                             .padding(.horizontal, 20)
                             .fixedSize(horizontal: false, vertical: true)
                         
-                        Text(NSLocalizedString("Silahkan pilih waktu untuk dihubungi.", comment: ""))
+                        Text(NSLocalizedString("Please select a time to contact.".localized(language), comment: ""))
                             .font(.subheadline)
                             .foregroundColor(Color(hex: "#707070"))
                             .multilineTextAlignment(.leading)
@@ -108,7 +111,7 @@ struct SuccessRegisterView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         HStack {
-                            TextField(NSLocalizedString("Pilih Tanggal Wawancara", comment: ""), text: $tanggalWawancara)
+                            TextField(NSLocalizedString("Choose an interview date".localized(language), comment: ""), text: $tanggalWawancara)
                                 .font(.subheadline)
                                 .frame(height: 36)
                                 .padding(.leading, 20)
@@ -136,7 +139,7 @@ struct SuccessRegisterView: View {
                         
                         HStack {
                             
-                            TextField(NSLocalizedString("Pilih Jam", comment: ""), text: $pilihJam)
+                            TextField(NSLocalizedString("Choose Time".localized(language), comment: ""), text: $pilihJam)
                                 .font(.subheadline)
                                 .frame(height: 36)
                                 .padding(.leading, 20)
@@ -161,7 +164,7 @@ struct SuccessRegisterView: View {
                         .cornerRadius(10)
                         .padding(.horizontal, 20)
                         
-                        Text(NSLocalizedString("Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru", comment: ""))
+                        Text(NSLocalizedString("Make sure your data is still the same. If not, then please fill in the data for new account creation again".localized(language), comment: ""))
                             .font(.subheadline)
                             .foregroundColor(Color(hex: "#707070"))
                             .multilineTextAlignment(.leading)
@@ -170,7 +173,7 @@ struct SuccessRegisterView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         Group {
-                            Text(NSLocalizedString("KTP.", comment: ""))
+                            Text(NSLocalizedString("Identity Card/(KTP)".localized(language), comment: ""))
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "#707070"))
                                 .multilineTextAlignment(.leading)
@@ -178,7 +181,7 @@ struct SuccessRegisterView: View {
                                 .padding(.horizontal, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            TextField(NSLocalizedString("No KTP", comment: ""), text: $registerData.nik)
+                            TextField(NSLocalizedString("Identity Card/(KTP) Number".localized(language), comment: ""), text: $registerData.nik)
                                 .frame(height: 10)
                                 .font(.subheadline)
                                 .padding()
@@ -188,7 +191,7 @@ struct SuccessRegisterView: View {
                                 .padding(.horizontal, 20)
                                 .disabled(true)
                             
-                            Text(NSLocalizedString("No. HP.", comment: ""))
+                            Text(NSLocalizedString("Phone Number".localized(language), comment: ""))
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "#707070"))
                                 .multilineTextAlignment(.leading)
@@ -196,7 +199,7 @@ struct SuccessRegisterView: View {
                                 .padding(.horizontal, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            TextField(NSLocalizedString("Nomor Handphone", comment: ""), text: $registerData.noTelepon)
+                            TextField(NSLocalizedString("Phone Number".localized(language), comment: ""), text: $registerData.noTelepon)
                                 .frame(height: 10)
                                 .font(.subheadline)
                                 .padding()
@@ -206,7 +209,7 @@ struct SuccessRegisterView: View {
                                 .padding(.horizontal, 20)
                                 .disabled(true)
                             
-                            Text("Email.")
+                            Text("Email")
                                 .font(.subheadline)
                                 .foregroundColor(Color(hex: "#707070"))
                                 .multilineTextAlignment(.leading)
@@ -214,7 +217,7 @@ struct SuccessRegisterView: View {
                                 .padding(.horizontal, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            TextField(NSLocalizedString("Alamat Email", comment: ""), text: $registerData.email)
+                            TextField(NSLocalizedString("Email", comment: ""), text: $registerData.email)
                                 .frame(height: 10)
                                 .font(.subheadline)
                                 .padding()
@@ -239,7 +242,7 @@ struct SuccessRegisterView: View {
                                     self.isShowAlertInternetConnection = true
                                 }
                             }, label: {
-                                Text(NSLocalizedString("Buat Janji", comment: ""))
+                                Text(NSLocalizedString("Make schedule".localized(language), comment: ""))
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
                                     .font(.system(size: 13))
@@ -259,9 +262,9 @@ struct SuccessRegisterView: View {
                                     self.showingModal = true
                                 },
                                 label: {
-                                    Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
+                                    Text(NSLocalizedString("Cancel Request".localized(language), comment: ""))
                                         .foregroundColor(Color(hex: "#707070"))
-                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                                        .fontWeight(.bold)
                                         .font(.system(size: 13))
                                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                                 }
@@ -331,11 +334,11 @@ struct SuccessRegisterView: View {
         }
         .alert(isPresented: $isShowingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+            title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+            primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                self.appState.moveToWelcomeView = true
+            }),
+            secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -379,7 +382,7 @@ struct SuccessRegisterView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("Please check your internet connection")
+            Text(NSLocalizedString("Please check your internet connection".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -411,8 +414,8 @@ struct SuccessRegisterView: View {
     func popupMessageCancelRegister() -> some View {
         VStack(alignment: .center) {
             
-            Text(NSLocalizedString("Batalkan Permohonan", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Cancel Request".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 30)
@@ -421,9 +424,9 @@ struct SuccessRegisterView: View {
             Button(
                 action: {},
                 label: {
-                    Text(NSLocalizedString("TIDAK", comment: ""))
+                    Text(NSLocalizedString("NO", comment: ""))
                         .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .font(.system(size: 13))
                         .frame(maxWidth: .infinity, maxHeight: 40)
                 }
@@ -474,22 +477,22 @@ struct SuccessRegisterView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 10)
             
-            Text(NSLocalizedString("Terimakasih telah memilih Bank Mestika", comment: ""))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+            Text(NSLocalizedString("Thank you for choosing Bank Mestika".localized(language), comment: ""))
+                .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 30)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text(NSLocalizedString("Permohonan Pembukaan Rekening Anda sedang dalam proses persetujuan. Pihak kami akan menghubungi Anda untuk memverifikasi data.", comment: ""))
+            Text(NSLocalizedString("Your application to open an account is in the process of approval. Our party will contact you to verify the data.".localized(language), comment: ""))
                 .font(.caption)
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
             NavigationLink(destination: WelcomeView()) {
-                Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
+                Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .foregroundColor(.white)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
                     .font(.system(size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 40)
             }
@@ -512,13 +515,13 @@ struct SuccessRegisterView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Informasi", comment: ""))
+            Text(NSLocalizedString("Information".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#2334D0"))
                 .padding(.bottom, 20)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text(NSLocalizedString("Jadwal wawancara telah kami terima, mohon tunggu CS kami untuk menghubungi anda pada :", comment: ""))
+            Text(NSLocalizedString("We have received the interview schedule, please wait for our CS to contact you at:".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -526,7 +529,7 @@ struct SuccessRegisterView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text(NSLocalizedString("Tanggal", comment: ""))
+                    Text(NSLocalizedString("Date", comment: ""))
                         .frame(width: 100, alignment: .leading)
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -545,7 +548,7 @@ struct SuccessRegisterView: View {
                 }
                 
                 HStack {
-                    Text(NSLocalizedString("Jam", comment: ""))
+                    Text(NSLocalizedString("Hour", comment: ""))
                         .frame(width: 100, alignment: .leading)
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -573,9 +576,9 @@ struct SuccessRegisterView: View {
 //                        reSubmitScheduleNasabahExisting()
                     },
                     label: {
-                        Text("Kembali ke Halaman Utama")
+                        Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, maxHeight: 40)
                     }
@@ -590,9 +593,9 @@ struct SuccessRegisterView: View {
                         self.appState.moveToWelcomeView = true
                     },
                     label: {
-                        Text("Kembali ke Halaman Utama")
+                        Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, maxHeight: 40)
                     }
@@ -736,7 +739,7 @@ struct SuccessRegisterView: View {
             } else {
                 self.isLoading = false
                 
-                self.scheduleVM.message = NSLocalizedString("Gagal membatalkan permohonan. Silakan coba beberapa saat lagi.", comment: "")
+                self.scheduleVM.message = NSLocalizedString("Failed to cancel the application. Please try again later.".localized(language), comment: "")
                 self.showingAlert.toggle()
             }
         })

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FavoriteTransferScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State private var searchCtrl = ""
     
     var cardNo: String = ""
@@ -25,9 +28,9 @@ struct FavoriteTransferScreen: View {
                     .padding(.bottom)
                     .padding(.bottom, 25)
             }
-            .navigationBarTitle("Favorit Transfer", displayMode: .inline)
+            .navigationBarTitle(NSLocalizedString("Transfer Favorites".localized(language), comment: ""), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {}, label: {
-                Text("Cancel")
+                Text(NSLocalizedString("Cancel".localized(language), comment: ""))
             }))
         }
     }
@@ -35,7 +38,7 @@ struct FavoriteTransferScreen: View {
     var searchCard: some View {
         HStack {
             HStack {
-                TextField("Cari kontak Transfer", text: $searchCtrl, onEditingChanged: { changed in
+                TextField(NSLocalizedString("Search for Transfer contacts".localized(language), comment: ""), text: $searchCtrl, onEditingChanged: { changed in
                     print("\($searchCtrl)")
                 })
                 

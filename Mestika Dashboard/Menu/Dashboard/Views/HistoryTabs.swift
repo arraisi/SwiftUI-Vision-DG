@@ -9,6 +9,10 @@ import SwiftUI
 
 struct HistoryTabs: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @StateObject var historyVM = HistoryTransactionViewModel()
     
     @State private var filterShowed: Bool = true
@@ -47,7 +51,7 @@ struct HistoryTabs: View {
                     Button(action: {
                         self.filterShowed = true
                     }, label: {
-                        Text("Filter Transaksi")
+                        Text(NSLocalizedString("Transaction Filter".localized(language), comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40)
                             .foregroundColor(.black)
@@ -70,14 +74,14 @@ struct HistoryTabs: View {
         VStack {
             VStack(alignment: .center, spacing: 20){
                 HStack {
-                    Text("Period of time")
+                    Text(NSLocalizedString("Period of time".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                     Spacer()
                 }
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("From")
+                        Text(NSLocalizedString("From".localized(language), comment: ""))
                         DatePicker(
                             "From",
                             selection: $dateFrom,
@@ -90,7 +94,7 @@ struct HistoryTabs: View {
                     Spacer()
                     
                     VStack(alignment: .leading) {
-                        Text("To")
+                        Text(NSLocalizedString("To".localized(language), comment: ""))
                         DatePicker(
                             "To",
                             selection: $dateTo,
@@ -108,7 +112,7 @@ struct HistoryTabs: View {
                     self.loadHistory()
                     self.filterShowed = false
                 }, label: {
-                    Text("View Search Results")
+                    Text(NSLocalizedString("View Search Results".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)

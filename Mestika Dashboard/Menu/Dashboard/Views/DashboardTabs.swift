@@ -10,6 +10,10 @@ import SDWebImageSwiftUI
 
 struct DashboardTabs: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
     var user: FetchedResults<Registration>
@@ -46,7 +50,7 @@ struct DashboardTabs: View {
                 
                 VStack {
                     HStack {
-                        Text("Kartu-Ku")
+                        Text(NSLocalizedString("My Card".localized(language), comment: ""))
                             .font(.title3)
                             .fontWeight(.ultraLight)
                         
@@ -144,7 +148,7 @@ struct DashboardTabs: View {
                         .fontWeight(.medium)
                 }
                 
-                Text("Apakah ada yang bisa bantu?")
+                Text(NSLocalizedString("Is there anything I can help you with?".localized(language), comment: ""))
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
@@ -176,13 +180,13 @@ struct DashboardTabs: View {
                         
                         if (isHiddenBalance) {
                             VStack(alignment: .leading) {
-                                Text("Saldo disembunyikan")
+                                Text(NSLocalizedString("Balance hidden".localized(language), comment: ""))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                             }
                         } else {
                             VStack(alignment: .leading) {
-                                Text("Saldo Rekening Utama")
+                                Text(NSLocalizedString("Main Account Balance".localized(language), comment: ""))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 

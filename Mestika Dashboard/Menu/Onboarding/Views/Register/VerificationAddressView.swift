@@ -9,6 +9,9 @@ import SwiftUI
 
 struct VerificationAddressView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var registerData: RegistrasiModel
     @State var isShowNextView : Bool = false
@@ -63,7 +66,7 @@ struct VerificationAddressView: View {
                 
                 ScrollView {
                     VStack {
-                        Text(NSLocalizedString("PASTIKAN INFORMASI ANDA BENAR", comment: ""))
+                        Text(NSLocalizedString("MAKE SURE YOUR INFORMATION IS CORRECT".localized(language), comment: ""))
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
@@ -73,7 +76,7 @@ struct VerificationAddressView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         VStack(alignment: .center) {
-                            Text(NSLocalizedString("Apakah Alamat Surat Menyurat Anda Sesuai KTP?", comment: ""))
+                            Text(NSLocalizedString("Does Your Mailing Address Match Your Identity Card/(KTP)?".localized(language), comment: ""))
                                 .font(.title2)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
@@ -120,7 +123,7 @@ struct VerificationAddressView: View {
                                     
                                     Group {
                                         HStack {
-                                            Text("Alamat")
+                                            Text(NSLocalizedString("Address".localized(language), comment: ""))
                                                 .font(Font.system(size: 12))
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(Color(hex: "#707070"))
@@ -131,7 +134,7 @@ struct VerificationAddressView: View {
                                         
                                         HStack {
                                             
-                                            TextField("Alamat", text: $registerData.addressInput) { changed in
+                                            TextField(NSLocalizedString("Address".localized(language), comment: ""), text: $registerData.addressInput) { changed in
                                             } onCommit: {
                                                 self.addressInput = self.registerData.addressInput
                                             }
@@ -165,7 +168,7 @@ struct VerificationAddressView: View {
                                     })
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressKelurahanInput, label: NSLocalizedString("Kelurahan", comment: ""), placeHolder: NSLocalizedString("Kelurahan", comment: ""), onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressKelurahanInput, label: NSLocalizedString("Village".localized(language), comment: ""), placeHolder: NSLocalizedString("Village".localized(language), comment: ""), onEditingChanged: { (Bool) in
                                         print("on edit")
                                         registerData.addressKelurahanInput = self.addressKelurahanInput
                                     }, onCommit: {
@@ -174,7 +177,7 @@ struct VerificationAddressView: View {
                                     })
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressKecamatanInput, label: NSLocalizedString("Kecamatan", comment: ""), placeHolder: NSLocalizedString("Kecamatan", comment: ""), onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressKecamatanInput, label: NSLocalizedString("Sub-district".localized(language), comment: ""), placeHolder: NSLocalizedString("Sub-district".localized(language), comment: ""), onEditingChanged: { (Bool) in
                                         print("on edit")
                                         registerData.addressKecamatanInput = self.addressKecamatanInput
                                     }, onCommit: {
@@ -185,13 +188,13 @@ struct VerificationAddressView: View {
                                     
                                     VStack(alignment: .leading) {
                                         
-                                        Text(NSLocalizedString("Kode Pos", comment: ""))
+                                        Text(NSLocalizedString("Postal code".localized(language), comment: ""))
                                             .font(Font.system(size: 12))
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color(hex: "#707070"))
                                         
                                         HStack {
-                                            TextField(NSLocalizedString("Kode Pos", comment: ""), text: $addressKodePosInput) { change in
+                                            TextField(NSLocalizedString("Postal code".localized(language), comment: ""), text: $addressKodePosInput) { change in
                                             } onCommit: {
                                                 print("on commit")
                                                 registerData.addressPostalCodeInput = self.addressKodePosInput
@@ -233,9 +236,9 @@ struct VerificationAddressView: View {
                         self.isShowNextView = true
                         
                     }, label: {
-                        Text(NSLocalizedString("Submit Data", comment: ""))
+                        Text(NSLocalizedString("Submit Data".localized(language), comment: ""))
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     })
@@ -259,11 +262,11 @@ struct VerificationAddressView: View {
         }
         .alert(isPresented: $isShowingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             addressSuggestionPopUp()
@@ -280,7 +283,7 @@ struct VerificationAddressView: View {
     func addressSuggestionPopUp() -> some View {
         VStack {
             HStack {
-                Text("Alamat")
+                Text(NSLocalizedString("Address".localized(language), comment: ""))
                     .fontWeight(.bold)
                     .font(.system(size: 19))
                     .foregroundColor(Color(hex: "#232175"))
@@ -289,7 +292,7 @@ struct VerificationAddressView: View {
             
             HStack {
                 
-                TextField("Alamat", text: $addressInput)
+                TextField(NSLocalizedString("Address".localized(language), comment: ""), text: $addressInput)
                     .font(Font.system(size: 14))
                     .frame(height: 36)
                 

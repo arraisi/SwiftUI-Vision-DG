@@ -11,6 +11,9 @@ import Indicators
 
 struct VerificationPINView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var appState: AppState
@@ -77,7 +80,7 @@ struct VerificationPINView: View {
                 
                 VStack {
                     
-                    Text(NSLocalizedString("VERIFIKASI PIN \nKARTU ATM ANDA", comment: ""))
+                    Text(NSLocalizedString("VERIFY YOUR PIN \nCARD OF ATM".localized(language), comment: ""))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -86,7 +89,7 @@ struct VerificationPINView: View {
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .center) {
-                        Text(NSLocalizedString("Silahkan Masukkan PIN \nkartu ATM Anda", comment: ""))
+                        Text(NSLocalizedString("Please enter your PIN \nATM card".localized(language), comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 18))
                             .foregroundColor(Color(hex: "#232175"))
                             .multilineTextAlignment(.center)
@@ -94,7 +97,7 @@ struct VerificationPINView: View {
                             .padding(.horizontal, 20)
                             .fixedSize(horizontal: false, vertical: true)
                         
-                        TextField(NSLocalizedString("Masukkan No Kartu ATM", comment: ""), text: $noKartuCtrl, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Insert ATM Card Number".localized(language), comment: ""), text: $noKartuCtrl, onEditingChanged: { changed in
                             self.registerData.noAtm = self.noKartuCtrl
                             self.registerData.accNo = self.noKartuCtrl
                         })
@@ -119,7 +122,7 @@ struct VerificationPINView: View {
                             
                             ZStack {
                                 HStack (spacing: 0) {
-                                    SecureField(NSLocalizedString("Masukkan PIN ATM", comment: ""), text: $pin)
+                                    SecureField(NSLocalizedString("Enter the ATM PIN".localized(language), comment: ""), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
                                         .frame(width: 200, height: 50)
@@ -158,7 +161,7 @@ struct VerificationPINView: View {
                             
                             ZStack {
                                 HStack (spacing: 0) {
-                                    TextField(NSLocalizedString("Masukkan PIN ATM", comment: ""), text: $pin)
+                                    TextField(NSLocalizedString("Enter the ATM PIN".localized(language), comment: ""), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
                                         .frame(width: 200, height: 50)
@@ -206,10 +209,10 @@ struct VerificationPINView: View {
                                 HStack(alignment: .top) {
                                     Image(systemName: shouldVerificationWithVC ? "checkmark.square": "square")
                                     VStack(alignment: .leading) {
-                                        Text(NSLocalizedString("Rekening Anda tidak memiliki kartu ATM?", comment: ""))
+                                        Text(NSLocalizedString("Your account doesn't have an ATM card?".localized(language), comment: ""))
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .foregroundColor(Color(hex: "#707070"))
-                                        Text(NSLocalizedString("Verifikasi Lewat Video Call", comment: ""))
+                                        Text(NSLocalizedString("Verification Via Video Call".localized(language), comment: ""))
                                             .font(.custom("Montserrat-Bold", size: 12))
                                             .foregroundColor(Color(hex: "#3756DF"))
                                     }
@@ -250,7 +253,7 @@ struct VerificationPINView: View {
                             }
                         }) {
                             
-                            Text("Berikutnya")
+                            Text(NSLocalizedString("Next".localized(language), comment: ""))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -355,7 +358,7 @@ struct VerificationPINView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 10)
             
-            Text("Kartu ATM Anda Diblokir")
+            Text(NSLocalizedString("Your ATM Card Is Blocked".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#DF1C1C"))
@@ -366,7 +369,7 @@ struct VerificationPINView: View {
             Button(action: {
                 self.nextToFormVideoCall = true
             }) {
-                Text("Verifikasi Video Call")
+                Text(NSLocalizedString("Video Call Verification".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
             }
@@ -391,7 +394,7 @@ struct VerificationPINView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 10)
             
-            Text(NSLocalizedString("PIN ATM yang anda Masukkan Salah!", comment: ""))
+            Text(NSLocalizedString("The ATM PIN you entered is wrong!".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#DF1C1C"))
@@ -399,20 +402,20 @@ struct VerificationPINView: View {
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text(NSLocalizedString("PIN ATM yang Anda masukkan tidak sesuai dengan PIN ATM rekening terdaftar.", comment: ""))
+            Text(NSLocalizedString("The ATM PIN you entered does not match the registered account ATM PIN.".localized(language), comment: ""))
                 .font(.caption)
                 .foregroundColor(Color(hex: "#232175"))
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text(NSLocalizedString("Silahkan coba kembali..", comment: ""))
+            Text(NSLocalizedString("Please try again ..".localized(language), comment: ""))
                 .font(.caption)
                 .bold()
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
             Button(action: {self.showingModal = false}) {
-                Text(NSLocalizedString("Kembali", comment: ""))
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
             }
@@ -437,14 +440,14 @@ struct VerificationPINView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 10)
             
-            Text(NSLocalizedString("ACCOUNT OPENING APPROVED", comment: ""))
+            Text(NSLocalizedString("ACCOUNT OPENING APPROVED".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical, 20)
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text(NSLocalizedString("Congratulations, your new account opening has been approved.", comment: ""))
+            Text(NSLocalizedString("Congratulations, your new account opening has been approved.".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .multilineTextAlignment(.leading)
@@ -453,7 +456,7 @@ struct VerificationPINView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
+                Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
             }

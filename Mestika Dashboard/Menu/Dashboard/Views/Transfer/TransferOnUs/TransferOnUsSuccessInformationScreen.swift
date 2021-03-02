@@ -9,6 +9,10 @@ import SwiftUI
 
 struct TransferOnUsSuccessInformationScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
 //    @EnvironmentObject var transferData: TransferOnUsModel
     var transferData: TransferOnUsModel
     @EnvironmentObject var appState: AppState
@@ -50,7 +54,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                             self.appState.moveToTransfer = true
                         },
                         label: {
-                            Text("Kembali Ke Halaman Utama")
+                            Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -79,14 +83,14 @@ struct TransferOnUsSuccessInformationScreen: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingBadge) {
             return Alert(
-                title: Text("Berhasil"),
-                message: Text("Favorit berhasil ditambahkan"),
-                dismissButton: .default(Text("Oke"))
+                title: Text(NSLocalizedString("Succeed".localized(language), comment: "")),
+                message: Text(NSLocalizedString("Favorite added successfully".localized(language), comment: "")),
+                dismissButton: .default(Text(NSLocalizedString("Okay".localized(language), comment: "")))
             )
         }
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
-                Text("Tambahkan ke Favorit?")
+                Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
                     .font(.caption)
                     .foregroundColor(.white)
                 
@@ -119,7 +123,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
-            Text("Transfer Sesama Berhasil")
+            Text(NSLocalizedString("Peer Transfer Successfully".localized(language), comment: ""))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -128,7 +132,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     var nominalInfo: some View {
         VStack {
-            Text("Nominal Transaksi")
+            Text(NSLocalizedString("Nominal Transaction".localized(language), comment: ""))
 //                .font(.caption)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
@@ -146,7 +150,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     var destinationInfo: some View {
         VStack(alignment: .leading) {
-            Text("Ke")
+            Text(NSLocalizedString("To".localized(language), comment: ""))
 //                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
@@ -172,7 +176,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     var receivedInfo: some View {
         VStack(alignment: .leading) {
-            Text("Dari")
+            Text(NSLocalizedString("From".localized(language), comment: ""))
 //                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             

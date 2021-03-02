@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListLastTransactionView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     var sourceNumber = ""
     @StateObject private var favoritVM = FavoritViewModel()
     
@@ -20,7 +24,7 @@ struct ListLastTransactionView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text("Transaksi Terakhir")
+                    Text(NSLocalizedString("Last transaction".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)

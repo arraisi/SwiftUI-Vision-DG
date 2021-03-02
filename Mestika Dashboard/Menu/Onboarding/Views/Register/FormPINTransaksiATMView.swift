@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FormPINTransaksiATMView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var registerData: RegistrasiModel
     @State var pin = ""
@@ -26,7 +29,7 @@ struct FormPINTransaksiATMView: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text(NSLocalizedString("Masukkan PIN Transaksi anda", comment: ""))
+                Text(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color.white)
                 
@@ -38,7 +41,7 @@ struct FormPINTransaksiATMView: View {
                 .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
                 
                 
-                Text(wrongPin ? "Incorrect Pin" : "")
+                Text(wrongPin ? NSLocalizedString("Incorrect Pin".localized(language), comment: "") : "")
                     .foregroundColor(.red)
                     .fontWeight(.heavy)
                     .padding()
@@ -70,7 +73,7 @@ struct FormPINTransaksiATMView: View {
                 .padding(.horizontal, 30)
             }
         }
-        .navigationBarTitle(NSLocalizedString("Ubah PIN Transaksi", comment: ""), displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Change Transaction PIN".localized(language), comment: ""), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
             Text("Cancel")
         }))

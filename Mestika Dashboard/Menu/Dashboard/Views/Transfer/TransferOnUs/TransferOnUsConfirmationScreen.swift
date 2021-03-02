@@ -9,6 +9,10 @@ import SwiftUI
 
 struct TransferOnUsConfirmationScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @EnvironmentObject var transferData: TransferOnUsModel
     
     var dateFormatter: DateFormatter {
@@ -35,7 +39,7 @@ struct TransferOnUsConfirmationScreen: View {
                 }
             }
         }
-        .navigationBarTitle("Konfirmasi", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Confirmation".localized(language), comment: ""), displayMode: .inline)
         .edgesIgnoringSafeArea(.bottom)
     }
     
@@ -47,7 +51,7 @@ struct TransferOnUsConfirmationScreen: View {
                 .padding(.top, 40)
                 .padding(.horizontal, 15)
             
-            Text("Konfirmasi Transfer")
+            Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
                 .font(.title2)
                 .foregroundColor(Color(hex: "#232175"))
                 .fontWeight(.bold)
@@ -56,7 +60,7 @@ struct TransferOnUsConfirmationScreen: View {
                 .padding(.bottom, 5)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Text("Pastikan data penerima dan jumlah nominal yang di input telah sesuai,")
+            Text(NSLocalizedString("Make sure the recipient data and the nominal amount inputted are correct,".localized(language), comment: ""))
                 .font(.subheadline)
                 .fontWeight(.light)
                 .foregroundColor(Color(hex: "#707070"))
@@ -68,12 +72,12 @@ struct TransferOnUsConfirmationScreen: View {
                 
                 // Penerima Form
                 HStack(spacing: 20) {
-                    Text("Nama Penerima")
+                    Text(NSLocalizedString("Recipient's name".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Penerima", text: self.$transferData.destinationName, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Receiver".localized(language), comment: ""), text: self.$transferData.destinationName, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationName)")
                     })
                     .disabled(true)
@@ -88,12 +92,12 @@ struct TransferOnUsConfirmationScreen: View {
                 
                 // Rekening Penerima Form
                 HStack(spacing: 20) {
-                    Text("Rekening Penerima")
+                    Text(NSLocalizedString("Beneficiary's Account".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Rekening Penerima", text: self.$transferData.destinationNumber, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Beneficiary's Account".localized(language), comment: ""), text: self.$transferData.destinationNumber, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
                     })
                     .disabled(true)
@@ -108,12 +112,12 @@ struct TransferOnUsConfirmationScreen: View {
                 
                 // Rekening Pengirim Form
                 HStack(spacing: 20) {
-                    Text("Rekening Pengirim")
+                    Text(NSLocalizedString("Sender's Account".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Rekening Pengirim", text: self.$transferData.sourceNumber, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Sender's Account".localized(language), comment: ""), text: self.$transferData.sourceNumber, onEditingChanged: { changed in
                         print("\(self.$transferData.sourceNumber)")
                     })
                     .disabled(true)
@@ -248,12 +252,12 @@ struct TransferOnUsConfirmationScreen: View {
                 
                 // Waktu Transaksi Form
                 HStack(spacing: 20) {
-                    Text("Waktu Transaksi")
+                    Text(NSLocalizedString("Transaction Time".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Waktu Transaksi", text: self.transferData.transactionDate == dateFormatter.string(from: Date()) ? .constant("Now") : self.$transferData.transactionDate, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Transaction Time".localized(language), comment: ""), text: self.transferData.transactionDate == dateFormatter.string(from: Date()) ? .constant("Now") : self.$transferData.transactionDate, onEditingChanged: { changed in
                         print("\(self.$transferData.transactionDate)")
                     })
                     .disabled(true)
@@ -268,12 +272,12 @@ struct TransferOnUsConfirmationScreen: View {
                 
                 // Catatan Form
                 HStack(spacing: 20) {
-                    Text("Catatan")
+                    Text(NSLocalizedString("Notes".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    MultilineTextField("Catatan", text: self.$transferData.notes, onCommit: {
+                    MultilineTextField(NSLocalizedString("Notes".localized(language), comment: ""), text: self.$transferData.notes, onCommit: {
                     })
                     .disabled(true)
                     .frame(height: 50)
@@ -288,7 +292,7 @@ struct TransferOnUsConfirmationScreen: View {
             
             VStack {
                 NavigationLink(destination: TransferOnUsPinConfirmationScreen(unLocked: false).environmentObject(transferData), label: {
-                    Text("Lakukan Transfer")
+                    Text(NSLocalizedString("Make a Transfer".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .font(.system(size: 13))

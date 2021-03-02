@@ -10,6 +10,9 @@ import Indicators
 
 struct VerificationRegisterDataView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     var productATMData = AddProductATM()
     @EnvironmentObject var appState: AppState
@@ -83,7 +86,7 @@ struct VerificationRegisterDataView: View {
                 
                 ScrollView {
                     VStack {
-                        Text(NSLocalizedString("PASTIKAN INFORMASI ANDA BENAR", comment: ""))
+                        Text(NSLocalizedString("MAKE SURE YOUR INFORMATION IS CORRECT".localized(language), comment: ""))
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
@@ -94,23 +97,23 @@ struct VerificationRegisterDataView: View {
                         
                         VStack(alignment: .leading) {
                             Group {
-                                LabelTextFieldWithIcon(value: $registerData.nik, label: NSLocalizedString("KTP", comment: ""), placeHolder: NSLocalizedString("KTP", comment: "")) {
+                                LabelTextFieldWithIcon(value: $registerData.nik, label: NSLocalizedString("Identity Card/(KTP)".localized(language), comment: ""), placeHolder: NSLocalizedString("Identity Card/(KTP)".localized(language), comment: "")) {
                                     (Bool) in
                                     print("on edit")
                                 } onCommit: {
                                     print("on commit")
                                 }.padding(.top, 20)
                                 .padding(.horizontal, 20)
-                                .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                .disabled(true)
                                 
-                                LabelTextFieldWithIcon(value: $registerData.noTelepon, label: NSLocalizedString("No. Telepon", comment: ""), placeHolder: NSLocalizedString("No. Telepon", comment: "")) {
+                                LabelTextFieldWithIcon(value: $registerData.noTelepon, label: NSLocalizedString("Phone Number".localized(language), comment: ""), placeHolder: NSLocalizedString("Phone Number".localized(language), comment: "")) {
                                     (Bool) in
                                     print("on edit")
                                 } onCommit: {
                                     print("on commit")
                                 }.padding(.top, 10)
                                 .padding(.horizontal, 20)
-                                .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                .disabled(true)
                                 
                                 LabelTextFieldWithIcon(value: $registerData.email, label: "Email", placeHolder: "Email") {
                                     (Bool) in
@@ -150,7 +153,7 @@ struct VerificationRegisterDataView: View {
                                         self.shouldPresentCamera = true
                                     }) {
                                         HStack {
-                                            Text(NSLocalizedString("Foto KTP", comment: ""))
+                                            Text(NSLocalizedString("Photo Identity Card/(KTP)".localized(language), comment: ""))
                                                 .font(.subheadline)
                                                 .foregroundColor(Color(hex: "#232175"))
                                                 .fontWeight(.bold)
@@ -216,7 +219,7 @@ struct VerificationRegisterDataView: View {
                                         self.shouldPresentCamera = true
                                     }) {
                                         HStack {
-                                            Text(self.registerData.fotoNPWP != Image("") ? "Your NPWP photo" : "Add NPWP")
+                                            Text(self.registerData.fotoNPWP != Image("") ? NSLocalizedString("Your NPWP photo".localized(language), comment: "")  : NSLocalizedString("Add NPWP".localized(language), comment: ""))
                                                 .font(.subheadline)
                                                 .foregroundColor(Color(hex: "#232175"))
                                                 .fontWeight(.bold)
@@ -257,7 +260,7 @@ struct VerificationRegisterDataView: View {
                             Group {
                                 Group {
                                     
-                                    Text(NSLocalizedString("Jenis Tabungan", comment: ""))
+                                    Text(NSLocalizedString("Types of Savings".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -266,7 +269,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.top, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Jenis Tabungan", comment: ""), text: $registerData.jenisTabungan)
+                                        TextField(NSLocalizedString("Types of Savings".localized(language), comment: ""), text: $registerData.jenisTabungan)
                                             .disabled(true)
                                         
                                         Divider()
@@ -283,7 +286,7 @@ struct VerificationRegisterDataView: View {
                                     .cornerRadius(15)
                                     .padding(.horizontal, 20)
                                     
-                                    Text(NSLocalizedString("Tujuan Pembukaan Rekening", comment: ""))
+                                    Text(NSLocalizedString("Account Opening Purpose".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -291,7 +294,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.horizontal, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Tujuan Pembukaan Rekening", comment: ""), text: $registerData.tujuanPembukaan)
+                                        TextField(NSLocalizedString("Account Opening Purpose".localized(language), comment: ""), text: $registerData.tujuanPembukaan)
                                             .disabled(true)
                                         
                                         Divider()
@@ -308,7 +311,7 @@ struct VerificationRegisterDataView: View {
                                     .cornerRadius(15)
                                     .padding(.horizontal, 20)
                                     
-                                    Text(NSLocalizedString("Sumber Dana", comment: ""))
+                                    Text(NSLocalizedString("Source of funds".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -316,7 +319,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.horizontal, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Sumber Dana", comment: ""), text: $registerData.sumberDana)
+                                        TextField(NSLocalizedString("Source of funds".localized(language), comment: ""), text: $registerData.sumberDana)
                                             .disabled(true)
                                         
                                         Divider()
@@ -334,7 +337,7 @@ struct VerificationRegisterDataView: View {
                                     .padding(.horizontal, 20)
                                     
                                     
-                                    Text(NSLocalizedString("Perkiraan Penarikan", comment: ""))
+                                    Text(NSLocalizedString("Estimated Withdrawal".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -342,7 +345,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.horizontal, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Perkiraan Penarikan", comment: ""), text: $registerData.perkiraanPenarikan)
+                                        TextField(NSLocalizedString("Estimated Withdrawal".localized(language), comment: ""), text: $registerData.perkiraanPenarikan)
                                             .disabled(true)
                                         
                                         Divider()
@@ -361,7 +364,7 @@ struct VerificationRegisterDataView: View {
                                 }
                                 
                                 Group {
-                                    Text(NSLocalizedString("Besar Perkiraan Penarikan", comment: ""))
+                                    Text(NSLocalizedString("Estimated Withdrawal Size".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -369,7 +372,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.horizontal, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Besar Perkiraan Penarikan", comment: ""), text: $registerData.besarPerkiraanPenarikan)
+                                        TextField(NSLocalizedString("Estimated Withdrawal Size".localized(language), comment: ""), text: $registerData.besarPerkiraanPenarikan)
                                             .disabled(true)
                                         
                                         Divider()
@@ -386,7 +389,7 @@ struct VerificationRegisterDataView: View {
                                     .cornerRadius(15)
                                     .padding(.horizontal, 20)
                                     
-                                    Text(NSLocalizedString("Perkiraan Setoran", comment: ""))
+                                    Text(NSLocalizedString("Estimated Deposit".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -394,7 +397,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.horizontal, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Perkiraan Setoran", comment: ""), text: $registerData.perkiraanSetoran)
+                                        TextField(NSLocalizedString("Estimated Deposit".localized(language), comment: ""), text: $registerData.perkiraanSetoran)
                                             .disabled(true)
                                         
                                         Divider()
@@ -411,7 +414,7 @@ struct VerificationRegisterDataView: View {
                                     .cornerRadius(15)
                                     .padding(.horizontal, 20)
                                     
-                                    Text(NSLocalizedString("Besar Perkiraan Setoran", comment: ""))
+                                    Text(NSLocalizedString("Estimated Deposit Size".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -419,7 +422,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.horizontal, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Besar Perkiraan Setoran", comment: ""), text: $registerData.besarPerkiraanPenarikan)
+                                        TextField(NSLocalizedString("Estimated Deposit Size".localized(language), comment: ""), text: $registerData.besarPerkiraanPenarikan)
                                             .disabled(true)
                                         
                                         Divider()
@@ -449,7 +452,7 @@ struct VerificationRegisterDataView: View {
                             Group {
                                 Group {
                                     
-                                    Text(NSLocalizedString("Pekerjaan", comment: ""))
+                                    Text(NSLocalizedString("Profession".localized(language), comment: ""))
                                         .font(.caption)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -458,7 +461,7 @@ struct VerificationRegisterDataView: View {
                                         .padding(.top, 20)
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Pekerjaan", comment: ""), text: $registerData.pekerjaan)
+                                        TextField(NSLocalizedString("Profession".localized(language), comment: ""), text: $registerData.pekerjaan)
                                             .disabled(true)
                                         
                                         Divider()
@@ -528,9 +531,9 @@ struct VerificationRegisterDataView: View {
                         saveUserToDb()
                         
                     }, label: {
-                        Text(NSLocalizedString("Submit Data", comment: ""))
+                        Text(NSLocalizedString("Submit Data".localized(language), comment: ""))
                             .foregroundColor(.white)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                            .fontWeight(.bold)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     })
@@ -577,17 +580,17 @@ struct VerificationRegisterDataView: View {
         }))
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text("Message"),
+                title: Text(NSLocalizedString("MESSAGE".localized(language), comment: "")),
                 message: Text("\(self.errorMessage)"),
                 dismissButton: .default(Text("Oke")))
         }
         .alert(isPresented: $isShowingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
         }
     }
     
@@ -636,7 +639,7 @@ struct VerificationRegisterDataView: View {
             if [6 ,9, 10, 11, 12].contains(registerData.pekerjaanId) {
                 
                 if registerData.pekerjaanId == 6 {
-                    Text(NSLocalizedString("Jabatan", comment: ""))
+                    Text(NSLocalizedString("Position".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(.gray)
@@ -644,7 +647,7 @@ struct VerificationRegisterDataView: View {
                         .padding(.horizontal, 20)
                     
                     HStack {
-                        TextField(NSLocalizedString("Jabatan", comment: ""), text: $registerData.jabatanProfesi)
+                        TextField(NSLocalizedString("Position".localized(language), comment: ""), text: $registerData.jabatanProfesi)
                             .disabled(true)
                         
                         Divider()
@@ -669,7 +672,7 @@ struct VerificationRegisterDataView: View {
                     
                     // MARK : Pekerjaan Wiraswasta
                     if registerData.pekerjaanId == 9 {
-                        Text(NSLocalizedString("Industri", comment: ""))
+                        Text(NSLocalizedString("Industry".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.semibold)
                             .foregroundColor(.gray)
@@ -677,7 +680,7 @@ struct VerificationRegisterDataView: View {
                             .padding(.horizontal, 20)
                         
                         HStack {
-                            TextField(NSLocalizedString("Industri", comment: ""), text: $registerData.industriTempatBekerja)
+                            TextField(NSLocalizedString("Industry".localized(language), comment: ""), text: $registerData.industriTempatBekerja)
                                 .disabled(true)
                             
                             Divider()
@@ -695,7 +698,7 @@ struct VerificationRegisterDataView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                    Text(NSLocalizedString("Penghasilan Kotor", comment: ""))
+                    Text(NSLocalizedString("Gross Income".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(.gray)
@@ -703,7 +706,7 @@ struct VerificationRegisterDataView: View {
                         .padding(.horizontal, 20)
                     
                     HStack {
-                        TextField(NSLocalizedString("Penghasilan Kotor", comment: ""), text: $registerData.penghasilanKotor)
+                        TextField(NSLocalizedString("Gross Income".localized(language), comment: ""), text: $registerData.penghasilanKotor)
                             .disabled(true)
                         
                         Divider()
@@ -723,7 +726,7 @@ struct VerificationRegisterDataView: View {
                 
             }
             
-            Text(NSLocalizedString("Sumber Pendapatan Lainnya", comment: ""))
+            Text(NSLocalizedString("Other Sources of Income".localized(language), comment: ""))
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundColor(.gray)
@@ -731,8 +734,8 @@ struct VerificationRegisterDataView: View {
                 .padding(.horizontal, 20)
             
             HStack {
-                TextField(NSLocalizedString("Sumber Pendapatan Lainnya", comment: ""), text: $registerData.sumberPendapatanLainnya)
-                    .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                TextField(NSLocalizedString("Other Sources of Income".localized(language), comment: ""), text: $registerData.sumberPendapatanLainnya)
+                    .disabled(true)
                 
                 Divider()
                     .frame(height: 30)
@@ -754,7 +757,7 @@ struct VerificationRegisterDataView: View {
     var informasiPenyandangDanaFields: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(NSLocalizedString("Informasi Penyandang Dana", comment: ""))
+                Text(NSLocalizedString("Funder Information".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
@@ -773,15 +776,15 @@ struct VerificationRegisterDataView: View {
             .cornerRadius(15)
             
             Group {
-                Text(NSLocalizedString("Nama Penyandang Dana", comment: ""))
+                Text(NSLocalizedString("Name of Funder".localized(language), comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Nama Penyandang Dana", comment: ""), text: $registerData.namaPenyandangDana)
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    TextField(NSLocalizedString("Name of Funder".localized(language), comment: ""), text: $registerData.namaPenyandangDana)
+                        .disabled(true)
                 }
                 .frame(height: 20)
                 .font(.subheadline)
@@ -792,15 +795,15 @@ struct VerificationRegisterDataView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Hubungan Dengan Anda", comment: ""))
+                Text(NSLocalizedString("Relationship With You".localized(language), comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Hubungan Dengan Anda", comment: ""), text: $registerData.hubunganPenyandangDana)
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    TextField(NSLocalizedString("Relationship With You".localized(language), comment: ""), text: $registerData.hubunganPenyandangDana)
+                        .disabled(true)
                 }
                 .frame(height: 20)
                 .font(.subheadline)
@@ -811,14 +814,14 @@ struct VerificationRegisterDataView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Profesi Penyandang Dana", comment: ""))
+                Text(NSLocalizedString("Profession Funders".localized(language), comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Profesi Penyandang Dana", comment: ""), text: $registerData.profesiPenyandangDana)
+                    TextField(NSLocalizedString("Profession Funders".localized(language), comment: ""), text: $registerData.profesiPenyandangDana)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -836,7 +839,7 @@ struct VerificationRegisterDataView: View {
     // MARK:- CREATE POPUP MESSAGE
     func popUpNpwp() -> some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text(NSLocalizedString("Nomor NPWP", comment: ""))
+            Text(NSLocalizedString("NPWP Number".localized(language), comment: ""))
                 .multilineTextAlignment(.leading)
                 .font(.custom("Montserrat-SemiBold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -845,7 +848,7 @@ struct VerificationRegisterDataView: View {
             //                self.registerData.npwp = String(str.prefix(15))
             //            }
             
-            TextField("No. NPWP", text: $npwp)
+            TextField(NSLocalizedString("NPWP Number".localized(language), comment: ""), text: $npwp)
                 .frame(height: 10)
                 .font(.custom("Montserrat-SemiBold", size: 12))
                 .foregroundColor(.black)
@@ -862,7 +865,7 @@ struct VerificationRegisterDataView: View {
                 print("REGISTER DATA NPWP : \(self.registerData.npwp)")
                 self.showingNpwpModal.toggle()
             }) {
-                Text("Save")
+                Text(NSLocalizedString("Save".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)

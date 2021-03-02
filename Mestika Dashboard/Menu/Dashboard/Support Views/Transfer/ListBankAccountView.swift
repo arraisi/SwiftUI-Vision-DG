@@ -10,6 +10,10 @@ import PopupView
 
 struct ListBankAccountView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     @State private var selectedAccount = 0
     @State private var showDialog = false
     
@@ -23,13 +27,13 @@ struct ListBankAccountView: View {
         ZStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Pilih Rekening")
+                    Text(NSLocalizedString("Select Account".localized(language), comment: ""))
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.bold)
                     
                     HStack {
-                        Text("Saldo Aktif :")
+                        Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         Text("Rp. 0")
@@ -59,7 +63,7 @@ struct ListBankAccountView: View {
         VStack {
             
             HStack {
-                Text("Pilih Akun")
+                Text(NSLocalizedString("Select Account".localized(language), comment: ""))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 
@@ -76,7 +80,7 @@ struct ListBankAccountView: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text("Saldo Aktif :")
+                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text("Rp. \(data.saldo)")

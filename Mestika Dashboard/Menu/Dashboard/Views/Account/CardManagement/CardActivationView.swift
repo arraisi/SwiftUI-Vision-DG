@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CardActivationView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var kartKuVM = KartuKuViewModel()
     
@@ -72,7 +75,7 @@ struct CardActivationView: View {
                                     self.nextView = true
                                 }
                             }, label: {
-                                Text("AKTIVASI KARTU ATM")
+                                Text(NSLocalizedString("ATM CARD ACTIVATION".localized(language), comment: ""))
                                     .foregroundColor(.white)
                                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                     .font(.system(size: 13))
@@ -93,7 +96,7 @@ struct CardActivationView: View {
                 }
             }
         })
-        .navigationBarTitle("Aktivasi Kartu", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Card Activation".localized(language), comment: ""), displayMode: .inline)
         .onAppear {
             self.noAtmCtrl = card.cardNo
             self.activateData.cardNo = card.cardNo
@@ -133,7 +136,7 @@ struct CardActivationView: View {
             // Field No ATM
             VStack {
                 HStack {
-                    Text("No. Kartu ATM")
+                    Text(NSLocalizedString("No. Kartu ATM".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -143,7 +146,7 @@ struct CardActivationView: View {
                 .padding(.top, 15)
                 
                 HStack {
-                    TextField("Rekening", text: self.$noAtmCtrl, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Account".localized(language), comment: ""), text: self.$noAtmCtrl, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .keyboardType(.numberPad)
@@ -163,7 +166,7 @@ struct CardActivationView: View {
             // Field CVV Code
             VStack {
                 HStack {
-                    Text("Masukkan Kode CVV")
+                    Text(NSLocalizedString("Enter CVV Code".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -172,7 +175,7 @@ struct CardActivationView: View {
                 .padding(.horizontal)
                 
                 VStack {
-                    SecureField("Kode CVV", text: self.$noCvvCtrl)
+                    SecureField(NSLocalizedString("CVV Code".localized(language), comment: ""), text: self.$noCvvCtrl)
                         .keyboardType(.numberPad)
                         .font(.subheadline)
                         .foregroundColor(.black)
@@ -186,7 +189,7 @@ struct CardActivationView: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    Text("Masukkan 3 digit angka dibelakang kartu ATM Anda")
+                    Text(NSLocalizedString("Enter the 3 digit number on the back of your ATM card".localized(language), comment: ""))
                         .font(.system(size: 12))
                         .padding(.bottom, 10)
                 }
@@ -210,7 +213,7 @@ struct CardActivationView: View {
             // Field No ATM
             VStack {
                 HStack {
-                    Text("Pembuatan PIN ATM baru")
+                    Text(NSLocalizedString("Making a new ATM PIN".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -220,7 +223,7 @@ struct CardActivationView: View {
                 .padding(.top, 15)
                 
                 HStack {
-                    SecureField("PIN ATM baru", text: self.$pinCtrl)
+                    SecureField(NSLocalizedString("New ATM PIN".localized(language), comment: ""), text: self.$pinCtrl)
                         .keyboardType(.numberPad)
                         .font(.subheadline)
                         .foregroundColor(.black)
@@ -238,7 +241,7 @@ struct CardActivationView: View {
             // Field CVV Code
             VStack {
                 HStack {
-                    Text("Masukkan kembali PIN ATM")
+                    Text(NSLocalizedString("Re-enter the ATM PIN".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -247,7 +250,7 @@ struct CardActivationView: View {
                 .padding(.horizontal)
                 
                 HStack {
-                    SecureField("Konfirmasi PIN ATM baru", text: self.$cPinCtrl)
+                    SecureField(NSLocalizedString("Confirm new ATM PIN".localized(language), comment: ""), text: self.$cPinCtrl)
                         .keyboardType(.numberPad)
                         .font(.subheadline)
                         .foregroundColor(.black)
@@ -264,7 +267,7 @@ struct CardActivationView: View {
                     Text("")
                 } else {
                     HStack {
-                        Text("PIN ATM yang Anda masukkan tidak sesuai.")
+                        Text(NSLocalizedString("The ATM PIN you entered does not match.".localized(language), comment: ""))
                             .font(.system(size: 12))
                             .foregroundColor(.red)
                             .fontWeight(.bold)
@@ -292,20 +295,20 @@ struct CardActivationView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("KODE CVV SALAH")
+            Text(NSLocalizedString("WRONG CVV CODE".localized(language), comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(.red)
                 .padding([.bottom, .top], 20)
             
-            Text("3 digit nomor terakhir dibelakang kartu ATM Anda tidak sesuai dengan nomor kartu yang terdaftar.")
+            Text(NSLocalizedString("The last 3 digit number on the back of your ATM card does not match the registered card number.".localized(language), comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
             
             Button(action: {}) {
-                Text("MASUKKAN KEMBALI KODE CVV")
+                Text(NSLocalizedString("RETURN THE CVV CODE".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -331,7 +334,7 @@ struct CardActivationView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("AKTIVASI KARTU ATM ANDA TELAH BERHASIL")
+            Text(NSLocalizedString("YOUR ATM CARD ACTIVATION HAS WORKED".localized(language), comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(.red)
@@ -340,7 +343,7 @@ struct CardActivationView: View {
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
-                Text("KEMBALI KE HALAMAN UTAMA")
+                Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -366,13 +369,13 @@ struct CardActivationView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("KODE CVV SALAH 3 KALI")
+            Text(NSLocalizedString("WRONG 3 TIMES CVV CODE".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(.red)
                 .padding([.bottom, .top], 20)
             
-            Text("Kode CVV yang Anda masukkan salah. Kesempatan Anda telah habis. Silahkan kembali mencoba Besok.")
+            Text(NSLocalizedString("The CVV code you entered is incorrect. Your chances have expired. Please try again Tomorrow.".localized(language), comment: ""))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -381,7 +384,7 @@ struct CardActivationView: View {
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
             }) {
-                Text("KEMBALI KE HALAMAN UTAMA")
+                Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

@@ -10,6 +10,9 @@ import LocalAuthentication
 
 struct FormChangeContactView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode
     
     @Binding var txtPhone: String
@@ -23,21 +26,21 @@ struct FormChangeContactView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack {
-                    Text("Contact Data")
+                    Text(NSLocalizedString("Contact Data".localized(language), comment: ""))
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
                     
                     VStack(alignment: .leading) {
                         
                         VStack(alignment: .leading) {
-                            Text("Phone")
+                            Text(NSLocalizedString("Phone Number".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(.black)
                             
                             HStack{
                                 Text("+62")
                                 Divider()
-                                TextField(NSLocalizedString("Input Number Phone", comment: ""), text: $txtPhone, onEditingChanged: { changed in
+                                TextField(NSLocalizedString(NSLocalizedString("Input Number Phone".localized(language), comment: ""), comment: ""), text: $txtPhone, onEditingChanged: { changed in
                                     
                                 })
                                 
@@ -73,7 +76,7 @@ struct FormChangeContactView: View {
                             self.presentationMode.wrappedValue.dismiss()
                             //                    self.showModal = false
                         }) {
-                            Text("Back")
+                            Text(NSLocalizedString("Back".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 16))
                                 .frame(maxWidth: .infinity, maxHeight: 50)

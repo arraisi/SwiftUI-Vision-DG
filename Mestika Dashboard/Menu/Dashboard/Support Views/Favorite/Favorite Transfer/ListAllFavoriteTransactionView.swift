@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListAllFavoriteTransactionView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     //    var action: ((FavoritModelElement) -> Void)?
     @State private var activeDetails: Bool = false
     
@@ -30,7 +34,7 @@ struct ListAllFavoriteTransactionView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text("Favorit Transfer")
+                    Text(NSLocalizedString("Transfer Favorites".localized(language), comment: ""))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -145,8 +149,8 @@ struct ListAllFavoriteTransactionView: View {
         }
         .onAppear(perform: getList)
         .actionSheet(isPresented: self.$showingDetail) {
-            ActionSheet(title: Text("Pilihan"), message: Text("Pilih menu dibawah ini"), buttons: [.default(Text("Hapus"), action: {
-                print("Hapus")
+            ActionSheet(title: Text(NSLocalizedString("Selection".localized(language), comment: "")), message: Text(NSLocalizedString("Select the menu below".localized(language), comment: "")), buttons: [.default(Text(NSLocalizedString("Delete".localized(language), comment: "")), action: {
+                print(NSLocalizedString("Delete".localized(language), comment: ""))
                 
 //                self.favoritVM.remove(data: data) { result in
 //                    print("result remove favorite \(result)")

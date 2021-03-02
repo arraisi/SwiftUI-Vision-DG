@@ -9,6 +9,10 @@ import SwiftUI
 
 struct GridMenuManyUsedView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     let gridItems = [
         GridItem(.fixed(80), spacing: 20),
         GridItem(.fixed(80), spacing: 20),
@@ -19,7 +23,7 @@ struct GridMenuManyUsedView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Banyak digunakan")
+                Text(NSLocalizedString("Many used".localized(language), comment: ""))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 

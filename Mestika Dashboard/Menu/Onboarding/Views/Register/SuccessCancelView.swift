@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SuccessCancelView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var appState: AppState
     
     var body: some View {
@@ -25,11 +29,11 @@ struct SuccessCancelView: View {
                             .frame(height: 150)
                             .padding(.bottom, 20)
                         
-                        Text(NSLocalizedString("Berhasil", comment: ""))
+                        Text(NSLocalizedString("Succeed".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 16))
                         
-                        Text(NSLocalizedString("Permohonan Pembukaan Rekening Telah Dibatalkan", comment: ""))
+                        Text(NSLocalizedString("Application For Account Opening Has Been Canceled".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Normal", size: 12))
                     }
@@ -42,7 +46,7 @@ struct SuccessCancelView: View {
                     Button(action: {
                         self.appState.moveToWelcomeView = true
                     }, label: {
-                        Text(NSLocalizedString("Kembali ke Halaman Utama", comment: ""))
+                        Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Bold", size: 16))
                     })

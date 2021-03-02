@@ -10,6 +10,9 @@ import Indicators
 
 struct FormChangePinTransactionView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject private var authVM = AuthViewModel()
@@ -53,25 +56,25 @@ struct FormChangePinTransactionView: View {
                     
                     VStack {
                         
-                        Text("Ubah PIN Transaksi")
+                        Text(NSLocalizedString("Change PIN Transaction".localized(language), comment: ""))
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
                         VStack(alignment: .leading) {
                             
-                            Text("Silahkan masukkan PIN lama dan baru Anda")
+                            Text(NSLocalizedString("Silahkan Kebebasan PIN lama dan baru Anda".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 14))
                                 .foregroundColor(Color(hex: "#002251"))
                                 .padding(.top, 5)
                             
-                            Text("PIN Lama")
+                            Text(NSLocalizedString("Old PIN".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .padding(.top, 5)
                             
                             HStack {
                                 
-                                SecureField("Input PIN lama Anda", text: self.$oldPinCtrl)
+                                SecureField(NSLocalizedString("Enter your old PIN".localized(language), comment: ""), text: self.$oldPinCtrl)
                                     .keyboardType(.numberPad)
                                     .onReceive(oldPinCtrl.publisher.collect()) {
                                         self.oldPinCtrl = String($0.prefix(6))
@@ -88,14 +91,14 @@ struct FormChangePinTransactionView: View {
                         
                         VStack(alignment: .leading) {
                             
-                            Text("PIN Baru")
+                            Text(NSLocalizedString("New PIN".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                             
                             VStack {
                                 HStack {
                                     
-                                    SecureField("Input PIN baru Anda", text: self.$pinCtrl)
+                                    SecureField(NSLocalizedString("Enter your new PIN".localized(language), comment: ""), text: self.$pinCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinCtrl.publisher.collect()) {
                                             self.pinCtrl = String($0.prefix(6))
@@ -108,7 +111,7 @@ struct FormChangePinTransactionView: View {
                                 
                                 HStack {
                                     
-                                    SecureField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
+                                    SecureField("Re-enter your new PIN".localized(language), text: self.$pinConfirmCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinConfirmCtrl.publisher.collect()) {
                                             self.pinConfirmCtrl = String($0.prefix(6))
@@ -148,7 +151,7 @@ struct FormChangePinTransactionView: View {
                                 }
                             }
                         }, label: {
-                            Text("Simpan PIN Baru")
+                            Text(NSLocalizedString("Save New PIN".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -218,7 +221,7 @@ struct FormChangePinTransactionView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("PIN tidak sama, silahkan ketik ulang")
+            Text(NSLocalizedString("PIN is not the same, please retype it".localized(language), comment: ""))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
@@ -227,7 +230,7 @@ struct FormChangePinTransactionView: View {
             Button(action: {
                 self.showModalError = false
             }) {
-                Text("Kembali")
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(.bold)
@@ -252,7 +255,7 @@ struct FormChangePinTransactionView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("PIN APLIKASI YANG BARU TELAH BERHASIL DISIMPAN")
+            Text(NSLocalizedString("NEW APPLICATION PIN HAS BEEN SUCCESSFULLY SAVED".localized(language), comment: ""))
                 .font(.custom("Montserrat-ExtraBold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
@@ -286,7 +289,7 @@ struct FormChangePinTransactionView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("PIN not Changed")
+            Text(NSLocalizedString("PIN not Changed".localized(language), comment: ""))
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
@@ -318,7 +321,7 @@ struct FormChangePinTransactionView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("PIN terdiri dari 6 karakter, tidak boleh berurutan dari 6 angka yang sama")
+            Text(NSLocalizedString("PIN consists of 6 characters, cannot be sequential from the same 6 digits".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)

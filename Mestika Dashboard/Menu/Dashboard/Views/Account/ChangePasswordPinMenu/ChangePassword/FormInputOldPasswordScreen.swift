@@ -9,17 +9,20 @@ import SwiftUI
 
 struct FormInputOldPasswordScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State private var oldPasswordCtrl = ""
     @State private var showPassword: Bool = false
     
     var body: some View {
         VStack {
-            Text("PASSWORD LAMA")
+            Text(NSLocalizedString("OLD PASSWORD".localized(language), comment: ""))
                 .font(.title2)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#2334D0"))
             
-            Text("Silahkan masukkan password akun lama Anda")
+            Text(NSLocalizedString("Please enter your old account password".localized(language), comment: ""))
                 .font(.subheadline)
                 .fontWeight(.light)
                 .foregroundColor(Color(hex: "#002251"))
@@ -28,15 +31,15 @@ struct FormInputOldPasswordScreen: View {
             VStack {
                 HStack {
                     if (showPassword) {
-                        TextField("Password account Anda", text: self.$oldPasswordCtrl)
+                        TextField("Your account password".localized(language), text: self.$oldPasswordCtrl)
                     } else {
-                        SecureField("Password account Anda", text: self.$oldPasswordCtrl)
+                        SecureField("Your account password".localized(language), text: self.$oldPasswordCtrl)
                     }
                     
                     Button(action: {
                         self.showPassword.toggle()
                     }, label: {
-                        Text("show")
+                        Text(NSLocalizedString("show".localized(language), comment: ""))
                             .foregroundColor(Color(hex: "#3756DF"))
                             .fontWeight(.light)
                     })
@@ -53,9 +56,9 @@ struct FormInputOldPasswordScreen: View {
 
         }
         .padding(.top, 60)
-        .navigationBarTitle("Ubah Password", displayMode: .inline)
+        .navigationBarTitle("Change Password".localized(language), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
-            Text("Cancel")
+            Text(NSLocalizedString("Cancel".localized(language), comment: ""))
         }))
     }
 }

@@ -10,6 +10,9 @@ import SystemConfiguration
 
 struct FormCompletionKartuATMView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var appState: AppState
     
     /* Environtment Object */
@@ -45,16 +48,16 @@ struct FormCompletionKartuATMView: View {
     //Dummy data
     
     @State var addressOptions: [MasterModel] = [
-        MasterModel(id: 1, name: NSLocalizedString("Alamat Sesuai KTP", comment: "")),
-        MasterModel(id: 2, name: NSLocalizedString("Alamat Surat Menyurat", comment: "")),
-        MasterModel(id: 3, name: NSLocalizedString("Alamat Perusahaan", comment: "")),
-        MasterModel(id: 4, name: NSLocalizedString("Alamat Lainnya", comment: "")),
+        MasterModel(id: 1, name: NSLocalizedString("Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language), comment: "")),
+        MasterModel(id: 2, name: NSLocalizedString("Mailing address".localized(LocalizationService.shared.language), comment: "")),
+        MasterModel(id: 3, name: NSLocalizedString("Company's address".localized(LocalizationService.shared.language), comment: "")),
+        MasterModel(id: 4, name: NSLocalizedString("Other Address".localized(LocalizationService.shared.language), comment: "")),
     ]
     
     @State var addressOptionsNonPekerja: [MasterModel] = [
-        MasterModel(id: 1, name: NSLocalizedString("Alamat Sesuai KTP", comment: "")),
-        MasterModel(id: 2, name: NSLocalizedString("Alamat Surat Menyurat", comment: "")),
-        MasterModel(id: 4, name: NSLocalizedString("Alamat Lainnya", comment: "")),
+        MasterModel(id: 1, name: NSLocalizedString("Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language), comment: "")),
+        MasterModel(id: 2, name: NSLocalizedString("Mailing address".localized(LocalizationService.shared.language), comment: "")),
+        MasterModel(id: 4, name: NSLocalizedString("Other Address".localized(LocalizationService.shared.language), comment: "")),
     ]
     
     let cities:[Address] = [
@@ -78,7 +81,7 @@ struct FormCompletionKartuATMView: View {
                 
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        Text(NSLocalizedString("LENGKAPI DATA", comment: ""))
+                        Text(NSLocalizedString("COMPLETE DATA".localized(language), comment: ""))
                             .multilineTextAlignment(.center)
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(.white)
@@ -96,7 +99,7 @@ struct FormCompletionKartuATMView: View {
 //                            }
                             self.goToSuccessPage = true
                         }, label: {
-                            Text(NSLocalizedString("Submit Data", comment: ""))
+                            Text(NSLocalizedString("Submit Data".localized(language), comment: ""))
                                 .foregroundColor(Color(hex: !isValid() ? "#FFFFFF" : "#2334D0"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -173,13 +176,13 @@ struct FormCompletionKartuATMView: View {
     var nameCard: some View {
         ZStack {
             VStack {
-                Text(NSLocalizedString("Nama Pada Kartu ATM", comment: ""))
+                Text(NSLocalizedString("Name on ATM Card".localized(language), comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color("DarkStaleBlue"))
                     .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
                 
-                Text(NSLocalizedString("Nama ini akan dicetak pada kartu ATM baru Anda", comment: ""))
+                Text(NSLocalizedString("This name will be printed on your new ATM card".localized(language), comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat", size: 12))
                     .foregroundColor(Color("DarkStaleBlue"))
@@ -195,7 +198,7 @@ struct FormCompletionKartuATMView: View {
                                 .foregroundColor(.black)
                                 .frame(height: 36)
                         } else {
-                            Text(NSLocalizedString("Masukkan Nama", comment: ""))
+                            Text(NSLocalizedString("Enter Name".localized(language), comment: ""))
                                 .font(Font.system(size: 14))
                                 .foregroundColor(Color.gray.opacity(0.5))
                                 .frame(height: 36)
@@ -218,7 +221,7 @@ struct FormCompletionKartuATMView: View {
     
     var addressCard: some View {
         VStack {
-            Text(NSLocalizedString("Alamat Pengiriman", comment: ""))
+            Text(NSLocalizedString("Shipping address".localized(language), comment: ""))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color("DarkStaleBlue"))
@@ -270,7 +273,7 @@ struct FormCompletionKartuATMView: View {
                 
                 HStack {
                     
-                    TextField(NSLocalizedString("Alamat", comment: ""), text: $atmData.atmAddressInput) { changed in
+                    TextField(NSLocalizedString("Address".localized(language), comment: ""), text: $atmData.atmAddressInput) { changed in
                     } onCommit: {
                     }
                     .font(Font.system(size: 14))
@@ -313,32 +316,32 @@ struct FormCompletionKartuATMView: View {
                 }
             }
             
-            LabelTextField(value: $atmData.atmAddressKelurahanInput, label: "", placeHolder: NSLocalizedString("Kelurahan", comment: ""), disabled:addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddressKelurahanInput, label: "", placeHolder: NSLocalizedString("Village".localized(language), comment: ""), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddressKecamatanInput, label: "", placeHolder: NSLocalizedString("Kecamatan", comment: ""), disabled:addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddressKecamatanInput, label: "", placeHolder: NSLocalizedString("Sub-district".localized(language), comment: ""), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddressKotaInput, label: "", placeHolder: NSLocalizedString("Kota", comment: ""), disabled:addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddressKotaInput, label: "", placeHolder: NSLocalizedString("City".localized(language), comment: ""), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $atmData.atmAddressPropinsiInput, label: "", placeHolder: NSLocalizedString("Provinsi", comment: ""), disabled:addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddressPropinsiInput, label: "", placeHolder: NSLocalizedString("Province".localized(language), comment: ""), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
             
             HStack {
-                TextField("Kode Pos", text: $kodePos) {change in
+                TextField(NSLocalizedString("Postal code".localized(language), comment: ""), text: $kodePos) {change in
                 } onCommit: {
                     self.atmData.atmAddressPostalCodeInput = self.kodePos
                 }
@@ -371,7 +374,7 @@ struct FormCompletionKartuATMView: View {
                 
                 HStack {
                     
-                    TextField("Alamat", text: $registerData.alamatPerusahaan) { changed in
+                    TextField(NSLocalizedString("Address".localized(language), comment: ""), text: $registerData.alamatPerusahaan) { changed in
                     } onCommit: {
                     }
                     .font(Font.system(size: 14))
@@ -390,13 +393,13 @@ struct FormCompletionKartuATMView: View {
                 
             }
             
-            LabelTextField(value: $registerData.kelurahan, label: "", placeHolder: "Kelurahan", disabled: true) { (change) in
+            LabelTextField(value: $registerData.kelurahan, label: "", placeHolder: NSLocalizedString("Village".localized(language), comment: ""), disabled: true) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $registerData.kecamatan, label: "", placeHolder: "Kecamatan", disabled: true
+            LabelTextField(value: $registerData.kecamatan, label: "", placeHolder: NSLocalizedString("Sub-district".localized(language), comment: ""), disabled: true
             ) { (change) in
                 
             } onCommit: {
@@ -404,7 +407,7 @@ struct FormCompletionKartuATMView: View {
             }
             
             HStack {
-                TextField("Kode Pos", text: $registerData.kodePos) {change in
+                TextField(NSLocalizedString("Postal code".localized(language), comment: ""), text: $registerData.kodePos) {change in
                 } onCommit: {
                     self.registerData.kodePos = self.kodePos
                 }
@@ -427,13 +430,13 @@ struct FormCompletionKartuATMView: View {
     var referalCodeCard: some View {
         ZStack {
             VStack {
-                Text(NSLocalizedString("Masukkan Kode Referal", comment: ""))
+                Text(NSLocalizedString("Enter Referral Code".localized(language), comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color("DarkStaleBlue"))
                     .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
                 
-                Text(NSLocalizedString("Dari mana Anda tahu informasi Digital Banking Bank mestika", comment: ""))
+                Text(NSLocalizedString("How do you know the information on Digital Banking Bank mestika".localized(language), comment: ""))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat", size: 12))
                     .foregroundColor(Color("DarkStaleBlue"))
@@ -449,7 +452,7 @@ struct FormCompletionKartuATMView: View {
                     
                     HStack {
                         
-                        TextField(NSLocalizedString("Masukkan kode referal", comment: ""), text: $atmData.atmAddresspostalReferral) { changed in
+                        TextField(NSLocalizedString("Enter the referral code".localized(language), comment: ""), text: $atmData.atmAddresspostalReferral) { changed in
                             
                         } onCommit: {
                         }
@@ -475,7 +478,7 @@ struct FormCompletionKartuATMView: View {
     func createBottomSuggestionNameFloater() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Nama Kartu", comment: ""))
+                Text(NSLocalizedString("Name Card".localized(language), comment: ""))
                     .fontWeight(.bold)
                     .font(.system(size: 19))
                     .foregroundColor(Color(hex: "#232175"))
@@ -483,7 +486,7 @@ struct FormCompletionKartuATMView: View {
             }
             
             HStack {
-                TextField(NSLocalizedString("Alamat Perusahaan", comment: ""), text: $location)
+                TextField(NSLocalizedString("Company's address".localized(language), comment: ""), text: $location)
                     .font(Font.system(size: 14))
                     .frame(height: 0)
                     .disabled(true)
@@ -524,8 +527,8 @@ struct FormCompletionKartuATMView: View {
     func createBottomAddressFloater() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Alamat", comment: ""))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                Text(NSLocalizedString("Address".localized(language), comment: ""))
+                    .fontWeight(.bold)
                     .font(.system(size: 19))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -533,7 +536,7 @@ struct FormCompletionKartuATMView: View {
             
             HStack {
                 
-                TextField(NSLocalizedString("Alamat Perusahaan", comment: ""), text: $location)
+                TextField(NSLocalizedString("Company's address".localized(language), comment: ""), text: $location)
                     .font(Font.system(size: 14))
                     .frame(height: 36)
                 
@@ -609,7 +612,7 @@ struct FormCompletionKartuATMView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text("Please check your internet connection")
+            Text(NSLocalizedString("Please check your internet connection".localized(language), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)

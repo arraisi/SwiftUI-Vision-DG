@@ -9,6 +9,9 @@ import SwiftUI
 
 struct LastFavoritePurchasePaymentScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Binding var dataFavorit: PurchasePaymentFavorite
     
     var body: some View {
@@ -68,7 +71,7 @@ struct LastFavoritePurchasePaymentScreen: View {
                 
                 VStack {
                     Button(action: {}, label: {
-                        Text("Lakukan Transfer")
+                        Text(NSLocalizedString("Make a Transfer".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))

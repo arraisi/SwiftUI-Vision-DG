@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CardPinVerificationView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var password = ""
@@ -30,13 +33,13 @@ struct CardPinVerificationView: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text("MASUKKAN PIN \n TRANSAKSI")
+                Text(NSLocalizedString("ENTER PIN \n TRANSACTION".localized(language), comment: ""))
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text("Masukkan PIN Transaksi anda")
+                Text(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#2334D0"))
@@ -69,7 +72,7 @@ struct CardPinVerificationView: View {
                 .padding(.horizontal, 30)
             }
         }
-        .navigationBarTitle("Verifikasi PIN Transaksi", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Transaction PIN Verification".localized(language), comment: ""), displayMode: .inline)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOffUs"))) { obj in
             print("SUCCESS PIN")
             self.activateData.pinTrx = password

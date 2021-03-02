@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct ChangePasswordOrPinSettingScreen: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
     var body: some View {
         VStack {
             VStack {
                 List {
                     NavigationLink(destination: FormInputOldPasswordScreen(), label: {
-                        Text("Ubah PIN Transaksi")
+                        Text(NSLocalizedString("Change Transaction PIN".localized(language), comment: ""))
                     })
                     
                     NavigationLink(destination: FormInputOldPasswordScreen(), label: {
-                        Text("Ubah Password")
+                        Text(NSLocalizedString("Change Password".localized(language), comment: ""))
                     })
                     
                     NavigationLink(destination: FormInputResetPinScreen(unLocked: false), label: {
-                        Text("Reset PIN Transaksi")
+                        Text(NSLocalizedString("Reset Transaction PIN".localized(language), comment: ""))
                     })
                 }
                 .padding([.top, .bottom], 20)
@@ -35,7 +38,7 @@ struct ChangePasswordOrPinSettingScreen: View {
             
             Spacer()
         }
-        .navigationBarTitle("Ubah Password / PIN", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Change Password / PIN".localized(language), comment: ""), displayMode: .inline)
     }
 }
 

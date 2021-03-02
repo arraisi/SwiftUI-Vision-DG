@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CardDamageView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var kartKuVM = KartuKuViewModel()
     var card: KartuKuDesignViewModel
@@ -33,11 +36,11 @@ struct CardDamageView: View {
                     
                     VStack(alignment: .leading, spacing: 25, content: {
                         
-                        Text("Laporan / Aduan Kerusakan")
+                        Text(NSLocalizedString("Damage Report / Complaint".localized(language), comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 15))
                         
                         VStack(alignment: .leading) {
-                            Text("Akan Diberikan Kartu Baru")
+                            Text(NSLocalizedString("A New Card Will Be Given".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Regular", size: 12))
                             
                             Button(action: {
@@ -51,7 +54,7 @@ struct CardDamageView: View {
                                         .frame(width: 18, height: 18)
                                     
                                     HStack {
-                                        Text("Biaya pengganti sebesar")
+                                        Text(NSLocalizedString("Replacement fee of".localized(language), comment: ""))
                                             .font(.custom("Montserrat-Regular", size: 10))
                                         Text("Rp. 20.000,-")
                                             .font(.custom("Montserrat-Bold", size: 10))
@@ -76,7 +79,7 @@ struct CardDamageView: View {
                                 }
                             },
                             label: {
-                                Text("LAPORKAN KERUSAKAN")
+                                Text(NSLocalizedString("REPORT DAMAGE".localized(language), comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -97,11 +100,11 @@ struct CardDamageView: View {
                 
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
-            .navigationBarTitle("Kartu Rusak", displayMode: .inline)
+            .navigationBarTitle(NSLocalizedString("Broken Card".localized(language), comment: ""), displayMode: .inline)
             .onAppear {
                 self.brokenData.cardNo = card.cardNo
             }
-            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("BrokenKartuKu"))) { obj in
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(NSLocalizedString("Broken My Card".localized(language), comment: "")))) { obj in
                 print("ON RESUME")
                 
                 if let pinTrx = obj.userInfo, let info = pinTrx["pinTrx"] {
@@ -142,7 +145,7 @@ struct CardDamageView: View {
             
             HStack {
                 
-                Text("Laporan / Aduan Kerusakan Kartu ATM Anda Telah Berhasil Kami Simpan")
+                Text(NSLocalizedString("We have successfully kept your ATM card damage report / complaint".localized(language), comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -152,14 +155,14 @@ struct CardDamageView: View {
             
             
             HStack {
-                Text("Terimakasih telah mengirimkan informasi kerusakan kartu Anda kepada Kami. Silahkan tunggu beberapa saat, pihak Kami akan segera menghubungi Anda untuk menindak lanjutin laporan Anda.")
+                Text(NSLocalizedString("Thank you for sending information about the damage to your card to us. Please wait a few moments, we will immediately contact you to follow up on your report.".localized(language), comment: ""))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
             }
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text("KEMBALI")
+                Text(NSLocalizedString("BACK".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -187,7 +190,7 @@ struct CardDamageView: View {
                     .foregroundColor(Color(hex: "#F32424"))
                 
                 
-                Text("PIN ATM Salah")
+                Text(NSLocalizedString("Wrong ATM PIN".localized(language), comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#F32424"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -196,7 +199,7 @@ struct CardDamageView: View {
             .padding(.top, 25)
             
             HStack {
-                Text("PIN ATM yang Anda masukkan salah.")
+                Text(NSLocalizedString("The ATM PIN you entered is wrong.".localized(language), comment: ""))
                     .font(.custom("Montserrat-Light", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -207,7 +210,7 @@ struct CardDamageView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 },
                 label: {
-                    Text("Kembali ke Halaman Utama")
+                    Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)

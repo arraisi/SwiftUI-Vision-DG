@@ -9,6 +9,10 @@ import SwiftUI
 
 struct DetailKartuAktifView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     var card: KartuKuDesignViewModel
     
     var body: some View {
@@ -68,13 +72,13 @@ struct DetailKartuAktifView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text("Limit Transaksi")
+                            Text(NSLocalizedString("Transaction Limit".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                             
                             
-                            Text("Atur limit transaksi kartu")
+                            Text(NSLocalizedString("Set card transaction limit".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
@@ -91,13 +95,13 @@ struct DetailKartuAktifView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text("Pengaturan PIN ATM")
+                            Text(NSLocalizedString("ATM PIN Settings".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                             
                             
-                            Text("Ubah PIN ATM / Reset PIN ATM")
+                            Text(NSLocalizedString("Change ATM PIN / Reset ATM PIN".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
@@ -137,13 +141,13 @@ struct DetailKartuAktifView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text("Kartu Rusak")
+                            Text(NSLocalizedString("Broken Card".localized(language), comment: ""))
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                             
                             
-                            Text("Laporkan kerusakan kartu")
+                            Text(NSLocalizedString("Report card damage".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PaymentPLNScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -39,7 +42,7 @@ struct PaymentPLNScreen: View {
                         })
                         .padding(.horizontal)
                     
-                    Text("Pembayaran")
+                    Text(NSLocalizedString("Payment".localized(language), comment: ""))
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(Color(hex: "#232175"))
@@ -70,7 +73,7 @@ struct PaymentPLNScreen: View {
                     .fontWeight(.heavy)
                     .fixedSize(horizontal: false, vertical: true)
                 
-                Text("Lakukan pembayaran tagihan dan pembelian listrik dengan mudah, cepat dan terencana")
+                Text(NSLocalizedString("Make bill payments and purchase electricity easily, quickly and in a planned manner".localized(language), comment: ""))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: true)
@@ -96,7 +99,7 @@ struct PaymentPLNScreen: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.white)
                         
-                        Text("Tambah ID PLN Lain")
+                        Text(NSLocalizedString("Add Another PLN ID".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))

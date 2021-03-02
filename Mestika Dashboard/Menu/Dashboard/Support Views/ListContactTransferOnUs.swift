@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ListContactTransferOnUs: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     var _listContact = [
         ContactTransferOnUs(id: 1, username: "Prima Jatnika", namaBank: "BNI", norek: "89898912383"),
         ContactTransferOnUs(id: 2, username: "Ilmal Yakin", namaBank: "BNI", norek: "1212312333"),
@@ -25,7 +29,7 @@ struct ListContactTransferOnUs: View {
                         .fontWeight(.bold)
                         .padding(.bottom, 5)
                     
-                    Text("Transfer uang ke sesama nasabah Bank Mestika atau ke nasabah Bank Lain kini lebih mudah dan cepat.")
+                    Text(NSLocalizedString("Money transfers to fellow Bank Mestika customers or to other Bank customers are now easier and faster.".localized(language), comment: ""))
                         .font(.caption)
                         .fontWeight(.ultraLight)
                         .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
@@ -40,14 +44,14 @@ struct ListContactTransferOnUs: View {
             .padding(.vertical, 20)
             
             HStack {
-                Text("Transfer ke")
+                Text(NSLocalizedString("Transfer to".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
                 Spacer()
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Cari kontrak lain")
+                    Text(NSLocalizedString("Find another contract".localized(language), comment: ""))
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#2334D0"))
                 })

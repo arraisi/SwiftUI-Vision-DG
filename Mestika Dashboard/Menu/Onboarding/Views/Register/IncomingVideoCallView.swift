@@ -11,6 +11,9 @@ import AVFoundation
 
 struct IncomingVideoCallView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var appState: AppState
 
     var jitsiMeetView: JitsiMeetView?
@@ -38,7 +41,7 @@ struct IncomingVideoCallView: View {
                     .padding(.bottom, 50)
                 
                 VStack {
-                    Text(NSLocalizedString("Incoming Video Call", comment: ""))
+                    Text(NSLocalizedString("Incoming Video Call".localized(language), comment: ""))
                         .font(.title3)
                         .foregroundColor(.white)
                         .padding(.bottom, 5)
@@ -115,7 +118,7 @@ struct IncomingVideoCallView: View {
                 }) {
                     Image("ic_call")
                 }
-                Text("Accept")
+                Text(NSLocalizedString("Accept".localized(language), comment: ""))
                     .foregroundColor(.white)
             }
             
@@ -129,7 +132,7 @@ struct IncomingVideoCallView: View {
                 }) {
                     Image("ic_hangup")
                 }
-                Text("Hang Up")
+                Text(NSLocalizedString("Hang Up".localized(language), comment: ""))
                     .foregroundColor(.white)
             }
         }

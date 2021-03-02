@@ -9,19 +9,22 @@ import SwiftUI
 
 struct TransferRtgsScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     // Observable Object
     @State var transferData = TransferOffUsModel()
     
     // Variable Transfer Type
     var _listTransferType = ["RTGS", "SKN"]
-    @State private var transferType: String = "Pilih Tipe Transaksi"
+    @State private var transferType: String = NSLocalizedString("Select Transaction Type".localized(LocalizationService.shared.language), comment: "")
     
     // Variable List BANK
-    @State private var bankSelector: String = "Pilih Bank Tujuan"
+    @State private var bankSelector: String = NSLocalizedString("Choose Destination Bank".localized(LocalizationService.shared.language), comment: "")
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Pilih Rekening", productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: NSLocalizedString("Select Account".localized(LocalizationService.shared.language), comment: ""), productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     @State var listBankAccount: [BankAccount] = []
     
     // Variable Amount
@@ -31,17 +34,18 @@ struct TransferRtgsScreen: View {
     private var minLimit: Int = 0
     
     // Variable Transaction Frequecy
-    var _listFrequency = ["Sekali", "Berkali-kali"]
-    @State var transactionFrequency = "Pilih Frekuensi Transaksi"
+    var _listFrequency = [NSLocalizedString("Once".localized(LocalizationService.shared
+                                                                .language), comment: ""), NSLocalizedString("Many times".localized(LocalizationService.shared.language), comment: "")]
+    @State var transactionFrequency = NSLocalizedString("Select Transaction Frequency".localized(LocalizationService.shared.language), comment: "")
     
     // Variable Voucher
-    var _listVoucher = ["Voucher Tidak Tersedia"]
-    @State var transactionVoucher = "Pilih Voucher"
+    var _listVoucher = [NSLocalizedString("Voucher Not Available".localized(LocalizationService.shared.language), comment: "")]
+    @State var transactionVoucher = NSLocalizedString("Select Voucher".localized(LocalizationService.shared.language), comment: "")
     
     // Variable Notes
     @State private var notesCtrl: String = ""
     
-    @State private var selectedCalendar: String = "Now"
+    @State private var selectedCalendar: String = NSLocalizedString("Now".localized(LocalizationService.shared.language), comment: "")
     
     // Variable Modal
     @State private var showDialogMinReached: Bool = false
@@ -78,9 +82,9 @@ struct TransferRtgsScreen: View {
         print(formatter.string(from: self.date))
         
         if (formatter.string(from: self.now) == formatter.string(from: self.date)) {
-            self.selectedCalendar = "Now"
+            self.selectedCalendar = NSLocalizedString("Now".localized(LocalizationService.shared.language), comment: "")
         } else {
-            self.selectedCalendar = "Next"
+            self.selectedCalendar = NSLocalizedString("Next".localized(LocalizationService.shared.language), comment: "")
         }
         
     }
@@ -112,7 +116,7 @@ struct TransferRtgsScreen: View {
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
-                            if (transactionVoucher == "Pilih Voucher" || transactionVoucher == "Voucher Tidak Tersedia") {
+                            if (transactionVoucher == NSLocalizedString("Select Voucher".localized(language), comment: "") || transactionVoucher == NSLocalizedString("Voucher Not Available".localized(language), comment: "")) {
                                 self.transferData.transactionVoucher = ""
                             }
                             
@@ -138,7 +142,7 @@ struct TransferRtgsScreen: View {
                             }
                             
                         }, label: {
-                            Text("KONFIRMASI TRANSFER")
+                            Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
                                 .foregroundColor(.white)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.system(size: 13))
@@ -170,7 +174,7 @@ struct TransferRtgsScreen: View {
                 })
                 .isDetailLink(false)
         }
-        .navigationBarTitle("Transfer ke Bank Lain", displayMode: .inline)
+        .navigationBarTitle(NSLocalizedString("Transfer to Other Bank".localized(language), comment: ""), displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -241,7 +245,7 @@ struct TransferRtgsScreen: View {
             // Field Pilih Bank
             VStack {
                 HStack {
-                    Text("Pilih Bank")
+                    Text(NSLocalizedString("Choose Bank".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -287,7 +291,7 @@ struct TransferRtgsScreen: View {
             // Field No Rekening Tujuan
             VStack {
                 HStack {
-                    Text("No Rekening Tujuan")
+                    Text(NSLocalizedString("Destination Account No".localized(language), comment: ""))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -297,7 +301,7 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 5)
                 
                 HStack {
-                    TextField("Rekening", text: self.$noRekeningCtrl, onEditingChanged: { changed in
+                    TextField(NSLocalizedString("Account".localized(language), comment: ""), text: self.$noRekeningCtrl, onEditingChanged: { changed in
                         self.transferData.destinationNumber = self.noRekeningCtrl
                     })
                     .keyboardType(.numberPad)
@@ -324,7 +328,7 @@ struct TransferRtgsScreen: View {
     var nominalCard: some View {
         VStack {
             HStack {
-                Text("Jumlah Besaran (Rp)")
+                Text(NSLocalizedString("Amount (Rp)".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.ultraLight)
                 
@@ -356,7 +360,7 @@ struct TransferRtgsScreen: View {
             .padding(.horizontal, 25)
             
             HStack {
-                Text("Limit Transaksi")
+                Text(NSLocalizedString("Transaction Limit".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.ultraLight)
                 
@@ -417,7 +421,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionFrequency)
                         .font(.subheadline)
-                        .foregroundColor(transactionFrequency == "Pilih Frekuensi Transaksi" ? .gray : .black)
+                        .foregroundColor(transactionFrequency == NSLocalizedString("Select Transaction Frequency".localized(language), comment: "") ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -451,7 +455,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionVoucher)
                         .font(.subheadline)
-                        .foregroundColor(transactionVoucher == "Pilih Voucher" ? .gray : .black)
+                        .foregroundColor(transactionVoucher == NSLocalizedString("Select Voucher".localized(language), comment: "") ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -482,7 +486,7 @@ struct TransferRtgsScreen: View {
     var notesCard: some View {
         VStack {
             HStack {
-                Text("Catatan")
+                Text(NSLocalizedString("Notes".localized(language), comment: ""))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
@@ -492,7 +496,7 @@ struct TransferRtgsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                MultilineTextField("Tulis keterangan Transaksi disini", text: self.$notesCtrl, onCommit: {
+                MultilineTextField(NSLocalizedString("Write a transaction description here".localized(language), comment: ""), text: self.$notesCtrl, onCommit: {
                 })
                 .onReceive(notesCtrl.publisher.collect()) {
                     self.notesCtrl = String($0.prefix(40))
@@ -528,7 +532,7 @@ struct TransferRtgsScreen: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text("Saldo Aktif :")
+                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text(self.selectedAccount.saldo)
@@ -556,7 +560,7 @@ struct TransferRtgsScreen: View {
     func bottomSheetCard() -> some View {
         VStack {
             HStack {
-                Text("Nomor Rekening Terkonfirmasi")
+                Text(NSLocalizedString("Confirmed Account Number".localized(language), comment: ""))
                     .foregroundColor(.green)
                     .font(.subheadline)
                     .fontWeight(.light)
@@ -605,7 +609,7 @@ struct TransferRtgsScreen: View {
                 NavigationLink(
                     destination: TransferRtgsConfirmation().environmentObject(transferData),
                     label: {
-                        Text("KONFIRMASI TRANSFER")
+                        Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
@@ -628,13 +632,13 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Transaksi ada kurang dari minimum transaksi.", comment: ""))
+            Text(NSLocalizedString(NSLocalizedString("There are transactions less than the minimum transaction.".localized(language), comment: ""), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Transaksi minimum Rp. \(self.minLimit),- . Silahkan mengganti nominal transaksi.", comment: ""))
+            Text(NSLocalizedString(NSLocalizedString("Minimum transaction".localized(language), comment: "") + "Rp. \(self.minLimit),- . " + NSLocalizedString("Please change the transaction nominal.".localized(language), comment: ""), comment: ""))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -645,7 +649,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinTransaction = false
                 },
                 label: {
-                    Text("UBAH NOMINAL")
+                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -659,7 +663,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinTransaction = false
                 },
                 label: {
-                    Text("BATALKAN TRANSAKSI")
+                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -681,13 +685,13 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Saldo Minimum Terlampaui", comment: ""))
+            Text(NSLocalizedString(NSLocalizedString("Minimum Balance Exceeded".localized(language), comment: ""), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Saldo minimum rekening Anda Rp. \(selectedAccount.saldo.thousandSeparator()),- terlampaui. Silahkan mengganti nominal transaksi atau menambahkan saldo ke rekening Anda.", comment: ""))
+            Text(NSLocalizedString(NSLocalizedString("Minimum balance in your account".localized(language), comment: "") + "Rp. \(selectedAccount.saldo.thousandSeparator()),- " + NSLocalizedString("exceeded. Please change the transaction amount or add a balance to your account.".localized(language), comment: ""), comment: ""))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -698,7 +702,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinReached = false
                 },
                 label: {
-                    Text("UBAH NOMINAL")
+                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -712,7 +716,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinReached = false
                 },
                 label: {
-                    Text("BATALKAN TRANSAKSI")
+                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -734,13 +738,13 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Limit transaksi terlampaui", comment: ""))
+            Text(NSLocalizedString(NSLocalizedString("Transaction limit exceeded".localized(language), comment: ""), comment: ""))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Limit transaksi Rp.\(limitTrx.thousandSeparator()),- terlampaui. Silahkan kurangi jumlah nominal transaksi atau batalkan transaksi.", comment: ""))
+            Text(NSLocalizedString(NSLocalizedString("Transaction Limit".localized(language), comment: "") + " Rp.\(limitTrx.thousandSeparator()),- " + NSLocalizedString("Exceeded. Please reduce the nominal amount of the transaction or cancel the transaction.".localized(language), comment: ""), comment: ""))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -751,7 +755,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMaxReached = false
                 },
                 label: {
-                    Text("UBAH NOMINAL")
+                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -765,7 +769,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMaxReached = false
                 },
                 label: {
-                    Text("BATALKAN TRANSAKSI")
+                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -782,7 +786,7 @@ struct TransferRtgsScreen: View {
     func modalSelectBankAccount() -> some View {
         VStack {
             HStack {
-                Text("Pilih Akun")
+                Text(NSLocalizedString("Select Account".localized(language), comment: ""))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 
@@ -799,7 +803,7 @@ struct TransferRtgsScreen: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text("Saldo Aktif :")
+                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text("Rp. \(data.saldo.thousandSeparator())")
@@ -835,7 +839,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     var disableForm: Bool {
-        if (self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Pilih Tipe Transaksi" && self.bankSelector != "Pilih Bank Tujuan") {
+        if (self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != NSLocalizedString("Select Transaction Type".localized(language), comment: "") && self.bankSelector != NSLocalizedString("Choose Destination Bank".localized(language), comment: "")) {
             return false
         }
         return true

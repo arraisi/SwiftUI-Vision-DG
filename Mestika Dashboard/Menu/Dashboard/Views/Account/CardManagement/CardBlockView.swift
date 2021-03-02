@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CardBlockView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var card: MyCard
     
     /* Boolean for Show Modal */
@@ -67,7 +70,7 @@ struct CardBlockView: View {
 //                .padding(.top, 30)
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
-            .navigationBarTitle("Blokir Kartu", displayMode: .inline)
+            .navigationBarTitle(NSLocalizedString("Block Card".localized(language), comment: ""), displayMode: .inline)
             .navigationBarItems(trailing:  NavigationLink(destination: CardManagementScreen(), label: {
                 Text("Cancel")
             }))
@@ -96,7 +99,7 @@ struct CardBlockView: View {
             
             HStack {
                 
-                Text(card.blocked ? "Berhasil, Kartu ATM Anda Sudah Diblokir Untuk Sementara Waktu":"Berhasil, Kartu ATM Anda Sudah Kembali Aktif")
+                Text(card.blocked ? NSLocalizedString("Success, Your ATM Card Has Been Blocked For A While".localized(language), comment: ""):NSLocalizedString("Success, Your ATM Card Is Back Active".localized(language), comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -105,7 +108,7 @@ struct CardBlockView: View {
             .padding(.top, 25)
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text("KEMBALI")
+                Text(NSLocalizedString("BACK".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)

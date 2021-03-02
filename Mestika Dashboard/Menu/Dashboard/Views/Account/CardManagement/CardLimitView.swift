@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CardLimitView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @State var limitPerTransaksi: Double = 0
     @State var limitPerHari: Double = 20000000
     
@@ -34,12 +37,12 @@ struct CardLimitView: View {
                     
                     VStack(alignment: .leading, spacing: 30, content: {
                         
-                        Text("Limit Kartu")
+                        Text(NSLocalizedString("Card Limit".localized(language), comment: ""))
                             .font(.custom("Montserrat-SemiBold", size: 15))
                         
                         // Limit per Transaksi
                         VStack(alignment: .leading) {
-                            Text("per Transaksi (Debit Card)")
+                            Text(NSLocalizedString("per Transaction (Debit Card)".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Light", size: 12))
                             HStack(alignment:.top){
                                 Text("Rp.")
@@ -60,7 +63,7 @@ struct CardLimitView: View {
                             }
                             Divider()
                             HStack {
-                                Text("Maximal limit per Transaksi")
+                                Text(NSLocalizedString("Maximum limit per Transaction".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Light", size: 10))
                                 Text("Rp. 50.000.000,-")
                                     .font(.custom("Montserrat-SemiBold", size: 10))
@@ -71,7 +74,7 @@ struct CardLimitView: View {
                         // Maximal limit penarikan per Hari
                         VStack(alignment: .leading) {
                             
-                            Text("per Transaksi (Debit Card)")
+                            Text(NSLocalizedString("per Transaction (Debit Card)".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Light", size: 12))
                             HStack(alignment:.top){
                                 Text("Rp.")
@@ -91,7 +94,7 @@ struct CardLimitView: View {
                             }
                             Divider()
                             HStack {
-                                Text("Maximal limit penarikan harian")
+                                Text(NSLocalizedString("Maximum daily withdrawal limit".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Light", size: 10))
                                 Text("Rp. 20.000.000,-")
                                     .font(.custom("Montserrat-SemiBold", size: 10))
@@ -102,7 +105,7 @@ struct CardLimitView: View {
                         NavigationLink(
                             destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
                             label: {
-                                Text("SIMPAN PERUBAHAN")
+                                Text(NSLocalizedString("SAVE CHANGES".localized(language), comment: ""))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -125,9 +128,9 @@ struct CardLimitView: View {
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
             .modifier(DismissingKeyboard())
-            .navigationBarTitle("Limit Kartu", displayMode: .inline)
+            .navigationBarTitle(NSLocalizedString("Card Limit".localized(language), comment: ""), displayMode: .inline)
             .navigationBarItems(trailing:  NavigationLink(destination: CardManagementScreen(), label: {
-                Text("Cancel")
+                Text(NSLocalizedString("Cancel".localized(language), comment: ""))
             }))
             .onAppear{
                 
@@ -168,7 +171,7 @@ struct CardLimitView: View {
             
             HStack {
                 
-                Text("Perubahan Limit Transaksi Kartu Anda Telah Berhasil di Simpan.")
+                Text(NSLocalizedString("Changes to Your Card Transaction Limit Has Been Successfully Saved.".localized(language), comment: ""))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -177,7 +180,7 @@ struct CardLimitView: View {
             .padding(.top, 25)
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text("KEMBALI")
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)

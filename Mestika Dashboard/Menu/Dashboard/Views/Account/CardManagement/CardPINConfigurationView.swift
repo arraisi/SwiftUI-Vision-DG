@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CardPINConfigurationView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var card: KartuKuDesignViewModel
     
     @AppStorage("lock_Password") var key = "123456"
@@ -33,7 +36,7 @@ struct CardPINConfigurationView: View {
                         
                         NavigationLink(destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(FormNewPinAtmView())), label: {
                             HStack{
-                                Text("Ubah PIN ATM Anda")
+                                Text(NSLocalizedString("Change your ATM PIN".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Medium", size: 15))
                                     .foregroundColor(.black)
                                 Spacer()
@@ -46,7 +49,7 @@ struct CardPINConfigurationView: View {
                         
                         NavigationLink(destination: FormInputOldPinScreen(unLocked: unLocked), label: {
                             HStack{
-                                Text("Ubah PIN Transaksi Anda")
+                                Text(NSLocalizedString("Change Your Transaction PIN".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Medium", size: 15))
                                     .foregroundColor(.black)
                                 Spacer()
@@ -59,7 +62,7 @@ struct CardPINConfigurationView: View {
                         
                         NavigationLink(destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(OtpResetPinScreen())), label: {
                             HStack{
-                                Text("Lupa PIN Transaksi Anda")
+                                Text(NSLocalizedString("Forgot Your Transaction PIN".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Medium", size: 15))
                                     .foregroundColor(.black)
                                 Spacer()
@@ -84,9 +87,9 @@ struct CardPINConfigurationView: View {
                 
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
-            .navigationBarTitle("Limit Kartu", displayMode: .inline)
+            .navigationBarTitle(NSLocalizedString("Card Limit".localized(language), comment: ""), displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(destination: CardManagementScreen(), label: {
-                Text("Cancel")
+                Text(NSLocalizedString("Cancel".localized(language), comment: ""))
             }))
             
         }
