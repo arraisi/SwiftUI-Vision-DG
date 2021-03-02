@@ -78,8 +78,14 @@ struct ListAllFavoriteTransactionView: View {
                                         self.destinationNumber = data.transferOnUs!.destinationNumber
                                         self.isRouteOnUs = true
                                     } else {
-                                        self.destinationNumber = data.transferOffUsRtgs!.accountTo
-                                        self.isRouteOffUs = true
+                                        
+                                        if (data.transferOffUsRtgs == nil) {
+                                            self.destinationNumber = data.transferOffUsSkn!.accountTo
+                                            self.isRouteOffUs = true
+                                        } else {
+                                            self.destinationNumber = data.transferOffUsRtgs!.accountTo
+                                            self.isRouteOffUs = true
+                                        }
                                     }
                                 },
                                 label: {
@@ -98,8 +104,18 @@ struct ListAllFavoriteTransactionView: View {
                                             .font(.custom("Montserrat-SemiBold", size: 14))
                                         
                                         HStack {
-                                            Text("\(data.bankName) : \(data.type == "TRANSFER_SESAMA" ? data.transferOnUs!.destinationNumber : data.transferOffUsRtgs!.accountTo)")
-                                                .font(.custom("Montserrat-Light", size: 14))
+                                            if (data.type == "TRANSFER_SESAMA") {
+                                                Text("\(data.bankName) : \(data.transferOnUs!.destinationNumber)")
+                                                    .font(.custom("Montserrat-Light", size: 14))
+                                            } else {
+                                                if (data.transferOffUsRtgs == nil) {
+                                                    Text("\(data.bankName) : \(data.transferOffUsSkn!.accountTo)")
+                                                        .font(.custom("Montserrat-Light", size: 14))
+                                                } else {
+                                                    Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
+                                                        .font(.custom("Montserrat-Light", size: 14))
+                                                }
+                                            }
                                         }
                                     }
                                 }

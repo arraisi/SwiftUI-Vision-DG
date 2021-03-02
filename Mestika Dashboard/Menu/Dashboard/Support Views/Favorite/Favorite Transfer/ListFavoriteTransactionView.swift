@@ -49,10 +49,18 @@ struct ListFavoriteTransactionView: View {
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                             
                             HStack {
-                                Text("\(data.bankName) :")
-                                    .font(.custom("Montserrat-Light", size: 14))
-                                Text("\(data.sourceNumber)")
-                                    .font(.custom("Montserrat-Light", size: 14))
+                                if (data.type == "TRANSFER_SESAMA") {
+                                    Text("\(data.bankName) : \(data.transferOnUs!.destinationNumber)")
+                                        .font(.custom("Montserrat-Light", size: 14))
+                                } else {
+                                    if (data.transferOffUsRtgs == nil) {
+                                        Text("\(data.bankName) : \(data.transferOffUsSkn!.accountTo)")
+                                            .font(.custom("Montserrat-Light", size: 14))
+                                    } else {
+                                        Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
+                                            .font(.custom("Montserrat-Light", size: 14))
+                                    }
+                                }
                             }
                         }
                         Spacer()
@@ -67,7 +75,7 @@ struct ListFavoriteTransactionView: View {
                 Spacer()
                 
                 NavigationLink(destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber), label: {
-                    Text("Cari kontak lain")
+                    Text("Lihat Daftar Selengkapnya")
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding()

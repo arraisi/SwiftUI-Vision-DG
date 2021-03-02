@@ -26,15 +26,17 @@ struct FavoriteTabs: View {
             VStack {
                 titleInfo
                 
-                ListFavoritePurchasePaymentView()
-                    .padding()
+//                ListFavoritePurchasePaymentView()
+//                    .padding()
                 
                 ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
                     .padding()
+                    .frame(height: 400)
                 
+                Spacer()
             }
 //        })
-        .navigationBarHidden(true)
+            .navigationBarTitle("Favorit", displayMode: .inline)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
