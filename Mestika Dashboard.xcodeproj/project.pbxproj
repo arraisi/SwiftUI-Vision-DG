@@ -279,6 +279,8 @@
 		52DA20A325511F8600CC048A /* FormInputResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20A225511F8600CC048A /* FormInputResetPinScreen.swift */; };
 		52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */; };
 		52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */; };
+		52DACF8225ECEF5D00099B3C /* PopOverEditFavoriteOnUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DACF8125ECEF5D00099B3C /* PopOverEditFavoriteOnUsView.swift */; };
+		52DACF8725ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DACF8625ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift */; };
 		52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */; };
 		52E4310A25DF97AC0050DB22 /* LastTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4310925DF97AC0050DB22 /* LastTransactionResponse.swift */; };
 		52E7740425B042CD00D5B010 /* ATMDesignNewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */; };
@@ -678,6 +680,8 @@
 		52DA20A225511F8600CC048A /* FormInputResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetPinScreen.swift; sourceTree = "<group>"; };
 		52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpResetPinScreen.swift; sourceTree = "<group>"; };
 		52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputResetNewPinScreen.swift; sourceTree = "<group>"; };
+		52DACF8125ECEF5D00099B3C /* PopOverEditFavoriteOnUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverEditFavoriteOnUsView.swift; sourceTree = "<group>"; };
+		52DACF8625ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverEditFavoriteOffUsView.swift; sourceTree = "<group>"; };
 		52DEC7AC256F9BF100A680C6 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
 		52E4310925DF97AC0050DB22 /* LastTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTransactionResponse.swift; sourceTree = "<group>"; };
 		52E7740325B042CD00D5B010 /* ATMDesignNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMDesignNewModel.swift; sourceTree = "<group>"; };
@@ -1133,6 +1137,8 @@
 				524746172547D157001F43C5 /* ListAllFavoriteTransactionView.swift */,
 				524746032547C900001F43C5 /* ListFavoriteTransactionView.swift */,
 				5247463425480047001F43C5 /* ListLastTransactionView.swift */,
+				52DACF8125ECEF5D00099B3C /* PopOverEditFavoriteOnUsView.swift */,
+				52DACF8625ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift */,
 			);
 			path = "Favorite Transfer";
 			sourceTree = "<group>";
@@ -2160,6 +2166,7 @@
 				C0AD115225DF74E6003FF920 /* HistoryTransactionRow.swift in Sources */,
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
 				5283AF5D25CD28E100111C75 /* UIDevice+Extensions.swift in Sources */,
+				52DACF8725ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				065DF51E25765ABE00255743 /* ATMDesignModel.swift in Sources */,
 				52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */,
@@ -2269,6 +2276,7 @@
 				525DB51F2546869B00D48075 /* PinView.swift in Sources */,
 				525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */,
 				C068A5A8256CED8300CE96C4 /* AppState.swift in Sources */,
+				52DACF8225ECEF5D00099B3C /* PopOverEditFavoriteOnUsView.swift in Sources */,
 				C08758D825D2398E008ED730 /* FavoritModel.swift in Sources */,
 				52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */,
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,

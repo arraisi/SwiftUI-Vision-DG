@@ -19,10 +19,12 @@ struct GridMenuView: View {
                 Group {
                     NavigationLink(destination: FavoriteTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber), label: {
                         ZStack {
-                            Image("ic_favorite")
-                                .resizable()
-                                .scaledToFill()
-                                .padding(5)
+                            VStack {
+                                Image("ic_favorite")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .padding(5)
+                            }
                         }
                         .background(Color.white)
                         .frame(width: 58, height: 58)

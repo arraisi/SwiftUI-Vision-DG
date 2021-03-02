@@ -109,6 +109,7 @@ struct DashboardTabs: View {
                         }
                     }
                 }
+                    .padding(.top, 20)
                 
 //                ListEwalletView()
 //                    .padding(.top, 30)

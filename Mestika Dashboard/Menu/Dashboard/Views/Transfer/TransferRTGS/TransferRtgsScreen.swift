@@ -22,6 +22,8 @@ struct TransferRtgsScreen: View {
     // Variable List BANK
     @State private var bankSelector: String = NSLocalizedString("Choose Destination Bank".localized(LocalizationService.shared.language), comment: "")
     
+    @Binding var dest: String
+    
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
     @State var selectedAccount = BankAccount(id: 0, namaRekening: NSLocalizedString("Select Account".localized(LocalizationService.shared.language), comment: ""), productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
@@ -31,7 +33,7 @@ struct TransferRtgsScreen: View {
     @State var amount = ""
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 0
+    @State private var minLimit: Int = 0
     
     // Variable Transaction Frequecy
     var _listFrequency = [NSLocalizedString("Once".localized(LocalizationService.shared
@@ -196,6 +198,9 @@ struct TransferRtgsScreen: View {
         .onAppear {
             self.transferData = TransferOffUsModel()
 //            self.transferType = _listTransferType[0]
+            if (dest != "") {
+                self.noRekeningCtrl = self.dest
+            }
             self.transferData.transactionFrequency = _listFrequency[0]
             self.transferData.transactionVoucher = _listVoucher[0]
             self.transferData.transactionType = _listTransferType[0]
@@ -904,6 +909,6 @@ struct TransferRtgsScreen: View {
 
 struct TransferRtgsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferRtgsScreen()
+        TransferRtgsScreen(dest: .constant(""))
     }
 }

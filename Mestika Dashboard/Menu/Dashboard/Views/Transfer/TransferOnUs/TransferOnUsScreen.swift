@@ -18,6 +18,8 @@ struct TransferOnUsScreen: View {
     @ObservedObject var profileVM = ProfileViewModel()
     @StateObject var transferVM = TransferViewModel()
     
+    @Binding var dest: String
+    
     @State var transferData = TransferOnUsModel()
     @State var transactionFrequency = NSLocalizedString("Select Transaction Frequency".localized(LocalizationService.shared.language), comment: "")
     @State var transactionVoucher = NSLocalizedString("Select Voucher".localized(LocalizationService.shared.language), comment: "")
@@ -44,7 +46,7 @@ struct TransferOnUsScreen: View {
     
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    private var minLimit: Int = 10000
+    @State private var minLimit: Int = 10000
     
     @State var balance: String = ""
     @State var productName: String = "-"
@@ -176,6 +178,9 @@ struct TransferOnUsScreen: View {
         .navigationBarTitle(NSLocalizedString("Inter-peer Transfer".localized(language), comment: ""), displayMode: .inline)
         .onAppear() {
             self.transferData = TransferOnUsModel()
+            if (dest != "") {
+                self.destinationNumber = self.dest
+            }
             self.getProfile()
             self.getLimit(code: "70")
         }
@@ -832,6 +837,6 @@ struct TransferOnUsScreen: View {
 
 struct TransferOnUsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferOnUsScreen()
+        TransferOnUsScreen(dest: .constant(""))
     }
 }

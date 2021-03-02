@@ -1,17 +1,13 @@
 //
-//  PopOverFavoriteView.swift
+//  PopOverEditFavoriteOnUsView.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 26/10/20.
+//  Created by Prima Jatnika on 01/03/21.
 //
 
 import SwiftUI
 
-struct PopOverFavoriteView: View {
-    
-    @AppStorage("language")
-    private var language = LocalizationService.shared.language
-    
+struct PopOverEditFavoriteOnUsView: View {
     
     @StateObject var favoritVM = FavoritViewModel()
     
@@ -27,7 +23,7 @@ struct PopOverFavoriteView: View {
         VStack {
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
+                    Text("Edit Kontrak Transfer")
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -37,7 +33,7 @@ struct PopOverFavoriteView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(NSLocalizedString("Beneficiary Contract Name".localized(language), comment: ""))
+                        Text("Nama Kontrak Penerima")
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -46,7 +42,7 @@ struct PopOverFavoriteView: View {
                     .padding(.horizontal, 20)
                     
                     VStack {
-                        TextField(NSLocalizedString("Beneficiary Contract Name".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
+                        TextField("Nama Kontak Penerima", text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
                             print("\($receivedName)")
                         })
@@ -61,7 +57,7 @@ struct PopOverFavoriteView: View {
                     .padding(.bottom, 25)
                     
                     HStack {
-                        Text(NSLocalizedString("Account Details".localized(language), comment: ""))
+                        Text("Detail Rekening")
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -94,12 +90,12 @@ struct PopOverFavoriteView: View {
                     
                     // No. Rekening Form
                     HStack(spacing: 20) {
-                        Text(NSLocalizedString("Account number".localized(language), comment: ""))
+                        Text("No. Rekening")
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100)
                         
-                        TextField(NSLocalizedString("Account number".localized(language), comment: ""), text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
+                        TextField("No. Rekening", text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
                             //                            print("\($receivedRekening)")
                         })
                         .disabled(true)
@@ -114,42 +110,14 @@ struct PopOverFavoriteView: View {
                     
                     Button(action: {
                         self.transferData.destinationName = self.receivedName
-                        // MARK: BODY
-                        let body: [String: Any] = [
-                            "bankAccountNumber" : "001",
-                            "bankName" : "MESTIKA",
-                            "name" : transferData.destinationName,
-                            "sourceNumber" : transferData.sourceNumber,
-                            "cardNo" : transferData.cardNo,
-                            "type" : transferData.transferType,
-                            "transferOnUs" : [
-                                "cardNo" : transferData.cardNo,
-                                "ref": transferData.ref,
-                                "nominal": transferData.amount,
-                                "currency": transferData.currency,
-                                "sourceNumber": transferData.sourceNumber,
-                                "destinationNumber": transferData.destinationNumber,
-                                "berita": "testing"
-                            ],
-                            "transactionDate" : transferData.transactionDate,
-                            "nominal" : transferData.amount,
-                            "nominalSign" : transferData.amount
-                        ]
                         
-                        print("TRANSFER ON US body => \(body)")
-                        
-                        print("\nTRANSFER ON US trx date => \(transferData.transactionDate)")
-                        
-                        self.favoritVM.transferOnUs(data: transferData) { result in
-                            print(NSLocalizedString("Save to favorites".localized(language), comment: ""))
-                            self.show = false
-                            self.showAlert = true
-                        }
+                        self.show = false
+                        self.showAlert = true
                     }, label: {
                         if self.favoritVM.isLoading {
                             ProgressView()
                         } else {
-                            Text(NSLocalizedString("SAVE TO FAVORITE".localized(language), comment: ""))
+                            Text("SIMPAN PERUBAHAN")
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                         }
@@ -177,11 +145,5 @@ struct PopOverFavoriteView: View {
     
     var disableForm: Bool {
         receivedName.isEmpty || self.favoritVM.isLoading
-    }
-}
-
-struct PopOverFavoriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        PopOverFavoriteView(transferData: TransferOnUsModel(), show: .constant(false), showAlert: .constant(false))
     }
 }

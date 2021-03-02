@@ -14,7 +14,7 @@ import Foundation
 
 // MARK: - FavoritModelElement
 struct FavoritModelElement: Codable {
-    let id, bankAccountNumber, bankName, name: String
+    var id, bankAccountNumber, bankName, name: String
     let sourceNumber, cardNo, type: String
     let transferOnUs: TransferOnUs?
     let transactionDate, nominal, nominalSign: String

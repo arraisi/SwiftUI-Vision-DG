@@ -51,7 +51,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                         TextField(NSLocalizedString("Beneficiary Contract Name".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
                         })
-                        .disabled(true)
+                        .disabled(false)
                         .frame(height: 10)
                         .font(.system(size: 15, weight: .bold, design: .default))
                         .padding()
