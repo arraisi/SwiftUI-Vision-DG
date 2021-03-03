@@ -18,6 +18,8 @@ struct ListFavoriteTransactionView: View {
     var cardNo = ""
     var sourceNumber = ""
     
+    @State var isNextRoute: Bool = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -53,10 +55,18 @@ struct ListFavoriteTransactionView: View {
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                             
                             HStack {
-                                Text("\(data.bankName) :")
-                                    .font(.custom("Montserrat-Light", size: 14))
-                                Text("\(data.sourceNumber)")
-                                    .font(.custom("Montserrat-Light", size: 14))
+                                if (data.type == "TRANSFER_SESAMA") {
+                                    Text("\(data.bankName) : \(data.transferOnUs!.destinationNumber)")
+                                        .font(.custom("Montserrat-Light", size: 14))
+                                } else {
+                                    if (data.transferOffUsRtgs == nil) {
+                                        Text("\(data.bankName) : \(data.transferOffUsSkn!.accountTo)")
+                                            .font(.custom("Montserrat-Light", size: 14))
+                                    } else {
+                                        Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
+                                            .font(.custom("Montserrat-Light", size: 14))
+                                    }
+                                }
                             }
                         }
                         Spacer()
@@ -70,8 +80,19 @@ struct ListFavoriteTransactionView: View {
             HStack {
                 Spacer()
                 
-                NavigationLink(destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber), label: {
-                    Text(NSLocalizedString("Find another contact".localized(language), comment: ""))
+                NavigationLink(
+                    destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber),
+                    isActive: self.$isNextRoute,
+                    label: {
+                        EmptyView()
+                    })
+                    .isDetailLink(false)
+                
+                Button(action: {
+                    print("See All")
+                    self.isNextRoute = true
+                }, label: {
+                    Text("Lihat Daftar Selengkapnya")
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding()
@@ -81,7 +102,10 @@ struct ListFavoriteTransactionView: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
-        .onAppear(perform: getList)
+        .onAppear {
+            self.isNextRoute = false
+            getList()
+        }
     }
     
     func getList() {

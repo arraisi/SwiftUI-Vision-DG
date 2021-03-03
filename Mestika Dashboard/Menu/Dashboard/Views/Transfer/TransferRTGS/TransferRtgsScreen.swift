@@ -23,6 +23,8 @@ struct TransferRtgsScreen: View {
     @State private var bankSelector: String = NSLocalizedString("Choose Destination Bank".localized(LocalizationService.shared.language), comment: "")
     
     @Binding var dest: String
+    @Binding var type: String
+    @Binding var destBank: String
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
@@ -200,6 +202,8 @@ struct TransferRtgsScreen: View {
 //            self.transferType = _listTransferType[0]
             if (dest != "") {
                 self.noRekeningCtrl = self.dest
+                self.transferType = self.type
+                self.bankSelector = self.destBank
             }
             self.transferData.transactionFrequency = _listFrequency[0]
             self.transferData.transactionVoucher = _listVoucher[0]
@@ -909,6 +913,6 @@ struct TransferRtgsScreen: View {
 
 struct TransferRtgsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferRtgsScreen(dest: .constant(""))
+        TransferRtgsScreen(dest: .constant(""), type: .constant(""), destBank: .constant(""))
     }
 }

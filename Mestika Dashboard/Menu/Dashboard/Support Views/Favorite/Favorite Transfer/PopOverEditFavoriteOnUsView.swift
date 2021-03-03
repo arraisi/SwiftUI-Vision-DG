@@ -95,7 +95,7 @@ struct PopOverEditFavoriteOnUsView: View {
                             .fontWeight(.light)
                             .frame(width: 100)
                         
-                        TextField("No. Rekening", text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
+                        TextField("No. Rekening", text: .constant(transferData.sourceNumber), onEditingChanged: { changed in
                             //                            print("\($receivedRekening)")
                         })
                         .disabled(true)
@@ -111,8 +111,18 @@ struct PopOverEditFavoriteOnUsView: View {
                     Button(action: {
                         self.transferData.destinationName = self.receivedName
                         
-                        self.show = false
-                        self.showAlert = true
+                        self.favoritVM.updateWithParam(id: self.transferData.idEdit, cardNo: self.transferData.cardNo, sourceNumber: self.transferData.sourceNumber, name: self.transferData.destinationName) { success in
+                            
+                            if success {
+                                self.show = false
+                                self.showAlert = true
+                            }
+                            
+                            if !success {
+                                
+                            }
+                            
+                        }
                     }, label: {
                         if self.favoritVM.isLoading {
                             ProgressView()

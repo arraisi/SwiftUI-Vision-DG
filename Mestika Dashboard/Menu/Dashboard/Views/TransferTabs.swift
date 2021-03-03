@@ -71,7 +71,7 @@ struct TransferTabs: View {
             
             // Link Transfer OFFUS
             NavigationLink(
-                destination: TransferRtgsScreen(dest: .constant("")),
+                destination: TransferRtgsScreen(dest: .constant(""), type: .constant(""), destBank: .constant("")),
                 isActive: self.$transferOffUsActive,
                 label: {EmptyView()}
             )

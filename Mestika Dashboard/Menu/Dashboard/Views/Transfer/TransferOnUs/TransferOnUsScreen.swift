@@ -180,6 +180,8 @@ struct TransferOnUsScreen: View {
             self.transferData = TransferOnUsModel()
             if (dest != "") {
                 self.destinationNumber = self.dest
+                self.transferData.destinationNumber = self.dest
+                inquiryTransfer()
             }
             self.getProfile()
             self.getLimit(code: "70")

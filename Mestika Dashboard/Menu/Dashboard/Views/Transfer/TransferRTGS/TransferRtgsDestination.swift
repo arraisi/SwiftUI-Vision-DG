@@ -132,6 +132,7 @@ struct TransferRtgsDestination: View {
                 label: {
                     EmptyView()
                 })
+                .isDetailLink(false)
         }
         .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
         .onTapGesture() {

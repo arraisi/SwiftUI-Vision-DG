@@ -478,6 +478,7 @@ struct TransferRtgsConfirmation: View {
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     
                 })
+                .isDetailLink(false)
                 .background(Color(hex: "#2334D0"))
                 .cornerRadius(12)
             }
