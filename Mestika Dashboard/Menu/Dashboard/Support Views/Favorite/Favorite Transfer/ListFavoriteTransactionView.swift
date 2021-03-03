@@ -37,43 +37,56 @@ struct ListFavoriteTransactionView: View {
             
             
             ScrollView(showsIndicators: false) {
-                ForEach(self.favoritVM.favorites.reversed(), id: \.id) { data in
+                
+                if self.favoritVM.isLoading {
+                    ProgressView()
+                } else if (self.favoritVM.favorites.count < 1) {
                     
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .fill(Color.secondary)
-                                .frame(width: 30, height: 30)
-                            
-                            Text(data.name.prefix(1))
-                                .foregroundColor(.white)
-                                .fontWeight(.heavy)
-                        }
+                    Text("Tidak ada Favorit")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .padding(.top, 25)
+                    
+                } else {
+                    ForEach(self.favoritVM.favorites.reversed(), id: \.id) { data in
                         
-                        VStack(alignment: .leading) {
-                            Text("\(data.name)")
-                                .font(.custom("Montserrat-SemiBold", size: 14))
+                        HStack {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.secondary)
+                                    .frame(width: 30, height: 30)
+                                
+                                Text(data.name.prefix(1))
+                                    .foregroundColor(.white)
+                                    .fontWeight(.heavy)
+                            }
                             
-                            HStack {
-                                if (data.type == "TRANSFER_SESAMA") {
-                                    Text("\(data.bankName) : \(data.transferOnUs!.destinationNumber)")
-                                        .font(.custom("Montserrat-Light", size: 14))
-                                } else {
-                                    if (data.transferOffUsRtgs == nil) {
-                                        Text("\(data.bankName) : \(data.transferOffUsSkn!.accountTo)")
+                            VStack(alignment: .leading) {
+                                Text("\(data.name)")
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                
+                                HStack {
+                                    if (data.type == "TRANSFER_SESAMA") {
+                                        Text("\(data.bankName) : \(data.transferOnUs!.destinationNumber)")
                                             .font(.custom("Montserrat-Light", size: 14))
                                     } else {
-                                        Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
-                                            .font(.custom("Montserrat-Light", size: 14))
+                                        if (data.transferOffUsRtgs == nil) {
+                                            Text("\(data.bankName) : \(data.transferOffUsSkn!.accountTo)")
+                                                .font(.custom("Montserrat-Light", size: 14))
+                                        } else {
+                                            Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
+                                                .font(.custom("Montserrat-Light", size: 14))
+                                        }
                                     }
                                 }
                             }
+                            Spacer()
                         }
-                        Spacer()
                     }
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 20)
                 }
-                .padding(.vertical, 5)
-                .padding(.horizontal, 20)
+                
+                
                 
             }
             
@@ -103,8 +116,12 @@ struct ListFavoriteTransactionView: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .onAppear {
+            print("ON APPEAR")
             self.isNextRoute = false
             getList()
+        }
+        .onDisappear {
+            print("ON DISAPPER")
         }
     }
     

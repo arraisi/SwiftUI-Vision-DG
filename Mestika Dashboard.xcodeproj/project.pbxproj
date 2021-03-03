@@ -161,6 +161,7 @@
 		529190BC25D3C8FC005A4898 /* BankReferenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */; };
 		529190C425D3C9A5005A4898 /* ReferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190C325D3C9A5005A4898 /* ReferenceService.swift */; };
 		529190CC25D3CB2D005A4898 /* ReferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */; };
+		5294535425EF2899009A5B83 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535325EF2899009A5B83 /* SearchBar.swift */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
 		52ADFE932557D99F00A1001F /* masterData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE772557D99F00A1001F /* masterData.json */; };
@@ -570,6 +571,7 @@
 		529190BB25D3C8FC005A4898 /* BankReferenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankReferenceResponse.swift; sourceTree = "<group>"; };
 		529190C325D3C9A5005A4898 /* ReferenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceService.swift; sourceTree = "<group>"; };
 		529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceViewModel.swift; sourceTree = "<group>"; };
+		5294535325EF2899009A5B83 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE772557D99F00A1001F /* masterData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masterData.json; sourceTree = "<group>"; };
@@ -980,6 +982,7 @@
 				C043CFC925CD4BD000328C91 /* BiometricType.swift */,
 				52C2FA2225D1A6F900AC3CF7 /* FavoriteAppBar.swift */,
 				52D8DC2625D65A4B004DF85E /* TextArea.swift */,
+				5294535325EF2899009A5B83 /* SearchBar.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -2521,6 +2524,7 @@
 				064BC26325760DA200F15CA9 /* ATMCardView.swift in Sources */,
 				C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */,
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
+				5294535425EF2899009A5B83 /* SearchBar.swift in Sources */,
 				0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */,
 				52C05570255F687300A57400 /* UserRegistrationService.swift in Sources */,
 				0A566A0E25CA6E940008E752 /* TransferServices.swift in Sources */,
