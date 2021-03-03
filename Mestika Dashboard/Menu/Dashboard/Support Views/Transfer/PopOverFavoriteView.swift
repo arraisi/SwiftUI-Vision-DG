@@ -37,7 +37,7 @@ struct PopOverFavoriteView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(NSLocalizedString("Beneficiary Contract Name".localized(language), comment: ""))
+                        Text(NSLocalizedString("Contact".localized(language), comment: ""))
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -46,7 +46,7 @@ struct PopOverFavoriteView: View {
                     .padding(.horizontal, 20)
                     
                     VStack {
-                        TextField(NSLocalizedString("Beneficiary Contract Name".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Contact".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
                             print("\($receivedName)")
                         })

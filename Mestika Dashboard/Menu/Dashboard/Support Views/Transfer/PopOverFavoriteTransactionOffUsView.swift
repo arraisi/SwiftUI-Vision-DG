@@ -39,7 +39,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                 
                 VStack {
                     HStack {
-                        Text(NSLocalizedString("Beneficiary Contract Name".localized(language), comment: ""))
+                        Text(NSLocalizedString("Contact".localized(language), comment: ""))
                             .font(.subheadline)
                             .fontWeight(.ultraLight)
                         
@@ -48,7 +48,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     .padding(.horizontal, 20)
                     
                     VStack {
-                        TextField(NSLocalizedString("Beneficiary Contract Name".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
+                        TextField(NSLocalizedString("Contact".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
                         })
                         .disabled(false)

@@ -14,7 +14,7 @@
 "LOGIN" = "MASUK";
 "MESSAGE" = "PESAN";
 "Before Starting..!!" = "Sebelum Mulai..!!";
-"Are you a customer of Bank Mestika?" = "Apakah Anda pelanggan Bank Mestika?";
+"Are you a customer of Bank Mestika?" = "Apakah Anda nasabah Bank Mestika?";
 "Do you want to cancel registration?" = "Apakah ingin membatalkan registrasi ?";
 "Are you sure want to go back home ?" = "Apakah kamu yakin ingin pulang ke rumah?";
 "INFORMATION SUBMIT VIDEO SCHEDULE" = "INFORMASI SUBMIT JADWAL VIDEOCALL";
@@ -685,7 +685,7 @@
 "Delete" = "Hapus";
 "Find another contact" = "Cari kontak lain";
 "Favorite Transaction" = "Favorit Transaksi";
-"Beneficiary Contract Name" = "Nama Kontrak Penerima";
+"Beneficiary Contact Name" = "Nama Kontak Penerima";
 "Account Details" = "Detail Rekening";
 "Account number" = "No. Rekening";
 "Save to favorites" = "Berhasil simpan ke favorite";
@@ -706,3 +706,9 @@
 "Period of time" = "Periode waktu";
 "All payment & purchase" = "Semua pembayaran & pembelian";
 "See All category" = "Lihat Semua kategori";
+"No, I am not" = "Tidak, saya bukan";
+"Saving Account" = "Rekening Tabungan";
+"Get the best savings only here" = "Dapatkan tabungan terbaik hanya disini";
+"Choose a savings product" = "Pilih produk tabungan";
+"Opening a new savings account" = "Pembukaan tabungan baru";
+"Your savings account" = "Rekening tabungan Anda";
