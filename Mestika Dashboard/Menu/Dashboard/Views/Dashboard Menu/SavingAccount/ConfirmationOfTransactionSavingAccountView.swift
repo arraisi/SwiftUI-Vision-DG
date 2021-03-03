@@ -91,7 +91,7 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                     
                 }
                 
-                Button(action: {}, label: {
+                NavigationLink(destination: ConfirmationPinOfSavingAccountView(), label: {
                     Text("KONFIRMASI TRANSAKSI")
                         .padding()
                         .font(.custom("Montserrat-Bold", size: 14))

@@ -39,7 +39,7 @@ struct NumPadView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            .padding(.vertical, 10)
             
         })
     }

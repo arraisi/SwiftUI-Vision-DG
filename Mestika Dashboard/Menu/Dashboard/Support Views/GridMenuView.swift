@@ -9,11 +9,19 @@ import SwiftUI
 
 struct GridMenuView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @Binding var cardNo: String
     @Binding var sourceNumber: String
     
+    @State private var savingAccountActive: Bool = false
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false, content: {
+            
+            NavigationLink(destination: SavingAccountView(), isActive: $savingAccountActive, label: {EmptyView()})
+                .isDetailLink(false)
+            
             HStack {
                 
                 Group {
@@ -22,10 +30,11 @@ struct GridMenuView: View {
                         RoundedIconLabel(imageName: "ic_favorite", label: "Favorite")
                     })
                     
-                    NavigationLink(destination: SavingAccountView(), label: {
+                    Button(action: {
+                        self.savingAccountActive = true
+                    }, label: {
                         RoundedIconLabel(imageName: "ic_rekening", label: "Saving Account")
                     })
-                    
                     
                     Button(action: {}, label: {
                         RoundedIconLabel(imageName: "ic_tarik_tunai", label: "Tarik Tunai")
@@ -86,6 +95,15 @@ struct GridMenuView: View {
             .padding(.vertical, 30)
             .padding(.horizontal, 15)
         })
+        .onReceive(self.appState.$moveToDashboard) { value in
+            if value {
+                //                getCoreDataNewDevice()
+                print("Move to moveToDashboard: \(value)")
+                //                activateWelcomeView()
+                self.savingAccountActive = false
+                self.appState.moveToDashboard = false
+            }
+        }
     }
 }
 

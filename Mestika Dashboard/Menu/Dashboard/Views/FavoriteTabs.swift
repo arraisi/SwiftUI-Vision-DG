@@ -12,7 +12,6 @@ struct FavoriteTabs: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
-    
     @Binding var cardNo: String
     @Binding var sourceNumber: String
     
