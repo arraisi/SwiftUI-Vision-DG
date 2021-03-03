@@ -53,6 +53,140 @@ class FavoritViewModel : ObservableObject {
         }
     }
     
+    func getListFavoriteFilterType(type: String, cardNo: String, sourceNumber: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        FavoritService.shared.getList(cardNo: cardNo, sourceNumber: sourceNumber) { result in
+            
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+//                    self.favorites = response
+                    
+                    self.favorites = response.filter({ (data: FavoritModelElement) -> Bool in
+                        if (type.isEmpty) {
+                            self.favorites = response
+                           return true
+                        }
+                        
+                        print(type)
+                        
+                        if (type == "Mestika") {
+                            print("SESAMA")
+                            print(type)
+                            return data.type == "TRANSFER_SESAMA"
+                        } else if (type == "All") {
+                            print("All")
+                            self.favorites = response
+                           return true
+                        } else if (type == "SKN" || data.type == "RTGS") {
+                            print("RTGS or SKN")
+                            print(type)
+                            return data.type == "ke Bank Lain"
+                        } else {
+                            print("Online")
+                            print(type)
+                            return data.type == "Online"
+                        }
+                        
+//                        return data.name.lowercased() == searchText.lowercased()
+                    })
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                
+                print("ERROR GET LIST FAVORITES-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(false)
+            }
+            
+        }
+    }
+    
+    func getListFavoriteFilter(searchText: String, cardNo: String, sourceNumber: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        FavoritService.shared.getList(cardNo: cardNo, sourceNumber: sourceNumber) { result in
+            
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+//                    self.favorites = response
+                    
+                    self.favorites = response.filter({ (data: FavoritModelElement) -> Bool in
+                        if (searchText.isEmpty) {
+                            self.favorites = response
+                           return true
+                        }
+                        
+                        if (data.type == "TRANSFER_SESAMA") {
+                            print("SESAMA")
+                            print(searchText)
+                            return data.name.lowercased() == searchText.lowercased() || data.transferOnUs!.destinationNumber == searchText
+                        } else {
+                            
+                            if (data.transferOffUsRtgs == nil) {
+                                print("SKN")
+                                print(searchText)
+                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsSkn!.accountTo == searchText
+                            } else {
+                                print("RTGS")
+                                print(searchText)
+                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsRtgs!.accountTo == searchText
+                            }
+                            
+                        }
+                        
+//                        return data.name.lowercased() == searchText.lowercased()
+                    })
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                
+                print("ERROR GET LIST FAVORITES-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(false)
+            }
+            
+        }
+    }
+    
     func getList(cardNo: String, sourceNumber: String, completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {

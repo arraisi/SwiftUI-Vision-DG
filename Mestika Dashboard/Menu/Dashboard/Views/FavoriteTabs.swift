@@ -62,11 +62,12 @@ struct FavoriteTabs: View {
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            
             Spacer()
             
-            Button(action: {}, label: {
-                Image("ic_search")
-            })
+//            Button(action: {}, label: {
+//                Image("ic_search")
+//            })
         }
         .padding()
     }

@@ -51,9 +51,9 @@ struct TransferTabs: View {
             }
             Spacer()
             
-            Button(action: {}, label: {
-                Image("ic_search")
-            })
+//            Button(action: {}, label: {
+//                Image("ic_search")
+//            })
         }
         .padding()
     }

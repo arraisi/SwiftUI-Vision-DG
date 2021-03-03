@@ -15,6 +15,9 @@ struct ListAllFavoriteTransactionView: View {
     private var language = LocalizationService.shared.language
     
     @State private var searchCtrl = ""
+    @State private var filterCtrl = "Type Filter"
+    
+    var _listFilterType = ["All", "Mestika", "Online", "SKN", "RTGS"]
     
     //    var action: ((FavoritModelElement) -> Void)?
     @State private var activeDetails: Bool = false
@@ -26,6 +29,7 @@ struct ListAllFavoriteTransactionView: View {
     @StateObject private var favoritVM = FavoritViewModel()
     
     @State private var showPopover: Bool = false
+    @State private var showPopoverFilter: Bool = false
     
     var cardNo: String = ""
     var sourceNumber: String = ""
@@ -38,6 +42,10 @@ struct ListAllFavoriteTransactionView: View {
     
     @State var transferDataOnUs = TransferOnUsModel()
     @State var transferDataOffUs = TransferOffUsModel()
+    
+    @State var showAlertEdit: Bool = false
+    @State var showAlert: Bool = false
+    @State var alert: String = ""
     
     var body: some View {
         ZStack {
@@ -172,6 +180,8 @@ struct ListAllFavoriteTransactionView: View {
                                     self.favoritVM.remove(data: data) { result in
                                         print("result remove favorite \(result)")
                                         if result {
+                                            self.alert = "REMOVE"
+                                            self.showAlert = true
                                             getList()
                                         }
                                     }
@@ -200,20 +210,41 @@ struct ListAllFavoriteTransactionView: View {
                 Spacer()
             }
             
-            if self.showPopover {
+            if self.showPopover || self.showPopoverFilter {
                 ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
             }
             
             if showPopover {
                 popupEdit
                     .padding(30)
-                    
+            }
+            
+            if showPopoverFilter {
+                popupFilter
+                    .padding(30)
+                    .padding(.top, 15)
             }
         }
         .onAppear {
             self.isRouteOnUs = false
             self.isRouteOffUs = false
             getList()
+        }
+        .alert(isPresented: $showAlert) {
+            
+            if (self.alert == "REMOVE") {
+                return Alert(
+                    title: Text(NSLocalizedString("Succeed".localized(language), comment: "")),
+                    message: Text("Data Berhasil Dihapus"),
+                    dismissButton: .default(Text(NSLocalizedString("Okay".localized(language), comment: "")))
+                )
+            }
+            
+            return Alert(
+                title: Text(NSLocalizedString("Succeed".localized(language), comment: "")),
+                message: Text("Perubahan Berhasil Disimpan"),
+                dismissButton: .default(Text(NSLocalizedString("Okay".localized(language), comment: "")))
+            )
         }
     }
     
@@ -313,11 +344,14 @@ struct ListAllFavoriteTransactionView: View {
                             
                             if success {
                                 self.showPopover = false
+                                self.alert = "EDIT"
+                                self.showAlert = true
                                 getList()
                             }
                             
                             if !success {
-                                
+                                self.showPopover = false
+                                getList()
                             }
                             
                         }
@@ -351,6 +385,86 @@ struct ListAllFavoriteTransactionView: View {
         }
     }
     
+    var popupFilter: some View {
+        VStack {
+            VStack {
+                HStack {
+                    Text("Based on the type of transfer")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding()
+                
+                VStack(alignment: .leading) {
+                    VStack {
+                        Menu {
+                            ForEach(self._listFilterType, id: \.self) { data in
+                                Button(action: {
+                                    self.filterCtrl = data
+                                }) {
+                                    Text(data)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(filterCtrl)
+                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                        .fontWeight(.bold)
+                                }
+                                .padding()
+                                
+                                Spacer()
+                                
+                                Image("ic_expand").padding()
+                            }
+                        }
+                        .disabled(false)
+                        .frame(height: 10)
+                        .font(.system(size: 15, weight: .bold, design: .default))
+                        .padding()
+                        .background(Color(hex: "#F6F8FB"))
+                        .cornerRadius(15)
+                        .padding(.horizontal, 15)
+                    }
+                    
+                    Button(action: {
+                        self.showPopoverFilter = false
+                        getListFilterType()
+                    }, label: {
+                        if self.favoritVM.isLoading {
+                            ProgressView()
+                        } else {
+                            Text("Search")
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                        }
+                    })
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                    .disabled(disableFormFilter)
+                    .background(disableFormFilter ? Color(.lightGray) : Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 40)
+                }
+            }
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+            .padding(.top, 20)
+            
+            Spacer()
+        }
+        .onAppear {
+            self.receivedName = self.transferDataOnUs.destinationName
+        }
+    }
+    
     var searchCard: some View {
         HStack {
             HStack {
@@ -358,9 +472,16 @@ struct ListAllFavoriteTransactionView: View {
                     print("\($searchCtrl)")
                 })
                 
-                Image("ic_search")
-                    .renderingMode(.template)
-                    .foregroundColor(.gray)
+                Button(
+                    action: {
+                        getListFilter()
+                    },
+                    label: {
+                        Image("ic_search")
+                            .renderingMode(.template)
+                            .foregroundColor(.gray)
+                    }
+                )
             }
             .frame(height: 10)
             .font(.subheadline)
@@ -370,7 +491,9 @@ struct ListAllFavoriteTransactionView: View {
             .padding(.leading, 20)
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
             
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {
+                self.showPopoverFilter = true
+            }, label: {
                 Image("ic_fillter")
                     .renderingMode(.template)
                     .foregroundColor(.gray)
@@ -385,6 +508,18 @@ struct ListAllFavoriteTransactionView: View {
         .padding([.bottom, .top], 20)
     }
     
+    func getListFilterType() {
+        self.favoritVM.getListFavoriteFilterType(type: filterCtrl, cardNo: self.cardNo, sourceNumber: self.sourceNumber) { result in
+            print(result)
+        }
+    }
+    
+    func getListFilter() {
+        self.favoritVM.getListFavoriteFilter(searchText: self.searchCtrl, cardNo: self.cardNo, sourceNumber: self.sourceNumber) { result in
+            print(result)
+        }
+    }
+    
     func getList() {
         self.favoritVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
             print(result)
@@ -393,5 +528,9 @@ struct ListAllFavoriteTransactionView: View {
     
     var disableForm: Bool {
         receivedName.isEmpty || self.favoritVM.isLoading
+    }
+    
+    var disableFormFilter: Bool {
+        filterCtrl.isEmpty || filterCtrl == "Type Filter"
     }
 }
