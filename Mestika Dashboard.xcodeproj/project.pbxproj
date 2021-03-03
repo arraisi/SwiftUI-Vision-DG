@@ -320,6 +320,8 @@
 		C06CDABC25E8A0FB00899CC8 /* LocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */; };
 		C06CDAC725E8A17700899CC8 /* String+Localisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06CDAC625E8A17700899CC8 /* String+Localisation.swift */; };
 		C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */; };
+		C0733FA425EE0E930034689F /* RoundedIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0733FA325EE0E930034689F /* RoundedIconLabel.swift */; };
+		C0733FBF25EE25320034689F /* SavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0733FBE25EE25320034689F /* SavingAccountView.swift */; };
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
 		C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */; };
@@ -360,6 +362,9 @@
 		C0BFB51E2576375500676B95 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB51D2576375400676B95 /* Address.swift */; };
 		C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */; };
 		C0D142D225DE50540015175D /* HistoryTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D142D125DE50540015175D /* HistoryTabs.swift */; };
+		C0D274D225EF099300513C53 /* RoundedIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D274D125EF099300513C53 /* RoundedIcon.swift */; };
+		C0D274D725EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D274D625EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift */; };
+		C0D274DC25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D274DB25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift */; };
 		C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */; };
 		C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */; };
 		C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */; };
@@ -726,6 +731,8 @@
 		C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationService.swift; sourceTree = "<group>"; };
 		C06CDAC625E8A17700899CC8 /* String+Localisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localisation.swift"; sourceTree = "<group>"; };
 		C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateFingerPrintResponseModel.swift; sourceTree = "<group>"; };
+		C0733FA325EE0E930034689F /* RoundedIconLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedIconLabel.swift; sourceTree = "<group>"; };
+		C0733FBE25EE25320034689F /* SavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountView.swift; sourceTree = "<group>"; };
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
 		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
@@ -766,6 +773,9 @@
 		C0BFB51D2576375400676B95 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINConfirmationView.swift; sourceTree = "<group>"; };
 		C0D142D125DE50540015175D /* HistoryTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabs.swift; sourceTree = "<group>"; };
+		C0D274D125EF099300513C53 /* RoundedIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedIcon.swift; sourceTree = "<group>"; };
+		C0D274D625EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOfOpeningSavingAccountView.swift; sourceTree = "<group>"; };
+		C0D274DB25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOfTransactionSavingAccountView.swift; sourceTree = "<group>"; };
 		C0D7B5CE2552ACEB009C3976 /* CardActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardActivationView.swift; sourceTree = "<group>"; };
 		C0D7B5DA2552AF43009C3976 /* CardOTPVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOTPVerificationView.swift; sourceTree = "<group>"; };
 		C0D7B5E22552B1B7009C3976 /* CardCVVVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCVVVerificationView.swift; sourceTree = "<group>"; };
@@ -1070,6 +1080,8 @@
 				52468AE7254179CE007518AE /* ListPromoForYouView.swift */,
 				52468AEC25417B3B007518AE /* ListPurchasePaymentView.swift */,
 				52468AF625418024007518AE /* VoucherView.swift */,
+				C0733FA325EE0E930034689F /* RoundedIconLabel.swift */,
+				C0D274D125EF099300513C53 /* RoundedIcon.swift */,
 			);
 			path = "Support Views";
 			sourceTree = "<group>";
@@ -1679,6 +1691,7 @@
 		C01C67A4255E38180019D06F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C0733FBC25EE25000034689F /* Dashboard Menu */,
 				0658B58C2563F8A1001B659D /* Notification */,
 				52BF57F52559279100F009B5 /* PaymentTransaction */,
 				526B657A254FB20800C13C36 /* Account */,
@@ -1742,6 +1755,24 @@
 				C06ED63725D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		C0733FBC25EE25000034689F /* Dashboard Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C0733FBD25EE250A0034689F /* SavingAccount */,
+			);
+			path = "Dashboard Menu";
+			sourceTree = "<group>";
+		};
+		C0733FBD25EE250A0034689F /* SavingAccount */ = {
+			isa = PBXGroup;
+			children = (
+				C0733FBE25EE25320034689F /* SavingAccountView.swift */,
+				C0D274D625EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift */,
+				C0D274DB25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift */,
+			);
+			path = SavingAccount;
 			sourceTree = "<group>";
 		};
 		C08758D625D2397C008ED730 /* Favorit */ = {
@@ -2219,6 +2250,7 @@
 				C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */,
 				C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */,
 				524746042547C900001F43C5 /* ListFavoriteTransactionView.swift in Sources */,
+				C0733FA425EE0E930034689F /* RoundedIconLabel.swift in Sources */,
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
 				525950222553E03000C8CA5D /* OtpVerificationForgotPasswordView.swift in Sources */,
 				C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */,
@@ -2324,6 +2356,7 @@
 				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
 				C0AD115A25DF7951003FF920 /* HistoryTransactionList.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
+				C0D274DC25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
 				064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */,
 				C043CFC225CD43B700328C91 /* FormChangeContactView.swift in Sources */,
@@ -2409,10 +2442,12 @@
 				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
 				522101B125C9213100C9566A /* TransferOnUsModel.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
+				C0D274D725EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
 				C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */,
 				524B396825A5C31500FE3ABE /* AddressSugestionResultResponse.swift in Sources */,
 				52ADFF402557DE6000A1001F /* SnapCarouselView.swift in Sources */,
+				C0D274D225EF099300513C53 /* RoundedIcon.swift in Sources */,
 				52D8DC0E25D62415004DF85E /* TransferSknExecResponse.swift in Sources */,
 				C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */,
 				C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */,
@@ -2421,6 +2456,7 @@
 				52ADFF212557DD0400A1001F /* RadioButtonGroup.swift in Sources */,
 				52ADFF452557DE7300A1001F /* SUImagePickerView.swift in Sources */,
 				C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */,
+				C0733FBF25EE25320034689F /* SavingAccountView.swift in Sources */,
 				C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */,
 				525FA10F25525DA8007EADCB /* OffsetKey.swift in Sources */,
 				5264ADF6255E75BD000565D5 /* ErrorResponse.swift in Sources */,

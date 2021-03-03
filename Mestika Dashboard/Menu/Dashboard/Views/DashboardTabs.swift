@@ -46,7 +46,6 @@ struct DashboardTabs: View {
                 menuGrid
                 
                 GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
-                    .padding(.top, 10)
                 
                 VStack {
                     HStack {
@@ -109,7 +108,6 @@ struct DashboardTabs: View {
                         }
                     }
                 }
-                    .padding(.top, 20)
                 
 //                ListEwalletView()
 //                    .padding(.top, 30)

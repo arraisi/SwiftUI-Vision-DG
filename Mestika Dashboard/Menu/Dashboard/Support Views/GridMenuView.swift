@@ -17,28 +17,23 @@ struct GridMenuView: View {
             HStack {
                 
                 Group {
+                    
                     NavigationLink(destination: FavoriteTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber), label: {
-                        ZStack {
-                            VStack {
-                                Image("ic_favorite")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .padding(5)
-                            }
-                        }
-                        .background(Color.white)
-                        .frame(width: 58, height: 58)
-                        .cornerRadius(10)
-                        .shadow(color: Color.gray.opacity(0.5), radius: 2)
+                        RoundedIconLabel(imageName: "ic_favorite", label: "Favorite")
                     })
                     
+                    NavigationLink(destination: SavingAccountView(), label: {
+                        RoundedIconLabel(imageName: "ic_rekening", label: "Saving Account")
+                    })
+                    
+                    
                     Button(action: {}, label: {
-                        Image("ic_menu_tarik_tunai")
+                        RoundedIconLabel(imageName: "ic_tarik_tunai", label: "Tarik Tunai")
                     })
                     .shadow(color: Color.gray.opacity(0.3), radius: 2)
                     
                     Button(action: {}, label: {
-                        Image("ic_menu_tarik_tunai")
+                        RoundedIconLabel(imageName: "ic_setor_tunai", label: "Setor Tunai")
                     })
                     .shadow(color: Color.gray.opacity(0.3), radius: 2)
                     
@@ -46,44 +41,50 @@ struct GridMenuView: View {
                         Image("ic_menu_tambah_saldo")
                     })
                     .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_pindah_saldo")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
                 }
                 
-                Button(action: {}, label: {
-                    Image("ic_menu_pindah_saldo")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
-                
-                Button(action: {}, label: {
-                    Image("ic_menu_deposito_online")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
-                
-                Button(action: {}, label: {
-                    Image("ic_menu_tabka")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
-                
-                Button(action: {}, label: {
-                    Image("ic_menu_minimum")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
-                
-                Button(action: {}, label: {
-                    Image("ic_menu_limit_transaksi")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
-                
-                Button(action: {}, label: {
-                    Image("ic_menu_rekening")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
-                
-                Button(action: {}, label: {
-                    Image("ic_menu_unfreeze_account")
-                })
-                .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                Group {
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_deposito_online")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_tabka")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_minimum")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_limit_transaksi")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_rekening")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                    Button(action: {}, label: {
+                        Image("ic_menu_unfreeze_account")
+                    })
+                    .shadow(color: Color.gray.opacity(0.3), radius: 2)
+                    
+                }
             }
-            .padding([.leading, .trailing], 15)
+            .padding(.vertical, 30)
+            .padding(.horizontal, 15)
         })
     }
 }
@@ -91,5 +92,6 @@ struct GridMenuView: View {
 struct GridMenuView_Previews: PreviewProvider {
     static var previews: some View {
         GridMenuView(cardNo: .constant(""), sourceNumber: .constant(""))
+            .previewLayout(PreviewLayout.fixed(width:  UIScreen.main.bounds.width, height: 80))
     }
 }

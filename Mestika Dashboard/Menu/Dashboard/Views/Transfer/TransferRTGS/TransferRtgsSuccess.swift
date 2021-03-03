@@ -128,7 +128,7 @@ struct TransferRtgsSuccess: View {
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
-            Text("Transfer" + "\(self.transferData.transferType)" + NSLocalizedString("Succeed".localized(language), comment: ""))
+            Text("Transfer " + "\(self.transferData.transferType)" + NSLocalizedString(" Succeed".localized(language), comment: ""))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
