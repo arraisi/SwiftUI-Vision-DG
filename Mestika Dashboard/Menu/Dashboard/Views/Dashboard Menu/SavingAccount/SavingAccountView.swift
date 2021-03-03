@@ -16,12 +16,16 @@ struct SavingAccountView: View {
     let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
     @State var product: String = ""
     
+    var nextBtnDisabled: Bool {
+        product.count == 0
+    }
+    
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
                     Text(NSLocalizedString("Saving Account".localized(language), comment: ""))
-                        .font(.custom("Montserrat-Bold", size: 32))
+                        .font(.custom("Montserrat-Bold", size: 28))
                     Text(NSLocalizedString("Get the best savings only here".localized(language), comment: ""))
                         .font(.custom("Montserrat-Bold", size: 14))
                         .foregroundColor(.gray)
@@ -64,9 +68,10 @@ struct SavingAccountView: View {
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)
-                        .background(Color("StaleBlue"))
+                        .background(nextBtnDisabled ? Color(.lightGray) : Color("StaleBlue"))
                         .cornerRadius(15)
                 })
+                .disabled(nextBtnDisabled)
             }
             .padding(25)
             .background(Color.white)
@@ -90,7 +95,7 @@ struct SavingAccountView: View {
                 List(self.mySavingProducts, id: \.self) { item in
                     
                     HStack {
-                        RoundedIcon(imageName: "ic_rekening")
+                        RoundedIcon(imageName: "ic_saving_account")
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item)
                                 .font(.custom("Montserrat-SemiBold", size: 14))

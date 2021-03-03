@@ -14,7 +14,7 @@ struct ConfirmationOfTransactionSavingAccountView: View {
             VStack(spacing: 15) {
                 
                 HStack {
-                    Image("ic_rekening")
+                    Image("ic_saving_account")
                         .resizable()
                         .frame(width: 69, height: 69)
                     Spacer()

@@ -64,7 +64,6 @@ struct ConfirmationPinOfSavingAccountView: View {
                 })
             }
         }
-        .navigationBarTitle(NSLocalizedString("Saving Account".localized(language), comment: ""), displayMode: .inline)
     }
 }
 

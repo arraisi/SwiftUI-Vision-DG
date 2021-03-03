@@ -91,6 +91,31 @@ struct SuccessOpenNewSavingAccountView: View {
         
         }
         .navigationTitle("")
+        .navigationBarItems(trailing: HStack(spacing: 30) {
+            HStack {
+                Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
+                    .font(.caption)
+                    .foregroundColor(.white)
+                
+                Button(action: {
+                    withAnimation(.easeIn) {
+//                        self.showPopover.toggle()
+                    }
+                }, label: {
+                    Image(systemName: "pin")
+                        .foregroundColor(.white)
+                })
+                
+            }
+            
+            Button(action: {
+//                self.uiImage = self.asUIImage()
+//                shareImage()
+            }, label: {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(.white)
+            })
+        })
 
     }
 }

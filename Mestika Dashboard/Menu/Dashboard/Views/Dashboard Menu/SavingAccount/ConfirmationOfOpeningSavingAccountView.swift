@@ -15,7 +15,11 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
     
     @State var product: String = ""
-    @State var depositBalance: String = "500.000"
+    @State var depositBalance: String = ""
+    
+    var nextBtnDisabled: Bool {
+        product.count == 0 || depositBalance.count == 0
+    }
     
     var body: some View {
         
@@ -80,6 +84,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             HStack(alignment: .top, spacing: 0) {
                                 Text("Rp.")
                                     .font(.custom("Montserrat-Bold", size: 24))
+                                
                                 TextField("0", text: $depositBalance)
                                     .font(.custom("Montserrat-Bold", size: 34))
                                 Spacer()
@@ -141,9 +146,10 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             .font(.custom("Montserrat-Bold", size: 14))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, maxHeight: 40)
-                            .background(Color("StaleBlue"))
+                            .background(nextBtnDisabled ? Color(.lightGray) : Color("StaleBlue"))
                             .cornerRadius(15)
                     })
+                    .disabled(nextBtnDisabled)
                     .padding(.horizontal, 25)
                 }
                 .frame(maxWidth: .infinity, maxHeight: 65)
