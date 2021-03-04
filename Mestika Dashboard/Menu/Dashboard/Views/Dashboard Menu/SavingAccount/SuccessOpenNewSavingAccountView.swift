@@ -30,12 +30,12 @@ struct SuccessOpenNewSavingAccountView: View {
                         Text("13 Januari 2021")
                             .font(.custom("Montserrat-Bold", size: 12))
                         
-                        Text("Pembukaan Tabungan \nBaru Berhasil")
+                        Text(NSLocalizedString("Savings Opening \nNew Successful".localized(language), comment: ""))
                             .multilineTextAlignment(.center)
                             .font(.custom("Montserrat-Bold", size: 18))
                             .padding(.bottom, 30)
                         
-                        Text("Jumlah Setoran")
+                        Text(NSLocalizedString("Deposit Amount".localized(language), comment: ""))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
                         HStack(alignment: .top, spacing: 0) {
@@ -50,7 +50,7 @@ struct SuccessOpenNewSavingAccountView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 5) {
                             
-                            Text("Rekening Tabungan")
+                            Text(NSLocalizedString("Saving Account".localized(language), comment: ""))
                                 .font(.custom("Montserrat-Bold", size: 10))
                             
                             Text("123456789")

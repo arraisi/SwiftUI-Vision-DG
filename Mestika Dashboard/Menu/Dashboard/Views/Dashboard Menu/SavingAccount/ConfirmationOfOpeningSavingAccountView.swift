@@ -31,7 +31,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     VStack {
                         
                         HStack {
-                            Text("Produk tabungan")
+                            Text(NSLocalizedString("Savings product".localized(language), comment: ""))
                             Spacer()
                         }
                         .font(.custom("Montserrat-SemiBold", size: 14))
@@ -74,7 +74,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     VStack {
                         
                         HStack {
-                            Text("Jumlah Setoran (Rp)")
+                            Text(NSLocalizedString("Deposit Amount (Rp)".localized(language), comment: ""))
                             Spacer()
                         }
                         .font(.custom("Montserrat-SemiBold", size: 14))
@@ -92,7 +92,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             .foregroundColor(Color("DarkStaleBlue"))
                             
                             HStack {
-                                Text("Setoran Melebihi Saldo Aktif")
+                                Text(NSLocalizedString("Deposit Exceeds Active Balance".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Bold", size: 10))
                                 Spacer()
                             }
@@ -101,7 +101,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             Divider()
                             
                             HStack {
-                                Text("Total Saldo Aktif")
+                                Text(NSLocalizedString("Total Active Balance".localized(language), comment: ""))
                                     .font(.custom("Montserrat-Bold", size: 10))
                                     .foregroundColor(.gray)
                                 
@@ -125,11 +125,11 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     
-                    SavingAccountDetailRow(label: "Minimum Setoran Awal", value: "250000")
+                    SavingAccountDetailRow(label: NSLocalizedString("Minimum Initial Deposit".localized(language), comment: ""), value: "250000")
                     
-                    SavingAccountDetailRow(label: "Minimum Setoran Selanjutnya", value: "5000")
+                    SavingAccountDetailRow(label: NSLocalizedString("Minimum Deposit Next".localized(language), comment: ""), value: "5000")
                     
-                    SavingAccountDetailRow(label: "Minimum Saldo", value: "100000")
+                    SavingAccountDetailRow(label: NSLocalizedString("Minimum Balance".localized(language), comment: ""), value: "100000")
                     
                     SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: "100000")
                 }
@@ -141,7 +141,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                 Spacer()
                 VStack {
                     NavigationLink(destination: ConfirmationOfTransactionSavingAccountView(), label: {
-                        Text("KONFIRMASI PEMBUKAAN")
+                        Text(NSLocalizedString("OPENING CONFIRMATION".localized(language), comment: ""))
                             .padding()
                             .font(.custom("Montserrat-Bold", size: 14))
                             .foregroundColor(.white)
@@ -157,7 +157,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                 .shadow(color: Color("StaleBlue").opacity(0.2), radius: 10, x: 2, y: 0)
             }
         }
-        .navigationBarTitle("Saving Account")
+        .navigationBarTitle(NSLocalizedString("Saving Account".localized(language), comment: ""))
 
         
     }

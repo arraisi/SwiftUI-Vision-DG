@@ -9,8 +9,7 @@ import SwiftUI
 
 struct SavingAccountView: View {
     
-    @AppStorage("language")
-    private var language = LocalizationService.shared.language
+    @AppStorage("language") private var language = LocalizationService.shared.language
     
     let savingProducts:[String] = ["Tabunganku", "Tabungan Mestika", "Tabungan Setia", "Tabungan SimPel"]
     let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
