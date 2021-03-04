@@ -118,11 +118,134 @@ class KartuKuService {
     func postBrokenKartKu(data: BrokenKartuKuModel, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
+            "cardDesign": data.cardDesign,
             "cardNo": data.cardNo,
-            "pin": encryptPassword(password: data.pin)
+            "encryptedPin": encryptPassword(password: data.pin),
+            "kabupatenKota": "Bandung",
+            "kecamatan": data.addressKecamatanInput,
+            "kelurahan": data.addressKelurahanInput,
+            "kodepos": data.addressKodePosInput,
+            "nameOnCard": data.nameOnCard,
+            "pin": encryptPassword(password: data.pin),
+            "postalAddress": data.addressInput,
+            "provinsi": "JAWA BARAT",
+            "rt": data.addressRtRwInput,
+            "rw": data.addressRtRwInput
         ]
         
         guard let url = URL.urlBrokenKartuKu() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("URL ABSOLUTE : \(url.absoluteURL)")
+        
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: body)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let dataResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    completion(.success(dataResponse!))
+                }
+                
+                if (httpResponse.statusCode > 300) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
+    // MARK: - POST BLOCK KARTKU KU
+    func postBlockKartKu(data: BrokenKartuKuModel, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+        
+        let body: [String: Any] = [
+            "cardDesign": data.cardDesign,
+            "cardNo": data.cardNo,
+            "encryptedPin": encryptPassword(password: data.pin),
+            "kabupatenKota": "Bandung",
+            "kecamatan": "Test",
+            "kelurahan": "Test",
+            "kodepos": "123",
+            "nameOnCard": data.nameOnCard,
+            "pin": encryptPassword(password: data.pin),
+            "postalAddress": data.addressInput,
+            "provinsi": "JAWA BARAT",
+            "rt": "02",
+            "rw": "03"
+        ]
+        
+        guard let url = URL.urlBlockKartuKu() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("URL ABSOLUTE : \(url.absoluteURL)")
+        
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: body)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let dataResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    completion(.success(dataResponse!))
+                }
+                
+                if (httpResponse.statusCode > 300) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
+    // MARK: - POST BLOCK KARTKU KU
+    func postChangePinKartKu(cardNo: String, pin: String, newPin: String, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+        
+        let body: [String: Any] = [
+            "cardNo": cardNo,
+            "newPin": encryptPassword(password: newPin),
+            "pin": encryptPassword(password: pin)
+        ]
+        
+        guard let url = URL.urlChangePinKartuKu() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         

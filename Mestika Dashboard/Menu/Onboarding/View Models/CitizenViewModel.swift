@@ -71,7 +71,8 @@ extension CitizenViewModel {
                 case .custom(code: 404):
                     self.errorMessage = "NIK TIDAK TERDAFTAR"
                 case .custom(code: 403):
-                    self.errorMessage = "USER STATUS NOT FOUND"
+//                    self.errorMessage = "USER STATUS NOT FOUND"
+                    self.errorMessage = "NIK tidak dapat didaftarkan untuk pembukaan rekening"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

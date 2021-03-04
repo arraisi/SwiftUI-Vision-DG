@@ -109,7 +109,7 @@ struct TransferRtgsDestination: View {
                         }
                         
                         Button(action: {
-                            self.transferData.addressOfDestination = self.addressCtrl
+                            self.transferData.addressOfDestination = self.transferData.notes
                             self.isRouteTransaction = true
                         }, label: {
                             Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
@@ -137,6 +137,10 @@ struct TransferRtgsDestination: View {
         .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear {
+            self.addressCtrl = self.transferData.notes
+            self.isRouteTransaction = false
         }
     }
     
@@ -183,7 +187,7 @@ struct TransferRtgsDestination: View {
                         Text(destinationType)
                             .font(.subheadline)
                             .foregroundColor(.black)
-                            .fontWeight(.light)
+                            .fontWeight(destinationType == NSLocalizedString("Receiver Type".localized(LocalizationService.shared.language), comment: "") ? .bold : .light)
                     }
                     .padding()
                     
@@ -218,7 +222,7 @@ struct TransferRtgsDestination: View {
                         Text(citizenShipCtrl)
                             .font(.subheadline)
                             .foregroundColor(.black)
-                            .fontWeight(.light)
+                            .fontWeight(citizenShipCtrl == NSLocalizedString("Citizenship".localized(LocalizationService.shared.language), comment: "") ? .bold : .light)
                     }
                     .padding()
                     
@@ -313,7 +317,7 @@ struct TransferRtgsDestination: View {
             .padding(.top, 25)
             
             VStack {
-                MultilineTextField(NSLocalizedString("Write the recipient's address".localized(language), comment: ""), text: self.$addressCtrl, onCommit: {
+                MultilineTextField(NSLocalizedString("Write the recipient's address".localized(language), comment: ""), text: self.$transferData.notes, onCommit: {
 //                    validateForm()
                 })
             }
@@ -339,7 +343,7 @@ struct TransferRtgsDestination: View {
             
         } else {
             
-            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != NSLocalizedString("Receiver Type".localized(language), comment: "") && self.citizenShipCtrl != NSLocalizedString("Citizenship".localized(language), comment: "") && self.addressCtrl.isNotEmpty()) {
+            if (self.transferData.destinationName.isNotEmpty() && self.destinationType != NSLocalizedString("Receiver Type".localized(language), comment: "") && self.citizenShipCtrl != NSLocalizedString("Citizenship".localized(language), comment: "") && self.transferData.notes.isNotEmpty()) {
                 return false
             }
         }

@@ -49,13 +49,13 @@ class TransferViewModel : ObservableObject {
                     switch error {
                     case .custom(code: 401):
                         self.code = "401"
-                        self.message = "Invalid Pin Trx"
+                        self.message = "PIN Transaksi Salah"
                     case .custom(code: 404):
                         self.code = "404"
                         self.message = "Data tidak ditemukan"
                     case .custom(code: 403):
                         self.code = "403"
-                        self.message = "Over Booking failed"
+                        self.message = "Transfer Gagal"
                     default:
                         self.message = "Internal Server Error"
                     }
@@ -93,13 +93,13 @@ class TransferViewModel : ObservableObject {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Over Booking failed"
+                    self.message = "Transfer Gagal"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -134,13 +134,13 @@ class TransferViewModel : ObservableObject {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Over Booking failed"
+                    self.message = "Transfer Gagal"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -173,13 +173,13 @@ class TransferViewModel : ObservableObject {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "RTGS failed"
+                    self.message = "Transfer Gagal"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -215,13 +215,13 @@ class TransferViewModel : ObservableObject {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "SKN failed"
+                    self.message = "Transfer Gagal"
                 default:
                     self.message = "Internal Server Error"
                 }

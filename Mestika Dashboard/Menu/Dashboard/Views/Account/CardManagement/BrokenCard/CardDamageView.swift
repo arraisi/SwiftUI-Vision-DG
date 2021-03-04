@@ -68,7 +68,7 @@ struct CardDamageView: View {
                         }
                         
                         NavigationLink(
-                            destination: CardBrokenPinVerificationView(unLocked: false).environmentObject(brokenData),
+                            destination: CardDamageAddressInputView().environmentObject(brokenData),
                             isActive: $showConfirmationPIN,
                             label: {})
                         
@@ -84,8 +84,9 @@ struct CardDamageView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, maxHeight: 50)
                             })
+                            .disabled(marked ? false : true)
                             .frame(height: 50)
-                            .background(Color(hex: "#2334D0"))
+                            .background(marked ? Color(hex: "#2334D0") : Color.gray.opacity(0.3))
                             .cornerRadius(12)
                         
                     })
@@ -103,6 +104,8 @@ struct CardDamageView: View {
             .navigationBarTitle(NSLocalizedString("Broken Card".localized(language), comment: ""), displayMode: .inline)
             .onAppear {
                 self.brokenData.cardNo = card.cardNo
+                self.brokenData.nameOnCard = card.nameOnCard
+                self.brokenData.cardDesign = "http://eagle.visiondg.xyz:8765/image/b5fb9a649b2c3670120343eb8dd85d03.png"
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(NSLocalizedString("Broken My Card".localized(language), comment: "")))) { obj in
                 print("ON RESUME")
