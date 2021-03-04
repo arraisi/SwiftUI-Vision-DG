@@ -58,7 +58,7 @@ struct PasswordView: View {
                 
                 ScrollView {
                     // Title
-                    Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
+                    Text("OPENING ACCOUNT DATA".localized(language))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -89,7 +89,7 @@ struct PasswordView: View {
                         
                         VStack {
                             // Sub title
-                            Text(NSLocalizedString("Enter Digital Banking Application Password".localized(language), comment: ""))
+                            Text("Enter Digital Banking Application Password".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .multilineTextAlignment(.center)
@@ -97,7 +97,7 @@ struct PasswordView: View {
                                 .padding(.top, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            Text(NSLocalizedString("This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)".localized(language), comment: ""))
+                            Text("This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
@@ -110,7 +110,7 @@ struct PasswordView: View {
                                     if (securedPassword) {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                SecureField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password)
+                                                SecureField("Enter Password".localized(language), text: $password)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .padding()
                                                     .frame(width: 200, height: 50)
@@ -130,7 +130,7 @@ struct PasswordView: View {
                                     } else {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password, onEditingChanged: { changed in
+                                                TextField("Enter Password".localized(language), text: $password, onEditingChanged: { changed in
                                                     print("\($password)")
                                                     
                                                     //                                                    self.registerData.password = password
@@ -159,7 +159,7 @@ struct PasswordView: View {
                                     if (securedConfirmation) {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                SecureField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
+                                                SecureField("Confirm Password".localized(language), text: $confirmationPassword)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .padding()
                                                     .frame(width: 200, height: 50)
@@ -179,7 +179,7 @@ struct PasswordView: View {
                                     } else {
                                         ZStack {
                                             HStack (spacing: 0) {
-                                                TextField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
+                                                TextField("Confirm Password".localized(language), text: $confirmationPassword)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .padding()
                                                     .frame(width: 200, height: 50)
@@ -223,7 +223,7 @@ struct PasswordView: View {
                                     }
                                 },
                                 label:{
-                                    Text(NSLocalizedString("Next".localized(language), comment: ""))
+                                    Text("Next".localized(language))
                                         .foregroundColor(.white)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .frame(maxWidth: .infinity, maxHeight: 40)
@@ -259,11 +259,11 @@ struct PasswordView: View {
         .navigationBarHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -292,14 +292,14 @@ struct PasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Password is not the same, please retype".localized(language), comment: ""))
+            Text("Password is not the same, please retype".localized(language))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
             Button(action: {}) {
-                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(.bold)

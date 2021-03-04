@@ -33,13 +33,13 @@ struct CardBrokenPinVerificationView: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text(NSLocalizedString("ENTER PIN \n TRANSACTION".localized(language), comment: ""))
+                Text("ENTER PIN \n TRANSACTION".localized(language))
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""))
+                Text("Enter your Transaction PIN".localized(language))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#2334D0"))
@@ -72,7 +72,7 @@ struct CardBrokenPinVerificationView: View {
                 .padding(.horizontal, 30)
             }
         }
-        .navigationBarTitle(NSLocalizedString("Damage Report".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Damage Report".localized(language), displayMode: .inline)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOffUs"))) { obj in
             print("SUCCESS PIN")
             let dataPin: [String: Any] = ["pinTrx": password]

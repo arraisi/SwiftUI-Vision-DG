@@ -9,6 +9,12 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct SavingSelectionModalView: View {
+    
+    // TODO: TRANSLATE
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var atmData: AddProductATM
@@ -57,7 +63,7 @@ struct SavingSelectionModalView: View {
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                TextField(NSLocalizedString("Masukkan kode referal", comment: ""), text: $atmData.atmAddresspostalReferral, onEditingChanged: { changed in
+                TextField("Masukkan kode referal".localized(language), text: $atmData.atmAddresspostalReferral, onEditingChanged: { changed in
                 }, onCommit: {})
                 .frame(height: 20)
                 .font(.custom("Montserrat-Regular", size: 14))
@@ -70,7 +76,7 @@ struct SavingSelectionModalView: View {
                 .padding(.vertical, 10)
                 .multilineTextAlignment(TextAlignment.center)
                 
-                Text(NSLocalizedString("Pastikan kamu memasukkan kode refferalmu dengan benar.", comment: ""))
+                Text("Pastikan kamu memasukkan kode refferalmu dengan benar.".localized(language))
                     .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.black)
                     .padding(.horizontal, 20)
@@ -97,7 +103,7 @@ struct SavingSelectionModalView: View {
                     }
                     
                 }) {
-                    Text(NSLocalizedString("Pilih Tabungan Ini", comment: ""))
+                    Text("Pilih Tabungan Ini".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
@@ -113,7 +119,7 @@ struct SavingSelectionModalView: View {
                     }
                     
                 }) {
-                    Text(NSLocalizedString("Pilih Tabungan lain", comment: ""))
+                    Text("Pilih Tabungan lain".localized(language))
                         .foregroundColor(Color(hex: "#5A6876"))
                         .fontWeight(.bold)
                         .font(.system(size: 14))

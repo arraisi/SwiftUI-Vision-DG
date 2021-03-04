@@ -27,13 +27,13 @@ struct ListBankAccountView: View {
         ZStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(NSLocalizedString("Select Account".localized(language), comment: ""))
+                    Text("Select Account".localized(language))
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.bold)
                     
                     HStack {
-                        Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
+                        Text("Active Balance:".localized(language))
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         Text("Rp. 0")
@@ -63,7 +63,7 @@ struct ListBankAccountView: View {
         VStack {
             
             HStack {
-                Text(NSLocalizedString("Select Account".localized(language), comment: ""))
+                Text("Select Account".localized(language))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 
@@ -80,7 +80,7 @@ struct ListBankAccountView: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
+                                Text("Active Balance:".localized(language))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text("Rp. \(data.saldo)")

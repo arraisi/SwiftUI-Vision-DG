@@ -72,13 +72,13 @@ struct DetailKartuAktifView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text(NSLocalizedString("Transaction Limit".localized(language), comment: ""))
+                            Text("Transaction Limit".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                             
                             
-                            Text(NSLocalizedString("Set card transaction limit".localized(language), comment: ""))
+                            Text("Set card transaction limit".localized(language))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
@@ -95,13 +95,13 @@ struct DetailKartuAktifView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text(NSLocalizedString("ATM PIN Settings".localized(language), comment: ""))
+                            Text("ATM PIN Settings".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                             
                             
-                            Text(NSLocalizedString("Change ATM PIN / Reset ATM PIN".localized(language), comment: ""))
+                            Text("Change ATM PIN / Reset ATM PIN".localized(language))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
@@ -141,13 +141,13 @@ struct DetailKartuAktifView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text(NSLocalizedString("Broken Card".localized(language), comment: ""))
+                            Text("Broken Card".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                             
                             
-                            Text(NSLocalizedString("Report card damage".localized(language), comment: ""))
+                            Text("Report card damage".localized(language))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))

@@ -41,12 +41,12 @@ struct IncomingVideoCallView: View {
                     .padding(.bottom, 50)
                 
                 VStack {
-                    Text(NSLocalizedString("Incoming Video Call".localized(language), comment: ""))
+                    Text("Incoming Video Call".localized(language))
                         .font(.title3)
                         .foregroundColor(.white)
                         .padding(.bottom, 5)
                     
-                    Text(NSLocalizedString("Call Center Mestika Bank", comment: ""))
+                    Text("Call Center Mestika Bank")
                         .font(.title)
                         .foregroundColor(.white)
                         .fontWeight(.bold)
@@ -118,7 +118,7 @@ struct IncomingVideoCallView: View {
                 }) {
                     Image("ic_call")
                 }
-                Text(NSLocalizedString("Accept".localized(language), comment: ""))
+                Text("Accept".localized(language))
                     .foregroundColor(.white)
             }
             
@@ -132,7 +132,7 @@ struct IncomingVideoCallView: View {
                 }) {
                     Image("ic_hangup")
                 }
-                Text(NSLocalizedString("Hang Up".localized(language), comment: ""))
+                Text("Hang Up".localized(language))
                     .foregroundColor(.white)
             }
         }

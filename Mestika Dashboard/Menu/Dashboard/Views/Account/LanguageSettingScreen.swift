@@ -25,12 +25,12 @@ struct LanguageSettingScreen: View {
             }
             ScrollView(showsIndicators: false) {
                 VStack {
-                    Text(NSLocalizedString("Choose Language".localized(language), comment: ""))
+                    Text("Choose Language".localized(language))
                         .font(.custom("Montserrat-Bold", size: 24))
                         .foregroundColor(Color(hex: "#232175"))
                     
                     VStack(alignment: .leading, spacing: 30) {
-                        Text(NSLocalizedString("Select this Language to use for the Application".localized(language), comment: ""))
+                        Text("Select this Language to use for the Application".localized(language))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#002251"))
                             .padding(.top, 5)
@@ -48,7 +48,7 @@ struct LanguageSettingScreen: View {
                             }
                             self.presentationMode.wrappedValue.dismiss()
                         }) {
-                            Text(NSLocalizedString("Use this Language".localized(language), comment: ""))
+                            Text("Use this Language".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 16))
                                 .frame(maxWidth: .infinity, maxHeight: 50)

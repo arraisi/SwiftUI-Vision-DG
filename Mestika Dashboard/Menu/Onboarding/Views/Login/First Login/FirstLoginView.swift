@@ -45,7 +45,7 @@ struct FirstLoginView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack {
-                    Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
+                    Text("LOGIN APPS".localized(language))
                         .font(.title3)
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
@@ -77,11 +77,11 @@ struct FirstLoginView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES"), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("No", comment: ""))))
+                secondaryButton: .cancel(Text("No")))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -93,7 +93,7 @@ struct FirstLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text(NSLocalizedString("Please Enter Your Mobile Number".localized(language), comment: ""))
+            Text("Please Enter Your Mobile Number".localized(language))
                 .font(.caption)
                 .bold()
                 .foregroundColor(.white)
@@ -129,7 +129,7 @@ struct FirstLoginView: View {
             .cornerRadius(15)
             .padding(.horizontal, 20)
             
-            Text(NSLocalizedString("Make sure your cellphone number is correct before proceeding to the next stage".localized(language), comment: ""))
+            Text("Make sure your cellphone number is correct before proceeding to the next stage".localized(language))
                 .font(.caption)
                 .bold()
                 .foregroundColor(.white)
@@ -143,7 +143,7 @@ struct FirstLoginView: View {
                     checkPhoneNumber()
                 },
                 label: {
-                    Text(NSLocalizedString("Enter your mobile number".localized(language), comment: ""))
+                    Text("Enter your mobile number".localized(language))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
                         .fontWeight(.bold)
                         .font(.system(size: 13))
@@ -180,13 +180,13 @@ struct FirstLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Phone number not registered".localized(language), comment: ""))
+            Text("Phone number not registered".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("The number you have is not registered, please register.".localized(language), comment: ""))
+            Text("The number you have is not registered, please register.".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))

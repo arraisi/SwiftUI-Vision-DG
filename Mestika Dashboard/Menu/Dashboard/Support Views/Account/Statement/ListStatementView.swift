@@ -31,7 +31,7 @@ struct ListStatementView: View {
             .padding(.top, 20)
             
             HStack {
-                Text(NSLocalizedString("Monthly financial reports".localized(language), comment: ""))
+                Text("Monthly financial reports".localized(language))
                     .font(.caption)
                     .fontWeight(.light)
                 

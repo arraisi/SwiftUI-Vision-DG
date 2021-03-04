@@ -23,12 +23,12 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text(NSLocalizedString("INPUT NO ACCOUNT / ID CARD".localized(language), comment: ""))
+                Text("INPUT NO ACCOUNT / ID CARD".localized(language))
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                 
-                Text(NSLocalizedString("Enter your account number / KTP and Transaction PIN.".localized(language), comment: ""))
+                Text("Enter your account number / KTP and Transaction PIN.".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -38,7 +38,7 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 
                 VStack {
                     HStack {
-                        TextField(NSLocalizedString("Enter your account number / ID CARD".localized(language), comment: ""), text: self.$atmNumberCtrl)
+                        TextField("Enter your account number / ID CARD".localized(language), text: self.$atmNumberCtrl)
                     }
                     .frame(height: 25)
                     .padding()
@@ -50,7 +50,7 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 
                 VStack {
                     HStack {
-                        TextField(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""), text: self.$pinAtmCtrl)
+                        TextField("Enter your Transaction PIN".localized(language), text: self.$pinAtmCtrl)
                     }
                     .frame(height: 25)
                     .padding()
@@ -64,7 +64,7 @@ struct FormNoRekeningPinForgotPasswordScreen: View {
                 
                 VStack {
                     NavigationLink(destination: LoginScreen(isNewDeviceLogin: .constant(false)), label: {
-                        Text(NSLocalizedString("DATA CONFIRMATION".localized(language), comment: ""))
+                        Text("DATA CONFIRMATION".localized(language))
                             .foregroundColor(Color(hex: "#232175"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))

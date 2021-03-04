@@ -25,7 +25,7 @@ struct ListHistoryTransferView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Transfer History".localized(language), comment: ""))
+                    Text("Transfer History".localized(language))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -33,7 +33,7 @@ struct ListHistoryTransferView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text(NSLocalizedString("More".localized(language), comment: ""))
+                        Text("More".localized(language))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.caption2)
                             .fontWeight(.bold)

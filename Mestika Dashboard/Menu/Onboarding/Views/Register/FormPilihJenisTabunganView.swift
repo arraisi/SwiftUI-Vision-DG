@@ -69,7 +69,7 @@ struct FormPilihJenisTabunganView: View {
                 VStack {
                     AppBarLogo(light: false, onCancel: {})
                     
-                    Text(NSLocalizedString("Choose Your Savings Type".localized(language), comment: ""))
+                    Text("Choose Your Savings Type".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 15))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.horizontal, 15)
@@ -167,11 +167,11 @@ struct FormPilihJenisTabunganView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -194,13 +194,13 @@ struct FormPilihJenisTabunganView: View {
     
     var detailsTypeSaving: some View {
         VStack(alignment: .leading) {
-            Text(NSLocalizedString("Deposit Savings".localized(language), comment: ""))
+            Text("Deposit Savings".localized(language))
                 .font(.custom("Montserrat-Bold", size: 22))
                 .foregroundColor(Color(hex: "#3756DF"))
                 .padding(.top, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(NSLocalizedString("Savings Advantages:".localized(language), comment: ""))
+            Text("Savings Advantages:".localized(language))
                 .font(.custom("Montserrat-Regular", size: 12))
                 .padding(.vertical, 10)
                 .foregroundColor(Color(hex: "#5A6876"))
@@ -210,7 +210,7 @@ struct FormPilihJenisTabunganView: View {
             
             NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData)) {
                 
-                Text(NSLocalizedString("Choose this Savings".localized(language), comment: ""))
+                Text("Choose this Savings".localized(language))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

@@ -209,6 +209,10 @@
 "Choose Language" = "Choose Language";
 "Select this Language to use for the Application" = "Select this Language to use for the Application";
 "Use this Language" = "Use this Language";
+///* LanguageSettingScreen */
+//"Choose Language" = "Pilih bahasa";
+//"Select this Language to use for the Application" = "Pilih Bahasa ini untuk digunakan untuk Aplikasi";
+//"Use this Language" = "Gunakan Bahasa ini";
 
 /* Register */
 /* KetentuanRegisterNonNasabahView */

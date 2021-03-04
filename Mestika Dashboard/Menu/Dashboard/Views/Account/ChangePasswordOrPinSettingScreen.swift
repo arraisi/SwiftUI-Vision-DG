@@ -16,15 +16,15 @@ struct ChangePasswordOrPinSettingScreen: View {
             VStack {
                 List {
                     NavigationLink(destination: FormInputOldPasswordScreen(), label: {
-                        Text(NSLocalizedString("Change Transaction PIN".localized(language), comment: ""))
+                        Text("Change Transaction PIN".localized(language))
                     })
                     
                     NavigationLink(destination: FormInputOldPasswordScreen(), label: {
-                        Text(NSLocalizedString("Change Password".localized(language), comment: ""))
+                        Text("Change Password".localized(language))
                     })
                     
                     NavigationLink(destination: FormInputResetPinScreen(unLocked: false), label: {
-                        Text(NSLocalizedString("Reset Transaction PIN".localized(language), comment: ""))
+                        Text("Reset Transaction PIN".localized(language))
                     })
                 }
                 .padding([.top, .bottom], 20)
@@ -38,7 +38,7 @@ struct ChangePasswordOrPinSettingScreen: View {
             
             Spacer()
         }
-        .navigationBarTitle(NSLocalizedString("Change Password / PIN".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Change Password / PIN".localized(language), displayMode: .inline)
     }
 }
 

@@ -25,7 +25,7 @@ struct FormChangeAddressView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     
-                    Text(NSLocalizedString("Address Data".localized(language), comment: ""))
+                    Text("Address Data".localized(language))
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
                     
@@ -35,7 +35,7 @@ struct FormChangeAddressView: View {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
-                        Text(NSLocalizedString("Back".localized(language), comment: ""))
+                        Text("Back".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .fontWeight(.bold)
@@ -63,45 +63,45 @@ struct FormChangeAddressView: View {
     
     var FormAddress: some View {
         VStack {
-            LabelTextField(value: self.$profileVM.alamat, label: NSLocalizedString("Address".localized(language), comment: ""), placeHolder: NSLocalizedString("Address".localized(language), comment: ""), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.alamat, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
             HStack(spacing: 20) {
-                LabelTextField(value: self.$profileVM.rt, label: NSLocalizedString("RT".localized(language), comment: ""), placeHolder: NSLocalizedString("RT".localized(language), comment: ""), disabled: true, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.rt, label: "RT".localized(language), placeHolder: "RT".localized(language), disabled: true, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.rw, label: NSLocalizedString("RW".localized(language), comment: ""), placeHolder: NSLocalizedString("RW".localized(language), comment: ""), disabled: true, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.rw, label: "RW".localized(language), placeHolder: "RW".localized(language), disabled: true, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
             }
             
-            LabelTextField(value: self.$profileVM.kelurahanName, label: NSLocalizedString("Village".localized(language), comment: ""), placeHolder: NSLocalizedString("Village".localized(language), comment: ""), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.kelurahanName, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.kecamatanName, label: NSLocalizedString("Sub-District".localized(language), comment: ""), placeHolder: NSLocalizedString("Sub-District".localized(language), comment: ""), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.kecamatanName, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.kabupatenName, label: NSLocalizedString("City".localized(language), comment: ""), placeHolder: NSLocalizedString("City".localized(language), comment: ""), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.kabupatenName, label: "City".localized(language), placeHolder: "City".localized(language), disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.provinsiName, label: NSLocalizedString("Province".localized(language), comment: ""), placeHolder: NSLocalizedString("Province".localized(language), comment: ""), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.provinsiName, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")

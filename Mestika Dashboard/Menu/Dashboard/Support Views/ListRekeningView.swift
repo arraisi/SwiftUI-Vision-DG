@@ -19,7 +19,7 @@ struct ListRekeningView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Account".localized(language), comment: ""))
+                Text("Account".localized(language))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 

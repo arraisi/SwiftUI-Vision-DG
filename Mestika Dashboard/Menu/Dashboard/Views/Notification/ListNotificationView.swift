@@ -34,7 +34,7 @@ struct ListNotificationView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text(NSLocalizedString("Mark All Read".localized(language), comment: ""))
+                        Text("Mark All Read".localized(language))
                             .foregroundColor(Color("DarkStaleBlue"))
                             .font(.caption2)
                             .padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 20))
@@ -63,7 +63,7 @@ struct ListNotificationView: View {
                                                 .font(.system(size: 12))
                                                 .fontWeight(.light)
                                                 .foregroundColor(Color("DarkStaleBlue"))
-                                            Text(NSLocalizedString("Destination account:".localized(language), comment: ""))
+                                            Text("Destination account:".localized(language))
                                                 .foregroundColor(Color("DarkStaleBlue"))
                                                 .font(.system(size: 12))
                                                 .fontWeight(.ultraLight)

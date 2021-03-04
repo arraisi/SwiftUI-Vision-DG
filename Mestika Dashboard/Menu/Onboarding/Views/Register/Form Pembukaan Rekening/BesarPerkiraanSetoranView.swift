@@ -56,7 +56,7 @@ struct BesarPerkiraanSetoranView: View {
                         
                         VStack {
                             // Title
-                            Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
+                            Text("OPENING ACCOUNT DATA".localized(language))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
@@ -88,8 +88,8 @@ struct BesarPerkiraanSetoranView: View {
                                         Spacer()
                                         
                                         // Sub title
-                                        Text(NSLocalizedString("How Much Your Estimated Deposit Funds Each Month".localized(language
-                                        ), comment: ""))
+                                        Text("How Much Your Estimated Deposit Funds Each Month".localized(language
+                                        ))
                                             .font(.custom("Montserrat-SemiBold", size: 18))
                                             .foregroundColor(Color(hex: "#232175"))
                                             .multilineTextAlignment(.center)
@@ -123,7 +123,7 @@ struct BesarPerkiraanSetoranView: View {
                                         if (editMode == .inactive) {
                                             NavigationLink(destination: PerkerjaanView().environmentObject(registerData)) {
                                                 
-                                                Text(NSLocalizedString("Next".localized(language), comment: ""))
+                                                Text("Next".localized(language))
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
@@ -138,7 +138,7 @@ struct BesarPerkiraanSetoranView: View {
                                         } else {
                                             NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
                                                 
-                                                Text(NSLocalizedString("Save".localized(language), comment: ""))
+                                                Text("Save".localized(language))
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
@@ -176,11 +176,11 @@ struct BesarPerkiraanSetoranView: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

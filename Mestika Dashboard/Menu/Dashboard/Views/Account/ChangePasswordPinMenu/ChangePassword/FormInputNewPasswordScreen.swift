@@ -20,12 +20,12 @@ struct FormInputNewPasswordScreen: View {
     
     var body: some View {
         VStack {
-            Text(NSLocalizedString("NEW PASSWORD".localized(language), comment: ""))
+            Text("NEW PASSWORD".localized(language))
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#2334D0"))
             
-            Text(NSLocalizedString("Enter your new password".localized(language), comment: ""))
+            Text("Enter your new password".localized(language))
                 .font(.subheadline)
                 .fontWeight(.light)
                 .foregroundColor(Color(hex: "#002251"))
@@ -35,15 +35,15 @@ struct FormInputNewPasswordScreen: View {
                 VStack {
                     HStack {
                         if (showPassword) {
-                            TextField(NSLocalizedString("New Password".localized(language), comment: ""), text: self.$passwordCtrl)
+                            TextField("New Password".localized(language), text: self.$passwordCtrl)
                         } else {
-                            SecureField(NSLocalizedString("New Password".localized(language), comment: ""), text: self.$passwordCtrl)
+                            SecureField("New Password".localized(language), text: self.$passwordCtrl)
                         }
                         
                         Button(action: {
                             self.showPassword.toggle()
                         }, label: {
-                            Text(NSLocalizedString("show".localized(language), comment: ""))
+                            Text("show".localized(language))
                                 .foregroundColor(Color(hex: "#3756DF"))
                                 .fontWeight(.light)
                         })
@@ -55,15 +55,15 @@ struct FormInputNewPasswordScreen: View {
                     
                     HStack {
                         if (showConfirmPassword) {
-                            TextField(NSLocalizedString("Confirm password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
+                            TextField("Confirm password".localized(language), text: self.$confirmPasswordCtrl)
                         } else {
-                            SecureField(NSLocalizedString("Confirm password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
+                            SecureField("Confirm password".localized(language), text: self.$confirmPasswordCtrl)
                         }
                         
                         Button(action: {
                             self.showConfirmPassword.toggle()
                         }, label: {
-                            Text(NSLocalizedString("show".localized(language), comment: ""))
+                            Text("show".localized(language))
                                 .foregroundColor(Color(hex: "#3756DF"))
                                 .fontWeight(.light)
                         })
@@ -82,7 +82,7 @@ struct FormInputNewPasswordScreen: View {
             
             VStack {
                 Button(action: {}, label: {
-                    Text(NSLocalizedString("Save New Password".localized(language), comment: ""))
+                    Text("Save New Password".localized(language))
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .font(.system(size: 13))
@@ -98,9 +98,9 @@ struct FormInputNewPasswordScreen: View {
             
         }
         .padding(.top, 60)
-        .navigationBarTitle(NSLocalizedString("Change Password".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Change Password".localized(language), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
-            Text(NSLocalizedString("Cancel".localized(language), comment: ""))
+            Text("Cancel".localized(language))
         }))
     }
 }

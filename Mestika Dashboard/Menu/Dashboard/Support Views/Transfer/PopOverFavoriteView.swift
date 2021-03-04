@@ -27,7 +27,7 @@ struct PopOverFavoriteView: View {
         VStack {
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
+                    Text("Add to favorites?".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -37,7 +37,7 @@ struct PopOverFavoriteView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(NSLocalizedString("Contact".localized(language), comment: ""))
+                        Text("Contact".localized(language))
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -46,7 +46,7 @@ struct PopOverFavoriteView: View {
                     .padding(.horizontal, 20)
                     
                     VStack {
-                        TextField(NSLocalizedString("Contact".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
+                        TextField("Contact".localized(language), text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
                             print("\($receivedName)")
                         })
@@ -61,7 +61,7 @@ struct PopOverFavoriteView: View {
                     .padding(.bottom, 25)
                     
                     HStack {
-                        Text(NSLocalizedString("Account Details".localized(language), comment: ""))
+                        Text("Account Details".localized(language))
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -94,12 +94,12 @@ struct PopOverFavoriteView: View {
                     
                     // No. Rekening Form
                     HStack(spacing: 20) {
-                        Text(NSLocalizedString("Account number".localized(language), comment: ""))
+                        Text("Account number".localized(language))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100)
                         
-                        TextField(NSLocalizedString("Account number".localized(language), comment: ""), text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
+                        TextField("Account number".localized(language), text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
                             //                            print("\($receivedRekening)")
                         })
                         .disabled(true)
@@ -141,7 +141,7 @@ struct PopOverFavoriteView: View {
                         print("\nTRANSFER ON US trx date => \(transferData.transactionDate)")
                         
                         self.favoritVM.transferOnUs(data: transferData) { result in
-                            print(NSLocalizedString("Save to favorites".localized(language), comment: ""))
+                            print("Save to favorites".localized(language))
                             self.show = false
                             self.showAlert = true
                         }
@@ -149,7 +149,7 @@ struct PopOverFavoriteView: View {
                         if self.favoritVM.isLoading {
                             ProgressView()
                         } else {
-                            Text(NSLocalizedString("SAVE TO FAVORITE".localized(language), comment: ""))
+                            Text("SAVE TO FAVORITE".localized(language))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                         }

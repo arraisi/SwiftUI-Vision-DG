@@ -32,7 +32,7 @@ struct FirstPasswordAppLoginView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack {
-                    Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
+                    Text("LOGIN APPS".localized(language))
                         .font(.custom("Montserrat-Bold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -57,7 +57,7 @@ struct FirstPasswordAppLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text(NSLocalizedString("Enter your Account Password".localized(language), comment: ""))
+            Text("Enter your Account Password".localized(language))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -71,7 +71,7 @@ struct FirstPasswordAppLoginView: View {
                     if (securedPassword) {
                         ZStack {
                             HStack (spacing: 0) {
-                                SecureField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password)
+                                SecureField("Enter Password".localized(language), text: $password)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -93,7 +93,7 @@ struct FirstPasswordAppLoginView: View {
                     } else {
                         ZStack {
                             HStack (spacing: 0) {
-                                TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password, onEditingChanged: { changed in
+                                TextField("Enter Password".localized(language), text: $password, onEditingChanged: { changed in
                                     print("\($password)")
                                 })
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -129,7 +129,7 @@ struct FirstPasswordAppLoginView: View {
                     checkPassword()
                 },
                 label: {
-                    Text(NSLocalizedString("LOGIN APPS".localized(language), comment: ""))
+                    Text("LOGIN APPS".localized(language))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

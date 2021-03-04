@@ -43,7 +43,7 @@ struct FirstATMLoginView: View {
             VStack {
                 
                 VStack {
-                    Text(NSLocalizedString("ENTER YOUR DATA".localized(language), comment: ""))
+                    Text("ENTER YOUR DATA".localized(language))
                         .font(.title2)
                         .bold()
                         .foregroundColor(.white)
@@ -75,7 +75,7 @@ struct FirstATMLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text(NSLocalizedString("Enter your registered ATM card number and ATM PIN".localized(language), comment: ""))
+            Text("Enter your registered ATM card number and ATM PIN".localized(language))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -83,7 +83,7 @@ struct FirstATMLoginView: View {
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
             
-            TextField(NSLocalizedString("Enter your ATM number".localized(language), comment: ""), text: $atmNumber, onEditingChanged: { changed in
+            TextField("Enter your ATM number".localized(language), text: $atmNumber, onEditingChanged: { changed in
                 print("\($atmNumber)")
             })
             .frame(height: 20)
@@ -94,7 +94,7 @@ struct FirstATMLoginView: View {
             .cornerRadius(20)
             .padding(.horizontal, 20)
             
-            TextField(NSLocalizedString("Enter your ATM PIN".localized(language), comment: ""), text: $pin, onEditingChanged: { changed in
+            TextField("Enter your ATM PIN".localized(language), text: $pin, onEditingChanged: { changed in
                 print("\($pin)")
             })
             .frame(height: 20)
@@ -110,7 +110,7 @@ struct FirstATMLoginView: View {
                     checkPinAndAtm()
                 },
                 label: {
-                    Text(NSLocalizedString("Enter Your ATM Card Data".localized(language), comment: ""))
+                    Text("Enter Your ATM Card Data".localized(language))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
                         .fontWeight(.bold)
                         .font(.system(size: 13))
@@ -156,13 +156,13 @@ struct FirstATMLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Your PIN or ATM Number is wrong".localized(language), comment: ""))
+            Text("Your PIN or ATM Number is wrong".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("The data you entered is not correct, please re-enter it.".localized(language), comment: ""))
+            Text("The data you entered is not correct, please re-enter it.".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))

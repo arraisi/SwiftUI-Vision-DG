@@ -47,13 +47,13 @@ struct CardCVVVerificationView: View {
                         Image(systemName: "largecircle.fill.circle")
                             .foregroundColor(.blue)
                         
-                        Text(NSLocalizedString("CVV Code".localized(language), comment: ""))
+                        Text("CVV Code".localized(language))
                     }
                     
                     VStack(alignment: .leading) {
                         
                         HStack (spacing: 0) {
-                            TextField(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""), text: $cvv.text, onEditingChanged: { changed in
+                            TextField("ENTER PASSWORD".localized(language), text: $cvv.text, onEditingChanged: { changed in
                                 print("input \($cvv.text)")
                             })
                             .font(.custom("Montserrat-Regular", size: 14))
@@ -65,7 +65,7 @@ struct CardCVVVerificationView: View {
                         
                         Divider()
                         
-                        Text(NSLocalizedString("Enter the 3 digit number on the back of your ATM card".localized(language), comment: ""))
+                        Text("Enter the 3 digit number on the back of your ATM card".localized(language))
                             .font(.system(size: 12))
                     }
                     .padding(.vertical, 25)
@@ -90,7 +90,7 @@ struct CardCVVVerificationView: View {
                     self.showingModal.toggle()
                     
                 }, label: {
-                    Text(NSLocalizedString("Activate Card".localized(language), comment: ""))
+                    Text("Activate Card".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -112,7 +112,7 @@ struct CardCVVVerificationView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .navigationBarTitle(NSLocalizedString("Activate Card".localized(language), comment: ""))
+        .navigationBarTitle("Activate Card".localized(language))
         .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             createBottomFloater()
         }
@@ -131,7 +131,7 @@ struct CardCVVVerificationView: View {
             
             HStack {
                 Text(
-                    !backView ? NSLocalizedString("Your ATM Card Activation Is Successful".localized(language), comment: "") : falseCount < 3 ? NSLocalizedString("WRONG CVV CODE".localized(language), comment: "") : NSLocalizedString("WRONG 3 TIMES CVV CODE".localized(language), comment: ""))
+                    !backView ? "Your ATM Card Activation Is Successful".localized(language) : falseCount < 3 ? "WRONG CVV CODE".localized(language) : "WRONG 3 TIMES CVV CODE".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(!backView ? Color(hex: "#2334D0") : Color(hex: "#F32424"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -140,7 +140,7 @@ struct CardCVVVerificationView: View {
             .padding(.top, 25)
             
             HStack {
-                Text(!backView ? "" : falseCount < 3 ? NSLocalizedString("The last 3 digit number on the back of your ATM card does not match the registered card number.".localized(language), comment: "") : NSLocalizedString("The CVV code you entered is incorrect. Your chance has expired. Please try again Tomorrow.".localized(language), comment: ""))
+                Text(!backView ? "" : falseCount < 3 ? "The last 3 digit number on the back of your ATM card does not match the registered card number.".localized(language) : "The CVV code you entered is incorrect. Your chance has expired. Please try again Tomorrow.".localized(language))
                     .font(.custom("Montserrat-Light", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -165,7 +165,7 @@ struct CardCVVVerificationView: View {
                     }
                 }
             }) {
-                Text(!backView ? NSLocalizedString("BACK TO MY CARD".localized(language), comment: "") : falseCount < 3 ? NSLocalizedString("RETURN THE CARD NUMBER".localized(language), comment: ""):NSLocalizedString("Back to Main Page".localized(language), comment: ""))
+                Text(!backView ? "BACK TO MY CARD".localized(language) : falseCount < 3 ? "RETURN THE CARD NUMBER".localized(language):"Back to Main Page".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)

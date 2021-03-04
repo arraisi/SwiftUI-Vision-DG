@@ -29,11 +29,11 @@ struct SuccessCancelView: View {
                             .frame(height: 150)
                             .padding(.bottom, 20)
                         
-                        Text(NSLocalizedString("Succeed".localized(language), comment: ""))
+                        Text("Succeed".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 16))
                         
-                        Text(NSLocalizedString("Application For Account Opening Has Been Canceled".localized(language), comment: ""))
+                        Text("Application For Account Opening Has Been Canceled".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Normal", size: 12))
                     }
@@ -46,7 +46,7 @@ struct SuccessCancelView: View {
                     Button(action: {
                         self.appState.moveToWelcomeView = true
                     }, label: {
-                        Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
+                        Text("Back to Main Page".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Bold", size: 16))
                     })

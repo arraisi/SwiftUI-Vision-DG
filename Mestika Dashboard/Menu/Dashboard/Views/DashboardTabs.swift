@@ -49,7 +49,7 @@ struct DashboardTabs: View {
                 
                 VStack {
                     HStack {
-                        Text(NSLocalizedString("My Card".localized(language), comment: ""))
+                        Text("My Card".localized(language))
                             .font(.title3)
                             .fontWeight(.ultraLight)
                         
@@ -147,7 +147,7 @@ struct DashboardTabs: View {
                         .fontWeight(.medium)
                 }
                 
-                Text(NSLocalizedString("Is there anything I can help you with?".localized(language), comment: ""))
+                Text("Is there anything I can help you with?".localized(language))
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
@@ -179,13 +179,13 @@ struct DashboardTabs: View {
                         
                         if (isHiddenBalance) {
                             VStack(alignment: .leading) {
-                                Text(NSLocalizedString("Balance hidden".localized(language), comment: ""))
+                                Text("Balance hidden".localized(language))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                             }
                         } else {
                             VStack(alignment: .leading) {
-                                Text(NSLocalizedString("Main Account Balance".localized(language), comment: ""))
+                                Text("Main Account Balance".localized(language))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 

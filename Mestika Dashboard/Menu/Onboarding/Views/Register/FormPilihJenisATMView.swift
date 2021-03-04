@@ -56,7 +56,7 @@ struct FormPilihJenisATMView: View {
                 VStack {
                     AppBarLogo(light: false, onCancel: {})
                     
-                    Text(NSLocalizedString("Choose Your ATM Card Type".localized(language), comment: ""))
+                    Text("Choose Your ATM Card Type".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.top, 25)
@@ -131,11 +131,11 @@ struct FormPilihJenisATMView: View {
             }
             .alert(isPresented: $isShowingAlert) {
                 return Alert(
-                    title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                    primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                    title: Text("Do you want to cancel registration?".localized(language)),
+                    primaryButton: .default(Text("YES".localized(language)), action: {
                         self.appState.moveToWelcomeView = true
                     }),
-                    secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                    secondaryButton: .cancel(Text("NO".localized(language))))
             }
             .gesture(DragGesture().onEnded({ value in
                 if(value.startLocation.x < 20 &&
@@ -154,7 +154,7 @@ struct FormPilihJenisATMView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Please check your internet connection".localized(language), comment: ""))
+            Text("Please check your internet connection".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)

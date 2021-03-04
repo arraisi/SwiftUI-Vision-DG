@@ -26,11 +26,11 @@ struct FormInputOldPinScreen: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text(NSLocalizedString("ENTER OLD PIN".localized(language), comment: ""))
+                Text("ENTER OLD PIN".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text(NSLocalizedString("Please enter your old transaction PIN".localized(language), comment: ""))
+                Text("Please enter your old transaction PIN".localized(language))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
@@ -43,7 +43,7 @@ struct FormInputOldPinScreen: View {
                 .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
                 
                 
-                Text(wrongPin ? NSLocalizedString("Incorrect Pin".localized(language), comment: "") : "")
+                Text(wrongPin ? "Incorrect Pin".localized(language) : "")
                     .foregroundColor(.red)
                     .fontWeight(.heavy)
                     .padding()
@@ -75,9 +75,9 @@ struct FormInputOldPinScreen: View {
                 .padding(.horizontal, 30)
             }
         }
-        .navigationBarTitle(NSLocalizedString("Change PIN Transaction".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Change PIN Transaction".localized(language), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
-            Text(NSLocalizedString("Cancel".localized(language), comment: ""))
+            Text("Cancel".localized(language))
         }))
     }
 }

@@ -112,7 +112,7 @@ struct AccountTabs: View {
             ZStack {
                 VStack {
                     HStack {
-                        Text(NSLocalizedString("Account".localized(language), comment: ""))
+                        Text("Account".localized(language))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.title)
                             .fontWeight(.bold)
@@ -141,7 +141,7 @@ struct AccountTabs: View {
                     NavigationLink(destination : FormChangeAddressView()){
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(NSLocalizedString("Address".localized(language), comment: ""))
+                                Text("Address".localized(language))
                                     .foregroundColor(Color(hex: "#1D2238"))
                                     .font(.subheadline)
                                     .fontWeight(.bold)
@@ -159,7 +159,7 @@ struct AccountTabs: View {
                     NavigationLink(destination : FormChangeContactView(txtPhone: self.$profileVM.telepon, txtEmail: self.$profileVM.email)){
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(NSLocalizedString("Contact".localized(language), comment: ""))
+                                Text("Contact".localized(language))
                                     .foregroundColor(Color(hex: "#1D2238"))
                                     .font(.subheadline)
                                     .fontWeight(.bold)
@@ -177,7 +177,7 @@ struct AccountTabs: View {
                     NavigationLink(destination : LanguageSettingScreen()){
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(NSLocalizedString("Language".localized(language), comment: ""))
+                                Text("Language".localized(language))
                                     .foregroundColor(Color(hex: "#1D2238"))
                                     .font(.subheadline)
                                     .fontWeight(.bold)
@@ -198,7 +198,7 @@ struct AccountTabs: View {
             ZStack {
                 VStack {
                     HStack {
-                        Text(NSLocalizedString("Security".localized(language), comment: ""))
+                        Text("Security".localized(language))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.title)
                             .fontWeight(.bold)
@@ -213,7 +213,7 @@ struct AccountTabs: View {
                             Toggle(
                                 isOn: $isFingerprint,
                                 label: {
-                                    Text(NSLocalizedString("Activation".localized(language), comment: "") + " \(Biometric().type() == .faceID ? "Face ID" : "Finger Print")")
+                                    Text("Activation".localized(language) + " \(Biometric().type() == .faceID ? "Face ID" : "Finger Print")")
                                         .foregroundColor(Color(hex: "#1D2238"))
                                         .font(.subheadline)
                                         .fontWeight(.bold)
@@ -253,7 +253,7 @@ struct AccountTabs: View {
                         
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(NSLocalizedString("Change Password".localized(language), comment: ""))
+                                Text("Change Password".localized(language))
                                     .foregroundColor(Color(hex: "#1D2238"))
                                     .font(.subheadline)
                                     .fontWeight(.bold)
@@ -272,7 +272,7 @@ struct AccountTabs: View {
                     NavigationLink(destination : FormChangePinTransactionView()) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(NSLocalizedString("Change PIN Transaction".localized(language), comment: ""))
+                                Text("Change PIN Transaction".localized(language))
                                     .foregroundColor(Color(hex: "#1D2238"))
                                     .font(.subheadline)
                                     .fontWeight(.bold)
@@ -296,7 +296,7 @@ struct AccountTabs: View {
                         Button(action : {self.forgotPasswordActived=true}){
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text(NSLocalizedString("Forgot PIN Transaction".localized(language), comment: ""))
+                                    Text("Forgot PIN Transaction".localized(language))
                                         .foregroundColor(Color(hex: "#1D2238"))
                                         .font(.subheadline)
                                         .fontWeight(.bold)
@@ -319,7 +319,7 @@ struct AccountTabs: View {
                         label: {
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text(NSLocalizedString("Logout".localized(language), comment: ""))
+                                    Text("Logout".localized(language))
                                         .foregroundColor(Color(hex: "#1D2238"))
                                         .font(.subheadline)
                                         .fontWeight(.bold)
@@ -343,8 +343,8 @@ struct AccountTabs: View {
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .alert(isPresented: $isShowingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Are you sure you want to exit the Bank Mestika application?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Are you sure you want to exit the Bank Mestika application?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.authVM.postLogout { success in
                         if success {
                             print("SUCCESS LOGOUT")
@@ -354,7 +354,7 @@ struct AccountTabs: View {
                         }
                     }
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .onAppear {
             //            getProfile()

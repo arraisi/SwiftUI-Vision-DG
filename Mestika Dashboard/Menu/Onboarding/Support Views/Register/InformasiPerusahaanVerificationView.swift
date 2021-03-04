@@ -17,7 +17,7 @@ struct InformasiPerusahaanVerificationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(NSLocalizedString("Company Information".localized(language), comment: ""))
+                Text("Company Information".localized(language))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(.gray)
@@ -37,14 +37,14 @@ struct InformasiPerusahaanVerificationView: View {
             .cornerRadius(15)
             
             Group {
-                Text(NSLocalizedString("Company name".localized(language), comment: ""))
+                Text("Company name".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Company name".localized(language), comment: ""), text: $registerData.namaPerusahaan)
+                    TextField("Company name".localized(language), text: $registerData.namaPerusahaan)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -56,14 +56,14 @@ struct InformasiPerusahaanVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Business fields".localized(language), comment: ""))
+                Text("Business fields".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Business fields".localized(language), comment: ""), text: $registerData.bidangUsaha)
+                    TextField("Business fields".localized(language), text: $registerData.bidangUsaha)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -75,14 +75,14 @@ struct InformasiPerusahaanVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Company's address".localized(language), comment: ""))
+                Text("Company's address".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Company's address".localized(language), comment: ""), text: $registerData.alamatPerusahaan)
+                    TextField("Company's address".localized(language), text: $registerData.alamatPerusahaan)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -94,7 +94,7 @@ struct InformasiPerusahaanVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Postal code".localized(language), comment: ""))
+                Text("Postal code".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
@@ -113,14 +113,14 @@ struct InformasiPerusahaanVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Sub-district".localized(language), comment: ""))
+                Text("Sub-district".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Sub-district".localized(language), comment: ""), text: $registerData.kecamatan)
+                    TextField("Sub-district".localized(language), text: $registerData.kecamatan)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -132,14 +132,14 @@ struct InformasiPerusahaanVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Village".localized(language), comment: ""))
+                Text("Village".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Village".localized(language), comment: ""), text: $registerData.kelurahan)
+                    TextField("Village".localized(language), text: $registerData.kelurahan)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -151,14 +151,14 @@ struct InformasiPerusahaanVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Phone number".localized(language), comment: ""))
+                Text("Phone number".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Phone number".localized(language), comment: ""), text: $registerData.noTeleponPerusahaan)
+                    TextField("Phone number".localized(language), text: $registerData.noTeleponPerusahaan)
                         .disabled(true)
                 }
                 .frame(height: 20)

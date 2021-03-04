@@ -36,11 +36,11 @@ struct CardDamageView: View {
                     
                     VStack(alignment: .leading, spacing: 25, content: {
                         
-                        Text(NSLocalizedString("Damage Report / Complaint".localized(language), comment: ""))
+                        Text("Damage Report / Complaint".localized(language))
                             .font(.custom("Montserrat-SemiBold", size: 15))
                         
                         VStack(alignment: .leading) {
-                            Text(NSLocalizedString("A New Card Will Be Given".localized(language), comment: ""))
+                            Text("A New Card Will Be Given".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 12))
                             
                             Button(action: {
@@ -54,7 +54,7 @@ struct CardDamageView: View {
                                         .frame(width: 18, height: 18)
                                     
                                     HStack {
-                                        Text(NSLocalizedString("Replacement fee of".localized(language), comment: ""))
+                                        Text("Replacement fee of".localized(language))
                                             .font(.custom("Montserrat-Regular", size: 10))
                                         Text("Rp. 20.000,-")
                                             .font(.custom("Montserrat-Bold", size: 10))
@@ -79,7 +79,7 @@ struct CardDamageView: View {
                                 }
                             },
                             label: {
-                                Text(NSLocalizedString("REPORT DAMAGE".localized(language), comment: ""))
+                                Text("REPORT DAMAGE".localized(language))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -101,13 +101,13 @@ struct CardDamageView: View {
                 
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
-            .navigationBarTitle(NSLocalizedString("Broken Card".localized(language), comment: ""), displayMode: .inline)
+            .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
             .onAppear {
                 self.brokenData.cardNo = card.cardNo
                 self.brokenData.nameOnCard = card.nameOnCard
                 self.brokenData.cardDesign = "http://eagle.visiondg.xyz:8765/image/b5fb9a649b2c3670120343eb8dd85d03.png"
             }
-            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name(NSLocalizedString("Broken My Card".localized(language), comment: "")))) { obj in
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Broken My Card".localized(language)))) { obj in
                 print("ON RESUME")
                 
                 if let pinTrx = obj.userInfo, let info = pinTrx["pinTrx"] {
@@ -148,7 +148,7 @@ struct CardDamageView: View {
             
             HStack {
                 
-                Text(NSLocalizedString("We have successfully kept your ATM card damage report / complaint".localized(language), comment: ""))
+                Text("We have successfully kept your ATM card damage report / complaint".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -158,14 +158,14 @@ struct CardDamageView: View {
             
             
             HStack {
-                Text(NSLocalizedString("Thank you for sending information about the damage to your card to us. Please wait a few moments, we will immediately contact you to follow up on your report.".localized(language), comment: ""))
+                Text("Thank you for sending information about the damage to your card to us. Please wait a few moments, we will immediately contact you to follow up on your report.".localized(language))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
             }
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text(NSLocalizedString("BACK".localized(language), comment: ""))
+                Text("BACK".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -193,7 +193,7 @@ struct CardDamageView: View {
                     .foregroundColor(Color(hex: "#F32424"))
                 
                 
-                Text(NSLocalizedString("Wrong ATM PIN".localized(language), comment: ""))
+                Text("Wrong ATM PIN".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#F32424"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -202,7 +202,7 @@ struct CardDamageView: View {
             .padding(.top, 25)
             
             HStack {
-                Text(NSLocalizedString("The ATM PIN you entered is wrong.".localized(language), comment: ""))
+                Text("The ATM PIN you entered is wrong.".localized(language))
                     .font(.custom("Montserrat-Light", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -213,7 +213,7 @@ struct CardDamageView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 },
                 label: {
-                    Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
+                    Text("Back to Main Page".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)

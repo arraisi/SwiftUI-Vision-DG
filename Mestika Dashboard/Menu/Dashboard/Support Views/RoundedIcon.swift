@@ -12,17 +12,15 @@ struct RoundedIcon: View {
     var imageName: String
     
     var body: some View {
-        VStack {
+        VStack{
             
             Image(imageName)
                 .resizable()
                 .renderingMode(.template)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color("StaleBlue"))
                 .frame(width: 23, height: 23)
-            
         }
         .frame(width: 40, height: 40)
-        .background(Color("StaleBlue"))
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color("White"), lineWidth: 1)
@@ -34,6 +32,6 @@ struct RoundedIcon: View {
 
 struct RoundedIcon_Previews: PreviewProvider {
     static var previews: some View {
-        RoundedIcon(imageName: "ic_rekening")
+        RoundedIcon(imageName: "ic_saving_account")
     }
 }

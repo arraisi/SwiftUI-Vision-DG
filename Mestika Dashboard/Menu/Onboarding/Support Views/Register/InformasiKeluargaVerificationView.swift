@@ -17,7 +17,7 @@ struct InformasiKeluargaVerificationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(NSLocalizedString("Your Nearest Family".localized(language), comment: ""))
+                Text("Your Nearest Family".localized(language))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(.gray)
@@ -37,14 +37,14 @@ struct InformasiKeluargaVerificationView: View {
             .cornerRadius(15)
             
             Group {
-                Text(NSLocalizedString("Relationship With You".localized(language), comment: ""))
+                Text("Relationship With You".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Relationship With You".localized(language), comment: ""), text: $registerData.hubunganKekerabatanKeluarga)
+                    TextField("Relationship With You".localized(language), text: $registerData.hubunganKekerabatanKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -56,14 +56,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Name".localized(language), comment: ""))
+                Text("Name".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Name".localized(language), comment: ""), text: $registerData.namaKeluarga)
+                    TextField("Name".localized(language), text: $registerData.namaKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -75,14 +75,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Family Address".localized(language), comment: ""))
+                Text("Family Address".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Family address".localized(language), comment: ""), text: $registerData.alamatKeluarga)
+                    TextField("Family address".localized(language), text: $registerData.alamatKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -94,14 +94,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Postal code".localized(language), comment: ""))
+                Text("Postal code".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Postal code".localized(language), comment: ""), text: $registerData.kodePosKeluarga)
+                    TextField("Postal code".localized(language), text: $registerData.kodePosKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -113,14 +113,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Sub-district".localized(language), comment: ""))
+                Text("Sub-district".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Sub-district".localized(language), comment: ""), text: $registerData.kecamatanKeluarga)
+                    TextField("Sub-district".localized(language), text: $registerData.kecamatanKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -132,14 +132,14 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Village".localized(language), comment: ""))
+                Text("Village".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField(NSLocalizedString("Village".localized(language), comment: ""), text: $registerData.kelurahanKeluarga)
+                    TextField("Village".localized(language), text: $registerData.kelurahanKeluarga)
                         .disabled(true)
                 }
                 .frame(height: 20)
@@ -151,7 +151,7 @@ struct InformasiKeluargaVerificationView: View {
             }
             
             Group {
-                Text(NSLocalizedString("Phone number".localized(language), comment: ""))
+                Text("Phone number".localized(language))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)

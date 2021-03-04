@@ -76,7 +76,7 @@ struct EmailOTPRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("We have sent the Verification Code to", comment: "") + " \(registerData.email)")
+                    Text("We have sent the Verification Code to" + " \(registerData.email)")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
@@ -84,7 +84,7 @@ struct EmailOTPRegisterNasabahView: View {
                         .padding(.horizontal, 20)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    Text(NSLocalizedString("Please enter the OTP code with \nREF #", comment: "")+"\(referenceCode)")
+                    Text("Please enter the OTP code with \nREF #"+"\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -99,7 +99,7 @@ struct EmailOTPRegisterNasabahView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("Didn't Receive Code?", comment: ""))
+                        Text("Didn't Receive Code?")
                             .font(.custom("Montserrat-Regular", size: 12))
                         
                         Button(action: {
@@ -111,7 +111,7 @@ struct EmailOTPRegisterNasabahView: View {
                             
                             getOTP()
                         }) {
-                            Text(NSLocalizedString("Resend OTP".localized(language), comment: ""))
+                            Text("Resend OTP".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }
@@ -129,7 +129,7 @@ struct EmailOTPRegisterNasabahView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text(NSLocalizedString("Please check your email to see the OTP code".localized(language), comment: ""))
+                    Text("Please check your email to see the OTP code".localized(language))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
@@ -156,7 +156,7 @@ struct EmailOTPRegisterNasabahView: View {
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             } else {
-                                Text(NSLocalizedString("OTP Verification".localized(language), comment: ""))
+                                Text("OTP Verification".localized(language))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -325,13 +325,13 @@ struct EmailOTPRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Incorrect OTP Code", comment: ""))
+            Text("Incorrect OTP Code")
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("The OTP code you entered is incorrect, please try again", comment: ""))
+            Text("The OTP code you entered is incorrect, please try again")
                 .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -341,7 +341,7 @@ struct EmailOTPRegisterNasabahView: View {
                 self.isLoading = false
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Back", comment: ""))
+                Text("Back")
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))
@@ -367,13 +367,13 @@ struct EmailOTPRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Incorrect OTP Code", comment: ""))
+            Text("Incorrect OTP Code")
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("The OTP code you entered was incorrect 5 times, please try again next week.", comment: ""))
+            Text("The OTP code you entered was incorrect 5 times, please try again next week.")
                 .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -382,7 +382,7 @@ struct EmailOTPRegisterNasabahView: View {
             Button(action: {
                 self.appState.moveToWelcomeView = true
             }) {
-                Text(NSLocalizedString("Back to Main Page", comment: ""))
+                Text("Back to Main Page")
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))

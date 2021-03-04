@@ -60,14 +60,14 @@ struct NoAtmOrRekeningVerificationView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("ATM Card or Account No.".localized(language), comment: ""))
+                    Text("ATM Card or Account No.".localized(language))
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .fontWeight(.bold)
                         .padding(.top, 30)
                         .multilineTextAlignment(.center)
                     
-                    Text(NSLocalizedString("Please enter your ATM card or account number".localized(language), comment: ""))
+                    Text("Please enter your ATM card or account number".localized(language))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#5A6876"))
                         .multilineTextAlignment(.center)
@@ -75,7 +75,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         .padding(.bottom, 20)
                     
                     HStack {
-                        TextField(NSLocalizedString("Select the type of card no. Inputted".localized(language), comment: ""), text: $jenisKartuCtrl)
+                        TextField("Select the type of card no. Inputted".localized(language), text: $jenisKartuCtrl)
                             .onChange(of: jenisKartuCtrl, perform: { value in
                                 noKartuCtrl = ""
                             })
@@ -103,7 +103,7 @@ struct NoAtmOrRekeningVerificationView: View {
                     .cornerRadius(15)
                     .padding(.vertical, 5)
                     
-                    TextField(NSLocalizedString("Enter card no.".localized(language), comment: ""), text: $noKartuCtrl, onEditingChanged: { changed in
+                    TextField("Enter card no.".localized(language), text: $noKartuCtrl, onEditingChanged: { changed in
                         //                        self.registerData.accNo = self.noKartuCtrl
                         if (jenisKartuCtrl == "Kartu ATM") {
                             self.registerData.atmOrRekening = "ATM"
@@ -134,7 +134,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         }
                     }
                     
-                    Text(NSLocalizedString("* Make sure your ATM card or account is active, if you haven't activated your ATM card, please visit the nearest Mestika Bank Office.".localized(language), comment: ""))
+                    Text("* Make sure your ATM card or account is active, if you haven't activated your ATM card, please visit the nearest Mestika Bank Office.".localized(language))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#5A6876"))
                         .padding(.top, 5)
@@ -145,7 +145,7 @@ struct NoAtmOrRekeningVerificationView: View {
                         destination: PhoneOTPRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData),
                         isActive: self.$isActive,
                         label: {
-                            Text(NSLocalizedString("Verification Card No.".localized(language), comment: ""))
+                            Text("Verification Card No.".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, maxHeight: 50)
@@ -183,11 +183,11 @@ struct NoAtmOrRekeningVerificationView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
@@ -205,7 +205,7 @@ struct NoAtmOrRekeningVerificationView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString("Please check your internet connection".localized(language), comment: ""))
+            Text("Please check your internet connection".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 13))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)

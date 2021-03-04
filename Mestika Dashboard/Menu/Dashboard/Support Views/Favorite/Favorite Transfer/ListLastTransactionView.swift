@@ -24,7 +24,7 @@ struct ListLastTransactionView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Last transaction".localized(language), comment: ""))
+                    Text("Last transaction".localized(language))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)

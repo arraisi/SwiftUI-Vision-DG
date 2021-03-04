@@ -35,7 +35,7 @@ struct LastFavoriteTransferScreen: View {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {
                             
-                            TextField(NSLocalizedString("Name".localized(language), comment: ""), text: $name).introspectTextField { textField in
+                            TextField("Name".localized(language), text: $name).introspectTextField { textField in
                                 textField.becomeFirstResponder()
                             }
                             .foregroundColor(.white)
@@ -118,7 +118,7 @@ struct LastFavoriteTransferScreen: View {
                     
                     VStack {
                         Button(action: {}, label: {
-                            Text(NSLocalizedString("Lakukan Transfer".localized(language), comment: ""))
+                            Text("Lakukan Transfer".localized(language))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))

@@ -9,20 +9,23 @@ import SwiftUI
 
 struct SavingAccountView: View {
     
-    @AppStorage("language")
-    private var language = LocalizationService.shared.language
+    @AppStorage("language") private var language = LocalizationService.shared.language
     
     let savingProducts:[String] = ["Tabunganku", "Tabungan Mestika", "Tabungan Setia", "Tabungan SimPel"]
     let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
     @State var product: String = ""
     
+    var nextBtnDisabled: Bool {
+        product.count == 0
+    }
+    
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(NSLocalizedString("Saving Account".localized(language), comment: ""))
-                        .font(.custom("Montserrat-Bold", size: 32))
-                    Text(NSLocalizedString("Get the best savings only here".localized(language), comment: ""))
+                    Text("Saving Account".localized(language))
+                        .font(.custom("Montserrat-Bold", size: 28))
+                    Text("Get the best savings only here".localized(language))
                         .font(.custom("Montserrat-Bold", size: 14))
                         .foregroundColor(.gray)
                 }
@@ -32,7 +35,7 @@ struct SavingAccountView: View {
             
             VStack(spacing: 20) {
                 HStack {
-                    TextField(NSLocalizedString("Choose a savings product".localized(language), comment: ""), text: $product)
+                    TextField("Choose a savings product".localized(language), text: $product)
                         .onChange(of: product, perform: { value in
                         })
                         .font(.custom("Montserrat-Regular", size: 12))
@@ -60,13 +63,14 @@ struct SavingAccountView: View {
                 .padding(.vertical, 5)
                 
                 NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(), label: {
-                    Text(NSLocalizedString("Opening a new savings account".localized(language), comment: ""))
+                    Text("Opening a new savings account".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)
-                        .background(Color("StaleBlue"))
+                        .background(nextBtnDisabled ? Color(.lightGray) : Color("StaleBlue"))
                         .cornerRadius(15)
                 })
+                .disabled(nextBtnDisabled)
             }
             .padding(25)
             .background(Color.white)
@@ -81,7 +85,7 @@ struct SavingAccountView: View {
             VStack {
                 
                 HStack {
-                    Text(NSLocalizedString("Your savings account".localized(language), comment: ""))
+                    Text("Your savings account".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                     Spacer()
                 }
@@ -90,7 +94,7 @@ struct SavingAccountView: View {
                 List(self.mySavingProducts, id: \.self) { item in
                     
                     HStack {
-                        RoundedIcon(imageName: "ic_rekening")
+                        RoundedIcon(imageName: "ic_saving_account")
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item)
                                 .font(.custom("Montserrat-SemiBold", size: 14))

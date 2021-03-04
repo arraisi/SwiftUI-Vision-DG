@@ -29,7 +29,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
         VStack {
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
+                    Text("Add to favorites?".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -39,7 +39,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                 
                 VStack {
                     HStack {
-                        Text(NSLocalizedString("Contact".localized(language), comment: ""))
+                        Text("Contact".localized(language))
                             .font(.subheadline)
                             .fontWeight(.ultraLight)
                         
@@ -48,7 +48,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     .padding(.horizontal, 20)
                     
                     VStack {
-                        TextField(NSLocalizedString("Contact".localized(language), comment: ""), text: self.$receivedName, onEditingChanged: { changed in
+                        TextField("Contact".localized(language), text: self.$receivedName, onEditingChanged: { changed in
                             self.transferData.destinationName = self.receivedName
                         })
                         .disabled(false)
@@ -62,7 +62,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     .padding(.bottom, 25)
                     
                     HStack {
-                        Text(NSLocalizedString("Account Details".localized(language), comment: ""))
+                        Text("Account Details".localized(language))
                             .font(.subheadline)
                             .fontWeight(.ultraLight)
                         
@@ -96,13 +96,13 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     
                     // No. Rekening Form
                     HStack(alignment: VerticalAlignment.firstTextBaseline) {
-                        Text(NSLocalizedString("Account number".localized(language), comment: ""))
+                        Text("Account number".localized(language))
                             .font(.callout)
                             .fontWeight(.light)
                         
                         Spacer()
                         
-                        TextField(NSLocalizedString("Account number".localized(language), comment: ""), text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
+                        TextField("Account number".localized(language), text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
                         })
                         .disabled(true)
                         .frame(height: 10)
@@ -118,20 +118,20 @@ struct PopOverFavoriteTransactionOffUsView: View {
                         
                         if (self.transferData.transactionType == "RTGS") {
                             self.favoritVM.transferRtgs(data: transferData) { result in
-                                print(NSLocalizedString("Save to favorites".localized(language), comment: ""))
+                                print("Save to favorites".localized(language))
                                 self.show = false
                                 self.showAlert = true
                             }
                         } else {
                             self.favoritVM.transferSkn(data: transferData) { result in
-                                print(NSLocalizedString("Save to favorites".localized(language), comment: ""))
+                                print("Save to favorites".localized(language))
                                 self.show = false
                                 self.showAlert = true
                             }
                         }
                         
                     }, label: {
-                        Text(NSLocalizedString("SAVE TO FAVORITE".localized(language), comment: ""))
+                        Text("SAVE TO FAVORITE".localized(language))
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                             .font(.system(size: 13))

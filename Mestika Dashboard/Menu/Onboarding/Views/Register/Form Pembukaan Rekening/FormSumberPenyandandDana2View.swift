@@ -91,7 +91,7 @@ struct FormSumberPenyandandDana2View: View {
                         
                         VStack{
                             // Title
-                            Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
+                            Text("OPENING ACCOUNT DATA".localized(language))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
@@ -122,7 +122,7 @@ struct FormSumberPenyandandDana2View: View {
                                         Spacer()
                                         
                                         // Sub title
-                                        Text(NSLocalizedString("Funding Resources".localized(language), comment: ""))
+                                        Text("Funding Resources".localized(language))
                                             .font(.custom("Montserrat-SemiBold", size: 18))
                                             .foregroundColor(Color(hex: "#232175"))
                                             .padding(.horizontal, 20)
@@ -143,7 +143,7 @@ struct FormSumberPenyandandDana2View: View {
                                         if (editMode == .inactive) {
                                             NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
                                                 
-                                                Text(NSLocalizedString("Next".localized(language), comment: ""))
+                                                Text("Next".localized(language))
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 50)
@@ -158,7 +158,7 @@ struct FormSumberPenyandandDana2View: View {
                                         } else {
                                             NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
                                                 
-                                                Text(NSLocalizedString("Save".localized(language), comment: ""))
+                                                Text("Save".localized(language))
                                                     .foregroundColor(.white)
                                                     .fontWeight(.bold)
                                                     .font(.system(size: 14))
@@ -196,11 +196,11 @@ struct FormSumberPenyandandDana2View: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -216,7 +216,7 @@ struct FormSumberPenyandandDana2View: View {
         
         VStack(alignment: .leading) {
             
-            LabelTextField(value: $registerData.namaPenyandangDana, label: NSLocalizedString("Name of Funder".localized(language), comment: ""), placeHolder: NSLocalizedString("Name".localized(language), comment: "")){ (changed) in
+            LabelTextField(value: $registerData.namaPenyandangDana, label: "Name of Funder".localized(language), placeHolder: "Name".localized(language)){ (changed) in
                 print("on edit")
             } onCommit: {
                 print("on commit")
@@ -225,14 +225,14 @@ struct FormSumberPenyandandDana2View: View {
             
             VStack(alignment: .leading) {
                 
-                Text(NSLocalizedString("Relationship With You".localized(language), comment: ""))
+                Text("Relationship With You".localized(language))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    TextField(NSLocalizedString("Choose relationship".localized(language), comment: ""), text: $registerData.hubunganPenyandangDana)
+                    TextField("Choose relationship".localized(language), text: $registerData.hubunganPenyandangDana)
                         .font(.custom("Montserrat-Regular", size: 12))
                         .frame(height: 50)
                         .padding(.leading, 15)
@@ -263,14 +263,14 @@ struct FormSumberPenyandandDana2View: View {
             
             VStack(alignment: .leading) {
                 
-                Text(NSLocalizedString("Profession Funders".localized(language), comment: ""))
+                Text("Profession Funders".localized(language))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    TextField(NSLocalizedString("Choose a profession".localized(language), comment: ""), text: $registerData.profesiPenyandangDana)
+                    TextField("Choose a profession".localized(language), text: $registerData.profesiPenyandangDana)
                         .font(.custom("Montserrat-Regular", size: 12))
                         .frame(height: 50)
                         .padding(.leading, 15)

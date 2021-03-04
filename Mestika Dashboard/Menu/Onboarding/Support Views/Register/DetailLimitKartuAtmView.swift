@@ -20,7 +20,7 @@ struct DetailLimitKartuAtmView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Detail Limit Kartu ATM".localized(language), comment: ""))
+                Text("Detail Limit Kartu ATM".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 15))
                 
                 Spacer()
@@ -29,17 +29,17 @@ struct DetailLimitKartuAtmView: View {
             .padding(.top, 20)
             
             ScrollView {
-                RowLimitKartuAtmView(title: NSLocalizedString("ATM Card Limit Details".localized(language), comment: ""), value: card.description.limitPenarikanHarian)
-                RowLimitKartuAtmView(title: NSLocalizedString("Daily Transfer".localized(language), comment: ""), value: card.description.limitTransferAntarSesama)
-                RowLimitKartuAtmView(title: NSLocalizedString("Transfer ke Bank Lain".localized(language), comment: ""), value: card.description.limitTransferKeBankLain)
-                RowLimitKartuAtmView(title: NSLocalizedString("Daily Withdrawals".localized(language).localized(language), comment: ""), value: card.description.limitPenarikanHarian)
-                RowLimitKartuAtmView(title: NSLocalizedString("Payment".localized(language), comment: ""), value: card.description.limitPayment)
-                RowLimitKartuAtmView(title: NSLocalizedString("Purchase".localized(language), comment: ""), value: card.description.limitPurchase)
+                RowLimitKartuAtmView(title: "ATM Card Limit Details".localized(language), value: card.description.limitPenarikanHarian)
+                RowLimitKartuAtmView(title: "Daily Transfer".localized(language), value: card.description.limitTransferAntarSesama)
+                RowLimitKartuAtmView(title: "Transfer ke Bank Lain".localized(language), value: card.description.limitTransferKeBankLain)
+                RowLimitKartuAtmView(title: "Daily Withdrawals".localized(language).localized(language), value: card.description.limitPenarikanHarian)
+                RowLimitKartuAtmView(title: "Payment".localized(language), value: card.description.limitPayment)
+                RowLimitKartuAtmView(title: "Purchase".localized(language), value: card.description.limitPurchase)
             }
             
             NavigationLink(destination: FormPilihDesainATMView().environmentObject(atmData).environmentObject(registerData),
                            label: {
-                            Text(NSLocalizedString("CHOOSE THIS ATM CARD".localized(language), comment: ""))
+                            Text("CHOOSE THIS ATM CARD".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, maxHeight: 40)

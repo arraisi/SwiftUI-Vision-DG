@@ -25,7 +25,7 @@ struct AddressOptionsView: View {
     
     var body: some View {
         VStack {
-            Text(NSLocalizedString("Shipping address".localized(language), comment: ""))
+            Text("Shipping address".localized(language))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Bold", size: 14))
                 .foregroundColor(Color("DarkStaleBlue"))

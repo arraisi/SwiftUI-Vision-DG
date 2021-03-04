@@ -51,7 +51,7 @@ struct HistoryTabs: View {
                     Button(action: {
                         self.filterShowed = true
                     }, label: {
-                        Text(NSLocalizedString("Transaction Filter".localized(language), comment: ""))
+                        Text("Transaction Filter".localized(language))
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40)
                             .foregroundColor(.black)
@@ -74,14 +74,14 @@ struct HistoryTabs: View {
         VStack {
             VStack(alignment: .center, spacing: 20){
                 HStack {
-                    Text(NSLocalizedString("Period of time".localized(language), comment: ""))
+                    Text("Period of time".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                     Spacer()
                 }
                 
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(NSLocalizedString("From".localized(language), comment: ""))
+                        Text("From".localized(language))
                         DatePicker(
                             "From",
                             selection: $dateFrom,
@@ -94,7 +94,7 @@ struct HistoryTabs: View {
                     Spacer()
                     
                     VStack(alignment: .leading) {
-                        Text(NSLocalizedString("To".localized(language), comment: ""))
+                        Text("To".localized(language))
                         DatePicker(
                             "To",
                             selection: $dateTo,
@@ -112,7 +112,7 @@ struct HistoryTabs: View {
                     self.loadHistory()
                     self.filterShowed = false
                 }, label: {
-                    Text(NSLocalizedString("View Search Results".localized(language), comment: ""))
+                    Text("View Search Results".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)

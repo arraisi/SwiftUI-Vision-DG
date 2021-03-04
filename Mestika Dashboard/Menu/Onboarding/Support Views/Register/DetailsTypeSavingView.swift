@@ -29,7 +29,7 @@ struct DetailsTypeSavingView: View {
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-//            Text(NSLocalizedString("Keunggulan Tabungan :", comment: ""))
+//            Text("Keunggulan Tabungan :")
 //                .font(.footnote)
 //                .padding(.top, 10)
 //                .padding(.horizontal, 15)
@@ -68,7 +68,7 @@ struct DetailsTypeSavingView: View {
                         self.isShowModalDetail.toggle()
                     }
                 }, label: {
-                    Text(NSLocalizedString("Saving Detail".localized(language), comment: ""))
+                    Text("Saving Detail".localized(language))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .font(.custom("Montserrat-SemiBold", size: 14))
 //                        .frame(minHeight: 30)
@@ -84,7 +84,7 @@ struct DetailsTypeSavingView: View {
                     }
                 },
                 label: {
-                    Text(NSLocalizedString("Choose this Savings".localized(language), comment: ""))
+                    Text("Choose this Savings".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)

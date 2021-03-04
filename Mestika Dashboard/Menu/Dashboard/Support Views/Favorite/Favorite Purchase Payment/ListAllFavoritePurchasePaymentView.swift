@@ -28,7 +28,7 @@ struct ListAllFavoritePurchasePaymentView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Favorite Purchase & Payment".localized(language), comment: ""))
+                    Text("Favorite Purchase & Payment".localized(language))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.bold)

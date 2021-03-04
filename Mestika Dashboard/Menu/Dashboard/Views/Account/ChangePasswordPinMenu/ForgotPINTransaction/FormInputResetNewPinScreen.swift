@@ -42,18 +42,18 @@ struct FormInputResetNewPinScreen: View {
                     
                     VStack {
                         
-                        Text(NSLocalizedString("FORGOT PIN".localized(language), comment: ""))
+                        Text("FORGOT PIN".localized(language))
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
-                        Text(NSLocalizedString("Please enter your new PIN".localized(language), comment: ""))
+                        Text("Please enter your new PIN".localized(language))
                             .font(.custom("Montserrat-Regular", size: 14))
                             .foregroundColor(Color(hex: "#002251"))
                             .padding(.top, 10)
                         
                         VStack(alignment: .leading) {
                             
-                            Text(NSLocalizedString("New PIN".localized(language), comment: ""))
+                            Text("New PIN".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .padding(.top, 10)
@@ -63,7 +63,7 @@ struct FormInputResetNewPinScreen: View {
                                     //                                    if (showPin) {
                                     //                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
                                     //                                    } else {
-                                    SecureField(NSLocalizedString("Enter your new PIN".localized(language), comment: ""), text: self.$pinCtrl)
+                                    SecureField("Enter your new PIN".localized(language), text: self.$pinCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinCtrl.publisher.collect()) {
                                             self.pinCtrl = String($0.prefix(6))
@@ -87,7 +87,7 @@ struct FormInputResetNewPinScreen: View {
                                     //                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
                                     //                                            .keyboardType(.numberPad)
                                     //                                    } else {
-                                    SecureField(NSLocalizedString("Enter your new PIN".localized(language), comment: ""), text: self.$pinConfirmCtrl)
+                                    SecureField("Enter your new PIN".localized(language), text: self.$pinConfirmCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinConfirmCtrl.publisher.collect()) {
                                             self.pinConfirmCtrl = String($0.prefix(6))
@@ -128,7 +128,7 @@ struct FormInputResetNewPinScreen: View {
                                 }
                             }
                         }){
-                            Text(NSLocalizedString("Save New PIN".localized(language), comment: ""))
+                            Text("Save New PIN".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -193,7 +193,7 @@ struct FormInputResetNewPinScreen: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("PIN is not the same, please retype it".localized(language), comment: ""))
+            Text("PIN is not the same, please retype it".localized(language))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
@@ -202,7 +202,7 @@ struct FormInputResetNewPinScreen: View {
             Button(action: {
                 self.showModalError = false
             }) {
-                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(.bold)
@@ -228,7 +228,7 @@ struct FormInputResetNewPinScreen: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("PIN consists of 6 characters, cannot be sequential from the same 6 digits".localized(language), comment: ""))
+            Text("PIN consists of 6 characters, cannot be sequential from the same 6 digits".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
@@ -261,7 +261,7 @@ struct FormInputResetNewPinScreen: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("NEW APPLICATION PIN HAS BEEN SUCCESSFULLY SAVED".localized(language), comment: ""))
+            Text("NEW APPLICATION PIN HAS BEEN SUCCESSFULLY SAVED".localized(language))
                 .font(.custom("Montserrat-ExtraBold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
@@ -294,7 +294,7 @@ struct FormInputResetNewPinScreen: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("PIN not Changed".localized(language), comment: ""))
+            Text("PIN not Changed".localized(language))
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)

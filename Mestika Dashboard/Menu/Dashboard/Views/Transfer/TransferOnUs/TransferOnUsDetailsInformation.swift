@@ -36,7 +36,7 @@ struct TransferOnUsDetailsInformation: View {
     var formCard: some View {
         VStack(alignment: .leading) {
             
-            Text(NSLocalizedString("Transfer Successful".localized(language), comment: ""))
+            Text("Transfer Successful".localized(language))
                 .font(.title2)
                 .foregroundColor(Color(hex: "#232175"))
                 .fontWeight(.bold)
@@ -50,12 +50,12 @@ struct TransferOnUsDetailsInformation: View {
             Group {
                 // Jenis Transfer Form
                 HStack(spacing: 20) {
-                    Text(NSLocalizedString("Transfer Type".localized(language), comment: ""))
+                    Text("Transfer Type".localized(language))
 //                        .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField(NSLocalizedString("Account Type".localized(language), comment: ""), text: self.$transferData.transferType, onEditingChanged: { changed in
+                    TextField("Account Type".localized(language), text: self.$transferData.transferType, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -69,12 +69,12 @@ struct TransferOnUsDetailsInformation: View {
                 
                 // Penerima Form
                 HStack(spacing: 20) {
-                    Text(NSLocalizedString("Receiver".localized(language), comment: ""))
+                    Text("Receiver".localized(language))
 //                        .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField(NSLocalizedString("Receiver".localized(language), comment: ""), text: self.$transferData.destinationName, onEditingChanged: { changed in
+                    TextField("Receiver".localized(language), text: self.$transferData.destinationName, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -88,12 +88,12 @@ struct TransferOnUsDetailsInformation: View {
                 
                 // Rekening Penerima Form
                 HStack(spacing: 20) {
-                    Text(NSLocalizedString("Beneficiary's Account".localized(language), comment: ""))
+                    Text("Beneficiary's Account".localized(language))
 //                        .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField(NSLocalizedString("Beneficiary's Account".localized(language), comment: ""), text: self.$transferData.destinationNumber, onEditingChanged: { changed in
+                    TextField("Beneficiary's Account".localized(language), text: self.$transferData.destinationNumber, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -126,12 +126,12 @@ struct TransferOnUsDetailsInformation: View {
                 
                 // Rekeking Form
                 HStack(spacing: 20) {
-                    Text(NSLocalizedString("Account".localized(language), comment: ""))
+                    Text("Account".localized(language))
 //                        .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField(NSLocalizedString("Account".localized(language), comment: ""), text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
+                    TextField("Account".localized(language), text: self.$transferData.sourceAccountName, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -145,12 +145,12 @@ struct TransferOnUsDetailsInformation: View {
                 
                 // Waktu Transaksi Form
                 HStack(spacing: 20) {
-                    Text(NSLocalizedString("Transaction Time".localized(language), comment: ""))
+                    Text("Transaction Time".localized(language))
 //                        .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField(NSLocalizedString("Transaction Time".localized(language), comment: ""), text: self.$transferData.transactionDate, onEditingChanged: { changed in
+                    TextField("Transaction Time".localized(language), text: self.$transferData.transactionDate, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -164,12 +164,12 @@ struct TransferOnUsDetailsInformation: View {
                 
                 // Frekuensi Form
                 HStack(spacing: 20) {
-                    Text(NSLocalizedString("Frequency".localized(language), comment: ""))
+                    Text("Frequency".localized(language))
 //                        .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField(NSLocalizedString("Frequency".localized(language), comment: ""), text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
+                    TextField("Frequency".localized(language), text: self.$transferData.transactionFrequency, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)
@@ -202,12 +202,12 @@ struct TransferOnUsDetailsInformation: View {
                 
                 // Catatan Form
                 HStack(spacing: 20) {
-                    Text(NSLocalizedString("Notes".localized(language), comment: ""))
+                    Text("Notes".localized(language))
 //                        .font(.caption)
                         .fontWeight(.light)
                         .frame(width: 100)
                     
-                    TextField(NSLocalizedString("Notes".localized(language), comment: ""), text: self.$transferData.notes, onEditingChanged: { changed in
+                    TextField("Notes".localized(language), text: self.$transferData.notes, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 50)
@@ -235,7 +235,7 @@ struct TransferOnUsDetailsInformation: View {
             .padding()
             
         }
-        .navigationBarTitle(NSLocalizedString("Transaction Details".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Transaction Details".localized(language), displayMode: .inline)
         .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity, alignment: .topLeading)
         .background(Color.white)
         .cornerRadius(15)

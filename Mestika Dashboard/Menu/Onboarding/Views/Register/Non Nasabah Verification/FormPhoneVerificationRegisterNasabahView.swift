@@ -50,12 +50,12 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Phone Verification".localized(language), comment: ""))
+                    Text("Phone Verification".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .padding(.top, 30)
                     
-                    Text(NSLocalizedString("Please enter your Phone Number".localized(language), comment: ""))
+                    Text("Please enter your Phone Number".localized(language))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -68,7 +68,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         Divider()
                             .frame(height: 30)
                         
-                        TextField(NSLocalizedString("Phone Number".localized(language), comment: ""), text: $phoneNumber, onEditingChanged: { changed in
+                        TextField("Phone Number".localized(language), text: $phoneNumber, onEditingChanged: { changed in
                             print("\($phoneNumber)")
                             
                             self.registerData.noTelepon = phoneNumber
@@ -148,7 +148,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         }
                         
                     }, label: {
-                        Text(NSLocalizedString("Phone Number Verification".localized(language), comment: ""))
+                        Text("Phone Number Verification".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -193,11 +193,11 @@ struct FormPhoneVerificationRegisterNasabahView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("TIDAK".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("TIDAK".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -223,7 +223,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Please Check Your Mobile Number".localized(language), comment: ""))
+            Text("Please Check Your Mobile Number".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
@@ -232,7 +232,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
             Button(action: {
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))
