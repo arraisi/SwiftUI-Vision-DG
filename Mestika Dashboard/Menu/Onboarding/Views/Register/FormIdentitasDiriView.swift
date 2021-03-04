@@ -310,11 +310,13 @@ struct FormIdentitasDiriView: View {
             
             VStack(alignment: .center){
                 Spacer()
-                HStack{
-                    Text("\(Image(systemName: "checkmark"))" + "Make sure your e-KTP is genuine and not a scanned, uploaded or photocopy version".localized(language))
+                HStack {
+                    Image(systemName: "checkmark")
+                    Text("Make sure your e-KTP is genuine and not a scanned, uploaded or photocopy version".localized(language))
                 }
                 HStack{
-                    Text("\(Image(systemName: "checkmark"))" + "Make sure the e-KTP is not cut off, data and photos are clearly visible".localized(language))
+                    Image(systemName: "checkmark")
+                    Text("Make sure the e-KTP is not cut off, data and photos are clearly visible".localized(language))
                 }
             }
             .foregroundColor(.white)
