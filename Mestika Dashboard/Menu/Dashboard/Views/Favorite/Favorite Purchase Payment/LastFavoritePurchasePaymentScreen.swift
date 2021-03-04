@@ -71,7 +71,7 @@ struct LastFavoritePurchasePaymentScreen: View {
                 
                 VStack {
                     Button(action: {}, label: {
-                        Text(NSLocalizedString("Make a Transfer".localized(language), comment: ""))
+                        Text("Make a Transfer".localized(language))
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))

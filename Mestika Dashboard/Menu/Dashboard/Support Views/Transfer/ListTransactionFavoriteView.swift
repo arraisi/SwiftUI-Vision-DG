@@ -27,7 +27,7 @@ struct ListTransactionFavoriteView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Favorite Transaction".localized(language), comment: ""))
+                Text("Favorite Transaction".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                 

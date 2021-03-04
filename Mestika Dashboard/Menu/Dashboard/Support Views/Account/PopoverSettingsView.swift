@@ -26,12 +26,12 @@ struct PopoverSettingsView: View {
     }
     
     var _listMenu = [
-        SettingMenu(id: 1, namaMenu: NSLocalizedString("Card Management".localized(LocalizationService.shared.language), comment: "")),
+        SettingMenu(id: 1, namaMenu: "Card Management".localized(LocalizationService.shared.language)),
         SettingMenu(id: 2, namaMenu: "e-Statement"),
-        SettingMenu(id: 3, namaMenu: NSLocalizedString("Transaction Fee".localized(LocalizationService.shared.language), comment: "")),
-        SettingMenu(id: 4, namaMenu: NSLocalizedString("Fingerprint Activation".localized(LocalizationService.shared.language), comment: "")),
-        SettingMenu(id: 5, namaMenu: NSLocalizedString("Language setting".localized(LocalizationService.shared.language), comment: "")),
-        SettingMenu(id: 6, namaMenu: NSLocalizedString("Change Password / PIN".localized(LocalizationService.shared.language), comment: "")),
+        SettingMenu(id: 3, namaMenu: "Transaction Fee".localized(LocalizationService.shared.language)),
+        SettingMenu(id: 4, namaMenu: "Fingerprint Activation".localized(LocalizationService.shared.language)),
+        SettingMenu(id: 5, namaMenu: "Language setting".localized(LocalizationService.shared.language)),
+        SettingMenu(id: 6, namaMenu: "Change Password / PIN".localized(LocalizationService.shared.language)),
         SettingMenu(id: 7, namaMenu: "Sign Out"),
     ]
     
@@ -40,7 +40,7 @@ struct PopoverSettingsView: View {
             VStack {
                 HStack {
                     NavigationLink(destination: CardManagementScreen(), label: {
-                        Text(NSLocalizedString("Card Management".localized(language), comment: ""))
+                        Text("Card Management".localized(language))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -66,7 +66,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     NavigationLink(destination: TransactionFeesScreen(), label: {
-                        Text(NSLocalizedString("Transaction Fee".localized(language), comment: ""))
+                        Text("Transaction Fee".localized(language))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -79,7 +79,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     Toggle(isOn: $isFingerprint) {
-                        Text(NSLocalizedString("Fingerprint Activation".localized(language), comment: ""))
+                        Text("Fingerprint Activation".localized(language))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -89,7 +89,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     NavigationLink(destination: LanguageSettingScreen(), label: {
-                        Text(NSLocalizedString("Language setting".localized(language), comment: ""))
+                        Text("Language setting".localized(language))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))
@@ -102,7 +102,7 @@ struct PopoverSettingsView: View {
                 
                 HStack {
                     NavigationLink(destination: ChangePasswordOrPinSettingScreen(), label: {
-                        Text(NSLocalizedString("Change Password / PIN".localized(language), comment: ""))
+                        Text("Change Password / PIN".localized(language))
                             .fontWeight(.light)
                             .frame(height: CGFloat(self.textHeight))
                             .foregroundColor(Color(hex: "#002251"))

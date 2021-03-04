@@ -9,6 +9,10 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct SavingDetailModalView: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @EnvironmentObject var registerData: RegistrasiModel
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var atmData: AddProductATM
@@ -34,7 +38,7 @@ struct SavingDetailModalView: View {
                 .padding()
             
             Group {
-                Text(NSLocalizedString(data.name, comment: ""))
+                Text(data.name)
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -74,7 +78,7 @@ struct SavingDetailModalView: View {
                 }
                 
             }) {
-                Text(NSLocalizedString("Kembali", comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)

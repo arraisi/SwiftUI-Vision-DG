@@ -113,7 +113,7 @@ struct InformasiPerusahaanView: View {
                 ScrollView {
                     
                     // Title
-                    Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
+                    Text("OPENING ACCOUNT DATA".localized(language))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -145,7 +145,7 @@ struct InformasiPerusahaanView: View {
                                 Spacer()
                                 
                                 // Sub title
-                                Text(NSLocalizedString("Enter Company Information".localized(language), comment: ""))
+                                Text("Enter Company Information".localized(language))
                                     .font(.custom("Montserrat-SemiBold", size: 18))
                                     .foregroundColor(Color(hex: "#232175"))
                                     .padding(.horizontal, 20)
@@ -177,7 +177,7 @@ struct InformasiPerusahaanView: View {
                                                 self.nextViewActive = true
                                                 
                                             }, label: {
-                                                Text(NSLocalizedString("Next".localized(language), comment: ""))
+                                                Text("Next".localized(language))
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
@@ -204,7 +204,7 @@ struct InformasiPerusahaanView: View {
                                                     self.verificationViewActive = true
                                                     
                                                 }, label: {
-                                                    Text(NSLocalizedString("Save".localized(language), comment: ""))
+                                                    Text("Save".localized(language))
                                                         .foregroundColor(.white)
                                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                                         .frame(maxWidth: .infinity, maxHeight: 40)
@@ -229,7 +229,7 @@ struct InformasiPerusahaanView: View {
                                                     self.verificationViewActive = true
                                                     
                                                 }, label: {
-                                                    Text(NSLocalizedString("Save".localized(language), comment: ""))
+                                                    Text("Save".localized(language))
                                                         .foregroundColor(.white)
                                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                                         .frame(maxWidth: .infinity, maxHeight: 40)
@@ -294,11 +294,11 @@ struct InformasiPerusahaanView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -336,7 +336,7 @@ struct InformasiPerusahaanView: View {
         
         VStack(alignment: .leading) {
             
-            LabelTextField(value: $registerData.namaPerusahaan, label: NSLocalizedString("Company name".localized(language), comment: ""), placeHolder: NSLocalizedString("Company name".localized(language), comment: "")){ (Bool) in
+            LabelTextField(value: $registerData.namaPerusahaan, label: "Company name".localized(language), placeHolder: "Company name".localized(language)){ (Bool) in
                 print("on edit")
             } onCommit: {
                 print("on commit")
@@ -345,7 +345,7 @@ struct InformasiPerusahaanView: View {
             
             
             Group {
-                Text(NSLocalizedString("Business fields".localized(language), comment: ""))
+                Text("Business fields".localized(language))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -372,7 +372,7 @@ struct InformasiPerusahaanView: View {
                 //                .cornerRadius(10)
                 
                 HStack {
-                    TextField(NSLocalizedString("Business fields".localized(language), comment: ""), text: $registerData.bidangUsaha)
+                    TextField("Business fields".localized(language), text: $registerData.bidangUsaha)
                         .font(Font.system(size: 14))
                         .frame(height: 50)
                         .padding(.leading, 15)
@@ -403,7 +403,7 @@ struct InformasiPerusahaanView: View {
             
             Group {
                 
-                Text(NSLocalizedString("Company's address".localized(language), comment: ""))
+                Text("Company's address".localized(language))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -411,7 +411,7 @@ struct InformasiPerusahaanView: View {
                 
                 HStack {
                     
-                    TextField(NSLocalizedString("Company's address".localized(language), comment: ""), text: $registerData.alamatPerusahaan) { changed in
+                    TextField("Company's address".localized(language), text: $registerData.alamatPerusahaan) { changed in
                     } onCommit: {
                     }
                     .font(Font.system(size: 14))
@@ -436,14 +436,14 @@ struct InformasiPerusahaanView: View {
             
             VStack(alignment: .leading) {
                 
-                Text(NSLocalizedString("Postal code".localized(language), comment: ""))
+                Text("Postal code".localized(language))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    TextField(NSLocalizedString("Postal code".localized(language), comment: ""), text: $kodePos) {change in
+                    TextField("Postal code".localized(language), text: $kodePos) {change in
                     } onCommit: {
                     }
                     .onReceive(kodePos.publisher.collect()) {
@@ -460,14 +460,14 @@ struct InformasiPerusahaanView: View {
             }
             .padding(.horizontal, 20)
             
-            LabelTextField(value: $registerData.kecamatan, label: NSLocalizedString("Sub-district".localized(language), comment: ""), placeHolder: NSLocalizedString("Sub-district".localized(language), comment: "")) { (Bool) in
+            LabelTextField(value: $registerData.kecamatan, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language)) { (Bool) in
                 print("on edit")
             } onCommit: {
                 print("on commit")
             }
             .padding(.horizontal, 20)
             
-            LabelTextField(value: $registerData.kelurahan, label: NSLocalizedString("Village".localized(language), comment: ""), placeHolder: NSLocalizedString("Village".localized(language), comment: "")) { (Bool) in
+            LabelTextField(value: $registerData.kelurahan, label: "Village".localized(language), placeHolder: "Village".localized(language)) { (Bool) in
                 print("on edit")
             } onCommit: {
                 print("on commit")
@@ -476,7 +476,7 @@ struct InformasiPerusahaanView: View {
             
             Group {
                 
-                Text(NSLocalizedString("Company Telephone Number".localized(language), comment: ""))
+                Text("Company Telephone Number".localized(language))
                     .font(Font.system(size: 12))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(hex: "#707070"))
@@ -492,7 +492,7 @@ struct InformasiPerusahaanView: View {
                     Divider()
                         .frame(height: 30)
                     
-                    TextField(NSLocalizedString("Company Telephone Number".localized(language), comment: ""), text: $noTlpPerusahaan) {change in
+                    TextField("Company Telephone Number".localized(language), text: $noTlpPerusahaan) {change in
                     } onCommit: {
                         self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
                     }
@@ -521,7 +521,7 @@ struct InformasiPerusahaanView: View {
     func createBottomFloater() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Company's address".localized(language), comment: ""))
+                Text("Company's address".localized(language))
                     .fontWeight(.bold)
                     .font(.system(size: 19))
                     .foregroundColor(Color(hex: "#232175"))
@@ -530,7 +530,7 @@ struct InformasiPerusahaanView: View {
             
             HStack {
                 
-                TextField(NSLocalizedString("Company's address".localized(language), comment: ""), text: $location)
+                TextField("Company's address".localized(language), text: $location)
                     .font(Font.system(size: 14))
                     .frame(height: 36)
                 
@@ -595,7 +595,7 @@ struct InformasiPerusahaanView: View {
     func createBottomFloaterBidangUsaha() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Business fields".localized(language), comment: ""))
+                Text("Business fields".localized(language))
                     .fontWeight(.bold)
                     .font(.system(size: 19))
                     .foregroundColor(Color(hex: "#232175"))

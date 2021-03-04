@@ -24,11 +24,11 @@ struct FormInputNewPinScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                Text(NSLocalizedString("ENTER NEW PIN".localized(language), comment: ""))
+                Text("ENTER NEW PIN".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text(NSLocalizedString("Please enter your new transaction PIN".localized(language), comment: ""))
+                Text("Please enter your new transaction PIN".localized(language))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#002251"))
                     .padding(.top, 5)
@@ -37,17 +37,17 @@ struct FormInputNewPinScreen: View {
                     VStack {
                         HStack {
                             if (showPassword) {
-                                TextField(NSLocalizedString("Your new PIN".localized(language), comment: ""), text: self.$passwordCtrl)
+                                TextField("Your new PIN".localized(language), text: self.$passwordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             } else {
-                                SecureField(NSLocalizedString("Your new PIN".localized(language), comment: ""), text: self.$passwordCtrl)
+                                SecureField("Your new PIN".localized(language), text: self.$passwordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             }
                             
                             Button(action: {
                                 self.showPassword.toggle()
                             }, label: {
-                                Text(NSLocalizedString("show".localized(language), comment: ""))
+                                Text("show".localized(language))
                                     .foregroundColor(Color(hex: "#3756DF"))
                                     .font(.custom("Montserrat-Light", size: 12))
                             })
@@ -59,17 +59,17 @@ struct FormInputNewPinScreen: View {
                         
                         HStack {
                             if (showConfirmPassword) {
-                                TextField(NSLocalizedString("Confirm PIN".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
+                                TextField("Confirm PIN".localized(language), text: self.$confirmPasswordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             } else {
-                                SecureField(NSLocalizedString("Confirm PIN".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
+                                SecureField("Confirm PIN".localized(language), text: self.$confirmPasswordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
                             }
                             
                             Button(action: {
                                 self.showConfirmPassword.toggle()
                             }, label: {
-                                Text(NSLocalizedString("show".localized(language), comment: ""))
+                                Text("show".localized(language))
                                     .foregroundColor(Color(hex: "#3756DF"))
                                     .font(.custom("Montserrat-Light", size: 12))
                             })
@@ -90,7 +90,7 @@ struct FormInputNewPinScreen: View {
                     Button(action: {
                         self.showingModal.toggle()
                     }, label: {
-                        Text(NSLocalizedString("Save New Transaction PIN".localized(language), comment: ""))
+                        Text("Save New Transaction PIN".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 16))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -105,7 +105,7 @@ struct FormInputNewPinScreen: View {
                 
             }
             .padding(.top, 60)
-            .navigationBarTitle(NSLocalizedString("Change PIN Transaction".localized(language), comment: ""), displayMode: .inline)
+            .navigationBarTitle("Change PIN Transaction".localized(language), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {}, label: {
                 Text("Cancel")
             }))
@@ -135,7 +135,7 @@ struct FormInputNewPinScreen: View {
             
             HStack {
                 
-                Text(NSLocalizedString("New Transaction PIN Has Been Successfully Saved.".localized(language), comment: ""))
+                Text("New Transaction PIN Has Been Successfully Saved.".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -144,7 +144,7 @@ struct FormInputNewPinScreen: View {
             .padding(.top, 25)
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text(NSLocalizedString("BACK", comment: ""))
+                Text("BACK")
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)

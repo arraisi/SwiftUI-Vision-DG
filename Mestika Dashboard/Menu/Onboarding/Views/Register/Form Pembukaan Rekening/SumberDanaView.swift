@@ -54,7 +54,7 @@ struct SumberDanaView: View {
                         
                         VStack {
                             // Title
-                            Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
+                            Text("OPENING ACCOUNT DATA".localized(language))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
                                 .foregroundColor(.white)
                                 .padding(.vertical, 30)
@@ -87,7 +87,7 @@ struct SumberDanaView: View {
                                         Spacer()
                                         
                                         // Sub title
-                                        Text(NSLocalizedString("Choose Your Fund Source".localized(language), comment: ""))
+                                        Text("Choose Your Fund Source".localized(language))
                                             .font(.custom("Montserrat-SemiBold", size: 18))
                                             .font(Font.system(size: 18))
                                             .foregroundColor(Color(hex: "#232175"))
@@ -174,11 +174,11 @@ struct SumberDanaView: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

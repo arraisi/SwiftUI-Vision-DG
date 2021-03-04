@@ -23,7 +23,7 @@ struct ListFavoriteTransactionView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Transfer Favorites".localized(language), comment: ""))
+                Text("Transfer Favorites".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                 
                 Spacer()

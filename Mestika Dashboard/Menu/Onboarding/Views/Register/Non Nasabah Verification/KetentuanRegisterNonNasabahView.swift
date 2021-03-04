@@ -58,7 +58,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                 .frame(width: 70, height: 70)
                                 .padding(.top, 20)
                             
-                            Text(NSLocalizedString("Before Starting..!!".localized(language), comment: ""))
+                            Text("Before Starting..!!".localized(language))
                                 .font(.custom("Montserrat-Bold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .padding(.top, 0)
@@ -68,7 +68,7 @@ struct KetentuanRegisterNonNasabahView: View {
                                 WebView(readed: self.$readed, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
                                 
                                 if showingBadge {
-                                    BadgeView(text: NSLocalizedString("Please scroll down".localized(language), comment: ""))
+                                    BadgeView(text: "Please scroll down".localized(language))
                                         .animation(.easeIn)
                                         .onAppear{
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -90,7 +90,7 @@ struct KetentuanRegisterNonNasabahView: View {
                             Button(action : {
                                 self.goToNext = true
                             }) {
-                                Text(NSLocalizedString("Continue to Create Account".localized(language), comment: ""))
+                                Text("Continue to Create Account".localized(language))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -103,7 +103,7 @@ struct KetentuanRegisterNonNasabahView: View {
                             Button(action : {
                                 self.appState.moveToWelcomeView = true
                             }) {
-                                Text(NSLocalizedString("Cancel Register".localized(language), comment: ""))
+                                Text("Cancel Register".localized(language))
                                     .foregroundColor(.gray)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -130,11 +130,11 @@ struct KetentuanRegisterNonNasabahView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES"), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO", comment: ""))))
+                secondaryButton: .cancel(Text("NO")))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

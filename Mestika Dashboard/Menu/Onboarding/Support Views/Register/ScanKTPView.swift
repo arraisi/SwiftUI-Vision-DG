@@ -36,7 +36,7 @@ struct ScanKTPView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text(NSLocalizedString("Please prepare your \nIdentity Card (KTP) in advance".localized(language), comment: ""))
+            Text("Please prepare your \nIdentity Card (KTP) in advance".localized(language))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
@@ -63,7 +63,7 @@ struct ScanKTPView: View {
             Button(action: {
                 self.onChange()
             }, label: {
-                Text(imageKTP == nil ? NSLocalizedString("Take Photo Identity Card (KTP)".localized(language), comment: "") : NSLocalizedString("Change Another Photo".localized(language), comment: ""))
+                Text(imageKTP == nil ? "Take Photo Identity Card (KTP)".localized(language) : "Change Another Photo".localized(language))
                     .foregroundColor(imageKTP == nil ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -80,12 +80,12 @@ struct ScanKTPView: View {
             
             VStack(alignment: .leading) {
                 
-                Text(NSLocalizedString("Identity Card Number".localized(language), comment: ""))
+                Text("Identity Card Number".localized(language))
                     .multilineTextAlignment(.leading)
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $nik, title: NSLocalizedString("No. KTP (Otomatis terisi)".localized(language), comment: ""), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $nik, title: "No. KTP (Otomatis terisi)".localized(language), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.nik = String(str.prefix(16))
                     self.isValidKtp = str.count == 16
                     
@@ -94,7 +94,7 @@ struct ScanKTPView: View {
                 Button(action: {self.confirmNik.toggle()}) {
                     HStack(alignment: .top) {
                         Image(systemName: confirmNik ? "checkmark.square": "square")
-                        Text(NSLocalizedString("* Check again and make sure your Identity Card Number (KTP) is correct".localized(language), comment: ""))
+                        Text("* Check again and make sure your Identity Card Number (KTP) is correct".localized(language))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#707070"))
                     }
@@ -109,7 +109,7 @@ struct ScanKTPView: View {
                     Button(action: {
                         getCitizen(nik: self.nik)
                     }) {
-                        Text(NSLocalizedString("Save".localized(language), comment: ""))
+                        Text("Save".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

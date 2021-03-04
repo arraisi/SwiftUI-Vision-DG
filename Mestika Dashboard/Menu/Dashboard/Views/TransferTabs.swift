@@ -45,7 +45,7 @@ struct TransferTabs: View {
                     .font(.title)
                     .fontWeight(.heavy)
                 
-                Text(NSLocalizedString("Please select the type of transaction to be used".localized(language), comment: ""))
+                Text("Please select the type of transaction to be used".localized(language))
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
@@ -81,7 +81,7 @@ struct TransferTabs: View {
                 print("ONUS")
                 self.transferOnUsActive = true
             }, label: {
-                Text(NSLocalizedString("FELLOW BANK MESTIKA".localized(language), comment: ""))
+                Text("FELLOW BANK MESTIKA".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 13))
@@ -100,7 +100,7 @@ struct TransferTabs: View {
                 print("OFFUS")
                 self.transferOffUsActive = true
             }, label: {
-                Text(NSLocalizedString("Transfer to Other Bank".localized(language), comment: ""))
+                Text("Transfer to Other Bank".localized(language))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.system(size: 13))

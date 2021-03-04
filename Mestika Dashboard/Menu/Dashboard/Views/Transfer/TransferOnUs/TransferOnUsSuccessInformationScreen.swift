@@ -54,7 +54,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                             self.appState.moveToTransfer = true
                         },
                         label: {
-                            Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
+                            Text("Back to Main Page".localized(language))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -83,14 +83,14 @@ struct TransferOnUsSuccessInformationScreen: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingBadge) {
             return Alert(
-                title: Text(NSLocalizedString("Succeed".localized(language), comment: "")),
-                message: Text(NSLocalizedString("Favorite added successfully".localized(language), comment: "")),
-                dismissButton: .default(Text(NSLocalizedString("Okay".localized(language), comment: "")))
+                title: Text("Succeed".localized(language)),
+                message: Text("Favorite added successfully".localized(language)),
+                dismissButton: .default(Text("Okay".localized(language)))
             )
         }
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
-                Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
+                Text("Add to favorites?".localized(language))
                     .font(.caption)
                     .foregroundColor(.white)
                 
@@ -123,7 +123,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
-            Text(NSLocalizedString("Peer Transfer Successfully".localized(language), comment: ""))
+            Text("Peer Transfer Successfully".localized(language))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
@@ -132,7 +132,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     var nominalInfo: some View {
         VStack {
-            Text(NSLocalizedString("Nominal Transaction".localized(language), comment: ""))
+            Text("Nominal Transaction".localized(language))
 //                .font(.caption)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
@@ -150,7 +150,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     var destinationInfo: some View {
         VStack(alignment: .leading) {
-            Text(NSLocalizedString("To".localized(language), comment: ""))
+            Text("To".localized(language))
 //                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
@@ -176,7 +176,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     var receivedInfo: some View {
         VStack(alignment: .leading) {
-            Text(NSLocalizedString("From".localized(language), comment: ""))
+            Text("From".localized(language))
 //                .font(.caption2)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             

@@ -31,7 +31,7 @@ struct FormCompletionReferalCodeView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 ScrollView {
-                    Text(NSLocalizedString("COMPLETE DATA".localized(language), comment: ""))
+                    Text("COMPLETE DATA".localized(language))
                         .multilineTextAlignment(.center)
                         .font(.custom("Montserrat-Bold", size: 26))
                         .foregroundColor(.white)
@@ -46,7 +46,7 @@ struct FormCompletionReferalCodeView: View {
 //                        self.postData()
                         self.goToSuccessPage = true
                     }) {
-                        Text(productVM.isLoading ? NSLocalizedString("Please wait".localized(language), comment: "") : NSLocalizedString("SUBMIT".localized(language), comment: ""))
+                        Text(productVM.isLoading ? "Please wait".localized(language) : "SUBMIT".localized(language))
                             .foregroundColor(Color("DarkStaleBlue"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))
@@ -75,13 +75,13 @@ struct FormCompletionReferalCodeView: View {
     var referalCodeCard: some View {
         ZStack {
             VStack {
-                Text(NSLocalizedString("Enter Referral Code".localized(language), comment: ""))
+                Text("Enter Referral Code".localized(language))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color("DarkStaleBlue"))
                     .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
                 
-                Text(NSLocalizedString("How do you know the information on Digital Banking Bank mestika" .localized(language), comment: ""))
+                Text("How do you know the information on Digital Banking Bank mestika" .localized(language))
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat", size: 12))
                     .foregroundColor(Color("DarkStaleBlue"))
@@ -97,7 +97,7 @@ struct FormCompletionReferalCodeView: View {
                     
                     HStack {
                         
-                        TextField(NSLocalizedString("Enter Referral Code".localized(language), comment: ""), text: $atmData.atmAddresspostalReferral) { changed in
+                        TextField("Enter Referral Code".localized(language), text: $atmData.atmAddresspostalReferral) { changed in
                             
                         } onCommit: {
                         }

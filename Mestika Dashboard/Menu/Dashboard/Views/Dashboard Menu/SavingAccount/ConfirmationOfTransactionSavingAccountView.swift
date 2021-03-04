@@ -24,14 +24,14 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                 }
                 
                 HStack {
-                    Text(NSLocalizedString("Confirmation of \nOpening Savings".localized(language), comment: ""))
+                    Text("Confirmation of \nOpening Savings".localized(language))
                     Spacer()
                 }
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color("DarkStaleBlue"))
                 
                 HStack {
-                    Text(NSLocalizedString("Make sure the data related to Online Deposit transactions are correct".localized(language), comment: ""))
+                    Text("Make sure the data related to Online Deposit transactions are correct".localized(language))
                     Spacer()
                 }
                 .font(.custom("Montserrat-Bold", size: 12))
@@ -39,12 +39,12 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                 
                 VStack(spacing: 5) {
                     HStack {
-                        Text(NSLocalizedString("Type of Transaction".localized(language), comment: ""))
+                        Text("Type of Transaction".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                             .foregroundColor(Color.gray)
                         Spacer()
                         HStack {
-                            Text(NSLocalizedString("Savings".localized(language), comment: ""))
+                            Text("Savings".localized(language))
                                 .font(.custom("Montserrat-Bold", size: 12))
                                 .foregroundColor(Color.black.opacity(0.6))
                             Spacer()
@@ -57,7 +57,7 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("Savings product".localized(language), comment: ""))
+                        Text("Savings product".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                             .foregroundColor(Color.gray)
                         Spacer()
@@ -75,7 +75,7 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("Deposit Amount".localized(language), comment: ""))
+                        Text("Deposit Amount".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                             .foregroundColor(Color.gray)
                         Spacer()
@@ -95,7 +95,7 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                 }
                 
                 NavigationLink(destination: ConfirmationPinOfSavingAccountView(), label: {
-                    Text(NSLocalizedString("TRANSACTION CONFIRMATION".localized(language), comment: ""))
+                    Text("TRANSACTION CONFIRMATION".localized(language))
                         .padding()
                         .font(.custom("Montserrat-Bold", size: 14))
                         .foregroundColor(.white)

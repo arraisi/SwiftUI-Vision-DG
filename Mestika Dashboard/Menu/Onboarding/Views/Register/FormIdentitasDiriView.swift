@@ -89,12 +89,12 @@ struct FormIdentitasDiriView: View {
                                 Button(action: {
                                     //                                    self.nextViewActive = true
                                 }, label: {
-                                    Text(NSLocalizedString("PERSONAL IDENTITY".localized(language), comment: ""))
+                                    Text("PERSONAL IDENTITY".localized(language))
                                         .font(.custom("Montserrat-ExtraBold", size: 24))
                                         .foregroundColor(.white)
                                 })
                                 
-                                Text(NSLocalizedString("Please fill in and complete your identity data".localized(language), comment: ""))
+                                Text("Please fill in and complete your identity data".localized(language))
                                     .font(.custom("Montserrat-Regular", size: 12))
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(Color(hex: "#F6F8FB"))
@@ -103,7 +103,7 @@ struct FormIdentitasDiriView: View {
                             
                             // Form KTP
                             VStack {
-                                DisclosureGroup(NSLocalizedString("Photo of KTP and ID Number of Population".localized(language), comment: ""), isExpanded: self.$formKTP) {
+                                DisclosureGroup("Photo of KTP and ID Number of Population".localized(language), isExpanded: self.$formKTP) {
                                     ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik, preview: $showKTPPreview,
                                                 onChange: {
                                                     self.actionSelection("ktp")
@@ -126,7 +126,7 @@ struct FormIdentitasDiriView: View {
                             
                             // Form Selfie
                             VStack {
-                                DisclosureGroup(NSLocalizedString("Take Self Photo or Selfie".localized(language), comment: ""), isExpanded: self.$formSelfie) {
+                                DisclosureGroup("Take Self Photo or Selfie".localized(language), isExpanded: self.$formSelfie) {
                                     SelfieView(registerData: _registerData, imageSelfie: $imageSelfie, preview: $showSelfiePreview,
                                                onChange: {
                                                 self.actionSelection("selfie")
@@ -149,7 +149,7 @@ struct FormIdentitasDiriView: View {
                             
                             // Form NPWP
                             VStack {
-                                DisclosureGroup(NSLocalizedString("Enter your NPWP".localized(language), comment: ""), isExpanded: self.$formNPWP) {
+                                DisclosureGroup("Enter your NPWP".localized(language), isExpanded: self.$formNPWP) {
                                     ScanNPWPView(registerData: _registerData, npwp: $npwp, alreadyHaveNpwp: $alreadyHaveNpwp, imageNPWP: $imageNPWP, preview: $showNPWPPreview,
                                                  onChange: {
                                                     self.actionSelection("npwp")
@@ -196,7 +196,7 @@ struct FormIdentitasDiriView: View {
                                 }
                                 
                             }, label: {
-                                Text(NSLocalizedString("Continue to Open New Account".localized(language), comment: ""))
+                                Text("Continue to Open New Account".localized(language))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 16))
                                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -259,11 +259,11 @@ struct FormIdentitasDiriView: View {
         }
 //        .alert(isPresented: $showingAlert) {
 //            return Alert(
-//                title: Text(NSLocalizedString("Apakah ingin membatalkan registrasi ?", comment: "")),
-//                primaryButton: .default(Text(NSLocalizedString("YA", comment: "")), action: {
+//                title: Text("Apakah ingin membatalkan registrasi ?"),
+//                primaryButton: .default(Text("YA"), action: {
 //                    self.appState.moveToWelcomeView = true
 //                }),
-//                secondaryButton: .cancel(Text(NSLocalizedString("Tidak", comment: ""))))
+//                secondaryButton: .cancel(Text("Tidak")))
 //        }
 //        .gesture(DragGesture().onEnded({ value in
 //            if(value.startLocation.x < 20 &&
@@ -311,10 +311,10 @@ struct FormIdentitasDiriView: View {
             VStack(alignment: .center){
                 Spacer()
                 HStack{
-                    Text("\(Image(systemName: "checkmark"))" + NSLocalizedString("Make sure your e-KTP is genuine and not a scanned, uploaded or photocopy version".localized(language), comment: ""))
+                    Text("\(Image(systemName: "checkmark"))" + "Make sure your e-KTP is genuine and not a scanned, uploaded or photocopy version".localized(language))
                 }
                 HStack{
-                    Text("\(Image(systemName: "checkmark"))" + NSLocalizedString("Make sure the e-KTP is not cut off, data and photos are clearly visible".localized(language), comment: ""))
+                    Text("\(Image(systemName: "checkmark"))" + "Make sure the e-KTP is not cut off, data and photos are clearly visible".localized(language))
                 }
             }
             .foregroundColor(.white)

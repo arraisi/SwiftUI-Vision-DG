@@ -24,7 +24,7 @@ struct ListLastPaymentPlnView: View {
             Color(hex: "#F6F8FB")
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Last Payment / Purchase".localized(language), comment: ""))
+                    Text("Last Payment / Purchase".localized(language))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.light)

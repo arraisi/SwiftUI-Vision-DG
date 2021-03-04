@@ -23,12 +23,12 @@ struct FormPasswordVerificationForgotPasswordView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""))
+                Text("ENTER PASSWORD".localized(language))
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                 
-                Text(NSLocalizedString("Proses verifikasi berhasil, Silahkan masukkan password aplikasi Anda.".localized(language), comment: ""))
+                Text("Proses verifikasi berhasil, Silahkan masukkan password aplikasi Anda.".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -38,9 +38,9 @@ struct FormPasswordVerificationForgotPasswordView: View {
                 VStack {
                     HStack {
                         if (showPassword) {
-                            TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: self.$oldPasswordCtrl)
+                            TextField("Enter Password".localized(language), text: self.$oldPasswordCtrl)
                         } else {
-                            SecureField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: self.$oldPasswordCtrl)
+                            SecureField("Enter Password".localized(language), text: self.$oldPasswordCtrl)
                         }
                         
                         Button(action: {
@@ -63,7 +63,7 @@ struct FormPasswordVerificationForgotPasswordView: View {
                 
                 VStack {
                     NavigationLink(destination: FormNoRekeningPinForgotPasswordScreen(), label: {
-                        Text(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""))
+                        Text("ENTER PASSWORD".localized(language))
                             .foregroundColor(Color(hex: "#2334D0"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))
@@ -80,7 +80,7 @@ struct FormPasswordVerificationForgotPasswordView: View {
             }
             .padding(.top, 60)
         }
-        .navigationBarTitle(NSLocalizedString("Forgot Password".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Forgot Password".localized(language), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
             Text("Cancel")
         }))

@@ -30,12 +30,12 @@ struct SuccessOpenNewSavingAccountView: View {
                         Text("13 Januari 2021")
                             .font(.custom("Montserrat-Bold", size: 12))
                         
-                        Text(NSLocalizedString("Savings Opening \nNew Successful".localized(language), comment: ""))
+                        Text("Savings Opening \nNew Successful".localized(language))
                             .multilineTextAlignment(.center)
                             .font(.custom("Montserrat-Bold", size: 18))
                             .padding(.bottom, 30)
                         
-                        Text(NSLocalizedString("Deposit Amount".localized(language), comment: ""))
+                        Text("Deposit Amount".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
                         HStack(alignment: .top, spacing: 0) {
@@ -50,7 +50,7 @@ struct SuccessOpenNewSavingAccountView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 5) {
                             
-                            Text(NSLocalizedString("Saving Account".localized(language), comment: ""))
+                            Text("Saving Account".localized(language))
                                 .font(.custom("Montserrat-Bold", size: 10))
                             
                             Text("123456789")
@@ -76,7 +76,7 @@ struct SuccessOpenNewSavingAccountView: View {
                             self.appState.moveToDashboard = true
                         },
                         label: {
-                            Text(NSLocalizedString("Back to Main Page".localized(language), comment: ""))
+                            Text("Back to Main Page".localized(language))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -93,7 +93,7 @@ struct SuccessOpenNewSavingAccountView: View {
         .navigationTitle("")
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
-                Text(NSLocalizedString("Add to favorites?".localized(language), comment: ""))
+                Text("Add to favorites?".localized(language))
                     .font(.caption)
                     .foregroundColor(.white)
                 

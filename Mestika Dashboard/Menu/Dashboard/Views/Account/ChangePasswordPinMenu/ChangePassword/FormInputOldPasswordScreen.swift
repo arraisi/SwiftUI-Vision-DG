@@ -17,12 +17,12 @@ struct FormInputOldPasswordScreen: View {
     
     var body: some View {
         VStack {
-            Text(NSLocalizedString("OLD PASSWORD".localized(language), comment: ""))
+            Text("OLD PASSWORD".localized(language))
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color(hex: "#2334D0"))
             
-            Text(NSLocalizedString("Please enter your old account password".localized(language), comment: ""))
+            Text("Please enter your old account password".localized(language))
                 .font(.subheadline)
                 .fontWeight(.light)
                 .foregroundColor(Color(hex: "#002251"))
@@ -39,7 +39,7 @@ struct FormInputOldPasswordScreen: View {
                     Button(action: {
                         self.showPassword.toggle()
                     }, label: {
-                        Text(NSLocalizedString("show".localized(language), comment: ""))
+                        Text("show".localized(language))
                             .foregroundColor(Color(hex: "#3756DF"))
                             .fontWeight(.light)
                     })
@@ -58,7 +58,7 @@ struct FormInputOldPasswordScreen: View {
         .padding(.top, 60)
         .navigationBarTitle("Change Password".localized(language), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {}, label: {
-            Text(NSLocalizedString("Cancel".localized(language), comment: ""))
+            Text("Cancel".localized(language))
         }))
     }
 }

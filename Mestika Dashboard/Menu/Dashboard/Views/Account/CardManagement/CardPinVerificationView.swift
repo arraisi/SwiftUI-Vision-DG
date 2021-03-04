@@ -33,13 +33,13 @@ struct CardPinVerificationView: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text(NSLocalizedString("ENTER PIN \n TRANSACTION".localized(language), comment: ""))
+                Text("ENTER PIN \n TRANSACTION".localized(language))
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color(hex: "#2334D0"))
                 
-                Text(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""))
+                Text("Enter your Transaction PIN".localized(language))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#2334D0"))
@@ -72,7 +72,7 @@ struct CardPinVerificationView: View {
                 .padding(.horizontal, 30)
             }
         }
-        .navigationBarTitle(NSLocalizedString("Transaction PIN Verification".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Transaction PIN Verification".localized(language), displayMode: .inline)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOffUs"))) { obj in
             print("SUCCESS PIN")
             self.activateData.pinTrx = password

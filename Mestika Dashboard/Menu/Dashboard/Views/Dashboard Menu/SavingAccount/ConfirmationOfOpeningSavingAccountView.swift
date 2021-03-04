@@ -31,14 +31,14 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     VStack {
                         
                         HStack {
-                            Text(NSLocalizedString("Savings product".localized(language), comment: ""))
+                            Text("Savings product".localized(language))
                             Spacer()
                         }
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         
                         HStack {
                             
-                            TextField(NSLocalizedString("Choose a savings product".localized(language), comment: ""), text: $product)
+                            TextField("Choose a savings product".localized(language), text: $product)
                                 .onChange(of: product, perform: { value in
                                 })
                                 .font(.custom("Montserrat-Bold", size: 12))
@@ -74,7 +74,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     VStack {
                         
                         HStack {
-                            Text(NSLocalizedString("Deposit Amount (Rp)".localized(language), comment: ""))
+                            Text("Deposit Amount (Rp)".localized(language))
                             Spacer()
                         }
                         .font(.custom("Montserrat-SemiBold", size: 14))
@@ -92,7 +92,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             .foregroundColor(Color("DarkStaleBlue"))
                             
                             HStack {
-                                Text(NSLocalizedString("Deposit Exceeds Active Balance".localized(language), comment: ""))
+                                Text("Deposit Exceeds Active Balance".localized(language))
                                     .font(.custom("Montserrat-Bold", size: 10))
                                 Spacer()
                             }
@@ -101,7 +101,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             Divider()
                             
                             HStack {
-                                Text(NSLocalizedString("Total Active Balance".localized(language), comment: ""))
+                                Text("Total Active Balance".localized(language))
                                     .font(.custom("Montserrat-Bold", size: 10))
                                     .foregroundColor(.gray)
                                 
@@ -125,11 +125,11 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     
-                    SavingAccountDetailRow(label: NSLocalizedString("Minimum Initial Deposit".localized(language), comment: ""), value: "250000")
+                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: "250000")
                     
-                    SavingAccountDetailRow(label: NSLocalizedString("Minimum Deposit Next".localized(language), comment: ""), value: "5000")
+                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: "5000")
                     
-                    SavingAccountDetailRow(label: NSLocalizedString("Minimum Balance".localized(language), comment: ""), value: "100000")
+                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: "100000")
                     
                     SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: "100000")
                 }
@@ -141,7 +141,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                 Spacer()
                 VStack {
                     NavigationLink(destination: ConfirmationOfTransactionSavingAccountView(), label: {
-                        Text(NSLocalizedString("OPENING CONFIRMATION".localized(language), comment: ""))
+                        Text("OPENING CONFIRMATION".localized(language))
                             .padding()
                             .font(.custom("Montserrat-Bold", size: 14))
                             .foregroundColor(.white)
@@ -157,7 +157,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                 .shadow(color: Color("StaleBlue").opacity(0.2), radius: 10, x: 2, y: 0)
             }
         }
-        .navigationBarTitle(NSLocalizedString("Saving Account".localized(language), comment: ""))
+        .navigationBarTitle("Saving Account".localized(language))
 
         
     }

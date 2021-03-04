@@ -27,7 +27,7 @@ struct ListAnnouncementView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text(NSLocalizedString("Mark All Read".localized(language), comment: ""))
+                        Text("Mark All Read".localized(language))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.caption2)
                             .padding(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 20))

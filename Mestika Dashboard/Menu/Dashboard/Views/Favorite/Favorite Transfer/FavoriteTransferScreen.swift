@@ -24,7 +24,7 @@ struct FavoriteTransferScreen: View {
 //                    .padding(.bottom)
 //                    .padding(.bottom, 25)
             }
-            .navigationBarTitle(NSLocalizedString("Transfer Favorites".localized(language), comment: ""), displayMode: .inline)
+            .navigationBarTitle("Transfer Favorites".localized(language), displayMode: .inline)
         }
     }
 }

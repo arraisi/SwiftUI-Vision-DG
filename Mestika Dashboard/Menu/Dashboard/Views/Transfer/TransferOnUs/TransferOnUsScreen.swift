@@ -21,12 +21,12 @@ struct TransferOnUsScreen: View {
     @Binding var dest: String
     
     @State var transferData = TransferOnUsModel()
-    @State var transactionFrequency = NSLocalizedString("Select Transaction Frequency".localized(LocalizationService.shared.language), comment: "")
-    @State var transactionVoucher = NSLocalizedString("Select Voucher".localized(LocalizationService.shared.language), comment: "")
+    @State var transactionFrequency = "Select Transaction Frequency".localized(LocalizationService.shared.language)
+    @State var transactionVoucher = "Select Voucher".localized(LocalizationService.shared.language)
     @State var destinationName = ""
     @State var destinationNumber = ""
     @State var amount = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: NSLocalizedString("Select Account".localized(LocalizationService.shared.language), comment: ""), productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Select Account".localized(LocalizationService.shared.language), productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     
     /*
      Dialog's Variables
@@ -53,8 +53,8 @@ struct TransferOnUsScreen: View {
     
     @State var listBankAccount: [BankAccount] = []
     
-    var _listVoucher = [NSLocalizedString("Voucher Not Available".localized(LocalizationService.shared.language), comment: "")]
-    var _listFrequency = [NSLocalizedString("Once".localized(LocalizationService.shared.language), comment: ""), NSLocalizedString("Many times".localized(LocalizationService.shared.language), comment: "")]
+    var _listVoucher = ["Voucher Not Available".localized(LocalizationService.shared.language)]
+    var _listFrequency = ["Once".localized(LocalizationService.shared.language), "Many times".localized(LocalizationService.shared.language)]
     
     @State private var selectedCalendar: String = "Now"
     
@@ -123,7 +123,7 @@ struct TransferOnUsScreen: View {
                             Button(action: {
                                 self.transferData.destinationName = self.destinationName
                                 
-                                if (transactionVoucher == NSLocalizedString("Select Voucher".localized(language), comment: "") || transactionVoucher == NSLocalizedString("Voucher Not Available".localized(language), comment: "")) {
+                                if (transactionVoucher == "Select Voucher".localized(language) || transactionVoucher == "Voucher Not Available".localized(language)) {
                                     self.transferData.transactionVoucher = ""
                                 }
                                 
@@ -147,7 +147,7 @@ struct TransferOnUsScreen: View {
                                 }
                                 
                             }, label: {
-                                Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
+                                Text("CONFIRM TRANSFER".localized(language))
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
                                     .font(.system(size: 13))
@@ -175,7 +175,7 @@ struct TransferOnUsScreen: View {
                 .edgesIgnoringSafeArea(.all)
             }
         })
-        .navigationBarTitle(NSLocalizedString("Inter-peer Transfer".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Inter-peer Transfer".localized(language), displayMode: .inline)
         .onAppear() {
             self.transferData = TransferOnUsModel()
             if (dest != "") {
@@ -209,7 +209,7 @@ struct TransferOnUsScreen: View {
     var noRekeningCard: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Destination Account No".localized(language), comment: ""))
+                Text("Destination Account No".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
@@ -219,7 +219,7 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                TextField(NSLocalizedString("Account".localized(language), comment: ""), text: $destinationNumber, onEditingChanged: {_ in
+                TextField("Account".localized(language), text: $destinationNumber, onEditingChanged: {_ in
                     inquiryTransfer()
                 }, onCommit: {
                     
@@ -265,7 +265,7 @@ struct TransferOnUsScreen: View {
     var nominalCard: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Amount (Rp)".localized(language), comment: ""))
+                Text("Amount (Rp)".localized(language))
                     .font(.subheadline)
                     .fontWeight(.ultraLight)
                 
@@ -298,7 +298,7 @@ struct TransferOnUsScreen: View {
             .padding(.horizontal, 25)
             
             HStack {
-                Text(NSLocalizedString("Transaction Limit".localized(language), comment: ""))
+                Text("Transaction Limit".localized(language))
                     .font(.subheadline)
                     .fontWeight(.ultraLight)
                 
@@ -350,7 +350,7 @@ struct TransferOnUsScreen: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
+                                Text("Active Balance:".localized(language))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text(self.selectedAccount.saldo)
@@ -462,7 +462,7 @@ struct TransferOnUsScreen: View {
     var notesCard: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Notes".localized(language), comment: ""))
+                Text("Notes".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
@@ -472,7 +472,7 @@ struct TransferOnUsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                MultilineTextField(NSLocalizedString("Write a transaction description here".localized(language), comment: ""), text: self.$notesCtrl, onCommit: {
+                MultilineTextField("Write a transaction description here".localized(language), text: self.$notesCtrl, onCommit: {
                 })
                 .onReceive(notesCtrl.publisher.collect()) {
                     self.notesCtrl = String($0.prefix(40))
@@ -494,7 +494,7 @@ struct TransferOnUsScreen: View {
     var bottomSheetCard: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Confirmed Account Number".localized(language), comment: ""))
+                Text("Confirmed Account Number".localized(language))
                     .foregroundColor(.green)
                     .font(.subheadline)
                     .fontWeight(.light)
@@ -540,7 +540,7 @@ struct TransferOnUsScreen: View {
             
             VStack {
                 NavigationLink(destination: TransferOnUsConfirmationScreen().environmentObject(transferData), label: {
-                    Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
+                    Text("CONFIRM TRANSFER".localized(language))
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 13))
@@ -563,13 +563,13 @@ struct TransferOnUsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("There are transactions less than the minimum transaction.".localized(language), comment: ""), comment: ""))
+            Text("There are transactions less than the minimum transaction.".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Minimum transaction of Rp.".localized(language), comment: "") + "\(self.minLimit),- . " + NSLocalizedString("Please change the transaction nominal.".localized(language), comment: ""), comment: ""))
+            Text("Minimum transaction of Rp.".localized(language) + "\(self.minLimit),- . " + "Please change the transaction nominal.".localized(language))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -580,7 +580,7 @@ struct TransferOnUsScreen: View {
                     self.showDialogMinTransaction = false
                 },
                 label: {
-                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
+                    Text("CHANGE THE NOMINAL".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -594,7 +594,7 @@ struct TransferOnUsScreen: View {
                     self.showDialogMinTransaction = false
                 },
                 label: {
-                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
+                    Text("CANCEL TRANSACTION".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -616,13 +616,13 @@ struct TransferOnUsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Minimum Balance Exceeded".localized(language), comment: ""), comment: ""))
+            Text("Minimum Balance Exceeded".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Your minimum account balance is Rp.".localized(language), comment: "") + " \(selectedAccount.saldo.thousandSeparator()),- " + NSLocalizedString("exceeded. Please change the transaction amount or add a balance to your account.".localized(language), comment: ""), comment: ""))
+            Text("Your minimum account balance is Rp.".localized(language) + " \(selectedAccount.saldo.thousandSeparator()),- " + "exceeded. Please change the transaction amount or add a balance to your account.".localized(language))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -633,7 +633,7 @@ struct TransferOnUsScreen: View {
                     self.showDialogMinReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
+                    Text("CHANGE THE NOMINAL".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -647,7 +647,7 @@ struct TransferOnUsScreen: View {
                     self.showDialogMinReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
+                    Text("CANCEL TRANSACTION".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -669,13 +669,13 @@ struct TransferOnUsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Transaction limit exceeded".localized(language), comment: ""), comment: ""))
+            Text("Transaction limit exceeded".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Transaction limit of Rp.".localized(language), comment: "") + "\(limitTrx.thousandSeparator()),- " + NSLocalizedString("Exceeded. Please reduce the nominal amount of the transaction or cancel the transaction.".localized(language), comment: ""), comment: ""))
+            Text("Transaction limit of Rp.".localized(language) + "\(limitTrx.thousandSeparator()),- " + "Exceeded. Please reduce the nominal amount of the transaction or cancel the transaction.".localized(language))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -686,7 +686,7 @@ struct TransferOnUsScreen: View {
                     self.showDialogMaxReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
+                    Text("CHANGE THE NOMINAL".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -700,7 +700,7 @@ struct TransferOnUsScreen: View {
                     self.showDialogMaxReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
+                    Text("CANCEL TRANSACTION".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -717,7 +717,7 @@ struct TransferOnUsScreen: View {
     func modalSelectBankAccount() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Select Account".localized(language), comment: ""))
+                Text("Select Account".localized(language))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 
@@ -734,7 +734,7 @@ struct TransferOnUsScreen: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
+                                Text("Active Balance:".localized(language))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text("Rp. \(data.saldo.thousandSeparator())")

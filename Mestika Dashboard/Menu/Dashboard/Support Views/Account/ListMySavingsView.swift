@@ -22,7 +22,7 @@ struct ListMySavingsView: View {
         ZStack {
             VStack {
                 HStack {
-                    Text(NSLocalizedString("My Savings".localized(language), comment: ""))
+                    Text("My Savings".localized(language))
                         .foregroundColor(Color(hex: "#1D2238"))
                         .font(.subheadline)
                         .fontWeight(.light)
@@ -30,7 +30,7 @@ struct ListMySavingsView: View {
                     Spacer()
                     
                     Button(action: {}) {
-                        Text(NSLocalizedString("more details".localized(language), comment: ""))
+                        Text("more details".localized(language))
                             .foregroundColor(Color(hex: "#232175"))
                             .font(.caption2)
                             .fontWeight(.bold)

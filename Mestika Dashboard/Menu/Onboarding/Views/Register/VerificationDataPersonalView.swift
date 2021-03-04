@@ -42,7 +42,7 @@ struct VerificationDataPersonalView: View {
                             .padding(.leading, 20)
                             .fixedSize(horizontal: false, vertical: true)
                         
-                        Text(NSLocalizedString("Template", comment: ""))
+                        Text("Template")
                             .font(.title)
                             .foregroundColor(Color(hex: "#2334D0"))
                             .fontWeight(.bold)
@@ -52,14 +52,14 @@ struct VerificationDataPersonalView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text(NSLocalizedString("You have chosen to register the savings type".localized(language), comment: ""))
+                        Text("You have chosen to register the savings type".localized(language))
                             .font(.subheadline)
                             .foregroundColor(Color(hex: "#707070"))
                             .multilineTextAlignment(.leading)
                             .padding(.top, 5)
                             .padding(.horizontal, 20)
                         
-                        Text(NSLocalizedString("Savings Deposit.".localized(language), comment: ""))
+                        Text("Savings Deposit.".localized(language))
                             .font(.subheadline)
                             .bold()
                             .foregroundColor(Color(hex: "#2334D0"))
@@ -67,7 +67,7 @@ struct VerificationDataPersonalView: View {
                             .padding(.horizontal, 20)
                     }
                     
-                    Text(NSLocalizedString("Before continuing the registration process, please first verify the data that you have filled in.".localized(language), comment: ""))
+                    Text("Before continuing the registration process, please first verify the data that you have filled in.".localized(language))
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.leading)
@@ -79,61 +79,61 @@ struct VerificationDataPersonalView: View {
                         .padding(.bottom, 10)
                     
                     Group {
-                        LabelTextField(value: $jenisTabungan, label: NSLocalizedString("Types of Savings".localized(language), comment: ""), placeHolder: NSLocalizedString("Jenis Tabungan", comment: "")){ (Bool) in
+                        LabelTextField(value: $jenisTabungan, label: "Types of Savings".localized(language), placeHolder: "Jenis Tabungan"){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Account Opening Purpose".localized(language), comment: ""), placeHolder: NSLocalizedString("Account Opening Purpose".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Account Opening Purpose".localized(language), placeHolder: "Account Opening Purpose".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Source of funds".localized(language), comment: ""), placeHolder: NSLocalizedString("Source of funds".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Source of funds".localized(language), placeHolder: "Source of funds".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Profession".localized(language), comment: ""), placeHolder: NSLocalizedString("Profession".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Profession".localized(language), placeHolder: "Profession".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Position".localized(language), comment: ""), placeHolder: NSLocalizedString("Position".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Position".localized(language), placeHolder: "Position".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Company name".localized(language), comment: ""), placeHolder: NSLocalizedString("Company name".localized(language), comment: "")) { (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Company name".localized(language), placeHolder: "Company name".localized(language)) { (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Company's address".localized(language), comment: ""), placeHolder: NSLocalizedString("Company's address".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Company's address".localized(language), placeHolder: "Company's address".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Sub-district".localized(language), comment: ""), placeHolder: NSLocalizedString("Sub-district".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Village".localized(language), comment: ""), placeHolder: NSLocalizedString("Village".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Village".localized(language), placeHolder: "Village".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Postal code".localized(language), comment: ""), placeHolder: NSLocalizedString("Postal code".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Postal code".localized(language), placeHolder: "Postal code".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
@@ -142,19 +142,19 @@ struct VerificationDataPersonalView: View {
                     .padding(.horizontal)
                     
                     Group {
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Company Number".localized(language), comment: ""), placeHolder: NSLocalizedString("Company Number".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Company Number".localized(language), placeHolder: "Company Number".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Business fields".localized(language), comment: ""), placeHolder: NSLocalizedString("Business fields".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Business fields".localized(language), placeHolder: "Business fields".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: NSLocalizedString("Income".localized(language), comment: ""), placeHolder: NSLocalizedString("Income".localized(language), comment: "")){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "Income".localized(language), placeHolder: "Income".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")
@@ -164,7 +164,7 @@ struct VerificationDataPersonalView: View {
                     
                     HStack {
                         NavigationLink(destination : VerificationAddressView()) {
-                            Text(NSLocalizedString("Valid Data".localized(language), comment: ""))
+                            Text("Valid Data".localized(language))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -179,7 +179,7 @@ struct VerificationDataPersonalView: View {
                         .padding(.vertical, 20)
                         
                         Button(action : {}) {
-                            Text(NSLocalizedString("Valid Data".localized(language), comment: ""))
+                            Text("Valid Data".localized(language))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))

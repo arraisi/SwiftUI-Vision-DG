@@ -16,21 +16,21 @@ struct ListPurchasePaymentView: View {
     @State var date = Date()
     
     var _listTransaksi = [
-        PurchasePayment(id: 1, tanggalTransaksi: "21 November 2020", namaTransaksi: NSLocalizedString("Prepaid Credit".localized(LocalizationService.shared.language), comment: ""), total: "600.000"),
-        PurchasePayment(id: 2, tanggalTransaksi: "4 Oktober 2020", namaTransaksi: NSLocalizedString("TV & Cable Internet".localized(LocalizationService.shared.language), comment: ""), total: "1.200.000")
+        PurchasePayment(id: 1, tanggalTransaksi: "21 November 2020", namaTransaksi: "Prepaid Credit".localized(LocalizationService.shared.language), total: "600.000"),
+        PurchasePayment(id: 2, tanggalTransaksi: "4 Oktober 2020", namaTransaksi: "TV & Cable Internet".localized(LocalizationService.shared.language), total: "1.200.000")
     ]
     
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(NSLocalizedString("Purchase & Payment".localized(language), comment: ""))
+                    Text("Purchase & Payment".localized(language))
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.bottom, 5)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    Text(NSLocalizedString("Purchasing and Payment of a wide variety of products.".localized(language), comment: ""))
+                    Text("Purchasing and Payment of a wide variety of products.".localized(language))
                         .font(.caption)
                         .fontWeight(.ultraLight)
                         .fixedSize(horizontal: false, vertical: true)
@@ -45,14 +45,14 @@ struct ListPurchasePaymentView: View {
             .padding(.vertical, 20)
             
             HStack {
-                Text(NSLocalizedString("Last transaction".localized(language), comment: ""))
+                Text("Last transaction".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
                 Spacer()
                 
                 Button(action: {}, label: {
-                    Text(NSLocalizedString("See Full List".localized(language), comment: ""))
+                    Text("See Full List".localized(language))
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#2334D0"))
                 })

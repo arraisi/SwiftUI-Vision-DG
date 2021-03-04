@@ -22,14 +22,14 @@ struct GridMenuAllPaymentPurchaseView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("All payment & purchase".localized(language), comment: ""))
+                Text("All payment & purchase".localized(language))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 
                 Spacer()
                 
                 Button(action: {}, label: {
-                    Text(NSLocalizedString("See All category".localized(language), comment: ""))
+                    Text("See All category".localized(language))
                         .bold()
                         .foregroundColor(Color(hex: "#2334D0"))
                 })

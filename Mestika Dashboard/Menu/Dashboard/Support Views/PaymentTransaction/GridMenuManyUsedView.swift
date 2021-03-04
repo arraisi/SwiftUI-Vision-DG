@@ -23,7 +23,7 @@ struct GridMenuManyUsedView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Many used".localized(language), comment: ""))
+                Text("Many used".localized(language))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 

@@ -15,7 +15,7 @@ struct ListPromoForYouView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Just for you!".localized(language), comment: ""))
+                Text("Just for you!".localized(language))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 

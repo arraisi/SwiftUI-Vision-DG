@@ -25,7 +25,7 @@ struct DetailKartuTidakAktifView: View {
             }
             
             HStack {
-                Text(NSLocalizedString("Inactive Account Card".localized(language), comment: ""))
+                Text("Inactive Account Card".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#232175"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -34,7 +34,7 @@ struct DetailKartuTidakAktifView: View {
             }
             
             HStack {
-                Text(NSLocalizedString("Activate your card first to see the settings.".localized(language), comment: ""))
+                Text("Activate your card first to see the settings.".localized(language))
                     .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(Color(hex: "#232175"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -46,7 +46,7 @@ struct DetailKartuTidakAktifView: View {
             NavigationLink(
                 destination: CardActivationView(card: card),
                 label: {
-                    Text(NSLocalizedString("ACTIVATE MY CARDS".localized(language), comment: ""))
+                    Text("ACTIVATE MY CARDS".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 40)

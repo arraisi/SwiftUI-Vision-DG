@@ -43,7 +43,7 @@ struct FormDetailKartuATMView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 25){
                         HStack {
-                            Text(NSLocalizedString("YOUR ATM CARD WILL BE SENT IMMEDIATELY".localized(language), comment: ""))
+                            Text("YOUR ATM CARD WILL BE SENT IMMEDIATELY".localized(language))
                                 .font(.custom("Montserrat-Bold", size: 24))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .fixedSize(horizontal: false, vertical: true)
@@ -70,7 +70,7 @@ struct FormDetailKartuATMView: View {
                         //                            .background(Color.clear)
                         
                         HStack {
-                            Text(NSLocalizedString("Congratulations, your new ATM card data has been successfully saved.".localized(language), comment: ""))
+                            Text("Congratulations, your new ATM card data has been successfully saved.".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .foregroundColor(Color(hex: "#1D2238"))
                             Spacer()
@@ -78,13 +78,13 @@ struct FormDetailKartuATMView: View {
                         
                         VStack {
                             HStack{
-                                Text(NSLocalizedString("Name".localized(language), comment: ""))
+                                Text("Name".localized(language))
                                     .font(.custom("Montserrat-Regular", size: 12))
                                     .foregroundColor(Color(hex: "#707070"))
                                 
                                 Spacer()
                                 
-                                TextField(NSLocalizedString("Name".localized(language), comment: ""), text: $atmData.atmName) { (isChanged) in
+                                TextField("Name".localized(language), text: $atmData.atmName) { (isChanged) in
                                     
                                 } onCommit: {
                                     
@@ -99,7 +99,7 @@ struct FormDetailKartuATMView: View {
                         }
                         
                         HStack {
-                            Text(NSLocalizedString("Please wait a few moments until your ATM card is accepted.".localized(language), comment: ""))
+                            Text("Please wait a few moments until your ATM card is accepted.".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .foregroundColor(Color(hex: "#1D2238"))
                             Spacer()
@@ -111,7 +111,7 @@ struct FormDetailKartuATMView: View {
                             NavigationLink(
                                 destination: VerificationPINView().environmentObject(registerData).environmentObject(atmData),
                                 label: {
-                                    Text(NSLocalizedString("NEXT".localized(language), comment: ""))
+                                    Text("NEXT".localized(language))
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
@@ -124,7 +124,7 @@ struct FormDetailKartuATMView: View {
                             NavigationLink(
                                 destination: SuccessRegisterView().environmentObject(registerData).environmentObject(atmData),
                                 label: {
-                                    Text(NSLocalizedString("NEXT".localized(language), comment: ""))
+                                    Text("NEXT".localized(language))
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .foregroundColor(.white)
                                         .frame(maxWidth: .infinity)
@@ -136,7 +136,7 @@ struct FormDetailKartuATMView: View {
                             //                            Button(action: {
                             //                                self.appState.moveToWelcomeView = true
                             //                            }) {
-                            //                                Text(NSLocalizedString("SELANJUTNYA", comment: ""))
+                            //                                Text("SELANJUTNYA")
                             //                                    .font(.custom("Montserrat-SemiBold", size: 14))
                             //                                    .foregroundColor(.white)
                             //                                    .frame(maxWidth: .infinity)
@@ -157,11 +157,11 @@ struct FormDetailKartuATMView: View {
         .navigationBarHidden(true)
         .alert(isPresented: $isShowingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

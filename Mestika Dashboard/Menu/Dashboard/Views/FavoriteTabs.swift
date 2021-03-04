@@ -52,11 +52,11 @@ struct FavoriteTabs: View {
     var titleInfo: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(NSLocalizedString("Favorite".localized(language), comment: ""))
+                Text("Favorite".localized(language))
                     .font(.title)
                     .fontWeight(.heavy)
                 
-                Text(NSLocalizedString("The following is a list of transactions that you have saved in the favorites menu".localized(language), comment: ""))
+                Text("The following is a list of transactions that you have saved in the favorites menu".localized(language))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: true)

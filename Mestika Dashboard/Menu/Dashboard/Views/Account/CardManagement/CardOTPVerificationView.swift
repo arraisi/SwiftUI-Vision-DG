@@ -48,7 +48,7 @@ struct CardOTPVerificationView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
-                Text(NSLocalizedString("OTP CODE VERIFICATION".localized(language), comment: ""))
+                Text("OTP CODE VERIFICATION".localized(language))
                     .font(.custom("Montserrat-Bold", size: 24))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -62,7 +62,7 @@ struct CardOTPVerificationView: View {
             .padding(.horizontal, 30)
             .padding(.top, 35)
         }
-        .navigationBarTitle(NSLocalizedString("Activate Card".localized(language), comment: ""))
+        .navigationBarTitle("Activate Card".localized(language))
     }
     
     // MARK: - CARD FORMS
@@ -70,7 +70,7 @@ struct CardOTPVerificationView: View {
         VStack(alignment: .center) {
             HStack {
                 VStack(alignment: .center) {
-                    Text(NSLocalizedString("Enter the OTP code has been sent to your number to continue to the next stage".localized(language), comment: ""))
+                    Text("Enter the OTP code has been sent to your number to continue to the next stage".localized(language))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -84,13 +84,13 @@ struct CardOTPVerificationView: View {
             }
             
             HStack {
-                Text(NSLocalizedString("Didn't Receive Code?".localized(language), comment: ""))
+                Text("Didn't Receive Code?".localized(language))
                     .font(.caption2)
                     .foregroundColor(.white)
                 Button(action: {
                     print("-> Resend OTP")
                 }) {
-                    Text(NSLocalizedString("Resend OTP".localized(language), comment: ""))
+                    Text("Resend OTP".localized(language))
                         .font(.caption2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -101,7 +101,7 @@ struct CardOTPVerificationView: View {
             }
             .padding(.top, 5)
             
-            Text(NSLocalizedString("Make sure you are connected to the Internet and have sufficient credit to receive OTP".localized(language), comment: ""))
+            Text("Make sure you are connected to the Internet and have sufficient credit to receive OTP".localized(language))
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -122,7 +122,7 @@ struct CardOTPVerificationView: View {
                     }
                 },
                 label: {
-                    Text(NSLocalizedString("ENTER OTP CODE".localized(language), comment: ""))
+                    Text("ENTER OTP CODE".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 16))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

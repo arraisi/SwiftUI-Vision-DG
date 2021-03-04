@@ -23,9 +23,9 @@ struct SavingAccountView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(NSLocalizedString("Saving Account".localized(language), comment: ""))
+                    Text("Saving Account".localized(language))
                         .font(.custom("Montserrat-Bold", size: 28))
-                    Text(NSLocalizedString("Get the best savings only here".localized(language), comment: ""))
+                    Text("Get the best savings only here".localized(language))
                         .font(.custom("Montserrat-Bold", size: 14))
                         .foregroundColor(.gray)
                 }
@@ -35,7 +35,7 @@ struct SavingAccountView: View {
             
             VStack(spacing: 20) {
                 HStack {
-                    TextField(NSLocalizedString("Choose a savings product".localized(language), comment: ""), text: $product)
+                    TextField("Choose a savings product".localized(language), text: $product)
                         .onChange(of: product, perform: { value in
                         })
                         .font(.custom("Montserrat-Regular", size: 12))
@@ -63,7 +63,7 @@ struct SavingAccountView: View {
                 .padding(.vertical, 5)
                 
                 NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(), label: {
-                    Text(NSLocalizedString("Opening a new savings account".localized(language), comment: ""))
+                    Text("Opening a new savings account".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -85,7 +85,7 @@ struct SavingAccountView: View {
             VStack {
                 
                 HStack {
-                    Text(NSLocalizedString("Your savings account".localized(language), comment: ""))
+                    Text("Your savings account".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                     Spacer()
                 }

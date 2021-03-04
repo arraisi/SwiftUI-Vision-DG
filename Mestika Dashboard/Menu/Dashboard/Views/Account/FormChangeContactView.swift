@@ -26,21 +26,21 @@ struct FormChangeContactView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack {
-                    Text(NSLocalizedString("Contact Data".localized(language), comment: ""))
+                    Text("Contact Data".localized(language))
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
                     
                     VStack(alignment: .leading) {
                         
                         VStack(alignment: .leading) {
-                            Text(NSLocalizedString("Phone Number".localized(language), comment: ""))
+                            Text("Phone Number".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(.black)
                             
                             HStack{
                                 Text("+62")
                                 Divider()
-                                TextField(NSLocalizedString(NSLocalizedString("Input Number Phone".localized(language), comment: ""), comment: ""), text: $txtPhone, onEditingChanged: { changed in
+                                TextField("Input Number Phone".localized(language), text: $txtPhone, onEditingChanged: { changed in
                                     
                                 })
                                 
@@ -60,7 +60,7 @@ struct FormChangeContactView: View {
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(.black)
                             
-                            TextField(NSLocalizedString("Input Email", comment: ""), text: $txtEmail, onEditingChanged: { changed in
+                            TextField("Input Email", text: $txtEmail, onEditingChanged: { changed in
                                 
                             })
                             .disabled(true)
@@ -76,7 +76,7 @@ struct FormChangeContactView: View {
                             self.presentationMode.wrappedValue.dismiss()
                             //                    self.showModal = false
                         }) {
-                            Text(NSLocalizedString("Back".localized(language), comment: ""))
+                            Text("Back".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 16))
                                 .frame(maxWidth: .infinity, maxHeight: 50)

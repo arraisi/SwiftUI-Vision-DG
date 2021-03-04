@@ -46,7 +46,7 @@ struct FirstPasswordLoginView: View {
                 AppBarLogo(light: false, onCancel: {})
                 
                 VStack {
-                    Text(NSLocalizedString("ENTER PASSWORD".localized(language), comment: ""))
+                    Text("ENTER PASSWORD".localized(language))
                         .font(.title2)
                         .bold()
                         .foregroundColor(.white)
@@ -78,7 +78,7 @@ struct FirstPasswordLoginView: View {
     
     var cardForm: some View {
         VStack(alignment: .center) {
-            Text(NSLocalizedString("The Application Password must be at least 8 characters long. It consists of Uppercase, Number, etc.".localized(language), comment: ""))
+            Text("The Application Password must be at least 8 characters long. It consists of Uppercase, Number, etc.".localized(language))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -92,7 +92,7 @@ struct FirstPasswordLoginView: View {
                     if (securedPassword) {
                         ZStack {
                             HStack (spacing: 0) {
-                                SecureField(NSLocalizedString("Masukkan Password".localized(language), comment: ""), text: $password)
+                                SecureField("Masukkan Password".localized(language), text: $password)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -114,7 +114,7 @@ struct FirstPasswordLoginView: View {
                     } else {
                         ZStack {
                             HStack (spacing: 0) {
-                                TextField(NSLocalizedString("Enter Password".localized(language), comment: ""), text: $password, onEditingChanged: { changed in
+                                TextField("Enter Password".localized(language), text: $password, onEditingChanged: { changed in
                                     print("\($password)")
                                 })
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -143,7 +143,7 @@ struct FirstPasswordLoginView: View {
                     if (securedConfirmation) {
                         ZStack {
                             HStack (spacing: 0) {
-                                SecureField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
+                                SecureField("Confirm Password".localized(language), text: $confirmationPassword)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -165,7 +165,7 @@ struct FirstPasswordLoginView: View {
                     } else {
                         ZStack {
                             HStack (spacing: 0) {
-                                TextField(NSLocalizedString("Confirm Password".localized(language), comment: ""), text: $confirmationPassword)
+                                TextField("Confirm Password".localized(language), text: $confirmationPassword)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .padding()
                                     .frame(width: 200, height: 50)
@@ -199,7 +199,7 @@ struct FirstPasswordLoginView: View {
                     checkPassword()
                 },
                 label: {
-                    Text(NSLocalizedString("SAVE LOGIN DATA".localized(language), comment: ""))
+                    Text("SAVE LOGIN DATA".localized(language))
                         .foregroundColor(disableForm ? .white : Color(hex: "#232175"))
                         .fontWeight(.bold)
                         .font(.system(size: 13))
@@ -235,7 +235,7 @@ struct FirstPasswordLoginView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Password is not the same, please retype", comment: ""))
+            Text("Password is not the same, please retype")
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))

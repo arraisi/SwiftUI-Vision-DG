@@ -31,9 +31,9 @@ struct FavoritePurchasePaymentScreen: View {
                     .padding(.bottom, 25)
                 })
             }
-            .navigationBarTitle(NSLocalizedString("Favorit Purchase".localized(language), comment: ""), displayMode: .inline)
+            .navigationBarTitle("Favorit Purchase".localized(language), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {}, label: {
-                Text(NSLocalizedString("Cancel".localized(language), comment: ""))
+                Text("Cancel".localized(language))
             }))
         }
     }
@@ -41,7 +41,7 @@ struct FavoritePurchasePaymentScreen: View {
     var searchCard: some View {
         HStack {
             HStack {
-                TextField(NSLocalizedString("Search for Transfer contacts".localized(language), comment: ""), text: $searchCtrl, onEditingChanged: { changed in
+                TextField("Search for Transfer contacts".localized(language), text: $searchCtrl, onEditingChanged: { changed in
                     print("\($searchCtrl)")
                 })
                 

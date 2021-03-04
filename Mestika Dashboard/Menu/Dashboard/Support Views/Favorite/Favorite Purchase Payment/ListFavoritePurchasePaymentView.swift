@@ -23,7 +23,7 @@ struct ListFavoritePurchasePaymentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Favorite Purchase & Payment".localized(language), comment: ""))
+                Text("Favorite Purchase & Payment".localized(language))
                     .font(.subheadline)
                     .fontWeight(.bold)
                 
@@ -64,7 +64,7 @@ struct ListFavoritePurchasePaymentView: View {
                 Spacer()
                 
                 NavigationLink(destination: FavoritePurchasePaymentScreen(), label: {
-                    Text(NSLocalizedString("See Full List".localized(language), comment: ""))
+                    Text("See Full List".localized(language))
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(Color(hex: "#2334D0"))

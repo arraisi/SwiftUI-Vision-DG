@@ -38,13 +38,13 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                 
                 AppBarLogo(light: false, onCancel: {})
                 
-                Text(NSLocalizedString("VERIFY YOUR PHONE NUMBER".localized(language), comment: ""))
+                Text("VERIFY YOUR PHONE NUMBER".localized(language))
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text(NSLocalizedString("Please Enter Your Mobile Number".localized(language), comment: ""))
+                Text("Please Enter Your Mobile Number".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -61,7 +61,7 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                     Divider()
                         .frame(height: 20)
                     
-                    TextField(NSLocalizedString("Phone Number".localized(language), comment: ""), text: $phoneNumberCtrl, onEditingChanged: { changed in
+                    TextField("Phone Number".localized(language), text: $phoneNumberCtrl, onEditingChanged: { changed in
                         print("\($phoneNumberCtrl)")
                         self.registerData.noTelepon = phoneNumberCtrl
                     }, onCommit: {
@@ -126,7 +126,7 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                 .padding(.top, 20)
                 .padding()
                 
-                Text(NSLocalizedString("Make sure your cellphone number is correct before proceeding to the next stage.".localized(language), comment: ""))
+                Text("Make sure your cellphone number is correct before proceeding to the next stage.".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -152,7 +152,7 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                             }
                         },
                         label: {
-                            Text(NSLocalizedString("ENTER YOUR PHONE NUMBER".localized(language), comment: ""))
+                            Text("ENTER YOUR PHONE NUMBER".localized(language))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -185,11 +185,11 @@ struct PhoneNumberVerificationForgotPasswordView: View {
         }
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel changing password?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES", comment: "")), action: {
+                title: Text("Do you want to cancel changing password?".localized(language)),
+                primaryButton: .default(Text("YES"), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("No", comment: ""))))
+                secondaryButton: .cancel(Text("No")))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -215,7 +215,7 @@ struct PhoneNumberVerificationForgotPasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Please Check Your Mobile Number".localized(language), comment: ""))
+            Text("Please Check Your Mobile Number".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
@@ -224,7 +224,7 @@ struct PhoneNumberVerificationForgotPasswordView: View {
             Button(action: {
                 self.isShowModal = false
             }) {
-                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))

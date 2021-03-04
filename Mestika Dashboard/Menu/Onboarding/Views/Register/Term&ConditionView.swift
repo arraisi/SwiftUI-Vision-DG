@@ -67,7 +67,7 @@ struct Term_ConditionView: View {
                 })
                 
                 VStack {
-                    Text(NSLocalizedString("TERMS AND CONDITIONS".localized(language), comment: ""))
+                    Text("TERMS AND CONDITIONS".localized(language))
                         .font(.title2)
                         .bold()
                         .foregroundColor(.white)
@@ -103,7 +103,7 @@ struct Term_ConditionView: View {
                         Button(action: toggleIsWni) {
                             HStack(alignment: .top) {
                                 Image(systemName: isCheckedWni ? "checkmark.square": "square")
-                                Text(NSLocalizedString("* I am an Indonesian citizen and do not have tax obligations in other countries".localized(language), comment: ""))
+                                Text("* I am an Indonesian citizen and do not have tax obligations in other countries".localized(language))
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#707070"))
                             }
@@ -115,7 +115,7 @@ struct Term_ConditionView: View {
                         Button(action: toggleIsAgree) {
                             HStack(alignment: .top) {
                                 Image(systemName: isCheckedAgree ? "checkmark.square": "square")
-                                Text(NSLocalizedString("* I agree".localized(language), comment: ""))
+                                Text("* I agree".localized(language))
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#707070"))
                             }
@@ -127,7 +127,7 @@ struct Term_ConditionView: View {
                         Button(action: toggleIsShareData) {
                             HStack(alignment: .top) {
                                 Image(systemName: isCheckedShareData ? "checkmark.square": "square")
-                                Text(NSLocalizedString("I give the right to Bank Mestika to provide data to third parties that cooperate with Bank Mestika".localized(language), comment: ""))
+                                Text("I give the right to Bank Mestika to provide data to third parties that cooperate with Bank Mestika".localized(language))
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#707070"))
                             }
@@ -140,7 +140,7 @@ struct Term_ConditionView: View {
                         Button(action: {
                             self.isShowDataVerification = true
                         }) {
-                            Text(NSLocalizedString("Next".localized(language), comment: ""))
+                            Text("Next".localized(language))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -168,11 +168,11 @@ struct Term_ConditionView: View {
         .navigationBarHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
-                title: Text(NSLocalizedString("Do you want to cancel registration?".localized(language), comment: "")),
-                primaryButton: .default(Text(NSLocalizedString("YES".localized(language), comment: "")), action: {
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text(NSLocalizedString("NO".localized(language), comment: ""))))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

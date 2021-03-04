@@ -29,7 +29,7 @@ struct ListContactTransferOnUs: View {
                         .fontWeight(.bold)
                         .padding(.bottom, 5)
                     
-                    Text(NSLocalizedString("Money transfers to fellow Bank Mestika customers or to other Bank customers are now easier and faster.".localized(language), comment: ""))
+                    Text("Money transfers to fellow Bank Mestika customers or to other Bank customers are now easier and faster.".localized(language))
                         .font(.caption)
                         .fontWeight(.ultraLight)
                         .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
@@ -44,14 +44,14 @@ struct ListContactTransferOnUs: View {
             .padding(.vertical, 20)
             
             HStack {
-                Text(NSLocalizedString("Transfer to".localized(language), comment: ""))
+                Text("Transfer to".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
                 Spacer()
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text(NSLocalizedString("Find another contract".localized(language), comment: ""))
+                    Text("Find another contract".localized(language))
                         .font(.subheadline)
                         .foregroundColor(Color(hex: "#2334D0"))
                 })

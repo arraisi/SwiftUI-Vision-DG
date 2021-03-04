@@ -61,7 +61,7 @@ struct VerifikasiPINView: View {
                 AppBarLogo(light: false, onCancel: {})
                 ScrollView {
                     // Title
-                    Text(NSLocalizedString("OPENING ACCOUNT DATA".localized(language), comment: ""))
+                    Text("OPENING ACCOUNT DATA".localized(language))
                         .font(.custom("Montserrat-ExtraBold", size: 24))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -94,14 +94,14 @@ struct VerifikasiPINView: View {
                             Spacer()
                             
                             // Sub title
-                            Text(NSLocalizedString("Re-enter your new \nPIN Transaction".localized(language), comment: ""))
+                            Text("Re-enter your new \nPIN Transaction".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 20)
                             
-                            Text(NSLocalizedString("This pin is used for every financial transaction activity".localized(language), comment: ""))
+                            Text("This pin is used for every financial transaction activity".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
@@ -143,7 +143,7 @@ struct VerifikasiPINView: View {
                                 }
                                 
                             }) {
-                                Text(NSLocalizedString("Save Transaction PIN".localized(language), comment: ""))
+                                Text("Save Transaction PIN".localized(language))
                                     .foregroundColor(.white)
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                     .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
@@ -275,13 +275,13 @@ struct VerifikasiPINView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("PIN is not the same".localized(language), comment: ""))
+            Text("PIN is not the same".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 22))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Text(NSLocalizedString("The transaction PIN that you entered is not the same as the initial, please re-enter it".localized(language), comment: ""))
+            Text("The transaction PIN that you entered is not the same as the initial, please re-enter it".localized(language))
                 .fontWeight(.bold)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -290,7 +290,7 @@ struct VerifikasiPINView: View {
             Button(action: {
                 self.showingModal.toggle()
             }) {
-                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))

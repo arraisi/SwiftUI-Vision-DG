@@ -41,12 +41,12 @@ struct PaymentTransactionTabs: View {
     var titleInfo: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(NSLocalizedString("Payments & Purchases".localized(language), comment: ""))
+                Text("Payments & Purchases".localized(language))
                     .font(.title)
                     .fontWeight(.heavy)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 
-                Text(NSLocalizedString("Make all forms of payments and transactions quickly, easily and safely".localized(language), comment: ""))
+                Text("Make all forms of payments and transactions quickly, easily and safely".localized(language))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)

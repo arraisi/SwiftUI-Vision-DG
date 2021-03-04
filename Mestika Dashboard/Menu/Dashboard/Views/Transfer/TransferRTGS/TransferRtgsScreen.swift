@@ -17,10 +17,10 @@ struct TransferRtgsScreen: View {
     
     // Variable Transfer Type
     var _listTransferType = ["RTGS", "SKN"]
-    @State private var transferType: String = NSLocalizedString("Select Transaction Type".localized(LocalizationService.shared.language), comment: "")
+    @State private var transferType: String = "Select Transaction Type".localized(LocalizationService.shared.language)
     
     // Variable List BANK
-    @State private var bankSelector: String = NSLocalizedString("Choose Destination Bank".localized(LocalizationService.shared.language), comment: "")
+    @State private var bankSelector: String = "Choose Destination Bank".localized(LocalizationService.shared.language)
     
     @Binding var dest: String
     @Binding var type: String
@@ -28,7 +28,7 @@ struct TransferRtgsScreen: View {
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
-    @State var selectedAccount = BankAccount(id: 0, namaRekening: NSLocalizedString("Select Account".localized(LocalizationService.shared.language), comment: ""), productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
+    @State var selectedAccount = BankAccount(id: 0, namaRekening: "Select Account".localized(LocalizationService.shared.language), productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     @State var listBankAccount: [BankAccount] = []
     
     // Variable Amount
@@ -38,18 +38,18 @@ struct TransferRtgsScreen: View {
     @State private var minLimit: Int = 0
     
     // Variable Transaction Frequecy
-    var _listFrequency = [NSLocalizedString("Once".localized(LocalizationService.shared
-                                                                .language), comment: ""), NSLocalizedString("Many times".localized(LocalizationService.shared.language), comment: "")]
-    @State var transactionFrequency = NSLocalizedString("Select Transaction Frequency".localized(LocalizationService.shared.language), comment: "")
+    var _listFrequency = ["Once".localized(LocalizationService.shared
+                                                                .language), "Many times".localized(LocalizationService.shared.language)]
+    @State var transactionFrequency = "Select Transaction Frequency".localized(LocalizationService.shared.language)
     
     // Variable Voucher
-    var _listVoucher = [NSLocalizedString("Voucher Not Available".localized(LocalizationService.shared.language), comment: "")]
-    @State var transactionVoucher = NSLocalizedString("Select Voucher".localized(LocalizationService.shared.language), comment: "")
+    var _listVoucher = ["Voucher Not Available".localized(LocalizationService.shared.language)]
+    @State var transactionVoucher = "Select Voucher".localized(LocalizationService.shared.language)
     
     // Variable Notes
     @State private var notesCtrl: String = ""
     
-    @State private var selectedCalendar: String = NSLocalizedString("Now".localized(LocalizationService.shared.language), comment: "")
+    @State private var selectedCalendar: String = "Now".localized(LocalizationService.shared.language)
     
     // Variable Modal
     @State private var showDialogMinReached: Bool = false
@@ -86,9 +86,9 @@ struct TransferRtgsScreen: View {
         print(formatter.string(from: self.date))
         
         if (formatter.string(from: self.now) == formatter.string(from: self.date)) {
-            self.selectedCalendar = NSLocalizedString("Now".localized(LocalizationService.shared.language), comment: "")
+            self.selectedCalendar = "Now".localized(LocalizationService.shared.language)
         } else {
-            self.selectedCalendar = NSLocalizedString("Next".localized(LocalizationService.shared.language), comment: "")
+            self.selectedCalendar = "Next".localized(LocalizationService.shared.language)
         }
         
     }
@@ -120,7 +120,7 @@ struct TransferRtgsScreen: View {
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
-                            if (transactionVoucher == NSLocalizedString("Select Voucher".localized(language), comment: "") || transactionVoucher == NSLocalizedString("Voucher Not Available".localized(language), comment: "")) {
+                            if (transactionVoucher == "Select Voucher".localized(language) || transactionVoucher == "Voucher Not Available".localized(language)) {
                                 self.transferData.transactionVoucher = ""
                             }
                             
@@ -146,7 +146,7 @@ struct TransferRtgsScreen: View {
                             }
                             
                         }, label: {
-                            Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
+                            Text("CONFIRM TRANSFER".localized(language))
                                 .foregroundColor(.white)
                                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                 .font(.system(size: 13))
@@ -178,7 +178,7 @@ struct TransferRtgsScreen: View {
                 })
                 .isDetailLink(false)
         }
-        .navigationBarTitle(NSLocalizedString("Transfer to Other Bank".localized(language), comment: ""), displayMode: .inline)
+        .navigationBarTitle("Transfer to Other Bank".localized(language), displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -254,7 +254,7 @@ struct TransferRtgsScreen: View {
             // Field Pilih Bank
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Choose Bank".localized(language), comment: ""))
+                    Text("Choose Bank".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -300,7 +300,7 @@ struct TransferRtgsScreen: View {
             // Field No Rekening Tujuan
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Destination Account No".localized(language), comment: ""))
+                    Text("Destination Account No".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -310,7 +310,7 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 5)
                 
                 HStack {
-                    TextField(NSLocalizedString("Account".localized(language), comment: ""), text: self.$noRekeningCtrl, onEditingChanged: { changed in
+                    TextField("Account".localized(language), text: self.$noRekeningCtrl, onEditingChanged: { changed in
                         self.transferData.destinationNumber = self.noRekeningCtrl
                     })
                     .keyboardType(.numberPad)
@@ -337,7 +337,7 @@ struct TransferRtgsScreen: View {
     var nominalCard: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Amount (Rp)".localized(language), comment: ""))
+                Text("Amount (Rp)".localized(language))
                     .font(.subheadline)
                     .fontWeight(.ultraLight)
                 
@@ -369,7 +369,7 @@ struct TransferRtgsScreen: View {
             .padding(.horizontal, 25)
             
             HStack {
-                Text(NSLocalizedString("Transaction Limit".localized(language), comment: ""))
+                Text("Transaction Limit".localized(language))
                     .font(.subheadline)
                     .fontWeight(.ultraLight)
                 
@@ -430,7 +430,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionFrequency)
                         .font(.subheadline)
-                        .foregroundColor(transactionFrequency == NSLocalizedString("Select Transaction Frequency".localized(language), comment: "") ? .gray : .black)
+                        .foregroundColor(transactionFrequency == "Select Transaction Frequency".localized(language) ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -464,7 +464,7 @@ struct TransferRtgsScreen: View {
                 VStack(alignment: .leading) {
                     Text(transactionVoucher)
                         .font(.subheadline)
-                        .foregroundColor(transactionVoucher == NSLocalizedString("Select Voucher".localized(language), comment: "") ? .gray : .black)
+                        .foregroundColor(transactionVoucher == "Select Voucher".localized(language) ? .gray : .black)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -495,7 +495,7 @@ struct TransferRtgsScreen: View {
     var notesCard: some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Notes".localized(language), comment: ""))
+                Text("Notes".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                 
@@ -505,7 +505,7 @@ struct TransferRtgsScreen: View {
             .padding(.top, 25)
             
             VStack {
-                MultilineTextField(NSLocalizedString("Write a transaction description here".localized(language), comment: ""), text: self.$notesCtrl, onCommit: {
+                MultilineTextField("Write a transaction description here".localized(language), text: self.$notesCtrl, onCommit: {
                 })
                 .onReceive(notesCtrl.publisher.collect()) {
                     self.notesCtrl = String($0.prefix(40))
@@ -541,7 +541,7 @@ struct TransferRtgsScreen: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
+                                Text("Active Balance:".localized(language))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text(self.selectedAccount.saldo)
@@ -569,7 +569,7 @@ struct TransferRtgsScreen: View {
     func bottomSheetCard() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Confirmed Account Number".localized(language), comment: ""))
+                Text("Confirmed Account Number".localized(language))
                     .foregroundColor(.green)
                     .font(.subheadline)
                     .fontWeight(.light)
@@ -618,7 +618,7 @@ struct TransferRtgsScreen: View {
                 NavigationLink(
                     destination: TransferRtgsConfirmation().environmentObject(transferData),
                     label: {
-                        Text(NSLocalizedString("CONFIRM TRANSFER".localized(language), comment: ""))
+                        Text("CONFIRM TRANSFER".localized(language))
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
@@ -641,13 +641,13 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("There are transactions less than the minimum transaction.".localized(language), comment: ""), comment: ""))
+            Text("There are transactions less than the minimum transaction.".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Minimum transaction".localized(language), comment: "") + "Rp. \(self.minLimit),- . " + NSLocalizedString("Please change the transaction nominal.".localized(language), comment: ""), comment: ""))
+            Text("Minimum transaction".localized(language) + "Rp. \(self.minLimit),- . " + "Please change the transaction nominal.".localized(language))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -658,7 +658,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinTransaction = false
                 },
                 label: {
-                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
+                    Text("CHANGE THE NOMINAL".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -672,7 +672,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinTransaction = false
                 },
                 label: {
-                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
+                    Text("CANCEL TRANSACTION".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -694,13 +694,13 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Minimum Balance Exceeded".localized(language), comment: ""), comment: ""))
+            Text("Minimum Balance Exceeded".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Minimum balance in your account".localized(language), comment: "") + "Rp. \(selectedAccount.saldo.thousandSeparator()),- " + NSLocalizedString("exceeded. Please change the transaction amount or add a balance to your account.".localized(language), comment: ""), comment: ""))
+            Text("Minimum balance in your account".localized(language) + "Rp. \(selectedAccount.saldo.thousandSeparator()),- " + "exceeded. Please change the transaction amount or add a balance to your account.".localized(language))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -711,7 +711,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
+                    Text("CHANGE THE NOMINAL".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -725,7 +725,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMinReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
+                    Text("CANCEL TRANSACTION".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -747,13 +747,13 @@ struct TransferRtgsScreen: View {
                 .padding(.top, 20)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Transaction limit exceeded".localized(language), comment: ""), comment: ""))
+            Text("Transaction limit exceeded".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 18))
                 .foregroundColor(.red)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 20)
             
-            Text(NSLocalizedString(NSLocalizedString("Transaction Limit".localized(language), comment: "") + " Rp.\(limitTrx.thousandSeparator()),- " + NSLocalizedString("Exceeded. Please reduce the nominal amount of the transaction or cancel the transaction.".localized(language), comment: ""), comment: ""))
+            Text("Transaction Limit".localized(language) + " Rp.\(limitTrx.thousandSeparator()),- " + "Exceeded. Please reduce the nominal amount of the transaction or cancel the transaction.".localized(language))
                 .font(.custom("Montserrat-Light", size: 14))
                 .foregroundColor(Color(hex: "#232175"))
                 .fixedSize(horizontal: false, vertical: true)
@@ -764,7 +764,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMaxReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CHANGE THE NOMINAL".localized(language), comment: ""))
+                    Text("CHANGE THE NOMINAL".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -778,7 +778,7 @@ struct TransferRtgsScreen: View {
                     self.showDialogMaxReached = false
                 },
                 label: {
-                    Text(NSLocalizedString("CANCEL TRANSACTION".localized(language), comment: ""))
+                    Text("CANCEL TRANSACTION".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
                 })
@@ -795,7 +795,7 @@ struct TransferRtgsScreen: View {
     func modalSelectBankAccount() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Select Account".localized(language), comment: ""))
+                Text("Select Account".localized(language))
                     .font(.title3)
                     .fontWeight(.ultraLight)
                 
@@ -812,7 +812,7 @@ struct TransferRtgsScreen: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                Text(NSLocalizedString("Active Balance:".localized(language), comment: ""))
+                                Text("Active Balance:".localized(language))
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 Text("Rp. \(data.saldo.thousandSeparator())")
@@ -848,7 +848,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     var disableForm: Bool {
-        if (self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != NSLocalizedString("Select Transaction Type".localized(language), comment: "") && self.bankSelector != NSLocalizedString("Choose Destination Bank".localized(language), comment: "")) {
+        if (self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language)) {
             return false
         }
         return true

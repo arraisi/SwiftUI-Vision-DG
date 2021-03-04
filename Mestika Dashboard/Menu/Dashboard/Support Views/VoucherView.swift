@@ -21,7 +21,7 @@ struct VoucherView: View {
                         .fontWeight(.bold)
                         .padding(.bottom, 5)
                     
-                    Text(NSLocalizedString("Transactions are more profitable by using vouchers.".localized(language), comment: ""))
+                    Text("Transactions are more profitable by using vouchers.".localized(language))
                         .font(.caption)
                         .fontWeight(.ultraLight)
                 }
@@ -36,7 +36,7 @@ struct VoucherView: View {
             
             VStack {
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text(NSLocalizedString("Show All Vouchers".localized(language), comment: ""))
+                    Text("Show All Vouchers".localized(language))
                         .foregroundColor(.white)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 13))

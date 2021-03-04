@@ -44,7 +44,7 @@ struct TransferOnUsPinConfirmationScreen: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""))
+                Text("Enter your Transaction PIN".localized(language))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

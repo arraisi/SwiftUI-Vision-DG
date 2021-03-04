@@ -46,13 +46,13 @@ struct FormInputAtmForgotPasswordScreen: View {
                 
                 AppBarLogo(light: false, onCancel: {})
                 
-                Text(NSLocalizedString("INPUT ATM DATA".localized(language), comment: ""))
+                Text("INPUT ATM DATA".localized(language))
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text(NSLocalizedString("Enter your registered ATM card number and ATM PIN".localized(language), comment: ""))
+                Text("Enter your registered ATM card number and ATM PIN".localized(language))
                     .font(.subheadline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
@@ -62,7 +62,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                 
                 VStack {
                     HStack {
-                        TextField(NSLocalizedString("Enter your ATM number".localized(language), comment: ""), text: self.$atmNumberCtrl)
+                        TextField("Enter your ATM number".localized(language), text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
                             .onReceive(atmNumberCtrl.publisher.collect()) {
                                 self.atmNumberCtrl = String($0.prefix(16))
@@ -79,13 +79,13 @@ struct FormInputAtmForgotPasswordScreen: View {
                 VStack {
                     HStack {
                         if (showPassword) {
-                            TextField(NSLocalizedString("Enter your ATM PIN".localized(language), comment: ""), text: self.$pinAtmCtrl)
+                            TextField("Enter your ATM PIN".localized(language), text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))
                                 }
                         } else {
-                            SecureField(NSLocalizedString("Enter your ATM PIN".localized(language), comment: ""), text: self.$pinAtmCtrl)
+                            SecureField("Enter your ATM PIN".localized(language), text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))
@@ -132,7 +132,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                             setPassword()
                         },
                         label: {
-                            Text(NSLocalizedString("DATA CONFIRMATION".localized(language), comment: ""))
+                            Text("DATA CONFIRMATION".localized(language))
                                 .foregroundColor(disableForm ? Color.white : Color(hex: "#232175"))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))

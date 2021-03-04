@@ -235,16 +235,16 @@ struct ListAllFavoriteTransactionView: View {
             
             if (self.alert == "REMOVE") {
                 return Alert(
-                    title: Text(NSLocalizedString("Succeed".localized(language), comment: "")),
+                    title: Text("Succeed".localized(language)),
                     message: Text("Data Berhasil Dihapus"),
-                    dismissButton: .default(Text(NSLocalizedString("Okay".localized(language), comment: "")))
+                    dismissButton: .default(Text("Okay".localized(language)))
                 )
             }
             
             return Alert(
-                title: Text(NSLocalizedString("Succeed".localized(language), comment: "")),
+                title: Text("Succeed".localized(language)),
                 message: Text("Perubahan Berhasil Disimpan"),
-                dismissButton: .default(Text(NSLocalizedString("Okay".localized(language), comment: "")))
+                dismissButton: .default(Text("Okay".localized(language)))
             )
         }
     }

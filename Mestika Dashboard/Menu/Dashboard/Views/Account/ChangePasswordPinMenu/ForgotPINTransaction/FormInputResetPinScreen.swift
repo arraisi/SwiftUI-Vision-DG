@@ -48,11 +48,11 @@ struct FormInputResetPinScreen: View {
                     
                     Spacer(minLength: 0)
                     
-                    Text(NSLocalizedString("Enter the ATM PIN".localized(language), comment: ""))
+                    Text("Enter the ATM PIN".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 24))
                         .foregroundColor(Color(hex: "#2334D0"))
                     
-                    Text(NSLocalizedString("Please enter your ATM PIN".localized(language), comment: ""))
+                    Text("Please enter your ATM PIN".localized(language))
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#002251"))
                         .padding(.top, 5)
@@ -65,7 +65,7 @@ struct FormInputResetPinScreen: View {
                     .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
                     
                     
-                    Text(wrongPin ? NSLocalizedString("Incorrect Pin".localized(language), comment: "") : "")
+                    Text(wrongPin ? "Incorrect Pin".localized(language) : "")
                         .foregroundColor(.red)
                         .fontWeight(.heavy)
                         .padding()
@@ -134,7 +134,7 @@ struct FormInputResetPinScreen: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("NEW TRANSACTION PIN HAS BEEN SAVED".localized(language), comment: ""))
+            Text("NEW TRANSACTION PIN HAS BEEN SAVED".localized(language))
                 .font(.custom("Montserrat-ExtraBold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)

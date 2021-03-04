@@ -25,7 +25,7 @@ struct ConfirmationPinOfSavingAccountView: View {
             VStack {
                 Spacer(minLength: 0)
                 
-                Text(NSLocalizedString("Enter your Transaction PIN".localized(language), comment: ""))
+                Text("Enter your Transaction PIN".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color.white)
                 
@@ -37,7 +37,7 @@ struct ConfirmationPinOfSavingAccountView: View {
                 .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
                 
                 
-                Text(wrongPin ? NSLocalizedString("Incorrect Pin".localized(language), comment: "") : "")
+                Text(wrongPin ? "Incorrect Pin".localized(language) : "")
                     .foregroundColor(.red)
                     .fontWeight(.heavy)
                     .padding()

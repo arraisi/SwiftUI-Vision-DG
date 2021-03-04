@@ -42,7 +42,7 @@ struct PaymentPLNScreen: View {
                         })
                         .padding(.horizontal)
                     
-                    Text(NSLocalizedString("Payment".localized(language), comment: ""))
+                    Text("Payment".localized(language))
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(Color(hex: "#232175"))
@@ -73,7 +73,7 @@ struct PaymentPLNScreen: View {
                     .fontWeight(.heavy)
                     .fixedSize(horizontal: false, vertical: true)
                 
-                Text(NSLocalizedString("Make bill payments and purchase electricity easily, quickly and in a planned manner".localized(language), comment: ""))
+                Text("Make bill payments and purchase electricity easily, quickly and in a planned manner".localized(language))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .fixedSize(horizontal: false, vertical: true)
@@ -99,7 +99,7 @@ struct PaymentPLNScreen: View {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.white)
                         
-                        Text(NSLocalizedString("Add Another PLN ID".localized(language), comment: ""))
+                        Text("Add Another PLN ID".localized(language))
                             .foregroundColor(.white)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))

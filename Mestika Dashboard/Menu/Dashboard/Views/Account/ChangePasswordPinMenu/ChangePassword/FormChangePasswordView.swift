@@ -53,27 +53,27 @@ struct FormChangePasswordView: View {
                 ScrollView(showsIndicators: false) {
                     
                     VStack {
-                        Text(NSLocalizedString("Change Application Password".localized(language), comment: ""))
+                        Text("Change Application Password".localized(language))
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
                         VStack(alignment: .leading) {
-                            Text(NSLocalizedString("Please enter your old and new passwords".localized(language), comment: ""))
+                            Text("Please enter your old and new passwords".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 14))
                                 .foregroundColor(Color(hex: "#002251"))
                                 .padding(.top, 5)
                             
-                            Text(NSLocalizedString("Old password".localized(language), comment: ""))
+                            Text("Old password".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .padding(.top, 5)
                             
                             HStack {
                                 if (showOldPassword) {
-                                    TextField(NSLocalizedString("Enter your old password".localized(language), comment: ""), text: self.$oldPasswordCtrl)
+                                    TextField("Enter your old password".localized(language), text: self.$oldPasswordCtrl)
                                         .font(.custom("Montserrat-Regular", size: 12))
                                 } else {
-                                    SecureField(NSLocalizedString("Enter your old password".localized(language), comment: ""), text: self.$oldPasswordCtrl)
+                                    SecureField("Enter your old password".localized(language), text: self.$oldPasswordCtrl)
                                         .font(.custom("Montserrat-Regular", size: 12))
                                 }
                                 
@@ -94,17 +94,17 @@ struct FormChangePasswordView: View {
                         
                         VStack(alignment: .leading) {
                             
-                            Text(NSLocalizedString("New Password".localized(language), comment: ""))
+                            Text("New Password".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                             
                             VStack {
                                 HStack {
                                     if (showPassword) {
-                                        TextField(NSLocalizedString("Enter your new password".localized(language), comment: ""), text: self.$passwordCtrl)
+                                        TextField("Enter your new password".localized(language), text: self.$passwordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     } else {
-                                        SecureField(NSLocalizedString("Enter your new password".localized(language), comment: ""), text: self.$passwordCtrl)
+                                        SecureField("Enter your new password".localized(language), text: self.$passwordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                     
@@ -122,10 +122,10 @@ struct FormChangePasswordView: View {
                                 
                                 HStack {
                                     if (showConfirmPassword) {
-                                        TextField(NSLocalizedString("Re-enter your new password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
+                                        TextField("Re-enter your new password".localized(language), text: self.$confirmPasswordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     } else {
-                                        SecureField(NSLocalizedString("Re-enter your new password".localized(language), comment: ""), text: self.$confirmPasswordCtrl)
+                                        SecureField("Re-enter your new password".localized(language), text: self.$confirmPasswordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                     
@@ -163,7 +163,7 @@ struct FormChangePasswordView: View {
                                 }
                             }
                         }, label: {
-                            Text(NSLocalizedString("Save New Password".localized(language), comment: ""))
+                            Text("Save New Password".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -220,7 +220,7 @@ struct FormChangePasswordView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("Password is not the same, please retype".localized(language), comment: ""))
+            Text("Password is not the same, please retype".localized(language))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
@@ -229,7 +229,7 @@ struct FormChangePasswordView: View {
             Button(action: {
                 self.showModalError = false
             }) {
-                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(.bold)
@@ -253,7 +253,7 @@ struct FormChangePasswordView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("NEW APPLICATION PASSWORD HAS BEEN SUCCESSFULLY SAVED".localized(language), comment: ""))
+            Text("NEW APPLICATION PASSWORD HAS BEEN SUCCESSFULLY SAVED".localized(language))
                 .font(.custom("Montserrat-ExtraBold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
