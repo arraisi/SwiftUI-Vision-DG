@@ -128,7 +128,7 @@ struct TransferRtgsSuccess: View {
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
-            Text("Transfer " + "\(self.transferData.transferType) " + "Succeed".localized(language))
+            Text("Inter Bank Fund Transfer".localized(language) + " Succeed".localized(language))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)

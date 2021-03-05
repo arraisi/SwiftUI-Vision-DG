@@ -123,7 +123,7 @@ struct TransferOnUsSuccessInformationScreen: View {
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             
-            Text("Peer Transfer Successfully".localized(language))
+            Text("Peer Transfer Succeed".localized(language))
                 .font(.subheadline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)

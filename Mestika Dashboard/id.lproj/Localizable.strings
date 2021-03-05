@@ -465,6 +465,7 @@
 
 /* SuccessCancelView */
 "Succeed" = "Berhasil";
+"Inter Bank Fund Transfer" = "Transfer Antar Bank";
 "Application For Account Opening Has Been Canceled" = "Permohonan Pembukaan Rekening Telah Dibatalkan";
 
 /*
@@ -640,7 +641,7 @@
 "Account Type" = "Jenis Rekening";
 "Frequency" = "Frekuensi";
 "Transaction Details" = "Detail Transaksi";
-"Peer Transfer Successfully" = "Transfer Sesama Berhasil";
+"Peer Transfer Succeed" = "Transfer Sesama Berhasil";
 "Confirmation" = "Konfirmasi";
 "Sender's Account" = "Rekening Pengirim";
 "Inter-peer Transfer" = "Transfer Antar Sesama";

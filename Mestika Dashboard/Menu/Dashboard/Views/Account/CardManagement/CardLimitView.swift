@@ -16,6 +16,11 @@ struct CardLimitView: View {
     @State var limitPerHari: Double = 20000000
     
     @State var limitPerTransaksiCtrl: String = "0"
+    @State var limitPenarikanHarianCtrl: String = "0"
+    @State var limitOnUsCtrl: String = "0"
+    @State var limitPembayaranCtrl: String = "0"
+    @State var limitPembelianCtrl: String = "0"
+    @State var limitIbftCtrl: String = "0"
     
     let maxTransaksi: Double = 50000000
     let maxPenarikanHarian: Double = 20000000
@@ -40,9 +45,9 @@ struct CardLimitView: View {
                         Text("Card Limit".localized(language))
                             .font(.custom("Montserrat-SemiBold", size: 15))
                         
-                        // Limit per Transaksi
+                        // IBFT per Transaksi
                         VStack(alignment: .leading) {
-                            Text("per Transaction (Debit Card)".localized(language))
+                            Text("Ibft per transaksi")
                                 .font(.custom("Montserrat-Light", size: 12))
                             HStack(alignment:.top){
                                 Text("Rp.")
@@ -63,56 +68,190 @@ struct CardLimitView: View {
                             }
                             Divider()
                             HStack {
-                                Text("Maximum limit per Transaction".localized(language))
+                                Text("Maximum limit of ibft transaction")
                                     .font(.custom("Montserrat-Light", size: 10))
-                                Text("Rp. 50.000.000,-")
+                                Text("Rp. 0,-")
                                     .font(.custom("Montserrat-SemiBold", size: 10))
                             }
                             .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                         }
                         
-                        // Maximal limit penarikan per Hari
+                        // Limit penarikan harian ATM
                         VStack(alignment: .leading) {
-                            
-                            Text("per Transaction (Debit Card)".localized(language))
+                            Text("Limit penarikan harian di ATM")
                                 .font(.custom("Montserrat-Light", size: 12))
                             HStack(alignment:.top){
                                 Text("Rp.")
                                     .font(.custom("Montserrat-Bold", size: 20))
-                                    .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                                 
-                                TextField("", value: $limitPerHari,
-                                          formatter: NumberFormatter.decimal) { (value) in
-                                    
-                                    print("onChange : \(value)")
-                                } onCommit: {
-                                    print("onCommit : \(limitPerTransaksi)")
-                                    
-                                }.keyboardType(.decimalPad)
-                                .font(.custom("Montserrat-Bold", size: 30))
-                                .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+                                TextField("0", text: self.$limitPenarikanHarianCtrl, onEditingChanged: {_ in
+                                })
+                                    .onReceive(limitPenarikanHarianCtrl.publisher.collect()) {
+                                        let amountString = String($0.prefix(13))
+                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                        self.limitPenarikanHarianCtrl = cleanAmount.thousandSeparator()
+                                    }
+                                    .keyboardType(.decimalPad)
+                                    .font(.custom("Montserrat-Bold", size: 30))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
                             }
                             Divider()
                             HStack {
-                                Text("Maximum daily withdrawal limit".localized(language))
+                                Text("Maximum limit of withdraw transactions")
                                     .font(.custom("Montserrat-Light", size: 10))
-                                Text("Rp. 20.000.000,-")
+                                Text("Rp. 10.000.000,-")
                                     .font(.custom("Montserrat-SemiBold", size: 10))
                             }
-                            .foregroundColor(limitPerHari > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                         }
                         
-                        NavigationLink(
-                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
-                            label: {
-                                Text("SAVE CHANGES".localized(language))
-                                    .foregroundColor(.white)
-                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                    .frame(maxWidth: .infinity, maxHeight: 50)
-                            })
-                            .frame(height: 50)
-                            .background(Color(hex: "#2334D0"))
-                            .cornerRadius(12)
+                        // Limit On Us
+                        VStack(alignment: .leading) {
+                            Text("Limit transaksi on us")
+                                .font(.custom("Montserrat-Light", size: 12))
+                            HStack(alignment:.top){
+                                Text("Rp.")
+                                    .font(.custom("Montserrat-Bold", size: 20))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                                TextField("0", text: self.$limitOnUsCtrl, onEditingChanged: {_ in
+                                })
+                                    .onReceive(limitOnUsCtrl.publisher.collect()) {
+                                        let amountString = String($0.prefix(13))
+                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                        self.limitOnUsCtrl = cleanAmount.thousandSeparator()
+                                    }
+                                    .keyboardType(.decimalPad)
+                                    .font(.custom("Montserrat-Bold", size: 30))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                            }
+                            Divider()
+                            HStack {
+                                Text("Maximum limit of transfer on us")
+                                    .font(.custom("Montserrat-Light", size: 10))
+                                Text("Rp. 10.000.000,-")
+                                    .font(.custom("Montserrat-SemiBold", size: 10))
+                            }
+                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                        }
+                        
+                        // Limit Pembayaran
+                        VStack(alignment: .leading) {
+                            Text("Limit pembayaran")
+                                .font(.custom("Montserrat-Light", size: 12))
+                            HStack(alignment:.top){
+                                Text("Rp.")
+                                    .font(.custom("Montserrat-Bold", size: 20))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                                TextField("0", text: self.$limitPembayaranCtrl, onEditingChanged: {_ in
+                                })
+                                    .onReceive(limitOnUsCtrl.publisher.collect()) {
+                                        let amountString = String($0.prefix(13))
+                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                        self.limitOnUsCtrl = cleanAmount.thousandSeparator()
+                                    }
+                                    .keyboardType(.decimalPad)
+                                    .font(.custom("Montserrat-Bold", size: 30))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                            }
+                            Divider()
+                            HStack {
+                                Text("Maximum limit of payment transaction")
+                                    .font(.custom("Montserrat-Light", size: 10))
+                                Text("Rp. 0,-")
+                                    .font(.custom("Montserrat-SemiBold", size: 10))
+                            }
+                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                        }
+                        
+                        // Limit Pembayaran
+                        VStack(alignment: .leading) {
+                            Text("Limit pembelian")
+                                .font(.custom("Montserrat-Light", size: 12))
+                            HStack(alignment:.top){
+                                Text("Rp.")
+                                    .font(.custom("Montserrat-Bold", size: 20))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                                TextField("0", text: self.$limitPembelianCtrl, onEditingChanged: {_ in
+                                })
+                                    .onReceive(limitPembelianCtrl.publisher.collect()) {
+                                        let amountString = String($0.prefix(13))
+                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                        self.limitPembelianCtrl = cleanAmount.thousandSeparator()
+                                    }
+                                    .keyboardType(.decimalPad)
+                                    .font(.custom("Montserrat-Bold", size: 30))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                            }
+                            Divider()
+                            HStack {
+                                Text("Maximum limit of purchase transaction")
+                                    .font(.custom("Montserrat-Light", size: 10))
+                                Text("Rp. 10.000.000,-")
+                                    .font(.custom("Montserrat-SemiBold", size: 10))
+                            }
+                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                        }
+                        
+                        // Limit ibft
+                        VStack(alignment: .leading) {
+                            Text("Limit pembelian")
+                                .font(.custom("Montserrat-Light", size: 12))
+                            HStack(alignment:.top){
+                                Text("Rp.")
+                                    .font(.custom("Montserrat-Bold", size: 20))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                                TextField("0", text: self.$limitIbftCtrl, onEditingChanged: {_ in
+                                })
+                                    .onReceive(limitPembelianCtrl.publisher.collect()) {
+                                        let amountString = String($0.prefix(13))
+                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                        self.limitPembelianCtrl = cleanAmount.thousandSeparator()
+                                    }
+                                    .keyboardType(.decimalPad)
+                                    .font(.custom("Montserrat-Bold", size: 30))
+                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                
+                            }
+                            Divider()
+                            HStack {
+                                Text("Maximum limit of ibft transaction")
+                                    .font(.custom("Montserrat-Light", size: 10))
+                                Text("Rp. 10.000.000,-")
+                                    .font(.custom("Montserrat-SemiBold", size: 10))
+                            }
+                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                        }
+                        
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("SAVE CHANGES".localized(language))
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(maxWidth: .infinity, maxHeight: 50)
+                        })
+                        .frame(height: 50)
+                        .background(Color(hex: "#2334D0"))
+                        .cornerRadius(12)
+                        
+//                        NavigationLink(
+//                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
+//                            label: {
+//                                Text("SAVE CHANGES".localized(language))
+//                                    .foregroundColor(.white)
+//                                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                                    .frame(maxWidth: .infinity, maxHeight: 50)
+//                            })
+//                            .frame(height: 50)
+//                            .background(Color(hex: "#2334D0"))
+//                            .cornerRadius(12)
                     })
                     .padding(20)
                     .padding(.top, 20)
