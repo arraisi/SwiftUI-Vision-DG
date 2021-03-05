@@ -50,7 +50,8 @@
  DetailsTypeSavingView
  */
 "Keunggulan Tabungan :" = "";
-"Pilih Tabungan ini" = "";
+"Choose This Savings" = "Pilih Tabungan ini";
+"Choose another savings" = "Pilih Tabungan lain";
 /*
  ScanKTPView
  */
@@ -58,7 +59,7 @@
 "Ambil Foto KTP" = "";
 "Ganti Foto Lain" = "";
 "Nomor Kartu Tanda Penduduk" = "";
-"No. KTP (Otomatis terisi)" = "";
+"Identity Card/(KTP) Number (Automatically filled in)" = "No. KTP (Otomatis terisi)";
 "Ambil Gambar Selfie" = "";
 "Ganti Foto Lain" = "";
 "Simpan" = "";
@@ -728,3 +729,12 @@
 "Deposit Amount" = "Jumlah Setoran";
 "TRANSACTION CONFIRMATION" = "KONFIRMASI TRANSAKSI";
 "Savings Opening \nNew Successful" = "Pembukaan Tabungan \nBaru Berhasil";
+"NIK tidak dapat didaftarkan untuk pembukaan rekening" = "NIK tidak dapat didaftarkan untuk pembukaan rekening";
+"You have chosen" = "Anda Telah memilih";
+"Have a referral code?" = "Punya kode referal?";
+"Make sure you enter the referral code correctly." = "Pastikan anda memasukkan kode refferal dengan benar.";
+"NIK TIDAK TERDAFTAR" = "NIK TIDAK TERDAFTAR";
+"Yes, I have" = "Ya, Saya memiliki";
+"Yes, the address matches" = "Ya, alamat sesuai";
+"Ya, alamat sesuai" = "Ya, alamat sesuai";
+"Tidak, alamat tidak sesuai" = "Tidak, alamat tidak sesuai";

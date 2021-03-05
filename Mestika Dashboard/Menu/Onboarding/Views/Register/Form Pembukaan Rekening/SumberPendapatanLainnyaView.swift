@@ -124,7 +124,7 @@ struct SumberPendapatanLainnyaView: View {
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(width: 19, height: 19)
                                                 
-                                                Text("Ya, Saya memiliki")
+                                                Text("Yes, I have".localized(language))
                                                     .font(.custom("Montserrat-Regular", size: 12))
                                                 
                                                 Spacer()

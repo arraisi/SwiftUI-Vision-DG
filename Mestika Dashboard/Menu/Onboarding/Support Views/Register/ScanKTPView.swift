@@ -85,7 +85,7 @@ struct ScanKTPView: View {
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $nik, title: "No. KTP (Otomatis terisi)".localized(language), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $nik, title: "Identity Card/(KTP) Number (Automatically filled in)".localized(language), disable: confirmNik, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.nik = String(str.prefix(16))
                     self.isValidKtp = str.count == 16
                     
@@ -127,7 +127,7 @@ struct ScanKTPView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("MESSAGE"),
-                message: Text(self.messageResponse),
+                message: Text(self.messageResponse.localized(language)),
                 dismissButton: .default(Text("Oke"))
             )
         }
