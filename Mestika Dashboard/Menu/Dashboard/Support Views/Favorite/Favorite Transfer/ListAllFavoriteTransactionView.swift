@@ -252,7 +252,7 @@ struct ListAllFavoriteTransactionView: View {
                             }
                         }
                     }),
-                    secondaryButton: .cancel(Text("TIDAK")))
+                    secondaryButton: .cancel(Text("NO".localized(language))))
             }
             
             return Alert(
