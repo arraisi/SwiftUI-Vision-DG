@@ -21,7 +21,7 @@ struct ListStatementView: View {
         VStack {
             HStack {
                 Text("E-Statement")
-                    .font(.subheadline)
+                    .font(.title)
                     .fontWeight(.bold)
                     .fontWeight(.light)
                 
@@ -63,7 +63,10 @@ struct ListStatementView: View {
                     }.padding(.vertical, 5)
                 }
             }.frame(height: 200)
+            
+            Spacer()
         }
+        .navigationBarTitle("e-Statement", displayMode: .inline)
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
         .cornerRadius(15)

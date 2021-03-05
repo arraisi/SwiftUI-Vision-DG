@@ -25,6 +25,8 @@ struct TransferRtgsScreen: View {
     @Binding var dest: String
     @Binding var type: String
     @Binding var destBank: String
+    @Binding var nameCst: String
+    @Binding var desc: String
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
@@ -133,7 +135,11 @@ struct TransferRtgsScreen: View {
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
                                     self.transferData.transactionType = self.transferType
-                                    self.transferData.notes = self.notesCtrl
+//
+                                    if (desc == "") {
+                                        self.transferData.notes = self.notesCtrl
+                                    }
+                                    
                                     self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     print("OKE")
                                     self.isRouteTransaction = true
@@ -198,12 +204,16 @@ struct TransferRtgsScreen: View {
             modalSelectBankAccount()
         }
         .onAppear {
+            self.isRouteTransaction = false
             self.transferData = TransferOffUsModel()
 //            self.transferType = _listTransferType[0]
             if (dest != "") {
+                print(desc)
                 self.noRekeningCtrl = self.dest
                 self.transferType = self.type
                 self.bankSelector = self.destBank
+                self.transferData.destinationName = self.nameCst
+                self.transferData.notes = self.desc
             }
             self.transferData.transactionFrequency = _listFrequency[0]
             self.transferData.transactionVoucher = _listVoucher[0]
@@ -913,6 +923,6 @@ struct TransferRtgsScreen: View {
 
 struct TransferRtgsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TransferRtgsScreen(dest: .constant(""), type: .constant(""), destBank: .constant(""))
+        TransferRtgsScreen(dest: .constant(""), type: .constant(""), destBank: .constant(""), nameCst: .constant(""), desc: .constant(""))
     }
 }

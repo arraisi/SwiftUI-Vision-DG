@@ -37,6 +37,8 @@ struct ListAllFavoriteTransactionView: View {
     @State var destinationNumber: String = ""
     @State var type: String = ""
     @State var destinationBank: String = ""
+    @State var name: String = ""
+    @State var desc: String = ""
     
     @State var isRouteOnUs: Bool = false
     @State var isRouteOffUs: Bool = false
@@ -77,9 +79,9 @@ struct ListAllFavoriteTransactionView: View {
                         label: {EmptyView()}
                     )
                     .isDetailLink(false)
-                    
+
                     NavigationLink(
-                        destination: TransferRtgsScreen(dest: .constant(destinationNumber), type: .constant(type), destBank: .constant(destinationBank)).environmentObject(transferDataOffUs),
+                        destination: TransferRtgsScreen(dest: .constant(destinationNumber), type: .constant(type), destBank: .constant(destinationBank), nameCst: .constant(name), desc: .constant(desc)).environmentObject(transferDataOffUs),
                         isActive: self.$isRouteOffUs,
                         label: {EmptyView()}
                     )
@@ -98,12 +100,16 @@ struct ListAllFavoriteTransactionView: View {
                                         print("OFF US")
                                         if (data.transferOffUsRtgs == nil) {
                                             self.destinationNumber = data.transferOffUsSkn!.accountTo
+                                            self.name = data.name
+                                            self.desc = data.transferOffUsSkn!.transferOffUsSknDescription
                                             self.destinationBank = data.bankName
                                             self.type = "SKN"
                                             self.isRouteOffUs = true
                                         } else {
                                             self.destinationNumber = data.transferOffUsRtgs!.accountTo
                                             self.destinationBank = data.bankName
+                                            self.name = data.name
+                                            self.desc = data.transferOffUsRtgs!.transferOffUsRtgsDescription
                                             self.type = "RTGS"
                                             self.isRouteOffUs = true
                                         }
@@ -151,6 +157,7 @@ struct ListAllFavoriteTransactionView: View {
                                     self.receivedName = data.name
                                     self.transferDataOnUs.destinationName = data.name
                                     self.transferDataOnUs.sourceNumber = data.transferOnUs!.sourceNumber
+                                    self.transferDataOnUs.destinationNumber = data.transferOnUs!.destinationNumber
                                     self.transferDataOnUs.cardNo = data.cardNo
                                     self.transferDataOnUs.idEdit = data.id
                                 } else {
@@ -158,13 +165,17 @@ struct ListAllFavoriteTransactionView: View {
                                     if (data.transferOffUsRtgs == nil) {
                                         self.transferDataOnUs.destinationName = data.name
                                         self.transferDataOnUs.sourceNumber = data.transferOffUsSkn!.sourceNumber
+                                        self.transferDataOnUs.destinationNumber = data.transferOffUsSkn!.accountTo
                                         self.transferDataOnUs.cardNo = data.cardNo
                                         self.transferDataOnUs.idEdit = data.id
+                                        self.receivedBank = data.bankName
                                     } else {
                                         self.transferDataOnUs.destinationName = data.name
                                         self.transferDataOnUs.sourceNumber = data.transferOffUsRtgs!.sourceNumber
+                                        self.transferDataOnUs.destinationNumber = data.transferOffUsRtgs!.accountTo
                                         self.transferDataOnUs.cardNo = data.cardNo
                                         self.transferDataOnUs.idEdit = data.id
+                                        self.receivedBank = data.bankName
                                     }
                                     
                                 }
@@ -174,25 +185,12 @@ struct ListAllFavoriteTransactionView: View {
                             })
                             .buttonStyle(PlainButtonStyle())
                         }
-                        .alert(isPresented: $isShowingAlert) {
-                            return Alert(
-                                title: Text("Anda Yakin ingin menghapus \(data.name)"),
-                                primaryButton: .default(Text("IYA"), action: {
-                                    self.favoritVM.remove(data: data) { result in
-                                        print("result remove favorite \(result)")
-                                        if result {
-                                            self.alert = "REMOVE"
-                                            self.showAlert = true
-                                            getList()
-                                        }
-                                    }
-                                }),
-                                secondaryButton: .cancel(Text("TIDAK")))
-                        }
                         .actionSheet(isPresented: self.$showingDetail) {
                             ActionSheet(title: Text("Pilihan"), message: Text("Pilih menu dibawah ini"), buttons: [.default(Text("Hapus"), action: {
                                 print("Hapus")
-                                self.isShowingAlert = true
+                                print(data.name)
+                                self.alert = "REMOVE DATA"
+                                self.showAlert = true
                             }), .default(Text("Edit"), action: {
                                 print("Edit")
                                 self.showPopover = true
@@ -241,6 +239,22 @@ struct ListAllFavoriteTransactionView: View {
                 )
             }
             
+            if (self.alert == "REMOVE DATA") {
+                return Alert(
+                    title: Text("Anda Yakin ingin menghapus \(self.transferDataOnUs.destinationName)"),
+                    primaryButton: .default(Text("IYA"), action: {
+                        self.favoritVM.removeWithParam(id: self.transferDataOnUs.idEdit, cardNo: self.transferDataOnUs.cardNo, sourceNumber: self.transferDataOnUs.sourceNumber) { result in
+                            print("result remove favorite \(result)")
+                            if result {
+                                self.alert = "REMOVE"
+                                self.showAlert = true
+                                getList()
+                            }
+                        }
+                    }),
+                    secondaryButton: .cancel(Text("TIDAK")))
+            }
+            
             return Alert(
                 title: Text("Succeed".localized(language)),
                 message: Text("Perubahan Berhasil Disimpan"),
@@ -253,7 +267,7 @@ struct ListAllFavoriteTransactionView: View {
         VStack {
             VStack {
                 HStack {
-                    Text("Edit Kontrak Transfer")
+                    Text("Ubah Kontak Transfer")
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -263,7 +277,7 @@ struct ListAllFavoriteTransactionView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("Nama Kontrak Penerima")
+                        Text("Nama Kontak Penerima")
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -306,11 +320,10 @@ struct ListAllFavoriteTransactionView: View {
                         .padding(.leading, 10)
                         .padding(.trailing, 60)
                         
-                        TextField("Bank", text: $receivedBank, onEditingChanged: { changed in
-                            print("\($receivedBank)")
+                        MultilineTextField("Bank", text: .constant(receivedBank), onCommit: {
+                            
                         })
                         .disabled(true)
-                        .frame(height: 10)
                         .padding()
                         .font(.subheadline)
                         .background(Color(hex: "#F6F8FB"))
@@ -325,7 +338,7 @@ struct ListAllFavoriteTransactionView: View {
                             .fontWeight(.light)
                             .frame(width: 100)
                         
-                        TextField("No. Rekening", text: .constant(transferDataOnUs.sourceNumber), onEditingChanged: { changed in
+                        TextField("No. Rekening", text: .constant(transferDataOnUs.destinationNumber), onEditingChanged: { changed in
                             //                            print("\($receivedRekening)")
                         })
                         .disabled(true)
@@ -363,10 +376,10 @@ struct ListAllFavoriteTransactionView: View {
                             Text("SIMPAN PERUBAHAN")
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
                     })
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     .disabled(disableForm)
                     .background(disableForm ? Color(.lightGray) : Color(hex: "#2334D0"))
                     .cornerRadius(12)
@@ -443,10 +456,10 @@ struct ListAllFavoriteTransactionView: View {
                             Text("Search")
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
                     })
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     .disabled(disableFormFilter)
                     .background(disableFormFilter ? Color(.lightGray) : Color(hex: "#2334D0"))
                     .cornerRadius(12)

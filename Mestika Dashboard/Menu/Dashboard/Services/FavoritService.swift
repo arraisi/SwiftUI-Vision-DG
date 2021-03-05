@@ -220,17 +220,10 @@ class FavoritService {
                 } else {
                     // if we're still here it means there was a problem
                     print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-                }
-                
-                if (httpResponse.statusCode == 404) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
-                if (httpResponse.statusCode == 400) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
-                }
-                
-                if (httpResponse.statusCode == 500) {
+                if (httpResponse.statusCode > 300) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }
@@ -247,6 +240,68 @@ class FavoritService {
             "id" : data.id,
             "cardNo": data.cardNo,
             "sourceNumber": data.sourceNumber
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        // MARK: URL
+        guard let url = URL.urlRemoveFavorite() else {
+            return completion(Result.failure(ErrorResult.network(string: "NETWORK ERROR")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        
+        // MARK: TASK
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("RESPONSE SERVICE REMOVE FAVORITE : CODE \(httpResponse.statusCode)")
+                
+                guard let data = data, error == nil else {
+                    return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+                }
+                
+                // MARK : change model response.
+                let response = try? JSONDecoder().decode(Status.self, from: data)
+                
+                print(response?.code ?? "NO CODE")
+                
+                if let status = response {
+                    if httpResponse.statusCode == 200 || httpResponse.statusCode == 400  {
+                        completion(.success(status))
+                    } else {
+                        // if we're still here it means there was a problem
+                        print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    }
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+            
+        }.resume()
+    }
+    
+    // MARK: - REMOVE FAVORITE
+    func removeWithParam(id: String, cardNo: String, sourceNumber: String, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+        
+        // MARK: BODY
+        let body: [String: Any] = [
+            "id" : id,
+            "cardNo": cardNo,
+            "sourceNumber": sourceNumber
         ]
         
         print("body => \(body)")

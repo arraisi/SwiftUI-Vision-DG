@@ -240,4 +240,12 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/channel/cardBroken")
     }
     
+    static func urlBlockKartuKu() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/channel/cardBlocked")
+    }
+    
+    static func urlChangePinKartuKu() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/channel/pinChange")
+    }
+    
 }

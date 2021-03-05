@@ -177,6 +177,7 @@ struct TransferOnUsScreen: View {
         })
         .navigationBarTitle("Inter-peer Transfer".localized(language), displayMode: .inline)
         .onAppear() {
+            self.routeConfirmation = false
             self.transferData = TransferOnUsModel()
             if (dest != "") {
                 self.destinationNumber = self.dest

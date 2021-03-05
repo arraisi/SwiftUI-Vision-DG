@@ -33,6 +33,9 @@ struct TransferRtgsConfirmation: View {
             }
         }
         .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
+        .onAppear {
+            self.transferData.addressOfDestination = self.transferData.notes
+        }
     }
     
     var formCard: some View {

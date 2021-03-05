@@ -81,6 +81,49 @@ extension KartuKuViewModel {
     }
     
     // MARK: - ACTIVATE KARTU KU
+    func changePinKartuKu(cardNo: String, pin: String, newPin: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        KartuKuService.shared.postChangePinKartKu(cardNo: cardNo, pin: pin, newPin: newPin) { result in
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "400"
+                    self.message = "Message parametr tidak valid"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - ACTIVATE KARTU KU
     func activateKartuKu(data: ActivateKartuKuModel, completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
@@ -131,6 +174,49 @@ extension KartuKuViewModel {
         }
         
         KartuKuService.shared.postBrokenKartKu(data: data) { result in
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "Invalid Pin Trx"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "400"
+                    self.message = "Message parametr tidak valid"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - BLOCK KARTU KU
+    func blockKartuKu(data: BrokenKartuKuModel, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        KartuKuService.shared.postBlockKartKu(data: data) { result in
             switch result {
             case .success(let response):
                 
