@@ -246,7 +246,7 @@ struct FirstOTPLoginView: View {
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                     } else {
-                        Text("Verifikasi OTP")
+                        Text("OTP Verification".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

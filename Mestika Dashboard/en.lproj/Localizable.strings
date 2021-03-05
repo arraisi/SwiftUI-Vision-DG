@@ -292,3 +292,7 @@
 "Save Transaction PIN" = "Save Transaction PIN";
 "PIN is not the same" = "PIN is not the same";
 "The transaction PIN that you entered is not the same as the initial, please re-enter it" = "The transaction PIN that you entered is not the same as the initial, please re-enter it";
+"NIK tidak dapat didaftarkan untuk pembukaan rekening" = "Identity Card Number / (NIK) cannot be registered for account opening";
+"NIK TIDAK TERDAFTAR" = "NIK IS NOT REGISTERED";
+"Ya, alamat sesuai" = "Yes, the address matches";
+"Tidak, alamat tidak sesuai" = "No, the address doesn't match";

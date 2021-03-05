@@ -44,7 +44,7 @@ struct SavingSelectionModalView: View {
                 .padding()
             
             VStack(alignment: .center, spacing: 10) {
-                Text("Anda Telah memilih")
+                Text("You have chosen".localized(language))
                     .font(.custom("Montserrat-Regular", size: 14))
                     .padding(.horizontal, 20)
                     .foregroundColor(.black)
@@ -57,13 +57,13 @@ struct SavingSelectionModalView: View {
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                Text("Punya kode referal ?")
+                Text("Have a referral code?".localized(language))
                     .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.black)
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                TextField("Masukkan kode referal".localized(language), text: $atmData.atmAddresspostalReferral, onEditingChanged: { changed in
+                TextField("Enter Referral Code".localized(language), text: $atmData.atmAddresspostalReferral, onEditingChanged: { changed in
                 }, onCommit: {})
                 .frame(height: 20)
                 .font(.custom("Montserrat-Regular", size: 14))
@@ -76,7 +76,7 @@ struct SavingSelectionModalView: View {
                 .padding(.vertical, 10)
                 .multilineTextAlignment(TextAlignment.center)
                 
-                Text("Pastikan kamu memasukkan kode refferalmu dengan benar.".localized(language))
+                Text("Make sure you enter the referral code correctly.".localized(language))
                     .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.black)
                     .padding(.horizontal, 20)
@@ -103,7 +103,7 @@ struct SavingSelectionModalView: View {
                     }
                     
                 }) {
-                    Text("Pilih Tabungan Ini".localized(language))
+                    Text("Choose This Savings".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
@@ -119,7 +119,7 @@ struct SavingSelectionModalView: View {
                     }
                     
                 }) {
-                    Text("Pilih Tabungan lain".localized(language))
+                    Text("Choose another savings".localized(language))
                         .foregroundColor(Color(hex: "#5A6876"))
                         .fontWeight(.bold)
                         .font(.system(size: 14))

@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct RadioButton: View {
-
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     let id: Int
     let label: String
     let callback: (Int)->()
@@ -16,7 +19,7 @@ struct RadioButton: View {
     let size: CGFloat
     let color: Color
     let textSize: CGFloat
-
+    
     init(
         _ id: Int,
         label: String,
@@ -25,7 +28,7 @@ struct RadioButton: View {
         size: CGFloat = 19,
         color: Color = Color(hex: "#595959"),
         textSize: CGFloat = 12
-        ) {
+    ) {
         self.id = id
         self.label = label
         self.size = size
@@ -34,7 +37,7 @@ struct RadioButton: View {
         self.selectedID = selectedID
         self.callback = callback
     }
-
+    
     var body: some View {
         
         Button(action:{
@@ -46,12 +49,12 @@ struct RadioButton: View {
             HStack(alignment: .center, spacing: 10) {
                 
                 Image(systemName: self.selectedID == self.id ? "largecircle.fill.circle" : "circle")
-//                    .renderingMode(.original)
+                    //                    .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: self.size, height: self.size)
                 
-                Text(label)
+                Text(label.localized(language))
                     .font(.custom("Montserrat-Regular", size: textSize))
                 
                 Spacer()
@@ -65,12 +68,12 @@ struct RadioButton: View {
 
 // MARK: - Radio Button Group
 struct RadioButtonGroup: View {
-
+    
     let items : [MasterModel]
     @Binding var selectedId: Int
-
+    
     let callback: (Int) -> ()
-
+    
     var body: some View {
         VStack {
             ForEach(0..<items.count) { index in
@@ -78,7 +81,7 @@ struct RadioButtonGroup: View {
             }
         }
     }
-
+    
     func radioGroupCallback(id: Int) {
         selectedId = id
         callback(id)
