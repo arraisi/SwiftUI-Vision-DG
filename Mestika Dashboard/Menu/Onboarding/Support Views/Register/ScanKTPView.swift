@@ -33,6 +33,7 @@ struct ScanKTPView: View {
     @State var isValidKtp: Bool = false
     @State var showingAlert: Bool = false
     @State var messageResponse: String = ""
+    @State var errorMessage: String = ""
     
     var body: some View {
         VStack(alignment: .center) {
@@ -127,8 +128,8 @@ struct ScanKTPView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("MESSAGE"),
-                message: Text(self.messageResponse.localized(language)),
-                dismissButton: .default(Text("Oke"))
+                message: Text(self.errorMessage.localized(language)),
+                dismissButton: .default(Text("OK"))
             )
         }
     }
@@ -143,7 +144,7 @@ struct ScanKTPView: View {
                 print("nikValid \(self.citizenVM.nik)")
                 print(self.citizenVM.alamatKtp)
                 print(self.citizenVM.rt)
-                self.messageResponse = self.citizenVM.errorMessage
+//                self.messageResponse = self.citizenVM.errorMessage
 //                self.showingAlert = true
                 self.registerData.nik = nik
                 self.registerData.namaLengkapFromNik = self.citizenVM.namaLengkap
@@ -168,7 +169,7 @@ struct ScanKTPView: View {
             
             if !success {
                 print("ERROR")
-                self.messageResponse = self.citizenVM.errorMessage
+                self.errorMessage = self.citizenVM.errorMessage
                 self.showingAlert = true
             }
         }
