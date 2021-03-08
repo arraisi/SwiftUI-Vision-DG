@@ -248,4 +248,7 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/channel/pinChange")
     }
     
+    static func urlLimitKartuKu() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/card/personal-limit")
+    }
 }

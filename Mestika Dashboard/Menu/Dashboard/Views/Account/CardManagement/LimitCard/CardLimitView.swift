@@ -9,8 +9,15 @@ import SwiftUI
 
 struct CardLimitView: View {
     
+    @State private var isLoading: Bool = false
+    @State private var statusError: String = ""
+    @State private var messageError: String = ""
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
+    
+    // Observable Object
+    @State var activateData = LimitKartuKuModel()
     
     @State var limitPerTransaksi: Double = 0
     @State var limitPerHari: Double = 20000000
@@ -27,10 +34,13 @@ struct CardLimitView: View {
     
     @State private var keyboardOffset: CGFloat = 0
     
+    @State var isNextRoute: Bool = false
+    
     var card: KartuKuDesignViewModel
     
     /* Boolean for Show Modal */
     @State var showingModal = false
+    @State var showingAlert = false
     
     var body: some View {
         ZStack {
@@ -60,6 +70,7 @@ struct CardLimitView: View {
                                         let amountString = String($0.prefix(13))
                                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                         self.limitPerTransaksiCtrl = cleanAmount.thousandSeparator()
+                                        self.activateData.limitIbft = cleanAmount
                                     }
                                     .keyboardType(.decimalPad)
                                     .font(.custom("Montserrat-Bold", size: 30))
@@ -91,6 +102,7 @@ struct CardLimitView: View {
                                         let amountString = String($0.prefix(13))
                                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                         self.limitPenarikanHarianCtrl = cleanAmount.thousandSeparator()
+                                        self.activateData.limitWd = cleanAmount
                                     }
                                     .keyboardType(.decimalPad)
                                     .font(.custom("Montserrat-Bold", size: 30))
@@ -122,6 +134,7 @@ struct CardLimitView: View {
                                         let amountString = String($0.prefix(13))
                                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                         self.limitOnUsCtrl = cleanAmount.thousandSeparator()
+                                        self.activateData.limitOnUs = cleanAmount
                                     }
                                     .keyboardType(.decimalPad)
                                     .font(.custom("Montserrat-Bold", size: 30))
@@ -149,10 +162,11 @@ struct CardLimitView: View {
                                 
                                 TextField("0", text: self.$limitPembayaranCtrl, onEditingChanged: {_ in
                                 })
-                                    .onReceive(limitOnUsCtrl.publisher.collect()) {
+                                    .onReceive(limitPembayaranCtrl.publisher.collect()) {
                                         let amountString = String($0.prefix(13))
                                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                        self.limitOnUsCtrl = cleanAmount.thousandSeparator()
+                                        self.limitPembayaranCtrl = cleanAmount.thousandSeparator()
+                                        self.activateData.limitPayment = cleanAmount
                                     }
                                     .keyboardType(.decimalPad)
                                     .font(.custom("Montserrat-Bold", size: 30))
@@ -169,7 +183,7 @@ struct CardLimitView: View {
                             .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                         }
                         
-                        // Limit Pembayaran
+                        // Limit Pembelian
                         VStack(alignment: .leading) {
                             Text("Limit pembelian")
                                 .font(.custom("Montserrat-Light", size: 12))
@@ -184,6 +198,7 @@ struct CardLimitView: View {
                                         let amountString = String($0.prefix(13))
                                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                         self.limitPembelianCtrl = cleanAmount.thousandSeparator()
+                                        self.activateData.limitPurchase = cleanAmount
                                     }
                                     .keyboardType(.decimalPad)
                                     .font(.custom("Montserrat-Bold", size: 30))
@@ -200,38 +215,11 @@ struct CardLimitView: View {
                             .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                         }
                         
-                        // Limit ibft
-                        VStack(alignment: .leading) {
-                            Text("Limit pembelian")
-                                .font(.custom("Montserrat-Light", size: 12))
-                            HStack(alignment:.top){
-                                Text("Rp.")
-                                    .font(.custom("Montserrat-Bold", size: 20))
-                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                                
-                                TextField("0", text: self.$limitIbftCtrl, onEditingChanged: {_ in
-                                })
-                                    .onReceive(limitPembelianCtrl.publisher.collect()) {
-                                        let amountString = String($0.prefix(13))
-                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                        self.limitPembelianCtrl = cleanAmount.thousandSeparator()
-                                    }
-                                    .keyboardType(.decimalPad)
-                                    .font(.custom("Montserrat-Bold", size: 30))
-                                    .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                                
-                            }
-                            Divider()
-                            HStack {
-                                Text("Maximum limit of ibft transaction")
-                                    .font(.custom("Montserrat-Light", size: 10))
-                                Text("Rp. 10.000.000,-")
-                                    .font(.custom("Montserrat-SemiBold", size: 10))
-                            }
-                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
-                        }
-                        
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Button(action: {
+                            self.activateData.cardNo = card.cardNo
+                            self.activateData.maxIbftPerTrans = "0"
+                            self.isNextRoute = true
+                        }, label: {
                             Text("SAVE CHANGES".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
@@ -241,17 +229,12 @@ struct CardLimitView: View {
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(12)
                         
-//                        NavigationLink(
-//                            destination: PINConfirmationView(key: "123456", pin: "", nextView: AnyView(CardLimitView(card: card, showingModal: true))),
-//                            label: {
-//                                Text("SAVE CHANGES".localized(language))
-//                                    .foregroundColor(.white)
-//                                    .font(.custom("Montserrat-SemiBold", size: 14))
-//                                    .frame(maxWidth: .infinity, maxHeight: 50)
-//                            })
-//                            .frame(height: 50)
-//                            .background(Color(hex: "#2334D0"))
-//                            .cornerRadius(12)
+                        NavigationLink(
+                            destination: CardLimitVerificationPinView(unLocked: false).environmentObject(activateData),
+                            isActive: self.$isNextRoute,
+                            label: {
+                                EmptyView()
+                            })
                     })
                     .padding(20)
                     .padding(.top, 20)
@@ -272,7 +255,7 @@ struct CardLimitView: View {
                 Text("Cancel".localized(language))
             }))
             .onAppear{
-                
+                getProfile()
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notif) in
                     let value = notif.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
                     let height = value.height
@@ -292,6 +275,26 @@ struct CardLimitView: View {
             }
             
         }
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text("\(self.statusError)"),
+                message: Text("\(self.messageError)"),
+                dismissButton: .default(Text("Oke")))
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LimitKartuKu"))) { obj in
+            print("ON RESUME")
+            
+            self.isLoading = true
+            if let pinTrx = obj.userInfo, let info = pinTrx["pinTrx"] {
+                print(info)
+                self.activateData.pinTrx = info as! String
+            }
+            
+            print(self.activateData.cardNo)
+            print(self.activateData.pinTrx)
+            
+            updateLimitKartuKu()
+        }
         .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             createBottomFloater()
         }
@@ -310,7 +313,7 @@ struct CardLimitView: View {
             
             HStack {
                 
-                Text("Changes to Your Card Transaction Limit Has Been Successfully Saved.".localized(language))
+                Text("Perubahan Limit Transaksi Kartu Anda Telah Berhasil di Simpan")
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -333,6 +336,60 @@ struct CardLimitView: View {
         .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    @ObservedObject var profileVM = ProfileViewModel()
+    func getProfile() {
+        self.profileVM.getProfile { success in
+            if success {
+                self.isLoading = false
+                
+                self.limitPerTransaksiCtrl = self.profileVM.maxIbftPerTrans
+                self.limitPenarikanHarianCtrl = self.profileVM.limitWd
+                self.limitOnUsCtrl = self.profileVM.limitOnUs
+                self.limitPembayaranCtrl = self.profileVM.limitPayment
+                self.limitPembelianCtrl = self.profileVM.limitPurchase
+            }
+            
+            if !success {
+                self.isLoading = false
+            }
+        }
+    }
+    
+    @ObservedObject var kartKuVM = KartuKuViewModel()
+    func updateLimitKartuKu() {
+        self.kartKuVM.updateLimitKartuKu(data: activateData) { success in
+            if success {
+                print("SUCCESS")
+                self.isLoading = false
+                self.showingModal = true
+            }
+            
+            if !success {
+                print("!SUCCESS")
+                
+                self.isLoading = false
+                if (self.kartKuVM.code == "400") {
+                    print("Error 400")
+                    self.statusError = self.kartKuVM.code
+                    self.messageError = "Bad Request"
+                    self.showingAlert = true
+                }
+                
+                if (self.kartKuVM.code == "401") {
+                    self.statusError = self.kartKuVM.code
+                    self.messageError = self.kartKuVM.message
+                    self.showingAlert = true
+                }
+                
+                if (self.kartKuVM.code == "500") {
+                    self.statusError = self.kartKuVM.code
+                    self.messageError = self.kartKuVM.message
+                    self.showingAlert = true
+                }
+            }
+        }
     }
 }
 

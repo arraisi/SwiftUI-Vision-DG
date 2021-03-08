@@ -11,6 +11,14 @@ import Combine
 class ProfileViewModel: ObservableObject {
     @Published var isLoading: Bool = true
     
+    // Limit
+    @Published var maxIbftPerTrans: String = ""
+    @Published var limitOnUs: String = ""
+    @Published var limitWd: String = ""
+    @Published var limitPayment: String = ""
+    @Published var limitPurchase: String = ""
+    @Published var limitIbft: String = ""
+    
     @Published var name: String = ""
     @Published var balance: String = ""
     @Published var nameOnCard: String = ""
@@ -71,6 +79,12 @@ extension ProfileViewModel {
                     self.cardName = _chipProfileDto.nameOnCard
                     self.cardNo = _chipProfileDto.cardNo ?? ""
                     self.accountNumber = _chipProfileDto.accountNumber
+                    self.maxIbftPerTrans = _chipProfileDto.maxIbftPerTrans ?? "0"
+                    self.limitOnUs = _chipProfileDto.limitOnUs ?? "0"
+                    self.limitWd = _chipProfileDto.limitWd ?? "0"
+                    self.limitPayment = _chipProfileDto.limitPayment ?? "0"
+                    self.limitPurchase = _chipProfileDto.limitPurchase ?? "0"
+                    self.limitIbft = _chipProfileDto.limitIbft ?? "0"
                     print(_chipProfileDto.accountNumber)
                 }
                  
