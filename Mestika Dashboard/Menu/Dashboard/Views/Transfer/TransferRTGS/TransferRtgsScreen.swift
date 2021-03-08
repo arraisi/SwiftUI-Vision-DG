@@ -22,6 +22,16 @@ struct TransferRtgsScreen: View {
     // Variable List BANK
     @State private var bankSelector: String = "Choose Destination Bank".localized(LocalizationService.shared.language)
     
+    @State private var destinationType: String = NSLocalizedString("Receiver Type".localized(LocalizationService.shared.language), comment: "")
+    
+    @State private var citizenShipCtrl: String = NSLocalizedString("Citizenship".localized(LocalizationService.shared.language), comment: "")
+    
+    // Variale Destination Type
+    var _listDestinationType = ["Personal", NSLocalizedString("Company".localized(LocalizationService.shared.language), comment: ""), NSLocalizedString("Group".localized(LocalizationService.shared.language), comment: ""), NSLocalizedString("Foundation".localized(LocalizationService.shared.language), comment: "")]
+    
+    // Variable Citizen Ship
+    var _listCitizenShip = ["Resident", "Non Resident"]
+    
     @Binding var dest: String
     @Binding var type: String
     @Binding var destBank: String
@@ -30,6 +40,7 @@ struct TransferRtgsScreen: View {
     
     // Variable NoRekening
     @State private var noRekeningCtrl: String = ""
+    @State private var destinationNameCtrl: String = ""
     @State var selectedAccount = BankAccount(id: 0, namaRekening: "Select Account".localized(LocalizationService.shared.language), productName: "", sourceNumber: "", noRekening: "", saldo: "0.0")
     @State var listBankAccount: [BankAccount] = []
     
@@ -134,6 +145,9 @@ struct TransferRtgsScreen: View {
                                     self.showDialogConfirmation = true
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
+                                    self.transferData.destinationName = self.destinationNameCtrl
+                                    self.transferData.citizenship = self.citizenShipCtrl
+                                    self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
 //
                                     if (desc == "") {
@@ -177,7 +191,7 @@ struct TransferRtgsScreen: View {
             }
             
             NavigationLink(
-                destination: TransferRtgsDestination().environmentObject(transferData),
+                destination: TransferRtgsConfirmation().environmentObject(transferData),
                 isActive: self.$isRouteTransaction,
                 label: {
                     EmptyView()
@@ -334,7 +348,113 @@ struct TransferRtgsScreen: View {
                 .background(Color(hex: "#F6F8FB"))
                 .cornerRadius(10)
                 .padding(.horizontal, 15)
-                .padding(.bottom, 25)
+                .padding(.bottom, 10)
+            }
+            
+            VStack {
+                HStack {
+                    
+                    TextField(NSLocalizedString("Destination Name".localized(language), comment: ""), text: self.$destinationNameCtrl, onEditingChanged: { changed in
+                        self.transferData.destinationName = self.destinationNameCtrl
+                    })
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+                    .padding()
+                }
+                .background(Color(hex: "#F6F8FB"))
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                .padding(.bottom, 10)
+            }
+            
+            // Field Type Destination
+            VStack {
+                HStack {
+                    Text("Beneficiary Type".localized(language))
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
+//                .padding(.top, 25)
+                
+                HStack {
+                    Menu {
+                        ForEach(self._listDestinationType, id: \.self) { data in
+                            Button(action: {
+                                self.destinationType = data
+                                self.transferData.typeDestination = data
+        //                        validateForm()
+                            }) {
+                                Text(data)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(destinationType)
+                                    .font(.subheadline)
+                                    .foregroundColor(.black)
+                                    .fontWeight(destinationType == NSLocalizedString("Receiver Type".localized(LocalizationService.shared.language), comment: "") ? .bold : .light)
+                            }
+                            .padding()
+                            
+                            Spacer()
+                            
+                            Image("ic_expand").padding()
+                        }
+                    }
+                }
+                .background(Color(hex: "#F6F8FB"))
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                .padding(.bottom, 10)
+            }
+            
+            // Filed Resident
+            VStack {
+                HStack {
+                    Text("Resident Status".localized(language))
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal)
+//                .padding(.top, 25)
+                
+                Menu {
+                    ForEach(self._listCitizenShip, id: \.self) { data in
+                        Button(action: {
+                            self.citizenShipCtrl = data
+                            self.transferData.citizenship = data
+    //                        validateForm()
+                        }) {
+                            Text(data)
+                                .font(.custom("Montserrat-Regular", size: 12))
+                        }
+                    }
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(citizenShipCtrl)
+                                .font(.subheadline)
+                                .foregroundColor(.black)
+                                .fontWeight(citizenShipCtrl == NSLocalizedString("Citizenship".localized(LocalizationService.shared.language), comment: "") ? .bold : .light)
+                        }
+                        .padding()
+                        
+                        Spacer()
+                        
+                        Image("ic_expand").padding()
+                    }
+                }
+                .background(Color(hex: "#F6F8FB"))
+                .cornerRadius(10)
+                .padding(.horizontal, 15)
+                .padding(.bottom, 10)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 30)
@@ -858,7 +978,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     var disableForm: Bool {
-        if (self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language)) {
+        if (self.destinationNameCtrl.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != NSLocalizedString("Receiver Type".localized(language), comment: "") && self.citizenShipCtrl != NSLocalizedString("Citizenship".localized(language), comment: "")) {
             return false
         }
         return true

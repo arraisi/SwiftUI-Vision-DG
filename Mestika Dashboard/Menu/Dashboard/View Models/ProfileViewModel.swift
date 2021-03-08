@@ -75,16 +75,17 @@ extension ProfileViewModel {
                 self.balance = response.chipProfileDto?.last!.balance ?? "0"
                 self.classCode = response.chipProfileDto?.last?.classCode ?? ""
                 
+                self.maxIbftPerTrans = response.chipProfileDto?.last?.maxIbftPerTrans ?? "0"
+                self.limitOnUs = response.chipProfileDto?.last?.limitOnUs ?? "1000000"
+                self.limitWd = response.chipProfileDto?.last?.limitWd ?? "0"
+                self.limitPayment = response.chipProfileDto?.last?.limitPayment ?? "0"
+                self.limitPurchase = response.chipProfileDto?.last?.limitPurchase ?? "0"
+                self.limitIbft = response.chipProfileDto?.last?.limitIbft ?? "0"
+                
                 if let _chipProfileDto = response.chipProfileDto?.last {
                     self.cardName = _chipProfileDto.nameOnCard
                     self.cardNo = _chipProfileDto.cardNo ?? ""
                     self.accountNumber = _chipProfileDto.accountNumber
-                    self.maxIbftPerTrans = _chipProfileDto.maxIbftPerTrans ?? "0"
-                    self.limitOnUs = _chipProfileDto.limitOnUs ?? "0"
-                    self.limitWd = _chipProfileDto.limitWd ?? "0"
-                    self.limitPayment = _chipProfileDto.limitPayment ?? "0"
-                    self.limitPurchase = _chipProfileDto.limitPurchase ?? "0"
-                    self.limitIbft = _chipProfileDto.limitIbft ?? "0"
                     print(_chipProfileDto.accountNumber)
                 }
                  

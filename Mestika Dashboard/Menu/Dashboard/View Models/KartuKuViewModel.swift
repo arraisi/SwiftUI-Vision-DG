@@ -37,6 +37,12 @@ extension KartuKuViewModel {
                 self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
                     print(data.cardDesign)
                     return KartuKuDesignViewModel(
+                        maxIbftPerTrans: data.maxIbftPerTrans ?? "0",
+                        limitOnUs: data.limitOnUs ?? "0",
+                        limitWd: data.limitWd ?? "0",
+                        limitPayment: data.limitPayment ?? "0",
+                        limitPurchase: data.limitPurchase ?? "0",
+                        limitIbft: data.limitIbft ?? "0",
                         cardFlag: data.cardFlag,
                         kodepos: data.kodepos,
                         provinsi: data.provinsi,
