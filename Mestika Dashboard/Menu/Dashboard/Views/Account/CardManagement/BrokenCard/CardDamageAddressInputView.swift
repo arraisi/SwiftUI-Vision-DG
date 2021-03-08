@@ -225,7 +225,7 @@ struct CardDamageAddressInputView: View {
 //                self.addressKecamatanInput = data.addressKecamatanInput!
 //                self.addressKodePosInput = data.kodePosKeluarga!
 //            }
-            getProfile()
+//            getProfile()
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()

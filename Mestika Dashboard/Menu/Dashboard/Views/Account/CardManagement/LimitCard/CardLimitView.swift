@@ -115,6 +115,10 @@ struct CardLimitView: View {
                                             self.limitPenarikanHarianCtrl = cleanAmount.thousandSeparator()
                                             self.limitPenarikanHarian = Double(cleanAmount) ?? 0
                                             self.activateData.limitWd = cleanAmount
+                                            
+                                            if (limitPenarikanHarian > maxPenarikanHarian) {
+                                                self.limitPenarikanHarianCtrl = "10000000".thousandSeparator()
+                                            }
                                         }
                                         .keyboardType(.decimalPad)
                                         .font(.custom("Montserrat-Bold", size: 30))
@@ -148,6 +152,10 @@ struct CardLimitView: View {
                                             self.limitOnUsCtrl = cleanAmount.thousandSeparator()
                                             self.limitTransferOnUs = Double(cleanAmount) ?? 0
                                             self.activateData.limitOnUs = cleanAmount
+                                            
+                                            if (limitTransferOnUs > maxTransferOnUs) {
+                                                self.limitOnUsCtrl = "10000000".thousandSeparator()
+                                            }
                                         }
                                         .keyboardType(.decimalPad)
                                         .font(.custom("Montserrat-Bold", size: 30))
@@ -214,6 +222,10 @@ struct CardLimitView: View {
                                             self.limitPembelianCtrl = cleanAmount.thousandSeparator()
                                             self.limitPembelian = Double(cleanAmount) ?? 0
                                             self.activateData.limitPurchase = cleanAmount
+                                            
+                                            if (limitPembelian > maxPembelian) {
+                                                self.limitPembelianCtrl = "10000000".thousandSeparator()
+                                            }
                                         }
                                         .keyboardType(.decimalPad)
                                         .font(.custom("Montserrat-Bold", size: 30))
@@ -268,9 +280,6 @@ struct CardLimitView: View {
                 .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
                 .modifier(DismissingKeyboard())
                 .navigationBarTitle("Card Limit".localized(language), displayMode: .inline)
-                .navigationBarItems(trailing:  NavigationLink(destination: CardManagementScreen(), label: {
-                    Text("Cancel".localized(language))
-                }))
                 .onAppear{
                     
                     print("GET BALANCE")
@@ -295,7 +304,7 @@ struct CardLimitView: View {
                 
                 // Background Color When Modal Showing
                 if self.showingModal {
-                    ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    ModalOverlay(tapAction: { withAnimation { } })
                         .edgesIgnoringSafeArea(.all)
                 }
                 
