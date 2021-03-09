@@ -227,6 +227,7 @@ struct TransferRtgsScreen: View {
                 self.transferType = self.type
                 self.bankSelector = self.destBank
                 self.transferData.destinationName = self.nameCst
+                self.destinationNameCtrl = self.nameCst
                 self.transferData.notes = self.desc
             }
             self.transferData.transactionFrequency = _listFrequency[0]

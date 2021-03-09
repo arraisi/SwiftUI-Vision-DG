@@ -23,6 +23,9 @@ struct TransferOnUsConfirmationScreen: View {
         return formatter
     }
     
+    @State var nominalCtrl: String = ""
+    @State var totalTransferCtrl: String = ""
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -41,6 +44,10 @@ struct TransferOnUsConfirmationScreen: View {
         }
         .navigationBarTitle("Confirmation".localized(language), displayMode: .inline)
         .edgesIgnoringSafeArea(.bottom)
+        .onAppear {
+            self.nominalCtrl = "Rp " + "\(self.transferData.amount.thousandSeparator())"
+            self.totalTransferCtrl = "Rp " + "\(self.transferData.amount.thousandSeparator())"
+        }
     }
     
     var formCard: some View {
@@ -137,7 +144,7 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Nominal Transfer", text: self.$transferData.amount, onEditingChanged: { changed in
+                    TextField("Nominal Transfer", text: self.$nominalCtrl, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
                     })
                     .disabled(true)
@@ -237,7 +244,7 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Total", text: self.$transferData.amount, onEditingChanged: { changed in
+                    TextField("Total", text: self.$totalTransferCtrl, onEditingChanged: { changed in
                         print("\(self.$transferData.amount)")
                     })
                     .disabled(true)

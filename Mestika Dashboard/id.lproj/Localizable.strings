@@ -500,6 +500,7 @@
 "Enter your new PIN" = "Input PIN baru Anda";
 "Save New PIN" = "Simpan PIN Baru";
 "PIN is not the same, please retype it" = "PIN tidak sama, silahkan ketik ulang";
+"New Pin not change, please retype it" = "PIN baru tidak berubah, silahkan ketik ulang";
 "NEW APPLICATION PIN HAS BEEN SUCCESSFULLY SAVED" = "PIN APLIKASI YANG BARU TELAH BERHASIL DISIMPAN";
 "PIN not Changed" = "PIN tidak Berubah";
 "Silahkan Kebebasan PIN lama dan baru Anda" = "Silahkan masukkan PIN lama dan baru Anda";

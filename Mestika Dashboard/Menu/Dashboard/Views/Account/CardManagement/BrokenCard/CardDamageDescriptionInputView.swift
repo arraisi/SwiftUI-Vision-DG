@@ -23,6 +23,8 @@ struct CardDamageDescriptionInputView: View {
     @State var showingModal = false
     @State var showingModalError = false
     
+    @State var isLoading: Bool = false
+    
     var body: some View {
         ZStack(alignment: .top) {
             VStack {
@@ -148,7 +150,7 @@ struct CardDamageDescriptionInputView: View {
     }
     
     var disableForm: Bool {
-        if (self.cardNo.isNotEmpty() && self.pinAtm.isNotEmpty()) {
+        if (self.cardNo.isNotEmpty() && self.pinAtm.isNotEmpty() && self.isLoading == false) {
             return false
         }
         return true
@@ -255,14 +257,17 @@ struct CardDamageDescriptionInputView: View {
     
     @ObservedObject var kartKuVM = KartuKuViewModel()
     func brokenKartuKu() {
+        self.isLoading = true
         self.kartKuVM.brokenKartuKu(data: cardData) { success in
             if success {
                 print("SUCCESS")
+                self.isLoading = false
                 self.showingModal = true
             }
             
             if !success {
                 print("!SUCCESS")
+                self.isLoading = false
                 self.showingModalError = true
             }
         }

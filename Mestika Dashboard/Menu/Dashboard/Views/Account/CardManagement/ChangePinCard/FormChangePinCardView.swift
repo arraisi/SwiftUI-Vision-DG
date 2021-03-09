@@ -30,6 +30,7 @@ struct FormChangePinCardView: View {
     @State private var showModal: Bool = false
     @State private var isPinChanged: Bool = false
     @State private var showModalError: Bool = false
+    @State private var showModalSamePin: Bool = false
     @State private var showPinWeakModal: Bool = false
     
     private var verificationBtnDisabled: Bool {
@@ -135,6 +136,8 @@ struct FormChangePinCardView: View {
                             UIApplication.shared.endEditing()
                             if pinCtrl != pinConfirmCtrl {
                                 self.showModalError.toggle()
+                            } else if (oldPinCtrl == pinCtrl) {
+                                self.showModalSamePin.toggle()
                             } else {
                                 if isPinValid(with: pinCtrl) {
                                     
@@ -175,7 +178,7 @@ struct FormChangePinCardView: View {
                 
             }
             
-            if self.showModal || self.showModalError || self.showPinWeakModal {
+            if self.showModal || self.showModalError || self.showPinWeakModal || self.showModalSamePin {
                 ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
@@ -202,6 +205,9 @@ struct FormChangePinCardView: View {
         }
         .popup(isPresented: $showModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             modalPinNotMatched()
+        }
+        .popup(isPresented: $showModalSamePin, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            modalPinSameWithOld()
         }
         .popup(isPresented: $showPinWeakModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             PinWeakModal()
@@ -233,6 +239,40 @@ struct FormChangePinCardView: View {
             
             Button(action: {
                 self.showModalError = false
+            }) {
+                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    func modalPinSameWithOld() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text(NSLocalizedString("New Pin not change, please retype it".localized(language), comment: ""))
+                .fontWeight(.bold)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showModalSamePin = false
             }) {
                 Text(NSLocalizedString("Back".localized(language), comment: ""))
                     .foregroundColor(.white)
