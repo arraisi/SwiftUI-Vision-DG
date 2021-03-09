@@ -113,7 +113,7 @@ struct SavingAccountView: View {
             
             Spacer()
         }
-        .navigationBarTitle("Saving Account")
+        .navigationBarTitle("Saving Account".localized(language), displayMode: .inline)
     }
 }
 

@@ -156,10 +156,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                 .background(Color.white)
                 .shadow(color: Color("StaleBlue").opacity(0.2), radius: 10, x: 2, y: 0)
             }
-        }
-        .navigationBarTitle("Saving Account".localized(language))
-
-        
+        }        
     }
     
     func SavingAccountDetailRow(label: String, value: String) -> some View {
