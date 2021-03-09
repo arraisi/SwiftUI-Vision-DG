@@ -98,13 +98,13 @@ struct CardDamageAddressInputView: View {
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(10)
                                         
-                                        Button(action:{
-                                            searchAddress()
-                                        }, label: {
-                                            Image(systemName: "magnifyingglass")
-                                                .font(Font.system(size: 20))
-                                                .foregroundColor(Color(hex: "#707070"))
-                                        })
+//                                        Button(action:{
+//                                            searchAddress()
+//                                        }, label: {
+//                                            Image(systemName: "magnifyingglass")
+//                                                .font(Font.system(size: 20))
+//                                                .foregroundColor(Color(hex: "#707070"))
+//                                        })
                                         
                                     }
                                     
@@ -211,21 +211,21 @@ struct CardDamageAddressInputView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             print("ON APPEAR")
-            user.forEach { data in
-                print(data.addressInput!)
-                cardData.addressInput = data.addressInput!
-                cardData.addressPostalCodeInput = data.kodePosKeluarga!
-                cardData.addressKecamatanInput = data.addressKecamatanInput!
-                cardData.addressKelurahanInput = data.addressKelurahanInput!
-                cardData.addressRtRwInput = "02 / 03"
-                
-                self.addressInput = data.addressInput!
-                self.addressRtRwInput = "02 / 03"
-                self.addressKelurahanInput = data.addressKelurahanInput!
-                self.addressKecamatanInput = data.addressKecamatanInput!
-                self.addressKodePosInput = data.kodePosKeluarga!
-            }
-            
+//            user.forEach { data in
+//                print(data.addressInput!)
+//                cardData.addressInput = data.addressInput!
+//                cardData.addressPostalCodeInput = data.kodePosKeluarga!
+//                cardData.addressKecamatanInput = data.addressKecamatanInput!
+//                cardData.addressKelurahanInput = data.addressKelurahanInput!
+//                cardData.addressRtRwInput = "02 / 03"
+//
+//                self.addressInput = data.addressInput!
+//                self.addressRtRwInput = "02 / 03"
+//                self.addressKelurahanInput = data.addressKelurahanInput!
+//                self.addressKecamatanInput = data.addressKecamatanInput!
+//                self.addressKodePosInput = data.kodePosKeluarga!
+//            }
+//            getProfile()
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -315,6 +315,33 @@ struct CardDamageAddressInputView: View {
                 self.isShowAlert = true
                 self.messageResponse = self.addressVM.message
                 print("Not Found")
+            }
+        }
+    }
+    
+    @ObservedObject var profileVM = ProfileViewModel()
+    func getProfile() {
+        self.isLoading = true
+        self.profileVM.getProfile { success in
+            if success {
+                print(self.profileVM.limitOnUs)
+                self.isLoading = false
+                
+                cardData.addressInput = self.profileVM.alamat
+                cardData.addressPostalCodeInput = ""
+                cardData.addressKecamatanInput = self.profileVM.kecamatanName
+                cardData.addressKelurahanInput = self.profileVM.kelurahanName
+                cardData.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
+                
+                self.addressInput = self.profileVM.alamat
+                self.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
+                self.addressKelurahanInput = self.profileVM.kelurahanName
+                self.addressKecamatanInput = self.profileVM.kecamatanName
+                self.addressKodePosInput = ""
+            }
+            
+            if !success {
+                self.isLoading = false
             }
         }
     }

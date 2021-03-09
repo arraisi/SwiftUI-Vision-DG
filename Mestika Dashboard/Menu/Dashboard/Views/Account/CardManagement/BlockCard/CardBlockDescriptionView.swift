@@ -165,7 +165,7 @@ struct CardBlockDescriptionView: View {
             
             HStack {
                 
-                Text(NSLocalizedString("Success, Your ATM Card Is Back Active".localized(language), comment: ""))
+                Text("Berhasil, Kartu ATM Anda Telah Diblokir Untuk sementara waktu")
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)

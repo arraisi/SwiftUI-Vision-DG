@@ -592,6 +592,8 @@
 "Now" = "Sekarang";
 "CONFIRM TRANSFER" = "KONFIRMASI TRANSFER";
 "Choose Bank" = "Pilih Bank";
+"Beneficiary Type" = "Type Penerima";
+"Resident Status" = "Status Kependudukan";
 "Destination Account No" = "No Rekening Tujuan";
 "Amount (Rp)" = "Jumlah Besaran (Rp)";
 "Transaction Limit" = "Limit Transaksi";

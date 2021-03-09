@@ -8,6 +8,8 @@
 import Foundation
 
 struct KartuKuDesignViewModel {
+    var maxIbftPerTrans, limitOnUs, limitWd, limitPayment: String?
+    var limitPurchase, limitIbft: String?
     var cardFlag, kodepos, provinsi, kabupatenKota: String
     var kecamatan, kelurahan, rw, rt: String
     var postalAddress, accountNumber, nameOnCard, cardNo: String

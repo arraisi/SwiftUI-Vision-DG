@@ -11,6 +11,14 @@ import Combine
 class ProfileViewModel: ObservableObject {
     @Published var isLoading: Bool = true
     
+    // Limit
+    @Published var maxIbftPerTrans: String = ""
+    @Published var limitOnUs: String = ""
+    @Published var limitWd: String = ""
+    @Published var limitPayment: String = ""
+    @Published var limitPurchase: String = ""
+    @Published var limitIbft: String = ""
+    
     @Published var name: String = ""
     @Published var balance: String = ""
     @Published var nameOnCard: String = ""
@@ -66,6 +74,13 @@ extension ProfileViewModel {
                 self.nameOnCard = response.products.last!.productName ?? ""
                 self.balance = response.chipProfileDto?.last!.balance ?? "0"
                 self.classCode = response.chipProfileDto?.last?.classCode ?? ""
+                
+                self.maxIbftPerTrans = response.chipProfileDto?.last?.maxIbftPerTrans ?? "0"
+                self.limitOnUs = response.chipProfileDto?.last?.limitOnUs ?? "1000000"
+                self.limitWd = response.chipProfileDto?.last?.limitWd ?? "0"
+                self.limitPayment = response.chipProfileDto?.last?.limitPayment ?? "0"
+                self.limitPurchase = response.chipProfileDto?.last?.limitPurchase ?? "0"
+                self.limitIbft = response.chipProfileDto?.last?.limitIbft ?? "0"
                 
                 if let _chipProfileDto = response.chipProfileDto?.last {
                     self.cardName = _chipProfileDto.nameOnCard

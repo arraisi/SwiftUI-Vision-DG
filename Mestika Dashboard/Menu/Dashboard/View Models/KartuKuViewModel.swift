@@ -37,6 +37,12 @@ extension KartuKuViewModel {
                 self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
                     print(data.cardDesign)
                     return KartuKuDesignViewModel(
+                        maxIbftPerTrans: data.maxIbftPerTrans ?? "0",
+                        limitOnUs: data.limitOnUs ?? "0",
+                        limitWd: data.limitWd ?? "0",
+                        limitPayment: data.limitPayment ?? "0",
+                        limitPurchase: data.limitPurchase ?? "0",
+                        limitIbft: data.limitIbft ?? "0",
                         cardFlag: data.cardFlag,
                         kodepos: data.kodepos,
                         provinsi: data.provinsi,
@@ -108,7 +114,7 @@ extension KartuKuViewModel {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
@@ -151,7 +157,7 @@ extension KartuKuViewModel {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
@@ -194,7 +200,7 @@ extension KartuKuViewModel {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
@@ -237,13 +243,59 @@ extension KartuKuViewModel {
                 switch error {
                 case .custom(code: 401):
                     self.code = "401"
-                    self.message = "Invalid Pin Trx"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "400"
                     self.message = "Message parametr tidak valid"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - LIMIT KARTU KU
+    func updateLimitKartuKu(data: LimitKartuKuModel, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        KartuKuService.shared.putLimitKartuKu(data: data) { result in
+            switch result {
+            case .success(let response):
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "PIN Transaksi Salah"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "400"
+                    self.message = "Message parametr tidak valid"
+                case .custom(code: 500):
+                    self.code = "500"
+                    self.message = "Internal Server Error"
                 default:
                     self.message = "Internal Server Error"
                 }
