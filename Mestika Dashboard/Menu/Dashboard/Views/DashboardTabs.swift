@@ -13,6 +13,22 @@ struct DashboardTabs: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    /* Carousel Variables */
+    @State var cards: [KartuKuDesignViewModel] = []
+    @State var firstOffset : CGFloat = 0
+    @State var offset : CGFloat = 0
+    @State var count : CGFloat = 0
+    
+    /* Card Variables */
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 140 // 100 is amount padding left and right
+    let itemHeight:CGFloat = 197
+    let itemGapHeight:CGFloat = 10
+    let itemGapWidth:CGFloat = 0.14
+    
+    /* Loading and Data Variable */
+    @State var isLoading : Bool = true
+    @State var kartkuKu = KartuKuResponse()
+    
     
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -23,15 +39,13 @@ struct DashboardTabs: View {
     @State var productName: String = "-"
     @State var accountNumber: String = "-"
     
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 140 // 100 is amount padding left and right
-    let itemHeight:CGFloat = 197
-    
     @Binding var cardNo: String
     @State var cardName: String = "-"
     @Binding var sourceNumber: String
     
+    @State var isDetailCard: Bool = false
+    
     @State var isHiddenBalance: Bool = false
-    @State var isLoading: Bool = true
     
     var body: some View {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
@@ -63,50 +77,35 @@ struct DashboardTabs: View {
                     }
                     .padding([.leading, .trailing], 15)
                     
-                    ZStack {
+                    HStack(spacing: itemWidth * itemGapWidth) {
                         
-                        WebImage(url: URL(string: "http://eagle-dev.apps.visiondg.bankmestika.co.id/image/ecdd770829c5d1d75a27d45bccea1121.png"))
-                            .onSuccess { image, data, cacheType in
-                                // Success
-                            }
-                            .placeholder {
-                                Rectangle().foregroundColor(.gray).opacity(0.5)
-                                    .frame(width: itemWidth, height: itemHeight)
-                            }
-                            .resizable()
-                            .indicator(.activity) // Activity Indicator
-                            .transition(.fade(duration: 0.5)) // Fade Transition with duration
-                            .scaledToFill()
-                            .frame(width: itemWidth, height: itemHeight)
-                        
-                        HStack {
+                        ForEach(self.cards, id: \.id) { card in
                             
-                            VStack(alignment: .leading) {
-                                Text("GOLD")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.bold)
-                                
-                                Text(self.accountNumber)
-                                    .font(.caption2)
-                                    .foregroundColor(Color.white)
-                                    .padding(.top, 15)
-                                
-                                Text(self.cardNo)
-                                    .font(.caption2)
-                                    .foregroundColor(Color.white)
-                                    .padding(.top, 10)
-                                
-                                Text(self.cardName)
-                                    .font(.subheadline)
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.bold)
+                            NavigationLink(
+                                destination: MyCardDashboardView(cards: .constant(card))) {
+                                CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: true)
+                                    .offset(x: self.offset)
+                                    .highPriorityGesture(
+                                        
+                                        DragGesture()
+                                            .onChanged({ (value) in
+                                                
+                                                if value.translation.width > 0 {
+                                                    self.offset = value.location.x
+                                                }
+                                                else{
+                                                    self.offset = value.location.x - self.itemWidth
+                                                }
+                                                
+                                            })
+                                            .onEnded(onDragEnded)
+                                    )
                             }
-                            .padding(.leading, 60)
-                            
-                            Spacer()
                         }
                     }
+                    .animation(.spring())
+                    .frame(width: itemWidth)
+                    .offset(x: self.firstOffset)
                 }
                 
 //                ListEwalletView()
@@ -131,6 +130,7 @@ struct DashboardTabs: View {
             print("GET")
             getUserInfo()
             getProfile()
+            getListKartuKu()
         }
     }
     
@@ -252,5 +252,72 @@ struct DashboardTabs: View {
         self.user.forEach { (data) in
             self.username = data.namaLengkapFromNik!
         }
+    }
+    
+    @ObservedObject var kartuKuVM = KartuKuViewModel()
+    private func getListKartuKu() {
+        self.kartuKuVM.getListKartuKu { success in
+            if success {
+                self.isLoading = false
+                self.cards = self.kartuKuVM.listKartuKu
+                self.refreshCarousel()
+            }
+            
+            if !success {
+                self.isLoading = false
+            }
+        }
+    }
+    
+    // MARK: - REFRESH THE CARD ITEM OFFSET
+    private func refreshCarousel() {
+        let offsetFirstItem = ((self.itemWidth + (itemWidth*0.08)) * CGFloat(self.cards.count / 2))
+        let offsetMiddleItem = (self.cards.count % 2 == 0 ? ((self.itemWidth + (UIScreen.main.bounds.width*0.15)) / 2) : 0)
+        self.firstOffset = offsetFirstItem - offsetMiddleItem
+        
+        if cards.count > 0 {
+            self.cards[0].isShow = true
+        }
+    }
+    
+    // MARK: - ON DRAG ENDED
+    private func onDragEnded(value: DragGesture.Value) {
+        if value.translation.width > 0 {
+            // dragThreshold -> distance of drag to next item
+            if value.translation.width > self.itemWidth / 4 && Int(self.count) != 0 {
+                
+                self.count -= 1
+                self.updateHeight(value: Int(self.count))
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
+            }
+            else{
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
+            }
+            
+        }
+        else{
+            // dragThreshold -> distance of drag to next item
+            if -value.translation.width > self.itemWidth / 4 && Int(self.count) !=  (self.cards.count - 1){
+                
+                self.count += 1
+                self.updateHeight(value: Int(self.count))
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
+            }
+            else{
+                
+                self.offset = -((self.itemWidth + (itemWidth*itemGapWidth)) * self.count)
+            }
+            
+        }
+    }
+    
+    // MARK: - UPDATE HEIGHT
+    private func updateHeight(value : Int){
+        
+        for i in 0..<cards.count{
+            cards[i].isShow = false
+        }
+        
+        cards[value].isShow = true
     }
 }

@@ -56,19 +56,22 @@ struct CardView: View {
                     }
                     .padding(.bottom)
                     
-                    HStack{
-                        Text(card.cardNo)
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-Regular", size: 12))
-                        Spacer()
+                    VStack {
+                        HStack{
+                            Text(card.cardNo)
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-Regular", size: 12))
+                            Spacer()
+                        }
+                        
+                        HStack{
+                            Text(card.accountNumber)
+                                .foregroundColor(.white)
+                                .font(.custom("Montserrat-Regular", size: 12))
+                            Spacer()
+                        }
                     }
-                    
-                    HStack{
-                        Text(card.accountNumber)
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-Regular", size: 12))
-                        Spacer()
-                    }
+                    .padding(.top, 10)
                     
                     HStack{
                         Text(card.nameOnCard)
