@@ -265,7 +265,7 @@ struct FormChangePinCardView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text(NSLocalizedString("New Pin not change, please retype it".localized(language), comment: ""))
+            Text("New Pin not change, please retype it".localized(language))
                 .fontWeight(.bold)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
@@ -274,7 +274,7 @@ struct FormChangePinCardView: View {
             Button(action: {
                 self.showModalSamePin = false
             }) {
-                Text(NSLocalizedString("Back".localized(language), comment: ""))
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .fontWeight(.bold)
