@@ -70,7 +70,9 @@ struct CardDamageView: View {
                         NavigationLink(
                             destination: CardDamageAddressInputView().environmentObject(brokenData),
                             isActive: $showConfirmationPIN,
-                            label: {})
+                            label: {}
+                        )
+                        .isDetailLink(false)
                         
                         Button(
                             action: {

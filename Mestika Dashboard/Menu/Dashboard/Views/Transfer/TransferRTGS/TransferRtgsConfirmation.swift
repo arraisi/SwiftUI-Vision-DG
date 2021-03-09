@@ -15,6 +15,8 @@ struct TransferRtgsConfirmation: View {
     @EnvironmentObject var transferData: TransferOffUsModel
     
     @State var adminFeeCtrl = "Rp. 1.000,00"
+    @State var nominalCtrl: String = ""
+    @State var totalTransferCtrl: String = ""
     
     var body: some View {
         ZStack {
@@ -35,6 +37,8 @@ struct TransferRtgsConfirmation: View {
         .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
         .onAppear {
             self.transferData.addressOfDestination = self.transferData.notes
+            self.nominalCtrl = "Rp " + "\(self.transferData.amount.thousandSeparator())"
+            self.totalTransferCtrl = "Rp " + "\(self.transferData.amount.thousandSeparator())"
         }
     }
     
@@ -341,7 +345,7 @@ struct TransferRtgsConfirmation: View {
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Nominal Transfer", text: self.$transferData.amount, onEditingChanged: { changed in
+                    TextField("Nominal Transfer", text: self.$nominalCtrl, onEditingChanged: { changed in
                         print("\(self.$transferData.destinationNumber)")
                     })
                     .disabled(true)
@@ -401,7 +405,7 @@ struct TransferRtgsConfirmation: View {
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Total Transactions".localized(language), text: self.$transferData.amount, onEditingChanged: { changed in
+                    TextField("Total Transactions".localized(language), text: self.$totalTransferCtrl, onEditingChanged: { changed in
                     })
                     .disabled(true)
                     .frame(height: 20)

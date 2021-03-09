@@ -98,13 +98,13 @@ struct CardDamageAddressInputView: View {
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(10)
                                         
-                                        //                                        Button(action:{
-                                        //                                            searchAddress()
-                                        //                                        }, label: {
-                                        //                                            Image(systemName: "magnifyingglass")
-                                        //                                                .font(Font.system(size: 20))
-                                        //                                                .foregroundColor(Color(hex: "#707070"))
-                                        //                                        })
+                                        Button(action:{
+                                            searchAddress()
+                                        }, label: {
+                                            Image(systemName: "magnifyingglass")
+                                                .font(Font.system(size: 20))
+                                                .foregroundColor(Color(hex: "#707070"))
+                                        })
                                         
                                     }
                                     
@@ -184,6 +184,7 @@ struct CardDamageAddressInputView: View {
                     label: {
                         EmptyView()
                     })
+                    .isDetailLink(false)
                 
                 VStack {
                     Button(action: {

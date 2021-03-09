@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CardDamageDescriptionInputView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -20,6 +22,8 @@ struct CardDamageDescriptionInputView: View {
     /* Boolean for Show Modal */
     @State var showingModal = false
     @State var showingModalError = false
+    
+    @State var isLoading: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -146,7 +150,7 @@ struct CardDamageDescriptionInputView: View {
     }
     
     var disableForm: Bool {
-        if (self.cardNo.isNotEmpty() && self.pinAtm.isNotEmpty()) {
+        if (self.cardNo.isNotEmpty() && self.pinAtm.isNotEmpty() && self.isLoading == false) {
             return false
         }
         return true
@@ -181,13 +185,17 @@ struct CardDamageDescriptionInputView: View {
                 Spacer()
             }
             
-            NavigationLink(destination: BottomNavigationView()) {
-                Text("BACK".localized(language))
-                    .font(.custom("Montserrat-SemiBold", size: 12))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                
-            }
+            Button(
+                action: {
+                    self.appState.moveToTransfer = true
+                },
+                label: {
+                    Text("BACK".localized(language))
+                        .font(.custom("Montserrat-SemiBold", size: 12))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+            )
             .frame(height: 50)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
@@ -249,14 +257,17 @@ struct CardDamageDescriptionInputView: View {
     
     @ObservedObject var kartKuVM = KartuKuViewModel()
     func brokenKartuKu() {
+        self.isLoading = true
         self.kartKuVM.brokenKartuKu(data: cardData) { success in
             if success {
                 print("SUCCESS")
+                self.isLoading = false
                 self.showingModal = true
             }
             
             if !success {
                 print("!SUCCESS")
+                self.isLoading = false
                 self.showingModalError = true
             }
         }

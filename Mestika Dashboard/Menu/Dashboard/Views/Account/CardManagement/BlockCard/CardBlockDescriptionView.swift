@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CardBlockDescriptionView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -173,17 +175,22 @@ struct CardBlockDescriptionView: View {
             }
             .padding(.top, 25)
             
-            NavigationLink(destination: BottomNavigationView()) {
-                Text("BACK".localized(language))
-                    .font(.custom("Montserrat-SemiBold", size: 12))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                
-            }
+            Button(
+                action: {
+                    self.appState.moveToTransfer = true
+                },
+                label: {
+                    Text("BACK".localized(language))
+                        .font(.custom("Montserrat-SemiBold", size: 12))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+            )
             .frame(height: 50)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.top, 25)
+
         }
         .padding(25)
         .frame(width: UIScreen.main.bounds.width - 60)

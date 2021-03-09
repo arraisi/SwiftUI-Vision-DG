@@ -132,6 +132,7 @@ struct DetailKartuAktifView: View {
                         Spacer()
                     }
                 })
+                .isDetailLink(false)
             
             NavigationLink(
                 destination: CardDamageView(card: card),
@@ -155,6 +156,7 @@ struct DetailKartuAktifView: View {
                         Spacer()
                     }
                 })
+                .isDetailLink(false)
             
         }
         .padding(.top, 25)
