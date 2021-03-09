@@ -169,7 +169,7 @@ struct CardDamageDescriptionInputView: View {
             
             HStack {
                 
-                Text(NSLocalizedString("We have successfully kept your ATM card damage report / complaint".localized(language), comment: ""))
+                Text("We have successfully kept your ATM card damage report / complaint".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -179,7 +179,7 @@ struct CardDamageDescriptionInputView: View {
             
             
             HStack {
-                Text(NSLocalizedString("Thank you for sending information about the damage to your card to us. Please wait a few moments, we will immediately contact you to follow up on your report.".localized(language), comment: ""))
+                Text("Thank you for sending information about the damage to your card to us. Please wait a few moments, we will immediately contact you to follow up on your report.".localized(language))
                     .font(.custom("Montserrat-Regular", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -190,7 +190,7 @@ struct CardDamageDescriptionInputView: View {
                     self.appState.moveToTransfer = true
                 },
                 label: {
-                    Text(NSLocalizedString("BACK".localized(language), comment: ""))
+                    Text("BACK".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -218,7 +218,7 @@ struct CardDamageDescriptionInputView: View {
                     .foregroundColor(Color(hex: "#F32424"))
                 
                 
-                Text(NSLocalizedString("Wrong ATM PIN".localized(language), comment: ""))
+                Text("Wrong ATM PIN".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#F32424"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -227,7 +227,7 @@ struct CardDamageDescriptionInputView: View {
             .padding(.top, 25)
             
             HStack {
-                Text(NSLocalizedString("The ATM PIN you entered is wrong.".localized(language), comment: ""))
+                Text("The ATM PIN you entered is wrong.".localized(language))
                     .font(.custom("Montserrat-Light", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
@@ -238,7 +238,7 @@ struct CardDamageDescriptionInputView: View {
                     self.showingModalError = false
                 },
                 label: {
-                    Text("Kembali")
+                    Text("Back".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)

@@ -22,12 +22,12 @@ struct TransferRtgsScreen: View {
     // Variable List BANK
     @State private var bankSelector: String = "Choose Destination Bank".localized(LocalizationService.shared.language)
     
-    @State private var destinationType: String = NSLocalizedString("Receiver Type".localized(LocalizationService.shared.language), comment: "")
+    @State private var destinationType: String = "Receiver Type".localized(LocalizationService.shared.language)
     
-    @State private var citizenShipCtrl: String = NSLocalizedString("Citizenship".localized(LocalizationService.shared.language), comment: "")
+    @State private var citizenShipCtrl: String = "Citizenship".localized(LocalizationService.shared.language)
     
     // Variale Destination Type
-    var _listDestinationType = ["Personal", NSLocalizedString("Company".localized(LocalizationService.shared.language), comment: ""), NSLocalizedString("Group".localized(LocalizationService.shared.language), comment: ""), NSLocalizedString("Foundation".localized(LocalizationService.shared.language), comment: "")]
+    var _listDestinationType = ["Personal", "Company".localized(LocalizationService.shared.language), "Group".localized(LocalizationService.shared.language), "Foundation".localized(LocalizationService.shared.language)]
     
     // Variable Citizen Ship
     var _listCitizenShip = ["Resident", "Non Resident"]
@@ -355,7 +355,7 @@ struct TransferRtgsScreen: View {
             VStack {
                 HStack {
                     
-                    TextField(NSLocalizedString("Destination Name".localized(language), comment: ""), text: self.$destinationNameCtrl, onEditingChanged: { changed in
+                    TextField("Destination Name".localized(language), text: self.$destinationNameCtrl, onEditingChanged: { changed in
                         self.transferData.destinationName = self.destinationNameCtrl
                     })
                     .font(.subheadline)
@@ -398,7 +398,7 @@ struct TransferRtgsScreen: View {
                                 Text(destinationType)
                                     .font(.subheadline)
                                     .foregroundColor(.black)
-                                    .fontWeight(destinationType == NSLocalizedString("Receiver Type".localized(LocalizationService.shared.language), comment: "") ? .bold : .light)
+                                    .fontWeight(destinationType == "Receiver Type".localized(LocalizationService.shared.language) ? .bold : .light)
                             }
                             .padding()
                             
@@ -443,7 +443,7 @@ struct TransferRtgsScreen: View {
                             Text(citizenShipCtrl)
                                 .font(.subheadline)
                                 .foregroundColor(.black)
-                                .fontWeight(citizenShipCtrl == NSLocalizedString("Citizenship".localized(LocalizationService.shared.language), comment: "") ? .bold : .light)
+                                .fontWeight(citizenShipCtrl == "Citizenship".localized(LocalizationService.shared.language) ? .bold : .light)
                         }
                         .padding()
                         
@@ -979,7 +979,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     var disableForm: Bool {
-        if (self.destinationNameCtrl.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != NSLocalizedString("Receiver Type".localized(language), comment: "") && self.citizenShipCtrl != NSLocalizedString("Citizenship".localized(language), comment: "")) {
+        if (self.destinationNameCtrl.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
             return false
         }
         return true

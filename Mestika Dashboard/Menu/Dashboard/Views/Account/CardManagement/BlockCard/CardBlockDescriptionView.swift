@@ -182,7 +182,7 @@ struct CardBlockDescriptionView: View {
                     self.appState.moveToTransfer = true
                 },
                 label: {
-                    Text(NSLocalizedString("BACK".localized(language), comment: ""))
+                    Text("BACK".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -211,7 +211,7 @@ struct CardBlockDescriptionView: View {
                     .foregroundColor(Color(hex: "#F32424"))
                 
                 
-                Text(NSLocalizedString("Wrong ATM PIN".localized(language), comment: ""))
+                Text("Wrong ATM PIN".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#F32424"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -220,7 +220,7 @@ struct CardBlockDescriptionView: View {
             .padding(.top, 25)
             
             HStack {
-                Text(NSLocalizedString("The ATM PIN you entered is wrong.".localized(language), comment: ""))
+                Text("The ATM PIN you entered is wrong.".localized(language))
                     .font(.custom("Montserrat-Light", size: 12))
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()

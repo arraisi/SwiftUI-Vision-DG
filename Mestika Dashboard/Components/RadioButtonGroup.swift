@@ -56,6 +56,8 @@ struct RadioButton: View {
                 
                 Text(label.localized(language))
                     .font(.custom("Montserrat-Regular", size: textSize))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.leading)
                 
                 Spacer()
                 

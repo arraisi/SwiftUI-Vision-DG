@@ -77,7 +77,7 @@ struct CardDamageAddressInputView: View {
                                 
                                 Group {
                                     HStack {
-                                        Text(NSLocalizedString("Address".localized(language), comment: ""))
+                                        Text("Address".localized(language))
                                             .font(Font.system(size: 12))
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color(hex: "#707070"))
@@ -88,7 +88,7 @@ struct CardDamageAddressInputView: View {
                                     
                                     HStack {
                                         
-                                        TextField(NSLocalizedString("Address".localized(language), comment: ""), text: $cardData.addressInput) { changed in
+                                        TextField("Address".localized(language), text: $cardData.addressInput) { changed in
                                         } onCommit: {
                                             self.addressInput = self.cardData.addressInput
                                         }
@@ -121,7 +121,7 @@ struct CardDamageAddressInputView: View {
                                 })
                                 .padding(.horizontal, 20)
                                 
-                                LabelTextField(value: $addressKelurahanInput, label: NSLocalizedString("Village".localized(language), comment: ""), placeHolder: NSLocalizedString("Village".localized(language), comment: ""), onEditingChanged: { (Bool) in
+                                LabelTextField(value: $addressKelurahanInput, label: "Village".localized(language), placeHolder: "Village".localized(language), onEditingChanged: { (Bool) in
                                     print("on edit")
                                     cardData.addressKelurahanInput = self.addressKelurahanInput
                                 }, onCommit: {
@@ -130,7 +130,7 @@ struct CardDamageAddressInputView: View {
                                 })
                                 .padding(.horizontal, 20)
                                 
-                                LabelTextField(value: $addressKecamatanInput, label: NSLocalizedString("Sub-district".localized(language), comment: ""), placeHolder: NSLocalizedString("Sub-district".localized(language), comment: ""), onEditingChanged: { (Bool) in
+                                LabelTextField(value: $addressKecamatanInput, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language), onEditingChanged: { (Bool) in
                                     print("on edit")
                                     cardData.addressKecamatanInput = self.addressKecamatanInput
                                 }, onCommit: {
@@ -141,13 +141,13 @@ struct CardDamageAddressInputView: View {
                                 
                                 VStack(alignment: .leading) {
                                     
-                                    Text(NSLocalizedString("Postal code".localized(language), comment: ""))
+                                    Text("Postal code".localized(language))
                                         .font(Font.system(size: 12))
                                         .fontWeight(.semibold)
                                         .foregroundColor(Color(hex: "#707070"))
                                     
                                     HStack {
-                                        TextField(NSLocalizedString("Postal code".localized(language), comment: ""), text: $addressKodePosInput) { change in
+                                        TextField("Postal code".localized(language), text: $addressKodePosInput) { change in
                                         } onCommit: {
                                             print("on commit")
                                             cardData.addressPostalCodeInput = self.addressKodePosInput
@@ -190,7 +190,7 @@ struct CardDamageAddressInputView: View {
                     Button(action: {
                         self.isRoute = true
                     }, label: {
-                        Text(NSLocalizedString("Submit Data".localized(language), comment: ""))
+                        Text("Submit Data".localized(language))
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                             .font(.system(size: 13))
@@ -206,27 +206,27 @@ struct CardDamageAddressInputView: View {
                 }
                 .background(Color.white)
             }
-
+            
         }
         .navigationBarTitle("Kerusakan Kartu", displayMode: .inline)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             print("ON APPEAR")
-//            user.forEach { data in
-//                print(data.addressInput!)
-//                cardData.addressInput = data.addressInput!
-//                cardData.addressPostalCodeInput = data.kodePosKeluarga!
-//                cardData.addressKecamatanInput = data.addressKecamatanInput!
-//                cardData.addressKelurahanInput = data.addressKelurahanInput!
-//                cardData.addressRtRwInput = "02 / 03"
-//
-//                self.addressInput = data.addressInput!
-//                self.addressRtRwInput = "02 / 03"
-//                self.addressKelurahanInput = data.addressKelurahanInput!
-//                self.addressKecamatanInput = data.addressKecamatanInput!
-//                self.addressKodePosInput = data.kodePosKeluarga!
-//            }
-//            getProfile()
+            //            user.forEach { data in
+            //                print(data.addressInput!)
+            //                cardData.addressInput = data.addressInput!
+            //                cardData.addressPostalCodeInput = data.kodePosKeluarga!
+            //                cardData.addressKecamatanInput = data.addressKecamatanInput!
+            //                cardData.addressKelurahanInput = data.addressKelurahanInput!
+            //                cardData.addressRtRwInput = "02 / 03"
+            //
+            //                self.addressInput = data.addressInput!
+            //                self.addressRtRwInput = "02 / 03"
+            //                self.addressKelurahanInput = data.addressKelurahanInput!
+            //                self.addressKecamatanInput = data.addressKecamatanInput!
+            //                self.addressKodePosInput = data.kodePosKeluarga!
+            //            }
+            //            getProfile()
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -240,7 +240,7 @@ struct CardDamageAddressInputView: View {
     func addressSuggestionPopUp() -> some View {
         VStack {
             HStack {
-                Text(NSLocalizedString("Address".localized(language), comment: ""))
+                Text("Address".localized(language))
                     .fontWeight(.bold)
                     .font(.system(size: 19))
                     .foregroundColor(Color(hex: "#232175"))
@@ -249,7 +249,7 @@ struct CardDamageAddressInputView: View {
             
             HStack {
                 
-                TextField(NSLocalizedString("Address".localized(language), comment: ""), text: $addressInput)
+                TextField("Address".localized(language), text: $addressInput)
                     .font(Font.system(size: 14))
                     .frame(height: 36)
                 
