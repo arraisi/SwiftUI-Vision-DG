@@ -46,7 +46,9 @@ struct CardBlockView: View {
                         NavigationLink(
                             destination: CardBlockDescriptionView().environmentObject(brokenData),
                             isActive: $showConfirmationPIN,
-                            label: {})
+                            label: {}
+                        )
+                        .isDetailLink(false)
                         
                         
                         Button (action: {

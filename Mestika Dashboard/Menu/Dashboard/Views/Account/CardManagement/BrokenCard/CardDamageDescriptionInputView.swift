@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CardDamageDescriptionInputView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -181,13 +183,17 @@ struct CardDamageDescriptionInputView: View {
                 Spacer()
             }
             
-            NavigationLink(destination: BottomNavigationView()) {
-                Text(NSLocalizedString("BACK".localized(language), comment: ""))
-                    .font(.custom("Montserrat-SemiBold", size: 12))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                
-            }
+            Button(
+                action: {
+                    self.appState.moveToTransfer = true
+                },
+                label: {
+                    Text(NSLocalizedString("BACK".localized(language), comment: ""))
+                        .font(.custom("Montserrat-SemiBold", size: 12))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                }
+            )
             .frame(height: 50)
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)

@@ -184,6 +184,7 @@ struct CardDamageAddressInputView: View {
                     label: {
                         EmptyView()
                     })
+                    .isDetailLink(false)
                 
                 VStack {
                     Button(action: {
