@@ -141,15 +141,15 @@ struct VerificationPINView: View {
                                     
                                     Spacer()
                                     
-                                    Button(action: {
-                                        self.secured.toggle()
-                                    }) {
-                                        Image(systemName: "eye.slash")
-                                            .font(.custom("Montserrat-Light", size: 14))
-                                            .frame(width: 80, height: 50)
-                                            .cornerRadius(10)
-                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    }
+//                                    Button(action: {
+//                                        self.secured.toggle()
+//                                    }) {
+//                                        Image(systemName: "eye.slash")
+//                                            .font(.custom("Montserrat-Light", size: 14))
+//                                            .frame(width: 80, height: 50)
+//                                            .cornerRadius(10)
+//                                            .foregroundColor(Color(hex: "#3756DF"))
+//                                    }
                                 }
                             }
                             .background(Color.gray.opacity(0.1))

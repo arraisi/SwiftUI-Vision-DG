@@ -74,7 +74,7 @@ struct CardBlockView: View {
                 .padding(.top, 30)
             }
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
-            .navigationBarTitle(NSLocalizedString("Block Card".localized(language), comment: ""), displayMode: .inline)
+            .navigationBarTitle("Block Card".localized(language), displayMode: .inline)
             .navigationBarItems(trailing:  NavigationLink(destination: CardManagementScreen(), label: {
                 Text("Cancel")
             }))
@@ -108,7 +108,7 @@ struct CardBlockView: View {
             
             HStack {
                 
-                Text(NSLocalizedString("Success, Your ATM Card Is Back Active".localized(language), comment: ""))
+                Text("Success, Your ATM Card Is Back Active".localized(language))
                     .font(.custom("Montserrat-Bold", size: 18))
                     .foregroundColor(Color(hex: "#2334D0"))
                     .fixedSize(horizontal: false, vertical: true)
@@ -117,7 +117,7 @@ struct CardBlockView: View {
             .padding(.top, 25)
             
             NavigationLink(destination: BottomNavigationView()) {
-                Text(NSLocalizedString("BACK".localized(language), comment: ""))
+                Text("BACK".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 50)
