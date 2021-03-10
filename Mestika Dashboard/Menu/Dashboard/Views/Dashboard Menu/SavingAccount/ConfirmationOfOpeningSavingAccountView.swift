@@ -87,6 +87,12 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 
                                 TextField("0", text: $depositBalance)
                                     .font(.custom("Montserrat-Bold", size: 34))
+                                    .onReceive(depositBalance.publisher.collect()) {
+                                        let amountString = String($0.prefix(13))
+                                        let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                        self.depositBalance = cleanAmount.thousandSeparator()
+                                    }
+                                    .keyboardType(.numberPad)
                                 Spacer()
                             }
                             .foregroundColor(Color("DarkStaleBlue"))
@@ -133,7 +139,8 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     
                     SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: "100000")
                 }
-                .padding(.vertical, 30)
+                .padding(.top, 20)
+                .padding(.bottom, 85)
                 
             }
             
@@ -156,7 +163,10 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                 .background(Color.white)
                 .shadow(color: Color("StaleBlue").opacity(0.2), radius: 10, x: 2, y: 0)
             }
-        }        
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
     }
     
     func SavingAccountDetailRow(label: String, value: String) -> some View {
