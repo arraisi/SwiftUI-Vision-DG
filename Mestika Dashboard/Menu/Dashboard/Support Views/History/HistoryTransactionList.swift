@@ -11,11 +11,21 @@ struct HistoryTransactionList: View {
     var histories: [HistoryLists]
     
     var body: some View {
-        List(histories, id: \.traceNo) { item in
+        
+        if (histories.count < 1) {
             
-            HistoryTransactionRow(data: item)
+            Text("Tidak ada Histori")
+                .font(.custom("Montserrat-SemiBold", size: 14))
+                .padding(.top, 25)
+            
+        } else {
+            ForEach(histories, id: \.traceNo) { item in
+                
+                HistoryTransactionRow(data: item)
+                    .padding(.horizontal)
+            }
+            .listStyle(PlainListStyle())
         }
-        .listStyle(PlainListStyle())
     }
 }
 

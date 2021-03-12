@@ -36,6 +36,7 @@ struct DashboardTabs: View {
     
     @State var username: String = ""
     @State var balance: String = ""
+    @State var balanceStatus: String = ""
     @State var productName: String = "-"
     @State var accountNumber: String = "-"
     
@@ -48,7 +49,7 @@ struct DashboardTabs: View {
     @State var isHiddenBalance: Bool = false
     
     var body: some View {
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false, content: {
+        ScrollView(.vertical, showsIndicators: false, content: {
             
             GeometryReader { geometry in
                 Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
@@ -85,21 +86,21 @@ struct DashboardTabs: View {
                                 destination: MyCardDashboardView(cards: .constant(card))) {
                                 CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: true)
                                     .offset(x: self.offset)
-                                    .highPriorityGesture(
-                                        
-                                        DragGesture()
-                                            .onChanged({ (value) in
-                                                
-                                                if value.translation.width > 0 {
-                                                    self.offset = value.location.x
-                                                }
-                                                else{
-                                                    self.offset = value.location.x - self.itemWidth
-                                                }
-                                                
-                                            })
-                                            .onEnded(onDragEnded)
-                                    )
+//                                    .highPriorityGesture(
+//
+//                                        DragGesture()
+//                                            .onChanged({ (value) in
+//
+//                                                if value.translation.width > 0 {
+//                                                    self.offset = value.location.x
+//                                                }
+//                                                else{
+//                                                    self.offset = value.location.x - self.itemWidth
+//                                                }
+//
+//                                            })
+//                                            .onEnded(onDragEnded)
+//                                    )
                             }
                         }
                     }
@@ -128,6 +129,7 @@ struct DashboardTabs: View {
         .edgesIgnoringSafeArea(.top)
         .onAppear {
             print("GET")
+            getAccountBalance()
             getUserInfo()
             getProfile()
             getListKartuKu()
@@ -189,15 +191,28 @@ struct DashboardTabs: View {
                                     .font(.caption)
                                     .fontWeight(.ultraLight)
                                 
-                                HStack {
-                                    Text("Rp.")
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color(hex: "#2334D0"))
-                                    
-                                    Text(balance.thousandSeparator())
-                                        .font(.title3)
-                                        .bold()
-                                        .foregroundColor(Color(hex: "#2334D0"))
+                                if (self.balanceStatus == "D") {
+                                    HStack {
+                                        Text("Rp.")
+                                            .fontWeight(.light)
+                                            .foregroundColor(.red)
+                                        
+                                        Text("- " + balance.thousandSeparator())
+                                            .font(.title3)
+                                            .bold()
+                                            .foregroundColor(.red)
+                                    }
+                                } else {
+                                    HStack {
+                                        Text("Rp.")
+                                            .fontWeight(.light)
+                                            .foregroundColor(Color(hex: "#2334D0"))
+                                        
+                                        Text(balance.thousandSeparator())
+                                            .font(.title3)
+                                            .bold()
+                                            .foregroundColor(Color(hex: "#2334D0"))
+                                    }
                                 }
                             }
                         }
@@ -234,12 +249,25 @@ struct DashboardTabs: View {
                 print("Name \(self.profileVM.name)")
                 print(self.profileVM.balance)
                 self.username = self.profileVM.name
-                self.balance = self.profileVM.balance
                 self.productName = self.profileVM.nameOnCard
                 self.accountNumber = self.profileVM.accountNumber
                 
                 self.cardNo = self.profileVM.cardNo
                 self.cardName = self.profileVM.cardName
+            }
+            
+            if !success {
+                self.isLoading = false
+            }
+        }
+    }
+    
+    func getAccountBalance() {
+        self.profileVM.getAccountBalance { success in
+            if success {
+                self.isLoading = false
+                self.balance = self.profileVM.balance
+                self.balanceStatus = self.profileVM.creditDebit
             }
             
             if !success {

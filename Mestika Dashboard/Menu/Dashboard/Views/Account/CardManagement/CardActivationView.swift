@@ -40,6 +40,11 @@ struct CardActivationView: View {
     
     @State private var isLoading: Bool = false
     
+    @State var tryCount = 0
+    @State private var timeRemainingBtn = 0
+    
+    @State var showingModal = false
+    
     var disableForm: Bool {
         noCvvCtrl.count < 3 || pinCtrl.count < 6 || cPinCtrl.count < 6
     }
@@ -59,7 +64,7 @@ struct CardActivationView: View {
                             createNewPinCard
                             
                             NavigationLink(
-                                destination: CardPinVerificationView(unLocked: false).environmentObject(activateData),
+                                destination: CardPinVerificationView(unLocked: false, tryCount: .constant(tryCount)).environmentObject(activateData),
                                 isActive: self.$nextView,
                                 label: {
                                     EmptyView()
@@ -71,8 +76,16 @@ struct CardActivationView: View {
                                 
                                 if (pinCtrl != cPinCtrl) {
                                     disableIncorrectPin = false
+                                } else if (!isPINValidated(with: pinCtrl)) {
+                                    self.showingModal = true
                                 } else  {
-                                    self.nextView = true
+                                    
+                                    if (self.tryCount >= 3) {
+                                        self.isShowingWrong3TimeCvv = true
+                                    } else {
+                                        self.nextView = true
+                                    }
+                                    
                                 }
                             }, label: {
                                 Text("ATM CARD ACTIVATION".localized(language))
@@ -90,7 +103,7 @@ struct CardActivationView: View {
                     })
                 }
                 
-                if self.isShowingSuccess || self.isShowingWrongCvv || self.isShowingWrong3TimeCvv {
+                if self.isShowingSuccess || self.isShowingWrongCvv || self.isShowingWrong3TimeCvv || self.showingModal {
                     ModalOverlay(tapAction: { withAnimation {} })
                         .edgesIgnoringSafeArea(.all)
                 }
@@ -105,6 +118,7 @@ struct CardActivationView: View {
             UIApplication.shared.endEditing()
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ActivatedKartuKu"))) { obj in
+            self.tryCount += 1
             print("ON RESUME")
             
             self.isLoading = true
@@ -119,14 +133,17 @@ struct CardActivationView: View {
             
             activateKartuKu()
         }
-        .popup(isPresented: $isShowingWrongCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $isShowingWrongCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             modalCodeCVVWrong()
         }
-        .popup(isPresented: $isShowingWrong3TimeCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $isShowingWrong3TimeCvv, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             modalCodeCVVWrong3Time()
         }
         .popup(isPresented: $isShowingSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             modalSuccessActivation()
+        }
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            popupMessagePin()
         }
     }
     
@@ -401,6 +418,52 @@ struct CardActivationView: View {
         .cornerRadius(20)
     }
     
+    // MARK:- CREATE POPUP MESSAGE
+    func popupMessagePin() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("PIN consists of 6 characters, cannot be sequential from the same 6 digits".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {
+                self.showingModal = false
+            }) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    private func isPINValidated(with pin: String) -> Bool {
+        if pinCtrl.count < 6 {
+            return false
+        }
+        
+        let pattern = #"^(?!(.)\1{3})(?!19|20)(?!012345|123456|234567|345678|456789|567890|098765|987654|876543|765432|654321|543210)\d{6}$"#
+        
+        let pinPredicate = NSPredicate(format:"SELF MATCHES %@", pattern)
+        return pinPredicate.evaluate(with: pinCtrl)
+    }
+    
     func activateKartuKu() {
         self.kartKuVM.activateKartuKu(data: activateData) { success in
             if success {
@@ -415,6 +478,7 @@ struct CardActivationView: View {
                 self.isLoading = false
                 if (self.kartKuVM.code == "400") {
                     self.isShowingWrongCvv = true
+
                 }
             }
         }

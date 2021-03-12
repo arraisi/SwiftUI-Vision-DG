@@ -299,6 +299,7 @@
 		52FF49AB25F5C82900890AE6 /* LimitKartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF49AA25F5C82900890AE6 /* LimitKartuKuModel.swift */; };
 		52FF49B125F5CDCF00890AE6 /* CardLimitVerificationPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF49B025F5CDCF00890AE6 /* CardLimitVerificationPinView.swift */; };
 		52FF49B625F7635F00890AE6 /* MyCardDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF49B525F7635F00890AE6 /* MyCardDashboardView.swift */; };
+		52FF49BB25F8789100890AE6 /* AccountBalanceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF49BA25F8789000890AE6 /* AccountBalanceResponse.swift */; };
 		6122B75B05705A3ECDE3ACC8 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */; };
 		6122B7C41F1E61664F79B955 /* UserRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BDC652092BD3513781D5 /* UserRegistrationViewModel.swift */; };
 		6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122BCB85E2BD6C30BF0566A /* ListStatementView.swift */; };
@@ -717,6 +718,7 @@
 		52FF49AA25F5C82900890AE6 /* LimitKartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitKartuKuModel.swift; sourceTree = "<group>"; };
 		52FF49B025F5CDCF00890AE6 /* CardLimitVerificationPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitVerificationPinView.swift; sourceTree = "<group>"; };
 		52FF49B525F7635F00890AE6 /* MyCardDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardDashboardView.swift; sourceTree = "<group>"; };
+		52FF49BA25F8789000890AE6 /* AccountBalanceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceResponse.swift; sourceTree = "<group>"; };
 		5EAE1B20BC82E123A232853A /* Pods-Mestika DashboardTests.debugqa.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugqa.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugqa.xcconfig"; sourceTree = "<group>"; };
 		6122B9FFB6FE416DB5199318 /* UserRegistrationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegistrationResponse.swift; sourceTree = "<group>"; };
 		6122BA5B1988B1A3947FC58A /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
@@ -1795,6 +1797,7 @@
 				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
 				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
+				52FF49BA25F8789000890AE6 /* AccountBalanceResponse.swift */,
 			);
 			name = Models;
 			path = "Mestika Dashboard/Menu/Dashboard/Models";
@@ -2537,6 +2540,7 @@
 				C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */,
 				C0733FBF25EE25320034689F /* SavingAccountView.swift in Sources */,
 				C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */,
+				52FF49BB25F8789100890AE6 /* AccountBalanceResponse.swift in Sources */,
 				525FA10F25525DA8007EADCB /* OffsetKey.swift in Sources */,
 				5264ADF6255E75BD000565D5 /* ErrorResponse.swift in Sources */,
 				C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */,

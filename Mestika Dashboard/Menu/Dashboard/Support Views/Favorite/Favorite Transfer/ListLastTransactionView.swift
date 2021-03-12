@@ -38,8 +38,12 @@ struct ListLastTransactionView: View {
                     .padding(.horizontal, 10)
                     .padding(.bottom, 10)
                 
-                if isLoading {
-                    ProgressView()
+                if (self.favoritVM.lastTransaction.count < 1) {
+                    
+                    Text("Tidak ada Transaksi")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .padding(.top, 25)
+                    
                 } else {
                     ScrollView(showsIndicators: false) {
                         ForEach(self.favoritVM.lastTransaction, id: \.trace) { data in
@@ -47,19 +51,20 @@ struct ListLastTransactionView: View {
                                 ZStack {
                                     Circle()
                                         .fill(data.sign == "D" ? Color.red : Color.green)
-                                        .frame(width: 30, height: 30)
+                                        .frame(width: 25, height: 25)
                                     
                                     Text("\(data.sign)")
                                         .foregroundColor(.white)
                                         .fontWeight(.heavy)
+                                        .font(.caption)
                                 }
                                 
                                 VStack(alignment: .leading) {
                                     Text("\(data.date.subStringRange(from: 6, to: 8)) - \(data.date.subStringRange(from: 4, to: 6)) - \(data.date.subStringRange(from: 0, to: 4))")
-                                        .font(.caption2)
+                                        .font(.system(size: 12))
                                     
                                     Text("\(data.historyListDescription)")
-                                        .font(.subheadline)
+                                        .font(.system(size: 12))
                                 }
                                 
                                 Spacer()
@@ -68,19 +73,19 @@ struct ListLastTransactionView: View {
                                     
                                     if (data.sign == "D") {
                                         Text("- Rp.")
-                                            .font(.subheadline)
+                                            .font(.system(size: 12))
                                             .foregroundColor(.red)
                                         
                                         Text("\(data.amount.thousandSeparator())")
-                                            .font(.subheadline)
+                                            .font(.system(size: 12))
                                             .foregroundColor(.red)
                                     } else {
                                         Text("+ Rp.")
-                                            .font(.subheadline)
+                                            .font(.system(size: 12))
                                             .foregroundColor(.green)
                                         
                                         Text("\(data.amount.thousandSeparator())")
-                                            .font(.subheadline)
+                                            .font(.system(size: 12))
                                             .foregroundColor(.green)
                                     }
                                     

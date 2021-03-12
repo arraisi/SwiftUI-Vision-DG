@@ -202,6 +202,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/user/profiles")
     }
     
+    static func urlGetAccountBalance() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/getAccountBalance")
+    }
+    
     //-------------------- FAVORITE SERVICE ----------------------//
     
     static func urlGetListFavorite() -> URL? {

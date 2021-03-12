@@ -11,6 +11,9 @@ import Combine
 class ProfileViewModel: ObservableObject {
     @Published var isLoading: Bool = true
     
+    // Account Balance
+    @Published var creditDebit: String = ""
+    
     // Limit
     @Published var maxIbftPerTrans: String = ""
     @Published var limitOnUs: String = ""
@@ -88,6 +91,40 @@ extension ProfileViewModel {
                     self.accountNumber = _chipProfileDto.accountNumber
                     print(_chipProfileDto.accountNumber)
                 }
+                 
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 404):
+                    self.errorMessage = "USER STATUS NOT FOUND"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - GET ACCOUNT BALANCE
+    func getAccountBalance(completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        ProfileService.shared.getAccountBalance { result in
+            switch result {
+            case .success(let response):
+                print("Success")
+                
+                self.isLoading = false
+                self.balance = response.balance
+                self.creditDebit = response.creditDebit
                  
                 completion(true)
                 

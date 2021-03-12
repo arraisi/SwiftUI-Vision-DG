@@ -13,6 +13,8 @@ class ProfileService {
     
     static let shared = ProfileService()
     
+    
+    // MARK: - CHECK PROFILE
     func checkProfile(completion: @escaping(Result<ProfileResponseModel, ErrorResult>) -> Void) {
         
         guard let url = URL.urlGetProfile() else {
@@ -34,6 +36,44 @@ class ProfileService {
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
                     if let profileResponse = try? JSONDecoder().decode(ProfileResponseModel.self, from: data) {
+                        completion(.success(profileResponse))
+                    }
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
+    // MARK: - GET ACCOUNT BALANCE
+    func getAccountBalance(completion: @escaping(Result<AccountBalanceResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlGetAccountBalance() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\n\n RESPONSE GET PROFILES = \(httpResponse.statusCode)\n")
+                
+                if (httpResponse.statusCode == 200) {
+                    print("OK 200")
+                    if let profileResponse = try? JSONDecoder().decode(AccountBalanceResponse.self, from: data) {
                         completion(.success(profileResponse))
                     }
                 }

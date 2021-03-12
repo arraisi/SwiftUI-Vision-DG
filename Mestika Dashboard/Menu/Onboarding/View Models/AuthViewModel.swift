@@ -236,7 +236,7 @@ extension AuthViewModel {
                 case .custom(code: 400):
                     self.errorMessage = "Password lemah,silahkan ganti password anda"
                 case .custom(code: 403):
-                    self.errorMessage = "Password not changed"
+                    self.errorMessage = "Password tidak berubah"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -280,7 +280,7 @@ extension AuthViewModel {
                 case .custom(code: 400):
                     self.errorMessage = "Password lemah,silahkan ganti password anda"
                 case .custom(code: 403):
-                    self.errorMessage = "PIN not changed"
+                    self.errorMessage = "Password tidak berubah"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -318,7 +318,7 @@ extension AuthViewModel {
                 case .custom(code: 400):
                     self.errorMessage = "Password lemah,silahkan ganti password anda"
                 case .custom(code: 403):
-                    self.errorMessage = "Password not changed"
+                    self.errorMessage = "Password tidak berubah"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -359,7 +359,7 @@ extension AuthViewModel {
                         self.errorMessage = "Unauthorized"
                     }
                 case .custom(code: 403):
-                    self.errorMessage = "Password not changed"
+                    self.errorMessage = "Password tidak berubah"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -398,7 +398,7 @@ extension AuthViewModel {
                             self.errorMessage = "Unauthorized"
                         }
                     case .custom(code: 403):
-                        self.errorMessage = "Password not changed"
+                        self.errorMessage = "Password tidak berubah"
                     case .custom(code: 406):
                         self.errorMessage = "Password lemah, silahkan ganti password anda"
                     case .custom(code: 500):
@@ -447,7 +447,7 @@ extension AuthViewModel {
                     }
                 case .custom(code: 403):
                     DispatchQueue.main.async {
-                        self.errorMessage = "Password not changed"
+                        self.errorMessage = "Password tidak berubah"
                         self.isLoading = false
                     }
                 default:
@@ -492,7 +492,7 @@ extension AuthViewModel {
                         self.errorMessage = "Unauthorized"
                     }
                 case .custom(code: 403):
-                    self.errorMessage = "Password not changed"
+                    self.errorMessage = "Password tidak berubah"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

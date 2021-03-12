@@ -25,6 +25,12 @@ struct CardPinVerificationView: View {
     @State var messageError: String = ""
     @State var statusError: String = ""
     
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @Binding var tryCount: Int
+    @State var timeRemainingBtn: Int = 0
+    @State var isBtnValidationDisabled = true
+    
     // Observable Object
     @State var activateData = ActivateKartuKuModel()
     
@@ -52,6 +58,11 @@ struct CardPinVerificationView: View {
                 }
                 .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
                 
+                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
+                    .font(.custom("Montserrat-Regular", size: 12))
+                    .foregroundColor(.red)
+                    .padding(.top)
+                
                 Spacer(minLength: 0)
                 
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
@@ -68,11 +79,32 @@ struct CardPinVerificationView: View {
                     
                     NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(Color(hex: "#2334D0")), isTransferOnUs: false)
                 }
+                .disabled(isBtnValidationDisabled)
                 .padding(.bottom)
                 .padding(.horizontal, 30)
             }
         }
         .navigationBarTitle("Transaction PIN Verification".localized(language), displayMode: .inline)
+        .onAppear {
+            print(tryCount)
+            if (tryCount == 1) {
+                self.timeRemainingBtn = 30
+            } else if (tryCount == 2) {
+                self.timeRemainingBtn = 60
+            } else if (tryCount == 3) {
+                self.timeRemainingBtn = 120
+            }
+        }
+        .onReceive(timer) { time in
+            if self.timeRemainingBtn > 0 {
+                self.timeRemainingBtn -= 1
+                print(timeRemainingBtn)
+            }
+            
+            if self.timeRemainingBtn < 1 {
+                isBtnValidationDisabled = false
+            }
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOffUs"))) { obj in
             print("SUCCESS PIN")
             self.activateData.pinTrx = password
@@ -85,6 +117,6 @@ struct CardPinVerificationView: View {
 
 struct CardPinVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        CardPinVerificationView(unLocked: false)
+        CardPinVerificationView(unLocked: false, tryCount: .constant(0))
     }
 }

@@ -11,6 +11,7 @@ class UserRegistrationViewModel: ObservableObject {
     @Published var message: String = ""
     @Published var phoneNumber: String = ""
     @Published var reference: String = ""
+    @Published var fingerprintFlag: Bool = false
     @Published var user: UserCheckResponse?
 }
 
@@ -93,6 +94,7 @@ extension UserRegistrationViewModel {
                     self.code = response.code ?? ""
 //                    self.code = "R05"
                     self.message = response.message ?? ""
+                    self.fingerprintFlag = response.fingerprintFlag ?? false
                     if let phone = response.phoneNumber {
                         self.phoneNumber = phone
                     }

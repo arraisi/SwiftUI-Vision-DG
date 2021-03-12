@@ -14,4 +14,5 @@ class UserCheckResponse: Decodable {
     let reference: String?
     let scheduledDate: String?
     let scheduledHours: String?
+    let fingerprintFlag: Bool?
 }

@@ -253,7 +253,8 @@ struct FirstOTPLoginView: View {
                     }
                     
                 }
-                .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
+                .background(Color(hex: disableForm ? "#CBD1D9" : "#4958e3"))
+                .shadow(radius: 3)
                 .cornerRadius(12)
                 .padding(.horizontal, 20)
                 .padding(.top, 10)

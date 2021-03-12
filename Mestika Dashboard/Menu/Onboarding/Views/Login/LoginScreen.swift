@@ -10,6 +10,9 @@ import SwiftUI
 
 struct LoginScreen: View {
     
+    // Device ID
+    var deviceId = UIDevice.current.identifierForVendor?.uuidString
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -29,10 +32,10 @@ struct LoginScreen: View {
     @State private var showPassword: Bool = false
     @State var phoneNumber: String = ""
     
+    @State var fingerprintFlag: Bool = false
+    
     @State var routeNewPassword: Bool = false
     
-    /* GET DEVICE ID */
-    var deviceId = UIDevice.current.identifierForVendor?.uuidString
     
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -144,16 +147,17 @@ struct LoginScreen: View {
                     )
                     .isDetailLink(false)
                     
-                    
-                    if let value = device.last?.fingerprintFlag {
-                        if biometricCheck() && value {
-                            
-                            Button(action: {
-                                authenticate()
-                            }, label: {
-                                Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
-                                    .padding(.trailing, 20)
-                            })
+                    if !isNewDeviceLogin {
+                        if let value = device.last?.fingerprintFlag {
+                            if biometricCheck() && value {
+                                
+                                Button(action: {
+                                    authenticate()
+                                }, label: {
+                                    Image(UIDevice.current.hasNotch ? "ic_faceid" : "ic_fingerprint")
+                                        .padding(.trailing, 20)
+                                })
+                            }
                         }
                     }
                     
@@ -196,6 +200,7 @@ struct LoginScreen: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
+            self.getUserStatus(deviceId: deviceId!)
             self.phoneNumber = self.registerData.noTelepon
         }
         .navigationBarHidden(true)
@@ -398,6 +403,26 @@ struct LoginScreen: View {
         .padding(.horizontal, 15)
         .background(Color.white)
         .cornerRadius(20)
+    }
+    
+    /* Function GET USER Status */
+    @ObservedObject var userVM = UserRegistrationViewModel()
+    func getUserStatus(deviceId: String) {
+        print("GET USER STATUS")
+        print("DEVICE ID : \(deviceId)")
+        
+        self.userVM.userCheck(deviceId: deviceId) { success in
+            
+            if success {
+                print("CODE STATUS : \(self.userVM.code)")
+                print("MESSAGE STATUS : \(self.userVM.message)")
+                
+                self.fingerprintFlag = self.userVM.fingerprintFlag
+            }
+            
+            if !success {
+            }
+        }
     }
 }
 
