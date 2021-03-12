@@ -283,7 +283,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
         .alert(isPresented: $isShowAlert) {
             return Alert(
                 title: Text("MESSAGE"),
-                message: Text(self.messageResponse),
+                message: Text(self.messageResponse.localized(language)),
                 dismissButton: .default(Text("Oke"))
             )
         }
@@ -411,7 +411,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 self.isLoading = false
                 self.isShowModal = false
             }) {
-                Text("Back")
+                Text("Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))
