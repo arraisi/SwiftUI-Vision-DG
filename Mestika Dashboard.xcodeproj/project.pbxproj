@@ -312,6 +312,12 @@
 		C00E80C025EF4FD3006A8335 /* SuccessOpenNewSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00E80BF25EF4FD2006A8335 /* SuccessOpenNewSavingAccountView.swift */; };
 		C018012E25D4E40F00766E41 /* FavoritViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018012D25D4E40F00766E41 /* FavoritViewModel.swift */; };
 		C018014725D4E47F00766E41 /* FavoritService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018014625D4E47F00766E41 /* FavoritService.swift */; };
+		C01B849C25FF213800F5BBD9 /* ProductsSavingAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B849B25FF213800F5BBD9 /* ProductsSavingAccountModel.swift */; };
+		C01B84A525FF21C400F5BBD9 /* SavingAccountServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84A425FF21C400F5BBD9 /* SavingAccountServices.swift */; };
+		C01B84B025FF240200F5BBD9 /* ProductsSavingAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84AF25FF240200F5BBD9 /* ProductsSavingAccountViewModel.swift */; };
+		C01B84B525FF2B1B00F5BBD9 /* SavingAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84B425FF2B1B00F5BBD9 /* SavingAccountModel.swift */; };
+		C01B84BA25FF2DF000F5BBD9 /* SavingAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84B925FF2DF000F5BBD9 /* SavingAccountViewModel.swift */; };
+		C01B84BF25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84BE25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
 		C043CF9925CD1F6600328C91 /* FormChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */; };
@@ -736,6 +742,12 @@
 		C00E80BF25EF4FD2006A8335 /* SuccessOpenNewSavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessOpenNewSavingAccountView.swift; sourceTree = "<group>"; };
 		C018012D25D4E40F00766E41 /* FavoritViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritViewModel.swift; sourceTree = "<group>"; };
 		C018014625D4E47F00766E41 /* FavoritService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritService.swift; sourceTree = "<group>"; };
+		C01B849B25FF213800F5BBD9 /* ProductsSavingAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsSavingAccountModel.swift; sourceTree = "<group>"; };
+		C01B84A425FF21C400F5BBD9 /* SavingAccountServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountServices.swift; sourceTree = "<group>"; };
+		C01B84AF25FF240200F5BBD9 /* ProductsSavingAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsSavingAccountViewModel.swift; sourceTree = "<group>"; };
+		C01B84B425FF2B1B00F5BBD9 /* SavingAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountModel.swift; sourceTree = "<group>"; };
+		C01B84B925FF2DF000F5BBD9 /* SavingAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountViewModel.swift; sourceTree = "<group>"; };
+		C01B84BE25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailSavingAccountModel.swift; sourceTree = "<group>"; };
 		C02E9BAC256E814C00622E7A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCarousel.swift; sourceTree = "<group>"; };
 		C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePasswordView.swift; sourceTree = "<group>"; };
@@ -906,6 +918,7 @@
 		0A566A0C25CA6E7A0008E752 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C01B84A325FF217D00F5BBD9 /* Dashboard Menu */,
 				C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */,
 				0A566A0D25CA6E940008E752 /* TransferServices.swift */,
 				52CB5DF125CBEA480012DDAB /* ProfileService.swift */,
@@ -1682,6 +1695,49 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		C01B849925FF211200F5BBD9 /* Dashboard Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C01B849A25FF211A00F5BBD9 /* Saving Account */,
+			);
+			path = "Dashboard Menu";
+			sourceTree = "<group>";
+		};
+		C01B849A25FF211A00F5BBD9 /* Saving Account */ = {
+			isa = PBXGroup;
+			children = (
+				C01B849B25FF213800F5BBD9 /* ProductsSavingAccountModel.swift */,
+				C01B84B425FF2B1B00F5BBD9 /* SavingAccountModel.swift */,
+				C01B84BE25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift */,
+			);
+			path = "Saving Account";
+			sourceTree = "<group>";
+		};
+		C01B84A325FF217D00F5BBD9 /* Dashboard Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C01B84A425FF21C400F5BBD9 /* SavingAccountServices.swift */,
+			);
+			path = "Dashboard Menu";
+			sourceTree = "<group>";
+		};
+		C01B84AC25FF23B000F5BBD9 /* Dashboard Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C01B84AE25FF23E100F5BBD9 /* Saving Account */,
+			);
+			path = "Dashboard Menu";
+			sourceTree = "<group>";
+		};
+		C01B84AE25FF23E100F5BBD9 /* Saving Account */ = {
+			isa = PBXGroup;
+			children = (
+				C01B84AF25FF240200F5BBD9 /* ProductsSavingAccountViewModel.swift */,
+				C01B84B925FF2DF000F5BBD9 /* SavingAccountViewModel.swift */,
+			);
+			path = "Saving Account";
+			sourceTree = "<group>";
+		};
 		C01C67A0255E36F20019D06F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1789,13 +1845,14 @@
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C01B849925FF211200F5BBD9 /* Dashboard Menu */,
 				C0AD115E25DF89C2003FF920 /* History */,
-				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				C08758D625D2397C008ED730 /* Favorit */,
 				C06ED63625D0F27000F68FC1 /* Account */,
 				522101AF25C9213100C9566A /* Transfer */,
 				52BF57E12558E80700F009B5 /* SavingType */,
 				C04B422125540FE800DDE4C7 /* Kartu-Ku */,
+				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
 				52FF49BA25F8789000890AE6 /* AccountBalanceResponse.swift */,
 			);
@@ -1947,6 +2004,7 @@
 		C0EB654B255E4D67009ADFFE /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				C01B84AC25FF23B000F5BBD9 /* Dashboard Menu */,
 				C0EB654C255E4D81009ADFFE /* DbViewModel.swift */,
 				0A566A0225CA68960008E752 /* TransferViewModel.swift */,
 				52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */,
@@ -2279,12 +2337,14 @@
 				C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */,
 				52BB53C225C165D50045DBE6 /* RescheduleRegisterView.swift in Sources */,
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
+				C01B84BF25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift in Sources */,
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,
 				52C362A325D12DC0000374AA /* TransferRtgsValidationPin.swift in Sources */,
 				C0BFB51E2576375500676B95 /* Address.swift in Sources */,
 				529190C425D3C9A5005A4898 /* ReferenceService.swift in Sources */,
 				525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */,
 				0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */,
+				C01B84B525FF2B1B00F5BBD9 /* SavingAccountModel.swift in Sources */,
 				52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */,
 				52474D79254028CD0094B758 /* AccountTabs.swift in Sources */,
 				52ADFE992557D99F00A1001F /* DetailJenisATMModel.swift in Sources */,
@@ -2345,6 +2405,7 @@
 				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
 				52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */,
+				C01B84BA25FF2DF000F5BBD9 /* SavingAccountViewModel.swift in Sources */,
 				528AE2C72595B89A003AFD73 /* AddressSugestionResponse.swift in Sources */,
 				52FF49B125F5CDCF00890AE6 /* CardLimitVerificationPinView.swift in Sources */,
 				52474D632540276A0094B758 /* TransferTabs.swift in Sources */,
@@ -2356,6 +2417,7 @@
 				C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */,
 				52ADFF982557DFDC00A1001F /* InformasiPerusahaanView.swift in Sources */,
 				52BF57EB2558F06A00F009B5 /* DetailsTypeSavingView.swift in Sources */,
+				C01B849C25FF213800F5BBD9 /* ProductsSavingAccountModel.swift in Sources */,
 				0AF48AD025778C760037942D /* Formatter+Extensions.swift in Sources */,
 				52ADFF172557DCE400A1001F /* LoadingIndicator.swift in Sources */,
 				C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */,
@@ -2510,6 +2572,7 @@
 				52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */,
 				52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */,
 				522B8C3C25E4E993003D17F1 /* CardBrokenPinVerificationView.swift in Sources */,
+				C01B84A525FF21C400F5BBD9 /* SavingAccountServices.swift in Sources */,
 				52BB53A125C108680045DBE6 /* AuthService.swift in Sources */,
 				C0AD11AC25DFA98E003FF920 /* HistoryTransactionViewModel.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
@@ -2526,6 +2589,7 @@
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				C0D274D725EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
+				C01B84B025FF240200F5BBD9 /* ProductsSavingAccountViewModel.swift in Sources */,
 				C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */,
 				524B396825A5C31500FE3ABE /* AddressSugestionResultResponse.swift in Sources */,
 				52ADFF402557DE6000A1001F /* SnapCarouselView.swift in Sources */,

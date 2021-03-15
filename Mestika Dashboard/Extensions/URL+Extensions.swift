@@ -255,4 +255,19 @@ extension URL {
     static func urlLimitKartuKu() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/card/personal-limit")
     }
+    
+    //-------------------- SAVING ACCOUNT SERVICE ----------------------//
+    
+    static func urlGetProductsSavingAccount() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/content/find-other-products")
+    }
+    
+    static func urlGetAccountsByCif() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/channel/inquiryAccountByCif")
+    }
+    
+    static func urlGetProductDetail() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/product/getProductDetail")
+    }
+    
 }

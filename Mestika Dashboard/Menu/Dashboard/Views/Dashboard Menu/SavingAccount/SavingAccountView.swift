@@ -11,8 +11,9 @@ struct SavingAccountView: View {
     
     @AppStorage("language") private var language = LocalizationService.shared.language
     
-    let savingProducts:[String] = ["Tabunganku", "Tabungan Mestika", "Tabungan Setia", "Tabungan SimPel"]
-    let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
+    @StateObject var productsSavingAccountVM = ProductsSavingAccountViewModel()
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    
     @State var product: String = ""
     
     var nextBtnDisabled: Bool {
@@ -44,12 +45,12 @@ struct SavingAccountView: View {
                         .disabled(true)
                     
                     Menu {
-                        ForEach(0..<savingProducts.count, id: \.self) { i in
+                        ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
                             Button(action: {
-                                print(savingProducts[i])
-                                product = savingProducts[i]
+                                print(productsSavingAccountVM.products[i])
+                                product = productsSavingAccountVM.products[i].name
                             }) {
-                                Text(savingProducts[i])
+                                Text(productsSavingAccountVM.products[i].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -91,14 +92,14 @@ struct SavingAccountView: View {
                 }
                 .padding([.top, .horizontal])
                 
-                List(self.mySavingProducts, id: \.self) { item in
+                List(self.savingAccountVM.accounts, id: \.self) { item in
                     
                     HStack {
                         RoundedIcon(imageName: "ic_saving_account")
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(item)
+                            Text(item.accountName)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
-                            Text("No. Rekening: 1201020201")
+                            Text("No. Rekening: \(item.accountNumber)")
                                 .font(.custom("Montserrat-SemiBold", size: 10))
                         }
                         
@@ -114,6 +115,15 @@ struct SavingAccountView: View {
             Spacer()
         }
         .navigationBarTitle("Saving Account".localized(language), displayMode: .inline)
+        .onAppear {
+            self.productsSavingAccountVM.getProducts { (success) in
+                
+            }
+            
+            self.savingAccountVM.getAccounts { (success) in
+                
+            }
+        }
     }
 }
 

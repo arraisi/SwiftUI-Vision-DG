@@ -12,6 +12,8 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @StateObject var productsSavingAccountVM = ProductsSavingAccountViewModel()
+    
     let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
     
     @State var product: String = ""
@@ -116,7 +118,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 HStack(alignment: .top, spacing: 0) {
                                     Text("Rp.")
                                         .font(.custom("Montserrat-Bold", size: 10))
-                                    Text("20000".thousandSeparator())
+                                    Text(productsSavingAccountVM.currency.thousandSeparator())
                                         .font(.custom("Montserrat-Bold", size: 14))
                                 }
                                 .foregroundColor(Color("StaleBlue"))
@@ -131,13 +133,13 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     
-                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: "250000")
+                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
                     
-                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: "5000")
+                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
                     
-                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: "100000")
+                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: productsSavingAccountVM.minimumSaldo)
                     
-                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: "100000")
+                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: productsSavingAccountVM.biayaAdministrasi)
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 85)
@@ -166,6 +168,11 @@ struct ConfirmationOfOpeningSavingAccountView: View {
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear{
+            self.productsSavingAccountVM.getProductsDetails(planCode: "") { (result) in
+                
+            }
         }
     }
     
