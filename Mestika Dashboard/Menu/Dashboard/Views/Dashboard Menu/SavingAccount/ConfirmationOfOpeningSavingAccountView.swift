@@ -14,10 +14,17 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     
     @StateObject var productsSavingAccountVM = ProductsSavingAccountViewModel()
     
-    let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
+    //    let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
     
-    @State var product: String = ""
-    @State var depositBalance: String = ""
+    @Binding var product: String
+    
+    @State var codePlan: String = ""
+    @State var depositBalance: String = "0"
+    
+    var currency = "0"
+    var minimumSaldo = "0"
+    var biayaAdministrasi = "0"
+    var minimumSetoranAwal = "0"
     
     var nextBtnDisabled: Bool {
         product.count == 0 || depositBalance.count == 0
@@ -48,11 +55,12 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 .disabled(true)
                             
                             Menu {
-                                ForEach(0..<mySavingProducts.count, id: \.self) { i in
+                                ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
                                     Button(action: {
-                                        product = mySavingProducts[i]
+                                        self.product = productsSavingAccountVM.products[i].name
+                                        self.codePlan = productsSavingAccountVM.products[i].codePlan
                                     }) {
-                                        Text(mySavingProducts[i])
+                                        Text(productsSavingAccountVM.products[i].name)
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                 }
@@ -99,12 +107,14 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             }
                             .foregroundColor(Color("DarkStaleBlue"))
                             
-                            HStack {
-                                Text("Deposit Exceeds Active Balance".localized(language))
-                                    .font(.custom("Montserrat-Bold", size: 10))
-                                Spacer()
+                            if Double(depositBalance)! > Double(currency)! {
+                                HStack {
+                                    Text("Deposit Exceeds Active Balance".localized(language))
+                                        .font(.custom("Montserrat-Bold", size: 10))
+                                    Spacer()
+                                }
+                                .foregroundColor(.red)
                             }
-                            .foregroundColor(.red)
                             
                             Divider()
                             
@@ -135,7 +145,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     
                     SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
                     
-                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
+                    //                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
                     
                     SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: productsSavingAccountVM.minimumSaldo)
                     
@@ -203,6 +213,6 @@ struct ConfirmationOfOpeningSavingAccountView: View {
 
 struct ConfirmationOfOpeningSavingAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationOfOpeningSavingAccountView()
+        ConfirmationOfOpeningSavingAccountView(product: .constant(""))
     }
 }

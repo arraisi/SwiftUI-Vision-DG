@@ -94,15 +94,15 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                     
                 }
                 
-                NavigationLink(destination: ConfirmationPinOfSavingAccountView(), label: {
-                    Text("TRANSACTION CONFIRMATION".localized(language))
-                        .padding()
-                        .font(.custom("Montserrat-Bold", size: 14))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .background(Color("StaleBlue"))
-                        .cornerRadius(15)
-                })
+//                NavigationLink(destination: ConfirmationPinOfSavingAccountView(codePlan: plan, product: <#String#>, deposit: <#Binding<String>#>), label: {
+//                    Text("TRANSACTION CONFIRMATION".localized(language))
+//                        .padding()
+//                        .font(.custom("Montserrat-Bold", size: 14))
+//                        .foregroundColor(.white)
+//                        .frame(maxWidth: .infinity, maxHeight: 50)
+//                        .background(Color("StaleBlue"))
+//                        .cornerRadius(15)
+//                })
             }
             .padding(25) // padding content
             .frame(maxWidth: .infinity)

@@ -70,6 +70,8 @@ class ProductsSavingAccountViewModel : ObservableObject {
             switch result {
             case .success(let response):
                 
+                print("SUCCESS GET PRODUCTS details")
+                
                 DispatchQueue.main.async {
 //                    self.productDetails = response
                     self.currency = response.currency
@@ -77,6 +79,7 @@ class ProductsSavingAccountViewModel : ObservableObject {
                     self.minimumSaldo = response.minimumSaldo
                     self.biayaAdministrasi = response.biayaAdministrasi
                     self.minimumSetoranAwal = response.minimumSetoranAwal
+                    
                     self.isLoading = false
                 }
                 

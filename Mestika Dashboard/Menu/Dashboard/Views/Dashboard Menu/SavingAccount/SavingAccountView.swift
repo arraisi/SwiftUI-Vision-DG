@@ -15,6 +15,9 @@ struct SavingAccountView: View {
     @StateObject var savingAccountVM = SavingAccountViewModel()
     
     @State var product: String = ""
+    @State var planCode: String = ""
+    @State var nextViewActive = false
+    @State var nextPinViewActive = false
     
     var nextBtnDisabled: Bool {
         product.count == 0
@@ -48,7 +51,8 @@ struct SavingAccountView: View {
                         ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
                             Button(action: {
                                 print(productsSavingAccountVM.products[i])
-                                product = productsSavingAccountVM.products[i].name
+                                self.product = productsSavingAccountVM.products[i].name
+                                self.planCode = productsSavingAccountVM.products[i].codePlan
                             }) {
                                 Text(productsSavingAccountVM.products[i].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
@@ -63,7 +67,9 @@ struct SavingAccountView: View {
                 .cornerRadius(15)
                 .padding(.vertical, 5)
                 
-                NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(), label: {
+                Button(action: {
+                    self.getProducDetails(planCode: self.planCode)
+                }, label: {
                     Text("Opening a new savings account".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
@@ -113,6 +119,16 @@ struct SavingAccountView: View {
             .padding(.leading, 10)
             
             Spacer()
+            
+            NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(
+                product: self.$product,
+                currency: self.productsSavingAccountVM.currency,
+                minimumSaldo: self.productsSavingAccountVM.minimumSaldo,
+                biayaAdministrasi: self.productsSavingAccountVM.biayaAdministrasi,
+                minimumSetoranAwal: self.productsSavingAccountVM.minimumSetoranAwal
+            ), isActive: self.$nextViewActive) {EmptyView()}
+            
+            NavigationLink(destination: ConfirmationPinOfSavingAccountView(codePlan: planCode, product: product, deposit: .constant("0")), isActive: self.$nextPinViewActive) {EmptyView()}
         }
         .navigationBarTitle("Saving Account".localized(language), displayMode: .inline)
         .onAppear {
@@ -122,6 +138,24 @@ struct SavingAccountView: View {
             
             self.savingAccountVM.getAccounts { (success) in
                 
+            }
+        }
+    }
+    
+    func getProducDetails(planCode: String) {
+        self.productsSavingAccountVM.getProductsDetails(planCode: planCode) { result in
+            print("\nnext route saving account")
+            print("\(String(describing: result))")
+//            print("result -> \(result)")
+            print("minimumSetoranAwal \(productsSavingAccountVM.minimumSetoranAwal)")
+            if result {
+                if productsSavingAccountVM.minimumSetoranAwal == "" || productsSavingAccountVM.minimumSetoranAwal == "0" {
+                    self.nextPinViewActive = true
+                } else {
+                    self.nextViewActive = true
+                }
+            } else {
+                self.nextPinViewActive = true
             }
         }
     }

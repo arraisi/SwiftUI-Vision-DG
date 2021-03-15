@@ -270,4 +270,8 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/product/getProductDetail")
     }
     
+    static func urlSaveSavingAccount() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/channel/newAccountRegistration")
+    }
+    
 }

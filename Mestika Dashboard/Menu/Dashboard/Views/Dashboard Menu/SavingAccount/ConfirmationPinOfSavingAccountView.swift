@@ -9,12 +9,19 @@ import SwiftUI
 
 struct ConfirmationPinOfSavingAccountView: View {
     
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    
     @AppStorage("lock_Password") var key = "123456"
     @AppStorage("language") private var language = LocalizationService.shared.language
     
     @State var pin = ""
     @State var wrongPin = false
     @State var unlocked = false
+    @State var success = false
+    
+    var codePlan: String
+    var product: String
+    @Binding var deposit: String
     
     var body: some View {
         ZStack {
@@ -45,8 +52,8 @@ struct ConfirmationPinOfSavingAccountView: View {
                 Spacer(minLength: 0)
                 
                 NavigationLink(
-                    destination: SuccessOpenNewSavingAccountView(),
-                    isActive: $unlocked,
+                    destination: SuccessOpenNewSavingAccountView(transactionDate: savingAccountVM.transactionDate, deposit: deposit, destinationNumber: savingAccountVM.destinationNumber, product: product),
+                    isActive: $success,
                     label: {
                         Text("")
                     })
@@ -54,14 +61,27 @@ struct ConfirmationPinOfSavingAccountView: View {
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
                 }, onCommit: {
-                    if self.pin == self.key {
-                        print("UNLOCKED")
-                        self.unlocked = true
-                    } else {
-                        print("INCORRECT")
-                        self.wrongPin = true
-                    }
+                    //                    if self.pin == self.key {
+                    //                        print("UNLOCKED")
+                    //                        self.unlocked = true
+                    //                    } else {
+                    //                        print("INCORRECT")
+                    //                        self.wrongPin = true
+                    //                    }
+                    
+                    self.saveSavingAccount()
                 })
+            }
+        }
+    }
+    
+    func saveSavingAccount() {
+        self.savingAccountVM.saveAccount(kodePlan: self.codePlan, deposit: self.deposit, pinTrx: self.pin) { result in
+            if result {
+                self.deposit = self.savingAccountVM.deposit
+                self.success = true
+            } else {
+                self.wrongPin = true
             }
         }
     }
@@ -69,6 +89,6 @@ struct ConfirmationPinOfSavingAccountView: View {
 
 struct ConfirmationPinOfSavingAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationPinOfSavingAccountView()
+        ConfirmationPinOfSavingAccountView(codePlan: "", product: "", deposit: .constant("0"))
     }
 }
