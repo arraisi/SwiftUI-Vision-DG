@@ -109,8 +109,8 @@ struct DashboardTabs: View {
                     .offset(x: self.firstOffset)
                 }
                 
-//                ListEwalletView()
-//                    .padding(.top, 30)
+                ListEwalletView()
+                    .padding(.top, 30)
 //
 //                ListContactTransferOnUs()
 //                    .padding(.top, 30)

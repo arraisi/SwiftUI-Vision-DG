@@ -62,10 +62,10 @@ struct CardBlockView: View {
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, maxHeight: 50)
                         })
-                        .hidden()
                         .frame(height: 50)
                         .background(Color(hex: "#2334D0"))
                         .cornerRadius(12)
+//                        .hidden()
                     }
                     .padding(20)
                     .padding(.top, 20)

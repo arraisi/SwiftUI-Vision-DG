@@ -12,60 +12,47 @@ struct DetailKartuAktifView: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
-    
     var card: KartuKuDesignViewModel
+    
+    @State private var isRouteStatement: Bool = false
+    @State private var isRouteTrxLimit: Bool = false
+    @State private var isRouteChangePin: Bool = false
+    @State private var isRouteBlockCard: Bool = false
+    @State private var isRouteBrokenCard: Bool = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
             
-            //            NavigationLink(
-            //                destination: Text("Riwayat Transaksi"),
-            //                label: {
-            //                    HStack{
-            //                        Image("ic_list")
-            //                            .resizable()
-            //                            .frame(width: 25, height: 25)
-            //                        VStack(alignment: .leading){
-            //                            Text("Riwayat Transaksi")
-            //                                .font(.custom("Montserrat-SemiBold", size: 15))
-            //                                .fixedSize(horizontal: false, vertical: true)
-            //                                .foregroundColor(Color(hex: "#232175"))
-            //
-            //
-            //                            Text("Riwayat transaksi pengunaan kartu")
-            //                                .font(.custom("Montserrat-Light", size: 12))
-            //                                .fixedSize(horizontal: false, vertical: true)
-            //                                .foregroundColor(Color(hex: "#232175"))
-            //                        }
-            //                        Spacer()
-            //                    }
-            //                })
-            //
-                        NavigationLink(
-                            destination: ListStatementView(),
-                            label: {
-                                HStack{
-                                    Image("ic_list")
-                                        .resizable()
-                                        .frame(width: 25, height: 25)
-                                    VStack(alignment: .leading){
-                                        Text("e-Statement")
-                                            .font(.custom("Montserrat-SemiBold", size: 15))
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .foregroundColor(Color(hex: "#232175"))
+            Button(
+                action: {
+                    self.isRouteStatement = true
+                },
+                label: {
+                    HStack {
+                        Image("ic_list")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                        VStack(alignment: .leading){
+                            Text("e-Statement")
+                                .font(.custom("Montserrat-SemiBold", size: 15))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+
+
+                            Text("Laporan keuangan bulanan")
+                                .font(.custom("Montserrat-Light", size: 12))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color(hex: "#232175"))
+                        }
+                        Spacer()
+                    }
+                }
+            )
             
-            
-                                        Text("Laporan keuangan bulanan")
-                                            .font(.custom("Montserrat-Light", size: 12))
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .foregroundColor(Color(hex: "#232175"))
-                                    }
-                                    Spacer()
-                                }
-                            })
-            
-            NavigationLink(
-                destination: CardLimitView(card: card),
+            Button(
+                action: {
+                    self.isRouteTrxLimit = true
+                },
                 label: {
                     HStack{
                         Image("ic_list")
@@ -85,12 +72,15 @@ struct DetailKartuAktifView: View {
                         }
                         Spacer()
                     }
-                })
+                }
+            )
             
-            NavigationLink(
-                destination: FormChangePinCardView(cardNo: .constant(card.cardNo)),
+            Button(
+                action: {
+                    self.isRouteChangePin = true
+                },
                 label: {
-                    HStack{
+                    HStack {
                         Image("ic_list")
                             .resizable()
                             .frame(width: 25, height: 25)
@@ -108,12 +98,15 @@ struct DetailKartuAktifView: View {
                         }
                         Spacer()
                     }
-                })
+                }
+            )
             
-            NavigationLink(
-                destination: CardBlockView(card: card),
+            Button(
+                action: {
+                    self.isRouteBlockCard = true
+                },
                 label: {
-                    HStack{
+                    HStack {
                         Image("ic_list")
                             .resizable()
                             .frame(width: 25, height: 25)
@@ -131,13 +124,15 @@ struct DetailKartuAktifView: View {
                         }
                         Spacer()
                     }
-                })
-                .isDetailLink(false)
+                }
+            )
             
-            NavigationLink(
-                destination: CardDamageView(card: card),
+            Button(
+                action: {
+                    self.isRouteBrokenCard = true
+                },
                 label: {
-                    HStack{
+                    HStack {
                         Image("ic_list")
                             .resizable()
                             .frame(width: 25, height: 25)
@@ -155,9 +150,45 @@ struct DetailKartuAktifView: View {
                         }
                         Spacer()
                     }
-                })
-                .isDetailLink(false)
+                }
+            )
             
+            NavigationLink(
+                destination: ListStatementView(),
+                isActive: self.$isRouteStatement,
+                label: {EmptyView()}
+            )
+            
+            NavigationLink(
+                destination: CardLimitView(card: card),
+                isActive: self.$isRouteTrxLimit,
+                label: {EmptyView()}
+            )
+            
+            NavigationLink(
+                destination: FormChangePinCardView(cardNo: .constant(card.cardNo)),
+                isActive: self.$isRouteChangePin,
+                label: {EmptyView()}
+            )
+            
+            NavigationLink(
+                destination: CardBlockView(card: card),
+                isActive: self.$isRouteBlockCard,
+                label: {}
+            )
+            .isDetailLink(false)
+            
+            NavigationLink(
+                destination: CardDamageView(card: card),
+                isActive: self.$isRouteBrokenCard,
+                label: {EmptyView()}
+            )
+            .isDetailLink(false)
+            
+        }
+        .onAppear {
+            self.isRouteBlockCard = false
+            self.isRouteBrokenCard = false
         }
         .padding(.top, 25)
         .padding(.bottom, 10)

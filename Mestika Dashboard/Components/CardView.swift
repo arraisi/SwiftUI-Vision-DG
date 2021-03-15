@@ -58,16 +58,16 @@ struct CardView: View {
                     
                     VStack {
                         HStack{
-                            Text(card.cardNo)
+                            Text(self.card.status == "INACTIVE" ? "**** \(card.cardNo.subStringRange(from: 12, to: 16))" : card.cardNo)
                                 .foregroundColor(.white)
-                                .font(.custom("Montserrat-Regular", size: 12))
+                                .font(.custom("Montserrat-Regular", size: 14))
                             Spacer()
                         }
                         
                         HStack{
                             Text(card.accountNumber)
                                 .foregroundColor(.white)
-                                .font(.custom("Montserrat-Regular", size: 12))
+                                .font(.custom("Montserrat-Regular", size: 14))
                             Spacer()
                         }
                     }
@@ -84,7 +84,7 @@ struct CardView: View {
                     
                     HStack{
                         Spacer()
-                        Text(self.card.status == "" ? "Tidak Aktif" : self.card.status)
+                        Text(self.card.status == "INACTIVE" ? "INACTIVE" : self.card.status)
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 10))
 //                        if card.status {
