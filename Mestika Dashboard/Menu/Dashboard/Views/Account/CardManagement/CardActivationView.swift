@@ -23,7 +23,7 @@ struct CardActivationView: View {
     var card: KartuKuDesignViewModel
     
     // Variable NoRekening
-    @State private var noAtmCtrl: String = "0"
+    @State private var noAtmCtrl: String = ""
     
     // Variable CVV Code
     @State private var noCvvCtrl: String = ""
@@ -37,6 +37,7 @@ struct CardActivationView: View {
     @State private var isShowingWrongCvv: Bool = false
     @State private var isShowingWrong3TimeCvv: Bool = false
     @State private var isShowingSuccess: Bool = false
+    @State private var isShowingIncorrectPin: Bool = false
     
     @State private var isLoading: Bool = false
     
@@ -46,7 +47,7 @@ struct CardActivationView: View {
     @State var showingModal = false
     
     var disableForm: Bool {
-        noCvvCtrl.count < 3 || pinCtrl.count < 6 || cPinCtrl.count < 6
+        noAtmCtrl.count < 16 || noCvvCtrl.count < 3 || pinCtrl.count < 6 || cPinCtrl.count < 6
     }
     
     var body: some View {
@@ -73,9 +74,10 @@ struct CardActivationView: View {
                             Button(action: {
                                 self.activateData.cvv = self.noCvvCtrl
                                 self.activateData.newPin = self.pinCtrl
+                                self.activateData.cardNo = self.noAtmCtrl
                                 
                                 if (pinCtrl != cPinCtrl) {
-                                    disableIncorrectPin = false
+                                    self.isShowingIncorrectPin = true
                                 } else if (!isPINValidated(with: pinCtrl)) {
                                     self.showingModal = true
                                 } else  {
@@ -98,12 +100,13 @@ struct CardActivationView: View {
                             .background(disableForm ? Color.gray : Color(hex: "#232175"))
                             .cornerRadius(12)
                             .padding(.top, 30)
+                            .padding(.bottom, 20)
                             .padding(.horizontal)
                         }
                     })
                 }
                 
-                if self.isShowingSuccess || self.isShowingWrongCvv || self.isShowingWrong3TimeCvv || self.showingModal {
+                if self.isShowingSuccess || self.isShowingWrongCvv || self.isShowingWrong3TimeCvv || self.showingModal || self.isShowingIncorrectPin {
                     ModalOverlay(tapAction: { withAnimation {} })
                         .edgesIgnoringSafeArea(.all)
                 }
@@ -111,8 +114,8 @@ struct CardActivationView: View {
         })
         .navigationBarTitle("Card Activation".localized(language), displayMode: .inline)
         .onAppear {
-            self.noAtmCtrl = card.cardNo
-            self.activateData.cardNo = card.cardNo
+//            self.noAtmCtrl = card.cardNo
+//            self.activateData.cardNo = card.cardNo
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -145,6 +148,9 @@ struct CardActivationView: View {
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             popupMessagePin()
         }
+        .popup(isPresented: $isShowingIncorrectPin, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            modalIncorectPin()
+        }
     }
     
     var noAtmAndCvvCard: some View {
@@ -165,7 +171,7 @@ struct CardActivationView: View {
                 HStack {
                     TextField("Account".localized(language), text: self.$noAtmCtrl, onEditingChanged: { changed in
                     })
-                    .disabled(true)
+//                    .disabled(true)
                     .keyboardType(.numberPad)
                     .font(.subheadline)
                     .foregroundColor(.black)
@@ -174,7 +180,8 @@ struct CardActivationView: View {
                         self.noAtmCtrl = String($0.prefix(16))
                     }
                 }
-                .background(Color.gray.opacity(0.2))
+//                .background(Color.gray.opacity(0.2))
+                .background(Color(hex: "#F6F8FB"))
                 .cornerRadius(10)
                 .padding(.horizontal, 15)
                 .padding(.bottom, 15)
@@ -304,6 +311,47 @@ struct CardActivationView: View {
     }
     
     // MARK: -Bottom modal for error
+    func modalIncorectPin() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 101, height: 99)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("PIN ATM Incorrect")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(.red)
+                .padding([.bottom, .top], 20)
+            
+            Text("The ATM PIN you entered does not match.".localized(language))
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {
+                self.isShowingIncorrectPin = false
+            }) {
+                Text("Back")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 14))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: -Bottom modal for error
     func modalCodeCVVWrong() -> some View {
         VStack(alignment: .leading) {
             Image("ic_title_warning")
@@ -354,7 +402,7 @@ struct CardActivationView: View {
             Text("YOUR ATM CARD ACTIVATION HAS WORKED".localized(language))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.custom("Montserrat-Bold", size: 20))
-                .foregroundColor(.red)
+                .foregroundColor(.blue)
                 .padding([.bottom, .top], 20)
             
             Button(action: {

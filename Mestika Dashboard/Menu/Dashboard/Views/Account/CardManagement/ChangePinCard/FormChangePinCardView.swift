@@ -33,9 +33,11 @@ struct FormChangePinCardView: View {
     @State private var showModalSamePin: Bool = false
     @State private var showPinWeakModal: Bool = false
     
+    @State private var isLoading: Bool = false
+    
     private var verificationBtnDisabled: Bool {
         pinCtrl.count == 0 || pinConfirmCtrl.count == 0 || oldPinCtrl.count == 0 ||
-        pinCtrl.count != 6 || pinConfirmCtrl.count != 6 || oldPinCtrl.count != 6
+            pinCtrl.count != 6 || pinConfirmCtrl.count != 6 || oldPinCtrl.count != 6 || self.isLoading == true
     }
     
     @GestureState private var dragOffset = CGSize.zero
@@ -46,9 +48,7 @@ struct FormChangePinCardView: View {
             
             VStack {
                 
-                AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {}
-                
-                if (self.kartuKuVM.isLoading) {
+                if (self.isLoading) {
                     LinearWaitingIndicator()
                         .animated(true)
                         .foregroundColor(.green)
@@ -140,15 +140,17 @@ struct FormChangePinCardView: View {
                                 self.showModalSamePin.toggle()
                             } else {
                                 if isPinValid(with: pinCtrl) {
-                                    
+                                    self.isLoading = true
                                     self.kartuKuVM.changePinKartuKu(cardNo: cardNo, pin: oldPinCtrl, newPin: pinCtrl) { success in
                                         
                                         if success {
+                                            self.isLoading = false
                                             self.isPinChanged = true
                                             self.showModal.toggle()
                                         }
                                         
                                         if !success {
+                                            self.isLoading = false
                                             self.isPinChanged = false
                                             self.showModal.toggle()
                                         }
@@ -171,6 +173,7 @@ struct FormChangePinCardView: View {
                         .padding(.vertical, 30)
                         
                     }
+                    .padding(.top, 70)
                     .padding()
                     
                 }
@@ -333,10 +336,11 @@ struct FormChangePinCardView: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("PIN not Changed".localized(language))
+            Text("Password Aplikasi Tidak Berubah")
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
+                .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
                 self.showModal = false
@@ -369,6 +373,7 @@ struct FormChangePinCardView: View {
                 .font(.custom("Montserrat-SemiBold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
+                .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
                 self.showPinWeakModal = false

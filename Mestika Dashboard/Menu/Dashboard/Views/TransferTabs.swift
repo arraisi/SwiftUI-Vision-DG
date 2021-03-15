@@ -35,6 +35,7 @@ struct TransferTabs: View {
             }
         })
         .navigationBarHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     // MARK: -USERNAME INFO VIEW

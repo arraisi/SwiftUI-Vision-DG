@@ -294,7 +294,7 @@ struct FormInputResetNewPinScreen: View {
                 .frame(width: 95, height: 95)
                 .padding(.top, 20)
             
-            Text("PIN not Changed".localized(language))
+            Text("Password Aplikasi Tidak Berubah")
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
