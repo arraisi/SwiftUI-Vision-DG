@@ -226,6 +226,8 @@ struct FormChangePinTransactionView: View {
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
                 self.showModalError = false
@@ -293,6 +295,8 @@ struct FormChangePinTransactionView: View {
                 .font(.custom("Montserrat-Bold", size: 24))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.vertical)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
             
             Button(action: {
                 self.showModal = false

@@ -11,9 +11,13 @@ struct SavingAccountView: View {
     
     @AppStorage("language") private var language = LocalizationService.shared.language
     
-    let savingProducts:[String] = ["Tabunganku", "Tabungan Mestika", "Tabungan Setia", "Tabungan SimPel"]
-    let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
+    @StateObject var productsSavingAccountVM = ProductsSavingAccountViewModel()
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    
     @State var product: String = ""
+    @State var planCode: String = ""
+    @State var nextViewActive = false
+    @State var nextPinViewActive = false
     
     var nextBtnDisabled: Bool {
         product.count == 0
@@ -44,12 +48,13 @@ struct SavingAccountView: View {
                         .disabled(true)
                     
                     Menu {
-                        ForEach(0..<savingProducts.count, id: \.self) { i in
+                        ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
                             Button(action: {
-                                print(savingProducts[i])
-                                product = savingProducts[i]
+                                print(productsSavingAccountVM.products[i])
+                                self.product = productsSavingAccountVM.products[i].name
+                                self.planCode = productsSavingAccountVM.products[i].codePlan
                             }) {
-                                Text(savingProducts[i])
+                                Text(productsSavingAccountVM.products[i].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -62,7 +67,9 @@ struct SavingAccountView: View {
                 .cornerRadius(15)
                 .padding(.vertical, 5)
                 
-                NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(), label: {
+                Button(action: {
+                    self.getProducDetails(planCode: self.planCode)
+                }, label: {
                     Text("Opening a new savings account".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
@@ -91,14 +98,14 @@ struct SavingAccountView: View {
                 }
                 .padding([.top, .horizontal])
                 
-                List(self.mySavingProducts, id: \.self) { item in
+                List(self.savingAccountVM.accounts, id: \.self) { item in
                     
                     HStack {
                         RoundedIcon(imageName: "ic_saving_account")
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(item)
+                            Text(item.accountName)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
-                            Text("No. Rekening: 1201020201")
+                            Text("No. Rekening: \(item.accountNumber)")
                                 .font(.custom("Montserrat-SemiBold", size: 10))
                         }
                         
@@ -112,8 +119,48 @@ struct SavingAccountView: View {
             .padding(.leading, 10)
             
             Spacer()
+            
+            NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(
+                product: self.$product,
+                codePlan: self.$planCode,
+                currency: self.productsSavingAccountVM.currency ?? "0",
+                minimumSaldo: self.productsSavingAccountVM.minimumSaldo ?? "0",
+                biayaAdministrasi: self.productsSavingAccountVM.biayaAdministrasi ?? "0",
+                minimumSetoranAwal: self.productsSavingAccountVM.minimumSetoranAwal ?? "0"
+            ), isActive: self.$nextViewActive) {EmptyView()}
+            
+            NavigationLink(destination: ConfirmationPinOfSavingAccountView(codePlan: planCode, product: product, deposit: .constant("0")), isActive: self.$nextPinViewActive) {EmptyView()}
         }
         .navigationBarTitle("Saving Account".localized(language), displayMode: .inline)
+        .onAppear {
+            self.productsSavingAccountVM.getProducts { (success) in
+                
+            }
+            
+            self.savingAccountVM.getAccounts { (success) in
+                
+            }
+        }
+    }
+    
+    func getProducDetails(planCode: String) {
+        self.productsSavingAccountVM.getProductsDetails(planCode: planCode) { result in
+            
+            print("\nif setoran awal ==  0 next to pin")
+            print("result -> \(String(describing: result))")
+            print("minimumSetoranAwal \(productsSavingAccountVM.minimumSetoranAwal ?? "0")")
+            
+            //                self.nextViewActive = true
+            if result {
+                if productsSavingAccountVM.minimumSetoranAwal == "" || productsSavingAccountVM.minimumSetoranAwal == "0" {
+                    self.nextPinViewActive = true
+                } else {
+                    self.nextViewActive = true
+                }
+            } else {
+                self.nextPinViewActive = true
+            }
+        }
     }
 }
 

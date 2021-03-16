@@ -12,10 +12,19 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
-    let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
+    @StateObject var productsSavingAccountVM = ProductsSavingAccountViewModel()
     
-    @State var product: String = ""
-    @State var depositBalance: String = ""
+    //    let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
+    
+    @Binding var product: String
+    @Binding var codePlan: String
+    
+    @State var depositBalance: String = "0"
+    
+    var currency = "0"
+    var minimumSaldo = "0"
+    var biayaAdministrasi = "0"
+    var minimumSetoranAwal = "0"
     
     var nextBtnDisabled: Bool {
         product.count == 0 || depositBalance.count == 0
@@ -46,11 +55,12 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 .disabled(true)
                             
                             Menu {
-                                ForEach(0..<mySavingProducts.count, id: \.self) { i in
+                                ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
                                     Button(action: {
-                                        product = mySavingProducts[i]
+                                        self.product = productsSavingAccountVM.products[i].name
+                                        self.codePlan = productsSavingAccountVM.products[i].codePlan
                                     }) {
-                                        Text(mySavingProducts[i])
+                                        Text(productsSavingAccountVM.products[i].name)
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                 }
@@ -97,12 +107,14 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             }
                             .foregroundColor(Color("DarkStaleBlue"))
                             
-                            HStack {
-                                Text("Deposit Exceeds Active Balance".localized(language))
-                                    .font(.custom("Montserrat-Bold", size: 10))
-                                Spacer()
+                            if Double(depositBalance)! > Double(currency)! {
+                                HStack {
+                                    Text("Deposit Exceeds Active Balance".localized(language))
+                                        .font(.custom("Montserrat-Bold", size: 10))
+                                    Spacer()
+                                }
+                                .foregroundColor(.red)
                             }
-                            .foregroundColor(.red)
                             
                             Divider()
                             
@@ -116,7 +128,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 HStack(alignment: .top, spacing: 0) {
                                     Text("Rp.")
                                         .font(.custom("Montserrat-Bold", size: 10))
-                                    Text("20000".thousandSeparator())
+                                    Text(currency.thousandSeparator())
                                         .font(.custom("Montserrat-Bold", size: 14))
                                 }
                                 .foregroundColor(Color("StaleBlue"))
@@ -131,13 +143,13 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     
-                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: "250000")
+                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: minimumSetoranAwal)
                     
-                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: "5000")
+                    //                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
                     
-                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: "100000")
+                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: minimumSaldo)
                     
-                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: "100000")
+                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: biayaAdministrasi)
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 85)
@@ -147,7 +159,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             VStack {
                 Spacer()
                 VStack {
-                    NavigationLink(destination: ConfirmationOfTransactionSavingAccountView(), label: {
+                    NavigationLink(destination: ConfirmationOfTransactionSavingAccountView(planCode: codePlan, product: product, deposit: $depositBalance), label: {
                         Text("OPENING CONFIRMATION".localized(language))
                             .padding()
                             .font(.custom("Montserrat-Bold", size: 14))
@@ -166,6 +178,14 @@ struct ConfirmationOfOpeningSavingAccountView: View {
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear{
+            //            self.productsSavingAccountVM.getProductsDetails(planCode: "") { (result) in
+            //
+            //            }
+            print("code plan \(codePlan)")
+            print("product \(product)")
+//            print("deposit \(deposit)")
         }
     }
     
@@ -196,6 +216,6 @@ struct ConfirmationOfOpeningSavingAccountView: View {
 
 struct ConfirmationOfOpeningSavingAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationOfOpeningSavingAccountView()
+        ConfirmationOfOpeningSavingAccountView(product: .constant(""), codePlan: .constant(""))
     }
 }

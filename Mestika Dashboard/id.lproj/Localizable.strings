@@ -755,3 +755,7 @@
 
 "Are You Sure To Block Your Card?" = "Apakah Anda Yakin Untuk Memblokir Kartu Anda?";
 "Blocking the Card may result in the Card not being used at an ATM machine and also not being used for transactions at the Online Shop through the GPN (National Payment Gateway)" = "Pemblokiran Kartu dapat mengakibatkan Kartu tidak dapat digunakan pada mesin ATM dan juga tidak dapat digunakan untuk transaksi di Toko Online melalui GPN (Gerbang Pembayaran Nasional)";
+"See Transaction Details" = "Lihat Detail Transaksi";
+"Successful Opening of New Savings" = "Pembukaan Tabungan Baru Berhasil";
+"Type of Transaction" = "Jenis Transaksi";
+"DOWNLOAD E-RECEIPT" = "UNDUH E-RECEIPT";

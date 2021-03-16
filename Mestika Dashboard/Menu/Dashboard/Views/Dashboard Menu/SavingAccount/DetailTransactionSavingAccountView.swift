@@ -1,45 +1,33 @@
 //
-//  ConfirmationOfTransactionSavingAccountView.swift
+//  DetailTransactionSavingAccountView.swift
 //  Mestika Dashboard
 //
-//  Created by Abdul R. Arraisi on 03/03/21.
+//  Created by Abdul R. Arraisi on 16/03/21.
 //
 
 import SwiftUI
 
-struct ConfirmationOfTransactionSavingAccountView: View {
+struct DetailTransactionSavingAccountView: View {
+    
+    @EnvironmentObject var appState: AppState
     
     @AppStorage("language") private var language = LocalizationService.shared.language
     
-    var planCode: String
     var product: String
-    @Binding var deposit: String
+    var deposit: String
     
     var body: some View {
         VStack {
             
             VStack(spacing: 15) {
-                
                 HStack {
-                    Image("ic_saving_account")
-                        .resizable()
-                        .frame(width: 69, height: 69)
-                    Spacer()
-                }
-                
-                HStack {
-                    Text("Confirmation of \nOpening Savings".localized(language))
+                    Text("Successful Opening of New Savings".localized(language))
                     Spacer()
                 }
                 .font(.custom("Montserrat-Bold", size: 18))
                 .foregroundColor(Color("DarkStaleBlue"))
-                
-                HStack {
-                    Text("Make sure the data related to Online Deposit transactions are correct".localized(language))
-                    Spacer()
-                }
-                .font(.custom("Montserrat-Bold", size: 12))
-                .foregroundColor(Color.gray)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
                 
                 VStack(spacing: 5) {
                     HStack {
@@ -98,8 +86,10 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                     
                 }
                 
-                NavigationLink(destination: ConfirmationPinOfSavingAccountView(codePlan: planCode, product: product, deposit: $deposit), label: {
-                    Text("TRANSACTION CONFIRMATION".localized(language))
+                Button(action: {
+                    
+                }, label: {
+                    Text("DOWNLOAD E-RECEIPT".localized(language))
                         .padding()
                         .font(.custom("Montserrat-Bold", size: 14))
                         .foregroundColor(.white)
@@ -119,16 +109,20 @@ struct ConfirmationOfTransactionSavingAccountView: View {
             Spacer()
         }
         .padding(.vertical, 30)
-        .onAppear{
-            print("code plan \(planCode)")
-            print("product \(product)")
-            print("deposit \(deposit)")
-        }
+        .navigationBarItems(trailing: HStack {
+            Button(action: {
+                self.appState.moveToDashboard = true
+            }, label: {
+                Text("Cancel".localized(language))
+                    .foregroundColor(.white)
+            })
+        })
+
     }
 }
 
-struct ConfirmationOfTransactionSavingAccountView_Previews: PreviewProvider {
+struct DetailTransactionSavingAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationOfTransactionSavingAccountView(planCode: "22", product: "Tabungan SimPel", deposit: .constant("10000"))
+        DetailTransactionSavingAccountView(product: "Tabungan Mestika", deposit: "100000")
     }
 }
