@@ -166,9 +166,9 @@
 "Take a Selfie" = "Take a Selfie";
 
 /* ScanNPWPView */
-"Please enter a photo of your NPWP card" = "Please enter a photo of your NPWP card";
-"Upload Image of NPWP" = "Upload Image of NPWP";
-"NPWP Number" = "NPWP Number";
+"Please enter a photo of your Tax Identification Number card" = "Please enter a photo of your NPWP card";
+"Upload Image of Tax Identification Number" = "Upload Image of NPWP";
+"Tax Identification Number" = "NPWP Number";
 "* I declare that I do not have an NPWP card.\n Skip this stage" = "* I declare that I do not have an NPWP card.\n Skip this stage" ;
 
 /* ScanNPWPView */

@@ -303,20 +303,20 @@ struct FormCompletionKartuATMView: View {
             }
             
             HStack {
-                LabelTextField(value: $atmData.atmAddressRtInput, label: "", placeHolder: "RT", disabled:addressOptionId != 4 ) { (change) in
+                LabelTextField(value: $atmData.atmAddressRtInput, label: "", placeHolder: "RT".localized(language), disabled:addressOptionId != 4 ) { (change) in
                     
                 } onCommit: {
                     
                 }
                 
-                LabelTextField(value: $atmData.atmAddressRwInput, label: "", placeHolder: "RW", disabled:addressOptionId != 4 ) { (change) in
+                LabelTextField(value: $atmData.atmAddressRwInput, label: "", placeHolder: "RW".localized(language), disabled:addressOptionId != 4 ) { (change) in
                     
                 } onCommit: {
                     
                 }
             }
             
-            LabelTextField(value: $atmData.atmAddressKelurahanInput, label: "", placeHolder: "Village".localized(language), disabled:addressOptionId != 4) { (change) in
+            LabelTextField(value: $atmData.atmAddressKelurahanInput, label: "", placeHolder: "District".localized(language), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
@@ -387,13 +387,13 @@ struct FormCompletionKartuATMView: View {
                 
             }
             
-            LabelTextField(value: $registerData.rtrw, label: "", placeHolder: "RT/RW", disabled: true ) { (change) in
+            LabelTextField(value: $registerData.rtrw, label: "", placeHolder: "RT/RW".localized(language), disabled: true ) { (change) in
                 
             } onCommit: {
                 
             }
             
-            LabelTextField(value: $registerData.kelurahan, label: "", placeHolder: "Village".localized(language), disabled: true) { (change) in
+            LabelTextField(value: $registerData.kelurahan, label: "", placeHolder: "District".localized(language), disabled: true) { (change) in
                 
             } onCommit: {
                 

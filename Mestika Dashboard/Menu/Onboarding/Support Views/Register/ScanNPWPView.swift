@@ -29,7 +29,7 @@ struct ScanNPWPView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Please enter a photo of your NPWP card".localized(language))
+            Text("Please enter a photo of your Tax Identification Number card".localized(language))
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Regular", size: 12))
                 .foregroundColor(.black)
@@ -58,7 +58,7 @@ struct ScanNPWPView: View {
             Button(action: {
                 self.onChange()
             }, label: {
-                Text(imageNPWP == nil ? "Upload Image of NPWP".localized(language) : "Change Another Photo".localized(language))
+                Text(imageNPWP == nil ? "Upload Image of Tax Identification Number".localized(language) : "Change Another Photo".localized(language))
                     .foregroundColor(imageNPWP == nil && !alreadyHaveNpwp ? .white : Color(hex: "#2334D0"))
                     .font(.custom("Montserrat-SemiBold", size: 14))
                     .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
@@ -76,12 +76,12 @@ struct ScanNPWPView: View {
             
             VStack(alignment: .leading) {
                 
-                Text("NPWP Number".localized(language))
+                Text("Tax Identification Number".localized(language))
                     .multilineTextAlignment(.leading)
                     .font(.custom("Montserrat-SemiBold", size: 12))
                     .foregroundColor(.black)
                 
-                TextFieldValidation(data: $npwp, title: "NPWP Number".localized(language), disable: alreadyHaveNpwp, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in
+                TextFieldValidation(data: $npwp, title: "Tax Identification Number".localized(language), disable: alreadyHaveNpwp, isValid: isValidNPWP, keyboardType: .numberPad) { (str: Array<Character>) in
                     self.npwp = String(str.prefix(15))
                     self.isValidNPWP = str.count == 15
                 }

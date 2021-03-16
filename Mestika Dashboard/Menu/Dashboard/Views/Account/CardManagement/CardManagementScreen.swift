@@ -9,6 +9,10 @@ import SwiftUI
 
 struct CardManagementScreen: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
+    
     /* Carousel Variables */
     @State var cards: [KartuKuDesignViewModel] = []
     @State var firstOffset : CGFloat = 0
@@ -85,7 +89,7 @@ struct CardManagementScreen: View {
                         Spacer()
                     }
                 }
-                .navigationBarTitle("Kartu-Ku", displayMode: .inline)
+                .navigationBarTitle("My Card".localized(language), displayMode: .inline)
                 .onAppear {
                     getListKartuKu()
                 }

@@ -39,7 +39,7 @@ struct DetailKartuAktifView: View {
                                 .foregroundColor(Color(hex: "#232175"))
 
 
-                            Text("Laporan keuangan bulanan")
+                            Text("Monthly financial reports".localized(language))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
@@ -111,13 +111,13 @@ struct DetailKartuAktifView: View {
                             .resizable()
                             .frame(width: 25, height: 25)
                         VStack(alignment: .leading){
-                            Text("Blokir Kartu")
+                            Text("Block card".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 15))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))
                             
                             
-                            Text("Blokir kartu sementara")
+                            Text("Temporary Block Cards".localized(language))
                                 .font(.custom("Montserrat-Light", size: 12))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .foregroundColor(Color(hex: "#232175"))

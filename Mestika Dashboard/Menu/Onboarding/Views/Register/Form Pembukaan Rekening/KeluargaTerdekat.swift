@@ -106,7 +106,7 @@ struct KeluargaTerdekat: View {
                                         Spacer()
                                         
                                         // Sub title
-                                        Text("Your Nearest Family Data".localized(language))
+                                        Text("Your Immediate Family Data".localized(language))
                                             .font(.custom("Montserrat-SemiBold", size: 18))
                                             .foregroundColor(Color(hex: "#232175"))
                                             .padding(.horizontal, 20)
@@ -354,7 +354,7 @@ struct KeluargaTerdekat: View {
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    TextField("Kode Pos", text: $kodePos) {change in
+                    TextField("Postal code".localized(language), text: $kodePos) {change in
                     } onCommit: {
                     }
                     .onReceive(kodePos.publisher.collect()) {
@@ -376,7 +376,7 @@ struct KeluargaTerdekat: View {
                 
             }
             
-            LabelTextField(value: $registerData.kelurahanKeluarga, label: "Village".localized(language), placeHolder: "Village".localized(language)) { (change) in
+            LabelTextField(value: $registerData.kelurahanKeluarga, label: "District".localized(language), placeHolder: "District".localized(language)) { (change) in
                 
             } onCommit: {
                 

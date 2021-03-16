@@ -64,7 +64,7 @@ struct CardDamageDescriptionInputView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .navigationBarTitle("Kerusakan Kartu", displayMode: .inline)
+        .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             self.cardNo = cardData.cardNo

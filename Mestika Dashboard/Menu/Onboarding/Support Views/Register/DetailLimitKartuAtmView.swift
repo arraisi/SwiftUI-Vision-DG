@@ -20,7 +20,7 @@ struct DetailLimitKartuAtmView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("ATM Card Limit Details".localized(language))
+                Text(card.title)
                     .font(.custom("Montserrat-SemiBold", size: 15))
                 
                 Spacer()

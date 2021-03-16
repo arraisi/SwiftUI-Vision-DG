@@ -43,17 +43,21 @@ struct DetailKartuTidakAktifView: View {
             }
             .padding(.bottom, 10)
             
-            NavigationLink(
-                destination: CardActivationView(card: card),
-                label: {
-                    Text("ACTIVATE MY CARDS".localized(language))
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 40)
-                })
-                .frame(height: 50)
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
+            if (card.status == "BLOCKED") {
+                EmptyView()
+            } else {
+                NavigationLink(
+                    destination: CardActivationView(card: card),
+                    label: {
+                        Text("ACTIVATE MY CARDS".localized(language))
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 40)
+                    })
+                    .frame(height: 50)
+                    .background(Color(hex: "#2334D0"))
+                    .cornerRadius(12)
+            }
             
         }
         .padding(.top, 35)

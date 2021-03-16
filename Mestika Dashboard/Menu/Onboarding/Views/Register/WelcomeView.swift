@@ -517,7 +517,7 @@ struct WelcomeView: View {
                 }
                 
                 HStack {
-                    Text("Hour".localized(language))
+                    Text("Time".localized(language))
                         .frame(width: 100, alignment: .leading)
                         .font(.custom("Montserrat-Bold", size: 18))
                         .foregroundColor(Color(hex: "#2334D0"))
@@ -544,7 +544,7 @@ struct WelcomeView: View {
             
             if (self.registerData.isNasabahmestika == true) {
                 NavigationLink(destination: PhoneOTPRegisterNasabahView(editModeForStatusCreated: .inactive, editModeForStatusKycWaiting: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData)){
-                    Text("Reschedule Schedule".localized(language))
+                    Text("Reschedule".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)
@@ -556,7 +556,7 @@ struct WelcomeView: View {
                 Button(action: {
                     self.isFormOTPForRescheduleActive.toggle()
                 }){
-                    Text("Reschedule Schedule".localized(language))
+                    Text("Reschedule".localized(language))
                         .foregroundColor(.white)
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .frame(maxWidth: .infinity, maxHeight: 50)

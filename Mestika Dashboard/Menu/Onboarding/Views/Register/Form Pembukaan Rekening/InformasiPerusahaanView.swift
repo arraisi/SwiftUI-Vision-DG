@@ -467,7 +467,7 @@ struct InformasiPerusahaanView: View {
             }
             .padding(.horizontal, 20)
             
-            LabelTextField(value: $registerData.kelurahan, label: "Village".localized(language), placeHolder: "Village".localized(language)) { (Bool) in
+            LabelTextField(value: $registerData.kelurahan, label: "District".localized(language), placeHolder: "District".localized(language)) { (Bool) in
                 print("on edit")
             } onCommit: {
                 print("on commit")

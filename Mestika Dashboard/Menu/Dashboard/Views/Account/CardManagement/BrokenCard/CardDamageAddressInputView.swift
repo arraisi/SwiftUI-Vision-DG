@@ -52,7 +52,7 @@ struct CardDamageAddressInputView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     VStack {
-                        Text("PASTIKAN INFORMASI ANDA BENAR")
+                        Text("MAKE SURE YOUR INFORMATION IS CORRECT".localized(language))
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
@@ -62,7 +62,7 @@ struct CardDamageAddressInputView: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         VStack(alignment: .center) {
-                            Text("Pastikan Alamat Surat Menyurat Anda Sudah Sesuai")
+                            Text("Make sure your correspondence address is correct".localized(language))
                                 .font(.title2)
                                 .foregroundColor(Color(hex: "#232175"))
                                 .fontWeight(.bold)
@@ -208,7 +208,7 @@ struct CardDamageAddressInputView: View {
             }
             
         }
-        .navigationBarTitle("Kerusakan Kartu", displayMode: .inline)
+        .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             print("ON APPEAR")

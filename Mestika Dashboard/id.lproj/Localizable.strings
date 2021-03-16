@@ -27,7 +27,9 @@
 "We have received your data, please wait for our CS to contact you at:" = "Data Anda telah kami terima, mohon tunggu CS kami untuk menghubungi Anda pada :";
 "Date" = "Tanggal";
 "Hour" = "Jam";
+"Time" = "Jam";
 "Reschedule Schedule" = "Reschedule Jadwal";
+"Reschedule" = "Ganti Jadwal";
 "Cancel Request" = "Batalkan Permohonan";
 "Approval in progress" = "Persetujuan sedang dalam proses";
 "Approval is in process. Results will be sent via SMS or email" = "Persetujuan sedang dalam proses. Hasil akan dikirimkan melalui SMS atau email";
@@ -146,6 +148,7 @@
 "No, I don't have" = "Tidak, Saya tidak memiliki";
 "Genetic Relationship" = "Hubungan Kekerabatan";
 "Your Nearest Family Data" = "Data Keluarga Terdekat Anda";
+"Your Immediate Family Data" = "Data Keluarga Terdekat Anda";
 "Enter your \nnew transaction PIN" = "Masukkan PIN \nTransaksi Baru Anda";
 "This pin is used for every financial transaction activity" = "Pin ini digunakan untuk setiap kegiatan transaksi keuangan";
 "Confirm Transaction PIN" = "Konfirmasi PIN Transaksi";
@@ -286,9 +289,9 @@
 "Take a Selfie" = "Ambil Gambar Selfie";
 
 /* ScanNPWPView */
-"Please enter a photo of your NPWP card" = "Silahkan masukkan Foto kartu NPWP Anda";
-"Upload Image of NPWP" = "Unggah Gambar NPWP";
-"NPWP Number" = "Nomor NPWP";
+"Please enter a photo of your Tax Identification Number card" = "Silahkan masukkan Foto kartu NPWP Anda";
+"Upload Image of Tax Identification Number" = "Unggah Gambar NPWP";
+"Tax Identification Number" = "Nomor NPWP";
 "* I declare that I do not have an NPWP card.\n Skip this stage" = "* Saya Menyatakan belum memiliki kartu NPWP.\n Lewati tahapan ini";
 
 /* ScanNPWPView */
@@ -310,14 +313,19 @@
 
 /* ScanNPWPView */
 "Your Nearest Family" = "Keluarga Terdekat Anda";
+"Your Immediate Family" = "Keluarga Terdekat Anda";
 "Relationship With You" = "Hubungan Dengan Anda";
 "Name" = "Nama";
 "Address" = "Alamat";
 "Postal code" = "Kode Pos";
+"District" = "Kabupaten";
 "Sub-district" = "Kecamatan";
 "Village" = "Kelurahan";
 "Phone number" = "Nomor Telepon";
 "Family address" = "Alamat keluarga";
+"RT/RW" = "Neighbourhood / Hamlet";
+"RT" = "Neighbourhood";
+"RW" = "Hamlet";
 
 /* InformasiPerusahaanVerificationView */
 "Company Information" = "Informasi Perusahaan";
@@ -355,6 +363,7 @@
 "Forgot PIN Transaction" = "Lupa PIN Transaksi";
 "Logout" = "Keluar";
 "Are you sure you want to exit the Bank Mestika application?" = "Anda yakin ingin keluar aplikasi Bank Mestika?";
+"Make sure your correspondence address is correct" = "Pastikan Alamat Surat Menyurat Anda Sudah Sesuai";
 
 /* Term_ConditionView */
 "TERMS AND CONDITIONS" = "SYARAT DAN KETENTUAN";
@@ -378,7 +387,7 @@
 "Industry" = "Industri";
 "Other Sources of Income" = "Sumber Pendapatan Lainnya";
 "Funder Information" = "Informasi Penyandang Dana";
-"NPWP Number" = "Nomor NPWP";
+"Tax Identification Number" = "Nomor NPWP";
 
 /* VerificationPINView */
 "VERIFY YOUR PIN \nCARD OF ATM" = "VERIFIKASI PIN \nKARTU ATM ANDA";
@@ -401,7 +410,7 @@
 "Choose Time" = "Pilih Jam";
 "Make sure your data is still the same. If not, then please fill in the data for new account creation again" = "Pastikan data Anda masih sama. Jika tidak maka silahkan mengisi kembali data pembuatan rekening baru";
 "Identity Card/(KTP) Number" = "Nomor KTP";
-"Make schedule" = "Buat Janji";
+"Create schedule" = "Buat Janji";
 "Failed to cancel the application. Please try again later." = "Gagal membatalkan permohonan. Silakan coba beberapa saat lagi.";
 "Cancel Request" = "Batalkan Permohonan";
 "Thank you for choosing Bank Mestika" = "Terimakasih telah memilih Bank Mestika";
@@ -688,6 +697,8 @@
 "Selection" = "Pilihan";
 "Select the menu below" = "Pilih menu dibawah ini";
 "Delete" = "Hapus";
+"Temporary Block Cards" = "Blokir Kartu Sementara";
+"Monthly financial reports" = "Laporan Keuangan Bulanan";
 "Find another contact" = "Cari kontak lain";
 "Favorite Transaction" = "Favorit Transaksi";
 "Beneficiary Contact Name" = "Nama Kontak Penerima";
@@ -741,3 +752,6 @@
 "Yes, the address matches" = "Ya, alamat sesuai";
 "Ya, alamat sesuai" = "Ya, alamat sesuai";
 "Tidak, alamat tidak sesuai" = "Tidak, alamat tidak sesuai";
+
+"Are You Sure To Block Your Card?" = "Apakah Anda Yakin Untuk Memblokir Kartu Anda?";
+"Blocking the Card may result in the Card not being used at an ATM machine and also not being used for transactions at the Online Shop through the GPN (National Payment Gateway)" = "Pemblokiran Kartu dapat mengakibatkan Kartu tidak dapat digunakan pada mesin ATM dan juga tidak dapat digunakan untuk transaksi di Toko Online melalui GPN (Gerbang Pembayaran Nasional)";

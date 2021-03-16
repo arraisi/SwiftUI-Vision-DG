@@ -17,7 +17,7 @@ struct InformasiKeluargaVerificationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Your Nearest Family".localized(language))
+                Text("Your Immediate Family".localized(language))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(.gray)

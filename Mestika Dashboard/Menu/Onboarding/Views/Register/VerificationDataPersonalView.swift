@@ -127,7 +127,7 @@ struct VerificationDataPersonalView: View {
                             print("on commit")
                         }
                         
-                        LabelTextField(value: $tujuanPembukaanRekening, label: "Village".localized(language), placeHolder: "Village".localized(language)){ (Bool) in
+                        LabelTextField(value: $tujuanPembukaanRekening, label: "District".localized(language), placeHolder: "District".localized(language)){ (Bool) in
                             print("on edit")
                         } onCommit: {
                             print("on commit")

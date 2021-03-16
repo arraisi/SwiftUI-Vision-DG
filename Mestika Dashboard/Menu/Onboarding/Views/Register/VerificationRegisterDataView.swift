@@ -125,7 +125,7 @@ struct VerificationRegisterDataView: View {
                                 .padding(.bottom, 20)
                                 .disabled(true)
                                 
-                                LabelTextFieldWithIcon(value: $registerData.npwp, label: "NPWP", placeHolder: "NPWP") {
+                                LabelTextFieldWithIcon(value: $registerData.npwp, label: "Tax Identification Number".localized(language), placeHolder: "Tax Identification Number".localized(language)) {
                                     (Bool) in
                                     print("on edit")
                                 } onCommit: {
@@ -839,7 +839,7 @@ struct VerificationRegisterDataView: View {
     // MARK:- CREATE POPUP MESSAGE
     func popUpNpwp() -> some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("NPWP Number".localized(language))
+            Text("Tax Identification Number".localized(language))
                 .multilineTextAlignment(.leading)
                 .font(.custom("Montserrat-SemiBold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
@@ -848,7 +848,7 @@ struct VerificationRegisterDataView: View {
             //                self.registerData.npwp = String(str.prefix(15))
             //            }
             
-            TextField("NPWP Number".localized(language), text: $npwp)
+            TextField("Tax Identification Number".localized(language), text: $npwp)
                 .frame(height: 10)
                 .font(.custom("Montserrat-SemiBold", size: 12))
                 .foregroundColor(.black)

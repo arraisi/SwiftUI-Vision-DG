@@ -159,7 +159,7 @@ struct VerificationAddressView: View {
                                     .padding(.horizontal, 20)
                                     
                                     
-                                    LabelTextField(value: $addressRtRwInput, label: "RT/RW", placeHolder: "RT/RW", onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressRtRwInput, label: "RT/RW".localized(language), placeHolder: "RT/RW".localized(language), onEditingChanged: { (Bool) in
                                         print("on edit")
                                         registerData.addressRtRwInput = self.addressRtRwInput
                                     }, onCommit: {
@@ -168,7 +168,7 @@ struct VerificationAddressView: View {
                                     })
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressKelurahanInput, label: "Village".localized(language), placeHolder: "Village".localized(language), onEditingChanged: { (Bool) in
+                                    LabelTextField(value: $addressKelurahanInput, label: "District".localized(language), placeHolder: "District".localized(language), onEditingChanged: { (Bool) in
                                         print("on edit")
                                         registerData.addressKelurahanInput = self.addressKelurahanInput
                                     }, onCommit: {

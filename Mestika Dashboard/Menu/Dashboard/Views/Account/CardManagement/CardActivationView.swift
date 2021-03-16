@@ -159,7 +159,7 @@ struct CardActivationView: View {
             // Field No ATM
             VStack {
                 HStack {
-                    Text("No. Kartu ATM".localized(language))
+                    Text("ATM Card No.".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     

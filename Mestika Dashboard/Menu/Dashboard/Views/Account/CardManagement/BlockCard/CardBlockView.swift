@@ -34,11 +34,11 @@ struct CardBlockView: View {
                             .resizable()
                             .frame(width: 75.48, height: 60)
                         
-                        Text("Apakah Anda Yakin Untuk Memblokir Kartu Anda")
+                        Text("Are You Sure To Block Your Card?".localized(language))
                             .font(.custom("Montserrat-Bold", size: 18))
                             .foregroundColor(Color(hex: "#232175"))
                         
-                        Text("Pemblokiran Kartu dapat mengakibatkan Kartu tidak dapat digunakan pada mesin ATM dan juga tidak dapat digunakan untuk transaksi di Toko Online melalui GPN (Gerbang Pembayaran Nasional)")
+                        Text("Blocking the Card may result in the Card not being used at an ATM machine and also not being used for transactions at the Online Shop through the GPN (National Payment Gateway)".localized(language))
                             .font(.custom("Montserrat-Regular", size: 12))
                             .foregroundColor(Color(hex: "#232175"))
                             .lineSpacing(10)
@@ -57,7 +57,7 @@ struct CardBlockView: View {
 //                            self.showingModal.toggle()
                             
                         }, label: {
-                            Text("BLOKIR KARTU")
+                            Text("Block Card".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, maxHeight: 50)

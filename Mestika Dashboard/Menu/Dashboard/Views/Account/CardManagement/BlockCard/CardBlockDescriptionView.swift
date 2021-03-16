@@ -36,14 +36,14 @@ struct CardBlockDescriptionView: View {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack {
                         atmForm
-                            .padding(.top, 60)
+                            .padding(.top, 30)
                         
                         Button(action: {
                             UIApplication.shared.endEditing()
                             self.cardData.pin = self.pinAtm
                             brokenKartuKu()
                         }, label: {
-                            Text("BLOCK CARD")
+                            Text("Block Card".localized(language))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
@@ -64,7 +64,7 @@ struct CardBlockDescriptionView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .navigationBarTitle("Blokir Kartu", displayMode: .inline)
+        .navigationBarTitle("Block Card".localized(language), displayMode: .inline)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             self.cardNo = cardData.cardNo
@@ -85,7 +85,7 @@ struct CardBlockDescriptionView: View {
             // Field Pilih Bank
             VStack {
                 HStack {
-                    Text("Masukkan Kartu ATM")
+                    Text("Insert ATM Card Number".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -116,7 +116,7 @@ struct CardBlockDescriptionView: View {
             // Field No Rekening Tujuan
             VStack {
                 HStack {
-                    Text("Masukkan PIN ATM Anda")
+                    Text("Enter your ATM PIN".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     

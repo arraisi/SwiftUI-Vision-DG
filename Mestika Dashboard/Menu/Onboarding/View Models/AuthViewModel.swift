@@ -234,7 +234,7 @@ extension AuthViewModel {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
-                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                    self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 403):
                     self.errorMessage = "Password tidak berubah"
                 default:
@@ -278,7 +278,7 @@ extension AuthViewModel {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
-                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                    self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 403):
                     self.errorMessage = "Password tidak berubah"
                 default:
@@ -316,7 +316,7 @@ extension AuthViewModel {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
-                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                    self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 403):
                     self.errorMessage = "Password tidak berubah"
                 default:
@@ -353,7 +353,7 @@ extension AuthViewModel {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
-                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                    self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 401):
                     DispatchQueue.main.async {
                         self.errorMessage = "Unauthorized"
@@ -400,7 +400,7 @@ extension AuthViewModel {
                     case .custom(code: 403):
                         self.errorMessage = "Password tidak berubah"
                     case .custom(code: 406):
-                        self.errorMessage = "Password lemah, silahkan ganti password anda"
+                        self.errorMessage = "Weak password, please change your password"
                     case .custom(code: 500):
                         self.errorMessage = "Internal Server Error"
                     default:
@@ -440,7 +440,7 @@ extension AuthViewModel {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
-                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                    self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 401):
                     DispatchQueue.main.async {
                         self.errorMessage = "Unauthorized"
@@ -486,7 +486,7 @@ extension AuthViewModel {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
-                    self.errorMessage = "Password lemah,silahkan ganti password anda"
+                    self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 401):
                     DispatchQueue.main.async {
                         self.errorMessage = "Unauthorized"

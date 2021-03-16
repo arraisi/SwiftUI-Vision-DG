@@ -237,7 +237,7 @@ struct RescheduleRegisterView: View {
                                     self.isShowAlertInternetConnection = true
                                 }
                             }, label: {
-                                Text("Make schedule".localized(language))
+                                Text("Create schedule".localized(language))
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
                                     .font(.system(size: 13))

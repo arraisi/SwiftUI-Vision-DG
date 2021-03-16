@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct AppBarLogo: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var light: Bool = true
@@ -42,7 +46,7 @@ struct AppBarLogo: View {
                     Button(action: {
                         self.onCancel()
                     }, label: {
-                        Text("Cancel")
+                        Text("Cancel".localized(language))
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .foregroundColor(light ? Color("DarkStaleBlue") : .white )
                     })
