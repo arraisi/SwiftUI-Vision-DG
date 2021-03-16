@@ -76,12 +76,10 @@ struct SuccessOpenNewSavingAccountView: View {
                 
                 Spacer()
                 
-                Button(
-                    action: {
-                        self.appState.moveToDashboard = true
-                    },
+                NavigationLink(
+                    destination: DetailTransactionSavingAccountView(product: product, deposit: deposit),
                     label: {
-                        Text("Back to Main Page".localized(language))
+                        Text("See Transaction Details".localized(language))
                             .foregroundColor(Color(hex: "#2334D0"))
                             .fontWeight(.bold)
                             .font(.system(size: 13))
@@ -95,7 +93,7 @@ struct SuccessOpenNewSavingAccountView: View {
             
             
         }
-        .navigationTitle("")
+        .navigationTitle("Transaction Details".localized(language))
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
                 Text("Add to favorites?".localized(language))

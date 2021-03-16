@@ -17,8 +17,8 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     //    let mySavingProducts:[String] = ["Tabunganku", "Tabungan Mestika"]
     
     @Binding var product: String
+    @Binding var codePlan: String
     
-    @State var codePlan: String = ""
     @State var depositBalance: String = "0"
     
     var currency = "0"
@@ -128,7 +128,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 HStack(alignment: .top, spacing: 0) {
                                     Text("Rp.")
                                         .font(.custom("Montserrat-Bold", size: 10))
-                                    Text(productsSavingAccountVM.currency.thousandSeparator())
+                                    Text(currency.thousandSeparator())
                                         .font(.custom("Montserrat-Bold", size: 14))
                                 }
                                 .foregroundColor(Color("StaleBlue"))
@@ -143,13 +143,13 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     
-                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
+                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: minimumSetoranAwal)
                     
                     //                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
                     
-                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: productsSavingAccountVM.minimumSaldo)
+                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: minimumSaldo)
                     
-                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: productsSavingAccountVM.biayaAdministrasi)
+                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: biayaAdministrasi)
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 85)
@@ -159,7 +159,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             VStack {
                 Spacer()
                 VStack {
-                    NavigationLink(destination: ConfirmationOfTransactionSavingAccountView(), label: {
+                    NavigationLink(destination: ConfirmationOfTransactionSavingAccountView(planCode: codePlan, product: product, deposit: $depositBalance), label: {
                         Text("OPENING CONFIRMATION".localized(language))
                             .padding()
                             .font(.custom("Montserrat-Bold", size: 14))
@@ -180,9 +180,12 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear{
-            self.productsSavingAccountVM.getProductsDetails(planCode: "") { (result) in
-                
-            }
+            //            self.productsSavingAccountVM.getProductsDetails(planCode: "") { (result) in
+            //
+            //            }
+            print("code plan \(codePlan)")
+            print("product \(product)")
+//            print("deposit \(deposit)")
         }
     }
     
@@ -213,6 +216,6 @@ struct ConfirmationOfOpeningSavingAccountView: View {
 
 struct ConfirmationOfOpeningSavingAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationOfOpeningSavingAccountView(product: .constant(""))
+        ConfirmationOfOpeningSavingAccountView(product: .constant(""), codePlan: .constant(""))
     }
 }

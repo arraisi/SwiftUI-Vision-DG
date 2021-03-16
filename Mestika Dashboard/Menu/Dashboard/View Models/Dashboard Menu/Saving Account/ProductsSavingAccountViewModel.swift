@@ -14,11 +14,11 @@ class ProductsSavingAccountViewModel : ObservableObject {
     @Published var products = [ProductSavingAccountModel]()
     
     // PRODUCT Details
-    @Published var currency = ""
+    @Published var currency: String?
     @Published var outgoing = ""
-    @Published var minimumSaldo = ""
-    @Published var biayaAdministrasi = ""
-    @Published var minimumSetoranAwal = ""
+    @Published var minimumSaldo: String?
+    @Published var biayaAdministrasi: String?
+    @Published var minimumSetoranAwal: String?
     
     func getProducts(completion: @escaping (Bool) -> Void) {
         
@@ -73,7 +73,7 @@ class ProductsSavingAccountViewModel : ObservableObject {
                 print("SUCCESS GET PRODUCTS details")
                 
                 DispatchQueue.main.async {
-//                    self.productDetails = response
+                    //                    self.productDetails = response
                     self.currency = response.currency
                     self.outgoing = response.outgoing
                     self.minimumSaldo = response.minimumSaldo
@@ -89,14 +89,15 @@ class ProductsSavingAccountViewModel : ObservableObject {
                 
                 print("ERROR GET LIST PRODUCTS SAVING ACCOUNT-->")
                 
-                switch error {
-                case .custom(code: 500):
-                    self.errorMessage = "Internal Server Error"
-                default:
-                    self.errorMessage = "Internal Server Error"
-                }
-                
                 DispatchQueue.main.async {
+                    
+                    switch error {
+                    case .custom(code: 500):
+                        self.errorMessage = "Internal Server Error"
+                    default:
+                        self.errorMessage = "Internal Server Error"
+                    }
+                    
                     self.isLoading = false
                 }
                 

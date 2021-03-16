@@ -53,10 +53,7 @@ struct ConfirmationPinOfSavingAccountView: View {
                 
                 NavigationLink(
                     destination: SuccessOpenNewSavingAccountView(transactionDate: savingAccountVM.transactionDate, deposit: deposit, destinationNumber: savingAccountVM.destinationNumber, product: product),
-                    isActive: $success,
-                    label: {
-                        Text("")
-                    })
+                    isActive: $success) {EmptyView()}
                 
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
@@ -73,6 +70,11 @@ struct ConfirmationPinOfSavingAccountView: View {
                 })
             }
         }
+        .onAppear{
+            print("code plan \(codePlan)")
+            print("product \(product)")
+            print("deposit \(deposit)")
+        }
     }
     
     func saveSavingAccount() {
@@ -82,6 +84,7 @@ struct ConfirmationPinOfSavingAccountView: View {
                 self.success = true
             } else {
                 self.wrongPin = true
+                self.pin = ""
             }
         }
     }

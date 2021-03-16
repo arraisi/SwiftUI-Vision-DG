@@ -215,7 +215,7 @@ class SavingAccountServices {
             
             if let httpResponse = response as? HTTPURLResponse {
                 
-                print("\n\nGET PRODUCT DETAILS SAVING ACCOUNT SERVICE RESULT : \(httpResponse.statusCode)")
+                print("\n\nSAVE SAVING ACCOUNT SERVICE RESULT : \(httpResponse.statusCode)")
                 
                 guard let data = data, error == nil else {
                     return completion(Result.failure(ErrorResult.network(string: "NO DATA")))
@@ -234,6 +234,10 @@ class SavingAccountServices {
                 } else {
                     // if we're still here it means there was a problem
                     print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
                 if (httpResponse.statusCode == 404) {

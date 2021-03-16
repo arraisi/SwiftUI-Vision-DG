@@ -122,10 +122,11 @@ struct SavingAccountView: View {
             
             NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(
                 product: self.$product,
-                currency: self.productsSavingAccountVM.currency,
-                minimumSaldo: self.productsSavingAccountVM.minimumSaldo,
-                biayaAdministrasi: self.productsSavingAccountVM.biayaAdministrasi,
-                minimumSetoranAwal: self.productsSavingAccountVM.minimumSetoranAwal
+                codePlan: self.$planCode,
+                currency: self.productsSavingAccountVM.currency ?? "0",
+                minimumSaldo: self.productsSavingAccountVM.minimumSaldo ?? "0",
+                biayaAdministrasi: self.productsSavingAccountVM.biayaAdministrasi ?? "0",
+                minimumSetoranAwal: self.productsSavingAccountVM.minimumSetoranAwal ?? "0"
             ), isActive: self.$nextViewActive) {EmptyView()}
             
             NavigationLink(destination: ConfirmationPinOfSavingAccountView(codePlan: planCode, product: product, deposit: .constant("0")), isActive: self.$nextPinViewActive) {EmptyView()}
@@ -144,10 +145,12 @@ struct SavingAccountView: View {
     
     func getProducDetails(planCode: String) {
         self.productsSavingAccountVM.getProductsDetails(planCode: planCode) { result in
-            print("\nnext route saving account")
-            print("\(String(describing: result))")
-//            print("result -> \(result)")
-            print("minimumSetoranAwal \(productsSavingAccountVM.minimumSetoranAwal)")
+            
+            print("\nif setoran awal ==  0 next to pin")
+            print("result -> \(String(describing: result))")
+            print("minimumSetoranAwal \(productsSavingAccountVM.minimumSetoranAwal ?? "0")")
+            
+            //                self.nextViewActive = true
             if result {
                 if productsSavingAccountVM.minimumSetoranAwal == "" || productsSavingAccountVM.minimumSetoranAwal == "0" {
                     self.nextPinViewActive = true

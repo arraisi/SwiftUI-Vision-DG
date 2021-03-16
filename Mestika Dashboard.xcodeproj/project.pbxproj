@@ -319,6 +319,7 @@
 		C01B84BA25FF2DF000F5BBD9 /* SavingAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84B925FF2DF000F5BBD9 /* SavingAccountViewModel.swift */; };
 		C01B84BF25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84BE25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift */; };
 		C01B84D825FF5A1F00F5BBD9 /* NewSavingAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84D725FF5A1F00F5BBD9 /* NewSavingAccountResponse.swift */; };
+		C01B84DD26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84DC26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
 		C043CF9925CD1F6600328C91 /* FormChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */; };
@@ -750,6 +751,7 @@
 		C01B84B925FF2DF000F5BBD9 /* SavingAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountViewModel.swift; sourceTree = "<group>"; };
 		C01B84BE25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailSavingAccountModel.swift; sourceTree = "<group>"; };
 		C01B84D725FF5A1F00F5BBD9 /* NewSavingAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSavingAccountResponse.swift; sourceTree = "<group>"; };
+		C01B84DC26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionSavingAccountView.swift; sourceTree = "<group>"; };
 		C02E9BAC256E814C00622E7A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCarousel.swift; sourceTree = "<group>"; };
 		C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePasswordView.swift; sourceTree = "<group>"; };
@@ -1902,6 +1904,7 @@
 				C0D274DB25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift */,
 				C0D274E025EF3C1500513C53 /* ConfirmationPinOfSavingAccountView.swift */,
 				C00E80BF25EF4FD2006A8335 /* SuccessOpenNewSavingAccountView.swift */,
+				C01B84DC26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift */,
 			);
 			path = SavingAccount;
 			sourceTree = "<group>";
@@ -2657,6 +2660,7 @@
 				522B8C2F25E4BA16003D17F1 /* ActivateKartuKuModel.swift in Sources */,
 				52AE1A70255A3D9A00B011B7 /* OtpResponse.swift in Sources */,
 				526B6598254FBF1400C13C36 /* ListHistoryTransferView.swift in Sources */,
+				C01B84DD26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift in Sources */,
 				064BC26325760DA200F15CA9 /* ATMCardView.swift in Sources */,
 				C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */,
 				52C3489125428CB000F08F37 /* NavigationConfigurator.swift in Sources */,
