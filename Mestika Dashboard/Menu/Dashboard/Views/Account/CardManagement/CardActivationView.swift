@@ -169,7 +169,7 @@ struct CardActivationView: View {
                 .padding(.top, 15)
                 
                 HStack {
-                    TextField("Account".localized(language), text: self.$noAtmCtrl, onEditingChanged: { changed in
+                    TextField("ATM Card No.".localized(language), text: self.$noAtmCtrl, onEditingChanged: { changed in
                     })
 //                    .disabled(true)
                     .keyboardType(.numberPad)

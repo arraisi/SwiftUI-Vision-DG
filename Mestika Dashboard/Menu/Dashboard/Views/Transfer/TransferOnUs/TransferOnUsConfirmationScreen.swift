@@ -84,8 +84,7 @@ struct TransferOnUsConfirmationScreen: View {
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    TextField("Receiver".localized(language), text: self.$transferData.destinationName, onEditingChanged: { changed in
-                        print("\(self.$transferData.destinationName)")
+                    MultilineTextField("Receiver".localized(language), text: self.$transferData.destinationName, onCommit: {
                     })
                     .disabled(true)
                     .frame(height: 20)
