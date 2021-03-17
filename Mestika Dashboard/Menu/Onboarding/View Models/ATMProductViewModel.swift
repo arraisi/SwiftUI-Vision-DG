@@ -93,16 +93,19 @@ extension ATMProductViewModel {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listJenisTabungan = response.content.map({ (data: ContentJenisTabungan) -> JenisTabunganViewModel in
+                    self.listJenisTabungan = response.map { (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
                         return JenisTabunganViewModel (
                             id: data.id,
-                            name: data.name,
-                            image: URL(string: data.image),
-                            description: data.contentDescription,
-                            type: data.type,
-                            codePlan: data.codePlan
+                            name: data.productName,
+                            image: URL(string: data.productImageURL),
+                            description: data.productDescription,
+                            type: data.balType ?? "",
+                            codePlan: data.kodePlan
                         )
-                    })
+                    }
+//                    self.listJenisTabungan = response.map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
+//
+//                    })
                     completion(true)
                 }
                 break

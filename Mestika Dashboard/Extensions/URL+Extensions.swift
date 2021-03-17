@@ -97,8 +97,12 @@ extension URL {
     }
     
     static func urlGetListJenisTabungan() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/content/content-find-product");
+        return URL(string: AppConstants().BASE_URL + "/product/getAll");
     }
+    
+//    static func urlGetListJenisTabungan() -> URL? {
+//        return URL(string: AppConstants().BASE_URL + "/content/content-find-product");
+//    }
     
     static func urlGetSuggestionAddressResult() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/google-maps/address/results")
@@ -259,7 +263,7 @@ extension URL {
     //-------------------- SAVING ACCOUNT SERVICE ----------------------//
     
     static func urlGetProductsSavingAccount() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/content/find-other-products")
+        return URL(string: AppConstants().BASE_URL + "/product/getOtherProducts")
     }
     
     static func urlGetAccountsByCif() -> URL? {

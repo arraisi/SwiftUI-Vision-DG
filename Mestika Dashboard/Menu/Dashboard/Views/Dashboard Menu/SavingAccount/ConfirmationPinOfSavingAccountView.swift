@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct ConfirmationPinOfSavingAccountView: View {
     
@@ -30,6 +31,14 @@ struct ConfirmationPinOfSavingAccountView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
+                
+                if (self.savingAccountVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
+                
                 Spacer(minLength: 0)
                 
                 Text("Enter your Transaction PIN".localized(language))

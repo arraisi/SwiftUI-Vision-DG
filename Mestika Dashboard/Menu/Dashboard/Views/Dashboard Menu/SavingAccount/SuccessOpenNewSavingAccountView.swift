@@ -62,7 +62,7 @@ struct SuccessOpenNewSavingAccountView: View {
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
-                        Text("Produk Tabungan")
+                        Text("Savings product".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
                         Text(product)
