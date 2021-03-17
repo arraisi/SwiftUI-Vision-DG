@@ -11,7 +11,7 @@ class ProductsSavingAccountViewModel : ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String = ""
     
-    @Published var products = [ProductSavingAccountModel]()
+    @Published var products = [ProductsSavingAccountModelElement]()
     
     // PRODUCT Details
     @Published var currency: String?
@@ -32,7 +32,7 @@ class ProductsSavingAccountViewModel : ObservableObject {
             case .success(let response):
                 
                 DispatchQueue.main.async {
-                    self.products = response.content
+                    self.products = response
                     self.isLoading = false
                 }
                 

@@ -57,10 +57,10 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             Menu {
                                 ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
                                     Button(action: {
-                                        self.product = productsSavingAccountVM.products[i].name
-                                        self.codePlan = productsSavingAccountVM.products[i].codePlan
+                                        self.product = productsSavingAccountVM.products[i].productName
+                                        self.codePlan = productsSavingAccountVM.products[i].kodePlan
                                     }) {
-                                        Text(productsSavingAccountVM.products[i].name)
+                                        Text(productsSavingAccountVM.products[i].productName)
                                             .font(.custom("Montserrat-Regular", size: 12))
                                     }
                                 }

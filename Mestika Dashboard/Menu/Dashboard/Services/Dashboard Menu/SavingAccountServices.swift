@@ -24,7 +24,7 @@ class SavingAccountServices {
         }
         
         var request = URLRequest(url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // MARK: TASK
