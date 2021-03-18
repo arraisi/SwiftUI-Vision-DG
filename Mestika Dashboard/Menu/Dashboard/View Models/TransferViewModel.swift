@@ -19,6 +19,8 @@ class TransferViewModel : ObservableObject {
     @Published var destinationName: String = ""
     @Published var destinationNumber: String = ""
     
+    @Published var transactionDate: String = ""
+    
     // MARK: - GET LIMIT TRANSACTION
     func getLimitTransaction(classCode: String,
                              completion: @escaping (Bool) -> Void) {
@@ -117,8 +119,9 @@ class TransferViewModel : ObservableObject {
             switch result {
             case .success(let response):
                 print(response)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.async {
                     self.isLoading = false
+                    self.transactionDate = response.transactionDate
                 }
                 
                 completion(true)
@@ -156,9 +159,10 @@ class TransferViewModel : ObservableObject {
             print(result)
             
             switch result {
-            case .success( _):
+            case .success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
+                    self.transactionDate = response.transactionDate
                 }
                 completion(true)
                 
@@ -200,6 +204,7 @@ class TransferViewModel : ObservableObject {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
+                    self.transactionDate = response.transactionDate
                 }
                 
                 completion(true)

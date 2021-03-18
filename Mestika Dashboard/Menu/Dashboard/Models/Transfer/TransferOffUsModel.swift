@@ -39,5 +39,7 @@ class TransferOffUsModel: ObservableObject {
     @Published var cityOfDestination = ""
     @Published var addressOfDestination = ""
     
+    @Published var trxDateResp = ""
+    
     static let shared = TransferOffUsModel()
 }

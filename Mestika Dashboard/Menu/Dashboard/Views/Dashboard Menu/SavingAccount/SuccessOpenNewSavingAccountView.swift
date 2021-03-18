@@ -76,24 +76,41 @@ struct SuccessOpenNewSavingAccountView: View {
                 
                 Spacer()
                 
-                NavigationLink(
-                    destination: DetailTransactionSavingAccountView(product: product, deposit: deposit),
+                Button(
+                    action: {
+                        self.appState.moveToDashboard = true
+                    },
                     label: {
-                        Text("See Transaction Details".localized(language))
+                        Text("Back to Main Page".localized(language))
                             .foregroundColor(Color(hex: "#2334D0"))
-                            .fontWeight(.bold)
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .font(.system(size: 13))
                             .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     })
                     .background(Color.white)
                     .cornerRadius(12)
-                    .padding(25)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 10)
+                
+//                NavigationLink(
+//                    destination: DetailTransactionSavingAccountView(product: product, deposit: deposit),
+//                    label: {
+//                        Text("See Transaction Details".localized(language))
+//                            .foregroundColor(Color(hex: "#2334D0"))
+//                            .fontWeight(.bold)
+//                            .font(.system(size: 13))
+//                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+//                    })
+//                    .background(Color.white)
+//                    .cornerRadius(12)
+//                    .padding(25)
                 
             }
             
             
         }
         .navigationTitle("Transaction Details".localized(language))
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: HStack(spacing: 30) {
             HStack {
                 Text("Add to favorites?".localized(language))

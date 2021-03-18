@@ -111,6 +111,16 @@ struct SavingAccountView: View {
                             }
                             
                             Spacer()
+                            
+                            VStack {
+                                Text(item.accountStatusDescription!)
+                                    .font(.custom("Montserrat-SemiBold", size: 12))
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal)
+                            }
+                            .background(Color("StaleBlue"))
+                            .cornerRadius(15)
                         }
                         
                     }
