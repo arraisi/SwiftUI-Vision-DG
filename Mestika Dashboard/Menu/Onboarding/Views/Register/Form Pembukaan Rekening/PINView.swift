@@ -126,7 +126,7 @@ struct PINView: View {
                                     
                                     if (!isPINValidated(with: pin)) {
                                         withAnimation {
-                                            self.showingModal.toggle()
+                                            self.showingModal = true
                                         }
                                     }
                                 },
@@ -275,7 +275,7 @@ struct PINView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-                self.showingModal.toggle()
+                self.showingModal = false
             }) {
                 Text("Back".localized(language))
                     .foregroundColor(.white)

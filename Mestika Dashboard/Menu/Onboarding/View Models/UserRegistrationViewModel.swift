@@ -92,8 +92,9 @@ extension UserRegistrationViewModel {
                 
                 DispatchQueue.main.async {
                     self.code = response.code ?? ""
-//                    self.code = "R05"
+//                    self.code = "R07"
                     self.message = response.message ?? ""
+//                    self.message = "KYC_WAITING"
                     self.fingerprintFlag = response.fingerprintFlag ?? false
                     if let phone = response.phoneNumber {
                         self.phoneNumber = phone

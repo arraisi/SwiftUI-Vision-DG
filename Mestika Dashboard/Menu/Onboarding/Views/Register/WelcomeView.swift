@@ -32,6 +32,7 @@ struct WelcomeView: View {
     @State var isIncomingVideoCall: Bool = false
     @State var isFormPilihScheduleAndATM: Bool = false
     @State var isFormOTPForRescheduleActive: Bool = false
+    @State var isCancelRegister: Bool = false
     
     // Route Variable Login
     @State var isLoginViewActive: Bool = false
@@ -567,25 +568,53 @@ struct WelcomeView: View {
             }
             
             if (self.registerData.isNasabahmestika == true) {
-                NavigationLink(destination: PhoneOTPRegisterNasabahView(editModeForCancel: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData)){
-                    Text("Cancel Request".localized(language))
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
+                
+                Button(
+                    action: {
+                        self.isCancelRegister = true
+                    },
+                    label: {
+                        Text("Cancel Request".localized(language))
+                            .foregroundColor(Color(hex: "#2334D0"))
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                    }
+                )
                 .background(Color.white)
                 .cornerRadius(12)
                 .padding(.bottom, 20)
+                
+                NavigationLink(
+                    destination: PhoneOTPRegisterNasabahView(editModeForCancel: .active, rootIsActive: .constant(false), root2IsActive: .constant(false)).environmentObject(registerData),
+                    isActive: self.$isCancelRegister) {
+                    EmptyView()
+                }
+                .isDetailLink(false)
+                
+                
             } else {
-                NavigationLink(destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData)){
-                    Text("Cancel Request".localized(language))
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                }
+                
+                Button(
+                    action: {
+                        self.isCancelRegister = true
+                    },
+                    label: {
+                        Text("Cancel Request".localized(language))
+                            .foregroundColor(Color(hex: "#2334D0"))
+                            .font(.custom("Montserrat-SemiBold", size: 14))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                    }
+                )
                 .background(Color.white)
                 .cornerRadius(12)
                 .padding(.bottom, 20)
+                
+                NavigationLink(
+                    destination: FormOTPVerificationRegisterNasabahView(rootIsActive: .constant(false), root2IsActive: .constant(false), editModeForCancel: .active).environmentObject(registerData),
+                    isActive: self.$isCancelRegister) {
+                    EmptyView()
+                }
+                .isDetailLink(false)
             }
             
             NavigationLink(
@@ -931,6 +960,7 @@ struct WelcomeView: View {
         self.isIncomingVideoCall = false
         self.isFormPilihScheduleAndATM = false
         self.isFormOTPForRescheduleActive = false
+        self.isCancelRegister = false
     }
     
     /* Function Check Network Reachability */

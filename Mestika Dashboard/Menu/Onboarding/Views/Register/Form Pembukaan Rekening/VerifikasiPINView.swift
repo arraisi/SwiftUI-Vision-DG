@@ -125,7 +125,7 @@ struct VerifikasiPINView: View {
                                 
                                 if (pin != self.registerData.pin) {
                                     
-                                    showingModal.toggle()
+                                    showingModal = true
                                     
                                 } else if (isPINValidated(with: pin)) {
                                     encryptPassword(password: pin)
@@ -133,7 +133,7 @@ struct VerifikasiPINView: View {
                                     
                                 } else if (!isPINValidated(with: pin)) {
                                     
-                                    self.showingModal.toggle()
+                                    self.showingModal = true
                                     
                                 }
                                 
@@ -287,7 +287,7 @@ struct VerifikasiPINView: View {
                 .padding(.bottom, 30)
             
             Button(action: {
-                self.showingModal.toggle()
+                self.showingModal = false
             }) {
                 Text("Back".localized(language))
                     .foregroundColor(.white)
