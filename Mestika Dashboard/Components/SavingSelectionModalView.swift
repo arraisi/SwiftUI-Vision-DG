@@ -25,6 +25,7 @@ struct SavingSelectionModalView: View {
     @Binding var showingReferralCodeModal: Bool
     @Binding var goToNextPage: Bool
     @Binding var backToSummary: Bool
+    @State var referralCode: String = ""
     
     var body: some View {
         VStack(alignment: .center) {
@@ -63,8 +64,12 @@ struct SavingSelectionModalView: View {
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                TextField("Enter Referral Code".localized(language), text: $atmData.atmAddresspostalReferral, onEditingChanged: { changed in
-                }, onCommit: {})
+                TextField("Enter Referral Code".localized(language), text: $referralCode, onEditingChanged: { changed in
+                    print("on change code referal")
+                }, onCommit: {
+                    atmData.atmAddresspostalReferral = self.referralCode
+                    print("on commit code referal")
+                })
                 .frame(height: 20)
                 .font(.custom("Montserrat-Regular", size: 14))
                 .autocapitalization(.none)
@@ -89,6 +94,9 @@ struct SavingSelectionModalView: View {
             
             VStack(alignment: .center, spacing: 10) {
                 Button(action: {
+                    
+                    atmData.atmAddresspostalReferral = self.referralCode
+                    
                     registerData.jenisTabungan = data.name
                     
                     withAnimation {
@@ -129,6 +137,9 @@ struct SavingSelectionModalView: View {
                 .padding(.horizontal, 20)
             }
             .padding(.vertical, 15)
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
         }
         //        .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height * 0.8)
     }
