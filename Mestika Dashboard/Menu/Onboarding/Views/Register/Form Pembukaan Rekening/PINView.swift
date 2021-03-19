@@ -161,13 +161,8 @@ struct PINView: View {
             }
             
             if self.showingModal {
-                ZStack {
-                    ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    popupMessage()
-                }
-                .transition(.asymmetric(insertion: .opacity, removal: .fade))
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                    .edgesIgnoringSafeArea(.all)
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -175,9 +170,9 @@ struct PINView: View {
             UIApplication.shared.endEditing()
         }
         .navigationBarHidden(true)
-//        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-//            popupMessage()
-//        }
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessage()
+        }
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(

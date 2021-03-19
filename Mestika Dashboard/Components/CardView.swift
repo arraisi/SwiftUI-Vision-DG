@@ -58,7 +58,7 @@ struct CardView: View {
                     
                     VStack {
                         HStack{
-                            Text(self.card.status == "INACTIVE" ? "**** \(card.cardNo.subStringRange(from: 12, to: 16))" : card.cardNo)
+                            Text(self.card.status != "ACTIVE" ? "**** \(card.cardNo.subStringRange(from: 12, to: 16))" : card.cardNo)
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-Regular", size: 14))
                             Spacer()

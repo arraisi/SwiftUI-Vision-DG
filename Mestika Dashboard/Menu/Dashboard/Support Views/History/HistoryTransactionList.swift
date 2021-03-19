@@ -19,12 +19,14 @@ struct HistoryTransactionList: View {
                 .padding(.top, 25)
             
         } else {
-            ForEach(histories, id: \.traceNo) { item in
-                
-                HistoryTransactionRow(data: item)
-                    .padding(.horizontal)
+            ScrollView {
+                ForEach(histories, id: \.traceNo) { item in
+                    
+                    HistoryTransactionRow(data: item)
+                        .padding(.horizontal)
+                }
+                .listStyle(PlainListStyle())
             }
-            .listStyle(PlainListStyle())
         }
     }
 }

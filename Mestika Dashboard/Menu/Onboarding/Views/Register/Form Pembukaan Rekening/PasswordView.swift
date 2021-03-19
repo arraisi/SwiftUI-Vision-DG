@@ -357,7 +357,8 @@ struct PasswordView: View {
                     encryptPassword(password: password)
                     self.activeRoute = true
                 default:
-                    self.modalErrorMessage = self.passwordVM.message
+//                    self.modalErrorMessage = self.passwordVM.message
+                    self.modalErrorMessage = "Weak password, please change your password"
                     self.showingModalPasswordError.toggle()
                 }
             }

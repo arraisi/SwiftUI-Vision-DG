@@ -174,15 +174,14 @@ struct VerifikasiPINView: View {
             }
             
             if self.showingModal {
-                ZStack {
-                    ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
-                    createBottomFloater()
-                }
-                .transition(.asymmetric(insertion: .opacity, removal: .fade))
+                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
             }
             
         }
         .edgesIgnoringSafeArea(.all)
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            createBottomFloater()
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
