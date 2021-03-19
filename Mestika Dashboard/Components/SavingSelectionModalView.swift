@@ -138,6 +138,9 @@ struct SavingSelectionModalView: View {
             }
             .padding(.vertical, 15)
         }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
         //        .frame(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height * 0.8)
     }
 }
