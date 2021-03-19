@@ -104,6 +104,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                 if success {
                     self.isLoading = false
                     self.unLocked = true
+                    self.transferData.trxDateResp = self.transferVM.transactionDate
                 }
                 
                 if !success {

@@ -119,7 +119,7 @@ struct TransferOnUsSuccessInformationScreen: View {
     
     var dateInfo: some View {
         VStack {
-            Text(self.transferData.transactionDate)
+            Text(self.transferData.trxDateResp)
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
             

@@ -14,7 +14,7 @@ struct SavingAccountModelElement: Codable, Hashable {
     let planAllowDebitInHouse, planAllowInquiry: PlanAllow
     let accountNumber: String
     let planAllowDebitDomestic: PlanAllow
-    let accountStatusDescription: AccountStatusDescription
+    let accountStatusDescription: String?
     let accountStatus: String
     let accountTypeDescription: AccountTypeDescription
     let currency: String
