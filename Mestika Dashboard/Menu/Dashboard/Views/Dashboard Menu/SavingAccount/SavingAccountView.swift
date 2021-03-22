@@ -19,6 +19,8 @@ struct SavingAccountView: View {
     @State var nextViewActive = false
     @State var nextPinViewActive = false
     
+    @State var description = ""
+    
     var nextBtnDisabled: Bool {
         product.count == 0
     }
@@ -54,6 +56,7 @@ struct SavingAccountView: View {
                                     print(productsSavingAccountVM.products[i])
                                     self.product = productsSavingAccountVM.products[i].productName
                                     self.planCode = productsSavingAccountVM.products[i].kodePlan
+                                    self.description = productsSavingAccountVM.products[i].productDescription
                                 }) {
                                     Text(productsSavingAccountVM.products[i].productName)
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -67,6 +70,10 @@ struct SavingAccountView: View {
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(15)
                     .padding(.vertical, 5)
+                    
+                    Text(self.description)
+                        .font(.custom("Montserrat-Regular", size: 12))
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     Button(action: {
                         self.getProducDetails(planCode: self.planCode)
@@ -104,7 +111,7 @@ struct SavingAccountView: View {
                         HStack {
                             RoundedIcon(imageName: "ic_saving_account")
                             VStack(alignment: .leading, spacing: 4) {
-                                Text(item.accountName)
+                                Text(item.productName ?? "")
                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                 Text("No. Rekening: \(item.accountNumber)")
                                     .font(.custom("Montserrat-SemiBold", size: 10))

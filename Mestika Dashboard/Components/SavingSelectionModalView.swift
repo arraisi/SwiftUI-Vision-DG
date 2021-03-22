@@ -98,6 +98,7 @@ struct SavingSelectionModalView: View {
                     atmData.atmAddresspostalReferral = self.referralCode
                     
                     registerData.jenisTabungan = data.name
+                    registerData.planCodeTabungan = data.codePlan
                     
                     withAnimation {
                         self.isShowModal.toggle()

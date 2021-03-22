@@ -11,6 +11,7 @@ class RegistrasiModel: ObservableObject {
     @Published var homeRoute: Bool = false
     @Published var noTelepon = ""
     @Published var jenisTabungan = ""
+    @Published var planCodeTabungan = ""
     @Published var nik = ""
     @Published var email = ""
     @Published var tujuanPembukaanId: Int = 0

@@ -40,6 +40,7 @@ class UserRegistrationService {
         
         var userDetailParam: [String : Any] = [
             "mobileNumber": registerData.noTelepon,
+            "codePlan": registerData.planCodeTabungan,
             "productName": registerData.jenisTabungan,
             "imageKtp": "/storage/20201211_090631_.jpg",
             "nik": registerData.nik,

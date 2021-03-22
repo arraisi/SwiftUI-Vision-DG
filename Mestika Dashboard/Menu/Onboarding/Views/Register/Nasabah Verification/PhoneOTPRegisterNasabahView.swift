@@ -110,7 +110,7 @@ struct PhoneOTPRegisterNasabahView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 30)
                     
-                    Text("Please enter the OTP code with \nREF #" + "\nREF #\(referenceCode)")
+                    Text("Please enter the OTP code with \nREF #" + "\(referenceCode)")
                         .font(.custom("Montserrat-Regular", size: 12))
                         .foregroundColor(Color(hex: "#707070"))
                         .multilineTextAlignment(.center)
@@ -125,7 +125,7 @@ struct PhoneOTPRegisterNasabahView: View {
                     
                     HStack {
                         Text("Didn't Receive Code?")
-                            .font(.custom("Montserrat-Regular", size: 12))
+                            .font(.custom("Montserrat-Regular", size: 11))
                         
                         Button(action: {
                             var flags = SCNetworkReachabilityFlags()
@@ -140,7 +140,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             }
                         }) {
                             Text("Resend OTP")
-                                .font(.custom("Montserrat-SemiBold", size: 12))
+                                .font(.custom("Montserrat-SemiBold", size: 11))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }
                         .disabled(isResendOtpDisabled)
@@ -149,7 +149,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             self.isOtpValid = true
                         }, label: {
                             Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
-                                .font(.custom("Montserrat-Regular", size: 12))
+                                .font(.custom("Montserrat-Regular", size: 11))
                         })
                         .disabled(AppConstants().BYPASS_OTP) // false by pass to next page
                     }

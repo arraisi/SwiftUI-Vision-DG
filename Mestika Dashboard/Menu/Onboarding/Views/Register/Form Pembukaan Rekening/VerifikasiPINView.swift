@@ -174,14 +174,11 @@ struct VerifikasiPINView: View {
             }
             
             if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                ModalOverlay(tapAction: { withAnimation {  } })
             }
             
         }
         .edgesIgnoringSafeArea(.all)
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            createBottomFloater()
-        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
@@ -193,7 +190,9 @@ struct VerifikasiPINView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }))
-        
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            createBottomFloater()
+        }
     }
     
     private var pinDots: some View {

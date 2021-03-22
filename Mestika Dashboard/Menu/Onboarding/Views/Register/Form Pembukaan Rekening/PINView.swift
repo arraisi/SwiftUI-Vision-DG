@@ -125,9 +125,7 @@ struct PINView: View {
                                     }
                                     
                                     if (!isPINValidated(with: pin)) {
-                                        withAnimation {
-                                            self.showingModal = true
-                                        }
+                                        self.showingModal = true
                                     }
                                 },
                                 label: {
@@ -161,7 +159,7 @@ struct PINView: View {
             }
             
             if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
         }
@@ -170,9 +168,6 @@ struct PINView: View {
             UIApplication.shared.endEditing()
         }
         .navigationBarHidden(true)
-        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessage()
-        }
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingAlert) {
             return Alert(
@@ -188,6 +183,9 @@ struct PINView: View {
                 self.showingAlert = true
             }
         }))
+        .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessage()
+        }
     }
     
     private var pinDots: some View {

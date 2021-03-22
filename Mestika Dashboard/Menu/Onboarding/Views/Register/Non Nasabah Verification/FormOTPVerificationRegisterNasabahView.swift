@@ -127,7 +127,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     
                     HStack {
                         Text("Didn't Receive Code?".localized(language))
-                            .font(.custom("Montserrat-Regular", size: 12))
+                            .font(.custom("Montserrat-Regular", size: 11))
                         
                         Button(action: {
                             var flags = SCNetworkReachabilityFlags()
@@ -143,7 +143,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             }
                         }) {
                             Text("Resend OTP".localized(language))
-                                .font(.custom("Montserrat-SemiBold", size: 12))
+                                .font(.custom("Montserrat-SemiBold", size: 11))
                                 .foregroundColor(isResendOtpDisabled ? Color.black : Color(hex: "#232175"))
                         }
                         .disabled(isResendOtpDisabled)
@@ -155,7 +155,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             },
                             label: {
                                 Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
-                                    .font(.custom("Montserrat-Regular", size: 12))
+                                    .font(.custom("Montserrat-Regular", size: 11))
                             })
                             .disabled(AppConstants().BYPASS_OTP)
                     }
