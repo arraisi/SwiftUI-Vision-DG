@@ -24,6 +24,9 @@ struct HistoryTransactionList: View {
                     
                     HistoryTransactionRow(data: item)
                         .padding(.horizontal)
+                    
+                    Divider()
+                        .padding(.horizontal)
                 }
                 .listStyle(PlainListStyle())
             }

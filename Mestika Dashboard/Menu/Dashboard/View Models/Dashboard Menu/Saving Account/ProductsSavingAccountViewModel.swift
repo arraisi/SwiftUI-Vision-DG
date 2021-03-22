@@ -74,11 +74,11 @@ class ProductsSavingAccountViewModel : ObservableObject {
                 
                 DispatchQueue.main.async {
                     //                    self.productDetails = response
-                    self.currency = response.currency
-                    self.outgoing = response.outgoing
-                    self.minimumSaldo = response.minimumSaldo
-                    self.biayaAdministrasi = response.biayaAdministrasi
-                    self.minimumSetoranAwal = response.minimumSetoranAwal
+                    self.currency = response.currency ?? "0"
+                    self.outgoing = response.outgoing ?? "0"
+                    self.minimumSaldo = response.minimumSaldo ?? "0"
+                    self.biayaAdministrasi = response.biayaAdministrasi ?? "0"
+                    self.minimumSetoranAwal = response.minimumSetoranAwal ?? "0"
                     
                     self.isLoading = false
                 }

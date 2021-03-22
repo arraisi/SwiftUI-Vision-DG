@@ -54,7 +54,6 @@ struct CardView: View {
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    .padding(.bottom)
                     
                     VStack {
                         HStack{
@@ -71,7 +70,8 @@ struct CardView: View {
                             Spacer()
                         }
                     }
-                    .padding(.top, 10)
+                    .padding(.bottom, 15)
+                    .padding(.top, 21)
                     
                     HStack{
                         Text(card.nameOnCard)
@@ -103,7 +103,8 @@ struct CardView: View {
 //                                .font(.custom("Montserrat-SemiBold", size: 10))
 //                        }
                     }
-                    .padding(.top)
+                    .padding(.top, 10)
+                    .padding(.trailing, 20)
                     
                     Spacer()
                 }

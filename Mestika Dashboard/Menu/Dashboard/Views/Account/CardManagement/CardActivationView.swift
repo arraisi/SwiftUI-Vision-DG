@@ -116,6 +116,8 @@ struct CardActivationView: View {
         .onAppear {
 //            self.noAtmCtrl = card.cardNo
 //            self.activateData.cardNo = card.cardNo
+            
+            print(card.cardNo)
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()

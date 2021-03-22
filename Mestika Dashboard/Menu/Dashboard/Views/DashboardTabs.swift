@@ -80,12 +80,12 @@ struct DashboardTabs: View {
                     
                     HStack(spacing: itemWidth * itemGapWidth) {
                         
-                        ForEach(self.cards, id: \.id) { card in
-                            
+                        if (self.cards.count < 1) {
+                            EmptyView()
+                        } else {
                             NavigationLink(
-                                destination: MyCardDashboardView(cards: .constant(card))) {
-                                CardView(card: card, cardWidth: itemWidth, cardHeight: card.isShow == true ? itemHeight:(itemHeight-itemGapHeight), showContent: true)
-                                    .offset(x: self.offset)
+                                destination: MyCardDashboardView(cards: .constant(cards[0]))) {
+                                CardView(card: cards[0], cardWidth: itemWidth, cardHeight: itemHeight, showContent: true)
 //                                    .highPriorityGesture(
 //
 //                                        DragGesture()
@@ -104,9 +104,6 @@ struct DashboardTabs: View {
                             }
                         }
                     }
-                    .animation(.spring())
-                    .frame(width: itemWidth)
-                    .offset(x: self.firstOffset)
                 }
                 
                 ListEwalletView()

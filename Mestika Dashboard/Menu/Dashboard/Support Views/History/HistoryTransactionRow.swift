@@ -15,7 +15,7 @@ struct HistoryTransactionRow: View {
         HStack(spacing: 5) {
             
             VStack(alignment: .leading, spacing: 3) {
-                Text(stringToDateFormat(data.postingDate))
+                Text("\(data.postingDate.subStringRange(from: 6, to: 8))-\(data.postingDate.subStringRange(from: 4, to: 6))-\(data.postingDate.subStringRange(from: 0, to: 4))")
                     .font(.custom("Montserrat-Regular", size: 10))
                 
                 Text(data.transactionInfo)

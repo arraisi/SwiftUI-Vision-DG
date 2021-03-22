@@ -26,6 +26,8 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     var biayaAdministrasi = "0"
     var minimumSetoranAwal = "0"
     
+    @State var depositDbl: Double = 0
+    
     var nextBtnDisabled: Bool {
         product.count == 0 || depositBalance.count == 0
     }
@@ -52,22 +54,8 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 })
                                 .font(.custom("Montserrat-Bold", size: 12))
                                 .padding(.leading, 15)
+                                .padding(.vertical)
                                 .disabled(true)
-                            
-                            Menu {
-                                ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
-                                    Button(action: {
-                                        self.product = productsSavingAccountVM.products[i].productName
-                                        self.codePlan = productsSavingAccountVM.products[i].kodePlan
-                                    }) {
-                                        Text(productsSavingAccountVM.products[i].productName)
-                                            .font(.custom("Montserrat-Regular", size: 12))
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "chevron.right").padding()
-                            }
-                            
                         }
                         .background(Color.gray.opacity(0.1))
                         .cornerRadius(15)
@@ -101,20 +89,26 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                         let amountString = String($0.prefix(13))
                                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                         self.depositBalance = cleanAmount.thousandSeparator()
+                                        
+                                        self.depositDbl = Double(cleanAmount) ?? 0
+                                        
+                                        if (self.depositDbl > Double(self.currency)!) {
+                                            self.depositBalance = self.currency.thousandSeparator()
+                                        }
                                     }
                                     .keyboardType(.numberPad)
                                 Spacer()
                             }
                             .foregroundColor(Color("DarkStaleBlue"))
                             
-                            if Double(depositBalance)! > Double(currency)! {
-                                HStack {
-                                    Text("Deposit Exceeds Active Balance".localized(language))
-                                        .font(.custom("Montserrat-Bold", size: 10))
-                                    Spacer()
-                                }
-                                .foregroundColor(.red)
-                            }
+//                            if Double(depositBalance)! > Double(currency)! {
+//                                HStack {
+//                                    Text("Deposit Exceeds Active Balance".localized(language))
+//                                        .font(.custom("Montserrat-Bold", size: 10))
+//                                    Spacer()
+//                                }
+//                                .foregroundColor(.red)
+//                            }
                             
                             Divider()
                             

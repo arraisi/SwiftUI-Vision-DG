@@ -82,8 +82,10 @@ struct InformasiKeluargaVerificationView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Family address".localized(language), text: $registerData.alamatKeluarga)
-                        .disabled(true)
+                    
+                    MultilineTextField("Family address".localized(language), text: $registerData.alamatKeluarga, onCommit: {
+                    })
+                    .disabled(true)
                 }
                 .frame(height: 20)
                 .font(.subheadline)

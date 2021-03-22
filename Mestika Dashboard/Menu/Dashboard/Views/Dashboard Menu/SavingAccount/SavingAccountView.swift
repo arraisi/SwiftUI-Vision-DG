@@ -19,6 +19,8 @@ struct SavingAccountView: View {
     @State var nextViewActive = false
     @State var nextPinViewActive = false
     
+    @State var balance: String = ""
+    
     @State var description = ""
     
     var nextBtnDisabled: Bool {
@@ -40,7 +42,7 @@ struct SavingAccountView: View {
                 }
                 .padding([.top, .horizontal], 25)
                 
-                VStack(spacing: 20) {
+                VStack {
                     HStack {
                         TextField("Choose a savings product".localized(language), text: $product)
                             .onChange(of: product, perform: { value in
@@ -74,6 +76,7 @@ struct SavingAccountView: View {
                     Text(self.description)
                         .font(.custom("Montserrat-Regular", size: 12))
                         .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, 15)
                     
                     Button(action: {
                         self.getProducDetails(planCode: self.planCode)
@@ -81,7 +84,7 @@ struct SavingAccountView: View {
                         Text("Opening a new savings account".localized(language))
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                             .background(nextBtnDisabled ? Color(.lightGray) : Color("StaleBlue"))
                             .cornerRadius(15)
                     })
@@ -141,7 +144,7 @@ struct SavingAccountView: View {
                 NavigationLink(destination: ConfirmationOfOpeningSavingAccountView(
                     product: self.$product,
                     codePlan: self.$planCode,
-                    currency: self.productsSavingAccountVM.currency ?? "0",
+                    currency: self.balance,
                     minimumSaldo: self.productsSavingAccountVM.minimumSaldo ?? "0",
                     biayaAdministrasi: self.productsSavingAccountVM.biayaAdministrasi ?? "0",
                     minimumSetoranAwal: self.productsSavingAccountVM.minimumSetoranAwal ?? "0"
@@ -153,12 +156,26 @@ struct SavingAccountView: View {
 
         }
         .onAppear {
+            self.getAccountBalance()
+            
             self.productsSavingAccountVM.getProducts { (success) in
                 
             }
             
             self.savingAccountVM.getAccounts { (success) in
                 
+            }
+        }
+    }
+    
+    @ObservedObject var profileVM = ProfileViewModel()
+    func getAccountBalance() {
+        self.profileVM.getAccountBalance { success in
+            if success {
+                self.balance = self.profileVM.balance
+            }
+            
+            if !success {
             }
         }
     }
@@ -173,12 +190,12 @@ struct SavingAccountView: View {
             //                self.nextViewActive = true
             if result {
                 if productsSavingAccountVM.minimumSetoranAwal == "" || productsSavingAccountVM.minimumSetoranAwal == "0" {
-                    self.nextPinViewActive = true
+                    self.nextViewActive = true
                 } else {
                     self.nextViewActive = true
                 }
             } else {
-                self.nextPinViewActive = true
+                self.nextViewActive = true
             }
         }
     }

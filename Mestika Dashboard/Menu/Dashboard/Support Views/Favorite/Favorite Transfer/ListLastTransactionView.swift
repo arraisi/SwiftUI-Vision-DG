@@ -60,7 +60,7 @@ struct ListLastTransactionView: View {
                                 }
                                 
                                 VStack(alignment: .leading) {
-                                    Text("\(data.date.subStringRange(from: 6, to: 8)) - \(data.date.subStringRange(from: 4, to: 6)) - \(data.date.subStringRange(from: 0, to: 4))")
+                                    Text("\(data.date.subStringRange(from: 6, to: 8))-\(data.date.subStringRange(from: 4, to: 6))-\(data.date.subStringRange(from: 0, to: 4))")
                                         .font(.system(size: 12))
                                     
                                     Text("\(data.historyListDescription)")
