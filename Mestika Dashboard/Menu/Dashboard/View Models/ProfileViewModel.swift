@@ -123,7 +123,13 @@ extension ProfileViewModel {
                 print("Success")
                 
                 self.isLoading = false
-                self.balance = response.balance
+                
+                if (response.balance == "") {
+                    self.balance = "0"
+                } else {
+                    self.balance = response.balance ?? "0"
+                }
+    
                 self.creditDebit = response.creditDebit
                  
                 completion(true)

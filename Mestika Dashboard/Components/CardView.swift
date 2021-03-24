@@ -32,20 +32,8 @@ struct CardView: View {
                 .scaledToFill()
                 .frame(width: cardWidth, height: cardHeight)
             
-//            Image("card_bg")
-//                .resizable()
-//                .frame(width: cardWidth, height: cardHeight)
-            
             if showContent {
                 VStack(){
-                    
-//                    HStack {
-//                        Spacer()
-//                        Image("logo_mestika")
-//                            .resizable()
-//                            .frame(width: 100, height: 15, alignment: .center)
-//                    }
-//                    .padding(.vertical, 10)
                     
                     HStack{
                         Text("GOLD")
@@ -87,21 +75,6 @@ struct CardView: View {
                         Text(self.card.status == "INACTIVE" ? "INACTIVE" : self.card.status)
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 10))
-//                        if card.status {
-//                            Text("Blokir Sementara")
-//                                .foregroundColor(.white)
-//                                .font(.custom("Montserrat-SemiBold", size: 10))
-//                        }
-//                        else if card.activeStatus {
-//                            Text("Aktif")
-//                                .foregroundColor(.white)
-//                                .font(.custom("Montserrat-SemiBold", size: 10))
-//                        }
-//                        else {
-//                            Text("Tidak Aktif")
-//                                .foregroundColor(.white)
-//                                .font(.custom("Montserrat-SemiBold", size: 10))
-//                        }
                     }
                     .padding(.top, 10)
                     .padding(.trailing, 20)
@@ -116,8 +89,8 @@ struct CardView: View {
     }
 }
 
-//struct CardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardView(card: KartuKuResponse[0], cardWidth: 315, cardHeight: 197, showContent: true)
-//    }
-//}
+struct CardView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardView(card: KartuKuDesignViewModel(cardFlag: "", kodepos: "", provinsi: "", kabupatenKota: "", kecamatan: "", kelurahan: "", rw: "", rt: "", postalAddress: "", accountNumber: "", nameOnCard: "", cardNo: "", classCode: "", nik: "", id: "", imageNameAlias: "", mainCard: "", status: ""), cardWidth: 315, cardHeight: 197, showContent: true)
+    }
+}

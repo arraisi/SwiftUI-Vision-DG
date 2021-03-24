@@ -9,5 +9,6 @@ import Foundation
 
 // MARK: - AccountBalanceResponse
 struct AccountBalanceResponse: Codable {
-    let accountLegderBalance, balance, creditDebit, currencyCode: String
+    let accountLegderBalance, creditDebit, currencyCode: String
+    let balance: String?
 }

@@ -84,12 +84,13 @@ struct ConfirmationPinOfSavingAccountView: View {
             print("product \(product)")
             print("deposit \(deposit)")
         }
+        .navigationBarTitle("Saving Account".localized(language), displayMode: .inline)
     }
     
     func saveSavingAccount() {
-        self.savingAccountVM.saveAccount(kodePlan: self.codePlan, deposit: self.deposit, pinTrx: self.pin) { result in
+        self.savingAccountVM.saveAccount(kodePlan: self.codePlan, deposit: self.deposit.replacingOccurrences(of: ".", with: ""), pinTrx: self.pin) { result in
             if result {
-                self.deposit = self.savingAccountVM.deposit
+//                self.deposit = self.savingAccountVM.deposit
                 self.success = true
             } else {
                 self.wrongPin = true

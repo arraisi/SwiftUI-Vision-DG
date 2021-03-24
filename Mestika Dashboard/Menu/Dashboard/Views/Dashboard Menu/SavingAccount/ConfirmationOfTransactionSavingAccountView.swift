@@ -46,7 +46,10 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                         Text("Type of Transaction".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                             .foregroundColor(Color.gray)
+                            .fixedSize(horizontal: false, vertical: true)
+                        
                         Spacer()
+                        
                         HStack {
                             Text("Savings".localized(language))
                                 .font(.custom("Montserrat-Bold", size: 12))
@@ -69,6 +72,8 @@ struct ConfirmationOfTransactionSavingAccountView: View {
                             Text(product)
                                 .font(.custom("Montserrat-Bold", size: 12))
                                 .foregroundColor(Color.black.opacity(0.6))
+                                .fixedSize(horizontal: false, vertical: true)
+                            
                             Spacer()
                         }
                         .padding(.horizontal)
