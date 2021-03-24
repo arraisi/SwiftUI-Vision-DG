@@ -101,14 +101,14 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             }
                             .foregroundColor(Color("DarkStaleBlue"))
                             
-//                            if Double(depositBalance)! > Double(currency)! {
-//                                HStack {
-//                                    Text("Deposit Exceeds Active Balance".localized(language))
-//                                        .font(.custom("Montserrat-Bold", size: 10))
-//                                    Spacer()
-//                                }
-//                                .foregroundColor(.red)
-//                            }
+                            //                            if Double(depositBalance)! > Double(currency)! {
+                            //                                HStack {
+                            //                                    Text("Deposit Exceeds Active Balance".localized(language))
+                            //                                        .font(.custom("Montserrat-Bold", size: 10))
+                            //                                    Spacer()
+                            //                                }
+                            //                                .foregroundColor(.red)
+                            //                            }
                             
                             Divider()
                             
@@ -137,13 +137,13 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     
-                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: minimumSetoranAwal)
+                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: productsSavingAccountVM.minimumSetoranAwal ?? "0")
                     
-                    //                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal)
+                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal ?? "0")
                     
-                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: minimumSaldo)
+                    SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: productsSavingAccountVM.minimumSaldo ?? "0")
                     
-                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan", value: biayaAdministrasi)
+                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan".localized(language), value: productsSavingAccountVM.biayaAdministrasi ?? "0")
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 85)
@@ -179,7 +179,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             //            }
             print("code plan \(codePlan)")
             print("product \(product)")
-//            print("deposit \(deposit)")
+            //            print("deposit \(deposit)")
         }
     }
     
