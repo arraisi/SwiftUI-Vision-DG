@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 struct BottomNavigationView: View {
     
@@ -26,6 +27,11 @@ struct BottomNavigationView: View {
     
     @State var cardNo: String = ""
     @State var sourceNumber: String = ""
+    
+    @State var showQrCode: Bool = false
+    
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
@@ -55,7 +61,9 @@ struct BottomNavigationView: View {
                     }
                     
                     if (selected == 4) {
-                        PaymentTransactionTabs()
+                        //                        PaymentTransactionTabs()
+                        InputPaymentByQrisView()
+                            .environmentObject(appState)
                     }
                     
                     Spacer()
@@ -67,7 +75,7 @@ struct BottomNavigationView: View {
                         ZStack(alignment: .bottom){
                             
                             CustomBottomNavigationView(selected: self.$selected)
-//                                .padding(.top, 5)
+                                //                                .padding(.top, 5)
                                 .padding(.horizontal, 20)
                                 .background(
                                     CurvedShape()
@@ -155,6 +163,28 @@ struct BottomNavigationView: View {
                 
             }
         }
+        .sheet(isPresented: self.$showQrCode, content: {
+            
+            Image(uiImage: generateQRCode(from: "123"))
+                .interpolation(.none)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+            
+        })
+    }
+    
+    func generateQRCode(from string: String) -> UIImage {
+        let data = Data(string.utf8)
+        filter.setValue(data, forKey: "inputMessage")
+        
+        if let outputImage = filter.outputImage {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+        
+        return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
     
     var appbar: some View {
@@ -177,7 +207,9 @@ struct BottomNavigationView: View {
             Button(action: {}, label: {
                 Image("ic_bell")
             })
-            Button(action: {}, label: {
+            Button(action: {
+                self.showQrCode = true
+            }, label: {
                 Image("ic_qrcode")
             })
         }
