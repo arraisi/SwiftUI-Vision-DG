@@ -169,7 +169,7 @@
 /* ScanNPWPView */
 "Please enter a photo of your Tax Identification Number card" = "Please enter a photo of your NPWP card";
 "Upload Image of Tax Identification Number" = "Upload Image of NPWP";
-"Tax Identification Number" = "NPWP Number";
+"Tax Identification Number" = "Tax Number";
 "* I declare that I do not have an NPWP card.\n Skip this stage" = "* I declare that I do not have an NPWP card.\n Skip this stage" ;
 
 /* ScanNPWPView */
@@ -297,3 +297,6 @@
 "NIK TIDAK TERDAFTAR" = "NIK IS NOT REGISTERED";
 "Ya, alamat sesuai" = "Yes, the address matches";
 "Tidak, alamat tidak sesuai" = "No, the address doesn't match";
+
+"No Favorites" = "Tidak ada Favorit";
+"See Full List" = "Lihat Daftar Selengkapnya";

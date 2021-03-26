@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct HistoryTransactionList: View {
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var histories: [HistoryLists]
     
     var body: some View {
         
         if (histories.count < 1) {
             
-            Text("Tidak ada Histori")
+            Text("No Favorites".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 14))
                 .padding(.top, 25)
             

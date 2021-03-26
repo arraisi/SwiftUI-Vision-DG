@@ -103,7 +103,7 @@ struct FormIdentitasDiriView: View {
                             
                             // Form KTP
                             VStack {
-                                DisclosureGroup("Photo of KTP and ID Number of Population".localized(language), isExpanded: self.$formKTP) {
+                                DisclosureGroup("Photo of KTP and Identity Card Number".localized(language), isExpanded: self.$formKTP) {
                                     ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik, preview: $showKTPPreview,
                                                 onChange: {
                                                     self.actionSelection("ktp")

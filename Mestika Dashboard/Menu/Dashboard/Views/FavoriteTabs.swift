@@ -19,27 +19,26 @@ struct FavoriteTabs: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-//        ScrollView(.vertical, showsIndicators: false, content: {
+        //        ScrollView(.vertical, showsIndicators: false, content: {
+        
+        //            GeometryReader { geometry in
+        //                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+        //                    .frame(height: 0)
+        //            }
+        
+        VStack {
+            titleInfo
             
-//            GeometryReader { geometry in
-//                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
-//                    .frame(height: 0)
-//            }
+            //                ListFavoritePurchasePaymentView()
+            //                    .padding()
             
-            VStack {
-                titleInfo
-                
-//                ListFavoritePurchasePaymentView()
-//                    .padding()
-                
-                ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
-                    .padding()
-                    .frame(height: 400)
-                
-                Spacer()
-            }
-//        })
-            .navigationBarTitle("Favorit", displayMode: .inline)
+            ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
+                .padding()
+                .frame(height: 400)
+            
+            Spacer()
+        }
+        .navigationBarTitle("Favorite".localized(language), displayMode: .inline)
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
@@ -64,9 +63,9 @@ struct FavoriteTabs: View {
             
             Spacer()
             
-//            Button(action: {}, label: {
-//                Image("ic_search")
-//            })
+            //            Button(action: {}, label: {
+            //                Image("ic_search")
+            //            })
         }
         .padding()
     }

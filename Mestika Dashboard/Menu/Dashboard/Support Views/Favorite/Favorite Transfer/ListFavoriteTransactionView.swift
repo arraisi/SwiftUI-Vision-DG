@@ -42,7 +42,7 @@ struct ListFavoriteTransactionView: View {
                     ProgressView()
                 } else if (self.favoritVM.favorites.count < 1) {
                     
-                    Text("Tidak ada Favorit")
+                    Text("No Favorites".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .padding(.top, 25)
                     
@@ -105,7 +105,7 @@ struct ListFavoriteTransactionView: View {
                     print("See All")
                     self.isNextRoute = true
                 }, label: {
-                    Text("Lihat Daftar Selengkapnya")
+                    Text("See Full List".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color(hex: "#2334D0"))
                         .padding()

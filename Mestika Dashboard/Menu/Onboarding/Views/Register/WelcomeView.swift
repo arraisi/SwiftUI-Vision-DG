@@ -160,8 +160,8 @@ struct WelcomeView: View {
                         
                         NavigationLink(
                             destination: FirstLoginView().environmentObject(registerData),
-//                            destination: BottomNavigationView(),
-//                            destination: VerificationAddressView().environmentObject(registerData),
+                            //                            destination: BottomNavigationView(),
+                            //                            destination: VerificationAddressView().environmentObject(registerData),
                             isActive: self.$isFirstLoginViewActive,
                             label: {}
                         )
@@ -210,6 +210,7 @@ struct WelcomeView: View {
             .navigationBarHidden(true)
             .onReceive(self.appState.$moveToWelcomeView) { moveToWelcomeView in
                 if moveToWelcomeView {
+                    self.isShowModal = false
                     getCoreDataNewDevice()
                     print("Move to Welcome: \(moveToWelcomeView)")
                     activateWelcomeView()
@@ -242,7 +243,7 @@ struct WelcomeView: View {
                     } else {
                         self.jitsiRoom = info as! String
                         print(jitsiRoom)
-
+                        
                         self.isIncomingVideoCall = true
                         print("VCALL")
                     }
@@ -263,7 +264,7 @@ struct WelcomeView: View {
                 getCoreDataNewDevice()
                 getCoreDataRegister()
                 getMobileVersion()
-//                getUserStatusKyc(deviceId: deviceId!)
+                //                getUserStatusKyc(deviceId: deviceId!)
                 var flags = SCNetworkReachabilityFlags()
                 SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                 

@@ -61,7 +61,7 @@
 "Ambil Foto KTP" = "";
 "Ganti Foto Lain" = "";
 "Nomor Kartu Tanda Penduduk" = "";
-"Identity Card/(KTP) Number (Automatically filled in)" = "No. KTP (Otomatis terisi)";
+"Identity Card/(KTP) Number" = "No. KTP (Otomatis terisi)";
 "Ambil Gambar Selfie" = "";
 "Ganti Foto Lain" = "";
 "Simpan" = "";
@@ -347,7 +347,7 @@
 /* FormIdentitasDiriView */
 "PERSONAL IDENTITY" = "IDENTITAS DIRI";
 "Please fill in and complete your identity data" = "Silahkan isi dan lengkapi data identitas Anda";
-"Photo of KTP and ID Number of Population" = "Foto KTP dan No. Induk Penduduk";
+"Photo of KTP and Identity Card Number" = "Foto KTP dan No. Induk Penduduk";
 "Take Self Photo or Selfie" = "Ambil Foto sendiri atau Selfie";
 "Enter your NPWP" = "Masukkan NPWP Anda";
 "Continue to Open New Account" = "Lanjut Pembukaan Rekening Baru";

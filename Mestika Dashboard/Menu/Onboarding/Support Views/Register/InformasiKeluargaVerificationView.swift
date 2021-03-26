@@ -81,13 +81,13 @@ struct InformasiKeluargaVerificationView: View {
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
+                
                 HStack {
                     
                     MultilineTextField("Family address".localized(language), text: $registerData.alamatKeluarga, onCommit: {
                     })
                     .disabled(true)
                 }
-                .frame(height: 20)
                 .font(.subheadline)
                 .padding()
                 .background(Color.gray.opacity(0.1))

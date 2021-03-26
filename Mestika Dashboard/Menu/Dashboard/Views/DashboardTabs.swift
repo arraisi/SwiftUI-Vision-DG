@@ -175,6 +175,7 @@ struct DashboardTabs: View {
                             .bold()
                             .foregroundColor(Color(hex: "#232175"))
                             .padding(.bottom, 5)
+                            .fixedSize(horizontal: false, vertical: true)
                         
                         if (isHiddenBalance) {
                             VStack(alignment: .leading) {
