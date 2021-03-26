@@ -310,6 +310,12 @@
 		C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */; };
 		C00702C7255531280089DBD1 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00702C6255531280089DBD1 /* DismissingKeyboard.swift */; };
 		C00E80C025EF4FD3006A8335 /* SuccessOpenNewSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00E80BF25EF4FD2006A8335 /* SuccessOpenNewSavingAccountView.swift */; };
+		C010FAC926099A920092EEDE /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = C010FAC826099A920092EEDE /* CodeScanner */; };
+		C010FAD1260B0FCD0092EEDE /* InputPaymentByQrisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010FAD0260B0FCD0092EEDE /* InputPaymentByQrisView.swift */; };
+		C010FAD6260B17280092EEDE /* ChooseAccountQrisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010FAD5260B17280092EEDE /* ChooseAccountQrisView.swift */; };
+		C010FADB260B1DDA0092EEDE /* SummaryQrisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010FADA260B1DDA0092EEDE /* SummaryQrisView.swift */; };
+		C010FAE0260B29200092EEDE /* ConfirmationPinQrisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010FADF260B29200092EEDE /* ConfirmationPinQrisView.swift */; };
+		C010FAE5260B29B70092EEDE /* SuccessPaymentQrisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C010FAE4260B29B70092EEDE /* SuccessPaymentQrisView.swift */; };
 		C018012E25D4E40F00766E41 /* FavoritViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018012D25D4E40F00766E41 /* FavoritViewModel.swift */; };
 		C018014725D4E47F00766E41 /* FavoritService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018014625D4E47F00766E41 /* FavoritService.swift */; };
 		C01B849C25FF213800F5BBD9 /* ProductsSavingAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B849B25FF213800F5BBD9 /* ProductsSavingAccountModel.swift */; };
@@ -742,6 +748,11 @@
 		C00702BE255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithToolBarKeyBoard.swift; sourceTree = "<group>"; };
 		C00702C6255531280089DBD1 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
 		C00E80BF25EF4FD2006A8335 /* SuccessOpenNewSavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessOpenNewSavingAccountView.swift; sourceTree = "<group>"; };
+		C010FAD0260B0FCD0092EEDE /* InputPaymentByQrisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPaymentByQrisView.swift; sourceTree = "<group>"; };
+		C010FAD5260B17280092EEDE /* ChooseAccountQrisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAccountQrisView.swift; sourceTree = "<group>"; };
+		C010FADA260B1DDA0092EEDE /* SummaryQrisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryQrisView.swift; sourceTree = "<group>"; };
+		C010FADF260B29200092EEDE /* ConfirmationPinQrisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPinQrisView.swift; sourceTree = "<group>"; };
+		C010FAE4260B29B70092EEDE /* SuccessPaymentQrisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPaymentQrisView.swift; sourceTree = "<group>"; };
 		C018012D25D4E40F00766E41 /* FavoritViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritViewModel.swift; sourceTree = "<group>"; };
 		C018014625D4E47F00766E41 /* FavoritService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritService.swift; sourceTree = "<group>"; };
 		C01B849B25FF213800F5BBD9 /* ProductsSavingAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsSavingAccountModel.swift; sourceTree = "<group>"; };
@@ -859,6 +870,7 @@
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				2E7F032F95A05771F41E14EF /* Pods_Mestika_Dashboard.framework in Frameworks */,
+				C010FAC926099A920092EEDE /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1692,6 +1704,18 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		C010FABE260999780092EEDE /* QRIS */ = {
+			isa = PBXGroup;
+			children = (
+				C010FAD0260B0FCD0092EEDE /* InputPaymentByQrisView.swift */,
+				C010FAD5260B17280092EEDE /* ChooseAccountQrisView.swift */,
+				C010FADA260B1DDA0092EEDE /* SummaryQrisView.swift */,
+				C010FADF260B29200092EEDE /* ConfirmationPinQrisView.swift */,
+				C010FAE4260B29B70092EEDE /* SuccessPaymentQrisView.swift */,
+			);
+			path = QRIS;
+			sourceTree = "<group>";
+		};
 		C01800A925D4DF4E00766E41 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1817,6 +1841,7 @@
 		C01C67A4255E38180019D06F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C010FABE260999780092EEDE /* QRIS */,
 				C0733FBC25EE25000034689F /* Dashboard Menu */,
 				0658B58C2563F8A1001B659D /* Notification */,
 				52BF57F52559279100F009B5 /* PaymentTransaction */,
@@ -2058,6 +2083,7 @@
 				520E467A2568B5A800DE9205 /* Introspect */,
 				520E46802568BEF100DE9205 /* Indicators */,
 				06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */,
+				C010FAC826099A920092EEDE /* CodeScanner */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -2144,6 +2170,7 @@
 				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
 				06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				C010FAC726099A920092EEDE /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -2367,6 +2394,7 @@
 				06202919256D905500A830EA /* ATMService.swift in Sources */,
 				52ADFF892557DFDC00A1001F /* FormEmailVerificationRegisterNasabahView.swift in Sources */,
 				C0BCCB222577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift in Sources */,
+				C010FAE5260B29B70092EEDE /* SuccessPaymentQrisView.swift in Sources */,
 				52E4310A25DF97AC0050DB22 /* LastTransactionResponse.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
 				0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */,
@@ -2459,6 +2487,7 @@
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
 				5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */,
 				52ADFEFE2557DC7A00A1001F /* CustomNavigationBarView.swift in Sources */,
+				C010FAE0260B29200092EEDE /* ConfirmationPinQrisView.swift in Sources */,
 				52ADFFAB2557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift in Sources */,
 				C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */,
 				C01B84D825FF5A1F00F5BBD9 /* NewSavingAccountResponse.swift in Sources */,
@@ -2527,6 +2556,7 @@
 				52ADFEC92557DA3700A1001F /* AssetsService.swift in Sources */,
 				52ADFF4F2557DED900A1001F /* TextRecognizer.swift in Sources */,
 				0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */,
+				C010FAD1260B0FCD0092EEDE /* InputPaymentByQrisView.swift in Sources */,
 				0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */,
 				526A81682560B2B200D614CB /* FirstOTPLoginView.swift in Sources */,
 				FA486B1E25AF528D00EDBD88 /* Font+Extensions.swift in Sources */,
@@ -2592,6 +2622,7 @@
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
+				C010FADB260B1DDA0092EEDE /* SummaryQrisView.swift in Sources */,
 				522101B125C9213100C9566A /* TransferOnUsModel.swift in Sources */,
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				C0D274D725EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift in Sources */,
@@ -2630,6 +2661,7 @@
 				52ADFF082557DCAD00A1001F /* InfiniteCarousellView.swift in Sources */,
 				5247463525480047001F43C5 /* ListLastTransactionView.swift in Sources */,
 				52C3629925D12D86000374AA /* TransferRtgsDestination.swift in Sources */,
+				C010FAD6260B17280092EEDE /* ChooseAccountQrisView.swift in Sources */,
 				52BF57CF2558E34100F009B5 /* FormPilihJenisTabunganView.swift in Sources */,
 				52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */,
 				0A566A0325CA68970008E752 /* TransferViewModel.swift in Sources */,
@@ -3450,6 +3482,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		C010FAC726099A920092EEDE /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.7;
+			};
+		};
 		C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
@@ -3498,6 +3538,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
 			productName = BottomSheet;
+		};
+		C010FAC826099A920092EEDE /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C010FAC726099A920092EEDE /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 		C06AC3102563770700D06EE3 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
