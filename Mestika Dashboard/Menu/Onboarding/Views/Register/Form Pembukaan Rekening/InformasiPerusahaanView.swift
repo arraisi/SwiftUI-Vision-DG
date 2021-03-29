@@ -526,14 +526,37 @@ struct InformasiPerusahaanView: View {
                 Spacer()
             }
             
+//            HStack {
+//
+//                TextField("Company's address".localized(language), text: $location)
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 36)
+//
+//                Button(action:{
+//                    searchAddress(keyword: location)
+//                }, label: {
+//                    Image(systemName: "location")
+//                        .font(Font.system(size: 20))
+//                        .foregroundColor(Color(hex: "#707070"))
+//                })
+//
+//            }
+//            .padding(.horizontal)
+//            .background(Color.gray.opacity(0.1))
+//            .cornerRadius(10)
+            
             HStack {
                 
-                TextField("Company's address".localized(language), text: $location)
-                    .font(Font.system(size: 14))
-                    .frame(height: 36)
+                MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
+                })
+                .font(Font.system(size: 14))
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
                 
                 Button(action:{
-                    searchAddress(keyword: location)
+                    //                        showingModal.toggle()
+                    searchAddress()
                 }, label: {
                     Image(systemName: "location")
                         .font(Font.system(size: 20))
@@ -541,9 +564,6 @@ struct InformasiPerusahaanView: View {
                 })
                 
             }
-            .padding(.horizontal)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
             
             //            List(addressSugestionResult, id: \.formatted_address) { data in
             //

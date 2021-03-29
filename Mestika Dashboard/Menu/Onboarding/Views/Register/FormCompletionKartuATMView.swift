@@ -92,11 +92,11 @@ struct FormCompletionKartuATMView: View {
                         
                         Button(action: {
                             self.atmData.atmAddressPostalCodeInput = self.kodePos
-//                            if (self.user.last?.isNasabahMestika == true) {
-//                                self.goToSuccessPage = true
-//                            } else {
-//                                self.postData()
-//                            }
+                            //                            if (self.user.last?.isNasabahMestika == true) {
+                            //                                self.goToSuccessPage = true
+                            //                            } else {
+                            //                                self.postData()
+                            //                            }
                             self.goToSuccessPage = true
                         }, label: {
                             Text("Submit Data".localized(language))
@@ -276,11 +276,20 @@ struct FormCompletionKartuATMView: View {
                 
                 HStack {
                     
-                    TextField("Address".localized(language), text: $atmData.atmAddressInput) { changed in
-                    } onCommit: {
-                    }
+                    //                    TextField("Address".localized(language), text: $atmData.atmAddressInput) { changed in
+                    //                    } onCommit: {
+                    //                    }
+                    //                    .font(Font.system(size: 14))
+                    //                    .frame(height: 36)
+                    //                    .disabled(addressOptionId != 4)
+                    //                    .padding(.horizontal)
+                    //                    .background(Color.gray.opacity(0.1))
+                    //                    .cornerRadius(10)
+                    
+                    
+                    MultilineTextField("Address".localized(language), text: $atmData.atmAddressInput, onCommit: {
+                    })
                     .font(Font.system(size: 14))
-                    .frame(height: 36)
                     .disabled(addressOptionId != 4)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
@@ -377,11 +386,18 @@ struct FormCompletionKartuATMView: View {
                 
                 HStack {
                     
-                    TextField("Address".localized(language), text: $registerData.alamatPerusahaan) { changed in
-                    } onCommit: {
-                    }
+                    //                    TextField("Address".localized(language), text: $registerData.alamatPerusahaan) { changed in
+                    //                    } onCommit: {
+                    //                    }
+                    //                    .font(Font.system(size: 14))
+                    //                    .frame(height: 36)
+                    //                    .disabled(true)
+                    //                    .padding(.horizontal)
+                    //                    .background(Color.gray.opacity(0.1))
+                    //                    .cornerRadius(10)
+                    MultilineTextField("Address".localized(language), text: $registerData.alamatPerusahaan, onCommit: {
+                    })
                     .font(Font.system(size: 14))
-                    .frame(height: 36)
                     .disabled(true)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
@@ -488,15 +504,25 @@ struct FormCompletionKartuATMView: View {
                 Spacer()
             }
             
+//            HStack {
+//                TextField("Company's address".localized(language), text: $location)
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 0)
+//                    .disabled(true)
+//            }
+//            .padding(.horizontal)
+//            .background(Color.gray.opacity(0.1))
+//            .cornerRadius(10)
+            
             HStack {
-                TextField("Company's address".localized(language), text: $location)
-                    .font(Font.system(size: 14))
-                    .frame(height: 0)
-                    .disabled(true)
+                MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
+                })
+                .font(Font.system(size: 14))
+                .disabled(true)
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
             }
-            .padding(.horizontal)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
             
             List(self.suggestions, id: \.self) { suggestion in
                 
@@ -539,9 +565,19 @@ struct FormCompletionKartuATMView: View {
             
             HStack {
                 
-                TextField("Company's address".localized(language), text: $location)
+//                TextField("Company's address".localized(language), text: $location)
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 36)
+                
+                HStack {
+                    MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
+                    })
                     .font(Font.system(size: 14))
-                    .frame(height: 36)
+                    .disabled(true)
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
                 
                 Button(action:{
                     searchAddress(keyword: location)
@@ -552,29 +588,26 @@ struct FormCompletionKartuATMView: View {
                 })
                 
             }
-            .padding(.horizontal)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
             
             
-//            List(addressSugestionResult, id: \.formatted_address) {data in
-//
-//                HStack {
-//                    Text(data.formatted_address)
-//                        .font(Font.system(size: 14))
-//
-//                    Spacer()
-//                }
-//                .contentShape(Rectangle())
-//                .onTapGesture(perform: {
-//                    searchAddress(data: data.formatted_address)
-//                    self.showingAddressModal.toggle()
-//                })
-//
-//            }
-//            .background(Color.white)
-//            .padding(.vertical)
-//            .frame(height: 150)
+            //            List(addressSugestionResult, id: \.formatted_address) {data in
+            //
+            //                HStack {
+            //                    Text(data.formatted_address)
+            //                        .font(Font.system(size: 14))
+            //
+            //                    Spacer()
+            //                }
+            //                .contentShape(Rectangle())
+            //                .onTapGesture(perform: {
+            //                    searchAddress(data: data.formatted_address)
+            //                    self.showingAddressModal.toggle()
+            //                })
+            //
+            //            }
+            //            .background(Color.white)
+            //            .padding(.vertical)
+            //            .frame(height: 150)
             
             ScrollView {
                 VStack {
@@ -649,8 +682,8 @@ struct FormCompletionKartuATMView: View {
                 atmData.atmAddressRtInput.trimmingCharacters(in: .whitespaces).count > 0 &&
                 atmData.atmAddressRwInput.trimmingCharacters(in: .whitespaces).count > 0 &&
                 atmData.atmAddressKotaInput.trimmingCharacters(in: .whitespaces).count > 0 &&
-            atmData.atmAddressPropinsiInput.trimmingCharacters(in: .whitespaces).count > 0
-            && atmData.atmAddressKelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && (atmData.atmAddressPostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 || self.kodePos.trimmingCharacters(in: .whitespaces).count > 0)
+                atmData.atmAddressPropinsiInput.trimmingCharacters(in: .whitespaces).count > 0
+                && atmData.atmAddressKelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && (atmData.atmAddressPostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 || self.kodePos.trimmingCharacters(in: .whitespaces).count > 0)
         } else {
             return !atmData.atmName.trimmingCharacters(in: .whitespaces).isEmpty
         }
@@ -667,13 +700,13 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
             atmData.addressEqualToDukcapil = true
         case 2: /// Surat Menyurat
-//            atmData.atmAddressInput = registerData.alamatKeluarga
-//            atmData.atmAddressPostalCodeInput = registerData.kodePosKeluarga
-//            atmData.atmAddressKecamatanInput = registerData.kecamatanKeluarga
-//            atmData.atmAddressKelurahanInput = registerData.kelurahanKeluarga
-//            atmData.atmAddressrtRwInput = ""
-//            atmData.addressEqualToDukcapil = false
-        
+            //            atmData.atmAddressInput = registerData.alamatKeluarga
+            //            atmData.atmAddressPostalCodeInput = registerData.kodePosKeluarga
+            //            atmData.atmAddressKecamatanInput = registerData.kecamatanKeluarga
+            //            atmData.atmAddressKelurahanInput = registerData.kelurahanKeluarga
+            //            atmData.atmAddressrtRwInput = ""
+            //            atmData.addressEqualToDukcapil = false
+            
             atmData.atmAddressInput = registerData.alamatKtpFromNik
             atmData.atmAddressPostalCodeInput = registerData.addressPostalCodeInput
             atmData.atmAddressKecamatanInput = registerData.addressKecamatanInput

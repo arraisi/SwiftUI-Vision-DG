@@ -88,12 +88,19 @@ struct CardDamageAddressInputView: View {
                                     
                                     HStack {
                                         
-                                        TextField("Address".localized(language), text: $cardData.addressInput) { changed in
-                                        } onCommit: {
-                                            self.addressInput = self.cardData.addressInput
-                                        }
+                                        //                                        TextField("Address".localized(language), text: $cardData.addressInput) { changed in
+                                        //                                        } onCommit: {
+                                        //                                            self.addressInput = self.cardData.addressInput
+                                        //                                        }
+                                        //                                        .font(Font.system(size: 14))
+                                        //                                        .frame(height: 36)
+                                        //                                        .padding(.horizontal)
+                                        //                                        .background(Color.gray.opacity(0.1))
+                                        //                                        .cornerRadius(10)
+                                        
+                                        MultilineTextField("Address".localized(language), text: $cardData.addressInput, onCommit: {
+                                        })
                                         .font(Font.system(size: 14))
-                                        .frame(height: 36)
                                         .padding(.horizontal)
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(10)
@@ -249,9 +256,13 @@ struct CardDamageAddressInputView: View {
             
             HStack {
                 
-                TextField("Address".localized(language), text: $addressInput)
-                    .font(Font.system(size: 14))
-                    .frame(height: 36)
+//                TextField("Address".localized(language), text: $addressInput)
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 36)
+                
+                MultilineTextField("Address".localized(language), text: $addressInput, onCommit: {
+                })
+                .font(Font.system(size: 14))
                 
                 Button(action:{
                     searchAddress(keyword: addressInput)
