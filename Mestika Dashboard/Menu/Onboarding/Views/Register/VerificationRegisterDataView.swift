@@ -915,9 +915,16 @@ struct VerificationRegisterDataView: View {
         data.addressKecamatanInput = self.registerData.addressKecamatanInput
         data.addressKelurahanInput = self.registerData.addressKelurahanInput
         data.addressPostalCodeInput = self.registerData.addressPostalCodeInput
-        data.rtFromNik = self.registerData.rtFromNik
+        
+        data.alamatKtpFromNik = self.registerData.alamatKtpFromNik
+        data.kecamatanFromNik = self.registerData.kecamatanFromNik
+        data.kelurahanFromNik = self.registerData.kelurahanFromNik
         data.kabupatenKotaFromNik = self.registerData.kabupatenKotaFromNik
         data.provinsiFromNik = self.registerData.provinsiFromNik
+        data.rwFromNik = self.registerData.rwFromNik
+        data.rtFromNik = self.registerData.rtFromNik
+        data.kodePosFromNik = self.registerData.kodePosFromNik
+        
         data.nomorKKFromNik = self.registerData.nomorKKFromNik
         data.jenisKelaminFromNik = self.registerData.jenisKelaminFromNik
         data.tempatLahirFromNik = self.registerData.tempatLahirFromNik

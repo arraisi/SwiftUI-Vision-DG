@@ -102,6 +102,14 @@ class RegistrasiModel: ObservableObject {
     @Published var addressKecamatanInput: String = ""
     @Published var addressPostalCodeInput: String = ""
     
+    // Alamat Surat Menyurat
+    @Published var alamatSuratMenyurat: String = ""
+    @Published var kodePosSuratMenyurat: String = ""
+    @Published var kecamatanSuratMenyurat: String = ""
+    @Published var kelurahanSuratMenyurat: String = ""
+    @Published var rtSuratMenyurat: String = ""
+    @Published var rwSuratMenyurat: String = ""
+    
     // For nasabah use only
     @Published var isNasabahmestika: Bool = false
     @Published var accType: String = ""

@@ -147,11 +147,14 @@ struct FormCompletionKartuATMView: View {
             user.forEach { (data) in
                 atmData.atmName = data.namaLengkapFromNik!
                 registerData.namaLengkapFromNik = data.namaLengkapFromNik!
-                registerData.alamatKtpFromNik = data.addressInput!
-                registerData.addressKecamatanInput = data.addressKecamatanInput!
-                registerData.addressKelurahanInput = data.addressKelurahanInput!
-                registerData.addressPostalCodeInput = data.addressPostalCodeInput!
+                registerData.provinsiFromNik = data.provinsiFromNik!
+                registerData.alamatKtpFromNik = data.alamatKtpFromNik!
+                registerData.addressKecamatanInput = data.kecamatanFromNik!
+                registerData.addressKelurahanInput = data.kelurahanFromNik!
+                registerData.addressPostalCodeInput = data.kodePosFromNik!
                 registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
+                registerData.rtFromNik = data.rtFromNik!
+                registerData.rwFromNik = data.rwFromNik!
                 registerData.nik = data.nik!
             }
         }
@@ -166,7 +169,7 @@ struct FormCompletionKartuATMView: View {
         }
         .alert(isPresented: $isShowAlert) {
             return Alert(
-                title: Text("MESSAGE"),
+                title: Text("MESSAGE".localized(language)),
                 message: Text(self.messageResponse),
                 dismissButton: .default(Text("Oke"))
             )
@@ -657,18 +660,25 @@ struct FormCompletionKartuATMView: View {
         switch addressOptionId {
         case 1: /// Sesuai KTP
             atmData.atmAddressInput = registerData.alamatKtpFromNik
-            atmData.atmAddressPostalCodeInput = registerData.kodePos
-            atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
-            atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
+            atmData.atmAddressPostalCodeInput = registerData.addressPostalCodeInput
+            atmData.atmAddressKecamatanInput = registerData.addressKecamatanInput
+            atmData.atmAddressKelurahanInput = registerData.addressKelurahanInput
             atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
             atmData.addressEqualToDukcapil = true
         case 2: /// Surat Menyurat
-            atmData.atmAddressInput = registerData.alamatKeluarga
-            atmData.atmAddressPostalCodeInput = registerData.kodePosKeluarga
-            atmData.atmAddressKecamatanInput = registerData.kecamatanKeluarga
-            atmData.atmAddressKelurahanInput = registerData.kelurahanKeluarga
-            atmData.atmAddressrtRwInput = ""
+//            atmData.atmAddressInput = registerData.alamatKeluarga
+//            atmData.atmAddressPostalCodeInput = registerData.kodePosKeluarga
+//            atmData.atmAddressKecamatanInput = registerData.kecamatanKeluarga
+//            atmData.atmAddressKelurahanInput = registerData.kelurahanKeluarga
+//            atmData.atmAddressrtRwInput = ""
+//            atmData.addressEqualToDukcapil = false
+        
+            atmData.atmAddressInput = registerData.alamatKtpFromNik
+            atmData.atmAddressPostalCodeInput = registerData.addressPostalCodeInput
+            atmData.atmAddressKecamatanInput = registerData.addressKecamatanInput
+            atmData.atmAddressKelurahanInput = registerData.kabupatenKotaFromNik
+            atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
             atmData.addressEqualToDukcapil = false
         case 3: /// Perusahaan
             atmData.atmAddressInput = registerData.alamatPerusahaan

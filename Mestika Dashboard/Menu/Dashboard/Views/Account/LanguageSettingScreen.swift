@@ -18,11 +18,12 @@ struct LanguageSettingScreen: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @State var showingAlert: Bool = false
+    
     var body: some View {
         VStack {
-            AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {
-                
-            }
+            AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {}
+            
             ScrollView(showsIndicators: false) {
                 VStack {
                     Text("Choose Language".localized(language))
@@ -46,7 +47,8 @@ struct LanguageSettingScreen: View {
                             } else {
                                 LocalizationService.shared.language = .english_us
                             }
-                            self.presentationMode.wrappedValue.dismiss()
+                            
+                            self.showingAlert = true
                         }) {
                             Text("Use this Language".localized(language))
                                 .foregroundColor(.white)
@@ -71,6 +73,15 @@ struct LanguageSettingScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .alert(isPresented: $showingAlert) {
+            return Alert(
+                title: Text("Succeed".localized(language)),
+                message: Text("Language changed successfully".localized(language)),
+                dismissButton: .default(Text("Okay".localized(language)), action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                })
+            )
+        }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 50) {
