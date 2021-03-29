@@ -89,7 +89,7 @@ class AddressSummaryViewModel: ObservableObject {
                 case .custom(code: 400):
                     self.message = "Masukkan Alamat Lengkap!"
                 default:
-                    self.message = "Internal Server Error"
+                    self.message = "Address not found"
                 }
                 
                 completion(false)

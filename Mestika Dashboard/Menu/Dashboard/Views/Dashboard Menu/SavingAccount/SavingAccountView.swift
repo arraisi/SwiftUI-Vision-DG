@@ -56,11 +56,11 @@ struct SavingAccountView: View {
                             ForEach(0..<productsSavingAccountVM.products.count, id: \.self) { i in
                                 Button(action: {
                                     print(productsSavingAccountVM.products[i])
-                                    self.product = productsSavingAccountVM.products[i].productName
-                                    self.planCode = productsSavingAccountVM.products[i].kodePlan
-                                    self.description = productsSavingAccountVM.products[i].productDescription
+                                    self.product = productsSavingAccountVM.products[i].productName ?? ""
+                                    self.planCode = productsSavingAccountVM.products[i].kodePlan ?? ""
+                                    self.description = productsSavingAccountVM.products[i].productDescription ?? ""
                                 }) {
-                                    Text(productsSavingAccountVM.products[i].productName)
+                                    Text(productsSavingAccountVM.products[i].productName ?? "")
                                         .font(.custom("Montserrat-Regular", size: 12))
                                 }
                             }

@@ -12,6 +12,12 @@ struct SuccessCancelView: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    // View Variables
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @EnvironmentObject var appState: AppState
     
     var body: some View {
@@ -58,12 +64,25 @@ struct SuccessCancelView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .onAppear() {
+            deleteCoreData()
+        }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
 //                self.isShowingAlert = true
             }
         }))
+    }
+    
+    func deleteCoreData() {
+        for users in user {
+            // delete it from the context
+            self.managedObjectContext.delete(users)
+        }
+
+        // save the context
+        try? self.managedObjectContext.save()
     }
 }
 

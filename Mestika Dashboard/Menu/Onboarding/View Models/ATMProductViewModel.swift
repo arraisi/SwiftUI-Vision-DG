@@ -95,12 +95,12 @@ extension ATMProductViewModel {
                     self.isLoading = false
                     self.listJenisTabungan = response.map { (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
                         return JenisTabunganViewModel (
-                            id: data.id,
-                            name: data.productName,
-                            image: URL(string: data.productImageURL),
-                            description: data.productDescription,
+                            id: data.id ?? "",
+                            name: data.productName ?? "",
+                            image: URL(string: data.productImageURL ?? ""),
+                            description: data.productDescription ?? "",
                             type: data.balType ?? "",
-                            codePlan: data.kodePlan
+                            codePlan: data.kodePlan ?? ""
                         )
                     }
 //                    self.listJenisTabungan = response.map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in

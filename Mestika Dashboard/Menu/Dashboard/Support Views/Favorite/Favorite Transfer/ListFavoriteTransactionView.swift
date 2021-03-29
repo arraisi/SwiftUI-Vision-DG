@@ -121,6 +121,7 @@ struct ListFavoriteTransactionView: View {
             getList()
         }
         .onDisappear {
+            getList()
             print("ON DISAPPER")
         }
     }
