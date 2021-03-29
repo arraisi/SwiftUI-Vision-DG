@@ -121,7 +121,7 @@ struct SumberDanaView: View {
                                         if (editMode == .inactive) {
                                             NavigationLink(destination: PerkiraanPenarikanView().environmentObject(registerData)) {
                                                 
-                                                Text("Next")
+                                                Text("Next".localized(language))
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
@@ -136,7 +136,7 @@ struct SumberDanaView: View {
                                         } else {
                                             NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
                                                 
-                                                Text("Save")
+                                                Text("Save".localized(language))
                                                     .foregroundColor(.white)
                                                     .fontWeight(.bold)
                                                     .font(.system(size: 14))

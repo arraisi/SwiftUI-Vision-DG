@@ -411,11 +411,9 @@ struct InformasiPerusahaanView: View {
                 
                 HStack {
                     
-                    TextField("Company's address".localized(language), text: $registerData.alamatPerusahaan) { changed in
-                    } onCommit: {
-                    }
+                    MultilineTextField("Company's address".localized(language), text: $registerData.alamatPerusahaan, onCommit: {
+                    })
                     .font(Font.system(size: 14))
-                    .frame(height: 36)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)

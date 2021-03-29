@@ -18,7 +18,7 @@ struct HistoryTransactionList: View {
         
         if (histories.count < 1) {
             
-            Text("No Favorites".localized(language))
+            Text("No Transactions".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 14))
                 .padding(.top, 25)
             

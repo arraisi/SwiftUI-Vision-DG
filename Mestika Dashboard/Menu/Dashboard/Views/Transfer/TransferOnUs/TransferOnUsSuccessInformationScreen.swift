@@ -85,7 +85,7 @@ struct TransferOnUsSuccessInformationScreen: View {
             return Alert(
                 title: Text("Succeed".localized(language)),
                 message: Text("Favorite added successfully".localized(language)),
-                dismissButton: .default(Text("Okay".localized(language)))
+                dismissButton: .default(Text("OK".localized(language)))
             )
         }
         .navigationBarItems(trailing: HStack(spacing: 30) {
