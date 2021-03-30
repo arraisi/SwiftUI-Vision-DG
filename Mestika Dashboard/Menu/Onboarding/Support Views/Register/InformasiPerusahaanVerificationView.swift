@@ -82,8 +82,16 @@ struct InformasiPerusahaanVerificationView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
                 HStack {
-                    TextField("Company's address".localized(language), text: $registerData.alamatPerusahaan)
-                        .disabled(true)
+//                    TextField("Company's address".localized(language), text: $registerData.alamatPerusahaan)
+//                        .disabled(true)
+                    
+                    MultilineTextField("Company's address".localized(language), text: $registerData.alamatPerusahaan, onCommit: {
+                    })
+                    .font(Font.system(size: 14))
+                    .disabled(true)
+//                    .padding(.horizontal)
+//                    .background(Color.gray.opacity(0.1))
+//                    .cornerRadius(10)
                 }
                 .frame(height: 20)
                 .font(.subheadline)

@@ -44,6 +44,9 @@ struct ContentView: View {
     }
     
     
+//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    var registerData = RegistrasiModel()
+    
     var body: some View {
         JGProgressHUDPresenter(userInteractionOnHUD: false) {
             ZStack {
@@ -59,10 +62,12 @@ struct ContentView: View {
                 WelcomeView()
                     .environmentObject(appState)
                 
-                //                NavigationView{
-                //                    BottomNavigationView()
-                //                        .environmentObject(appState)
-                //                }
+//                NavigationView{
+//                    InformasiPerusahaanView()
+//                        .environment(\.managedObjectContext, context)
+//                        .environmentObject(appState)
+//                        .environmentObject(registerData)
+//                }
             }
             .edgesIgnoringSafeArea(.top)
         }

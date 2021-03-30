@@ -133,17 +133,13 @@ struct VerificationAddressView: View {
                                         }
                                         
                                         HStack {
-                                            
-                                            TextField("Address".localized(language), text: $registerData.addressInput) { changed in
-                                            } onCommit: {
+                                            MultilineTextField("Address".localized(language), text: $registerData.addressInput, onCommit: {
                                                 self.addressInput = self.registerData.addressInput
-                                            }
+                                            })
                                             .font(Font.system(size: 14))
-                                            .frame(height: 36)
                                             .padding(.horizontal)
                                             .background(Color.gray.opacity(0.1))
                                             .cornerRadius(10)
-                                            
                                             Button(action:{
                                                 //                        showingModal.toggle()
                                                 searchAddress()
@@ -152,8 +148,30 @@ struct VerificationAddressView: View {
                                                     .font(Font.system(size: 20))
                                                     .foregroundColor(Color(hex: "#707070"))
                                             })
-                                            
                                         }
+                                        
+//                                        HStack {
+//
+//                                            TextField("Address".localized(language), text: $registerData.addressInput) { changed in
+//                                            } onCommit: {
+//                                                self.addressInput = self.registerData.addressInput
+//                                            }
+//                                            .font(Font.system(size: 14))
+//                                            .frame(height: 36)
+//                                            .padding(.horizontal)
+//                                            .background(Color.gray.opacity(0.1))
+//                                            .cornerRadius(10)
+//
+//                                            Button(action:{
+//                                                //                        showingModal.toggle()
+//                                                searchAddress()
+//                                            }, label: {
+//                                                Image(systemName: "magnifyingglass")
+//                                                    .font(Font.system(size: 20))
+//                                                    .foregroundColor(Color(hex: "#707070"))
+//                                            })
+//
+//                                        }
                                         
                                     }
                                     .padding(.horizontal, 20)
@@ -292,9 +310,17 @@ struct VerificationAddressView: View {
             
             HStack {
                 
-                TextField("Address".localized(language), text: $addressInput)
+//                TextField("Address".localized(language), text: $addressInput)
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 36)
+                
+                
+                    MultilineTextField("Address".localized(language), text: $addressInput, onCommit: {
+                    })
                     .font(Font.system(size: 14))
-                    .frame(height: 36)
+//                    .padding(.horizontal)
+//                    .background(Color.gray.opacity(0.1))
+//                    .cornerRadius(10)
                 
                 Button(action:{
                     searchAddress(keyword: addressInput)

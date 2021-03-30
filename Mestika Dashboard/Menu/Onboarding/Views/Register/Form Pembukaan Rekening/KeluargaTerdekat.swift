@@ -323,18 +323,37 @@ struct KeluargaTerdekat: View {
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
+                //                HStack {
+                //
+                //                    TextField("Address".localized(language), text: $registerData.alamatKeluarga) { changed in
+                //                    } onCommit: {
+                //                    }
+                //                    .font(Font.system(size: 14))
+                //                    .frame(height: 36)
+                //                    .padding(.horizontal)
+                //                    .background(Color.gray.opacity(0.1))
+                //                    .cornerRadius(10)
+                //
+                //                    Button(action:{
+                //                        searchAddress()
+                //                    }, label: {
+                //                        Image(systemName: "magnifyingglass")
+                //                            .font(Font.system(size: 20))
+                //                            .foregroundColor(Color(hex: "#707070"))
+                //                    })
+                //
+                //                }
                 HStack {
                     
-                    TextField("Address".localized(language), text: $registerData.alamatKeluarga) { changed in
-                    } onCommit: {
-                    }
+                    MultilineTextField("Address".localized(language), text: $registerData.alamatKeluarga, onCommit: {
+                    })
                     .font(Font.system(size: 14))
-                    .frame(height: 36)
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
                     
                     Button(action:{
+                        //                        showingModal.toggle()
                         searchAddress()
                     }, label: {
                         Image(systemName: "magnifyingglass")
@@ -437,11 +456,34 @@ struct KeluargaTerdekat: View {
                 Spacer()
             }
             
+//            HStack {
+//
+//                TextField("Company's address".localized(language), text: $location)
+//                    .font(Font.system(size: 14))
+//                    .frame(height: 36)
+//
+//                Button(action:{
+//                    searchAddress(keyword: location)
+//                }, label: {
+//                    Image(systemName: "location.viewfinder")
+//                        .font(Font.system(size: 20))
+//                        .foregroundColor(Color(hex: "#707070"))
+//                })
+//
+//            }
+//            .padding(.horizontal)
+//            .background(Color.gray.opacity(0.1))
+//            .cornerRadius(10)
+            
+            
             HStack {
                 
-                TextField("Company's address".localized(language), text: $location)
-                    .font(Font.system(size: 14))
-                    .frame(height: 36)
+                MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
+                })
+                .font(Font.system(size: 14))
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
                 
                 Button(action:{
                     searchAddress(keyword: location)
@@ -452,29 +494,26 @@ struct KeluargaTerdekat: View {
                 })
                 
             }
-            .padding(.horizontal)
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(10)
             
-//            List(addressSugestionResult, id: \.formatted_address) { data in
-//
-//                HStack {
-//                    Text(data.formatted_address)
-//                        .font(Font.system(size: 14))
-//
-//                    Spacer()
-//                }
-//                .contentShape(Rectangle())
-//                .onTapGesture(perform: {
-//                    searchAddress(data: data.formatted_address)
-//                    self.showingModal.toggle()
-//                })
-//
-//            }
-//            .background(Color.white)
-//            .padding(.vertical)
-//            .frame(height: 150)
-//            
+            //            List(addressSugestionResult, id: \.formatted_address) { data in
+            //
+            //                HStack {
+            //                    Text(data.formatted_address)
+            //                        .font(Font.system(size: 14))
+            //
+            //                    Spacer()
+            //                }
+            //                .contentShape(Rectangle())
+            //                .onTapGesture(perform: {
+            //                    searchAddress(data: data.formatted_address)
+            //                    self.showingModal.toggle()
+            //                })
+            //
+            //            }
+            //            .background(Color.white)
+            //            .padding(.vertical)
+            //            .frame(height: 150)
+            //
             
             ScrollView {
                 VStack {

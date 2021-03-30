@@ -235,7 +235,7 @@ struct ListAllFavoriteTransactionView: View {
                 return Alert(
                     title: Text("Succeed".localized(language)),
                     message: Text("Data Berhasil Dihapus"),
-                    dismissButton: .default(Text("Okay".localized(language)))
+                    dismissButton: .default(Text("OK".localized(language)))
                 )
             }
             
@@ -258,7 +258,7 @@ struct ListAllFavoriteTransactionView: View {
             return Alert(
                 title: Text("Succeed".localized(language)),
                 message: Text("Perubahan Berhasil Disimpan"),
-                dismissButton: .default(Text("Okay".localized(language)))
+                dismissButton: .default(Text("OK".localized(language)))
             )
         }
     }
