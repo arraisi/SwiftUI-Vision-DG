@@ -25,7 +25,6 @@ struct FavoriteTransferScreen: View {
 //                    .padding(.bottom, 25)
             }
             .navigationBarTitle("Transfer Favorites".localized(language), displayMode: .inline)
-            .navigationBarBackButtonHidden(true)
             
         }
     }
