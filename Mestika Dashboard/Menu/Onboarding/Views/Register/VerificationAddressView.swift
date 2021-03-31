@@ -136,7 +136,7 @@ struct VerificationAddressView: View {
                                             MultilineTextField("Address".localized(language), text: $registerData.addressInput, onCommit: {
                                                 self.addressInput = self.registerData.addressInput
                                             })
-                                            .font(Font.system(size: 14))
+                                            .font(Font.system(size: 11))
                                             .padding(.horizontal)
                                             .background(Color.gray.opacity(0.1))
                                             .cornerRadius(10)
@@ -403,6 +403,9 @@ struct VerificationAddressView: View {
                     registerData.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     registerData.addressKelurahanInput = self.addressSugestion[0].kelurahan
                     registerData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+                    
+                    registerData.addressKotaInput = self.addressSugestion[0].city
+                    registerData.addressProvinsiInput = self.addressSugestion[0].province
                     
                     self.addressInput = self.addressSugestion[0].formatted_address
                     self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"

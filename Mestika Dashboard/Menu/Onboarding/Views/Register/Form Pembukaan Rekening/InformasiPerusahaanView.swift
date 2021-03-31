@@ -385,6 +385,7 @@ struct InformasiPerusahaanView: View {
                             }) {
                                 Text(bidangUsaha[i].nama)
                                     .font(.custom("Montserrat-Regular", size: 12))
+                                    .fixedSize(horizontal: false, vertical: true)
                             }
                         }
                     } label: {
@@ -413,7 +414,7 @@ struct InformasiPerusahaanView: View {
                     
                     MultilineTextField("Company's address".localized(language), text: $registerData.alamatPerusahaan, onCommit: {
                     })
-                    .font(Font.system(size: 14))
+                    .font(Font.system(size: 11))
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
@@ -706,6 +707,8 @@ struct InformasiPerusahaanView: View {
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
                     registerData.alamatPerusahaan = self.addressSugestion[0].formatted_address
+                    registerData.kotaPerusahaan = self.addressSugestion[0].city
+                    registerData.provinsiPerusahaan = self.addressSugestion[0].province
                     registerData.kodePos = self.addressSugestion[0].postalCode
                     self.kodePos = self.addressSugestion[0].postalCode
                     registerData.kecamatan = self.addressSugestion[0].kecamatan

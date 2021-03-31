@@ -93,6 +93,10 @@ struct CardManagementScreen: View {
                 .onAppear {
                     getListKartuKu()
                 }
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CardManagement"))) { obj in
+                    print("GET AGGAIN")
+                    getListKartuKu()
+                }
             }
             .background(Color(hex: "#F6F8FB")
                             .edgesIgnoringSafeArea(.all))

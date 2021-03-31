@@ -10,8 +10,11 @@
         <attribute name="addressInput" optional="YES" attributeType="String"/>
         <attribute name="addressKecamatanInput" optional="YES" attributeType="String"/>
         <attribute name="addressKelurahanInput" optional="YES" attributeType="String"/>
+        <attribute name="addressKotaInput" optional="YES" attributeType="String"/>
         <attribute name="addressPostalCodeInput" optional="YES" attributeType="String"/>
+        <attribute name="addressProvinsiInput" optional="YES" attributeType="String"/>
         <attribute name="addressRtRwInput" optional="YES" attributeType="String"/>
+        <attribute name="addressWithKtp" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="agamaFromNik" optional="YES" attributeType="String"/>
         <attribute name="alamatKeluarga" optional="YES" attributeType="String"/>
         <attribute name="alamatKtpFromNik" optional="YES" attributeType="String"/>
@@ -53,6 +56,7 @@
         <attribute name="kodePos" optional="YES" attributeType="String"/>
         <attribute name="kodePosFromNik" optional="YES" attributeType="String"/>
         <attribute name="kodePosKeluarga" optional="YES" attributeType="String"/>
+        <attribute name="kotaPerusahaan" optional="YES" attributeType="String"/>
         <attribute name="namaIbuFromNik" optional="YES" attributeType="String"/>
         <attribute name="namaKeluarga" optional="YES" attributeType="String"/>
         <attribute name="namaLengkapFromNik" optional="YES" attributeType="String"/>
@@ -79,6 +83,7 @@
         <attribute name="pin" optional="YES" attributeType="String"/>
         <attribute name="profesiPenyandangDana" optional="YES" attributeType="String"/>
         <attribute name="provinsiFromNik" optional="YES" attributeType="String"/>
+        <attribute name="provinsiPerusahaan" optional="YES" attributeType="String"/>
         <attribute name="rtFromNik" optional="YES" attributeType="String"/>
         <attribute name="rtrw" optional="YES" attributeType="String"/>
         <attribute name="rwFromNik" optional="YES" attributeType="String"/>
@@ -164,7 +169,7 @@
     </entity>
     <elements>
         <element name="NewDevice" positionX="-54" positionY="144" width="128" height="14"/>
-        <element name="Registration" positionX="-63" positionY="144" width="128" height="1409"/>
+        <element name="Registration" positionX="-63" positionY="144" width="128" height="1484"/>
         <element name="ScheduleInterview" positionX="-54" positionY="153" width="128" height="59"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="899"/>
     </elements>

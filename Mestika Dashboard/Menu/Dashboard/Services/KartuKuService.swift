@@ -124,7 +124,7 @@ class KartuKuService {
             "kabupatenKota": "Bandung",
             "kecamatan": data.addressKecamatanInput,
             "kelurahan": data.addressKelurahanInput,
-            "kodepos": data.addressKodePosInput,
+            "kodepos": "00000" + data.addressPostalCodeInput,
             "nameOnCard": data.nameOnCard,
             "pin": encryptPassword(password: data.pin),
             "postalAddress": data.addressInput,

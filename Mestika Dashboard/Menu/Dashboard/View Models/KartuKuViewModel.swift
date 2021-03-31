@@ -61,7 +61,7 @@ extension KartuKuViewModel {
                         id: data.id,
                         imageNameAlias: data.imageNameAlias,
                         mainCard: data.mainCard!,
-                        status: data.status ?? "")
+                        status: data.status ?? "INACTIVE")
                 })
                 
                 print(self.listKartuKu.count)

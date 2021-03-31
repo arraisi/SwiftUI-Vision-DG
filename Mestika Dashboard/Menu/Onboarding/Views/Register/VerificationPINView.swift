@@ -123,9 +123,9 @@ struct VerificationPINView: View {
                             ZStack {
                                 HStack (spacing: 0) {
                                     SecureField("Enter the ATM PIN".localized(language), text: $pin)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .font(.custom("Montserrat-SemiBold", size: 16))
                                         .padding()
-                                        .frame(width: 200, height: 50)
+//                                        .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
@@ -164,7 +164,7 @@ struct VerificationPINView: View {
                                     TextField("Enter the ATM PIN".localized(language), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
-                                        .frame(width: 200, height: 50)
+//                                        .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
