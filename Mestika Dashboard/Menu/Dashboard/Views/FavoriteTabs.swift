@@ -39,6 +39,18 @@ struct FavoriteTabs: View {
             Spacer()
         }
         .navigationBarTitle("Favorite".localized(language), displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
+                                Button(action: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }) {
+                                    HStack {
+                                        Image(systemName: "chevron.left") // set image here
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(.white)
+                                        Text("Back".localized(language))
+                                    }
+                                })
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {

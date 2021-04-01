@@ -186,7 +186,7 @@ struct ListAllFavoriteTransactionView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                         .actionSheet(isPresented: self.$showingDetail) {
-                            ActionSheet(title: Text("Pilihan"), message: Text("Pilih menu dibawah ini"), buttons: [.default(Text("Hapus"), action: {
+                            ActionSheet(title: Text("Selection"), message: Text("Select the menu below"), buttons: [.default(Text("Delete"), action: {
                                 print("Hapus")
                                 print(data.name)
                                 self.alert = "REMOVE DATA"
@@ -195,9 +195,7 @@ struct ListAllFavoriteTransactionView: View {
                                 print("Edit")
                                 self.showPopover = true
                                
-                            }), .cancel({
-                                
-                            })])
+                            }), .cancel(Text("Cancel"))])
                         }
                     }
                     .listStyle(PlainListStyle())
@@ -241,8 +239,8 @@ struct ListAllFavoriteTransactionView: View {
             
             if (self.alert == "REMOVE DATA") {
                 return Alert(
-                    title: Text("Anda Yakin ingin menghapus \(self.transferDataOnUs.destinationName)"),
-                    primaryButton: .default(Text("IYA"), action: {
+                    title: Text("Anda Yakin ingin menghapus".localized(language) + " \(self.transferDataOnUs.destinationName)"),
+                    primaryButton: .default(Text("YES".localized(language)), action: {
                         self.favoritVM.removeWithParam(id: self.transferDataOnUs.idEdit, cardNo: self.transferDataOnUs.cardNo, sourceNumber: self.transferDataOnUs.sourceNumber) { result in
                             print("result remove favorite \(result)")
                             if result {
@@ -257,7 +255,7 @@ struct ListAllFavoriteTransactionView: View {
             
             return Alert(
                 title: Text("Succeed".localized(language)),
-                message: Text("Perubahan Berhasil Disimpan"),
+                message: Text("Changes Saved Successfully".localized(language)),
                 dismissButton: .default(Text("OK".localized(language)))
             )
         }
@@ -267,7 +265,7 @@ struct ListAllFavoriteTransactionView: View {
         VStack {
             VStack {
                 HStack {
-                    Text("Ubah Kontak Transfer")
+                    Text("Change Transfer Contact".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
@@ -277,7 +275,7 @@ struct ListAllFavoriteTransactionView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("Nama Kontak Penerima")
+                        Text("Recipient's Contact Name".localized(language))
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -286,7 +284,7 @@ struct ListAllFavoriteTransactionView: View {
                     .padding(.horizontal, 20)
                     
                     VStack {
-                        TextField("Nama Kontak Penerima", text: self.$receivedName, onEditingChanged: { changed in
+                        TextField("Recipient's Contact Name".localized(language), text: self.$receivedName, onEditingChanged: { changed in
                             self.transferDataOnUs.destinationName = self.receivedName
                             print("\($receivedName)")
                         })
@@ -301,7 +299,7 @@ struct ListAllFavoriteTransactionView: View {
                     .padding(.bottom, 25)
                     
                     HStack {
-                        Text("Detail Rekening")
+                        Text("Account Details".localized(language))
                             .font(.caption)
                             .fontWeight(.ultraLight)
                         
@@ -333,12 +331,12 @@ struct ListAllFavoriteTransactionView: View {
                     
                     // No. Rekening Form
                     HStack(spacing: 20) {
-                        Text("No. Rekening")
+                        Text("Account number".localized(language))
                             .font(.caption)
                             .fontWeight(.light)
                             .frame(width: 100)
                         
-                        TextField("No. Rekening", text: .constant(transferDataOnUs.destinationNumber), onEditingChanged: { changed in
+                        TextField("Account number".localized(language), text: .constant(transferDataOnUs.destinationNumber), onEditingChanged: { changed in
                             //                            print("\($receivedRekening)")
                         })
                         .disabled(true)
@@ -373,7 +371,7 @@ struct ListAllFavoriteTransactionView: View {
                         if self.favoritVM.isLoading {
                             ProgressView()
                         } else {
-                            Text("SIMPAN PERUBAHAN")
+                            Text("SAVE CHANGES".localized(language))
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
                                 .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
@@ -403,7 +401,7 @@ struct ListAllFavoriteTransactionView: View {
         VStack {
             VStack {
                 HStack {
-                    Text("Based on the type of transfer")
+                    Text("Based on the type of transfer".localized(language))
                         .font(.subheadline)
                         .fontWeight(.light)
                     
