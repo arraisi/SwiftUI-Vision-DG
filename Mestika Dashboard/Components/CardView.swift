@@ -58,6 +58,7 @@ struct CardView: View {
                             Spacer()
                         }
                     }
+                    .padding(.leading, 20)
                     .padding(.bottom, 15)
                     .padding(.top, 21)
                     
@@ -66,13 +67,16 @@ struct CardView: View {
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-Regular", size: 15))
                             .fontWeight(.bold)
+                            .fixedSize(horizontal: false, vertical: true)
+                        
                         Spacer()
                     }
+                    .padding(.leading, 20)
                     .padding(.top, 10)
                     
                     HStack{
                         Spacer()
-                        Text(self.card.status == "INACTIVE" ? "INACTIVE" : self.card.status)
+                        Text((self.card.status == "INACTIVE" ? "INACTIVE" : self.card.status) ?? "INACTIVE")
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 10))
                     }

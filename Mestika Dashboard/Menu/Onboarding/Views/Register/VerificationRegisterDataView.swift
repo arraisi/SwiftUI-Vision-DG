@@ -909,13 +909,17 @@ struct VerificationRegisterDataView: View {
         data.noRekening = self.registerData.noRekening
         data.accNo = self.registerData.accNo
         
-        // Data From NIK
-        data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
-        data.addressInput = self.registerData.alamatKtpFromNik
+        // Data Surat Menyurat
+        data.addressInput = self.registerData.addressInput
         data.addressKecamatanInput = self.registerData.addressKecamatanInput
         data.addressKelurahanInput = self.registerData.addressKelurahanInput
         data.addressPostalCodeInput = self.registerData.addressPostalCodeInput
+        data.addressRtRwInput = self.registerData.addressRtRwInput
+        data.addressProvinsiInput = self.registerData.addressProvinsiInput
+        data.addressKotaInput = self.registerData.addressKotaInput
         
+        // Data From NIK
+        data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
         data.alamatKtpFromNik = self.registerData.alamatKtpFromNik
         data.kecamatanFromNik = self.registerData.kecamatanFromNik
         data.kelurahanFromNik = self.registerData.kelurahanFromNik
@@ -943,8 +947,10 @@ struct VerificationRegisterDataView: View {
         data.kecamatan = self.registerData.kecamatan
         data.kelurahan = self.registerData.kelurahan
         data.rtrw = self.registerData.rtrw
+        data.kotaPerusahaan = self.registerData.kotaPerusahaan
+        data.provinsiPerusahaan = self.registerData.provinsiPerusahaan
         
-        // Data Surat Menyurat
+        // Data Keluarga
         data.alamatKeluarga = self.registerData.alamatKeluarga
         data.kodePosKeluarga = self.registerData.kodePosKeluarga
         data.kecamatanKeluarga = self.registerData.kecamatanKeluarga

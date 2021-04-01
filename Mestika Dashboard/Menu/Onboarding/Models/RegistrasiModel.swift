@@ -51,6 +51,9 @@ class RegistrasiModel: ObservableObject {
     @Published var kodePos = ""
     @Published var kecamatan = ""
     @Published var kelurahan = ""
+    @Published var kotaPerusahaan = ""
+    @Published var provinsiPerusahaan = ""
+    @Published var kodePosPerusahaan = ""
     @Published var rtrw = ""
     @Published var noTeleponPerusahaan = ""
     @Published var penghasilanKotorId: Int = 0
@@ -101,6 +104,8 @@ class RegistrasiModel: ObservableObject {
     @Published var addressKelurahanInput: String = ""
     @Published var addressKecamatanInput: String = ""
     @Published var addressPostalCodeInput: String = ""
+    @Published var addressKotaInput: String = ""
+    @Published var addressProvinsiInput: String = ""
     
     // Alamat Surat Menyurat
     @Published var alamatSuratMenyurat: String = ""
@@ -109,6 +114,8 @@ class RegistrasiModel: ObservableObject {
     @Published var kelurahanSuratMenyurat: String = ""
     @Published var rtSuratMenyurat: String = ""
     @Published var rwSuratMenyurat: String = ""
+    @Published var kotaSuratMenyurat: String = ""
+    @Published var provinsiSuratMenyurat: String = ""
     
     // For nasabah use only
     @Published var isNasabahmestika: Bool = false

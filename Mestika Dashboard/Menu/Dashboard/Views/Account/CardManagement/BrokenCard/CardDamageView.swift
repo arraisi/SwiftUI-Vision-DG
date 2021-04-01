@@ -105,6 +105,7 @@ struct CardDamageView: View {
             .background(Color(hex: "#F6F8FB").edgesIgnoringSafeArea(.all))
             .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
             .onAppear {
+                self.showConfirmationPIN = false
                 self.brokenData.cardNo = card.cardNo
                 self.brokenData.nameOnCard = card.nameOnCard
                 self.brokenData.cardDesign = "http://eagle.visiondg.xyz:8765/image/b5fb9a649b2c3670120343eb8dd85d03.png"

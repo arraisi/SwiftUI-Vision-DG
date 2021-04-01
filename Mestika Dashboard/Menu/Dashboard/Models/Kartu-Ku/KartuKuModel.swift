@@ -15,6 +15,6 @@ struct KartuKuDesignViewModel {
     var postalAddress, accountNumber, nameOnCard, cardNo: String
     var cardDesign: URL?
     var classCode, nik, id, imageNameAlias: String
-    var mainCard, status: String
+    var mainCard, status: String?
     var isShow: Bool = false
 }
