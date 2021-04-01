@@ -231,7 +231,7 @@ struct CardBlockDescriptionView: View {
                     self.showingModalError = false
                 },
                 label: {
-                    Text("Kembali")
+                    Text("Back".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: 50)

@@ -298,8 +298,12 @@
 "Ya, alamat sesuai" = "Yes, the address matches";
 "Tidak, alamat tidak sesuai" = "No, the address doesn't match";
 
-"No Favorites" = "Tidak ada Favorit";
-"No Transactions" = "Tidak ada Transaksi";
-"See Full List" = "Lihat Daftar Selengkapnya";
+"No Favorites" = "No Favorites";
+"No Transactions" = "No Transactions";
+"See Full List" = "See Full List";
 
-"Language changed successfully" = "Bahasa berhasil diganti";
+"Language changed successfully" = "Language changed successfully";
+"Select the menu below" = "Select the menu below";
+"Delete" = "Delete";
+"Edit" = "Edit";
+

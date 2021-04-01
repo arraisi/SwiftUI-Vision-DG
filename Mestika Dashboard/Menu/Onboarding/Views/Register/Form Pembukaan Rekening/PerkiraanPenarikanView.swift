@@ -123,7 +123,7 @@ struct PerkiraanPenarikanView: View {
                                         if (editMode == .inactive) {
                                             NavigationLink(destination: BesarPerkiraanPenarikanView().environmentObject(registerData)) {
                                                 
-                                                Text("Next")
+                                                Text("Next".localized(language))
                                                     .foregroundColor(.white)
                                                     .fontWeight(.bold)
                                                     .font(.system(size: 14))

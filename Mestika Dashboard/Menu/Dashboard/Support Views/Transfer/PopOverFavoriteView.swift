@@ -150,14 +150,14 @@ struct PopOverFavoriteView: View {
                             ProgressView()
                         } else {
                             Text("SAVE TO FAVORITE".localized(language))
+                                .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                         }
                     })
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     .disabled(disableForm)
-                    .background(disableForm ? Color(.lightGray) : Color(hex: "#2334D0"))
+                    .background(disableForm ? Color.gray : Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 40)
