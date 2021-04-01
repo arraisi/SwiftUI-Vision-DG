@@ -442,8 +442,9 @@ struct InformasiPerusahaanView: View {
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    TextField("Postal code".localized(language), text: $kodePos) {change in
+                    TextField("Postal code".localized(language), text: $kodePos) { change in
                     } onCommit: {
+                        self.registerData.kodePos = self.kodePos
                     }
                     .onReceive(kodePos.publisher.collect()) {
                         self.kodePos = String($0.prefix(5))

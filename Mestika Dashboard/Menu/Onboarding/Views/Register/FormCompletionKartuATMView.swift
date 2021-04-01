@@ -742,11 +742,11 @@ struct FormCompletionKartuATMView: View {
             print("Case 3")
             atmData.atmAddressInput = registerData.alamatPerusahaan
             atmData.atmAddressPostalCodeInput = registerData.kodePos
-            atmData.atmAddressKecamatanInput = "registerData.kecamatan"
+            atmData.atmAddressKecamatanInput = registerData.kecamatan
             atmData.atmAddressKelurahanInput = registerData.kelurahan
             atmData.atmAddressrtRwInput = registerData.rtrw
-            atmData.atmAddressPropinsiInput = "registerData.provinsiPerusahaan"
-            atmData.atmAddressKotaInput = "registerData.kotaPerusahaan"
+            atmData.atmAddressPropinsiInput = registerData.provinsiPerusahaan
+            atmData.atmAddressKotaInput = registerData.kotaPerusahaan
             atmData.addressEqualToDukcapil = false
         case 4:
             print("Case 4")

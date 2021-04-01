@@ -69,7 +69,7 @@ class TransferServices {
                       completion: @escaping(Result<InquiryTransferResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "cardNo": "1",
+            "cardNo": " ",
             "nominal": "1",
             "currency": "360",
             "sourceNumber": "1",

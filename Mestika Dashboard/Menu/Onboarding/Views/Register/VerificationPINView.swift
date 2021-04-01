@@ -123,7 +123,7 @@ struct VerificationPINView: View {
                             ZStack {
                                 HStack (spacing: 0) {
                                     SecureField("Enter the ATM PIN".localized(language), text: $pin)
-                                        .font(.custom("Montserrat-SemiBold", size: 16))
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
 //                                        .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
@@ -289,7 +289,7 @@ struct VerificationPINView: View {
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             createBottomFloater()
         }
-        .popup(isPresented: $showingModalBlockAtm, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+        .popup(isPresented: $showingModalBlockAtm, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             NoAtmAndBlock
         }
     }
