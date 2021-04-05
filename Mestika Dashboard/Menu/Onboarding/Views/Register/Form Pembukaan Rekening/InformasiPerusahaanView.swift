@@ -372,11 +372,16 @@ struct InformasiPerusahaanView: View {
                 //                .cornerRadius(10)
                 
                 HStack {
-                    TextField("Business fields".localized(language), text: $registerData.bidangUsaha)
-                        .font(Font.system(size: 14))
-                        .frame(height: 50)
-                        .padding(.leading, 15)
-                        .disabled(true)
+//                    TextField("Business fields".localized(language), text: $registerData.bidangUsaha)
+//                        .font(Font.system(size: 14))
+//                        .frame(height: 50)
+//                        .padding(.leading, 15)
+//                        .disabled(true)
+                    
+                    MultilineTextField(registerData.bidangUsaha == "" ? "Business fields".localized(language) : "", text: $registerData.bidangUsaha, onCommit: {
+                    })
+                    .padding(.leading, 15)
+                    .disabled(true)
                     
                     Menu {
                         ForEach(0..<bidangUsaha.count, id: \.self) { i in
@@ -384,7 +389,7 @@ struct InformasiPerusahaanView: View {
                                 registerData.bidangUsaha = bidangUsaha[i].nama
                             }) {
                                 Text(bidangUsaha[i].nama)
-                                    .font(.custom("Montserrat-Regular", size: 12))
+//                                    .font(.custom("Montserrat-Regular", size: 12))
                                     .fixedSize(horizontal: false, vertical: true)
                                     .lineLimit(2)
                             }
@@ -394,8 +399,7 @@ struct InformasiPerusahaanView: View {
                     }
                     
                 }
-                .frame(height: 36)
-                .font(Font.system(size: 14))
+                .font(Font.system(size: 12))
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
                 
@@ -415,7 +419,7 @@ struct InformasiPerusahaanView: View {
                     
                     MultilineTextField("Company's address".localized(language), text: $registerData.alamatPerusahaan, onCommit: {
                     })
-                    .font(Font.system(size: 11))
+                    .font(Font.system(size: 12))
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)

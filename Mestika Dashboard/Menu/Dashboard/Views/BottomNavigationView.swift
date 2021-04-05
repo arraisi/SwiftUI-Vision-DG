@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreImage.CIFilterBuiltins
+import CodeScanner
 
 struct BottomNavigationView: View {
     
@@ -30,6 +31,10 @@ struct BottomNavigationView: View {
     
     @State var showQrCode: Bool = false
     
+    @State private var isShowingScanner = false
+    
+    @State private var qrisActive = false
+    
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
@@ -37,10 +42,25 @@ struct BottomNavigationView: View {
         UITabBar.appearance().backgroundColor = UIColor.white
     }
     
+    
+    func handleScan(result: Result<String, CodeScannerView.ScanError>) {
+        self.isShowingScanner = false
+        // more code to come
+        print("\nresult : \(result)")
+        self.qrisActive = true
+    }
+    
     var body: some View {
         ZStack {
+            
             Color(hex: "#F6F8FB")
+            
+            NavigationLink(destination: InputPaymentByQrisView().environmentObject(appState), isActive: self.$qrisActive) {
+                EmptyView()
+            }
+            
             ZStack {
+                
                 VStack {
                     appbar
                     
@@ -61,11 +81,8 @@ struct BottomNavigationView: View {
                     }
                     
                     if (selected == 4) {
-                        //                        PaymentTransactionTabs()
-                        InputPaymentByQrisView()
-                            .environmentObject(appState)
+                        PaymentTransactionTabs()
                     }
-                    
                     Spacer()
                 }
                 
@@ -81,10 +98,13 @@ struct BottomNavigationView: View {
                                     CurvedShape()
                                 )
                             
-                            
                             VStack {
                                 Button(action: {
-                                    selected = 4
+                                    
+                                    //                                    selected = 4
+                                    // temporary qris
+                                    self.isShowingScanner = true
+                                    print("\n\(selected)")
                                 }) {
                                     Image("ic_dashboard")
                                         .renderingMode(.template)
@@ -133,7 +153,7 @@ struct BottomNavigationView: View {
             
             if (showingSettingMenu) {
                 ModalOverlay(tapAction: { withAnimation { self.showingSettingMenu = false } })
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .edgesIgnoringSafeArea(.all)
             }
             
             if showingSettingMenu {
@@ -172,6 +192,9 @@ struct BottomNavigationView: View {
                 .frame(width: 200, height: 200)
             
         })
+        .sheet(isPresented: self.$isShowingScanner) {
+            CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
+        }
     }
     
     func generateQRCode(from string: String) -> UIImage {
