@@ -26,10 +26,11 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     var biayaAdministrasi = "0"
     var minimumSetoranAwal = "0"
     
+    @State var minSetoranDbl: Double = 10000
     @State var depositDbl: Double = 0
     
     var nextBtnDisabled: Bool {
-        product.count == 0 || depositBalance == "" || depositBalance == "0"
+        product.count == 0 || depositBalance == "" || depositBalance == "0" || depositDbl < minSetoranDbl
     }
     
     var body: some View {
@@ -112,21 +113,21 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             
                             Divider()
                             
-//                            HStack {
-//                                Text("Total Active Balance".localized(language))
-//                                    .font(.custom("Montserrat-Bold", size: 10))
-//                                    .foregroundColor(.gray)
-//
-//                                Spacer()
-//
-//                                HStack(alignment: .top, spacing: 0) {
-//                                    Text("Rp.")
-//                                        .font(.custom("Montserrat-Bold", size: 10))
-//                                    Text(currency.thousandSeparator())
-//                                        .font(.custom("Montserrat-Bold", size: 14))
-//                                }
-//                                .foregroundColor(Color("StaleBlue"))
-//                            }
+                            //                            HStack {
+                            //                                Text("Total Active Balance".localized(language))
+                            //                                    .font(.custom("Montserrat-Bold", size: 10))
+                            //                                    .foregroundColor(.gray)
+                            //
+                            //                                Spacer()
+                            //
+                            //                                HStack(alignment: .top, spacing: 0) {
+                            //                                    Text("Rp.")
+                            //                                        .font(.custom("Montserrat-Bold", size: 10))
+                            //                                    Text(currency.thousandSeparator())
+                            //                                        .font(.custom("Montserrat-Bold", size: 14))
+                            //                                }
+                            //                                .foregroundColor(Color("StaleBlue"))
+                            //                            }
                         }
                     }
                     .padding(25) // padding content
@@ -141,15 +142,14 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                         
                         HStack {
                             Text("Total Active Balance".localized(language))
-                                .font(.custom("Montserrat-Bold", size: 10))
-                                .foregroundColor(.gray)
+                                .font(.custom("Montserrat-Bold", size: 12))
                             
                             Spacer()
                             
                             HStack(alignment: .top, spacing: 0) {
                                 Text("Rp.")
                                     .font(.custom("Montserrat-Bold", size: 10))
-                                Text(currency.thousandSeparator())
+                                Text(currency.thousandSeparator() + ",00")
                                     .font(.custom("Montserrat-Bold", size: 14))
                             }
                             .foregroundColor(Color("StaleBlue"))
@@ -166,11 +166,22 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .shadow(color: Color("StaleBlue").opacity(0.2), radius: 10)
                     .padding(.horizontal, 25)
                     
-                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumNextDeposit ?? "0")
+                    if (productsSavingAccountVM.minimumNextDeposit == "") {
+                        SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: "0")
+                    } else {
+                        SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumNextDeposit ?? "0")
+                    }
+                    
+                    
                     
                     SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: productsSavingAccountVM.minimumSaldo ?? "0")
                     
-                    SavingAccountDetailRow(label: "Biaya Administratif / Bulan".localized(language), value: productsSavingAccountVM.biayaAdministrasi ?? "0")
+                    if (productsSavingAccountVM.biayaAdministrasi == "") {
+                        SavingAccountDetailRow(label: "Biaya Administratif / Bulan".localized(language), value: "0")
+                    } else {
+                        SavingAccountDetailRow(label: "Biaya Administratif / Bulan".localized(language), value: productsSavingAccountVM.biayaAdministrasi ?? "0")
+                    }
+                
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 85)
@@ -201,9 +212,9 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear{
-                        self.productsSavingAccountVM.getProductsDetails(planCode: codePlan) { (result) in
-            
-                        }
+            self.productsSavingAccountVM.getProductsDetails(planCode: codePlan) { (result) in
+//                self.minSetoranDbl = Double((productsSavingAccountVM.minimumNextDeposit?.subStringRange(from: 0, to: productsSavingAccountVM.minimumNextDeposit!.count-2))!)!
+            }
             print("code plan \(codePlan)")
             print("product \(product)")
             //            print("deposit \(deposit)")
@@ -242,7 +253,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             Spacer()
             
             HStack(alignment: .top, spacing: 0) {
-                Text("Rp.")
+                Text("Rp. ")
                     .font(.custom("Montserrat-Bold", size: 10))
                 Text(value.thousandSeparator())
                     .font(.custom("Montserrat-Bold", size: 12))

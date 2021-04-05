@@ -60,8 +60,14 @@ struct SavingAccountView: View {
                                     self.planCode = productsSavingAccountVM.products[i].kodePlan ?? ""
                                     self.description = productsSavingAccountVM.products[i].productDescription ?? ""
                                 }) {
-                                    Text(productsSavingAccountVM.products[i].productName ?? "")
-                                        .font(.custom("Montserrat-Regular", size: 12))
+                                    
+                                    if (productsSavingAccountVM.products.count < 1) {
+                                        Text("Product Not Available")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                    } else {
+                                        Text(productsSavingAccountVM.products[i].productName ?? "")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                    }
                                 }
                             }
                         } label: {
