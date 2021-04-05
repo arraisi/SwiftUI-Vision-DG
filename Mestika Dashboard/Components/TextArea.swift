@@ -116,9 +116,10 @@ struct MultilineTextField: View {
     var placeholderView: some View {
         Group {
             if showingPlaceholder {
-                Text(placeholder).foregroundColor(.gray)
+                Text(placeholder).foregroundColor(Color(.lightGray))
+                    .font(Font.system(size: 14))
                     .padding(.leading, 4)
-                    .padding(.top, 8)
+                    .padding(.top, 10)
             }
         }
     }
