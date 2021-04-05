@@ -19,7 +19,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     @Binding var product: String
     @Binding var codePlan: String
     
-    @State var depositBalance: String = "0"
+    @State var depositBalance: String = ""
     
     var currency = "0"
     var minimumSaldo = "0"
@@ -29,7 +29,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     @State var depositDbl: Double = 0
     
     var nextBtnDisabled: Bool {
-        product.count == 0 || depositBalance.count == 0
+        product.count == 0 || depositBalance == "" || depositBalance == "0"
     }
     
     var body: some View {
@@ -112,21 +112,21 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             
                             Divider()
                             
-                            HStack {
-                                Text("Total Active Balance".localized(language))
-                                    .font(.custom("Montserrat-Bold", size: 10))
-                                    .foregroundColor(.gray)
-                                
-                                Spacer()
-                                
-                                HStack(alignment: .top, spacing: 0) {
-                                    Text("Rp.")
-                                        .font(.custom("Montserrat-Bold", size: 10))
-                                    Text(currency.thousandSeparator())
-                                        .font(.custom("Montserrat-Bold", size: 14))
-                                }
-                                .foregroundColor(Color("StaleBlue"))
-                            }
+//                            HStack {
+//                                Text("Total Active Balance".localized(language))
+//                                    .font(.custom("Montserrat-Bold", size: 10))
+//                                    .foregroundColor(.gray)
+//
+//                                Spacer()
+//
+//                                HStack(alignment: .top, spacing: 0) {
+//                                    Text("Rp.")
+//                                        .font(.custom("Montserrat-Bold", size: 10))
+//                                    Text(currency.thousandSeparator())
+//                                        .font(.custom("Montserrat-Bold", size: 14))
+//                                }
+//                                .foregroundColor(Color("StaleBlue"))
+//                            }
                         }
                     }
                     .padding(25) // padding content
@@ -137,9 +137,36 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
                     
-                    SavingAccountDetailRow(label: "Minimum Initial Deposit".localized(language), value: productsSavingAccountVM.minimumSetoranAwal ?? "0")
+                    VStack {
+                        
+                        HStack {
+                            Text("Total Active Balance".localized(language))
+                                .font(.custom("Montserrat-Bold", size: 10))
+                                .foregroundColor(.gray)
+                            
+                            Spacer()
+                            
+                            HStack(alignment: .top, spacing: 0) {
+                                Text("Rp.")
+                                    .font(.custom("Montserrat-Bold", size: 10))
+                                Text(currency.thousandSeparator())
+                                    .font(.custom("Montserrat-Bold", size: 14))
+                            }
+                            .foregroundColor(Color("StaleBlue"))
+                        }
+                        
+                        SavingAccountDetailRow1(label: "Minimum Initial Deposit".localized(language), value: productsSavingAccountVM.minimumSetoranAwal ?? "0")
+                        
+                    }
+                    .padding(.horizontal, 25) // padding content
+                    .padding(.vertical, 15) // padding content
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color("StaleBlue").opacity(0.2), radius: 10)
+                    .padding(.horizontal, 25)
                     
-                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumSetoranAwal ?? "0")
+                    SavingAccountDetailRow(label: "Minimum Deposit Next".localized(language), value: productsSavingAccountVM.minimumNextDeposit ?? "0")
                     
                     SavingAccountDetailRow(label: "Minimum Balance".localized(language), value: productsSavingAccountVM.minimumSaldo ?? "0")
                     
@@ -174,9 +201,9 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear{
-            //            self.productsSavingAccountVM.getProductsDetails(planCode: "") { (result) in
-            //
-            //            }
+                        self.productsSavingAccountVM.getProductsDetails(planCode: codePlan) { (result) in
+            
+                        }
             print("code plan \(codePlan)")
             print("product \(product)")
             //            print("deposit \(deposit)")
@@ -184,7 +211,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     }
     
     func SavingAccountDetailRow(label: String, value: String) -> some View {
-        HStack{
+        HStack {
             Text(label)
                 .font(.custom("Montserrat-Bold", size: 12))
             
@@ -205,6 +232,23 @@ struct ConfirmationOfOpeningSavingAccountView: View {
         .cornerRadius(15)
         .shadow(color: Color("StaleBlue").opacity(0.2), radius: 10)
         .padding(.horizontal, 25)
+    }
+    
+    func SavingAccountDetailRow1(label: String, value: String) -> some View {
+        HStack {
+            Text(label)
+                .font(.custom("Montserrat-Bold", size: 12))
+            
+            Spacer()
+            
+            HStack(alignment: .top, spacing: 0) {
+                Text("Rp.")
+                    .font(.custom("Montserrat-Bold", size: 10))
+                Text(value.thousandSeparator())
+                    .font(.custom("Montserrat-Bold", size: 12))
+            }
+            .foregroundColor(Color("StaleBlue"))
+        }
     }
 }
 

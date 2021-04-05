@@ -19,6 +19,7 @@ class ProductsSavingAccountViewModel : ObservableObject {
     @Published var minimumSaldo: String?
     @Published var biayaAdministrasi: String?
     @Published var minimumSetoranAwal: String?
+    @Published var minimumNextDeposit: String?
     
     func getProducts(completion: @escaping (Bool) -> Void) {
         
@@ -79,6 +80,7 @@ class ProductsSavingAccountViewModel : ObservableObject {
                     self.minimumSaldo = response.minimumSaldo ?? "0"
                     self.biayaAdministrasi = response.biayaAdministrasi ?? "0"
                     self.minimumSetoranAwal = response.minimumSetoranAwal ?? "0"
+                    self.minimumNextDeposit = response.minimumSetoranSelanjutnya ?? "0"
                     
                     self.isLoading = false
                 }
