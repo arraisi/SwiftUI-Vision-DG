@@ -231,6 +231,10 @@ class KartuKuService {
                 if (httpResponse.statusCode > 300) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
+                
+                if (httpResponse.statusCode > 406) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()

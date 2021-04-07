@@ -10,17 +10,17 @@ import Foundation
 // MARK: - SavingAccountModelElement
 struct SavingAccountModelElement: Codable, Hashable {
     let accountName: String
-    let accountType: AccountType
-    let planAllowDebitInHouse, planAllowInquiry: PlanAllow
+    let accountType: String?
+    let planAllowDebitInHouse, planAllowInquiry: String?
     let accountNumber: String
-    let planAllowDebitDomestic: PlanAllow
+    let planAllowDebitDomestic: String?
     let accountStatusDescription: String?
     let accountStatus: String
-    let accountTypeDescription: AccountTypeDescription
+    let accountTypeDescription: String?
     let planName: String?
     let currency: String
     let productName: String?
-    let planAllowCreditDomestic, planAllowCreditInHouse: PlanAllow
+    let planAllowCreditDomestic, planAllowCreditInHouse: String?
     let cardNumber: String
     let accountBranch: String
 }
@@ -37,6 +37,7 @@ enum AccountType: String, Codable {
 
 enum AccountTypeDescription: String, Codable {
     case empty = ""
+    case loan = "LOAN"
     case saving = "SAVING"
 }
 

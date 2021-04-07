@@ -152,6 +152,7 @@
 		526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */; };
 		526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526B661A254FFB0500C13C36 /* SettingMenu.swift */; };
 		526BA00825984FE000E1CFC3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 526BA00A25984FE000E1CFC3 /* Localizable.strings */; };
+		527646E1261C59670071C616 /* AccountBalanceListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527646E0261C59670071C616 /* AccountBalanceListResponse.swift */; };
 		527E31202566138E004FF5ED /* MobileVersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E311F2566138E004FF5ED /* MobileVersionResponse.swift */; };
 		527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E3124256613EB004FF5ED /* MobileVersionService.swift */; };
 		527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E312925661644004FF5ED /* MobileVersionViewModel.swift */; };
@@ -585,6 +586,7 @@
 		526BA00925984FE000E1CFC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		526BA03B2598529200E1CFC3 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		526BA03F2598530200E1CFC3 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		527646E0261C59670071C616 /* AccountBalanceListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceListResponse.swift; sourceTree = "<group>"; };
 		527E311F2566138E004FF5ED /* MobileVersionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionResponse.swift; sourceTree = "<group>"; };
 		527E3124256613EB004FF5ED /* MobileVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionService.swift; sourceTree = "<group>"; };
 		527E312925661644004FF5ED /* MobileVersionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileVersionViewModel.swift; sourceTree = "<group>"; };
@@ -1885,6 +1887,7 @@
 				52ADFEAB2557D9A800A1001F /* Card.swift */,
 				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
 				52FF49BA25F8789000890AE6 /* AccountBalanceResponse.swift */,
+				527646E0261C59670071C616 /* AccountBalanceListResponse.swift */,
 			);
 			name = Models;
 			path = "Mestika Dashboard/Menu/Dashboard/Models";
@@ -2388,6 +2391,7 @@
 				065DF52325765B5200255743 /* GeneralPaginationResponse.swift in Sources */,
 				526B660C254FFA7900C13C36 /* TransactionFeesScreen.swift in Sources */,
 				52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */,
+				527646E1261C59670071C616 /* AccountBalanceListResponse.swift in Sources */,
 				C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */,
 				52C3629425D12D13000374AA /* TransferRtgsScreen.swift in Sources */,
 				52ADFF332557DDBD00A1001F /* OTPTextField.swift in Sources */,

@@ -292,23 +292,19 @@ struct SuccessRegisterView: View {
                 label: {})
             
             if self.showingModal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
+                ModalOverlay(tapAction: { withAnimation {  } })
             }
             
             if self.showingModalJam {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalJam = false } })
+                ModalOverlay(tapAction: { withAnimation {  } })
             }
             
             if self.showingModalTanggal {
-                ModalOverlay(tapAction: { withAnimation { self.showingModalTanggal = false } })
+                ModalOverlay(tapAction: { withAnimation {  } })
             }
             
             if self.showingModalInformation {
-                ZStack {
-                    ModalOverlay(tapAction: { withAnimation { self.showingModalInformation = false } })
-                    showModalInformation()
-                }
-                .transition(.asymmetric(insertion: .opacity, removal: .fade))
+                    ModalOverlay(tapAction: { withAnimation {  } })
             }
             
             if self.isShowAlertInternetConnection {
@@ -349,9 +345,9 @@ struct SuccessRegisterView: View {
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageCancelRegister()
         }
-//        .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
-//            showModalInformation()
-//        }
+        .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            showModalInformation()
+        }
         .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             PopupNoInternetConnection()
         }

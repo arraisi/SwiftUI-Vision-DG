@@ -266,6 +266,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/product/getOtherProducts")
     }
     
+    static func urlGetListBalanceAccount() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/accountBalance")
+    }
+    
     static func urlGetAccountsByCif() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/channel/inquiryAccountByCif")
     }

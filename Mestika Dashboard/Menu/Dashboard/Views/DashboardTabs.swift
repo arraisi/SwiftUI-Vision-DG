@@ -25,10 +25,14 @@ struct DashboardTabs: View {
     let itemGapHeight:CGFloat = 10
     let itemGapWidth:CGFloat = 0.14
     
+    @State var listSourceNumber: [String] = []
+    
     /* Loading and Data Variable */
     @State var isLoading : Bool = true
+    @State var isLoadingCard : Bool = true
     @State var kartkuKu = KartuKuResponse()
     
+    @StateObject var savingAccountVM = SavingAccountViewModel()
     
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -86,21 +90,21 @@ struct DashboardTabs: View {
                             NavigationLink(
                                 destination: MyCardDashboardView(cards: .constant(cards[0]))) {
                                 CardView(card: cards[0], cardWidth: itemWidth, cardHeight: itemHeight, showContent: true)
-//                                    .highPriorityGesture(
-//
-//                                        DragGesture()
-//                                            .onChanged({ (value) in
-//
-//                                                if value.translation.width > 0 {
-//                                                    self.offset = value.location.x
-//                                                }
-//                                                else{
-//                                                    self.offset = value.location.x - self.itemWidth
-//                                                }
-//
-//                                            })
-//                                            .onEnded(onDragEnded)
-//                                    )
+                                //                                    .highPriorityGesture(
+                                //
+                                //                                        DragGesture()
+                                //                                            .onChanged({ (value) in
+                                //
+                                //                                                if value.translation.width > 0 {
+                                //                                                    self.offset = value.location.x
+                                //                                                }
+                                //                                                else{
+                                //                                                    self.offset = value.location.x - self.itemWidth
+                                //                                                }
+                                //
+                                //                                            })
+                                //                                            .onEnded(onDragEnded)
+                                //                                    )
                             }
                         }
                     }
@@ -108,28 +112,40 @@ struct DashboardTabs: View {
                 
                 ListEwalletView()
                     .padding(.top, 30)
-//
-//                ListContactTransferOnUs()
-//                    .padding(.top, 30)
-//
-//                ListPromoForYouView()
-//                    .padding(.top, 30)
-//
-//                ListPurchasePaymentView()
-//                    .padding(.top, 30)
-//
-//                VoucherView()
-//                    .padding(.top, 50)
+                //
+                //                ListContactTransferOnUs()
+                //                    .padding(.top, 30)
+                //
+                //                ListPromoForYouView()
+                //                    .padding(.top, 30)
+                //
+                //                ListPurchasePaymentView()
+                //                    .padding(.top, 30)
+                //
+                //                VoucherView()
+                //                    .padding(.top, 50)
             }
         })
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
         .onAppear {
             print("GET")
-            getAccountBalance()
+//            getAccountBalance()
             getUserInfo()
             getProfile()
             getListKartuKu()
+            
+            self.savingAccountVM.getAccounts { (success) in
+                self.isLoadingCard = false
+                self.savingAccountVM.accounts.forEach { e in
+                    print(e.accountNumber)
+                    self.listSourceNumber.append(e.accountNumber)
+                }
+                
+                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+                    
+                }
+            }
         }
     }
     
@@ -159,75 +175,153 @@ struct DashboardTabs: View {
     // MARK: -MENU GRID VIEW
     var menuGrid: some View {
         VStack {
-            if isLoading {
+            if isLoadingCard {
                 ProgressView("Loading")
                     .padding(.vertical, 50)
             } else {
-                HStack(alignment: .top) {
-                    Divider()
-                        .frame(width: 3, height: isHiddenBalance ? 60 : 90)
-                        .background(Color(hex: "#232175"))
-                        .padding(.trailing, 5)
-                    
-                    VStack(alignment: .leading) {
-                        Text("\(self.productName)")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(Color(hex: "#232175"))
-                            .padding(.bottom, 5)
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        if (isHiddenBalance) {
-                            VStack(alignment: .leading) {
-                                Text("Balance hidden".localized(language))
-                                    .font(.caption)
-                                    .fontWeight(.ultraLight)
-                            }
-                        } else {
-                            VStack(alignment: .leading) {
-                                Text("Main Account Balance".localized(language))
-                                    .font(.caption)
-                                    .fontWeight(.ultraLight)
+                ScrollView(.horizontal, showsIndicators: false, content: {
+                    HStack {
+                        ForEach(0..<self.savingAccountVM.accounts.count) { index in
+                            HStack(alignment: .top) {
+                                Divider()
+                                    .frame(width: 3, height: isHiddenBalance ? 70 : 100)
+                                    .background(Color(hex: "#232175"))
+                                    .padding(.trailing, 5)
                                 
-                                if (self.balanceStatus == "D") {
-                                    HStack {
-                                        Text("Rp.")
-                                            .fontWeight(.light)
-                                            .foregroundColor(.red)
+                                VStack(alignment: .leading) {
+                                    Text("\(self.savingAccountVM.accounts[index].accountTypeDescription ?? "")")
+                                        .font(.headline)
+                                        .bold()
+                                        .padding(.bottom, 5)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                    VStack(alignment: .leading) {
                                         
-                                        Text("- " + balance.thousandSeparator())
-                                            .font(.title3)
+                                        Text("\(self.savingAccountVM.accounts[index].productName ?? "Tabungan Mestika")")
+                                            .font(.subheadline)
                                             .bold()
-                                            .foregroundColor(.red)
-                                    }
-                                } else {
-                                    HStack {
-                                        Text("Rp.")
-                                            .fontWeight(.light)
-                                            .foregroundColor(Color(hex: "#2334D0"))
+                                            .foregroundColor(Color(hex: "#232175"))
+                                            .fontWeight(.ultraLight)
                                         
-                                        Text(balance.thousandSeparator())
-                                            .font(.title3)
-                                            .bold()
-                                            .foregroundColor(Color(hex: "#2334D0"))
+                                        if (self.savingAccountVM.accounts[index].accountNumber == "") {
+                                            Text("-")
+                                                .font(.caption)
+                                                .fontWeight(.ultraLight)
+                                        } else {
+                                            Text("\(self.savingAccountVM.accounts[index].accountNumber)")
+                                                .font(.caption)
+                                                .fontWeight(.ultraLight)
+                                        }
+                                        
+                                        if isHiddenBalance {
+                                            EmptyView()
+                                        } else {
+                                            HStack {
+                                                Text("Rp.")
+                                                    .fontWeight(.light)
+                                                    .foregroundColor(.black)
+                                                
+                                                if (self.savingAccountVM.balanceAccount.count < 1) {
+                                                    ProgressView()
+                                                } else {
+                                                    Text("\(self.savingAccountVM.balanceAccount[index].balance.thousandSeparator())")
+                                                        .font(.title3)
+                                                        .bold()
+                                                        .foregroundColor(.black)
+                                                }
+                                            }
+                                            .padding(.top, 5)
+                                        }
                                     }
                                 }
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    self.isHiddenBalance.toggle()
+                                }, label: {
+                                    Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
+                                        .padding(.top, 5)
+                                })
+                                .padding(.leading, 30)
                             }
+                            .padding([.leading, .trailing], 15)
+                            .padding(.top, 25)
+                            .padding(.bottom, 20)
                         }
                     }
-                    
-                    Spacer(minLength: 0)
-                    
-                    Button(action: {
-                        self.isHiddenBalance.toggle()
-                    }, label: {
-                        Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
-                            .padding(.top, 5)
-                    })
-                }
-                .padding([.leading, .trailing], 15)
-                .padding(.top, 25)
-                .padding(.bottom, 20)
+                    //                    HStack {
+                    //                        List(self.savingAccountVM.accounts, id: \.self) { item in
+                    //
+                    //                            HStack(alignment: .top) {
+                    //                                Divider()
+                    //                                    .frame(width: 3, height: isHiddenBalance ? 60 : 90)
+                    //                                    .background(Color(hex: "#232175"))
+                    //                                    .padding(.trailing, 5)
+                    //
+                    //                                VStack(alignment: .leading) {
+                    //                                    Text("\(self.productName)")
+                    //                                        .font(.title2)
+                    //                                        .bold()
+                    //                                        .foregroundColor(Color(hex: "#232175"))
+                    //                                        .padding(.bottom, 5)
+                    //                                        .fixedSize(horizontal: false, vertical: true)
+                    //
+                    //                                    if (isHiddenBalance) {
+                    //                                        VStack(alignment: .leading) {
+                    //                                            Text("Balance hidden".localized(language))
+                    //                                                .font(.caption)
+                    //                                                .fontWeight(.ultraLight)
+                    //                                        }
+                    //                                    } else {
+                    //                                        VStack(alignment: .leading) {
+                    //                                            Text("Main Account Balance".localized(language))
+                    //                                                .font(.caption)
+                    //                                                .fontWeight(.ultraLight)
+                    //
+                    //                                            if (self.balanceStatus == "D") {
+                    //                                                HStack {
+                    //                                                    Text("Rp.")
+                    //                                                        .fontWeight(.light)
+                    //                                                        .foregroundColor(.red)
+                    //
+                    //                                                    Text("- " + balance.thousandSeparator())
+                    //                                                        .font(.title3)
+                    //                                                        .bold()
+                    //                                                        .foregroundColor(.red)
+                    //                                                }
+                    //                                            } else {
+                    //                                                HStack {
+                    //                                                    Text("Rp.")
+                    //                                                        .fontWeight(.light)
+                    //                                                        .foregroundColor(Color(hex: "#2334D0"))
+                    //
+                    //                                                    Text(balance.thousandSeparator())
+                    //                                                        .font(.title3)
+                    //                                                        .bold()
+                    //                                                        .foregroundColor(Color(hex: "#2334D0"))
+                    //                                                }
+                    //                                            }
+                    //                                        }
+                    //                                    }
+                    //                                }
+                    //
+                    //                                Spacer(minLength: 0)
+                    //
+                    //                                Button(action: {
+                    //                                    self.isHiddenBalance.toggle()
+                    //                                }, label: {
+                    //                                    Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
+                    //                                        .padding(.top, 5)
+                    //                                })
+                    //                            }
+                    //                            .padding([.leading, .trailing], 15)
+                    //                            .padding(.top, 25)
+                    //                            .padding(.bottom, 20)
+                    //
+                    //                        }
+                    //                    }
+                })
             }
         }
         .navigationBarHidden(true)
