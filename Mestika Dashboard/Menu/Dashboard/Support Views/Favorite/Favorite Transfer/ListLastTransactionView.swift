@@ -16,6 +16,8 @@ struct ListLastTransactionView: View {
     var sourceNumber = ""
     @StateObject private var favoritVM = FavoritViewModel()
     
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    
     @State var isLoading: Bool = true
     
     var body: some View {
@@ -115,12 +117,14 @@ struct ListLastTransactionView: View {
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
         }
         .onAppear {
-            getList()
+            self.savingAccountVM.getAccounts { (success) in
+                getList(source: self.savingAccountVM.accounts[0].accountNumber)
+            }
         }
     }
     
-    func getList() {
-        self.favoritVM.getListLastTransaction(sourceNumber: self.sourceNumber, completion: { result in
+    func getList(source: String) {
+        self.favoritVM.getListLastTransaction(sourceNumber: source, completion: { result in
             self.isLoading = false
             print(result)
         })

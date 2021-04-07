@@ -217,17 +217,18 @@ struct DashboardTabs: View {
                                             EmptyView()
                                         } else {
                                             HStack {
-                                                Text("Rp.")
-                                                    .fontWeight(.light)
-                                                    .foregroundColor(.black)
-                                                
                                                 if (self.savingAccountVM.balanceAccount.count < 1) {
                                                     ProgressView()
                                                 } else {
-                                                    Text("\(self.savingAccountVM.balanceAccount[index].balance.thousandSeparator())")
+                                                    
+                                                    Text("Rp.")
+                                                        .fontWeight(.light)
+                                                        .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                    
+                                                    Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance.thousandSeparator())")
                                                         .font(.title3)
                                                         .bold()
-                                                        .foregroundColor(.black)
+                                                        .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
                                                 }
                                             }
                                             .padding(.top, 5)

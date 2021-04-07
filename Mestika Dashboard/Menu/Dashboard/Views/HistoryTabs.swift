@@ -14,11 +14,15 @@ struct HistoryTabs: View {
     
     
     @StateObject var historyVM = HistoryTransactionViewModel()
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    
+    @State var listSourceNumber: [String] = []
     
     @State private var filterShowed: Bool = true
     
     @State private var startDate = ""
     @State private var endDate = ""
+    @State var selectedSourceNumber: String = ""
     
     @State private var dateFrom = Date()
     @State private var dateTo = Date()
@@ -66,6 +70,16 @@ struct HistoryTabs: View {
                 }
             }
             
+        }.onAppear {
+            self.savingAccountVM.getAccounts { (success) in
+                self.savingAccountVM.accounts.forEach { e in
+                    print(e.accountNumber)
+                    
+                    if (e.accountTypeDescription == "SAVING") {
+                        self.listSourceNumber.append(e.accountNumber)
+                    }
+                }
+            }
         }
         
     }
@@ -78,6 +92,36 @@ struct HistoryTabs: View {
                         .font(.custom("Montserrat-SemiBold", size: 14))
                     Spacer()
                 }
+                
+                HStack {
+                    Menu {
+                        ForEach(self.listSourceNumber, id: \.self) { data in
+                            Button(action: {
+                                self.selectedSourceNumber = data
+                            }) {
+                                Text(data)
+                                    .bold()
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                                    .foregroundColor(.black)
+                            }
+                        }
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(selectedSourceNumber)
+                                .font(.subheadline)
+                                .foregroundColor(.black)
+                                .fontWeight(.bold)
+                        }
+                        .padding()
+                        
+                        Spacer()
+                        
+                        Image("ic_expand").padding()
+                    }
+                }
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.3), radius: 10)
                 
                 HStack {
                     VStack(alignment: .leading) {
@@ -131,7 +175,7 @@ struct HistoryTabs: View {
     }
     
     func loadHistory() {
-        self.historyVM.getList(cardNo: cardNo, sourceNumber: sourceNumber, dateFrom: startDate, dateTo: endDate) { (result) in
+        self.historyVM.getList(cardNo: cardNo, sourceNumber: selectedSourceNumber, dateFrom: startDate, dateTo: endDate) { (result) in
             print("PRINT ON VIEW HISTORY : GET LIST HISTORY STATUS -> \(result)")
         }
     }
