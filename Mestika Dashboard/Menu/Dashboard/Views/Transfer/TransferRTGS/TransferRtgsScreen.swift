@@ -9,6 +9,12 @@ import SwiftUI
 
 struct TransferRtgsScreen: View {
     
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    @State var listSourceNumber: [String] = []
+    
+    @State var selectedSourceNumber: String = ""
+    @State var selectedBalance: String = ""
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -236,6 +242,17 @@ struct TransferRtgsScreen: View {
             getProfile()
             getListBank()
             self.getLimit(code: "70")
+            
+            self.savingAccountVM.getAccounts { (success) in
+                self.savingAccountVM.accounts.forEach { e in
+                    print(e.accountNumber)
+                    self.listSourceNumber.append(e.accountNumber)
+                }
+                
+                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+                    
+                }
+            }
         }
     }
     
@@ -655,44 +672,109 @@ struct TransferRtgsScreen: View {
         .padding()
     }
     
+//    var bankAccountCard: some View {
+//        ZStack {
+//
+//            Button(
+//                action: {
+//                    UIApplication.shared.endEditing()
+//                    self.showDialogSelectAccount = true
+//                },
+//                label: {
+//                    HStack {
+//                        VStack(alignment: .leading) {
+//                            Text(self.selectedAccount.namaRekening)
+//                                .font(.subheadline)
+//                                .foregroundColor(Color(hex: "#232175"))
+//                                .fontWeight(.bold)
+//
+//                            HStack {
+//                                Text("Active Balance:".localized(language))
+//                                    .font(.caption)
+//                                    .fontWeight(.ultraLight)
+//                                Text(self.selectedAccount.saldo)
+//                                    .font(.caption)
+//                                    .foregroundColor(Color(hex: "#232175"))
+//                                    .fontWeight(.semibold)
+//                            }
+//                        }
+//
+//                        Spacer()
+//
+//                        Image("ic_expand")
+//                    }
+//                    .padding()
+//                }
+//            )
+//        }
+//        .frame(width: UIScreen.main.bounds.width - 60)
+//        .background(Color(hex: "#F6F8FB"))
+//        .cornerRadius(15)
+//    }
+    
+    
     var bankAccountCard: some View {
         ZStack {
-            
-            Button(
-                action: {
-                    UIApplication.shared.endEditing()
-                    self.showDialogSelectAccount = true
-                },
-                label: {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(self.selectedAccount.namaRekening)
-                                .font(.subheadline)
-                                .foregroundColor(Color(hex: "#232175"))
-                                .fontWeight(.bold)
+            HStack {
+                
+                Menu {
+                    ForEach(0..<self.listSourceNumber.count) { index in
+                        Button(action: {
+                            self.selectedSourceNumber = self.listSourceNumber[index]
+                            self.selectedAccount.noRekening = self.selectedSourceNumber
+                            self.transferData.sourceNumber = self.selectedSourceNumber
                             
-                            HStack {
-                                Text("Active Balance:".localized(language))
+                            if self.savingAccountVM.balanceAccount.count < 1 {
+                                self.selectedBalance = "0"
+                                self.selectedAccount.saldo = "0"
+                            } else {
+                                self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance
+                                self.selectedAccount.saldo = self.selectedBalance
+                            }
+                        }) {
+                            Text(self.listSourceNumber[index])
+                                .bold()
+                                .font(.custom("Montserrat-Regular", size: 12))
+                                .foregroundColor(.black)
+                        }
+                    }
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(selectedSourceNumber)
+                            .font(.subheadline)
+                            .foregroundColor(Color(hex: "#232175"))
+                            .fontWeight(.bold)
+                        
+                        HStack {
+                            Text("Active Balance:".localized(language))
+                                .font(.caption)
+                                .fontWeight(.ultraLight)
+                            
+                            if (self.savingAccountVM.balanceAccount.count < 1) {
+                                Text("-")
                                     .font(.caption)
-                                    .fontWeight(.ultraLight)
-                                Text(self.selectedAccount.saldo)
+                                    .foregroundColor(Color(hex: "#232175"))
+                                    .fontWeight(.semibold)
+                            } else {
+                                Text("\(self.selectedBalance.thousandSeparator())")
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#232175"))
                                     .fontWeight(.semibold)
                             }
                         }
-                        
-                        Spacer()
-                        
-                        Image("ic_expand")
                     }
-                    .padding()
+                    
+                    Spacer()
+                    
+                    Image("ic_expand").padding()
                 }
-            )
+            }
+            .padding()
         }
         .frame(width: UIScreen.main.bounds.width - 60)
-        .background(Color(hex: "#F6F8FB"))
+        .background(Color.white)
         .cornerRadius(15)
+        .shadow(color: Color.gray.opacity(0.3), radius: 10)
     }
     
     // MARK: - MODAL

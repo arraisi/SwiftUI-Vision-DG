@@ -17,12 +17,14 @@ struct HistoryTabs: View {
     @StateObject var savingAccountVM = SavingAccountViewModel()
     
     @State var listSourceNumber: [String] = []
+    @State var listCardNumber: [String] = []
     
     @State private var filterShowed: Bool = true
     
     @State private var startDate = ""
     @State private var endDate = ""
     @State var selectedSourceNumber: String = ""
+    @State var selectedCardNumber: String = ""
     
     @State private var dateFrom = Date()
     @State private var dateTo = Date()
@@ -77,6 +79,7 @@ struct HistoryTabs: View {
                     
                     if (e.accountTypeDescription == "SAVING") {
                         self.listSourceNumber.append(e.accountNumber)
+                        self.listCardNumber.append(e.cardNumber)
                     }
                 }
             }
@@ -95,11 +98,12 @@ struct HistoryTabs: View {
                 
                 HStack {
                     Menu {
-                        ForEach(self.listSourceNumber, id: \.self) { data in
+                        ForEach(0..<self.listSourceNumber.count) { index in
                             Button(action: {
-                                self.selectedSourceNumber = data
+                                self.selectedSourceNumber = self.listSourceNumber[index]
+                                self.selectedCardNumber = self.listCardNumber[index]
                             }) {
-                                Text(data)
+                                Text(self.listSourceNumber[index])
                                     .bold()
                                     .font(.custom("Montserrat-Regular", size: 12))
                                     .foregroundColor(.black)
@@ -175,7 +179,7 @@ struct HistoryTabs: View {
     }
     
     func loadHistory() {
-        self.historyVM.getList(cardNo: cardNo, sourceNumber: selectedSourceNumber, dateFrom: startDate, dateTo: endDate) { (result) in
+        self.historyVM.getList(cardNo: selectedCardNumber, sourceNumber: selectedSourceNumber, dateFrom: startDate, dateTo: endDate) { (result) in
             print("PRINT ON VIEW HISTORY : GET LIST HISTORY STATUS -> \(result)")
         }
     }

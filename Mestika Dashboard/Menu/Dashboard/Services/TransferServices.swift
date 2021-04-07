@@ -130,6 +130,7 @@ class TransferServices {
             "sourceNumber": transferData.sourceNumber,
             "destinationNumber": transferData.destinationNumber,
             "berita": transferData.notes,
+//            "planAllowDebitInHouse": "Y",
             "pin": encryptPassword(password: transferData.pin)
         ]
         
@@ -205,6 +206,7 @@ class TransferServices {
             "addressBeneficiary1": transferData.addressOfDestination,
             "addressBeneficiary2": "BANDUNG",
             "addressBeneficiary3": "",
+//            "planAllowDebitDomestic": "Y",
             "typeOfBeneficiary": transferData.typeDestination,
             "pin": encryptPassword(password: transferData.pin)
         ]
@@ -282,6 +284,7 @@ class TransferServices {
             "ref": "",
             "typeOfBeneficiary": transferData.typeDestination,
             "typeOfBusiness": "A",
+//            "planAllowDebitDomestic": "Y",
             "sourceNumber": transferData.sourceNumber,
             "ultimateBeneficiaryName": transferData.destinationName
         ]

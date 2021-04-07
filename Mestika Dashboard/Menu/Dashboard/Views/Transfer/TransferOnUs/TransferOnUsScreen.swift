@@ -13,6 +13,11 @@ struct TransferOnUsScreen: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    @State var listSourceNumber: [String] = []
+    
+    @State var selectedSourceNumber: String = ""
+    @State var selectedBalance: String = ""
     
     /* Function GET USER Status */
     @ObservedObject var profileVM = ProfileViewModel()
@@ -186,6 +191,17 @@ struct TransferOnUsScreen: View {
             }
             self.getProfile()
             self.getLimit(code: "70")
+            
+            self.savingAccountVM.getAccounts { (success) in
+                self.savingAccountVM.accounts.forEach { e in
+                    print(e.accountNumber)
+                    self.listSourceNumber.append(e.accountNumber)
+                }
+                
+                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+                    
+                }
+            }
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
@@ -337,36 +353,61 @@ struct TransferOnUsScreen: View {
     
     var bankAccountCard: some View {
         ZStack {
-            Button(
-                action: {
-                    UIApplication.shared.endEditing()
-                    self.showDialogSelectAccount = true
-                },
-                label: {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(self.selectedAccount.productName)
-                                .font(.subheadline)
-                                .foregroundColor(Color(hex: "#232175"))
-                                .fontWeight(.bold)
+            HStack {
+                
+                Menu {
+                    ForEach(0..<self.listSourceNumber.count) { index in
+                        Button(action: {
+                            self.selectedSourceNumber = self.listSourceNumber[index]
+                            self.selectedAccount.noRekening = self.selectedSourceNumber
+                            self.transferData.sourceNumber = self.selectedSourceNumber
                             
-                            HStack {
-                                Text("Active Balance:".localized(language))
+                            if self.savingAccountVM.balanceAccount.count < 1 {
+                                self.selectedBalance = "0"
+                                self.selectedAccount.saldo = "0"
+                            } else {
+                                self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance
+                                self.selectedAccount.saldo = self.selectedBalance
+                            }
+                        }) {
+                            Text(self.listSourceNumber[index])
+                                .bold()
+                                .font(.custom("Montserrat-Regular", size: 12))
+                                .foregroundColor(.black)
+                        }
+                    }
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(selectedSourceNumber)
+                            .font(.subheadline)
+                            .foregroundColor(Color(hex: "#232175"))
+                            .fontWeight(.bold)
+                        
+                        HStack {
+                            Text("Active Balance:".localized(language))
+                                .font(.caption)
+                                .fontWeight(.ultraLight)
+                            
+                            if (self.savingAccountVM.balanceAccount.count < 1) {
+                                Text("-")
                                     .font(.caption)
-                                    .fontWeight(.ultraLight)
-                                Text(self.selectedAccount.saldo)
+                                    .foregroundColor(Color(hex: "#232175"))
+                                    .fontWeight(.semibold)
+                            } else {
+                                Text("\(self.selectedBalance.thousandSeparator())")
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#232175"))
                                     .fontWeight(.semibold)
                             }
                         }
-                        
-                        Spacer()
-                        Image("ic_expand")
                     }
-                    .padding()
+                    
+                    Spacer()
+                    
+                    Image("ic_expand").padding()
                 }
-            )
+            }
+            .padding()
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .background(Color.white)
@@ -756,7 +797,7 @@ struct TransferOnUsScreen: View {
                 .onTapGesture {
                     self.selectedAccount = data
                     self.transferData.cardNo = data.noRekening
-                    self.transferData.sourceNumber = data.sourceNumber
+//                    self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.productName
                     print(data.noRekening)
                     self.showDialogSelectAccount = false
@@ -814,7 +855,7 @@ struct TransferOnUsScreen: View {
                 print(self.selectedAccount.sourceNumber)
                 self.transferData.username = self.profileVM.name
                 self.transferData.cardNo = self.profileVM.cardNo
-                self.transferData.sourceNumber = self.profileVM.accountNumber
+//                self.transferData.sourceNumber = self.profileVM.accountNumber
                 self.transferData.sourceAccountName = self.profileVM.nameOnCard
                 
                 self.listBankAccount.removeAll()
