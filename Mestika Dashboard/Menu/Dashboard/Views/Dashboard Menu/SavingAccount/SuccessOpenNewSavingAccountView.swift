@@ -78,6 +78,7 @@ struct SuccessOpenNewSavingAccountView: View {
                 
                 Button(
                     action: {
+                        NotificationCenter.default.post(name: NSNotification.Name("SavingAccountReturn"), object: nil, userInfo: nil)
                         self.appState.moveToDashboard = true
                     },
                     label: {

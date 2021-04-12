@@ -74,6 +74,7 @@ class SavingAccountViewModel : ObservableObject {
             case .success(let response):
                 
                 self.accounts = response
+                
                 DispatchQueue.main.async {
                     self.isLoading = false
                 }

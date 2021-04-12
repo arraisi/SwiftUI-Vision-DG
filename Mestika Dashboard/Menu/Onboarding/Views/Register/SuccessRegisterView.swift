@@ -231,6 +231,7 @@ struct SuccessRegisterView: View {
                         Group {
                             
                             Button(action: {
+                                UIApplication.shared.endEditing()
                                 if pilihJam != "" {
 //                                    if (self.user.last?.isNasabahMestika == true) {
 //                                        submitScheduleNasabahExisting()

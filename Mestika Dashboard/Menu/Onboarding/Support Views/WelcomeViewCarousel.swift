@@ -24,7 +24,7 @@ struct WelcomeViewCarousel: View {
     var body: some View {
         VStack{
             
-            HStack(spacing: 20){
+            HStack(spacing: 20) {
                 
                 ForEach(0..<data.count) { i in
                     

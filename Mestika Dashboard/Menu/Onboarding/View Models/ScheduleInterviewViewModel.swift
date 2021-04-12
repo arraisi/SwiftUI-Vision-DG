@@ -73,9 +73,9 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
     
     // MARK:- GET SCHEDULE BY DATE
     func getScheduleById(date: String) {
-        self.scheduleJamBasedOnDate = Array(Set(schedule.filter({ (data:ScheduleInterviewViewModel) -> Bool in
+        self.scheduleJamBasedOnDate = Array(Set(schedule.filter({ (data: ScheduleInterviewViewModel) -> Bool in
             return data.date == date
-        }).map({ (data:ScheduleInterviewViewModel) -> String in
+        }).map({ (data: ScheduleInterviewViewModel) -> String in
             return "\(data.timeStart)" + "-" + "\(data.timeEnd)"
         }))).sorted()
     }

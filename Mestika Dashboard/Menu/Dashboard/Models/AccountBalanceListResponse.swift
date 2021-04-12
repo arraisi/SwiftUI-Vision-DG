@@ -7,16 +7,17 @@ import Foundation
 
 // MARK: - AccountBalanceListResponseElement
 struct AccountBalanceListResponseElement: Codable, Hashable {
-    let ref, balance, currency, creditDebit: String
-        let sourceName: String?
-        let accountLegderBalance, sourceNumber, cardNo: String
-        let status: StatusBalance
-        let currencyCode: String
-    }
+    let ref: String
+    let balance, currency, creditDebit: String?
+    let sourceName: String?
+    let accountLegderBalance, sourceNumber, cardNo: String?
+    let status: StatusBalance
+    let currencyCode: String?
+}
 
-    // MARK: - Status
-    struct StatusBalance: Codable, Hashable {
-        let status, message, code: String
-    }
+// MARK: - Status
+struct StatusBalance: Codable, Hashable {
+    let status, message, code: String
+}
 
 typealias AccountBalanceListResponse = [AccountBalanceListResponseElement]

@@ -190,7 +190,7 @@ class TransferServices {
         
         let body: [String: Any] = [
             "ref": "1",
-            "cardNo": transferData.sourceNumber,
+            "cardNo": transferData.cardNo,
             "nominal": transferData.amount,
             "currency": "360",
             "sourceNumber": transferData.sourceNumber,

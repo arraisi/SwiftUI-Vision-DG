@@ -245,8 +245,12 @@ struct TransferRtgsScreen: View {
             
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
-                    print(e.accountNumber)
-                    self.listSourceNumber.append(e.accountNumber)
+                    
+                    if (e.planAllowDebitDomestic == "Y") {
+                        print(e.accountNumber)
+                        self.listSourceNumber.append(e.accountNumber)
+                    }
+                    
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
@@ -728,7 +732,10 @@ struct TransferRtgsScreen: View {
                                 self.selectedBalance = "0"
                                 self.selectedAccount.saldo = "0"
                             } else {
-                                self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance
+                                self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance ?? "0"
+                                self.transferData.cardNo = self.savingAccountVM.balanceAccount[index].cardNo ?? ""
+                                print(self.transferData.cardNo)
+                                print(self.selectedAccount.noRekening)
                                 self.selectedAccount.saldo = self.selectedBalance
                             }
                         }) {
@@ -1045,7 +1052,7 @@ struct TransferRtgsScreen: View {
                 //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-                    self.transferData.cardNo = data.noRekening
+//                    self.transferData.cardNo = data.noRekening
                     self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.namaRekening
                     print(data.noRekening)
@@ -1061,7 +1068,7 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     var disableForm: Bool {
-        if (self.destinationNameCtrl.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
+        if (self.destinationNameCtrl.isNotEmpty() && self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
             return false
         }
         return true
@@ -1085,7 +1092,7 @@ struct TransferRtgsScreen: View {
                 self.listBankAccount.removeAll()
                 self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, productName: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
                 self.selectedAccount = self.listBankAccount[0]
-                self.transferData.cardNo = self.profileVM.cardNo
+//                self.transferData.cardNo = self.profileVM.cardNo
                 self.transferData.sourceNumber = self.profileVM.accountNumber
                 self.transferData.sourceAccountName = self.profileVM.nameOnCard
                 

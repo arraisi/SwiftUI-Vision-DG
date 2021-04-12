@@ -194,8 +194,11 @@ struct TransferOnUsScreen: View {
             
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
-                    print(e.accountNumber)
-                    self.listSourceNumber.append(e.accountNumber)
+                    
+                    if (e.planAllowDebitInHouse == "Y") {
+                        print(e.accountNumber)
+                        self.listSourceNumber.append(e.accountNumber)
+                    }
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
@@ -366,7 +369,10 @@ struct TransferOnUsScreen: View {
                                 self.selectedBalance = "0"
                                 self.selectedAccount.saldo = "0"
                             } else {
-                                self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance
+                                self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance ?? "0"
+                                self.transferData.cardNo = self.savingAccountVM.balanceAccount[index].cardNo ?? "0"
+                                print(self.transferData.cardNo)
+                                print(self.selectedAccount.noRekening)
                                 self.selectedAccount.saldo = self.selectedBalance
                             }
                         }) {
@@ -796,7 +802,7 @@ struct TransferOnUsScreen: View {
                 //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-                    self.transferData.cardNo = data.noRekening
+//                    self.transferData.cardNo = data.noRekening
 //                    self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.productName
                     print(data.noRekening)
@@ -810,7 +816,7 @@ struct TransferOnUsScreen: View {
     }
     
     func validateForm() {
-        if (self.destinationNumber.count == 11 && self.amount != "" && self.transferVM.destinationName != "Akun Tidak Ditemukan") {
+        if (self.destinationNumber.count == 11 && self.selectedSourceNumber == "" && self.amount != "" && self.transferVM.destinationName != "Akun Tidak Ditemukan") {
             disabledButton = false
         } else {
             disabledButton = true
@@ -854,7 +860,7 @@ struct TransferOnUsScreen: View {
                 print(self.profileVM.balance)
                 print(self.selectedAccount.sourceNumber)
                 self.transferData.username = self.profileVM.name
-                self.transferData.cardNo = self.profileVM.cardNo
+//                self.transferData.cardNo = self.profileVM.cardNo
 //                self.transferData.sourceNumber = self.profileVM.accountNumber
                 self.transferData.sourceAccountName = self.profileVM.nameOnCard
                 

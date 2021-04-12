@@ -26,6 +26,7 @@ struct DashboardTabs: View {
     let itemGapWidth:CGFloat = 0.14
     
     @State var listSourceNumber: [String] = []
+    @State var listTypeAccount: [String] = []
     
     /* Loading and Data Variable */
     @State var isLoading : Bool = true
@@ -128,6 +129,27 @@ struct DashboardTabs: View {
         })
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("SavingAccountReturn"))) { obj in
+            self.savingAccountVM.getAccounts { (success) in
+                self.listSourceNumber = []
+                self.listTypeAccount = []
+                self.isLoadingCard = false
+                
+                self.savingAccountVM.accounts.forEach { e in
+                    
+//                    if (e.accountType == "S" || e.accountType == "D") {
+//                        print(e.accountNumber)
+//                        self.listSourceNumber.append(e.accountNumber)
+//                    }
+                    self.listSourceNumber.append(e.accountNumber)
+                    self.listTypeAccount.append(e.accountType ?? "")
+                }
+                
+                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+                    
+                }
+            }
+        }
         .onAppear {
             print("GET")
 //            getAccountBalance()
@@ -138,8 +160,14 @@ struct DashboardTabs: View {
             self.savingAccountVM.getAccounts { (success) in
                 self.isLoadingCard = false
                 self.savingAccountVM.accounts.forEach { e in
+                    
+//                    if (e.accountType == "S" || e.accountType == "D") {
+//                        print(e.accountNumber)
+//                        self.listSourceNumber.append(e.accountNumber)
+//                    }
                     print(e.accountNumber)
                     self.listSourceNumber.append(e.accountNumber)
+                    self.listTypeAccount.append(e.accountType ?? "")
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
@@ -216,22 +244,31 @@ struct DashboardTabs: View {
                                         if isHiddenBalance {
                                             EmptyView()
                                         } else {
-                                            HStack {
-                                                if (self.savingAccountVM.balanceAccount.count < 1) {
-                                                    ProgressView()
+                                            
+                                            if (self.listTypeAccount.count < 1) {
+                                                ProgressView()
+                                            } else {
+                                                if (self.listTypeAccount[index] == "S" || self.listTypeAccount[index] == "D") {
+                                                    HStack {
+                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
+                                                            ProgressView()
+                                                        } else {
+                                                            
+                                                            Text("Rp.")
+                                                                .fontWeight(.light)
+                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                            
+                                                            Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
+                                                                .font(.title3)
+                                                                .bold()
+                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                        }
+                                                    }
+                                                    .padding(.top, 5)
                                                 } else {
-                                                    
-                                                    Text("Rp.")
-                                                        .fontWeight(.light)
-                                                        .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-                                                    
-                                                    Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance.thousandSeparator())")
-                                                        .font(.title3)
-                                                        .bold()
-                                                        .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                    EmptyView()
                                                 }
                                             }
-                                            .padding(.top, 5)
                                         }
                                     }
                                 }
@@ -251,77 +288,6 @@ struct DashboardTabs: View {
                             .padding(.bottom, 20)
                         }
                     }
-                    //                    HStack {
-                    //                        List(self.savingAccountVM.accounts, id: \.self) { item in
-                    //
-                    //                            HStack(alignment: .top) {
-                    //                                Divider()
-                    //                                    .frame(width: 3, height: isHiddenBalance ? 60 : 90)
-                    //                                    .background(Color(hex: "#232175"))
-                    //                                    .padding(.trailing, 5)
-                    //
-                    //                                VStack(alignment: .leading) {
-                    //                                    Text("\(self.productName)")
-                    //                                        .font(.title2)
-                    //                                        .bold()
-                    //                                        .foregroundColor(Color(hex: "#232175"))
-                    //                                        .padding(.bottom, 5)
-                    //                                        .fixedSize(horizontal: false, vertical: true)
-                    //
-                    //                                    if (isHiddenBalance) {
-                    //                                        VStack(alignment: .leading) {
-                    //                                            Text("Balance hidden".localized(language))
-                    //                                                .font(.caption)
-                    //                                                .fontWeight(.ultraLight)
-                    //                                        }
-                    //                                    } else {
-                    //                                        VStack(alignment: .leading) {
-                    //                                            Text("Main Account Balance".localized(language))
-                    //                                                .font(.caption)
-                    //                                                .fontWeight(.ultraLight)
-                    //
-                    //                                            if (self.balanceStatus == "D") {
-                    //                                                HStack {
-                    //                                                    Text("Rp.")
-                    //                                                        .fontWeight(.light)
-                    //                                                        .foregroundColor(.red)
-                    //
-                    //                                                    Text("- " + balance.thousandSeparator())
-                    //                                                        .font(.title3)
-                    //                                                        .bold()
-                    //                                                        .foregroundColor(.red)
-                    //                                                }
-                    //                                            } else {
-                    //                                                HStack {
-                    //                                                    Text("Rp.")
-                    //                                                        .fontWeight(.light)
-                    //                                                        .foregroundColor(Color(hex: "#2334D0"))
-                    //
-                    //                                                    Text(balance.thousandSeparator())
-                    //                                                        .font(.title3)
-                    //                                                        .bold()
-                    //                                                        .foregroundColor(Color(hex: "#2334D0"))
-                    //                                                }
-                    //                                            }
-                    //                                        }
-                    //                                    }
-                    //                                }
-                    //
-                    //                                Spacer(minLength: 0)
-                    //
-                    //                                Button(action: {
-                    //                                    self.isHiddenBalance.toggle()
-                    //                                }, label: {
-                    //                                    Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
-                    //                                        .padding(.top, 5)
-                    //                                })
-                    //                            }
-                    //                            .padding([.leading, .trailing], 15)
-                    //                            .padding(.top, 25)
-                    //                            .padding(.bottom, 20)
-                    //
-                    //                        }
-                    //                    }
                 })
             }
         }

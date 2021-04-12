@@ -59,25 +59,42 @@ struct NumPadView: View {
                     
                     password.append(value)
                     
-                    DispatchQueue.main.async {
+                    withAnimation {
                         
-                        withAnimation{
+                        if password.count == 6{
+                            print(password)
+                            print(key)
+                            unlocked = false
+                            wrongPass = false
                             
-                            if password.count == 6{
-                                print(password)
-                                print(key)
-                                unlocked = false
-                                wrongPass = false
-                                
-                                if isTransferOnUs {
-                                    NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
-                                } else {
-                                    NotificationCenter.default.post(name: NSNotification.Name("PinOffUs"), object: nil, userInfo: nil)
-                                }
-                                NotificationCenter.default.post(name: NSNotification.Name("PinForgotPinTrx"), object: nil, userInfo: nil)
+                            if isTransferOnUs {
+                                NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+                            } else {
+                                NotificationCenter.default.post(name: NSNotification.Name("PinOffUs"), object: nil, userInfo: nil)
                             }
+                            NotificationCenter.default.post(name: NSNotification.Name("PinForgotPinTrx"), object: nil, userInfo: nil)
                         }
                     }
+                    
+//                    DispatchQueue.main.async {
+//
+//                        withAnimation {
+//
+//                            if password.count == 6{
+//                                print(password)
+//                                print(key)
+//                                unlocked = false
+//                                wrongPass = false
+//
+//                                if isTransferOnUs {
+//                                    NotificationCenter.default.post(name: NSNotification.Name("PinOnUs"), object: nil, userInfo: nil)
+//                                } else {
+//                                    NotificationCenter.default.post(name: NSNotification.Name("PinOffUs"), object: nil, userInfo: nil)
+//                                }
+//                                NotificationCenter.default.post(name: NSNotification.Name("PinForgotPinTrx"), object: nil, userInfo: nil)
+//                            }
+//                        }
+//                    }
                 }
             }
         }

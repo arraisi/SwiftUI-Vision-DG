@@ -200,6 +200,7 @@ struct VerificationPINView: View {
                         
                         HStack {
                             Button(action: {
+                                UIApplication.shared.endEditing()
                                 self.shouldVerificationWithVC.toggle()
                                 if self.shouldVerificationWithVC {
                                     self.pin = ""
@@ -241,13 +242,12 @@ struct VerificationPINView: View {
                         
                         Button(action: {
                             
-                            UIApplication.shared.endEditing()
-                            
                             self.tryCount += 1
                             if self.shouldVerificationWithVC {
 //                                UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
                                 self.nextToFormVideoCall = true
                             } else {
+                                UIApplication.shared.endEditing()
 //                                UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
                                 validatePINBackEnd()
                             }
