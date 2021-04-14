@@ -89,6 +89,25 @@ struct DashboardTabs: View {
                 
                 VStack {
                     HStack {
+                        Text("Information")
+                            .font(.title3)
+                            .fontWeight(.ultraLight)
+                        
+                        Spacer()
+                    }
+                    .padding([.leading, .trailing], 15)
+                    
+                    HStack(spacing: itemWidth * itemGapWidth) {
+                        
+                        Image("ic_notif_rekening")
+                            .padding(.leading, 15)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                        
+                    }
+                }
+                
+                VStack {
+                    HStack {
                         Text("My Card".localized(language))
                             .font(.title3)
                             .fontWeight(.ultraLight)
