@@ -285,7 +285,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.messageResponse.localized(language)),
-                dismissButton: .default(Text("Oke"))
+                dismissButton: .default(Text("OK".localized(language)))
             )
         }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in

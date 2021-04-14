@@ -582,7 +582,7 @@ struct VerificationRegisterDataView: View {
             return Alert(
                 title: Text("MESSAGE".localized(language)),
                 message: Text("\(self.errorMessage)"),
-                dismissButton: .default(Text("Oke")))
+                dismissButton: .default(Text("OK".localized(language))))
         }
         .alert(isPresented: $isShowingAlert) {
             return Alert(

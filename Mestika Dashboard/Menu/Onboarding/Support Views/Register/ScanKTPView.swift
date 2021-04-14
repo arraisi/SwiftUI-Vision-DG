@@ -129,7 +129,7 @@ struct ScanKTPView: View {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.errorMessage.localized(language)),
-                dismissButton: .default(Text("OK"))
+                dismissButton: .default(Text("OK".localized(language)))
             )
         }
     }

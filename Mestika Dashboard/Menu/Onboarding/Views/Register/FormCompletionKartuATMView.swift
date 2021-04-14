@@ -188,7 +188,7 @@ struct FormCompletionKartuATMView: View {
             return Alert(
                 title: Text("MESSAGE".localized(language)),
                 message: Text(self.messageResponse),
-                dismissButton: .default(Text("Oke"))
+                dismissButton: .default(Text("OK".localized(language)))
             )
         }
     }

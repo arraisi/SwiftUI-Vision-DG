@@ -138,10 +138,10 @@ struct FormEmailVerificationRegisterNasabahView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Do you want to cancel registration?".localized(language)),
-                primaryButton: .default(Text("YES"), action: {
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text("NO")))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

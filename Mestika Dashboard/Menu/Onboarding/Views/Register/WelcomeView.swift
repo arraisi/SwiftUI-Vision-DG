@@ -257,7 +257,7 @@ struct WelcomeView: View {
                 return Alert(
                     title: Text("MESSAGE".localized(language)),
                     message: Text("\(jitsiRoom)"),
-                    dismissButton: .default(Text("Oke"))
+                    dismissButton: .default(Text("OK".localized(language)))
                 )
             }
             .onAppear {
@@ -289,7 +289,7 @@ struct WelcomeView: View {
                 return Alert(
                     title: Text("MESSAGE".localized(language)),
                     message: Text(self.alertMessage),
-                    dismissButton: .default(Text("Oke")))
+                    dismissButton: .default(Text("OK".localized(language))))
             }
             .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 PopupNoInternetConnection()

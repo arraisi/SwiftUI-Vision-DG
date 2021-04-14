@@ -214,7 +214,7 @@ struct KeluargaTerdekat: View {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.messageResponse),
-                dismissButton: .default(Text("Oke"))
+                dismissButton: .default(Text("OK".localized(language)))
             )
         }
         .navigationBarBackButtonHidden(true)

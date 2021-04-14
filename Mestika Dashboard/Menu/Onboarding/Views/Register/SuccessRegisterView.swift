@@ -356,7 +356,7 @@ struct SuccessRegisterView: View {
             return Alert(
                 title: Text("Message"),
                 message: Text("\(self.scheduleVM.message)"),
-                dismissButton: .default(Text("Oke")))
+                dismissButton: .default(Text("OK".localized(language))))
         }
     }
     

@@ -186,10 +186,10 @@ struct PhoneNumberVerificationForgotPasswordView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Do you want to cancel changing password?".localized(language)),
-                primaryButton: .default(Text("YES"), action: {
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text("No")))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&

@@ -83,7 +83,7 @@ struct TransferRtgsValidationPin: View {
                 return Alert(
                     title: Text("\(self.statusError)"),
                     message: Text("\(self.messageError)"),
-                    dismissButton: .default(Text("Oke")))
+                    dismissButton: .default(Text("OK".localized(language))))
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOffUs"))) { obj in
                 print("SUCCESS PIN")
