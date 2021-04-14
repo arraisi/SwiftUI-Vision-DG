@@ -40,7 +40,12 @@ class HistoryTransactionViewModel : ObservableObject {
                 
                 DispatchQueue.main.async {
                     if let _histories = response.historyList {
-                        self.histories = _histories
+                        
+                        if (_histories.isEmpty) {
+                            self.histories = []
+                        } else {
+                            self.histories = _histories
+                        }
                     }
                     self.isLoading = false
                 }

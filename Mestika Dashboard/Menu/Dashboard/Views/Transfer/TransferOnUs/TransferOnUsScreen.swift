@@ -49,8 +49,8 @@ struct TransferOnUsScreen: View {
     @State private var disabledButton = true
     @State private var routeConfirmation: Bool = false
     
-    @State private var maxLimit: Int = 10000000
-    @State private var limitTrx: String = "10000000"
+    @State private var maxLimit: Int = 30000000
+    @State private var limitTrx: String = "30000000"
     @State private var minLimit: Int = 10000
     
     @State var balance: String = ""
@@ -816,7 +816,7 @@ struct TransferOnUsScreen: View {
     }
     
     func validateForm() {
-        if (self.destinationNumber.count == 11 && self.selectedSourceNumber == "" && self.amount != "" && self.transferVM.destinationName != "Akun Tidak Ditemukan") {
+        if (self.destinationNumber.count == 11 && self.selectedSourceNumber != "" && self.amount != "" && self.transferVM.destinationName != "Akun Tidak Ditemukan") {
             disabledButton = false
         } else {
             disabledButton = true
@@ -876,7 +876,7 @@ struct TransferOnUsScreen: View {
     }
     
     func getLimit(code: String) {
-        self.transferVM.getLimitTransaction(classCode: "70") { success in
+        self.transferVM.getLimitTransaction(classCode: "10") { success in
             if success {
                 self.maxLimit = Int(self.transferVM.limitIbft) ?? 0
                 self.limitTrx = self.transferVM.limitIbft

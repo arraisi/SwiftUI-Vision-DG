@@ -408,7 +408,6 @@ struct CardActivationView: View {
                 .padding([.bottom, .top], 20)
             
             Button(action: {
-                NotificationCenter.default.post(name: NSNotification.Name("CardManagement"), object: nil, userInfo: nil)
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Back to Main Page".localized(language))
@@ -518,6 +517,8 @@ struct CardActivationView: View {
     func activateKartuKu() {
         self.kartKuVM.activateKartuKu(data: activateData) { success in
             if success {
+                NotificationCenter.default.post(name: NSNotification.Name("CardManagementReturn"), object: nil, userInfo: nil)
+                
                 print("SUCCESS")
                 self.isLoading = false
                 self.isShowingSuccess = true

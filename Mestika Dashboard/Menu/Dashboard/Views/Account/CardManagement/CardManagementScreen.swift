@@ -90,11 +90,12 @@ struct CardManagementScreen: View {
                     }
                 }
                 .navigationBarTitle("My Card".localized(language), displayMode: .inline)
-                .onAppear {
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CardManagementReturn"))) { obj in
+                    print("GET AGAIN")
+                    self.isLoading = true
                     getListKartuKu()
                 }
-                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CardManagement"))) { obj in
-                    print("GET AGGAIN")
+                .onAppear {
                     getListKartuKu()
                 }
             }

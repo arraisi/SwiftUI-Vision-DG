@@ -70,6 +70,8 @@ class SavingAccountViewModel : ObservableObject {
         
         SavingAccountServices.shared.getAccounts() { result in
             
+            self.accounts = []
+            
             switch result {
             case .success(let response):
                 

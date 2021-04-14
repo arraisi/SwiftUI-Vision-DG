@@ -78,7 +78,6 @@ struct SuccessOpenNewSavingAccountView: View {
                 
                 Button(
                     action: {
-                        NotificationCenter.default.post(name: NSNotification.Name("SavingAccountReturn"), object: nil, userInfo: nil)
                         self.appState.moveToDashboard = true
                     },
                     label: {
@@ -92,6 +91,9 @@ struct SuccessOpenNewSavingAccountView: View {
                     .cornerRadius(12)
                     .padding(.leading, 20)
                     .padding(.trailing, 10)
+                
+
+                Spacer()
                 
 //                NavigationLink(
 //                    destination: DetailTransactionSavingAccountView(product: product, deposit: deposit),
@@ -112,6 +114,9 @@ struct SuccessOpenNewSavingAccountView: View {
         }
         .navigationBarTitle("Saving Account".localized(language), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            NotificationCenter.default.post(name: NSNotification.Name("SavingAccountReturn"), object: nil, userInfo: nil)
+        }
 //        .navigationBarItems(trailing: HStack(spacing: 30) {
 //            HStack {
 //                Text("Add to favorites?".localized(language))

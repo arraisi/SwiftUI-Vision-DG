@@ -10,6 +10,8 @@ import SDWebImageSwiftUI
 
 struct DashboardTabs: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -66,6 +68,24 @@ struct DashboardTabs: View {
                 menuGrid
                 
                 GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
+                    .onReceive(self.appState.$moveToDashboard) { value in
+                        self.isLoadingCard = true
+                        
+                        self.savingAccountVM.getAccounts { (success) in
+                            self.isLoadingCard = false
+
+                            self.savingAccountVM.accounts.forEach { e in
+
+                                print(e.accountNumber)
+                                self.listSourceNumber.append(e.accountNumber)
+                                self.listTypeAccount.append(e.accountType ?? "")
+                            }
+
+                            self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+
+                            }
+                        }
+                    }
                 
                 VStack {
                     HStack {
@@ -91,21 +111,6 @@ struct DashboardTabs: View {
                             NavigationLink(
                                 destination: MyCardDashboardView(cards: .constant(cards[0]))) {
                                 CardView(card: cards[0], cardWidth: itemWidth, cardHeight: itemHeight, showContent: true)
-                                //                                    .highPriorityGesture(
-                                //
-                                //                                        DragGesture()
-                                //                                            .onChanged({ (value) in
-                                //
-                                //                                                if value.translation.width > 0 {
-                                //                                                    self.offset = value.location.x
-                                //                                                }
-                                //                                                else{
-                                //                                                    self.offset = value.location.x - self.itemWidth
-                                //                                                }
-                                //
-                                //                                            })
-                                //                                            .onEnded(onDragEnded)
-                                //                                    )
                             }
                         }
                     }
@@ -113,43 +118,10 @@ struct DashboardTabs: View {
                 
                 ListEwalletView()
                     .padding(.top, 30)
-                //
-                //                ListContactTransferOnUs()
-                //                    .padding(.top, 30)
-                //
-                //                ListPromoForYouView()
-                //                    .padding(.top, 30)
-                //
-                //                ListPurchasePaymentView()
-                //                    .padding(.top, 30)
-                //
-                //                VoucherView()
-                //                    .padding(.top, 50)
             }
         })
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("SavingAccountReturn"))) { obj in
-            self.savingAccountVM.getAccounts { (success) in
-                self.listSourceNumber = []
-                self.listTypeAccount = []
-                self.isLoadingCard = false
-                
-                self.savingAccountVM.accounts.forEach { e in
-                    
-//                    if (e.accountType == "S" || e.accountType == "D") {
-//                        print(e.accountNumber)
-//                        self.listSourceNumber.append(e.accountNumber)
-//                    }
-                    self.listSourceNumber.append(e.accountNumber)
-                    self.listTypeAccount.append(e.accountType ?? "")
-                }
-                
-                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
-                    
-                }
-            }
-        }
         .onAppear {
             print("GET")
 //            getAccountBalance()
@@ -209,7 +181,7 @@ struct DashboardTabs: View {
             } else {
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     HStack {
-                        ForEach(0..<self.savingAccountVM.accounts.count) { index in
+                        ForEach(0..<self.savingAccountVM.accounts.reversed().count) { index in
                             HStack(alignment: .top) {
                                 Divider()
                                     .frame(width: 3, height: isHiddenBalance ? 70 : 100)
@@ -258,10 +230,19 @@ struct DashboardTabs: View {
                                                                 .fontWeight(.light)
                                                                 .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
                                                             
-                                                            Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-                                                                .font(.title3)
-                                                                .bold()
-                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
+                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
+                                                                    .font(.title3)
+                                                                    .bold()
+                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                            } else {
+                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
+                                                                    .font(.title3)
+                                                                    .bold()
+                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                            }
+                                                            
+
                                                         }
                                                     }
                                                     .padding(.top, 5)

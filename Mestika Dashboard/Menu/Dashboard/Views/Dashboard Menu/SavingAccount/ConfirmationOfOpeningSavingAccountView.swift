@@ -212,6 +212,15 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear{
+            
+            if (codePlan == "20") {
+                self.minSetoranDbl = 0
+            } else if (codePlan == "22") {
+                self.minSetoranDbl = 10000
+            } else {
+                self.minSetoranDbl = 100000
+            }
+            
             self.productsSavingAccountVM.getProductsDetails(planCode: codePlan) { (result) in
 //                self.minSetoranDbl = Double((productsSavingAccountVM.minimumNextDeposit?.subStringRange(from: 0, to: productsSavingAccountVM.minimumNextDeposit!.count-2))!)!
             }

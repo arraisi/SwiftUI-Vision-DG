@@ -164,9 +164,11 @@ struct HistoryTabs: View {
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(.white)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                        .background(Color(hex: "#2334D0"))
+                        .background(Color(hex: selectedSourceNumber == "" ? "#CBD1D9" : "#232175"))
                         .cornerRadius(15)
                 })
+                .disabled(selectedSourceNumber == "" ? true : false)
+                
             }
             .padding()
             .background(Color.white)

@@ -164,7 +164,6 @@ struct NoAtmOrRekeningVerificationView: View {
                 .shadow(radius: 30)
                 .padding(.vertical, 25)
             }
-            .padding(.horizontal, 30)
             
             if (self.isShowAlertInternetConnection) {
                 ModalOverlay(tapAction: { withAnimation {
@@ -189,7 +188,7 @@ struct NoAtmOrRekeningVerificationView: View {
                 }),
                 secondaryButton: .cancel(Text("NO".localized(language))))
         }
-        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
                 self.showingAlert = true

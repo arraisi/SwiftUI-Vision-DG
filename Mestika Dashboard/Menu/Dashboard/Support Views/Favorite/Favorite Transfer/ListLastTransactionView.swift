@@ -14,6 +14,8 @@ struct ListLastTransactionView: View {
     
     
     var sourceNumber = ""
+    @State var listSourceNumber: [String] = []
+    
     @StateObject private var favoritVM = FavoritViewModel()
     
     @StateObject var savingAccountVM = SavingAccountViewModel()
@@ -118,7 +120,16 @@ struct ListLastTransactionView: View {
         }
         .onAppear {
             self.savingAccountVM.getAccounts { (success) in
-                getList(source: self.savingAccountVM.accounts[0].accountNumber)
+                
+                self.savingAccountVM.accounts.forEach { e in
+                    
+                    if (e.accountType == "S") {
+                        self.listSourceNumber.append(e.accountNumber)
+                    }
+                    
+                }
+                
+                getList(source: self.listSourceNumber[0])
             }
         }
     }

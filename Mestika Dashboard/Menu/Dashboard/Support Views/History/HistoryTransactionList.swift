@@ -16,7 +16,7 @@ struct HistoryTransactionList: View {
     
     var body: some View {
         
-        if (histories.count < 1) {
+        if (histories.isEmpty) {
             
             Text("No Transactions".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 14))
