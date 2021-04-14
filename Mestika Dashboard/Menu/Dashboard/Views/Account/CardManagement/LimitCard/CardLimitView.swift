@@ -314,7 +314,7 @@ struct CardLimitView: View {
             return Alert(
                 title: Text("\(self.statusError)"),
                 message: Text("\(self.messageError)"),
-                dismissButton: .default(Text("Oke")))
+                dismissButton: .default(Text("OK".localized(language))))
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LimitKartuKu"))) { obj in
             print("ON RESUME")

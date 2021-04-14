@@ -77,7 +77,7 @@ struct LanguageSettingScreen: View {
             return Alert(
                 title: Text("Succeed".localized(language)),
                 message: Text("Language changed successfully".localized(language)),
-                dismissButton: .default(Text("Okay".localized(language)), action: {
+                dismissButton: .default(Text("OK".localized(language)), action: {
                     self.presentationMode.wrappedValue.dismiss()
                 })
             )

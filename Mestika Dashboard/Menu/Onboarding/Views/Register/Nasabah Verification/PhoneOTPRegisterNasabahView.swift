@@ -283,7 +283,7 @@ struct PhoneOTPRegisterNasabahView: View {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.messageResponse),
-                dismissButton: .default(Text("Oke"), action: {
+                dismissButton: .default(Text("OK".localized(language)), action: {
                     self.isLoading = false
                 }))
         }
@@ -306,10 +306,10 @@ struct PhoneOTPRegisterNasabahView: View {
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Do you want to cancel registration?"),
-                primaryButton: .default(Text("YES"), action: {
+                primaryButton: .default(Text("YES".localized(language)), action: {
                     self.appState.moveToWelcomeView = true
                 }),
-                secondaryButton: .cancel(Text("NO")))
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
     }
     

@@ -88,7 +88,7 @@ struct TransferOnUsPinConfirmationScreen: View {
             return Alert(
                 title: Text("\(self.statusError)"),
                 message: Text("\(self.messageError)"),
-                dismissButton: .default(Text("Oke")))
+                dismissButton: .default(Text("OK".localized(language))))
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOnUs"))) { obj in
             print("SUCCESS PIN")

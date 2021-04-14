@@ -217,7 +217,7 @@ struct EmailOTPRegisterNasabahView: View {
             return Alert(
                 title: Text("MESSAGE"),
                 message: Text(self.messageResponse),
-                dismissButton: .default(Text("Oke"), action: {
+                dismissButton: .default(Text("OK".localized(language)), action: {
                     self.isLoading = false
                 })
             )
