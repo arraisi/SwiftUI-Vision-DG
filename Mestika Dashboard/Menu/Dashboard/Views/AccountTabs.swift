@@ -70,7 +70,7 @@ struct AccountTabs: View {
                 .edgesIgnoringSafeArea(.all)
             }
         }
-        .popup(isPresented: $isShowModal, type: .toast, position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+        .popup(isPresented: $isShowModal, type: .floater(verticalPadding: 200), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             
             PopupConfirmationAuth()
                 .padding(15)
@@ -239,10 +239,27 @@ struct AccountTabs: View {
                                 
                                 self.biometricChanged = value
                                 
-                            }
-                            .onTapGesture {
-                                
-                                self.isShowModal = true
+                                //perform your action here...
+                                saveDataNewDeviceToCoreData()
+                                if value {
+                                    
+                                    self.isShowModal = true
+                                    
+                                } else {
+                                    self.authVM.disableBiometricLogin { result in
+                                        
+                                        print("result : \(result)")
+                                        if result {
+                                            print("DISABLE FINGER PRINT SUCCESS")
+                                        }
+                                        
+                                        if !result {
+                                            self.isFingerprint = true
+                                            print("DISABLE FINGER PRINT FAILED")
+                                            saveDataNewDeviceToCoreData()
+                                        }
+                                    }
+                                }
                                 
                             }
                         }
@@ -397,28 +414,8 @@ struct AccountTabs: View {
             
             Button(
                 action: {
-                    //perform your action here...
-                    saveDataNewDeviceToCoreData()
-                    if biometricChanged {
-                        enableBiometricLogin()
-                    } else {
-                        self.authVM.disableBiometricLogin { result in
-                            
-                            print("result : \(result)")
-                            if result {
-                                print("DISABLE FINGER PRINT SUCCESS")
-                            }
-                            
-                            if !result {
-                                self.isFingerprint = true
-                                print("DISABLE FINGER PRINT FAILED")
-                                saveDataNewDeviceToCoreData()
-                            }
-                        }
-                    }
                     
-                    print(biometricChanged)
-                    self.isShowModal = false
+                    enableBiometricLogin()
                     
                 },
                 label: {
