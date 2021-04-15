@@ -73,16 +73,16 @@ struct DashboardTabs: View {
                         
                         self.savingAccountVM.getAccounts { (success) in
                             self.isLoadingCard = false
-
+                            
                             self.savingAccountVM.accounts.forEach { e in
-
+                                
                                 print(e.accountNumber)
                                 self.listSourceNumber.append(e.accountNumber)
                                 self.listTypeAccount.append(e.accountType ?? "")
                             }
-
+                            
                             self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
-
+                                
                             }
                         }
                     }
@@ -100,8 +100,11 @@ struct DashboardTabs: View {
                     HStack(spacing: itemWidth * itemGapWidth) {
                         
                         Image("ic_notif_rekening")
-                            .padding(.leading, 15)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: itemWidth, height: itemHeight)
                             .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                            .padding(.leading, 15)
                         
                     }
                 }
@@ -143,7 +146,7 @@ struct DashboardTabs: View {
         .edgesIgnoringSafeArea(.top)
         .onAppear {
             print("GET")
-//            getAccountBalance()
+            //            getAccountBalance()
             getUserInfo()
             getProfile()
             getListKartuKu()
@@ -152,10 +155,10 @@ struct DashboardTabs: View {
                 self.isLoadingCard = false
                 self.savingAccountVM.accounts.forEach { e in
                     
-//                    if (e.accountType == "S" || e.accountType == "D") {
-//                        print(e.accountNumber)
-//                        self.listSourceNumber.append(e.accountNumber)
-//                    }
+                    //                    if (e.accountType == "S" || e.accountType == "D") {
+                    //                        print(e.accountNumber)
+                    //                        self.listSourceNumber.append(e.accountNumber)
+                    //                    }
                     print(e.accountNumber)
                     self.listSourceNumber.append(e.accountNumber)
                     self.listTypeAccount.append(e.accountType ?? "")
@@ -261,7 +264,7 @@ struct DashboardTabs: View {
                                                                     .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
                                                             }
                                                             
-
+                                                            
                                                         }
                                                     }
                                                     .padding(.top, 5)

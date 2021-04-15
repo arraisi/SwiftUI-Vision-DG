@@ -19,21 +19,17 @@ struct AccountTabs: View {
     @EnvironmentObject var appState: AppState
     
     @Binding var showingSettingMenu : Bool
+    @Binding var isFingerprint: Bool
+    @Binding var isShowModal: Bool
+    
     @State var username: String = ""
     @State var phoneNumber: String = ""
     
     /* Data Binding */
     @ObservedObject private var authVM = AuthViewModel()
-    @State private var isFingerprint = false
-    @State private var isNextRoute = false
-    
     @State private var isShowingAlert = false
-    
     @State private var forgotPasswordActived = false
-    
     @State private var isLoading: Bool = true
-    @State private var isShowModal: Bool = false
-    @State private var biometricChanged: Bool = false
     
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -62,19 +58,6 @@ struct AccountTabs: View {
                 }
             })
             .navigationBarHidden(true)
-            
-            if (self.isShowModal) {
-                ModalOverlay(tapAction: { withAnimation {
-                    self.isShowModal = false
-                } })
-                .edgesIgnoringSafeArea(.all)
-            }
-        }
-        .popup(isPresented: $isShowModal, type: .floater(verticalPadding: 200), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
-            
-            PopupConfirmationAuth()
-                .padding(15)
-            
         }
         .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
             if moveToAccountTab {
@@ -235,22 +218,17 @@ struct AccountTabs: View {
                                         .fontWeight(.bold)
                                 }
                             )
-                            .onChange(of: self.isFingerprint) { value in
-                                
-                                self.biometricChanged = value
-                                
-                                //perform your action here...
-                                saveDataNewDeviceToCoreData()
-                                if value {
-                                    
+                            .onTapGesture {
+                                if !self.isFingerprint {
                                     self.isShowModal = true
-                                    
                                 } else {
                                     self.authVM.disableBiometricLogin { result in
                                         
                                         print("result : \(result)")
                                         if result {
                                             print("DISABLE FINGER PRINT SUCCESS")
+                                            self.isFingerprint = false
+                                            saveDataNewDeviceToCoreData()
                                         }
                                         
                                         if !result {
@@ -260,7 +238,6 @@ struct AccountTabs: View {
                                         }
                                     }
                                 }
-                                
                             }
                         }
                         
@@ -397,88 +374,6 @@ struct AccountTabs: View {
         
     }
     
-    func PopupConfirmationAuth() -> some View {
-        VStack(alignment: .leading) {
-            Text("Do you want to activate this feature?".localized(language))
-                .font(.custom("Montserrat-Bold", size: 16))
-                .foregroundColor(Color(hex: "#232175"))
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 5)
-            
-            Text("Digital Bangking application will access the fingerprint data registered on your device".localized(language))
-                .font(.custom("Montserrat-Medium", size: 14))
-                .multilineTextAlignment(.leading)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.bottom, 20)
-            
-            Button(
-                action: {
-                    
-                    enableBiometricLogin()
-                    
-                },
-                label: {
-                    Text("OK".localized(language))
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                })
-                .background(Color(hex: "#2334D0"))
-                .cornerRadius(12)
-                .frame(maxWidth: .infinity, minHeight: 40)
-                .padding(.bottom, 5)
-            
-            Button(
-                action: {
-                    self.isShowModal = false
-                },
-                label: {
-                    Text("Cancel".localized(language))
-                        .foregroundColor(Color(hex: "#2334D0"))
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                })
-                .background(Color.white)
-                .cornerRadius(12)
-                .frame(maxWidth: .infinity, minHeight: 40)
-        }
-        .padding([.top], 40)
-        .padding([.bottom, .leading, .trailing], 20)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(color: Color.gray.opacity(0.3), radius: 10)
-    }
-    
-    // MARK: Biometric Authentication Check
-    func enableBiometricLogin() {
-        let context = LAContext()
-        var error: NSError?
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            self.authVM.enableBiometricLogin { result in
-                print("result : \(result)")
-                if result {
-                    print("ENABLE FINGER PRINT SUCCESS")
-                }
-                
-                if !result {
-                    self.isFingerprint = false
-                    print("ENABLE FINGER PRINT FAILED")
-                    saveDataNewDeviceToCoreData()
-                }
-            }
-            
-        } else {
-            
-            guard let settingUrl = URL(string : "App-Prefs:") else {
-                return
-            }
-            
-            UIApplication.shared.open(settingUrl)
-        }
-    }
-    
     func getUserInfo() {
         self.user.forEach { (data) in
             self.username = data.namaLengkapFromNik!
@@ -494,6 +389,8 @@ struct AccountTabs: View {
             data.fingerprintFlag = self.isFingerprint
         } else {
             device.last?.fingerprintFlag = self.isFingerprint
+            print("\nDevice last finger print")
+            print(device.last?.fingerprintFlag as Any)
         }
         
         do {
@@ -507,6 +404,6 @@ struct AccountTabs: View {
 
 struct AccountTabs_Previews: PreviewProvider {
     static var previews: some View {
-        AccountTabs(showingSettingMenu: .constant(false))
+        AccountTabs(showingSettingMenu: .constant(false), isFingerprint: .constant(false), isShowModal: .constant(false))
     }
 }
