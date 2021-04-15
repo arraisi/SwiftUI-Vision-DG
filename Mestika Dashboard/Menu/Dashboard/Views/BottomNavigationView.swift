@@ -8,14 +8,20 @@
 import SwiftUI
 import CoreImage.CIFilterBuiltins
 import CodeScanner
+import LocalAuthentication
 
 struct BottomNavigationView: View {
+    
+    
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
     
     @EnvironmentObject var appState: AppState
     @State private var isRouteTransferOnUs: Bool = false
     @State private var isRouteTransferOffUs: Bool = false
     
     @ObservedObject private var profileVM = ProfileViewModel()
+    @ObservedObject private var authVM = AuthViewModel()
     
     @State private var showingSlideMenu = false
     @State private var showingSettingMenu = false
@@ -35,6 +41,9 @@ struct BottomNavigationView: View {
     
     @State private var qrisActive = false
     
+    @State private var isFingerprint: Bool = false
+    @State private var isShowConfirmationBiometricAuth: Bool = false
+    
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
@@ -42,6 +51,13 @@ struct BottomNavigationView: View {
         UITabBar.appearance().backgroundColor = UIColor.white
     }
     
+    /* CORE DATA */
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
+    
+    @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
     
     func handleScan(result: Result<String, CodeScannerView.ScanError>) {
         self.isShowingScanner = false
@@ -77,7 +93,7 @@ struct BottomNavigationView: View {
                     }
                     
                     if (selected == 3) {
-                        AccountTabs(showingSettingMenu: self.$showingSettingMenu)
+                        AccountTabs(showingSettingMenu: self.$showingSettingMenu, isFingerprint: self.$isFingerprint, isShowModal: self.$isShowConfirmationBiometricAuth)
                     }
                     
                     if (selected == 4) {
@@ -151,7 +167,7 @@ struct BottomNavigationView: View {
             }
             
             
-            if (showingSettingMenu) {
+            if (showingSettingMenu || isShowConfirmationBiometricAuth) {
                 ModalOverlay(tapAction: { withAnimation { self.showingSettingMenu = false } })
                     .edgesIgnoringSafeArea(.all)
             }
@@ -195,6 +211,101 @@ struct BottomNavigationView: View {
         .sheet(isPresented: self.$isShowingScanner) {
             CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
         }
+        .popup(isPresented: $isShowConfirmationBiometricAuth, type: .floater(verticalPadding: 200), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            
+            PopupConfirmationBiometricAuth()
+                .padding(15)
+            
+        }
+    }
+    
+    
+    // Fungsi untuk setting biometric login
+    func PopupConfirmationBiometricAuth() -> some View {
+        VStack(alignment: .leading) {
+            Text("Do you want to activate this feature?".localized(language))
+                .font(.custom("Montserrat-Bold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 5)
+            
+            Text("Digital Bangking application will access the fingerprint data registered on your device".localized(language))
+                .font(.custom("Montserrat-Medium", size: 14))
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    print("\n\n\nEnable Finger Print")
+                    enableBiometricLogin()
+                    
+                },
+                label: {
+                    Text("OK".localized(language))
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .frame(maxWidth: .infinity, minHeight: 40)
+                .padding(.bottom, 5)
+            
+            Button(
+                action: {
+                    self.isFingerprint = false
+                    self.isShowConfirmationBiometricAuth = false
+                    saveDataNewDeviceToCoreData()
+                },
+                label: {
+                    Text("Cancel".localized(language))
+                        .foregroundColor(Color(hex: "#2334D0"))
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color.white)
+                .cornerRadius(12)
+                .frame(maxWidth: .infinity, minHeight: 40)
+        }
+        .padding([.top], 40)
+        .padding([.bottom, .leading, .trailing], 20)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+    }
+    
+    // MARK: Biometric Authentication Check
+    func enableBiometricLogin() {
+        
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            self.authVM.enableBiometricLogin { result in
+                print("result : \(result)")
+                if result {
+                    print("ENABLE FINGER PRINT SUCCESS")
+                    self.isFingerprint = true
+                    saveDataNewDeviceToCoreData()
+                }
+                
+                if !result {
+                    print("ENABLE FINGER PRINT FAILED")
+                    self.isFingerprint = false
+                    saveDataNewDeviceToCoreData()
+                }
+            }
+            
+        } else {
+            
+            guard let settingUrl = URL(string : "App-Prefs:") else {
+                return
+            }
+            
+            UIApplication.shared.open(settingUrl)
+        }
     }
     
     func generateQRCode(from string: String) -> UIImage {
@@ -209,6 +320,27 @@ struct BottomNavigationView: View {
         
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
+    
+    func saveDataNewDeviceToCoreData()  {
+        print("------SAVE ACCOUNT TO CORE DATA-------")
+        
+        if device.count == 0 {
+            let data = NewDevice(context: managedObjectContext)
+            data.fingerprintFlag = self.isFingerprint
+        } else {
+            device.last?.fingerprintFlag = self.isFingerprint
+            print("\nDevice last finger print")
+            print(device.last?.fingerprintFlag as Any)
+        }
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+        
+    }
+    // Fungsi untuk setting biometric login
     
     var appbar: some View {
         VStack {

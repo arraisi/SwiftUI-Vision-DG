@@ -142,10 +142,10 @@ struct DashboardTabs: View {
                 self.isLoadingCard = false
                 self.savingAccountVM.accounts.forEach { e in
                     
-//                    if (e.accountType == "S" || e.accountType == "D") {
-//                        print(e.accountNumber)
-//                        self.listSourceNumber.append(e.accountNumber)
-//                    }
+                    //                    if (e.accountType == "S" || e.accountType == "D") {
+                    //                        print(e.accountNumber)
+                    //                        self.listSourceNumber.append(e.accountNumber)
+                    //                    }
                     print(e.accountNumber)
                     self.listSourceNumber.append(e.accountNumber)
                     self.listTypeAccount.append(e.accountType ?? "")
@@ -251,7 +251,7 @@ struct DashboardTabs: View {
                                                                     .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
                                                             }
                                                             
-
+                                                            
                                                         }
                                                     }
                                                     .padding(.top, 5)
