@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CardActivationView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -408,7 +410,8 @@ struct CardActivationView: View {
                 .padding([.bottom, .top], 20)
             
             Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
+//                self.presentationMode.wrappedValue.dismiss()
+                self.appState.moveToDashboard = true
             }) {
                 Text("Back to Main Page".localized(language))
                     .foregroundColor(.white)

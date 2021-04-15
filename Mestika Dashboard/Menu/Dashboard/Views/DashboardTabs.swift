@@ -68,43 +68,30 @@ struct DashboardTabs: View {
                 menuGrid
                 
                 GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
-                    .onReceive(self.appState.$moveToDashboard) { value in
-                        self.isLoadingCard = true
-                        
-                        self.savingAccountVM.getAccounts { (success) in
-                            self.isLoadingCard = false
-
-                            self.savingAccountVM.accounts.forEach { e in
-
-                                print(e.accountNumber)
-                                self.listSourceNumber.append(e.accountNumber)
-                                self.listTypeAccount.append(e.accountType ?? "")
-                            }
-
-                            self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
-
-                            }
-                        }
-                    }
+          
                 
                 VStack {
                     HStack {
                         Text("Information")
                             .font(.title3)
                             .fontWeight(.ultraLight)
-                        
+
                         Spacer()
                     }
                     .padding([.leading, .trailing], 15)
-                    
+
                     HStack(spacing: itemWidth * itemGapWidth) {
-                        
-                        Image("ic_notif_rekening")
-                            .padding(.leading, 15)
-                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                        
+                        Button(action: {
+                           
+                        }, label: {
+                            Image("ic_notif_rekening")
+                                .resizable()// Fade Transition with duration
+                                .scaledToFill()
+                                .frame(width: itemWidth, height: itemHeight)
+                        })
                     }
                 }
+                .padding(.bottom, 15)
                 
                 VStack {
                     HStack {
@@ -143,7 +130,10 @@ struct DashboardTabs: View {
         .edgesIgnoringSafeArea(.top)
         .onAppear {
             print("GET")
-//            getAccountBalance()
+            self.isLoadingCard = true
+            self.listSourceNumber = []
+            self.listTypeAccount = []
+            
             getUserInfo()
             getProfile()
             getListKartuKu()
@@ -200,7 +190,7 @@ struct DashboardTabs: View {
             } else {
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     HStack {
-                        ForEach(0..<self.savingAccountVM.accounts.reversed().count) { index in
+                        ForEach(0..<self.savingAccountVM.accounts.count) { index in
                             HStack(alignment: .top) {
                                 Divider()
                                     .frame(width: 3, height: isHiddenBalance ? 70 : 100)

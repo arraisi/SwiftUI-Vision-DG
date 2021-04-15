@@ -150,7 +150,7 @@ struct CardDamageDescriptionInputView: View {
     }
     
     var disableForm: Bool {
-        if (self.cardNo.isNotEmpty() && self.pinAtm.isNotEmpty() && self.isLoading == false) {
+        if (self.cardNo.isNotEmpty() && self.pinAtm.count == 6 && self.isLoading == false) {
             return false
         }
         return true

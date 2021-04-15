@@ -90,12 +90,10 @@ struct CardManagementScreen: View {
                     }
                 }
                 .navigationBarTitle("My Card".localized(language), displayMode: .inline)
-                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CardManagementReturn"))) { obj in
-                    print("GET AGAIN")
-                    self.isLoading = true
-                    getListKartuKu()
-                }
                 .onAppear {
+                    print("GET LIST CARD")
+                    self.isLoading = true
+                    self.cards.removeAll()
                     getListKartuKu()
                 }
             }
@@ -108,7 +106,11 @@ struct CardManagementScreen: View {
     private func getListKartuKu() {
         self.kartuKuVM.getListKartuKu { success in
             if success {
-                self.isLoading = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
                 self.cards = self.kartuKuVM.listKartuKu
                 self.refreshCarousel()
             }

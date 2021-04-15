@@ -54,6 +54,7 @@ struct DetailKartuTidakAktifView: View {
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, maxHeight: 40)
                     })
+                    .isDetailLink(false)
                     .frame(height: 50)
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)

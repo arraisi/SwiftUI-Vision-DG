@@ -23,6 +23,7 @@ class SavingAccountViewModel : ObservableObject {
         
         DispatchQueue.main.async {
             self.isLoading = true
+            self.balanceAccount.removeAll()
         }
         
         SavingAccountServices.shared.getListAccountBalance(listSourceNumber: listSourceNumber) { result in
@@ -66,12 +67,10 @@ class SavingAccountViewModel : ObservableObject {
         
         DispatchQueue.main.async {
             self.isLoading = true
+            self.accounts.removeAll()
         }
         
         SavingAccountServices.shared.getAccounts() { result in
-            
-            self.accounts = []
-            
             switch result {
             case .success(let response):
                 

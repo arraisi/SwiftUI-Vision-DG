@@ -33,6 +33,7 @@ extension KartuKuViewModel {
                 print("SUCCESS")
                 
                 self.isLoading = false
+                self.listKartuKu.removeAll()
                 
                 self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
                     print(data.cardDesign)
