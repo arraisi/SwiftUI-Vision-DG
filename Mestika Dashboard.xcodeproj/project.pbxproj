@@ -339,6 +339,9 @@
 		C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */; };
 		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
 		C05BA90825821A7D00E115D6 /* FormPINTransaksiATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05BA90725821A7D00E115D6 /* FormPINTransaksiATMView.swift */; };
+		C0619E2A2629AA730053F326 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0619E292629AA730053F326 /* ScannerViewModel.swift */; };
+		C0619E2F2629AAB00053F326 /* QrCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0619E2E2629AAB00053F326 /* QrCodeScannerView.swift */; };
+		C0619E342629ADC40053F326 /* QrisScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0619E332629ADC40053F326 /* QrisScannerView.swift */; };
 		C068A5A8256CED8300CE96C4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068A5A7256CED8300CE96C4 /* AppState.swift */; };
 		C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068A5AF256CF3C100CE96C4 /* UIApplication.swift */; };
 		C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2F92563726700D06EE3 /* KetentuanModel.swift */; };
@@ -777,6 +780,9 @@
 		C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewModel.swift; sourceTree = "<group>"; };
 		C0587B7B255BED2600F82D9D /* SelfieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieView.swift; sourceTree = "<group>"; };
 		C05BA90725821A7D00E115D6 /* FormPINTransaksiATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPINTransaksiATMView.swift; sourceTree = "<group>"; };
+		C0619E292629AA730053F326 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
+		C0619E2E2629AAB00053F326 /* QrCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeScannerView.swift; sourceTree = "<group>"; };
+		C0619E332629ADC40053F326 /* QrisScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrisScannerView.swift; sourceTree = "<group>"; };
 		C068A5A7256CED8300CE96C4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		C068A5AF256CF3C100CE96C4 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		C06AC2F92563726700D06EE3 /* KetentuanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanModel.swift; sourceTree = "<group>"; };
@@ -1010,6 +1016,7 @@
 		523A86282542BE8600ADFE25 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C0619E282629AA540053F326 /* QrCodeScanner */,
 				52ADFF532557DEE900A1001F /* TextFieldWithPickerAsInput.swift */,
 				52ADFF4E2557DED900A1001F /* TextRecognizer.swift */,
 				52ADFF492557DE8000A1001F /* TabItemView.swift */,
@@ -1709,6 +1716,7 @@
 		C010FABE260999780092EEDE /* QRIS */ = {
 			isa = PBXGroup;
 			children = (
+				C0619E332629ADC40053F326 /* QrisScannerView.swift */,
 				C010FAD0260B0FCD0092EEDE /* InputPaymentByQrisView.swift */,
 				C010FAD5260B17280092EEDE /* ChooseAccountQrisView.swift */,
 				C010FADA260B1DDA0092EEDE /* SummaryQrisView.swift */,
@@ -1904,6 +1912,15 @@
 				52FF49AA25F5C82900890AE6 /* LimitKartuKuModel.swift */,
 			);
 			path = "Kartu-Ku";
+			sourceTree = "<group>";
+		};
+		C0619E282629AA540053F326 /* QrCodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+				C0619E292629AA730053F326 /* ScannerViewModel.swift */,
+				C0619E2E2629AAB00053F326 /* QrCodeScannerView.swift */,
+			);
+			path = QrCodeScanner;
 			sourceTree = "<group>";
 		};
 		C06ED63625D0F27000F68FC1 /* Account */ = {
@@ -2436,6 +2453,7 @@
 				529190CC25D3CB2D005A4898 /* ReferenceViewModel.swift in Sources */,
 				525FA115255289B0007EADCB /* GridMenuManyUsedView.swift in Sources */,
 				0A566A0825CA6A4E0008E752 /* TransferOnUsResponse.swift in Sources */,
+				C0619E2F2629AAB00053F326 /* QrCodeScannerView.swift in Sources */,
 				52ADFFA32557DFDC00A1001F /* Term&ConditionView.swift in Sources */,
 				52ADFFA62557DFDC00A1001F /* VerificationDataPersonalView.swift in Sources */,
 				C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */,
@@ -2503,6 +2521,7 @@
 				525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */,
 				C0D142D225DE50540015175D /* HistoryTabs.swift in Sources */,
 				C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */,
+				C0619E342629ADC40053F326 /* QrisScannerView.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				52ADFEAE2557D9A800A1001F /* SliderAssetsResponse.swift in Sources */,
 				52ADFF9F2557DFDC00A1001F /* PenghasilanKotorView.swift in Sources */,
@@ -2569,6 +2588,7 @@
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
 				0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */,
 				529190BC25D3C8FC005A4898 /* BankReferenceResponse.swift in Sources */,
+				C0619E2A2629AA730053F326 /* ScannerViewModel.swift in Sources */,
 				52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */,
 				526A81672560B2B200D614CB /* FirstLoginView.swift in Sources */,
 				C04B958B255450D0006690C2 /* PopUpBubble.swift in Sources */,
