@@ -23,6 +23,7 @@ struct DashboardTabs: View {
     
     /* Card Variables */
     let itemWidth:CGFloat = UIScreen.main.bounds.width - 140 // 100 is amount padding left and right
+    let itemWidthAccount:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
     let itemHeight:CGFloat = 197
     let itemGapHeight:CGFloat = 10
     let itemGapWidth:CGFloat = 0.14
@@ -54,6 +55,9 @@ struct DashboardTabs: View {
     @State var isDetailCard: Bool = false
     
     @State var isHiddenBalance: Bool = false
+    @State var isHiddenInformationReStore: Bool = true
+    
+    @State var routingManagementCard: Bool = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
@@ -68,27 +72,30 @@ struct DashboardTabs: View {
                 menuGrid
                 
                 GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
-          
                 
                 VStack {
                     HStack {
                         Text("Information")
                             .font(.title3)
                             .fontWeight(.ultraLight)
-
+                        
                         Spacer()
                     }
                     .padding([.leading, .trailing], 15)
-
-                    HStack(spacing: itemWidth * itemGapWidth) {
-                        Button(action: {
-                           
-                        }, label: {
-                            Image("ic_notif_rekening")
-                                .resizable()// Fade Transition with duration
-                                .scaledToFill()
-                                .frame(width: itemWidth, height: itemHeight)
-                        })
+                    
+                    if isHiddenInformationReStore {
+                        EmptyView()
+                    } else {
+                        HStack(spacing: itemWidth * itemGapWidth) {
+                            Button(action: {
+                                
+                            }, label: {
+                                Image("ic_notif_rekening")
+                                    .resizable()// Fade Transition with duration
+                                    .scaledToFill()
+                                    .frame(width: itemWidth, height: itemHeight)
+                            })
+                        }
                     }
                 }
                 .padding(.bottom, 15)
@@ -101,11 +108,23 @@ struct DashboardTabs: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: CardManagementScreen(), label: {
-                            Text("See All")
-                                .bold()
-                                .foregroundColor(Color(hex: "#2334D0"))
-                        })
+                        NavigationLink(
+                            destination: CardManagementScreen(),
+                            isActive: self.$routingManagementCard,
+                            label: {}
+                        )
+                        .isDetailLink(false)
+                        
+                        Button(
+                            action: {
+                                self.routingManagementCard = true
+                            },
+                            label: {
+                                Text("See All")
+                                    .bold()
+                                    .foregroundColor(Color(hex: "#2334D0"))
+                            }
+                        )
                     }
                     .padding([.leading, .trailing], 15)
                     
@@ -119,6 +138,14 @@ struct DashboardTabs: View {
                                 CardView(card: cards[0], cardWidth: itemWidth, cardHeight: itemHeight, showContent: true)
                             }
                         }
+                    }
+                }
+                .onReceive(self.appState.$moveToDashboard) { value in
+                    if value {
+                        print("Move to Dashboard: \(value)")
+                        
+                        self.routingManagementCard = false
+                        self.appState.moveToDashboard = false
                     }
                 }
                 
@@ -141,14 +168,14 @@ struct DashboardTabs: View {
             self.savingAccountVM.getAccounts { (success) in
                 self.isLoadingCard = false
                 self.savingAccountVM.accounts.forEach { e in
-                    
-                    //                    if (e.accountType == "S" || e.accountType == "D") {
-                    //                        print(e.accountNumber)
-                    //                        self.listSourceNumber.append(e.accountNumber)
-                    //                    }
                     print(e.accountNumber)
                     self.listSourceNumber.append(e.accountNumber)
                     self.listTypeAccount.append(e.accountType ?? "")
+                }
+                
+                if self.listTypeAccount.contains("D") {
+                    print("ADA TYPE D")
+                    self.isHiddenInformationReStore = false
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
@@ -188,97 +215,118 @@ struct DashboardTabs: View {
                 ProgressView("Loading")
                     .padding(.vertical, 50)
             } else {
-                ScrollView(.horizontal, showsIndicators: false, content: {
-                    HStack {
+                VStack {
+                    HStack(spacing: itemWidthAccount * itemGapWidth) {
                         ForEach(0..<self.savingAccountVM.accounts.count) { index in
-                            HStack(alignment: .top) {
-                                Divider()
-                                    .frame(width: 3, height: isHiddenBalance ? 70 : 100)
-                                    .background(Color(hex: "#232175"))
-                                    .padding(.trailing, 5)
-                                
-                                VStack(alignment: .leading) {
-                                    Text("\(self.savingAccountVM.accounts[index].accountTypeDescription ?? "")")
-                                        .font(.headline)
-                                        .bold()
-                                        .padding(.bottom, 5)
-                                        .fixedSize(horizontal: false, vertical: true)
+                            HStack {
+                                HStack(alignment: .top) {
+                                    Divider()
+                                        .frame(width: 3, height: isHiddenBalance ? 70 : 100)
+                                        .background(Color(hex: "#232175"))
+                                        .padding(.trailing, 5)
                                     
                                     VStack(alignment: .leading) {
-                                        
-                                        Text("\(self.savingAccountVM.accounts[index].productName ?? "Tabungan Mestika")")
-                                            .font(.subheadline)
+                                        Text("\(self.savingAccountVM.accounts[index].accountTypeDescription ?? "")")
+                                            .font(.headline)
                                             .bold()
-                                            .foregroundColor(Color(hex: "#232175"))
-                                            .fontWeight(.ultraLight)
+                                            .padding(.bottom, 5)
+                                            .fixedSize(horizontal: false, vertical: true)
                                         
-                                        if (self.savingAccountVM.accounts[index].accountNumber == "") {
-                                            Text("-")
-                                                .font(.caption)
-                                                .fontWeight(.ultraLight)
-                                        } else {
-                                            Text("\(self.savingAccountVM.accounts[index].accountNumber)")
-                                                .font(.caption)
-                                                .fontWeight(.ultraLight)
-                                        }
-                                        
-                                        if isHiddenBalance {
-                                            EmptyView()
-                                        } else {
+                                        VStack(alignment: .leading) {
                                             
-                                            if (self.listTypeAccount.count < 1) {
-                                                ProgressView()
+                                            Text("\(self.savingAccountVM.accounts[index].productName ?? "Tabungan Mestika")")
+                                                .font(.subheadline)
+                                                .bold()
+                                                .foregroundColor(Color(hex: "#232175"))
+                                                .fontWeight(.ultraLight)
+                                            
+                                            if (self.savingAccountVM.accounts[index].accountNumber == "") {
+                                                Text("-")
+                                                    .font(.caption)
+                                                    .fontWeight(.ultraLight)
                                             } else {
-                                                if (self.listTypeAccount[index] == "S" || self.listTypeAccount[index] == "D") {
-                                                    HStack {
-                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-                                                            ProgressView()
-                                                        } else {
-                                                            
-                                                            Text("Rp.")
-                                                                .fontWeight(.light)
-                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-                                                            
-                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-                                                                    .font(.title3)
-                                                                    .bold()
-                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-                                                            } else {
-                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-                                                                    .font(.title3)
-                                                                    .bold()
-                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-                                                            }
-                                                            
-                                                            
-                                                        }
-                                                    }
-                                                    .padding(.top, 5)
+                                                Text("\(self.savingAccountVM.accounts[index].accountNumber)")
+                                                    .font(.caption)
+                                                    .fontWeight(.ultraLight)
+                                            }
+                                            
+                                            if isHiddenBalance {
+                                                EmptyView()
+                                            } else {
+                                                
+                                                if (self.listTypeAccount.count < 1) {
+                                                    ProgressView()
                                                 } else {
-                                                    EmptyView()
+                                                    if (self.listTypeAccount[index] == "S" || self.listTypeAccount[index] == "D") {
+                                                        HStack {
+                                                            if (self.savingAccountVM.balanceAccount.count < 1) {
+                                                                ProgressView()
+                                                            } else {
+                                                                
+                                                                Text("Rp.")
+                                                                    .fontWeight(.light)
+                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                                
+                                                                if (self.savingAccountVM.balanceAccount[index].balance == "") {
+                                                                    Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
+                                                                        .font(.title3)
+                                                                        .bold()
+                                                                        .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                                } else {
+                                                                    Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
+                                                                        .font(.title3)
+                                                                        .bold()
+                                                                        .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                                }
+                                                                
+                                                                
+                                                            }
+                                                        }
+                                                        .padding(.top, 5)
+                                                    } else {
+                                                        EmptyView()
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        self.isHiddenBalance.toggle()
+                                    }, label: {
+                                        Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
+                                            .padding(.top, 5)
+                                    })
+                                    .padding(.leading, 40)
                                 }
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    self.isHiddenBalance.toggle()
-                                }, label: {
-                                    Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
-                                        .padding(.top, 5)
-                                })
-                                .padding(.leading, 30)
+                                .padding(.trailing, 25)
+                                .padding(.top, 25)
+                                .padding(.bottom, 20)
+                                .frame(width: itemWidthAccount)
                             }
-                            .padding([.leading, .trailing], 15)
-                            .padding(.top, 25)
-                            .padding(.bottom, 20)
+                            .offset(x: self.offset)
+                            .highPriorityGesture(
+                                
+                                DragGesture()
+                                    .onChanged({ (value) in
+                                        
+                                        if value.translation.width > 0 {
+                                            self.offset = value.location.x
+                                        }
+                                        else{
+                                            self.offset = value.location.x - (UIScreen.main.bounds.width - 90)
+                                        }
+                                        
+                                    })
+                                    .onEnded(onDragEndedAccount)
+                            )
                         }
                     }
-                })
+                    .frame(width: UIScreen.main.bounds.width - 20)
+                }
+                .animation(.spring())
             }
         }
         .navigationBarHidden(true)
@@ -388,13 +436,43 @@ struct DashboardTabs: View {
         }
     }
     
+    private func onDragEndedAccount(value: DragGesture.Value) {
+        if value.translation.width > 0 {
+            // dragThreshold -> distance of drag to next item
+            if value.translation.width > self.itemWidthAccount / 4 && Int(self.count) != 0 {
+                
+                self.count -= 1
+                self.updateHeight(value: Int(self.count))
+                self.offset = -((self.itemWidthAccount + (itemWidthAccount*itemGapWidth)) * self.count)
+            }
+            else{
+                self.offset = -((self.itemWidthAccount + (itemWidthAccount*itemGapWidth)) * self.count)
+            }
+            
+        }
+        else{
+            // dragThreshold -> distance of drag to next item
+            if -value.translation.width > self.itemWidthAccount / 4 && Int(self.count) !=  (self.savingAccountVM.accounts.count - 1){
+                
+                self.count += 1
+                self.updateHeight(value: Int(self.count))
+                self.offset = -((self.itemWidthAccount + (itemWidthAccount*itemGapWidth)) * self.count)
+            }
+            else{
+                
+                self.offset = -((self.itemWidthAccount + (itemWidthAccount*itemGapWidth)) * self.count)
+            }
+            
+        }
+    }
+    
     // MARK: - UPDATE HEIGHT
     private func updateHeight(value : Int){
         
-        for i in 0..<cards.count{
-            cards[i].isShow = false
-        }
-        
-        cards[value].isShow = true
+        //        for i in 0..<cards.count{
+        //            cards[i].isShow = false
+        //        }
+        //
+        //        cards[value].isShow = true
     }
 }
