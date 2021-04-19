@@ -706,8 +706,10 @@ struct VerificationRegisterDataView: View {
                         .padding(.horizontal, 20)
                     
                     HStack {
-                        TextField("Gross Income".localized(language), text: $registerData.penghasilanKotor)
-                            .disabled(true)
+                        
+                        MultilineTextField("Gross Income".localized(language), text: $registerData.penghasilanKotor, onCommit: {
+                        })
+                        .disabled(true)
                         
                         Divider()
                             .frame(height: 30)

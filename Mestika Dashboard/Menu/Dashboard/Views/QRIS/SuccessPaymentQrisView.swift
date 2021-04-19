@@ -13,6 +13,9 @@ struct SuccessPaymentQrisView: View {
     
     @AppStorage("language") private var language = LocalizationService.shared.language
     
+    // Environtment Object
+    @EnvironmentObject var qrisData: QrisModel
+    
     var body: some View {
         VStack {
             
@@ -29,9 +32,9 @@ struct SuccessPaymentQrisView: View {
                     .multilineTextAlignment(.center)
                 
                 HStack{
-                    Text("REF : 123456789")
+                    Text("REF : \(self.qrisData.reffNumber)")
                     Spacer()
-                    Text("2020/09/12 19:00:00")
+                    Text("\(self.qrisData.transactionDate)")
                 }
                 .font(.custom("Montserrat-Bold", size: 10))
                 .foregroundColor(Color("DarkStaleBlue"))
@@ -51,10 +54,10 @@ struct SuccessPaymentQrisView: View {
                         
                         VStack(alignment: .trailing) {
                             
-                            Text("Yovi Eka Putra".localized(language))
+                            Text("\(self.qrisData.fromAccountName)")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                             
-                            Text("xxxxxxx1234".localized(language))
+                            Text("\(self.qrisData.pan)")
                                 .font(.custom("Montserrat-SemiBold", size: 10))
                         }
                         
@@ -70,10 +73,10 @@ struct SuccessPaymentQrisView: View {
                         
                         VStack(alignment: .trailing) {
                             
-                            Text("GRAMEDIA".localized(language))
+                            Text("\(self.qrisData.merchantName)")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                             
-                            Text("Karawaci Kelapa Dua".localized(language))
+                            Text("\(self.qrisData.merchantCity)")
                                 .font(.custom("Montserrat-SemiBold", size: 10))
                             
                             Text("TERMA00001".localized(language))
@@ -92,7 +95,7 @@ struct SuccessPaymentQrisView: View {
                         Text("IDR")
                             .font(.custom("Montserrat-Bold", size: 12))
                         
-                        Text("200000".thousandSeparator())
+                        Text("\(self.qrisData.transactionAmount)".thousandSeparator())
                             .font(.custom("Montserrat-Bold", size: 24))
                     }
                     .foregroundColor(Color("DarkStaleBlue"))
@@ -117,21 +120,21 @@ struct SuccessPaymentQrisView: View {
                             Text("Jumlah Nominal")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                             Spacer()
-                            Text("IDR 200.0000")
+                            Text("IDR \(self.qrisData.transactionAmount.thousandSeparator())")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                         }
                         HStack {
                             Text("Tips")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                             Spacer()
-                            Text("IDR 2.000")
+                            Text("IDR \(self.qrisData.transactionFee.thousandSeparator())")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                         }
                         HStack {
                             Text("Invoice Number")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                             Spacer()
-                            Text("0123456789")
+                            Text("\(self.qrisData.reffNumber)")
                                 .font(.custom("Montserrat-SemiBold", size: 12))
                         }
                     }
@@ -170,6 +173,7 @@ struct SuccessPaymentQrisView: View {
             Spacer()
         }
         .navigationBarTitle("Pembayaran QRIS", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
 
     }
 }

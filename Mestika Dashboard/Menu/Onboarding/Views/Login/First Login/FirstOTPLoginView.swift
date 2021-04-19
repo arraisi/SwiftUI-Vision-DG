@@ -147,6 +147,14 @@ struct FirstOTPLoginView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("MESSAGE"),
+                message: Text(self.messageResponse),
+                dismissButton: .default(Text("OK".localized(language)), action: {
+                    self.isLoading = false
+                }))
+        }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {

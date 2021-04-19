@@ -120,10 +120,6 @@ struct ListFavoriteTransactionView: View {
             self.isNextRoute = false
             getList()
         }
-        .onDisappear {
-            getList()
-            print("ON DISAPPER")
-        }
     }
     
     func getList() {

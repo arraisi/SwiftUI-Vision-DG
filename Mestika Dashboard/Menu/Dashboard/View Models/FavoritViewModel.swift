@@ -63,6 +63,7 @@ class FavoritViewModel : ObservableObject {
             
             switch result {
             case .success(let response):
+                self.favorites.removeAll()
                 
                 DispatchQueue.main.async {
 //                    self.favorites = response
@@ -197,11 +198,14 @@ class FavoritViewModel : ObservableObject {
             
             switch result {
             case .success(let response):
+                self.favorites.removeAll()
                 
                 DispatchQueue.main.async {
-                    self.favorites = response
+                    
                     self.isLoading = false
                 }
+                
+                self.favorites = response
                 
                 completion(true)
                 

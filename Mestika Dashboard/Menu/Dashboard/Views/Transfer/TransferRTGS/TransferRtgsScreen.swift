@@ -22,7 +22,7 @@ struct TransferRtgsScreen: View {
     @State var transferData = TransferOffUsModel()
     
     // Variable Transfer Type
-    var _listTransferType = ["RTGS", "SKN"]
+    var _listTransferType = ["RTGS", "SKN", "Online"]
     @State private var transferType: String = "Select Transaction Type".localized(LocalizationService.shared.language)
     
     // Variable List BANK
@@ -373,40 +373,88 @@ struct TransferRtgsScreen: View {
                 .padding(.bottom, 10)
             }
             
-            VStack {
-                HStack {
-                    
-                    TextField("Destination Name".localized(language), text: self.$destinationNameCtrl, onEditingChanged: { changed in
-                        self.transferData.destinationName = self.destinationNameCtrl
-                    })
-                    .font(.subheadline)
-                    .foregroundColor(.black)
-                    .padding()
-                }
-                .background(Color(hex: "#F6F8FB"))
-                .cornerRadius(10)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 10)
-            }
-            
-            // Field Type Destination
-            VStack {
-                HStack {
-                    Text("Beneficiary Type".localized(language))
+            if transferType == "Online" {
+                EmptyView()
+            } else {
+                VStack {
+                    HStack {
+                        
+                        TextField("Destination Name".localized(language), text: self.$destinationNameCtrl, onEditingChanged: { changed in
+                            self.transferData.destinationName = self.destinationNameCtrl
+                        })
                         .font(.subheadline)
-                        .fontWeight(.light)
-                    
-                    Spacer()
+                        .foregroundColor(.black)
+                        .padding()
+                    }
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 10)
                 }
-                .padding(.horizontal)
-//                .padding(.top, 25)
                 
-                HStack {
+                // Field Type Destination
+                VStack {
+                    HStack {
+                        Text("Beneficiary Type".localized(language))
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+    //                .padding(.top, 25)
+                    
+                    HStack {
+                        Menu {
+                            ForEach(self._listDestinationType, id: \.self) { data in
+                                Button(action: {
+                                    self.destinationType = data
+                                    self.transferData.typeDestination = data
+            //                        validateForm()
+                                }) {
+                                    Text(data)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(destinationType)
+                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                        .fontWeight(destinationType == "Receiver Type".localized(LocalizationService.shared.language) ? .bold : .light)
+                                }
+                                .padding()
+                                
+                                Spacer()
+                                
+                                Image("ic_expand").padding()
+                            }
+                        }
+                    }
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 10)
+                }
+                
+                // Filed Resident
+                VStack {
+                    HStack {
+                        Text("Resident Status".localized(language))
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+    //                .padding(.top, 25)
+                    
                     Menu {
-                        ForEach(self._listDestinationType, id: \.self) { data in
+                        ForEach(self._listCitizenShip, id: \.self) { data in
                             Button(action: {
-                                self.destinationType = data
-                                self.transferData.typeDestination = data
+                                self.citizenShipCtrl = data
+                                self.transferData.citizenship = data
         //                        validateForm()
                             }) {
                                 Text(data)
@@ -416,10 +464,10 @@ struct TransferRtgsScreen: View {
                     } label: {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(destinationType)
+                                Text(citizenShipCtrl)
                                     .font(.subheadline)
                                     .foregroundColor(.black)
-                                    .fontWeight(destinationType == "Receiver Type".localized(LocalizationService.shared.language) ? .bold : .light)
+                                    .fontWeight(citizenShipCtrl == "Citizenship".localized(LocalizationService.shared.language) ? .bold : .light)
                             }
                             .padding()
                             
@@ -428,55 +476,11 @@ struct TransferRtgsScreen: View {
                             Image("ic_expand").padding()
                         }
                     }
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 10)
                 }
-                .background(Color(hex: "#F6F8FB"))
-                .cornerRadius(10)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 10)
-            }
-            
-            // Filed Resident
-            VStack {
-                HStack {
-                    Text("Resident Status".localized(language))
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-//                .padding(.top, 25)
-                
-                Menu {
-                    ForEach(self._listCitizenShip, id: \.self) { data in
-                        Button(action: {
-                            self.citizenShipCtrl = data
-                            self.transferData.citizenship = data
-    //                        validateForm()
-                        }) {
-                            Text(data)
-                                .font(.custom("Montserrat-Regular", size: 12))
-                        }
-                    }
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(citizenShipCtrl)
-                                .font(.subheadline)
-                                .foregroundColor(.black)
-                                .fontWeight(citizenShipCtrl == "Citizenship".localized(LocalizationService.shared.language) ? .bold : .light)
-                        }
-                        .padding()
-                        
-                        Spacer()
-                        
-                        Image("ic_expand").padding()
-                    }
-                }
-                .background(Color(hex: "#F6F8FB"))
-                .cornerRadius(10)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 10)
             }
         }
         .frame(width: UIScreen.main.bounds.width - 30)

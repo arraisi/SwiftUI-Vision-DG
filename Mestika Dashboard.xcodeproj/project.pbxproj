@@ -56,6 +56,12 @@
 		521927FB25F0BB3A00822042 /* CardBlockDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521927FA25F0BB3A00822042 /* CardBlockDescriptionView.swift */; };
 		5219280125F0D8F800822042 /* FormChangePinCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5219280025F0D8F800822042 /* FormChangePinCardView.swift */; };
 		522101B125C9213100C9566A /* TransferOnUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522101B025C9213100C9566A /* TransferOnUsModel.swift */; };
+		52210C47262D3BBF004A6483 /* ParseQrisResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C46262D3BBF004A6483 /* ParseQrisResponseModel.swift */; };
+		52210C4F262D3C95004A6483 /* QrisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C4E262D3C95004A6483 /* QrisModel.swift */; };
+		52210C54262D3DF0004A6483 /* QrisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C53262D3DF0004A6483 /* QrisService.swift */; };
+		52210C5C262D404E004A6483 /* PayQrisResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C5B262D404E004A6483 /* PayQrisResponseModel.swift */; };
+		52210C61262D40E5004A6483 /* QrisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C60262D40E5004A6483 /* QrisViewModel.swift */; };
+		52210C66262D83BD004A6483 /* HistoryByAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C65262D83BD004A6483 /* HistoryByAccountView.swift */; };
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
@@ -487,6 +493,12 @@
 		521927FA25F0BB3A00822042 /* CardBlockDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockDescriptionView.swift; sourceTree = "<group>"; };
 		5219280025F0D8F800822042 /* FormChangePinCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePinCardView.swift; sourceTree = "<group>"; };
 		522101B025C9213100C9566A /* TransferOnUsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferOnUsModel.swift; sourceTree = "<group>"; };
+		52210C46262D3BBF004A6483 /* ParseQrisResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseQrisResponseModel.swift; sourceTree = "<group>"; };
+		52210C4E262D3C95004A6483 /* QrisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrisModel.swift; sourceTree = "<group>"; };
+		52210C53262D3DF0004A6483 /* QrisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrisService.swift; sourceTree = "<group>"; };
+		52210C5B262D404E004A6483 /* PayQrisResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayQrisResponseModel.swift; sourceTree = "<group>"; };
+		52210C60262D40E5004A6483 /* QrisViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrisViewModel.swift; sourceTree = "<group>"; };
+		52210C65262D83BD004A6483 /* HistoryByAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryByAccountView.swift; sourceTree = "<group>"; };
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
@@ -958,6 +970,7 @@
 				C018014625D4E47F00766E41 /* FavoritService.swift */,
 				C0AD11A625DFA60F003FF920 /* HistoryTransactionServices.swift */,
 				52EC00A325E397E10003ED71 /* KartuKuService.swift */,
+				52210C53262D3DF0004A6483 /* QrisService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1019,6 +1032,16 @@
 				52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */,
 			);
 			path = Transfer;
+			sourceTree = "<group>";
+		};
+		52210C45262D3B9E004A6483 /* Qris */ = {
+			isa = PBXGroup;
+			children = (
+				52210C46262D3BBF004A6483 /* ParseQrisResponseModel.swift */,
+				52210C4E262D3C95004A6483 /* QrisModel.swift */,
+				52210C5B262D404E004A6483 /* PayQrisResponseModel.swift */,
+			);
+			path = Qris;
 			sourceTree = "<group>";
 		};
 		5233700A26298FE100ED3E4F /* DepositAccount */ = {
@@ -1904,6 +1927,7 @@
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				52210C45262D3B9E004A6483 /* Qris */,
 				C01B849925FF211200F5BBD9 /* Dashboard Menu */,
 				C0AD115E25DF89C2003FF920 /* History */,
 				C08758D625D2397C008ED730 /* Favorit */,
@@ -1957,6 +1981,7 @@
 				5233700A26298FE100ED3E4F /* DepositAccount */,
 				C0733FBD25EE250A0034689F /* SavingAccount */,
 				52FF49B525F7635F00890AE6 /* MyCardDashboardView.swift */,
+				52210C65262D83BD004A6483 /* HistoryByAccountView.swift */,
 			);
 			path = "Dashboard Menu";
 			sourceTree = "<group>";
@@ -2083,6 +2108,7 @@
 				C018012D25D4E40F00766E41 /* FavoritViewModel.swift */,
 				C0AD11AB25DFA98E003FF920 /* HistoryTransactionViewModel.swift */,
 				52EC00A825E39F530003ED71 /* KartuKuViewModel.swift */,
+				52210C60262D40E5004A6483 /* QrisViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -2456,6 +2482,7 @@
 				52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
 				5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */,
+				52210C54262D3DF0004A6483 /* QrisService.swift in Sources */,
 				52ADFFAD2557DFDC00A1001F /* KetentuanRegisterNonNasabahView.swift in Sources */,
 				C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */,
 				C0BCCB2F2577E3DE00B9B07A /* EmailOTPRegisterNasabahView.swift in Sources */,
@@ -2543,6 +2570,7 @@
 				525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */,
 				C0D142D225DE50540015175D /* HistoryTabs.swift in Sources */,
 				C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */,
+				52210C47262D3BBF004A6483 /* ParseQrisResponseModel.swift in Sources */,
 				C0619E342629ADC40053F326 /* QrisScannerView.swift in Sources */,
 				524746282547F6EC001F43C5 /* LastTransaction.swift in Sources */,
 				52ADFEAE2557D9A800A1001F /* SliderAssetsResponse.swift in Sources */,
@@ -2597,6 +2625,7 @@
 				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
 				52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */,
 				5219280125F0D8F800822042 /* FormChangePinCardView.swift in Sources */,
+				52210C5C262D404E004A6483 /* PayQrisResponseModel.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
 				52ADFF9B2557DFDC00A1001F /* PasswordView.swift in Sources */,
 				C0BCDEB925B69B3D00E1028F /* PinNoAtmService.swift in Sources */,
@@ -2684,6 +2713,7 @@
 				C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */,
 				C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */,
 				52BF57E32558E81F00F009B5 /* SavingType.swift in Sources */,
+				52210C66262D83BD004A6483 /* HistoryByAccountView.swift in Sources */,
 				526B658E254FBADC00C13C36 /* ListMySavingsView.swift in Sources */,
 				52ADFF212557DD0400A1001F /* RadioButtonGroup.swift in Sources */,
 				52ADFF452557DE7300A1001F /* SUImagePickerView.swift in Sources */,
@@ -2716,6 +2746,7 @@
 				52ADFFA42557DFDC00A1001F /* VerificationPINView.swift in Sources */,
 				527E312F25663289004FF5ED /* UserCheckResponse.swift in Sources */,
 				FA486B1925AF4E9100EDBD88 /* SavingDetailModalView.swift in Sources */,
+				52210C4F262D3C95004A6483 /* QrisModel.swift in Sources */,
 				52C3629E25D12DA3000374AA /* TransferRtgsConfirmation.swift in Sources */,
 				C0AEAC2725D516B600B6A20C /* EncryptPasswordView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
@@ -2747,6 +2778,7 @@
 				5294535425EF2899009A5B83 /* SearchBar.swift in Sources */,
 				0A09FC5B256C3E17005B1BB0 /* AddProductATM.swift in Sources */,
 				52C05570255F687300A57400 /* UserRegistrationService.swift in Sources */,
+				52210C61262D40E5004A6483 /* QrisViewModel.swift in Sources */,
 				0A566A0E25CA6E940008E752 /* TransferServices.swift in Sources */,
 				52468AE0254177E6007518AE /* Substring+Extensions.swift in Sources */,
 				6122BA757969EBD48882E437 /* ListStatementView.swift in Sources */,

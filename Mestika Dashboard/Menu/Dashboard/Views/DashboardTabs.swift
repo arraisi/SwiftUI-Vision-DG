@@ -65,6 +65,8 @@ struct DashboardTabs: View {
     @State var routingMyCardDashboard: Bool = false
     @State var routingAccountDeposit: Bool = false
     
+    @State var isRouteHistoryAcc: Bool = false
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
             
@@ -78,6 +80,12 @@ struct DashboardTabs: View {
                 menuGrid
                 
                 GridMenuView(cardNo: $cardNo, sourceNumber: $sourceNumber)
+                
+                NavigationLink(
+                    destination: HistoryByAccountView(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber),
+                    isActive: self.$isRouteHistoryAcc,
+                    label: {}
+                )
                 
                 VStack {
                     HStack {
@@ -188,9 +196,6 @@ struct DashboardTabs: View {
         .onAppear {
             print("GET")
             self.isLoadingCard = true
-            self.listSourceNumber = []
-            self.listTypeAccount = []
-            self.listCreditDebit = []
             
             getUserInfo()
             getProfile()
@@ -206,7 +211,7 @@ struct DashboardTabs: View {
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
                     
-                    if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
+                    if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "" }) {
                         print("ADA TYPE D")
                         self.isHiddenInformationReStore = false
                     }
@@ -244,148 +249,156 @@ struct DashboardTabs: View {
     // MARK: -MENU GRID VIEW
     var menuGrid: some View {
         VStack {
-            if isLoadingCard {
+            if isLoadingCard || self.savingAccountVM.accounts.isEmpty {
                 ProgressView("Loading")
                     .padding(.vertical, 50)
             } else {
+                
                 TabView {
                     ForEach(0..<self.savingAccountVM.accounts.count) { index in
-                        HStack {
-                            HStack(alignment: .top) {
-                                Divider()
-                                    .frame(width: 3, height: isHiddenBalance ? 70 : 100)
-                                    .background(Color(hex: "#232175"))
-                                    .padding(.trailing, 5)
+                        Button(
+                            action: {
+                                self.isRouteHistoryAcc = true
+                            },
+                            label: {
+                                HStack {
+                                    HStack(alignment: .top) {
+                                        Divider()
+                                            .frame(width: 3, height: isHiddenBalance ? 70 : 100)
+                                            .background(Color(hex: "#232175"))
+                                            .padding(.trailing, 5)
 
-                                VStack(alignment: .leading) {
-                                    Text("\(self.savingAccountVM.accounts[index].accountTypeDescription ?? "")")
-                                        .font(.headline)
-                                        .bold()
-                                        .padding(.bottom, 5)
-                                        .fixedSize(horizontal: false, vertical: true)
+                                        VStack(alignment: .leading) {
+                                            Text("\(self.savingAccountVM.accounts[index].accountTypeDescription ?? "")")
+                                                .font(.headline)
+                                                .bold()
+                                                .padding(.bottom, 5)
+                                                .fixedSize(horizontal: false, vertical: true)
 
-                                    VStack(alignment: .leading) {
+                                            VStack(alignment: .leading) {
 
-                                        Text("\(self.savingAccountVM.accounts[index].productName ?? "Tabungan Mestika")")
-                                            .font(.subheadline)
-                                            .bold()
-                                            .foregroundColor(Color(hex: "#232175"))
-                                            .fontWeight(.ultraLight)
+                                                Text("\(self.savingAccountVM.accounts[index].productName ?? "Tabungan Mestika")")
+                                                    .font(.subheadline)
+                                                    .bold()
+                                                    .foregroundColor(Color(hex: "#232175"))
+                                                    .fontWeight(.ultraLight)
 
-                                        if (self.savingAccountVM.accounts[index].accountNumber == "") {
-                                            Text("-")
-                                                .font(.caption)
-                                                .fontWeight(.ultraLight)
-                                        } else {
-                                            Text("\(self.savingAccountVM.accounts[index].accountNumber)")
-                                                .font(.caption)
-                                                .fontWeight(.ultraLight)
-                                        }
-
-                                        if isHiddenBalance {
-                                            EmptyView()
-                                        } else {
-                                            
-                                            HStack {
-                                                if (self.savingAccountVM.balanceAccount.count < 1) {
-                                                    ProgressView()
+                                                if (self.savingAccountVM.accounts[index].accountNumber == "") {
+                                                    Text("-")
+                                                        .font(.caption)
+                                                        .fontWeight(.ultraLight)
                                                 } else {
+                                                    Text("\(self.savingAccountVM.accounts[index].accountNumber)")
+                                                        .font(.caption)
+                                                        .fontWeight(.ultraLight)
+                                                }
 
-                                                    Text("Rp.")
-                                                        .fontWeight(.light)
-                                                        .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                if isHiddenBalance {
+                                                    EmptyView()
+                                                } else {
+                                                    
+                                                    HStack {
+                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
+                                                            ProgressView()
+                                                        } else {
 
-                                                    if (self.savingAccountVM.balanceAccount[index].balance == "") {
-                                                        Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-                                                            .font(.title3)
-                                                            .bold()
-                                                            .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-                                                    } else {
-                                                        Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-                                                            .font(.title3)
-                                                            .bold()
-                                                            .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                            Text("Rp.")
+                                                                .fontWeight(.light)
+                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+
+                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
+                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
+                                                                    .font(.title3)
+                                                                    .bold()
+                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                            } else {
+                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
+                                                                    .font(.title3)
+                                                                    .bold()
+                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                            }
+
+
+                                                        }
                                                     }
+                                                    .padding(.top, 5)
 
-
+        //                                            if (self.listTypeAccount.isEmpty) {
+        //                                                ProgressView()
+        //                                            } else {
+        //                                                if (self.listTypeAccount[index] == "S" || self.listTypeAccount[index] == "D") {
+        //                                                    HStack {
+        //                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
+        //                                                            ProgressView()
+        //                                                        } else {
+        //
+        //                                                            Text("Rp.")
+        //                                                                .fontWeight(.light)
+        //                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+        //
+        //                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
+        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
+        //                                                                    .font(.title3)
+        //                                                                    .bold()
+        //                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+        //                                                            } else {
+        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
+        //                                                                    .font(.title3)
+        //                                                                    .bold()
+        //                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+        //                                                            }
+        //
+        //
+        //                                                        }
+        //                                                    }
+        //                                                    .padding(.top, 5)
+        //                                                } else {
+        //                                                    HStack {
+        //                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
+        //                                                            ProgressView()
+        //                                                        } else {
+        //
+        //                                                            Text("Rp.")
+        //                                                                .fontWeight(.light)
+        //                                                                .foregroundColor(.white)
+        //
+        //                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
+        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
+        //                                                                    .font(.title3)
+        //                                                                    .bold()
+        //                                                                    .foregroundColor(.white)
+        //                                                            } else {
+        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
+        //                                                                    .font(.title3)
+        //                                                                    .bold()
+        //                                                                    .foregroundColor(.white)
+        //                                                            }
+        //                                                        }
+        //                                                    }
+        //                                                    .padding(.top, 5)
+        //                                                }
+        //                                            }
                                                 }
                                             }
-                                            .padding(.top, 5)
-
-//                                            if (self.listTypeAccount.isEmpty) {
-//                                                ProgressView()
-//                                            } else {
-//                                                if (self.listTypeAccount[index] == "S" || self.listTypeAccount[index] == "D") {
-//                                                    HStack {
-//                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-//                                                            ProgressView()
-//                                                        } else {
-//
-//                                                            Text("Rp.")
-//                                                                .fontWeight(.light)
-//                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-//
-//                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-//                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-//                                                                    .font(.title3)
-//                                                                    .bold()
-//                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-//                                                            } else {
-//                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-//                                                                    .font(.title3)
-//                                                                    .bold()
-//                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-//                                                            }
-//
-//
-//                                                        }
-//                                                    }
-//                                                    .padding(.top, 5)
-//                                                } else {
-//                                                    HStack {
-//                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-//                                                            ProgressView()
-//                                                        } else {
-//
-//                                                            Text("Rp.")
-//                                                                .fontWeight(.light)
-//                                                                .foregroundColor(.white)
-//
-//                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-//                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-//                                                                    .font(.title3)
-//                                                                    .bold()
-//                                                                    .foregroundColor(.white)
-//                                                            } else {
-//                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-//                                                                    .font(.title3)
-//                                                                    .bold()
-//                                                                    .foregroundColor(.white)
-//                                                            }
-//                                                        }
-//                                                    }
-//                                                    .padding(.top, 5)
-//                                                }
-//                                            }
                                         }
+
+                                        Spacer()
+
+                                        Button(action: {
+                                            self.isHiddenBalance.toggle()
+                                        }, label: {
+                                            Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
+                                                .padding(.top, 5)
+                                        })
+                                        .padding(.leading, 40)
                                     }
+                                    .padding([.trailing, .leading], 25)
+                                    .padding(.top, 25)
+                                    .padding(.bottom, 20)
                                 }
-
-                                Spacer()
-
-                                Button(action: {
-                                    self.isHiddenBalance.toggle()
-                                }, label: {
-                                    Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
-                                        .padding(.top, 5)
-                                })
-                                .padding(.leading, 40)
+                                .padding(.bottom, 30)
                             }
-                            .padding([.trailing, .leading], 25)
-                            .padding(.top, 25)
-                            .padding(.bottom, 20)
-                        }
-                        .padding(.bottom, 30)
+                        )
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())

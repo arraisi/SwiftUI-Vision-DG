@@ -18,6 +18,11 @@ struct ConfirmationPinQrisView: View {
     @State var unlocked = false
     @State var success = false
     
+    @StateObject var qrisVM = QrisViewModel()
+    
+    // Environtment Object
+    @EnvironmentObject var qrisData: QrisModel
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
@@ -26,12 +31,12 @@ struct ConfirmationPinQrisView: View {
             
             VStack {
                 
-                //                if (self.savingAccountVM.isLoading) {
-                //                    LinearWaitingIndicator()
-                //                        .animated(true)
-                //                        .foregroundColor(.green)
-                //                        .frame(height: 1)
-                //                }
+                if (self.qrisVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
                 
                 Spacer(minLength: 0)
                 
@@ -55,19 +60,34 @@ struct ConfirmationPinQrisView: View {
                 Spacer(minLength: 0)
                 
                 NavigationLink(
-                    destination: SuccessPaymentQrisView(),
+                    destination: SuccessPaymentQrisView().environmentObject(qrisData),
                     isActive: $unlocked) {EmptyView()}
                 
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
                 }, onCommit: {
-                    if self.pin == self.key {
-                        print("UNLOCKED")
-                        self.unlocked = true
-                    } else {
-                        print("INCORRECT")
-                        self.wrongPin = true
+                    self.qrisData.pinTrx = pin
+                    
+                    self.qrisVM.payQris(data: qrisData) { success in
+                        
+                        if success {
+                            self.qrisData.pan = self.qrisVM.pan
+                            self.qrisData.transactionDate = self.qrisVM.transactionDate
+                            self.qrisData.reffNumber = self.qrisVM.reffNumber
+                            self.qrisData.responseCode = self.qrisVM.responseCode
+                            
+                            self.unlocked = true
+                        }
+                        
                     }
+                    
+//                    if self.pin == self.key {
+//                        print("UNLOCKED")
+//                        self.unlocked = true
+//                    } else {
+//                        print("INCORRECT")
+//                        self.wrongPin = true
+//                    }
                 })
             }
         }
