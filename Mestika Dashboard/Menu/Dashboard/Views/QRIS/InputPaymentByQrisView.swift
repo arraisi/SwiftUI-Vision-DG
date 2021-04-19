@@ -11,8 +11,6 @@ import CodeScanner
 
 struct InputPaymentByQrisView: View {
     
-    @EnvironmentObject var appState: AppState
-    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -105,7 +103,6 @@ struct InputPaymentByQrisView: View {
                     isActive: self.$qrisActive) {
                     EmptyView()
                 }
-                .isDetailLink(false)
                 
                 Button(action: {self.qrisActive = true}) {
                     Text("Next".localized(language))
@@ -127,28 +124,28 @@ struct InputPaymentByQrisView: View {
             
             Spacer()
         }
-        .onReceive(self.appState.$moveToDashboard) { value in
-            if value {
-                //                getCoreDataNewDevice()
-                print("Move to moveToDashboard: \(value)")
-                //                activateWelcomeView()
-                self.qrisActive = false
-                self.appState.moveToDashboard = false
-            }
-        }
+//        .onReceive(self.appState.$moveToDashboard) { value in
+//            if value {
+//                //                getCoreDataNewDevice()
+//                print("Move to moveToDashboard: \(value)")
+//                //                activateWelcomeView()
+//                self.qrisActive = false
+//                self.appState.moveToDashboard = false
+//            }
+//        }
         .navigationBarTitle("Pembayaran QRIS", displayMode: .inline)
         .padding(.vertical, 30)
-        .sheet(isPresented: $isShowingScanner) {
-            CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
-        }
+//        .sheet(isPresented: $isShowingScanner) {
+//            CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
+//        }
         
     }
     
-    func handleScan(result: Result<String, CodeScannerView.ScanError>) {
-        self.isShowingScanner = false
-        // more code to come
-        print("\nresult : \(result)")
-    }
+//    func handleScan(result: Result<String, CodeScannerView.ScanError>) {
+//        self.isShowingScanner = false
+//        // more code to come
+//        print("\nresult : \(result)")
+//    }
 }
 
 struct InputPaymentByQrisView_Previews: PreviewProvider {

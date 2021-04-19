@@ -147,7 +147,7 @@ struct SuccessPaymentQrisView: View {
                     .foregroundColor(.gray)
                 
                 Button(action: {
-                    self.appState.moveToDashboard = true
+                    self.appState.moveToTransfer = true
                 }) {
                     Text("Done".localized(language))
                         .foregroundColor(.white)

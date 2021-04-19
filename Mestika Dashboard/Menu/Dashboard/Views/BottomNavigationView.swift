@@ -36,9 +36,6 @@ struct BottomNavigationView: View {
     @State var sourceNumber: String = ""
     
     @State var showQrCode: Bool = false
-    
-    @State private var isShowingScanner = false
-    
     @State private var qrisActive = false
     
     @State private var isFingerprint: Bool = false
@@ -59,21 +56,16 @@ struct BottomNavigationView: View {
     
     @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
     
-    func handleScan(result: Result<String, CodeScannerView.ScanError>) {
-        self.isShowingScanner = false
-        // more code to come
-        print("\nresult : \(result)")
-        self.qrisActive = true
-    }
     
     var body: some View {
         ZStack {
             
             Color(hex: "#F6F8FB")
             
-            NavigationLink(destination: InputPaymentByQrisView().environmentObject(appState), isActive: self.$qrisActive) {
+            NavigationLink(destination: QrisScannerView().environmentObject(appState), isActive: self.$qrisActive) {
                 EmptyView()
             }
+            .isDetailLink(false)
             
             ZStack {
                 
@@ -119,7 +111,7 @@ struct BottomNavigationView: View {
                                     
                                     //                                    selected = 4
                                     // temporary qris
-                                    self.isShowingScanner = true
+                                    self.qrisActive = true
                                     print("\n\(selected)")
                                 }) {
                                     Image("ic_dashboard")
@@ -195,6 +187,7 @@ struct BottomNavigationView: View {
                 self.selected = 0
                 self.isRouteTransferOnUs = false
                 self.isRouteTransferOffUs = false
+                self.qrisActive = false
                 self.appState.moveToTransfer = false
                 
             }
@@ -208,9 +201,6 @@ struct BottomNavigationView: View {
                 .frame(width: 200, height: 200)
             
         })
-        .sheet(isPresented: self.$isShowingScanner) {
-            CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
-        }
         .popup(isPresented: $isShowConfirmationBiometricAuth, type: .floater(verticalPadding: 200), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             
             PopupConfirmationBiometricAuth()
@@ -218,7 +208,6 @@ struct BottomNavigationView: View {
             
         }
     }
-    
     
     // Fungsi untuk setting biometric login
     func PopupConfirmationBiometricAuth() -> some View {
@@ -230,7 +219,7 @@ struct BottomNavigationView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 5)
             
-            Text("Digital Bangking application will access the fingerprint data registered on your device".localized(language))
+            Text("Digital Bangking application will access the".localized(language) + " \(Biometric().type() == .faceID ? "Face ID" : "Finger Print") " + "data registered on your device".localized(language))
                 .font(.custom("Montserrat-Medium", size: 14))
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
