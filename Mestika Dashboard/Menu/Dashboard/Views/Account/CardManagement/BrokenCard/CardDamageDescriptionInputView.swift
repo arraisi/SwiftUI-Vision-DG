@@ -187,7 +187,7 @@ struct CardDamageDescriptionInputView: View {
             
             Button(
                 action: {
-                    self.appState.moveToTransfer = true
+                    self.appState.moveToDashboard = true
                 },
                 label: {
                     Text("BACK".localized(language))

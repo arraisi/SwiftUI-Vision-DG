@@ -20,6 +20,7 @@ struct SavingAccountModelElement: Codable, Hashable {
     let planName: String?
     let currency: String
     let productName: String?
+    let planCode: String
     let planAllowCreditDomestic, planAllowCreditInHouse: String?
     let cardNumber: String
     let accountBranch: String

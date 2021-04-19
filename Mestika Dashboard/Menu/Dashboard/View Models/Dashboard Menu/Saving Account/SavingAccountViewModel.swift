@@ -31,14 +31,11 @@ class SavingAccountViewModel : ObservableObject {
             switch result {
             case .success(let response):
                 
-                DispatchQueue.main.async {
-                    
-                    print("COUNT")
-                    print(response.count)
-                    
-                    self.balanceAccount = response
-                    self.isLoading = false
-                }
+                print("COUNT")
+                print(response.count)
+                
+                self.balanceAccount = response
+                self.isLoading = false
                 
                 completion(true)
                 
@@ -64,6 +61,46 @@ class SavingAccountViewModel : ObservableObject {
     }
     
     func getAccounts(completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+            self.accounts.removeAll()
+        }
+        
+        SavingAccountServices.shared.getAccounts() { result in
+            switch result {
+            case .success(let response):
+                
+                self.accounts = response
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                
+                print("ERROR GET LIST PRODUCTS SAVING ACCOUNT-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(false)
+            }
+            
+        }
+    }
+    
+    func getAccountsAndBalance(completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true

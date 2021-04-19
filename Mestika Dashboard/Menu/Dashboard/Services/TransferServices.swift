@@ -125,7 +125,7 @@ class TransferServices {
         let body: [String: Any] = [
             "cardNo": transferData.cardNo,
             "ref": "1",
-            "nominal": transferData.amount,
+            "nominal": transferData.amount.replacingOccurrences(of: ".", with: ""),
             "currency": "360",
             "sourceNumber": transferData.sourceNumber,
             "destinationNumber": transferData.destinationNumber,

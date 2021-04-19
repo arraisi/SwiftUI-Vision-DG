@@ -65,6 +65,10 @@
 		522B8C3C25E4E993003D17F1 /* CardBrokenPinVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C3B25E4E993003D17F1 /* CardBrokenPinVerificationView.swift */; };
 		522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E4CCB25EF6E2B009B267F /* CardBrokenModel.swift */; };
 		522E4CD125EF7585009B267F /* CardDamageDescriptionInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E4CD025EF7585009B267F /* CardDamageDescriptionInputView.swift */; };
+		5233700C26298FFB00ED3E4F /* DepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233700B26298FFB00ED3E4F /* DepositAccountView.swift */; };
+		52337014262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52337013262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift */; };
+		523370192629964F00ED3E4F /* DetailTransactionDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */; };
+		5233701E2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
@@ -489,6 +493,10 @@
 		522B8C3B25E4E993003D17F1 /* CardBrokenPinVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrokenPinVerificationView.swift; sourceTree = "<group>"; };
 		522E4CCB25EF6E2B009B267F /* CardBrokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrokenModel.swift; sourceTree = "<group>"; };
 		522E4CD025EF7585009B267F /* CardDamageDescriptionInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageDescriptionInputView.swift; sourceTree = "<group>"; };
+		5233700B26298FFB00ED3E4F /* DepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAccountView.swift; sourceTree = "<group>"; };
+		52337013262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOfDepositAccountView.swift; sourceTree = "<group>"; };
+		523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionDepositAccountView.swift; sourceTree = "<group>"; };
+		5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPinOfDepositAccountView.swift; sourceTree = "<group>"; };
 		5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mestika Dashboard.entitlements"; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1005,6 +1013,17 @@
 				52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */,
 			);
 			path = Transfer;
+			sourceTree = "<group>";
+		};
+		5233700A26298FE100ED3E4F /* DepositAccount */ = {
+			isa = PBXGroup;
+			children = (
+				5233700B26298FFB00ED3E4F /* DepositAccountView.swift */,
+				52337013262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift */,
+				523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */,
+				5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */,
+			);
+			path = DepositAccount;
 			sourceTree = "<group>";
 		};
 		523A86282542BE8600ADFE25 /* Components */ = {
@@ -1918,6 +1937,7 @@
 		C0733FBC25EE25000034689F /* Dashboard Menu */ = {
 			isa = PBXGroup;
 			children = (
+				5233700A26298FE100ED3E4F /* DepositAccount */,
 				C0733FBD25EE250A0034689F /* SavingAccount */,
 				52FF49B525F7635F00890AE6 /* MyCardDashboardView.swift */,
 			);
@@ -2401,6 +2421,7 @@
 				C010FAE5260B29B70092EEDE /* SuccessPaymentQrisView.swift in Sources */,
 				52E4310A25DF97AC0050DB22 /* LastTransactionResponse.swift in Sources */,
 				52DA20AB2551218C00CC048A /* OtpResetPinScreen.swift in Sources */,
+				523370192629964F00ED3E4F /* DetailTransactionDepositAccountView.swift in Sources */,
 				0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
@@ -2426,6 +2447,7 @@
 				524745F62547C547001F43C5 /* ListFavoritePurchasePaymentView.swift in Sources */,
 				525950222553E03000C8CA5D /* OtpVerificationForgotPasswordView.swift in Sources */,
 				C0D7B5CF2552ACEB009C3976 /* CardActivationView.swift in Sources */,
+				5233701E2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift in Sources */,
 				526B6581254FB72300C13C36 /* HistoryTransaction.swift in Sources */,
 				52ADFE972557D99F00A1001F /* CardModel.swift in Sources */,
 				52ADFEEF2557DC3C00A1001F /* CharacterInputCell.swift in Sources */,
@@ -2537,6 +2559,7 @@
 				C0AD115A25DF7951003FF920 /* HistoryTransactionList.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C0D274DC25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift in Sources */,
+				52337014262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift in Sources */,
 				C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */,
 				064CCE51256DADBD001B8EB7 /* Published+Extensions.swift in Sources */,
 				C043CFC225CD43B700328C91 /* FormChangeContactView.swift in Sources */,
@@ -2549,6 +2572,7 @@
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */,
+				5233700C26298FFB00ED3E4F /* DepositAccountView.swift in Sources */,
 				C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
 				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,

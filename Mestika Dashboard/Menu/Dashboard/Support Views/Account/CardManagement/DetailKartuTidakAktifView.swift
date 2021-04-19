@@ -12,8 +12,9 @@ struct DetailKartuTidakAktifView: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
-    
     var card: KartuKuDesignViewModel
+    
+    @State var routeActiveCard: Bool = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -46,24 +47,37 @@ struct DetailKartuTidakAktifView: View {
             if (card.status == "BLOCKED") {
                 EmptyView()
             } else {
+                
                 NavigationLink(
                     destination: CardActivationView(card: card),
+                    isActive: self.$routeActiveCard,
+                    label: {}
+                )
+                .isDetailLink(false)
+                
+                Button(
+                    action: {
+                        self.routeActiveCard = true
+                    },
                     label: {
                         Text("ACTIVATE MY CARDS".localized(language))
                             .foregroundColor(.white)
                             .font(.custom("Montserrat-SemiBold", size: 14))
                             .frame(maxWidth: .infinity, maxHeight: 40)
-                    })
-                    .isDetailLink(false)
-                    .frame(height: 50)
-                    .background(Color(hex: "#2334D0"))
-                    .cornerRadius(12)
+                    }
+                )
+                .frame(height: 50)
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
             }
             
         }
         .padding(.top, 35)
         .padding(20)
         .background(Color.white)
+        .onAppear {
+            self.routeActiveCard = false
+        }
     }
 }
 
