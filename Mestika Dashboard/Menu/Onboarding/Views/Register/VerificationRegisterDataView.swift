@@ -336,34 +336,35 @@ struct VerificationRegisterDataView: View {
                                     .cornerRadius(15)
                                     .padding(.horizontal, 20)
                                     
-                                    Text("Gross Income".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                    
-                                    HStack {
+                                    if appState.nasabahIsExisting {
+                                        Text("Gross Income".localized(language))
+                                            .font(.caption)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.gray)
+                                            .multilineTextAlignment(.leading)
+                                            .padding(.horizontal, 20)
                                         
-                                        MultilineTextField("Gross Income".localized(language), text: $registerData.penghasilanKotor) {
+                                        HStack {
                                             
+                                            MultilineTextField("Gross Income".localized(language), text: $registerData.penghasilanKotor) {
+                                                
+                                            }
+                                            .disabled(true)
+                                            
+                                            Divider()
+                                                .frame(height: 30)
+                                            
+                                            NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
+                                                Text("Edit").foregroundColor(.blue)
+                                            }
                                         }
-//                                        TextField("Gross Income".localized(language), text: $registerData.penghasilanKotor)
-//                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
+                                        .frame(height: 20)
+                                        .font(.subheadline)
+                                        .padding()
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(15)
+                                        .padding(.horizontal, 20)
                                     }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
                                     
                                     Text("Estimated Withdrawal".localized(language))
                                         .font(.caption)
@@ -1006,7 +1007,7 @@ struct VerificationRegisterDataView: View {
                     self.nextRouteNasabah = true
                 } else {
                     self.nextRouteNasabah = true
-//                    self.nextRouteNonNasabah = true
+                    //                    self.nextRouteNonNasabah = true
                 }
             }
             
