@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreImage.CIFilterBuiltins
-import CodeScanner
 import LocalAuthentication
 
 struct BottomNavigationView: View {
