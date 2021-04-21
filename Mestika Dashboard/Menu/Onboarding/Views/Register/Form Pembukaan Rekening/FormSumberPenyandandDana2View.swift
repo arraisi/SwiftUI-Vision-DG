@@ -23,6 +23,9 @@ struct FormSumberPenyandandDana2View: View {
     // Routing variables
     @State var editMode: EditMode = .inactive
     
+    @State var routeToSumberPendapatanLainnya: Bool = false
+    @State var routeToPenghasilanKotor: Bool = false
+    
     // View variables
     let sumberPenyandangDana: [MasterModel] = load("sumberPenyandangDana.json")
     let hubunganOptions = ["Ayah", "Ibu", "Kakak", "Adik", "Saudara", "Teman"]
@@ -139,9 +142,29 @@ struct FormSumberPenyandandDana2View: View {
                                         .cornerRadius(15)
                                         .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                         
+                                        NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData),
+                                                       isActive: $routeToSumberPendapatanLainnya,
+                                                       label: {
+                                                        EmptyView()
+                                                       })
+                                        
+                                        NavigationLink(destination: PenghasilanKotorView().environmentObject(registerData),
+                                                       isActive: $routeToPenghasilanKotor,
+                                                       label: {
+                                                        EmptyView()
+                                                       })
+                                        
                                         // Button
                                         if (editMode == .inactive) {
-                                            NavigationLink(destination: SumberPendapatanLainnyaView().environmentObject(registerData), label:{
+                                            Button(action: {
+                                                
+                                                if appState.nasabahIsExisting {
+                                                    routeToPenghasilanKotor = true
+                                                } else {
+                                                    routeToSumberPendapatanLainnya = true
+                                                }
+                                                
+                                            }, label:{
                                                 
                                                 Text("Next".localized(language))
                                                     .foregroundColor(.white)
