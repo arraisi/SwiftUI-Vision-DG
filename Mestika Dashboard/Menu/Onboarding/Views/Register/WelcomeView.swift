@@ -806,11 +806,7 @@ struct WelcomeView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             
-//            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData).environmentObject(appState), isActive: self.$isNoAtmOrRekViewActive) {
-//                EmptyView()
-//            }
-//            .isDetailLink(false)
-            NavigationLink(destination: PerkerjaanView().environmentObject(registerData).environmentObject(appState), isActive: self.$isNoAtmOrRekViewActive) {
+            NavigationLink(destination: NoAtmOrRekeningVerificationView(rootIsActive: .constant(false)).environmentObject(registerData).environmentObject(appState), isActive: self.$isNoAtmOrRekViewActive) {
                 EmptyView()
             }
             .isDetailLink(false)
