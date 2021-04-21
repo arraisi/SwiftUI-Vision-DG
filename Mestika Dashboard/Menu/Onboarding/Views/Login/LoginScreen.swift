@@ -240,8 +240,12 @@ struct LoginScreen: View {
                 }
                 
                 if !success {
-                    print("LOGIN FAILED")
-                    self.showingModal = true
+                    if (self.authVM.errorCode == "206") {
+                        self.routeNewPassword = true
+                    } else {
+                        print("LOGIN FAILED")
+                        self.showingModal = true
+                    }
                 }
             }
             
@@ -255,8 +259,13 @@ struct LoginScreen: View {
                 }
                 
                 if !success {
-                    print("LOGIN FAILED")
-                    self.showingModal = true
+                    
+                    if (self.authVM.errorCode == "206") {
+                        self.routeNewPassword = true
+                    } else {
+                        print("LOGIN FAILED")
+                        self.showingModal = true
+                    }
                 }
             }
         }

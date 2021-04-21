@@ -18,6 +18,8 @@ struct ConfirmationPinQrisView: View {
     @State var unlocked = false
     @State var success = false
     
+    @State var pendingRoute: Bool = false
+    
     @StateObject var qrisVM = QrisViewModel()
     
     // Environtment Object
@@ -63,6 +65,10 @@ struct ConfirmationPinQrisView: View {
                     destination: SuccessPaymentQrisView().environmentObject(qrisData),
                     isActive: $unlocked) {EmptyView()}
                 
+                NavigationLink(
+                    destination: PendingPaymentQrisView().environmentObject(qrisData),
+                    isActive: $pendingRoute) {EmptyView()}
+                
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
                 }, onCommit: {
@@ -76,7 +82,13 @@ struct ConfirmationPinQrisView: View {
                             self.qrisData.reffNumber = self.qrisVM.reffNumber
                             self.qrisData.responseCode = self.qrisVM.responseCode
                             
-                            self.unlocked = true
+                            
+                            if (self.qrisData.responseCode == "00") {
+                                self.unlocked = true
+                            } else if (self.qrisData.responseCode == "68") {
+                                self.pendingRoute = true
+                            }
+                            
                         }
                         
                     }

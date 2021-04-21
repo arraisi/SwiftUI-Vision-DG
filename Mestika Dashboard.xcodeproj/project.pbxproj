@@ -53,6 +53,7 @@
 		5205861025723965005DB764 /* PasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205860F25723965005DB764 /* PasswordResponse.swift */; };
 		52058615257239AB005DB764 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52058614257239AB005DB764 /* PasswordViewModel.swift */; };
 		5205861A25723A2F005DB764 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5205861925723A2F005DB764 /* PasswordService.swift */; };
+		5212C668262E992D00876E3D /* PendingPaymentQrisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212C667262E992D00876E3D /* PendingPaymentQrisView.swift */; };
 		521927FB25F0BB3A00822042 /* CardBlockDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521927FA25F0BB3A00822042 /* CardBlockDescriptionView.swift */; };
 		5219280125F0D8F800822042 /* FormChangePinCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5219280025F0D8F800822042 /* FormChangePinCardView.swift */; };
 		522101B125C9213100C9566A /* TransferOnUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522101B025C9213100C9566A /* TransferOnUsModel.swift */; };
@@ -489,6 +490,7 @@
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		5205861925723A2F005DB764 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
+		5212C667262E992D00876E3D /* PendingPaymentQrisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingPaymentQrisView.swift; sourceTree = "<group>"; };
 		521927FA25F0BB3A00822042 /* CardBlockDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockDescriptionView.swift; sourceTree = "<group>"; };
 		5219280025F0D8F800822042 /* FormChangePinCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePinCardView.swift; sourceTree = "<group>"; };
 		522101B025C9213100C9566A /* TransferOnUsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferOnUsModel.swift; sourceTree = "<group>"; };
@@ -1762,6 +1764,7 @@
 				C010FADA260B1DDA0092EEDE /* SummaryQrisView.swift */,
 				C010FADF260B29200092EEDE /* ConfirmationPinQrisView.swift */,
 				C010FAE4260B29B70092EEDE /* SuccessPaymentQrisView.swift */,
+				5212C667262E992D00876E3D /* PendingPaymentQrisView.swift */,
 			);
 			path = QRIS;
 			sourceTree = "<group>";
@@ -2685,6 +2688,7 @@
 				C01B84A525FF21C400F5BBD9 /* SavingAccountServices.swift in Sources */,
 				52BB53A125C108680045DBE6 /* AuthService.swift in Sources */,
 				C0AD11AC25DFA98E003FF920 /* HistoryTransactionViewModel.swift in Sources */,
+				5212C668262E992D00876E3D /* PendingPaymentQrisView.swift in Sources */,
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
 				528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */,

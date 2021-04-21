@@ -45,10 +45,8 @@ struct InputPaymentByQrisView: View {
                     Text("\(self.qrisData.merchantName)")
                         .font(.custom("Montserrat-Bold", size: 14))
                         .foregroundColor(Color("DarkStaleBlue"))
+                    
                     Text("\(self.qrisData.merchantCity)")
-                        .font(.custom("Montserrat-SemiBold", size: 14))
-                        .foregroundColor(Color("DarkStaleBlue"))
-                    Text("TERMA00001")
                         .font(.custom("Montserrat-SemiBold", size: 14))
                         .foregroundColor(Color("DarkStaleBlue"))
                 }
@@ -239,7 +237,7 @@ struct InputPaymentByQrisView: View {
     }
     
     var disableForm: Bool {
-        if self.selectedSourceNumber == "Select Source Number" || (!disableFee && nominalTips == "") {
+        if self.selectedSourceNumber == "Select Source Number" || (!disableFee && nominalTips == "") || (!disableAmount && nominalTrx == "") {
             return true
         }
         
