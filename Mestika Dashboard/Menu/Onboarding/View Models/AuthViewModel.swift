@@ -18,6 +18,7 @@ class AuthViewModel: ObservableObject {
     @Published var pinTransaction: String = ""
     @Published var status: String = ""
     @Published var errorMessage: String = ""
+    @Published var errorCode: String = ""
 }
 
 extension AuthViewModel {
@@ -50,6 +51,9 @@ extension AuthViewModel {
                 switch error {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
+                case .custom(code: 206):
+                    self.errorCode = "206"
+                    self.errorMessage = "Change Password"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -86,6 +90,9 @@ extension AuthViewModel {
                 switch error {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
+                case .custom(code: 206):
+                    self.errorCode = "206"
+                    self.errorMessage = "Change Password"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

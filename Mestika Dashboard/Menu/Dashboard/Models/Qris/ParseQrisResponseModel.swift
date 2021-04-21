@@ -7,6 +7,6 @@ import Foundation
 
 // MARK: - ParseQrisResponseModel
 struct ParseQrisResponseModel: Codable {
-    let transactionCurrency, transactionFee, merchantCity, transactionAmount: String
+    let transactionFee, merchantCity, transactionAmount, currency: String
     let merchantName: String
 }

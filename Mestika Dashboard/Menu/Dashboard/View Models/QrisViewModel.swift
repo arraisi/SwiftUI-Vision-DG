@@ -44,7 +44,7 @@ class QrisViewModel : ObservableObject {
                     self.isLoading = false
                 }
                 
-                self.transactionCurrency = response.transactionCurrency
+                self.transactionCurrency = response.currency
                 self.transactionFee = response.transactionFee
                 self.merchantCity = response.merchantCity
                 self.transactionAmount = response.transactionAmount

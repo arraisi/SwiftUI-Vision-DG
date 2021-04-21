@@ -11,6 +11,7 @@ import JGProgressHUD_SwiftUI
 struct ContentView: View {
     
     let appState = AppState()
+    @Environment(\.scenePhase) var scenePhase
     
     init() {
         // this is not the same as manipulating the proxy directly
@@ -70,6 +71,15 @@ struct ContentView: View {
 //                }
             }
             .edgesIgnoringSafeArea(.top)
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .inactive {
+                    print("Inactive")
+                } else if newPhase == .active {
+                    print("Active")
+                } else if newPhase == .background {
+                    print("Background")
+                }
+            }
         }
     }
 }
