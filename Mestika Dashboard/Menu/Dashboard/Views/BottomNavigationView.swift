@@ -344,12 +344,12 @@ struct BottomNavigationView: View {
     
     var navBarItem: some View {
         HStack(spacing: 30) {
-            //            NavigationLink(destination: NotificationScreen(), label: {
-            //                Image("ic_bell")
-            //            })
-            Button(action: {}, label: {
+            NavigationLink(destination: InboxView(), label: {
                 Image("ic_bell")
             })
+            //            Button(action: {}, label: {
+            //                Image("ic_bell")
+            //            })
             Button(action: {
                 self.showQrCode = true
             }, label: {
