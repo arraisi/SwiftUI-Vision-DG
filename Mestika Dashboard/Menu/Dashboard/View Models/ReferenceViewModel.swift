@@ -58,24 +58,12 @@ class BankReferenceViewModel {
         self.data = data
     }
     
-    var swiftCode: String {
-        return self.data.swiftCode
+    var code: String {
+        return self.data.code
     }
     
-    var kliringCode: Int {
-        return self.data.kliringCode
-    }
-    
-    var sknRtgsCode: Int {
-        return self.data.sknRtgsCode
-    }
-    
-    var combinationName: String {
-        return self.data.combinationName
-    }
-    
-    var bankName: String {
-        return self.data.bankName
+    var name: String {
+        return self.data.name
     }
     
     

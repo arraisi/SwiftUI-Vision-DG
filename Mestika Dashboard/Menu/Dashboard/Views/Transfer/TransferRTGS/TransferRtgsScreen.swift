@@ -314,12 +314,11 @@ struct TransferRtgsScreen: View {
                         ForEach(0..<self.referenceVM._listBank.count) { index in
                             
                             Button(action: {
-                                self.bankSelector = self.referenceVM._listBank[index].bankName
-                                self.transferData.bankName = self.referenceVM._listBank[index].bankName
-                                self.transferData.combinationBankName = self.referenceVM._listBank[index].combinationName
-                                self.transferData.destinationBankCode = self.referenceVM._listBank[index].swiftCode
+                                self.bankSelector = self.referenceVM._listBank[index].name
+                                self.transferData.bankName = self.referenceVM._listBank[index].name
+                                self.transferData.destinationBankCode = self.referenceVM._listBank[index].code
                             }) {
-                                Text(self.referenceVM._listBank[index].bankName)
+                                Text(self.referenceVM._listBank[index].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -1112,9 +1111,9 @@ struct TransferRtgsScreen: View {
             if success {
                 print("SUCCESS")
 //                self.bankSelector = self.referenceVM._listBank[0].bankName
-                self.transferData.bankName = self.referenceVM._listBank[0].bankName
-                self.transferData.destinationBankCode = self.referenceVM._listBank[0].swiftCode
-                self.transferData.combinationBankName = self.referenceVM._listBank[0].combinationName
+                self.transferData.bankName = self.referenceVM._listBank[0].name
+                self.transferData.destinationBankCode = self.referenceVM._listBank[0].code
+                self.transferData.combinationBankName = ""
                 print(self.referenceVM._listBank.count)
             }
             

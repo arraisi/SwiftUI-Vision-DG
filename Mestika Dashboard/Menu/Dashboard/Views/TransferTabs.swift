@@ -12,12 +12,20 @@ struct TransferTabs: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
-    
     @Binding var cardNo: String
     @Binding var sourceNumber: String
     
     @Binding var transferOnUsActive: Bool
     @Binding var transferOffUsActive: Bool
+    
+    @State private var timeLogout = 300
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State var showAlertTimeout: Bool = false
+    
+    @EnvironmentObject var appState: AppState
+    
+    @ObservedObject private var authVM = AuthViewModel()
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
@@ -36,6 +44,28 @@ struct TransferTabs: View {
         })
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
+        .onReceive(timer) { time in
+            print(self.timeLogout)
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
+            
+            if self.timeLogout < 1 {
+                showAlertTimeout = true
+            }
+        }
+        .alert(isPresented: $showAlertTimeout) {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("YES".localized(language)), action: {
+                self.authVM.postLogout { success in
+                    if success {
+                        print("SUCCESS LOGOUT")
+                        DispatchQueue.main.async {
+                            self.appState.moveToWelcomeView = true
+                        }
+                    }
+                }
+            }))
+        }
     }
     
     // MARK: -USERNAME INFO VIEW

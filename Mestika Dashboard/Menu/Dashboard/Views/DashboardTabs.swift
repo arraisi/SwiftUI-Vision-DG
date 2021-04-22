@@ -10,6 +10,13 @@ import SDWebImageSwiftUI
 
 struct DashboardTabs: View {
     
+    @ObservedObject private var authVM = AuthViewModel()
+    
+    @State private var timeLogout = 300
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State var showAlertTimeout: Bool = false
+    
     @EnvironmentObject var appState: AppState
     
     @AppStorage("language")
@@ -193,8 +200,19 @@ struct DashboardTabs: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .edgesIgnoringSafeArea(.top)
+        .onReceive(timer) { time in
+            print(self.timeLogout)
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
+            
+            if self.timeLogout < 1 {
+                showAlertTimeout = true
+            }
+        }
         .onAppear {
             print("GET")
+            self.isHiddenInformationReStore = true
             self.isLoadingCard = true
             
             getUserInfo()
@@ -221,6 +239,20 @@ struct DashboardTabs: View {
 
             }
         }
+        .alert(isPresented: $showAlertTimeout) {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("YES".localized(language)), action: {
+                self.authVM.postLogout { success in
+                    if success {
+                        print("SUCCESS LOGOUT")
+                        DispatchQueue.main.async {
+                            self.appState.moveToWelcomeView = true
+                        }
+                    }
+                }
+            }))
+        }
+        
+        
     }
     
     // MARK: -USERNAME INFO VIEW

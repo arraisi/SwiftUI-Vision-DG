@@ -44,7 +44,9 @@ struct AccountTabs: View {
     
     @FetchRequest(entity: NewDevice.entity(), sortDescriptors: []) var device: FetchedResults<NewDevice>
     
+    
     var body: some View {
+        
         ZStack {
             ScrollView(.vertical, showsIndicators: false, content: {
                 
@@ -65,14 +67,14 @@ struct AccountTabs: View {
             .navigationBarHidden(true)
         }
         .onReceive(timer) { time in
+            print(self.timeLogout)
             if self.timeLogout > 0 {
                 self.timeLogout -= 1
             }
             
             if self.timeLogout < 1 {
                 showAlertTimeout = true
-            } else {
-                showAlertTimeout = false
+                isShowingAlert = true
             }
         }
         .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
@@ -357,10 +359,11 @@ struct AccountTabs: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
-        .alert(isPresented: $showAlertTimeout) {
-            return Alert(
-                title: Text("Session Expired".localized(language)),
-                primaryButton: .default(Text("YES".localized(language)), action: {
+        .alert(isPresented: $isShowingAlert) {
+            
+            if showAlertTimeout {
+                
+                return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("YES".localized(language)), action: {
                     self.authVM.postLogout { success in
                         if success {
                             print("SUCCESS LOGOUT")
@@ -369,10 +372,9 @@ struct AccountTabs: View {
                             }
                         }
                     }
-                }),
-                secondaryButton: .cancel(Text("NO".localized(language))))
-        }
-        .alert(isPresented: $isShowingAlert) {
+                }))
+            }
+            
             return Alert(
                 title: Text("Are you sure you want to exit the Bank Mestika application?".localized(language)),
                 primaryButton: .default(Text("YES".localized(language)), action: {

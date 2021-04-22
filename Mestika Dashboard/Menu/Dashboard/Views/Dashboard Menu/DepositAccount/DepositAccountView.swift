@@ -247,12 +247,15 @@ struct DepositAccountView: View {
             
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
-                    print(e.accountNumber)
-                    print(e.planCode)
-                    self.listSourceNumber.append(e.accountNumber)
-                    self.listPlantCode.append(e.planCode)
-                    self.listTypeAccount.append(e.accountType ?? "")
-                    self.listCardNo.append(e.cardNumber)
+                    
+                    if (e.accountType == "S") {
+                        print(e.accountNumber)
+                        print(e.planCode)
+                        self.listSourceNumber.append(e.accountNumber)
+                        self.listPlantCode.append(e.planCode)
+                        self.listTypeAccount.append(e.accountType ?? "")
+                        self.listCardNo.append(e.cardNumber)
+                    }
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
