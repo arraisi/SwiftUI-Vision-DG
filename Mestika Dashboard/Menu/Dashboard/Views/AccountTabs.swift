@@ -31,6 +31,11 @@ struct AccountTabs: View {
     @State private var forgotPasswordActived = false
     @State private var isLoading: Bool = true
     
+    @State private var timeLogout = 300
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State var showAlertTimeout: Bool = false
+    
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -58,6 +63,17 @@ struct AccountTabs: View {
                 }
             })
             .navigationBarHidden(true)
+        }
+        .onReceive(timer) { time in
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
+            
+            if self.timeLogout < 1 {
+                showAlertTimeout = true
+            } else {
+                showAlertTimeout = false
+            }
         }
         .onReceive(self.appState.$moveToAccountTab) { moveToAccountTab in
             if moveToAccountTab {
@@ -341,6 +357,21 @@ struct AccountTabs: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .alert(isPresented: $showAlertTimeout) {
+            return Alert(
+                title: Text("Session Expired".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
+                    self.authVM.postLogout { success in
+                        if success {
+                            print("SUCCESS LOGOUT")
+                            DispatchQueue.main.async {
+                                self.appState.moveToWelcomeView = true
+                            }
+                        }
+                    }
+                }),
+                secondaryButton: .cancel(Text("NO".localized(language))))
+        }
         .alert(isPresented: $isShowingAlert) {
             return Alert(
                 title: Text("Are you sure you want to exit the Bank Mestika application?".localized(language)),

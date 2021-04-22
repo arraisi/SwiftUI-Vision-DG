@@ -271,7 +271,7 @@ struct DepositAccountView: View {
                         self.transferData.cardNo = self.savingAccountVM.balanceAccount[0].cardNo ?? ""
                         self.transferData.sourceNumber = self.self.listSourceNumber[0]
                         
-                        if (self.savingAccountVM.balanceAccount[i].creditDebit == "") {
+                        if (self.savingAccountVM.balanceAccount[i].creditDebit == "D") {
                             print("DATA CREDIT DEBIT")
                             print(self.listSourceNumber[i])
                             print(self.listPlantCode[i])
