@@ -211,7 +211,7 @@ struct DashboardTabs: View {
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
                     
-                    if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "" }) {
+                    if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
                         print("ADA TYPE D")
                         self.isHiddenInformationReStore = false
                     }

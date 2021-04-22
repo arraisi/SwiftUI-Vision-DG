@@ -54,6 +54,9 @@ extension AuthViewModel {
                 case .custom(code: 206):
                     self.errorCode = "206"
                     self.errorMessage = "Change Password"
+                case .custom(code: 401):
+                    self.errorCode = "401"
+                    self.errorMessage = "Move to Dashboard"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -93,6 +96,9 @@ extension AuthViewModel {
                 case .custom(code: 206):
                     self.errorCode = "206"
                     self.errorMessage = "Change Password"
+                case .custom(code: 401):
+                    self.errorCode = "401"
+                    self.errorMessage = "Move to Dashboard"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

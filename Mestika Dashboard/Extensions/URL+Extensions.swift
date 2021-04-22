@@ -177,7 +177,7 @@ extension URL {
     }
     
     static func urlBankReference() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/reference/kliringAndRtgsBank")
+        return URL(string: AppConstants().BASE_URL + "/reference/bankwithcode")
     }
     
     static func urlTransferOverbookingInquiry() -> URL? {
