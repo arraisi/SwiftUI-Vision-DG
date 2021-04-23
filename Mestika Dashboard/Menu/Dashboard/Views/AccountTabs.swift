@@ -36,6 +36,8 @@ struct AccountTabs: View {
     
     @State var showAlertTimeout: Bool = false
     
+    @State var leftTime: Date = Date()
+    
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -46,6 +48,12 @@ struct AccountTabs: View {
     
     
     var body: some View {
+        
+        let tap = TapGesture()
+            .onEnded { _ in
+                self.timeLogout = 300
+                print("View tapped!")
+            }
         
         ZStack {
             ScrollView(.vertical, showsIndicators: false, content: {
@@ -66,8 +74,10 @@ struct AccountTabs: View {
             })
             .navigationBarHidden(true)
         }
+        .gesture(tap)
         .onReceive(timer) { time in
             print(self.timeLogout)
+            
             if self.timeLogout > 0 {
                 self.timeLogout -= 1
             }
@@ -363,7 +373,7 @@ struct AccountTabs: View {
             
             if showAlertTimeout {
                 
-                return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("YES".localized(language)), action: {
+                return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
                     self.authVM.postLogout { success in
                         if success {
                             print("SUCCESS LOGOUT")

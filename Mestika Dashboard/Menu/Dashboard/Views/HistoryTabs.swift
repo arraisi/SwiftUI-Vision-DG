@@ -54,6 +54,13 @@ struct HistoryTabs: View {
     @Binding var sourceNumber: String
     
     var body: some View {
+        
+        let tap = TapGesture()
+            .onEnded { _ in
+                self.timeLogout = 300
+                print("View tapped!")
+            }
+        
         ZStack {
             if filterShowed {
                 
@@ -82,6 +89,7 @@ struct HistoryTabs: View {
             }
             
         }
+        .gesture(tap)
         .onReceive(timer) { time in
             print(self.timeLogout)
             if self.timeLogout > 0 {
@@ -93,7 +101,7 @@ struct HistoryTabs: View {
             }
         }
         .alert(isPresented: $showAlertTimeout) {
-            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("YES".localized(language)), action: {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
                 self.authVM.postLogout { success in
                     if success {
                         print("SUCCESS LOGOUT")

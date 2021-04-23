@@ -243,7 +243,8 @@ struct DepositAccountView: View {
         }
         .onAppear {
             self.isLoading = true
-//            getProfile()
+            getProfile()
+            getAccountBalance()
             
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
@@ -267,12 +268,12 @@ struct DepositAccountView: View {
 //                            self.currency = self.savingAccountVM.balanceAccount[i].balance?.thousandSeparator() ?? "0"
 //                        }
                         
-                        self.currency = self.savingAccountVM.balanceAccount[0].balance?.thousandSeparator() ?? "0"
-                        self.cardNo = self.savingAccountVM.balanceAccount[0].cardNo ?? ""
-                        self.selectSourceNumber = self.listSourceNumber[0]
-                        
-                        self.transferData.cardNo = self.savingAccountVM.balanceAccount[0].cardNo ?? ""
-                        self.transferData.sourceNumber = self.self.listSourceNumber[0]
+//                        self.currency = self.savingAccountVM.balanceAccount[0].balance?.thousandSeparator() ?? "0"
+//                        self.cardNo = self.savingAccountVM.balanceAccount[0].cardNo ?? ""
+//                        self.selectSourceNumber = self.listSourceNumber[0]
+//
+//                        self.transferData.cardNo = self.savingAccountVM.balanceAccount[0].cardNo ?? ""
+//                        self.transferData.sourceNumber = self.self.listSourceNumber[0]
                         
                         if (self.savingAccountVM.balanceAccount[i].creditDebit == "D") {
                             print("DATA CREDIT DEBIT")
@@ -336,7 +337,23 @@ struct DepositAccountView: View {
                 print("Name \(self.profileVM.name)")
                 print(self.profileVM.balance)
                 
-//                self.currency = self.profileVM.balance.thousandSeparator()
+                self.cardNo = self.profileVM.cardNo
+                self.selectSourceNumber = self.profileVM.accountNumber
+                
+                self.transferData.cardNo = self.profileVM.cardNo
+                self.transferData.sourceNumber = self.profileVM.accountNumber
+            }
+        }
+    }
+    
+    func getAccountBalance() {
+        self.profileVM.getAccountBalance { success in
+            if success {
+                
+                self.currency = self.profileVM.balance
+            }
+            
+            if !success {
             }
         }
     }

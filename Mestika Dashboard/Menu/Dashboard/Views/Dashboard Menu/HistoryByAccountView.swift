@@ -52,7 +52,7 @@ struct HistoryByAccountView: View {
                 
             } else {
                 
-                VStack {
+                VStack(alignment: .leading) {
                     
                     Button(action: {
                         self.filterShowed = true
@@ -69,8 +69,11 @@ struct HistoryByAccountView: View {
                     
                     HistoryTransactionList(histories: historyVM.histories)
                     
+                    
                 }
             }
+            
+            Spacer()
             
         }
         .navigationBarTitle("History", displayMode: .inline)

@@ -28,6 +28,13 @@ struct TransferTabs: View {
     @ObservedObject private var authVM = AuthViewModel()
     
     var body: some View {
+        
+        let tap = TapGesture()
+            .onEnded { _ in
+                self.timeLogout = 300
+                print("View tapped!")
+            }
+        
         ScrollView(.vertical, showsIndicators: false, content: {
             
             GeometryReader { geometry in
@@ -42,6 +49,7 @@ struct TransferTabs: View {
                 ListLastTransactionView(sourceNumber: sourceNumber)
             }
         })
+        .gesture(tap)
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .onReceive(timer) { time in
@@ -55,7 +63,7 @@ struct TransferTabs: View {
             }
         }
         .alert(isPresented: $showAlertTimeout) {
-            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("YES".localized(language)), action: {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
                 self.authVM.postLogout { success in
                     if success {
                         print("SUCCESS LOGOUT")

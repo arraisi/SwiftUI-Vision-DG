@@ -285,10 +285,14 @@ extension URL {
     //-------------------- QRIS SERVICE ----------------------//
     
     static func urlParseQris() -> URL? {
-        return URL(string: "http://139.59.192.16:8080/api/v1.0/qris/parseQr")
+        return URL(string: AppConstants().BASE_URL + "/qris/parseQr")
     }
     
     static func urlPayQris() -> URL? {
-        return URL(string: "http://139.59.192.16:8080/api/v1.0/qris/payQr")
+        return URL(string: AppConstants().BASE_URL + "/qris/payQr")
+    }
+    
+    static func urlCheckStatusQris() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/qris/checkStatusQr")
     }
 }

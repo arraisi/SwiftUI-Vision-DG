@@ -16,6 +16,13 @@ struct PendingPaymentQrisView: View {
     // Environtment Object
     @EnvironmentObject var qrisData: QrisModel
     
+    @StateObject var qrisVM = QrisViewModel()
+    
+    @State var errorMessage: String = ""
+    @State var statusError: String = ""
+    
+    @State var isShowAlert: Bool = false
+    
     var body: some View {
         VStack {
             
@@ -151,7 +158,7 @@ struct PendingPaymentQrisView: View {
                 
                 Group {
                     Button(action: {
-                        
+                        getStatusQris()
                     }) {
                         Text("Check Transaction Status".localized(language))
                             .foregroundColor(.white)
@@ -189,6 +196,28 @@ struct PendingPaymentQrisView: View {
         }
         .navigationBarTitle("Pembayaran QRIS", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("\(self.statusError)"),
+                message: Text("\(self.errorMessage)"),
+                dismissButton: .default(Text("OK".localized(language))))
+        }
+    }
+    
+    func getStatusQris() {
+        self.qrisVM.statusQris(data: qrisData) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                self.errorMessage = self.qrisVM.message
+                self.statusError = self.qrisVM.code
+                self.isShowAlert = true
+            }
+            
+        }
     }
 }
 
