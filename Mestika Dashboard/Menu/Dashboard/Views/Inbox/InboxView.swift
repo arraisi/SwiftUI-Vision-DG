@@ -31,6 +31,10 @@ struct InboxView: View {
                 PesanView()
             }
             
+            if selected == 1 {
+                PemberitahuanView()
+            }
+            
             Spacer()
             
         }
@@ -44,31 +48,5 @@ struct InboxView_Previews: PreviewProvider {
             InboxView()
                 .navigationBarTitle("Inbox", displayMode: .inline)
         }
-    }
-}
-
-
-struct UnderlineButton: View {
-    
-    var active: Bool
-    var label: String
-    var action: ()->()
-    
-    var body: some View {
-        Button(action: {
-            action()
-        }, label: {
-            VStack{
-                Text(label)
-                    .font(.system(size: 14))
-                    .fontWeight(.bold)
-                    .foregroundColor(active ? Color("StaleBlue") : Color.gray)
-                Group {
-                    Rectangle()
-                }
-                .frame(height: 3)
-                .foregroundColor(active ? Color("StaleBlue") : Color.gray)
-            }
-        })
     }
 }
