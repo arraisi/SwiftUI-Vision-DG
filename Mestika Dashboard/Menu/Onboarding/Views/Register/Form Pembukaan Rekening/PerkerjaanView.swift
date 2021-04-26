@@ -41,8 +41,6 @@ struct PerkerjaanView: View {
             
             VStack {
                 AppBarLogo(light: false, onCancel: {})
-                
-                ScrollView {
                     
                     ZStack {
                         
@@ -97,7 +95,7 @@ struct PerkerjaanView: View {
                                             .padding(.vertical, 30)
                                         
                                         // Forms input
-                                        ZStack {
+                                        ScrollView {
                                             
                                             RadioButtonGroup(
                                                 items: pekerjaan,
@@ -234,9 +232,6 @@ struct PerkerjaanView: View {
                             
                         }
                     }
-                    
-                }
-                .KeyboardAwarePadding()
                 
             }
             

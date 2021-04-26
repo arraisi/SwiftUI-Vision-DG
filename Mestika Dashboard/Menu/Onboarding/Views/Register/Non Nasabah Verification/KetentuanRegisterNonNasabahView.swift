@@ -65,7 +65,8 @@ struct KetentuanRegisterNonNasabahView: View {
                                 .padding(.bottom, 5)
                             
                             ZStack {
-                                WebView(readed: self.$readed, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                                WebView(readed: self.$readed, urlString: Bundle.main.url(forResource: LocalizationService.shared.language != .english_us ?
+                                            "term" : "term-english", withExtension: "html")?.absoluteString)
                                 
                                 if showingBadge {
                                     BadgeView(text: "Please scroll down".localized(language))

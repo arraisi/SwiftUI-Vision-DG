@@ -153,8 +153,8 @@ struct FormCompletionKartuATMView: View {
                 registerData.addressKelurahanInput = data.kelurahanFromNik!
                 registerData.addressPostalCodeInput = data.kodePosFromNik!
                 registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
-                registerData.rtFromNik = data.rtFromNik!
-                registerData.rwFromNik = data.rwFromNik!
+                registerData.rtFromNik = data.rtFromNik ?? ""
+                registerData.rwFromNik = data.rwFromNik ?? ""
                 registerData.nik = data.nik!
                 
                 registerData.alamatSuratMenyurat = data.addressInput!
@@ -168,7 +168,7 @@ struct FormCompletionKartuATMView: View {
                 registerData.kelurahan = data.kelurahan!
                 registerData.alamatPerusahaan = data.alamatPerusahaan!
                 registerData.kodePos = data.kodePos!
-                registerData.rtrw = data.rtrw!
+                registerData.rtrw = data.rtrw ?? ""
                 registerData.kotaPerusahaan = data.kotaPerusahaan!
                 registerData.provinsiPerusahaan = data.provinsiPerusahaan!
                 
@@ -696,8 +696,6 @@ struct FormCompletionKartuATMView: View {
     func isValid() -> Bool {
         if addressOptionId == 4 {
             return atmData.atmName.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressInput.trimmingCharacters(in: .whitespaces).count > 0 && atmData.atmAddressKecamatanInput.trimmingCharacters(in: .whitespaces).count > 0 &&
-                atmData.atmAddressRtInput.trimmingCharacters(in: .whitespaces).count > 0 &&
-                atmData.atmAddressRwInput.trimmingCharacters(in: .whitespaces).count > 0 &&
                 atmData.atmAddressKotaInput.trimmingCharacters(in: .whitespaces).count > 0 &&
                 atmData.atmAddressPropinsiInput.trimmingCharacters(in: .whitespaces).count > 0
                 && atmData.atmAddressKelurahanInput.trimmingCharacters(in: .whitespaces).count > 0 && (atmData.atmAddressPostalCodeInput.trimmingCharacters(in: .whitespaces).count > 0 || self.kodePos.trimmingCharacters(in: .whitespaces).count > 0)

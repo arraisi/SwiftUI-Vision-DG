@@ -78,7 +78,7 @@ struct Term_ConditionView: View {
                     
                     VStack(alignment: .leading) {
                         ZStack {
-                            WebView(readed: self.$readFinished, urlString: Bundle.main.url(forResource: "term", withExtension: "html")?.absoluteString)
+                            WebView(readed: self.$readFinished, urlString: Bundle.main.url(forResource: LocalizationService.shared.language != .english_us ? "term" : "term-english", withExtension: "html")?.absoluteString)
                                 .padding(.horizontal, 12)
                             
 //                            if showingBadge {

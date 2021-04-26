@@ -354,6 +354,7 @@
 		C052A082263276D900DC90C6 /* UnderlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052A081263276D900DC90C6 /* UnderlineButton.swift */; };
 		C052A087263277F800DC90C6 /* PemberitahuanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052A086263277F800DC90C6 /* PemberitahuanView.swift */; };
 		C052A08F2632786C00DC90C6 /* PemberitahuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052A08E2632786C00DC90C6 /* PemberitahuanModel.swift */; };
+		C052A095263679A800DC90C6 /* term-english.html in Resources */ = {isa = PBXBuildFile; fileRef = C052A094263679A800DC90C6 /* term-english.html */; };
 		C0587B7C255BED2600F82D9D /* SelfieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0587B7B255BED2600F82D9D /* SelfieView.swift */; };
 		C05BA90825821A7D00E115D6 /* FormPINTransaksiATMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05BA90725821A7D00E115D6 /* FormPINTransaksiATMView.swift */; };
 		C0619E2A2629AA730053F326 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0619E292629AA730053F326 /* ScannerViewModel.swift */; };
@@ -813,6 +814,7 @@
 		C052A081263276D900DC90C6 /* UnderlineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineButton.swift; sourceTree = "<group>"; };
 		C052A086263277F800DC90C6 /* PemberitahuanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemberitahuanView.swift; sourceTree = "<group>"; };
 		C052A08E2632786C00DC90C6 /* PemberitahuanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PemberitahuanModel.swift; sourceTree = "<group>"; };
+		C052A094263679A800DC90C6 /* term-english.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "term-english.html"; sourceTree = "<group>"; };
 		C0587B7B255BED2600F82D9D /* SelfieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfieView.swift; sourceTree = "<group>"; };
 		C05BA90725821A7D00E115D6 /* FormPINTransaksiATMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPINTransaksiATMView.swift; sourceTree = "<group>"; };
 		C0619E292629AA730053F326 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
@@ -969,6 +971,7 @@
 			isa = PBXGroup;
 			children = (
 				06AD57082570D3370071C4A9 /* term.html */,
+				C052A094263679A800DC90C6 /* term-english.html */,
 			);
 			path = Html;
 			sourceTree = "<group>";
@@ -2305,6 +2308,7 @@
 				C0A4F99825528C0700566A11 /* Montserrat-Bold.ttf in Resources */,
 				526BA00825984FE000E1CFC3 /* Localizable.strings in Resources */,
 				52ADFE9D2557D99F00A1001F /* pekerjaan.json in Resources */,
+				C052A095263679A800DC90C6 /* term-english.html in Resources */,
 				52ADFEA42557D99F00A1001F /* perkiraanPenarikan.json in Resources */,
 				52ADFE9F2557D99F00A1001F /* penghasilanKotor.json in Resources */,
 				0A8B775A25B8366B00819952 /* ip7_ringtone.mp3 in Resources */,

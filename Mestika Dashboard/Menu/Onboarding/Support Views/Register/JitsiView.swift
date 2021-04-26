@@ -45,12 +45,25 @@ struct JitsiView: UIViewControllerRepresentable {
         
         let jitsiMeetView = JitsiMeetView()
         jitsiMeetView.delegate = context.coordinator
-        self.jitsiMeetView = jitsiMeetView
+        DispatchQueue.main.async {
+            self.jitsiMeetView = jitsiMeetView
+        }
         
         let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
             builder.serverURL = URL(string: AppConstants().JITSI_URL)
             builder.welcomePageEnabled = false
             builder.room = self.jitsi_room
+            
+            builder.setFeatureFlag("add-people.enabled", withValue: false)
+            builder.setFeatureFlag("invite.enabled", withValue: false)
+            builder.setFeatureFlag("close-captions.enabled", withValue: false)
+            builder.setFeatureFlag("chat.enabled", withValue: false)
+            builder.setFeatureFlag("meeting-name.enabled", withValue: false)
+            builder.setFeatureFlag("audio-mute.enabled", withValue: false)
+            builder.setFeatureFlag("video-mute.enabled", withValue: false)
+            builder.setFeatureFlag("video-share.enabled", withValue: false)
+            builder.setFeatureFlag("android.audio-focus.disabled", withValue: false)
+            
         }
         
         let vc = UIViewController()
@@ -59,7 +72,9 @@ struct JitsiView: UIViewControllerRepresentable {
         
         jitsiMeetView.join(options)
         
-        pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
+        DispatchQueue.main.async {
+            pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
+        }
         pipViewCoordinator?.show()
         
         //        vc.present(vc, animated: true, completion: nil)
@@ -68,7 +83,7 @@ struct JitsiView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        
+//        uiViewController.
     }
     
     func cleanUp() {

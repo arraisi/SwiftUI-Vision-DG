@@ -310,6 +310,11 @@ struct FormIdentitasDiriView: View {
             
             VStack(alignment: .center){
                 Spacer()
+                Image("scan_id_frame")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 300)
+                Spacer()
                 HStack {
                     Image(systemName: "checkmark")
                     Text("Make sure your e-KTP is genuine and not a scanned, uploaded or photocopy version".localized(language))
