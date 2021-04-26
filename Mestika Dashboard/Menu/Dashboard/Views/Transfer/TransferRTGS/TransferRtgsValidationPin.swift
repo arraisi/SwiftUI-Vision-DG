@@ -96,6 +96,7 @@ struct TransferRtgsValidationPin: View {
     func submitTransfer() {
         print("Submit Transfer")
         self.isLoading = true
+        print(transferData.transactionType)
         if (transferData.transactionType == "RTGS") {
             print("RTGS")
             self.transferVM.transferRtgs(transferData: transferData) { success in
@@ -118,6 +119,25 @@ struct TransferRtgsValidationPin: View {
         } else if (transferData.transactionType == "SKN") {
             print("SKN")
             self.transferVM.transferSkn(transferData: transferData) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        self.isLoading = false
+                        self.unLocked = true
+                        self.transferData.trxDateResp = self.transferVM.transactionDate
+                    }
+
+                    if !success {
+                        self.isLoading = false
+                        self.statusError = self.transferVM.code
+                        self.messageError = self.transferVM.message
+                        self.showingAlert = true
+                        resetField()
+                    }
+                }
+            }
+        } else if (transferData.transactionType == "Online") {
+            print("Online")
+            self.transferVM.transferIbft(transferData: transferData) { success in
                 DispatchQueue.main.async {
                     if success {
                         self.isLoading = false

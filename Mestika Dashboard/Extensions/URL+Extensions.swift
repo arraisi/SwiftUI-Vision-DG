@@ -184,8 +184,16 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/transper/overbookingInquiry")
     }
     
+    static func urlTransferIbftInquiry() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/ibft/ibftInquiry")
+    }
+    
     static func urlTransferOverbooking() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/transper/overbooking")
+    }
+    
+    static func urlTransferIbft() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/ibft/ibft")
     }
     
     static func urlTransferRtgs() -> URL? {

@@ -18,6 +18,7 @@ class TransferViewModel : ObservableObject {
     
     @Published var destinationName: String = ""
     @Published var destinationNumber: String = ""
+    @Published var reffNumber: String = ""
     
     @Published var transactionDate: String = ""
     
@@ -110,6 +111,50 @@ class TransferViewModel : ObservableObject {
         }
     }
     
+    // MARK: - Transfer IBFT INQUIRY
+    func transferIbftInquiry(transferData: TransferOffUsModel,
+                             completion: @escaping (Bool) -> Void) {
+        TransferServices.shared.transferIbftInquiry(transferData: transferData) { result in
+            print(result)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.isLoading = false
+            }
+            
+            switch result {
+            case .success(let response):
+                print(response)
+                
+                DispatchQueue.main.async {
+                    self.destinationName = response.destinationAccountName
+                    self.destinationNumber = response.destinationAccountNumber
+                    self.reffNumber = response.reffNumber
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "PIN Transaksi Salah"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "Transfer Gagal"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
     // MARK: - Transfer ONUS
     func transferOnUs(transferData: TransferOnUsModel,
                       completion: @escaping (Bool) -> Void) {
@@ -124,6 +169,46 @@ class TransferViewModel : ObservableObject {
                     self.transactionDate = response.transactionDate
                 }
                 
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "PIN Transaksi Salah"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "Transfer Gagal"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - Transfer IBFT
+    func transferIbft(transferData: TransferOffUsModel,
+                      completion: @escaping (Bool) -> Void) {
+        TransferServices.shared.transferIbft(transferData: transferData) { result in
+            print(result)
+            
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.transactionDate = response.transactionDate
+                }
                 completion(true)
                 
             case .failure(let error):
