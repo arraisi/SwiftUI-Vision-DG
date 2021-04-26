@@ -18,6 +18,11 @@ struct ConfirmationPinQrisView: View {
     @State var unlocked = false
     @State var success = false
     
+    @State var errorMessage: String = ""
+    @State var statusError: String = ""
+    
+    @State var isShowAlert: Bool = false
+    
     @State var pendingRoute: Bool = false
     
     @StateObject var qrisVM = QrisViewModel()
@@ -91,6 +96,13 @@ struct ConfirmationPinQrisView: View {
                             
                         }
                         
+                        if !success {
+                            self.errorMessage = self.qrisVM.message
+                            self.statusError = self.qrisVM.code
+                            self.isShowAlert = true
+                            resetField()
+                        }
+                        
                     }
                     
 //                    if self.pin == self.key {
@@ -104,6 +116,16 @@ struct ConfirmationPinQrisView: View {
             }
         }
         .navigationBarTitle("Pembayaran QRIS", displayMode: .inline)
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("\(self.statusError)"),
+                message: Text("\(self.errorMessage)"),
+                dismissButton: .default(Text("OK".localized(language))))
+        }
+    }
+    
+    private func resetField() {
+        self.pin = "" /// return to empty pin
     }
 }
 

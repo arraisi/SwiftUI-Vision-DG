@@ -84,6 +84,12 @@ struct WelcomeView: View {
     private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     var body: some View {
+        
+        let tap = TapGesture()
+            .onEnded { _ in
+                print("View tapped!")
+            }
+        
         NavigationView {
             
             ZStack {
@@ -205,6 +211,7 @@ struct WelcomeView: View {
                 )
                 .isDetailLink(false)
             }
+            .gesture(tap)
             .navigationBarItems(trailing: EmptyView())
             .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)

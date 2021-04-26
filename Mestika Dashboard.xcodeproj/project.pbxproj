@@ -117,6 +117,8 @@
 		52474D79254028CD0094B758 /* AccountTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D78254028CD0094B758 /* AccountTabs.swift */; };
 		52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */; };
 		524B396825A5C31500FE3ABE /* AddressSugestionResultResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524B396725A5C31500FE3ABE /* AddressSugestionResultResponse.swift */; };
+		524C7CBF263680C800898E01 /* TransferIbftInquiryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524C7CBE263680C800898E01 /* TransferIbftInquiryResponse.swift */; };
+		524C7CC426368FD200898E01 /* TransferIbftExecResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524C7CC326368FD200898E01 /* TransferIbftExecResponse.swift */; };
 		524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */; };
 		524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB11E256E1141006ED6F0 /* CitizenService.swift */; };
 		524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB123256E1289006ED6F0 /* CitizenViewModel.swift */; };
@@ -569,6 +571,8 @@
 		52474D78254028CD0094B758 /* AccountTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTabs.swift; sourceTree = "<group>"; };
 		52474D7D25402D130094B758 /* PaymentTransactionTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTransactionTabs.swift; sourceTree = "<group>"; };
 		524B396725A5C31500FE3ABE /* AddressSugestionResultResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSugestionResultResponse.swift; sourceTree = "<group>"; };
+		524C7CBE263680C800898E01 /* TransferIbftInquiryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferIbftInquiryResponse.swift; sourceTree = "<group>"; };
+		524C7CC326368FD200898E01 /* TransferIbftExecResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferIbftExecResponse.swift; sourceTree = "<group>"; };
 		524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNIKResponse.swift; sourceTree = "<group>"; };
 		524CB11E256E1141006ED6F0 /* CitizenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenService.swift; sourceTree = "<group>"; };
 		524CB123256E1289006ED6F0 /* CitizenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenViewModel.swift; sourceTree = "<group>"; };
@@ -1047,6 +1051,8 @@
 				52D8DC0D25D62415004DF85E /* TransferSknExecResponse.swift */,
 				52D6AD0025DBA0080079B48C /* InquiryTransferResponse.swift */,
 				52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */,
+				524C7CBE263680C800898E01 /* TransferIbftInquiryResponse.swift */,
+				524C7CC326368FD200898E01 /* TransferIbftExecResponse.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -2628,6 +2634,7 @@
 				C06ED63825D0F2DD00F68FC1 /* GenerateFingerPrintResponseModel.swift in Sources */,
 				064EBDB9256B04E20070A792 /* FormCompletionReferalCodeView.swift in Sources */,
 				522B8C3725E4E505003D17F1 /* BrokenKartuKuModel.swift in Sources */,
+				524C7CBF263680C800898E01 /* TransferIbftInquiryResponse.swift in Sources */,
 				5245F8BE253FE9FC002E8B53 /* BottomNavigationView.swift in Sources */,
 				52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */,
 				527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */,
@@ -2727,6 +2734,7 @@
 				52DA20852551069C00CC048A /* Statement.swift in Sources */,
 				526B6616254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift in Sources */,
 				52BF57DD2558E67900F009B5 /* CardTypeSavingView.swift in Sources */,
+				524C7CC426368FD200898E01 /* TransferIbftExecResponse.swift in Sources */,
 				525950232553E03000C8CA5D /* PhoneNumberVerificationForgotPasswordView.swift in Sources */,
 				52ADFE9C2557D99F00A1001F /* RegistrasiModel.swift in Sources */,
 				52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */,

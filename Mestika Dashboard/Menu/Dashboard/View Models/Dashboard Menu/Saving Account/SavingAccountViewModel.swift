@@ -10,6 +10,7 @@ import Foundation
 class SavingAccountViewModel : ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String = ""
+    @Published var errorCode: String = ""
     
     @Published var accounts = SavingAccountModel()
     
@@ -23,8 +24,9 @@ class SavingAccountViewModel : ObservableObject {
         
         DispatchQueue.main.async {
             self.isLoading = true
-            self.balanceAccount.removeAll()
         }
+        
+        self.balanceAccount.removeAll()
         
         SavingAccountServices.shared.getListAccountBalance(listSourceNumber: listSourceNumber) { result in
             
@@ -44,7 +46,11 @@ class SavingAccountViewModel : ObservableObject {
                 print("ERROR GET LIST BALANCE ACCOUNT-->")
                 
                 switch error {
+                case .custom(code: 401):
+                    self.errorCode = "401"
+                    self.errorMessage = "LOGGEDOUT"
                 case .custom(code: 500):
+                    self.errorCode = "500"
                     self.errorMessage = "Internal Server Error"
                 default:
                     self.errorMessage = "Internal Server Error"

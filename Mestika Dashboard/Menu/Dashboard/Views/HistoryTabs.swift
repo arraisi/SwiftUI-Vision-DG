@@ -9,6 +9,15 @@ import SwiftUI
 
 struct HistoryTabs: View {
     
+    @State private var timeLogout = 300
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State var showAlertTimeout: Bool = false
+    
+    @EnvironmentObject var appState: AppState
+    
+    @ObservedObject private var authVM = AuthViewModel()
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -45,6 +54,13 @@ struct HistoryTabs: View {
     @Binding var sourceNumber: String
     
     var body: some View {
+        
+        let tap = TapGesture()
+            .onEnded { _ in
+                self.timeLogout = 300
+                print("View tapped!")
+            }
+        
         ZStack {
             if filterShowed {
                 
@@ -72,7 +88,31 @@ struct HistoryTabs: View {
                 }
             }
             
-        }.onAppear {
+        }
+        .gesture(tap)
+        .onReceive(timer) { time in
+            print(self.timeLogout)
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
+            
+            if self.timeLogout < 1 {
+                showAlertTimeout = true
+            }
+        }
+        .alert(isPresented: $showAlertTimeout) {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
+                self.authVM.postLogout { success in
+                    if success {
+                        print("SUCCESS LOGOUT")
+                        DispatchQueue.main.async {
+                            self.appState.moveToWelcomeView = true
+                        }
+                    }
+                }
+            }))
+        }
+        .onAppear {
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
                     print(e.accountNumber)

@@ -15,6 +15,8 @@ struct TransferRtgsScreen: View {
     @State var selectedSourceNumber: String = ""
     @State var selectedBalance: String = ""
     
+    @State var isShowName: Bool = false
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -148,7 +150,21 @@ struct TransferRtgsScreen: View {
                             } else if (amount <= myCredit) {
                                 
                                 if (self.transferData.transactionType == "Online") {
-                                    self.showDialogConfirmation = true
+//                                    self.showDialogConfirmation = true
+                                    
+                                    self.transferData.destinationNumber = self.noRekeningCtrl
+                                    self.transferData.destinationName = self.destinationNameCtrl
+                                    self.transferData.typeDestination = self.destinationType
+                                    self.transferData.transactionType = self.transferType
+//
+                                    if (desc == "") {
+                                        self.transferData.notes = self.notesCtrl
+                                    }
+                                    
+                                    self.transferData.transactionDate = dateFormatter.string(from: self.date)
+                                    print("OKE")
+                                    self.isRouteTransaction = true
+                                    
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
                                     self.transferData.destinationName = self.destinationNameCtrl
@@ -180,6 +196,7 @@ struct TransferRtgsScreen: View {
                         })
                         .disabled(disableForm)
                         .background(disableForm ? Color.gray : Color(hex: "#232175"))
+//                        .background(Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                     }
@@ -311,15 +328,14 @@ struct TransferRtgsScreen: View {
                 
                 HStack {
                     Menu {
-                        ForEach(0..<self.referenceVM._listBank.count) { index in
+                        ForEach(0..<self.referenceVM._listBank.count, id: \.self) { index in
                             
                             Button(action: {
-                                self.bankSelector = self.referenceVM._listBank[index].bankName
-                                self.transferData.bankName = self.referenceVM._listBank[index].bankName
-                                self.transferData.combinationBankName = self.referenceVM._listBank[index].combinationName
-                                self.transferData.destinationBankCode = self.referenceVM._listBank[index].swiftCode
+                                self.bankSelector = self.referenceVM._listBank[index].name
+                                self.transferData.bankName = self.referenceVM._listBank[index].name
+                                self.transferData.destinationBankCode = self.referenceVM._listBank[index].code
                             }) {
-                                Text(self.referenceVM._listBank[index].bankName)
+                                Text(self.referenceVM._listBank[index].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -358,13 +374,18 @@ struct TransferRtgsScreen: View {
                 HStack {
                     TextField("Account".localized(language), text: self.$noRekeningCtrl, onEditingChanged: { changed in
                         self.transferData.destinationNumber = self.noRekeningCtrl
+                        inquiryTransfer()
                     })
                     .keyboardType(.numberPad)
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .padding()
                     .onReceive(noRekeningCtrl.publisher.collect()) {
-                        self.noRekeningCtrl = String($0.prefix(16))
+                        if (transferType == "Online") {
+                            self.noRekeningCtrl = String($0.prefix(11))
+                        } else {
+                            self.noRekeningCtrl = String($0.prefix(16))
+                        }
                     }
                 }
                 .background(Color(hex: "#F6F8FB"))
@@ -374,7 +395,21 @@ struct TransferRtgsScreen: View {
             }
             
             if transferType == "Online" {
-                EmptyView()
+                
+                if isShowName {
+                    HStack {
+                        Text(self.limitVM.destinationName)
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 25)
+                    .padding(.bottom, 10)
+                } else {
+                    EmptyView()
+                }
+                
             } else {
                 VStack {
                     HStack {
@@ -1072,8 +1107,17 @@ struct TransferRtgsScreen: View {
     // MARK: - FUNCTION DATA
     
     var disableForm: Bool {
-        if (self.destinationNameCtrl.isNotEmpty() && self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
-            return false
+        
+        if (self.transferType == "Online") {
+            print("Validation IBFT")
+            if (self.destinationNameCtrl.isNotEmpty() && self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language)) {
+                return false
+            }
+        } else {
+            print("Validation RTGS")
+            if (self.destinationNameCtrl.isNotEmpty() && self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
+                return false
+            }
         }
         return true
     }
@@ -1112,9 +1156,9 @@ struct TransferRtgsScreen: View {
             if success {
                 print("SUCCESS")
 //                self.bankSelector = self.referenceVM._listBank[0].bankName
-                self.transferData.bankName = self.referenceVM._listBank[0].bankName
-                self.transferData.destinationBankCode = self.referenceVM._listBank[0].swiftCode
-                self.transferData.combinationBankName = self.referenceVM._listBank[0].combinationName
+                self.transferData.bankName = self.referenceVM._listBank[0].name
+                self.transferData.destinationBankCode = self.referenceVM._listBank[0].code
+                self.transferData.combinationBankName = ""
                 print(self.referenceVM._listBank.count)
             }
             
@@ -1130,6 +1174,32 @@ struct TransferRtgsScreen: View {
             if success {
                 self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
                 self.limitTrx = self.limitVM.limitIbft
+            }
+        }
+    }
+    
+    // MARK: GET DESTINATION NAME
+    func inquiryTransfer() {
+        if transferData.destinationNumber.count == 11 {
+            self.isShowName = true
+            
+            self.limitVM.transferIbftInquiry(transferData: transferData) { success in
+                
+                DispatchQueue.main.async {
+                    if success {
+                        print("\nSUCCESS DESTINATION NAME : \(self.limitVM.destinationName)\n")
+                        self.destinationNameCtrl = self.limitVM.destinationName
+                        
+                        self.transferData.ref = self.limitVM.reffNumber
+                        self.transferData.destinationNumber = self.limitVM.destinationNumber
+                        self.transferData.destinationName = self.limitVM.destinationName
+                    }
+                    
+                    if !success {
+                        print("NOT SUCCESS")
+                        self.limitVM.destinationName = "Akun Tidak Ditemukan"
+                    }
+                }
             }
         }
     }

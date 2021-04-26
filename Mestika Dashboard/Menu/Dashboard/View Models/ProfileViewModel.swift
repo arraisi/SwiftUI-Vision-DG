@@ -44,6 +44,7 @@ class ProfileViewModel: ObservableObject {
     @Published var rw: String = ""
     
     @Published var errorMessage: String = ""
+    @Published var statusCode: String = ""
 }
 
 extension ProfileViewModel {
@@ -102,7 +103,11 @@ extension ProfileViewModel {
                 
                 switch error {
                 case .custom(code: 404):
+                    self.statusCode = "404"
                     self.errorMessage = "USER STATUS NOT FOUND"
+                case .custom(code: 401):
+                    self.statusCode = "401"
+                    self.errorMessage = "LOGEDOUT"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

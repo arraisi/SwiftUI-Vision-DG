@@ -10,6 +10,13 @@ import SDWebImageSwiftUI
 
 struct DashboardTabs: View {
     
+    @ObservedObject private var authVM = AuthViewModel()
+    
+    @State private var timeLogout = 300
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State var showAlertTimeout: Bool = false
+    
     @EnvironmentObject var appState: AppState
     
     @AppStorage("language")
@@ -68,6 +75,13 @@ struct DashboardTabs: View {
     @State var isRouteHistoryAcc: Bool = false
     
     var body: some View {
+        
+        let tap = TapGesture()
+            .onEnded { _ in
+                self.timeLogout = 300
+                print("View tapped!")
+            }
+        
         ScrollView(.vertical, showsIndicators: false, content: {
             
             GeometryReader { geometry in
@@ -110,7 +124,12 @@ struct DashboardTabs: View {
                             .isDetailLink(false)
                             
                             Button(action: {
-                                self.routingAccountDeposit = true
+                                
+                                if (self.balanceStatus == "D") {
+                                    
+                                } else {
+                                    self.routingAccountDeposit = true
+                                }
                             }, label: {
                                 Image("ic_notif_rekening")
                                     .resizable()// Fade Transition with duration
@@ -189,38 +208,76 @@ struct DashboardTabs: View {
                     .padding(.top, 30)
             }
         })
+        .gesture(tap)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .edgesIgnoringSafeArea(.top)
+        .onReceive(timer) { time in
+            print(self.timeLogout)
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
+
+            if self.timeLogout < 1 {
+                showAlertTimeout = true
+            }
+        }
         .onAppear {
             print("GET")
+            self.listSourceNumber.removeAll()
+            self.listTypeAccount.removeAll()
+            self.isHiddenInformationReStore = true
             self.isLoadingCard = true
             
             getUserInfo()
             getProfile()
             getListKartuKu()
+            getAccountBalance()
             
-            self.savingAccountVM.getAccounts { (success) in
-                self.isLoadingCard = false
-                self.savingAccountVM.accounts.forEach { e in
-                    print(e.accountNumber)
-                    self.listSourceNumber.append(e.accountNumber)
-                    self.listTypeAccount.append(e.accountType ?? "")
-                }
+            self.savingAccountVM.getAccounts { success in
                 
-                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
-                    
-                    if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
-                        print("ADA TYPE D")
-                        self.isHiddenInformationReStore = false
+                if success {
+                    self.isLoadingCard = false
+                    self.savingAccountVM.accounts.forEach { e in
+                        print(e.accountNumber)
+                        self.listSourceNumber.append(e.accountNumber)
+                        self.listTypeAccount.append(e.accountType ?? "")
                     }
                     
+                    self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+                        
+                        if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
+                            print("ADA TYPE D")
+                            self.isHiddenInformationReStore = false
+                        }
+                        
+                    }
                 }
                 
+                if !success {
+                    self.isLoadingCard = false
+                    if (self.savingAccountVM.errorCode == "401") {
+                        self.appState.moveToWelcomeView = true
+                    }
+                }
 
             }
         }
+        .alert(isPresented: $showAlertTimeout) {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
+                self.authVM.postLogout { success in
+                    if success {
+                        print("SUCCESS LOGOUT")
+                        DispatchQueue.main.async {
+                            self.appState.moveToWelcomeView = true
+                        }
+                    }
+                }
+            }))
+        }
+        
+        
     }
     
     // MARK: -USERNAME INFO VIEW
@@ -433,6 +490,10 @@ struct DashboardTabs: View {
             
             if !success {
                 self.isLoading = false
+                
+                if (self.profileVM.statusCode == "401") {
+                    self.appState.moveToWelcomeView = true
+                }
             }
         }
     }

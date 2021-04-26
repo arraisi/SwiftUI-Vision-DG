@@ -62,20 +62,27 @@ struct QrisScannerView: View {
     func handleScan(_ code: String) {
         print("\nCode : \(code)\n")
         self.qrisData.content = code
+        
+//        self.qrisData.merchantName = "Tokopedia"
+//        self.qrisData.merchantCity = "Jakarta Pusat"
+//        self.qrisData.transactionAmount = "25000"
+//        self.qrisData.transactionFee = "0"
+//
+//        self.qrisActive = true
         self.qrisVM.parseQris(data: qrisData) { success in
-            
+
             if success {
                 print(self.qrisVM.merchantName)
                 print(self.qrisVM.merchantCity)
-                
+
                 self.qrisData.merchantName = self.qrisVM.merchantName
                 self.qrisData.merchantCity = self.qrisVM.merchantCity
                 self.qrisData.transactionAmount = self.qrisVM.transactionAmount
                 self.qrisData.transactionFee = self.qrisVM.transactionFee
-                
+
                 self.qrisActive = true
             }
-            
+
         }
         
 //        self.isShowingScanner = false
