@@ -257,33 +257,45 @@ struct FormIdentitasDiriView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-//        .alert(isPresented: $showingAlert) {
-//            return Alert(
-//                title: Text("Apakah ingin membatalkan registrasi ?"),
-//                primaryButton: .default(Text("YA"), action: {
-//                    self.appState.moveToWelcomeView = true
-//                }),
-//                secondaryButton: .cancel(Text("Tidak")))
-//        }
-//        .gesture(DragGesture().onEnded({ value in
-//            if(value.startLocation.x < 20 &&
-//                value.translation.width > 50) {
-//                self.showingAlert = true
-//            }
-//        }))
+        //        .alert(isPresented: $showingAlert) {
+        //            return Alert(
+        //                title: Text("Apakah ingin membatalkan registrasi ?"),
+        //                primaryButton: .default(Text("YA"), action: {
+        //                    self.appState.moveToWelcomeView = true
+        //                }),
+        //                secondaryButton: .cancel(Text("Tidak")))
+        //        }
+        //        .gesture(DragGesture().onEnded({ value in
+        //            if(value.startLocation.x < 20 &&
+        //                value.translation.width > 50) {
+        //                self.showingAlert = true
+        //            }
+        //        }))
     }
     
     var camera: some View {
         ZStack {
             SUImagePickerView(sourceType: .camera, image: self.$imageSelfie, isPresented: self.$shouldPresentCamera, frontCamera: self.$formSelfie)
-            
-            Image("pattern_selfie")
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .opacity(0.5)
-                .offset(y: -(UIScreen.main.bounds.height * 0.12))
-            
+            ZStack{
+                Image("pattern_selfie")
+                    .renderingMode(.original)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .opacity(0.5)
+                    .offset(y: -(UIScreen.main.bounds.height * 0.185))
+                
+                VStack(alignment: .center){
+                    Spacer()
+                    HStack(alignment: .center) {
+                        Text("Please remove the attributes / accessories that are being worn on your face such as glasses, gloves, other accessories")
+                            .font(.system(size: 14))
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                .foregroundColor(.white)
+                .padding([.horizontal], 20)
+                .padding([.bottom], 140)
+            }
         }
     }
     
@@ -342,7 +354,7 @@ struct FormIdentitasDiriView: View {
                         self.registerData.fotoNPWP = imageNPWP!
                     }
                     
-                        
+                    
                 })
         }
     }

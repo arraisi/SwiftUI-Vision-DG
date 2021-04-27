@@ -32,7 +32,6 @@ struct SumberPendapatanLainnyaView: View {
     @State var selection: String?
     
     @State var sumberPendapatanLainIndex = 0
-    @State var isShowingKeluargaTerdekat = false
     
     let sumberPendapatanLainnyaList = ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"]
     
@@ -197,8 +196,8 @@ struct SumberPendapatanLainnyaView: View {
                                 .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                                 
                                 NavigationLink(
-                                    destination: KeluargaTerdekat().environmentObject(registerData),
-                                    tag: "keluargaTerdekat",
+                                    destination: VerificationAddressView().environmentObject(registerData),
+                                    tag: "VerificationAddress",
                                     selection: $selection,
                                     label: {EmptyView()})
                                 
@@ -212,7 +211,7 @@ struct SumberPendapatanLainnyaView: View {
                                 if (editMode == .inactive) {
                                     Button(action: {
                                         registerData.sumberPendapatanLainnyaId = self.selectedId
-                                        self.selection = "keluargaTerdekat"
+                                        self.selection = "VerificationAddress"
                                     }, label:{
                                         
                                         Text("Next".localized(language))

@@ -37,7 +37,7 @@ struct CardDamageAddressInputView: View {
     @State var messageResponse: String = ""
     
     var disableForm: Bool {
-        if cardData.addressInput.isEmpty || addressInput.isEmpty || addressRtRwInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
+        if cardData.addressInput.isEmpty || addressInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
             return true
         }
         
