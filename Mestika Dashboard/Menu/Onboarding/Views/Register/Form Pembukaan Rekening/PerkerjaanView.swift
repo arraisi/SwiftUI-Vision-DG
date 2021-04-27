@@ -158,6 +158,8 @@ struct PerkerjaanView: View {
                                                 print("pekerjaan id : \(registerData.pekerjaanId)")
                                                 
                                                 switch registerData.pekerjaanId {
+                                                case 3 :
+                                                    self.selection = "jabatanProfesi"
                                                 case 6 :
                                                     self.selection = "jabatanProfesi"
                                                 case 9:

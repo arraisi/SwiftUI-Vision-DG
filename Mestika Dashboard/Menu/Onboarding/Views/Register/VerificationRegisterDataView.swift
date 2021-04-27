@@ -537,17 +537,17 @@ struct VerificationRegisterDataView: View {
                         .padding(.bottom, 10)
                         .shadow(radius: 2)
                         
-                        VStack(alignment: .leading) {
-                            Group {
-                                InformasiKeluargaVerificationView()
-                                    .padding(.bottom, 20)
-                            }
-                        }
-                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(15)
-                        .padding(.bottom, 10)
-                        .shadow(radius: 2)
+//                        VStack(alignment: .leading) {
+//                            Group {
+//                                InformasiKeluargaVerificationView()
+//                                    .padding(.bottom, 20)
+//                            }
+//                        }
+//                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+//                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+//                        .cornerRadius(15)
+//                        .padding(.bottom, 10)
+//                        .shadow(radius: 2)
                         
                     }
                     .padding(.horizontal, 30)
