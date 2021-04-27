@@ -219,7 +219,7 @@ struct DashboardTabs: View {
                 self.timeLogout -= 1
             }
 
-            if self.timeLogout < 1 {
+            if self.timeLogout == 1 {
                 showAlertTimeout = true
             }
         }
