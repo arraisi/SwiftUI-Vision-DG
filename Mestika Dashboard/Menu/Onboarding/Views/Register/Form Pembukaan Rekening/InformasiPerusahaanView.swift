@@ -193,7 +193,7 @@ struct InformasiPerusahaanView: View {
                                     
                                     if isEditFromSummary {
                                         NavigationLink(
-                                            destination: VerificationRegisterDataView().environmentObject(registerData),
+                                            destination: RegisterSummaryView().environmentObject(registerData),
                                             isActive: $verificationViewActive,
                                             label: {
                                                 Button(action: {

@@ -140,11 +140,11 @@ struct EmailOTPRegisterNasabahView: View {
                     
                     VStack {
                         NavigationLink(
-                            destination: FormPilihJenisTabunganView(shouldPopToRootView: self.$shouldPopToRootView).environmentObject(registerData).environmentObject(productATMData),
+                            destination: FormPilihJenisTabunganView().environmentObject(registerData).environmentObject(productATMData),
                             isActive: self.$isOtpValid,
                             label: {
                                 EmptyView()
-                            }).isDetailLink(false)
+                            })
                         
                         Button(action: {
                             self.tryCount += 1

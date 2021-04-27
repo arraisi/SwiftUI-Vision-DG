@@ -41,8 +41,6 @@ struct FormPilihJenisTabunganView: View {
     @State var showingAlert: Bool = false
     @GestureState private var dragOffset = CGSize.zero
     
-    @Binding var shouldPopToRootView : Bool
-    
     @State var showingModal = false
     @State var showingReferralCodeModal = false
     @State var showingModalDetail = false
@@ -167,7 +165,7 @@ struct FormPilihJenisTabunganView: View {
                     EmptyView()
                 }
                 
-                NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: $backToSummary) {
+                NavigationLink(destination: RegisterSummaryView().environmentObject(registerData), isActive: $backToSummary) {
                     EmptyView()
                 }
                 
@@ -322,7 +320,7 @@ struct FormPilihJenisTabunganView: View {
 
 struct ChooseTypeSavingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormPilihJenisTabunganView(shouldPopToRootView: .constant(false)).environmentObject(RegistrasiModel())
+        FormPilihJenisTabunganView().environmentObject(RegistrasiModel())
             .environmentObject(AddProductATM())
     }
 }

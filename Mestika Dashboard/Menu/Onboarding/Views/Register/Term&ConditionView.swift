@@ -135,7 +135,7 @@ struct Term_ConditionView: View {
                             .padding(.bottom, 20)
                         }
                         
-                        NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData), isActive: self.$isShowDataVerification) {EmptyView()}
+                        NavigationLink(destination: RegisterSummaryView().environmentObject(registerData), isActive: self.$isShowDataVerification) {EmptyView()}
                         
                         Button(action: {
                             self.isShowDataVerification = true

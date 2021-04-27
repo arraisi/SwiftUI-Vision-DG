@@ -133,7 +133,7 @@ struct FormIndustriTempatBekerjaView: View {
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 25)
                                     } else {
-                                        NavigationLink(destination: InformasiPerusahaanView(editMode: self.editMode).environmentObject(registerData)) {
+                                        NavigationLink(destination: RegisterSummaryView().environmentObject(registerData)) {
                                             
                                             Text("Next".localized(language))
                                                 .foregroundColor(.white)

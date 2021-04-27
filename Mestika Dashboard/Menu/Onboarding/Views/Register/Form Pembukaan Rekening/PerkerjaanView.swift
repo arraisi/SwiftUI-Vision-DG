@@ -188,25 +188,7 @@ struct PerkerjaanView: View {
                                             .padding(.vertical, 25)
                                             
                                         } else {
-                                            Button(action: {
-                                                print("pekerjaan id : \(registerData.pekerjaanId)")
-                                                
-                                                switch registerData.pekerjaanId {
-                                                case 6 :
-                                                    self.selection = "jabatanProfesi"
-                                                case 9:
-                                                    self.selection = "industriTempatBekerja"
-                                                case 10:
-                                                    self.selection = "sumberPenyandangDana2"
-                                                case 11:
-                                                    self.selection = "sumberPenyandangDana2"
-                                                case 12:
-                                                    self.selection = "sumberPenyandangDana2"
-                                                default:
-                                                    self.selection = "informasiPerusahaan"
-                                                }
-                                                
-                                            }, label: {
+                                            NavigationLink(destination: RegisterSummaryView().environmentObject(registerData), label: {
                                                 Text("Next".localized(language))
                                                     .foregroundColor(.white)
                                                     .font(.custom("Montserrat-SemiBold", size: 14))
