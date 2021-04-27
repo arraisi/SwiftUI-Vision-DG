@@ -310,6 +310,17 @@
 		52EC00AE25E3B1370003ED71 /* KartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */; };
 		52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */; };
 		52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */; };
+		52FE9ABC2637CCD90089EBAF /* DestinationAccountBalancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */; };
+		52FE9AC12637DB0B0089EBAF /* FormMoveBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AC02637DB0B0089EBAF /* FormMoveBalanceView.swift */; };
+		52FE9AC62637E5570089EBAF /* MoveBalanceConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AC52637E5570089EBAF /* MoveBalanceConfirmationView.swift */; };
+		52FE9ACC2637E92B0089EBAF /* MoveBalancesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9ACB2637E92B0089EBAF /* MoveBalancesModel.swift */; };
+		52FE9AD12637F5F30089EBAF /* MoveBalancePinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AD02637F5F30089EBAF /* MoveBalancePinView.swift */; };
+		52FE9AD62637F7620089EBAF /* SuccessMoveBalancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AD52637F7620089EBAF /* SuccessMoveBalancesView.swift */; };
+		52FE9ADC2637FC350089EBAF /* DestinationAccountAddBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9ADB2637FC350089EBAF /* DestinationAccountAddBalanceView.swift */; };
+		52FE9AE12637FC5E0089EBAF /* FormAddBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AE02637FC5E0089EBAF /* FormAddBalanceView.swift */; };
+		52FE9AE62637FC6F0089EBAF /* AddBalanceConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AE52637FC6F0089EBAF /* AddBalanceConfirmationView.swift */; };
+		52FE9AEB2637FC800089EBAF /* AddBalancePinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AEA2637FC800089EBAF /* AddBalancePinView.swift */; };
+		52FE9AF02637FC920089EBAF /* SuccessAddBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AEF2637FC920089EBAF /* SuccessAddBalanceView.swift */; };
 		52FF49AB25F5C82900890AE6 /* LimitKartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF49AA25F5C82900890AE6 /* LimitKartuKuModel.swift */; };
 		52FF49B125F5CDCF00890AE6 /* CardLimitVerificationPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF49B025F5CDCF00890AE6 /* CardLimitVerificationPinView.swift */; };
 		52FF49B625F7635F00890AE6 /* MyCardDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF49B525F7635F00890AE6 /* MyCardDashboardView.swift */; };
@@ -767,6 +778,17 @@
 		52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuModel.swift; sourceTree = "<group>"; };
 		52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganModel.swift; sourceTree = "<group>"; };
 		52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTransactionResponse.swift; sourceTree = "<group>"; };
+		52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationAccountBalancesView.swift; sourceTree = "<group>"; };
+		52FE9AC02637DB0B0089EBAF /* FormMoveBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormMoveBalanceView.swift; sourceTree = "<group>"; };
+		52FE9AC52637E5570089EBAF /* MoveBalanceConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBalanceConfirmationView.swift; sourceTree = "<group>"; };
+		52FE9ACB2637E92B0089EBAF /* MoveBalancesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBalancesModel.swift; sourceTree = "<group>"; };
+		52FE9AD02637F5F30089EBAF /* MoveBalancePinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBalancePinView.swift; sourceTree = "<group>"; };
+		52FE9AD52637F7620089EBAF /* SuccessMoveBalancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessMoveBalancesView.swift; sourceTree = "<group>"; };
+		52FE9ADB2637FC350089EBAF /* DestinationAccountAddBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationAccountAddBalanceView.swift; sourceTree = "<group>"; };
+		52FE9AE02637FC5E0089EBAF /* FormAddBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormAddBalanceView.swift; sourceTree = "<group>"; };
+		52FE9AE52637FC6F0089EBAF /* AddBalanceConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBalanceConfirmationView.swift; sourceTree = "<group>"; };
+		52FE9AEA2637FC800089EBAF /* AddBalancePinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBalancePinView.swift; sourceTree = "<group>"; };
+		52FE9AEF2637FC920089EBAF /* SuccessAddBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAddBalanceView.swift; sourceTree = "<group>"; };
 		52FF49AA25F5C82900890AE6 /* LimitKartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitKartuKuModel.swift; sourceTree = "<group>"; };
 		52FF49B025F5CDCF00890AE6 /* CardLimitVerificationPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitVerificationPinView.swift; sourceTree = "<group>"; };
 		52FF49B525F7635F00890AE6 /* MyCardDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCardDashboardView.swift; sourceTree = "<group>"; };
@@ -1689,6 +1711,38 @@
 			path = Result;
 			sourceTree = "<group>";
 		};
+		52FE9ABA2637CC780089EBAF /* MoveBalances */ = {
+			isa = PBXGroup;
+			children = (
+				52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */,
+				52FE9AC02637DB0B0089EBAF /* FormMoveBalanceView.swift */,
+				52FE9AC52637E5570089EBAF /* MoveBalanceConfirmationView.swift */,
+				52FE9AD02637F5F30089EBAF /* MoveBalancePinView.swift */,
+				52FE9AD52637F7620089EBAF /* SuccessMoveBalancesView.swift */,
+			);
+			path = MoveBalances;
+			sourceTree = "<group>";
+		};
+		52FE9ACA2637E9140089EBAF /* MoveBalances */ = {
+			isa = PBXGroup;
+			children = (
+				52FE9ACB2637E92B0089EBAF /* MoveBalancesModel.swift */,
+			);
+			path = MoveBalances;
+			sourceTree = "<group>";
+		};
+		52FE9ADA2637FBF40089EBAF /* AddBalances */ = {
+			isa = PBXGroup;
+			children = (
+				52FE9ADB2637FC350089EBAF /* DestinationAccountAddBalanceView.swift */,
+				52FE9AE02637FC5E0089EBAF /* FormAddBalanceView.swift */,
+				52FE9AE52637FC6F0089EBAF /* AddBalanceConfirmationView.swift */,
+				52FE9AEA2637FC800089EBAF /* AddBalancePinView.swift */,
+				52FE9AEF2637FC920089EBAF /* SuccessAddBalanceView.swift */,
+			);
+			path = AddBalances;
+			sourceTree = "<group>";
+		};
 		52FF49AF25F5CDB600890AE6 /* LimitCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1803,6 +1857,7 @@
 		C01B849925FF211200F5BBD9 /* Dashboard Menu */ = {
 			isa = PBXGroup;
 			children = (
+				52FE9ACA2637E9140089EBAF /* MoveBalances */,
 				C01B849A25FF211A00F5BBD9 /* Saving Account */,
 			);
 			path = "Dashboard Menu";
@@ -2025,6 +2080,8 @@
 		C0733FBC25EE25000034689F /* Dashboard Menu */ = {
 			isa = PBXGroup;
 			children = (
+				52FE9ADA2637FBF40089EBAF /* AddBalances */,
+				52FE9ABA2637CC780089EBAF /* MoveBalances */,
 				5233700A26298FE100ED3E4F /* DepositAccount */,
 				C0733FBD25EE250A0034689F /* SavingAccount */,
 				52FF49B525F7635F00890AE6 /* MyCardDashboardView.swift */,
@@ -2465,6 +2522,7 @@
 				C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */,
 				527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */,
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
+				52FE9AC12637DB0B0089EBAF /* FormMoveBalanceView.swift in Sources */,
 				52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */,
 				528AE2D12595BB01003AFD73 /* AddressViewModel.swift in Sources */,
 				5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */,
@@ -2485,6 +2543,8 @@
 				52AE1A81255A425100B011B7 /* OtpService.swift in Sources */,
 				C01B84BF25FF37E600F5BBD9 /* ProductDetailSavingAccountModel.swift in Sources */,
 				52ADFF122557DCD700A1001F /* LabelTextField.swift in Sources */,
+				52FE9AEB2637FC800089EBAF /* AddBalancePinView.swift in Sources */,
+				52FE9AF02637FC920089EBAF /* SuccessAddBalanceView.swift in Sources */,
 				52C362A325D12DC0000374AA /* TransferRtgsValidationPin.swift in Sources */,
 				C0BFB51E2576375500676B95 /* Address.swift in Sources */,
 				529190C425D3C9A5005A4898 /* ReferenceService.swift in Sources */,
@@ -2492,6 +2552,7 @@
 				0658B5992563F8A2001B659D /* ListNotificationView.swift in Sources */,
 				C01B84B525FF2B1B00F5BBD9 /* SavingAccountModel.swift in Sources */,
 				52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */,
+				52FE9AC62637E5570089EBAF /* MoveBalanceConfirmationView.swift in Sources */,
 				52474D79254028CD0094B758 /* AccountTabs.swift in Sources */,
 				52ADFE992557D99F00A1001F /* DetailJenisATMModel.swift in Sources */,
 				52AE1A75255A3E7800B011B7 /* OtpViewModel.swift in Sources */,
@@ -2553,6 +2614,7 @@
 				C0619E2F2629AAB00053F326 /* QrCodeScannerView.swift in Sources */,
 				52ADFFA32557DFDC00A1001F /* Term&ConditionView.swift in Sources */,
 				52ADFFA62557DFDC00A1001F /* VerificationDataPersonalView.swift in Sources */,
+				52FE9AD62637F7620089EBAF /* SuccessMoveBalancesView.swift in Sources */,
 				C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */,
 				C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */,
 				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
@@ -2654,6 +2716,7 @@
 				C0AC4A5E25820CCD00848AC7 /* InformasiKeluargaVerificationView.swift in Sources */,
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
 				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
+				52FE9AD12637F5F30089EBAF /* MoveBalancePinView.swift in Sources */,
 				C0AD115A25DF7951003FF920 /* HistoryTransactionList.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
 				C0D274DC25EF2EAC00513C53 /* ConfirmationOfTransactionSavingAccountView.swift in Sources */,
@@ -2670,6 +2733,7 @@
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */,
+				52FE9AE62637FC6F0089EBAF /* AddBalanceConfirmationView.swift in Sources */,
 				5233700C26298FFB00ED3E4F /* DepositAccountView.swift in Sources */,
 				C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */,
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
@@ -2746,12 +2810,14 @@
 				52DA20992551156500CC048A /* FormInputOldPinScreen.swift in Sources */,
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
 				528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */,
+				52FE9ADC2637FC350089EBAF /* DestinationAccountAddBalanceView.swift in Sources */,
 				C00E80C025EF4FD3006A8335 /* SuccessOpenNewSavingAccountView.swift in Sources */,
 				C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */,
 				C0AD116025DF89D3003FF920 /* HistoryTransactionModel.swift in Sources */,
 				52468AC72541694F007518AE /* ListRekeningView.swift in Sources */,
 				52DA20B3255134B300CC048A /* FormInputResetNewPinScreen.swift in Sources */,
 				5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */,
+				52FE9ABC2637CCD90089EBAF /* DestinationAccountBalancesView.swift in Sources */,
 				52ADFF8B2557DFDC00A1001F /* FormPilihDesainATMView.swift in Sources */,
 				C010FADB260B1DDA0092EEDE /* SummaryQrisView.swift in Sources */,
 				522101B125C9213100C9566A /* TransferOnUsModel.swift in Sources */,
@@ -2788,6 +2854,7 @@
 				526A81652560B2B200D614CB /* FirstATMLoginView.swift in Sources */,
 				52474D68254028350094B758 /* FavoriteTabs.swift in Sources */,
 				524746232547E6BF001F43C5 /* LastFavoriteTransferScreen.swift in Sources */,
+				52FE9ACC2637E92B0089EBAF /* MoveBalancesModel.swift in Sources */,
 				526B6593254FBAF100C13C36 /* MySavings.swift in Sources */,
 				064EBDAE256ADEB20070A792 /* FormCompletionKartuATMView.swift in Sources */,
 				52468AF725418024007518AE /* VoucherView.swift in Sources */,
@@ -2810,6 +2877,7 @@
 				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */,
 				FA1B142D25AC66E50000152A /* SuccessCancelView.swift in Sources */,
 				52ADFEBC2557DA0700A1001F /* RecognizedText.swift in Sources */,
+				52FE9AE12637FC5E0089EBAF /* FormAddBalanceView.swift in Sources */,
 				524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,

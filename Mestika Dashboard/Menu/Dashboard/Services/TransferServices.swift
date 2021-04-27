@@ -162,7 +162,7 @@ class TransferServices {
                     completion(.success(transferResponse!))
                 }
                 
-                if (httpResponse.statusCode > 300) {
+                if (httpResponse.statusCode > 200) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }
@@ -316,9 +316,9 @@ class TransferServices {
             "description": transferData.notes,
             "flagWargaNegara": "W",
             "flagResidenceDebitur": "R",
-            "destinationBankMemberName": transferData.combinationBankName,
+            "destinationBankMemberName": transferData.bankName,
             "destinationBankName": transferData.bankName,
-            "destinationBankBranchName": "DAGO",
+            "destinationBankBranchName": transferData.bankName,
             "accountTo": transferData.destinationNumber,
             "addressBeneficiary1": transferData.addressOfDestination,
             "addressBeneficiary2": "BANDUNG",

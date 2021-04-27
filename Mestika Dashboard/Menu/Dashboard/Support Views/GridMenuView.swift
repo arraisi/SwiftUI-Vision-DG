@@ -15,12 +15,32 @@ struct GridMenuView: View {
     @Binding var sourceNumber: String
     
     @State private var savingAccountActive: Bool = false
+    @State private var moveBalancesActive: Bool = false
+    @State private var addBalancesActive: Bool = false
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false, content: {
             
-            NavigationLink(destination: SavingAccountView(), isActive: $savingAccountActive, label: {EmptyView()})
-                .isDetailLink(false)
+            NavigationLink(
+                destination: SavingAccountView(),
+                isActive: $savingAccountActive,
+                label: { EmptyView() }
+            )
+            .isDetailLink(false)
+            
+            NavigationLink(
+                destination: DestinationAccountBalancesView(),
+                isActive: $moveBalancesActive,
+                label: { EmptyView() }
+            )
+            .isDetailLink(false)
+            
+            NavigationLink(
+                destination: DestinationAccountAddBalanceView(),
+                isActive: $addBalancesActive,
+                label: { EmptyView() }
+            )
+            .isDetailLink(false)
             
             HStack {
                 
@@ -46,12 +66,16 @@ struct GridMenuView: View {
                     })
                     .shadow(color: Color.gray.opacity(0.3), radius: 2)
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        self.addBalancesActive = true
+                    }, label: {
                         Image("ic_menu_tambah_saldo")
                     })
                     .shadow(color: Color.gray.opacity(0.3), radius: 2)
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        self.moveBalancesActive = true
+                    }, label: {
                         Image("ic_menu_pindah_saldo")
                     })
                     .shadow(color: Color.gray.opacity(0.3), radius: 2)
@@ -101,6 +125,8 @@ struct GridMenuView: View {
                 print("Move to moveToDashboard: \(value)")
                 //                activateWelcomeView()
                 self.savingAccountActive = false
+                self.moveBalancesActive = false
+                self.addBalancesActive = false
                 self.appState.moveToDashboard = false
             }
         }

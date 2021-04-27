@@ -1197,6 +1197,7 @@ struct TransferRtgsScreen: View {
                     
                     if !success {
                         print("NOT SUCCESS")
+                        self.destinationNameCtrl = "Akun Tidak Ditemukan"
                         self.limitVM.destinationName = "Akun Tidak Ditemukan"
                     }
                 }

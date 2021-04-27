@@ -22,6 +22,8 @@ struct ListLastTransactionView: View {
     
     @State var isLoading: Bool = true
     
+    @State var showAlert: Bool = false
+    
     var body: some View {
         
         ZStack {
@@ -119,25 +121,46 @@ struct ListLastTransactionView: View {
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
         }
         .onAppear {
-            self.savingAccountVM.getAccounts { (success) in
+            self.savingAccountVM.getAccounts { success in
                 
-                self.savingAccountVM.accounts.forEach { e in
-                    
-                    if (e.accountType == "S") {
-                        self.listSourceNumber.append(e.accountNumber)
+                if success {
+                    self.savingAccountVM.accounts.forEach { e in
+                        
+                        if (e.accountType == "S") {
+                            self.listSourceNumber.append(e.accountNumber)
+                        }
+                        
                     }
                     
+                    if (self.listSourceNumber.count < 1) {
+                        
+                    } else {
+                        getList(source: self.listSourceNumber[0])
+                    }
                 }
                 
-                getList(source: self.listSourceNumber[0])
+                if !success {
+                    self.showAlert = true
+                }
+                
             }
+        }
+        .alert(isPresented: $showAlert) {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
+            }))
         }
     }
     
     func getList(source: String) {
-        self.favoritVM.getListLastTransaction(sourceNumber: source, completion: { result in
-            self.isLoading = false
-            print(result)
+        self.favoritVM.getListLastTransaction(sourceNumber: source, completion: { success in
+            if success {
+                self.isLoading = false
+            }
+            
+            if !success {
+                self.isLoading = false
+                self.showAlert = true
+            }
         })
     }
 }

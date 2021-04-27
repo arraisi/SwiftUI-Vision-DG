@@ -39,6 +39,8 @@ class FavoritViewModel : ObservableObject {
                 switch error {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
+                case .custom(code: 401):
+                    self.errorMessage = "401"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
