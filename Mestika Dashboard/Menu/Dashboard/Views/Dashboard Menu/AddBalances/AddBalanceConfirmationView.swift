@@ -45,7 +45,7 @@ struct AddBalanceConfirmationView: View {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Tambah Saldo", displayMode: .inline)
     }
     
     var formCard: some View {

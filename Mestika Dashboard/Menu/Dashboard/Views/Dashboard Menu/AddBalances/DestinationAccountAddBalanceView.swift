@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct DestinationAccountAddBalanceView: View {
     
@@ -17,6 +18,20 @@ struct DestinationAccountAddBalanceView: View {
         MoveBalanceCard(id: 2, typeTabungan: "Gold Saver", saldo: "100000", cardNo: "98391928391", color: "#D0C423"),
         MoveBalanceCard(id: 3, typeTabungan: "Silver Saver", saldo: "150000", cardNo: "98391928391", color: "#9B9B9B")
     ]
+    
+    // Local Variable
+    @State private var listSourceNumber: [String] = []
+    @State private var listTabunganName: [String] = []
+    @State private var listCardNo: [String] = []
+    @State private var listBalance: [String] = []
+    
+    // Bool
+    @State private var isLoading: Bool = false
+    @State private var isShowAlert: Bool = false
+    
+    // Alert Message
+    @State private var messageError: String = ""
+    @State private var statusError: String = ""
     
     // Routing
     @State var nextRouting: Bool = false
@@ -34,76 +49,179 @@ struct DestinationAccountAddBalanceView: View {
             // bg color
             Color(hex: "#F4F7FA")
             
-            ScrollView(.vertical, showsIndicators: false, content: {
+            VStack {
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                        .padding(.bottom, 10)
+                }
                 
-                // title text
-                VStack(alignment: .leading) {
-                    Text("Tambah Saldo dari")
-                        .font(.title)
-                        .fontWeight(.bold)
+                ScrollView(.vertical, showsIndicators: false, content: {
                     
-                    Text("Pilih asal tabungan yang akan ditambahkan ke saldo utama")
-                        .font(.subheadline)
-                }
-                .padding(.vertical, 20)
-                
-                // list account
-                ForEach(self._listAccount, id: \.self) { data in
-                    Button(action: {
+                    // title text
+                    VStack(alignment: .leading) {
+                        Text("Tambah Saldo")
+                            .font(.title)
+                            .fontWeight(.bold)
                         
-                        self.transactionData.cardNo = data.cardNo
-                        self.transactionData.destinationNumber = "123456"
-                        self.transactionData.transferType = "Tambah Saldo"
-                        self.transactionData.destinationName = "Rekening Utama"
-                        self.transactionData.sourceNumber = "123456"
-                        self.transactionData.sourceAccountName = data.typeTabungan
-                        
-                        self.nextRouting = true
-                        
-                    }, label: {
-                        VStack(alignment: .leading) {
-                            
-                            HStack {
-                                Spacer()
-                                Image("logo_m_mestika")
-                                    .resizable()
-                                    .frame(width: 30, height: 30, alignment: .center)
-                            }
-                            .padding(.trailing, 15)
-                            
-                            Text("\(data.typeTabungan)")
-                                .fontWeight(.semibold)
-                                .font(.system(size: 18))
-                                .padding(.bottom, 5)
-                            
-                            HStack(alignment: .top) {
-                                Text("Rp.")
-                                    .fontWeight(.bold)
+                        Text("Pilih asal tabungan yang akan ditambahkan ke saldo utama")
+                            .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(.vertical, 20)
+                    
+                    // list account
+                    
+                    if !self.listBalance.isEmpty {
+                        ForEach(0..<self.listSourceNumber.count, id: \.self) { index in
+                            Button(action: {
                                 
-                                Text("\(data.saldo.thousandSeparator())")
-                                    .fontWeight(.heavy)
-                                    .font(.system(size: 30))
-                            }
-                            .padding(.bottom, 5)
-                            
-                            Text("\(data.cardNo)")
-                                .font(.system(size: 15))
+                                self.transactionData.mainBalance = self.listBalance[index]
+                                self.transactionData.sourceNumber = self.listSourceNumber[index]
+                                self.transactionData.transferType = "Tambah Saldo"
+                                self.transactionData.sourceAccountName = self.listTabunganName[index]
+                                
+                                self.nextRouting = true
+                                
+                            }, label: {
+                                VStack(alignment: .leading) {
+                                    
+                                    HStack {
+                                        Spacer()
+                                        Image("logo_m_mestika")
+                                            .resizable()
+                                            .frame(width: 30, height: 30, alignment: .center)
+                                    }
+                                    .padding(.trailing, 15)
+                                    
+                                    Text("\(self.listTabunganName[index])")
+                                        .fontWeight(.semibold)
+                                        .font(.system(size: 18))
+                                        .padding(.bottom, 5)
+                                    
+                                    HStack(alignment: .top) {
+                                        Text("Rp.")
+                                            .fontWeight(.bold)
+                                        
+                                        Text("\(self.listBalance[index].thousandSeparator())")
+                                            .fontWeight(.heavy)
+                                            .font(.system(size: 30))
+                                    }
+                                    .padding(.bottom, 5)
+                                    
+                                    Text("\(self.listSourceNumber[index])")
+                                        .font(.system(size: 15))
+                                }
+                                .padding([.vertical, .leading], 15)
+                                .frame(width: UIScreen.main.bounds.width - 50, alignment: .leading)
+                                .background(Color(hex: "#2334D0"))
+                                .foregroundColor(.white)
+                                .cornerRadius(15)
+                            })
                         }
-                        .padding([.vertical, .leading], 15)
-                        .frame(width: UIScreen.main.bounds.width - 50, alignment: .leading)
-                        .background(Color(hex: "\(data.color)"))
-                        .foregroundColor(.white)
-                        .cornerRadius(15)
-                    })
-                }
-            })
-            .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
+                    }
+                })
+                .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
+            }
         }
         .onAppear {
             self.nextRouting = false
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarTitle("Tambah Saldo", displayMode: .inline)
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("\(self.statusError)"),
+                message: Text("\(self.messageError)"),
+                dismissButton: .default(Text("OK"))
+            )
+        }
+        .onAppear {
+            self.listSourceNumber.removeAll()
+            self.listTabunganName.removeAll()
+            self.listBalance.removeAll()
+            self.listCardNo.removeAll()
+            getMainAccount()
+        }
+    }
+    
+    // func get balance main account
+    @ObservedObject var profileVM = ProfileViewModel()
+    func getMainAccount() {
+        self.isLoading = true
+        
+        self.profileVM.getProfile { success in
+            DispatchQueue.main.async {
+                if success {
+                    self.transactionData.destinationNumber = self.profileVM.accountNumber
+                    self.transactionData.destinationName = "Rekening Utama"
+                    self.transactionData.cardNo = self.profileVM.cardNo
+                    
+                    // Get List
+                    getListAccount()
+                }
+                
+                if !success {
+                    self.isLoading = false
+                    
+                    self.isShowAlert = true
+                    self.statusError = self.profileVM.statusCode
+                    self.messageError = "Cannot Get Main Account Balance"
+                }
+            }
+        }
+    }
+    
+    // func get list account
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    func getListAccount() {
+        self.savingAccountVM.getAccounts { success in
+            
+            DispatchQueue.main.async {
+                if success {
+                    self.savingAccountVM.accounts.forEach { a in
+                        
+                        if (a.accountType == "S") {
+                            self.listSourceNumber.append(a.accountNumber)
+                            self.listTabunganName.append(a.productName ?? "No Name")
+                        }
+                    }
+                    
+                    self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { success in
+                        
+                        DispatchQueue.main.async {
+                            if success {
+                                
+                                self.isLoading = false
+                                self.savingAccountVM.balanceAccount.forEach { b in
+                                    self.listBalance.append(b.balance ?? "0")
+                                }
+                            }
+                            
+                            if !success {
+                                self.isLoading = false
+                                
+                                self.isShowAlert = true
+                                self.statusError = "500"
+                                self.messageError = "Failed Parse Balance"
+                            }
+                        }
+                        
+                    }
+                }
+                
+                if !success {
+                    self.isLoading = false
+                    
+                    self.isShowAlert = true
+                    self.statusError = "500"
+                    self.messageError = "Failed Parse Account"
+                }
+            }
+            
+        }
     }
 }
 
