@@ -7,6 +7,7 @@
 
 import LocalAuthentication
 import SwiftUI
+import Indicators
 
 struct LoginScreen: View {
     
@@ -36,6 +37,7 @@ struct LoginScreen: View {
     
     @State var routeNewPassword: Bool = false
     
+    @State var isLoading: Bool = false
     
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -65,6 +67,13 @@ struct LoginScreen: View {
             VStack {
                 
                 AppBarLogo(light: false, onCancel: {})
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
                 
                 Text("LOGIN APPS".localized(language))
                     .font(.title2)
@@ -229,17 +238,21 @@ struct LoginScreen: View {
     
     // MARK: - LOGIN AUTH
     func login() {
+        self.isLoading = true
         
         if self.isNewDeviceLogin {
             print("LOGIN NEW DEVICE")
             authVM.postLoginNewDevice(password: self.passwordCtrl, phoneNumber: self.phoneNumber) { success in
                 saveDataNewDeviceToCoreData()
                 if success {
+                    self.isLoading = false
                     print("LOGIN SUCCESS")
                     self.isActiveRoute = true
                 }
                 
                 if !success {
+                    self.isLoading = false
+                    
                     if (self.authVM.errorCode == "206") {
                         self.routeNewPassword = true
                     } else if (self.authVM.errorCode == "401") {
@@ -256,11 +269,14 @@ struct LoginScreen: View {
             authVM.postLogin(password: self.passwordCtrl, phoneNumber: "", fingerCode: "") { success in
                 
                 if success {
+                    self.isLoading = false
+                    
                     print("LOGIN SUCCESS")
                     self.isActiveRoute = true
                 }
                 
                 if !success {
+                    self.isLoading = false
                     
                     if (self.authVM.errorCode == "206") {
                         self.routeNewPassword = true

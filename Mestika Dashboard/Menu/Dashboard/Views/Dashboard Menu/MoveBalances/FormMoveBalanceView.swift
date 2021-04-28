@@ -256,7 +256,7 @@ struct FormMoveBalanceView: View {
             }
         }
         .onAppear {
-            self.transactionData.mainBalance = self.saldoAktif
+            self.saldoAktif = self.transactionData.mainBalance
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()

@@ -78,7 +78,7 @@ struct AddBalancePinView: View {
                     self.wrongPin = false
                 }, onCommit: {
                     self.transactionData.pin = pin
-                    self.success = true
+                    submitData()
                 })
             }
         }
@@ -89,6 +89,33 @@ struct AddBalancePinView: View {
                 message: Text("\(self.messageError)"),
                 dismissButton: .default(Text("OK".localized(language))))
         }
+    }
+    
+    // func submit data
+    @ObservedObject var transferVM = TransferViewModel()
+    func submitData() {
+        self.isLoading = true
+        self.transferVM.moveBalance(transferData: transactionData) { success in
+            DispatchQueue.main.async {
+                if success {
+                    self.isLoading = false
+                    self.success = true
+                    self.transactionData.trxDateResp = self.transferVM.transactionDate
+                }
+                
+                if !success {
+                    self.statusError = self.transferVM.code
+                    self.messageError = self.transferVM.message
+                    self.isLoading = false
+                    self.showingAlert = true
+                    resetField()
+                }
+            }
+        }
+    }
+    
+    private func resetField() {
+        self.pin = "" /// return to empty pin
     }
 }
 

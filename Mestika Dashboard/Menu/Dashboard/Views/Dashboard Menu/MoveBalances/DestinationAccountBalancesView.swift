@@ -68,18 +68,19 @@ struct DestinationAccountBalancesView: View {
                     
                     // title text
                     VStack(alignment: .leading) {
-                        Text("Pindah Saldo ke")
+                        Text("Pindah Saldo")
                             .font(.title)
                             .fontWeight(.bold)
                         
                         Text("Silahkan pilih tabungan tujuan pemindahan saldo dari rekening utama")
                             .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     .padding(.vertical, 20)
                     
                     // list account
                     
-                    if !self.listSourceNumber.isEmpty {
+                    if !self.listBalance.isEmpty {
                         ForEach(0..<self.listSourceNumber.count, id: \.self) { index in
                             Button(action: {
                                 
@@ -126,6 +127,10 @@ struct DestinationAccountBalancesView: View {
                                 .cornerRadius(15)
                             })
                         }
+                    } else {
+                        ShimmerView()
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 200)
+                            .cornerRadius(15)
                     }
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
@@ -141,21 +146,22 @@ struct DestinationAccountBalancesView: View {
             )
         }
         .onAppear {
-            getMainAccount()
+            self.listSourceNumber.removeAll()
+            self.listTabunganName.removeAll()
+            self.listBalance.removeAll()
+            self.listCardNo.removeAll()
+            getAccountBalance()
         }
     }
     
     // func get balance main account
     @ObservedObject var profileVM = ProfileViewModel()
     func getMainAccount() {
-        self.isLoading = true
-        
         self.profileVM.getProfile { success in
             DispatchQueue.main.async {
                 if success {
                     self.transaksiData.sourceNumber = self.profileVM.accountNumber
                     self.transaksiData.cardNo = self.profileVM.cardNo
-                    self.transaksiData.mainBalance = self.profileVM.balance
                     
                     // Get List
                     getListAccount()
@@ -166,8 +172,29 @@ struct DestinationAccountBalancesView: View {
                     
                     self.isShowAlert = true
                     self.statusError = self.profileVM.statusCode
-                    self.messageError = "Cannot Get Main Account Balance"
+                    self.messageError = "Cannot Get Main Account"
                 }
+            }
+        }
+    }
+    
+    // func get balance
+    func getAccountBalance() {
+        self.isLoading = true
+        
+        self.profileVM.getAccountBalance { success in
+            if success {
+                self.transaksiData.mainBalance = self.profileVM.balance
+                
+                getMainAccount()
+            }
+            
+            if !success {
+                self.isLoading = false
+                
+                self.isShowAlert = true
+                self.statusError = "500"
+                self.messageError = "Cannot Get Main Account Balance"
             }
         }
     }

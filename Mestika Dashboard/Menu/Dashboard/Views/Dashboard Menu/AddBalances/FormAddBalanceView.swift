@@ -17,7 +17,7 @@ struct FormAddBalanceView: View {
     @State private var frekuensiSelectedCtrl = "Select Transaction Frekuensi"
     @State private var notesCtrl: String = ""
     
-    @State private var saldoAktif: String = "400000"
+    @State private var saldoAktif: String = "0"
     @State private var amountDbl: Double = 0
     
     // Variable List
@@ -254,6 +254,9 @@ struct FormAddBalanceView: View {
                 .cornerRadius(12)
                 .padding(.horizontal)
             }
+        }
+        .onAppear {
+            self.saldoAktif = self.transactionData.mainBalance
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
