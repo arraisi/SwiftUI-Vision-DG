@@ -87,4 +87,54 @@ class HistoryTransactionServices {
             
         }.resume()
     }
+    
+    // MARK: - GET LIST FAVORITE
+    func findAll(completion: @escaping(Result<HistoryModel, ErrorResult>) -> Void) {
+        
+        // MARK: URL
+        guard let url = URL.urlGetAllHistory() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // MARK: TASK
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                print("\n\nFIND ALL HISTORY SERVICE RESULST : \(httpResponse.statusCode)")
+                
+                guard let data = data, error == nil else {
+                    return completion(Result.failure(ErrorResult.network(string: "NO DATA")))
+                }
+                
+                if (httpResponse.statusCode == 200) {
+                    
+                    let history = try? JSONDecoder().decode(HistoryModel.self, from: data)
+                    
+                    if let _history = history {
+                        //                        print(_history)
+                        completion(.success(_history))
+                    }
+                    
+                } else {
+                    // if we're still here it means there was a problem
+                    print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+            
+        }.resume()
+    }
 }

@@ -247,7 +247,6 @@
 		52ADFFA42557DFDC00A1001F /* VerificationPINView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */; };
 		52ADFFA62557DFDC00A1001F /* VerificationDataPersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF7E2557DFDB00A1001F /* VerificationDataPersonalView.swift */; };
 		52ADFFA72557DFDC00A1001F /* VerificationAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */; };
-		52ADFFA82557DFDC00A1001F /* VerificationRegisterDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */; };
 		52ADFFA92557DFDC00A1001F /* IncomingVideoCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */; };
 		52ADFFAA2557DFDC00A1001F /* NoAtmOrRekeningVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF822557DFDB00A1001F /* NoAtmOrRekeningVerificationView.swift */; };
 		52ADFFAB2557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFF832557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift */; };
@@ -443,6 +442,8 @@
 		C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */; };
 		C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB654C255E4D81009ADFFE /* DbViewModel.swift */; };
 		C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB90D22553D7E2004DBCF5 /* CardView.swift */; };
+		C0F1F8DF263961A200F86167 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1F8DE263961A200F86167 /* HistoryView.swift */; };
+		C0F1F8E4263961E900F86167 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1F8E3263961E900F86167 /* HistoryModel.swift */; };
 		C0FBE56026384E180027A9DB /* RegisterSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FBE55F26384E180027A9DB /* RegisterSummaryView.swift */; };
 		C0FBE56626384EEC0027A9DB /* IdentityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FBE56526384EEC0027A9DB /* IdentityView.swift */; };
 		C0FBE56B26384F6C0027A9DB /* IdentityPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FBE56A26384F6C0027A9DB /* IdentityPictureView.swift */; };
@@ -720,7 +721,6 @@
 		52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationPINView.swift; sourceTree = "<group>"; };
 		52ADFF7E2557DFDB00A1001F /* VerificationDataPersonalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationDataPersonalView.swift; sourceTree = "<group>"; };
 		52ADFF7F2557DFDB00A1001F /* VerificationAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationAddressView.swift; sourceTree = "<group>"; };
-		52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationRegisterDataView.swift; sourceTree = "<group>"; };
 		52ADFF812557DFDB00A1001F /* IncomingVideoCallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingVideoCallView.swift; sourceTree = "<group>"; };
 		52ADFF822557DFDB00A1001F /* NoAtmOrRekeningVerificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAtmOrRekeningVerificationView.swift; sourceTree = "<group>"; };
 		52ADFF832557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormOTPVerificationRegisterNasabahView.swift; sourceTree = "<group>"; };
@@ -921,6 +921,8 @@
 		C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormNewPinAtmView.swift; sourceTree = "<group>"; };
 		C0EB654C255E4D81009ADFFE /* DbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbViewModel.swift; sourceTree = "<group>"; };
 		C0EB90D22553D7E2004DBCF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		C0F1F8DE263961A200F86167 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		C0F1F8E3263961E900F86167 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		C0FBE55F26384E180027A9DB /* RegisterSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSummaryView.swift; sourceTree = "<group>"; };
 		C0FBE56526384EEC0027A9DB /* IdentityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityView.swift; sourceTree = "<group>"; };
 		C0FBE56A26384F6C0027A9DB /* IdentityPictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityPictureView.swift; sourceTree = "<group>"; };
@@ -1805,7 +1807,6 @@
 				52BF57CE2558E34100F009B5 /* FormPilihJenisTabunganView.swift */,
 				C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */,
 				52ADFF7B2557DFDB00A1001F /* Term&ConditionView.swift */,
-				52ADFF802557DFDB00A1001F /* VerificationRegisterDataView.swift */,
 				52ADFF7C2557DFDB00A1001F /* VerificationPINView.swift */,
 				52ADFF7A2557DFDB00A1001F /* SuccessRegisterView.swift */,
 				C0E6C8FA255F87BB00A79237 /* FormPilihJenisATMView.swift */,
@@ -2023,6 +2024,7 @@
 				C052A07C2631558400DC90C6 /* InboxView.swift */,
 				C037234B26311F0900BA2B43 /* PesanView.swift */,
 				C052A086263277F800DC90C6 /* PemberitahuanView.swift */,
+				C0F1F8DE263961A200F86167 /* HistoryView.swift */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -2032,6 +2034,7 @@
 			children = (
 				C03723562631239E00BA2B43 /* PesanModel.swift */,
 				C052A08E2632786C00DC90C6 /* PemberitahuanModel.swift */,
+				C0F1F8E3263961E900F86167 /* HistoryModel.swift */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -2566,6 +2569,7 @@
 				52DACF8725ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
 				065DF51E25765ABE00255743 /* ATMDesignModel.swift in Sources */,
+				C0F1F8E4263961E900F86167 /* HistoryModel.swift in Sources */,
 				52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */,
 				0AF48AD825778C9C0037942D /* Numeric+Extensions.swift in Sources */,
 				52ADFF8E2557DFDC00A1001F /* BesarPerkiraanPenarikanView.swift in Sources */,
@@ -2736,7 +2740,6 @@
 				527E312A25661644004FF5ED /* MobileVersionViewModel.swift in Sources */,
 				52ADFF9A2557DFDC00A1001F /* SumberDanaView.swift in Sources */,
 				C018014725D4E47F00766E41 /* FavoritService.swift in Sources */,
-				52ADFFA82557DFDC00A1001F /* VerificationRegisterDataView.swift in Sources */,
 				C0A4F9AC25529A9700566A11 /* ArrowDownShape.swift in Sources */,
 				526B6602254FF9FC00C13C36 /* StatementScreen.swift in Sources */,
 				52ADFE952557D99F00A1001F /* MasterData.swift in Sources */,
@@ -2810,6 +2813,7 @@
 				C0E6C91A255F934D00A79237 /* DetailLimitKartuAtmView.swift in Sources */,
 				5245F88C253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld in Sources */,
 				52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */,
+				C0F1F8DF263961A200F86167 /* HistoryView.swift in Sources */,
 				52C362A825D12DD8000374AA /* TransferRtgsSuccess.swift in Sources */,
 				C043CF9925CD1F6600328C91 /* FormChangePasswordView.swift in Sources */,
 				C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */,
