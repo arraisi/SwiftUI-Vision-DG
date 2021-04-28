@@ -54,7 +54,7 @@ struct FormAddBalanceView: View {
                                 .foregroundColor(Color(hex: "#8790CD"))
                                 .padding(.bottom, 2)
                             
-                            Text("\(self.transactionData.destinationName)")
+                            Text("\(self.transactionData.sourceAccountName)")
                                 .fontWeight(.bold)
                         }
                         
@@ -66,7 +66,7 @@ struct FormAddBalanceView: View {
                                 .foregroundColor(Color(hex: "#8790CD"))
                                 .padding(.bottom, 2)
                             
-                            Text("Rekening Utama")
+                            Text("\(self.transactionData.destinationName)")
                                 .fontWeight(.bold)
                         }
                     }
@@ -253,7 +253,7 @@ struct FormAddBalanceView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .navigationBarTitle("Tambah Saldo", displayMode: .inline)
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var selectedDate: Binding<Date> {
@@ -290,7 +290,7 @@ struct FormAddBalanceView: View {
     }
     
     var disableForm: Bool {
-        if (amountCtrl.isNotEmpty() || frekuensiSelectedCtrl != "Select Transaction Frekuensi") {
+        if (amountCtrl.isNotEmpty() && frekuensiSelectedCtrl != "Select Transaction Frekuensi") {
             return false
         }
         return true

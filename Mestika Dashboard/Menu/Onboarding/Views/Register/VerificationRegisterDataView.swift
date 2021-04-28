@@ -727,12 +727,16 @@ struct VerificationRegisterDataView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                    Text("Gross Income".localized(language))
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.leading)
-                        .padding(.horizontal, 20)
+                    HStack {
+                        Text("Gross Income".localized(language))
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.leading)
+                            .padding(.horizontal, 20)
+                        
+                        Spacer()
+                    }
                     
                     HStack {
                         

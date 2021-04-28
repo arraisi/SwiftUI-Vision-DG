@@ -82,7 +82,7 @@ struct AddBalancePinView: View {
                 })
             }
         }
-        .navigationBarTitle("Tambah Saldo".localized(language), displayMode: .inline)
+        .navigationBarTitleDisplayMode(.inline)
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("\(self.statusError)"),

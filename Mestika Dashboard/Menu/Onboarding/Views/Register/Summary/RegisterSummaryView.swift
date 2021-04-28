@@ -189,12 +189,17 @@ struct RegisterSummaryView: View {
                             }
                             
                             if appState.nasabahIsExisting || (!appState.nasabahIsExisting && ![10, 11, 12].contains(registerData.pekerjaanId))  {
-                                Text("Gross Income".localized(language))
-                                    .font(.caption)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.gray)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.horizontal, 20)
+
+                                HStack {
+                                    Text("Gross Income".localized(language))
+                                        .font(.caption)
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.leading)
+                                        .padding(.horizontal, 20)
+                                    
+                                    Spacer()
+                                }
                                 
                                 HStack {
                                     
@@ -288,6 +293,16 @@ struct RegisterSummaryView: View {
                 }
                 .background(Color.white)
 
+            }
+            
+            if self.registerData.hasNoNpwp && self.registerData.npwp == "" {
+                ZStack {
+                    ModalOverlay(tapAction: {})
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    popUpNpwp()
+                }
+                .transition(.asymmetric(insertion: .opacity, removal: .fade))
             }
         }
         .edgesIgnoringSafeArea(.all)

@@ -391,7 +391,6 @@ struct InformasiPerusahaanView: View {
                                 Text(bidangUsaha[i].nama)
 //                                    .font(.custom("Montserrat-Regular", size: 12))
                                     .fixedSize(horizontal: false, vertical: true)
-                                    .lineLimit(2)
                             }
                         }
                     } label: {

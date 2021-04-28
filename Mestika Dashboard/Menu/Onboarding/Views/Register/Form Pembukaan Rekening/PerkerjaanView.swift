@@ -151,56 +151,89 @@ struct PerkerjaanView: View {
                                             selection: $selection,
                                             label: {EmptyView()})
                                         
+                                        Button(action: {
+                                            print("pekerjaan id : \(registerData.pekerjaanId)")
+                                            
+                                            switch registerData.pekerjaanId {
+                                            case 3 :
+                                                self.selection = "jabatanProfesi"
+                                            case 6 :
+                                                self.selection = "jabatanProfesi"
+                                            case 9:
+                                                self.selection = "industriTempatBekerja"
+                                            case 10:
+                                                self.selection = "sumberPenyandangDana2"
+                                            case 11:
+                                                self.selection = "sumberPenyandangDana2"
+                                            case 12:
+                                                self.selection = "sumberPenyandangDana2"
+                                            default:
+                                                self.selection = "informasiPerusahaan"
+                                            }
+                                            
+                                        }, label: {
+                                            Text("Next".localized(language))
+                                                .foregroundColor(.white)
+                                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                                .frame(maxWidth: .infinity, maxHeight: 40)
+                                        })
+                                        .disabled(registerData.pekerjaanId == 0)
+                                        .frame(height: 50)
+                                        .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                        .cornerRadius(12)
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 25)
+                                        
                                         // Button
-                                        if (editMode == .inactive) {
-                                            
-                                            Button(action: {
-                                                print("pekerjaan id : \(registerData.pekerjaanId)")
-                                                
-                                                switch registerData.pekerjaanId {
-                                                case 3 :
-                                                    self.selection = "jabatanProfesi"
-                                                case 6 :
-                                                    self.selection = "jabatanProfesi"
-                                                case 9:
-                                                    self.selection = "industriTempatBekerja"
-                                                case 10:
-                                                    self.selection = "sumberPenyandangDana2"
-                                                case 11:
-                                                    self.selection = "sumberPenyandangDana2"
-                                                case 12:
-                                                    self.selection = "sumberPenyandangDana2"
-                                                default:
-                                                    self.selection = "informasiPerusahaan"
-                                                }
-                                                
-                                            }, label: {
-                                                Text("Next".localized(language))
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                                    .frame(maxWidth: .infinity, maxHeight: 40)
-                                            })
-                                            .disabled(registerData.pekerjaanId == 0)
-                                            .frame(height: 50)
-                                            .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                            .cornerRadius(12)
-                                            .padding(.horizontal, 20)
-                                            .padding(.vertical, 25)
-                                            
-                                        } else {
-                                            NavigationLink(destination: RegisterSummaryView().environmentObject(registerData), label: {
-                                                Text("Next".localized(language))
-                                                    .foregroundColor(.white)
-                                                    .font(.custom("Montserrat-SemiBold", size: 14))
-                                                    .frame(maxWidth: .infinity, maxHeight: 40)
-                                            })
-                                            .disabled(registerData.pekerjaanId == 0)
-                                            .frame(height: 50)
-                                            .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
-                                            .cornerRadius(12)
-                                            .padding(.horizontal, 20)
-                                            .padding(.vertical, 25)
-                                        }
+//                                        if (editMode == .inactive) {
+//
+//                                            Button(action: {
+//                                                print("pekerjaan id : \(registerData.pekerjaanId)")
+//
+//                                                switch registerData.pekerjaanId {
+//                                                case 3 :
+//                                                    self.selection = "jabatanProfesi"
+//                                                case 6 :
+//                                                    self.selection = "jabatanProfesi"
+//                                                case 9:
+//                                                    self.selection = "industriTempatBekerja"
+//                                                case 10:
+//                                                    self.selection = "sumberPenyandangDana2"
+//                                                case 11:
+//                                                    self.selection = "sumberPenyandangDana2"
+//                                                case 12:
+//                                                    self.selection = "sumberPenyandangDana2"
+//                                                default:
+//                                                    self.selection = "informasiPerusahaan"
+//                                                }
+//
+//                                            }, label: {
+//                                                Text("Next".localized(language))
+//                                                    .foregroundColor(.white)
+//                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+//                                            })
+//                                            .disabled(registerData.pekerjaanId == 0)
+//                                            .frame(height: 50)
+//                                            .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+//                                            .cornerRadius(12)
+//                                            .padding(.horizontal, 20)
+//                                            .padding(.vertical, 25)
+//
+//                                        } else {
+//                                            NavigationLink(destination: RegisterSummaryView().environmentObject(registerData), label: {
+//                                                Text("Next".localized(language))
+//                                                    .foregroundColor(.white)
+//                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+//                                                    .frame(maxWidth: .infinity, maxHeight: 40)
+//                                            })
+//                                            .disabled(registerData.pekerjaanId == 0)
+//                                            .frame(height: 50)
+//                                            .background(registerData.pekerjaanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+//                                            .cornerRadius(12)
+//                                            .padding(.horizontal, 20)
+//                                            .padding(.vertical, 25)
+//                                        }
                                         
                                     }
                                     .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))

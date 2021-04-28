@@ -40,14 +40,14 @@ struct PasswordView: View {
             return false
         }
         
-        let emailFormat = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$"
+        let emailFormat = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$"
         
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluate(with: string)
     }
     
     var disableForm: Bool {
-        password.isEmpty || isPasswordValid || confirmationPassword.isEmpty || password.count < 6 || confirmationPassword.count < 6
+        password.isEmpty || !isPasswordValid || confirmationPassword.isEmpty || password.count < 6 || confirmationPassword.count < 6
     }
     
     var body: some View {
