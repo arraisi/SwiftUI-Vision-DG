@@ -6,12 +6,15 @@
 import Foundation
 
 // MARK: - ProfileModel
+import Foundation
+
+// MARK: - ProfileResponseModel
 struct ProfileResponseModel: Codable {
     let id: String
     let personal: Personal
     let status: String
     let products: [Product]
-    let chipProfileDto: [ChipProfileDto]?
+    let chipProfileDto: [ChipProfileDto]
     let profileResponseModelID: ID
 
     enum CodingKeys: String, CodingKey {
@@ -23,14 +26,14 @@ struct ProfileResponseModel: Codable {
 
 // MARK: - ChipProfileDto
 struct ChipProfileDto: Codable {
-    let maxIbftPerTrans, limitOnUs, limitWd, limitPayment, limitPurchase, limitIbft: String?
-    let cardFlag, kodepos, provinsi, kabupatenKota: String
-    let kecamatan, kelurahan, rw, rt: String
-    let postalAddress, accountNumber, nameOnCard: String
-    let cardNo: String?
-    let cardDesign, classCode, nik, id: String
-    let imageNameAlias, balance: String
-    let status: String?
+    let maxIbftPerTrans, limitOnUs, limitWd, limitPayment: String
+    let limitPurchase, limitIbft, cardFlag, kodepos: String
+    let provinsi, kabupatenKota, kecamatan, kelurahan: String
+    let rw, rt, postalAddress, accountNumber: String
+    let nameOnCard, cardNo: String
+    let cardDesign: String
+    let classCode, nik, id, imageNameAlias: String
+    let balance, status: String?
     let mainCard: String
 }
 
@@ -46,7 +49,8 @@ struct Personal: Codable {
 // MARK: - Product
 struct Product: Codable {
     let planCode: String
-    let accountNo, productName: String?
+    let accountNo: String?
+    let productName: String
 }
 
 // MARK: - ID

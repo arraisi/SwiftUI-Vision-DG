@@ -213,16 +213,16 @@ struct DashboardTabs: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .edgesIgnoringSafeArea(.top)
-        .onReceive(timer) { time in
-            print(self.timeLogout)
-            if self.timeLogout > 0 {
-                self.timeLogout -= 1
-            }
-
-            if self.timeLogout == 1 {
-                showAlertTimeout = true
-            }
-        }
+//        .onReceive(timer) { time in
+//            print(self.timeLogout)
+//            if self.timeLogout > 0 {
+//                self.timeLogout -= 1
+//            }
+//
+//            if self.timeLogout == 1 {
+//                showAlertTimeout = true
+//            }
+//        }
         .onAppear {
             print("GET")
             self.listSourceNumber.removeAll()

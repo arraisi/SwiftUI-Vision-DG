@@ -70,6 +70,7 @@ class RegistrasiModel: ObservableObject {
     @Published var fotoTandaTangan: Image = Image("")
     @Published var fotoNPWP: Image = Image("")
     @Published var npwp = ""
+    @Published var showPopupNpwp: Bool = false
     @Published var hasNoNpwp: Bool = false
     @Published var namaLengkapFromNik: String = ""
     @Published var nomorKKFromNik: String = ""

@@ -454,4 +454,69 @@ class TransferServices {
             
         }.resume()
     }
+    
+    // MARK: - POST MOVE BALANCE LIKE ON US API
+    func moveBalance(transferData: MoveBalancesModel,
+                      completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
+        
+        let body: [String: Any] = [
+            "cardNo": transferData.cardNo,
+            "ref": "1",
+            "nominal": transferData.amount.replacingOccurrences(of: ".", with: ""),
+            "currency": "360",
+            "sourceNumber": transferData.sourceNumber,
+            "destinationNumber": transferData.destinationNumber,
+            "berita": transferData.notes,
+            "pin": encryptPassword(password: transferData.pin)
+        ]
+        
+        guard let url = URL.urlTransferOverbooking() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("URL ABSOLUTE : \(url.absoluteURL)")
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: body)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString as Any)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    print("ON Success")
+                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    completion(.success(transferResponse!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
 }

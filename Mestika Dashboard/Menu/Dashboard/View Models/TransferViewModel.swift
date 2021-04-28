@@ -319,4 +319,46 @@ class TransferViewModel : ObservableObject {
             }
         }
     }
+    
+    // MARK: - Transfer ONUS
+    func moveBalance(transferData: MoveBalancesModel,
+                      completion: @escaping (Bool) -> Void) {
+        TransferServices.shared.moveBalance(transferData: transferData) {result in
+            print(result)
+            
+            switch result {
+            case .success(let response):
+                print(response)
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.transactionDate = response.transactionDate
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 401):
+                    self.code = "401"
+                    self.message = "PIN Transaksi Salah"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.message = "Data tidak ditemukan"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "Transfer Gagal"
+                default:
+                    self.message = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
 }

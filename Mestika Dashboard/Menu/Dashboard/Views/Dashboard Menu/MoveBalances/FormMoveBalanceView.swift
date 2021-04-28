@@ -17,7 +17,7 @@ struct FormMoveBalanceView: View {
     @State private var frekuensiSelectedCtrl = "Select Transaction Frekuensi"
     @State private var notesCtrl: String = ""
     
-    @State private var saldoAktif: String = "400000"
+    @State private var saldoAktif: String = "0"
     @State private var amountDbl: Double = 0
     
     // Variable List
@@ -57,6 +57,11 @@ struct FormMoveBalanceView: View {
                             Text("Rekening Utama")
                                 .fontWeight(.bold)
                         }
+                        
+                        Spacer()
+                        
+                        Text("-->")
+                            .fontWeight(.bold)
                         
                         Spacer()
                         
@@ -123,7 +128,7 @@ struct FormMoveBalanceView: View {
                                 .font(.system(size: 12))
                                 .fontWeight(.bold)
                             
-                            Text("400.000")
+                            Text("\(self.saldoAktif.thousandSeparator())")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
                         }
@@ -250,7 +255,13 @@ struct FormMoveBalanceView: View {
                 .padding(.horizontal)
             }
         }
-        .navigationBarTitle("Pindah Saldo", displayMode: .inline)
+        .onAppear {
+            self.transactionData.mainBalance = self.saldoAktif
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var selectedDate: Binding<Date> {
@@ -287,7 +298,7 @@ struct FormMoveBalanceView: View {
     }
     
     var disableForm: Bool {
-        if (amountCtrl.isNotEmpty() || frekuensiSelectedCtrl != "Select Transaction Frekuensi") {
+        if (amountCtrl.isNotEmpty() && frekuensiSelectedCtrl != "Select Transaction Frekuensi") {
             return false
         }
         return true

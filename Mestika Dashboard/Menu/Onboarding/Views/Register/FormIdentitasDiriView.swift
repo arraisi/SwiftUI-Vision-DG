@@ -254,6 +254,9 @@ struct FormIdentitasDiriView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            self.registerData.showPopupNpwp = false
+        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

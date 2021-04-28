@@ -139,7 +139,7 @@ struct MoveBalanceConfirmationView: View {
                         .fontWeight(.light)
                         .frame(width: 100, alignment: .leading)
                     
-                    MultilineTextField("Nominal Transaksi", text: self.$amountCtrl, onCommit: {
+                    MultilineTextField("", text: self.$amountCtrl, onCommit: {
                     })
                     .disabled(true)
                     .frame(height: 20)

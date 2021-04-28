@@ -29,5 +29,7 @@ class MoveBalancesModel: ObservableObject {
     
     @Published var trxDateResp = ""
     
+    @Published var mainBalance = ""
+    
     static let shared = MoveBalancesModel()
 }

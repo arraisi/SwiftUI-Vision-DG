@@ -295,7 +295,7 @@ struct RegisterSummaryView: View {
 
             }
             
-            if self.registerData.hasNoNpwp && self.registerData.npwp == "" {
+            if self.registerData.showPopupNpwp {
                 ZStack {
                     ModalOverlay(tapAction: {})
                         .edgesIgnoringSafeArea(.all)
@@ -336,7 +336,8 @@ struct RegisterSummaryView: View {
             Button(action: {
                 self.registerData.npwp = self.npwp
                 print("REGISTER DATA NPWP : \(self.registerData.npwp)")
-                self.showingNpwpModal.toggle()
+                self.registerData.showPopupNpwp = false
+                self.showingNpwpModal = false
             }) {
                 Text("Save".localized(language))
                     .foregroundColor(.white)

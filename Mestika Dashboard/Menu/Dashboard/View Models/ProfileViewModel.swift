@@ -59,34 +59,33 @@ extension ProfileViewModel {
             switch result {
             case .success(let response):
                 print("Success")
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.alamat = response.personal.address
-                    self.provinsiName = response.personal.propName
-                    self.kabupatenName = response.personal.kabName
-                    self.kecamatanName = response.personal.kecName
-                    self.kelurahanName = response.personal.kelName
-                    self.rt = response.personal.rt
-                    self.rw = response.personal.rw
-                }
+                
+                self.isLoading = false
+                self.alamat = response.personal.address
+                self.provinsiName = response.personal.propName
+                self.kabupatenName = response.personal.kabName
+                self.kecamatanName = response.personal.kecName
+                self.kelurahanName = response.personal.kelName
+                self.rt = response.personal.rt
+                self.rw = response.personal.rw
                 
                 print("\n\nVM PROFILE \(response.personal.name)\n\n")
-                print("\n\nVM PROFILE \(String(describing: response.chipProfileDto?.last!.cardNo))\n\n")
+                print("\n\nVM PROFILE \(String(describing: response.chipProfileDto.last!.cardNo))\n\n")
                 self.name = response.personal.name
                 self.telepon = response.profileResponseModelID.telepon
                 self.email = response.profileResponseModelID.surel
                 self.nameOnCard = response.products.last!.productName ?? ""
-                self.balance = response.chipProfileDto?.last!.balance ?? "0"
-                self.classCode = response.chipProfileDto?.last?.classCode ?? ""
+                self.balance = response.chipProfileDto.last!.balance ?? "0"
+                self.classCode = response.chipProfileDto.last?.classCode ?? ""
                 
-                self.maxIbftPerTrans = response.chipProfileDto?.last?.maxIbftPerTrans ?? "0"
-                self.limitOnUs = response.chipProfileDto?.last?.limitOnUs ?? "1000000"
-                self.limitWd = response.chipProfileDto?.last?.limitWd ?? "0"
-                self.limitPayment = response.chipProfileDto?.last?.limitPayment ?? "0"
-                self.limitPurchase = response.chipProfileDto?.last?.limitPurchase ?? "0"
-                self.limitIbft = response.chipProfileDto?.last?.limitIbft ?? "0"
+                self.maxIbftPerTrans = response.chipProfileDto.last?.maxIbftPerTrans ?? "0"
+                self.limitOnUs = response.chipProfileDto.last?.limitOnUs ?? "1000000"
+                self.limitWd = response.chipProfileDto.last?.limitWd ?? "0"
+                self.limitPayment = response.chipProfileDto.last?.limitPayment ?? "0"
+                self.limitPurchase = response.chipProfileDto.last?.limitPurchase ?? "0"
+                self.limitIbft = response.chipProfileDto.last?.limitIbft ?? "0"
                 
-                if let _chipProfileDto = response.chipProfileDto?.last {
+                if let _chipProfileDto = response.chipProfileDto.last {
                     self.cardName = _chipProfileDto.nameOnCard
                     self.cardNo = _chipProfileDto.cardNo ?? ""
                     self.accountNumber = _chipProfileDto.accountNumber

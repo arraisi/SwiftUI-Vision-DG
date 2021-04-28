@@ -60,6 +60,11 @@ struct FormAddBalanceView: View {
                         
                         Spacer()
                         
+                        Text("-->")
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                        
                         VStack(alignment: .leading) {
                             Text("Ke")
                                 .font(.system(size: 13))
@@ -114,7 +119,7 @@ struct FormAddBalanceView: View {
                     Divider()
                     
                     HStack {
-                        Text("Saldo aktif \(self.transactionData.destinationName)")
+                        Text("Saldo aktif \(self.transactionData.sourceAccountName)")
                             .font(.system(size: 12))
                         
                         Spacer()

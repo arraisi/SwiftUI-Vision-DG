@@ -152,6 +152,7 @@ struct IdentityPictureView: View {
                         print("\nretrieve image ktp")
                     case "npwp":
                         self.registerData.hasNoNpwp = true
+                        self.registerData.showPopupNpwp = true
                         self.registerData.npwp = ""
                         self.registerData.fotoNPWP = Image(uiImage: image)
                         self.showingNpwpModal = true

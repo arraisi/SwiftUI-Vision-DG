@@ -110,7 +110,7 @@ struct PasswordView: View {
                                 .padding(.top, 20)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            Text("This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)".localized(language))
+                            Text("This password is used when you enter the Mestika Bank Mobile Banking Application".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
@@ -222,6 +222,94 @@ struct PasswordView: View {
                             .cornerRadius(15)
                             .addBorder(self.isPasswordValid ? Color.blue : Color.red, width: self.password.count > 0 ? 1 : 0 , cornerRadius: 15)
                             .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+                            
+                            
+                            VStack {
+                                
+                                HStack {
+                                    Text("Harap gunakan setidaknya :")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .multilineTextAlignment(.leading)
+                                        .padding(.horizontal, 20)
+                                        .padding(.top, 20)
+                                        .padding(.bottom, 5)
+                                    
+                                    Spacer()
+                                }
+                                
+                                HStack {
+                                    Text("✗")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .padding(.leading, 25)
+                                    
+                                    Text("1 Karakter")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                    
+                                    Spacer()
+                                }
+                                .padding(.bottom, 2)
+                                
+                                HStack {
+                                    Text("✗")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .padding(.leading, 25)
+                                    
+                                    Text("1 Huruf Kecil")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                    
+                                    Spacer()
+                                }
+                                .padding(.bottom, 2)
+                                
+                                HStack {
+                                    Text("✗")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .padding(.leading, 25)
+                                    
+                                    Text("1 Huruf kapital/besar")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                    
+                                    Spacer()
+                                }
+                                .padding(.bottom, 2)
+                                
+                                HStack {
+                                    Text("✗")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .padding(.leading, 25)
+                                    
+                                    Text("1 Angka")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                    
+                                    Spacer()
+                                }
+                                .padding(.bottom, 2)
+                                
+                                HStack {
+                                    Text("✗")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .padding(.leading, 25)
+                                    
+                                    Text("1 Karakter Spesial")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                    
+                                    Spacer()
+                                }
+                                .padding(.bottom, 2)
+                                
+                                HStack {
+                                    Text("✗")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                        .padding(.leading, 25)
+                                    
+                                    Text("Minimal 8 karakter")
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                    
+                                    Spacer()
+                                }
+                                .padding(.bottom, 2)
+                            }
+                            .frame(width: UIScreen.main.bounds.width - 90, alignment: .leading)
                             
                             NavigationLink(
                                 destination: PINView().environmentObject(registerData),
