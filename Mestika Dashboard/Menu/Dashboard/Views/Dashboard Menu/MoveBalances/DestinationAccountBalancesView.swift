@@ -79,7 +79,7 @@ struct DestinationAccountBalancesView: View {
                     
                     // list account
                     
-                    if !self.listSourceNumber.isEmpty {
+                    if !self.listBalance.isEmpty {
                         ForEach(0..<self.listSourceNumber.count, id: \.self) { index in
                             Button(action: {
                                 

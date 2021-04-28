@@ -31,9 +31,66 @@ struct PasswordView: View {
     @State private var activeRoute: Bool = false
     @State private var modalErrorMessage: String = ""
     
-    @State private var isPasswordValid : Bool   = false
+    // Masking Password
+    @State private var isPasswordValid : Bool = false
+    @State private var haveCharacter: Bool = false
+    @State private var haveLowercase: Bool = false
+    @State private var haveUppercase: Bool = false
+    @State private var haveNumber: Bool = false
+    @State private var haveSpecialcase: Bool = false
+    @State private var haveMin8Char: Bool = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    func isHaveUppercase(_ string: String) -> Bool {
+        
+        let format = ".*[A-Z]+.*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", format)
+        return predicate.evaluate(with: string)
+    }
+    
+    func isHaveLowercase(_ string: String) -> Bool {
+        
+        let format = ".*[a-z]+.*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", format)
+        return predicate.evaluate(with: string)
+    }
+    
+    func isHaveSpecialChar(_ string: String) -> Bool {
+        
+        let format = ".*[!@#$&]+.*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", format)
+        return predicate.evaluate(with: string)
+    }
+    
+    func isHaveNumber(_ string: String) -> Bool {
+        
+        let format = ".*[0-9]+.*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", format)
+        return predicate.evaluate(with: string)
+    }
+    
+    func isHave8Char(_ string: String) -> Bool {
+        
+        if string.count >= 8 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isHaveChar(_ string: String) -> Bool {
+        
+        if string.count >= 1 {
+            return true
+        }
+        
+        return false
+    }
     
     func textFieldValidatorPassword(_ string: String) -> Bool {
         if string.count > 100 {
@@ -154,6 +211,12 @@ struct PasswordView: View {
                                                 .foregroundColor(Color(hex: "#232175"))
                                                 .onReceive(password.publisher.collect()) { it in
                                                     self.isPasswordValid = self.textFieldValidatorPassword(String(it))
+                                                    self.haveUppercase = self.isHaveUppercase(String(it))
+                                                    self.haveLowercase = self.isHaveLowercase(String(it))
+                                                    self.haveNumber = self.isHaveNumber(String(it))
+                                                    self.haveSpecialcase = self.isHaveSpecialChar(String(it))
+                                                    self.haveMin8Char = self.isHave8Char(String(it))
+                                                    self.haveCharacter = self.isHaveChar(String(it))
                                                 }
                                                 
                                                 Button(action: {
@@ -180,6 +243,15 @@ struct PasswordView: View {
                                                     .padding()
                                                     .frame(width: 200, height: 50)
                                                     .foregroundColor(Color(hex: "#232175"))
+                                                    .onReceive(password.publisher.collect()) { it in
+                                                        self.isPasswordValid = self.textFieldValidatorPassword(String(it))
+                                                        self.haveUppercase = self.isHaveUppercase(String(it))
+                                                        self.haveLowercase = self.isHaveLowercase(String(it))
+                                                        self.haveNumber = self.isHaveNumber(String(it))
+                                                        self.haveSpecialcase = self.isHaveSpecialChar(String(it))
+                                                        self.haveMin8Char = self.isHave8Char(String(it))
+                                                        self.haveCharacter = self.isHaveChar(String(it))
+                                                    }
                                                 
                                                 Button(action: {
                                                     self.securedConfirmation.toggle()
@@ -238,9 +310,15 @@ struct PasswordView: View {
                                 }
                                 
                                 HStack {
-                                    Text("✗")
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .padding(.leading, 25)
+                                    if (self.haveCharacter) {
+                                        Text("✓")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    } else {
+                                        Text("✗")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    }
                                     
                                     Text("1 Karakter")
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -250,9 +328,15 @@ struct PasswordView: View {
                                 .padding(.bottom, 2)
                                 
                                 HStack {
-                                    Text("✗")
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .padding(.leading, 25)
+                                    if (self.haveLowercase) {
+                                        Text("✓")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    } else {
+                                        Text("✗")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    }
                                     
                                     Text("1 Huruf Kecil")
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -262,9 +346,16 @@ struct PasswordView: View {
                                 .padding(.bottom, 2)
                                 
                                 HStack {
-                                    Text("✗")
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .padding(.leading, 25)
+                                    
+                                    if (self.haveUppercase) {
+                                        Text("✓")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    } else {
+                                        Text("✗")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    }
                                     
                                     Text("1 Huruf kapital/besar")
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -274,9 +365,15 @@ struct PasswordView: View {
                                 .padding(.bottom, 2)
                                 
                                 HStack {
-                                    Text("✗")
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .padding(.leading, 25)
+                                    if (self.haveNumber) {
+                                        Text("✓")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    } else {
+                                        Text("✗")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    }
                                     
                                     Text("1 Angka")
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -286,9 +383,15 @@ struct PasswordView: View {
                                 .padding(.bottom, 2)
                                 
                                 HStack {
-                                    Text("✗")
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .padding(.leading, 25)
+                                    if (self.haveSpecialcase) {
+                                        Text("✓")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    } else {
+                                        Text("✗")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    }
                                     
                                     Text("1 Karakter Spesial")
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -298,9 +401,15 @@ struct PasswordView: View {
                                 .padding(.bottom, 2)
                                 
                                 HStack {
-                                    Text("✗")
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .padding(.leading, 25)
+                                    if (self.haveMin8Char) {
+                                        Text("✓")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    } else {
+                                        Text("✗")
+                                            .font(.custom("Montserrat-Regular", size: 12))
+                                            .padding(.leading, 25)
+                                    }
                                     
                                     Text("Minimal 8 karakter")
                                         .font(.custom("Montserrat-Regular", size: 12))
