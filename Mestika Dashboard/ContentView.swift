@@ -64,10 +64,7 @@ struct ContentView: View {
                     .environmentObject(appState)
                 
 //                NavigationView{
-//                    InformasiPerusahaanView()
-//                        .environment(\.managedObjectContext, context)
-//                        .environmentObject(appState)
-//                        .environmentObject(registerData)
+//                    DestinationAccountAddBalanceView()
 //                }
             }
             .edgesIgnoringSafeArea(.top)

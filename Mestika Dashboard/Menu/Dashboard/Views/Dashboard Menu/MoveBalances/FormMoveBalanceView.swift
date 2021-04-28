@@ -77,7 +77,7 @@ struct FormMoveBalanceView: View {
                 .foregroundColor(.white)
                 .cornerRadius(15)
                 .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                .padding(.bottom, 20)
+                .padding(.vertical, 20)
                 
                 // nominal input
                 VStack(alignment: .leading) {
@@ -94,7 +94,6 @@ struct FormMoveBalanceView: View {
                                 let amountString = String($0.prefix(13))
                                 let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                 self.amountCtrl = cleanAmount.thousandSeparator()
-                                self.transactionData.amount = cleanAmount
                                 
                                 self.amountDbl = Double(cleanAmount) ?? 0
                                 
@@ -233,6 +232,8 @@ struct FormMoveBalanceView: View {
                     if (notesCtrl.isEmpty) {
                         self.transactionData.notes = "-"
                     }
+                    
+                    self.transactionData.amount = self.amountCtrl
                     
                     self.nextRouting = true
                     

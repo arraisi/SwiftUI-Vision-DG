@@ -51,7 +51,7 @@ struct DestinationAccountBalancesView: View {
                     Text("Silahkan pilih tabungan tujuan pemindahan saldo dari rekening utama")
                         .font(.subheadline)
                 }
-                .padding(.bottom, 20)
+                .padding(.vertical, 20)
                 
                 // list account
                 ForEach(self._listAccount, id: \.self) { data in

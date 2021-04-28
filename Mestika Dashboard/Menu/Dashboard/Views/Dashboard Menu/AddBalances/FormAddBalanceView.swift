@@ -77,7 +77,7 @@ struct FormAddBalanceView: View {
                 .foregroundColor(.white)
                 .cornerRadius(15)
                 .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                .padding(.bottom, 20)
+                .padding(.vertical, 20)
                 
                 // nominal input
                 VStack(alignment: .leading) {
@@ -94,7 +94,7 @@ struct FormAddBalanceView: View {
                                 let amountString = String($0.prefix(13))
                                 let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                 self.amountCtrl = cleanAmount.thousandSeparator()
-                                self.transactionData.amount = cleanAmount
+//                                self.transactionData.amount = cleanAmount
                                 
                                 self.amountDbl = Double(cleanAmount) ?? 0
                                 
@@ -229,6 +229,7 @@ struct FormAddBalanceView: View {
                 Button(action: {
                     
                     self.transactionData.transactionDate = dateFormatter.string(from: self.date)
+                    self.transactionData.amount = self.amountCtrl
                     
                     if (notesCtrl.isEmpty) {
                         self.transactionData.notes = "-"
@@ -248,6 +249,9 @@ struct FormAddBalanceView: View {
                 .cornerRadius(12)
                 .padding(.horizontal)
             }
+        }
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
         }
         .navigationBarTitle("Tambah Saldo", displayMode: .inline)
     }

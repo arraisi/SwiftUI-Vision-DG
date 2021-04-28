@@ -10,7 +10,7 @@ import SwiftUI
 struct DestinationAccountAddBalanceView: View {
     
     // Observable Object
-    @State var transaksiData = MoveBalancesModel()
+    @State var transactionData = MoveBalancesModel()
     
     @State private var _listAccount = [
         MoveBalanceCard(id: 1, typeTabungan: "Platinum Saver", saldo: "300000", cardNo: "98391928391", color: "#2334D0"),
@@ -19,16 +19,16 @@ struct DestinationAccountAddBalanceView: View {
     ]
     
     // Routing
-    @State private var nextRouting: Bool = false
+    @State var nextRouting: Bool = false
     
     var body: some View {
         ZStack {
             
             // Route Link
             NavigationLink(
-                destination: FormAddBalanceView().environmentObject(transaksiData),
+                destination: FormAddBalanceView().environmentObject(transactionData),
                 isActive: self.$nextRouting,
-                label: {}
+                label: { EmptyView() }
             )
             
             // bg color
@@ -45,18 +45,18 @@ struct DestinationAccountAddBalanceView: View {
                     Text("Pilih asal tabungan yang akan ditambahkan ke saldo utama")
                         .font(.subheadline)
                 }
-                .padding(.bottom, 20)
+                .padding(.vertical, 20)
                 
                 // list account
                 ForEach(self._listAccount, id: \.self) { data in
                     Button(action: {
                         
-                        self.transaksiData.cardNo = data.cardNo
-                        self.transaksiData.destinationNumber = "123456"
-                        self.transaksiData.transferType = "Tambah Saldo"
-                        self.transaksiData.destinationName = "Rekening Utama"
-                        self.transaksiData.sourceNumber = "123456"
-                        self.transaksiData.sourceAccountName = data.typeTabungan
+                        self.transactionData.cardNo = data.cardNo
+                        self.transactionData.destinationNumber = "123456"
+                        self.transactionData.transferType = "Tambah Saldo"
+                        self.transactionData.destinationName = "Rekening Utama"
+                        self.transactionData.sourceNumber = "123456"
+                        self.transactionData.sourceAccountName = data.typeTabungan
                         
                         self.nextRouting = true
                         
@@ -98,6 +98,9 @@ struct DestinationAccountAddBalanceView: View {
                 }
             })
             .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
+        }
+        .onAppear {
+            self.nextRouting = false
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarTitle("Tambah Saldo", displayMode: .inline)

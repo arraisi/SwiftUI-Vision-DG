@@ -31,10 +31,23 @@ struct PasswordView: View {
     @State private var activeRoute: Bool = false
     @State private var modalErrorMessage: String = ""
     
+    @State private var isPasswordValid : Bool   = false
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    func textFieldValidatorPassword(_ string: String) -> Bool {
+        if string.count > 100 {
+            return false
+        }
+        
+        let emailFormat = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$"
+        
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: string)
+    }
+    
     var disableForm: Bool {
-        password.isEmpty || confirmationPassword.isEmpty || password.count < 6 || confirmationPassword.count < 6
+        password.isEmpty || isPasswordValid || confirmationPassword.isEmpty || password.count < 6 || confirmationPassword.count < 6
     }
     
     var body: some View {
@@ -139,6 +152,9 @@ struct PasswordView: View {
                                                 .padding()
                                                 .frame(width: 200, height: 50)
                                                 .foregroundColor(Color(hex: "#232175"))
+                                                .onReceive(password.publisher.collect()) { it in
+                                                    self.isPasswordValid = self.textFieldValidatorPassword(String(it))
+                                                }
                                                 
                                                 Button(action: {
                                                     self.securedPassword.toggle()
@@ -204,6 +220,7 @@ struct PasswordView: View {
                             .frame(width: UIScreen.main.bounds.width - 100)
                             .background(Color.white)
                             .cornerRadius(15)
+                            .addBorder(self.isPasswordValid ? Color.blue : Color.red, width: self.password.count > 0 ? 1 : 0 , cornerRadius: 15)
                             .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                             
                             NavigationLink(
@@ -357,7 +374,7 @@ struct PasswordView: View {
                     encryptPassword(password: password)
                     self.activeRoute = true
                 default:
-//                    self.modalErrorMessage = self.passwordVM.message
+                    //                    self.modalErrorMessage = self.passwordVM.message
                     self.modalErrorMessage = "Weak password, please change your password"
                     self.showingModalPasswordError.toggle()
                 }
