@@ -83,464 +83,58 @@ struct VerificationRegisterDataView: View {
                         .frame(height: 1)
                 }
                 
-                
-                ScrollView {
-                    VStack {
-                        Text("MAKE SURE YOUR INFORMATION IS CORRECT".localized(language))
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .padding(.vertical, 25)
-                            .padding(.horizontal, 20)
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        VStack(alignment: .leading) {
-                            Group {
-                                LabelTextFieldWithIcon(value: $registerData.nik, label: "Identity Card/(KTP)".localized(language), placeHolder: "Identity Card/(KTP)".localized(language)) {
-                                    (Bool) in
-                                    print("on edit")
-                                } onCommit: {
-                                    print("on commit")
-                                }.padding(.top, 20)
-                                .padding(.horizontal, 20)
-                                .disabled(true)
-                                
-                                LabelTextFieldWithIcon(value: $registerData.noTelepon, label: "Phone Number".localized(language), placeHolder: "Phone Number".localized(language)) {
-                                    (Bool) in
-                                    print("on edit")
-                                } onCommit: {
-                                    print("on commit")
-                                }.padding(.top, 10)
-                                .padding(.horizontal, 20)
-                                .disabled(true)
-                                
-                                LabelTextFieldWithIcon(value: $registerData.email, label: "Email", placeHolder: "Email") {
-                                    (Bool) in
-                                    print("on edit")
-                                } onCommit: {
-                                    print("on commit")
-                                }.padding(.top, 10)
-                                .padding(.horizontal, 20)
-                                .padding(.bottom, 20)
-                                .disabled(true)
-                                
-                                LabelTextFieldWithIcon(value: $registerData.npwp, label: "Tax Identification Number".localized(language), placeHolder: "Tax Identification Number".localized(language)) {
-                                    (Bool) in
-                                    print("on edit")
-                                } onCommit: {
-                                    print("on commit")
-                                }.padding(.top, 10)
-                                .padding(.horizontal, 20)
-                                .padding(.bottom, 20)
-                                .disabled(true)
-                                
-                            }
-                        }
-                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(15)
-                        .padding(.bottom, 10)
-                        .shadow(radius: 2)
-                        
-                        VStack(alignment: .leading) {
-                            Group {
-                                // KTP ROW
-                                VStack {
-                                    
-                                    Button(action: {
-                                        self.cameraFileName = "ktp"
-                                        self.shouldPresentCamera = true
-                                    }) {
-                                        HStack {
-                                            Text("Photo Identity Card/(KTP)".localized(language))
-                                                .font(.subheadline)
-                                                .foregroundColor(Color(hex: "#232175"))
-                                                .fontWeight(.bold)
-                                            Spacer()
-                                            
-                                            VStack {
-                                                self.registerData.fotoKTP
-                                                    .resizable()
-                                                    .frame(maxWidth: 80, maxHeight: 50)
-                                                    .cornerRadius(8)
-                                            }
-                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
-                                        }
-                                        
-                                    }
-                                    .fullScreenCover(isPresented: $shouldPresentCamera) {
-                                        scanner
-                                    }
-                                    
-                                    Divider()
-                                }
-                                .padding(.top, 20)
-                                .padding(.horizontal, 20)
-                                
-                                // SELFIE ROW
-                                VStack {
-                                    
-                                    Button(action: {
-                                        self.cameraFileName = "selfie"
-                                        // self.shouldPresentMaskSelfie = true
-                                        self.shouldPresentCameraSelfie = true
-                                    }) {
-                                        HStack {
-                                            Text("Selfie")
-                                                .font(.subheadline)
-                                                .foregroundColor(Color(hex: "#232175"))
-                                                .fontWeight(.bold)
-                                            Spacer()
-                                            
-                                            VStack {
-                                                self.registerData.fotoSelfie
-                                                    .resizable()
-                                                    .frame(maxWidth: 80, maxHeight: 50)
-                                                    .cornerRadius(8)
-                                            }
-                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
-                                        }
-                                    }
-                                    .fullScreenCover(isPresented: $shouldPresentCameraSelfie) {
-                                        camera
-                                    }
-                                    Divider()
-                                }
-                                .padding(.top, 20)
-                                .padding(.horizontal, 20)
-                                
-                                // NPWP ROW
-                                //                                if self.registerData.npwp != "" {
-                                VStack {
-                                    
-                                    Button(action: {
-                                        self.cameraFileName = "npwp"
-                                        self.shouldPresentCamera = true
-                                    }) {
-                                        HStack {
-                                            Text(self.registerData.fotoNPWP != Image("") ? "Your NPWP photo".localized(language)  : "Add NPWP".localized(language))
-                                                .font(.subheadline)
-                                                .foregroundColor(Color(hex: "#232175"))
-                                                .fontWeight(.bold)
-                                            Spacer()
-                                            
-                                            VStack {
-                                                if self.registerData.fotoNPWP != Image("") {
-                                                    self.registerData.fotoNPWP
-                                                        .resizable()
-                                                        .frame(maxWidth: 80, maxHeight: 50)
-                                                        .cornerRadius(8)
-                                                } else {
-                                                    Image("ic_camera")
-                                                        .resizable()
-                                                        .frame(maxWidth: 50, maxHeight: 36)
-                                                }
-                                            }
-                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
-                                        }
-                                    }
-                                    .fullScreenCover(isPresented: $shouldPresentCamera) {
-                                        scanner
-                                    }
-                                    Divider()
-                                }
-                                .padding([.top, .bottom], 20)
-                                .padding(.horizontal, 20)
-                                //                                }
-                            }
-                        }
-                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(15)
-                        .padding(.bottom, 10)
-                        .shadow(radius: 2)
-                        
-                        VStack(alignment: .leading) {
-                            Group {
-                                Group {
-                                    
-                                    Text("Types of Savings".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                        .padding(.top, 20)
-                                    
-                                    HStack {
-                                        TextField("Types of Savings".localized(language), text: $registerData.jenisTabungan)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: FormPilihJenisTabunganView(shouldPopToRootView: .constant(false), editMode: .active).environmentObject(registerData).environmentObject(productATMData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                    
-                                    Text("Account Opening Purpose".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                    
-                                    HStack {
-                                        TextField("Account Opening Purpose".localized(language), text: $registerData.tujuanPembukaan)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                    
-                                    Text("Source of funds".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                    
-                                    HStack {
-                                        TextField("Source of funds".localized(language), text: $registerData.sumberDana)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: SumberDanaView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                    
-                                    if appState.nasabahIsExisting {
-                                        Text("Gross Income".localized(language))
-                                            .font(.caption)
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(.gray)
-                                            .multilineTextAlignment(.leading)
-                                            .padding(.horizontal, 20)
-                                        
-                                        HStack {
-                                            
-                                            MultilineTextField("Gross Income".localized(language), text: $registerData.penghasilanKotor) {
-                                                
-                                            }
-                                            .disabled(true)
-                                            
-                                            Divider()
-                                                .frame(height: 30)
-                                            
-                                            NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
-                                                Text("Edit").foregroundColor(.blue)
-                                            }
-                                        }
-                                        .frame(height: 20)
-                                        .font(.subheadline)
-                                        .padding()
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(15)
-                                        .padding(.horizontal, 20)
-                                    }
-                                    
-                                    Text("Estimated Withdrawal".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                    
-                                    HStack {
-                                        TextField("Estimated Withdrawal".localized(language), text: $registerData.perkiraanPenarikan)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: PerkiraanPenarikanView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                }
-                                
-                                Group {
-                                    Text("Estimated Withdrawal Size".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                    
-                                    HStack {
-                                        TextField("Estimated Withdrawal Size".localized(language), text: $registerData.besarPerkiraanPenarikan)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: BesarPerkiraanPenarikanView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                    
-                                    Text("Estimated Deposit".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                    
-                                    HStack {
-                                        TextField("Estimated Deposit".localized(language), text: $registerData.perkiraanSetoran)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: PerkiraanSetoranView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                    
-                                    Text("Estimated Deposit Size".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                    
-                                    HStack {
-                                        TextField("Estimated Deposit Size".localized(language), text: $registerData.besarPerkiraanPenarikan)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: BesarPerkiraanSetoranView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                    .padding(.bottom, 20)
-                                }
-                            }
-                        }
-                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(15)
-                        .padding(.bottom, 10)
-                        .shadow(radius: 2)
-                        
-                        VStack(alignment: .leading) {
-                            Group {
-                                Group {
-                                    
-                                    Text("Profession".localized(language))
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .padding(.horizontal, 20)
-                                        .padding(.top, 20)
-                                    
-                                    HStack {
-                                        TextField("Profession".localized(language), text: $registerData.pekerjaan)
-                                            .disabled(true)
-                                        
-                                        Divider()
-                                            .frame(height: 30)
-                                        
-                                        NavigationLink(destination: PerkerjaanView(editMode: .active).environmentObject(registerData)) {
-                                            Text("Edit").foregroundColor(.blue)
-                                        }
-                                    }
-                                    .frame(height: 20)
-                                    .font(.subheadline)
-                                    .padding()
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(15)
-                                    .padding(.horizontal, 20)
-                                    
-                                    dynamicForm
-                                    
-                                }
-                            }
-                            Spacer()
-                        }
-                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(15)
-                        .padding(.bottom, 10)
-                        .shadow(radius: 2)
-                        
-                        VStack(alignment: .leading) {
-                            Group {
-                                // MARK : Pekerjaan Wiraswasta
-                                if [10, 11, 12].contains(registerData.pekerjaanId) {
-                                    informasiPenyandangDanaFields
-                                } else {
-                                    InformasiPerusahaanVerificationView()
-                                        .padding(.bottom, 5)
-                                }
-                            }
-                            Spacer()
-                        }
-                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(15)
-                        .padding(.bottom, 10)
-                        .shadow(radius: 2)
-                        
+//                
+//                ScrollView {
+//                    VStack {
+//                        Text("MAKE SURE YOUR INFORMATION IS CORRECT".localized(language))
+//                            .font(.title2)
+//                            .bold()
+//                            .foregroundColor(.white)
+//                            .multilineTextAlignment(.center)
+//                            .padding(.vertical, 25)
+//                            .padding(.horizontal, 20)
+//                            .fixedSize(horizontal: false, vertical: true)
+//                        
 //                        VStack(alignment: .leading) {
 //                            Group {
-//                                InformasiKeluargaVerificationView()
-//                                    .padding(.bottom, 20)
+//                                LabelTextFieldWithIcon(value: $registerData.nik, label: "Identity Card/(KTP)".localized(language), placeHolder: "Identity Card/(KTP)".localized(language)) {
+//                                    (Bool) in
+//                                    print("on edit")
+//                                } onCommit: {
+//                                    print("on commit")
+//                                }.padding(.top, 20)
+//                                .padding(.horizontal, 20)
+//                                .disabled(true)
+//                                
+//                                LabelTextFieldWithIcon(value: $registerData.noTelepon, label: "Phone Number".localized(language), placeHolder: "Phone Number".localized(language)) {
+//                                    (Bool) in
+//                                    print("on edit")
+//                                } onCommit: {
+//                                    print("on commit")
+//                                }.padding(.top, 10)
+//                                .padding(.horizontal, 20)
+//                                .disabled(true)
+//                                
+//                                LabelTextFieldWithIcon(value: $registerData.email, label: "Email", placeHolder: "Email") {
+//                                    (Bool) in
+//                                    print("on edit")
+//                                } onCommit: {
+//                                    print("on commit")
+//                                }.padding(.top, 10)
+//                                .padding(.horizontal, 20)
+//                                .padding(.bottom, 20)
+//                                .disabled(true)
+//                                
+//                                LabelTextFieldWithIcon(value: $registerData.npwp, label: "Tax Identification Number".localized(language), placeHolder: "Tax Identification Number".localized(language)) {
+//                                    (Bool) in
+//                                    print("on edit")
+//                                } onCommit: {
+//                                    print("on commit")
+//                                }.padding(.top, 10)
+//                                .padding(.horizontal, 20)
+//                                .padding(.bottom, 20)
+//                                .disabled(true)
+//                                
 //                            }
 //                        }
 //                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
@@ -548,12 +142,418 @@ struct VerificationRegisterDataView: View {
 //                        .cornerRadius(15)
 //                        .padding(.bottom, 10)
 //                        .shadow(radius: 2)
-                        
-                    }
-                    .padding(.horizontal, 30)
-                    .padding(.bottom, 35)
-                }
-                
+//                        
+//                        VStack(alignment: .leading) {
+//                            Group {
+//                                // KTP ROW
+//                                VStack {
+//                                    
+//                                    Button(action: {
+//                                        self.cameraFileName = "ktp"
+//                                        self.shouldPresentCamera = true
+//                                    }) {
+//                                        HStack {
+//                                            Text("Photo Identity Card/(KTP)".localized(language))
+//                                                .font(.subheadline)
+//                                                .foregroundColor(Color(hex: "#232175"))
+//                                                .fontWeight(.bold)
+//                                            Spacer()
+//                                            
+//                                            VStack {
+//                                                self.registerData.fotoKTP
+//                                                    .resizable()
+//                                                    .frame(maxWidth: 80, maxHeight: 50)
+//                                                    .cornerRadius(8)
+//                                            }
+//                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
+//                                        }
+//                                        
+//                                    }
+//                                    .fullScreenCover(isPresented: $shouldPresentCamera) {
+//                                        scanner
+//                                    }
+//                                    
+//                                    Divider()
+//                                }
+//                                .padding(.top, 20)
+//                                .padding(.horizontal, 20)
+//                                
+//                                // SELFIE ROW
+//                                VStack {
+//                                    
+//                                    Button(action: {
+//                                        self.cameraFileName = "selfie"
+//                                        // self.shouldPresentMaskSelfie = true
+//                                        self.shouldPresentCameraSelfie = true
+//                                    }) {
+//                                        HStack {
+//                                            Text("Selfie")
+//                                                .font(.subheadline)
+//                                                .foregroundColor(Color(hex: "#232175"))
+//                                                .fontWeight(.bold)
+//                                            Spacer()
+//                                            
+//                                            VStack {
+//                                                self.registerData.fotoSelfie
+//                                                    .resizable()
+//                                                    .frame(maxWidth: 80, maxHeight: 50)
+//                                                    .cornerRadius(8)
+//                                            }
+//                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
+//                                        }
+//                                    }
+//                                    .fullScreenCover(isPresented: $shouldPresentCameraSelfie) {
+//                                        camera
+//                                    }
+//                                    Divider()
+//                                }
+//                                .padding(.top, 20)
+//                                .padding(.horizontal, 20)
+//                                
+//                                // NPWP ROW
+//                                //                                if self.registerData.npwp != "" {
+//                                VStack {
+//                                    
+//                                    Button(action: {
+//                                        self.cameraFileName = "npwp"
+//                                        self.shouldPresentCamera = true
+//                                    }) {
+//                                        HStack {
+//                                            Text(self.registerData.fotoNPWP != Image("") ? "Your NPWP photo".localized(language)  : "Add NPWP".localized(language))
+//                                                .font(.subheadline)
+//                                                .foregroundColor(Color(hex: "#232175"))
+//                                                .fontWeight(.bold)
+//                                            Spacer()
+//                                            
+//                                            VStack {
+//                                                if self.registerData.fotoNPWP != Image("") {
+//                                                    self.registerData.fotoNPWP
+//                                                        .resizable()
+//                                                        .frame(maxWidth: 80, maxHeight: 50)
+//                                                        .cornerRadius(8)
+//                                                } else {
+//                                                    Image("ic_camera")
+//                                                        .resizable()
+//                                                        .frame(maxWidth: 50, maxHeight: 36)
+//                                                }
+//                                            }
+//                                            .frame(maxWidth: 80, minHeight: 50, maxHeight: 50)
+//                                        }
+//                                    }
+//                                    .fullScreenCover(isPresented: $shouldPresentCamera) {
+//                                        scanner
+//                                    }
+//                                    Divider()
+//                                }
+//                                .padding([.top, .bottom], 20)
+//                                .padding(.horizontal, 20)
+//                                //                                }
+//                            }
+//                        }
+//                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+//                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+//                        .cornerRadius(15)
+//                        .padding(.bottom, 10)
+//                        .shadow(radius: 2)
+//                        
+//                        VStack(alignment: .leading) {
+//                            Group {
+//                                Group {
+//                                    
+//                                    Text("Types of Savings".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                        .padding(.top, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Types of Savings".localized(language), text: $registerData.jenisTabungan)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: FormPilihJenisTabunganView(shouldPopToRootView: .constant(false), editMode: .active).environmentObject(registerData).environmentObject(productATMData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                    
+//                                    Text("Account Opening Purpose".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Account Opening Purpose".localized(language), text: $registerData.tujuanPembukaan)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: TujuanPembukaanRekeningView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                    
+//                                    Text("Source of funds".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Source of funds".localized(language), text: $registerData.sumberDana)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: SumberDanaView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                    
+//                                    if appState.nasabahIsExisting {
+//                                        Text("Gross Income".localized(language))
+//                                            .font(.caption)
+//                                            .fontWeight(.semibold)
+//                                            .foregroundColor(.gray)
+//                                            .multilineTextAlignment(.leading)
+//                                            .padding(.horizontal, 20)
+//                                        
+//                                        HStack {
+//                                            
+//                                            MultilineTextField("Gross Income".localized(language), text: $registerData.penghasilanKotor) {
+//                                                
+//                                            }
+//                                            .disabled(true)
+//                                            
+//                                            Divider()
+//                                                .frame(height: 30)
+//                                            
+//                                            NavigationLink(destination: PenghasilanKotorView(editMode: .active).environmentObject(registerData)) {
+//                                                Text("Edit").foregroundColor(.blue)
+//                                            }
+//                                        }
+//                                        .frame(height: 20)
+//                                        .font(.subheadline)
+//                                        .padding()
+//                                        .background(Color.gray.opacity(0.1))
+//                                        .cornerRadius(15)
+//                                        .padding(.horizontal, 20)
+//                                    }
+//                                    
+//                                    Text("Estimated Withdrawal".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Estimated Withdrawal".localized(language), text: $registerData.perkiraanPenarikan)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: PerkiraanPenarikanView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                }
+//                                
+//                                Group {
+//                                    Text("Estimated Withdrawal Size".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Estimated Withdrawal Size".localized(language), text: $registerData.besarPerkiraanPenarikan)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: BesarPerkiraanPenarikanView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                    
+//                                    Text("Estimated Deposit".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Estimated Deposit".localized(language), text: $registerData.perkiraanSetoran)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: PerkiraanSetoranView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                    
+//                                    Text("Estimated Deposit Size".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Estimated Deposit Size".localized(language), text: $registerData.besarPerkiraanPenarikan)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: BesarPerkiraanSetoranView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                    .padding(.bottom, 20)
+//                                }
+//                            }
+//                        }
+//                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+//                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+//                        .cornerRadius(15)
+//                        .padding(.bottom, 10)
+//                        .shadow(radius: 2)
+//                        
+//                        VStack(alignment: .leading) {
+//                            Group {
+//                                Group {
+//                                    
+//                                    Text("Profession".localized(language))
+//                                        .font(.caption)
+//                                        .fontWeight(.semibold)
+//                                        .foregroundColor(.gray)
+//                                        .multilineTextAlignment(.leading)
+//                                        .padding(.horizontal, 20)
+//                                        .padding(.top, 20)
+//                                    
+//                                    HStack {
+//                                        TextField("Profession".localized(language), text: $registerData.pekerjaan)
+//                                            .disabled(true)
+//                                        
+//                                        Divider()
+//                                            .frame(height: 30)
+//                                        
+//                                        NavigationLink(destination: PerkerjaanView(editMode: .active).environmentObject(registerData)) {
+//                                            Text("Edit").foregroundColor(.blue)
+//                                        }
+//                                    }
+//                                    .frame(height: 20)
+//                                    .font(.subheadline)
+//                                    .padding()
+//                                    .background(Color.gray.opacity(0.1))
+//                                    .cornerRadius(15)
+//                                    .padding(.horizontal, 20)
+//                                    
+//                                    dynamicForm
+//                                    
+//                                }
+//                            }
+//                            Spacer()
+//                        }
+//                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+//                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+//                        .cornerRadius(15)
+//                        .padding(.bottom, 10)
+//                        .shadow(radius: 2)
+//                        
+//                        VStack(alignment: .leading) {
+//                            Group {
+//                                // MARK : Pekerjaan Wiraswasta
+//                                if [10, 11, 12].contains(registerData.pekerjaanId) {
+//                                    informasiPenyandangDanaFields
+//                                } else {
+//                                    InformasiPerusahaanVerificationView()
+//                                        .padding(.bottom, 5)
+//                                }
+//                            }
+//                            Spacer()
+//                        }
+//                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+//                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+//                        .cornerRadius(15)
+//                        .padding(.bottom, 10)
+//                        .shadow(radius: 2)
+//                        
+////                        VStack(alignment: .leading) {
+////                            Group {
+////                                InformasiKeluargaVerificationView()
+////                                    .padding(.bottom, 20)
+////                            }
+////                        }
+////                        .frame(minWidth: UIScreen.main.bounds.width - 30, maxWidth: UIScreen.main.bounds.width - 30, maxHeight: .infinity)
+////                        .background(LinearGradient(gradient: Gradient(colors: [Color(hex: "#ffffff"), Color(hex: "#ececf6")]), startPoint: .top, endPoint: .bottom))
+////                        .cornerRadius(15)
+////                        .padding(.bottom, 10)
+////                        .shadow(radius: 2)
+//                        
+//                    }
+//                    .padding(.horizontal, 30)
+//                    .padding(.bottom, 35)
+//                }
+//                
                 VStack {
                     Button(action: {
                         

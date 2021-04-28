@@ -150,7 +150,7 @@ struct KeluargaTerdekat: View {
                                                 .padding(.vertical, 25)
                                         } else {
                                             NavigationLink(
-                                                destination: VerificationRegisterDataView().environmentObject(registerData),
+                                                destination: RegisterSummaryView().environmentObject(registerData),
                                                 isActive: $verificationViewActive,
                                                 label: {
                                                     Button(action: {

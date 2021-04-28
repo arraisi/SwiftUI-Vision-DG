@@ -176,7 +176,7 @@ struct FormIdentitasDiriView: View {
                                 label: {EmptyView()})
                             
                             NavigationLink(
-                                destination: VerificationRegisterDataView().environmentObject(registerData),
+                                destination: RegisterSummaryView().environmentObject(registerData),
                                 isActive: self.$backToSummary,
                                 label: {EmptyView()})
                             

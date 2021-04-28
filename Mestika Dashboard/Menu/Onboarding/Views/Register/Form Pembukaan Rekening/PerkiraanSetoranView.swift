@@ -135,7 +135,7 @@ struct PerkiraanSetoranView: View {
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
                                         } else {
-                                            NavigationLink(destination: VerificationRegisterDataView().environmentObject(registerData)) {
+                                            NavigationLink(destination: RegisterSummaryView().environmentObject(registerData)) {
                                                 
                                                 Text("Save".localized(language))
                                                     .foregroundColor(.white)

@@ -202,7 +202,7 @@ struct SumberPendapatanLainnyaView: View {
                                     label: {EmptyView()})
                                 
                                 NavigationLink(
-                                    destination: VerificationRegisterDataView().environmentObject(registerData),
+                                    destination: RegisterSummaryView().environmentObject(registerData),
                                     tag: "verificationView",
                                     selection: $selection,
                                     label: {EmptyView()})
