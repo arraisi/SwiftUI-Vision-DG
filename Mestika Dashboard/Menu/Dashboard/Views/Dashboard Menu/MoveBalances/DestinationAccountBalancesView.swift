@@ -127,6 +127,10 @@ struct DestinationAccountBalancesView: View {
                                 .cornerRadius(15)
                             })
                         }
+                    } else {
+                        ShimmerView()
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 200)
+                            .cornerRadius(15)
                     }
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)

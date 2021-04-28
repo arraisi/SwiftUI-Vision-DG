@@ -282,6 +282,7 @@
 		52C3629E25D12DA3000374AA /* TransferRtgsConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3629D25D12DA3000374AA /* TransferRtgsConfirmation.swift */; };
 		52C362A325D12DC0000374AA /* TransferRtgsValidationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C362A225D12DC0000374AA /* TransferRtgsValidationPin.swift */; };
 		52C362A825D12DD8000374AA /* TransferRtgsSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C362A725D12DD8000374AA /* TransferRtgsSuccess.swift */; };
+		52C3BAFB2639DB070066A7A6 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3BAFA2639DB070066A7A6 /* ShimmerView.swift */; };
 		52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */; };
 		52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF125CBEA480012DDAB /* ProfileService.swift */; };
 		52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */; };
@@ -755,6 +756,7 @@
 		52C3629D25D12DA3000374AA /* TransferRtgsConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRtgsConfirmation.swift; sourceTree = "<group>"; };
 		52C362A225D12DC0000374AA /* TransferRtgsValidationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRtgsValidationPin.swift; sourceTree = "<group>"; };
 		52C362A725D12DD8000374AA /* TransferRtgsSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRtgsSuccess.swift; sourceTree = "<group>"; };
+		52C3BAFA2639DB070066A7A6 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseModel.swift; sourceTree = "<group>"; };
 		52CB5DF125CBEA480012DDAB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 				52D8DC2625D65A4B004DF85E /* TextArea.swift */,
 				5294535325EF2899009A5B83 /* SearchBar.swift */,
 				C052A081263276D900DC90C6 /* UnderlineButton.swift */,
+				52C3BAFA2639DB070066A7A6 /* ShimmerView.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -2562,6 +2565,7 @@
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
 				5283AF5D25CD28E100111C75 /* UIDevice+Extensions.swift in Sources */,
 				5294536025EF59E7009A5B83 /* CardDamageAddressInputView.swift in Sources */,
+				52C3BAFB2639DB070066A7A6 /* ShimmerView.swift in Sources */,
 				C0FBE56026384E180027A9DB /* RegisterSummaryView.swift in Sources */,
 				52DACF8725ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
