@@ -184,7 +184,13 @@ struct SavingAccountView: View {
     func getAccountBalance() {
         self.profileVM.getAccountBalance { success in
             if success {
-                self.balance = self.profileVM.balance
+                
+                if self.profileVM.creditDebit == "D" {
+                    self.balance = "0"
+                } else {
+                    self.balance = self.profileVM.balance
+                }
+                
             }
             
             if !success {

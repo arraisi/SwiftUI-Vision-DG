@@ -309,6 +309,7 @@ struct FirstOTPLoginView: View {
     private func submitPin() {
         if pin.count == maxDigits {
             isDisabled = true
+            validateOTP()
         }
         
         if pin.count > maxDigits {

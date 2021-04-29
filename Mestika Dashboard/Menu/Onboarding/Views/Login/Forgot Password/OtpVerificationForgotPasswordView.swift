@@ -264,6 +264,8 @@ struct OtpVerificationForgotPasswordView: View {
     private func submitPin() {
         if pin.count == maxDigits {
             isDisabled = true
+            self.tryCount += 1
+            validateOTP()
         }
         
         if pin.count > maxDigits {

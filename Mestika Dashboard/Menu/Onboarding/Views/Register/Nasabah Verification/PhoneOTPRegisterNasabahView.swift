@@ -349,6 +349,9 @@ struct PhoneOTPRegisterNasabahView: View {
     private func submitPin() {
         if pin.count == maxDigits {
             isDisabled = true
+            print("MAX")
+            self.tryCount += 1
+            validateOTP()
         }
         
         if pin.count > maxDigits {
