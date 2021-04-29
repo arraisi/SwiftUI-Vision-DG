@@ -298,7 +298,7 @@ struct FormMoveBalanceView: View {
     }
     
     var disableForm: Bool {
-        if (amountCtrl.isNotEmpty() && frekuensiSelectedCtrl != "Select Transaction Frekuensi") {
+        if (amountCtrl.isNotEmpty() && amountCtrl != "0" && frekuensiSelectedCtrl != "Select Transaction Frekuensi") {
             return false
         }
         return true

@@ -184,7 +184,12 @@ struct DestinationAccountBalancesView: View {
         
         self.profileVM.getAccountBalance { success in
             if success {
-                self.transaksiData.mainBalance = self.profileVM.balance
+                
+                if (self.profileVM.creditDebit == "D") {
+                    self.transaksiData.mainBalance = "0"
+                } else {
+                    self.transaksiData.mainBalance = self.profileVM.balance
+                }
                 
                 getMainAccount()
             }
@@ -208,7 +213,7 @@ struct DestinationAccountBalancesView: View {
                 if success {
                     self.savingAccountVM.accounts.forEach { a in
                         
-                        if (a.accountType == "S") {
+                        if (a.accountType == "S" && self.transaksiData.sourceNumber != a.accountNumber) {
                             self.listSourceNumber.append(a.accountNumber)
                             self.listTabunganName.append(a.productName ?? "No Name")
                         }

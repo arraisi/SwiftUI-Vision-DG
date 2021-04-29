@@ -314,14 +314,18 @@ struct PasswordView: View {
                                         Text("✓")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.green)
+                                        
                                     } else {
                                         Text("✗")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.black)
                                     }
                                     
                                     Text("1 Karakter")
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(self.haveCharacter ? .green : .black)
                                     
                                     Spacer()
                                 }
@@ -332,14 +336,18 @@ struct PasswordView: View {
                                         Text("✓")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.green)
+                                        
                                     } else {
                                         Text("✗")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.black)
                                     }
                                     
                                     Text("1 Huruf Kecil")
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(self.haveLowercase ? .green : .black)
                                     
                                     Spacer()
                                 }
@@ -351,14 +359,18 @@ struct PasswordView: View {
                                         Text("✓")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.green)
+                                        
                                     } else {
                                         Text("✗")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.black)
                                     }
                                     
                                     Text("1 Huruf kapital/besar")
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(self.haveUppercase ? .green : .black)
                                     
                                     Spacer()
                                 }
@@ -369,14 +381,18 @@ struct PasswordView: View {
                                         Text("✓")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.green)
+                                        
                                     } else {
                                         Text("✗")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.black)
                                     }
                                     
                                     Text("1 Angka")
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(self.haveNumber ? .green : .black)
                                     
                                     Spacer()
                                 }
@@ -387,14 +403,18 @@ struct PasswordView: View {
                                         Text("✓")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.green)
+                                        
                                     } else {
                                         Text("✗")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.black)
                                     }
                                     
                                     Text("1 Karakter Spesial")
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(self.haveSpecialcase ? .green : .black)
                                     
                                     Spacer()
                                 }
@@ -405,14 +425,18 @@ struct PasswordView: View {
                                         Text("✓")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.green)
+                                        
                                     } else {
                                         Text("✗")
                                             .font(.custom("Montserrat-Regular", size: 12))
                                             .padding(.leading, 25)
+                                            .foregroundColor(.black)
                                     }
                                     
                                     Text("Minimal 8 karakter")
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .foregroundColor(self.haveMin8Char ? .green : .black)
                                     
                                     Spacer()
                                 }

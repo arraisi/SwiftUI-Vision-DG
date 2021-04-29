@@ -28,8 +28,7 @@ struct SuccessMoveBalancesView: View {
             VStack(alignment: .center) {
                 Image("logo_m_mestika")
                     .resizable()
-                    .frame(width: 100, height: 100, alignment: .center)
-                    .padding(.top, 30)
+                    .frame(width: 70, height: 70, alignment: .center)
                     .padding()
                 
                 VStack(spacing: 5) {
@@ -67,7 +66,8 @@ struct SuccessMoveBalancesView: View {
                     Spacer()
                 }
                 .foregroundColor(.white)
-                .padding(25)
+                .padding(.horizontal, 25)
+                .padding(.top, 25)
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
@@ -83,7 +83,8 @@ struct SuccessMoveBalancesView: View {
                     Spacer()
                 }
                 .foregroundColor(.white)
-                .padding(25)
+                .padding(.horizontal, 25)
+                .padding(.top, 25)
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
@@ -99,7 +100,8 @@ struct SuccessMoveBalancesView: View {
                     Spacer()
                 }
                 .foregroundColor(.white)
-                .padding(25)
+                .padding(.horizontal, 25)
+                .padding(.top, 25)
                 
                 Spacer()
                 
@@ -127,6 +129,7 @@ struct SuccessMoveBalancesView: View {
         }
         .navigationTitle("")
         .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: HStack(spacing: 30) {
             Button(action: {
                 self.uiImage = self.asUIImage()
