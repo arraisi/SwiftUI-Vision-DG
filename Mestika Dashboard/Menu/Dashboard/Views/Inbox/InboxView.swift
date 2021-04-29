@@ -15,25 +15,34 @@ struct InboxView: View {
         VStack(spacing: 0) {
             
             HStack(spacing: 0){
-                UnderlineButton(active: self.selected == 0 ? true : false, label: "Pesan") {
-                    print("Pesan")
+                UnderlineButton(active: self.selected == 0 ? true : false, label: "History") {
+                    print("History")
                     self.selected = 0
                 }
                 
-                UnderlineButton(active: self.selected == 1 ? true : false, label: "Pemberitahuan") {
-                    print("Pemberitahuan")
+                UnderlineButton(active: self.selected == 1 ? true : false, label: "Pesan") {
+                    print("Pesan")
                     self.selected = 1
                 }
+                
+                //                UnderlineButton(active: self.selected == 1 ? true : false, label: "Pemberitahuan") {
+                //                    print("Pemberitahuan")
+                //                    self.selected = 1
+                //                }
             }
             .padding(.top, 30)
             
             if selected == 0 {
-                PesanView()
+                HistoryView()
             }
             
             if selected == 1 {
-                PemberitahuanView()
+                PesanView()
             }
+            
+            //            if selected == 1 {
+            //                PemberitahuanView()
+            //            }
             
             Spacer()
             
