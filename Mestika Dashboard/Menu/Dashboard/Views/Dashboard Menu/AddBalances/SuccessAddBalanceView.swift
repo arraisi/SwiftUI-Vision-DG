@@ -16,6 +16,13 @@ struct SuccessAddBalanceView: View {
     // App Storage
     @AppStorage("language") private var language = LocalizationService.shared.language
     
+    // Local Variable
+    @State private var tglTrx: String = ""
+    @State private var sourceName: String = ""
+    @State private var destinationName: String = ""
+    @State private var notes: String = ""
+    @State private var amount: String = ""
+    
     @State private var uiImage: UIImage = UIImage()
     @State private var sheet = false
     
@@ -32,7 +39,7 @@ struct SuccessAddBalanceView: View {
                     .padding()
                 
                 VStack(spacing: 5) {
-                    Text("\(self.transactionData.trxDateResp)")
+                    Text("\(self.tglTrx)")
                         .font(.custom("Montserrat-Bold", size: 12))
                     
                     Text("Tambah Saldo Berhasil")
@@ -46,7 +53,7 @@ struct SuccessAddBalanceView: View {
                     HStack(alignment: .top, spacing: 0) {
                         Text("Rp.")
                             .font(.custom("Montserrat-Bold", size: 22))
-                        Text("\(self.transactionData.amount.thousandSeparator())")
+                        Text("\(self.amount.thousandSeparator())")
                             .font(.custom("Montserrat-Bold", size: 36))
                     }
                 }
@@ -58,7 +65,7 @@ struct SuccessAddBalanceView: View {
                         Text("Rekening Asal".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
-                        Text("\(self.transactionData.sourceAccountName)")
+                        Text("\(self.sourceName)")
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
@@ -75,7 +82,7 @@ struct SuccessAddBalanceView: View {
                         Text("Rekening Tujuan".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
-                        Text("\(self.transactionData.destinationName)")
+                        Text("\(self.destinationName)")
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
@@ -92,7 +99,7 @@ struct SuccessAddBalanceView: View {
                         Text("Catatan".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
-                        Text("\(self.transactionData.notes)")
+                        Text("\(self.notes)")
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
@@ -130,6 +137,13 @@ struct SuccessAddBalanceView: View {
         .navigationTitle("")
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            self.tglTrx = self.transactionData.transactionDate
+            self.sourceName = self.transactionData.sourceAccountName
+            self.destinationName = self.transactionData.destinationName
+            self.notes = self.transactionData.notes
+            self.amount = self.transactionData.amount
+        }
         .navigationBarItems(trailing: HStack(spacing: 30) {
             Button(action: {
                 self.uiImage = self.asUIImage()

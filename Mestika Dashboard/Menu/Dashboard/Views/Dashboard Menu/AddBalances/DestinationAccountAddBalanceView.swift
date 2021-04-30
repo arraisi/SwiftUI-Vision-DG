@@ -188,8 +188,12 @@ struct DestinationAccountAddBalanceView: View {
                     self.savingAccountVM.accounts.forEach { a in
                         
                         if (a.accountType == "S") {
-                            self.listSourceNumber.append(a.accountNumber)
-                            self.listTabunganName.append(a.productName ?? "No Name")
+                            
+                            if (self.transactionData.sourceNumber != a.accountNumber) {
+                                self.listSourceNumber.append(a.accountNumber)
+                                self.listTabunganName.append(a.productName ?? "No Name")
+                            }
+                            
                         }
                     }
                     

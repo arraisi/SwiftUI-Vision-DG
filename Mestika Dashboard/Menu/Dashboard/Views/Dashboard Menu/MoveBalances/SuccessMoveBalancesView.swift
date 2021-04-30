@@ -99,7 +99,7 @@ struct SuccessMoveBalancesView: View {
                         Text("Catatan".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
-                        Text("\(self.transactionData.notes)")
+                        Text("\(self.notes)")
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
