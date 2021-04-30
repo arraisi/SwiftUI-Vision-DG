@@ -44,6 +44,7 @@
 		0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF48AE12577CC5D0037942D /* StringProtocol+Extensions.swift */; };
 		2E7F032F95A05771F41E14EF /* Pods_Mestika_Dashboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D6479A09A0661EF063B4B /* Pods_Mestika_Dashboard.framework */; };
 		5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */; };
+		5203B1F9263BEE26007174FB /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 5203B1F8263BEE26007174FB /* SocketIO */; };
 		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
 		520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 522563832562549900BCAB67 /* JGProgressHUD-SwiftUI */; };
@@ -282,6 +283,7 @@
 		52C362A325D12DC0000374AA /* TransferRtgsValidationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C362A225D12DC0000374AA /* TransferRtgsValidationPin.swift */; };
 		52C362A825D12DD8000374AA /* TransferRtgsSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C362A725D12DD8000374AA /* TransferRtgsSuccess.swift */; };
 		52C3BAFB2639DB070066A7A6 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3BAFA2639DB070066A7A6 /* ShimmerView.swift */; };
+		52C3BB03263A9A940066A7A6 /* FormInputAtmChangeDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3BB02263A9A940066A7A6 /* FormInputAtmChangeDeviceView.swift */; };
 		52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */; };
 		52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF125CBEA480012DDAB /* ProfileService.swift */; };
 		52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */; };
@@ -757,6 +759,7 @@
 		52C362A225D12DC0000374AA /* TransferRtgsValidationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRtgsValidationPin.swift; sourceTree = "<group>"; };
 		52C362A725D12DD8000374AA /* TransferRtgsSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRtgsSuccess.swift; sourceTree = "<group>"; };
 		52C3BAFA2639DB070066A7A6 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
+		52C3BB02263A9A940066A7A6 /* FormInputAtmChangeDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputAtmChangeDeviceView.swift; sourceTree = "<group>"; };
 		52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseModel.swift; sourceTree = "<group>"; };
 		52CB5DF125CBEA480012DDAB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -955,6 +958,7 @@
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				2E7F032F95A05771F41E14EF /* Pods_Mestika_Dashboard.framework in Frameworks */,
+				5203B1F9263BEE26007174FB /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1385,6 +1389,7 @@
 				5259501E2553E03000C8CA5D /* LoginScreen.swift */,
 				525950162553E03000C8CA5D /* Forgot Password */,
 				6122BA0D825E221739AB5B40 /* First Login */,
+				52C3BB02263A9A940066A7A6 /* FormInputAtmChangeDeviceView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2290,6 +2295,7 @@
 				520E467A2568B5A800DE9205 /* Introspect */,
 				520E46802568BEF100DE9205 /* Indicators */,
 				06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */,
+				5203B1F8263BEE26007174FB /* SocketIO */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -2376,6 +2382,7 @@
 				C01B3DEE2564203300BD3C06 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
 				06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				5203B1F7263BEE26007174FB /* XCRemoteSwiftPackageReference "socket" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -2866,6 +2873,7 @@
 				526B659D254FC05300C13C36 /* HistoryTransfer.swift in Sources */,
 				C0D274D725EF10B800513C53 /* ConfirmationOfOpeningSavingAccountView.swift in Sources */,
 				52ADFF262557DD1600A1001F /* SavingSelectionModalView.swift in Sources */,
+				52C3BB03263A9A940066A7A6 /* FormInputAtmChangeDeviceView.swift in Sources */,
 				C0240F9926388E6800E0181D /* SourceOfFundView.swift in Sources */,
 				C01B84B025FF240200F5BBD9 /* ProductsSavingAccountViewModel.swift in Sources */,
 				C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */,
@@ -3690,6 +3698,14 @@
 				minimumVersion = 1.5.0;
 			};
 		};
+		5203B1F7263BEE26007174FB /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.1;
+			};
+		};
 		520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Connapptivity/SwiftUI-Indicators";
@@ -3753,6 +3769,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		5203B1F8263BEE26007174FB /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5203B1F7263BEE26007174FB /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
 		};
 		520E467A2568B5A800DE9205 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;

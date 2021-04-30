@@ -213,16 +213,16 @@ struct DashboardTabs: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .edgesIgnoringSafeArea(.top)
-//        .onReceive(timer) { time in
-//            print(self.timeLogout)
-//            if self.timeLogout > 0 {
-//                self.timeLogout -= 1
-//            }
-//
-//            if self.timeLogout == 1 {
-//                showAlertTimeout = true
-//            }
-//        }
+        .onReceive(timer) { time in
+            print(self.timeLogout)
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
+
+            if self.timeLogout == 1 {
+                showAlertTimeout = true
+            }
+        }
         .onAppear {
             print("GET")
             self.listSourceNumber.removeAll()
@@ -258,7 +258,7 @@ struct DashboardTabs: View {
                 if !success {
                     self.isLoadingCard = false
                     if (self.savingAccountVM.errorCode == "401") {
-                        self.appState.moveToWelcomeView = true
+                        self.showAlertTimeout = true
                     }
                 }
 
@@ -286,7 +286,8 @@ struct DashboardTabs: View {
             VStack(alignment: .leading) {
                 
                 if isLoading {
-                    ProgressView()
+                    ShimmerView()
+                        .frame(width: 100, height: 20)
                 } else {
                     Text("Hi, \(self.username)")
                         .font(.headline)
@@ -492,7 +493,7 @@ struct DashboardTabs: View {
                 self.isLoading = false
                 
                 if (self.profileVM.statusCode == "401") {
-                    self.appState.moveToWelcomeView = true
+                    self.showAlertTimeout = true
                 }
             }
         }

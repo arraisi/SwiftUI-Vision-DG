@@ -170,6 +170,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/auth/forgotPwd")
     }
     
+    static func urlAuthChangeDevice() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/auth/login-change-atm-verification")
+    }
+    
     //-------------------- TRANSFER SERVICE ----------------------//
     
     static func urlLimitTransaction() -> URL? {

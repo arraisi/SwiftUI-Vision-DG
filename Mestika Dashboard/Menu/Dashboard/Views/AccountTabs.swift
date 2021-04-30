@@ -78,9 +78,9 @@ struct AccountTabs: View {
         .onReceive(timer) { time in
             print(self.timeLogout)
             
-//            if self.timeLogout > 0 {
-//                self.timeLogout -= 1
-//            }
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
             
             if self.timeLogout < 1 {
                 showAlertTimeout = true
