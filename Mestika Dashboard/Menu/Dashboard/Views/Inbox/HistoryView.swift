@@ -46,16 +46,16 @@ struct HistoryRow: View {
                     .fill(Color.green)
                     .frame(width: 30, height: 30)
                 
-                Text("\(data.data.destinationAccountName.subStringRange(from: 0, to: 1))")
+                Text("\(data.data.destinationAccountName?.subStringRange(from: 0, to: 1) ?? "0")")
                     .foregroundColor(.white)
                     .fontWeight(.heavy)
             }
             
             VStack(alignment: .leading) {
-                Text(data.data.destinationAccountName)
+                Text(data.data.destinationAccountName ?? "")
                     .font(.custom("Montserrat-Bold", size: 14))
                 
-                Text("\(data.data.message)")
+                Text("\(data.data.message ?? "")")
                     .font(.custom("Montserrat-Medium", size: 12))
             }
             
@@ -64,7 +64,7 @@ struct HistoryRow: View {
             HStack {
                 Text("Rp.")
                 
-                Text("\(data.data.transactionAmount.thousandSeparator())")
+                Text("\(data.data.transactionAmount?.thousandSeparator() ?? "0")")
             }
             .font(.custom("Montserrat-Bold", size: 14))
             .foregroundColor(.green)
@@ -86,6 +86,6 @@ struct HistoryRow: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryRow(data: HistoryModelElement(nik: "00000", deviceID: "123", trxDate: "123", status: 1, message: "123", rc: "123", trxType: "123", traceNumber: "123", reffNumber: "123", data: DataClass(transactionFee: "123", destinationBank: "123", transactionAmount: "10000000000", destinationAccountNumber: "123", message: "Description", sourceAccountNumber: "123", destinationAccountName: "Abdul R Arraisi", sourceAccountName: "123")))
+        HistoryRow(data: HistoryModelElement(nik: "00000", deviceID: "123", trxDate: "123", status: 1, message: "123", rc: "123", trxType: "123", traceNumber: "123", reffNumber: "123", data: DataClass(transactionFee: "1000000", destinationBank: "123456", transactionAmount: "2000000", destinationAccountNumber: "123456", message: "Description", sourceAccountNumber: "100", destinationAccountName: "AA", sourceAccountName: "BB", amount: "4000000", destinationAccount: "123", referenceNumber: "x123", sourceAccount: "b123", trxMessage: "Message")))
     }
 }
