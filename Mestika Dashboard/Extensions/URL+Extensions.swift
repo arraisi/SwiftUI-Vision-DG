@@ -222,6 +222,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/user/getAccountBalance")
     }
     
+    static func urlGetPasswordParam() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/password/pwd-param")
+    }
+    
     //-------------------- FAVORITE SERVICE ----------------------//
     
     static func urlGetListFavorite() -> URL? {

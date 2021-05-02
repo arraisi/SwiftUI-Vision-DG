@@ -19,6 +19,11 @@ class AuthViewModel: ObservableObject {
     @Published var status: String = ""
     @Published var errorMessage: String = ""
     @Published var errorCode: String = ""
+    
+    @Published var minimumPasswordLength: Int = 0
+    @Published var minimumUpperCaseLetterInPassword: Int = 1
+    @Published var minimumLowerCaseLetterInPassword: Int = 1
+    @Published var minimumNumericInPassword: Int = 1
 }
 
 extension AuthViewModel {
@@ -538,6 +543,54 @@ extension AuthViewModel {
             switch result {
             case .success(let response):
                 print("Success \(response)")
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                case .custom(code: 400):
+                    self.errorMessage = "Weak password, please change your password"
+                case .custom(code: 401):
+                    DispatchQueue.main.async {
+                        self.errorMessage = "Unauthorized"
+                    }
+                case .custom(code: 403):
+                    self.errorMessage = "Password tidak berubah"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                completion(false)
+            }
+        }
+        
+    }
+    
+    // MARK: - GET PASSWORD PARAM
+    func passwordParam(completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.passwordParam() { result in
+            
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            
+            switch result {
+            case .success(let response):
+                print("Success \(response)")
+                
+                self.minimumPasswordLength = response.minimumPasswordLength
+                self.minimumNumericInPassword = response.minimumNumericInPassword
+                self.minimumUpperCaseLetterInPassword = response.minimumUpperCaseLetterInPassword
+                self.minimumLowerCaseLetterInPassword = response.minimumLowerCaseLetterInPassword
                 
                 completion(true)
                 
