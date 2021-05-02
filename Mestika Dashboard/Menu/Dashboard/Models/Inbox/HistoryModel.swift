@@ -16,7 +16,7 @@ struct HistoryModelElement: Codable {
     let rc: String?
     let trxType, traceNumber, reffNumber: String
     let data: DataClass
-
+    
     enum CodingKeys: String, CodingKey {
         case nik
         case deviceID = "deviceId"
@@ -26,8 +26,10 @@ struct HistoryModelElement: Codable {
 
 // MARK: - DataClass
 struct DataClass: Codable {
-    let transactionFee, destinationBank, transactionAmount, destinationAccountNumber: String
-    let message, sourceAccountNumber, destinationAccountName, sourceAccountName: String
+    let transactionFee, destinationBank, transactionAmount, destinationAccountNumber: String?
+    let message, sourceAccountNumber, destinationAccountName, sourceAccountName: String?
+    let amount, destinationAccount: String?
+    let referenceNumber, sourceAccount: String?, trxMessage: String?
 }
 
 typealias HistoryModel = [HistoryModelElement]
