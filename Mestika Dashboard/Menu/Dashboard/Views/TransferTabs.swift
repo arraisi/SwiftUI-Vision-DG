@@ -62,18 +62,18 @@ struct TransferTabs: View {
                 showAlertTimeout = true
             }
         }
-        .alert(isPresented: $showAlertTimeout) {
-            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
-                self.authVM.postLogout { success in
-                    if success {
-                        print("SUCCESS LOGOUT")
-                        DispatchQueue.main.async {
-                            self.appState.moveToWelcomeView = true
-                        }
-                    }
-                }
-            }))
-        }
+//        .alert(isPresented: $showAlertTimeout) {
+//            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
+//                self.authVM.postLogout { success in
+//                    if success {
+//                        print("SUCCESS LOGOUT")
+//                        DispatchQueue.main.async {
+//                            self.appState.moveToWelcomeView = true
+//                        }
+//                    }
+//                }
+//            }))
+//        }
     }
     
     // MARK: -USERNAME INFO VIEW

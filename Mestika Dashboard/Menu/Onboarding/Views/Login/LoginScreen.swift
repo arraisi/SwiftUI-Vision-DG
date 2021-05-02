@@ -39,6 +39,8 @@ struct LoginScreen: View {
     
     @State var isLoading: Bool = false
     
+    @State var routeAtmInputLogin: Bool = false
+    
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
     var user: FetchedResults<Registration>
@@ -150,6 +152,13 @@ struct LoginScreen: View {
                     .isDetailLink(false)
                     
                     NavigationLink(
+                        destination: FormInputAtmChangeDeviceView(pwd: self.$passwordCtrl, phoneNmbr: self.$phoneNumber),
+                        isActive: self.$routeAtmInputLogin,
+                        label: {}
+                    )
+                    .isDetailLink(false)
+                    
+                    NavigationLink(
                         destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                         isActive: self.$routeNewPassword,
                         label: {}
@@ -247,7 +256,8 @@ struct LoginScreen: View {
                 if success {
                     self.isLoading = false
                     print("LOGIN SUCCESS")
-                    self.isActiveRoute = true
+//                    self.isActiveRoute = true
+                    self.routeAtmInputLogin = true
                 }
                 
                 if !success {
@@ -256,7 +266,8 @@ struct LoginScreen: View {
                     if (self.authVM.errorCode == "206") {
                         self.routeNewPassword = true
                     } else if (self.authVM.errorCode == "401") {
-                        self.appState.moveToWelcomeView = true
+//                        self.appState.moveToWelcomeView = true
+                        self.showingModal = true
                     } else {
                         print("LOGIN FAILED")
                         self.showingModal = true

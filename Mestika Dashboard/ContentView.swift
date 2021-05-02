@@ -64,8 +64,8 @@ struct ContentView: View {
                     .environmentObject(appState)
                 
 //                NavigationView{
-//                    PasswordView()
-//                        .environmentObject(RegistrasiModel())
+//                    SuccessMoveBalancesView()
+//                        .environmentObject(MoveBalancesModel())
 //                        .environmentObject(appState)
 //                }
             }

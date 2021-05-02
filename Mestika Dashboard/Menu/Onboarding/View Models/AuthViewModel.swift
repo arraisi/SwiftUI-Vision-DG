@@ -108,6 +108,55 @@ extension AuthViewModel {
         
     }
     
+    // MARK: - POST LOGIN CHANGE DEVICE
+    func postLoginChangeDevice(
+        password: String,
+        phoneNumber: String,
+        atmPin: String,
+        cardNo: String,
+        completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.loginChangeDevice(
+            password: encryptPassword(password: password),
+            phoneNumber: phoneNumber,
+            atmPin: encryptPassword(password: atmPin),
+            cardNo: cardNo
+        ) { result in
+            switch result {
+            case .success( _):
+                print("Success")
+                self.isLoading = false
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                case .custom(code: 206):
+                    self.errorCode = "206"
+                    self.errorMessage = "Change Password"
+                case .custom(code: 401):
+                    self.errorCode = "401"
+                    self.errorMessage = "Move to Dashboard"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+        
+    }
+    
     // MARK: - POST LOGOUT
     func postLogout(completion: @escaping (Bool) -> Void) {
         

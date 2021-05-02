@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ListLastTransactionView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -147,6 +149,7 @@ struct ListLastTransactionView: View {
         }
         .alert(isPresented: $showAlert) {
             return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
+                self.appState.moveToWelcomeView = true
             }))
         }
     }
