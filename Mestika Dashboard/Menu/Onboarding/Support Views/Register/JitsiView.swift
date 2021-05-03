@@ -54,15 +54,20 @@ struct JitsiView: UIViewControllerRepresentable {
             builder.welcomePageEnabled = false
             builder.room = self.jitsi_room
             
-            builder.setFeatureFlag("add-people.enabled", withValue: false)
-            builder.setFeatureFlag("invite.enabled", withValue: false)
-            builder.setFeatureFlag("close-captions.enabled", withValue: false)
-            builder.setFeatureFlag("chat.enabled", withValue: false)
-            builder.setFeatureFlag("meeting-name.enabled", withValue: false)
-            builder.setFeatureFlag("audio-mute.enabled", withValue: false)
-            builder.setFeatureFlag("video-mute.enabled", withValue: false)
-            builder.setFeatureFlag("video-share.enabled", withValue: false)
-            builder.setFeatureFlag("android.audio-focus.disabled", withValue: false)
+            builder.setFeatureFlag("add-people.enabled", withBoolean: false)
+            builder.setFeatureFlag("invite.enabled", withBoolean: false)
+            builder.setFeatureFlag("close-captions.enabled", withBoolean: false)
+            builder.setFeatureFlag("chat.enabled", withBoolean: false)
+            builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
+            builder.setFeatureFlag("audio-mute.enabled", withBoolean: false)
+            builder.setFeatureFlag("audio-only.enabled", withBoolean: false)
+            builder.setFeatureFlag("help.enabled", withBoolean: false)
+            builder.setFeatureFlag("overflow-menu.enabled", withBoolean: false)
+            builder.setFeatureFlag("toolbox.alwaysVisible", withBoolean: true)
+            builder.setFeatureFlag("toolbox.enabled", withBoolean: false)
+            builder.setFeatureFlag("video-mute.enabled", withBoolean: true)
+            builder.setFeatureFlag("video-share.enabled", withBoolean: false)
+            builder.setFeatureFlag("android.audio-focus.disabled", withBoolean: false)
             
         }
         

@@ -123,7 +123,7 @@ struct DestinationAccountAddBalanceView: View {
                         }
                     } else {
                         ShimmerView()
-                            .frame(width: UIScreen.main.bounds.width - 50, height: 200)
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 170)
                             .cornerRadius(15)
                     }
                 })
@@ -189,7 +189,7 @@ struct DestinationAccountAddBalanceView: View {
                         
                         if (a.accountType == "S") {
                             
-                            if (self.transactionData.sourceNumber != a.accountNumber) {
+                            if (self.transactionData.destinationNumber != a.accountNumber) {
                                 self.listSourceNumber.append(a.accountNumber)
                                 self.listTabunganName.append(a.productName ?? "No Name")
                             }

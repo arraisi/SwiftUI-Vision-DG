@@ -93,7 +93,10 @@ extension ATMProductViewModel {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listJenisTabungan = response.map { (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
+                    
+                    self.listJenisTabungan = response.filter({ (e: JenisTabunganModelElement) -> Bool in
+                        e.categoryProduct == "main_account"
+                    }).map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
                         return JenisTabunganViewModel (
                             id: data.id ?? "",
                             name: data.productName ?? "",
@@ -102,7 +105,7 @@ extension ATMProductViewModel {
                             type: data.balType ?? "",
                             codePlan: data.kodePlan ?? ""
                         )
-                    }
+                    })
 //                    self.listJenisTabungan = response.map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
 //
 //                    })
