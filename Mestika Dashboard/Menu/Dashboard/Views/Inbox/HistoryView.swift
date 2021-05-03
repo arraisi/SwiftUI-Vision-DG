@@ -14,6 +14,8 @@ struct HistoryView: View {
     
     @StateObject var historVM = HistoryTransactionViewModel()
     
+    @Binding var isLoading: Bool
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -26,8 +28,9 @@ struct HistoryView: View {
             .padding(.vertical, 30)
         }
         .onAppear{
+            self.isLoading = true
             historVM.findAll { r in
-                
+                self.isLoading = false
             }
         }
     }

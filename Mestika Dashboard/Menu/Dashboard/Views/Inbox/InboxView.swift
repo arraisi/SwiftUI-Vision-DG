@@ -6,13 +6,22 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct InboxView: View {
     
     @State var selected: Int = 0
+    @State var isLoading: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
+            
+            if (self.isLoading) {
+                LinearWaitingIndicator()
+                    .animated(true)
+                    .foregroundColor(.green)
+                    .frame(height: 1)
+            }
             
             HStack(spacing: 0){
                 UnderlineButton(active: self.selected == 0 ? true : false, label: "History") {
@@ -33,7 +42,7 @@ struct InboxView: View {
             .padding(.top, 30)
             
             if selected == 0 {
-                HistoryView()
+                HistoryView(isLoading: self.$isLoading)
             }
             
             if selected == 1 {
