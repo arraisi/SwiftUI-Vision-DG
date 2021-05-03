@@ -33,3 +33,28 @@ class MoveBalancesModel: ObservableObject {
     
     static let shared = MoveBalancesModel()
 }
+
+//@Published var username = ""
+//@Published var transferType = "Tambah Saldo"
+//@Published var cardNo = "6178941834728284"
+//@Published var ref = ""
+//@Published var amount = ""
+//@Published var adminFee = ""
+//@Published var currency = "360"
+//@Published var sourceNumber = "13806712742"
+//@Published var sourceAccountName = "Vina10"
+//@Published var destinationNumber = "56580239168"
+//@Published var destinationName = "JULIANA"
+//@Published var notes = ""
+//@Published var pin = ""
+//
+//@Published var idEdit = ""
+//
+//@Published var transactionDate = "Sekarang"
+//@Published var transactionFrequency = ""
+//
+//@Published var trxDateResp = ""
+//
+//@Published var mainBalance = "10000000"
+//
+//static let shared = MoveBalancesModel()
