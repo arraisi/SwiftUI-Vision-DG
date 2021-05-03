@@ -129,7 +129,7 @@ struct FormAddBalanceView: View {
                                 .font(.system(size: 12))
                                 .fontWeight(.bold)
                             
-                            Text("400.000")
+                            Text("\(self.saldoAktif.thousandSeparator())")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
                         }

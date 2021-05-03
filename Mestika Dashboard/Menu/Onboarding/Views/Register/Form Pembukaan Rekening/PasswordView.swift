@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftyRSA
+import Indicators
 
 struct PasswordView: View {
     
@@ -33,12 +34,18 @@ struct PasswordView: View {
     
     // Masking Password
     @State private var isPasswordValid : Bool = false
-    @State private var haveCharacter: Bool = false
     @State private var haveLowercase: Bool = false
     @State private var haveUppercase: Bool = false
     @State private var haveNumber: Bool = false
     @State private var haveSpecialcase: Bool = false
     @State private var haveMin8Char: Bool = false
+    
+    @State var minimumPasswordLength: Int = 8
+    @State var minimumUpperCaseLetterInPassword: Int = 1
+    @State var minimumLowerCaseLetterInPassword: Int = 1
+    @State var minimumNumericInPassword: Int = 1
+    
+    @State var isLoading: Bool = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -76,16 +83,7 @@ struct PasswordView: View {
     
     func isHave8Char(_ string: String) -> Bool {
         
-        if string.count >= 8 {
-            return true
-        }
-        
-        return false
-    }
-    
-    func isHaveChar(_ string: String) -> Bool {
-        
-        if string.count >= 1 {
+        if string.count >= self.minimumPasswordLength {
             return true
         }
         
@@ -97,14 +95,14 @@ struct PasswordView: View {
             return false
         }
         
-        let emailFormat = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$"
+        let emailFormat = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{\(self.minimumPasswordLength),}$"
         
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluate(with: string)
     }
     
     var disableForm: Bool {
-        password.isEmpty || !isPasswordValid || confirmationPassword.isEmpty || password.count < 6 || confirmationPassword.count < 6
+        password.isEmpty || !isPasswordValid || confirmationPassword.isEmpty || password.count < self.minimumPasswordLength || confirmationPassword.count < self.minimumPasswordLength
     }
     
     var body: some View {
@@ -216,7 +214,6 @@ struct PasswordView: View {
                                                     self.haveNumber = self.isHaveNumber(String(it))
                                                     self.haveSpecialcase = self.isHaveSpecialChar(String(it))
                                                     self.haveMin8Char = self.isHave8Char(String(it))
-                                                    self.haveCharacter = self.isHaveChar(String(it))
                                                 }
                                                 
                                                 Button(action: {
@@ -250,7 +247,6 @@ struct PasswordView: View {
                                                         self.haveNumber = self.isHaveNumber(String(it))
                                                         self.haveSpecialcase = self.isHaveSpecialChar(String(it))
                                                         self.haveMin8Char = self.isHave8Char(String(it))
-                                                        self.haveCharacter = self.isHaveChar(String(it))
                                                     }
                                                 
                                                 Button(action: {
@@ -308,28 +304,6 @@ struct PasswordView: View {
                                     
                                     Spacer()
                                 }
-                                
-                                HStack {
-                                    if (self.haveCharacter) {
-                                        Text("✓")
-                                            .font(.custom("Montserrat-Regular", size: 12))
-                                            .padding(.leading, 25)
-                                            .foregroundColor(.green)
-                                        
-                                    } else {
-                                        Text("✗")
-                                            .font(.custom("Montserrat-Regular", size: 12))
-                                            .padding(.leading, 25)
-                                            .foregroundColor(.black)
-                                    }
-                                    
-                                    Text("1 Karakter")
-                                        .font(.custom("Montserrat-Regular", size: 12))
-                                        .foregroundColor(self.haveCharacter ? .green : .black)
-                                    
-                                    Spacer()
-                                }
-                                .padding(.bottom, 2)
                                 
                                 HStack {
                                     if (self.haveLowercase) {
@@ -434,7 +408,7 @@ struct PasswordView: View {
                                             .foregroundColor(.black)
                                     }
                                     
-                                    Text("Minimal 8 karakter")
+                                    Text("Minimal \(self.minimumPasswordLength) karakter")
                                         .font(.custom("Montserrat-Regular", size: 12))
                                         .foregroundColor(self.haveMin8Char ? .green : .black)
                                     
@@ -495,6 +469,9 @@ struct PasswordView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .onAppear {
+            getPasswordParam()
+        }
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Do you want to cancel registration?".localized(language)),
@@ -603,6 +580,20 @@ struct PasswordView: View {
             else {
                 print(self.passwordVM.code)
                 print(self.passwordVM.message)
+            }
+        }
+    }
+    
+    @ObservedObject var authVM = AuthViewModel()
+    func getPasswordParam() {
+        print("GET PARAM")
+        self.authVM.passwordParam() { success in
+            if success {
+                print(self.authVM.minimumPasswordLength)
+                self.minimumPasswordLength = self.authVM.minimumPasswordLength
+                self.minimumNumericInPassword = self.authVM.minimumNumericInPassword
+                self.minimumLowerCaseLetterInPassword = self.authVM.minimumLowerCaseLetterInPassword
+                self.minimumUpperCaseLetterInPassword = self.authVM.minimumUpperCaseLetterInPassword
             }
         }
     }

@@ -10,8 +10,14 @@ import JGProgressHUD_SwiftUI
 
 struct ContentView: View {
     
+    @StateObject private var model = StompClientModel() // <this
+    
     let appState = AppState()
     @Environment(\.scenePhase) var scenePhase
+    
+    private func onAppear() {
+        model.connect()
+    }
     
     init() {
         // this is not the same as manipulating the proxy directly
@@ -64,21 +70,13 @@ struct ContentView: View {
                     .environmentObject(appState)
                 
 //                NavigationView{
-//                    SuccessMoveBalancesView()
-//                        .environmentObject(MoveBalancesModel())
+//                    PasswordView()
+//                        .environmentObject(RegistrasiModel())
 //                        .environmentObject(appState)
 //                }
             }
             .edgesIgnoringSafeArea(.top)
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .inactive {
-                    print("Inactive")
-                } else if newPhase == .active {
-                    print("Active")
-                } else if newPhase == .background {
-                    print("Background")
-                }
-            }
+            .onAppear(perform: onAppear)
         }
     }
 }

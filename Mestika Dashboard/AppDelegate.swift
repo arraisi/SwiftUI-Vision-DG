@@ -9,47 +9,11 @@ import UIKit
 import CoreData
 import Firebase
 import UserNotifications
-import SocketIO
-
-
-final class NotificationWebsocket: ObservableObject {
-    private var manager = SocketManager(
-        socketURL: URL(string: "ws://eagle.visiondg.xyz:8765/websocketnotification")!, config: [.log(true), .compress, .path("/websocketnotification"), .forceWebsockets(true)])
-    
-    @Published var messages = [String]()
-    
-    init() {
-        let socket = manager.defaultSocket
-        socket.on(clientEvent: .connect) { (data, ack) in
-            print("Connected")
-            socket.emit("NodeJS Server Port", "Hi Node.JS server!")
-        }
-        
-        socket.on("websocket-notification") { [weak self] (data, ack) in
-            if let data = data[0] as? [String: String],
-               let rawMessage =  data["roomId"] {
-                
-                DispatchQueue.main.async {
-                    self?.messages.append(rawMessage)
-                }
-                
-                
-                let dataRoom: [String: Any] = ["room_id": self?.messages.last]
-                
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
-                }
-            }
-        }
-        
-        socket.connect()
-    }
-}
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
-    let service = NotificationWebsocket()
+    let model = StompClientModel() // <this
     
     let gcmMessageIDKey = "gcm.message_id"
     
@@ -64,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         #endif
         Bundle(path: injectionBundlePath)?.load()
         #endif
+        
+        model.connect()
         
         ///Implement Firebase
         FirebaseApp.configure()

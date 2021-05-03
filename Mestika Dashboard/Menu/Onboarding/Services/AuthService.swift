@@ -780,4 +780,55 @@ class AuthService {
             
         }.resume()
     }
+    
+    // MARK: - PASSWORD PARAM
+    func passwordParam(completion: @escaping(Result<PasswordParamResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlGetPasswordParam() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        let finalUrl = url.appending("maximumUserIdleTimeOut", value: "40")
+        
+        var request = URLRequest(finalUrl)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let validateResponse = try? JSONDecoder().decode(PasswordParamResponse.self, from: data)
+                    completion(.success(validateResponse!))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 400) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
 }
