@@ -37,10 +37,11 @@ struct JenisTabunganModelElement: Codable {
     let fieldSaldo5, fieldSaldo6, fieldSaldo7, fieldSaldo8: String?
     let fieldSaldo9: String?
     let productName, productDescription: String?
+    let categoryProduct: String?
     let productImageURL: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, kodePlan, kodeAplikasi, balType, namaPlan, currency, outgoing, continueFlag, minimumSaldo, biayaAdministrasi, minimumSetoranAwal, fieldRate1, fieldRate2, fieldRate3, fieldRate4, fieldRate5, fieldRate6, fieldRate7, fieldRate8, fieldRate9, fieldSaldo1, fieldSaldo2, fieldSaldo3, fieldSaldo4, fieldSaldo5, fieldSaldo6, fieldSaldo7, fieldSaldo8, fieldSaldo9, productName, productDescription
+        case id, kodePlan, kodeAplikasi, balType, namaPlan, currency, outgoing, continueFlag, minimumSaldo, biayaAdministrasi, minimumSetoranAwal, fieldRate1, fieldRate2, fieldRate3, fieldRate4, fieldRate5, fieldRate6, fieldRate7, fieldRate8, fieldRate9, fieldSaldo1, fieldSaldo2, fieldSaldo3, fieldSaldo4, fieldSaldo5, fieldSaldo6, fieldSaldo7, fieldSaldo8, fieldSaldo9, categoryProduct, productName, productDescription
         case productImageURL = "productImageUrl"
     }
 }

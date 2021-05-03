@@ -51,7 +51,11 @@ struct PasswordView: View {
     
     func isHaveUppercase(_ string: String) -> Bool {
         
-        let format = ".*[A-Z]+.*"
+        var format = ".*[A-Z]+.*"
+        
+        if minimumUpperCaseLetterInPassword >= 2 {
+            format = ".*[A-Z].*[A-Z].*"
+        }
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", format)
         return predicate.evaluate(with: string)
@@ -59,7 +63,11 @@ struct PasswordView: View {
     
     func isHaveLowercase(_ string: String) -> Bool {
         
-        let format = ".*[a-z]+.*"
+        var format = ".*[a-z]+.*"
+        
+        if minimumLowerCaseLetterInPassword >= 2 {
+            format = ".*[a-z].*[a-z].*"
+        }
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", format)
         return predicate.evaluate(with: string)
@@ -99,6 +107,10 @@ struct PasswordView: View {
         
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluate(with: string)
+    }
+    
+    var validatePwd: Bool {
+        !haveLowercase || !haveUppercase || !haveNumber || !haveSpecialcase || !haveMin8Char
     }
     
     var disableForm: Bool {
@@ -288,7 +300,7 @@ struct PasswordView: View {
                             .frame(width: UIScreen.main.bounds.width - 100)
                             .background(Color.white)
                             .cornerRadius(15)
-                            .addBorder(self.isPasswordValid ? Color.blue : Color.red, width: self.password.count > 0 ? 1 : 0 , cornerRadius: 15)
+                            .addBorder(self.validatePwd ? Color.red : Color.blue, width: self.password.count > 0 ? 1 : 0 , cornerRadius: 15)
                             .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
                             
                             
@@ -319,7 +331,7 @@ struct PasswordView: View {
                                             .foregroundColor(.black)
                                     }
                                     
-                                    Text("1 Huruf Kecil")
+                                    Text("\(self.minimumLowerCaseLetterInPassword) Huruf Kecil")
                                         .font(.custom("Montserrat-Regular", size: 12))
                                         .foregroundColor(self.haveLowercase ? .green : .black)
                                     
@@ -342,7 +354,7 @@ struct PasswordView: View {
                                             .foregroundColor(.black)
                                     }
                                     
-                                    Text("1 Huruf kapital/besar")
+                                    Text("\(self.minimumUpperCaseLetterInPassword) Huruf kapital/besar")
                                         .font(.custom("Montserrat-Regular", size: 12))
                                         .foregroundColor(self.haveUppercase ? .green : .black)
                                     

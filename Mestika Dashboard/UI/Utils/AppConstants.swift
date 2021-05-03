@@ -21,13 +21,15 @@ class AppConstants {
     var BASE_URL = "http://eagle-dev.apps.visiondg.bankmestika.co.id/api/v1.0"
     #endif
     
-    var JITSI_URL = "https://meet.visiondg.xyz/"
+    var JITSI_URL = "https://vcse.visiondg.bankmestika.co.id"
     //    https://video.visiondg.xyz
+//    var JITSI_URL = "https://meet.visiondg.xyz/"
+//    ws://eagle.visiondg.xyz:8765/websocketnotification
     
     #if DEBUG
-    var WEBSOCKET_URL = "ws://eagle.visiondg.xyz:8765/websocketnotification"
+    var WEBSOCKET_URL = "ws://eagle-dev.apps.visiondg.bankmestika.co.id/websocketnotification"
     #elseif Release
-    var WEBSOCKET_URL = "ws://eagle.visiondg.xyz:8765/websocketnotification"
+    var WEBSOCKET_URL = "ws://eagle-dev.apps.visiondg.bankmestika.co.id/websocketnotification"
     #else
     var WEBSOCKET_URL = "ws://eagle-dev.apps.visiondg.bankmestika.co.id/websocketnotification"
     #endif
