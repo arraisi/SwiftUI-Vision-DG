@@ -52,10 +52,10 @@ struct HistoryRow: View {
             }
             
             VStack(alignment: .leading) {
-                Text(data.data.destinationAccountName ?? "")
+                Text(data.trxType)
                     .font(.custom("Montserrat-Bold", size: 14))
                 
-                Text("\(data.data.message ?? "")")
+                Text("\(data.trxDate ?? "")")
                     .font(.custom("Montserrat-Medium", size: 12))
             }
             
@@ -64,7 +64,7 @@ struct HistoryRow: View {
             HStack {
                 Text("Rp.")
                 
-                Text("\(data.data.transactionAmount?.thousandSeparator() ?? "0")")
+                Text("\(data.data.amount?.thousandSeparator() ?? "0")")
             }
             .font(.custom("Montserrat-Bold", size: 14))
             .foregroundColor(.green)
