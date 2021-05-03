@@ -263,10 +263,13 @@ struct WelcomeView: View {
                 print("RECEIVED JITSI END")
                 getUserStatus(deviceId: deviceId!)
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CheckWebsocket"))) { obj in
+                self.isShowAlert = true
+            }
             .alert(isPresented: $isShowAlert) {
                 return Alert(
                     title: Text("MESSAGE".localized(language)),
-                    message: Text("\(jitsiRoom)"),
+                    message: Text("Websokcet Connect"),
                     dismissButton: .default(Text("OK".localized(language)))
                 )
             }
@@ -295,12 +298,12 @@ struct WelcomeView: View {
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
             }
-            .alert(isPresented: $showingAlert) {
-                return Alert(
-                    title: Text("MESSAGE".localized(language)),
-                    message: Text(self.alertMessage),
-                    dismissButton: .default(Text("OK".localized(language))))
-            }
+//            .alert(isPresented: $showingAlert) {
+//                return Alert(
+//                    title: Text("MESSAGE".localized(language)),
+//                    message: Text(self.alertMessage),
+//                    dismissButton: .default(Text("OK".localized(language))))
+//            }
             .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 PopupNoInternetConnection()
             }

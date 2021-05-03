@@ -20,6 +20,8 @@ class WebSocket: NSObject, SwiftStompDelegate {
         print(deviceId)
         
         swiftStomp.subscribe(to: "/open/changes/\(deviceId!)")
+        
+        NotificationCenter.default.post(name: NSNotification.Name("CheckWebsocket"), object: nil, userInfo: nil)
     }
     
     func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
@@ -57,7 +59,8 @@ class WebSocket: NSObject, SwiftStompDelegate {
     }
     
     func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {
-        
+        print("Error")
+        print(type)
     }
     
     func onSocketEvent(eventName: String, description: String) {
