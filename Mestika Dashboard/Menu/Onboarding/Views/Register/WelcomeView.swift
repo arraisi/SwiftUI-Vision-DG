@@ -89,8 +89,8 @@ struct WelcomeView: View {
             .onEnded { _ in
                 print("View tapped!")
                 
-//                let dataRoom: [String: Any] = ["room_id": "12345"]
-//                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+                let dataRoom: [String: Any] = ["room_id": "12345"]
+                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
             }
         
         NavigationView {

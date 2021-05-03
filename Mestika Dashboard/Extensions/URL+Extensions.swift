@@ -96,8 +96,12 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design2?type=\(type)");
     }
     
+//    static func urlGetListJenisTabungan() -> URL? {
+//        return URL(string: AppConstants().BASE_URL + "/product/getAll");
+//    }
+    
     static func urlGetListJenisTabungan() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/product/getAll");
+        return URL(string: AppConstants().BASE_URL + "/product/mainProducts");
     }
     
 //    static func urlGetListJenisTabungan() -> URL? {
@@ -282,8 +286,12 @@ extension URL {
     
     //-------------------- SAVING ACCOUNT SERVICE ----------------------//
     
+//    static func urlGetProductsSavingAccount() -> URL? {
+//        return URL(string: AppConstants().BASE_URL + "/product/getOtherProducts")
+//    }
+    
     static func urlGetProductsSavingAccount() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/product/getOtherProducts")
+        return URL(string: AppConstants().BASE_URL + "/product/subProducts")
     }
     
     static func urlGetListBalanceAccount() -> URL? {

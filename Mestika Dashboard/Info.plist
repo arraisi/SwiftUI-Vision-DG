@@ -14,8 +14,6 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -30,6 +28,8 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>ws://eagle-dev.apps.visiondg.bankmestika.co.id</key>
+			<dict/>
 			<key>10.1.222.14:7443</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
