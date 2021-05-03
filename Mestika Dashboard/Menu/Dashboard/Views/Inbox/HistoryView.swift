@@ -21,7 +21,11 @@ struct HistoryView: View {
             VStack {
                 ForEach(historVM.history, id: \.reffNumber) { data in
                     
-                    HistoryRow(data: data)
+                    NavigationLink(
+                        destination: HistoryDetailView(data: data),
+                        label: {
+                            HistoryRow(data: data)
+                        })
                     
                 }
             }
