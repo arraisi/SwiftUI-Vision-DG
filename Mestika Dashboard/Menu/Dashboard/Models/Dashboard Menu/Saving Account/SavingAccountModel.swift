@@ -24,6 +24,7 @@ struct SavingAccountModelElement: Codable, Hashable {
     let planAllowCreditDomestic, planAllowCreditInHouse: String?
     let cardNumber: String
     let accountBranch: String
+    let categoryProduct: String?
 }
 
 enum AccountStatusDescription: String, Codable {

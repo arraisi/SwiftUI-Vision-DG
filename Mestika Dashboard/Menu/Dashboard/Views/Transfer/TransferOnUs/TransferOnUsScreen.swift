@@ -195,7 +195,7 @@ struct TransferOnUsScreen: View {
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
                     
-                    if (e.planAllowDebitInHouse == "Y") {
+                    if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
                         print(e.accountNumber)
                         self.listSourceNumber.append(e.accountNumber)
                     }
