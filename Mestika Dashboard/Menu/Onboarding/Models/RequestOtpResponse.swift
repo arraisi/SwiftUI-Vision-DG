@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - RequestOtpResponse
 struct RequestOtpResponse: Codable {
-    let phoneNumber, type: String
+    let phoneNumber, type: String?
     let subType: String?
     let appCode, deviceID, fireBaseID: String
     let emailAddress: String?
