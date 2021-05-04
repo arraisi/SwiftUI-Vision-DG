@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 import PopupView
-import JitsiMeet
+import JitsiMeetSDK
 import Indicators
 import SystemConfiguration
 

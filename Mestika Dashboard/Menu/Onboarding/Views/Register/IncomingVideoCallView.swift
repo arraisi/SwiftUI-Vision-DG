@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import JitsiMeet
+import JitsiMeetSDK
 import AVFoundation
 
 struct IncomingVideoCallView: View {
