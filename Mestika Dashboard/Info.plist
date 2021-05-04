@@ -28,8 +28,6 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>ws://eagle-dev.apps.visiondg.bankmestika.co.id</key>
-			<dict/>
 			<key>10.1.222.14:7443</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>

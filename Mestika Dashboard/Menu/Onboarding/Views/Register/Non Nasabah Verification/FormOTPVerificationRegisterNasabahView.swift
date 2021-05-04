@@ -509,6 +509,10 @@ struct FormOTPVerificationRegisterNasabahView: View {
     
     @ObservedObject private var otpVM = OtpViewModel()
     func getOTP() {
+        
+        print("Phone Number")
+        print(self.registerData.noTelepon)
+        
         self.otpVM.otpRequest(
             otpRequest: OtpRequest(
                 destination: self.registerData.noTelepon,

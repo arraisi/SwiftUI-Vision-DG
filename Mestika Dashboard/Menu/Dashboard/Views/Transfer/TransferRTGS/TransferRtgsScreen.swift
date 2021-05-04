@@ -263,7 +263,7 @@ struct TransferRtgsScreen: View {
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
                     
-                    if (e.planAllowDebitDomestic == "Y") {
+                    if (e.planAllowDebitDomestic == "Y" && e.categoryProduct != "S") {
                         print(e.accountNumber)
                         self.listSourceNumber.append(e.accountNumber)
                     }

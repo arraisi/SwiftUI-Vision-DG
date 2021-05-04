@@ -61,6 +61,8 @@ class WebSocket: NSObject, SwiftStompDelegate {
     func onError(swiftStomp: SwiftStomp, briefDescription: String, fullDescription: String?, receiptId: String?, type: StompErrorType) {
         print("Error")
         print(type)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("ErrorWebsocket"), object: nil, userInfo: nil)
     }
     
     func onSocketEvent(eventName: String, description: String) {
