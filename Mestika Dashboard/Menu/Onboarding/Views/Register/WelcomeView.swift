@@ -81,6 +81,8 @@ struct WelcomeView: View {
     
     @State var phoneNumber = ""
     
+    @State var messageWebsocket: String = ""
+    
     private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
     var body: some View {
@@ -89,8 +91,8 @@ struct WelcomeView: View {
             .onEnded { _ in
                 print("View tapped!")
                 
-                let dataRoom: [String: Any] = ["room_id": "12345"]
-                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+//                let dataRoom: [String: Any] = ["room_id": "12345"]
+//                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
             }
         
         NavigationView {
@@ -264,12 +266,17 @@ struct WelcomeView: View {
                 getUserStatus(deviceId: deviceId!)
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CheckWebsocket"))) { obj in
+                self.messageWebsocket = "Websocket Connect"
+                self.isShowAlert = true
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ErrorWebsocket"))) { obj in
+                self.messageWebsocket = "Websocket Error"
                 self.isShowAlert = true
             }
             .alert(isPresented: $isShowAlert) {
                 return Alert(
                     title: Text("MESSAGE".localized(language)),
-                    message: Text("Websokcet Connect"),
+                    message: Text("\(self.messageWebsocket)"),
                     dismissButton: .default(Text("OK".localized(language)))
                 )
             }

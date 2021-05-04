@@ -101,39 +101,13 @@ extension OtpViewModel {
         OtpService.shared.getRequestOtp(otpRequest: otpRequest) { result in
             switch result {
             case.success(let response):
-                print(response.status?.message! ?? "no message")
                 
-                if (response.status?.message != "OTP_REQUESTED_FAILED") {
-                    print("Success")
-                    print(response.timeCounter ?? "no timeCounter")
-                    print(response.tryCount ?? "no tryCount")
-                    
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                        self.destination = response.destination ?? ""
-                        self.reference = response.reference ?? "0"
-                        self.code = response.code ?? "0"
-                        
-                        print(response.code ?? "no code")
-                        print(response.message ?? "no message")
-                        
-                        self.statusMessage = response.status?.message ?? ""
-                        self.timeCounter = response.timeCounter ?? 30
-                        
-                        completion(true)
-                    }
-                    
-                } else {
-                    print("Failed Request")
-                    
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                        self.statusMessage = (response.status?.message)!
-                        self.timeCounter = response.tryCount ?? 0
-                    }
-                    
-                    completion(false)
-                }
+                self.isLoading = false
+                self.destination = response.destination
+                self.reference = response.reference
+                self.timeCounter = response.timeCounter
+                
+                completion(true)
                 
             case .failure(let error):
                 print("ERROR-->")
@@ -143,6 +117,8 @@ extension OtpViewModel {
                     switch error {
                     case .custom(code: 403):
                         self.statusMessage = "Phone Number Registered"
+                    case .custom(code: 400):
+                        self.statusMessage = "Bad Request"
                     default:
                         self.statusMessage = "Internal Server Error"
                     }

@@ -75,15 +75,15 @@ class OtpService {
     }
     
     /* GET CODE OTP */
-    func getRequestOtp(otpRequest: OtpRequest, completion: @escaping(Result<OtpResponse, ErrorResult>) -> Void) {
+    func getRequestOtp(otpRequest: OtpRequest, completion: @escaping(Result<RequestOtpResponse, ErrorResult>) -> Void) {
         
         guard let url = URL.urlOTP() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         let finalUrl = url
-            .appending("trytime", value: otpRequest.trytime.numberString)
             .appending("destination", value: otpRequest.destination)
+            .appending("trytime", value: otpRequest.trytime.numberString)
             .appending("type", value: otpRequest.type)
         
         var request = URLRequest(finalUrl)
@@ -99,7 +99,7 @@ class OtpService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                    let otpResponse = try? JSONDecoder().decode(RequestOtpResponse.self, from: data)
                     if otpResponse == nil {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                     } else {
@@ -108,6 +108,10 @@ class OtpService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 400) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 

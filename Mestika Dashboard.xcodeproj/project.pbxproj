@@ -182,6 +182,7 @@
 		529190CC25D3CB2D005A4898 /* ReferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */; };
 		5294535425EF2899009A5B83 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535325EF2899009A5B83 /* SearchBar.swift */; };
 		5294536025EF59E7009A5B83 /* CardDamageAddressInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */; };
+		52A7970D2641170D001B9937 /* RequestOtpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7970C2641170D001B9937 /* RequestOtpResponse.swift */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
 		52ADFE932557D99F00A1001F /* masterData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE772557D99F00A1001F /* masterData.json */; };
@@ -662,6 +663,7 @@
 		529190CB25D3CB2D005A4898 /* ReferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceViewModel.swift; sourceTree = "<group>"; };
 		5294535325EF2899009A5B83 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageAddressInputView.swift; sourceTree = "<group>"; };
+		52A7970C2641170D001B9937 /* RequestOtpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOtpResponse.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE772557D99F00A1001F /* masterData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masterData.json; sourceTree = "<group>"; };
@@ -1956,6 +1958,7 @@
 				52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */,
 				52BB539B25C108080045DBE6 /* LoginCredentialResponse.swift */,
 				5203B245263C1E8A007174FB /* PasswordParamResponse.swift */,
+				52A7970C2641170D001B9937 /* RequestOtpResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2706,6 +2709,7 @@
 				C0DBBE6C25C7D6360012B13E /* FirstPasswordAppLoginView.swift in Sources */,
 				C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */,
 				526B661B254FFB0500C13C36 /* SettingMenu.swift in Sources */,
+				52A7970D2641170D001B9937 /* RequestOtpResponse.swift in Sources */,
 				52ADFEF42557DC5C00A1001F /* CheckBoxGroup.swift in Sources */,
 				C0BCDEC625B6B99D00E1028F /* BadgeView.swift in Sources */,
 				5203B246263C1E8A007174FB /* PasswordParamResponse.swift in Sources */,

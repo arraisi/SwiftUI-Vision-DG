@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         #endif
         
         ///Implement Firebase
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
