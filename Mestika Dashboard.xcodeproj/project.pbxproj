@@ -380,6 +380,7 @@
 		C0619E342629ADC40053F326 /* QrisScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0619E332629ADC40053F326 /* QrisScannerView.swift */; };
 		C068A5A8256CED8300CE96C4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068A5A7256CED8300CE96C4 /* AppState.swift */; };
 		C068A5B0256CF3C100CE96C4 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068A5AF256CF3C100CE96C4 /* UIApplication.swift */; };
+		C06A492026404F8C0046E397 /* PdfKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06A491F26404F8C0046E397 /* PdfKitView.swift */; };
 		C06AC2FA2563726700D06EE3 /* KetentuanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2F92563726700D06EE3 /* KetentuanModel.swift */; };
 		C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */; };
 		C06CDABC25E8A0FB00899CC8 /* LocalizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */; };
@@ -864,6 +865,7 @@
 		C0619E332629ADC40053F326 /* QrisScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrisScannerView.swift; sourceTree = "<group>"; };
 		C068A5A7256CED8300CE96C4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		C068A5AF256CF3C100CE96C4 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		C06A491F26404F8C0046E397 /* PdfKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfKitView.swift; sourceTree = "<group>"; };
 		C06AC2F92563726700D06EE3 /* KetentuanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanModel.swift; sourceTree = "<group>"; };
 		C06AC2FE256372D200D06EE3 /* KetentuanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KetentuanViewModel.swift; sourceTree = "<group>"; };
 		C06CDABB25E8A0FB00899CC8 /* LocalizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationService.swift; sourceTree = "<group>"; };
@@ -1169,6 +1171,7 @@
 				5294535325EF2899009A5B83 /* SearchBar.swift */,
 				C052A081263276D900DC90C6 /* UnderlineButton.swift */,
 				52C3BAFA2639DB070066A7A6 /* ShimmerView.swift */,
+				C06A491F26404F8C0046E397 /* PdfKitView.swift */,
 			);
 			name = Components;
 			path = "Mestika Dashboard/Components";
@@ -2574,6 +2577,7 @@
 			files = (
 				C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */,
 				527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */,
+				C06A492026404F8C0046E397 /* PdfKitView.swift in Sources */,
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
 				52FE9AC12637DB0B0089EBAF /* FormMoveBalanceView.swift in Sources */,
 				52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */,
