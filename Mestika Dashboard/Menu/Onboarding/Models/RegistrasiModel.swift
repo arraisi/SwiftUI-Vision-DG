@@ -9,6 +9,7 @@ import SwiftUI
 
 class RegistrasiModel: ObservableObject {
     @Published var homeRoute: Bool = false
+    @Published var atmNumberReferral = ""
     @Published var noTelepon = ""
     @Published var jenisTabungan = ""
     @Published var planCodeTabungan = ""

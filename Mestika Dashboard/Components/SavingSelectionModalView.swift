@@ -96,6 +96,7 @@ struct SavingSelectionModalView: View {
                 Button(action: {
                     
                     atmData.atmAddresspostalReferral = self.referralCode
+                    registerData.atmNumberReferral = self.referralCode
                     
                     registerData.jenisTabungan = data.name
                     registerData.planCodeTabungan = data.codePlan
