@@ -29,10 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Bundle(path: injectionBundlePath)?.load()
         #endif
         
-        model.connect()
-        
         ///Implement Firebase
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
         
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self

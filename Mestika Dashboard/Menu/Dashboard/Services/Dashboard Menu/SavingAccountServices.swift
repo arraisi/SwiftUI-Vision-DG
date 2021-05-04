@@ -90,7 +90,7 @@ class SavingAccountServices {
         }
         
         var request = URLRequest(url)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // MARK: TASK

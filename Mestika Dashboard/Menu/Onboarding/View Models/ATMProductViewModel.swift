@@ -94,9 +94,7 @@ extension ATMProductViewModel {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     
-                    self.listJenisTabungan = response.filter({ (e: JenisTabunganModelElement) -> Bool in
-                        e.categoryProduct == "main_account"
-                    }).map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
+                    self.listJenisTabungan = response.map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
                         return JenisTabunganViewModel (
                             id: data.id ?? "",
                             name: data.productName ?? "",

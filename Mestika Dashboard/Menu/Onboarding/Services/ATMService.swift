@@ -114,7 +114,7 @@ class ATMService {
         }
         
         var request = URLRequest(url)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
