@@ -372,6 +372,7 @@ struct RegisterSummaryView: View {
         data.noAtm = self.registerData.noAtm
         data.noRekening = self.registerData.noRekening
         data.accNo = self.registerData.accNo
+        data.atmNumberReferral = self.registerData.atmNumberReferral
         
         // Data Surat Menyurat
         data.addressInput = self.registerData.addressInput

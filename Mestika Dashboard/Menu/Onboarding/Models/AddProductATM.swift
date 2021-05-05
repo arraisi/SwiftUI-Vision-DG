@@ -10,6 +10,7 @@ import Foundation
 
 class AddProductATM: ObservableObject, Codable {
     @Published var atmAddressInput: String = ""
+    @Published var atmNumberReferral: String = ""
     @Published var imageDesign: String = ""
     @Published var codeClass: String = ""
     @Published var atmAddressName: String = ""

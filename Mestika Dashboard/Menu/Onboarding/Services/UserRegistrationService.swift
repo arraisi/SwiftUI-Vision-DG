@@ -39,6 +39,7 @@ class UserRegistrationService {
         print(registerData.hasNoNpwp)
         
         var userDetailParam: [String : Any] = [
+            "atmNumberReferral": registerData.atmNumberReferral,
             "mobileNumber": registerData.noTelepon,
             "codePlan": registerData.planCodeTabungan,
             "productName": registerData.jenisTabungan,
