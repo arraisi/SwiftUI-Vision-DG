@@ -7,7 +7,7 @@ target 'Mestika Dashboard' do
 
   # Pods for Mestika Dashboard
 
-  pod 'JitsiMeetSDK', '~> 2.11.0'
+  # pod 'JitsiMeetSDK', '~> 2.11.0'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'SwiftyRSA'

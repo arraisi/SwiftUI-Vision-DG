@@ -7,7 +7,7 @@
 
 import UIKit
 import SwiftUI
-import JitsiMeet
+import JitsiMeetSDK
 
 struct JitsiView: UIViewControllerRepresentable {
     
@@ -54,20 +54,20 @@ struct JitsiView: UIViewControllerRepresentable {
             builder.welcomePageEnabled = false
             builder.room = self.jitsi_room
             
-            builder.setFeatureFlag("add-people.enabled", withBoolean: false)
+//            builder.setFeatureFlag("add-people.enabled", withBoolean: false)
             builder.setFeatureFlag("invite.enabled", withBoolean: false)
-            builder.setFeatureFlag("close-captions.enabled", withBoolean: false)
-            builder.setFeatureFlag("chat.enabled", withBoolean: true)
-            builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
-            builder.setFeatureFlag("audio-mute.enabled", withBoolean: false)
-            builder.setFeatureFlag("audio-only.enabled", withBoolean: false)
-            builder.setFeatureFlag("help.enabled", withBoolean: false)
-            builder.setFeatureFlag("overflow-menu.enabled", withBoolean: false)
-            builder.setFeatureFlag("toolbox.alwaysVisible", withBoolean: false)
-            builder.setFeatureFlag("toolbox.enabled", withBoolean: false)
-            builder.setFeatureFlag("video-mute.enabled", withBoolean: true)
-            builder.setFeatureFlag("video-share.enabled", withBoolean: false)
-            builder.setFeatureFlag("android.audio-focus.disabled", withBoolean: false)
+//            builder.setFeatureFlag("close-captions.enabled", withBoolean: false)
+//            builder.setFeatureFlag("chat.enabled", withBoolean: true)
+//            builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
+//            builder.setFeatureFlag("audio-mute.enabled", withBoolean: false)
+//            builder.setFeatureFlag("audio-only.enabled", withBoolean: false)
+//            builder.setFeatureFlag("help.enabled", withBoolean: false)
+//            builder.setFeatureFlag("overflow-menu.enabled", withBoolean: false)
+//            builder.setFeatureFlag("toolbox.alwaysVisible", withBoolean: false)
+//            builder.setFeatureFlag("toolbox.enabled", withBoolean: false)
+//            builder.setFeatureFlag("video-mute.enabled", withBoolean: true)
+//            builder.setFeatureFlag("video-share.enabled", withBoolean: false)
+//            builder.setFeatureFlag("android.audio-focus.disabled", withBoolean: false)
             
         }
         
