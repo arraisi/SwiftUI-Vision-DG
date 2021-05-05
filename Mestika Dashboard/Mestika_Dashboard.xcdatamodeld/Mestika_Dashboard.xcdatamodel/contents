@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="NewDevice" representedClassName="NewDevice" syncable="YES" codeGenerationType="class">
         <attribute name="fingerprintFlag" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="noTelepon" optional="YES" attributeType="String"/>
@@ -19,6 +19,7 @@
         <attribute name="alamatKeluarga" optional="YES" attributeType="String"/>
         <attribute name="alamatKtpFromNik" optional="YES" attributeType="String"/>
         <attribute name="alamatPerusahaan" optional="YES" attributeType="String"/>
+        <attribute name="atmNumberReferral" optional="YES" attributeType="String"/>
         <attribute name="atmOrRekening" optional="YES" attributeType="String"/>
         <attribute name="besarPerkiraanPenarikan" optional="YES" attributeType="String"/>
         <attribute name="besarPerkiraanPenarikanId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -169,7 +170,7 @@
     </entity>
     <elements>
         <element name="NewDevice" positionX="-54" positionY="144" width="128" height="14"/>
-        <element name="Registration" positionX="-63" positionY="144" width="128" height="1484"/>
+        <element name="Registration" positionX="-63" positionY="144" width="128" height="1499"/>
         <element name="ScheduleInterview" positionX="-54" positionY="153" width="128" height="59"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="899"/>
     </elements>
