@@ -24,6 +24,7 @@ struct FormPilihJenisATMView: View {
     
     /* Carousel Variables */
     @State var cards: [ATMViewModel] = []
+    @State var atms: JenisATMModel = []
     @State var firstOffset : CGFloat = 0
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
@@ -108,7 +109,7 @@ struct FormPilihJenisATMView: View {
                 }
                 if (self.isShowAlertInternetConnection) {
                     ModalOverlay(tapAction: { withAnimation {
-                    self.isShowAlertInternetConnection = false
+                        self.isShowAlertInternetConnection = false
                     } })
                 }
             }
@@ -229,7 +230,7 @@ struct FormPilihJenisATMView: View {
     
     // MARK: - SELECT CARD HANDLER
     func selectCard(card: ATMViewModel) {
-        atmData.productType = card.key
+        atmData.productType = card.id
         atmData.codeClass = card.description.codeClass
     }
     
@@ -247,10 +248,23 @@ struct FormPilihJenisATMView: View {
     private func fetchATMList() {
         if cards.count == 0 {
             isLoading = true
-            productVM.getListATM() { (success: Bool) in
+            //            productVM.getListATM() { (success: Bool) in
+            //                isLoading = false
+            //                if success {
+            //                    self.cards = productVM.listATM
+            //                    self.refreshCarousel()
+            //                    if cards.count > 0 {
+            //                        self.selectCard(card: self.cards[0])
+            //                    }
+            //                }
+            //            }
+            
+            productVM.getListJenisATM() { (success: Bool) in
                 isLoading = false
                 if success {
                     self.cards = productVM.listATM
+                    print("\n\nJENIS ATM/ CARDS DATA : \n")
+                    print("\(self.cards)")
                     self.refreshCarousel()
                     if cards.count > 0 {
                         self.selectCard(card: self.cards[0])

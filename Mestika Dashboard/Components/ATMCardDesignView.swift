@@ -20,7 +20,7 @@ struct ATMCardDesignView: View {
     
     var body: some View {
         ZStack {
-            WebImage(url: card.cardImage!)
+            WebImage(url: card.cardImage)
                 .onSuccess { image, data, cacheType in
                     // Success
                     // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
