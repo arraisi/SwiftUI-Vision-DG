@@ -357,6 +357,8 @@
 		C01B84DD26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84DC26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift */; };
 		C0240F9926388E6800E0181D /* SourceOfFundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0240F9826388E6800E0181D /* SourceOfFundView.swift */; };
 		C02A6745264278ED003679DE /* JenisAtmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A6744264278ED003679DE /* JenisAtmModel.swift */; };
+		C02A675026428C37003679DE /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */; };
+		C02A675126428C37003679DE /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
 		C037234C26311F0900BA2B43 /* PesanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037234B26311F0900BA2B43 /* PesanView.swift */; };
@@ -967,6 +969,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C02A675026428C37003679DE /* JitsiMeetSDK.xcframework in Frameworks */,
+				C02A675126428C37003679DE /* WebRTC.xcframework in Frameworks */,
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
