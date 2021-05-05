@@ -92,8 +92,16 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm2");
     }
     
+    static func urlFindListATM() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "content/debitCardDesigns");
+    }
+    
     static func urlGetListATMDesign(type: String) -> URL? {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design2?type=\(type)");
+    }
+    
+    static func urlFindListATMDesign(code: String) -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/content/debitCardTypes?classCode=\(code)");
     }
     
 //    static func urlGetListJenisTabungan() -> URL? {
