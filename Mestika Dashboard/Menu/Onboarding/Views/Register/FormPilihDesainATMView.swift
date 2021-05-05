@@ -247,7 +247,7 @@ struct FormPilihDesainATMView: View {
         if cards.count > selected {
             let card = cards[selected]
             print(card)
-            atmData.atmDesignType = card.key
+            atmData.atmDesignType = card.title
             atmData.imageDesign = card.cardImage?.absoluteString ?? ""
         }
     }
@@ -272,7 +272,7 @@ struct FormPilihDesainATMView: View {
     private func fetchATMDesignList() {
         if cards.count == 0 {
             isLoading = true
-            productVM.getListATMDesign(type: atmData.productType) { (success: Bool) in
+            productVM.getListATMDesign(classCode: atmData.productType) { (success: Bool) in
                 isLoading = false
                 if success {
                     self.cards = productVM.listATMDesign

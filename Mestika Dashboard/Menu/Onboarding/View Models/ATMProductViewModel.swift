@@ -10,6 +10,7 @@ import UIKit
 class ATMProductViewModel : ObservableObject {
     @Published var isLoading: Bool = false
     @Published var listATM: [ATMViewModel] = []
+    @Published var listJenisATM: JenisATMModel = []
     @Published var listATMDesign: [ATMDesignViewModel] = []
     @Published var listJenisTabungan: [JenisTabunganViewModel] = []
 }
@@ -43,45 +44,6 @@ extension ATMProductViewModel {
         }
     }
     
-    // MARK: - Get List ATM
-    func getListATM(completion: @escaping (Bool) -> Void) {
-        DispatchQueue.main.async {
-            self.isLoading = true
-        }
-        
-        ATMService.shared.getListATM() { result in
-            switch result {
-            case.success(let response):
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.listATM = response.map({ (data: ATMModel) -> ATMViewModel in
-                        var image = UIImage(named: "card_bg")!
-                        if let img = data.cardImageBase64?.base64ToImage() {
-                             image = img
-                        }
-                        return ATMViewModel (
-                            id: data.id,
-                            key: data.key,
-                            title: data.title,
-                            cardImage: URL(string: data.cardImage),
-                            description: self.mapDescriptionLimit(data: data.description),
-                            cardImageBase64: image
-                        )
-                    })
-                    completion(true)
-                }
-                break
-            case .failure(let error):
-                print("ERROR-->")
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    completion(false)
-                }
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
     // MARK: - Get List Jenis Tabungan
     func getListJenisTabungan(completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
@@ -104,9 +66,9 @@ extension ATMProductViewModel {
                             codePlan: data.kodePlan ?? ""
                         )
                     })
-//                    self.listJenisTabungan = response.map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
-//
-//                    })
+                    //                    self.listJenisTabungan = response.map({ (data: JenisTabunganModelElement) -> JenisTabunganViewModel in
+                    //
+                    //                    })
                     completion(true)
                 }
                 break
@@ -121,40 +83,87 @@ extension ATMProductViewModel {
         }
     }
     
-    func mapDescriptionLimit(data: ATMDescriptionModel) -> ATMDescriptionModel {
+    func mapDescriptionLimit(data: JenisATMModelElement) -> ATMDescriptionModel {
         return ATMDescriptionModel(limitPurchase: data.limitPurchase.thousandSeparator(),
                                    limitPayment: data.limitPayment.thousandSeparator(),
-                                   limitPenarikanHarian: data.limitPenarikanHarian.thousandSeparator(),
-                                   limitTransferKeBankLain: data.limitTransferKeBankLain.thousandSeparator(),
-                                   limitTransferAntarSesama: data.limitTransferAntarSesama.thousandSeparator(),
-                                   codeClass: data.codeClass)
+                                   limitPenarikanHarian: data.limitWd.thousandSeparator(),
+                                   limitTransferKeBankLain: data.limitIbft.thousandSeparator(),
+                                   limitTransferAntarSesama: data.limitOnUs.thousandSeparator(),
+                                   codeClass: data.classCode)
     }
     
-    // MARK: - Get List ATM Design
-    func getListATMDesign(type: String, completion: @escaping (Bool) -> Void) {
+    func getListJenisATM(completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        ATMService.shared.getListATMDesign(type: type) { result in
+        ATMService.shared.getListJenistATM() { result in
             switch result {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.listATMDesign = response.data.content.filter({ (data: ContentATM) -> Bool in
-                        return data.cardType == type
-                    }).map({ (data: ContentATM) -> ATMDesignViewModel in
-                        var image = UIImage(named: "card_bg")!
-                        if let img = data.cardImageBase64?.base64ToImage() {
-                             image = img
-                         }
+                    //                    self.listATM = response.map({ (data: ATMModel) -> ATMViewModel in
+                    //                        var image = UIImage(named: "card_bg")!
+                    //                        if let img = data.cardImageBase64?.base64ToImage() {
+                    //                             image = img
+                    //                        }
+                    //                        return ATMViewModel (
+                    //                            id: data.id,
+                    //                            key: data.key,
+                    //                            title: data.title,
+                    //                            cardImage: URL(string: data.cardImage),
+                    //                            description: self.mapDescriptionLimit(data: data.description),
+                    //                            cardImageBase64: image
+                    //                        )
+                    //                    })
+                    self.listATM = response.map({ (data: JenisATMModelElement) -> ATMViewModel in
+                        let image = UIImage(named: "card_bg")!
+                        return ATMViewModel (
+                            id: data.classCode,
+                            key: "",
+                            title: data.cardName,
+                            cardImage: URL(string: data.cardImageURL),
+                            description: self.mapDescriptionLimit(data: data),
+                            cardImageBase64: image
+                        )
+                    })
+                    completion(true)
+                }
+                break
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    completion(false)
+                }
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: - Get List ATM Design
+    func getListATMDesign(classCode: String, completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        ATMService.shared.getListATMDesign(classCode: classCode) { result in
+            switch result {
+            case.success(let response):
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.listATMDesign = response.map({ (data: DesainAtmModel) -> ATMDesignViewModel in
+                        let image = UIImage(named: "card_bg")!
+//                        if let img = data.cardImageBase64?.base64ToImage() {
+//                            image = img
+//                        }
                         return ATMDesignViewModel (
-                            id: data.id,
-                            key: data.key,
-                            title: data.title,
-                            cardType: data.cardType,
-                            cardImage: URL(string: data.cardImage),
-                            description: data.contentDescription,
+                            id: "",
+                            key: "",
+                            title: data.cardTypeName,
+                            cardType: "",
+                            cardImage: URL(string: data.cardTypeImageURL),
+                            description: data.cardTypeDescription,
                             cardImageBase64: image
                         )
                     })

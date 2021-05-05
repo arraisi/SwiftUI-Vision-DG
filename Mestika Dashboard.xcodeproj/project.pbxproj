@@ -356,6 +356,7 @@
 		C01B84D825FF5A1F00F5BBD9 /* NewSavingAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84D725FF5A1F00F5BBD9 /* NewSavingAccountResponse.swift */; };
 		C01B84DD26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84DC26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift */; };
 		C0240F9926388E6800E0181D /* SourceOfFundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0240F9826388E6800E0181D /* SourceOfFundView.swift */; };
+		C02A6745264278ED003679DE /* JenisAtmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A6744264278ED003679DE /* JenisAtmModel.swift */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
 		C037234C26311F0900BA2B43 /* PesanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037234B26311F0900BA2B43 /* PesanView.swift */; };
@@ -844,6 +845,7 @@
 		C01B84D725FF5A1F00F5BBD9 /* NewSavingAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSavingAccountResponse.swift; sourceTree = "<group>"; };
 		C01B84DC26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionSavingAccountView.swift; sourceTree = "<group>"; };
 		C0240F9826388E6800E0181D /* SourceOfFundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceOfFundView.swift; sourceTree = "<group>"; };
+		C02A6744264278ED003679DE /* JenisAtmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisAtmModel.swift; sourceTree = "<group>"; };
 		C02E9BAC256E814C00622E7A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCarousel.swift; sourceTree = "<group>"; };
 		C037234B26311F0900BA2B43 /* PesanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PesanView.swift; sourceTree = "<group>"; };
@@ -2228,6 +2230,7 @@
 			children = (
 				C0BFB51D2576375400676B95 /* Address.swift */,
 				528AE2C62595B89A003AFD73 /* AddressSugestionResponse.swift */,
+				C02A6744264278ED003679DE /* JenisAtmModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -2926,6 +2929,7 @@
 				C037234C26311F0900BA2B43 /* PesanView.swift in Sources */,
 				5264ADF6255E75BD000565D5 /* ErrorResponse.swift in Sources */,
 				C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */,
+				C02A6745264278ED003679DE /* JenisAtmModel.swift in Sources */,
 				06AD57002570CAC50071C4A9 /* WebView.swift in Sources */,
 				526B6589254FB7AA00C13C36 /* ListHistoryTransactionView.swift in Sources */,
 				525950252553E03000C8CA5D /* FormNoRekeningPinForgotPasswordScreen.swift in Sources */,

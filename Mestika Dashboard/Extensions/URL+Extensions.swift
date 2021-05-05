@@ -93,7 +93,7 @@ extension URL {
     }
     
     static func urlFindListATM() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "content/debitCardDesigns");
+        return URL(string: AppConstants().BASE_URL + "/content/debitCardDesigns");
     }
     
     static func urlGetListATMDesign(type: String) -> URL? {

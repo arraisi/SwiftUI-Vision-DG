@@ -18,7 +18,7 @@ struct ATMCardView: View {
     
     var body: some View {
         ZStack {
-            WebImage(url: card.cardImage!)
+            WebImage(url: card.cardImage)
                 .onSuccess { image, data, cacheType in
                     // Success
                 }

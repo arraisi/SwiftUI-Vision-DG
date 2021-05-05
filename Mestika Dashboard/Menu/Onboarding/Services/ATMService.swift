@@ -138,10 +138,8 @@ class ATMService {
         }.resume()
     }
     
-    // MARK : get response model of list ATM Design.
-    func getListATMDesign(type: String, completion: @escaping(Result<ATMDesignNewModel, NetworkError>) -> Void) {
-        
-        guard let url = URL.urlGetListATMDesign(type: type) else {
+    func getListJenistATM(completion: @escaping(Result<JenisATMModel, NetworkError>) -> Void) {
+        guard let url = URL.urlFindListATM() else {
             return completion(.failure(.badUrl))
         }
         
@@ -159,11 +157,48 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode(ATMDesignNewModel.self, from: data)
-            print(response)
+            let response = try? JSONDecoder().decode(JenisATMModel.self, from: data)
+            
             if response == nil {
+                print("\n get list jenis atm nil")
                 completion(.failure(.decodingError))
             } else {
+                print("\n\n succes get list jenis atm")
+                print("\n jenis ATM Count : \(String(describing: response?.count))\n")
+                completion(.success(response!))
+            }
+        }.resume()
+    }
+    
+    // MARK : get response model of list ATM Design.
+    func getListATMDesign(classCode: String, completion: @escaping(Result<[DesainAtmModel], NetworkError>) -> Void) {
+        
+        guard let url = URL.urlFindListATMDesign(code: classCode) else {
+            return completion(.failure(.badUrl))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(.failure(.noData))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+            }
+            
+            // MARK : change model response.
+            let response = try? JSONDecoder().decode([DesainAtmModel].self, from: data)
+            
+            if response == nil {
+                print("\n get list desain atm nil\n")
+                completion(.failure(.decodingError))
+            } else {
+                print("\n\n success get list desain atm")
+                print("\n desain ATM Count : \(String(describing: response?.count))\n")
                 completion(.success(response!))
             }
         }.resume()
