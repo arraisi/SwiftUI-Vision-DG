@@ -32,7 +32,7 @@ struct FormInputAtmChangeDeviceView: View {
     @Binding var phoneNmbr: String
     
     var disableForm: Bool {
-        if (cardNoCtrl.isEmpty || pinCtrl.isEmpty) {
+        if (cardNoCtrl.isEmpty || pinCtrl.isEmpty || isLoading) {
             return true
         }
         return false
@@ -119,6 +119,7 @@ struct FormInputAtmChangeDeviceView: View {
                     
                     Button(
                         action: {
+                            UIApplication.shared.endEditing()
                             login()
                         },
                         label: {
@@ -156,9 +157,9 @@ struct FormInputAtmChangeDeviceView: View {
     // func login change device
     @ObservedObject private var authVM = AuthViewModel()
     func login() {
+        self.isLoading = true
+        
         self.authVM.postLoginChangeDevice(password: self.pwd, phoneNumber: self.phoneNmbr, atmPin: self.pinCtrl, cardNo: self.cardNoCtrl) { success in
-            
-            self.isLoading = true
             
             DispatchQueue.main.async {
                 if success {
