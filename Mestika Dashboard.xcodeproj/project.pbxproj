@@ -184,6 +184,12 @@
 		5294535425EF2899009A5B83 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535325EF2899009A5B83 /* SearchBar.swift */; };
 		5294536025EF59E7009A5B83 /* CardDamageAddressInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */; };
 		52A7970D2641170D001B9937 /* RequestOtpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7970C2641170D001B9937 /* RequestOtpResponse.swift */; };
+		52A7A36026428935001B9937 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */; };
+		52A7A36126428935001B9937 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52A7A36226428935001B9937 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; };
+		52A7A36326428935001B9937 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52A7A36826428D1D001B9937 /* FormChangePersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */; };
+		52A7A37E26429E59001B9937 /* PinConfirmationChangeDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */; };
 		52ADFE6D2557D87A00A1001F /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */; };
 		52ADFE6E2557D87A00A1001F /* NetworkReachbility+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */; };
 		52ADFE932557D99F00A1001F /* masterData.json in Resources */ = {isa = PBXBuildFile; fileRef = 52ADFE772557D99F00A1001F /* masterData.json */; };
@@ -482,6 +488,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		52A7A36426428935001B9937 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				52A7A36326428935001B9937 /* WebRTC.xcframework in Embed Frameworks */,
+				52A7A36126428935001B9937 /* JitsiMeetSDK.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		06202918256D905500A830EA /* ATMService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATMService.swift; sourceTree = "<group>"; };
 		0620291D256D914500A830EA /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
@@ -664,6 +685,8 @@
 		52A7970C2641170D001B9937 /* RequestOtpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOtpResponse.swift; sourceTree = "<group>"; };
 		52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
 		52A7A3582641CC12001B9937 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
+		52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePersonalDataView.swift; sourceTree = "<group>"; };
+		52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinConfirmationChangeDataView.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE6C2557D87A00A1001F /* NetworkReachbility+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkReachbility+Extensions.swift"; sourceTree = "<group>"; };
 		52ADFE772557D99F00A1001F /* masterData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = masterData.json; sourceTree = "<group>"; };
@@ -974,6 +997,8 @@
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				6312566BD2327D8729CF0518 /* Pods_Mestika_Dashboard.framework in Frameworks */,
+				52A7A36226428935001B9937 /* WebRTC.xcframework in Frameworks */,
+				52A7A36026428935001B9937 /* JitsiMeetSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1448,6 +1473,8 @@
 				C043CFCE25CD4E5300328C91 /* FormChangeAddressView.swift */,
 				526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */,
 				C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */,
+				52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */,
+				52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -2306,6 +2333,7 @@
 				5245F87E253FE702002E8B53 /* Frameworks */,
 				5245F87F253FE702002E8B53 /* Resources */,
 				64E52C30468431400C4A1FC5 /* [CP] Embed Pods Frameworks */,
+				52A7A36426428935001B9937 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2605,6 +2633,7 @@
 				C0FBE56026384E180027A9DB /* RegisterSummaryView.swift in Sources */,
 				52DACF8725ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift in Sources */,
 				5247466325481051001F43C5 /* LastFavoritePurchasePaymentScreen.swift in Sources */,
+				52A7A37E26429E59001B9937 /* PinConfirmationChangeDataView.swift in Sources */,
 				065DF51E25765ABE00255743 /* ATMDesignModel.swift in Sources */,
 				C0F1F8E4263961E900F86167 /* HistoryModel.swift in Sources */,
 				52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */,
@@ -2808,6 +2837,7 @@
 				C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */,
 				C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */,
 				C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */,
+				52A7A36826428D1D001B9937 /* FormChangePersonalDataView.swift in Sources */,
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */,

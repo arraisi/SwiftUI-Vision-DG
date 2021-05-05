@@ -149,21 +149,23 @@ struct AccountTabs: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                     
-                    //                    HStack {
-                    //                        VStack(alignment: .leading) {
-                    //                            Text("Personal Data")
-                    //                                .foregroundColor(Color(hex: "#1D2238"))
-                    //                                .font(.subheadline)
-                    //                                .fontWeight(.bold)
-                    //                        }
-                    //
-                    //                        Spacer()
-                    //                    }
-                    //                    .padding(.vertical, 5)
-                    //                    .padding(.horizontal, 20)
-                    //
-                    //                    Divider()
-                    //                        .padding(.horizontal, 10)
+                    NavigationLink(destination : FormChangePersonalDataView()){
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Personal Data".localized(language))
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
+                        }
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
+                    }
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
                     
                     NavigationLink(destination : FormChangeAddressView()){
                         HStack {

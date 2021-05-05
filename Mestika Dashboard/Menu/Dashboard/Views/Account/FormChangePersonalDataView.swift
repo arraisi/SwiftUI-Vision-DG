@@ -1,13 +1,13 @@
 //
-//  FormChangeAddressView.swift
+//  FormChangePersonalDataView.swift
 //  Mestika Dashboard
 //
-//  Created by Abdul R. Arraisi on 05/02/21.
+//  Created by Prima Jatnika on 05/05/21.
 //
 
 import SwiftUI
 
-struct FormChangeAddressView: View {
+struct FormChangePersonalDataView: View {
     
     @AppStorage("language")
     private var language = LocalizationService.shared.language
@@ -34,7 +34,7 @@ struct FormChangeAddressView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     
-                    Text("Address Data".localized(language))
+                    Text("Personal Data".localized(language))
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
                     
@@ -53,6 +53,7 @@ struct FormChangeAddressView: View {
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
                     .padding(.top, 30)
+                    .padding(.bottom, 10)
                     
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
@@ -65,7 +66,6 @@ struct FormChangeAddressView: View {
                     }
                     .background(Color(hex: "#2334D0"))
                     .cornerRadius(12)
-                    .padding(.top, 10)
                 }
                 .padding(30)
                 .background(Color.white)
@@ -85,45 +85,37 @@ struct FormChangeAddressView: View {
     
     var FormAddress: some View {
         VStack {
-            LabelTextField(value: self.$profileVM.alamat, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: false, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.name, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            HStack(spacing: 20) {
-                LabelTextField(value: self.$profileVM.rt, label: "RT".localized(language), placeHolder: "RT".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-                LabelTextField(value: self.$profileVM.rw, label: "RW".localized(language), placeHolder: "RW".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-            }
-            
-            LabelTextField(value: self.$profileVM.kelurahanName, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: false, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.telepon, label: "Telephone".localized(language), placeHolder: "RT".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.kecamatanName, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: false, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.email, label: "e-Mail".localized(language), placeHolder: "e-Mail".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.kabupatenName, label: "City".localized(language), placeHolder: "City".localized(language), disabled: false, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.tempatLahir, label: "Place of Birth".localized(language), placeHolder: "Place of Birth".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.provinsiName, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: false, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.tglLahir, label: "Date of Birth".localized(language), placeHolder: "Date of Birth".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            LabelTextField(value: self.$profileVM.gender, label: "Gender".localized(language), placeHolder: "Gender".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
@@ -132,8 +124,8 @@ struct FormChangeAddressView: View {
     }
 }
 
-struct FormChangeAddressView_Previews: PreviewProvider {
+struct FormChangePersonalDataView_Previews: PreviewProvider {
     static var previews: some View {
-        FormChangeAddressView()
+        FormChangePersonalDataView()
     }
 }

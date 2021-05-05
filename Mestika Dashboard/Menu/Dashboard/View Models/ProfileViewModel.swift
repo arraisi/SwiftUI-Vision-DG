@@ -14,6 +14,8 @@ class ProfileViewModel: ObservableObject {
     // Account Balance
     @Published var creditDebit: String = ""
     
+    @Published var profileModel = ProfileResponseModel.self
+    
     // Limit
     @Published var maxIbftPerTrans: String = ""
     @Published var limitOnUs: String = ""
@@ -27,6 +29,9 @@ class ProfileViewModel: ObservableObject {
     @Published var nameOnCard: String = ""
     @Published var telepon: String = ""
     @Published var email: String = ""
+    @Published var tglLahir: String = ""
+    @Published var tempatLahir: String = ""
+    @Published var gender: String = ""
     
     @Published var classCode: String = ""
     @Published var cardNo: String = ""
@@ -61,6 +66,7 @@ extension ProfileViewModel {
                 print("Success")
                 
                 self.isLoading = false
+            
                 self.alamat = response.personal.address
                 self.provinsiName = response.personal.propName
                 self.kabupatenName = response.personal.kabName
@@ -77,6 +83,9 @@ extension ProfileViewModel {
                 self.nameOnCard = response.products.last!.productName ?? ""
                 self.balance = response.chipProfileDto.last!.balance ?? "0"
                 self.classCode = response.chipProfileDto.last?.classCode ?? ""
+                self.tempatLahir = response.personal.placeOfBirth
+                self.tglLahir = response.personal.dateOfBirth
+                self.gender = response.personal.gender
                 
                 self.maxIbftPerTrans = response.chipProfileDto.last?.maxIbftPerTrans ?? "0"
                 self.limitOnUs = response.chipProfileDto.last?.limitOnUs ?? "1000000"
