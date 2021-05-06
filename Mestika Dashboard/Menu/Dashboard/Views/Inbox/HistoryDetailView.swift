@@ -9,20 +9,59 @@ import SwiftUI
 
 struct HistoryDetailView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var data: HistoryModelElement
     
     var body: some View {
-        VStack {HistoryPDFView}
-            .navigationBarItems(trailing: VStack{
+        VStack {
+            HistoryDetailAppBar
+            HistoryPDFView
+            Spacer()
+        }
+        .navigationBarHidden(true)
+        //        .navigationBarItems(trailing: VStack{
+        //            Button(action: {
+        //                exportToPDF()
+        //            }, label: {
+        //                Image(systemName: "tray.and.arrow.down")
+        //                    .font(.system(size: 24))
+        //                    .padding(.horizontal, 5)
+        //            })
+        //        })
+    }
+    
+    var HistoryDetailAppBar: some View {
+        ZStack {
+            Color("DarkStaleBlue")
+                .edgesIgnoringSafeArea(.all)
+            HStack(spacing: 0) {
+                Button(action: {
+                    UINavigationBar.appearance().tintColor = UIColor.white
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    HStack(spacing: 5) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                        
+                        Text("Back")
+                            .foregroundColor(.white)
+                    }
+                })
+                
+                Spacer()
+                
                 Button(action: {
                     exportToPDF()
                 }, label: {
                     Image(systemName: "tray.and.arrow.down")
                         .font(.system(size: 24))
                         .padding(.horizontal, 5)
+                        .foregroundColor(.white)
                 })
-                .foregroundColor(.white)
-            })
+            }
+            .padding([.horizontal, .bottom], 10)
+        }.frame(height: 40)
     }
     
     var HistoryPDFView: some View {
@@ -127,7 +166,6 @@ struct HistoryDetailView: View {
         //View to render on PDF
         let myUIHostingController = UIHostingController(rootView: HistoryPDFView)
         myUIHostingController.view.frame = CGRect(origin: .zero, size: pageSize)
-        
         
         //Render the view behind all other views
         guard let rootVC = UIApplication.shared.windows.first?.rootViewController else {

@@ -46,13 +46,12 @@ struct ContentView: View {
         
         // This property is not present on the UINavigationBarAppearance
         // object for some reason and you have to leave it til the end
-        UINavigationBar.appearance().tintColor = .white
+        // UINavigationBar.appearance().tintColor = .white
         
     }
     
-    
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    var registerData = RegistrasiModel()
+    //    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //    var registerData = RegistrasiModel()
     
     var body: some View {
         JGProgressHUDPresenter(userInteractionOnHUD: false) {
@@ -69,11 +68,11 @@ struct ContentView: View {
                 WelcomeView()
                     .environmentObject(appState)
                 
-//                NavigationView{
-//                    PasswordView()
-//                        .environmentObject(RegistrasiModel())
-//                        .environmentObject(appState)
-//                }
+                //                NavigationView{
+                //                    PasswordView()
+                //                        .environmentObject(RegistrasiModel())
+                //                        .environmentObject(appState)
+                //                }
             }
             .edgesIgnoringSafeArea(.top)
             .onAppear(perform: onAppear)

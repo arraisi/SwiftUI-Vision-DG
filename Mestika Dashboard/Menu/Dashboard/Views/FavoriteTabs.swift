@@ -49,6 +49,7 @@ struct FavoriteTabs: View {
                                             .aspectRatio(contentMode: .fit)
                                             .foregroundColor(.white)
                                         Text("Back".localized(language))
+                                            .foregroundColor(.white)
                                     }
                                 })
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
