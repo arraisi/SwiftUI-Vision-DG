@@ -17,7 +17,6 @@ class WebSocket: NSObject, SwiftStompDelegate {
     
     func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
         print("Connected")
-        print(deviceId)
         
         swiftStomp.subscribe(to: "/open/changes/\(deviceId!)")
         swiftStomp.subscribe(to: "/close/changes/\(deviceId!)")
@@ -27,6 +26,9 @@ class WebSocket: NSObject, SwiftStompDelegate {
     
     func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
         print("Disconnected")
+        
+        swiftStomp.unsubscribe(from: "/open/changes/\(deviceId!)")
+        swiftStomp.unsubscribe(from: "/close/changes/\(deviceId!)")
     }
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) {
@@ -45,7 +47,9 @@ class WebSocket: NSObject, SwiftStompDelegate {
                 if (data.notificationType == "START") {
                     let dataRoom: [String: Any] = ["room_id": data.roomId]
                     NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
-                } else if (data.notificationType == "END") {
+                }
+                
+                if (data.notificationType == "END") {
                     NotificationCenter.default.post(name: NSNotification.Name("JitsiEnd"), object: nil, userInfo: nil)
                 }
 
@@ -84,6 +88,7 @@ final class StompClientModel: ObservableObject {
         let stomp = SwiftStomp(host: url)
         stomp.delegate = WebSocket()
         
+        stomp.autoReconnect = true
         stomp.connect()
     }
 }

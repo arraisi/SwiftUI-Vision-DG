@@ -20,9 +20,13 @@ struct ConfirmationPinOfSavingAccountView: View {
     @State var unlocked = false
     @State var success = false
     
+    @State var isFailedDeposit: Bool = false
+    
     var codePlan: String
     var product: String
     @Binding var deposit: String
+    
+    @State private var isLoading: Bool = false
     
     var body: some View {
         ZStack {
@@ -32,7 +36,7 @@ struct ConfirmationPinOfSavingAccountView: View {
             
             VStack {
                 
-                if (self.savingAccountVM.isLoading) {
+                if (self.isLoading) {
                     LinearWaitingIndicator()
                         .animated(true)
                         .foregroundColor(.green)
@@ -61,7 +65,7 @@ struct ConfirmationPinOfSavingAccountView: View {
                 Spacer(minLength: 0)
                 
                 NavigationLink(
-                    destination: SuccessOpenNewSavingAccountView(transactionDate: savingAccountVM.transactionDate, deposit: deposit, destinationNumber: savingAccountVM.destinationNumber, product: product),
+                    destination: SuccessOpenNewSavingAccountView(transactionDate: savingAccountVM.transactionDate, deposit: deposit, destinationNumber: savingAccountVM.destinationNumber, product: product, isFailedDeposit: isFailedDeposit),
                     isActive: $success) {EmptyView()}
                 
                 PinVerification(pin: $pin, onChange: {
@@ -88,13 +92,26 @@ struct ConfirmationPinOfSavingAccountView: View {
     }
     
     func saveSavingAccount() {
-        self.savingAccountVM.saveAccount(kodePlan: self.codePlan, deposit: self.deposit.replacingOccurrences(of: ".", with: ""), pinTrx: self.pin) { result in
-            if result {
-//                self.deposit = self.savingAccountVM.deposit
+        self.isLoading = true
+        self.savingAccountVM.saveAccount(kodePlan: self.codePlan, deposit: self.deposit.replacingOccurrences(of: ".", with: ""), pinTrx: self.pin) { success in
+            
+            if success {
+                self.isLoading = false
+                
+                self.isFailedDeposit = false
                 self.success = true
-            } else {
-                self.wrongPin = true
-                self.pin = ""
+            }
+            
+            if !success {
+                self.isLoading = false
+                
+                if savingAccountVM.errorCode == "206" {
+                    self.isFailedDeposit = true
+                    self.success = true
+                } else {
+                    self.wrongPin = true
+                    self.pin = ""
+                }
             }
         }
     }

@@ -173,6 +173,9 @@ class SavingAccountViewModel : ObservableObject {
                 switch error {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
+                case .custom(code: 206):
+                    self.errorCode = "206"
+                    self.errorMessage = "Failed Deposit"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

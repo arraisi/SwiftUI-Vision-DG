@@ -306,6 +306,10 @@ class SavingAccountServices {
                     print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
                 }
                 
+                if (httpResponse.statusCode == 206) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }

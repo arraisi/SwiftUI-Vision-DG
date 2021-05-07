@@ -10,14 +10,7 @@ import JGProgressHUD_SwiftUI
 
 struct ContentView: View {
     
-    @StateObject private var model = StompClientModel() // <this
-    
     let appState = AppState()
-    @Environment(\.scenePhase) var scenePhase
-    
-    private func onAppear() {
-        model.connect()
-    }
     
     init() {
         // this is not the same as manipulating the proxy directly
@@ -75,7 +68,6 @@ struct ContentView: View {
                 //                }
             }
             .edgesIgnoringSafeArea(.top)
-            .onAppear(perform: onAppear)
         }
     }
 }

@@ -293,7 +293,8 @@ struct LoginScreen: View {
                     if (self.authVM.errorCode == "206") {
                         self.routeNewPassword = true
                     } else if (self.authVM.errorCode == "401") {
-                        self.appState.moveToWelcomeView = true
+//                        self.appState.moveToWelcomeView = true
+                        self.showingModal = true
                     } else {
                         print("LOGIN FAILED")
                         self.showingModal = true

@@ -299,11 +299,6 @@ struct WelcomeView: View {
                     self.isShowAlertInternetConnection = true
                 }
             }
-            .onAppear() {
-                NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail".localized(language)), object: nil, queue: .main) { (_) in
-                    
-                }
-            }
             .fullScreenCover(isPresented: $isShowJitsi) {
                 JitsiView(jitsi_room: self.$jitsiRoom)
             }

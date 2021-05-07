@@ -18,6 +18,8 @@ struct SuccessOpenNewSavingAccountView: View {
     var destinationNumber: String
     var product: String
     
+    var isFailedDeposit: Bool
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
@@ -74,6 +76,27 @@ struct SuccessOpenNewSavingAccountView: View {
                 .foregroundColor(.white)
                 .padding(25)
                 
+                if isFailedDeposit {
+                    VStack(alignment: .leading) {
+                        Text("Setoran Gagal")
+                            .foregroundColor(.red)
+                            .fontWeight(.medium)
+                            .padding(.leading, 20)
+                            .padding(.top, 10)
+                            .padding(.bottom, 2)
+                        
+                        Text("Pembukaan akun berhasil. Namun, setoran gagal. Silahkan melakukan deposit melalui tautan dibawah ini.")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 10)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .padding(.horizontal, 20)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                }
+                
                 Spacer()
                 
                 Button(
@@ -89,24 +112,10 @@ struct SuccessOpenNewSavingAccountView: View {
                     })
                     .background(Color.white)
                     .cornerRadius(12)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 10)
+                    .padding(.horizontal, 20)
                 
 
                 Spacer()
-                
-//                NavigationLink(
-//                    destination: DetailTransactionSavingAccountView(product: product, deposit: deposit),
-//                    label: {
-//                        Text("See Transaction Details".localized(language))
-//                            .foregroundColor(Color(hex: "#2334D0"))
-//                            .fontWeight(.bold)
-//                            .font(.system(size: 13))
-//                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-//                    })
-//                    .background(Color.white)
-//                    .cornerRadius(12)
-//                    .padding(25)
                 
             }
             
@@ -117,37 +126,11 @@ struct SuccessOpenNewSavingAccountView: View {
         .onAppear {
             NotificationCenter.default.post(name: NSNotification.Name("SavingAccountReturn"), object: nil, userInfo: nil)
         }
-//        .navigationBarItems(trailing: HStack(spacing: 30) {
-//            HStack {
-//                Text("Add to favorites?".localized(language))
-//                    .font(.caption)
-//                    .foregroundColor(.white)
-//
-//                Button(action: {
-//                    withAnimation(.easeIn) {
-//                        //                        self.showPopover.toggle()
-//                    }
-//                }, label: {
-//                    Image(systemName: "pin")
-//                        .foregroundColor(.white)
-//                })
-//
-//            }
-//
-//            Button(action: {
-//                //                self.uiImage = self.asUIImage()
-//                //                shareImage()
-//            }, label: {
-//                Image(systemName: "square.and.arrow.up")
-//                    .foregroundColor(.white)
-//            })
-//        })
-        
     }
 }
 
 struct SuccessOpenNewSavingAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        SuccessOpenNewSavingAccountView(transactionDate: "", deposit: "", destinationNumber: "", product: "")
+        SuccessOpenNewSavingAccountView(transactionDate: "", deposit: "", destinationNumber: "", product: "", isFailedDeposit: false)
     }
 }

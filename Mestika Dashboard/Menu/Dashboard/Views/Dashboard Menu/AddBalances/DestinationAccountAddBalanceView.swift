@@ -204,7 +204,12 @@ struct DestinationAccountAddBalanceView: View {
                                 
                                 self.isLoading = false
                                 self.savingAccountVM.balanceAccount.forEach { b in
-                                    self.listBalance.append(b.balance ?? "0")
+                                    
+                                    if (b.balance == "") {
+                                        self.listBalance.append("0")
+                                    } else {
+                                        self.listBalance.append(b.balance ?? "0")
+                                    }
                                 }
                             }
                             

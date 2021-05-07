@@ -25,7 +25,7 @@ class ATMService {
             "nik": dataRequest.nik,
             "isNasabahMestika": dataRequest.isNasabahMestika,
             "isVcall": dataRequest.isVcall,
-            "codeClass": dataRequest.codeClass,
+            "codeClass": dataRequest.productType,
             "imageDesign": dataRequest.imageDesign,
             "atmName": dataRequest.atmName,
             "atmAddressInput": dataRequest.atmAddressInput,
