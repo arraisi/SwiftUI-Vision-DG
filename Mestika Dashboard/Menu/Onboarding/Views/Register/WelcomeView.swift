@@ -14,6 +14,8 @@ import SystemConfiguration
 
 struct WelcomeView: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -40,6 +42,8 @@ struct WelcomeView: View {
     @State var isFirstOTPLoginViewActive: Bool = false
     @State var isPasswordViewActive: Bool = false
     @State var isLoginNewDevice: Bool = false
+    
+    var jitsiMeetView: JitsiMeetView?
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -263,6 +267,7 @@ struct WelcomeView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
                 print("RECEIVED JITSI END")
+                self.isIncomingVideoCall = false
                 getUserStatus(deviceId: deviceId!)
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CheckWebsocket"))) { obj in

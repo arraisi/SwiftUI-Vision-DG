@@ -128,7 +128,7 @@ struct ListLastTransactionView: View {
                 if success {
                     self.savingAccountVM.accounts.forEach { e in
                         
-                        if (e.accountType == "S") {
+                        if (e.categoryProduct == "M") {
                             self.listSourceNumber.append(e.accountNumber)
                         }
                         

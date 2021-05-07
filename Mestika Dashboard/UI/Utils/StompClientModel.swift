@@ -20,6 +20,7 @@ class WebSocket: NSObject, SwiftStompDelegate {
         print(deviceId)
         
         swiftStomp.subscribe(to: "/open/changes/\(deviceId!)")
+        swiftStomp.subscribe(to: "/close/changes/\(deviceId!)")
         
         NotificationCenter.default.post(name: NSNotification.Name("CheckWebsocket"), object: nil, userInfo: nil)
     }
@@ -34,16 +35,20 @@ class WebSocket: NSObject, SwiftStompDelegate {
             print("Message with id `\(messageId)` received at destination `\(destination)`:\n\(message)")
             
             let jsonData = Data(message.utf8)
-            
+
             let decoder = JSONDecoder()
 
             do {
                 let data = try decoder.decode(ReceivingMessage.self, from: jsonData)
                 print(data.roomId)
                 
-                let dataRoom: [String: Any] = ["room_id": data.roomId]
-                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
-                
+                if (data.notificationType == "START") {
+                    let dataRoom: [String: Any] = ["room_id": data.roomId]
+                    NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+                } else if (data.notificationType == "END") {
+                    NotificationCenter.default.post(name: NSNotification.Name("JitsiEnd"), object: nil, userInfo: nil)
+                }
+
             } catch {
                 print(error.localizedDescription)
             }

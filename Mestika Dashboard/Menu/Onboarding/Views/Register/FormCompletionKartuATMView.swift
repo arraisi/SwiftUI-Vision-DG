@@ -51,13 +51,13 @@ struct FormCompletionKartuATMView: View {
         MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
         MasterModel(id: 2, name: "Mailing address".localized(LocalizationService.shared.language)),
         MasterModel(id: 3, name: "Company's address".localized(LocalizationService.shared.language)),
-        MasterModel(id: 4, name: "Other Address".localized(LocalizationService.shared.language)),
+//        MasterModel(id: 4, name: "Other Address".localized(LocalizationService.shared.language)),
     ]
     
     @State var addressOptionsNonPekerja: [MasterModel] = [
         MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
         MasterModel(id: 2, name: "Mailing address".localized(LocalizationService.shared.language)),
-        MasterModel(id: 4, name: "Other Address".localized(LocalizationService.shared.language)),
+//        MasterModel(id: 4, name: "Other Address".localized(LocalizationService.shared.language)),
     ]
     
     let cities:[Address] = [

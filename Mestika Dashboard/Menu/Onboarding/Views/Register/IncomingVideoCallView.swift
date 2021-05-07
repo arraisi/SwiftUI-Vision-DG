@@ -79,13 +79,12 @@ struct IncomingVideoCallView: View {
             
             JitsiMeet.sharedInstance().defaultConferenceOptions = defaultOptions
         })
-        .onAppear() {
-            NotificationCenter.default.addObserver(forName: NSNotification.Name("Detail"), object: nil, queue: .main) { (_) in
-                
-            }
-        }
         .fullScreenCover(isPresented: $isShowJitsi) {
             JitsiView(jitsi_room: self.$jitsiRoom)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
+            print("RECEIVED JITSI END")
+            self.isShowJitsi = false
         }
     }
     

@@ -213,12 +213,15 @@ struct DestinationAccountBalancesView: View {
                 if success {
                     self.savingAccountVM.accounts.forEach { a in
                         
-                        if (a.accountType == "S") {
+                        if (a.categoryProduct == "S") {
                             
-                            if (self.transaksiData.sourceNumber != a.accountNumber) {
-                                self.listSourceNumber.append(a.accountNumber)
-                                self.listTabunganName.append(a.productName ?? "No Name")
-                            }
+//                            if (self.transaksiData.sourceNumber != a.accountNumber) {
+//                                self.listSourceNumber.append(a.accountNumber)
+//                                self.listTabunganName.append(a.productName ?? "No Name")
+//                            }
+                            
+                            self.listSourceNumber.append(a.accountNumber)
+                            self.listTabunganName.append(a.productName ?? "No Name")
 
                         }
                     }
