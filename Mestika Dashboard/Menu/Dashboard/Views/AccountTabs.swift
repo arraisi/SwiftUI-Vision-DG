@@ -240,8 +240,8 @@ struct AccountTabs: View {
                         
                     }
                     
-                    Divider()
-                        .padding(.horizontal, 10)
+//                    Divider()
+//                        .padding(.horizontal, 10)
                 }
                 .frame(width: UIScreen.main.bounds.width - 30)
             }
