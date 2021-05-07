@@ -216,6 +216,28 @@ struct AccountTabs: View {
                         .padding(.horizontal, 20)
                     }
                     
+                    
+                    
+                    Divider()
+                        .padding(.horizontal, 10)
+                    
+                    NavigationLink(destination : TransactionLimitView()) {
+                        
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("Transaction Limit".localized(language))
+                                    .foregroundColor(Color(hex: "#1D2238"))
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                            }
+                            
+                            Spacer()
+                        }
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 20)
+                        
+                    }
+                    
                     Divider()
                         .padding(.horizontal, 10)
                 }

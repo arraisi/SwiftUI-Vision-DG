@@ -357,8 +357,6 @@
 		C01B84DD26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01B84DC26002EE700F5BBD9 /* DetailTransactionSavingAccountView.swift */; };
 		C0240F9926388E6800E0181D /* SourceOfFundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0240F9826388E6800E0181D /* SourceOfFundView.swift */; };
 		C02A6745264278ED003679DE /* JenisAtmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A6744264278ED003679DE /* JenisAtmModel.swift */; };
-		C02A675026428C37003679DE /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */; };
-		C02A675126428C37003679DE /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; };
 		C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BAC256E814C00622E7A /* WelcomeView.swift */; };
 		C02E9BB2256E81B200622E7A /* WelcomeViewCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E9BB1256E81B200622E7A /* WelcomeViewCarousel.swift */; };
 		C037234C26311F0900BA2B43 /* PesanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037234B26311F0900BA2B43 /* PesanView.swift */; };
@@ -423,6 +421,9 @@
 		C0B347CB25593688000754C4 /* CardDamageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347CA25593688000754C4 /* CardDamageView.swift */; };
 		C0B347D32559422B000754C4 /* CardBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B347D22559422B000754C4 /* CardBlockView.swift */; };
 		C0B38AB1263FEE1C0015B4E2 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B38AB0263FEE1C0015B4E2 /* HistoryDetailView.swift */; };
+		C0B641802645138300C0D55A /* TransactionLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B6417F2645138300C0D55A /* TransactionLimitView.swift */; };
+		C0B6418E2645142A00C0D55A /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B641842645141000C0D55A /* JitsiMeetSDK.xcframework */; };
+		C0B6418F2645142A00C0D55A /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B641852645141000C0D55A /* WebRTC.xcframework */; };
 		C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */; };
 		C0BCCB222577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */; };
 		C0BCCB272577E3AD00B9B07A /* EmailRegisterNasabahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */; };
@@ -915,6 +916,9 @@
 		C0B347CA25593688000754C4 /* CardDamageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageView.swift; sourceTree = "<group>"; };
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
 		C0B38AB0263FEE1C0015B4E2 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
+		C0B6417F2645138300C0D55A /* TransactionLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitView.swift; sourceTree = "<group>"; };
+		C0B641842645141000C0D55A /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../../Downloads/jitsi-meet/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
+		C0B641852645141000C0D55A /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../../Downloads/jitsi-meet/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
 		C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppBar.swift; sourceTree = "<group>"; };
 		C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterNasabahView.swift; sourceTree = "<group>"; };
@@ -969,8 +973,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C02A675026428C37003679DE /* JitsiMeetSDK.xcframework in Frameworks */,
-				C02A675126428C37003679DE /* WebRTC.xcframework in Frameworks */,
+				C0B6418E2645142A00C0D55A /* JitsiMeetSDK.xcframework in Frameworks */,
+				C0B6418F2645142A00C0D55A /* WebRTC.xcframework in Frameworks */,
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
@@ -1454,6 +1458,7 @@
 				C043CFCE25CD4E5300328C91 /* FormChangeAddressView.swift */,
 				526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */,
 				C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */,
+				C0B6417F2645138300C0D55A /* TransactionLimitView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1818,6 +1823,8 @@
 		A5D2A9330E58646C22F4EE12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C0B641842645141000C0D55A /* JitsiMeetSDK.xcframework */,
+				C0B641852645141000C0D55A /* WebRTC.xcframework */,
 				C047F0952642753800E3E308 /* jitsi-meet */,
 				52A7A3582641CC12001B9937 /* WebRTC.xcframework */,
 				52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */,
@@ -2824,6 +2831,7 @@
 				52474D7E25402D130094B758 /* PaymentTransactionTabs.swift in Sources */,
 				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
 				52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */,
+				C0B641802645138300C0D55A /* TransactionLimitView.swift in Sources */,
 				5219280125F0D8F800822042 /* FormChangePinCardView.swift in Sources */,
 				52210C5C262D404E004A6483 /* PayQrisResponseModel.swift in Sources */,
 				52ADFF942557DFDC00A1001F /* SumberPendapatanLainnyaView.swift in Sources */,
