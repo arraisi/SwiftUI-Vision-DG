@@ -403,6 +403,8 @@
 		C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */; };
 		C08758D825D2398E008ED730 /* FavoritModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08758D725D2398E008ED730 /* FavoritModel.swift */; };
 		C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0884939255BC12E00E2F927 /* ScanKTPView.swift */; };
+		C08D58702645FE25002E9BF5 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08D586F2645FE25002E9BF5 /* JitsiMeetSDK.xcframework */; };
+		C08D58742645FE3F002E9BF5 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08D58732645FE3F002E9BF5 /* WebRTC.xcframework */; };
 		C092ABF02553B3CF0051CE3E /* MyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C092ABEF2553B3CF0051CE3E /* MyCard.swift */; };
 		C092ABFF2553B5850051CE3E /* myCardData.json in Resources */ = {isa = PBXBuildFile; fileRef = C092ABFE2553B5850051CE3E /* myCardData.json */; };
 		C09DF8A7255BE6B000482F58 /* FormIdentitasDiriView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */; };
@@ -499,8 +501,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				52F4E3B9264543CC0094F320 /* WebRTC.xcframework in Embed Frameworks */,
-				52F4E3B7264543CC0094F320 /* JitsiMeetSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,8 +687,6 @@
 		5294535325EF2899009A5B83 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageAddressInputView.swift; sourceTree = "<group>"; };
 		52A7970C2641170D001B9937 /* RequestOtpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOtpResponse.swift; sourceTree = "<group>"; };
-		52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
-		52A7A3582641CC12001B9937 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
 		52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePersonalDataView.swift; sourceTree = "<group>"; };
 		52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinConfirmationChangeDataView.swift; sourceTree = "<group>"; };
 		52ADFE6B2557D87A00A1001F /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
@@ -885,9 +883,6 @@
 		C043CFC125CD43B700328C91 /* FormChangeContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangeContactView.swift; sourceTree = "<group>"; };
 		C043CFC925CD4BD000328C91 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
 		C043CFCE25CD4E5300328C91 /* FormChangeAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangeAddressView.swift; sourceTree = "<group>"; };
-		C047F086264272D800E3E308 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = ../../../Downloads/out/JitsiMeetSDK.xcframework; sourceTree = "<group>"; };
-		C047F087264272D800E3E308 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = ../../../Downloads/out/WebRTC.xcframework; sourceTree = "<group>"; };
-		C047F0952642753800E3E308 /* jitsi-meet */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "jitsi-meet"; path = "../../../Downloads/jitsi-meet"; sourceTree = "<group>"; };
 		C04B958A255450D0006690C2 /* PopUpBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBubble.swift; sourceTree = "<group>"; };
 		C04C4A8A256B684B004723D7 /* ScheduleInterviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewModel.swift; sourceTree = "<group>"; };
 		C052A07C2631558400DC90C6 /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
@@ -915,6 +910,8 @@
 		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		C08758D725D2398E008ED730 /* FavoritModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritModel.swift; sourceTree = "<group>"; };
 		C0884939255BC12E00E2F927 /* ScanKTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanKTPView.swift; sourceTree = "<group>"; };
+		C08D586F2645FE25002E9BF5 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = JitsiMeetSDK.xcframework; sourceTree = "<group>"; };
+		C08D58732645FE3F002E9BF5 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebRTC.xcframework; sourceTree = "<group>"; };
 		C092ABEF2553B3CF0051CE3E /* MyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCard.swift; sourceTree = "<group>"; };
 		C092ABFE2553B5850051CE3E /* myCardData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = myCardData.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
 		C09DF8A6255BE6B000482F58 /* FormIdentitasDiriView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormIdentitasDiriView.swift; sourceTree = "<group>"; };
@@ -942,8 +939,6 @@
 		C0B347D22559422B000754C4 /* CardBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockView.swift; sourceTree = "<group>"; };
 		C0B38AB0263FEE1C0015B4E2 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		C0B6417F2645138300C0D55A /* TransactionLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitView.swift; sourceTree = "<group>"; };
-		C0B641842645141000C0D55A /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../../Downloads/jitsi-meet/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
-		C0B641852645141000C0D55A /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../../Downloads/jitsi-meet/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
 		C0BC3A1D2575EDD300A981DD /* CustomAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAppBar.swift; sourceTree = "<group>"; };
 		C0BCCB212577E36100B9B07A /* PhoneOTPRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneOTPRegisterNasabahView.swift; sourceTree = "<group>"; };
 		C0BCCB262577E3AD00B9B07A /* EmailRegisterNasabahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterNasabahView.swift; sourceTree = "<group>"; };
@@ -1007,8 +1002,8 @@
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				6312566BD2327D8729CF0518 /* Pods_Mestika_Dashboard.framework in Frameworks */,
-				52F4E3B8264543CC0094F320 /* WebRTC.xcframework in Frameworks */,
-				52F4E3B6264543CC0094F320 /* JitsiMeetSDK.xcframework in Frameworks */,
+				C08D58742645FE3F002E9BF5 /* WebRTC.xcframework in Frameworks */,
+				C08D58702645FE25002E9BF5 /* JitsiMeetSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1253,15 +1248,16 @@
 				C00AC552255E52E2005D67C0 /* Menu */,
 				C092ABFD2553B51B0051CE3E /* Resources */,
 				52ADFEB22557DA0700A1001F /* Utils */,
+				C0B0F37E2646040F003FF962 /* Frameworks */,
 				5245F884253FE702002E8B53 /* AppDelegate.swift */,
 				5245F886253FE702002E8B53 /* SceneDelegate.swift */,
 				5245F888253FE702002E8B53 /* ContentView.swift */,
 				5245F892253FE705002E8B53 /* LaunchScreen.storyboard */,
-				5245F895253FE705002E8B53 /* Info.plist */,
+				526BA00A25984FE000E1CFC3 /* Localizable.strings */,
 				5245F88A253FE702002E8B53 /* Mestika_Dashboard.xcdatamodeld */,
 				064CCE5D256DB40D001B8EB7 /* GoogleService-Info.plist */,
+				5245F895253FE705002E8B53 /* Info.plist */,
 				5245F88F253FE705002E8B53 /* Preview Content */,
-				526BA00A25984FE000E1CFC3 /* Localizable.strings */,
 			);
 			path = "Mestika Dashboard";
 			sourceTree = "<group>";
@@ -1851,13 +1847,6 @@
 		A5D2A9330E58646C22F4EE12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C0B641842645141000C0D55A /* JitsiMeetSDK.xcframework */,
-				C0B641852645141000C0D55A /* WebRTC.xcframework */,
-				C047F0952642753800E3E308 /* jitsi-meet */,
-				52A7A3582641CC12001B9937 /* WebRTC.xcframework */,
-				52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */,
-				C047F086264272D800E3E308 /* JitsiMeetSDK.xcframework */,
-				C047F087264272D800E3E308 /* WebRTC.xcframework */,
 				8FE34BEEB01C90376DE62BE4 /* Pods_Mestika_Dashboard.framework */,
 				D5F417F6A1389F47850D9E9C /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */,
 				A71DFC0DC2AD884C20BE2F7F /* Pods_Mestika_DashboardTests.framework */,
@@ -2263,6 +2252,15 @@
 				C0AD115F25DF89D3003FF920 /* HistoryTransactionModel.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		C0B0F37E2646040F003FF962 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C08D586F2645FE25002E9BF5 /* JitsiMeetSDK.xcframework */,
+				C08D58732645FE3F002E9BF5 /* WebRTC.xcframework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		C0BFB51C2576373700676B95 /* Register */ = {
