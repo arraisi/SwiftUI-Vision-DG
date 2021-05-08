@@ -351,33 +351,7 @@ struct InformasiPerusahaanView: View {
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
-                //                HStack {
-                //
-                //                    TextField("Bidang Usaha", text: $registerData.bidangUsaha) { changed in
-                //                    } onCommit: {
-                //                    }
-                //                    .font(Font.system(size: 14))
-                //                    .frame(height: 36)
-                //                    .disabled(true)
-                //
-                //                    Button(action:{
-                //                        showingModalBidang.toggle()
-                //                    }, label: {
-                //                        Image(systemName: "chevron.right")
-                //                    })
-                //
-                //                }
-                //                .padding(.horizontal)
-                //                .background(Color.gray.opacity(0.1))
-                //                .cornerRadius(10)
-                
                 HStack {
-//                    TextField("Business fields".localized(language), text: $registerData.bidangUsaha)
-//                        .font(Font.system(size: 14))
-//                        .frame(height: 50)
-//                        .padding(.leading, 15)
-//                        .disabled(true)
-                    
                     MultilineTextField(registerData.bidangUsaha == "" ? "Business fields".localized(language) : "", text: $registerData.bidangUsaha, onCommit: {
                     })
                     .padding(.leading, 15)
@@ -424,7 +398,6 @@ struct InformasiPerusahaanView: View {
                     .cornerRadius(10)
                     
                     Button(action:{
-                        //                        showingModal.toggle()
                         searchAddress()
                     }, label: {
                         Image(systemName: "magnifyingglass")
@@ -532,25 +505,6 @@ struct InformasiPerusahaanView: View {
                 Spacer()
             }
             
-//            HStack {
-//
-//                TextField("Company's address".localized(language), text: $location)
-//                    .font(Font.system(size: 14))
-//                    .frame(height: 36)
-//
-//                Button(action:{
-//                    searchAddress(keyword: location)
-//                }, label: {
-//                    Image(systemName: "location")
-//                        .font(Font.system(size: 20))
-//                        .foregroundColor(Color(hex: "#707070"))
-//                })
-//
-//            }
-//            .padding(.horizontal)
-//            .background(Color.gray.opacity(0.1))
-//            .cornerRadius(10)
-            
             HStack {
                 
                 MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
@@ -561,7 +515,6 @@ struct InformasiPerusahaanView: View {
                 .cornerRadius(10)
                 
                 Button(action:{
-                    //                        showingModal.toggle()
                     searchAddress()
                 }, label: {
                     Image(systemName: "location")
@@ -570,19 +523,6 @@ struct InformasiPerusahaanView: View {
                 })
                 
             }
-            
-            //            List(addressSugestionResult, id: \.formatted_address) { data in
-            //
-            //                AddressSuggestionRow(address: data.formatted_address)
-            //                .onTapGesture(perform: {
-            //                    searchAddress(data: data.formatted_address)
-            //                    self.showingModal.toggle()
-            //                })
-            //
-            //            }
-            ////            .background(Color.white)
-            //            .padding(.vertical)
-            //            .frame(height: 150)
             
             ScrollView {
                 VStack {
@@ -625,25 +565,6 @@ struct InformasiPerusahaanView: View {
                     .foregroundColor(Color(hex: "#232175"))
                 Spacer()
             }
-            
-            //            HStack {
-            //
-            //                TextField("Cari Bidang Usaha", text: $registerData.bidangUsaha)
-            //                    .font(Font.system(size: 14))
-            //                    .frame(height: 36)
-            //
-            //                Button(action:{
-            //                    print("cari bidang usaha")
-            //                }, label: {
-            //                    Image(systemName: "magnifyingglass")
-            //                        .font(Font.system(size: 20))
-            //                        .foregroundColor(Color(hex: "#707070"))
-            //                })
-            //
-            //            }
-            //            .padding(.horizontal)
-            //            .background(Color.gray.opacity(0.1))
-            //            .cornerRadius(10)
             
             ScrollView {
                 VStack {
@@ -719,6 +640,8 @@ struct InformasiPerusahaanView: View {
                     registerData.kecamatan = self.addressSugestion[0].kecamatan
                     registerData.kelurahan = self.addressSugestion[0].kelurahan
                     registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+                    registerData.rtPerusahaan = self.addressSugestion[0].rt
+                    registerData.rwPerusahaan = self.addressSugestion[0].rw
                 }
                 self.showingModal = false
                 print("Success")

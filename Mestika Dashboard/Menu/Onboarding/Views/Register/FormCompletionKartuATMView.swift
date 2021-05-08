@@ -149,9 +149,9 @@ struct FormCompletionKartuATMView: View {
                 registerData.namaLengkapFromNik = data.namaLengkapFromNik!
                 registerData.provinsiFromNik = data.provinsiFromNik!
                 registerData.alamatKtpFromNik = data.alamatKtpFromNik!
-                registerData.addressKecamatanInput = data.kecamatanFromNik!
-                registerData.addressKelurahanInput = data.kelurahanFromNik!
-                registerData.addressPostalCodeInput = data.kodePosFromNik!
+                registerData.kecamatanFromNik = data.kecamatanFromNik!
+                registerData.kelurahanFromNik = data.kelurahanFromNik!
+                registerData.kodePosFromNik = data.kodePosFromNik!
                 registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
                 registerData.rtFromNik = data.rtFromNik ?? ""
                 registerData.rwFromNik = data.rwFromNik ?? ""
@@ -163,14 +163,16 @@ struct FormCompletionKartuATMView: View {
                 registerData.kodePosSuratMenyurat = data.addressPostalCodeInput!
                 registerData.kotaSuratMenyurat = data.addressKotaInput!
                 registerData.provinsiSuratMenyurat = data.addressProvinsiInput!
-                registerData.rtSuratMenyurat = data.addressRtRwInput!
-                registerData.rwSuratMenyurat = data.addressRtRwInput!
+                registerData.rtSuratMenyurat = data.addressRtInput!
+                registerData.rwSuratMenyurat = data.addressRwInput!
                 
                 registerData.kecamatan = data.kecamatan!
                 registerData.kelurahan = data.kelurahan!
                 registerData.alamatPerusahaan = data.alamatPerusahaan!
                 registerData.kodePos = data.kodePos!
                 registerData.rtrw = data.rtrw ?? ""
+                registerData.rtPerusahaan = data.rtPerusahaan!
+                registerData.rwPerusahaan = data.rwPerusahaan!
                 registerData.kotaPerusahaan = data.kotaPerusahaan!
                 registerData.provinsiPerusahaan = data.provinsiPerusahaan!
                 
@@ -404,16 +406,6 @@ struct FormCompletionKartuATMView: View {
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    
-                    //                    TextField("Address".localized(language), text: $registerData.alamatPerusahaan) { changed in
-                    //                    } onCommit: {
-                    //                    }
-                    //                    .font(Font.system(size: 14))
-                    //                    .frame(height: 36)
-                    //                    .disabled(true)
-                    //                    .padding(.horizontal)
-                    //                    .background(Color.gray.opacity(0.1))
-                    //                    .cornerRadius(10)
                     MultilineTextField("Address".localized(language), text: $registerData.alamatPerusahaan, onCommit: {
                     })
                     .font(Font.system(size: 14))
@@ -523,16 +515,6 @@ struct FormCompletionKartuATMView: View {
                 Spacer()
             }
             
-//            HStack {
-//                TextField("Company's address".localized(language), text: $location)
-//                    .font(Font.system(size: 14))
-//                    .frame(height: 0)
-//                    .disabled(true)
-//            }
-//            .padding(.horizontal)
-//            .background(Color.gray.opacity(0.1))
-//            .cornerRadius(10)
-            
             HStack {
                 MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
                 })
@@ -584,10 +566,6 @@ struct FormCompletionKartuATMView: View {
             
             HStack {
                 
-//                TextField("Company's address".localized(language), text: $location)
-//                    .font(Font.system(size: 14))
-//                    .frame(height: 36)
-                
                 HStack {
                     MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
                     })
@@ -607,26 +585,6 @@ struct FormCompletionKartuATMView: View {
                 })
                 
             }
-            
-            
-            //            List(addressSugestionResult, id: \.formatted_address) {data in
-            //
-            //                HStack {
-            //                    Text(data.formatted_address)
-            //                        .font(Font.system(size: 14))
-            //
-            //                    Spacer()
-            //                }
-            //                .contentShape(Rectangle())
-            //                .onTapGesture(perform: {
-            //                    searchAddress(data: data.formatted_address)
-            //                    self.showingAddressModal.toggle()
-            //                })
-            //
-            //            }
-            //            .background(Color.white)
-            //            .padding(.vertical)
-            //            .frame(height: 150)
             
             ScrollView {
                 VStack {
@@ -711,9 +669,9 @@ struct FormCompletionKartuATMView: View {
         case 1: /// Sesuai KTP
             print("Case 1")
             atmData.atmAddressInput = registerData.alamatKtpFromNik
-            atmData.atmAddressPostalCodeInput = registerData.addressPostalCodeInput
-            atmData.atmAddressKecamatanInput = registerData.addressKecamatanInput
-            atmData.atmAddressKelurahanInput = registerData.addressKelurahanInput
+            atmData.atmAddressPostalCodeInput = registerData.kodePosFromNik
+            atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
+            atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
             atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
             atmData.atmAddressRtInput = registerData.rtFromNik
@@ -724,9 +682,9 @@ struct FormCompletionKartuATMView: View {
             
             if registerData.isAddressEqualToDukcapil {
                             atmData.atmAddressInput = registerData.alamatKtpFromNik
-                            atmData.atmAddressPostalCodeInput = registerData.addressPostalCodeInput
-                            atmData.atmAddressKecamatanInput = registerData.addressKecamatanInput
-                            atmData.atmAddressKelurahanInput = registerData.kabupatenKotaFromNik
+                            atmData.atmAddressPostalCodeInput = registerData.kodePosFromNik
+                            atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
+                            atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
                             atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
                             atmData.atmAddressPropinsiInput = registerData.provinsiFromNik
                 atmData.atmAddressRtInput = registerData.rtFromNik
@@ -753,8 +711,8 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressKecamatanInput = registerData.kecamatan
             atmData.atmAddressKelurahanInput = registerData.kelurahan
             atmData.atmAddressrtRwInput = registerData.rtrw
-            atmData.atmAddressRtInput = "00"
-            atmData.atmAddressRwInput = "00"
+            atmData.atmAddressRtInput = registerData.rtPerusahaan
+            atmData.atmAddressRwInput = registerData.rwPerusahaan
             atmData.atmAddressPropinsiInput = registerData.provinsiPerusahaan
             atmData.atmAddressKotaInput = registerData.kotaPerusahaan
             atmData.addressEqualToDukcapil = false

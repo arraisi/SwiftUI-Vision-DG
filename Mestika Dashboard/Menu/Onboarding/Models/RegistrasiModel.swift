@@ -55,6 +55,8 @@ class RegistrasiModel: ObservableObject {
     @Published var kotaPerusahaan = ""
     @Published var provinsiPerusahaan = ""
     @Published var kodePosPerusahaan = ""
+    @Published var rtPerusahaan = ""
+    @Published var rwPerusahaan = ""
     @Published var rtrw = ""
     @Published var noTeleponPerusahaan = ""
     @Published var penghasilanKotorId: Int = 0
@@ -103,6 +105,8 @@ class RegistrasiModel: ObservableObject {
     @Published var isAddressEqualToDukcapil: Bool = false
     @Published var addressInput: String = ""
     @Published var addressRtRwInput: String = ""
+    @Published var addressRtInput: String = ""
+    @Published var addressRwInput: String = ""
     @Published var addressKelurahanInput: String = ""
     @Published var addressKecamatanInput: String = ""
     @Published var addressPostalCodeInput: String = ""

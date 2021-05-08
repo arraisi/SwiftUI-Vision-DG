@@ -18,8 +18,8 @@ extension URLRequest {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("C7CDC911-A2D5-45F0-BEB8-C9C55E64675C", forHTTPHeaderField: "X-Device-ID")
-                self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
+                self.setValue("C7CDC911-A2D5-45F0-BEB8-C9C55E64675C", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")

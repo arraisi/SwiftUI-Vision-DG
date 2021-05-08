@@ -236,6 +236,8 @@ struct VerificationAddressView: View {
                             self.registerData.addressPostalCodeInput = registerData.kodePosFromNik
                             self.registerData.addressProvinsiInput = registerData.provinsiFromNik
                             self.registerData.addressKotaInput = registerData.kabupatenKotaFromNik
+                            self.registerData.addressRtInput = registerData.rtFromNik
+                            self.registerData.addressRwInput = registerData.rwFromNik
                             
                             self.isShowNextView = true
                             

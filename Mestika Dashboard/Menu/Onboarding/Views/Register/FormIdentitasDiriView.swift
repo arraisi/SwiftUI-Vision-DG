@@ -260,20 +260,6 @@ struct FormIdentitasDiriView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        //        .alert(isPresented: $showingAlert) {
-        //            return Alert(
-        //                title: Text("Apakah ingin membatalkan registrasi ?"),
-        //                primaryButton: .default(Text("YA"), action: {
-        //                    self.appState.moveToWelcomeView = true
-        //                }),
-        //                secondaryButton: .cancel(Text("Tidak")))
-        //        }
-        //        .gesture(DragGesture().onEnded({ value in
-        //            if(value.startLocation.x < 20 &&
-        //                value.translation.width > 50) {
-        //                self.showingAlert = true
-        //            }
-        //        }))
     }
     
     var camera: some View {

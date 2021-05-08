@@ -144,8 +144,7 @@ struct ScanKTPView: View {
                 print("nikValid \(self.citizenVM.nik)")
                 print(self.citizenVM.alamatKtp)
                 print(self.citizenVM.rt)
-//                self.messageResponse = self.citizenVM.errorMessage
-//                self.showingAlert = true
+                
                 self.registerData.nik = nik
                 self.registerData.namaLengkapFromNik = self.citizenVM.namaLengkap
                 self.registerData.tempatLahirFromNik = self.citizenVM.tempatLahir
@@ -156,13 +155,11 @@ struct ScanKTPView: View {
                 self.registerData.kecamatanFromNik = self.citizenVM.kecamatan
                 self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
                 self.registerData.provinsiFromNik = self.citizenVM.provinsi
+                self.registerData.kodePosFromNik = "40287"
                 self.registerData.fotoKTP = self.imageKTP!
                 
                 print(self.registerData.nik)
                 print(self.registerData.namaLengkapFromNik)
-                
-//                UserDefaults.standard.set(self.citizenVM.nik, forKey: "nik_local")
-//                UserDefaults.standard.set(self.citizenVM.namaLengkap, forKey: "nama_local")
                 
                 self.onCommit()
             }

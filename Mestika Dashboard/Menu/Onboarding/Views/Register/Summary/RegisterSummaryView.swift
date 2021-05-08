@@ -372,7 +372,7 @@ struct RegisterSummaryView: View {
         data.noAtm = self.registerData.noAtm
         data.noRekening = self.registerData.noRekening
         data.accNo = self.registerData.accNo
-//        data.atmNumberReferral = self.registerData.atmNumberReferral
+        data.atmNumberReferral = self.registerData.atmNumberReferral
         
         // Data Surat Menyurat
         data.addressInput = self.registerData.addressInput
@@ -382,6 +382,8 @@ struct RegisterSummaryView: View {
         data.addressRtRwInput = self.registerData.addressRtRwInput
         data.addressProvinsiInput = self.registerData.addressProvinsiInput
         data.addressKotaInput = self.registerData.addressKotaInput
+        data.addressRtInput = self.registerData.addressRtInput
+        data.addressRwInput = self.registerData.addressRwInput
         
         // Data From NIK
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
@@ -412,6 +414,8 @@ struct RegisterSummaryView: View {
         data.kecamatan = self.registerData.kecamatan
         data.kelurahan = self.registerData.kelurahan
         data.rtrw = self.registerData.rtrw
+        data.rtPerusahaan = self.registerData.rtPerusahaan
+        data.rwPerusahaan = self.registerData.rwPerusahaan
         data.kotaPerusahaan = self.registerData.kotaPerusahaan
         data.provinsiPerusahaan = self.registerData.provinsiPerusahaan
         
