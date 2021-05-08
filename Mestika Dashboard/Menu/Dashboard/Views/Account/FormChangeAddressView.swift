@@ -40,7 +40,32 @@ struct FormChangeAddressView: View {
                     
                     FormAddress
                         .padding(.top, 20)
+                }
+                .padding(30)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+                .padding(.horizontal, 25)
+                .padding(.bottom, 10)
+                
+                VStack {
                     
+                    Text("Mailing Data".localized(language))
+                        .font(.custom("Montserrat-Bold", size: 22))
+                        .foregroundColor(Color(hex: "#232175"))
+                    
+                    FormAddressMailing
+                        .padding(.top, 20)
+                    
+                }
+                .padding(30)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+                .padding(.horizontal, 25)
+                .padding(.bottom, 20)
+                
+                VStack {
                     Button(action: {
                         self.nextRoute = true
                     }) {
@@ -67,12 +92,8 @@ struct FormChangeAddressView: View {
                     .cornerRadius(12)
                     .padding(.top, 10)
                 }
-                .padding(30)
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                .padding(25)
-                //            .padding(.top, 30)
+                .padding(.horizontal, 25)
+                .padding(.bottom, 20)
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -124,6 +145,54 @@ struct FormChangeAddressView: View {
             })
             
             LabelTextField(value: self.$profileVM.provinsiName, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+        }
+    }
+    
+    var FormAddressMailing: some View {
+        VStack {
+            LabelTextField(value: self.$profileVM.alamatSuratMenyurat, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            HStack(spacing: 20) {
+                LabelTextField(value: self.$profileVM.rtSuratMenyurat, label: "RT".localized(language), placeHolder: "RT".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$profileVM.rwSuratMenyurat, label: "RW".localized(language), placeHolder: "RW".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+            }
+            
+            LabelTextField(value: self.$profileVM.kelurahanSuratMenyurat, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            LabelTextField(value: self.$profileVM.kecamatanSuratMenyurat, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            LabelTextField(value: self.$profileVM.kotaSuratMenyurat, label: "City".localized(language), placeHolder: "City".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            LabelTextField(value: self.$profileVM.provinsiSuratMenyurat, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")

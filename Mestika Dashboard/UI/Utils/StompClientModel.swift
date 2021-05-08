@@ -20,6 +20,7 @@ class WebSocket: NSObject, SwiftStompDelegate {
         
         swiftStomp.subscribe(to: "/open/changes/\(deviceId!)")
         swiftStomp.subscribe(to: "/close/changes/\(deviceId!)")
+        swiftStomp.subscribe(to: "/websocket-notification")
         
         NotificationCenter.default.post(name: NSNotification.Name("CheckWebsocket"), object: nil, userInfo: nil)
     }
@@ -29,36 +30,64 @@ class WebSocket: NSObject, SwiftStompDelegate {
         
         swiftStomp.unsubscribe(from: "/open/changes/\(deviceId!)")
         swiftStomp.unsubscribe(from: "/close/changes/\(deviceId!)")
+        swiftStomp.unsubscribe(from: "/websocket-notification")
     }
     
     func onMessageReceived(swiftStomp: SwiftStomp, message: Any?, messageId: String, destination: String, headers: [String : String]) {
+        
+        print(destination)
+        
+        if (destination == "/websocket-notification") {
+            print("Notif")
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    let content = UNMutableNotificationContent()
+                    content.title = "Jadwal Video Call"
+                    content.subtitle = "09.00 - 10.00"
+                    content.sound = UNNotificationSound.default
 
-        if let message = message as? String{
-            print("Message with id `\(messageId)` received at destination `\(destination)`:\n\(message)")
-            
-            let jsonData = Data(message.utf8)
+                    // show this notification five seconds from now
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
 
-            let decoder = JSONDecoder()
+                    // choose a random identifier
+                    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 
-            do {
-                let data = try decoder.decode(ReceivingMessage.self, from: jsonData)
-                print(data.roomId)
-                
-                if (data.notificationType == "START") {
-                    let dataRoom: [String: Any] = ["room_id": data.roomId]
-                    NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                } else if let error = error {
+                    print(error.localizedDescription)
                 }
-                
-                if (data.notificationType == "END") {
-                    NotificationCenter.default.post(name: NSNotification.Name("JitsiEnd"), object: nil, userInfo: nil)
-                }
-
-            } catch {
-                print(error.localizedDescription)
             }
             
-        } else if let message = message as? Data{
-            print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
+        } else {
+            print("Vcall")
+            if let message = message as? String {
+                print("Message with id `\(messageId)` received at destination `\(destination)`:\n\(message)")
+                
+                let jsonData = Data(message.utf8)
+
+                let decoder = JSONDecoder()
+
+                do {
+                    let data = try decoder.decode(ReceivingMessage.self, from: jsonData)
+                    print(data.roomId)
+                    
+                    if (data.notificationType == "START") {
+                        let dataRoom: [String: Any] = ["room_id": data.roomId]
+                        NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+                    }
+                    
+                    if (data.notificationType == "END") {
+                        NotificationCenter.default.post(name: NSNotification.Name("JitsiEnd"), object: nil, userInfo: nil)
+                    }
+
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            } else if let message = message as? Data{
+                print("Data message with id `\(messageId)` and binary length `\(message.count)` received at destination `\(destination)`")
+            }
         }
         
     }

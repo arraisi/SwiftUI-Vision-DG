@@ -9,18 +9,17 @@ import Foundation
 
 // MARK: - HistoryModelElement
 struct HistoryModelElement: Codable {
-    let nik, deviceID: String
-    let trxDate: String?
-    let status: Int
-    let message: String
-    let rc: String?
-    let trxType, traceNumber, reffNumber: String
+    let nik, deviceID: String?
+    let transactionDate: String?
+    let status: Int?
+    let message, code: String?
+    let trxType, traceNumber, reffNumber: String?
     let data: DataClass
     
     enum CodingKeys: String, CodingKey {
         case nik
         case deviceID = "deviceId"
-        case trxDate, status, message, rc, trxType, traceNumber, reffNumber, data
+        case transactionDate, status, message, code, trxType, traceNumber, reffNumber, data
     }
 }
 

@@ -664,7 +664,7 @@ struct SuccessRegisterView: View {
         
         atmData.nik = registerData.nik
         atmData.isNasabahMestika = registerData.isNasabahmestika
-        atmData.codeClass = ""
+        atmData.codeClass = atmData.productType
         
         scheduleVM.submitScheduleNasabahExisting(atmData: atmData, date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { (success) in
             

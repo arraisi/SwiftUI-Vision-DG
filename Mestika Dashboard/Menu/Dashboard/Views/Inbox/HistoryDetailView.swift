@@ -79,9 +79,9 @@ struct HistoryDetailView: View {
                 Text(data.status == 0 ? "Berhasil" : "Gagal")
                     .font(.custom("Montserrat-Bold", size: 16))
                 
-                Text("Waktu : \(data.trxDate ?? "")")
+                Text("Waktu : \(data.transactionDate ?? "")")
                 
-                Text("Reff : \(data.reffNumber)")
+                Text("Reff : \(data.reffNumber ?? "")")
             }
             
             VStack {
@@ -202,7 +202,7 @@ struct HistoryDetailView: View {
 struct HistoryDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            HistoryDetailView(data: HistoryModelElement(nik: "00000", deviceID: "123", trxDate: "123", status: 0, message: "123", rc: "123", trxType: "123", traceNumber: "123", reffNumber: "123", data: DataClass(transactionFee: "1000000", destinationBank: "123456", transactionAmount: "2000000", destinationAccountNumber: "123456", message: "Lorem ipsum lask ekahs lahsk alsdh kas. Lorem ipsum lask ekahs lahsk alsdh kas", sourceAccountNumber: "100", destinationAccountName: "AA", sourceAccountName: "BB", amount: "4000000", destinationAccount: "123", referenceNumber: "x123", sourceAccount: "b123", trxMessage: "Message")))
+            HistoryDetailView(data: HistoryModelElement(nik: "00000", deviceID: "123", transactionDate: "123", status: 0, message: "123", code: "00", trxType: "123", traceNumber: "123", reffNumber: "123", data: DataClass(transactionFee: "1000000", destinationBank: "123456", transactionAmount: "2000000", destinationAccountNumber: "123456", message: "Lorem ipsum lask ekahs lahsk alsdh kas. Lorem ipsum lask ekahs lahsk alsdh kas", sourceAccountNumber: "100", destinationAccountName: "AA", sourceAccountName: "BB", amount: "4000000", destinationAccount: "123", referenceNumber: "x123", sourceAccount: "b123", trxMessage: "Message")))
         }
     }
 }

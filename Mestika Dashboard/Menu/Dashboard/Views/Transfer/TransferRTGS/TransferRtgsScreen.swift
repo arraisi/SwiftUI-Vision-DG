@@ -374,7 +374,6 @@ struct TransferRtgsScreen: View {
                 HStack {
                     TextField("Account".localized(language), text: self.$noRekeningCtrl, onEditingChanged: { changed in
                         self.transferData.destinationNumber = self.noRekeningCtrl
-                        inquiryTransfer()
                     })
                     .keyboardType(.numberPad)
                     .font(.subheadline)
@@ -396,19 +395,19 @@ struct TransferRtgsScreen: View {
             
             if transferType == "Online" {
                 
-                if isShowName {
-                    HStack {
-                        Text(self.limitVM.destinationName)
-                            .font(.subheadline)
-                            .fontWeight(.light)
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal, 25)
-                    .padding(.bottom, 10)
-                } else {
-                    EmptyView()
-                }
+//                if isShowName {
+//                    HStack {
+//                        Text(self.limitVM.destinationName)
+//                            .font(.subheadline)
+//                            .fontWeight(.light)
+//
+//                        Spacer()
+//                    }
+//                    .padding(.horizontal, 25)
+//                    .padding(.bottom, 10)
+//                } else {
+//                    EmptyView()
+//                }
                 
             } else {
                 VStack {
@@ -776,6 +775,8 @@ struct TransferRtgsScreen: View {
                                 print(self.transferData.cardNo)
                                 print(self.selectedAccount.noRekening)
                                 self.selectedAccount.saldo = self.selectedBalance
+                                
+                                inquiryTransfer()
                             }
                         }) {
                             Text(self.listSourceNumber[index])

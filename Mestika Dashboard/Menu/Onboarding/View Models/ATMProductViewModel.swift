@@ -102,20 +102,7 @@ extension ATMProductViewModel {
             case.success(let response):
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    //                    self.listATM = response.map({ (data: ATMModel) -> ATMViewModel in
-                    //                        var image = UIImage(named: "card_bg")!
-                    //                        if let img = data.cardImageBase64?.base64ToImage() {
-                    //                             image = img
-                    //                        }
-                    //                        return ATMViewModel (
-                    //                            id: data.id,
-                    //                            key: data.key,
-                    //                            title: data.title,
-                    //                            cardImage: URL(string: data.cardImage),
-                    //                            description: self.mapDescriptionLimit(data: data.description),
-                    //                            cardImageBase64: image
-                    //                        )
-                    //                    })
+                    
                     self.listATM = response.map({ (data: JenisATMModelElement) -> ATMViewModel in
                         let image = UIImage(named: "card_bg")!
                         return ATMViewModel (
@@ -154,11 +141,9 @@ extension ATMProductViewModel {
                     self.isLoading = false
                     self.listATMDesign = response.map({ (data: DesainAtmModel) -> ATMDesignViewModel in
                         let image = UIImage(named: "card_bg")!
-//                        if let img = data.cardImageBase64?.base64ToImage() {
-//                            image = img
-//                        }
+                        
                         return ATMDesignViewModel (
-                            id: "",
+                            id: data.cardTypeName,
                             key: "",
                             title: data.cardTypeName,
                             cardType: "",

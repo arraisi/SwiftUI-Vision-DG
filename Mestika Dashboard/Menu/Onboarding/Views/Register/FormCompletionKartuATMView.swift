@@ -163,6 +163,8 @@ struct FormCompletionKartuATMView: View {
                 registerData.kodePosSuratMenyurat = data.addressPostalCodeInput!
                 registerData.kotaSuratMenyurat = data.addressKotaInput!
                 registerData.provinsiSuratMenyurat = data.addressProvinsiInput!
+                registerData.rtSuratMenyurat = data.addressRtRwInput!
+                registerData.rwSuratMenyurat = data.addressRtRwInput!
                 
                 registerData.kecamatan = data.kecamatan!
                 registerData.kelurahan = data.kelurahan!
@@ -714,6 +716,8 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressKelurahanInput = registerData.addressKelurahanInput
             atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
+            atmData.atmAddressRtInput = registerData.rtFromNik
+            atmData.atmAddressRwInput = registerData.rwFromNik
             atmData.addressEqualToDukcapil = true
         case 2: /// Surat Menyurat
             print("Case 2")
@@ -723,6 +727,10 @@ struct FormCompletionKartuATMView: View {
                             atmData.atmAddressPostalCodeInput = registerData.addressPostalCodeInput
                             atmData.atmAddressKecamatanInput = registerData.addressKecamatanInput
                             atmData.atmAddressKelurahanInput = registerData.kabupatenKotaFromNik
+                            atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
+                            atmData.atmAddressPropinsiInput = registerData.provinsiFromNik
+                atmData.atmAddressRtInput = registerData.rtFromNik
+                atmData.atmAddressRwInput = registerData.rwFromNik
                             atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
                             atmData.addressEqualToDukcapil = true
             } else {
@@ -730,7 +738,9 @@ struct FormCompletionKartuATMView: View {
                 atmData.atmAddressPostalCodeInput = registerData.kodePosSuratMenyurat
                 atmData.atmAddressKecamatanInput = registerData.kecamatanSuratMenyurat
                 atmData.atmAddressKelurahanInput = registerData.kelurahanSuratMenyurat
-                atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
+                atmData.atmAddressrtRwInput = "\(registerData.rtSuratMenyurat)/\(registerData.rwSuratMenyurat)"
+                atmData.atmAddressRtInput = registerData.rtSuratMenyurat
+                atmData.atmAddressRwInput = registerData.rwSuratMenyurat
                 atmData.atmAddressKotaInput = registerData.kotaSuratMenyurat
                 atmData.atmAddressPropinsiInput = registerData.provinsiSuratMenyurat
                 atmData.addressEqualToDukcapil = false
@@ -743,6 +753,8 @@ struct FormCompletionKartuATMView: View {
             atmData.atmAddressKecamatanInput = registerData.kecamatan
             atmData.atmAddressKelurahanInput = registerData.kelurahan
             atmData.atmAddressrtRwInput = registerData.rtrw
+            atmData.atmAddressRtInput = "00"
+            atmData.atmAddressRwInput = "00"
             atmData.atmAddressPropinsiInput = registerData.provinsiPerusahaan
             atmData.atmAddressKotaInput = registerData.kotaPerusahaan
             atmData.addressEqualToDukcapil = false
@@ -774,11 +786,12 @@ struct FormCompletionKartuATMView: View {
         atmData.nik = registerData.nik
         atmData.isNasabahMestika = false
         atmData.isVcall = isVideoCall == "true" ? true : false
-        atmData.codeClass = ""
+        atmData.codeClass = atmData.productType
         
         
         self.goToSuccessPage = true
         self.isLoading = true
+        
         productVM.addProductATM(dataRequest: atmData) { (success: Bool) in
             self.isLoading = false
             if success {

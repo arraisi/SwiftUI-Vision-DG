@@ -173,11 +173,13 @@ class ATMService {
     // MARK : get response model of list ATM Design.
     func getListATMDesign(classCode: String, completion: @escaping(Result<[DesainAtmModel], NetworkError>) -> Void) {
         
-        guard let url = URL.urlFindListATMDesign(code: classCode) else {
+        guard let url = URL.urlFindListATMDesign() else {
             return completion(.failure(.badUrl))
         }
         
-        var request = URLRequest(url)
+        let paramsUrl = url.appending("classCode", value: classCode)
+        
+        var request = URLRequest(paramsUrl)
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in

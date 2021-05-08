@@ -94,7 +94,7 @@ class PinNoAtmService {
                 "atmAddressRwInput": atmData.atmAddressRwInput,
                 "atmName": atmData.atmName,
                 "isNasabahMestika": true,
-                "codeClass": atmData.codeClass,
+                "codeClass": atmData.productType,
                 "imageDesign": atmData.imageDesign,
                 "addressEqualToDukcapil": false
             ]

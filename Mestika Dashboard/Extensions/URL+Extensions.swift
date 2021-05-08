@@ -100,8 +100,8 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm-design2?type=\(type)");
     }
     
-    static func urlFindListATMDesign(code: String) -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/content/debitCardTypes?classCode=\(code)");
+    static func urlFindListATMDesign() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/content/debitCardTypes");
     }
     
 //    static func urlGetListJenisTabungan() -> URL? {
@@ -228,6 +228,10 @@ extension URL {
     
     static func urlGetProfile() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/user/profiles")
+    }
+    
+    static func urlGetCustomerFromPhoenix() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/customer/fromPhoenix")
     }
     
     static func urlGetAccountBalance() -> URL? {

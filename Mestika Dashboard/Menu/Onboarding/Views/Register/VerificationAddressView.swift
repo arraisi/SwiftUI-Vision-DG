@@ -35,7 +35,7 @@ struct VerificationAddressView: View {
         }
         
         if (registerData.verificationAddressId != 1) {
-            if registerData.addressInput.isEmpty || addressInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
+            if registerData.addressInput.isEmpty || addressInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressRtRwInput.isEmpty || addressKodePosInput.isEmpty {
                 return true
             }
         } 
@@ -150,32 +150,8 @@ struct VerificationAddressView: View {
                                             })
                                         }
                                         
-//                                        HStack {
-//
-//                                            TextField("Address".localized(language), text: $registerData.addressInput) { changed in
-//                                            } onCommit: {
-//                                                self.addressInput = self.registerData.addressInput
-//                                            }
-//                                            .font(Font.system(size: 14))
-//                                            .frame(height: 36)
-//                                            .padding(.horizontal)
-//                                            .background(Color.gray.opacity(0.1))
-//                                            .cornerRadius(10)
-//
-//                                            Button(action:{
-//                                                //                        showingModal.toggle()
-//                                                searchAddress()
-//                                            }, label: {
-//                                                Image(systemName: "magnifyingglass")
-//                                                    .font(Font.system(size: 20))
-//                                                    .foregroundColor(Color(hex: "#707070"))
-//                                            })
-//
-//                                        }
-                                        
                                     }
                                     .padding(.horizontal, 20)
-                                    
                                     
                                     LabelTextField(value: $addressRtRwInput, label: "RT/RW".localized(language), placeHolder: "RT/RW".localized(language), onEditingChanged: { (Bool) in
                                         print("on edit")
@@ -251,7 +227,21 @@ struct VerificationAddressView: View {
                     
                     Button(action: {
                         
-                        self.isShowNextView = true
+                        if (registerData.isAddressEqualToDukcapil) {
+                            
+                            self.registerData.addressInput = registerData.alamatKtpFromNik
+                            self.registerData.addressRtRwInput = registerData.rtFromNik
+                            self.registerData.addressKelurahanInput = registerData.kelurahanFromNik
+                            self.registerData.addressKecamatanInput = registerData.kecamatanFromNik
+                            self.registerData.addressPostalCodeInput = registerData.kodePosFromNik
+                            self.registerData.addressProvinsiInput = registerData.provinsiFromNik
+                            self.registerData.addressKotaInput = registerData.kabupatenKotaFromNik
+                            
+                            self.isShowNextView = true
+                            
+                        } else {
+                            self.isShowNextView = true
+                        }
                         
                     }, label: {
                         Text("Submit Data".localized(language))

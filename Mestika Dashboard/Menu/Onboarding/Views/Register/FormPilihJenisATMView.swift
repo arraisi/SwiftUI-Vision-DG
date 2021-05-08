@@ -248,16 +248,6 @@ struct FormPilihJenisATMView: View {
     private func fetchATMList() {
         if cards.count == 0 {
             isLoading = true
-            //            productVM.getListATM() { (success: Bool) in
-            //                isLoading = false
-            //                if success {
-            //                    self.cards = productVM.listATM
-            //                    self.refreshCarousel()
-            //                    if cards.count > 0 {
-            //                        self.selectCard(card: self.cards[0])
-            //                    }
-            //                }
-            //            }
             
             productVM.getListJenisATM() { (success: Bool) in
                 isLoading = false

@@ -320,6 +320,8 @@
 		52F4E3B7264543CC0094F320 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		52F4E3B8264543CC0094F320 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; };
 		52F4E3B9264543CC0094F320 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52F4E3BE264673760094F320 /* FormChangeOtherDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */; };
+		52F4E3C2264682390094F320 /* CustomerFromPhoenixResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */; };
 		52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = 52FCDD94263EF48B002A76E9 /* SwiftStomp */; };
 		52FCDD9A263EF4F2002A76E9 /* StompClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */; };
 		52FE9ABC2637CCD90089EBAF /* DestinationAccountBalancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */; };
@@ -819,6 +821,8 @@
 		52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KartuKuModel.swift; sourceTree = "<group>"; };
 		52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JenisTabunganModel.swift; sourceTree = "<group>"; };
 		52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTransactionResponse.swift; sourceTree = "<group>"; };
+		52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangeOtherDataView.swift; sourceTree = "<group>"; };
+		52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerFromPhoenixResponse.swift; sourceTree = "<group>"; };
 		52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClientModel.swift; sourceTree = "<group>"; };
 		52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationAccountBalancesView.swift; sourceTree = "<group>"; };
 		52FE9AC02637DB0B0089EBAF /* FormMoveBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormMoveBalanceView.swift; sourceTree = "<group>"; };
@@ -1482,6 +1486,7 @@
 				52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */,
 				52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */,
 				C0B6417F2645138300C0D55A /* TransactionLimitView.swift */,
+				52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -2018,6 +2023,7 @@
 				52BB539B25C108080045DBE6 /* LoginCredentialResponse.swift */,
 				5203B245263C1E8A007174FB /* PasswordParamResponse.swift */,
 				52A7970C2641170D001B9937 /* RequestOtpResponse.swift */,
+				52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2851,6 +2857,7 @@
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */,
+				52F4E3BE264673760094F320 /* FormChangeOtherDataView.swift in Sources */,
 				52FE9AE62637FC6F0089EBAF /* AddBalanceConfirmationView.swift in Sources */,
 				5233700C26298FFB00ED3E4F /* DepositAccountView.swift in Sources */,
 				C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */,
@@ -2886,6 +2893,7 @@
 				52C348722542878700F08F37 /* ListTransactionFavoriteView.swift in Sources */,
 				52C2FA2325D1A6F900AC3CF7 /* FavoriteAppBar.swift in Sources */,
 				52ADFF4A2557DE8000A1001F /* TabItemView.swift in Sources */,
+				52F4E3C2264682390094F320 /* CustomerFromPhoenixResponse.swift in Sources */,
 				C06CDAC725E8A17700899CC8 /* String+Localisation.swift in Sources */,
 				525DB51025467BAB00D48075 /* NumPadView.swift in Sources */,
 				C05BA90825821A7D00E115D6 /* FormPINTransaksiATMView.swift in Sources */,

@@ -185,10 +185,10 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormChangeContactView(txtPhone: self.$profileVM.telepon, txtEmail: self.$profileVM.email)){
+                    NavigationLink(destination : FormChangeOtherDataView()){
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("Contact".localized(language))
+                                Text("Other Data".localized(language))
                                     .foregroundColor(Color(hex: "#1D2238"))
                                     .font(.subheadline)
                                     .fontWeight(.bold)

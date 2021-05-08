@@ -90,7 +90,7 @@ struct SavingAccountView: View {
                             
                             Button(action: {
                                 
-                                if (self.savingAccountVM.accounts.count >= 3) {
+                                if (self.savingAccountVM.accounts.filter{ $0.categoryProduct == "S" }.count >= 3) {
                                     self.showMaximumSavingAcc = true
                                 } else {
                                     self.getProducDetails(planCode: self.planCode)

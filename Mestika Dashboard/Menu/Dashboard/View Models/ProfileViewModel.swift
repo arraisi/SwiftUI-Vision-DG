@@ -48,11 +48,102 @@ class ProfileViewModel: ObservableObject {
     @Published var rt: String = ""
     @Published var rw: String = ""
     
+    @Published var alamatSuratMenyurat: String = ""
+    @Published var rtSuratMenyurat: String = ""
+    @Published var rwSuratMenyurat: String = ""
+    @Published var kodePosSuratMenyurat: String = ""
+    @Published var kelurahanSuratMenyurat: String = ""
+    @Published var kecamatanSuratMenyurat: String = ""
+    @Published var kotaSuratMenyurat: String = ""
+    @Published var provinsiSuratMenyurat: String = ""
+    
+    @Published var tujuanPembukaan: String = ""
+    @Published var sumberDana: String = ""
+    @Published var jumlahPenarikanPerbulan: String = ""
+    @Published var jumlahPenarikanDanaPerbulan: String = ""
+    @Published var jumlahSetoranPerbulan: String = ""
+    @Published var jumlahSetoranDanaPerbulan: String = ""
+    
+    @Published var hubunganKeluarga: String = ""
+    @Published var namaKeluarga: String = ""
+    @Published var alamatKeluarga: String = ""
+    @Published var kodePosKeluarga: String = ""
+    @Published var kelurahanKeluarga: String = ""
+    @Published var kecamatanKeluarga: String = ""
+    @Published var teleponKeluarga: String = ""
+    
+    @Published var pekerjaan: String = ""
+    @Published var penghasilanKotor: String = ""
+    @Published var PendapatanLainnya: String = ""
+    
+    @Published var namaPenyandang: String = ""
+    @Published var hubunganPenyandang: String = ""
+    @Published var pekerjaanPenyandang: String = ""
+    
     @Published var errorMessage: String = ""
     @Published var statusCode: String = ""
 }
 
 extension ProfileViewModel {
+    
+    // MARK: - GET CUSTOMER
+    func getCustomerFromPhoenix(completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        ProfileService.shared.checkCustomer { result in
+            switch result {
+            case .success(let response):
+                print("Success")
+                
+                self.isLoading = false
+                
+                self.tujuanPembukaan = response.last?.cdd.tujuanPembukaanRekening ?? ""
+                self.sumberDana = response.last?.cdd.sumberDana ?? ""
+                self.jumlahPenarikanPerbulan = response.last?.cdd.frequencyPenarikanDana ?? ""
+                self.jumlahPenarikanDanaPerbulan = response.last?.cdd.jumlahPenarikanDana ?? ""
+                self.jumlahSetoranPerbulan = response.last?.cdd.frequencySetoranDana ?? ""
+                self.jumlahSetoranDanaPerbulan = response.last?.cdd.jumlahSetoranDana ?? ""
+                
+                self.hubunganKeluarga = response.last?.cdd.keluargaTerdekat ?? ""
+                self.namaKeluarga = response.last?.cdd.namaKeluargaTerdekat ?? ""
+                self.alamatKeluarga = response.last?.cdd.alamatKeluargaTerdekat ?? ""
+                self.kodePosKeluarga = response.last?.cdd.kodePosKeluargaTerdekat ?? ""
+                self.kelurahanKeluarga = response.last?.cdd.kelurahanKeluargaTerdekat ?? ""
+                self.kecamatanKeluarga = response.last?.cdd.kecamatanKeluargaTerdekat ?? ""
+                self.teleponKeluarga = response.last?.cdd.teleponKeluargaTerdekat ?? ""
+                
+                self.pekerjaan = response.last?.cdd.pekerjaan ?? ""
+                self.penghasilanKotor = ""
+                self.PendapatanLainnya = ""
+                 
+                self.namaPenyandang = ""
+                self.hubunganPenyandang = ""
+                self.pekerjaanPenyandang = ""
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 404):
+                    self.statusCode = "404"
+                    self.errorMessage = "USER STATUS NOT FOUND"
+                case .custom(code: 401):
+                    self.statusCode = "401"
+                    self.errorMessage = "LOGEDOUT"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
     
     // MARK: - GET PROFILE
     func getProfile(completion: @escaping (Bool) -> Void) {
@@ -93,6 +184,16 @@ extension ProfileViewModel {
                 self.limitPayment = response.chipProfileDto.last?.limitPayment ?? "0"
                 self.limitPurchase = response.chipProfileDto.last?.limitPurchase ?? "0"
                 self.limitIbft = response.chipProfileDto.last?.limitIbft ?? "0"
+                
+                
+                self.alamatSuratMenyurat = response.chipProfileDto.last?.postalAddress ?? ""
+                self.rtSuratMenyurat = response.chipProfileDto.last?.rt ?? ""
+                self.rwSuratMenyurat = response.chipProfileDto.last?.rw ?? ""
+                self.kodePosSuratMenyurat = response.chipProfileDto.last?.kodepos ?? ""
+                self.kelurahanSuratMenyurat = response.chipProfileDto.last?.kelurahan ?? ""
+                self.kecamatanSuratMenyurat = response.chipProfileDto.last?.kecamatan ?? ""
+                self.kotaSuratMenyurat = response.chipProfileDto.last?.kabupatenKota ?? ""
+                self.provinsiSuratMenyurat = response.chipProfileDto.last?.provinsi ?? ""
                 
                 if let _chipProfileDto = response.chipProfileDto.last {
                     self.cardName = _chipProfileDto.nameOnCard

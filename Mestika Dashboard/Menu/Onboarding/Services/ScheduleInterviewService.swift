@@ -118,7 +118,7 @@ class ScheduleInterviewService {
                 "atmAddressRwInput": atmData.atmAddressrtRwInput,
                 "atmName": atmData.atmName,
                 "isNasabahMestika": atmData.isNasabahMestika,
-                "codeClass": "70",
+                "codeClass": atmData.productType,
                 "imageDesign": atmData.imageDesign,
                 "addressEqualToDukcapil": atmData.isNasabahMestika
             ]
