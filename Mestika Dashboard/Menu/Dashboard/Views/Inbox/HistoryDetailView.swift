@@ -11,6 +11,9 @@ struct HistoryDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     var data: HistoryModelElement
     
     var body: some View {
@@ -44,7 +47,7 @@ struct HistoryDetailView: View {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.white)
                         
-                        Text("Back")
+                        Text("Back".localized(language))
                             .foregroundColor(.white)
                     }
                 })
@@ -54,7 +57,7 @@ struct HistoryDetailView: View {
                 Button(action: {
                     exportToPDF()
                 }, label: {
-                    Image(systemName: "tray.and.arrow.down")
+                    Image(systemName: "square.and.arrow.up")
                         .font(.system(size: 24))
                         .padding(.horizontal, 5)
                         .foregroundColor(.white)
@@ -79,20 +82,20 @@ struct HistoryDetailView: View {
                 Text(data.status == 0 ? "Berhasil" : "Gagal")
                     .font(.custom("Montserrat-Bold", size: 16))
                 
-                Text("Waktu : \(data.transactionDate ?? "")")
+                Text("Time".localized(language) + " : \(data.transactionDate ?? "")")
                 
                 Text("Reff : \(data.reffNumber ?? "")")
             }
             
             VStack {
                 HStack {
-                    Text("Sumber rekening")
+                    Text("Source Account".localized(language))
                     Spacer()
                     Text(data.data.sourceAccount ?? "")
                 }
                 
                 HStack {
-                    Text("Rekening tujuan")
+                    Text("Beneficiary's Account".localized(language))
                     Spacer()
                     Text(data.data.destinationAccount ?? "")
                 }
@@ -100,24 +103,15 @@ struct HistoryDetailView: View {
             
             VStack {
                 HStack {
-                    HStack {
-                        Text("Bank tujuan")
-                        Spacer()
-                    }
-                    .frame(width: 120)
-                    
-                    Text(data.data.destinationBank ?? "")
+                    Text("Beneficiary's Bank".localized(language))
                     Spacer()
+                    Text(data.data.destinationBank ?? "")
                 }
                 HStack {
-                    HStack {
-                        Text("Deskripsi")
-                        Spacer()
-                    }
-                    .frame(width: 120)
+                    Text("Description".localized(language))
+                    Spacer()
                     Text(data.data.trxMessage ?? "")
                         .fixedSize(horizontal: false, vertical: true)
-                    Spacer()
                 }
             }
             
@@ -126,27 +120,27 @@ struct HistoryDetailView: View {
                 Divider()
                 
                 HStack {
-                    Text("Nominal transaksi :")
+                    Text("Transaction amount".localized(language))
                     Spacer()
-                    Text("")
+                    Text("IDR \(data.data.transactionAmount?.thousandSeparator() ?? "0")")
                 }
                 
                 HStack {
-                    Text("Fee transaksi :")
+                    Text("Transaction Fee".localized(language))
                     Spacer()
-                    Text("")
+                    Text("IDR \(data.data.transactionFee?.thousandSeparator() ?? "0")")
                 }
                 
-                HStack {
-                    Text("Voucher :")
-                    Spacer()
-                    Text("")
-                }
+//                HStack {
+//                    Text("Voucher :")
+//                    Spacer()
+//                    Text("")
+//                }
                 
                 HStack {
-                    Text("Total transaksi :")
+                    Text("Total amount".localized(language))
                     Spacer()
-                    Text(data.data.amount?.thousandSeparator() ?? "")
+                    Text("IDR \(data.data.amount?.thousandSeparator() ?? "0")")
                 }
                 
                 Divider()
