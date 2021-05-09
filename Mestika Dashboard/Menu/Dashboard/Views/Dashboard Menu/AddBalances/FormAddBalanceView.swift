@@ -121,6 +121,7 @@ struct FormAddBalanceView: View {
                     HStack {
                         Text("Saldo aktif \(self.transactionData.sourceAccountName)")
                             .font(.system(size: 12))
+                            .fixedSize(horizontal: false, vertical: true)
                         
                         Spacer()
                         

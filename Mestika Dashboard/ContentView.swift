@@ -61,11 +61,11 @@ struct ContentView: View {
                 WelcomeView()
                     .environmentObject(appState)
                 
-                //                NavigationView{
-                //                    PasswordView()
-                //                        .environmentObject(RegistrasiModel())
-                //                        .environmentObject(appState)
-                //                }
+//                                NavigationView{
+//                                    BesarPerkiraanPenarikanView()
+//                                        .environmentObject(RegistrasiModel())
+//                                        .environmentObject(appState)
+//                                }
             }
             .edgesIgnoringSafeArea(.top)
         }

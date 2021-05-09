@@ -76,6 +76,13 @@ class ProfileViewModel: ObservableObject {
     @Published var penghasilanKotor: String = ""
     @Published var PendapatanLainnya: String = ""
     
+    @Published var namaPerusahaan: String = ""
+    @Published var alamatPerusahaan: String = ""
+    @Published var kodePosPerusahaan: String = ""
+    @Published var kelurahanPerusahaan: String = ""
+    @Published var kecamatanPerusahaan: String = ""
+    @Published var teleponPerusahaan: String = ""
+    
     @Published var namaPenyandang: String = ""
     @Published var hubunganPenyandang: String = ""
     @Published var pekerjaanPenyandang: String = ""
@@ -116,7 +123,14 @@ extension ProfileViewModel {
                 
                 self.pekerjaan = response.last?.cdd.pekerjaan ?? ""
                 self.penghasilanKotor = ""
-                self.PendapatanLainnya = ""
+                self.PendapatanLainnya = response.last?.cdd.sumberPendapatanLainnya ?? ""
+                
+                self.namaPerusahaan = response.last?.cdd.namaPerusahaan ?? ""
+                self.alamatPerusahaan = response.last?.cdd.alamatPerusahaan ?? ""
+                self.kodePosPerusahaan = response.last?.cdd.kodePosPerusahaan ?? ""
+                self.kelurahanPerusahaan = response.last?.cdd.kelurahanPerusahaan ?? ""
+                self.kecamatanPerusahaan = response.last?.cdd.kecamatanPerusahaan ?? ""
+                self.teleponPerusahaan = response.last?.cdd.teleponPerusahaan ?? ""
                  
                 self.namaPenyandang = ""
                 self.hubunganPenyandang = ""

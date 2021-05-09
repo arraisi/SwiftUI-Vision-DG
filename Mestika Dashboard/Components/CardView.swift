@@ -57,6 +57,7 @@ struct CardView: View {
                                 .font(.custom("Montserrat-Regular", size: 14))
                             Spacer()
                         }
+                        .hidden()
                     }
                     .padding(.leading, 20)
                     .padding(.bottom, 15)

@@ -120,7 +120,7 @@ class ScheduleInterviewService {
                 "isNasabahMestika": atmData.isNasabahMestika,
                 "codeClass": atmData.productType,
                 "imageDesign": atmData.imageDesign,
-                "addressEqualToDukcapil": atmData.isNasabahMestika
+                "addressEqualToDukcapil": atmData.addressEqualToDukcapil
             ]
         ]
         

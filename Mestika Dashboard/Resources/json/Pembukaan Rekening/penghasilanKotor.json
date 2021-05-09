@@ -1,22 +1,22 @@
 [
     {
         "id": 1,
-        "name": "Rp. 0,- s/d Rp. 50.000.000,-"
+        "name": "< Rp 50 Juta"
     },
     {
         "id": 2,
-        "name": "> Rp. 50.000.000,- s/d Rp. 100.000.000,-"
+        "name": "Rp 50 Juta - Rp 100 Juta"
     },
     {
         "id": 3,
-        "name": "> Rp. 100.000.000,- s/d Rp. 250.000.000,-"
+        "name": "Rp 100 Juta - Rp 250 Juta"
     },
     {
         "id": 4,
-        "name": "> Rp. Rp. 250.000.000,- s/d Rp. 500.000.000,-"
+        "name": "Rp 250 Juta - Rp 500 Juta"
     },
     {
         "id": 5,
-        "name": "> Rp. 500.000.000,-"
+        "name": "> Rp 500 Juta"
     }
 ]

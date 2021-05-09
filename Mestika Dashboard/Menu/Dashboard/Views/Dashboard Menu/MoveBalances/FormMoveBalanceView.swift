@@ -120,6 +120,7 @@ struct FormMoveBalanceView: View {
                     HStack {
                         Text("Saldo aktif Tabungan-Ku")
                             .font(.system(size: 12))
+                            .fixedSize(horizontal: false, vertical: true)
                         
                         Spacer()
                         

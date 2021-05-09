@@ -233,11 +233,11 @@ struct SuccessRegisterView: View {
                             Button(action: {
                                 UIApplication.shared.endEditing()
                                 if pilihJam != "" {
-//                                    if (self.user.last?.isNasabahMestika == true) {
-//                                        submitScheduleNasabahExisting()
-//                                    } else {
-//                                        submitSchedule()
-//                                    }
+                                    //                                    if (self.user.last?.isNasabahMestika == true) {
+                                    //                                        submitScheduleNasabahExisting()
+                                    //                                    } else {
+                                    //                                        submitSchedule()
+                                    //                                    }
                                     submitScheduleNasabahExisting()
                                 } else {
                                     self.isShowAlertInternetConnection = true
@@ -305,7 +305,7 @@ struct SuccessRegisterView: View {
             }
             
             if self.showingModalInformation {
-                    ModalOverlay(tapAction: { withAnimation {  } })
+                ModalOverlay(tapAction: { withAnimation {  } })
             }
             
             if self.isShowAlertInternetConnection {
@@ -317,6 +317,42 @@ struct SuccessRegisterView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            user.forEach { (data) in
+                atmData.atmName = data.namaLengkapFromNik!
+                registerData.namaLengkapFromNik = data.namaLengkapFromNik!
+                registerData.provinsiFromNik = data.provinsiFromNik!
+                registerData.alamatKtpFromNik = data.alamatKtpFromNik!
+                registerData.kecamatanFromNik = data.kecamatanFromNik!
+                registerData.kelurahanFromNik = data.kelurahanFromNik!
+                registerData.kodePosFromNik = data.kodePosFromNik!
+                registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
+                registerData.rtFromNik = data.rtFromNik ?? ""
+                registerData.rwFromNik = data.rwFromNik ?? ""
+                registerData.nik = data.nik!
+                
+                registerData.alamatSuratMenyurat = data.addressInput!
+                registerData.kecamatanSuratMenyurat = data.addressKecamatanInput!
+                registerData.kelurahanSuratMenyurat = data.addressKelurahanInput!
+                registerData.kodePosSuratMenyurat = data.addressPostalCodeInput!
+                registerData.kotaSuratMenyurat = data.addressKotaInput!
+                registerData.provinsiSuratMenyurat = data.addressProvinsiInput!
+                registerData.rtSuratMenyurat = data.addressRtInput!
+                registerData.rwSuratMenyurat = data.addressRwInput!
+                
+                registerData.kecamatan = data.kecamatan!
+                registerData.kelurahan = data.kelurahan!
+                registerData.alamatPerusahaan = data.alamatPerusahaan!
+                registerData.kodePos = data.kodePos!
+                registerData.rtrw = data.rtrw ?? ""
+                registerData.rtPerusahaan = data.rtPerusahaan!
+                registerData.rwPerusahaan = data.rwPerusahaan!
+                registerData.kotaPerusahaan = data.kotaPerusahaan!
+                registerData.provinsiPerusahaan = data.provinsiPerusahaan!
+                
+                registerData.isAddressEqualToDukcapil = data.isAddressEqualToDukcapil
+            }
+        }
         .onAppear {
             getAllSchedule()
         }
@@ -331,11 +367,11 @@ struct SuccessRegisterView: View {
         }
         .alert(isPresented: $isShowingAlert) {
             return Alert(
-            title: Text("Do you want to cancel registration?".localized(language)),
-            primaryButton: .default(Text("YES".localized(language)), action: {
-                self.appState.moveToWelcomeView = true
-            }),
-            secondaryButton: .cancel(Text("NO".localized(language))))
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text("NO".localized(language))))
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
@@ -570,7 +606,7 @@ struct SuccessRegisterView: View {
                     action: {
                         print("BACK")
                         self.appState.moveToWelcomeView = true
-//                        reSubmitScheduleNasabahExisting()
+                        //                        reSubmitScheduleNasabahExisting()
                     },
                     label: {
                         Text("Back to Main Page".localized(language))
@@ -665,6 +701,30 @@ struct SuccessRegisterView: View {
         atmData.nik = registerData.nik
         atmData.isNasabahMestika = registerData.isNasabahmestika
         atmData.codeClass = atmData.productType
+        
+        if registerData.isAddressEqualToDukcapil {
+            atmData.atmAddressInput = registerData.alamatKtpFromNik
+            atmData.atmAddressPostalCodeInput = registerData.kodePosFromNik
+            atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
+            atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
+            atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
+            atmData.atmAddressPropinsiInput = registerData.provinsiFromNik
+            atmData.atmAddressRtInput = registerData.rtFromNik
+            atmData.atmAddressRwInput = registerData.rwFromNik
+            atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
+            atmData.addressEqualToDukcapil = true
+        } else {
+            atmData.atmAddressInput = registerData.alamatSuratMenyurat
+            atmData.atmAddressPostalCodeInput = registerData.kodePosSuratMenyurat
+            atmData.atmAddressKecamatanInput = registerData.kecamatanSuratMenyurat
+            atmData.atmAddressKelurahanInput = registerData.kelurahanSuratMenyurat
+            atmData.atmAddressrtRwInput = "\(registerData.rtSuratMenyurat)/\(registerData.rwSuratMenyurat)"
+            atmData.atmAddressRtInput = registerData.rtSuratMenyurat
+            atmData.atmAddressRwInput = registerData.rwSuratMenyurat
+            atmData.atmAddressKotaInput = registerData.kotaSuratMenyurat
+            atmData.atmAddressPropinsiInput = registerData.provinsiSuratMenyurat
+            atmData.addressEqualToDukcapil = false
+        }
         
         scheduleVM.submitScheduleNasabahExisting(atmData: atmData, date: self.tanggalWawancara, nik: registerData.nik, endTime: timeArr[1], startTime: timeArr[0]) { (success) in
             

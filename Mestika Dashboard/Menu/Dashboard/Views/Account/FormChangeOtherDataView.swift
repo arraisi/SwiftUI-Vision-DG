@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormChangeOtherDataView: View {
     
@@ -17,6 +18,8 @@ struct FormChangeOtherDataView: View {
     @StateObject var profileVM = ProfileViewModel()
     
     @State var nextRoute: Bool = false
+    
+    @State private var isLoading: Bool = false
     
     var body: some View {
         VStack {
@@ -31,12 +34,20 @@ struct FormChangeOtherDataView: View {
                 
             }
             
+            if (self.isLoading) {
+                LinearWaitingIndicator()
+                    .animated(true)
+                    .foregroundColor(.green)
+                    .frame(height: 1)
+            }
+            
             ScrollView(showsIndicators: false) {
                 VStack {
                     
                     Text("Data Pembuatan Rekening".localized(language))
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     FormPembuatanRekening
                         .padding(.top, 20)
@@ -50,25 +61,10 @@ struct FormChangeOtherDataView: View {
                 
                 VStack {
                     
-                    Text("Data Keluarga".localized(language))
+                    Text("Data Perusahaan".localized(language))
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
-                    
-                    FormKeluargaTerdekat
-                        .padding(.top, 20)
-                }
-                .padding(30)
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                .padding(.horizontal, 25)
-                .padding(.bottom, 10)
-                
-                VStack {
-                    
-                    Text("Data Pekerjaan".localized(language))
-                        .font(.custom("Montserrat-Bold", size: 22))
-                        .foregroundColor(Color(hex: "#232175"))
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     FormPekerjaan
                         .padding(.top, 20)
@@ -85,6 +81,7 @@ struct FormChangeOtherDataView: View {
                     Text("Data Penyandang Dana".localized(language))
                         .font(.custom("Montserrat-Bold", size: 22))
                         .foregroundColor(Color(hex: "#232175"))
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     FormPenyandangDana
                         .padding(.top, 20)
@@ -133,9 +130,17 @@ struct FormChangeOtherDataView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
-            
-            profileVM.getProfile(completion: {result in})
-            profileVM.getCustomerFromPhoenix(completion: {result in})
+            self.isLoading = true
+            profileVM.getCustomerFromPhoenix(completion: { success in
+                
+                if success {
+                    self.isLoading = false
+                }
+                
+                if !success {
+                    self.isLoading = false
+                }
+            })
             
         }
     }
@@ -166,13 +171,13 @@ struct FormChangeOtherDataView: View {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.jumlahSetoranPerbulan, label: "Jumlah Setoran Perbulan".localized(language), placeHolder: "umlah Setoran Perbulan".localized(language), disabled: false, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.jumlahSetoranPerbulan, label: "Jumlah Setoran Perbulan".localized(language), placeHolder: "Jumlah Setoran Perbulan".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "umlah Setoran Dana Perbulan".localized(language), placeHolder: "umlah Setoran Dana Perbulan".localized(language), disabled: false, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "Jumlah Setoran Dana Perbulan".localized(language), placeHolder: "Jumlah Setoran Dana Perbulan".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
@@ -228,19 +233,37 @@ struct FormChangeOtherDataView: View {
     
     var FormPekerjaan: some View {
         VStack {
-            LabelTextField(value: self.$profileVM.pekerjaan, label: "Pekerjaan".localized(language), placeHolder: "Pekerjaan".localized(language), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.namaPerusahaan, label: "Nama".localized(language), placeHolder: "Nama".localized(language), disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.penghasilanKotor, label: "Penghasilan Kotor".localized(language), placeHolder: "Penghasilan Kotor".localized(language), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.alamatPerusahaan, label: "Alamat".localized(language), placeHolder: "Alamat".localized(language), disabled: true, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
             })
             
-            LabelTextField(value: self.$profileVM.PendapatanLainnya, label: "Pendapatan Lainnya".localized(language), placeHolder: "Pendapatan Lainnya".localized(language), disabled: true, onEditingChanged: { (Bool) in
+            LabelTextField(value: self.$profileVM.kodePosPerusahaan, label: "Kode Pos".localized(language), placeHolder: "Kode Pos".localized(language), disabled: true, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            LabelTextField(value: self.$profileVM.kelurahanPerusahaan, label: "Kelurahan".localized(language), placeHolder: "Kelurahan".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            LabelTextField(value: self.$profileVM.kecamatanPerusahaan, label: "Kecamatan".localized(language), placeHolder: "Kecamatan".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                print("on edit")
+            }, onCommit: {
+                print("on commit")
+            })
+            
+            LabelTextField(value: self.$profileVM.teleponPerusahaan, label: "Telepon".localized(language), placeHolder: "Telepon".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
             }, onCommit: {
                 print("on commit")
