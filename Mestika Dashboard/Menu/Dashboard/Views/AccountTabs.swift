@@ -38,6 +38,8 @@ struct AccountTabs: View {
     
     @State var leftTime: Date = Date()
     
+    @State var trxLimitActive: Bool = false
+    
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -76,7 +78,7 @@ struct AccountTabs: View {
         }
         .gesture(tap)
         .onReceive(timer) { time in
-            print(self.timeLogout)
+//            print(self.timeLogout)
             
             if self.timeLogout > 0 {
                 self.timeLogout -= 1
@@ -92,8 +94,11 @@ struct AccountTabs: View {
                 //                getCoreDataNewDevice()
                 print("Move to moveToDashboard: \(moveToAccountTab)")
                 //                activateWelcomeView()
-                self.forgotPasswordActived = false
-                self.appState.moveToAccountTab = false
+                DispatchQueue.main.async {
+                    self.trxLimitActive = false
+                    self.forgotPasswordActived = false
+                    self.appState.moveToAccountTab = false
+                }
             }
         }
         .onAppear(perform: {
@@ -217,31 +222,36 @@ struct AccountTabs: View {
                         .padding(.vertical, 5)
                         .padding(.horizontal, 20)
                     }
-                    
-                    
+
                     
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : TransactionLimitView()) {
+                    ZStack {
+                        NavigationLink(destination : TransactionLimitView(), isActive: $trxLimitActive) {EmptyView()}
+                            .isDetailLink(false)
                         
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Transaction Limit".localized(language))
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
+                        Button(action: {
+                            self.trxLimitActive = true
+                        }, label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Transaction Limit".localized(language))
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                                
+                                Spacer()
                             }
-                            
-                            Spacer()
-                        }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 20)
-                        
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                        })
                     }
                     
-//                    Divider()
-//                        .padding(.horizontal, 10)
+                    
+                    //                    Divider()
+                    //                        .padding(.horizontal, 10)
                 }
                 .frame(width: UIScreen.main.bounds.width - 30)
             }

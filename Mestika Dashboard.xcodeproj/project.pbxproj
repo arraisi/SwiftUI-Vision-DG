@@ -316,10 +316,6 @@
 		52EC00AE25E3B1370003ED71 /* KartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EC00AD25E3B1370003ED71 /* KartuKuModel.swift */; };
 		52EE767925BA7D9800441A8D /* JenisTabunganModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EE767825BA7D9700441A8D /* JenisTabunganModel.swift */; };
 		52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */; };
-		52F4E3B6264543CC0094F320 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */; };
-		52F4E3B7264543CC0094F320 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3522641CC0E001B9937 /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		52F4E3B8264543CC0094F320 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; };
-		52F4E3B9264543CC0094F320 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52A7A3582641CC12001B9937 /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		52F4E3BE264673760094F320 /* FormChangeOtherDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */; };
 		52F4E3C2264682390094F320 /* CustomerFromPhoenixResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */; };
 		52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = 52FCDD94263EF48B002A76E9 /* SwiftStomp */; };
@@ -370,6 +366,7 @@
 		C037234C26311F0900BA2B43 /* PesanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C037234B26311F0900BA2B43 /* PesanView.swift */; };
 		C0372351263122C600BA2B43 /* pesan.json in Resources */ = {isa = PBXBuildFile; fileRef = C0372350263122C600BA2B43 /* pesan.json */; };
 		C03723572631239E00BA2B43 /* PesanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03723562631239E00BA2B43 /* PesanModel.swift */; };
+		C03CA7572647ED69005F2B6E /* TransactionLimitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03CA7562647ED69005F2B6E /* TransactionLimitModel.swift */; };
 		C043CF9925CD1F6600328C91 /* FormChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */; };
 		C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CFB425CD34BD00328C91 /* FormChangePinTransactionView.swift */; };
 		C043CFBD25CD3F9000328C91 /* languages.json in Resources */ = {isa = PBXBuildFile; fileRef = C043CFBC25CD3F9000328C91 /* languages.json */; };
@@ -460,6 +457,8 @@
 		C0E6C912255F92BD00A79237 /* RowLimitKartuAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */; };
 		C0E6C91A255F934D00A79237 /* DetailLimitKartuAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */; };
 		C0E7B400255B47C7003D278B /* FormNewPinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */; };
+		C0EB2D722647F79E00EB0195 /* TrasactionLimitRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB2D712647F79E00EB0195 /* TrasactionLimitRow.swift */; };
+		C0EB2D78264805AE00EB0195 /* PinTransactionLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB2D77264805AE00EB0195 /* PinTransactionLimitView.swift */; };
 		C0EB654D255E4D81009ADFFE /* DbViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB654C255E4D81009ADFFE /* DbViewModel.swift */; };
 		C0EB90D32553D7E2004DBCF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB90D22553D7E2004DBCF5 /* CardView.swift */; };
 		C0F1F8DF263961A200F86167 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1F8DE263961A200F86167 /* HistoryView.swift */; };
@@ -877,6 +876,7 @@
 		C037234B26311F0900BA2B43 /* PesanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PesanView.swift; sourceTree = "<group>"; };
 		C0372350263122C600BA2B43 /* pesan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pesan.json; sourceTree = "<group>"; };
 		C03723562631239E00BA2B43 /* PesanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PesanModel.swift; sourceTree = "<group>"; };
+		C03CA7562647ED69005F2B6E /* TransactionLimitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitModel.swift; sourceTree = "<group>"; };
 		C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePasswordView.swift; sourceTree = "<group>"; };
 		C043CFB425CD34BD00328C91 /* FormChangePinTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePinTransactionView.swift; sourceTree = "<group>"; };
 		C043CFBC25CD3F9000328C91 /* languages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = languages.json; sourceTree = "<group>"; };
@@ -967,6 +967,8 @@
 		C0E6C911255F92BD00A79237 /* RowLimitKartuAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowLimitKartuAtmView.swift; sourceTree = "<group>"; };
 		C0E6C919255F934D00A79237 /* DetailLimitKartuAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLimitKartuAtmView.swift; sourceTree = "<group>"; };
 		C0E7B3FF255B47C7003D278B /* FormNewPinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormNewPinAtmView.swift; sourceTree = "<group>"; };
+		C0EB2D712647F79E00EB0195 /* TrasactionLimitRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrasactionLimitRow.swift; sourceTree = "<group>"; };
+		C0EB2D77264805AE00EB0195 /* PinTransactionLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinTransactionLimitView.swift; sourceTree = "<group>"; };
 		C0EB654C255E4D81009ADFFE /* DbViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbViewModel.swift; sourceTree = "<group>"; };
 		C0EB90D22553D7E2004DBCF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C0F1F8DE263961A200F86167 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -1481,7 +1483,7 @@
 				C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */,
 				52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */,
 				52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */,
-				C0B6417F2645138300C0D55A /* TransactionLimitView.swift */,
+				C03CA7552647ED4E005F2B6E /* Transaction Limit */,
 				52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */,
 			);
 			path = Account;
@@ -2113,6 +2115,25 @@
 			path = Inbox;
 			sourceTree = "<group>";
 		};
+		C03CA7552647ED4E005F2B6E /* Transaction Limit */ = {
+			isa = PBXGroup;
+			children = (
+				C0B6417F2645138300C0D55A /* TransactionLimitView.swift */,
+				C0EB2D77264805AE00EB0195 /* PinTransactionLimitView.swift */,
+				C0EB2D702647F78200EB0195 /* Subviews */,
+				C03CA75C2647ED7D005F2B6E /* Model */,
+			);
+			path = "Transaction Limit";
+			sourceTree = "<group>";
+		};
+		C03CA75C2647ED7D005F2B6E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C03CA7562647ED69005F2B6E /* TransactionLimitModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C04B421F25540FB000DDE4C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -2297,6 +2318,14 @@
 				C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */,
 			);
 			path = ChangePINATM;
+			sourceTree = "<group>";
+		};
+		C0EB2D702647F78200EB0195 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				C0EB2D712647F79E00EB0195 /* TrasactionLimitRow.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		C0EB654B255E4D67009ADFFE /* View Models */ = {
@@ -2693,6 +2722,7 @@
 				523370192629964F00ED3E4F /* DetailTransactionDepositAccountView.swift in Sources */,
 				0AF48ACB2577834D0037942D /* ATMCardDesignView.swift in Sources */,
 				525DB52E2546C29700D48075 /* TransferOnUsDetailsInformation.swift in Sources */,
+				C0EB2D78264805AE00EB0195 /* PinTransactionLimitView.swift in Sources */,
 				52C3489A2542ACC500F08F37 /* ListBankAccountView.swift in Sources */,
 				064BC25E2576093300F15CA9 /* ATMModel.swift in Sources */,
 				526A81582560B1F900D614CB /* LoginBindingModel.swift in Sources */,
@@ -2791,6 +2821,7 @@
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
 				5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */,
 				52ADFEFE2557DC7A00A1001F /* CustomNavigationBarView.swift in Sources */,
+				C0EB2D722647F79E00EB0195 /* TrasactionLimitRow.swift in Sources */,
 				C010FAE0260B29200092EEDE /* ConfirmationPinQrisView.swift in Sources */,
 				52ADFFAB2557DFDC00A1001F /* FormOTPVerificationRegisterNasabahView.swift in Sources */,
 				C00702B52554E2B60089DBD1 /* CardLimitView.swift in Sources */,
@@ -2878,6 +2909,7 @@
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
 				52468AD125416FB1007518AE /* ListContactTransferOnUs.swift in Sources */,
 				52468ABF254136A4007518AE /* GridMenuView.swift in Sources */,
+				C03CA7572647ED69005F2B6E /* TransactionLimitModel.swift in Sources */,
 				0658B5962563F8A2001B659D /* NotificationModel.swift in Sources */,
 				529190BC25D3C8FC005A4898 /* BankReferenceResponse.swift in Sources */,
 				C0619E2A2629AA730053F326 /* ScannerViewModel.swift in Sources */,

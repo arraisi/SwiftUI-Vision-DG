@@ -53,7 +53,7 @@ struct TransferTabs: View {
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .onReceive(timer) { time in
-            print(self.timeLogout)
+//            print(self.timeLogout)
             if self.timeLogout > 0 {
                 self.timeLogout -= 1
             }
