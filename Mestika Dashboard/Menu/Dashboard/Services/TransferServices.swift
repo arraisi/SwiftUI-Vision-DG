@@ -176,7 +176,7 @@ class TransferServices {
         
         let body: [String: Any] = [
             "cardNo": transferData.cardNo,
-            "ref": "1",
+            "ref": transferData.ref,
             "nominal": transferData.amount.replacingOccurrences(of: ".", with: ""),
             "currency": "360",
             "sourceNumber": transferData.sourceNumber,
@@ -241,14 +241,16 @@ class TransferServices {
                       completion: @escaping(Result<TransferIbftExecResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "currency": "360",
-            "sourceAccountNumber": transferData.sourceNumber,
+            "destinationAccountName": transferData.destinationName,
             "destinationAccountNumber": transferData.destinationNumber,
             "destinationBank": transferData.destinationBankCode,
+            "pinTrx": encryptPassword(password: transferData.pin),
+            "sourceAccountName": transferData.sourceAccountName,
+            "sourceAccountNumber": transferData.sourceNumber,
+            "sourceBank": "151",
             "transactionAmount": transferData.amount,
-            "transactionFee": transferData.adminFee,
-            "reffNumber": transferData.ref,
-            "pinTrx": encryptPassword(password: transferData.pin)
+            "transactionDetails": "",
+            "transactionFee": transferData.adminFee
         ]
         
         guard let url = URL.urlTransferIbft() else {
@@ -323,7 +325,6 @@ class TransferServices {
             "addressBeneficiary1": transferData.addressOfDestination,
             "addressBeneficiary2": "BANDUNG",
             "addressBeneficiary3": "",
-//            "planAllowDebitDomestic": "Y",
             "typeOfBeneficiary": transferData.typeDestination,
             "pin": encryptPassword(password: transferData.pin)
         ]
@@ -401,7 +402,6 @@ class TransferServices {
             "ref": "",
             "typeOfBeneficiary": transferData.typeDestination,
             "typeOfBusiness": "A",
-//            "planAllowDebitDomestic": "Y",
             "sourceNumber": transferData.sourceNumber,
             "ultimateBeneficiaryName": transferData.destinationName
         ]

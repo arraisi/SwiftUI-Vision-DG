@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct TransferOnUsPinConfirmationScreen: View {
     
@@ -42,6 +43,14 @@ struct TransferOnUsPinConfirmationScreen: View {
             .isDetailLink(false)
             
             VStack {
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                }
+                
                 Spacer(minLength: 0)
                 
                 Text("Enter your Transaction PIN".localized(language))

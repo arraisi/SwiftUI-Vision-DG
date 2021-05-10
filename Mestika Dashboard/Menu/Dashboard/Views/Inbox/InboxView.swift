@@ -75,28 +75,28 @@ struct InboxView: View {
             
         }
         .navigationTitle("Inbox")
-        .onReceive(timer) { time in
-//            print(self.timeLogout)
-            if self.timeLogout > 0 {
-                self.timeLogout -= 1
-            }
-
-            if self.timeLogout == 1 {
-                showAlertTimeout = true
-            }
-        }
-        .alert(isPresented: $showAlertTimeout) {
-            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
-                self.authVM.postLogout { success in
-                    if success {
-                        print("SUCCESS LOGOUT")
-                        DispatchQueue.main.async {
-                            self.appState.moveToWelcomeView = true
-                        }
-                    }
-                }
-            }))
-        }
+//        .onReceive(timer) { time in
+////            print(self.timeLogout)
+//            if self.timeLogout > 0 {
+//                self.timeLogout -= 1
+//            }
+//
+//            if self.timeLogout == 1 {
+//                showAlertTimeout = true
+//            }
+//        }
+//        .alert(isPresented: $showAlertTimeout) {
+//            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
+//                self.authVM.postLogout { success in
+//                    if success {
+//                        print("SUCCESS LOGOUT")
+//                        DispatchQueue.main.async {
+//                            self.appState.moveToWelcomeView = true
+//                        }
+//                    }
+//                }
+//            }))
+//        }
     }
 }
 
