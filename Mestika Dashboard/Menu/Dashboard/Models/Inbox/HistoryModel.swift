@@ -8,7 +8,8 @@
 import Foundation
 
 // MARK: - HistoryModelElement
-struct HistoryModelElement: Codable {
+struct HistoryModelElement: Codable, Identifiable {
+    let id  = UUID()
     let nik, deviceID: String?
     let transactionDate: String?
     let status: Int?

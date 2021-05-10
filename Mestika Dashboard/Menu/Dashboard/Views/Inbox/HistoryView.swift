@@ -19,7 +19,7 @@ struct HistoryView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(historVM.history, id: \.reffNumber) { data in
+                ForEach(historVM.history.sorted(by: { $0.transactionDate ?? "0" > $1.transactionDate ?? "0" }), id: \.id) { data in
                     
                     NavigationLink(
                         destination: HistoryDetailView(data: data),
