@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import BackgroundTasks
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,6 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "bank.mestika", using: nil) { task in
+            print("BG Task Scheduler")
+            self.handleAppRefresh(task: task as! BGAppRefreshTask)
+            print("App: BackgroundTask registered.")
+        }
+        
+        registerNotifications()
 
         // Get the managed object context from the shared persistent container.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -66,6 +75,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         print("Background")
+        scheduleAppRefresh()
+
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
@@ -73,8 +84,53 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
+    
+    func scheduleAppRefresh() {
+        let request = BGAppRefreshTaskRequest(identifier: "bank.mestika")
 
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 60) 
 
+        do {
+            try BGTaskScheduler.shared.submit(request)
+            print("App: Scheduled Background Task.")
+        } catch {
+            print("Could not schedule image fetch: (error)")
+        }
+    }
+
+    
+    private func registerNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("Notifications: Authorized.")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func handleAppRefresh(task: BGAppRefreshTask) {
+        
+        scheduleAppRefresh()
+        
+        let refreshQueue = OperationQueue()
+        refreshQueue.qualityOfService = .background
+        refreshQueue.maxConcurrentOperationCount = 1
+        
+        let refreshOperation = BlockOperation {
+            
+            OperationQueue.main.addOperation {
+                print("App", "Oh i'm awake")
+            }
+        }
+        
+        refreshOperation.completionBlock = { task.setTaskCompleted(success: true)}
+        
+        task.expirationHandler = {
+            refreshQueue.cancelAllOperations()
+            task.setTaskCompleted(success: true)
+        }
+    }
 }
 
 class HostingController<ContentView>: UIHostingController<ContentView> where ContentView : View {
