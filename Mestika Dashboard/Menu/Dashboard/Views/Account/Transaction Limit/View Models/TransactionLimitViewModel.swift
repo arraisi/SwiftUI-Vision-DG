@@ -22,15 +22,25 @@ class TransactionLimitViewModel: ObservableObject {
     @Published var maxTrxPurchase: Double = Double.greatestFiniteMagnitude
     
     @Published var trxOnCifIdr: Double = 10000
+    @Published var trxOnCifIdrTxt: String = "10000".thousandSeparator()
     @Published var trxOnCifNonIdr: Double = 10000
+    @Published var trxOnCifNonIdrTxt: String = "10000".thousandSeparator()
     @Published var trxOnUsIdr: Double = 100000
+    @Published var trxOnUsIdrTxt: String = "10000"
     @Published var trxOnUsNonIdr: Double = 10000
+    @Published var trxOnUsNonIdrTxt: String = "10000".thousandSeparator()
     @Published var trxVirtualAccount: Double = 10000
+    @Published var trxVirtualAccountTxt: String = "10000".thousandSeparator()
     @Published var trxSknTransfer: Double = 10000
+    @Published var trxSknTransferTxt: String = "10000".thousandSeparator()
     @Published var trxRtgsTransfer: Double = 10000
+    @Published var trxRtgsTransferTxt: String = "10000".thousandSeparator()
     @Published var trxOnlineTransfer: Double = 10000
+    @Published var trxOnlineTransferTxt: String = "10000".thousandSeparator()
     @Published var trxBillPayment: Double = 10000
+    @Published var trxBillPaymentTxt: String = "10000".thousandSeparator()
     @Published var trxPurchase: Double = 10000
+    @Published var trxPurchaseTxt: String = "10000".thousandSeparator()
     
     @Published var nik: String = ""
 }
@@ -179,18 +189,19 @@ extension TransactionLimitViewModel {
             ]
         ]
         
-        
-        print("\nbody => \(body)\n")
+//        print("\n\nbody => \(body)\n\n")
         
         let jsonData = try? JSONSerialization.data(withJSONObject: body, options: [])
         let jsonString = String(data: jsonData!, encoding: .utf8)
+        print("\n\n")
         print(jsonString ?? "")
+        print("\n\n")
         
-        if JSONSerialization.isValidJSONObject(jsonData ?? "") {
-            print("Valid Json")
-        } else {
-            print("InValid Json")
-        }
+//        if JSONSerialization.isValidJSONObject(jsonData ?? "") {
+//            print("Valid Json")
+//        } else {
+//            print("InValid Json")
+//        }
         
         // MARK: URL
         guard let url = URL.urlUserLimit() else { return }
@@ -215,10 +226,11 @@ extension TransactionLimitViewModel {
                     print("RESPONSE SAVE USER LIMIT \(data)")
                     if data.code == "200" {
                         completion(.success(true))
+                    } else {
+                        completion(.failure(ErrorResult.custom(code: Int(response?.code ?? "0") ?? 0)))
                     }
                 }
                 
-                completion(.failure(ErrorResult.custom(code: Int(response?.code ?? "0") ?? 0)))
             }
             
         }.resume()

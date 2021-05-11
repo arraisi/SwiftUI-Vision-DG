@@ -12,14 +12,8 @@ struct TrasactionLimitRow: View {
     var lable: String
     var min: Double
     @Binding var value: Double
-//    @Binding var txtValue: String
+    @Binding var txtValue: String
     @Binding var max: Double
-    
-    let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
     
     var body: some View {
         VStack(alignment: .center) {
@@ -29,22 +23,26 @@ struct TrasactionLimitRow: View {
                 Spacer()
             }
             
-            TextField(String(format: "%.0f", min), value: $value, formatter: formatter)
-                .multilineTextAlignment(.center)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
-                .padding(.horizontal, 30)
-            
-            //            TextField(String(Int(min)), text: $txtValue)
+            //            TextField(String(format: "%.0f", min), value: $value, formatter: formatter)
             //                .multilineTextAlignment(.center)
             //                .textFieldStyle(RoundedBorderTextFieldStyle())
-            //                .onChange(of: txtValue, perform: { value in
-            //                    self.value = Double(value) ?? 0
-            //                })
             //                .keyboardType(.numberPad)
             //                .padding(.horizontal, 30)
             
+            TextField(String(format: "%.0f", min), text: $txtValue)
+                .multilineTextAlignment(.center)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .onChange(of: txtValue, perform: { value in
+                    self.txtValue = value.thousandSeparator()
+                    self.value = Double(value.replacingOccurrences(of: ".", with: "")) ?? 0
+                })
+                .keyboardType(.numberPad)
+                .padding(.horizontal, 30)
+            
             Slider(value: $value, in: min...max)
+                .onChange(of: value) { v in
+                    txtValue = String(format: "%.0f", value.rounded(toPlaces: 0)).thousandSeparator()
+                }
             
             
             HStack {
@@ -76,6 +74,6 @@ struct TrasactionLimitRow: View {
 
 struct TrasactionLimitRow_Previews: PreviewProvider {
     static var previews: some View {
-        TrasactionLimitRow(lable: "Text", min: 10000, value: .constant(0), max: .constant(1000000))
+        TrasactionLimitRow(lable: "Text", min: 10000, value: .constant(0), txtValue: .constant("100000"), max: .constant(1000000))
     }
 }

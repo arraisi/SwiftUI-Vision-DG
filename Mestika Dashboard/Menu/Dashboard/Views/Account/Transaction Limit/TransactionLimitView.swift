@@ -35,7 +35,7 @@ struct TransactionLimitView: View {
                         
                     case .failure(let error):
                         self.wrongPin = true
-                        print("ERROR GET LIST FAVORITES--> \(error)")
+                        print("ERROR FAVORITES--> \(error)")
                     }
                     
                 }
@@ -57,25 +57,25 @@ struct TransactionLimitView: View {
                         
                         VStack(spacing: 20) {
                             
-                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifIdr, max: $trxLimitVM.maxTrxOnCifIdr)
+                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifIdr, txtValue: $trxLimitVM.trxOnCifIdrTxt, max: $trxLimitVM.maxTrxOnCifIdr)
                             
-                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifNonIdr, max: $trxLimitVM.maxTrxOnCifNonIdr)
+                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifNonIdr, txtValue: $trxLimitVM.trxOnCifNonIdrTxt, max: $trxLimitVM.maxTrxOnCifNonIdr)
                             
-                            TrasactionLimitRow(lable: "Limit transaksi on us (Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsIdr, max: $trxLimitVM.maxTrxOnUsIdr)
+                            TrasactionLimitRow(lable: "Limit transaksi on us (Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsIdr, txtValue: $trxLimitVM.trxOnUsIdrTxt, max: $trxLimitVM.maxTrxOnUsIdr)
                             
-                            TrasactionLimitRow(lable: "Limit transaksi on us (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsNonIdr, max: $trxLimitVM.maxTrxOnUsNonIdr)
+                            TrasactionLimitRow(lable: "Limit transaksi on us (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsNonIdr, txtValue: $trxLimitVM.trxOnUsNonIdrTxt, max: $trxLimitVM.maxTrxOnUsNonIdr)
                             
-                            TrasactionLimitRow(lable: "Limit transaksi virtual akun", min: 10000, value: $trxLimitVM.trxVirtualAccount, max: $trxLimitVM.maxTrxVirtualAccount)
+                            TrasactionLimitRow(lable: "Limit transaksi virtual akun", min: 10000, value: $trxLimitVM.trxVirtualAccount, txtValue: $trxLimitVM.trxVirtualAccountTxt, max: $trxLimitVM.maxTrxVirtualAccount)
                             
-                            TrasactionLimitRow(lable: "Limit transaksi SKN", min: 10000, value: $trxLimitVM.trxSknTransfer, max: $trxLimitVM.maxTrxSknTransfer)
+                            TrasactionLimitRow(lable: "Limit transaksi SKN", min: 10000, value: $trxLimitVM.trxSknTransfer, txtValue: $trxLimitVM.trxSknTransferTxt, max: $trxLimitVM.maxTrxSknTransfer)
                             
-                            TrasactionLimitRow(lable: "Limit transaksi RTGS", min: 10000, value: $trxLimitVM.trxRtgsTransfer, max: $trxLimitVM.maxTrxRtgsTransfer)
+                            TrasactionLimitRow(lable: "Limit transaksi RTGS", min: 10000, value: $trxLimitVM.trxRtgsTransfer, txtValue: $trxLimitVM.trxRtgsTransferTxt, max: $trxLimitVM.maxTrxRtgsTransfer)
                             
-                            TrasactionLimitRow(lable: "Limit transaksi IBFT", min: 10000, value: $trxLimitVM.trxOnlineTransfer, max: $trxLimitVM.maxTrxOnlineTransfer)
+                            TrasactionLimitRow(lable: "Limit transaksi IBFT", min: 10000, value: $trxLimitVM.trxOnlineTransfer, txtValue: $trxLimitVM.trxOnlineTransferTxt, max: $trxLimitVM.maxTrxOnlineTransfer)
                             
-                            TrasactionLimitRow(lable: "Limit pembayaran tagihan", min: 10000, value: $trxLimitVM.trxBillPayment, max: $trxLimitVM.maxTrxBillPayment)
+                            TrasactionLimitRow(lable: "Limit pembayaran tagihan", min: 10000, value: $trxLimitVM.trxBillPayment, txtValue: $trxLimitVM.trxBillPaymentTxt, max: $trxLimitVM.maxTrxBillPayment)
                             
-                            TrasactionLimitRow(lable: "Limit pembelian", min: 10000, value: $trxLimitVM.trxPurchase, max: $trxLimitVM.maxTrxPurchase)
+                            TrasactionLimitRow(lable: "Limit pembelian", min: 10000, value: $trxLimitVM.trxPurchase, txtValue: $trxLimitVM.trxPurchaseTxt, max: $trxLimitVM.maxTrxPurchase)
                             
                         }
                         .padding()
@@ -111,10 +111,10 @@ struct TransactionLimitView: View {
                 UIApplication.shared.endEditing()
             }
             .onAppear(perform: {
-                //                trxLimitVM.mappingGlobalLimitData(data: data)
-                //                trxLimitVM.mappingUserLimitData(data: userData)
-                trxLimitVM.findTrxGlobalLimit()
-                trxLimitVM.findTrxUserLimit()
+                trxLimitVM.mappingGlobalLimitData(data: data)
+                trxLimitVM.mappingUserLimitData(data: userData)
+                //                trxLimitVM.findTrxGlobalLimit()
+                //                trxLimitVM.findTrxUserLimit()
             })
         }
         
