@@ -842,6 +842,7 @@ struct TransferOnUsScreen: View {
                     if success {
                         print("\nSUCCESS DESTINATION NAME : \(self.transferVM.destinationName)\n")
                         self.destinationName = self.transferVM.destinationName
+                        self.transferData.ref = self.transferVM.reffNumber
                     }
                     
                     if !success {
