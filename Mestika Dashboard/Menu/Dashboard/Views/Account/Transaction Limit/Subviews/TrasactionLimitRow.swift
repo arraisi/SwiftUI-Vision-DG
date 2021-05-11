@@ -12,8 +12,8 @@ struct TrasactionLimitRow: View {
     var lable: String
     var min: Double
     @Binding var value: Double
-    @Binding var txtValue: String
-    var max: Double
+//    @Binding var txtValue: String
+    @Binding var max: Double
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -28,20 +28,23 @@ struct TrasactionLimitRow: View {
                     .font(.system(size: 14))
                 Spacer()
             }
-
-            TextField(String(Int(min)), text: $txtValue)
+            
+            TextField(String(format: "%.0f", min), value: $value, formatter: formatter)
                 .multilineTextAlignment(.center)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .onChange(of: txtValue, perform: { value in
-                    self.value = Double(value) ?? 0
-                })
                 .keyboardType(.numberPad)
                 .padding(.horizontal, 30)
             
+            //            TextField(String(Int(min)), text: $txtValue)
+            //                .multilineTextAlignment(.center)
+            //                .textFieldStyle(RoundedBorderTextFieldStyle())
+            //                .onChange(of: txtValue, perform: { value in
+            //                    self.value = Double(value) ?? 0
+            //                })
+            //                .keyboardType(.numberPad)
+            //                .padding(.horizontal, 30)
+            
             Slider(value: $value, in: min...max)
-                .onChange(of: value, perform: { value in
-                    txtValue = String(format: "%.0f", value)
-                })
             
             
             HStack {
@@ -58,7 +61,7 @@ struct TrasactionLimitRow: View {
                 VStack(alignment: .trailing) {
                     Text("Max.")
                         .font(.system(size: 12))
-                    Text(String(Int(max)).thousandSeparator())
+                    Text(String(format: "%.0f", max).thousandSeparator())
                         .font(.system(size: 12))
                         .foregroundColor(Color("StaleBlue"))
                 }
@@ -73,6 +76,6 @@ struct TrasactionLimitRow: View {
 
 struct TrasactionLimitRow_Previews: PreviewProvider {
     static var previews: some View {
-        TrasactionLimitRow(lable: "Text", min: 10000, value: .constant(0), txtValue: .constant("0"), max: 1000000)
+        TrasactionLimitRow(lable: "Text", min: 10000, value: .constant(0), max: .constant(1000000))
     }
 }

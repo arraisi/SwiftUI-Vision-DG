@@ -9,132 +9,115 @@ import SwiftUI
 
 struct TransactionLimitView: View {
     
-    @State var trxOnUsMilikSendiriRp: Double = 0
-    @State var trxOnUsMilikSendiriRpTxt: String = ""
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
     
-    @State var trxOnUsMilikSendiriNonRp: Double = 0
-    @State var trxOnUsMilikSendiriNonRpTxt: String = ""
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var trxOnUsRp: Double = 0
-    @State var trxOnUsRpTxt: String = ""
+    let data: GlobalLimitModel = load("globalLimitData.json")
+    let userData: UserLimitModel = load("userLimitData.json")
     
-    @State var trxOnUsNonRp: Double = 0
-    @State var trxOnUsNonRpTxt: String = ""
-    
-    @State var trxVirtualAkun: Double = 0
-    @State var trxVirtualAkunTxt: String = ""
-    
-    @State var trxSKN: Double = 0
-    @State var trxSKNTxt: String = ""
-    
-    @State var trxRTGS: Double = 0
-    @State var trxRTGSTxt: String = ""
-    
-    @State var trxIBFT: Double = 0
-    @State var trxIBFTTxt: String = ""
-    
-    @State var trxPembayaran: Double = 0
-    @State var trxPembayaranTxt: String = ""
-    
-    @State var trxPembelian: Double = 0
-    @State var trxPembelianTxt: String = ""
+    @StateObject var trxLimitVM = TransactionLimitViewModel()
     
     @State private var pinActive: Bool = false
+    @State private var wrongPin: Bool = false
+    @State private var showingAlert: Bool = false
     
     var body: some View {
-        ZStack {
-            
-            VStack(alignment: .center) {
-                
-                ScrollView(showsIndicators: false) {
-                    
-                    VStack(spacing: 20) {
+        if pinActive {
+            PinTransactionLimitView(wrongPin: $wrongPin) { pin in
+                trxLimitVM.saveTrxUserLimit(pin: pin) { result in
+                    switch result {
+                    case .success( _):
+                        //                        presentationMode.wrappedValue.dismiss()
+                        showingAlert = true
+                        print("Success")
                         
-                        TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Rupiah)", min: 10000, value: $trxOnUsMilikSendiriRp, txtValue: $trxOnUsMilikSendiriRpTxt, max: 1000000000)
-                        
-                        TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Non Rupiah)", min: 10000, value: $trxOnUsMilikSendiriNonRp, txtValue: $trxOnUsMilikSendiriNonRpTxt, max: 10000)
-                        
-                        TrasactionLimitRow(lable: "Limit transaksi on us (Rupiah)", min: 10000, value: $trxOnUsRp, txtValue: $trxOnUsRpTxt, max: 1000000000)
-                        
-                        TrasactionLimitRow(lable: "Limit transaksi on us (Non Rupiah)", min: 10000, value: $trxOnUsNonRp, txtValue: $trxOnUsNonRpTxt, max: 10000)
-                        
-                        TrasactionLimitRow(lable: "Limit transaksi virtual akun", min: 10000, value: $trxVirtualAkun, txtValue: $trxVirtualAkunTxt, max: 50000000)
-                        
-                        TrasactionLimitRow(lable: "Limit transaksi SKN", min: 10000, value: $trxSKN, txtValue: $trxSKNTxt, max: 250000000)
-                        
-                        TrasactionLimitRow(lable: "Limit transaksi RTGS", min: 10000, value: $trxRTGS, txtValue: $trxRTGSTxt, max: 1000000000)
-                        
-                        TrasactionLimitRow(lable: "Limit transaksi IBFT", min: 10000, value: $trxIBFT, txtValue: $trxIBFTTxt, max: 50000000)
-                        
-                        TrasactionLimitRow(lable: "Limit pembayaran tagihan", min: 10000, value: $trxPembayaran, txtValue: $trxPembayaranTxt, max: 10000000)
-                        
-                        TrasactionLimitRow(lable: "Limit pembelian", min: 10000, value: $trxPembelian, txtValue: $trxPembelianTxt, max: 10000000)
-                        
+                    case .failure(let error):
+                        self.wrongPin = true
+                        print("ERROR GET LIST FAVORITES--> \(error)")
                     }
-                    .padding()
-                    .padding(.top, 20)
-                }
-                
-                
-                Spacer()
-                
-                VStack {
-                    HStack(alignment: .center){
-                        NavigationLink(destination: PinTransactionLimitView(), isActive: $pinActive, label: {EmptyView()
-                        })
-                        
-                        Button(action: {
-                            self.pinActive = true
-                        }, label: {
-                            Text("SIMPAN")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(width: 300, height: 40)
-                        })
-                        .background(Color("StaleBlue"))
-                        .cornerRadius(10)
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                     
                 }
-                .padding(5)
-                .background(Color.white)
             }
+            .alert(isPresented: $showingAlert) {
+                return Alert(
+                    title: Text("Successful".localized(language)),
+                    message: Text("Update limit transaction".localized(language)),
+                    dismissButton: .default(Text("OK".localized(language)), action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }))
+            }
+        } else {
+            ZStack {
+                
+                VStack(alignment: .center) {
+                    
+                    ScrollView(showsIndicators: false) {
+                        
+                        VStack(spacing: 20) {
+                            
+                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifIdr, max: $trxLimitVM.maxTrxOnCifIdr)
+                            
+                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifNonIdr, max: $trxLimitVM.maxTrxOnCifNonIdr)
+                            
+                            TrasactionLimitRow(lable: "Limit transaksi on us (Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsIdr, max: $trxLimitVM.maxTrxOnUsIdr)
+                            
+                            TrasactionLimitRow(lable: "Limit transaksi on us (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsNonIdr, max: $trxLimitVM.maxTrxOnUsNonIdr)
+                            
+                            TrasactionLimitRow(lable: "Limit transaksi virtual akun", min: 10000, value: $trxLimitVM.trxVirtualAccount, max: $trxLimitVM.maxTrxVirtualAccount)
+                            
+                            TrasactionLimitRow(lable: "Limit transaksi SKN", min: 10000, value: $trxLimitVM.trxSknTransfer, max: $trxLimitVM.maxTrxSknTransfer)
+                            
+                            TrasactionLimitRow(lable: "Limit transaksi RTGS", min: 10000, value: $trxLimitVM.trxRtgsTransfer, max: $trxLimitVM.maxTrxRtgsTransfer)
+                            
+                            TrasactionLimitRow(lable: "Limit transaksi IBFT", min: 10000, value: $trxLimitVM.trxOnlineTransfer, max: $trxLimitVM.maxTrxOnlineTransfer)
+                            
+                            TrasactionLimitRow(lable: "Limit pembayaran tagihan", min: 10000, value: $trxLimitVM.trxBillPayment, max: $trxLimitVM.maxTrxBillPayment)
+                            
+                            TrasactionLimitRow(lable: "Limit pembelian", min: 10000, value: $trxLimitVM.trxPurchase, max: $trxLimitVM.maxTrxPurchase)
+                            
+                        }
+                        .padding()
+                        .padding(.top, 20)
+                    }
+                    
+                    
+                    Spacer()
+                    
+                    VStack {
+                        HStack(alignment: .center) {
+                            Button(action: {
+                                self.pinActive = true
+                            }, label: {
+                                Text("SIMPAN")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(width: 300, height: 40)
+                            })
+                            .background(Color("StaleBlue"))
+                            .cornerRadius(10)
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        
+                    }
+                    .padding(5)
+                    .background(Color.white)
+                }
+            }
+            .navigationBarTitle("Transaction Limit", displayMode: .inline)
+            .onTapGesture() {
+                UIApplication.shared.endEditing()
+            }
+            .onAppear(perform: {
+                //                trxLimitVM.mappingGlobalLimitData(data: data)
+                //                trxLimitVM.mappingUserLimitData(data: userData)
+                trxLimitVM.findTrxGlobalLimit()
+                trxLimitVM.findTrxUserLimit()
+            })
         }
-        .navigationBarTitle("Transaction Limit", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-    }
-    
-    func valueRow(min: String, value: Double, max: String) -> some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Min.")
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                Text(min.thousandSeparator())
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .foregroundColor(Color("StaleBlue"))
-            }
-            Spacer()
-            
-            Text("\(Int(value))".thousandSeparator())
-                .font(.custom("Montserrat-SemiBold", size: 16))
-                .padding(10)
-                .frame(width: 150)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color(.lightGray), lineWidth: 2)
-                )
-            
-            Spacer()
-            VStack(alignment: .trailing) {
-                Text("Max.")
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                Text(max.thousandSeparator())
-                    .font(.custom("Montserrat-SemiBold", size: 14))
-                    .foregroundColor(Color("StaleBlue"))
-            }
-        }
+        
     }
 }
 

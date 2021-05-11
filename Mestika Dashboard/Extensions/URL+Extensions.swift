@@ -335,4 +335,14 @@ extension URL {
     static func urlCheckStatusQris() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/qris/checkStatusQr")
     }
+    
+    //-------------------- TRX LIMIT SERVICE ----------------------//
+    
+    static func urlGlobalLimit() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/globalLimit")
+    }
+    
+    static func urlUserLimit() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/userLimit")
+    }
 }
