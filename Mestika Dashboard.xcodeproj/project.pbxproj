@@ -68,6 +68,10 @@
 		5225637425621D7F00BCAB67 /* ScheduleInterviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */; };
 		5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */; };
 		5225637E25621E6400BCAB67 /* ScheduleInterviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */; };
+		52271740264A6A8800A012AC /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5227173F264A6A8800A012AC /* WebRTC.xcframework */; };
+		52271741264A6A8800A012AC /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5227173F264A6A8800A012AC /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52271745264A6ABA00A012AC /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52271744264A6ABA00A012AC /* JitsiMeetSDK.xcframework */; };
+		52271746264A6ABA00A012AC /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52271744264A6ABA00A012AC /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		522B8C2A25E4B62F003D17F1 /* CardPinVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */; };
 		522B8C2F25E4BA16003D17F1 /* ActivateKartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */; };
 		522B8C3725E4E505003D17F1 /* BrokenKartuKuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C3625E4E504003D17F1 /* BrokenKartuKuModel.swift */; };
@@ -397,8 +401,6 @@
 		C0733FBF25EE25320034689F /* SavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0733FBE25EE25320034689F /* SavingAccountView.swift */; };
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
-		C07AA4A826497C9800CB953E /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A626497C9800CB953E /* WebRTC.xcframework */; };
-		C07AA4A926497C9800CB953E /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */; };
 		C07AA4C126497EC900CB953E /* userLimitData.json in Resources */ = {isa = PBXBuildFile; fileRef = C07AA4C026497EC900CB953E /* userLimitData.json */; };
 		C07AA4C526497F6300CB953E /* globalLimitData.json in Resources */ = {isa = PBXBuildFile; fileRef = C07AA4C426497F6300CB953E /* globalLimitData.json */; };
 		C07AA4CA264A243E00CB953E /* TransactionLimitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07AA4C9264A243E00CB953E /* TransactionLimitViewModel.swift */; };
@@ -503,6 +505,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				52271741264A6A8800A012AC /* WebRTC.xcframework in Embed Frameworks */,
+				52271746264A6ABA00A012AC /* JitsiMeetSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -563,6 +567,8 @@
 		5225637325621D7F00BCAB67 /* ScheduleInterviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewResponse.swift; sourceTree = "<group>"; };
 		5225637825621E3A00BCAB67 /* ScheduleInterviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewViewModel.swift; sourceTree = "<group>"; };
 		5225637D25621E6400BCAB67 /* ScheduleInterviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInterviewService.swift; sourceTree = "<group>"; };
+		5227173F264A6A8800A012AC /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
+		52271744264A6ABA00A012AC /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
 		522B8C2925E4B62F003D17F1 /* CardPinVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPinVerificationView.swift; sourceTree = "<group>"; };
 		522B8C2E25E4BA16003D17F1 /* ActivateKartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateKartuKuModel.swift; sourceTree = "<group>"; };
 		522B8C3625E4E504003D17F1 /* BrokenKartuKuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokenKartuKuModel.swift; sourceTree = "<group>"; };
@@ -1003,14 +1009,14 @@
 			files = (
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
-				C07AA4A926497C9800CB953E /* JitsiMeetSDK.xcframework in Frameworks */,
+				52271745264A6ABA00A012AC /* JitsiMeetSDK.xcframework in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
 				52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */,
 				520585FB25721F00005DB764 /* Indicators in Frameworks */,
 				520585F525721F00005DB764 /* PopupView in Frameworks */,
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
-				C07AA4A826497C9800CB953E /* WebRTC.xcframework in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
+				52271740264A6A8800A012AC /* WebRTC.xcframework in Frameworks */,
 				6312566BD2327D8729CF0518 /* Pods_Mestika_Dashboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1855,6 +1861,8 @@
 		A5D2A9330E58646C22F4EE12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52271744264A6ABA00A012AC /* JitsiMeetSDK.xcframework */,
+				5227173F264A6A8800A012AC /* WebRTC.xcframework */,
 				8FE34BEEB01C90376DE62BE4 /* Pods_Mestika_Dashboard.framework */,
 				D5F417F6A1389F47850D9E9C /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */,
 				A71DFC0DC2AD884C20BE2F7F /* Pods_Mestika_DashboardTests.framework */,

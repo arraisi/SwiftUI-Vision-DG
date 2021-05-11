@@ -7,10 +7,11 @@ import Foundation
 
 // MARK: - TransferIbftInquiryResponse
 struct TransferIbftInquiryResponse: Codable {
-    let destinationAccountNumber, destinationBank, sourceAccountNumber, transactionAmount: String
-    let transactionDetails, currency, sourceBank, pan: String
-    let phoneNumber, featureCode, transactionDate, destinationAccountName: String
-    let transactionFee, transferIndicator, reffNumber: String
+    let destinationAccountNumber, destinationBank, sourceAccountNumber, transactionAmount: String?
+    let transactionDetails, currency, sourceBank, pan: String?
+    let phoneNumber, featureCode, transactionDate, destinationAccountName: String?
+    let transactionFee, transferIndicator, reffNumber: String?
+    let trace, ref: String?
     let status: StatusInquiry
 }
 

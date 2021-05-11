@@ -21,6 +21,7 @@ class TransferViewModel : ObservableObject {
     @Published var reffNumber: String = ""
     
     @Published var status: String = ""
+    @Published var messageStatus: String = ""
     
     @Published var transactionDate: String = ""
     
@@ -130,9 +131,15 @@ class TransferViewModel : ObservableObject {
                 
                 DispatchQueue.main.async {
                     self.status = response.status.code
-                    self.destinationName = response.destinationAccountName
-                    self.destinationNumber = response.destinationAccountNumber
-                    self.reffNumber = response.reffNumber
+                    self.messageStatus = response.status.message
+                    self.destinationName = response.destinationAccountName ?? ""
+                    self.destinationNumber = response.destinationAccountNumber ?? ""
+                    
+                    if (response.reffNumber == nil) {
+                        self.reffNumber = response.ref ?? ""
+                    } else {
+                        self.reffNumber = response.reffNumber ?? ""
+                    }
                 }
                 
                 completion(true)
@@ -151,6 +158,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 500):
+                    self.code = "500"
+                    self.message = "Internal Server Error"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -193,6 +203,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 500):
+                    self.code = "500"
+                    self.message = "Internal Server Error"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -233,9 +246,13 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 500):
+                    self.code = "500"
+                    self.message = "Internal Server Error"
                 default:
                     self.message = "Internal Server Error"
                 }
+                
                 completion(false)
             }
         }
@@ -273,6 +290,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 500):
+                    self.code = "500"
+                    self.message = "Internal Server Error"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -316,6 +336,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 500):
+                    self.code = "500"
+                    self.message = "Internal Server Error"
                 default:
                     self.message = "Internal Server Error"
                 }

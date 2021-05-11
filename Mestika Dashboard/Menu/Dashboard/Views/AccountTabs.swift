@@ -228,8 +228,13 @@ struct AccountTabs: View {
                         .padding(.horizontal, 10)
                     
                     ZStack {
-                        NavigationLink(destination : TransactionLimitView(), isActive: $trxLimitActive) {EmptyView()}
-                            .isDetailLink(false)
+                        NavigationLink(
+                            destination: TransactionLimitView(),
+                            isActive: $trxLimitActive,
+                            label: { EmptyView() }
+                        ).isDetailLink(false).introspectNavigationController { navController  in
+                            navController.view.gestureRecognizers = []
+                        }
                         
                         Button(action: {
                             self.trxLimitActive = true

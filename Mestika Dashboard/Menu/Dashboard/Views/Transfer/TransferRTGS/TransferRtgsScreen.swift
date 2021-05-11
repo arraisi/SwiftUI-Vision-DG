@@ -19,6 +19,8 @@ struct TransferRtgsScreen: View {
     @State var isShowName: Bool = false
     @State var isLoading: Bool = false
     
+    @State var messageStatusInquiry: String = ""
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -80,6 +82,7 @@ struct TransferRtgsScreen: View {
     @State private var showDialogMinTransaction: Bool = false
     @State private var showDialogConfirmation: Bool = false
     @State private var showDialogSelectAccount: Bool = false
+    @State private var showDialogErrorInquiry: Bool = false
     
     // Variable Disable
     @State private var disabledButton = true
@@ -210,16 +213,18 @@ struct TransferRtgsScreen: View {
 //                        .background(Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
+                        .padding(.bottom, 20)
                     }
                 })
             }
             
-            if (self.showDialogMinReached || self.showDialogMaxReached || self.showDialogSelectAccount || self.showDialogMinTransaction) {
+            if (self.showDialogMinReached || self.showDialogMaxReached || self.showDialogSelectAccount || self.showDialogMinTransaction || self.showDialogErrorInquiry) {
                 ModalOverlay(tapAction: { withAnimation {
                     self.showDialogMaxReached = false
                     self.showDialogMinReached = false
                     self.showDialogSelectAccount = false
                     self.showDialogMinTransaction = false
+                    self.showDialogErrorInquiry = false
                 }})
                 .edgesIgnoringSafeArea(.all)
             }
@@ -250,6 +255,9 @@ struct TransferRtgsScreen: View {
         }
         .popup(isPresented: $showDialogSelectAccount, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
             modalSelectBankAccount()
+        }
+        .popup(isPresented: $showDialogErrorInquiry, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalErrorInquiry()
         }
         .onAppear {
             self.isRouteTransaction = false
@@ -421,23 +429,6 @@ struct TransferRtgsScreen: View {
 //                }
                 
             } else {
-                VStack {
-                    HStack {
-                        
-                        TextField("Destination Name".localized(language), text: self.$destinationNameCtrl, onEditingChanged: { changed in
-                            self.transferData.destinationName = self.destinationNameCtrl
-                        })
-                        .font(.subheadline)
-                        .foregroundColor(.black)
-                        .padding()
-                    }
-                    .background(Color(hex: "#F6F8FB"))
-                    .cornerRadius(10)
-                    .padding(.horizontal, 15)
-                    .padding(.bottom, 10)
-                }
-                .hidden()
-                
                 // Field Type Destination
                 VStack {
                     HStack {
@@ -1063,6 +1054,47 @@ struct TransferRtgsScreen: View {
         .shadow(radius: 20)
     }
     
+    func modalErrorInquiry() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 74, height: 81)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("WARNING".localized(language))
+                .font(.custom("Montserrat-SemiBold", size: 18))
+                .foregroundColor(.red)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text("\(self.messageStatusInquiry)")
+                .font(.custom("Montserrat-Light", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogErrorInquiry = false
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
     func modalSelectBankAccount() -> some View {
         VStack {
             HStack {
@@ -1127,7 +1159,7 @@ struct TransferRtgsScreen: View {
             }
         } else {
             print("Validation RTGS")
-            if (self.destinationNameCtrl.isNotEmpty() && self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
+            if (self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
                 return false
             }
         }
@@ -1192,34 +1224,36 @@ struct TransferRtgsScreen: View {
     
     // MARK: GET DESTINATION NAME
     func inquiryTransfer() {
-        if transferData.destinationNumber.count == 9 {
-            self.isShowName = true
-            self.isLoading = true
+        self.isShowName = true
+        self.isLoading = true
+        
+        self.limitVM.transferIbftInquiry(transferData: transferData) { success in
             
-            self.limitVM.transferIbftInquiry(transferData: transferData) { success in
-                
-                DispatchQueue.main.async {
-                    if success {
-                        self.isLoading = false
-                        if (self.limitVM.status == "00") {
-                            print("\nSUCCESS DESTINATION NAME : \(self.limitVM.destinationName)\n")
-                            self.destinationNameCtrl = self.limitVM.destinationName
-                            
-                            self.transferData.ref = self.limitVM.reffNumber
-                            self.transferData.destinationNumber = self.limitVM.destinationNumber
-                            self.transferData.destinationName = self.limitVM.destinationName
-                            
-                            self.isRouteTransaction = true
-                        }
+            DispatchQueue.main.async {
+                if success {
+                    self.isLoading = false
+                    if (self.limitVM.status == "00") {
+                        print("\nSUCCESS DESTINATION NAME : \(self.limitVM.destinationName)\n")
+                        self.destinationNameCtrl = self.limitVM.destinationName
                         
+                        self.transferData.ref = self.limitVM.reffNumber
+                        self.transferData.destinationNumber = self.limitVM.destinationNumber
+                        self.transferData.destinationName = self.limitVM.destinationName
+                        
+                        self.isRouteTransaction = true
+                    } else {
+                        
+                        self.messageStatusInquiry = self.limitVM.messageStatus
+                        self.showDialogErrorInquiry = true
                     }
                     
-                    if !success {
-                        self.isLoading = false
-                        print("NOT SUCCESS")
-                        self.destinationNameCtrl = "Akun Tidak Ditemukan"
-                        self.limitVM.destinationName = "Akun Tidak Ditemukan"
-                    }
+                }
+                
+                if !success {
+                    self.isLoading = false
+                    print("NOT SUCCESS")
+                    self.destinationNameCtrl = "Akun Tidak Ditemukan"
+                    self.limitVM.destinationName = "Akun Tidak Ditemukan"
                 }
             }
         }
