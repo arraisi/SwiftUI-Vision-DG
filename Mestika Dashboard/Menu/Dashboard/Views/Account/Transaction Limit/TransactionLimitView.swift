@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TransactionLimitView: View {
     
+    @AppStorage("language")
+    private var language = LocalizationService.shared.language
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let data: GlobalLimitModel = load("globalLimitData.json")
@@ -18,6 +21,7 @@ struct TransactionLimitView: View {
     
     @State private var pinActive: Bool = false
     @State private var wrongPin: Bool = false
+    @State private var showingAlert: Bool = false
     
     var body: some View {
         if pinActive {
@@ -25,7 +29,8 @@ struct TransactionLimitView: View {
                 trxLimitVM.saveTrxUserLimit(pin: pin) { result in
                     switch result {
                     case .success( _):
-                        presentationMode.wrappedValue.dismiss()
+                        //                        presentationMode.wrappedValue.dismiss()
+                        showingAlert = true
                         print("Success")
                         
                     case .failure(let error):
@@ -34,6 +39,14 @@ struct TransactionLimitView: View {
                     }
                     
                 }
+            }
+            .alert(isPresented: $showingAlert) {
+                return Alert(
+                    title: Text("Successful".localized(language)),
+                    message: Text("Update limit transaction".localized(language)),
+                    dismissButton: .default(Text("OK".localized(language)), action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }))
             }
         } else {
             ZStack {
@@ -94,6 +107,9 @@ struct TransactionLimitView: View {
                 }
             }
             .navigationBarTitle("Transaction Limit", displayMode: .inline)
+            .onTapGesture() {
+                UIApplication.shared.endEditing()
+            }
             .onAppear(perform: {
                 //                trxLimitVM.mappingGlobalLimitData(data: data)
                 //                trxLimitVM.mappingUserLimitData(data: userData)
