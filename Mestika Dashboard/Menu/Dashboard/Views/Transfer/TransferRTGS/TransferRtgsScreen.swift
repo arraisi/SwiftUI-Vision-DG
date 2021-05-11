@@ -1111,7 +1111,7 @@ struct TransferRtgsScreen: View {
         
         if (self.transferType == "Online") {
             print("Validation IBFT")
-            if (self.destinationNameCtrl.isNotEmpty() && self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language)) {
+            if (self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language)) {
                 return false
             }
         } else {

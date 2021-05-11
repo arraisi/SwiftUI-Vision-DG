@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct TransferRtgsValidationPin: View {
     
@@ -37,6 +38,14 @@ struct TransferRtgsValidationPin: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
+                    
+                    if (self.isLoading) {
+                        LinearWaitingIndicator()
+                            .animated(true)
+                            .foregroundColor(.green)
+                            .frame(height: 1)
+                    }
+                    
                     Spacer(minLength: 0)
                     
                     Text("Enter your Transaction PIN".localized(language))

@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import Firebase
 import UserNotifications
+import BackgroundTasks
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -100,15 +101,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Print message ID.
         
         if let messageID = userInfo[gcmMessageIDKey] {
-          print("Message ID: \(messageID)")
+            print("Message ID: \(messageID)")
         }
-
+        
         let jitsiRoom = userInfo["room"]
         print(jitsiRoom)
-
+        
         let dataRoom: [String: Any] = ["room_id": jitsiRoom]
-
-//        UserDefaults.standard.set(jitsiRoom ?? "-", forKey: "jitsi_room")
+        
+        //        UserDefaults.standard.set(jitsiRoom ?? "-", forKey: "jitsi_room")
         // Print full message.
         print(userInfo)
         DispatchQueue.main.async {
@@ -119,17 +120,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // [END receive_message]
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-      print("Unable to register for remote notifications: \(error.localizedDescription)")
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
-
+    
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
     // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
     // the FCM registration token.
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-      print("APNs token retrieved: \(deviceToken)")
-
-      // With swizzling disabled you must set the APNs token here.
-       Messaging.messaging().apnsToken = deviceToken
+        print("APNs token retrieved: \(deviceToken)")
+        
+        // With swizzling disabled you must set the APNs token here.
+        Messaging.messaging().apnsToken = deviceToken
     }
     
     // MARK: UISceneSession Lifecycle

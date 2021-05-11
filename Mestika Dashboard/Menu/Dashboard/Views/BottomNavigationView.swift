@@ -36,6 +36,7 @@ struct BottomNavigationView: View {
     
     @State var showQrCode: Bool = false
     @State private var qrisActive = false
+    @State private var inboxActive: Bool = false
     
     @State private var isFingerprint: Bool = false
     @State private var isShowConfirmationBiometricAuth: Bool = false
@@ -343,13 +344,19 @@ struct BottomNavigationView: View {
     }
     
     var navBarItem: some View {
-        HStack(spacing: 30) {
-            NavigationLink(destination: InboxView(), label: {
+        HStack(spacing: 30) {            
+            NavigationLink(
+                destination: InboxView(),
+                isActive: self.$inboxActive,
+                label: { EmptyView() }
+            )
+            
+            Button(action: {
+                self.inboxActive = true
+            }, label: {
                 Image("ic_bell")
             })
-            //            Button(action: {}, label: {
-            //                Image("ic_bell")
-            //            })
+            
             Button(action: {
                 self.showQrCode = true
             }, label: {

@@ -18,20 +18,20 @@ struct HistoryDetailView: View {
     
     var body: some View {
         VStack {
-            HistoryDetailAppBar
+            //            HistoryDetailAppBar
             HistoryPDFView
             Spacer()
         }
-        .navigationBarHidden(true)
-        //        .navigationBarItems(trailing: VStack{
-        //            Button(action: {
-        //                exportToPDF()
-        //            }, label: {
-        //                Image(systemName: "tray.and.arrow.down")
-        //                    .font(.system(size: 24))
-        //                    .padding(.horizontal, 5)
-        //            })
-        //        })
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarItems(trailing: VStack{
+            Button(action: {
+                exportToPDF()
+            }, label: {
+                Image(systemName: "tray.and.arrow.down")
+                    .font(.system(size: 24))
+                    .padding(.horizontal, 5)
+            })
+        })
     }
     
     var HistoryDetailAppBar: some View {
@@ -131,11 +131,11 @@ struct HistoryDetailView: View {
                     Text("IDR \(data.data.transactionFee?.thousandSeparator() ?? "0")")
                 }
                 
-//                HStack {
-//                    Text("Voucher :")
-//                    Spacer()
-//                    Text("")
-//                }
+                //                HStack {
+                //                    Text("Voucher :")
+                //                    Spacer()
+                //                    Text("")
+                //                }
                 
                 HStack {
                     Text("Total amount".localized(language))

@@ -24,7 +24,7 @@ struct PerkiraanPenarikanView: View {
     @State var editMode: EditMode = .inactive
     
     // View variables
-    let perkiraanPenarikan: [MasterModel] = load("perkiraanPenarikan.json")
+    let perkiraanPenarikan: [MasterModel] = load("perkiraanSetoran.json")
     
     var body: some View {
         
