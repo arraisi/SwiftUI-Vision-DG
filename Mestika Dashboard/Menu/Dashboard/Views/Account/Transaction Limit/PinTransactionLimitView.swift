@@ -79,6 +79,11 @@ struct PinTransactionLimitView: View {
 //                        self.wrongPin = true
 //                    }
                 })
+                .onChange(of: wrongPin) { wrong in
+                    if wrong {
+                        self.pin = ""
+                    }
+                }
             }
         }
         .navigationBarTitle("Transaction Limit", displayMode: .inline)

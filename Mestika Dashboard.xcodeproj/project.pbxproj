@@ -367,6 +367,7 @@
 		C0372351263122C600BA2B43 /* pesan.json in Resources */ = {isa = PBXBuildFile; fileRef = C0372350263122C600BA2B43 /* pesan.json */; };
 		C03723572631239E00BA2B43 /* PesanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03723562631239E00BA2B43 /* PesanModel.swift */; };
 		C03CA7572647ED69005F2B6E /* TransactionLimitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03CA7562647ED69005F2B6E /* TransactionLimitModel.swift */; };
+		C0436261264A8BD90024418E /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0436260264A8BD90024418E /* Double+Extensions.swift */; };
 		C043CF9925CD1F6600328C91 /* FormChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */; };
 		C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043CFB425CD34BD00328C91 /* FormChangePinTransactionView.swift */; };
 		C043CFBD25CD3F9000328C91 /* languages.json in Resources */ = {isa = PBXBuildFile; fileRef = C043CFBC25CD3F9000328C91 /* languages.json */; };
@@ -880,6 +881,7 @@
 		C0372350263122C600BA2B43 /* pesan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pesan.json; sourceTree = "<group>"; };
 		C03723562631239E00BA2B43 /* PesanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PesanModel.swift; sourceTree = "<group>"; };
 		C03CA7562647ED69005F2B6E /* TransactionLimitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitModel.swift; sourceTree = "<group>"; };
+		C0436260264A8BD90024418E /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		C043CF9825CD1F6600328C91 /* FormChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePasswordView.swift; sourceTree = "<group>"; };
 		C043CFB425CD34BD00328C91 /* FormChangePinTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePinTransactionView.swift; sourceTree = "<group>"; };
 		C043CFBC25CD3F9000328C91 /* languages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = languages.json; sourceTree = "<group>"; };
@@ -1434,6 +1436,7 @@
 				FA486B1D25AF528D00EDBD88 /* Font+Extensions.swift */,
 				5283AF5C25CD28E100111C75 /* UIDevice+Extensions.swift */,
 				C06CDAC625E8A17700899CC8 /* String+Localisation.swift */,
+				C0436260264A8BD90024418E /* Double+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2786,6 +2789,7 @@
 				C0FE1E2B255A49F600B3AAE0 /* CardPINConfigurationView.swift in Sources */,
 				C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */,
 				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
+				C0436261264A8BD90024418E /* Double+Extensions.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
 				52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */,
 				C01B84BA25FF2DF000F5BBD9 /* SavingAccountViewModel.swift in Sources */,
