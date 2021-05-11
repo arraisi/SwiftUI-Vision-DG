@@ -29,7 +29,6 @@ struct TransactionLimitView: View {
                 trxLimitVM.saveTrxUserLimit(pin: pin) { result in
                     switch result {
                     case .success( _):
-                        //                        presentationMode.wrappedValue.dismiss()
                         showingAlert = true
                         print("Success")
                         
@@ -111,10 +110,10 @@ struct TransactionLimitView: View {
                 UIApplication.shared.endEditing()
             }
             .onAppear(perform: {
-                trxLimitVM.mappingGlobalLimitData(data: data)
-                trxLimitVM.mappingUserLimitData(data: userData)
-                //                trxLimitVM.findTrxGlobalLimit()
-                //                trxLimitVM.findTrxUserLimit()
+                //                trxLimitVM.mappingGlobalLimitData(data: data)
+                //                trxLimitVM.mappingUserLimitData(data: userData)
+                trxLimitVM.findTrxGlobalLimit()
+                trxLimitVM.findTrxUserLimit()
             })
         }
         

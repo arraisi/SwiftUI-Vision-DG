@@ -94,10 +94,6 @@ struct PinTransactionLimitView: View {
                 dismissButton: .default(Text("OK".localized(language))))
         }
     }
-    
-    private func resetField() {
-        self.pin = "" /// return to empty pin
-    }
 }
 
 struct PinTransactionLimitView_Previews: PreviewProvider {

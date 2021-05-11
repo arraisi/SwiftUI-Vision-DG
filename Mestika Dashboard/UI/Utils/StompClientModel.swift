@@ -73,6 +73,27 @@ class WebSocket: NSObject, SwiftStompDelegate {
                     print(data.roomId)
                     
                     if (data.notificationType == "START") {
+                        
+                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                            if success {
+                                let content = UNMutableNotificationContent()
+                                content.title = "Incoming Call"
+                                content.subtitle = "Bank Mestika Calling ..."
+                                content.sound = UNNotificationSound.default
+
+                                // show this notification five seconds from now
+                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+
+                                // choose a random identifier
+                                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                                // add our notification request
+                                UNUserNotificationCenter.current().add(request)
+                            } else if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }
+                        
                         let dataRoom: [String: Any] = ["room_id": data.roomId]
                         NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
                     }
