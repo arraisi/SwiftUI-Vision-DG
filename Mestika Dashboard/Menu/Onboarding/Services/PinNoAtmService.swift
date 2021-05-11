@@ -96,7 +96,7 @@ class PinNoAtmService {
                 "isNasabahMestika": true,
                 "codeClass": atmData.productType,
                 "imageDesign": atmData.imageDesign,
-                "addressEqualToDukcapil": false
+                "addressEqualToDukcapil": atmData.addressEqualToDukcapil
             ]
         ]
         

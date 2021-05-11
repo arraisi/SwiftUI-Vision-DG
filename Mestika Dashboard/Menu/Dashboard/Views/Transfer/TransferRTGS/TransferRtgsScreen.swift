@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct TransferRtgsScreen: View {
     
@@ -16,6 +17,7 @@ struct TransferRtgsScreen: View {
     @State var selectedBalance: String = ""
     
     @State var isShowName: Bool = false
+    @State var isLoading: Bool = false
     
     @AppStorage("language")
     private var language = LocalizationService.shared.language
@@ -124,6 +126,15 @@ struct TransferRtgsScreen: View {
             }
             
             VStack {
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                        .padding(.bottom, 10)
+                }
+                
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack {
                         chooseTransactionType
@@ -149,11 +160,8 @@ struct TransferRtgsScreen: View {
                                 self.showDialogMinTransaction = true
                             } else if (amount <= myCredit) {
                                 
-                                if (self.transferData.transactionType == "Online") {
-//                                    self.showDialogConfirmation = true
-                                    
+                                if (self.transferType == "Online") {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
-                                    self.transferData.destinationName = self.destinationNameCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
 //
@@ -163,11 +171,12 @@ struct TransferRtgsScreen: View {
                                     
                                     self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     print("OKE")
-                                    self.isRouteTransaction = true
+                                    
+                                    inquiryTransfer()
                                     
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
-                                    self.transferData.destinationName = self.destinationNameCtrl
+//                                    self.transferData.destinationName = self.destinationNameCtrl
                                     self.transferData.citizenship = self.citizenShipCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
@@ -178,7 +187,9 @@ struct TransferRtgsScreen: View {
                                     
                                     self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     print("OKE")
-                                    self.isRouteTransaction = true
+                                    
+                                    inquiryTransfer()
+//                                    self.isRouteTransaction = true
                                 }
                                 
                             } else if (amount > myCredit ) {
@@ -381,7 +392,7 @@ struct TransferRtgsScreen: View {
                     .padding()
                     .onReceive(noRekeningCtrl.publisher.collect()) {
                         if (transferType == "Online") {
-                            self.noRekeningCtrl = String($0.prefix(11))
+                            self.noRekeningCtrl = String($0.prefix(9))
                         } else {
                             self.noRekeningCtrl = String($0.prefix(16))
                         }
@@ -425,6 +436,7 @@ struct TransferRtgsScreen: View {
                     .padding(.horizontal, 15)
                     .padding(.bottom, 10)
                 }
+                .hidden()
                 
                 // Field Type Destination
                 VStack {
@@ -775,8 +787,7 @@ struct TransferRtgsScreen: View {
                                 print(self.transferData.cardNo)
                                 print(self.selectedAccount.noRekening)
                                 self.selectedAccount.saldo = self.selectedBalance
-                                
-                                inquiryTransfer()
+                            
                             }
                         }) {
                             Text(self.listSourceNumber[index])
@@ -1181,22 +1192,30 @@ struct TransferRtgsScreen: View {
     
     // MARK: GET DESTINATION NAME
     func inquiryTransfer() {
-        if transferData.destinationNumber.count == 11 {
+        if transferData.destinationNumber.count == 9 {
             self.isShowName = true
+            self.isLoading = true
             
             self.limitVM.transferIbftInquiry(transferData: transferData) { success in
                 
                 DispatchQueue.main.async {
                     if success {
-                        print("\nSUCCESS DESTINATION NAME : \(self.limitVM.destinationName)\n")
-                        self.destinationNameCtrl = self.limitVM.destinationName
+                        self.isLoading = false
+                        if (self.limitVM.status == "00") {
+                            print("\nSUCCESS DESTINATION NAME : \(self.limitVM.destinationName)\n")
+                            self.destinationNameCtrl = self.limitVM.destinationName
+                            
+                            self.transferData.ref = self.limitVM.reffNumber
+                            self.transferData.destinationNumber = self.limitVM.destinationNumber
+                            self.transferData.destinationName = self.limitVM.destinationName
+                            
+                            self.isRouteTransaction = true
+                        }
                         
-                        self.transferData.ref = self.limitVM.reffNumber
-                        self.transferData.destinationNumber = self.limitVM.destinationNumber
-                        self.transferData.destinationName = self.limitVM.destinationName
                     }
                     
                     if !success {
+                        self.isLoading = false
                         print("NOT SUCCESS")
                         self.destinationNameCtrl = "Akun Tidak Ditemukan"
                         self.limitVM.destinationName = "Akun Tidak Ditemukan"

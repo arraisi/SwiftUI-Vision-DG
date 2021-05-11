@@ -20,6 +20,8 @@ class TransferViewModel : ObservableObject {
     @Published var destinationNumber: String = ""
     @Published var reffNumber: String = ""
     
+    @Published var status: String = ""
+    
     @Published var transactionDate: String = ""
     
     // MARK: - GET LIMIT TRANSACTION
@@ -85,6 +87,7 @@ class TransferViewModel : ObservableObject {
                 
                 DispatchQueue.main.async {
                     self.destinationName = response.destinationAccountName
+                    self.reffNumber = response.ref
                 }
                 
                 completion(true)
@@ -126,6 +129,7 @@ class TransferViewModel : ObservableObject {
                 print(response)
                 
                 DispatchQueue.main.async {
+                    self.status = response.status.code
                     self.destinationName = response.destinationAccountName
                     self.destinationNumber = response.destinationAccountNumber
                     self.reffNumber = response.reffNumber

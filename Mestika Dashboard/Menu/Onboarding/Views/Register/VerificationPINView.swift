@@ -18,6 +18,9 @@ struct VerificationPINView: View {
     @EnvironmentObject var atmData: AddProductATM
     @EnvironmentObject var appState: AppState
     
+    @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
+    var user: FetchedResults<Registration>
+    
     @ObservedObject private var pinNoAtmVM = PinNoAtmViewModel()
     /*
      Boolean for Show Modal
@@ -125,7 +128,7 @@ struct VerificationPINView: View {
                                     SecureField("Enter the ATM PIN".localized(language), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
-//                                        .frame(width: 200, height: 50)
+                                        //                                        .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
@@ -141,15 +144,15 @@ struct VerificationPINView: View {
                                     
                                     Spacer()
                                     
-//                                    Button(action: {
-//                                        self.secured.toggle()
-//                                    }) {
-//                                        Image(systemName: "eye.slash")
-//                                            .font(.custom("Montserrat-Light", size: 14))
-//                                            .frame(width: 80, height: 50)
-//                                            .cornerRadius(10)
-//                                            .foregroundColor(Color(hex: "#3756DF"))
-//                                    }
+                                    //                                    Button(action: {
+                                    //                                        self.secured.toggle()
+                                    //                                    }) {
+                                    //                                        Image(systemName: "eye.slash")
+                                    //                                            .font(.custom("Montserrat-Light", size: 14))
+                                    //                                            .frame(width: 80, height: 50)
+                                    //                                            .cornerRadius(10)
+                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    //                                    }
                                 }
                             }
                             .background(Color.gray.opacity(0.1))
@@ -164,7 +167,7 @@ struct VerificationPINView: View {
                                     TextField("Enter the ATM PIN".localized(language), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
-//                                        .frame(width: 200, height: 50)
+                                        //                                        .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
@@ -180,15 +183,15 @@ struct VerificationPINView: View {
                                     
                                     Spacer()
                                     
-//                                    Button(action: {
-//                                        self.secured.toggle()
-//                                    }) {
-//                                        Image(systemName: "eye.fill")
-//                                            .font(.custom("Montserrat-Light", size: 14))
-//                                            .frame(width: 80, height: 50)
-//                                            .cornerRadius(10)
-//                                            .foregroundColor(Color(hex: "#3756DF"))
-//                                    }
+                                    //                                    Button(action: {
+                                    //                                        self.secured.toggle()
+                                    //                                    }) {
+                                    //                                        Image(systemName: "eye.fill")
+                                    //                                            .font(.custom("Montserrat-Light", size: 14))
+                                    //                                            .frame(width: 80, height: 50)
+                                    //                                            .cornerRadius(10)
+                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
+                                    //                                    }
                                 }
                             }
                             .background(Color.gray.opacity(0.1))
@@ -244,11 +247,11 @@ struct VerificationPINView: View {
                             
                             self.tryCount += 1
                             if self.shouldVerificationWithVC {
-//                                UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
+                                //                                UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
                                 self.nextToFormVideoCall = true
                             } else {
                                 UIApplication.shared.endEditing()
-//                                UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
+                                //                                UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
                                 validatePINBackEnd()
                             }
                         }) {
@@ -275,8 +278,8 @@ struct VerificationPINView: View {
             
             if (self.showingModal || self.showingModalBlockAtm) {
                 ModalOverlay(tapAction: { withAnimation {
-//                                self.showingModal = false
-//                    self.showingModalBlockAtm = false
+                    //                                self.showingModal = false
+                    //                    self.showingModalBlockAtm = false
                     
                 } })
             }
@@ -285,6 +288,42 @@ struct VerificationPINView: View {
         .navigationBarHidden(true)
         .onTapGesture() {
             UIApplication.shared.endEditing()
+        }
+        .onAppear {
+            user.forEach { (data) in
+                atmData.atmName = data.namaLengkapFromNik!
+                registerData.namaLengkapFromNik = data.namaLengkapFromNik!
+                registerData.provinsiFromNik = data.provinsiFromNik!
+                registerData.alamatKtpFromNik = data.alamatKtpFromNik!
+                registerData.kecamatanFromNik = data.kecamatanFromNik!
+                registerData.kelurahanFromNik = data.kelurahanFromNik!
+                registerData.kodePosFromNik = data.kodePosFromNik!
+                registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
+                registerData.rtFromNik = data.rtFromNik ?? ""
+                registerData.rwFromNik = data.rwFromNik ?? ""
+                registerData.nik = data.nik!
+                
+                registerData.alamatSuratMenyurat = data.addressInput!
+                registerData.kecamatanSuratMenyurat = data.addressKecamatanInput!
+                registerData.kelurahanSuratMenyurat = data.addressKelurahanInput!
+                registerData.kodePosSuratMenyurat = data.addressPostalCodeInput!
+                registerData.kotaSuratMenyurat = data.addressKotaInput!
+                registerData.provinsiSuratMenyurat = data.addressProvinsiInput!
+                registerData.rtSuratMenyurat = data.addressRtInput!
+                registerData.rwSuratMenyurat = data.addressRwInput!
+                
+                registerData.kecamatan = data.kecamatan!
+                registerData.kelurahan = data.kelurahan!
+                registerData.alamatPerusahaan = data.alamatPerusahaan!
+                registerData.kodePos = data.kodePos!
+                registerData.rtrw = data.rtrw ?? ""
+                registerData.rtPerusahaan = data.rtPerusahaan!
+                registerData.rwPerusahaan = data.rwPerusahaan!
+                registerData.kotaPerusahaan = data.kotaPerusahaan!
+                registerData.provinsiPerusahaan = data.provinsiPerusahaan!
+                
+                registerData.isAddressEqualToDukcapil = data.isAddressEqualToDukcapil
+            }
         }
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             createBottomFloater()
@@ -306,6 +345,30 @@ struct VerificationPINView: View {
     
     func validatePINBackEnd() {
         self.isLoading = true
+        
+        if registerData.isAddressEqualToDukcapil {
+            atmData.atmAddressInput = registerData.alamatKtpFromNik
+            atmData.atmAddressPostalCodeInput = registerData.kodePosFromNik
+            atmData.atmAddressKecamatanInput = registerData.kecamatanFromNik
+            atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
+            atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
+            atmData.atmAddressPropinsiInput = registerData.provinsiFromNik
+            atmData.atmAddressRtInput = registerData.rtFromNik
+            atmData.atmAddressRwInput = registerData.rwFromNik
+            atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
+            atmData.addressEqualToDukcapil = true
+        } else {
+            atmData.atmAddressInput = registerData.alamatSuratMenyurat
+            atmData.atmAddressPostalCodeInput = registerData.kodePosSuratMenyurat
+            atmData.atmAddressKecamatanInput = registerData.kecamatanSuratMenyurat
+            atmData.atmAddressKelurahanInput = registerData.kelurahanSuratMenyurat
+            atmData.atmAddressrtRwInput = "\(registerData.rtSuratMenyurat)/\(registerData.rwSuratMenyurat)"
+            atmData.atmAddressRtInput = registerData.rtSuratMenyurat
+            atmData.atmAddressRwInput = registerData.rwSuratMenyurat
+            atmData.atmAddressKotaInput = registerData.kotaSuratMenyurat
+            atmData.atmAddressPropinsiInput = registerData.provinsiSuratMenyurat
+            atmData.addressEqualToDukcapil = false
+        }
         
         self.pinNoAtmVM.pinValidationNasabahExisting(atmData: atmData, pin: self.pin, cardNo: self.noKartuCtrl)
         { success in

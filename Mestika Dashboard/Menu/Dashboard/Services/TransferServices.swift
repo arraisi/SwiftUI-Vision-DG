@@ -66,7 +66,7 @@ class TransferServices {
     
     // MARK: - POST TRANSFER ONUS INQUIRY
     func transferOnUsInquiry(transferData: TransferOnUsModel,
-                      completion: @escaping(Result<InquiryTransferResponse, ErrorResult>) -> Void) {
+                             completion: @escaping(Result<InquiryTransferResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "cardNo": " ",
@@ -120,13 +120,14 @@ class TransferServices {
     
     // MARK: - POST TRANSFER IBFT INQUIRY
     func transferIbftInquiry(transferData: TransferOffUsModel,
-                      completion: @escaping(Result<TransferIbftInquiryResponse, ErrorResult>) -> Void) {
+                             completion: @escaping(Result<TransferIbftInquiryResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "currency": "360",
+            "destinationAccountNumber": transferData.destinationNumber,
             "destinationBank": transferData.destinationBankCode,
             "sourceAccountNumber": transferData.sourceNumber,
-            "destinationAccountNumber": transferData.destinationNumber
+            "transactionAmount": transferData.amount,
+            "transactionDetails": ""
         ]
         
         guard let url = URL.urlTransferIbftInquiry() else {
@@ -182,7 +183,7 @@ class TransferServices {
             "sourceNumber": transferData.sourceNumber,
             "destinationNumber": transferData.destinationNumber,
             "berita": transferData.notes,
-//            "planAllowDebitInHouse": "Y",
+            //            "planAllowDebitInHouse": "Y",
             "pin": encryptPassword(password: transferData.pin)
         ]
         
@@ -457,7 +458,7 @@ class TransferServices {
     
     // MARK: - POST MOVE BALANCE LIKE ON US API
     func moveBalance(transferData: MoveBalancesModel,
-                      completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
+                     completion: @escaping(Result<TransferOnUsResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "cardNo": transferData.cardNo,
