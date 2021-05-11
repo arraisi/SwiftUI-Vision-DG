@@ -7,8 +7,13 @@
 
 import Foundation
 
-// MARK: - TransactionLimitModel
-struct TransactionLimitModel: Codable {
+// MARK: - GlobalLimitModelElement
+typealias GlobalLimitModel = [Limit]
+
+// MARK: - UserLimitModel
+struct UserLimitModel: Codable {
+    let nik: String
+    let pinTrx: String?
     let limits: [Limit]
 }
 

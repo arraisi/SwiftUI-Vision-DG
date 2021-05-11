@@ -16,7 +16,7 @@ struct PinTransactionLimitView: View {
     @AppStorage("language") private var language = LocalizationService.shared.language
     
     @State var pin = ""
-    @State var wrongPin = false
+    @Binding var wrongPin: Bool
     @State var unlocked = false
     @State var success = false
     
@@ -26,6 +26,8 @@ struct PinTransactionLimitView: View {
     @State var isShowAlert: Bool = false
     
     @State var pendingRoute: Bool = false
+    
+    let callback: (String)->()
     
     var body: some View {
         ZStack {
@@ -66,19 +68,20 @@ struct PinTransactionLimitView: View {
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
                 }, onCommit: {
+                    self.callback(self.pin)
                     
-                    if self.pin == self.key {
-                        print("UNLOCKED")
-                        self.unlocked = true
-                        self.appState.moveToAccountTab = true
-                    } else {
-                        print("INCORRECT")
-                        self.wrongPin = true
-                    }
+//                    if self.pin == self.key {
+//                        print("UNLOCKED")
+//                        self.unlocked = true
+//                        self.appState.moveToAccountTab = true
+//                    } else {
+//                        print("INCORRECT")
+//                        self.wrongPin = true
+//                    }
                 })
             }
         }
-        .navigationBarTitle("Pembayaran QRIS", displayMode: .inline)
+        .navigationBarTitle("Transaction Limit", displayMode: .inline)
         .alert(isPresented: $isShowAlert) {
             return Alert(
                 title: Text("\(self.statusError)"),
@@ -94,6 +97,8 @@ struct PinTransactionLimitView: View {
 
 struct PinTransactionLimitView_Previews: PreviewProvider {
     static var previews: some View {
-        PinTransactionLimitView()
+        PinTransactionLimitView(wrongPin: .constant(false)) { pin in
+            
+        }
     }
 }

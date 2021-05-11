@@ -318,10 +318,6 @@
 		52F44A1325DE24280037EABB /* LimitTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */; };
 		52F4E3BE264673760094F320 /* FormChangeOtherDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */; };
 		52F4E3C2264682390094F320 /* CustomerFromPhoenixResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */; };
-		52F4E3CA2647869A0094F320 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F4E3C9264786990094F320 /* WebRTC.xcframework */; };
-		52F4E3CB2647869A0094F320 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52F4E3C9264786990094F320 /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		52F4E3D32647872D0094F320 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F4E3D22647872D0094F320 /* JitsiMeetSDK.xcframework */; };
-		52F4E3D42647872D0094F320 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52F4E3D22647872D0094F320 /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = 52FCDD94263EF48B002A76E9 /* SwiftStomp */; };
 		52FCDD9A263EF4F2002A76E9 /* StompClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */; };
 		52FE9ABC2637CCD90089EBAF /* DestinationAccountBalancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */; };
@@ -401,6 +397,11 @@
 		C0733FBF25EE25320034689F /* SavingAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0733FBE25EE25320034689F /* SavingAccountView.swift */; };
 		C075137B255C19A900BB75D8 /* ScanNPWPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075137A255C19A900BB75D8 /* ScanNPWPView.swift */; };
 		C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */; };
+		C07AA4A826497C9800CB953E /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A626497C9800CB953E /* WebRTC.xcframework */; };
+		C07AA4A926497C9800CB953E /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */; };
+		C07AA4C126497EC900CB953E /* userLimitData.json in Resources */ = {isa = PBXBuildFile; fileRef = C07AA4C026497EC900CB953E /* userLimitData.json */; };
+		C07AA4C526497F6300CB953E /* globalLimitData.json in Resources */ = {isa = PBXBuildFile; fileRef = C07AA4C426497F6300CB953E /* globalLimitData.json */; };
+		C07AA4CA264A243E00CB953E /* TransactionLimitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07AA4C9264A243E00CB953E /* TransactionLimitViewModel.swift */; };
 		C0858AD725ADA6ED00773DD5 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */; };
 		C08758D825D2398E008ED730 /* FavoritModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08758D725D2398E008ED730 /* FavoritModel.swift */; };
 		C088493A255BC12E00E2F927 /* ScanKTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0884939255BC12E00E2F927 /* ScanKTPView.swift */; };
@@ -502,8 +503,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				52F4E3CB2647869A0094F320 /* WebRTC.xcframework in Embed Frameworks */,
-				52F4E3D42647872D0094F320 /* JitsiMeetSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -824,8 +823,6 @@
 		52F44A1225DE24280037EABB /* LimitTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTransactionResponse.swift; sourceTree = "<group>"; };
 		52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangeOtherDataView.swift; sourceTree = "<group>"; };
 		52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerFromPhoenixResponse.swift; sourceTree = "<group>"; };
-		52F4E3C9264786990094F320 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
-		52F4E3D22647872D0094F320 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../Downloads/jitsi-meet/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
 		52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClientModel.swift; sourceTree = "<group>"; };
 		52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationAccountBalancesView.swift; sourceTree = "<group>"; };
 		52FE9AC02637DB0B0089EBAF /* FormMoveBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormMoveBalanceView.swift; sourceTree = "<group>"; };
@@ -913,6 +910,11 @@
 		C0733FBE25EE25320034689F /* SavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountView.swift; sourceTree = "<group>"; };
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
+		C07AA4A626497C9800CB953E /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = ../../../../../../Downloads/WebRTC.xcframework; sourceTree = "<group>"; };
+		C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = ../../../../../../Downloads/JitsiMeetSDK.xcframework; sourceTree = "<group>"; };
+		C07AA4C026497EC900CB953E /* userLimitData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userLimitData.json; sourceTree = "<group>"; };
+		C07AA4C426497F6300CB953E /* globalLimitData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = globalLimitData.json; sourceTree = "<group>"; };
+		C07AA4C9264A243E00CB953E /* TransactionLimitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitViewModel.swift; sourceTree = "<group>"; };
 		C0858AD625ADA6ED00773DD5 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 		C08758D725D2398E008ED730 /* FavoritModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritModel.swift; sourceTree = "<group>"; };
 		C0884939255BC12E00E2F927 /* ScanKTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanKTPView.swift; sourceTree = "<group>"; };
@@ -1001,15 +1003,15 @@
 			files = (
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
-				52F4E3D32647872D0094F320 /* JitsiMeetSDK.xcframework in Frameworks */,
+				C07AA4A926497C9800CB953E /* JitsiMeetSDK.xcframework in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
 				52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */,
 				520585FB25721F00005DB764 /* Indicators in Frameworks */,
 				520585F525721F00005DB764 /* PopupView in Frameworks */,
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
+				C07AA4A826497C9800CB953E /* WebRTC.xcframework in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				6312566BD2327D8729CF0518 /* Pods_Mestika_Dashboard.framework in Frameworks */,
-				52F4E3CA2647869A0094F320 /* WebRTC.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1853,8 +1855,6 @@
 		A5D2A9330E58646C22F4EE12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				52F4E3D22647872D0094F320 /* JitsiMeetSDK.xcframework */,
-				52F4E3C9264786990094F320 /* WebRTC.xcframework */,
 				8FE34BEEB01C90376DE62BE4 /* Pods_Mestika_Dashboard.framework */,
 				D5F417F6A1389F47850D9E9C /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */,
 				A71DFC0DC2AD884C20BE2F7F /* Pods_Mestika_DashboardTests.framework */,
@@ -2095,6 +2095,8 @@
 				C043CFBC25CD3F9000328C91 /* languages.json */,
 				52ADFE772557D99F00A1001F /* masterData.json */,
 				C0372350263122C600BA2B43 /* pesan.json */,
+				C07AA4C026497EC900CB953E /* userLimitData.json */,
+				C07AA4C426497F6300CB953E /* globalLimitData.json */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -2127,17 +2129,18 @@
 				C0B6417F2645138300C0D55A /* TransactionLimitView.swift */,
 				C0EB2D77264805AE00EB0195 /* PinTransactionLimitView.swift */,
 				C0EB2D702647F78200EB0195 /* Subviews */,
-				C03CA75C2647ED7D005F2B6E /* Model */,
+				C03CA75C2647ED7D005F2B6E /* Models */,
+				C07AA4C8264A241100CB953E /* View Models */,
 			);
 			path = "Transaction Limit";
 			sourceTree = "<group>";
 		};
-		C03CA75C2647ED7D005F2B6E /* Model */ = {
+		C03CA75C2647ED7D005F2B6E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C03CA7562647ED69005F2B6E /* TransactionLimitModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C04B421F25540FB000DDE4C7 /* Models */ = {
@@ -2218,6 +2221,14 @@
 			path = SavingAccount;
 			sourceTree = "<group>";
 		};
+		C07AA4C8264A241100CB953E /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				C07AA4C9264A243E00CB953E /* TransactionLimitViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
 		C08758D625D2397C008ED730 /* Favorit */ = {
 			isa = PBXGroup;
 			children = (
@@ -2284,6 +2295,8 @@
 		C0B0F37E2646040F003FF962 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */,
+				C07AA4A626497C9800CB953E /* WebRTC.xcframework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -2517,12 +2530,14 @@
 				52ADFE9D2557D99F00A1001F /* pekerjaan.json in Resources */,
 				C052A095263679A800DC90C6 /* term-english.html in Resources */,
 				52ADFEA42557D99F00A1001F /* perkiraanPenarikan.json in Resources */,
+				C07AA4C126497EC900CB953E /* userLimitData.json in Resources */,
 				52ADFE9F2557D99F00A1001F /* penghasilanKotor.json in Resources */,
 				0A8B775A25B8366B00819952 /* ip7_ringtone.mp3 in Resources */,
 				52ADFEA62557D99F00A1001F /* sumberPendapatanLainnya.json in Resources */,
 				5245F891253FE705002E8B53 /* Preview Assets.xcassets in Resources */,
 				52ADFEA22557D99F00A1001F /* sumberPenyandangDana.json in Resources */,
 				52BF57D42558E57D00F009B5 /* savingTypeData.json in Resources */,
+				C07AA4C526497F6300CB953E /* globalLimitData.json in Resources */,
 				0658B5A72563FA6E001B659D /* Colors.xcassets in Resources */,
 				C0E40B822564D90700259612 /* jabatanProfesi.json in Resources */,
 				52ADFEA72557D99F00A1001F /* besarPerkiraanSetoran.json in Resources */,
@@ -2973,6 +2988,7 @@
 				52ADFF902557DFDC00A1001F /* PerkerjaanView.swift in Sources */,
 				528AE2DE2595DCB0003AFD73 /* bidangUsaha.json in Sources */,
 				52FE9ADC2637FC350089EBAF /* DestinationAccountAddBalanceView.swift in Sources */,
+				C07AA4CA264A243E00CB953E /* TransactionLimitViewModel.swift in Sources */,
 				C00E80C025EF4FD3006A8335 /* SuccessOpenNewSavingAccountView.swift in Sources */,
 				C04C4A8B256B684B004723D7 /* ScheduleInterviewModel.swift in Sources */,
 				C0AD116025DF89D3003FF920 /* HistoryTransactionModel.swift in Sources */,

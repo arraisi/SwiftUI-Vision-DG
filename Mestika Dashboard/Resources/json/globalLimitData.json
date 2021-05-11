@@ -1,0 +1,42 @@
+[
+    {
+        "key": "trxVirtualAccount",
+        "value": 50000000
+    },
+    {
+        "key": "trxOnCifNonIdr",
+        "value": 10000
+    },
+    {
+        "key": "trxSknTransfer",
+        "value": 250000000
+    },
+    {
+        "key": "trxOnUsNonIdr",
+        "value": 10000
+    },
+    {
+        "key": "trxRtgsTransfer",
+        "value": 1000000000
+    },
+    {
+        "key": "trxOnCifIdr",
+        "value": 100000000
+    },
+    {
+        "key": "trxOnUsIdr",
+        "value": 100000000
+    },
+    {
+        "key": "trxOnlineTransfer",
+        "value": 50000000
+    },
+    {
+        "key": "trxPurchase",
+        "value": 10000000
+    },
+    {
+        "key": "trxBillPayment",
+        "value": 10000000
+    }
+]
