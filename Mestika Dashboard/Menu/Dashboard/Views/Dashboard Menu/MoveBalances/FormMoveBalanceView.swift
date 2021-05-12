@@ -226,34 +226,35 @@ struct FormMoveBalanceView: View {
                 .cornerRadius(15)
                 .shadow(color: Color.gray.opacity(0.3), radius: 10)
                 
+                Button(action: {
+                    
+                    self.transactionData.transactionDate = dateFormatter.string(from: self.date)
+                    
+                    if (notesCtrl.isEmpty) {
+                        self.transactionData.notes = "-"
+                    }
+                    
+                    self.transactionData.amount = self.amountCtrl
+                    
+                    self.nextRouting = true
+                    
+                }, label: {
+                    Text("KONFIRMASI TRANSAKSI")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .font(.system(size: 13))
+                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                })
+                .disabled(disableForm)
+                .background(disableForm ? Color.gray : Color(hex: "#232175"))
+                .cornerRadius(12)
+                .padding(.horizontal)
+                .padding(.top, 20)
+                .padding(.bottom, 10)
             })
             .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
             
-            Button(action: {
-                
-                self.transactionData.transactionDate = dateFormatter.string(from: self.date)
-                
-                if (notesCtrl.isEmpty) {
-                    self.transactionData.notes = "-"
-                }
-                
-                self.transactionData.amount = self.amountCtrl
-                
-                self.nextRouting = true
-                
-            }, label: {
-                Text("KONFIRMASI TRANSAKSI")
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                    .font(.system(size: 13))
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-            })
-            .disabled(disableForm)
-            .background(disableForm ? Color.gray : Color(hex: "#232175"))
-            .cornerRadius(12)
-            .padding(.horizontal)
-            .padding(.top, 20)
-            .padding(.bottom, 10)
+
             
         }
         .onAppear {

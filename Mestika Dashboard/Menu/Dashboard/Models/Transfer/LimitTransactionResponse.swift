@@ -11,10 +11,13 @@ import Foundation
 struct LimitTransactionResponse: Codable {
     let classCode, maxIbftPerTrans, limitOnUs, limitWd: String
     let limitPayment, limitPurchase, classDescription, limitIbft: String
-    let cardName, cardDescription, cardImageURL: String
+    let cardName, cardDescription: String
+    let cardImageURL: String?
+    let cardReplaceFee: String
 
     enum CodingKeys: String, CodingKey {
         case classCode, maxIbftPerTrans, limitOnUs, limitWd, limitPayment, limitPurchase, classDescription, limitIbft, cardName, cardDescription
         case cardImageURL = "cardImageUrl"
+        case cardReplaceFee
     }
 }

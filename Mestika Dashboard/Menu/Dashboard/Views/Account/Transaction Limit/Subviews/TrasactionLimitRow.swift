@@ -35,6 +35,11 @@ struct TrasactionLimitRow: View {
                 .onChange(of: txtValue, perform: { value in
                     self.txtValue = value.thousandSeparator()
                     self.value = Double(value.replacingOccurrences(of: ".", with: "")) ?? 0
+                    
+                    if (Double(value.replacingOccurrences(of: ".", with: "")) ?? 0 > max) {
+                        self.txtValue = String(max).thousandSeparator()
+                        self.value = max / 10
+                    }
                 })
                 .keyboardType(.numberPad)
                 .padding(.horizontal, 30)

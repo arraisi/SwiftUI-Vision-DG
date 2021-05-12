@@ -296,6 +296,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/card/personal-limit")
     }
     
+    static func urlReplacementFee() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/card/card-replacement-fee")
+    }
+    
     //-------------------- SAVING ACCOUNT SERVICE ----------------------//
     
 //    static func urlGetProductsSavingAccount() -> URL? {

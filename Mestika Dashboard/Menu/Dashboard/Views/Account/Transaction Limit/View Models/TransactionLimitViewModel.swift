@@ -226,6 +226,8 @@ extension TransactionLimitViewModel {
                     print("RESPONSE SAVE USER LIMIT \(data)")
                     if data.code == "200" {
                         completion(.success(true))
+                    } else if (data.code == "404") {
+                        completion(.failure(ErrorResult.custom(code: 404)))
                     } else {
                         completion(.failure(ErrorResult.custom(code: Int(response?.code ?? "0") ?? 0)))
                     }

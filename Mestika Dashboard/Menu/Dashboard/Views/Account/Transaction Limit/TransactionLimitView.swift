@@ -23,26 +23,41 @@ struct TransactionLimitView: View {
     @State private var wrongPin: Bool = false
     @State private var showingAlert: Bool = false
     
+    @State private var messageCode: String = ""
+    @State private var messageStatus: String = ""
+    
     var body: some View {
         if pinActive {
             PinTransactionLimitView(wrongPin: $wrongPin) { pin in
                 trxLimitVM.saveTrxUserLimit(pin: pin) { result in
                     switch result {
                     case .success( _):
+                        messageCode = "Successful"
+                        messageStatus = "Update limit transaction"
+                        
                         showingAlert = true
                         print("Success")
                         
                     case .failure(let error):
-                        self.wrongPin = true
-                        print("ERROR FAVORITES--> \(error)")
+                        
+                        switch error {
+                        case .custom(code: 404):
+                            messageCode = "Failed"
+                            messageStatus = "Failed to save or update user limit"
+                            
+                            showingAlert = true
+                        default:
+                            self.wrongPin = true
+                            print("ERROR FAVORITES--> \(error)")
+                        }
                     }
                     
                 }
             }
             .alert(isPresented: $showingAlert) {
                 return Alert(
-                    title: Text("Successful".localized(language)),
-                    message: Text("Update limit transaction".localized(language)),
+                    title: Text("\(messageCode)".localized(language)),
+                    message: Text("\(messageStatus)".localized(language)),
                     dismissButton: .default(Text("OK".localized(language)), action: {
                         presentationMode.wrappedValue.dismiss()
                     }))

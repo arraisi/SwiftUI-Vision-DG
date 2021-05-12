@@ -33,12 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ///Implement Firebase
         FirebaseApp.configure()
         
+        ///Implement Stomp Client
+//        model.connect()
+        
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
         // [END set_messaging_delegate]
         
         // [START register_for_notifications]
-        
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate

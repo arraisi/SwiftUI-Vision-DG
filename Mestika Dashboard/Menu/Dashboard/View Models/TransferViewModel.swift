@@ -20,10 +20,59 @@ class TransferViewModel : ObservableObject {
     @Published var destinationNumber: String = ""
     @Published var reffNumber: String = ""
     
+    @Published var cardReplaceFee: String = ""
+    
     @Published var status: String = ""
     @Published var messageStatus: String = ""
     
     @Published var transactionDate: String = ""
+    
+    // MARK: - GET FEE CARD RE
+    func getFeeCardReplacement(classCode: String,
+                             completion: @escaping (Bool) -> Void) {
+        
+        TransferServices.shared.getFeeReplacement(classCode: classCode) { result in
+            print(result)
+            
+            switch result {
+            case .success(let response):
+                print(response)
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                self.cardReplaceFee = response.cardReplaceFee
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                print(error)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isLoading = false
+                }
+                
+                DispatchQueue.main.async {
+                    switch error {
+                    case .custom(code: 401):
+                        self.code = "401"
+                        self.message = "PIN Transaksi Salah"
+                    case .custom(code: 404):
+                        self.code = "404"
+                        self.message = "Data tidak ditemukan"
+                    case .custom(code: 403):
+                        self.code = "403"
+                        self.message = "Transfer Gagal"
+                    default:
+                        self.message = "Internal Server Error"
+                    }
+                }
+                
+                completion(false)
+            }
+        }
+    }
     
     // MARK: - GET LIMIT TRANSACTION
     func getLimitTransaction(classCode: String,
@@ -39,6 +88,7 @@ class TransferViewModel : ObservableObject {
                     self.isLoading = false
                     self.limitIbft = response.limitIbft
                     self.limitOnUs = response.limitOnUs
+                    self.cardReplaceFee = response.cardReplaceFee
                 }
                 
                 completion(true)

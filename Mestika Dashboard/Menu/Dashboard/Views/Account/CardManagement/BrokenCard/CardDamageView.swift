@@ -25,6 +25,8 @@ struct CardDamageView: View {
     @State var marked = false
     @State var showConfirmationPIN = false
     
+    @State var cardFee: String = "17500"
+    
     var body: some View {
         ZStack {
             ScrollView(.vertical, showsIndicators: false) {
@@ -56,7 +58,7 @@ struct CardDamageView: View {
                                     HStack {
                                         Text("Replacement fee of".localized(language))
                                             .font(.custom("Montserrat-Regular", size: 10))
-                                        Text("Rp. 20.000,-")
+                                        Text("\(self.cardFee)".thousandSeparator())
                                             .font(.custom("Montserrat-Bold", size: 10))
                                     }
                                     
@@ -109,6 +111,8 @@ struct CardDamageView: View {
                 self.brokenData.cardNo = card.cardNo
                 self.brokenData.nameOnCard = card.nameOnCard
                 self.brokenData.cardDesign = "http://eagle.visiondg.xyz:8765/image/b5fb9a649b2c3670120343eb8dd85d03.png"
+                
+                getCardFee()
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("Broken My Card".localized(language)))) { obj in
                 print("ON RESUME")
@@ -243,6 +247,15 @@ struct CardDamageView: View {
             if !success {
                 print("!SUCCESS")
                 self.showingModalError = true
+            }
+        }
+    }
+    
+    @ObservedObject var limitVM = TransferViewModel()
+    func getCardFee() {
+        self.limitVM.getFeeCardReplacement(classCode: card.classCode) { success in
+            if success {
+                self.cardFee = self.limitVM.cardReplaceFee
             }
         }
     }

@@ -49,20 +49,13 @@ struct ContentView: View {
             ZStack {
                 Color(hex: "#F6F8FB")
                 
-                //                if (status == "LOGGED_IN") {
-                //                    BottomNavigationView().environmentObject(appState)
-                //                } else {
-                //                    WelcomeView()
-                //                        .environmentObject(appState)
-                //                }
-                
                 WelcomeView()
                 
-//                                NavigationView{
-//                                    BesarPerkiraanPenarikanView()
-//                                        .environmentObject(RegistrasiModel())
-//                                        .environmentObject(appState)
-//                                }
+                //                                NavigationView{
+                //                                    BesarPerkiraanPenarikanView()
+                //                                        .environmentObject(RegistrasiModel())
+                //                                        .environmentObject(appState)
+                //                                }
             }
             .edgesIgnoringSafeArea(.top)
         }

@@ -27,6 +27,43 @@ class TransferServices {
         //        self.registerData.password = base64String
     }
     
+    // MARK: - GET FEE REPLACEMENT CARD
+    func getFeeReplacement(classCode: String, completion: @escaping(Result<FeeCardReplacementResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlReplacementFee() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        let paramsUrl = url.appending("classCode", value: classCode)
+        
+        var request = URLRequest(paramsUrl)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("response: \(String(describing: response))")
+            
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let limitResponse = try? JSONDecoder().decode(FeeCardReplacementResponse.self, from: data!)
+                    if let limit = limitResponse {
+                        completion(.success(limit))
+                    }
+                } else {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+        }.resume()
+    }
+    
     // MARK: - GET LIMIT TRANSACTION
     func getLimitTransaction(classCode: String, completion: @escaping(Result<LimitTransactionResponse, ErrorResult>) -> Void) {
         

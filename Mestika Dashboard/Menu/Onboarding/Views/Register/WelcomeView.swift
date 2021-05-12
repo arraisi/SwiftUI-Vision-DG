@@ -43,7 +43,7 @@ struct WelcomeView: View {
     @State var isPasswordViewActive: Bool = false
     @State var isLoginNewDevice: Bool = false
     
-    var jitsiMeetView: JitsiMeetView?
+    var jitsiMeetView: JitsiView?
     
     // View Variables
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -175,8 +175,6 @@ struct WelcomeView: View {
                         
                         NavigationLink(
                             destination: FirstLoginView().environmentObject(registerData),
-                            //                            destination: BottomNavigationView(),
-                            //                            destination: VerificationAddressView().environmentObject(registerData),
                             isActive: self.$isFirstLoginViewActive,
                             label: {}
                         )
@@ -267,6 +265,7 @@ struct WelcomeView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
                 print("RECEIVED JITSI END")
+                jitsiMeetView?.cleanUp()
                 self.isIncomingVideoCall = false
                 getUserStatus(deviceId: deviceId!)
             }
@@ -299,18 +298,9 @@ struct WelcomeView: View {
                     self.isShowAlertInternetConnection = true
                 }
             }
-            .fullScreenCover(isPresented: $isShowJitsi) {
-                JitsiView(jitsi_room: self.$jitsiRoom)
-            }
             .popup(isPresented: $isShowModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMenu()
             }
-//            .alert(isPresented: $showingAlert) {
-//                return Alert(
-//                    title: Text("MESSAGE".localized(language)),
-//                    message: Text(self.alertMessage),
-//                    dismissButton: .default(Text("OK".localized(language))))
-//            }
             .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 PopupNoInternetConnection()
             }

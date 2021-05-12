@@ -19,6 +19,7 @@ class BrokenKartuKuModel: ObservableObject {
     @Published var addressPostalCodeInput = ""
     @Published var cardNo = ""
     @Published var pin = ""
+    @Published var cardFee = ""
     
     static let shared = BrokenKartuKuModel()
 }
