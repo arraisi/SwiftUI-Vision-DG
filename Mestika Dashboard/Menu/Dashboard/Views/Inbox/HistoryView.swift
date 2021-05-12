@@ -19,22 +19,34 @@ struct HistoryView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(historVM.history.sorted(by: { $0.transactionDate ?? "0" > $1.transactionDate ?? "0" }), id: \.id) { data in
+                
+                if (historVM.history.count < 1) {
                     
+                    Text("Loading")
+                    
+                } else {
+                    ForEach(historVM.history.reversed(), id: \.id) { data in
+                        
                     NavigationLink(
                         destination: HistoryDetailView(data: data),
                         label: {
                             HistoryRow(data: data)
                         })
-                    
+                        
+                    }
                 }
             }
             .padding(.vertical, 30)
         }
         .onAppear{
             self.isLoading = true
-            historVM.findAll { r in
-                self.isLoading = false
+            
+            self.historVM.findAll { success in
+                
+                if success {
+                    self.isLoading = false
+                }
+                
             }
         }
     }
@@ -53,16 +65,16 @@ struct HistoryRow: View {
                     .fill(Color.green)
                     .frame(width: 30, height: 30)
                 
-                Text("\(data.data.destinationAccountName?.subStringRange(from: 0, to: 1) ?? "0")")
+                Text("A")
                     .foregroundColor(.white)
                     .fontWeight(.heavy)
             }
             
             VStack(alignment: .leading) {
-                Text(data.trxType ?? "")
+                Text(data.trxType)
                     .font(.custom("Montserrat-Bold", size: 14))
                 
-                Text("\(data.transactionDate ?? "")")
+                Text("\(data.transactionDate)")
                     .font(.custom("Montserrat-Medium", size: 12))
             }
             
@@ -70,8 +82,8 @@ struct HistoryRow: View {
             
             HStack {
                 Text("Rp.")
-                
-                Text("\(data.data.amount?.thousandSeparator() ?? "0")")
+
+                Text("\(data.data.amount.thousandSeparator())")
             }
             .font(.custom("Montserrat-Bold", size: 14))
             .foregroundColor(.green)
@@ -91,8 +103,8 @@ struct HistoryRow: View {
     }
 }
 
-struct HistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryRow(data: HistoryModelElement(nik: "00000", deviceID: "123", transactionDate: "123", status: 1, message: "123", code: "123", trxType: "123", traceNumber: "123", reffNumber: "123", data: DataClass(transactionFee: "1000000", destinationBank: "123456", transactionAmount: "2000000", destinationAccountNumber: "123456", message: "Description", sourceAccountNumber: "100", destinationAccountName: "AA", sourceAccountName: "BB", amount: "4000000", destinationAccount: "123", referenceNumber: "x123", sourceAccount: "b123", trxMessage: "Message")))
-    }
-}
+//struct HistoryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HistoryRow(data: HistoryModelElement(nik: "00000", deviceID: "123", transactionDate: "123", status: 1, message: "123", code: "123", trxType: "123", traceNumber: "123", reffNumber: "123", data: DataClass(transactionFee: "1000000", destinationBank: "123456", transactionAmount: "2000000", destinationAccountNumber: "123456", message: "Description", sourceAccountNumber: "100", destinationAccountName: "AA", sourceAccountName: "BB", amount: "4000000", destinationAccount: "123", referenceNumber: "x123", sourceAccount: "b123", trxMessage: "Message")))
+//    }
+//}

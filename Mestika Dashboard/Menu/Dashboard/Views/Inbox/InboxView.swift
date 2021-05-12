@@ -51,11 +51,6 @@ struct InboxView: View {
                     print("Pesan")
                     self.selected = 1
                 }
-                
-                //                UnderlineButton(active: self.selected == 1 ? true : false, label: "Pemberitahuan") {
-                //                    print("Pemberitahuan")
-                //                    self.selected = 1
-                //                }
             }
             .padding(.top, 30)
             
@@ -67,14 +62,10 @@ struct InboxView: View {
                 PesanView()
             }
             
-            //            if selected == 1 {
-            //                PemberitahuanView()
-            //            }
-            
             Spacer()
             
         }
-        .navigationTitle("Inbox")
+        .navigationBarTitle("Inbox", displayMode: .inline)
 //        .onReceive(timer) { time in
 ////            print(self.timeLogout)
 //            if self.timeLogout > 0 {
