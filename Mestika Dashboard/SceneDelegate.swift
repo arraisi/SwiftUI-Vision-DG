@@ -24,6 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         let appState = AppState()
+        
+        registerNotifications()
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
@@ -67,6 +69,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         print("Background")
+        scheduleAppRefresh()
 
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
@@ -74,6 +77,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    func scheduleAppRefresh() {
+        let request = BGAppRefreshTaskRequest(identifier: "bank.mestika")
+
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 1)
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+            print("App: Scheduled Background Task.")
+        } catch {
+            print("Could not schedule image fetch: (error)")
+        }
+    }
+
+    
+    private func registerNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("Notifications: Authorized.")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func handleAppRefresh(task: BGAppRefreshTask) {
+        
+        scheduleAppRefresh()
+        
+        let refreshQueue = OperationQueue()
+        refreshQueue.qualityOfService = .background
+        refreshQueue.maxConcurrentOperationCount = 1
+        
+        let refreshOperation = BlockOperation {
+            
+        }
+        
+        refreshOperation.completionBlock = { task.setTaskCompleted(success: true)}
+        
+        task.expirationHandler = {
+            refreshQueue.cancelAllOperations()
+            task.setTaskCompleted(success: true)
+        }
     }
 }
 

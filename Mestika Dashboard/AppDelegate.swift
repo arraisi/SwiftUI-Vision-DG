@@ -33,9 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ///Implement Firebase
         FirebaseApp.configure()
         
-        ///Implement Stomp Client
-//        model.connect()
-        
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
         // [END set_messaging_delegate]
