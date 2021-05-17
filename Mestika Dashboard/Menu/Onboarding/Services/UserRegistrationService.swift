@@ -82,7 +82,7 @@ class UserRegistrationService {
             "isAgreetoShare": registerData.isShareData,
             "isAddressEqualToDukcapil": registerData.isAddressEqualToDukcapil,
             "addressInput": registerData.addressInput ?? "",
-            "addressRtRwInput": registerData.addressRtRwInput ?? "",
+//            "addressRtRwInput": registerData.addressRtRwInput ?? "",
             "addressKelurahanInput": registerData.addressKelurahanInput ?? "",
             "addressKecamatanInput": registerData.addressKecamatanInput ?? "",
             "addressPostalCodeInput": registerData.addressPostalCodeInput ?? "",

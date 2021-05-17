@@ -129,8 +129,8 @@ class KartuKuService {
             "pin": encryptPassword(password: data.pin),
             "postalAddress": data.addressInput,
             "provinsi": "JAWA BARAT",
-            "rt": data.addressRtRwInput,
-            "rw": data.addressRtRwInput
+            "rt": "00",
+            "rw": "00"
         ]
         
         guard let url = URL.urlBrokenKartuKu() else {

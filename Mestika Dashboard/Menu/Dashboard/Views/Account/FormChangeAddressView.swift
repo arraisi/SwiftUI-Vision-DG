@@ -112,19 +112,19 @@ struct FormChangeAddressView: View {
                 print("on commit")
             })
             
-            HStack(spacing: 20) {
-                LabelTextField(value: self.$profileVM.rt, label: "RT".localized(language), placeHolder: "RT".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-                LabelTextField(value: self.$profileVM.rw, label: "RW".localized(language), placeHolder: "RW".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-            }
+//            HStack(spacing: 20) {
+//                LabelTextField(value: self.$profileVM.rt, label: "RT".localized(language), placeHolder: "RT".localized(language), disabled: false, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+//
+//                LabelTextField(value: self.$profileVM.rw, label: "RW".localized(language), placeHolder: "RW".localized(language), disabled: false, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+//            }
             
             LabelTextField(value: self.$profileVM.kelurahanName, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")
@@ -160,19 +160,19 @@ struct FormChangeAddressView: View {
                 print("on commit")
             })
             
-            HStack(spacing: 20) {
-                LabelTextField(value: self.$profileVM.rtSuratMenyurat, label: "RT".localized(language), placeHolder: "RT".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-                LabelTextField(value: self.$profileVM.rwSuratMenyurat, label: "RW".localized(language), placeHolder: "RW".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-            }
+//            HStack(spacing: 20) {
+//                LabelTextField(value: self.$profileVM.rtSuratMenyurat, label: "RT".localized(language), placeHolder: "RT".localized(language), disabled: false, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+//                
+//                LabelTextField(value: self.$profileVM.rwSuratMenyurat, label: "RW".localized(language), placeHolder: "RW".localized(language), disabled: false, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+//            }
             
             LabelTextField(value: self.$profileVM.kelurahanSuratMenyurat, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: false, onEditingChanged: { (Bool) in
                 print("on edit")

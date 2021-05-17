@@ -639,9 +639,9 @@ struct InformasiPerusahaanView: View {
                     self.kodePos = self.addressSugestion[0].postalCode
                     registerData.kecamatan = self.addressSugestion[0].kecamatan
                     registerData.kelurahan = self.addressSugestion[0].kelurahan
-                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
-                    registerData.rtPerusahaan = self.addressSugestion[0].rt
-                    registerData.rwPerusahaan = self.addressSugestion[0].rw
+//                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+//                    registerData.rtPerusahaan = self.addressSugestion[0].rt
+//                    registerData.rwPerusahaan = self.addressSugestion[0].rw
                 }
                 self.showingModal = false
                 print("Success")

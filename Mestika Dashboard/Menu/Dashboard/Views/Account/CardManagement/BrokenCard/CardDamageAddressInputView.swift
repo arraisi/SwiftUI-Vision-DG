@@ -19,7 +19,7 @@ struct CardDamageAddressInputView: View {
     var user: FetchedResults<Registration>
     
     @State var addressInput: String = ""
-    @State var addressRtRwInput: String = ""
+//    @State var addressRtRwInput: String = ""
     @State var addressKelurahanInput: String = ""
     @State var addressKecamatanInput: String = ""
     @State var addressKodePosInput: String = ""
@@ -110,14 +110,14 @@ struct CardDamageAddressInputView: View {
                             .padding(.horizontal, 20)
                             
                             
-                            LabelTextField(value: $addressRtRwInput, label: "RT/RW", placeHolder: "RT/RW", onEditingChanged: { (Bool) in
-                                print("on edit")
-                                cardData.addressRtRwInput = self.addressRtRwInput
-                            }, onCommit: {
-                                print("on commit")
-                                cardData.addressRtRwInput = self.addressRtRwInput
-                            })
-                            .padding(.horizontal, 20)
+//                            LabelTextField(value: $addressRtRwInput, label: "RT/RW", placeHolder: "RT/RW", onEditingChanged: { (Bool) in
+//                                print("on edit")
+//                                cardData.addressRtRwInput = self.addressRtRwInput
+//                            }, onCommit: {
+//                                print("on commit")
+//                                cardData.addressRtRwInput = self.addressRtRwInput
+//                            })
+//                            .padding(.horizontal, 20)
                             
                             LabelTextField(value: $addressKelurahanInput, label: "Village".localized(language), placeHolder: "Village".localized(language), onEditingChanged: { (Bool) in
                                 print("on edit")
@@ -330,10 +330,10 @@ struct CardDamageAddressInputView: View {
                 cardData.addressPostalCodeInput = ""
                 cardData.addressKecamatanInput = self.profileVM.kecamatanName
                 cardData.addressKelurahanInput = self.profileVM.kelurahanName
-                cardData.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
+//                cardData.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
                 
                 self.addressInput = self.profileVM.alamat
-                self.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
+//                self.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
                 self.addressKelurahanInput = self.profileVM.kelurahanName
                 self.addressKecamatanInput = self.profileVM.kecamatanName
                 self.addressKodePosInput = ""
@@ -358,10 +358,10 @@ struct CardDamageAddressInputView: View {
                     cardData.addressPostalCodeInput = self.addressSugestion[0].postalCode
                     cardData.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     cardData.addressKelurahanInput = self.addressSugestion[0].kelurahan
-                    cardData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+//                    cardData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     
                     self.addressInput = self.addressSugestion[0].formatted_address
-                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+//                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     self.addressKelurahanInput = self.addressSugestion[0].kelurahan
                     self.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     self.addressKodePosInput = self.addressSugestion[0].postalCode
