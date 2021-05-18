@@ -1137,7 +1137,7 @@ struct WelcomeView: View {
             self.registerData.kodePos = data.kodePos!
             self.registerData.kecamatan = data.kecamatan!
             self.registerData.kelurahan = data.kelurahan!
-            self.registerData.rtrw = data.rtrw!
+//            self.registerData.rtrw = data.rtrw!
             
             // Data Surat Menyurat
             self.registerData.alamatKeluarga = data.alamatKeluarga!

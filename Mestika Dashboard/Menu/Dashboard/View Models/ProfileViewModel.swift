@@ -45,12 +45,12 @@ class ProfileViewModel: ObservableObject {
     @Published var kabupatenName: String = ""
     @Published var kecamatanName: String = ""
     @Published var kelurahanName: String = ""
-    @Published var rt: String = ""
-    @Published var rw: String = ""
+//    @Published var rt: String = ""
+//    @Published var rw: String = ""
     
     @Published var alamatSuratMenyurat: String = ""
-    @Published var rtSuratMenyurat: String = ""
-    @Published var rwSuratMenyurat: String = ""
+//    @Published var rtSuratMenyurat: String = ""
+//    @Published var rwSuratMenyurat: String = ""
     @Published var kodePosSuratMenyurat: String = ""
     @Published var kelurahanSuratMenyurat: String = ""
     @Published var kecamatanSuratMenyurat: String = ""
@@ -177,8 +177,8 @@ extension ProfileViewModel {
                 self.kabupatenName = response.personal.kabName
                 self.kecamatanName = response.personal.kecName
                 self.kelurahanName = response.personal.kelName
-                self.rt = response.personal.rt
-                self.rw = response.personal.rw
+//                self.rt = response.personal.rt
+//                self.rw = response.personal.rw
                 
                 print("\n\nVM PROFILE \(response.personal.name)\n\n")
                 print("\n\nVM PROFILE \(String(describing: response.chipProfileDto.last!.cardNo))\n\n")
@@ -201,8 +201,8 @@ extension ProfileViewModel {
                 
                 
                 self.alamatSuratMenyurat = response.chipProfileDto.last?.postalAddress ?? ""
-                self.rtSuratMenyurat = response.chipProfileDto.last?.rt ?? ""
-                self.rwSuratMenyurat = response.chipProfileDto.last?.rw ?? ""
+//                self.rtSuratMenyurat = response.chipProfileDto.last?.rt ?? ""
+//                self.rwSuratMenyurat = response.chipProfileDto.last?.rw ?? ""
                 self.kodePosSuratMenyurat = response.chipProfileDto.last?.kodepos ?? ""
                 self.kelurahanSuratMenyurat = response.chipProfileDto.last?.kelurahan ?? ""
                 self.kecamatanSuratMenyurat = response.chipProfileDto.last?.kecamatan ?? ""

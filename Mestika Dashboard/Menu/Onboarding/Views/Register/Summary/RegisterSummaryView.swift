@@ -379,11 +379,11 @@ struct RegisterSummaryView: View {
         data.addressKecamatanInput = self.registerData.addressKecamatanInput
         data.addressKelurahanInput = self.registerData.addressKelurahanInput
         data.addressPostalCodeInput = self.registerData.addressPostalCodeInput
-        data.addressRtRwInput = self.registerData.addressRtRwInput
+//        data.addressRtRwInput = self.registerData.addressRtRwInput
         data.addressProvinsiInput = self.registerData.addressProvinsiInput
         data.addressKotaInput = self.registerData.addressKotaInput
-        data.addressRtInput = self.registerData.addressRtInput
-        data.addressRwInput = self.registerData.addressRwInput
+//        data.addressRtInput = self.registerData.addressRtInput
+//        data.addressRwInput = self.registerData.addressRwInput
         
         // Data From NIK
         data.namaLengkapFromNik = self.registerData.namaLengkapFromNik
@@ -413,9 +413,9 @@ struct RegisterSummaryView: View {
         data.kodePos = self.registerData.kodePos
         data.kecamatan = self.registerData.kecamatan
         data.kelurahan = self.registerData.kelurahan
-        data.rtrw = self.registerData.rtrw
-        data.rtPerusahaan = self.registerData.rtPerusahaan
-        data.rwPerusahaan = self.registerData.rwPerusahaan
+//        data.rtrw = self.registerData.rtrw
+//        data.rtPerusahaan = self.registerData.rtPerusahaan
+//        data.rwPerusahaan = self.registerData.rwPerusahaan
         data.kotaPerusahaan = self.registerData.kotaPerusahaan
         data.provinsiPerusahaan = self.registerData.provinsiPerusahaan
         

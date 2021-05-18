@@ -316,9 +316,9 @@ struct VerificationPINView: View {
                 registerData.kelurahan = data.kelurahan!
                 registerData.alamatPerusahaan = data.alamatPerusahaan!
                 registerData.kodePos = data.kodePos!
-                registerData.rtrw = data.rtrw ?? ""
-                registerData.rtPerusahaan = data.rtPerusahaan!
-                registerData.rwPerusahaan = data.rwPerusahaan!
+//                registerData.rtrw = data.rtrw ?? ""
+//                registerData.rtPerusahaan = data.rtPerusahaan!
+//                registerData.rwPerusahaan = data.rwPerusahaan!
                 registerData.kotaPerusahaan = data.kotaPerusahaan!
                 registerData.provinsiPerusahaan = data.provinsiPerusahaan!
                 
@@ -353,18 +353,18 @@ struct VerificationPINView: View {
             atmData.atmAddressKelurahanInput = registerData.kelurahanFromNik
             atmData.atmAddressKotaInput = registerData.kabupatenKotaFromNik
             atmData.atmAddressPropinsiInput = registerData.provinsiFromNik
-            atmData.atmAddressRtInput = registerData.rtFromNik
-            atmData.atmAddressRwInput = registerData.rwFromNik
-            atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
+//            atmData.atmAddressRtInput = registerData.rtFromNik
+//            atmData.atmAddressRwInput = registerData.rwFromNik
+//            atmData.atmAddressrtRwInput = "\(registerData.rtFromNik)/\(registerData.rwFromNik)"
             atmData.addressEqualToDukcapil = true
         } else {
             atmData.atmAddressInput = registerData.alamatSuratMenyurat
             atmData.atmAddressPostalCodeInput = registerData.kodePosSuratMenyurat
             atmData.atmAddressKecamatanInput = registerData.kecamatanSuratMenyurat
             atmData.atmAddressKelurahanInput = registerData.kelurahanSuratMenyurat
-            atmData.atmAddressrtRwInput = "\(registerData.rtSuratMenyurat)/\(registerData.rwSuratMenyurat)"
-            atmData.atmAddressRtInput = registerData.rtSuratMenyurat
-            atmData.atmAddressRwInput = registerData.rwSuratMenyurat
+//            atmData.atmAddressrtRwInput = "\(registerData.rtSuratMenyurat)/\(registerData.rwSuratMenyurat)"
+//            atmData.atmAddressRtInput = registerData.rtSuratMenyurat
+//            atmData.atmAddressRwInput = registerData.rwSuratMenyurat
             atmData.atmAddressKotaInput = registerData.kotaSuratMenyurat
             atmData.atmAddressPropinsiInput = registerData.provinsiSuratMenyurat
             atmData.addressEqualToDukcapil = false

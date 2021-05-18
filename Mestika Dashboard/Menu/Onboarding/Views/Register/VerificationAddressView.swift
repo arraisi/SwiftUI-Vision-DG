@@ -17,7 +17,7 @@ struct VerificationAddressView: View {
     @State var isShowNextView : Bool = false
     
     @State var addressInput: String = ""
-    @State var addressRtRwInput: String = ""
+//    @State var addressRtRwInput: String = ""
     @State var addressKelurahanInput: String = ""
     @State var addressKecamatanInput: String = ""
     @State var addressKodePosInput: String = ""
@@ -35,7 +35,7 @@ struct VerificationAddressView: View {
         }
         
         if (registerData.verificationAddressId != 1) {
-            if addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressRtRwInput.isEmpty || addressKodePosInput.isEmpty {
+            if addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
                 return true
             }
         } 
@@ -153,14 +153,14 @@ struct VerificationAddressView: View {
                                     }
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressRtRwInput, label: "RT/RW".localized(language), placeHolder: "RT/RW".localized(language), onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                        registerData.addressRtRwInput = self.addressRtRwInput
-                                    }, onCommit: {
-                                        print("on commit")
-                                        registerData.addressRtRwInput = self.addressRtRwInput
-                                    })
-                                    .padding(.horizontal, 20)
+//                                    LabelTextField(value: $addressRtRwInput, label: "RT/RW".localized(language), placeHolder: "RT/RW".localized(language), onEditingChanged: { (Bool) in
+//                                        print("on edit")
+//                                        registerData.addressRtRwInput = self.addressRtRwInput
+//                                    }, onCommit: {
+//                                        print("on commit")
+//                                        registerData.addressRtRwInput = self.addressRtRwInput
+//                                    })
+//                                    .padding(.horizontal, 20)
                                     
                                     LabelTextField(value: $addressKelurahanInput, label: "District".localized(language), placeHolder: "District".localized(language), onEditingChanged: { (Bool) in
                                         print("on edit")
@@ -230,14 +230,14 @@ struct VerificationAddressView: View {
                         if (registerData.isAddressEqualToDukcapil) {
                             
                             self.registerData.addressInput = registerData.alamatKtpFromNik
-                            self.registerData.addressRtRwInput = registerData.rtFromNik
+//                            self.registerData.addressRtRwInput = registerData.rtFromNik
                             self.registerData.addressKelurahanInput = registerData.kelurahanFromNik
                             self.registerData.addressKecamatanInput = registerData.kecamatanFromNik
                             self.registerData.addressPostalCodeInput = registerData.kodePosFromNik
                             self.registerData.addressProvinsiInput = registerData.provinsiFromNik
                             self.registerData.addressKotaInput = registerData.kabupatenKotaFromNik
-                            self.registerData.addressRtInput = registerData.rtFromNik
-                            self.registerData.addressRwInput = registerData.rwFromNik
+//                            self.registerData.addressRtInput = registerData.rtFromNik
+//                            self.registerData.addressRwInput = registerData.rwFromNik
                             
                             self.isShowNextView = true
                             
@@ -394,13 +394,13 @@ struct VerificationAddressView: View {
                     registerData.addressPostalCodeInput = self.addressSugestion[0].postalCode
                     registerData.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     registerData.addressKelurahanInput = self.addressSugestion[0].kelurahan
-                    registerData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+//                    registerData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     
                     registerData.addressKotaInput = self.addressSugestion[0].city
                     registerData.addressProvinsiInput = self.addressSugestion[0].province
                     
                     self.addressInput = self.addressSugestion[0].formatted_address
-                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+//                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     self.addressKelurahanInput = self.addressSugestion[0].kelurahan
                     self.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     self.addressKodePosInput = self.addressSugestion[0].postalCode

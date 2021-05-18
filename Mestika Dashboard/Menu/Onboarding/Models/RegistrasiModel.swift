@@ -104,9 +104,9 @@ class RegistrasiModel: ObservableObject {
     @Published var isShareData: Bool = false
     @Published var isAddressEqualToDukcapil: Bool = false
     @Published var addressInput: String = ""
-    @Published var addressRtRwInput: String = ""
-    @Published var addressRtInput: String = ""
-    @Published var addressRwInput: String = ""
+//    @Published var addressRtRwInput: String = ""
+//    @Published var addressRtInput: String = ""
+//    @Published var addressRwInput: String = ""
     @Published var addressKelurahanInput: String = ""
     @Published var addressKecamatanInput: String = ""
     @Published var addressPostalCodeInput: String = ""
