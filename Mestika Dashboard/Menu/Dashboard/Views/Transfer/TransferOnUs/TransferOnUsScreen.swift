@@ -14,6 +14,8 @@ struct TransferOnUsScreen: View {
     private var language = LocalizationService.shared.language
     
     @StateObject var savingAccountVM = SavingAccountViewModel()
+    @StateObject var trxLimitVM = TransactionLimitViewModel()
+    
     @State var listSourceNumber: [String] = []
     
     @State var selectedSourceNumber: String = ""
@@ -877,10 +879,24 @@ struct TransferOnUsScreen: View {
     }
     
     func getLimit(code: String) {
-        self.transferVM.getLimitTransaction(classCode: "10") { success in
+//        self.transferVM.getLimitTransaction(classCode: "10") { success in
+//            if success {
+//                self.maxLimit = Int(self.transferVM.limitIbft) ?? 0
+//                self.limitTrx = self.transferVM.limitIbft
+//            }
+//        }
+        
+        self.transferVM.limitUser { success in
+            
             if success {
-                self.maxLimit = Int(self.transferVM.limitIbft) ?? 0
-                self.limitTrx = self.transferVM.limitIbft
+                print("GET LIMIT SUCCESS")
+                print(transferVM.limitUserOnline)
+                self.maxLimit = transferVM.limitUserOnline
+                self.limitTrx = String(maxLimit)
+            }
+            
+            if !success {
+                print("FAILED GET LIMIT")
             }
         }
     }

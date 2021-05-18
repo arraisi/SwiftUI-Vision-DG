@@ -37,10 +37,12 @@ struct HistoryModelElement: Codable, Identifiable {
 
 // MARK: - DataClass
 struct DataClass: Codable {
-    let amount: String
+    let amount: String?
     let destinationBank: String
-    let referenceNumber, fee, trxMessage, sumTotal: String
+    let referenceNumber, fee, trxMessage, sumTotal: String?
     let destinationAccountName: String
+    let transactionFee, transactionAmount, destinationAccountNumber: String?
+    let message: String?
     let sourceAccount, destinationAccount: String?
 }
 

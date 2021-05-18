@@ -110,7 +110,7 @@ struct HistoryDetailView: View {
                 HStack {
                     Text("Description".localized(language))
                     Spacer()
-                    Text(data.data.trxMessage)
+                    Text(data.data.trxMessage ?? "")
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -122,19 +122,19 @@ struct HistoryDetailView: View {
                 HStack {
                     Text("Transaction amount".localized(language))
                     Spacer()
-                    Text("IDR \(data.data.amount.thousandSeparator())")
+                    Text("IDR \(data.data.amount ?? "0")".thousandSeparator())
                 }
                 
                 HStack {
                     Text("Transaction Fee".localized(language))
                     Spacer()
-                    Text("IDR \(data.data.fee.thousandSeparator())")
+                    Text("IDR \(data.data.fee ?? "0")".thousandSeparator())
                 }
                 
                 HStack {
                     Text("Total amount".localized(language))
                     Spacer()
-                    Text("IDR \(data.data.sumTotal.thousandSeparator())")
+                    Text("IDR \(data.data.sumTotal ?? "0")".thousandSeparator())
                 }
                 
                 Divider()

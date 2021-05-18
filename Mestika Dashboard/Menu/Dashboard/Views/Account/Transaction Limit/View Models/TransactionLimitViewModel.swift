@@ -86,7 +86,9 @@ extension TransactionLimitViewModel {
             case "trxOnCifNonIdr":
                 self.trxOnCifNonIdr = Double(limit.value)
             case "trxOnUsIdr":
+                print(limit.value)
                 self.trxOnUsIdr = Double(limit.value)
+                self.trxOnUsIdrTxt = String(limit.value)
             case "trxOnUsNonIdr":
                 self.trxOnUsNonIdr = Double(limit.value)
             case "trxVirtualAccount":

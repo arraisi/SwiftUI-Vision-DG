@@ -11,6 +11,8 @@ import Indicators
 struct TransferRtgsScreen: View {
     
     @StateObject var savingAccountVM = SavingAccountViewModel()
+    @StateObject var trxLimitVM = TransactionLimitViewModel()
+    
     @State var listSourceNumber: [String] = []
     
     @State var selectedSourceNumber: String = ""
@@ -277,6 +279,8 @@ struct TransferRtgsScreen: View {
             self.transferData.transactionType = _listTransferType[0]
             getProfile()
             getListBank()
+            
+            trxLimitVM.findTrxUserLimit()
             self.getLimit(code: "70")
             
             self.savingAccountVM.getAccounts { (success) in
@@ -303,6 +307,21 @@ struct TransferRtgsScreen: View {
                     Button(action: {
                         self.transferType = data
                         self.transferData.transactionType = data
+                        
+                        if (self.transferType == "RTGS") {
+                            print(limitVM.limitUserRtgs)
+                            self.maxLimit = limitVM.limitUserRtgs
+                            self.limitTrx = String(maxLimit)
+                        } else if (self.transferType == "SKN") {
+                            print(limitVM.limitUserSkn)
+                            self.maxLimit = limitVM.limitUserSkn
+                            self.limitTrx = String(maxLimit)
+                        } else {
+                            print(limitVM.limitUserOnline)
+                            self.maxLimit = limitVM.limitUserOnline
+                            self.limitTrx = String(maxLimit)
+                        }
+                        
                     }) {
                         Text(data)
                             .font(.custom("Montserrat-Regular", size: 12))
@@ -400,7 +419,7 @@ struct TransferRtgsScreen: View {
                     .padding()
                     .onReceive(noRekeningCtrl.publisher.collect()) {
                         if (transferType == "Online") {
-                            self.noRekeningCtrl = String($0.prefix(9))
+                            self.noRekeningCtrl = String($0.prefix(16))
                         } else {
                             self.noRekeningCtrl = String($0.prefix(16))
                         }
@@ -573,7 +592,7 @@ struct TransferRtgsScreen: View {
                         .foregroundColor(.red)
                         .font(.caption2)
                         .fontWeight(.bold)
-                    Text("\(self.selectedAccount.saldo.thousandSeparator())")
+                    Text("\(self.limitTrx.thousandSeparator())")
                         .foregroundColor(.red)
                         .font(.subheadline)
                         .fontWeight(.bold)
@@ -1214,10 +1233,24 @@ struct TransferRtgsScreen: View {
     
     @ObservedObject var limitVM = TransferViewModel()
     func getLimit(code: String) {
-        self.limitVM.getLimitTransaction(classCode: "70") { success in
+//        self.maxLimit = Int(self.trxLimitVM.maxTrxRtgsTransfer)
+//        self.limitTrx = String(self.trxLimitVM.maxTrxRtgsTransfer)
+        
+//        self.limitVM.getLimitTransaction(classCode: "70") { success in
+//            if success {
+//                self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
+//                self.limitTrx = self.limitVM.limitIbft
+//            }
+//        }
+        
+        self.limitVM.limitUser { success in
+            
             if success {
-                self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
-                self.limitTrx = self.limitVM.limitIbft
+                print("GET LIMIT SUCCESS")
+            }
+            
+            if !success {
+                print("FAILED GET LIMIT")
             }
         }
     }
@@ -1239,6 +1272,7 @@ struct TransferRtgsScreen: View {
                         self.transferData.ref = self.limitVM.reffNumber
                         self.transferData.destinationNumber = self.limitVM.destinationNumber
                         self.transferData.destinationName = self.limitVM.destinationName
+                        self.transferData.adminFee = self.limitVM.fee
                         
                         self.isRouteTransaction = true
                     } else {

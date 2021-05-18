@@ -25,7 +25,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appState = AppState()
         
-        registerNotifications()
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "bank.mestika", using: nil) { task in
+            print("BG Task Scheduler")
+            self.handleAppRefresh(task: task as! BGAppRefreshTask)
+            print("App: BackgroundTask registered.")
+        }
+
+//        registerNotifications()
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
@@ -69,7 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         print("Background")
-        scheduleAppRefresh()
+//        scheduleAppRefresh()
 
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information

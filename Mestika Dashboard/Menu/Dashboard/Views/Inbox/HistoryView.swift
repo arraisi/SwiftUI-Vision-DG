@@ -83,7 +83,7 @@ struct HistoryRow: View {
             HStack {
                 Text("Rp.")
 
-                Text("\(data.data.amount.thousandSeparator())")
+                Text("\(data.data.amount ?? "0")".thousandSeparator())
             }
             .font(.custom("Montserrat-Bold", size: 14))
             .foregroundColor(.green)

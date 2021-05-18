@@ -171,7 +171,9 @@ class TransferServices {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
-        var request = URLRequest(url)
+        let paramsUrl = url.appending("type", value: transferData.transactionType.lowercased())
+        
+        var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         print("URL ABSOLUTE : \(url.absoluteURL)")
@@ -292,7 +294,8 @@ class TransferServices {
             "sourceBank": "151",
             "transactionAmount": transferData.amount,
             "transactionDetails": "",
-            "transactionFee": transferData.adminFee
+            "transactionFee": transferData.adminFee,
+            "reffNumber": transferData.ref
         ]
         
         guard let url = URL.urlTransferIbft() else {
@@ -556,6 +559,49 @@ class TransferServices {
                     print("ON Success")
                     let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
                     completion(.success(transferResponse!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+            
+        }.resume()
+    }
+    
+    // MARK: - POST MOVE BALANCE LIKE ON US API
+    func limitUser(completion: @escaping(Result<UserLimitModel, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlUserLimit() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("URL ABSOLUTE : \(url.absoluteURL)")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    print("ON Success")
+                    let userLimit = try? JSONDecoder().decode(UserLimitModel.self, from: data)
+                    completion(.success(userLimit!))
                 }
                 
                 if (httpResponse.statusCode == 401) {

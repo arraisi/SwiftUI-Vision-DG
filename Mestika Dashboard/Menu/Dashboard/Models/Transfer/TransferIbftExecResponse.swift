@@ -7,15 +7,9 @@ import Foundation
 
 // MARK: - TransferIbftExecResponse
 struct TransferIbftExecResponse: Codable {
-    let currency, sourceAccountNumber, destinationAccountNumber, destinationBank: String
-    let transactionAmount, transactionFee, reffNumber, pinTrx: String
-    let nik, deviceID, traceNumber, transactionDate: String
-    let destinationAccountName, sourceAccountName: String
+    let pan, sourceBank, phoneNumber, currency: String
+    let sourceAccountNumber, sourceAccountName, destinationAccountNumber, destinationAccountName: String
+    let destinationBank, transactionAmount, transactionFee, transactionDetails: String
+    let reffNumber, nik, traceNumber, transactionDate: String
     let status: StatusInquiry
-
-    enum CodingKeys: String, CodingKey {
-        case currency, sourceAccountNumber, destinationAccountNumber, destinationBank, transactionAmount, transactionFee, reffNumber, pinTrx, nik
-        case deviceID = "deviceId"
-        case traceNumber, transactionDate, destinationAccountName, sourceAccountName, status
-    }
 }

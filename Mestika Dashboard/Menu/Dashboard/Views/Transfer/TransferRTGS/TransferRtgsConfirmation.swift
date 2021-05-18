@@ -18,6 +18,8 @@ struct TransferRtgsConfirmation: View {
     @State var nominalCtrl: String = ""
     @State var totalTransferCtrl: String = ""
     
+    @State var totalTrx: Int = 0
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -39,6 +41,11 @@ struct TransferRtgsConfirmation: View {
             self.transferData.addressOfDestination = self.transferData.notes
             self.nominalCtrl = "Rp " + "\(self.transferData.amount.thousandSeparator())"
             self.totalTransferCtrl = "Rp " + "\(self.transferData.amount.thousandSeparator())"
+            self.adminFeeCtrl = "Rp " + "\(self.transferData.adminFee.thousandSeparator())"
+            
+            self.totalTrx = Int(self.transferData.amount)! + Int(self.transferData.adminFee)!
+            
+            self.totalTransferCtrl = "Rp " + "\(String(totalTrx))"
         }
     }
     
