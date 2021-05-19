@@ -14,11 +14,13 @@ struct TransferRtgsExecResponse: Codable {
     let accountTo, cardNo, transactionDate, sourceNumber: String
     let addressBeneficiary2, addressBeneficiary1, transferRtgsExecResponseDescription, ultimateBeneficiaryName: String
     let addressBeneficiary3, flagWargaNegara, destinationBankBranchName: String
+    let sumTotal: String
 
     enum CodingKeys: String, CodingKey {
         case status, destinationBankName, ref, currency, flagResidenceDebitur, destinationBankCode, nominal, destinationBankMemberName, nominalstr, accountTo, cardNo, transactionDate, sourceNumber, addressBeneficiary2, addressBeneficiary1
         case transferRtgsExecResponseDescription = "description"
         case ultimateBeneficiaryName, addressBeneficiary3, flagWargaNegara, destinationBankBranchName
+        case sumTotal
     }
 }
 

@@ -11,5 +11,6 @@ struct TransferIbftExecResponse: Codable {
     let sourceAccountNumber, sourceAccountName, destinationAccountNumber, destinationAccountName: String
     let destinationBank, transactionAmount, transactionFee, transactionDetails: String
     let reffNumber, nik, traceNumber, transactionDate: String
+    let sumTotal: String
     let status: StatusInquiry
 }

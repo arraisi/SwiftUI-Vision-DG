@@ -222,7 +222,6 @@ class TransferServices {
             "sourceNumber": transferData.sourceNumber,
             "destinationNumber": transferData.destinationNumber,
             "berita": transferData.notes,
-            //            "planAllowDebitInHouse": "Y",
             "pin": encryptPassword(password: transferData.pin)
         ]
         
@@ -269,6 +268,10 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 406) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
@@ -344,6 +347,10 @@ class TransferServices {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
+                if (httpResponse.statusCode == 406) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
@@ -357,7 +364,7 @@ class TransferServices {
                       completion: @escaping(Result<TransferRtgsExecResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "ref": "1",
+            "ref": transferData.ref,
             "cardNo": transferData.cardNo,
             "nominal": transferData.amount,
             "currency": "360",
@@ -424,6 +431,10 @@ class TransferServices {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
+                if (httpResponse.statusCode == 406) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
@@ -452,7 +463,7 @@ class TransferServices {
             "nominal": transferData.amount,
             "pin": encryptPassword(password: transferData.pin),
             "provinceCode": "1234",
-            "ref": "",
+            "ref": transferData.ref,
             "typeOfBeneficiary": transferData.typeDestination,
             "typeOfBusiness": "A",
             "sourceNumber": transferData.sourceNumber,
@@ -501,6 +512,10 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 406) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 

@@ -153,7 +153,7 @@ struct LoginScreen: View {
                     .isDetailLink(false)
                     
                     NavigationLink(
-                        destination: FormInputAtmChangeDeviceView(pwd: self.$passwordCtrl, phoneNmbr: self.$phoneNumber),
+                        destination: FormInputAtmChangeDeviceView(pwd: self.$passwordCtrl, phoneNmbr: self.$phoneNumber).environmentObject(registerData),
                         isActive: self.$routeAtmInputLogin,
                         label: {}
                     )

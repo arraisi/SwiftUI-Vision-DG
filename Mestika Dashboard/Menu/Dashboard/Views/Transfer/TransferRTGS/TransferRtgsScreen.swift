@@ -66,7 +66,7 @@ struct TransferRtgsScreen: View {
     
     // Variable Transaction Frequecy
     var _listFrequency = ["Once".localized(LocalizationService.shared
-                                                                .language), "Many times".localized(LocalizationService.shared.language)]
+                                            .language), "Many times".localized(LocalizationService.shared.language)]
     @State var transactionFrequency = "Select Transaction Frequency".localized(LocalizationService.shared.language)
     
     // Variable Voucher
@@ -154,6 +154,7 @@ struct TransferRtgsScreen: View {
                         
                         Button(action: {
                             UIApplication.shared.endEditing()
+                            
                             let amount = Int(self.transferData.amount) ?? 0
                             let myCredit = Int(self.selectedAccount.saldo.replacingOccurrences(of: ".", with: "")) ?? 0
                             
@@ -163,13 +164,14 @@ struct TransferRtgsScreen: View {
                             
                             if (amount < self.minLimit) {
                                 self.showDialogMinTransaction = true
-                            } else if (amount <= myCredit) {
-                                
+                            }
+                            
+                            if (amount <= myCredit && amount < self.maxLimit) {
                                 if (self.transferType == "Online") {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
-//
+                                    
                                     if (desc == "") {
                                         self.transferData.notes = self.notesCtrl
                                     }
@@ -181,11 +183,10 @@ struct TransferRtgsScreen: View {
                                     
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
-//                                    self.transferData.destinationName = self.destinationNameCtrl
                                     self.transferData.citizenship = self.citizenShipCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
-//
+                                    
                                     if (desc == "") {
                                         self.transferData.notes = self.notesCtrl
                                     }
@@ -194,12 +195,14 @@ struct TransferRtgsScreen: View {
                                     print("OKE")
                                     
                                     inquiryTransfer()
-//                                    self.isRouteTransaction = true
                                 }
-                                
-                            } else if (amount > myCredit ) {
+                            }
+                            
+                            if (amount > myCredit) {
                                 self.showDialogMinReached = true
-                            } else {
+                            }
+                            
+                            if (amount > self.maxLimit) {
                                 self.showDialogMaxReached = true
                             }
                             
@@ -212,7 +215,7 @@ struct TransferRtgsScreen: View {
                         })
                         .disabled(disableForm)
                         .background(disableForm ? Color.gray : Color(hex: "#232175"))
-//                        .background(Color(hex: "#232175"))
+                        //                        .background(Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.bottom, 20)
@@ -264,7 +267,7 @@ struct TransferRtgsScreen: View {
         .onAppear {
             self.isRouteTransaction = false
             self.transferData = TransferOffUsModel()
-//            self.transferType = _listTransferType[0]
+            //            self.transferType = _listTransferType[0]
             if (dest != "") {
                 print(desc)
                 self.noRekeningCtrl = self.dest
@@ -433,19 +436,19 @@ struct TransferRtgsScreen: View {
             
             if transferType == "Online" {
                 
-//                if isShowName {
-//                    HStack {
-//                        Text(self.limitVM.destinationName)
-//                            .font(.subheadline)
-//                            .fontWeight(.light)
-//
-//                        Spacer()
-//                    }
-//                    .padding(.horizontal, 25)
-//                    .padding(.bottom, 10)
-//                } else {
-//                    EmptyView()
-//                }
+                //                if isShowName {
+                //                    HStack {
+                //                        Text(self.limitVM.destinationName)
+                //                            .font(.subheadline)
+                //                            .fontWeight(.light)
+                //
+                //                        Spacer()
+                //                    }
+                //                    .padding(.horizontal, 25)
+                //                    .padding(.bottom, 10)
+                //                } else {
+                //                    EmptyView()
+                //                }
                 
             } else {
                 // Field Type Destination
@@ -458,7 +461,7 @@ struct TransferRtgsScreen: View {
                         Spacer()
                     }
                     .padding(.horizontal)
-    //                .padding(.top, 25)
+                    //                .padding(.top, 25)
                     
                     HStack {
                         Menu {
@@ -466,7 +469,7 @@ struct TransferRtgsScreen: View {
                                 Button(action: {
                                     self.destinationType = data
                                     self.transferData.typeDestination = data
-            //                        validateForm()
+                                    //                        validateForm()
                                 }) {
                                     Text(data)
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -504,14 +507,14 @@ struct TransferRtgsScreen: View {
                         Spacer()
                     }
                     .padding(.horizontal)
-    //                .padding(.top, 25)
+                    //                .padding(.top, 25)
                     
                     Menu {
                         ForEach(self._listCitizenShip, id: \.self) { data in
                             Button(action: {
                                 self.citizenShipCtrl = data
                                 self.transferData.citizenship = data
-        //                        validateForm()
+                                //                        validateForm()
                             }) {
                                 Text(data)
                                     .font(.custom("Montserrat-Regular", size: 12))
@@ -736,45 +739,45 @@ struct TransferRtgsScreen: View {
         .padding()
     }
     
-//    var bankAccountCard: some View {
-//        ZStack {
-//
-//            Button(
-//                action: {
-//                    UIApplication.shared.endEditing()
-//                    self.showDialogSelectAccount = true
-//                },
-//                label: {
-//                    HStack {
-//                        VStack(alignment: .leading) {
-//                            Text(self.selectedAccount.namaRekening)
-//                                .font(.subheadline)
-//                                .foregroundColor(Color(hex: "#232175"))
-//                                .fontWeight(.bold)
-//
-//                            HStack {
-//                                Text("Active Balance:".localized(language))
-//                                    .font(.caption)
-//                                    .fontWeight(.ultraLight)
-//                                Text(self.selectedAccount.saldo)
-//                                    .font(.caption)
-//                                    .foregroundColor(Color(hex: "#232175"))
-//                                    .fontWeight(.semibold)
-//                            }
-//                        }
-//
-//                        Spacer()
-//
-//                        Image("ic_expand")
-//                    }
-//                    .padding()
-//                }
-//            )
-//        }
-//        .frame(width: UIScreen.main.bounds.width - 60)
-//        .background(Color(hex: "#F6F8FB"))
-//        .cornerRadius(15)
-//    }
+    //    var bankAccountCard: some View {
+    //        ZStack {
+    //
+    //            Button(
+    //                action: {
+    //                    UIApplication.shared.endEditing()
+    //                    self.showDialogSelectAccount = true
+    //                },
+    //                label: {
+    //                    HStack {
+    //                        VStack(alignment: .leading) {
+    //                            Text(self.selectedAccount.namaRekening)
+    //                                .font(.subheadline)
+    //                                .foregroundColor(Color(hex: "#232175"))
+    //                                .fontWeight(.bold)
+    //
+    //                            HStack {
+    //                                Text("Active Balance:".localized(language))
+    //                                    .font(.caption)
+    //                                    .fontWeight(.ultraLight)
+    //                                Text(self.selectedAccount.saldo)
+    //                                    .font(.caption)
+    //                                    .foregroundColor(Color(hex: "#232175"))
+    //                                    .fontWeight(.semibold)
+    //                            }
+    //                        }
+    //
+    //                        Spacer()
+    //
+    //                        Image("ic_expand")
+    //                    }
+    //                    .padding()
+    //                }
+    //            )
+    //        }
+    //        .frame(width: UIScreen.main.bounds.width - 60)
+    //        .background(Color(hex: "#F6F8FB"))
+    //        .cornerRadius(15)
+    //    }
     
     
     var bankAccountCard: some View {
@@ -797,7 +800,7 @@ struct TransferRtgsScreen: View {
                                 print(self.transferData.cardNo)
                                 print(self.selectedAccount.noRekening)
                                 self.selectedAccount.saldo = self.selectedBalance
-                            
+                                
                             }
                         }) {
                             Text(self.listSourceNumber[index])
@@ -1154,7 +1157,7 @@ struct TransferRtgsScreen: View {
                 //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-//                    self.transferData.cardNo = data.noRekening
+                    //                    self.transferData.cardNo = data.noRekening
                     self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.namaRekening
                     print(data.noRekening)
@@ -1203,11 +1206,8 @@ struct TransferRtgsScreen: View {
                 self.listBankAccount.removeAll()
                 self.listBankAccount.append(BankAccount(id: 1, namaRekening: self.profileVM.nameOnCard, productName: self.profileVM.nameOnCard, sourceNumber: self.profileVM.accountNumber, noRekening: self.profileVM.cardNo, saldo: self.profileVM.balance.thousandSeparator()))
                 self.selectedAccount = self.listBankAccount[0]
-//                self.transferData.cardNo = self.profileVM.cardNo
                 self.transferData.sourceNumber = self.profileVM.accountNumber
                 self.transferData.sourceAccountName = self.profileVM.nameOnCard
-                
-                //                getLimit(code: self.profileVM.classCode)
             }
         }
     }
@@ -1218,7 +1218,6 @@ struct TransferRtgsScreen: View {
             
             if success {
                 print("SUCCESS")
-//                self.bankSelector = self.referenceVM._listBank[0].bankName
                 self.transferData.bankName = self.referenceVM._listBank[0].name
                 self.transferData.destinationBankCode = self.referenceVM._listBank[0].code
                 self.transferData.combinationBankName = ""
@@ -1233,15 +1232,6 @@ struct TransferRtgsScreen: View {
     
     @ObservedObject var limitVM = TransferViewModel()
     func getLimit(code: String) {
-//        self.maxLimit = Int(self.trxLimitVM.maxTrxRtgsTransfer)
-//        self.limitTrx = String(self.trxLimitVM.maxTrxRtgsTransfer)
-        
-//        self.limitVM.getLimitTransaction(classCode: "70") { success in
-//            if success {
-//                self.maxLimit = Int(self.limitVM.limitIbft) ?? 0
-//                self.limitTrx = self.limitVM.limitIbft
-//            }
-//        }
         
         self.limitVM.limitUser { success in
             
@@ -1273,6 +1263,7 @@ struct TransferRtgsScreen: View {
                         self.transferData.destinationNumber = self.limitVM.destinationNumber
                         self.transferData.destinationName = self.limitVM.destinationName
                         self.transferData.adminFee = self.limitVM.fee
+                        self.transferData.trxDateResp = self.limitVM.transactionDate
                         
                         self.isRouteTransaction = true
                     } else {

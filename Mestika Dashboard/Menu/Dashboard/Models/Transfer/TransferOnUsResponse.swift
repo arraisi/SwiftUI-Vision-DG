@@ -17,6 +17,7 @@ class TransferOnUsResponse: Decodable {
     var currency: String
     var nominal: String
     var nominalstr: String
+    var sumTotal: String
 }
 
 struct TransferResponseStatus: Decodable {

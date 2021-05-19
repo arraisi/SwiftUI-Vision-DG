@@ -192,6 +192,7 @@ class TransferViewModel : ObservableObject {
                     self.destinationName = response.destinationAccountName ?? ""
                     self.destinationNumber = response.destinationAccountNumber ?? ""
                     self.fee = response.transactionFee ?? ""
+                    self.transactionDate = response.transactionDate ?? ""
                     
                     if (response.reffNumber == nil) {
                         self.reffNumber = response.ref ?? ""
@@ -261,6 +262,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 406):
+                    self.code = "406"
+                    self.message = "Nominal melebihi limit transaksi"
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"
@@ -304,6 +308,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 406):
+                    self.code = "406"
+                    self.message = "Nominal melebihi limit transaksi"
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"
@@ -348,6 +355,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 406):
+                    self.code = "406"
+                    self.message = "Nominal melebihi limit transaksi"
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"
@@ -394,6 +404,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 406):
+                    self.code = "406"
+                    self.message = "Nominal melebihi limit transaksi"
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"

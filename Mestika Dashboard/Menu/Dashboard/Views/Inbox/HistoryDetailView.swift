@@ -105,7 +105,7 @@ struct HistoryDetailView: View {
                 HStack {
                     Text("Beneficiary's Bank".localized(language))
                     Spacer()
-                    Text(data.data.destinationBank)
+                    Text(data.data.destinationBank ?? "")
                 }
                 HStack {
                     Text("Description".localized(language))

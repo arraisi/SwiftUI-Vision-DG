@@ -116,7 +116,7 @@ class HistoryTransactionServices {
                     let history = try? JSONDecoder().decode(HistoryModel.self, from: data)
                     
                     if let _history = history {
-                        //                        print(_history)
+                        print("SUCCESS FIND ALL HISTORY")
                         completion(.success(_history))
                     }
                     

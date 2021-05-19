@@ -16,10 +16,12 @@ struct TransferSknExecResponse: Codable {
     let transactionDate, sourceNumber, clearingCode, transferSknExecResponseDescription: String
     let ultimateBeneficiaryName, flagWargaNegara, provinceCode, cityCode: String
     let digitSign: String
+    let sumTotal: String
 
     enum CodingKeys: String, CodingKey {
         case status, flagResidenceCreditor, ref, typeOfBusiness, sourceName, currency, flagResidenceDebitur, destinationBankCode, nominal, nominalstr, accountTo, branchCode, cardNo, transactionDate, sourceNumber, clearingCode
         case transferSknExecResponseDescription = "description"
         case ultimateBeneficiaryName, flagWargaNegara, provinceCode, cityCode, digitSign
+        case sumTotal
     }
 }

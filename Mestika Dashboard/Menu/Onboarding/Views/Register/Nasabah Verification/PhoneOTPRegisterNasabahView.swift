@@ -179,6 +179,7 @@ struct PhoneOTPRegisterNasabahView: View {
                                 EmptyView()
                             }
                             .isDetailLink(false)
+                            
                         } else if (editModeForStatusKycWaiting == .active) {
                             NavigationLink(
                                 destination: RescheduleRegisterView().environmentObject(registerData).environmentObject(productATMData),
@@ -186,6 +187,7 @@ struct PhoneOTPRegisterNasabahView: View {
                                 EmptyView()
                             }
                             .isDetailLink(false)
+                            
                         } else {
                             NavigationLink(
                                 destination: EmailRegisterNasabahView(shouldPopToRootView: self.$rootIsActive, shouldPopToRootView2: self.$root2IsActive).environmentObject(registerData),

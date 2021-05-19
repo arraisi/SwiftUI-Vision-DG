@@ -10,6 +10,9 @@ import Indicators
 
 struct FormInputAtmChangeDeviceView: View {
     
+    /* Environtment Object */
+    @EnvironmentObject var registerData: RegistrasiModel
+    
     // Message
     @State private var responseCode: String = ""
     @State private var responseMsg: String = ""
@@ -26,6 +29,7 @@ struct FormInputAtmChangeDeviceView: View {
     
     // Route
     @State private var nextRoute: Bool = false
+    @State private var routeNewPassword: Bool = false
     
     // @Binding Data
     @Binding var pwd: String
@@ -44,6 +48,13 @@ struct FormInputAtmChangeDeviceView: View {
             NavigationLink(
                 destination: BottomNavigationView(),
                 isActive: self.$nextRoute,
+                label: {}
+            )
+            .isDetailLink(false)
+            
+            NavigationLink(
+                destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(true)).environmentObject(registerData),
+                isActive: self.$routeNewPassword,
                 label: {}
             )
             .isDetailLink(false)
@@ -194,7 +205,12 @@ struct FormInputAtmChangeDeviceView: View {
                 .padding([.bottom, .top], 20)
             
             Button(action: {
-                self.isShowModalError = false
+                
+                if (self.responseCode == "206") {
+                    self.routeNewPassword = true
+                } else {
+                    self.isShowModalError = false
+                }
             }) {
                 Text("Back")
                     .foregroundColor(.white)

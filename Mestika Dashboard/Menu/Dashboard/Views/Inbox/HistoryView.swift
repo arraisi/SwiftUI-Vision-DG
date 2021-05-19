@@ -22,7 +22,7 @@ struct HistoryView: View {
                 
                 if (historVM.history.count < 1) {
                     
-                    Text("Loading")
+                    ProgressView()
                     
                 } else {
                     ForEach(historVM.history.reversed(), id: \.id) { data in
@@ -71,10 +71,10 @@ struct HistoryRow: View {
             }
             
             VStack(alignment: .leading) {
-                Text(data.trxType)
+                Text(data.trxType ?? "")
                     .font(.custom("Montserrat-Bold", size: 14))
                 
-                Text("\(data.transactionDate)")
+                Text("\(data.transactionDate ?? "")")
                     .font(.custom("Montserrat-Medium", size: 12))
             }
             

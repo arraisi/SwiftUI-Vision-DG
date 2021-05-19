@@ -891,7 +891,7 @@ struct TransferOnUsScreen: View {
             if success {
                 print("GET LIMIT SUCCESS")
                 print(transferVM.limitUserOnline)
-                self.maxLimit = transferVM.limitUserOnline
+                self.maxLimit = transferVM.limitUserOnUs
                 self.limitTrx = String(maxLimit)
             }
             
