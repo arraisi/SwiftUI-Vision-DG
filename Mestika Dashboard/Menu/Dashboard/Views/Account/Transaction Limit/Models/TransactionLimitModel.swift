@@ -20,5 +20,5 @@ struct UserLimitModel: Codable {
 // MARK: - Limit
 struct Limit: Codable {
     let key: String
-    let value: Int
+    let value: Double
 }

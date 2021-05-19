@@ -52,16 +52,16 @@ struct TransferTabs: View {
         .gesture(tap)
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-        .onReceive(timer) { time in
-//            print(self.timeLogout)
-            if self.timeLogout > 0 {
-                self.timeLogout -= 1
-            }
-            
-            if self.timeLogout < 1 {
-                showAlertTimeout = true
-            }
-        }
+//        .onReceive(timer) { time in
+////            print(self.timeLogout)
+//            if self.timeLogout > 0 {
+//                self.timeLogout -= 1
+//            }
+//
+//            if self.timeLogout < 1 {
+//                showAlertTimeout = true
+//            }
+//        }
 //        .alert(isPresented: $showAlertTimeout) {
 //            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
 //                self.authVM.postLogout { success in
@@ -106,7 +106,7 @@ struct TransferTabs: View {
                 isActive: self.$transferOnUsActive) {
                 EmptyView()
             }
-            .isDetailLink(false)
+//            .isDetailLink(false)
             
             // Link Transfer OFFUS
             NavigationLink(
@@ -114,7 +114,7 @@ struct TransferTabs: View {
                 isActive: self.$transferOffUsActive,
                 label: {EmptyView()}
             )
-            .isDetailLink(false)
+//            .isDetailLink(false)
             
             Button(action: {
                 print("ONUS")

@@ -33,7 +33,7 @@ struct DashboardTabs: View {
     @State var currentItemPosition : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 150 // 100 is amount padding left and right
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
     let itemHeight:CGFloat = 170
     let itemGapHeight:CGFloat = 10
     let itemGapWidth:CGFloat = 0.14
@@ -190,6 +190,7 @@ struct DashboardTabs: View {
                                     CardView(card: cards[0], cardWidth: itemWidth, cardHeight: itemHeight, showContent: true)
                                 }
                             )
+                            .padding(.trailing, 40)
                         }
                     }
                 }
@@ -380,62 +381,6 @@ struct DashboardTabs: View {
                                                         }
                                                     }
                                                     .padding(.top, 5)
-
-        //                                            if (self.listTypeAccount.isEmpty) {
-        //                                                ProgressView()
-        //                                            } else {
-        //                                                if (self.listTypeAccount[index] == "S" || self.listTypeAccount[index] == "D") {
-        //                                                    HStack {
-        //                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-        //                                                            ProgressView()
-        //                                                        } else {
-        //
-        //                                                            Text("Rp.")
-        //                                                                .fontWeight(.light)
-        //                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-        //
-        //                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-        //                                                            } else {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-        //                                                            }
-        //
-        //
-        //                                                        }
-        //                                                    }
-        //                                                    .padding(.top, 5)
-        //                                                } else {
-        //                                                    HStack {
-        //                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-        //                                                            ProgressView()
-        //                                                        } else {
-        //
-        //                                                            Text("Rp.")
-        //                                                                .fontWeight(.light)
-        //                                                                .foregroundColor(.white)
-        //
-        //                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(.white)
-        //                                                            } else {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(.white)
-        //                                                            }
-        //                                                        }
-        //                                                    }
-        //                                                    .padding(.top, 5)
-        //                                                }
-        //                                            }
                                                 }
                                             }
                                         }

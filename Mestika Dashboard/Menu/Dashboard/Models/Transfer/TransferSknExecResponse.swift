@@ -10,7 +10,7 @@ import Foundation
 struct TransferSknExecResponse: Codable {
     let status: StatusExec
     let flagResidenceCreditor, ref, typeOfBusiness: String
-    let sourceName: JSONNull?
+    let sourceName: String?
     let currency, flagResidenceDebitur, destinationBankCode, nominal: String
     let nominalstr, accountTo, branchCode, cardNo: String
     let transactionDate, sourceNumber, clearingCode, transferSknExecResponseDescription: String

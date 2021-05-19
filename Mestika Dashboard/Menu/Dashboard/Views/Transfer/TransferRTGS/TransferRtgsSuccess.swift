@@ -45,6 +45,7 @@ struct TransferRtgsSuccess: View {
                     
                     dateInfo
                     nominalInfo
+                    nominalTransaksi
                     destinationInfo
                     receivedInfo
                     
@@ -137,7 +138,7 @@ struct TransferRtgsSuccess: View {
     
     var nominalInfo: some View {
         VStack {
-            Text("Nominal Transaction".localized(language))
+            Text("Nominal Total".localized(language))
                 .font(.caption)
                 .foregroundColor(Color(hex: "#FFFFFF"))
             
@@ -145,9 +146,55 @@ struct TransferRtgsSuccess: View {
                 Text("Rp.")
                     .foregroundColor(.white)
                     .fontWeight(.bold)
-                Text(self.transferData.amount.thousandSeparator())
+                Text(self.transferData.totalTrx.thousandSeparator())
                     .foregroundColor(.white)
                     .font(.system(size: 30, weight: .bold, design: .default))
+            }
+        }
+        .padding(.top, 30)
+        .padding(.bottom, 10)
+    }
+    
+    var nominalTransaksi: some View {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top) {
+                Text("Nominal Transaction".localized(language))
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(hex: "#FFFFFF"))
+                    .padding(.trailing, 20)
+                
+                Text("Rp.")
+                    .font(.caption2)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                Text(self.transferData.amount.thousandSeparator())
+                    .font(.caption2)
+                    .foregroundColor(.white)
+                    .font(.system(size: 30, weight: .bold, design: .default))
+                
+                Spacer()
+            }
+            .padding(.bottom, 5)
+            
+            HStack(alignment: .top) {
+                Text("Nominal Fee".localized(language))
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(hex: "#FFFFFF"))
+                    .padding(.trailing, 20)
+                
+                Text("Rp.")
+                    .font(.caption2)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                
+                Text(self.transferData.adminFee.thousandSeparator())
+                    .font(.caption2)
+                    .foregroundColor(.white)
+                    .font(.system(size: 30, weight: .bold, design: .default))
+                
+                Spacer()
             }
         }
         .padding(.vertical, 30)

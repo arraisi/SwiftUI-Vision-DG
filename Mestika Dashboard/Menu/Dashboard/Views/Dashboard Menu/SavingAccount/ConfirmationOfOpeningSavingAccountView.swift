@@ -30,7 +30,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
     @State var depositDbl: Double = 0
     
     var nextBtnDisabled: Bool {
-        product.count == 0 || depositBalance == "" || depositBalance == "0" || depositDbl < minSetoranDbl
+        product.count == 0 || depositBalance == "" || depositDbl < minSetoranDbl
     }
     
     var body: some View {
@@ -216,9 +216,9 @@ struct ConfirmationOfOpeningSavingAccountView: View {
             if (codePlan == "20") {
                 self.minSetoranDbl = 0
             } else if (codePlan == "22") {
-                self.minSetoranDbl = 10000
+                self.minSetoranDbl = 20000
             } else {
-                self.minSetoranDbl = 100000
+                self.minSetoranDbl = 0
             }
             
             self.productsSavingAccountVM.getProductsDetails(planCode: codePlan) { (result) in

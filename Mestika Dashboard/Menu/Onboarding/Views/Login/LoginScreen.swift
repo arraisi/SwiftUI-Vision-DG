@@ -160,7 +160,7 @@ struct LoginScreen: View {
                     .isDetailLink(false)
                     
                     NavigationLink(
-                        destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
+                        destination: FormForceChangePasswordView(),
                         isActive: self.$routeNewPassword,
                         label: {}
                     )
