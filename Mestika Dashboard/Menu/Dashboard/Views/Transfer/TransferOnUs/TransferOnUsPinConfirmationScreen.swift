@@ -40,7 +40,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                 isActive: self.$unLocked,
                 label: {EmptyView()}
             )
-//            .isDetailLink(false)
+            .isDetailLink(false)
             
             VStack {
                 
@@ -97,7 +97,10 @@ struct TransferOnUsPinConfirmationScreen: View {
             return Alert(
                 title: Text("\(self.statusError)"),
                 message: Text("\(self.messageError)"),
-                dismissButton: .default(Text("OK".localized(language))))
+                dismissButton: .default(Text("OK".localized(language)),
+                                        action: {
+                                            self.showingAlert = false
+                                        }))
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOnUs"))) { obj in
             print("SUCCESS PIN")

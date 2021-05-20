@@ -241,7 +241,8 @@ struct DashboardTabs: View {
                 if success {
                     self.isLoadingCard = false
                     self.savingAccountVM.accounts.forEach { e in
-                        print(e.accountNumber)
+                        print(e.categoryProduct)
+                        
                         self.listSourceNumber.append(e.accountNumber)
                         self.listTypeAccount.append(e.accountType ?? "")
                     }

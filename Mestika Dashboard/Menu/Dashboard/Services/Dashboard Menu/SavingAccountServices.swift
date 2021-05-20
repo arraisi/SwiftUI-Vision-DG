@@ -224,6 +224,8 @@ class SavingAccountServices {
                 
                 if (httpResponse.statusCode == 200) {
                     
+                    print("JSON String: \(String(data: data, encoding: .utf8))")
+                    
                     let accounts = try? JSONDecoder().decode(SavingAccountModel.self, from: data)
                     
                     if let _response = accounts {

@@ -52,145 +52,135 @@ struct CardDamageAddressInputView: View {
                 .resizable()
             
             VStack {
-                VStack {
-                    Text("MAKE SURE YOUR INFORMATION IS CORRECT".localized(language))
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(.vertical, 25)
-                        .padding(.horizontal, 20)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    VStack(alignment: .center) {
-                        Text("Make sure your correspondence address is correct".localized(language))
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack {
+                        Text("MAKE SURE YOUR INFORMATION IS CORRECT".localized(language))
                             .font(.title2)
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fontWeight(.bold)
+                            .bold()
+                            .foregroundColor(.white)
                             .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, 20)
+                            .padding(.vertical, 25)
                             .padding(.horizontal, 20)
+                            .fixedSize(horizontal: false, vertical: true)
                         
-                        Group {
-                            Divider()
+                        VStack(alignment: .center) {
+                            Text("Make sure your correspondence address is correct".localized(language))
+                                .font(.title2)
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.top, 20)
                                 .padding(.horizontal, 20)
                             
                             Group {
-                                HStack {
-                                    Text("Address".localized(language))
+                                Divider()
+                                    .padding(.horizontal, 20)
+                                
+                                Group {
+                                    HStack {
+                                        Text("Address".localized(language))
+                                            .font(Font.system(size: 12))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color(hex: "#707070"))
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    HStack {
+                                        MultilineTextField("Address".localized(language), text: $cardData.addressInput, onCommit: {
+                                            self.addressInput = self.cardData.addressInput
+                                        })
+                                        .font(Font.system(size: 14))
+                                        .padding(.horizontal)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                        
+                                        Button(action:{
+                                            searchAddress()
+                                        }, label: {
+                                            Image(systemName: "magnifyingglass")
+                                                .font(Font.system(size: 20))
+                                                .foregroundColor(Color(hex: "#707070"))
+                                        })
+                                        
+                                    }
+                                    
+                                }
+                                .padding(.horizontal, 20)
+                                
+                                LabelTextField(value: $addressKelurahanInput, label: "Village".localized(language), placeHolder: "Village".localized(language), onEditingChanged: { (Bool) in
+                                    print("on edit")
+                                    cardData.addressKelurahanInput = self.addressKelurahanInput
+                                }, onCommit: {
+                                    print("on commit")
+                                    cardData.addressKelurahanInput = self.addressKelurahanInput
+                                })
+                                .padding(.horizontal, 20)
+                                
+                                LabelTextField(value: $addressKecamatanInput, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language), onEditingChanged: { (Bool) in
+                                    print("on edit")
+                                    cardData.addressKecamatanInput = self.addressKecamatanInput
+                                }, onCommit: {
+                                    print("on commit")
+                                    cardData.addressKecamatanInput = self.addressKecamatanInput
+                                })
+                                .padding(.horizontal, 20)
+                                
+                                VStack(alignment: .leading) {
+                                    
+                                    Text("Postal code".localized(language))
                                         .font(Font.system(size: 12))
                                         .fontWeight(.semibold)
                                         .foregroundColor(Color(hex: "#707070"))
-                                        .multilineTextAlignment(.leading)
                                     
-                                    Spacer()
-                                }
-                                
-                                HStack {
-                                    MultilineTextField("Address".localized(language), text: $cardData.addressInput, onCommit: {
-                                        self.addressInput = self.cardData.addressInput
-                                    })
-                                    .font(Font.system(size: 14))
+                                    HStack {
+                                        TextField("Postal code".localized(language), text: $addressKodePosInput) { change in
+                                        } onCommit: {
+                                            print("on commit")
+                                            cardData.addressPostalCodeInput = self.addressKodePosInput
+                                        }
+                                        .onReceive(addressKodePosInput.publisher.collect()) {
+                                            self.addressKodePosInput = String($0.prefix(5))
+                                        }
+                                        .keyboardType(.numberPad)
+                                        .font(Font.system(size: 14))
+                                        .frame(height: 36)
+                                    }
                                     .padding(.horizontal)
                                     .background(Color.gray.opacity(0.1))
                                     .cornerRadius(10)
                                     
-                                    Button(action:{
-                                        searchAddress()
-                                    }, label: {
-                                        Image(systemName: "magnifyingglass")
-                                            .font(Font.system(size: 20))
-                                            .foregroundColor(Color(hex: "#707070"))
-                                    })
-                                    
                                 }
-                                
+                                .padding(.horizontal, 20)
+                                .padding(.bottom, 30)
                             }
-                            .padding(.horizontal, 20)
-                            
-                            
-//                            LabelTextField(value: $addressRtRwInput, label: "RT/RW", placeHolder: "RT/RW", onEditingChanged: { (Bool) in
-//                                print("on edit")
-//                                cardData.addressRtRwInput = self.addressRtRwInput
-//                            }, onCommit: {
-//                                print("on commit")
-//                                cardData.addressRtRwInput = self.addressRtRwInput
-//                            })
-//                            .padding(.horizontal, 20)
-                            
-                            LabelTextField(value: $addressKelurahanInput, label: "Village".localized(language), placeHolder: "Village".localized(language), onEditingChanged: { (Bool) in
-                                print("on edit")
-                                cardData.addressKelurahanInput = self.addressKelurahanInput
-                            }, onCommit: {
-                                print("on commit")
-                                cardData.addressKelurahanInput = self.addressKelurahanInput
-                            })
-                            .padding(.horizontal, 20)
-                            
-                            LabelTextField(value: $addressKecamatanInput, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language), onEditingChanged: { (Bool) in
-                                print("on edit")
-                                cardData.addressKecamatanInput = self.addressKecamatanInput
-                            }, onCommit: {
-                                print("on commit")
-                                cardData.addressKecamatanInput = self.addressKecamatanInput
-                            })
-                            .padding(.horizontal, 20)
-                            
-                            VStack(alignment: .leading) {
-                                
-                                Text("Postal code".localized(language))
-                                    .font(Font.system(size: 12))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(Color(hex: "#707070"))
-                                
-                                HStack {
-                                    TextField("Postal code".localized(language), text: $addressKodePosInput) { change in
-                                    } onCommit: {
-                                        print("on commit")
-                                        cardData.addressPostalCodeInput = self.addressKodePosInput
-                                    }
-                                    .onReceive(addressKodePosInput.publisher.collect()) {
-                                        self.addressKodePosInput = String($0.prefix(5))
-                                    }
-                                    .keyboardType(.numberPad)
-                                    .font(Font.system(size: 14))
-                                    .frame(height: 36)
-                                }
-                                .padding(.horizontal)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(10)
-                                
-                            }
-                            .padding(.horizontal, 20)
-                            .padding(.bottom, 30)
                         }
+                        .frame(width: UIScreen.main.bounds.width - 50)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(radius: 30)
+                        
+                        Button(action: {
+                            self.isRoute = true
+                        }, label: {
+                            Text("Submit Data".localized(language))
+                                .foregroundColor(disableForm ? Color.white : Color(hex: "#232175"))
+                                .fontWeight(.bold)
+                                .font(.system(size: 13))
+                                .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+                        })
+                        .disabled(disableForm)
+                        .background(disableForm ? Color(.lightGray) : Color.white)
+                        .cornerRadius(12)
+                        .padding(.top, 30)
+                        .padding(.bottom, 10)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 50)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(radius: 30)
-                    
-                    Button(action: {
-                        self.isRoute = true
-                    }, label: {
-                        Text("Submit Data".localized(language))
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                    })
-                    .disabled(disableForm)
-                    .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
-                    .cornerRadius(12)
-                    .padding(.horizontal, 100)
-                    .padding(.top, 30)
+                    .padding(.horizontal, 30)
+                    .padding(.top, 20)
                     .padding(.bottom, 10)
                 }
-                .offset(y: kGuardian.slide).animation(.easeInOut(duration: 1.0))
-                .padding(.horizontal, 30)
-                .padding(.top, 100)
-                .padding(.bottom, 10)
                 
                 NavigationLink(
                     destination: CardDamageDescriptionInputView().environmentObject(cardData),
@@ -203,7 +193,6 @@ struct CardDamageAddressInputView: View {
             
         }
         .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
-        .edgesIgnoringSafeArea(.all)
         .onAppear {
             print("ON APPEAR")
             //            user.forEach { data in

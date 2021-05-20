@@ -20,9 +20,13 @@ struct HistoryView: View {
         ScrollView {
             VStack {
                 
-                if (historVM.history.count < 1) {
+                if (self.isLoading) {
                     
                     ProgressView()
+                    
+                } else if (historVM.history.count < 1) {
+                    
+                    Text("No History Data")
                     
                 } else {
                     ForEach(historVM.history.reversed(), id: \.id) { data in
@@ -47,6 +51,9 @@ struct HistoryView: View {
                     self.isLoading = false
                 }
                 
+                if !success {
+                    self.isLoading = false
+                }
             }
         }
     }
