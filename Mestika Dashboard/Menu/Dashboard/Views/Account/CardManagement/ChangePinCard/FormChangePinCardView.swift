@@ -62,6 +62,7 @@ struct FormChangePinCardView: View {
                         Text("Change PIN")
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
+                            .padding(.bottom, 20)
                         
                         VStack(alignment: .leading) {
                             

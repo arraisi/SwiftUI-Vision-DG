@@ -111,7 +111,7 @@ struct ListLastTransactionView: View {
                             .padding(.vertical, 5)
                         }
                     }
-                    .frame(height: 400)
+                    .frame(height: 350)
                 }
                 
                 

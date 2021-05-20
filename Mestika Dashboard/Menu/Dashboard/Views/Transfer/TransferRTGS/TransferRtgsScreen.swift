@@ -62,7 +62,7 @@ struct TransferRtgsScreen: View {
     @State var amount = ""
     @State private var maxLimit: Int = 10000000
     @State private var limitTrx: String = "10000000"
-    @State private var minLimit: Int = 0
+    @State private var minLimit: Int = 10000
     
     // Variable Transaction Frequecy
     var _listFrequency = ["Once".localized(LocalizationService.shared
@@ -164,14 +164,13 @@ struct TransferRtgsScreen: View {
                             
                             if (amount < self.minLimit) {
                                 self.showDialogMinTransaction = true
-                            }
-                            
-                            if (amount <= myCredit && amount < self.maxLimit) {
+                            } else if (amount <= myCredit) {
+                                
                                 if (self.transferType == "Online") {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
-                                    
+                                    //
                                     if (desc == "") {
                                         self.transferData.notes = self.notesCtrl
                                     }
@@ -183,10 +182,11 @@ struct TransferRtgsScreen: View {
                                     
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
+                                    //                                    self.transferData.destinationName = self.destinationNameCtrl
                                     self.transferData.citizenship = self.citizenShipCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
-                                    
+                                    //
                                     if (desc == "") {
                                         self.transferData.notes = self.notesCtrl
                                     }
@@ -195,16 +195,15 @@ struct TransferRtgsScreen: View {
                                     print("OKE")
                                     
                                     inquiryTransfer()
+                                    //                                    self.isRouteTransaction = true
                                 }
-                            }
-                            
-                            if (amount > myCredit) {
+                                
+                            } else if (amount > myCredit ) {
                                 self.showDialogMinReached = true
-                            }
-                            
-                            if (amount > self.maxLimit) {
+                            } else if (amount > self.maxLimit) {
                                 self.showDialogMaxReached = true
                             }
+                            
                             
                         }, label: {
                             Text("CONFIRM TRANSFER".localized(language))
@@ -1176,12 +1175,12 @@ struct TransferRtgsScreen: View {
         
         if (self.transferType == "Online") {
             print("Validation IBFT")
-            if (self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language)) {
+            if (self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && !self.isLoading) {
                 return false
             }
         } else {
             print("Validation RTGS")
-            if (self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language)) {
+            if (self.selectedSourceNumber.isNotEmpty() && self.noRekeningCtrl.count >= 9 && self.amount != "" && self.transferType != "Select Transaction Type".localized(language) && self.bankSelector != "Choose Destination Bank".localized(language) && self.destinationType != "Receiver Type".localized(language) && self.citizenShipCtrl != "Citizenship".localized(language) && !self.isLoading) {
                 return false
             }
         }
@@ -1279,6 +1278,9 @@ struct TransferRtgsScreen: View {
                     print("NOT SUCCESS")
                     self.destinationNameCtrl = "Akun Tidak Ditemukan"
                     self.limitVM.destinationName = "Akun Tidak Ditemukan"
+                    
+                    self.messageStatusInquiry = self.limitVM.messageStatus
+                    self.showDialogErrorInquiry = true
                 }
             }
         }

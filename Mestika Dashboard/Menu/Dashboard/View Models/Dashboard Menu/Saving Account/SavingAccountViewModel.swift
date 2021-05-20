@@ -36,8 +36,10 @@ class SavingAccountViewModel : ObservableObject {
                 print("COUNT")
                 print(response.count)
                 
-                self.balanceAccount = response
-                self.isLoading = false
+                DispatchQueue.main.async {
+                    self.balanceAccount = response
+                    self.isLoading = false
+                }
                 
                 completion(true)
                 
@@ -77,7 +79,7 @@ class SavingAccountViewModel : ObservableObject {
             switch result {
             case .success(let response):
                 
-                self.accounts = response
+                self.accounts = response.sorted(by: { $0.categoryProduct ?? "" > $1.categoryProduct ?? "" })
                 
                 DispatchQueue.main.async {
                     self.isLoading = false

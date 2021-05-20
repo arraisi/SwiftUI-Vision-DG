@@ -879,13 +879,6 @@ struct TransferOnUsScreen: View {
     }
     
     func getLimit(code: String) {
-//        self.transferVM.getLimitTransaction(classCode: "10") { success in
-//            if success {
-//                self.maxLimit = Int(self.transferVM.limitIbft) ?? 0
-//                self.limitTrx = self.transferVM.limitIbft
-//            }
-//        }
-        
         self.transferVM.limitUser { success in
             
             if success {

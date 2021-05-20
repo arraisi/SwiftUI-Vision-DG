@@ -33,7 +33,7 @@ struct DashboardTabs: View {
     @State var currentItemPosition : CGFloat = 0
     
     /* Card Variables */
-    let itemWidth:CGFloat = UIScreen.main.bounds.width - 150 // 100 is amount padding left and right
+    let itemWidth:CGFloat = UIScreen.main.bounds.width - 100 // 100 is amount padding left and right
     let itemHeight:CGFloat = 170
     let itemGapHeight:CGFloat = 10
     let itemGapWidth:CGFloat = 0.14
@@ -180,7 +180,7 @@ struct DashboardTabs: View {
                                 isActive: self.$routingMyCardDashboard,
                                 label: {}
                             )
-                            .isDetailLink(false)
+//                            .isDetailLink(false)
                             
                             Button(
                                 action: {
@@ -190,6 +190,7 @@ struct DashboardTabs: View {
                                     CardView(card: cards[0], cardWidth: itemWidth, cardHeight: itemHeight, showContent: true)
                                 }
                             )
+                            .padding(.trailing, 40)
                         }
                     }
                 }
@@ -214,11 +215,11 @@ struct DashboardTabs: View {
         .navigationBarTitleDisplayMode(.inline)
         .edgesIgnoringSafeArea(.top)
         .onReceive(timer) { time in
-//            print(self.timeLogout)
+            //            print(self.timeLogout)
             if self.timeLogout > 0 {
                 self.timeLogout -= 1
             }
-
+            
             if self.timeLogout == 1 {
                 showAlertTimeout = true
             }
@@ -261,7 +262,7 @@ struct DashboardTabs: View {
                         self.showAlertTimeout = true
                     }
                 }
-
+                
             }
         }
         .alert(isPresented: $showAlertTimeout) {
@@ -308,8 +309,10 @@ struct DashboardTabs: View {
     var menuGrid: some View {
         VStack {
             if isLoadingCard || self.savingAccountVM.accounts.isEmpty {
+                
                 ProgressView("Loading")
                     .padding(.vertical, 50)
+                
             } else {
                 
                 TabView {
@@ -319,28 +322,28 @@ struct DashboardTabs: View {
                                 self.isRouteHistoryAcc = true
                             },
                             label: {
-                                HStack {
+                                VStack {
                                     HStack(alignment: .top) {
                                         Divider()
                                             .frame(width: 3, height: isHiddenBalance ? 70 : 100)
                                             .background(Color(hex: "#232175"))
                                             .padding(.trailing, 5)
-
+                                        
                                         VStack(alignment: .leading) {
                                             Text("\(self.savingAccountVM.accounts[index].accountTypeDescription ?? "")")
                                                 .font(.headline)
                                                 .bold()
                                                 .padding(.bottom, 5)
                                                 .fixedSize(horizontal: false, vertical: true)
-
+                                            
                                             VStack(alignment: .leading) {
-
+                                                
                                                 Text("\(self.savingAccountVM.accounts[index].productName ?? "Tabungan Mestika")")
                                                     .font(.subheadline)
                                                     .bold()
                                                     .foregroundColor(Color(hex: "#232175"))
                                                     .fontWeight(.ultraLight)
-
+                                                
                                                 if (self.savingAccountVM.accounts[index].accountNumber == "") {
                                                     Text("-")
                                                         .font(.caption)
@@ -350,7 +353,7 @@ struct DashboardTabs: View {
                                                         .font(.caption)
                                                         .fontWeight(.ultraLight)
                                                 }
-
+                                                
                                                 if isHiddenBalance {
                                                     EmptyView()
                                                 } else {
@@ -359,11 +362,11 @@ struct DashboardTabs: View {
                                                         if (self.savingAccountVM.balanceAccount.count < 1) {
                                                             ProgressView()
                                                         } else {
-
+                                                            
                                                             Text("Rp.")
                                                                 .fontWeight(.light)
                                                                 .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-
+                                                            
                                                             if (self.savingAccountVM.balanceAccount[index].balance == "") {
                                                                 Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
                                                                     .font(.title3)
@@ -375,73 +378,17 @@ struct DashboardTabs: View {
                                                                     .bold()
                                                                     .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
                                                             }
-
-
+                                                            
+                                                            
                                                         }
                                                     }
                                                     .padding(.top, 5)
-
-        //                                            if (self.listTypeAccount.isEmpty) {
-        //                                                ProgressView()
-        //                                            } else {
-        //                                                if (self.listTypeAccount[index] == "S" || self.listTypeAccount[index] == "D") {
-        //                                                    HStack {
-        //                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-        //                                                            ProgressView()
-        //                                                        } else {
-        //
-        //                                                            Text("Rp.")
-        //                                                                .fontWeight(.light)
-        //                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-        //
-        //                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-        //                                                            } else {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-        //                                                            }
-        //
-        //
-        //                                                        }
-        //                                                    }
-        //                                                    .padding(.top, 5)
-        //                                                } else {
-        //                                                    HStack {
-        //                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-        //                                                            ProgressView()
-        //                                                        } else {
-        //
-        //                                                            Text("Rp.")
-        //                                                                .fontWeight(.light)
-        //                                                                .foregroundColor(.white)
-        //
-        //                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(.white)
-        //                                                            } else {
-        //                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-        //                                                                    .font(.title3)
-        //                                                                    .bold()
-        //                                                                    .foregroundColor(.white)
-        //                                                            }
-        //                                                        }
-        //                                                    }
-        //                                                    .padding(.top, 5)
-        //                                                }
-        //                                            }
                                                 }
                                             }
                                         }
-
+                                        
                                         Spacer()
-
+                                        
                                         Button(action: {
                                             self.isHiddenBalance.toggle()
                                         }, label: {
@@ -457,6 +404,7 @@ struct DashboardTabs: View {
                                 .padding(.bottom, 30)
                             }
                         )
+
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
@@ -466,11 +414,11 @@ struct DashboardTabs: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-        .frame(width: UIScreen.main.bounds.width - 30)
+        .frame(width: UIScreen.main.bounds.width - 30, height: itemHeight)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
-
+        
     }
     
     /* Function GET USER Status */
@@ -499,6 +447,7 @@ struct DashboardTabs: View {
         }
     }
     
+    /* Function GET Balance */
     func getAccountBalance() {
         self.profileVM.getAccountBalance { success in
             if success {
@@ -513,12 +462,14 @@ struct DashboardTabs: View {
         }
     }
     
+    /* Function GET Info */
     func getUserInfo() {
         self.user.forEach { (data) in
             self.username = data.namaLengkapFromNik!
         }
     }
     
+    /* Function GET Kartu-Ku */
     @ObservedObject var kartuKuVM = KartuKuViewModel()
     private func getListKartuKu() {
         self.kartuKuVM.getListKartuKu { success in
@@ -579,10 +530,10 @@ struct DashboardTabs: View {
     // MARK: - UPDATE HEIGHT
     private func updateHeight(value : Int){
         
-                for i in 0..<cards.count{
-                    cards[i].isShow = false
-                }
+        for i in 0..<cards.count{
+            cards[i].isShow = false
+        }
         
-                cards[value].isShow = true
+        cards[value].isShow = true
     }
 }

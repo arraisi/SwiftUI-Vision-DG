@@ -26,14 +26,12 @@ struct GridMenuView: View {
                 isActive: $savingAccountActive,
                 label: { EmptyView() }
             )
-            .isDetailLink(false)
             
             NavigationLink(
                 destination: DestinationAccountBalancesView(),
                 isActive: $moveBalancesActive,
                 label: { EmptyView() }
             )
-            .isDetailLink(false)
             
             NavigationLink(
                 destination: DestinationAccountAddBalanceView(),

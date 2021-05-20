@@ -45,7 +45,9 @@ struct TransferRtgsConfirmation: View {
             
             self.totalTrx = Int(self.transferData.amount)! + Int(self.transferData.adminFee)!
             
-            self.totalTransferCtrl = "Rp " + "\(String(totalTrx))"
+            self.totalTransferCtrl = "Rp " + "\(String(totalTrx).thousandSeparator())"
+            
+            self.transferData.totalTrx = String(totalTrx)
         }
     }
     

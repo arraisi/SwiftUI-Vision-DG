@@ -6,22 +6,22 @@
 //
 
 import Foundation
+
 // MARK: response transfer
-class TransferOnUsResponse: Decodable {
-    var status: TransferResponseStatus
-    var ref: String
-    var destinationNumber: String
-    var cardNo: String
-    var transactionDate: String
-    var sourceNumber: String
-    var currency: String
-    var nominal: String
-    var nominalstr: String
-    var sumTotal: String
+struct TransferOnUsResponse: Codable {
+    let status: StatusTrx
+    let ref, destinationNumber, cardNo, transactionDate: String
+    let sourceNumber, currency, berita, nominal: String
+    let nominalstr, traceNumber: String
+    
+    enum CodingKeys: String, CodingKey {
+        case status, ref, destinationNumber, cardNo, transactionDate
+        case sourceNumber, currency, berita, nominal
+        case nominalstr, traceNumber
+    }
 }
 
-struct TransferResponseStatus: Decodable {
-    var status: String?
-    var message: String?
-    var code: String?
+// MARK: - Status
+struct StatusTrx: Codable {
+    let status, message, code: String
 }

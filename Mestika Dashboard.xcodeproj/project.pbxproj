@@ -124,6 +124,11 @@
 		524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */; };
 		524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB11E256E1141006ED6F0 /* CitizenService.swift */; };
 		524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB123256E1289006ED6F0 /* CitizenViewModel.swift */; };
+		5256B3CC2654C5A400E38AB7 /* FormForceChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */; };
+		52591C0826539915006A2756 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */; };
+		52591C0926539915006A2756 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52591C0A26539915006A2756 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A626497C9800CB953E /* WebRTC.xcframework */; };
+		52591C0B26539915006A2756 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A626497C9800CB953E /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */; };
 		525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */; };
 		525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */; };
@@ -618,6 +623,7 @@
 		524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNIKResponse.swift; sourceTree = "<group>"; };
 		524CB11E256E1141006ED6F0 /* CitizenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenService.swift; sourceTree = "<group>"; };
 		524CB123256E1289006ED6F0 /* CitizenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenViewModel.swift; sourceTree = "<group>"; };
+		5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormForceChangePasswordView.swift; sourceTree = "<group>"; };
 		525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordForgotPasswordView.swift; sourceTree = "<group>"; };
 		525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmPinForgotPasswordView.swift; sourceTree = "<group>"; };
 		525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmForgotPasswordScreen.swift; sourceTree = "<group>"; };
@@ -992,11 +998,13 @@
 			files = (
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
+				52591C0826539915006A2756 /* JitsiMeetSDK.xcframework in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
 				52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */,
 				520585FB25721F00005DB764 /* Indicators in Frameworks */,
 				520585F525721F00005DB764 /* PopupView in Frameworks */,
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
+				52591C0A26539915006A2756 /* WebRTC.xcframework in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				12478D1186E08B100E24B481 /* Pods_Mestika_Dashboard.framework in Frameworks */,
 			);
@@ -1435,9 +1443,18 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5256B3C82654C51E00E38AB7 /* Force Change Password */ = {
+			isa = PBXGroup;
+			children = (
+				5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */,
+			);
+			path = "Force Change Password";
+			sourceTree = "<group>";
+		};
 		525950152553E03000C8CA5D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				5256B3C82654C51E00E38AB7 /* Force Change Password */,
 				5259501E2553E03000C8CA5D /* LoginScreen.swift */,
 				525950162553E03000C8CA5D /* Forgot Password */,
 				6122BA0D825E221739AB5B40 /* First Login */,
@@ -2943,6 +2960,7 @@
 				5247465B25480C3A001F43C5 /* ListLastPurchasePaymentView.swift in Sources */,
 				5247464625480754001F43C5 /* ListAllFavoritePurchasePaymentView.swift in Sources */,
 				52ADFFAC2557DFDC00A1001F /* FormDetailKartuATMView.swift in Sources */,
+				5256B3CC2654C5A400E38AB7 /* FormForceChangePasswordView.swift in Sources */,
 				C0E40B7A2564D83F00259612 /* FormJabatanProfesiView.swift in Sources */,
 				52D8DC2725D65A4B004DF85E /* TextArea.swift in Sources */,
 				52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */,

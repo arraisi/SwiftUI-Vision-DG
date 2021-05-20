@@ -53,7 +53,7 @@ struct FormInputAtmChangeDeviceView: View {
             .isDetailLink(false)
             
             NavigationLink(
-                destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(true)).environmentObject(registerData),
+                destination: FormForceChangePasswordView(),
                 isActive: self.$routeNewPassword,
                 label: {}
             )

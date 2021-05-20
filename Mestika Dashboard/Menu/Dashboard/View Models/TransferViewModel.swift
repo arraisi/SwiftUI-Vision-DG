@@ -220,6 +220,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"
+                case .custom(code: 504):
+                    self.code = "504"
+                    self.message = "Error Transfer"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -437,17 +440,18 @@ class TransferViewModel : ObservableObject {
                         case "trxOnCifNonIdr":
                             print("Cif Non Idr")
                         case "trxOnUsIdr":
-                            self.limitUserOnUs = limit.value
+                            print("On Us")
+                            self.limitUserOnUs = Int(limit.value)
                         case "trxOnUsNonIdr":
                             print("On Us Non Idr")
                         case "trxVirtualAccount":
                             print("VA")
                         case "trxSknTransfer":
-                            self.limitUserSkn = limit.value
+                            self.limitUserSkn = Int(limit.value)
                         case "trxRtgsTransfer":
-                            self.limitUserRtgs = limit.value
+                            self.limitUserRtgs = Int(limit.value)
                         case "trxOnlineTransfer":
-                            self.limitUserOnline = limit.value
+                            self.limitUserOnline = Int(limit.value)
                         case "trxBillPayment":
                             print("Bill Payment")
                         case "trxPurchase":

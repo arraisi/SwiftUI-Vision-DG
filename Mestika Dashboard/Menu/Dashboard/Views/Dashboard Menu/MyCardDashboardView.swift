@@ -60,7 +60,7 @@ struct MyCardDashboardView: View {
                         .edgesIgnoringSafeArea(.bottom)
                         .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0.0, y: 15.0)
                         .animation(.spring())
-                        .padding(.vertical,25)
+                        .padding(.vertical, 25)
                         
                         if cards.status == "ACTIVE" {
                             DetailKartuAktifView(card: cards)

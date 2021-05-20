@@ -186,6 +186,10 @@ class AuthService {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
+                if (httpResponse.statusCode == 503) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 404) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }

@@ -27,10 +27,6 @@ struct FormChangePersonalDataView: View {
                 label: {EmptyView()}
             )
             
-            AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {
-                
-            }
-            
             ScrollView(showsIndicators: false) {
                 VStack {
                     
@@ -54,29 +50,15 @@ struct FormChangePersonalDataView: View {
                     .cornerRadius(12)
                     .padding(.top, 30)
                     .padding(.bottom, 10)
-                    
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("Back".localized(language))
-                            .foregroundColor(.white)
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                    }
-                    .background(Color(hex: "#2334D0"))
-                    .cornerRadius(12)
                 }
                 .padding(30)
                 .background(Color.white)
                 .cornerRadius(15)
                 .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                 .padding(25)
-                //            .padding(.top, 30)
             }
         }
-        .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
+        .navigationBarTitle("Account", displayMode: .inline)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
