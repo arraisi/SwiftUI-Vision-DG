@@ -125,10 +125,6 @@
 		524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB11E256E1141006ED6F0 /* CitizenService.swift */; };
 		524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB123256E1289006ED6F0 /* CitizenViewModel.swift */; };
 		5256B3CC2654C5A400E38AB7 /* FormForceChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */; };
-		52591C0826539915006A2756 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */; };
-		52591C0926539915006A2756 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		52591C0A26539915006A2756 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A626497C9800CB953E /* WebRTC.xcframework */; };
-		52591C0B26539915006A2756 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C07AA4A626497C9800CB953E /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */; };
 		525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */; };
 		525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950192553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift */; };
@@ -500,6 +496,19 @@
 			remoteInfo = "Mestika Dashboard";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C0B8AD2526564F4200BCE21F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0448BEC6A05548DB51F91841 /* Pods-Mestika Dashboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika Dashboard.debug.xcconfig"; path = "Target Support Files/Pods-Mestika Dashboard/Pods-Mestika Dashboard.debug.xcconfig"; sourceTree = "<group>"; };
@@ -908,8 +917,6 @@
 		C0733FBE25EE25320034689F /* SavingAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountView.swift; sourceTree = "<group>"; };
 		C075137A255C19A900BB75D8 /* ScanNPWPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanNPWPView.swift; sourceTree = "<group>"; };
 		C0781C89255B4B3F00D4F245 /* OtpChangePinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpChangePinAtmView.swift; sourceTree = "<group>"; };
-		C07AA4A626497C9800CB953E /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "/Users/macbookpro/Downloads/jitsi-meet-custom-old/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<absolute>"; };
-		C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "/Users/macbookpro/Downloads/jitsi-meet-custom-old/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<absolute>"; };
 		C07AA4C026497EC900CB953E /* userLimitData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userLimitData.json; sourceTree = "<group>"; };
 		C07AA4C426497F6300CB953E /* globalLimitData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = globalLimitData.json; sourceTree = "<group>"; };
 		C07AA4C9264A243E00CB953E /* TransactionLimitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLimitViewModel.swift; sourceTree = "<group>"; };
@@ -998,13 +1005,11 @@
 			files = (
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
-				52591C0826539915006A2756 /* JitsiMeetSDK.xcframework in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
 				52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */,
 				520585FB25721F00005DB764 /* Indicators in Frameworks */,
 				520585F525721F00005DB764 /* PopupView in Frameworks */,
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
-				52591C0A26539915006A2756 /* WebRTC.xcframework in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				12478D1186E08B100E24B481 /* Pods_Mestika_Dashboard.framework in Frameworks */,
 			);
@@ -1549,8 +1554,6 @@
 		5291912825D3FF11005A4898 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				C07AA4A626497C9800CB953E /* WebRTC.xcframework */,
-				C07AA4A726497C9800CB953E /* JitsiMeetSDK.xcframework */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -2391,6 +2394,7 @@
 				5245F87E253FE702002E8B53 /* Frameworks */,
 				5245F87F253FE702002E8B53 /* Resources */,
 				B64A1E7D1582B1355F4D21B4 /* [CP] Embed Pods Frameworks */,
+				C0B8AD2526564F4200BCE21F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
