@@ -159,8 +159,8 @@ struct PerkerjaanView: View {
                                                 self.selection = "jabatanProfesi"
                                             case 6 :
                                                 self.selection = "jabatanProfesi"
-                                            case 9:
-                                                self.selection = "industriTempatBekerja"
+//                                            case 9:
+//                                                self.selection = "industriTempatBekerja"
                                             case 10:
                                                 self.selection = "sumberPenyandangDana2"
                                             case 11:

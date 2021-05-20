@@ -343,7 +343,6 @@ struct InformasiPerusahaanView: View {
             }
             .padding(.horizontal, 20)
             
-            
             Group {
                 Text("Business fields".localized(language))
                     .font(Font.system(size: 12))
@@ -352,18 +351,29 @@ struct InformasiPerusahaanView: View {
                     .multilineTextAlignment(.leading)
                 
                 HStack {
-                    MultilineTextField(registerData.bidangUsaha == "" ? "Business fields".localized(language) : "", text: $registerData.bidangUsaha, onCommit: {
-                    })
-                    .padding(.leading, 15)
-                    .disabled(true)
+                    if registerData.bidangUsaha == "" {
+                        Text("Business fields".localized(language))
+                            .font(Font.system(size: 14))
+                            .foregroundColor(Color(.lightGray))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.leading, 15)
+                    }
+                    else {
+                        Text(registerData.bidangUsaha)
+                            .font(Font.system(size: 14))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.leading, 15)
+                        
+                    }
                     
+                    Spacer()
                     Menu {
                         ForEach(0..<bidangUsaha.count, id: \.self) { i in
                             Button(action: {
                                 registerData.bidangUsaha = bidangUsaha[i].nama
                             }) {
                                 Text(bidangUsaha[i].nama)
-//                                    .font(.custom("Montserrat-Regular", size: 12))
+                                    //                                    .font(.custom("Montserrat-Regular", size: 12))
                                     .fixedSize(horizontal: false, vertical: true)
                             }
                         }
@@ -379,6 +389,42 @@ struct InformasiPerusahaanView: View {
                 
             }
             .padding(.horizontal, 20)
+            
+//            Group {
+//                Text("Business fields".localized(language))
+//                    .font(Font.system(size: 12))
+//                    .fontWeight(.semibold)
+//                    .foregroundColor(Color(hex: "#707070"))
+//                    .multilineTextAlignment(.leading)
+//
+//                HStack {
+//                    MultilineTextField(registerData.bidangUsaha == "" ? "Business fields".localized(language) : "", text: $registerData.bidangUsaha, onCommit: {
+//                    })
+//                    .padding(.leading, 15)
+//                    .disabled(true)
+//
+//                    Menu {
+//                        ForEach(0..<bidangUsaha.count, id: \.self) { i in
+//                            Button(action: {
+//                                registerData.bidangUsaha = bidangUsaha[i].nama
+//                            }) {
+//                                Text(bidangUsaha[i].nama)
+//                                    //                                    .font(.custom("Montserrat-Regular", size: 12))
+//                                    .fixedSize(horizontal: false, vertical: true)
+//                            }
+//                        }
+//                    } label: {
+//                        Image(systemName: "chevron.right").padding()
+//                    }
+//
+//                }
+//                .font(Font.system(size: 12))
+//                .background(Color.gray.opacity(0.1))
+//                .cornerRadius(10)
+//
+//
+//            }
+//            .padding(.horizontal, 20)
             
             Group {
                 
@@ -639,9 +685,9 @@ struct InformasiPerusahaanView: View {
                     self.kodePos = self.addressSugestion[0].postalCode
                     registerData.kecamatan = self.addressSugestion[0].kecamatan
                     registerData.kelurahan = self.addressSugestion[0].kelurahan
-//                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
-//                    registerData.rtPerusahaan = self.addressSugestion[0].rt
-//                    registerData.rwPerusahaan = self.addressSugestion[0].rw
+                    //                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
+                    //                    registerData.rtPerusahaan = self.addressSugestion[0].rt
+                    //                    registerData.rwPerusahaan = self.addressSugestion[0].rw
                 }
                 self.showingModal = false
                 print("Success")

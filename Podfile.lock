@@ -93,6 +93,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.4.1):
     - GoogleUtilities/Logger
+  - JitsiMeetSDK (3.5.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -106,6 +107,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Messaging
+  - JitsiMeetSDK
   - SwiftyRSA
 
 SPEC REPOS:
@@ -119,6 +121,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - JitsiMeetSDK
     - nanopb
     - PromisesObjC
     - SwiftyRSA
@@ -133,10 +136,11 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: c6bbc9753d046b5456dd4f940057fbad2c28419e
   GoogleDataTransport: 11e3a5f2c190327df1a4a5d7e7ae3d4d5b9c9e4c
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
+  JitsiMeetSDK: ef6ebbad2237c0e3ea6ff61fea78745f9543b238
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftyRSA: 3b9c9179744217951facc6a3e9ae8d8c97061ffa
 
-PODFILE CHECKSUM: ee49373802a3540229e83039cca28b1f17dcbf28
+PODFILE CHECKSUM: 7fa12d0008fa70576b49d7c8698c4aacf6684952
 
 COCOAPODS: 1.10.1

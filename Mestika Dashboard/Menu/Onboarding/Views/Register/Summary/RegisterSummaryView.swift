@@ -177,22 +177,23 @@ struct RegisterSummaryView: View {
                                 
                             }
                             
-                            if [9].contains(registerData.pekerjaanId) {
-                                
-                                ZStack {
-                                    FieldSummaryView(value: $registerData.industriTempatBekerja, label: "Industry", onEdit: {
-                                        self.industriTempatBekerjaActive = true
-                                    })
-                                    NavigationLink(destination: FormIndustriTempatBekerjaView(editMode: .active).environmentObject(registerData), isActive: $industriTempatBekerjaActive) {EmptyView()}
-                                }
-                                
-                            }
+//                            if [9].contains(registerData.pekerjaanId) {
+//
+//                                ZStack {
+//                                    FieldSummaryView(value: $registerData.industriTempatBekerja, label: "Industry", onEdit: {
+//                                        self.industriTempatBekerjaActive = true
+//                                    })
+//                                    NavigationLink(destination: FormIndustriTempatBekerjaView(editMode: .active).environmentObject(registerData), isActive: $industriTempatBekerjaActive) {EmptyView()}
+//                                }
+//
+//                            }
                             
                             if appState.nasabahIsExisting || (!appState.nasabahIsExisting && ![10, 11, 12].contains(registerData.pekerjaanId))  {
 
                                 HStack {
                                     Text("Gross Income".localized(language))
-                                        .font(.caption)
+//                                        .font(.caption)
+                                        .font(.custom("Montserrat-SemiBold", size: 12))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
