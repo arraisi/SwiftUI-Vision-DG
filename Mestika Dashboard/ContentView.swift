@@ -51,11 +51,11 @@ struct ContentView: View {
                 
                 WelcomeView()
                 
-                //                                NavigationView{
-                //                                    BesarPerkiraanPenarikanView()
-                //                                        .environmentObject(RegistrasiModel())
-                //                                        .environmentObject(appState)
-                //                                }
+//                                                NavigationView{
+//                                                    SuccessRegisterView()
+//                                                        .environmentObject(RegistrasiModel())
+//                                                        .environmentObject(AddProductATM())
+//                                                }
             }
             .edgesIgnoringSafeArea(.top)
         }

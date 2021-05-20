@@ -88,11 +88,8 @@ struct TransferTabs: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
-            Spacer()
             
-//            Button(action: {}, label: {
-//                Image("ic_search")
-//            })
+            Spacer()
         }
         .padding()
     }

@@ -22,8 +22,6 @@ struct LanguageSettingScreen: View {
     
     var body: some View {
         VStack {
-            AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {}
-            
             ScrollView(showsIndicators: false) {
                 VStack {
                     Text("Choose Language".localized(language))
@@ -71,8 +69,7 @@ struct LanguageSettingScreen: View {
                 
             }
         }
-        .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
+        .navigationBarTitle("Language", displayMode: .inline)
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("Succeed".localized(language)),

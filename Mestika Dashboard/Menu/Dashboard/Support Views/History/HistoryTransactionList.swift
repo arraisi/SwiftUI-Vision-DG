@@ -21,6 +21,9 @@ struct HistoryTransactionList: View {
             Text("No Transactions".localized(language))
                 .font(.custom("Montserrat-SemiBold", size: 14))
                 .padding(.top, 25)
+                .padding(.horizontal)
+            
+            Spacer()
             
         } else {
             ScrollView {

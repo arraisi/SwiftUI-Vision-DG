@@ -69,7 +69,7 @@ struct AccountTabs: View {
                     VStack {
                         profileInfo
                         menuGrid
-                            .padding(.bottom)
+                            .padding(.bottom, 40)
                         
                     }
                 }
@@ -232,7 +232,7 @@ struct AccountTabs: View {
                             destination: TransactionLimitView(),
                             isActive: $trxLimitActive,
                             label: { EmptyView() }
-                        ).isDetailLink(false).introspectNavigationController { navController  in
+                        ).introspectNavigationController { navController  in
                             navController.view.gestureRecognizers = []
                         }
                         

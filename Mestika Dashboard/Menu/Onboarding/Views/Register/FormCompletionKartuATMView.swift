@@ -163,8 +163,8 @@ struct FormCompletionKartuATMView: View {
                 registerData.kodePosSuratMenyurat = data.addressPostalCodeInput!
                 registerData.kotaSuratMenyurat = data.addressKotaInput!
                 registerData.provinsiSuratMenyurat = data.addressProvinsiInput!
-                registerData.rtSuratMenyurat = data.addressRtInput!
-                registerData.rwSuratMenyurat = data.addressRwInput!
+                registerData.rtSuratMenyurat = data.addressRtInput ?? ""
+                registerData.rwSuratMenyurat = data.addressRwInput ?? ""
                 
                 registerData.kecamatan = data.kecamatan!
                 registerData.kelurahan = data.kelurahan!

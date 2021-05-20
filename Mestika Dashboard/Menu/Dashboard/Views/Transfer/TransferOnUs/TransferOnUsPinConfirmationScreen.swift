@@ -40,7 +40,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                 isActive: self.$unLocked,
                 label: {EmptyView()}
             )
-            .isDetailLink(false)
+//            .isDetailLink(false)
             
             VStack {
                 
