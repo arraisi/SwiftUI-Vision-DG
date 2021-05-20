@@ -97,7 +97,7 @@ struct MultilineTextField: View {
         }
     }
 
-    @State private var dynamicHeight: CGFloat = 100
+    @State private var dynamicHeight: CGFloat = 40
     @State private var showingPlaceholder = false
 
     init (_ placeholder: String = "", text: Binding<String>, onCommit: (() -> Void)? = nil) {
