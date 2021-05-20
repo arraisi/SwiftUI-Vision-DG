@@ -119,7 +119,7 @@ struct SumberDanaView: View {
                                         
                                         // Button
                                         if (editMode == .inactive) {
-                                            NavigationLink(destination: PerkiraanPenarikanView().environmentObject(registerData)) {
+                                            NavigationLink(destination: FormPenarikanView().environmentObject(registerData)) {
                                                 
                                                 Text("Next".localized(language))
                                                     .foregroundColor(.white)

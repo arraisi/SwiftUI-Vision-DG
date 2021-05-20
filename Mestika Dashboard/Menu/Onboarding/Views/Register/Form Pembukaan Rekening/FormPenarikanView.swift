@@ -1,13 +1,13 @@
 //
-//  FormBesarPenarikanDanaView.swift
-//  Bank Mestika
+//  FormPenarikanView.swift
+//  Mestika Dashboard
 //
-//  Created by Abdul R. Arraisi on 01/10/20.
+//  Created by Abdul R. Arraisi on 20/05/21.
 //
 
 import SwiftUI
 
-struct BesarPerkiraanPenarikanView: View {
+struct FormPenarikanView: View {
     
     @AppStorage("language")
     private var language = LocalizationService.shared.language
@@ -24,7 +24,12 @@ struct BesarPerkiraanPenarikanView: View {
     @State var editMode: EditMode = .inactive
     
     // View variables
+    let perkiraanPenarikan: [MasterModel] = load("perkiraanSetoran.json")
     let besarPerkiraanPenarikan: [MasterModel] = load("besarPerkiraanSetoran.json")
+    
+    var disableButton: Bool {
+        registerData.perkiraanPenarikanId == 0 || registerData.besarPerkiraanPenarikanId == 0
+    }
     
     var body: some View {
         
@@ -41,7 +46,7 @@ struct BesarPerkiraanPenarikanView: View {
             VStack {
                 AppBarLogo(light: false, onCancel: {})
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     ZStack {
                         
                         VStack {
@@ -54,6 +59,7 @@ struct BesarPerkiraanPenarikanView: View {
                         }
                         
                         VStack {
+                            
                             // Title
                             Text("OPENING ACCOUNT DATA".localized(language))
                                 .font(.custom("Montserrat-ExtraBold", size: 24))
@@ -86,64 +92,40 @@ struct BesarPerkiraanPenarikanView: View {
                                         
                                         Spacer()
                                         
-                                        // Sub title
-                                        Text("How Much Your Estimated Withdrawal of Funds Each Month".localized(language))
-                                            .font(.custom("Montserrat-SemiBold", size: 18))
-                                            .foregroundColor(Color(hex: "#232175"))
-                                            .multilineTextAlignment(.center)
-                                            .padding(.horizontal, 40)
-                                            .padding(.vertical, 30)
+                                        perkiraanPenarikanView
                                         
-                                        // Forms input
-                                        ZStack {
-                                            
-                                            RadioButtonGroup(
-                                                items: besarPerkiraanPenarikan,
-                                                selectedId: $registerData.besarPerkiraanPenarikanId) { selected in
-                                                
-                                                if let i = besarPerkiraanPenarikan.firstIndex(where: { $0.id == selected }) {
-                                                    print(besarPerkiraanPenarikan[i])
-                                                    registerData.besarPerkiraanPenarikan = besarPerkiraanPenarikan[i].name
-                                                }
-                                                
-                                                print("Selected is: \(registerData.besarPerkiraanPenarikan)")
-                                            }
-                                            .padding()
-                                            
-                                        }
-                                        .frame(width: UIScreen.main.bounds.width - 100)
-                                        .background(Color.white)
-                                        .cornerRadius(15)
-                                        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+                                        besarPenarikanView
                                         
                                         // Button
                                         if (editMode == .inactive) {
-                                            NavigationLink(destination: PerkiraanSetoranView().environmentObject(registerData)) {
+                                            NavigationLink(destination: FormSetoranView().environmentObject(registerData)) {
                                                 
                                                 Text("Next".localized(language))
                                                     .foregroundColor(.white)
-                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                                    .fontWeight(.bold)
+                                                    .font(.system(size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
                                                 
                                             }
-                                            .disabled(registerData.besarPerkiraanPenarikanId == 0)
+                                            .disabled(disableButton)
                                             .frame(height: 50)
-                                            .background(registerData.besarPerkiraanPenarikanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .background(disableButton ? Color(.lightGray) : Color(hex: "#2334D0"))
                                             .cornerRadius(12)
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
                                         } else {
                                             NavigationLink(destination: RegisterSummaryView().environmentObject(registerData)) {
                                                 
-                                                Text("Save".localized(language))
+                                                Text("Save")
                                                     .foregroundColor(.white)
-                                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                                    .fontWeight(.bold)
+                                                    .font(.system(size: 14))
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
                                                 
                                             }
-                                            .disabled(registerData.besarPerkiraanPenarikanId == 0)
+                                            .disabled(disableButton)
                                             .frame(height: 50)
-                                            .background(registerData.besarPerkiraanPenarikanId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .background(disableButton ? Color(.lightGray) : Color(hex: "#2334D0"))
                                             .cornerRadius(12)
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
@@ -161,13 +143,10 @@ struct BesarPerkiraanPenarikanView: View {
                             }
                             .padding(.bottom, 25)
                         }
-
                     }
                 }
                 .KeyboardAwarePadding()
-                
             }
-            
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
@@ -187,10 +166,83 @@ struct BesarPerkiraanPenarikanView: View {
             }
         }))
     }
+    
+    // MARK: Form Perkiraan Penarikan Dana
+    private var perkiraanPenarikanView: some View {
+        VStack {
+            // Sub title
+            Text("How Many Times Are Estimated Withdrawal of Funds in a Month".localized(language))
+                .font(.custom("Montserrat-SemiBold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                .padding(.vertical, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            // Forms input
+            ZStack {
+                
+                RadioButtonGroup(
+                    items: perkiraanPenarikan,
+                    selectedId: $registerData.perkiraanPenarikanId) { selected in
+                    
+                    if let i = perkiraanPenarikan.firstIndex(where: { $0.id == selected }) {
+                        print(perkiraanPenarikan[i])
+                        registerData.perkiraanPenarikan = perkiraanPenarikan[i].name
+                    }
+                    
+                    print("Selected is: \(registerData.perkiraanPenarikan)")
+                    
+                }
+                .padding()
+                
+            }
+            .frame(width: UIScreen.main.bounds.width - 100)
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+        }
+    }
+    
+    // MARK: Form Besar Penarikan Dana
+    private var besarPenarikanView: some View {
+        VStack {
+            // Sub title
+            Text("How Much Your Estimated Withdrawal of Funds Each Month".localized(language))
+                .font(.custom("Montserrat-SemiBold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                .padding(.vertical, 20)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            // Forms input
+            ZStack {
+                
+                RadioButtonGroup(
+                    items: besarPerkiraanPenarikan,
+                    selectedId: $registerData.besarPerkiraanPenarikanId) { selected in
+                    
+                    if let i = besarPerkiraanPenarikan.firstIndex(where: { $0.id == selected }) {
+                        print(besarPerkiraanPenarikan[i])
+                        registerData.besarPerkiraanPenarikan = besarPerkiraanPenarikan[i].name
+                    }
+                    
+                    print("Selected is: \(registerData.besarPerkiraanPenarikan)")
+                }
+                .padding()
+                
+            }
+            .frame(width: UIScreen.main.bounds.width - 100)
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+        }
+    }
 }
 
-struct BesarPenarikanDanaView_Previews: PreviewProvider {
+struct FormPenarikanView_Previews: PreviewProvider {
     static var previews: some View {
-        BesarPerkiraanPenarikanView().environmentObject(RegistrasiModel())
+        FormPenarikanView().environmentObject(RegistrasiModel())
     }
 }
