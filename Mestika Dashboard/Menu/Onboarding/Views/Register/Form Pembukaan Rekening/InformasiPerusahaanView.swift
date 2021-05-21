@@ -29,6 +29,7 @@ struct InformasiPerusahaanView: View {
     
     @State var namaPerusahaan: String = ""
     @State var alamatPerusahaan: String = ""
+    @State var kabKota: String = ""
     @State var kelurahan: String = ""
     @State var kodePos : String = ""
     @State var kecamatan : String = ""
@@ -319,6 +320,9 @@ struct InformasiPerusahaanView: View {
         if self.kodePos == "" {
             return true
         }
+        if registerData.kabKota == "" {
+            return true
+        }
         if registerData.kecamatan == "" {
             return true
         }
@@ -480,6 +484,13 @@ struct InformasiPerusahaanView: View {
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
                 
+            }
+            .padding(.horizontal, 20)
+            
+            LabelTextField(value: $registerData.kabKota, label: "City".localized(language), placeHolder: "City".localized(language)) { (Bool) in
+                print("on edit")
+            } onCommit: {
+                print("on commit")
             }
             .padding(.horizontal, 20)
             
@@ -685,6 +696,8 @@ struct InformasiPerusahaanView: View {
                     self.kodePos = self.addressSugestion[0].postalCode
                     registerData.kecamatan = self.addressSugestion[0].kecamatan
                     registerData.kelurahan = self.addressSugestion[0].kelurahan
+                    registerData.kabKota = self.addressSugestion[0].city
+                    
                     //                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     //                    registerData.rtPerusahaan = self.addressSugestion[0].rt
                     //                    registerData.rwPerusahaan = self.addressSugestion[0].rw
