@@ -180,7 +180,7 @@ struct DashboardTabs: View {
                                 isActive: self.$routingMyCardDashboard,
                                 label: {}
                             )
-//                            .isDetailLink(false)
+                            .isDetailLink(false)
                             
                             Button(
                                 action: {

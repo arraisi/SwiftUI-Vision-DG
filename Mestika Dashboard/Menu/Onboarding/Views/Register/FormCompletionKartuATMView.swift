@@ -148,27 +148,27 @@ struct FormCompletionKartuATMView: View {
                 registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
                 registerData.rtFromNik = data.rtFromNik ?? ""
                 registerData.rwFromNik = data.rwFromNik ?? ""
-                registerData.nik = data.nik!
+                registerData.nik = data.nik ?? ""
                 
-                registerData.alamatSuratMenyurat = data.addressInput!
-                registerData.kecamatanSuratMenyurat = data.addressKecamatanInput!
-                registerData.kelurahanSuratMenyurat = data.addressKelurahanInput!
-                registerData.kodePosSuratMenyurat = data.addressPostalCodeInput!
-                registerData.kotaSuratMenyurat = data.addressKotaInput!
-                registerData.provinsiSuratMenyurat = data.addressProvinsiInput!
+                registerData.alamatSuratMenyurat = data.addressInput ?? ""
+                registerData.kecamatanSuratMenyurat = data.addressKecamatanInput ?? ""
+                registerData.kelurahanSuratMenyurat = data.addressKelurahanInput ?? ""
+                registerData.kodePosSuratMenyurat = data.addressPostalCodeInput ?? ""
+                registerData.kotaSuratMenyurat = data.addressKotaInput ?? ""
+                registerData.provinsiSuratMenyurat = data.addressProvinsiInput ?? ""
                 registerData.rtSuratMenyurat = data.addressRtInput ?? ""
                 registerData.rwSuratMenyurat = data.addressRwInput ?? ""
                 
-                registerData.kotaPerusahaan = data.kotaPerusahaan!
-                registerData.kecamatan = data.kecamatan!
-                registerData.kelurahan = data.kelurahan!
-                registerData.alamatPerusahaan = data.alamatPerusahaan!
-                registerData.kodePos = data.kodePos!
+                registerData.kabKota = data.kabKota ?? ""
+                registerData.kecamatan = data.kecamatan ?? ""
+                registerData.kelurahan = data.kelurahan ?? ""
+                registerData.alamatPerusahaan = data.alamatPerusahaan ?? ""
+                registerData.kodePos = data.kodePos ?? ""
 //                registerData.rtrw = data.rtrw ?? ""
 //                registerData.rtPerusahaan = data.rtPerusahaan!
 //                registerData.rwPerusahaan = data.rwPerusahaan!
-                registerData.kotaPerusahaan = data.kotaPerusahaan!
-                registerData.provinsiPerusahaan = data.provinsiPerusahaan!
+                registerData.kotaPerusahaan = data.kotaPerusahaan ?? ""
+                registerData.provinsiPerusahaan = data.provinsiPerusahaan ?? ""
                 
                 registerData.isAddressEqualToDukcapil = data.isAddressEqualToDukcapil
             }

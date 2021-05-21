@@ -129,6 +129,7 @@ struct TransferOnUsScreen: View {
                         VStack {
                             Button(action: {
                                 self.transferData.destinationName = self.destinationName
+                                self.transferData.sourceNumber = self.selectedSourceNumber
                                 
                                 if (transactionVoucher == "Select Voucher".localized(language) || transactionVoucher == "Voucher Not Available".localized(language)) {
                                     self.transferData.transactionVoucher = ""

@@ -103,7 +103,7 @@ struct TransferTabs: View {
                 isActive: self.$transferOnUsActive) {
                 EmptyView()
             }
-//            .isDetailLink(false)
+            .isDetailLink(false)
             
             // Link Transfer OFFUS
             NavigationLink(
@@ -111,7 +111,7 @@ struct TransferTabs: View {
                 isActive: self.$transferOffUsActive,
                 label: {EmptyView()}
             )
-//            .isDetailLink(false)
+            .isDetailLink(false)
             
             Button(action: {
                 print("ONUS")

@@ -190,7 +190,6 @@ struct FormOTPVerificationRegisterNasabahView: View {
                             isActive: self.$isCancelViewActive,
                             label: {}
                         )
-                        .isDetailLink(false)
                         
                         Button(action: {
                             var flags = SCNetworkReachabilityFlags()

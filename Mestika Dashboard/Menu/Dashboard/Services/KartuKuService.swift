@@ -51,6 +51,9 @@ class KartuKuService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
+                    
+                    print("KARTU KU OK")
+                    
                     let kartuKuResponse = try? JSONDecoder().decode(KartuKuResponse.self, from: data!)
                     if let kartuKu = kartuKuResponse {
                         completion(.success(kartuKu))
