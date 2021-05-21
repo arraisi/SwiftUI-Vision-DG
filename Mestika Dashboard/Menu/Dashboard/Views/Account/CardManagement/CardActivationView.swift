@@ -72,7 +72,7 @@ struct CardActivationView: View {
                                 label: {
                                     EmptyView()
                                 })
-                                .isDetailLink(false)
+//                                .isDetailLink(false)
                             
                             Button(action: {
                                 self.activateData.cvv = self.noCvvCtrl

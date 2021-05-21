@@ -83,7 +83,7 @@ extension AuthViewModel {
         
         AuthService.shared.loginNewDevice(password: encryptPassword(password: password), phoneNumber: phoneNumber) { result in
             switch result {
-            case .success( _):
+            case .success(let response):
                 print("Success")
                 self.isLoading = false
                 
@@ -101,6 +101,9 @@ extension AuthViewModel {
                 case .custom(code: 206):
                     self.errorCode = "206"
                     self.errorMessage = "Change Password"
+                case .customWithStatus(code: 206, codeStatus: "302"):
+                    self.errorCode = "302"
+                    self.errorMessage = "Autentikasi gagal, silakan coba kembali"
                 case .custom(code: 401):
                     self.errorCode = "401"
                     self.errorMessage = "Move to Dashboard"
@@ -150,6 +153,9 @@ extension AuthViewModel {
                 case .custom(code: 206):
                     self.errorCode = "206"
                     self.errorMessage = "Change Password"
+                case .custom(code: 302):
+                    self.errorCode = "302"
+                    self.errorMessage = "Autentikasi gagal, silahkan coba kembali"
                 case .custom(code: 401):
                     self.errorCode = "401"
                     self.errorMessage = "Move to Dashboard"

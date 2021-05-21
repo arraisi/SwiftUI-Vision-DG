@@ -47,7 +47,17 @@ struct InformasiPerusahaanView: View {
     @State var addressSugestion = [AddressViewModel]()
     @State var addressSugestionResult = [AddressResultViewModel]()
     
-    let bidangUsaha:[BidangUsaha] = [
+    let bidangUsahaSwasta:[BidangUsaha] = [
+        .init(nama: "Notaris"),
+        .init(nama: "Konsultan Keuangan / Perencana"),
+        .init(nama: "Keuangan"),
+        .init(nama: "Advokat (Konsultan Hukum)"),
+        .init(nama: "Kurator (Pengurus atau Pengawas institusi Budaya dan Seni)"),
+        .init(nama: "Konsultan Pajak"),
+        .init(nama: "Lainnya (valuenya adalah pegawai swasta)"),
+    ]
+    
+    let bidangUsahaWiraswasta:[BidangUsaha] = [
         .init(nama: "Minimarket/ Jasa Parkir/ SPBU"),
         .init(nama: "Ekspor/ Impor"),
         .init(nama: "Perdagangan Barang Antik"),
@@ -70,10 +80,6 @@ struct InformasiPerusahaanView: View {
         .init(nama: "Lembaga Keuangan"),
         .init(nama: "Yayasan Sosial"),
         .init(nama: "Konstruksi/ Kontraktor"),
-        .init(nama: "Notaris"),
-        .init(nama: "Konsultan Keuangan/ Perencana Keuangan"),
-        .init(nama: "Advokat"),
-        .init(nama: "Konsultan Pajak"),
     ]
     
     /*
@@ -278,9 +284,6 @@ struct InformasiPerusahaanView: View {
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             createBottomFloater()
         }
-        .popup(isPresented: $showingModalBidang, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
-            createBottomFloaterBidangUsaha()
-        }
         .onAppear() {
             self.noTlpPerusahaan = self.registerData.noTeleponPerusahaan
             self.kodePos = self.registerData.kodePos
@@ -350,81 +353,82 @@ struct InformasiPerusahaanView: View {
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
-                HStack {
-                    if registerData.bidangUsaha == "" {
-                        Text("Business fields".localized(language))
-                            .font(Font.system(size: 14))
-                            .foregroundColor(Color(.lightGray))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.leading, 15)
-                    }
-                    else {
-                        Text(registerData.bidangUsaha)
-                            .font(Font.system(size: 14))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.leading, 15)
+                if (registerData.pekerjaanId == 3) {
+                    HStack {
+                        if registerData.bidangUsaha == "" {
+                            Text("Business fields".localized(language))
+                                .font(Font.system(size: 14))
+                                .foregroundColor(Color(.lightGray))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.leading, 15)
+                        }
+                        else {
+                            Text(registerData.bidangUsaha)
+                                .font(Font.system(size: 14))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.leading, 15)
+                            
+                        }
+                        
+                        Spacer()
+                        Menu {
+                            ForEach(0..<bidangUsahaSwasta.count, id: \.self) { i in
+                                Button(action: {
+                                    registerData.bidangUsaha = bidangUsahaSwasta[i].nama
+                                }) {
+                                    Text(bidangUsahaSwasta[i].nama)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
                         
                     }
-                    
-                    Spacer()
-                    Menu {
-                        ForEach(0..<bidangUsaha.count, id: \.self) { i in
-                            Button(action: {
-                                registerData.bidangUsaha = bidangUsaha[i].nama
-                            }) {
-                                Text(bidangUsaha[i].nama)
-                                    //                                    .font(.custom("Montserrat-Regular", size: 12))
-                                    .fixedSize(horizontal: false, vertical: true)
-                            }
+                    .font(Font.system(size: 12))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                } else if (registerData.pekerjaanId == 4) {
+                    HStack {
+                        if registerData.bidangUsaha == "" {
+                            Text("Business fields".localized(language))
+                                .font(Font.system(size: 14))
+                                .foregroundColor(Color(.lightGray))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.leading, 15)
                         }
-                    } label: {
-                        Image(systemName: "chevron.right").padding()
+                        else {
+                            Text(registerData.bidangUsaha)
+                                .font(Font.system(size: 14))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.leading, 15)
+                            
+                        }
+                        
+                        Spacer()
+                        Menu {
+                            ForEach(0..<bidangUsahaWiraswasta.count, id: \.self) { i in
+                                Button(action: {
+                                    registerData.bidangUsaha = bidangUsahaWiraswasta[i].nama
+                                }) {
+                                    Text(bidangUsahaWiraswasta[i].nama)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
                     }
-                    
+                    .font(Font.system(size: 12))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                } else {
+                    EmptyView()
                 }
-                .font(Font.system(size: 12))
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                
                 
             }
             .padding(.horizontal, 20)
-            
-//            Group {
-//                Text("Business fields".localized(language))
-//                    .font(Font.system(size: 12))
-//                    .fontWeight(.semibold)
-//                    .foregroundColor(Color(hex: "#707070"))
-//                    .multilineTextAlignment(.leading)
-//
-//                HStack {
-//                    MultilineTextField(registerData.bidangUsaha == "" ? "Business fields".localized(language) : "", text: $registerData.bidangUsaha, onCommit: {
-//                    })
-//                    .padding(.leading, 15)
-//                    .disabled(true)
-//
-//                    Menu {
-//                        ForEach(0..<bidangUsaha.count, id: \.self) { i in
-//                            Button(action: {
-//                                registerData.bidangUsaha = bidangUsaha[i].nama
-//                            }) {
-//                                Text(bidangUsaha[i].nama)
-//                                    //                                    .font(.custom("Montserrat-Regular", size: 12))
-//                                    .fixedSize(horizontal: false, vertical: true)
-//                            }
-//                        }
-//                    } label: {
-//                        Image(systemName: "chevron.right").padding()
-//                    }
-//
-//                }
-//                .font(Font.system(size: 12))
-//                .background(Color.gray.opacity(0.1))
-//                .cornerRadius(10)
-//
-//
-//            }
-//            .padding(.horizontal, 20)
             
             Group {
                 
@@ -586,51 +590,6 @@ struct InformasiPerusahaanView: View {
                             }
                             .padding(.horizontal, 15)
                             .padding(.vertical, 5)
-                        }
-                        .foregroundColor(.black)
-                    }
-                }
-            }
-            .frame(height: 150)
-            .padding(.vertical)
-            
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding()
-        .background(Color.white)
-        .cornerRadius(20)
-    }
-    
-    // MARK: -Fuction for Create Bottom Floater (Modal)
-    func createBottomFloaterBidangUsaha() -> some View {
-        VStack {
-            HStack {
-                Text("Business fields".localized(language))
-                    .fontWeight(.bold)
-                    .font(.system(size: 19))
-                    .foregroundColor(Color(hex: "#232175"))
-                Spacer()
-            }
-            
-            ScrollView {
-                VStack {
-                    ForEach(0...bidangUsaha.count-1, id: \.self) {index in
-                        Button(action: {
-                            registerData.bidangUsaha = bidangUsaha[index].nama
-                            self.showingModalBidang.toggle()
-                        }) {
-                            VStack(alignment: .center) {
-                                HStack {
-                                    Text(bidangUsaha[index].nama)
-                                        .font(Font.system(size: 14))
-                                    
-                                    Spacer()
-                                }
-                                Divider()
-                            }
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 5)
-                            
                         }
                         .foregroundColor(.black)
                     }

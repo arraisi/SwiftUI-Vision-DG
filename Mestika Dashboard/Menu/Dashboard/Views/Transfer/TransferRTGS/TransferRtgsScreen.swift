@@ -170,6 +170,7 @@ struct TransferRtgsScreen: View {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
+                                    self.transferData.sourceNumber = self.selectedSourceNumber
                                     //
                                     if (desc == "") {
                                         self.transferData.notes = self.notesCtrl
@@ -186,6 +187,7 @@ struct TransferRtgsScreen: View {
                                     self.transferData.citizenship = self.citizenShipCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
+                                    self.transferData.sourceNumber = self.selectedSourceNumber
                                     //
                                     if (desc == "") {
                                         self.transferData.notes = self.notesCtrl

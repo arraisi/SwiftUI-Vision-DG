@@ -50,6 +50,7 @@ struct LoginScreen: View {
     
     /* Boolean for Show Modal */
     @State var showingModal = false
+    @State var showingModalError = false
     @State var showingModalBiometricLogin = false
     @State var showingModalForgotPassword = false
     
@@ -209,7 +210,7 @@ struct LoginScreen: View {
                 
             }
             
-            if self.showingModal || self.showingModalForgotPassword {
+            if self.showingModal || self.showingModalForgotPassword || self.showingModalError {
                 ModalOverlay(tapAction: { withAnimation { self.showingModal = false } })
                     .edgesIgnoringSafeArea(.all)
             }
@@ -226,6 +227,9 @@ struct LoginScreen: View {
         .navigationBarBackButtonHidden(true)
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessage()
+        }
+        .popup(isPresented: $showingModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageError()
         }
         .popup(isPresented: $showingModalBiometricLogin, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupBiometricLogin()
@@ -256,6 +260,7 @@ struct LoginScreen: View {
                 saveDataNewDeviceToCoreData()
                 if success {
                     self.isLoading = false
+                    
                     print("LOGIN SUCCESS")
 //                    self.isActiveRoute = true
                     self.routeAtmInputLogin = true
@@ -267,8 +272,10 @@ struct LoginScreen: View {
                     if (self.authVM.errorCode == "206") {
                         self.routeNewPassword = true
                     } else if (self.authVM.errorCode == "401") {
-//                        self.appState.moveToWelcomeView = true
                         self.showingModal = true
+                    } else if (self.authVM.errorCode == "302") {
+                        print("ERROR")
+                        self.showingModalError = true
                     } else {
                         print("LOGIN FAILED")
                         self.showingModal = true
@@ -357,6 +364,39 @@ struct LoginScreen: View {
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))
                 .padding(.bottom, 30)
+            
+            Button(action: {}) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Autentikasi gagal, silakan coba kembali".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
             
             Button(action: {}) {
                 Text("Back".localized(language))

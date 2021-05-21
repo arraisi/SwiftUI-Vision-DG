@@ -113,7 +113,8 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 206) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: loginResponse!.code)))
                 }
                 
                 if (httpResponse.statusCode == 500) {
@@ -179,6 +180,10 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 206) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 302) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
