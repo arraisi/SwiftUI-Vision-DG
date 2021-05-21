@@ -49,6 +49,28 @@ struct InformasiPerusahaanView: View {
     @State var addressSugestionResult = [AddressResultViewModel]()
     
     let bidangUsahaSwasta:[BidangUsaha] = [
+        .init(nama: "Minimarket/ Jasa Parkir/ SPBU"),
+        .init(nama: "Ekspor/ Impor"),
+        .init(nama: "Perdagangan Barang Antik"),
+        .init(nama: "Biro Perjalanan/ Travel"),
+        .init(nama: "Perdagangan Emas/ Permata/ Logam Mulia"),
+        .init(nama: "Properti/ Real Estate/ Kontraktor"),
+        .init(nama: "Money Changer"),
+        .init(nama: "MLM (Multi Level Marketing)"),
+        .init(nama: "Pedagang Sayur"),
+        .init(nama: "Perdagangan/ Jual Beli"),
+        .init(nama: "Restoran/ Rumah Makan"),
+        .init(nama: "Jasa Pendidikan"),
+        .init(nama: "Jasa Kesehatan"),
+        .init(nama: "Perkebunan"),
+        .init(nama: "Pertanian dan Perikanan"),
+        .init(nama: "Peternakan"),
+        .init(nama: "Industri/ Pabrik"),
+        .init(nama: "Perhotelan"),
+        .init(nama: "Pengangkutan/ Transportasi"),
+        .init(nama: "Lembaga Keuangan"),
+        .init(nama: "Yayasan Sosial"),
+        .init(nama: "Konstruksi/ Kontraktor"),
         .init(nama: "Notaris"),
         .init(nama: "Konsultan Keuangan / Perencana"),
         .init(nama: "Keuangan"),
@@ -392,7 +414,7 @@ struct InformasiPerusahaanView: View {
                     .font(Font.system(size: 12))
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
-                } else if (registerData.pekerjaanId == 4) {
+                } else if (registerData.pekerjaanId == 9) {
                     HStack {
                         if registerData.bidangUsaha == "" {
                             Text("Business fields".localized(language))

@@ -27,7 +27,7 @@ struct ProfileResponseModel: Codable {
 // MARK: - ChipProfileDto
 struct ChipProfileDto: Codable {
     let maxIbftPerTrans, limitOnUs, limitWd, limitPayment: String
-    let limitPurchase, limitIbft, cardFlag, kodepos: String
+    let limitPurchase, limitIbft, cardFlag: String
     let provinsi, kabupatenKota, kecamatan, kelurahan: String
     let rw, rt, postalAddress, accountNumber: String
     let nameOnCard, cardNo: String
@@ -35,6 +35,7 @@ struct ChipProfileDto: Codable {
     let classCode, nik, id, imageNameAlias: String
     let balance, status: String?
     let mainCard: String
+    let kodepos: String?
 }
 
 // MARK: - Personal

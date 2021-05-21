@@ -161,6 +161,8 @@ extension ProfileViewModel {
     
     // MARK: - GET PROFILE
     func getProfile(completion: @escaping (Bool) -> Void) {
+        
+        print("GET PROFILE COK")
         DispatchQueue.main.async {
             self.isLoading = true
         }
@@ -169,6 +171,7 @@ extension ProfileViewModel {
             switch result {
             case .success(let response):
                 print("Success")
+                print("GET PROFILE OK")
                 
                 self.isLoading = false
             

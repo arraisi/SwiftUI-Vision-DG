@@ -475,25 +475,10 @@ struct SuccessRegisterView: View {
                     .font(.system(size: 13))
                     .frame(maxWidth: .infinity, maxHeight: 40)
             }
+            .isDetailLink(false)
             .background(Color.gray)
             .cornerRadius(12)
             .padding(.bottom, 20)
-            
-            //            Button(
-            //                action: {
-            //                    cancelRegistration()
-            //                },
-            //                label: {
-            //                    Text("YA")
-            //                        .foregroundColor(.white)
-            //                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-            //                        .font(.system(size: 13))
-            //                        .frame(maxWidth: .infinity, maxHeight: 40)
-            //                }
-            //            )
-            //            .background(Color.gray)
-            //            .cornerRadius(12)
-            //            .padding(.bottom, 20)
         }
         .frame(width: UIScreen.main.bounds.width - 60)
         .padding()

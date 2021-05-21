@@ -45,7 +45,7 @@ extension KartuKuViewModel {
                         limitPurchase: data.limitPurchase ?? "0",
                         limitIbft: data.limitIbft ?? "0",
                         cardFlag: data.cardFlag,
-                        kodepos: data.kodepos,
+                        kodepos: data.kodepos ?? "",
                         provinsi: data.provinsi,
                         kabupatenKota: data.kabupatenKota,
                         kecamatan: data.kecamatan,
