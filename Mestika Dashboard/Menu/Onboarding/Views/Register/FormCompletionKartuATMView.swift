@@ -159,7 +159,7 @@ struct FormCompletionKartuATMView: View {
                 registerData.rtSuratMenyurat = data.addressRtInput ?? ""
                 registerData.rwSuratMenyurat = data.addressRwInput ?? ""
                 
-                registerData.kabKota = data.kabKota ?? ""
+//                registerData.kabKota = data.kabKota ?? ""
                 registerData.kecamatan = data.kecamatan ?? ""
                 registerData.kelurahan = data.kelurahan ?? ""
                 registerData.alamatPerusahaan = data.alamatPerusahaan ?? ""
