@@ -50,6 +50,7 @@ class RegistrasiModel: ObservableObject {
     @Published var kelurahanKeluarga = ""
     @Published var noTlpKeluarga = ""
     @Published var kodePos = ""
+    @Published var kabKota = ""
     @Published var kecamatan = ""
     @Published var kelurahan = ""
     @Published var kotaPerusahaan = ""

@@ -124,28 +124,28 @@ struct RegisterSummaryView: View {
                                 FieldSummaryView(value: $registerData.perkiraanPenarikan, label: "Estimated Withdrawal", onEdit: {
                                     perkiraanPenarikanActive = true
                                 })
-                                NavigationLink(destination: PerkiraanPenarikanView(editMode: .active).environmentObject(registerData), isActive: $perkiraanPenarikanActive) {EmptyView()}
+                                NavigationLink(destination: FormPenarikanView(editMode: .active).environmentObject(registerData), isActive: $perkiraanPenarikanActive) {EmptyView()}
                             }
                             
                             ZStack {
                                 FieldSummaryView(value: $registerData.besarPerkiraanPenarikan, label: "Estimated Withdrawal Size", onEdit: {
                                     besarPerkiraanPenarikanActive = true
                                 })
-                                NavigationLink(destination: BesarPerkiraanPenarikanView(editMode: .active).environmentObject(registerData), isActive: $besarPerkiraanPenarikanActive) {EmptyView()}
+                                NavigationLink(destination: FormPenarikanView(editMode: .active).environmentObject(registerData), isActive: $besarPerkiraanPenarikanActive) {EmptyView()}
                             }
                             
                             ZStack {
                                 FieldSummaryView(value: $registerData.perkiraanSetoran, label: "Estimated Deposit", onEdit: {
                                     perkiraanSetoranActive = true
                                 })
-                                NavigationLink(destination: PerkiraanSetoranView(editMode: .active).environmentObject(registerData), isActive: $perkiraanSetoranActive) {EmptyView()}
+                                NavigationLink(destination: FormSetoranView(editMode: .active).environmentObject(registerData), isActive: $perkiraanSetoranActive) {EmptyView()}
                             }
                             
                             ZStack {
                                 FieldSummaryView(value: $registerData.besarPerkiraanSetoran, label: "Estimated Deposit Size", onEdit: {
                                     besarPerkiraanSetoranActive = true
                                 })
-                                NavigationLink(destination: BesarPerkiraanSetoranView(editMode: .active).environmentObject(registerData), isActive: $besarPerkiraanSetoranActive) {EmptyView()}
+                                NavigationLink(destination: FormSetoranView(editMode: .active).environmentObject(registerData), isActive: $besarPerkiraanSetoranActive) {EmptyView()}
                             }
                             
                         }

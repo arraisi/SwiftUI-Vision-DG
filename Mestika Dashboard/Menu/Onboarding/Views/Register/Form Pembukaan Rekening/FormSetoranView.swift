@@ -1,13 +1,13 @@
 //
-//  FormBesarPerkiraanSetoranView.swift
-//  Bank Mestika
+//  FormSetoranView.swift
+//  Mestika Dashboard
 //
-//  Created by Abdul R. Arraisi on 01/10/20.
+//  Created by Abdul R. Arraisi on 20/05/21.
 //
 
 import SwiftUI
 
-struct BesarPerkiraanSetoranView: View {
+struct FormSetoranView: View {
     
     @AppStorage("language")
     private var language = LocalizationService.shared.language
@@ -24,7 +24,12 @@ struct BesarPerkiraanSetoranView: View {
     @State var editMode: EditMode = .inactive
     
     // View variables
+    let perkiraanSetoran: [MasterModel] = load("perkiraanSetoran.json")
     let besarPerkiraanSetoran: [MasterModel] = load("besarPerkiraanSetoran.json")
+    
+    var disableButton: Bool {
+        registerData.perkiraanSetoranId == 0 || registerData.besarPerkiraanSetoranId == 0
+    }
     
     var body: some View {
         
@@ -87,37 +92,9 @@ struct BesarPerkiraanSetoranView: View {
                                         
                                         Spacer()
                                         
-                                        // Sub title
-                                        Text("How Much Your Estimated Deposit Funds Each Month".localized(language
-                                        ))
-                                            .font(.custom("Montserrat-SemiBold", size: 18))
-                                            .foregroundColor(Color(hex: "#232175"))
-                                            .multilineTextAlignment(.center)
-                                            .padding(.horizontal, 40)
-                                            .padding(.vertical, 30)
+                                        perkiraanSetoranView
                                         
-                                        // Forms input
-                                        ZStack {
-                                            
-                                            RadioButtonGroup(
-                                                items: besarPerkiraanSetoran,
-                                                selectedId: $registerData.besarPerkiraanSetoranId) { selected in
-                                                
-                                                if let i = besarPerkiraanSetoran.firstIndex(where: { $0.id == selected }) {
-                                                    print(besarPerkiraanSetoran[i])
-                                                    registerData.besarPerkiraanSetoran = besarPerkiraanSetoran[i].name
-                                                }
-                                                
-                                                print("Selected is: \(registerData.besarPerkiraanSetoran)")
-                                                
-                                            }
-                                            .padding()
-                                            
-                                        }
-                                        .frame(width: UIScreen.main.bounds.width - 100)
-                                        .background(Color.white)
-                                        .cornerRadius(15)
-                                        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+                                        besarSetoranView
                                         
                                         // Button
                                         if (editMode == .inactive) {
@@ -129,9 +106,9 @@ struct BesarPerkiraanSetoranView: View {
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
                                                 
                                             }
-                                            .disabled(registerData.besarPerkiraanSetoranId == 0)
+                                            .disabled(disableButton)
                                             .frame(height: 50)
-                                            .background(registerData.besarPerkiraanSetoranId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .background(disableButton ? Color(.lightGray) : Color(hex: "#2334D0"))
                                             .cornerRadius(12)
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
@@ -144,20 +121,20 @@ struct BesarPerkiraanSetoranView: View {
                                                     .frame(maxWidth: .infinity, maxHeight: 40)
                                                 
                                             }
-                                            .disabled(registerData.besarPerkiraanSetoranId == 0)
+                                            .disabled(disableButton)
                                             .frame(height: 50)
-                                            .background(registerData.besarPerkiraanSetoranId == 0 ? Color(.lightGray) : Color(hex: "#2334D0"))
+                                            .background(disableButton ? Color(.lightGray) : Color(hex: "#2334D0"))
                                             .cornerRadius(12)
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
                                         }
+                                        
                                     }
                                     .background(LinearGradient(gradient: Gradient(colors: [.white, Color(hex: "#D6DAF0")]), startPoint: .top, endPoint: .bottom))
                                     .cornerRadius(25.0)
                                     .shadow(color: Color(hex: "#2334D0").opacity(0.2), radius: 10, y: -2)
                                     .padding(.horizontal, 30)
-                                    .padding(.top, 24)
-                                    
+                                    .padding(.top, 25)
                                 }
                                 
                             }
@@ -167,9 +144,7 @@ struct BesarPerkiraanSetoranView: View {
                     }
                 }
                 .KeyboardAwarePadding()
-                
             }
-            
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
@@ -189,10 +164,80 @@ struct BesarPerkiraanSetoranView: View {
             }
         }))
     }
+    
+    private var perkiraanSetoranView: some View {
+        VStack {
+            // Sub title
+            Text("How many times are estimated for the deposit of funds in a month".localized(language))
+                .font(.custom("Montserrat-SemiBold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                .padding(.vertical, 20)
+            
+            // Forms input
+            ZStack {
+                
+                RadioButtonGroup(
+                    items: perkiraanSetoran,
+                    selectedId: $registerData.perkiraanSetoranId) { selected in
+                    
+                    if let i = perkiraanSetoran.firstIndex(where: { $0.id == selected }) {
+                        print(perkiraanSetoran[i])
+                        registerData.perkiraanSetoran = perkiraanSetoran[i].name
+                    }
+                    
+                    print("Selected is: \(registerData.perkiraanSetoran)")
+                    
+                }
+                .padding()
+                
+            }
+            .frame(width: UIScreen.main.bounds.width - 100)
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+        }
+    }
+    
+    private var besarSetoranView: some View {
+        VStack {
+            // Sub title
+            Text("How Much Your Estimated Deposit Funds Each Month".localized(language))
+                .font(.custom("Montserrat-SemiBold", size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+                .padding(.vertical, 20)
+            
+            // Forms input
+            ZStack {
+                
+                RadioButtonGroup(
+                    items: besarPerkiraanSetoran,
+                    selectedId: $registerData.besarPerkiraanSetoranId) { selected in
+                    
+                    if let i = besarPerkiraanSetoran.firstIndex(where: { $0.id == selected }) {
+                        print(besarPerkiraanSetoran[i])
+                        registerData.besarPerkiraanSetoran = besarPerkiraanSetoran[i].name
+                    }
+                    
+                    print("Selected is: \(registerData.besarPerkiraanSetoran)")
+                    
+                }
+                .padding()
+                
+            }
+            .frame(width: UIScreen.main.bounds.width - 100)
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+        }
+    }
 }
 
-struct FormBesarPerkiraanSetoranView_Previews: PreviewProvider {
+struct FormSetoranView_Previews: PreviewProvider {
     static var previews: some View {
-        BesarPerkiraanSetoranView().environmentObject(RegistrasiModel())
+        FormSetoranView().environmentObject(RegistrasiModel())
     }
 }

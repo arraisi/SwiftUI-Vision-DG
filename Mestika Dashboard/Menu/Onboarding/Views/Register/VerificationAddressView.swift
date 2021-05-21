@@ -18,6 +18,7 @@ struct VerificationAddressView: View {
     
     @State var addressInput: String = ""
 //    @State var addressRtRwInput: String = ""
+    @State var addressKotaInput: String = ""
     @State var addressKelurahanInput: String = ""
     @State var addressKecamatanInput: String = ""
     @State var addressKodePosInput: String = ""
@@ -35,7 +36,7 @@ struct VerificationAddressView: View {
         }
         
         if (registerData.verificationAddressId != 1) {
-            if addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
+            if addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty || addressKotaInput.isEmpty {
                 return true
             }
         } 
@@ -177,6 +178,15 @@ struct VerificationAddressView: View {
                                     }, onCommit: {
                                         print("on commit")
                                         registerData.addressKecamatanInput = self.addressKecamatanInput
+                                    })
+                                    .padding(.horizontal, 20)
+                                    
+                                    LabelTextField(value: $addressKotaInput, label: "City".localized(language), placeHolder: "City".localized(language), onEditingChanged: { (Bool) in
+                                        print("on edit")
+                                        registerData.addressKotaInput = self.addressKotaInput
+                                    }, onCommit: {
+                                        print("on commit")
+                                        registerData.addressKotaInput = self.addressKotaInput
                                     })
                                     .padding(.horizontal, 20)
                                     
@@ -403,6 +413,7 @@ struct VerificationAddressView: View {
 //                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     self.addressKelurahanInput = self.addressSugestion[0].kelurahan
                     self.addressKecamatanInput = self.addressSugestion[0].kecamatan
+                    self.addressKotaInput = self.addressSugestion[0].city
                     self.addressKodePosInput = self.addressSugestion[0].postalCode
                 }
                 self.showingModal = false
