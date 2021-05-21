@@ -29,6 +29,7 @@ struct InformasiPerusahaanView: View {
     
     @State var namaPerusahaan: String = ""
     @State var alamatPerusahaan: String = ""
+    @State var provinsi: String = ""
     @State var kabKota: String = ""
     @State var kelurahan: String = ""
     @State var kodePos : String = ""
@@ -320,7 +321,10 @@ struct InformasiPerusahaanView: View {
         if self.kodePos == "" {
             return true
         }
-        if registerData.kabKota == "" {
+        if registerData.provinsiPerusahaan == "" {
+            return true
+        }
+        if registerData.kotaPerusahaan == "" {
             return true
         }
         if registerData.kecamatan == "" {
@@ -487,7 +491,14 @@ struct InformasiPerusahaanView: View {
             }
             .padding(.horizontal, 20)
             
-            LabelTextField(value: $registerData.kabKota, label: "City".localized(language), placeHolder: "City".localized(language)) { (Bool) in
+            LabelTextField(value: $registerData.provinsiPerusahaan, label: "Province".localized(language), placeHolder: "Province".localized(language)) { (Bool) in
+                print("on edit")
+            } onCommit: {
+                print("on commit")
+            }
+            .padding(.horizontal, 20)
+            
+            LabelTextField(value: $registerData.kotaPerusahaan, label: "City".localized(language), placeHolder: "City".localized(language)) { (Bool) in
                 print("on edit")
             } onCommit: {
                 print("on commit")
@@ -696,7 +707,6 @@ struct InformasiPerusahaanView: View {
                     self.kodePos = self.addressSugestion[0].postalCode
                     registerData.kecamatan = self.addressSugestion[0].kecamatan
                     registerData.kelurahan = self.addressSugestion[0].kelurahan
-                    registerData.kabKota = self.addressSugestion[0].city
                     
                     //                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     //                    registerData.rtPerusahaan = self.addressSugestion[0].rt

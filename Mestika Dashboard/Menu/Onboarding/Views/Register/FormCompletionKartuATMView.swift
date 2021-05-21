@@ -159,7 +159,7 @@ struct FormCompletionKartuATMView: View {
                 registerData.rtSuratMenyurat = data.addressRtInput ?? ""
                 registerData.rwSuratMenyurat = data.addressRwInput ?? ""
                 
-                registerData.kabKota = data.kabKota!
+                registerData.kotaPerusahaan = data.kotaPerusahaan!
                 registerData.kecamatan = data.kecamatan!
                 registerData.kelurahan = data.kelurahan!
                 registerData.alamatPerusahaan = data.alamatPerusahaan!
@@ -418,7 +418,13 @@ struct FormCompletionKartuATMView: View {
 //            }
             
             
-            LabelTextField(value: $registerData.kabKota, label: "", placeHolder: "City".localized(language), disabled: true) { (change) in
+            LabelTextField(value: $registerData.provinsiPerusahaan, label: "", placeHolder: "Province".localized(language), disabled: true) { (change) in
+                
+            } onCommit: {
+                
+            }
+            
+            LabelTextField(value: $registerData.kotaPerusahaan, label: "", placeHolder: "City".localized(language), disabled: true) { (change) in
                 
             } onCommit: {
                 
