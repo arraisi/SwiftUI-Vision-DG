@@ -419,6 +419,7 @@ struct RegisterSummaryView: View {
 //        data.rwPerusahaan = self.registerData.rwPerusahaan
         data.kotaPerusahaan = self.registerData.kotaPerusahaan
         data.provinsiPerusahaan = self.registerData.provinsiPerusahaan
+        data.kabKota = self.registerData.kabKota
         
         // Data Keluarga
         data.alamatKeluarga = self.registerData.alamatKeluarga

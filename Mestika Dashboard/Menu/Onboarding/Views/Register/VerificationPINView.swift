@@ -291,36 +291,36 @@ struct VerificationPINView: View {
         }
         .onAppear {
             user.forEach { (data) in
-                atmData.atmName = data.namaLengkapFromNik!
-                registerData.namaLengkapFromNik = data.namaLengkapFromNik!
-                registerData.provinsiFromNik = data.provinsiFromNik!
-                registerData.alamatKtpFromNik = data.alamatKtpFromNik!
-                registerData.kecamatanFromNik = data.kecamatanFromNik!
-                registerData.kelurahanFromNik = data.kelurahanFromNik!
-                registerData.kodePosFromNik = data.kodePosFromNik!
-                registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik!
+                atmData.atmName = data.namaLengkapFromNik ?? ""
+                registerData.namaLengkapFromNik = data.namaLengkapFromNik ?? ""
+                registerData.provinsiFromNik = data.provinsiFromNik ?? ""
+                registerData.alamatKtpFromNik = data.alamatKtpFromNik ?? ""
+                registerData.kecamatanFromNik = data.kecamatanFromNik ?? ""
+                registerData.kelurahanFromNik = data.kelurahanFromNik ?? ""
+                registerData.kodePosFromNik = data.kodePosFromNik ?? ""
+                registerData.kabupatenKotaFromNik = data.kabupatenKotaFromNik ?? ""
                 registerData.rtFromNik = data.rtFromNik ?? ""
                 registerData.rwFromNik = data.rwFromNik ?? ""
-                registerData.nik = data.nik!
+                registerData.nik = data.nik ?? ""
                 
                 registerData.alamatSuratMenyurat = data.addressInput!
-                registerData.kecamatanSuratMenyurat = data.addressKecamatanInput!
-                registerData.kelurahanSuratMenyurat = data.addressKelurahanInput!
-                registerData.kodePosSuratMenyurat = data.addressPostalCodeInput!
-                registerData.kotaSuratMenyurat = data.addressKotaInput!
-                registerData.provinsiSuratMenyurat = data.addressProvinsiInput!
-                registerData.rtSuratMenyurat = data.addressRtInput!
-                registerData.rwSuratMenyurat = data.addressRwInput!
+                registerData.kecamatanSuratMenyurat = data.addressKecamatanInput ?? ""
+                registerData.kelurahanSuratMenyurat = data.addressKelurahanInput ?? ""
+                registerData.kodePosSuratMenyurat = data.addressPostalCodeInput ?? ""
+                registerData.kotaSuratMenyurat = data.addressKotaInput ?? ""
+                registerData.provinsiSuratMenyurat = data.addressProvinsiInput ?? ""
+                registerData.rtSuratMenyurat = data.addressRtInput ?? ""
+                registerData.rwSuratMenyurat = data.addressRwInput ?? ""
                 
-                registerData.kecamatan = data.kecamatan!
-                registerData.kelurahan = data.kelurahan!
-                registerData.alamatPerusahaan = data.alamatPerusahaan!
-                registerData.kodePos = data.kodePos!
+                registerData.kecamatan = data.kecamatan ?? ""
+                registerData.kelurahan = data.kelurahan ?? ""
+                registerData.alamatPerusahaan = data.alamatPerusahaan ?? ""
+                registerData.kodePos = ""
 //                registerData.rtrw = data.rtrw ?? ""
 //                registerData.rtPerusahaan = data.rtPerusahaan!
 //                registerData.rwPerusahaan = data.rwPerusahaan!
-                registerData.kotaPerusahaan = data.kotaPerusahaan!
-                registerData.provinsiPerusahaan = data.provinsiPerusahaan!
+                registerData.kotaPerusahaan = data.kotaPerusahaan ?? ""
+                registerData.provinsiPerusahaan = data.provinsiPerusahaan ?? ""
                 
                 registerData.isAddressEqualToDukcapil = data.isAddressEqualToDukcapil
             }
