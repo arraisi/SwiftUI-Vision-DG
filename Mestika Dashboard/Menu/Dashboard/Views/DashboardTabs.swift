@@ -393,7 +393,7 @@ struct DashboardTabs: View {
                                         Button(action: {
                                             self.isHiddenBalance.toggle()
                                         }, label: {
-                                            Image(systemName: isHiddenBalance ? "eye.fill" : "eye.slash")
+                                            Image(systemName: isHiddenBalance ? "eye.slash" : "eye.fill")
                                                 .padding(.top, 5)
                                         })
                                         .padding(.leading, 40)

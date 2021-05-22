@@ -23,6 +23,8 @@ struct ListFavoriteTransactionView: View {
     
     @State var isNextRoute: Bool = false
     
+    @State var isLoading: Bool = true
+    
     var body: some View {
         VStack {
             HStack {
@@ -41,9 +43,11 @@ struct ListFavoriteTransactionView: View {
             
             ScrollView(showsIndicators: false) {
                 
-                if self.favoritVM.isLoading {
+                if (self.isLoading) {
+                    
                     ProgressView()
-                } else if (self.favoritVM.favorites.count < 1) {
+                    
+                } else if (!self.isLoading && self.favoritVM.favorites.count < 1) {
                     
                     Text("No Favorites".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 14))
@@ -89,15 +93,13 @@ struct ListFavoriteTransactionView: View {
                     .padding(.horizontal, 20)
                 }
                 
-                
-                
             }
             
             HStack {
                 Spacer()
                 
                 NavigationLink(
-                    destination: FavoriteTransferScreen(cardNo: self.cardNo, sourceNumber: self.sourceNumber),
+                    destination: FavoriteTransferScreen(cardNo: self.selectedCardNo, sourceNumber: self.selectedSourceNo),
                     isActive: self.$isNextRoute,
                     label: {
                         EmptyView()
@@ -141,8 +143,16 @@ struct ListFavoriteTransactionView: View {
     }
     
     func getList() {
-        self.favoritVM.getList(cardNo: self.selectedCardNo, sourceNumber: self.selectedSourceNo, completion: { result in
-            print(result)
+        self.isLoading = true
+        self.favoritVM.getList(cardNo: self.selectedCardNo, sourceNumber: self.selectedSourceNo, completion: { success in
+            
+            if success {
+                self.isLoading = false
+            }
+
+            if !success {
+                self.isLoading = false
+            }
         })
     }
 }

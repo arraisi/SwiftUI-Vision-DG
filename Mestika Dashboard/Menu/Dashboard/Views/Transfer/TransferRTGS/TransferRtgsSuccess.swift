@@ -177,7 +177,6 @@ struct TransferRtgsSuccess: View {
                     .font(.system(size: 30, weight: .bold, design: .default))
                 
             }
-            .padding(.horizontal, 20)
             .padding(.bottom, 5)
             
             HStack(alignment: .top) {
@@ -198,7 +197,6 @@ struct TransferRtgsSuccess: View {
                     .foregroundColor(.white)
                     .font(.system(size: 30, weight: .bold, design: .default))
             }
-            .padding(.horizontal, 20)
         }
         .padding(.vertical, 30)
         .padding(.horizontal, 20)

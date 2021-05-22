@@ -214,6 +214,7 @@ class FavoritViewModel : ObservableObject {
             case .failure(let error):
                 
                 print("ERROR GET LIST FAVORITES-->")
+                self.favorites.removeAll()
                 
                 switch error {
                 case .custom(code: 500):

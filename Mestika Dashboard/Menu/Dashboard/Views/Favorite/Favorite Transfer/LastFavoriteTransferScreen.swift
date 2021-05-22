@@ -136,7 +136,7 @@ struct LastFavoriteTransferScreen: View {
                 .navigationBarTitle("", displayMode: .inline)
             }
             .onAppear {
-                self.name = data.name
+                self.name = data.name ?? ""
             }
             
         }

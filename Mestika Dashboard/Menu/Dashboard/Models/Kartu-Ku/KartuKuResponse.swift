@@ -11,12 +11,12 @@ import Foundation
 struct KartuKuResponseElement: Codable {
     let maxIbftPerTrans, limitOnUs, limitWd, limitPayment: String?
     let limitPurchase, limitIbft: String?
-    let cardFlag, provinsi, kabupatenKota: String
-    let kecamatan, kelurahan, rw, rt: String
-    let postalAddress, accountNumber, nameOnCard: String
+    let cardFlag, provinsi, kabupatenKota: String?
+    let kecamatan, kelurahan, rw, rt: String?
+    let postalAddress, accountNumber, nameOnCard: String?
     let cardNo: String?
-    let cardDesign: String
-    let classCode, nik, id, imageNameAlias: String
+    let cardDesign: String?
+    let classCode, nik, id, imageNameAlias: String?
     let balance: String?
     let status, mainCard: String?
     let kodepos: String?

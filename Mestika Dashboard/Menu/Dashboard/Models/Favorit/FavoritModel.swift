@@ -44,12 +44,14 @@ struct TransferOffUsSkn: Codable {
     let digitSign, flagResidenceDebitur, flagWargaNegara, transferOffUsSknDescription: String
     let ultimateBeneficiaryName, destinationBankCode, sourceNumber, currency: String
     let nominal, cardNo: String
-    let pin, typeOfBeneficiary: JSONNull?
+    let pin, typeOfBeneficiary: String?
+    let transactionFee: String?
 
     enum CodingKeys: String, CodingKey {
         case flagResidenceCreditur, ref, accountTo, clearingCode, branchCode, provinceCode, cityCode, typeOfBusiness, digitSign, flagResidenceDebitur, flagWargaNegara
         case transferOffUsSknDescription = "description"
         case ultimateBeneficiaryName, destinationBankCode, sourceNumber, currency, nominal, cardNo, pin, typeOfBeneficiary
+        case transactionFee
     }
 }
 

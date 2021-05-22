@@ -265,8 +265,8 @@ struct WelcomeView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
                 print("RECEIVED JITSI END")
-                jitsiMeetView?.cleanUp()
                 self.isIncomingVideoCall = false
+                jitsiMeetView?.cleanUp()
                 getUserStatus(deviceId: deviceId!)
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CheckWebsocket"))) { obj in
