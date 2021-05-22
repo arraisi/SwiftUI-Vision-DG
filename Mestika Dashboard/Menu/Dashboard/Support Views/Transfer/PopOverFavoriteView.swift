@@ -21,7 +21,6 @@ struct PopOverFavoriteView: View {
     @Binding var showAlert: Bool
     @State var receivedName = ""
     @State var receivedBank = "MESTIKA"
-    //    @State var receivedRekening = "88091293900"
     
     var body: some View {
         VStack {
@@ -100,7 +99,6 @@ struct PopOverFavoriteView: View {
                             .frame(width: 100)
                         
                         TextField("Account number".localized(language), text: .constant(transferData.destinationNumber), onEditingChanged: { changed in
-                            //                            print("\($receivedRekening)")
                         })
                         .disabled(true)
                         .frame(height: 10)
@@ -129,7 +127,7 @@ struct PopOverFavoriteView: View {
                                 "currency": transferData.currency,
                                 "sourceNumber": transferData.sourceNumber,
                                 "destinationNumber": transferData.destinationNumber,
-                                "berita": "testing"
+                                "berita": transferData.notes
                             ],
                             "transactionDate" : transferData.transactionDate,
                             "nominal" : transferData.amount,

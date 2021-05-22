@@ -113,15 +113,6 @@ struct VerificationAddressView: View {
                                     Divider()
                                         .padding(.horizontal, 20)
                                     
-                                    //                                    LabelTextField(value: $addressInput, label: "Alamat", placeHolder: "Alamat", onEditingChanged: { (Bool) in
-                                    //                                        print("on edit")
-                                    //                                        registerData.addressInput = self.addressInput
-                                    //                                    }, onCommit: {
-                                    //                                        print("on commit")
-                                    //                                        registerData.addressInput = self.addressInput
-                                    //                                    })
-                                    //                                    .padding(.horizontal, 20)
-                                    
                                     Group {
                                         HStack {
                                             Text("Address".localized(language))
@@ -142,7 +133,6 @@ struct VerificationAddressView: View {
                                             .background(Color.gray.opacity(0.1))
                                             .cornerRadius(10)
                                             Button(action:{
-                                                //                        showingModal.toggle()
                                                 searchAddress()
                                             }, label: {
                                                 Image(systemName: "magnifyingglass")

@@ -17,9 +17,11 @@ struct TransferOnUsScreen: View {
     @StateObject var trxLimitVM = TransactionLimitViewModel()
     
     @State var listSourceNumber: [String] = []
+    @State var listCardNumber: [String] = []
     
     @State var selectedSourceNumber: String = ""
     @State var selectedBalance: String = ""
+    @State var selectedCardNumber: String = ""
     
     /* Function GET USER Status */
     @ObservedObject var profileVM = ProfileViewModel()
@@ -200,7 +202,9 @@ struct TransferOnUsScreen: View {
                     
                     if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
                         print(e.accountNumber)
+                        print(e.cardNumber)
                         self.listSourceNumber.append(e.accountNumber)
+                        self.listCardNumber.append(e.cardNumber)
                     }
                 }
                 
@@ -365,17 +369,16 @@ struct TransferOnUsScreen: View {
                     ForEach(0..<self.listSourceNumber.count) { index in
                         Button(action: {
                             self.selectedSourceNumber = self.listSourceNumber[index]
+                            self.selectedCardNumber = self.listCardNumber[index]
                             self.selectedAccount.noRekening = self.selectedSourceNumber
                             self.transferData.sourceNumber = self.selectedSourceNumber
+                            self.transferData.cardNo = self.selectedCardNumber
                             
                             if self.savingAccountVM.balanceAccount.count < 1 {
                                 self.selectedBalance = "0"
                                 self.selectedAccount.saldo = "0"
                             } else {
                                 self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance ?? "0"
-                                self.transferData.cardNo = self.savingAccountVM.balanceAccount[index].cardNo ?? "0"
-                                print(self.transferData.cardNo)
-                                print(self.selectedAccount.noRekening)
                                 self.selectedAccount.saldo = self.selectedBalance
                             }
                         }) {
@@ -802,11 +805,8 @@ struct TransferOnUsScreen: View {
                         .padding(.horizontal, 25)
                         .padding(.bottom, 10)
                 }
-                //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-//                    self.transferData.cardNo = data.noRekening
-//                    self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.productName
                     print(data.noRekening)
                     self.showDialogSelectAccount = false
@@ -864,8 +864,6 @@ struct TransferOnUsScreen: View {
                 print(self.profileVM.balance)
                 print(self.selectedAccount.sourceNumber)
                 self.transferData.username = self.profileVM.name
-//                self.transferData.cardNo = self.profileVM.cardNo
-//                self.transferData.sourceNumber = self.profileVM.accountNumber
                 self.transferData.sourceAccountName = self.profileVM.nameOnCard
                 
                 self.listBankAccount.removeAll()

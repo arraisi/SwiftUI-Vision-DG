@@ -19,18 +19,9 @@ struct FavoriteTabs: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        //        ScrollView(.vertical, showsIndicators: false, content: {
-        
-        //            GeometryReader { geometry in
-        //                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
-        //                    .frame(height: 0)
-        //            }
         
         VStack {
             titleInfo
-            
-            //                ListFavoritePurchasePaymentView()
-            //                    .padding()
             
             ListFavoriteTransactionView(cardNo: self.cardNo, sourceNumber: self.sourceNumber)
                 .padding()
@@ -45,7 +36,7 @@ struct FavoriteTabs: View {
                                     self.presentationMode.wrappedValue.dismiss()
                                 }) {
                                     HStack {
-                                        Image(systemName: "chevron.left") // set image here
+                                        Image(systemName: "chevron.left")
                                             .aspectRatio(contentMode: .fit)
                                             .foregroundColor(.white)
                                         Text("Back".localized(language))
@@ -75,10 +66,6 @@ struct FavoriteTabs: View {
             }
             
             Spacer()
-            
-            //            Button(action: {}, label: {
-            //                Image("ic_search")
-            //            })
         }
         .padding()
     }

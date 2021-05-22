@@ -45,19 +45,24 @@ struct FormCompletionKartuATMView: View {
     @State var isShowAlertInternetConnection = false
     private let reachability = SCNetworkReachabilityCreateWithName(nil, AppConstants().BASE_URL)
     
-    //Dummy data
-    
     @State var addressOptions: [MasterModel] = [
         MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
         MasterModel(id: 2, name: "Mailing address".localized(LocalizationService.shared.language)),
         MasterModel(id: 3, name: "Company's address".localized(LocalizationService.shared.language)),
-//        MasterModel(id: 4, name: "Other Address".localized(LocalizationService.shared.language)),
     ]
     
     @State var addressOptionsNonPekerja: [MasterModel] = [
         MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
         MasterModel(id: 2, name: "Mailing address".localized(LocalizationService.shared.language)),
-//        MasterModel(id: 4, name: "Other Address".localized(LocalizationService.shared.language)),
+    ]
+    
+    @State var addressOptionsNonPekerjaWithoutMailing: [MasterModel] = [
+        MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
+    ]
+    
+    @State var addressOptionsWithoutMailing: [MasterModel] = [
+        MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
+        MasterModel(id: 3, name: "Company's address".localized(LocalizationService.shared.language)),
     ]
     
     @State var suggestions:[String] = []
@@ -85,11 +90,6 @@ struct FormCompletionKartuATMView: View {
                         
                         Button(action: {
                             self.atmData.atmAddressPostalCodeInput = self.kodePos
-                            //                            if (self.user.last?.isNasabahMestika == true) {
-                            //                                self.goToSuccessPage = true
-                            //                            } else {
-                            //                                self.postData()
-                            //                            }
                             self.goToSuccessPage = true
                         }, label: {
                             Text("Submit Data".localized(language))
@@ -245,20 +245,42 @@ struct FormCompletionKartuATMView: View {
                 .foregroundColor(Color("DarkStaleBlue"))
                 .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
             
-            if registerData.pekerjaanId == 10 || registerData.pekerjaanId == 11 || registerData.pekerjaanId == 12 {
-                RadioButtonGroup(
-                    items: addressOptionsNonPekerja,
-                    selectedId: $addressOptionId) { selected in
-                    fetchAddressOption()
+            if (registerData.verificationAddressId == 1 || registerData.verificationAddressId == 0) {
+                
+                if registerData.pekerjaanId == 10 || registerData.pekerjaanId == 11 || registerData.pekerjaanId == 12 {
+                    RadioButtonGroup(
+                        items: addressOptionsNonPekerjaWithoutMailing,
+                        selectedId: $addressOptionId) { selected in
+                        fetchAddressOption()
+                    }
+                    .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                } else {
+                    RadioButtonGroup(
+                        items: addressOptionsWithoutMailing,
+                        selectedId: $addressOptionId) { selected in
+                        fetchAddressOption()
+                    }
+                    .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
                 }
-                .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                
             } else {
-                RadioButtonGroup(
-                    items: addressOptions,
-                    selectedId: $addressOptionId) { selected in
-                    fetchAddressOption()
+                
+                if registerData.pekerjaanId == 10 || registerData.pekerjaanId == 11 || registerData.pekerjaanId == 12 {
+                    RadioButtonGroup(
+                        items: addressOptionsNonPekerja,
+                        selectedId: $addressOptionId) { selected in
+                        fetchAddressOption()
+                    }
+                    .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                } else {
+                    RadioButtonGroup(
+                        items: addressOptions,
+                        selectedId: $addressOptionId) { selected in
+                        fetchAddressOption()
+                    }
+                    .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
                 }
-                .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                
             }
             
             VStack { Divider() }.padding(.horizontal, 20)
@@ -291,18 +313,8 @@ struct FormCompletionKartuATMView: View {
                 
                 HStack {
                     
-                    //                    TextField("Address".localized(language), text: $atmData.atmAddressInput) { changed in
-                    //                    } onCommit: {
-                    //                    }
-                    //                    .font(Font.system(size: 14))
-                    //                    .frame(height: 36)
-                    //                    .disabled(addressOptionId != 4)
-                    //                    .padding(.horizontal)
-                    //                    .background(Color.gray.opacity(0.1))
-                    //                    .cornerRadius(10)
-                    
-                    
                     MultilineTextField("Address".localized(language), text: $atmData.atmAddressInput, onCommit: {
+                        
                     })
                     .font(Font.system(size: 11))
                     .disabled(addressOptionId != 4)
@@ -410,13 +422,6 @@ struct FormCompletionKartuATMView: View {
                 }
                 
             }
-            
-//            LabelTextField(value: $registerData.rtrw, label: "", placeHolder: "RT/RW".localized(language), disabled: true ) { (change) in
-//
-//            } onCommit: {
-//
-//            }
-            
             
             LabelTextField(value: $registerData.kabKota, label: "", placeHolder: "City".localized(language), disabled: true) { (change) in
                 

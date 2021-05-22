@@ -368,8 +368,8 @@ class FavoritService {
             "bankAccountNumber" : "001",
             "bankName" : "MESTIKA",
             "name" : data.destinationName,
-            "sourceNumber" : "23446155930",
-            "cardNo" : "8364839043000578",
+            "sourceNumber" : data.sourceNumber,
+            "cardNo" : data.cardNo,
             "type" : data.transferType,
             "transferOnUs" : [
                 "cardNo" : data.cardNo,
@@ -380,7 +380,7 @@ class FavoritService {
                 "destinationNumber": data.destinationNumber,
                 "berita": "testing"
             ],
-            "transactionDate" : "2020-01-10 10:20:57",
+            "transactionDate" : data.trxDateResp,
             "nominal" : data.amount,
             "nominalSign" : data.amount
         ]
@@ -443,13 +443,13 @@ class FavoritService {
             "name" : data.destinationName,
             "sourceNumber" : data.sourceNumber,
             "cardNo" : data.cardNo,
-            "type" : data.transferType,
+            "type" : "TRANSFER_RTGS",
             "transferOffUsRtgs": [
-                "ref": "1",
-                "cardNo": "8364839043000578",
+                "ref": data.ref,
+                "cardNo": data.cardNo,
                 "nominal": data.amount,
                 "currency": "360",
-                "sourceNumber": "23446155930",
+                "sourceNumber": data.sourceNumber,
                 "destinationBankCode": data.destinationBankCode,
                 "ultimateBeneficiaryName": data.destinationName,
                 "description": data.notes,
@@ -463,7 +463,7 @@ class FavoritService {
                 "addressBeneficiary2": "",
                 "addressBeneficiary3": ""
             ],
-            "transactionDate" : "2020-01-10 10:20:57",
+            "transactionDate" : data.trxDateResp,
             "nominal" : data.amount,
             "nominalSign" : data.amount
         ]
@@ -519,19 +519,20 @@ class FavoritService {
     func saveFavoriteSkn(data: TransferOffUsModel, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
         // MARK: BODY
-        let body: [String: Any] = [
-            "bankAccountNumber" : "001",
+        let body: [String: Any?] = [
+            "bankAccountNumber" : data.destinationBankCode,
             "bankName" : data.bankName,
             "name" : data.destinationName,
             "sourceNumber" : data.sourceNumber,
             "cardNo" : data.cardNo,
-            "type" : data.transferType,
+            "type" : "TRANSFER_SKN",
+            "transferOnUs" : nil,
             "transferOffUsSkn": [
-                "ref": "1",
-                "cardNo": "8364839043000578",
+                "ref": data.ref,
+                "cardNo": data.cardNo,
                 "nominal": data.amount,
                 "currency": "360",
-                "sourceNumber": "23446155930",
+                "sourceNumber": data.sourceNumber,
                 "destinationBankCode": data.destinationBankCode,
                 "ultimateBeneficiaryName": data.destinationName,
                 "description": data.notes,
@@ -542,16 +543,18 @@ class FavoritService {
                 "cityCode": "1234",
                 "provinceCode": "1234",
                 "branchCode": "1234",
-                "clearingCode": data.kliringCode,
+                "clearingCode": "1122",
                 "accountTo": data.destinationNumber,
-                "flagResidenceCreditur": "R"
+                "flagResidenceCreditur": "R",
+                "typeOfBeneficiary" : "tipe"
             ],
-            "transactionDate" : "2020-01-10 10:20:57",
+            "transferOffUsRtgs" : nil,
+            "transactionDate" : data.trxDateResp,
             "nominal" : data.amount,
             "nominalSign" : data.amount
         ]
         
-        print("TRANSFER ON US body => \(body)")
+        print("FAVORITE SKN body => \(body)")
         
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         

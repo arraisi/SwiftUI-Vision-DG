@@ -28,6 +28,8 @@ struct TransferRtgsSuccess: View {
     @State private var dateString = ""
     
     @State var showingBadge: Bool = false
+    @State var status: String = ""
+    @State var message: String = ""
     
     var body: some View {
         ZStack {
@@ -79,7 +81,7 @@ struct TransferRtgsSuccess: View {
             }
             
             if showPopover {
-                PopOverFavoriteTransactionOffUsView(transferData: transferData, show: self.$showPopover, showAlert: self.$showingBadge)
+                PopOverFavoriteTransactionOffUsView(transferData: transferData, show: self.$showPopover, showAlert: self.$showingBadge, status: self.$status, message: self.$message)
                     .padding(30)
             }
             
@@ -88,8 +90,8 @@ struct TransferRtgsSuccess: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingBadge) {
             return Alert(
-                title: Text("Succeed".localized(language)),
-                message: Text("Favorite added successfully".localized(language)),
+                title: Text("\(self.status)".localized(language)),
+                message: Text("\(self.message)".localized(language)),
                 dismissButton: .default(Text("OK".localized(language)))
             )
         }
@@ -162,7 +164,8 @@ struct TransferRtgsSuccess: View {
                     .font(.caption2)
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#FFFFFF"))
-                    .padding(.trailing, 20)
+                
+                Spacer()
                 
                 Text("Rp.")
                     .font(.caption2)
@@ -173,8 +176,8 @@ struct TransferRtgsSuccess: View {
                     .foregroundColor(.white)
                     .font(.system(size: 30, weight: .bold, design: .default))
                 
-                Spacer()
             }
+            .padding(.horizontal, 20)
             .padding(.bottom, 5)
             
             HStack(alignment: .top) {
@@ -182,7 +185,8 @@ struct TransferRtgsSuccess: View {
                     .font(.caption2)
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#FFFFFF"))
-                    .padding(.trailing, 20)
+                
+                Spacer()
                 
                 Text("Rp.")
                     .font(.caption2)
@@ -193,11 +197,11 @@ struct TransferRtgsSuccess: View {
                     .font(.caption2)
                     .foregroundColor(.white)
                     .font(.system(size: 30, weight: .bold, design: .default))
-                
-                Spacer()
             }
+            .padding(.horizontal, 20)
         }
         .padding(.vertical, 30)
+        .padding(.horizontal, 20)
     }
     
     var destinationInfo: some View {

@@ -122,19 +122,19 @@ struct HistoryDetailView: View {
                 HStack {
                     Text("Transaction amount".localized(language))
                     Spacer()
-                    Text("IDR \(data.data.amount ?? "0")".thousandSeparator())
+                    Text("IDR \(data.data.amount?.thousandSeparator() ?? "0")".thousandSeparator())
                 }
                 
                 HStack {
                     Text("Transaction Fee".localized(language))
                     Spacer()
-                    Text("IDR \(data.data.fee ?? "0")".thousandSeparator())
+                    Text("IDR \(data.data.fee?.thousandSeparator() ?? "0")".thousandSeparator())
                 }
                 
                 HStack {
                     Text("Total amount".localized(language))
                     Spacer()
-                    Text("IDR \(data.data.sumTotal ?? "0")".thousandSeparator())
+                    Text("IDR \(data.data.sumTotal?.thousandSeparator() ?? "0")".thousandSeparator())
                 }
                 
                 Divider()

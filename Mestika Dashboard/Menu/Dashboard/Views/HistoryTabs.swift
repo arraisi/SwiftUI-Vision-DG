@@ -86,6 +86,7 @@ struct HistoryTabs: View {
                     HistoryTransactionList(histories: historyVM.histories)
                     
                 }
+                .padding(.bottom, 50)
             }
             
         }

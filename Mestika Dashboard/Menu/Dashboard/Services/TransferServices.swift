@@ -282,6 +282,10 @@ class TransferServices {
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
+                
+                if (httpResponse.statusCode == 504) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()

@@ -14,9 +14,11 @@ struct TransferRtgsScreen: View {
     @StateObject var trxLimitVM = TransactionLimitViewModel()
     
     @State var listSourceNumber: [String] = []
+    @State var listCardNumber: [String] = []
     
     @State var selectedSourceNumber: String = ""
     @State var selectedBalance: String = ""
+    @State var selectedCardNo: String = ""
     
     @State var isShowName: Bool = false
     @State var isLoading: Bool = false
@@ -183,7 +185,6 @@ struct TransferRtgsScreen: View {
                                     
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
-                                    //                                    self.transferData.destinationName = self.destinationNameCtrl
                                     self.transferData.citizenship = self.citizenShipCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
@@ -197,7 +198,6 @@ struct TransferRtgsScreen: View {
                                     print("OKE")
                                     
                                     inquiryTransfer()
-                                    //                                    self.isRouteTransaction = true
                                 }
                                 
                             } else if (amount > myCredit ) {
@@ -284,14 +284,15 @@ struct TransferRtgsScreen: View {
             getProfile()
             getListBank()
             
-            trxLimitVM.findTrxUserLimit()
-            self.getLimit(code: "70")
+            self.getLimit()
             
             self.savingAccountVM.getAccounts { (success) in
                 self.savingAccountVM.accounts.forEach { e in
                     
                     if (e.planAllowDebitDomestic == "Y" && e.categoryProduct != "S") {
                         print(e.accountNumber)
+                        print(e.cardNumber)
+                        self.listCardNumber.append(e.cardNumber)
                         self.listSourceNumber.append(e.accountNumber)
                     }
                     
@@ -791,15 +792,13 @@ struct TransferRtgsScreen: View {
                             self.selectedSourceNumber = self.listSourceNumber[index]
                             self.selectedAccount.noRekening = self.selectedSourceNumber
                             self.transferData.sourceNumber = self.selectedSourceNumber
+                            self.transferData.cardNo = self.listCardNumber[index]
                             
                             if self.savingAccountVM.balanceAccount.count < 1 {
                                 self.selectedBalance = "0"
                                 self.selectedAccount.saldo = "0"
                             } else {
                                 self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance ?? "0"
-                                self.transferData.cardNo = self.savingAccountVM.balanceAccount[index].cardNo ?? ""
-                                print(self.transferData.cardNo)
-                                print(self.selectedAccount.noRekening)
                                 self.selectedAccount.saldo = self.selectedBalance
                                 
                             }
@@ -1155,10 +1154,8 @@ struct TransferRtgsScreen: View {
                         .padding(.horizontal, 25)
                         .padding(.bottom, 10)
                 }
-                //                .background(Color(hex: "#FF00FF"))
                 .onTapGesture {
                     self.selectedAccount = data
-                    //                    self.transferData.cardNo = data.noRekening
                     self.transferData.sourceNumber = data.sourceNumber
                     self.transferData.sourceAccountName = data.namaRekening
                     print(data.noRekening)
@@ -1232,7 +1229,7 @@ struct TransferRtgsScreen: View {
     }
     
     @ObservedObject var limitVM = TransferViewModel()
-    func getLimit(code: String) {
+    func getLimit() {
         
         self.limitVM.limitUser { success in
             

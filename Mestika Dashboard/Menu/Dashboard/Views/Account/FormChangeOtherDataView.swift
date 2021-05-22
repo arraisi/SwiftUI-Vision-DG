@@ -49,39 +49,48 @@ struct FormChangeOtherDataView: View {
                     .padding(.horizontal, 25)
                     .padding(.bottom, 10)
                     
-                    VStack {
-                        
-                        Text("Data Perusahaan".localized(language))
-                            .font(.custom("Montserrat-Bold", size: 22))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        FormPekerjaan
-                            .padding(.top, 20)
-                    }
-                    .padding(30)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                    .padding(.horizontal, 25)
-                    .padding(.bottom, 10)
                     
-                    VStack {
-                        
-                        Text("Data Penyandang Dana".localized(language))
-                            .font(.custom("Montserrat-Bold", size: 22))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        FormPenyandangDana
-                            .padding(.top, 20)
+                    if (self.profileVM.namaPerusahaan == "") {
+                        EmptyView()
+                    } else {
+                        VStack {
+                            
+                            Text("Data Perusahaan".localized(language))
+                                .font(.custom("Montserrat-Bold", size: 22))
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            FormPekerjaan
+                                .padding(.top, 20)
+                        }
+                        .padding(30)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+                        .padding(.horizontal, 25)
+                        .padding(.bottom, 10)
                     }
-                    .padding(30)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                    .padding(.horizontal, 25)
-                    .padding(.bottom, 10)
+                    
+                    if (self.profileVM.namaPenyandang == "") {
+                        EmptyView()
+                    } else {
+                        VStack {
+                            
+                            Text("Data Penyandang Dana".localized(language))
+                                .font(.custom("Montserrat-Bold", size: 22))
+                                .foregroundColor(Color(hex: "#232175"))
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            FormPenyandangDana
+                                .padding(.top, 20)
+                        }
+                        .padding(30)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+                        .padding(.horizontal, 25)
+                        .padding(.bottom, 10)
+                    }
                     
                     VStack {
                         Button(action: {

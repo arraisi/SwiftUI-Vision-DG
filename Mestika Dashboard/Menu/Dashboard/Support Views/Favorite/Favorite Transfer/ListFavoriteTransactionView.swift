@@ -18,6 +18,9 @@ struct ListFavoriteTransactionView: View {
     var cardNo = ""
     var sourceNumber = ""
     
+    @State private var selectedCardNo: String = ""
+    @State private var selectedSourceNo: String = ""
+    
     @State var isNextRoute: Bool = false
     
     var body: some View {
@@ -118,12 +121,27 @@ struct ListFavoriteTransactionView: View {
         .onAppear {
             print("ON APPEAR")
             self.isNextRoute = false
+            getMainAccount()
+        }
+    }
+    
+    @StateObject var savingAccountVM = SavingAccountViewModel()
+    func getMainAccount() {
+        self.savingAccountVM.getAccounts { (success) in
+            self.savingAccountVM.accounts.forEach { e in
+                
+                if (e.categoryProduct == "M") {
+                    self.selectedCardNo = e.cardNumber
+                    self.selectedSourceNo = e.accountNumber
+                }
+            }
+            
             getList()
         }
     }
     
     func getList() {
-        self.favoritVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
+        self.favoritVM.getList(cardNo: self.selectedCardNo, sourceNumber: self.selectedSourceNo, completion: { result in
             print(result)
         })
     }

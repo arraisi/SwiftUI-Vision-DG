@@ -18,6 +18,8 @@ struct PopOverFavoriteTransactionOffUsView: View {
     
     @Binding var show: Bool
     @Binding var showAlert: Bool
+    @Binding var status: String
+    @Binding var message: String
     
     @State var receivedName = ""
     
@@ -123,10 +125,24 @@ struct PopOverFavoriteTransactionOffUsView: View {
                                 self.showAlert = true
                             }
                         } else {
-                            self.favoritVM.transferSkn(data: transferData) { result in
-                                print("Save to favorites".localized(language))
-                                self.show = false
-                                self.showAlert = true
+                            self.favoritVM.transferSkn(data: transferData) { success in
+                                
+                                if success {
+                                    print("Save to favorites".localized(language))
+                                    self.status = "Succeed"
+                                    self.message = "Favorite added successfully"
+                                    self.show = false
+                                    self.showAlert = true
+                                }
+                                
+                                if !success {
+                                    print("Error Save Favorite")
+                                    self.status = "Failed"
+                                    self.message = "Error added favorite"
+                                    self.show = false
+                                    self.showAlert = true
+                                }
+                                
                             }
                         }
                         
@@ -160,6 +176,6 @@ struct PopOverFavoriteTransactionOffUsView: View {
 
 struct PopOverFavoriteTransactionOffUsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopOverFavoriteTransactionOffUsView(transferData: TransferOffUsModel(), show: .constant(false), showAlert: .constant(false))
+        PopOverFavoriteTransactionOffUsView(transferData: TransferOffUsModel(), show: .constant(false), showAlert: .constant(false), status: .constant(""), message: .constant(""))
     }
 }
