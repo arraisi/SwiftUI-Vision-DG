@@ -27,24 +27,24 @@ struct ProfileResponseModel: Codable {
 // MARK: - ChipProfileDto
 struct ChipProfileDto: Codable {
     let maxIbftPerTrans, limitOnUs, limitWd, limitPayment: String
-    let limitPurchase, limitIbft, cardFlag: String
-    let provinsi, kabupatenKota, kecamatan, kelurahan: String
-    let rw, rt, postalAddress, accountNumber: String
-    let nameOnCard, cardNo: String
-    let cardDesign: String
-    let classCode, nik, id, imageNameAlias: String
+    let limitPurchase, limitIbft, cardFlag: String?
+    let provinsi, kabupatenKota, kecamatan, kelurahan: String?
+    let rw, rt, postalAddress, accountNumber: String?
+    let nameOnCard, cardNo: String?
+    let cardDesign: String?
+    let classCode, nik, id, imageNameAlias: String?
     let balance, status: String?
-    let mainCard: String
+    let mainCard: String?
     let kodepos: String?
 }
 
 // MARK: - Personal
 struct Personal: Codable {
-    let propName, noProp, kabName, noKab: String
-    let kecName, noKec, kelName, noKel: String
-    let rw, rt, address, marital: String
-    let gender, dateOfBirth, placeOfBirth, name: String
-    let namaIbuKandung: String
+    let propName, noProp, kabName, noKab: String?
+    let kecName, noKec, kelName, noKel: String?
+    let rw, rt, address, marital: String?
+    let gender, dateOfBirth, placeOfBirth, name: String?
+    let namaIbuKandung: String?
 }
 
 // MARK: - Product

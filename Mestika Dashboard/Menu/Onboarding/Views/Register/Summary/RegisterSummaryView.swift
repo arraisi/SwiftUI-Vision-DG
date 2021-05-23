@@ -177,22 +177,10 @@ struct RegisterSummaryView: View {
                                 
                             }
                             
-//                            if [9].contains(registerData.pekerjaanId) {
-//
-//                                ZStack {
-//                                    FieldSummaryView(value: $registerData.industriTempatBekerja, label: "Industry", onEdit: {
-//                                        self.industriTempatBekerjaActive = true
-//                                    })
-//                                    NavigationLink(destination: FormIndustriTempatBekerjaView(editMode: .active).environmentObject(registerData), isActive: $industriTempatBekerjaActive) {EmptyView()}
-//                                }
-//
-//                            }
-                            
                             if appState.nasabahIsExisting || (!appState.nasabahIsExisting && ![10, 11, 12].contains(registerData.pekerjaanId))  {
 
                                 HStack {
                                     Text("Gross Income".localized(language))
-//                                        .font(.caption)
                                         .font(.custom("Montserrat-SemiBold", size: 12))
                                         .fontWeight(.semibold)
                                         .foregroundColor(.gray)
@@ -317,10 +305,6 @@ struct RegisterSummaryView: View {
                 .multilineTextAlignment(.leading)
                 .font(.custom("Montserrat-SemiBold", size: 16))
                 .foregroundColor(Color(hex: "#232175"))
-            
-            //            TextFieldValidation(data: $registerData.npwp, title: "No. NPWP", disable: false, isValid: false, keyboardType: .numberPad) { (str: Array<Character>) in
-            //                self.registerData.npwp = String(str.prefix(15))
-            //            }
             
             TextField("Tax Identification Number".localized(language), text: $npwp)
                 .frame(height: 10)

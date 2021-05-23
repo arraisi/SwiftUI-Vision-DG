@@ -121,10 +121,12 @@ struct DestinationAccountBalancesView: View {
                                 .cornerRadius(15)
                             })
                         }
-                    } else {
+                    } else if (self.isLoading) {
                         ShimmerView()
                             .frame(width: UIScreen.main.bounds.width - 50, height: 200)
                             .cornerRadius(15)
+                    } else if (self.listSourceNumber.isEmpty) {
+                        EmptyView()
                     }
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
@@ -209,38 +211,38 @@ struct DestinationAccountBalancesView: View {
                         
                         if (a.categoryProduct == "S") {
                             
-//                            if (self.transaksiData.sourceNumber != a.accountNumber) {
-//                                self.listSourceNumber.append(a.accountNumber)
-//                                self.listTabunganName.append(a.productName ?? "No Name")
-//                            }
-                            
                             self.listSourceNumber.append(a.accountNumber)
                             self.listTabunganName.append(a.productName ?? "No Name")
 
                         }
                     }
                     
-                    self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { success in
-                        
-                        DispatchQueue.main.async {
-                            if success {
+                    if (self.listSourceNumber.isEmpty) {
+                        print("No Sub Account")
+                    } else {
+                        self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { success in
+                            
+                            DispatchQueue.main.async {
+                                if success {
+                                    
+                                    self.isLoading = false
+                                    self.savingAccountVM.balanceAccount.forEach { b in
+                                        self.listBalance.append(b.balance ?? "0")
+                                    }
+                                }
                                 
-                                self.isLoading = false
-                                self.savingAccountVM.balanceAccount.forEach { b in
-                                    self.listBalance.append(b.balance ?? "0")
+                                if !success {
+                                    self.isLoading = false
+                                    
+                                    self.isShowAlert = true
+                                    self.statusError = "500"
+                                    self.messageError = "Failed Parse Balance"
                                 }
                             }
                             
-                            if !success {
-                                self.isLoading = false
-                                
-                                self.isShowAlert = true
-                                self.statusError = "500"
-                                self.messageError = "Failed Parse Balance"
-                            }
                         }
-                        
                     }
+                    
                 }
                 
                 if !success {

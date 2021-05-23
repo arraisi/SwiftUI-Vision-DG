@@ -208,7 +208,11 @@ struct FormCompletionKartuATMView: View {
                 
                 HStack {
                     Button(action:{
-                        showingSuggestionNameModal.toggle()
+                        
+                        if (atmData.atmName.count > 20) {
+                            showingSuggestionNameModal.toggle()
+                        }
+                        
                     }, label: {
                         if atmData.atmName != "" {
                             Text(atmData.atmName)

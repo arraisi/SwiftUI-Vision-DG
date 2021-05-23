@@ -26,7 +26,7 @@ struct DestinationAccountAddBalanceView: View {
     @State private var listBalance: [String] = []
     
     // Bool
-    @State private var isLoading: Bool = false
+    @State private var isLoading: Bool = true
     @State private var isShowAlert: Bool = false
     
     // Alert Message
@@ -50,13 +50,13 @@ struct DestinationAccountAddBalanceView: View {
             Color(hex: "#F4F7FA")
             
             VStack {
-                if (self.isLoading) {
-                    LinearWaitingIndicator()
-                        .animated(true)
-                        .foregroundColor(.green)
-                        .frame(height: 1)
-                        .padding(.bottom, 10)
-                }
+//                if (self.isLoading) {
+//                    LinearWaitingIndicator()
+//                        .animated(true)
+//                        .foregroundColor(.green)
+//                        .frame(height: 1)
+//                        .padding(.bottom, 10)
+//                }
                 
                 ScrollView(.vertical, showsIndicators: false, content: {
                     
@@ -121,10 +121,12 @@ struct DestinationAccountAddBalanceView: View {
                                 .cornerRadius(15)
                             })
                         }
-                    } else {
+                    } else if (self.isLoading) {
                         ShimmerView()
                             .frame(width: UIScreen.main.bounds.width - 50, height: 170)
                             .cornerRadius(15)
+                    } else if (self.listSourceNumber.isEmpty) {
+                        EmptyView()
                     }
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
@@ -197,31 +199,35 @@ struct DestinationAccountAddBalanceView: View {
                         }
                     }
                     
-                    self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { success in
-                        
-                        DispatchQueue.main.async {
-                            if success {
-                                
-                                self.isLoading = false
-                                self.savingAccountVM.balanceAccount.forEach { b in
+                    if (listSourceNumber.isEmpty) {
+                        print("No Sub Account")
+                    } else {
+                        self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { success in
+                            
+                            DispatchQueue.main.async {
+                                if success {
                                     
-                                    if (b.balance == "") {
-                                        self.listBalance.append("0")
-                                    } else {
-                                        self.listBalance.append(b.balance ?? "0")
+                                    self.isLoading = false
+                                    self.savingAccountVM.balanceAccount.forEach { b in
+                                        
+                                        if (b.balance == "") {
+                                            self.listBalance.append("0")
+                                        } else {
+                                            self.listBalance.append(b.balance ?? "0")
+                                        }
                                     }
+                                }
+                                
+                                if !success {
+                                    self.isLoading = false
+                                    
+                                    self.isShowAlert = true
+                                    self.statusError = "500"
+                                    self.messageError = "Failed Parse Balance"
                                 }
                             }
                             
-                            if !success {
-                                self.isLoading = false
-                                
-                                self.isShowAlert = true
-                                self.statusError = "500"
-                                self.messageError = "Failed Parse Balance"
-                            }
                         }
-                        
                     }
                 }
                 

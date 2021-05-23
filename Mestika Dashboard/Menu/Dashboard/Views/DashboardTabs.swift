@@ -180,7 +180,7 @@ struct DashboardTabs: View {
                                 isActive: self.$routingMyCardDashboard,
                                 label: {}
                             )
-                            .isDetailLink(false)
+//                            .isDetailLink(false)
                             
                             Button(
                                 action: {
@@ -243,9 +243,16 @@ struct DashboardTabs: View {
                     self.savingAccountVM.accounts.forEach { e in
                         print(e.categoryProduct)
                         
+                        if (e.categoryProduct == "M") {
+                            self.listSourceNumber.insert(e.accountNumber, at: 0)
+                            self.listTypeAccount.insert(e.accountType ?? "", at: 0)
+                        }
+                        
                         self.listSourceNumber.append(e.accountNumber)
                         self.listTypeAccount.append(e.accountType ?? "")
                     }
+                    
+                    
                     
                     self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
                         

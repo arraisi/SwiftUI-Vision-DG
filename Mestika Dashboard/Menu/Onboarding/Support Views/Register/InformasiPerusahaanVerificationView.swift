@@ -55,23 +55,25 @@ struct InformasiPerusahaanVerificationView: View {
                 .padding(.horizontal, 20)
             }
             
-            Group {
-                Text("Business fields".localized(language))
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.gray)
-                    .multilineTextAlignment(.leading)
+            if (registerData.pekerjaanId == 3 || registerData.pekerjaanId == 9) {
+                Group {
+                    Text("Business fields".localized(language))
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 20)
+                    HStack {
+                        TextField("Business fields".localized(language), text: $registerData.bidangUsaha)
+                            .disabled(true)
+                    }
+                    .frame(height: 20)
+                    .font(.subheadline)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(15)
                     .padding(.horizontal, 20)
-                HStack {
-                    TextField("Business fields".localized(language), text: $registerData.bidangUsaha)
-                        .disabled(true)
                 }
-                .frame(height: 20)
-                .font(.subheadline)
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(15)
-                .padding(.horizontal, 20)
             }
             
             Group {
@@ -81,19 +83,13 @@ struct InformasiPerusahaanVerificationView: View {
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
+                
                 HStack {
-//                    TextField("Company's address".localized(language), text: $registerData.alamatPerusahaan)
-//                        .disabled(true)
-                    
                     MultilineTextField("Company's address".localized(language), text: $registerData.alamatPerusahaan, onCommit: {
                     })
                     .font(Font.system(size: 14))
                     .disabled(true)
-//                    .padding(.horizontal)
-//                    .background(Color.gray.opacity(0.1))
-//                    .cornerRadius(10)
                 }
-                .frame(height: 20)
                 .font(.subheadline)
                 .padding()
                 .background(Color.gray.opacity(0.1))
@@ -148,6 +144,44 @@ struct InformasiPerusahaanVerificationView: View {
                     .padding(.horizontal, 20)
                 HStack {
                     TextField("Village".localized(language), text: $registerData.kelurahan)
+                        .disabled(true)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("City".localized(language))
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("City".localized(language), text: $registerData.kotaPerusahaan)
+                        .disabled(true)
+                }
+                .frame(height: 20)
+                .font(.subheadline)
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(15)
+                .padding(.horizontal, 20)
+            }
+            
+            Group {
+                Text("Province".localized(language))
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 20)
+                HStack {
+                    TextField("Province".localized(language), text: $registerData.provinsiPerusahaan)
                         .disabled(true)
                 }
                 .frame(height: 20)

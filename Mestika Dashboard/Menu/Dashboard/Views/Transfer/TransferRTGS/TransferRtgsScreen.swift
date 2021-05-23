@@ -347,6 +347,7 @@ struct TransferRtgsScreen: View {
                     Image("ic_expand").padding()
                 }
             }
+            .frame(width: UIScreen.main.bounds.width - 30)
         }
         .frame(width: UIScreen.main.bounds.width - 30)
         .background(Color.white)
@@ -400,6 +401,7 @@ struct TransferRtgsScreen: View {
                 .cornerRadius(10)
                 .padding(.horizontal, 15)
                 .padding(.bottom, 10)
+                .frame(width: UIScreen.main.bounds.width - 30)
             }
             
             // Field No Rekening Tujuan
@@ -740,47 +742,6 @@ struct TransferRtgsScreen: View {
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .padding()
     }
-    
-    //    var bankAccountCard: some View {
-    //        ZStack {
-    //
-    //            Button(
-    //                action: {
-    //                    UIApplication.shared.endEditing()
-    //                    self.showDialogSelectAccount = true
-    //                },
-    //                label: {
-    //                    HStack {
-    //                        VStack(alignment: .leading) {
-    //                            Text(self.selectedAccount.namaRekening)
-    //                                .font(.subheadline)
-    //                                .foregroundColor(Color(hex: "#232175"))
-    //                                .fontWeight(.bold)
-    //
-    //                            HStack {
-    //                                Text("Active Balance:".localized(language))
-    //                                    .font(.caption)
-    //                                    .fontWeight(.ultraLight)
-    //                                Text(self.selectedAccount.saldo)
-    //                                    .font(.caption)
-    //                                    .foregroundColor(Color(hex: "#232175"))
-    //                                    .fontWeight(.semibold)
-    //                            }
-    //                        }
-    //
-    //                        Spacer()
-    //
-    //                        Image("ic_expand")
-    //                    }
-    //                    .padding()
-    //                }
-    //            )
-    //        }
-    //        .frame(width: UIScreen.main.bounds.width - 60)
-    //        .background(Color(hex: "#F6F8FB"))
-    //        .cornerRadius(15)
-    //    }
-    
     
     var bankAccountCard: some View {
         ZStack {

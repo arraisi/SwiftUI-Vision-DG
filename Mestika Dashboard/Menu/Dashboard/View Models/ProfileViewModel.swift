@@ -175,25 +175,25 @@ extension ProfileViewModel {
                 
                 self.isLoading = false
             
-                self.alamat = response.personal.address
-                self.provinsiName = response.personal.propName
-                self.kabupatenName = response.personal.kabName
-                self.kecamatanName = response.personal.kecName
-                self.kelurahanName = response.personal.kelName
+                self.alamat = response.personal.address ?? ""
+                self.provinsiName = response.personal.propName ?? ""
+                self.kabupatenName = response.personal.kabName ?? ""
+                self.kecamatanName = response.personal.kecName ?? ""
+                self.kelurahanName = response.personal.kelName ?? ""
 //                self.rt = response.personal.rt
 //                self.rw = response.personal.rw
                 
                 print("\n\nVM PROFILE \(response.personal.name)\n\n")
                 print("\n\nVM PROFILE \(String(describing: response.chipProfileDto.last!.cardNo))\n\n")
-                self.name = response.personal.name
+                self.name = response.personal.name ?? ""
                 self.telepon = response.profileResponseModelID.telepon
                 self.email = response.profileResponseModelID.surel
                 self.nameOnCard = response.products.last!.productName ?? ""
                 self.balance = response.chipProfileDto.last!.balance ?? "0"
                 self.classCode = response.chipProfileDto.last?.classCode ?? ""
-                self.tempatLahir = response.personal.placeOfBirth
-                self.tglLahir = response.personal.dateOfBirth
-                self.gender = response.personal.gender
+                self.tempatLahir = response.personal.placeOfBirth ?? ""
+                self.tglLahir = response.personal.dateOfBirth ?? ""
+                self.gender = response.personal.gender ?? ""
                 
                 self.maxIbftPerTrans = response.chipProfileDto.last?.maxIbftPerTrans ?? "0"
                 self.limitOnUs = response.chipProfileDto.last?.limitOnUs ?? "1000000"
@@ -213,9 +213,9 @@ extension ProfileViewModel {
                 self.provinsiSuratMenyurat = response.chipProfileDto.last?.provinsi ?? ""
                 
                 if let _chipProfileDto = response.chipProfileDto.last {
-                    self.cardName = _chipProfileDto.nameOnCard
+                    self.cardName = _chipProfileDto.nameOnCard ?? ""
                     self.cardNo = _chipProfileDto.cardNo ?? ""
-                    self.accountNumber = _chipProfileDto.accountNumber
+                    self.accountNumber = _chipProfileDto.accountNumber ?? ""
                     print(_chipProfileDto.accountNumber)
                 }
                  

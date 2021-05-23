@@ -20,10 +20,12 @@ struct CardLimitView: View {
     @State var activateData = LimitKartuKuModel()
     
     @State var limitPerTransaksi: Double = 0
-    @State var limitPerHari: Double = 20000000
+    @State var limitPerHari: Double = 0
     @State var limitPenarikanHarian: Double = 0
+    @State var limitPembayaran: Double = 0
     @State var limitTransferOnUs: Double = 0
     @State var limitPembelian: Double = 0
+    @State var limitIbft: Double = 0
     
     @State var limitPerTransaksiCtrl: String = "0"
     @State var limitPenarikanHarianCtrl: String = "0"
@@ -32,11 +34,20 @@ struct CardLimitView: View {
     @State var limitPembelianCtrl: String = "0"
     @State var limitIbftCtrl: String = "0"
     
-    let maxTransaksi: Double = 50000000
-    let maxPenarikanHarian: Double = 10000000
-    let maxTransferOnUs: Double = 10000000
-    let maxPembelian: Double = 10000000
+    @State var maxTransaksi: Double = 100000
+    @State var maxPenarikanHarian: Double = 100000
+    @State var maxTransferOnUs: Double = 100000
+    @State var maxPembelian: Double = 100000
+    @State var maxPembayaran: Double = 100000
+    @State var maxIbft: Double = 100000
     
+    @State var maxLimitPerTransaksi: String = ""
+    @State var maxLimitPenarikan: String = ""
+    @State var maxLimitOnUs: String = ""
+    @State var maxLimitPembayaran: String = ""
+    @State var maxLimitPembelian: String = ""
+    @State var maxLimitIbft: String = ""
+ 
     @State private var keyboardOffset: CGFloat = 0
     
     @State var isNextRoute: Bool = false
@@ -48,7 +59,7 @@ struct CardLimitView: View {
     @State var showingAlert = false
     
     private var disabledBtn: Bool {
-        limitPenarikanHarian > maxPenarikanHarian || limitPembelian > maxPembelian || limitTransferOnUs > maxTransferOnUs
+        limitPenarikanHarian > maxPenarikanHarian || limitPembelian > maxPembelian || limitTransferOnUs > maxTransferOnUs || limitIbft > maxIbft
     }
     
     var body: some View {
@@ -76,12 +87,16 @@ struct CardLimitView: View {
                                     
                                     TextField("0", text: self.$limitPerTransaksiCtrl, onEditingChanged: {_ in
                                     })
-                                    .disabled(true)
                                         .onReceive(limitPerTransaksiCtrl.publisher.collect()) {
                                             let amountString = String($0.prefix(13))
                                             let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                             self.limitPerTransaksiCtrl = cleanAmount.thousandSeparator()
-                                            self.activateData.limitIbft = cleanAmount
+                                            self.limitPerTransaksi = Double(cleanAmount) ?? 0
+                                            self.activateData.maxIbftPerTrans = cleanAmount
+                                            
+                                            if (limitPerTransaksi > maxTransaksi) {
+                                                self.limitPerTransaksiCtrl = self.maxLimitPerTransaksi.thousandSeparator()
+                                            }
                                         }
                                         .keyboardType(.decimalPad)
                                         .font(.custom("Montserrat-Bold", size: 30))
@@ -92,7 +107,7 @@ struct CardLimitView: View {
                                 HStack {
                                     Text("Maximum limit of ibft transaction")
                                         .font(.custom("Montserrat-Light", size: 10))
-                                    Text("Rp. 0,-")
+                                    Text("Rp. \(self.maxLimitPerTransaksi.thousandSeparator()),-")
                                         .font(.custom("Montserrat-SemiBold", size: 10))
                                 }
                                 .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
@@ -109,17 +124,18 @@ struct CardLimitView: View {
                                     
                                     TextField("0", text: self.$limitPenarikanHarianCtrl, onEditingChanged: {_ in
                                     })
-                                        .onReceive(limitPenarikanHarianCtrl.publisher.collect()) {
-                                            let amountString = String($0.prefix(13))
-                                            let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                            self.limitPenarikanHarianCtrl = cleanAmount.thousandSeparator()
-                                            self.limitPenarikanHarian = Double(cleanAmount) ?? 0
-                                            self.activateData.limitWd = cleanAmount
-                                            
-                                            if (limitPenarikanHarian > maxPenarikanHarian) {
-                                                self.limitPenarikanHarianCtrl = "10000000".thousandSeparator()
-                                            }
+                                    .onChange(of: limitPenarikanHarianCtrl) {
+                                        print($0)
+                                        
+                                        let cleanAmount = $0.replacingOccurrences(of: ".", with: "")
+                                        self.limitPenarikanHarianCtrl = cleanAmount.thousandSeparator()
+                                        self.limitPenarikanHarian = Double(cleanAmount) ?? 0
+                                        self.activateData.limitWd = cleanAmount
+                                        
+                                        if (limitPenarikanHarian > maxPenarikanHarian) {
+                                            self.limitPenarikanHarianCtrl = self.maxLimitPenarikan.thousandSeparator()
                                         }
+                                    }
                                         .keyboardType(.decimalPad)
                                         .font(.custom("Montserrat-Bold", size: 30))
                                         .foregroundColor(limitPenarikanHarian > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
@@ -129,7 +145,7 @@ struct CardLimitView: View {
                                 HStack {
                                     Text("Maximum limit of withdraw transactions")
                                         .font(.custom("Montserrat-Light", size: 10))
-                                    Text("Rp. 10.000.000,-")
+                                    Text("Rp. \(self.maxLimitPenarikan.thousandSeparator()),-")
                                         .font(.custom("Montserrat-SemiBold", size: 10))
                                 }
                                 .foregroundColor(limitPenarikanHarian > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
@@ -154,7 +170,7 @@ struct CardLimitView: View {
                                             self.activateData.limitOnUs = cleanAmount
                                             
                                             if (limitTransferOnUs > maxTransferOnUs) {
-                                                self.limitOnUsCtrl = "10000000".thousandSeparator()
+                                                self.limitOnUsCtrl = self.maxLimitOnUs.thousandSeparator()
                                             }
                                         }
                                         .keyboardType(.decimalPad)
@@ -166,7 +182,7 @@ struct CardLimitView: View {
                                 HStack {
                                     Text("Maximum limit of transfer on us")
                                         .font(.custom("Montserrat-Light", size: 10))
-                                    Text("Rp. 10.000.000,-")
+                                    Text("Rp. \(self.maxLimitOnUs.thousandSeparator()),-")
                                         .font(.custom("Montserrat-SemiBold", size: 10))
                                 }
                                 .foregroundColor(limitTransferOnUs > maxTransferOnUs ? Color.red : Color(hex: "#232175"))
@@ -179,30 +195,34 @@ struct CardLimitView: View {
                                 HStack(alignment:.top){
                                     Text("Rp.")
                                         .font(.custom("Montserrat-Bold", size: 20))
-                                        .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                        .foregroundColor(limitPembayaran > maxPembayaran ? Color.red : Color(hex: "#232175"))
                                     
                                     TextField("0", text: self.$limitPembayaranCtrl, onEditingChanged: {_ in
                                     })
-                                    .disabled(true)
                                         .onReceive(limitPembayaranCtrl.publisher.collect()) {
                                             let amountString = String($0.prefix(13))
                                             let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                                             self.limitPembayaranCtrl = cleanAmount.thousandSeparator()
+                                            self.limitPembayaran = Double(cleanAmount) ?? 0
                                             self.activateData.limitPayment = cleanAmount
+                                            
+                                            if (limitPembayaran > maxPembayaran) {
+                                                self.limitPembayaranCtrl = self.maxLimitPembayaran.thousandSeparator()
+                                            }
                                         }
                                         .keyboardType(.decimalPad)
                                         .font(.custom("Montserrat-Bold", size: 30))
-                                        .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                        .foregroundColor(limitPembayaran > maxPembayaran ? Color.red : Color(hex: "#232175"))
                                     
                                 }
                                 Divider()
                                 HStack {
                                     Text("Maximum limit of payment transaction")
                                         .font(.custom("Montserrat-Light", size: 10))
-                                    Text("Rp. 0,-")
+                                    Text("Rp. \(self.maxLimitPembayaran.thousandSeparator()),-")
                                         .font(.custom("Montserrat-SemiBold", size: 10))
                                 }
-                                .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                .foregroundColor(limitPembayaran > maxPembayaran ? Color.red : Color(hex: "#232175"))
                             }
                             
                             // Limit Pembelian
@@ -224,7 +244,7 @@ struct CardLimitView: View {
                                             self.activateData.limitPurchase = cleanAmount
                                             
                                             if (limitPembelian > maxPembelian) {
-                                                self.limitPembelianCtrl = "10000000".thousandSeparator()
+                                                self.limitPembelianCtrl = self.maxLimitPembelian.thousandSeparator()
                                             }
                                         }
                                         .keyboardType(.decimalPad)
@@ -236,16 +256,52 @@ struct CardLimitView: View {
                                 HStack {
                                     Text("Maximum limit of purchase transaction")
                                         .font(.custom("Montserrat-Light", size: 10))
-                                    Text("Rp. 10.000.000,-")
+                                    Text("Rp. \(self.maxLimitPembelian.thousandSeparator()),-")
                                         .font(.custom("Montserrat-SemiBold", size: 10))
                                 }
                                 .foregroundColor(limitPembelian > maxPembelian ? Color.red : Color(hex: "#232175"))
                             }
                             
+                            // Limit IBFT
+                            VStack(alignment: .leading) {
+                                Text("Limit ibft")
+                                    .font(.custom("Montserrat-Light", size: 12))
+                                HStack(alignment:.top){
+                                    Text("Rp.")
+                                        .font(.custom("Montserrat-Bold", size: 20))
+                                        .foregroundColor(limitIbft > maxIbft ? Color.red : Color(hex: "#232175"))
+                                    
+                                    TextField("0", text: self.$limitIbftCtrl, onEditingChanged: {_ in
+                                    })
+                                        .onReceive(limitIbftCtrl.publisher.collect()) {
+                                            let amountString = String($0.prefix(13))
+                                            let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                            self.limitIbftCtrl = cleanAmount.thousandSeparator()
+                                            self.limitIbft = Double(cleanAmount) ?? 0
+                                            self.activateData.limitIbft = cleanAmount
+                                            
+                                            if (limitIbft > maxIbft) {
+                                                self.limitIbftCtrl = self.maxLimitIbft.thousandSeparator()
+                                            }
+                                        }
+                                        .keyboardType(.decimalPad)
+                                        .font(.custom("Montserrat-Bold", size: 30))
+                                        .foregroundColor(limitPembelian > maxPembelian ? Color.red : Color(hex: "#232175"))
+                                    
+                                }
+                                Divider()
+                                HStack {
+                                    Text("Maximum limit of ibft transaction")
+                                        .font(.custom("Montserrat-Light", size: 10))
+                                    Text("Rp. \(self.maxLimitIbft.thousandSeparator()),-")
+                                        .font(.custom("Montserrat-SemiBold", size: 10))
+                                }
+                                .foregroundColor(limitIbft > maxIbft ? Color.red : Color(hex: "#232175"))
+                            }
+                            
                             Button(action: {
                                 self.activateData.cardNo = card.cardNo
                                 self.activateData.maxIbftPerTrans = "0"
-                                self.activateData.limitPayment = "0"
                                 self.isNextRoute = true
                             }, label: {
                                 Text("SAVE CHANGES".localized(language))
@@ -282,13 +338,22 @@ struct CardLimitView: View {
                 .navigationBarTitle("Card Limit".localized(language), displayMode: .inline)
                 .onAppear{
                     
+                    self.getLimitTrx()
+                    
                     print("GET BALANCE")
-                    print(card.limitOnUs)
-                    self.limitPerTransaksiCtrl = card.maxIbftPerTrans!
-                    self.limitPenarikanHarianCtrl = card.limitWd!
-                    self.limitOnUsCtrl = card.limitOnUs!
-                    self.limitPembayaranCtrl = card.limitPayment!
-                    self.limitPembelianCtrl = card.limitPurchase!
+                    
+                    print(card.maxIbftPerTrans)
+                    print(card.limitWd)
+                    print(card.limitPayment)
+                    print(card.limitPurchase)
+                    print(card.limitIbft)
+                    
+                    self.limitPerTransaksiCtrl = card.maxIbftPerTrans ?? "0"
+                    self.limitPenarikanHarianCtrl = card.limitWd ?? "0"
+                    self.limitOnUsCtrl = card.limitOnUs ?? "0"
+                    self.limitPembayaranCtrl = card.limitPayment ?? "0"
+                    self.limitPembelianCtrl = card.limitPurchase ?? "0"
+                    self.limitIbftCtrl = card.limitIbft ?? "0"
                     
                     NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notif) in
                         let value = notif.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
@@ -373,22 +438,37 @@ struct CardLimitView: View {
         .cornerRadius(20)
     }
     
-    @ObservedObject var profileVM = ProfileViewModel()
-    func getProfile() {
+    @ObservedObject var limitTrxVM = TransferViewModel()
+    func getLimitTrx() {
+        print("Class Code --> \(card.classCode)")
         self.isLoading = true
-        self.profileVM.getProfile { success in
+        self.limitTrxVM.getLimitTransaction(classCode: card.classCode) { success in
+            
             if success {
-                print(self.profileVM.limitOnUs)
+                print("Dapet Limit TRX")
                 self.isLoading = false
                 
-                self.limitPerTransaksiCtrl = self.profileVM.maxIbftPerTrans
-                self.limitPenarikanHarianCtrl = self.profileVM.limitWd
-                self.limitOnUsCtrl = self.profileVM.limitOnUs
-                self.limitPembayaranCtrl = self.profileVM.limitPayment
-                self.limitPembelianCtrl = self.profileVM.limitPurchase
+                self.maxLimitPerTransaksi = self.limitTrxVM.limitIbftPerTrx
+                self.maxTransaksi = Double(limitTrxVM.limitIbftPerTrx) ?? 0
+                
+                self.maxLimitPenarikan = self.limitTrxVM.limitPenarikanHarian
+                self.maxPenarikanHarian = Double(limitTrxVM.limitPenarikanHarian) ?? 0
+                
+                self.maxLimitOnUs = self.limitTrxVM.limitOnUs
+                self.maxTransferOnUs = Double(limitTrxVM.limitOnUs) ?? 0
+                
+                self.maxLimitPembayaran = self.limitTrxVM.limitPembayaran
+                self.maxPembayaran = Double(limitTrxVM.limitPembayaran) ?? 0
+                
+                self.maxLimitPembelian = self.limitTrxVM.limitPembelian
+                self.maxPembelian = Double(limitTrxVM.limitPembelian) ?? 0
+                
+                self.maxLimitIbft = self.limitTrxVM.limitIbft
+                self.maxIbft = Double(limitTrxVM.limitIbft) ?? 0
             }
             
             if !success {
+                print("Gagal Dapet Limit Trx")
                 self.isLoading = false
             }
         }

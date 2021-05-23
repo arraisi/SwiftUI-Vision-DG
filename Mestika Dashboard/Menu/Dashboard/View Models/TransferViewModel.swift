@@ -13,9 +13,14 @@ class TransferViewModel : ObservableObject {
     @Published var timeEnd: String = ""
     @Published var message: String = ""
     @Published var code: String = ""
+    @Published var totalTrx: String = ""
+    
+    @Published var limitIbftPerTrx: String = ""
+    @Published var limitPenarikanHarian: String = ""
+    @Published var limitPembayaran: String = ""
+    @Published var limitPembelian: String = ""
     @Published var limitOnUs: String = ""
     @Published var limitIbft: String = ""
-    @Published var totalTrx: String = ""
     
     @Published var destinationName: String = ""
     @Published var fee: String = ""
@@ -91,12 +96,19 @@ class TransferViewModel : ObservableObject {
             switch result {
             case .success(let response):
                 print(response)
+                
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.limitIbft = response.limitIbft
-                    self.limitOnUs = response.limitOnUs
-                    self.cardReplaceFee = response.cardReplaceFee
                 }
+                
+                self.limitIbftPerTrx = response.maxIbftPerTrans
+                self.limitPenarikanHarian = response.limitWd
+                self.limitPembayaran = response.limitPayment
+                self.limitPembelian = response.limitPurchase
+                self.limitIbft = response.limitIbft
+                self.limitOnUs = response.limitOnUs
+                
+                self.cardReplaceFee = response.cardReplaceFee
                 
                 completion(true)
                 
