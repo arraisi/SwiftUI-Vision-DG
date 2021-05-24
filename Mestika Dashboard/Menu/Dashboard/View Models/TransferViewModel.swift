@@ -332,6 +332,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"
+                case .custom(code: 503):
+                    self.code = "503"
+                    self.message = "Internal Server Error"
                 default:
                     self.message = "Internal Server Error"
                 }

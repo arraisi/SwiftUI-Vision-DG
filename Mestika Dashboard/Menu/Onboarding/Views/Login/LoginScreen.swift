@@ -276,6 +276,9 @@ struct LoginScreen: View {
                     } else if (self.authVM.errorCode == "302") {
                         print("ERROR")
                         self.showingModalError = true
+                    } else if (self.authVM.errorCode == "406") {
+                        print("BLOCKED")
+                        self.showingModal = true
                     } else {
                         print("LOGIN FAILED")
                         self.showingModal = true

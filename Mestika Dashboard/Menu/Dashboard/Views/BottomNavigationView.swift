@@ -73,7 +73,7 @@ struct BottomNavigationView: View {
                     appbar
                     
                     if (selected == 0) {
-                        DashboardTabs(cardNo: $cardNo, sourceNumber: $sourceNumber)
+                        DashboardTabs(tmpMyAccount: DashboardAccountModel(), cardNo: $cardNo, sourceNumber: $sourceNumber)
                     }
                     
                     if (selected == 1) {

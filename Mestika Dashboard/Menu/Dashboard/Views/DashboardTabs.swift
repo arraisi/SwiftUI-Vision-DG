@@ -40,7 +40,12 @@ struct DashboardTabs: View {
     
     @State var listSourceNumber: [String] = []
     @State var listTypeAccount: [String] = []
+    @State var listProductName: [String] = []
     @State var listCreditDebit: [String] = []
+    
+    @State var listSortedMyAccount: [DashboardAccountModel] = []
+    @State var listMyAccount: [DashboardAccountModel] = []
+    @State var tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
     
     /* Loading and Data Variable */
     @State var isLoading : Bool = true
@@ -180,7 +185,7 @@ struct DashboardTabs: View {
                                 isActive: self.$routingMyCardDashboard,
                                 label: {}
                             )
-//                            .isDetailLink(false)
+                            .isDetailLink(false)
                             
                             Button(
                                 action: {
@@ -227,7 +232,8 @@ struct DashboardTabs: View {
         .onAppear {
             print("GET")
             self.listSourceNumber.removeAll()
-            self.listTypeAccount.removeAll()
+            self.listMyAccount.removeAll()
+            
             self.isHiddenInformationReStore = true
             self.isLoadingCard = true
             
@@ -241,19 +247,36 @@ struct DashboardTabs: View {
                 if success {
                     self.isLoadingCard = false
                     self.savingAccountVM.accounts.forEach { e in
-                        print(e.categoryProduct)
                         
-                        if (e.categoryProduct == "M") {
-                            self.listSourceNumber.insert(e.accountNumber, at: 0)
-                            self.listTypeAccount.insert(e.accountType ?? "", at: 0)
-                        }
+                        self.tmpMyAccount.sourceNumber = e.accountNumber
+                        self.tmpMyAccount.typeAccount = e.accountType ?? ""
+                        self.tmpMyAccount.productName = e.productName ?? "Tabungan Mestika"
+                        self.tmpMyAccount.description = e.accountTypeDescription
+                        self.tmpMyAccount.categoryProduct = e.categoryProduct
+                        self.listMyAccount.append(tmpMyAccount)
                         
-                        self.listSourceNumber.append(e.accountNumber)
-                        self.listTypeAccount.append(e.accountType ?? "")
                     }
                     
                     
+                    let sourceFilteredM = listMyAccount.filter { word in
+                        return word.categoryProduct == "M"
+                    }
+                    let sourceFilteredS = listMyAccount.filter { word in
+                      return word.categoryProduct == "S"
+                    }
+                    let sourceFilteredBlankOrNil = listMyAccount.filter { word in
+                      return word.categoryProduct != "M" && word.categoryProduct != "S"
+                    }
+
+                    listSortedMyAccount.append(contentsOf: sourceFilteredM)
+                    listSortedMyAccount.append(contentsOf: sourceFilteredS)
+                    listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
                     
+                    listSortedMyAccount.forEach { a in
+                        print(a.categoryProduct)
+                        self.listSourceNumber.append(a.sourceNumber ?? "")
+                    }
+
                     self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
                         
                         if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
@@ -316,7 +339,7 @@ struct DashboardTabs: View {
     // MARK: -MENU GRID VIEW
     var menuGrid: some View {
         VStack {
-            if isLoadingCard || self.savingAccountVM.accounts.isEmpty {
+            if isLoadingCard || self.savingAccountVM.accounts.isEmpty || self.listSourceNumber.count < 1 || listSortedMyAccount.isEmpty {
                 
                 ProgressView("Loading")
                     .padding(.vertical, 50)
@@ -346,18 +369,18 @@ struct DashboardTabs: View {
                                             
                                             VStack(alignment: .leading) {
                                                 
-                                                Text("\(self.savingAccountVM.accounts[index].productName ?? "Tabungan Mestika")")
+                                                Text("\(self.listSortedMyAccount[index].productName ?? "Tabungan Mestika")")
                                                     .font(.subheadline)
                                                     .bold()
                                                     .foregroundColor(Color(hex: "#232175"))
                                                     .fontWeight(.ultraLight)
                                                 
-                                                if (self.savingAccountVM.accounts[index].accountNumber == "") {
+                                                if (self.listSortedMyAccount[index].sourceNumber == "") {
                                                     Text("-")
                                                         .font(.caption)
                                                         .fontWeight(.ultraLight)
                                                 } else {
-                                                    Text("\(self.savingAccountVM.accounts[index].accountNumber)")
+                                                    Text("\(self.listSortedMyAccount[index].sourceNumber ?? "")")
                                                         .font(.caption)
                                                         .fontWeight(.ultraLight)
                                                 }
@@ -544,4 +567,12 @@ struct DashboardTabs: View {
         
         cards[value].isShow = true
     }
+}
+
+struct DashboardAccountModel {
+    var sourceNumber: String?
+    var typeAccount: String?
+    var productName: String?
+    var description: String?
+    var categoryProduct: String?
 }

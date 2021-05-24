@@ -72,6 +72,9 @@ struct NumPadView: View {
                             } else {
                                 NotificationCenter.default.post(name: NSNotification.Name("PinOffUs"), object: nil, userInfo: nil)
                             }
+                            
+                            
+                            
                             NotificationCenter.default.post(name: NSNotification.Name("PinForgotPinTrx"), object: nil, userInfo: nil)
                         }
                     }

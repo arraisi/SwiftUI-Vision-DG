@@ -271,11 +271,9 @@ extension KartuKuViewModel {
         
         KartuKuService.shared.putLimitKartuKu(data: data) { result in
             switch result {
-            case .success(let response):
+            case .success(_ ):
                 
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
+                self.isLoading = false
                 
                 completion(true)
                 
@@ -283,9 +281,7 @@ extension KartuKuViewModel {
                 print("ERROR-->")
                 print(error)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.isLoading = false
-                }
+                self.isLoading = false
                 
                 switch error {
                 case .custom(code: 401):
@@ -295,6 +291,9 @@ extension KartuKuViewModel {
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "Pin Transaksi Salah"
+                case .custom(code: 400):
                     self.code = "400"
                     self.message = "Message parametr tidak valid"
                 case .custom(code: 500):

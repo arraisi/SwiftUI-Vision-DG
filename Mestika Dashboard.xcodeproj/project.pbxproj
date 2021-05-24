@@ -45,6 +45,7 @@
 		12478D1186E08B100E24B481 /* Pods_Mestika_Dashboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F652904AE43713C516FA1A2 /* Pods_Mestika_Dashboard.framework */; };
 		3A5E6D248BE42AFC297E22A0 /* Pods_Mestika_DashboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA4641FE3F09350872C55F6 /* Pods_Mestika_DashboardTests.framework */; };
 		5200AF1525D23EE800E7C0A3 /* TransferOffUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */; };
+		52017E3E265B559B00703515 /* CardLimitPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52017E3D265B559A00703515 /* CardLimitPinView.swift */; };
 		5203B246263C1E8A007174FB /* PasswordParamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5203B245263C1E8A007174FB /* PasswordParamResponse.swift */; };
 		520585F525721F00005DB764 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86232542B67900ADFE25 /* PopupView */; };
 		520585F625721F00005DB764 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 523A86322542CC6E00ADFE25 /* BottomSheet */; };
@@ -550,6 +551,7 @@
 		1F652904AE43713C516FA1A2 /* Pods_Mestika_Dashboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mestika_Dashboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4463479AF6BCDF5B05002318 /* Pods-Mestika DashboardTests.debugmestika.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mestika DashboardTests.debugmestika.xcconfig"; path = "Target Support Files/Pods-Mestika DashboardTests/Pods-Mestika DashboardTests.debugmestika.xcconfig"; sourceTree = "<group>"; };
 		5200AF1425D23EE800E7C0A3 /* TransferOffUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOffUsModel.swift; sourceTree = "<group>"; };
+		52017E3D265B559A00703515 /* CardLimitPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLimitPinView.swift; sourceTree = "<group>"; };
 		5203B245263C1E8A007174FB /* PasswordParamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordParamResponse.swift; sourceTree = "<group>"; };
 		5205860F25723965005DB764 /* PasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResponse.swift; sourceTree = "<group>"; };
 		52058614257239AB005DB764 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
@@ -1841,6 +1843,7 @@
 			children = (
 				C00702B42554E2B60089DBD1 /* CardLimitView.swift */,
 				52FF49B025F5CDCF00890AE6 /* CardLimitVerificationPinView.swift */,
+				52017E3D265B559A00703515 /* CardLimitPinView.swift */,
 			);
 			path = LimitCard;
 			sourceTree = "<group>";
@@ -2793,6 +2796,7 @@
 				52DA20942551115700CC048A /* FormInputNewPasswordScreen.swift in Sources */,
 				C0D274E625EF3DF600513C53 /* PinVerification.swift in Sources */,
 				526B6611254FFA9B00C13C36 /* LanguageSettingScreen.swift in Sources */,
+				52017E3E265B559B00703515 /* CardLimitPinView.swift in Sources */,
 				C0A4F9882552896200566A11 /* DetailKartuTidakAktifView.swift in Sources */,
 				52ADFF982557DFDC00A1001F /* InformasiPerusahaanView.swift in Sources */,
 				C052A087263277F800DC90C6 /* PemberitahuanView.swift in Sources */,
