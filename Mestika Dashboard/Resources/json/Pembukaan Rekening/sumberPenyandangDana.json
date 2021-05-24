@@ -1,14 +1,46 @@
 [
     {
         "id": 1,
-        "name": "Ibu Rumah Tangga"
+        "name": "Ayah"
     },
     {
         "id": 2,
-        "name": "Pensiunan"
+        "name": "Ibu"
     },
     {
         "id": 3,
-        "name": "Pelajar / Mahasiswa"
+        "name": "Anak"
+    },
+    {
+        "id": 4,
+        "name": "Paman"
+    },
+    {
+        "id": 5,
+        "name": "Bibi"
+    },
+    {
+        "id": 6,
+        "name": "Sepupu"
+    },
+    {
+        "id": 7,
+        "name": "Adik"
+    },
+    {
+        "id": 8,
+        "name": "Kaka"
+    },
+    {
+        "id": 9,
+        "name": "Kakek"
+    },
+    {
+        "id": 10,
+        "name": "Suami"
+    },
+    {
+        "id": 11,
+        "name": "Lainnya"
     }
 ]
