@@ -36,6 +36,13 @@ struct DestinationAccountAddBalanceView: View {
     // Routing
     @State var nextRouting: Bool = false
     
+    func hasSubAccount() -> Bool {
+        return self.listSourceNumber.filter { item in
+            return item == "S"
+        }.count > 0
+        
+    }
+    
     var body: some View {
         ZStack {
             
@@ -50,13 +57,13 @@ struct DestinationAccountAddBalanceView: View {
             Color(hex: "#F4F7FA")
             
             VStack {
-//                if (self.isLoading) {
-//                    LinearWaitingIndicator()
-//                        .animated(true)
-//                        .foregroundColor(.green)
-//                        .frame(height: 1)
-//                        .padding(.bottom, 10)
-//                }
+                //                if (self.isLoading) {
+                //                    LinearWaitingIndicator()
+                //                        .animated(true)
+                //                        .foregroundColor(.green)
+                //                        .frame(height: 1)
+                //                        .padding(.bottom, 10)
+                //                }
                 
                 ScrollView(.vertical, showsIndicators: false, content: {
                     
@@ -74,7 +81,14 @@ struct DestinationAccountAddBalanceView: View {
                     
                     // list account
                     
-                    if !self.listBalance.isEmpty {
+                    if (self.isLoading) {
+                        ShimmerView()
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 170)
+                            .cornerRadius(15)
+                    } else if (!self.hasSubAccount()) {
+                        Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
+                            .multilineTextAlignment(.center)
+                    } else if !self.listBalance.isEmpty {
                         ForEach(0..<self.listSourceNumber.count, id: \.self) { index in
                             Button(action: {
                                 
@@ -121,12 +135,6 @@ struct DestinationAccountAddBalanceView: View {
                                 .cornerRadius(15)
                             })
                         }
-                    } else if (self.isLoading) {
-                        ShimmerView()
-                            .frame(width: UIScreen.main.bounds.width - 50, height: 170)
-                            .cornerRadius(15)
-                    } else if (self.listSourceNumber.isEmpty) {
-                        EmptyView()
                     }
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
@@ -200,6 +208,7 @@ struct DestinationAccountAddBalanceView: View {
                     }
                     
                     if (listSourceNumber.isEmpty) {
+                        self.isLoading = false
                         print("No Sub Account")
                     } else {
                         self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { success in
