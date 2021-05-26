@@ -15,6 +15,8 @@ struct TransferRtgsValidationPin: View {
     
     @EnvironmentObject var transferData: TransferOffUsModel
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State var password = ""
     @State var isLoading = false
     

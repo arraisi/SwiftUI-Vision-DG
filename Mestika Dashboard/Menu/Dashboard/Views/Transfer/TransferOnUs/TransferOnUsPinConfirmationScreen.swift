@@ -13,6 +13,7 @@ struct TransferOnUsPinConfirmationScreen: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @EnvironmentObject var transferData: TransferOnUsModel
     

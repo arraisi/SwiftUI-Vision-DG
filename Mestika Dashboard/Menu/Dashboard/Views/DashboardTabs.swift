@@ -203,6 +203,11 @@ struct DashboardTabs: View {
                     if value {
                         print("Move to Dashboard: \(value)")
                         
+                        self.listMyAccount.removeAll()
+                        self.listSourceNumber.removeAll()
+                        self.listSortedMyAccount.removeAll()
+                        self.tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
+                        
                         self.routingAccountDeposit = false
                         self.routingManagementCard = false
                         self.routingMyCardDashboard = false
@@ -231,8 +236,10 @@ struct DashboardTabs: View {
         }
         .onAppear {
             print("GET")
-            self.listSourceNumber.removeAll()
             self.listMyAccount.removeAll()
+            self.listSourceNumber.removeAll()
+            self.listSortedMyAccount.removeAll()
+            self.tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
             
             self.isHiddenInformationReStore = true
             self.isLoadingCard = true
