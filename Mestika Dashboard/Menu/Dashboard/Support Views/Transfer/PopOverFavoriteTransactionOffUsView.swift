@@ -119,10 +119,24 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     Button(action: {
                         
                         if (self.transferData.transactionType == "RTGS") {
-                            self.favoritVM.transferRtgs(data: transferData) { result in
-                                print("Save to favorites".localized(language))
-                                self.show = false
-                                self.showAlert = true
+                            self.favoritVM.transferRtgs(data: transferData) { success in
+
+                                if success {
+                                    print("Save to favorites".localized(language))
+                                    self.status = "Succeed"
+                                    self.message = "Favorite added successfully"
+                                    self.show = false
+                                    self.showAlert = true
+                                }
+                                
+                                if !success {
+                                    print("Error Save Favorite")
+                                    self.status = "Failed"
+                                    self.message = "Error added favorite"
+                                    self.show = false
+                                    self.showAlert = true
+                                }
+                                
                             }
                         } else {
                             self.favoritVM.transferSkn(data: transferData) { success in

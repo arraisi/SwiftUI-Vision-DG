@@ -14,27 +14,23 @@ import Foundation
 
 // MARK: - FavoritModelElement
 struct FavoritModelElement: Codable {
-    var id, bankAccountNumber, bankName, name: String
-    let sourceNumber, cardNo, type: String
-    let transferOnUs: TransferOnUs?
-    let transactionDate, nominal, nominalSign: String
-    let transferOffUsSkn: TransferOffUsSkn?
+//    var id, bankAccountNumber, bankName, name: String
+//    let sourceNumber, cardNo, type: String
+//    let transferOnUs: TransferOnUs?
+//    let transactionDate, nominal, nominalSign: String
+//    let transferOffUsSkn: TransferOffUsSkn?
+//    let transferOffUsRtgs: TransferOffUsRtgs?
+    let id, name, sourceNumber, cardNo: String
+    let type: String
     let transferOffUsRtgs: TransferOffUsRtgs?
+    let transferOnUs: TransferOnUs?
+    let transferOffUsSkn: TransferOffUsSkn?
 }
 
 // MARK: - TransferOffUsRtgs
 struct TransferOffUsRtgs: Codable {
-    let addressBeneficiary3, ref, addressBeneficiary2, addressBeneficiary1: String
-    let accountTo, destinationBankBranchName, destinationBankName, destinationBankMemberName: String
-    let flagResidenceDebitur, flagWargaNegara, transferOffUsRtgsDescription, ultimateBeneficiaryName: String
-    let destinationBankCode, sourceNumber, currency, nominal: String
-    let cardNo: String
-
-    enum CodingKeys: String, CodingKey {
-        case addressBeneficiary3, ref, addressBeneficiary2, addressBeneficiary1, accountTo, destinationBankBranchName, destinationBankName, destinationBankMemberName, flagResidenceDebitur, flagWargaNegara
-        case transferOffUsRtgsDescription = "description"
-        case ultimateBeneficiaryName, destinationBankCode, sourceNumber, currency, nominal, cardNo
-    }
+//    let name: String, accountTo: String?
+    let destinationBankCode, destinationBankName: String
 }
 
 // MARK: - TransferOffUsSkn
@@ -57,8 +53,7 @@ struct TransferOffUsSkn: Codable {
 
 // MARK: - TransferOnUs
 struct TransferOnUs: Codable {
-    let berita, destinationNumber, sourceNumber, currency: String
-    let nominal, ref, cardNo: String
+    let destinationNumber: String
 }
 
 typealias FavoritModel = [FavoritModelElement]

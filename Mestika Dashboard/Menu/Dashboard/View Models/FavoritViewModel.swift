@@ -150,15 +150,19 @@ class FavoritViewModel : ObservableObject {
                             return data.name.lowercased() == searchText.lowercased() || data.transferOnUs!.destinationNumber == searchText
                         } else {
                             
-                            if (data.transferOffUsRtgs == nil) {
-                                print("SKN")
-                                print(searchText)
-                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsSkn!.accountTo == searchText
-                            } else {
-                                print("RTGS")
-                                print(searchText)
-                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsRtgs!.accountTo == searchText
-                            }
+//                            if (data.transferOffUsRtgs == nil) {
+//                                print("SKN")
+//                                print(searchText)
+//                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsSkn!.accountTo == searchText
+//                            } else {
+//                                print("RTGS")
+//                                print(searchText)
+//                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsRtgs!.accountTo == searchText
+//                            }
+                            
+                            print("RTGS")
+                            print(searchText)
+                            return data.name.lowercased() == searchText.lowercased()
                             
                         }
                         

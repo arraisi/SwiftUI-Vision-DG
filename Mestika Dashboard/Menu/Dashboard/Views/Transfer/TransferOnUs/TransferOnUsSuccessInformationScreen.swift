@@ -12,6 +12,8 @@ struct TransferOnUsSuccessInformationScreen: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @State var status: String = ""
+    @State var message: String = ""
     
 //    @EnvironmentObject var transferData: TransferOnUsModel
     var transferData: TransferOnUsModel
@@ -74,7 +76,7 @@ struct TransferOnUsSuccessInformationScreen: View {
             }
             
             if showPopover {
-                PopOverFavoriteView(transferData: transferData, show: self.$showPopover, showAlert: self.$showingBadge)
+                PopOverFavoriteView(transferData: transferData, show: self.$showPopover, showAlert: self.$showingBadge, status: self.$status, message: self.$message)
                     .padding(30)
             }
         
@@ -83,8 +85,8 @@ struct TransferOnUsSuccessInformationScreen: View {
         .navigationBarBackButtonHidden(true)
         .alert(isPresented: $showingBadge) {
             return Alert(
-                title: Text("Succeed".localized(language)),
-                message: Text("Favorite added successfully".localized(language)),
+                title: Text("\(self.status)".localized(language)),
+                message: Text("\(self.message)".localized(language)),
                 dismissButton: .default(Text("OK".localized(language)))
             )
         }

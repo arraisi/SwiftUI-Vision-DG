@@ -73,15 +73,15 @@ struct ListFavoriteTransactionView: View {
                                 
                                 HStack {
                                     if (data.type == "TRANSFER_SESAMA") {
-                                        Text("\(data.bankName) : \(data.transferOnUs!.destinationNumber)")
+                                        Text("\(data.transferOnUs!.destinationNumber)")
                                             .font(.custom("Montserrat-Light", size: 14))
                                     } else {
                                         if (data.transferOffUsRtgs == nil) {
-                                            Text("\(data.bankName) : \(data.transferOffUsSkn!.accountTo)")
+                                            Text("\(data.transferOffUsSkn!.accountTo)")
                                                 .font(.custom("Montserrat-Light", size: 14))
                                         } else {
-                                            Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
-                                                .font(.custom("Montserrat-Light", size: 14))
+//                                            Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
+//                                                .font(.custom("Montserrat-Light", size: 14))
                                         }
                                     }
                                 }

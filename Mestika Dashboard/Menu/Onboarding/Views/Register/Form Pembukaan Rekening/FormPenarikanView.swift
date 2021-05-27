@@ -114,7 +114,7 @@ struct FormPenarikanView: View {
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 25)
                                         } else {
-                                            NavigationLink(destination: RegisterSummaryView().environmentObject(registerData)) {
+                                            NavigationLink(destination: RegisterSummaryView(deviceModel: DeviceTraceModel()).environmentObject(registerData)) {
                                                 
                                                 Text("Save")
                                                     .foregroundColor(.white)

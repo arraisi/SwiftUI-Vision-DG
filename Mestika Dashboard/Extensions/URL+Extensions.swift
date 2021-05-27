@@ -88,6 +88,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/user/card");
     }
     
+    static func urlCheckFreeze() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user/checkFreeze")
+    }
+    
     static func urlGetListATM() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/content/content-find-atm2");
     }
@@ -242,6 +246,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/password/pwd-param")
     }
     
+    static func urlPostTrace() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/trace")
+    }
+    
     //-------------------- FAVORITE SERVICE ----------------------//
     
     static func urlGetListFavorite() -> URL? {
@@ -349,4 +357,6 @@ extension URL {
     static func urlUserLimit() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/userLimit")
     }
+    
+    //-------------------- FREEZE ACCOUNT SERVICE ----------------------//
 }

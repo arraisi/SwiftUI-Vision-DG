@@ -46,10 +46,10 @@ struct LastFavoriteTransferScreen: View {
                             .disabled(nameTextFieldDisabled)
                             
                             HStack {
-                                Text("\(data.bankName) :")
-                                    .foregroundColor(.white)
-                                    .font(.caption)
-                                    .fontWeight(.light)
+//                                Text("\(data.bankName) :")
+//                                    .foregroundColor(.white)
+//                                    .font(.caption)
+//                                    .fontWeight(.light)
                                 
                                 Text("\(data.cardNo)")
                                     .foregroundColor(.white)

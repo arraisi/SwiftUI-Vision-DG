@@ -18,6 +18,8 @@ struct TransferTabs: View {
     @Binding var transferOnUsActive: Bool
     @Binding var transferOffUsActive: Bool
     
+    @State var showPopup: Bool = false
+    
     @State private var timeLogout = 300
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -26,6 +28,7 @@ struct TransferTabs: View {
     @EnvironmentObject var appState: AppState
     
     @ObservedObject private var authVM = AuthViewModel()
+    @ObservedObject private var profileVM = ProfileViewModel()
     
     var body: some View {
         
@@ -35,23 +38,37 @@ struct TransferTabs: View {
                 print("View tapped!")
             }
         
-        ScrollView(.vertical, showsIndicators: false, content: {
-            
-            GeometryReader { geometry in
-                Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
-                    .frame(height: 0)
-            }
-            
-            VStack {
-                titleInfo
-                buttonLink
+        ZStack {
+            ScrollView(.vertical, showsIndicators: false, content: {
                 
-                ListLastTransactionView(sourceNumber: sourceNumber)
+                GeometryReader { geometry in
+                    Color.clear.preference(key: OffsetKey.self, value: geometry.frame(in: .global).minY)
+                        .frame(height: 0)
+                }
+                
+                VStack {
+                    titleInfo
+                    buttonLink
+                    
+                    ListLastTransactionView(sourceNumber: sourceNumber)
+                }
+            })
+            
+            if self.showPopup {
+                ModalOverlay(tapAction: { withAnimation { self.showPopup = false } })
+                    .edgesIgnoringSafeArea(.all)
             }
-        })
+        }
         .gesture(tap)
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
+//        .onAppear {
+//            checkFreezeAccount()
+//        }
+        .popup(isPresented: $showPopup, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageError()
+                .padding(.bottom, 90)
+        }
 //        .onReceive(timer) { time in
 ////            print(self.timeLogout)
 //            if self.timeLogout > 0 {
@@ -103,7 +120,7 @@ struct TransferTabs: View {
                 isActive: self.$transferOnUsActive) {
                 EmptyView()
             }
-//            .isDetailLink(false)
+            .isDetailLink(false)
             
             // Link Transfer OFFUS
             NavigationLink(
@@ -111,11 +128,18 @@ struct TransferTabs: View {
                 isActive: self.$transferOffUsActive,
                 label: {EmptyView()}
             )
-//            .isDetailLink(false)
+            .isDetailLink(false)
             
             Button(action: {
-                print("ONUS")
-                self.transferOnUsActive = true
+                
+                if (self.profileVM.freezeAccount) {
+                    print("Freeze Account")
+                    self.showPopup = true
+                } else {
+                    print("ONUS")
+                    self.transferOnUsActive = true
+                }
+                
             }, label: {
                 Text("FELLOW BANK MESTIKA".localized(language))
                     .foregroundColor(.white)
@@ -133,8 +157,15 @@ struct TransferTabs: View {
             Spacer(minLength: 10)
             
             Button(action: {
-                print("OFFUS")
-                self.transferOffUsActive = true
+                
+                if (self.profileVM.freezeAccount) {
+                    print("Freeze Account")
+                    self.showPopup = true
+                } else {
+                    print("OFFUS")
+                    self.transferOffUsActive = true
+                }
+        
             }, label: {
                 Text("Transfer to Other Bank".localized(language))
                     .foregroundColor(Color(hex: "#2334D0"))
@@ -150,6 +181,43 @@ struct TransferTabs: View {
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
         }
         .padding([.bottom, .top], 20)
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Akun anda telah dibekukan".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {}) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
+    func checkFreezeAccount() {
+        self.profileVM.getAccountFreeze { sucess in }
     }
 }
 

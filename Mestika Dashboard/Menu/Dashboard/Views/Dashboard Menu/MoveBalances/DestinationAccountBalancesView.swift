@@ -85,16 +85,6 @@ struct DestinationAccountBalancesView: View {
                         ShimmerView()
                             .frame(width: UIScreen.main.bounds.width - 50, height: 170)
                             .cornerRadius(15)
-                    } else if (!self.hasSubAccount()) {
-                        ZStack {
-                            ShimmerView()
-                                .frame(width: UIScreen.main.bounds.width - 50, height: 170)
-                                .cornerRadius(15)
-                            if (!self.hasSubAccount()) {
-                                Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
-                                    .multilineTextAlignment(.center)
-                            }
-                        }
                     } else if !self.listBalance.isEmpty {
                         ForEach(0..<self.listSourceNumber.count, id: \.self) { index in
                             Button(action: {
@@ -141,6 +131,12 @@ struct DestinationAccountBalancesView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(15)
                             })
+                        }
+                    } else {
+                        if (!self.hasSubAccount()) {
+                            Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 50)
                         }
                     }
                 })

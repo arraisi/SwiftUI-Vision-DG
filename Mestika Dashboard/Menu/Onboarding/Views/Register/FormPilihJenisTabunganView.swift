@@ -165,7 +165,7 @@ struct FormPilihJenisTabunganView: View {
                     EmptyView()
                 }
                 
-                NavigationLink(destination: RegisterSummaryView().environmentObject(registerData), isActive: $backToSummary) {
+                NavigationLink(destination: RegisterSummaryView(deviceModel: DeviceTraceModel()).environmentObject(registerData), isActive: $backToSummary) {
                     EmptyView()
                 }
                 

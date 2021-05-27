@@ -24,6 +24,7 @@ struct BottomNavigationView: View {
     
     @State private var showingSlideMenu = false
     @State private var showingSettingMenu = false
+    @State private var showFreezeMenu = false
     
     @State var selected = 0
     
@@ -74,10 +75,17 @@ struct BottomNavigationView: View {
                     
                     if (selected == 0) {
                         DashboardTabs(tmpMyAccount: DashboardAccountModel(), cardNo: $cardNo, sourceNumber: $sourceNumber)
+                            .onAppear {
+                                self.traceDevice()
+                            }
                     }
                     
                     if (selected == 1) {
                         TransferTabs(cardNo: self.$cardNo, sourceNumber: self.$sourceNumber, transferOnUsActive: self.$isRouteTransferOnUs, transferOffUsActive: self.$isRouteTransferOffUs)
+                            .onAppear {
+                                print("check freeze")
+                                self.checkFreezeAccount()
+                            }
                     }
                     
                     if (selected == 2) {
@@ -108,9 +116,6 @@ struct BottomNavigationView: View {
                             
                             VStack {
                                 Button(action: {
-                                    
-                                    //                                    selected = 4
-                                    // temporary qris
                                     self.qrisActive = true
                                     print("\n\(selected)")
                                 }) {
@@ -159,8 +164,8 @@ struct BottomNavigationView: View {
             }
             
             
-            if (showingSettingMenu || isShowConfirmationBiometricAuth) {
-                ModalOverlay(tapAction: { withAnimation { self.showingSettingMenu = false } })
+            if (showingSettingMenu || isShowConfirmationBiometricAuth || showFreezeMenu) {
+                ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
             
@@ -207,6 +212,46 @@ struct BottomNavigationView: View {
                 .padding(15)
             
         }
+        .popup(isPresented: $showFreezeMenu, type: .floater(verticalPadding: 200), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            popupFreezeAccount()
+                .padding(.bottom, 40)
+        }
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupFreezeAccount() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Akun anda telah dibekukan".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showFreezeMenu = false
+                self.selected = 0
+            }) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     // Fungsi untuk setting biometric login
@@ -364,6 +409,30 @@ struct BottomNavigationView: View {
             })
         }
         .padding(.horizontal)
+    }
+    
+    func checkFreezeAccount() {
+        self.profileVM.getAccountFreeze { sucess in
+            
+            if sucess {
+                if self.profileVM.freezeAccount {
+                    self.showFreezeMenu = true
+                }
+            }
+            
+        }
+    }
+    
+    func traceDevice() {
+        
+        var deviceModel = DeviceTraceModel()
+        
+        deviceModel.version = UIDevice.current.systemVersion
+        deviceModel.model = UIDevice.current.model
+        deviceModel.osVersion = UIDevice.current.systemVersion
+        deviceModel.brand = UIDevice.current.name
+        
+        self.profileVM.postTrace(data: deviceModel) { success in }
     }
     
 }

@@ -50,6 +50,8 @@ struct ListAllFavoriteTransactionView: View {
     @State var showAlert: Bool = false
     @State var alert: String = ""
     
+    @State var showFreezeMenu: Bool = false
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -92,26 +94,30 @@ struct ListAllFavoriteTransactionView: View {
                             
                             Button(
                                 action: {
-                                    if (data.type == "TRANSFER_SESAMA") {
-                                        print("ON US")
-                                        self.destinationNumber = data.transferOnUs!.destinationNumber
-                                        self.isRouteOnUs = true
+                                    if (self.profileVM.freezeAccount) {
+                                        self.showFreezeMenu = true
                                     } else {
-                                        print("OFF US")
-                                        if (data.transferOffUsRtgs == nil) {
-                                            self.destinationNumber = data.transferOffUsSkn!.accountTo
-                                            self.name = data.name
-                                            self.desc = data.transferOffUsSkn!.transferOffUsSknDescription
-                                            self.destinationBank = data.bankName
-                                            self.type = "SKN"
-                                            self.isRouteOffUs = true
+                                        if (data.type == "TRANSFER_SESAMA") {
+                                            print("ON US")
+                                            self.destinationNumber = data.transferOnUs!.destinationNumber
+                                            self.isRouteOnUs = true
                                         } else {
-                                            self.destinationNumber = data.transferOffUsRtgs!.accountTo
-                                            self.destinationBank = data.bankName
-                                            self.name = data.name
-                                            self.desc = data.transferOffUsRtgs!.transferOffUsRtgsDescription
-                                            self.type = "RTGS"
-                                            self.isRouteOffUs = true
+                                            print("OFF US")
+                                            if (data.transferOffUsRtgs == nil) {
+                                                self.destinationNumber = data.transferOffUsSkn!.accountTo
+                                                self.name = data.name
+                                                self.desc = data.transferOffUsSkn!.transferOffUsSknDescription
+                                                self.destinationBank = "data.bankName"
+                                                self.type = "SKN"
+                                                self.isRouteOffUs = true
+                                            } else {
+    //                                            self.destinationNumber = data.transferOffUsRtgs!.accountTo
+                                                self.destinationBank = "data.bankName"
+                                                self.name = data.name
+    //                                            self.desc = data.transferOffUsRtgs!.transferOffUsRtgsDescription
+                                                self.type = "RTGS"
+                                                self.isRouteOffUs = true
+                                            }
                                         }
                                     }
                                 },
@@ -132,15 +138,15 @@ struct ListAllFavoriteTransactionView: View {
                                         
                                         HStack {
                                             if (data.type == "TRANSFER_SESAMA") {
-                                                Text("\(data.bankName) : \(data.transferOnUs!.destinationNumber)")
+                                                Text("\(data.transferOnUs!.destinationNumber)")
                                                     .font(.custom("Montserrat-Light", size: 14))
                                             } else {
                                                 if (data.transferOffUsRtgs == nil) {
-                                                    Text("\(data.bankName) : \(data.transferOffUsSkn!.accountTo)")
+                                                    Text("\(data.transferOffUsSkn!.accountTo)")
                                                         .font(.custom("Montserrat-Light", size: 14))
                                                 } else {
-                                                    Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
-                                                        .font(.custom("Montserrat-Light", size: 14))
+//                                                    Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
+//                                                        .font(.custom("Montserrat-Light", size: 14))
                                                 }
                                             }
                                         }
@@ -156,7 +162,7 @@ struct ListAllFavoriteTransactionView: View {
                                 if (data.type == "TRANSFER_SESAMA") {
                                     self.receivedName = data.name
                                     self.transferDataOnUs.destinationName = data.name
-                                    self.transferDataOnUs.sourceNumber = data.transferOnUs!.sourceNumber
+//                                    self.transferDataOnUs.sourceNumber = data.transferOnUs!.sourceNumber
                                     self.transferDataOnUs.destinationNumber = data.transferOnUs!.destinationNumber
                                     self.transferDataOnUs.cardNo = data.cardNo
                                     self.transferDataOnUs.idEdit = data.id
@@ -168,14 +174,14 @@ struct ListAllFavoriteTransactionView: View {
                                         self.transferDataOnUs.destinationNumber = data.transferOffUsSkn!.accountTo
                                         self.transferDataOnUs.cardNo = data.cardNo
                                         self.transferDataOnUs.idEdit = data.id
-                                        self.receivedBank = data.bankName
+                                        self.receivedBank = "data.bankName"
                                     } else {
                                         self.transferDataOnUs.destinationName = data.name
-                                        self.transferDataOnUs.sourceNumber = data.transferOffUsRtgs!.sourceNumber
-                                        self.transferDataOnUs.destinationNumber = data.transferOffUsRtgs!.accountTo
+//                                        self.transferDataOnUs.sourceNumber = data.transferOffUsRtgs!.sourceNumber
+//                                        self.transferDataOnUs.destinationNumber = data.transferOffUsRtgs!.accountTo
                                         self.transferDataOnUs.cardNo = data.cardNo
                                         self.transferDataOnUs.idEdit = data.id
-                                        self.receivedBank = data.bankName
+                                        self.receivedBank = "data.bankName"
                                     }
                                     
                                 }
@@ -207,8 +213,8 @@ struct ListAllFavoriteTransactionView: View {
                 Spacer()
             }
             
-            if self.showPopover || self.showPopoverFilter {
-                ModalOverlay(tapAction: { withAnimation { self.showPopover = false } })
+            if self.showPopover || self.showPopoverFilter || self.showFreezeMenu {
+                ModalOverlay(tapAction: { withAnimation { } })
             }
             
             if showPopover {
@@ -225,7 +231,12 @@ struct ListAllFavoriteTransactionView: View {
         .onAppear {
             self.isRouteOnUs = false
             self.isRouteOffUs = false
+            self.checkFreezeAccount()
             getList()
+        }
+        .popup(isPresented: $showFreezeMenu, type: .floater(verticalPadding: 200), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            popupFreezeAccount()
+                .padding(.bottom, 40)
         }
         .alert(isPresented: $showAlert) {
             
@@ -397,6 +408,39 @@ struct ListAllFavoriteTransactionView: View {
         }
     }
     
+    // MARK: POPUP MESSAGE ERROR
+    func popupFreezeAccount() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Akun anda telah dibekukan".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {}) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     var popupFilter: some View {
         VStack {
             VStack {
@@ -536,6 +580,11 @@ struct ListAllFavoriteTransactionView: View {
         self.favoritVM.getList(cardNo: self.cardNo, sourceNumber: self.sourceNumber, completion: { result in
             print(result)
         })
+    }
+    
+    @ObservedObject var profileVM = ProfileViewModel()
+    func checkFreezeAccount() {
+        self.profileVM.getAccountFreeze { sucess in }
     }
     
     var disableForm: Bool {
