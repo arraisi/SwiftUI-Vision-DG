@@ -45,12 +45,12 @@ class ProfileViewModel: ObservableObject {
     @Published var kabupatenName: String = ""
     @Published var kecamatanName: String = ""
     @Published var kelurahanName: String = ""
-//    @Published var rt: String = ""
-//    @Published var rw: String = ""
+    //    @Published var rt: String = ""
+    //    @Published var rw: String = ""
     
     @Published var alamatSuratMenyurat: String = ""
-//    @Published var rtSuratMenyurat: String = ""
-//    @Published var rwSuratMenyurat: String = ""
+    //    @Published var rtSuratMenyurat: String = ""
+    //    @Published var rwSuratMenyurat: String = ""
     @Published var kodePosSuratMenyurat: String = ""
     @Published var kelurahanSuratMenyurat: String = ""
     @Published var kecamatanSuratMenyurat: String = ""
@@ -91,6 +91,8 @@ class ProfileViewModel: ObservableObject {
     
     @Published var errorMessage: String = ""
     @Published var statusCode: String = ""
+    
+    @Published var existingCustomer: Bool = false
 }
 
 extension ProfileViewModel {
@@ -105,40 +107,52 @@ extension ProfileViewModel {
             switch result {
             case .success(let response):
                 print("Success")
-                
-                self.isLoading = false
-                
-                self.tujuanPembukaan = response.last?.cdd.tujuanPembukaanRekening ?? ""
-                self.sumberDana = response.last?.cdd.sumberDana ?? ""
-                self.jumlahPenarikanPerbulan = response.last?.cdd.frequencyPenarikanDana ?? ""
-                self.jumlahPenarikanDanaPerbulan = response.last?.cdd.jumlahPenarikanDana ?? ""
-                self.jumlahSetoranPerbulan = response.last?.cdd.frequencySetoranDana ?? ""
-                self.jumlahSetoranDanaPerbulan = response.last?.cdd.jumlahSetoranDana ?? ""
-                
-                self.hubunganKeluarga = response.last?.cdd.keluargaTerdekat ?? ""
-                self.namaKeluarga = response.last?.cdd.namaKeluargaTerdekat ?? ""
-                self.alamatKeluarga = response.last?.cdd.alamatKeluargaTerdekat ?? ""
-                self.kodePosKeluarga = response.last?.cdd.kodePosKeluargaTerdekat ?? ""
-                self.kelurahanKeluarga = response.last?.cdd.kelurahanKeluargaTerdekat ?? ""
-                self.kecamatanKeluarga = response.last?.cdd.kecamatanKeluargaTerdekat ?? ""
-                self.teleponKeluarga = response.last?.cdd.teleponKeluargaTerdekat ?? ""
-                
-                self.pekerjaan = response.last?.cdd.pekerjaan ?? ""
-                self.penghasilanKotor = ""
-                self.PendapatanLainnya = response.last?.cdd.sumberPendapatanLainnya ?? ""
-                
-                self.namaPerusahaan = response.last?.cdd.namaPerusahaan ?? ""
-                self.alamatPerusahaan = response.last?.cdd.alamatPerusahaan ?? ""
-                self.kodePosPerusahaan = response.last?.cdd.kodePosPerusahaan ?? ""
-                self.kelurahanPerusahaan = response.last?.cdd.kelurahanPerusahaan ?? ""
-                self.kecamatanPerusahaan = response.last?.cdd.kecamatanPerusahaan ?? ""
-                self.teleponPerusahaan = response.last?.cdd.teleponPerusahaan ?? ""
-                 
-                self.namaPenyandang = ""
-                self.hubunganPenyandang = ""
-                self.pekerjaanPenyandang = ""
-                
-                completion(true)
+                DispatchQueue.main.async {
+                    
+                    self.isLoading = false
+                    
+                    self.tujuanPembukaan = response.last?.cdd.tujuanPembukaanRekening ?? ""
+                    self.sumberDana = response.last?.cdd.sumberDana ?? ""
+                    self.jumlahPenarikanPerbulan = response.last?.cdd.frequencyPenarikanDana ?? ""
+                    self.jumlahPenarikanDanaPerbulan = response.last?.cdd.jumlahPenarikanDana ?? ""
+                    self.jumlahSetoranPerbulan = response.last?.cdd.frequencySetoranDana ?? ""
+                    self.jumlahSetoranDanaPerbulan = response.last?.cdd.jumlahSetoranDana ?? ""
+                    
+                    self.hubunganKeluarga = response.last?.cdd.keluargaTerdekat ?? ""
+                    self.namaKeluarga = response.last?.cdd.namaKeluargaTerdekat ?? ""
+                    self.alamatKeluarga = response.last?.cdd.alamatKeluargaTerdekat ?? ""
+                    self.kodePosKeluarga = response.last?.cdd.kodePosKeluargaTerdekat ?? ""
+                    self.kelurahanKeluarga = response.last?.cdd.kelurahanKeluargaTerdekat ?? ""
+                    self.kecamatanKeluarga = response.last?.cdd.kecamatanKeluargaTerdekat ?? ""
+                    self.teleponKeluarga = response.last?.cdd.teleponKeluargaTerdekat ?? ""
+                    
+                    self.pekerjaan = response.last?.cdd.pekerjaan ?? ""
+                    self.penghasilanKotor = response.last?.cdd.penghasilanKotorTahunan ?? ""
+                    self.PendapatanLainnya = response.last?.cdd.sumberPendapatanLainnya ?? "Tidak ada"
+                    
+                    self.namaPerusahaan = response.last?.cdd.namaPerusahaan ?? ""
+                    self.alamatPerusahaan = response.last?.cdd.alamatPerusahaan ?? ""
+                    self.kodePosPerusahaan = response.last?.cdd.kodePosPerusahaan ?? ""
+                    self.kelurahanPerusahaan = response.last?.cdd.kelurahanPerusahaan ?? ""
+                    self.kecamatanPerusahaan = response.last?.cdd.kecamatanPerusahaan ?? ""
+                    self.teleponPerusahaan = response.last?.cdd.teleponPerusahaan ?? ""
+                    
+                    self.namaPenyandang = ""
+                    self.hubunganPenyandang = ""
+                    self.pekerjaanPenyandang = ""
+                    
+                    self.email = response.last?.customerFromPhoenixResponseID.surel ?? ""
+                    self.telepon = response.last?.customerFromPhoenixResponseID.telepon ?? ""
+                    self.name = response.last?.personal.name ?? ""
+                    self.tempatLahir = response.last?.personal.placeOfBirth ?? ""
+                    self.tglLahir = response.last?.personal.dateOfBirth ?? ""
+                    self.gender = response.last?.personal.gender ?? ""
+                    
+                    self.existingCustomer = response.last?.personal.existingCustomer ?? false
+                    
+                    print("Complete fetch customer phoenix vm  ie. (email) : \(response.last?.customerFromPhoenixResponseID.surel ?? "") published email: \(self.email)")
+                    completion(true)
+                }
                 
             case .failure(let error):
                 print("ERROR-->")
@@ -176,14 +190,14 @@ extension ProfileViewModel {
                 print("GET PROFILE OK")
                 
                 self.isLoading = false
-            
+                
                 self.alamat = response.personal.address ?? ""
                 self.provinsiName = response.personal.propName ?? ""
                 self.kabupatenName = response.personal.kabName ?? ""
                 self.kecamatanName = response.personal.kecName ?? ""
                 self.kelurahanName = response.personal.kelName ?? ""
-//                self.rt = response.personal.rt
-//                self.rw = response.personal.rw
+                //                self.rt = response.personal.rt
+                //                self.rw = response.personal.rw
                 
                 print("\n\nVM PROFILE \(response.personal.name)\n\n")
                 print("\n\nVM PROFILE \(String(describing: response.chipProfileDto.last!.cardNo))\n\n")
@@ -206,8 +220,8 @@ extension ProfileViewModel {
                 
                 
                 self.alamatSuratMenyurat = response.chipProfileDto.last?.postalAddress ?? ""
-//                self.rtSuratMenyurat = response.chipProfileDto.last?.rt ?? ""
-//                self.rwSuratMenyurat = response.chipProfileDto.last?.rw ?? ""
+                //                self.rtSuratMenyurat = response.chipProfileDto.last?.rt ?? ""
+                //                self.rwSuratMenyurat = response.chipProfileDto.last?.rw ?? ""
                 self.kodePosSuratMenyurat = response.chipProfileDto.last?.kodepos ?? ""
                 self.kelurahanSuratMenyurat = response.chipProfileDto.last?.kelurahan ?? ""
                 self.kecamatanSuratMenyurat = response.chipProfileDto.last?.kecamatan ?? ""
@@ -220,7 +234,7 @@ extension ProfileViewModel {
                     self.accountNumber = _chipProfileDto.accountNumber ?? ""
                     print(_chipProfileDto.accountNumber)
                 }
-                 
+                
                 completion(true)
                 
             case .failure(let error):
@@ -262,9 +276,9 @@ extension ProfileViewModel {
                 } else {
                     self.balance = response.balance ?? "0"
                 }
-    
+                
                 self.creditDebit = response.creditDebit
-                 
+                
                 completion(true)
                 
             case .failure(let error):

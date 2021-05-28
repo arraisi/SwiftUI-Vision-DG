@@ -9,15 +9,15 @@ import Foundation
 
 // MARK: - CustomerFromPhoenixResponseElement
 struct CustomerFromPhoenixResponseElement: Codable {
-    let id: String?
+    let id: String
     let customerFromPhoenixResponseID: IDPhoenix
     let personal: PersonalPhoenix
     let citra: Citra
     let cdd: Cdd
     let products: [ProductPhoenix]
     let resikoProfil: ResikoProfil
-    let pepOpsi: Bool?
-    let status: String?
+    let pepOpsi: Bool
+    let status: String
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -30,14 +30,14 @@ struct CustomerFromPhoenixResponseElement: Codable {
 struct Cdd: Codable {
     let kecamatanSuratMenyurat, kelurahanSuratMenyurat, rwSuratMenyurat, rtSuratMenyurat: String?
     let alamatSuratMenyurat: String?
-    let sumberPendapatanLainnya: String?
+    let penghasilanKotorTahunan, sumberPendapatanLainnya: String?
     let jumlahSetoranDana, frequencySetoranDana, jumlahPenarikanDana, frequencyPenarikanDana: String?
     let sumberDana, tujuanPembukaanRekening, namaPerusahaan: String?
     let hpPerusahaan: String?
     let alamatPerusahaan, kodePosPerusahaan, kecamatanPerusahaan, kelurahanPerusahaan: String?
-    let teleponPerusahaan, keluargaTerdekat, namaKeluargaTerdekat, alamatKeluargaTerdekat: String?
-    let kodePosKeluargaTerdekat, kelurahanKeluargaTerdekat, kecamatanKeluargaTerdekat: String?
-    let teleponKeluargaTerdekat, pekerjaan: String?
+    let teleponPerusahaan, keluargaTerdekat: String?
+    let namaKeluargaTerdekat, alamatKeluargaTerdekat, kodePosKeluargaTerdekat, kelurahanKeluargaTerdekat: String?
+    let kecamatanKeluargaTerdekat, teleponKeluargaTerdekat, pekerjaan: String?
     let bidangUsahaPerusahaan: String?
 }
 
