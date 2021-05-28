@@ -62,13 +62,6 @@ struct TransferTabs: View {
         .gesture(tap)
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-//        .onAppear {
-//            checkFreezeAccount()
-//        }
-        .popup(isPresented: $showPopup, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageError()
-                .padding(.bottom, 90)
-        }
 //        .onReceive(timer) { time in
 ////            print(self.timeLogout)
 //            if self.timeLogout > 0 {
@@ -132,13 +125,8 @@ struct TransferTabs: View {
             
             Button(action: {
                 
-                if (self.profileVM.freezeAccount) {
-                    print("Freeze Account")
-                    self.showPopup = true
-                } else {
-                    print("ONUS")
-                    self.transferOnUsActive = true
-                }
+                print("ONUS")
+                self.transferOnUsActive = true
                 
             }, label: {
                 Text("FELLOW BANK MESTIKA".localized(language))
@@ -158,13 +146,8 @@ struct TransferTabs: View {
             
             Button(action: {
                 
-                if (self.profileVM.freezeAccount) {
-                    print("Freeze Account")
-                    self.showPopup = true
-                } else {
-                    print("OFFUS")
-                    self.transferOffUsActive = true
-                }
+                print("OFFUS")
+                self.transferOffUsActive = true
         
             }, label: {
                 Text("Transfer to Other Bank".localized(language))
@@ -181,43 +164,6 @@ struct TransferTabs: View {
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
         }
         .padding([.bottom, .top], 20)
-    }
-    
-    // MARK: POPUP MESSAGE ERROR
-    func popupMessageError() -> some View {
-        VStack(alignment: .leading) {
-            Image(systemName: "xmark.octagon.fill")
-                .resizable()
-                .frame(width: 65, height: 65)
-                .foregroundColor(.red)
-                .padding(.top, 20)
-            
-            Text("Akun anda telah dibekukan".localized(language))
-                .fontWeight(.bold)
-                .font(.system(size: 22))
-                .foregroundColor(Color(hex: "#232175"))
-                .padding([.bottom, .top], 20)
-            
-            Button(action: {}) {
-                Text("Back".localized(language))
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                    .font(.system(size: 12))
-                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-            }
-            .background(Color(hex: "#2334D0"))
-            .cornerRadius(12)
-            
-            Text("")
-        }
-        .frame(width: UIScreen.main.bounds.width - 60)
-        .padding(.horizontal, 15)
-        .background(Color.white)
-        .cornerRadius(20)
-    }
-    
-    func checkFreezeAccount() {
-        self.profileVM.getAccountFreeze { sucess in }
     }
 }
 

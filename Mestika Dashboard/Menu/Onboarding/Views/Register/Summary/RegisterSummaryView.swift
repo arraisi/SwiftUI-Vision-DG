@@ -428,7 +428,7 @@ struct RegisterSummaryView: View {
         self.isLoading = true
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
-//                saveTraceDevice()
+                saveTraceDevice()
                 saveUserToCoreData()
                 if self.appState.nasabahIsExisting {
                     self.nextRouteNasabah = true
@@ -448,10 +448,16 @@ struct RegisterSummaryView: View {
     
     func saveTraceDevice() {
         
-        self.deviceModel.version = UIDevice.current.systemVersion
-        self.deviceModel.model = UIDevice.current.model
-        self.deviceModel.osVersion = UIDevice.current.systemVersion
-        self.deviceModel.brand = UIDevice.current.name
+        deviceModel.version = UIDevice.current.systemVersion
+        deviceModel.model = UIDevice.current.model
+        deviceModel.osVersion = UIDevice.current.systemVersion
+        deviceModel.brand = UIDevice.current.name
+        deviceModel.product = "iPhone"
+        deviceModel.display = "Retina"
+        deviceModel.hardware = "A11"
+        deviceModel.cpuAbi = "ARM64"
+        deviceModel.manufacturer = "Foxconn"
+        deviceModel.user = UIDevice.current.name
         
         self.profileVM.postTrace(data: deviceModel) { success in }
     }

@@ -77,11 +77,11 @@ struct ListFavoriteTransactionView: View {
                                             .font(.custom("Montserrat-Light", size: 14))
                                     } else {
                                         if (data.transferOffUsRtgs == nil) {
-                                            Text("\(data.transferOffUsSkn!.accountTo)")
+                                            Text("\(data.transferOffUsSkn!.destinationNumber)")
                                                 .font(.custom("Montserrat-Light", size: 14))
                                         } else {
-//                                            Text("\(data.bankName) : \(data.transferOffUsRtgs!.accountTo)")
-//                                                .font(.custom("Montserrat-Light", size: 14))
+                                            Text("\(data.transferOffUsRtgs!.destinationNumber)")
+                                                .font(.custom("Montserrat-Light", size: 14))
                                         }
                                     }
                                 }

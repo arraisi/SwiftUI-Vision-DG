@@ -14,46 +14,33 @@ import Foundation
 
 // MARK: - FavoritModelElement
 struct FavoritModelElement: Codable {
-//    var id, bankAccountNumber, bankName, name: String
-//    let sourceNumber, cardNo, type: String
-//    let transferOnUs: TransferOnUs?
-//    let transactionDate, nominal, nominalSign: String
-//    let transferOffUsSkn: TransferOffUsSkn?
-//    let transferOffUsRtgs: TransferOffUsRtgs?
     let id, name, sourceNumber, cardNo: String
     let type: String
+    let destinationNumber, destinationBankName: String
     let transferOffUsRtgs: TransferOffUsRtgs?
     let transferOnUs: TransferOnUs?
     let transferOffUsSkn: TransferOffUsSkn?
+    let transferOffUsOnline: TransferOffUsOnline?
+}
+
+// MARK: - TransferOffUsOnline
+struct TransferOffUsOnline: Codable {
+    let destinationNumber, destinationBankName: String
 }
 
 // MARK: - TransferOffUsRtgs
 struct TransferOffUsRtgs: Codable {
-//    let name: String, accountTo: String?
-    let destinationBankCode, destinationBankName: String
+    let destinationNumber, destinationBankName, typeOfBeneficiary, citizenCode: String
 }
 
 // MARK: - TransferOffUsSkn
 struct TransferOffUsSkn: Codable {
-    let flagResidenceCreditur, ref, accountTo, clearingCode: String
-    let branchCode, provinceCode, cityCode, typeOfBusiness: String
-    let digitSign, flagResidenceDebitur, flagWargaNegara, transferOffUsSknDescription: String
-    let ultimateBeneficiaryName, destinationBankCode, sourceNumber, currency: String
-    let nominal, cardNo: String
-    let pin, typeOfBeneficiary: String?
-    let transactionFee: String?
-
-    enum CodingKeys: String, CodingKey {
-        case flagResidenceCreditur, ref, accountTo, clearingCode, branchCode, provinceCode, cityCode, typeOfBusiness, digitSign, flagResidenceDebitur, flagWargaNegara
-        case transferOffUsSknDescription = "description"
-        case ultimateBeneficiaryName, destinationBankCode, sourceNumber, currency, nominal, cardNo, pin, typeOfBeneficiary
-        case transactionFee
-    }
+    let destinationNumber, destinationBankName, typeOfBeneficiary, citizenCode: String
 }
 
 // MARK: - TransferOnUs
 struct TransferOnUs: Codable {
-    let destinationNumber: String
+    let destinationNumber, destinationBankName: String
 }
 
 typealias FavoritModel = [FavoritModelElement]

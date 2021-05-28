@@ -431,6 +431,12 @@ struct BottomNavigationView: View {
         deviceModel.model = UIDevice.current.model
         deviceModel.osVersion = UIDevice.current.systemVersion
         deviceModel.brand = UIDevice.current.name
+        deviceModel.product = "iPhone"
+        deviceModel.display = "Retina"
+        deviceModel.hardware = "A11"
+        deviceModel.cpuAbi = "ARM64"
+        deviceModel.manufacturer = "Foxconn"
+        deviceModel.user = UIDevice.current.name
         
         self.profileVM.postTrace(data: deviceModel) { success in }
     }
