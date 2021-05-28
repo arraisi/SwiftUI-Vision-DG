@@ -19,6 +19,8 @@ struct SavingAccountView: View {
     @State var nextViewActive = false
     @State var nextPinViewActive = false
     
+    @State var showFreezeMenu: Bool = false
+    
     @State var showMaximumSavingAcc: Bool = false
     
     @State var balance: String = ""
@@ -90,10 +92,14 @@ struct SavingAccountView: View {
                             
                             Button(action: {
                                 
-                                if (self.savingAccountVM.accounts.filter{ $0.categoryProduct == "S" }.count >= 3) {
-                                    self.showMaximumSavingAcc = true
+                                if (self.profileVM.freezeAccount) {
+                                    self.showFreezeMenu = true
                                 } else {
-                                    self.getProducDetails(planCode: self.planCode)
+                                    if (self.savingAccountVM.accounts.filter{ $0.categoryProduct == "S" }.count >= 3) {
+                                        self.showMaximumSavingAcc = true
+                                    } else {
+                                        self.getProducDetails(planCode: self.planCode)
+                                    }
                                 }
         
                             }, label: {
@@ -175,7 +181,7 @@ struct SavingAccountView: View {
                     }
                 })
                 
-                if (self.showMaximumSavingAcc) {
+                if (self.showMaximumSavingAcc || self.showFreezeMenu) {
                     ModalOverlay(tapAction: { withAnimation { } })
                         .edgesIgnoringSafeArea(.all)
                 }
@@ -185,7 +191,7 @@ struct SavingAccountView: View {
         }
         .onAppear {
             self.getAccountBalance()
-            
+            self.checkFreezeAccount()
             self.productsSavingAccountVM.getProducts { (success) in
                 
             }
@@ -197,6 +203,44 @@ struct SavingAccountView: View {
         .popup(isPresented: $showMaximumSavingAcc, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             popupMaximumSavingAcc()
         }
+        .popup(isPresented: $showFreezeMenu, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+            popupFreezeAccount()
+        }
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupFreezeAccount() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Akun anda telah dibekukan".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showFreezeMenu = false
+            }) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     // MARK: - POPUP CHECK CONNECTION INTERNET
@@ -272,6 +316,10 @@ struct SavingAccountView: View {
                 self.nextViewActive = true
             }
         }
+    }
+    
+    func checkFreezeAccount() {
+        self.profileVM.getAccountFreeze { sucess in }
     }
 }
 

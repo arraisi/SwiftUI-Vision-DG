@@ -96,26 +96,30 @@ struct ListAllFavoriteTransactionView: View {
                             
                             Button(
                                 action: {
-                                    if (data.type == "TRANSFER_SESAMA") {
-                                        print("ON US")
-                                        self.destinationNumber = data.transferOnUs!.destinationNumber
-                                        self.isRouteOnUs = true
+                                    if !self.profileVM.freezeAccount {
+                                        self.showFreezeMenu = true
                                     } else {
-                                        print("OFF US")
-                                        if (data.transferOffUsRtgs == nil) {
-                                            self.destinationNumber = data.transferOffUsSkn!.destinationNumber
-                                            self.name = data.name
-                                            self.desc = ""
-                                            self.destinationBank = data.destinationBankName
-                                            self.type = "SKN"
-                                            self.isRouteOffUs = true
+                                        if (data.type == "TRANSFER_SESAMA") {
+                                            print("ON US")
+                                            self.destinationNumber = data.transferOnUs!.destinationNumber
+                                            self.isRouteOnUs = true
                                         } else {
-                                            self.destinationNumber = data.transferOffUsRtgs!.destinationNumber
-                                            self.destinationBank = data.destinationBankName
-                                            self.name = data.name
-                                            self.desc = ""
-                                            self.type = "RTGS"
-                                            self.isRouteOffUs = true
+                                            print("OFF US")
+                                            if (data.transferOffUsRtgs == nil) {
+                                                self.destinationNumber = data.transferOffUsSkn!.destinationNumber
+                                                self.name = data.name
+                                                self.desc = ""
+                                                self.destinationBank = data.destinationBankName ?? ""
+                                                self.type = "SKN"
+                                                self.isRouteOffUs = true
+                                            } else {
+                                                self.destinationNumber = data.destinationNumber ?? ""
+                                                self.destinationBank = data.destinationBankName ?? ""
+                                                self.name = data.name
+                                                self.desc = ""
+                                                self.type = "RTGS"
+                                                self.isRouteOffUs = true
+                                            }
                                         }
                                     }
                                 },
@@ -136,14 +140,14 @@ struct ListAllFavoriteTransactionView: View {
                                         
                                         HStack {
                                             if (data.type == "TRANSFER_SESAMA") {
-                                                Text("\(data.destinationBankName) : \(data.transferOnUs!.destinationNumber)")
+                                                Text("\(data.destinationBankName ?? "") : \(data.destinationNumber ?? "")")
                                                     .font(.custom("Montserrat-Light", size: 14))
                                             } else {
                                                 if (data.transferOffUsRtgs == nil) {
-                                                    Text("\(data.destinationBankName) : \(data.transferOffUsSkn!.destinationNumber)")
+                                                    Text("\(data.destinationBankName ?? "") : \(data.destinationNumber ?? "")")
                                                         .font(.custom("Montserrat-Light", size: 14))
                                                 } else {
-                                                    Text("\(data.destinationBankName) : \(data.transferOffUsRtgs!.destinationNumber)")
+                                                    Text("\(data.destinationBankName ?? "") : \(data.destinationNumber ?? "")")
                                                         .font(.custom("Montserrat-Light", size: 14))
                                                 }
                                             }
@@ -169,17 +173,17 @@ struct ListAllFavoriteTransactionView: View {
                                     if (data.transferOffUsRtgs == nil) {
                                         self.transferDataOnUs.destinationName = data.name
                                         self.transferDataOnUs.sourceNumber = data.sourceNumber
-                                        self.transferDataOnUs.destinationNumber = data.transferOffUsSkn!.destinationNumber
+                                        self.transferDataOnUs.destinationNumber = data.destinationNumber ?? ""
                                         self.transferDataOnUs.cardNo = data.cardNo
                                         self.transferDataOnUs.idEdit = data.id
-                                        self.receivedBank = data.destinationBankName
+                                        self.receivedBank = data.destinationBankName ?? ""
                                     } else {
                                         self.transferDataOnUs.destinationName = data.name
                                         self.transferDataOnUs.sourceNumber = data.sourceNumber
-                                        self.transferDataOnUs.destinationNumber = data.transferOffUsRtgs!.destinationNumber
+                                        self.transferDataOnUs.destinationNumber = data.destinationNumber ?? ""
                                         self.transferDataOnUs.cardNo = data.cardNo
                                         self.transferDataOnUs.idEdit = data.id
-                                        self.receivedBank = data.destinationBankName
+                                        self.receivedBank = data.destinationBankName ?? ""
                                     }
                                     
                                 }
@@ -423,7 +427,7 @@ struct ListAllFavoriteTransactionView: View {
                 .padding([.bottom, .top], 20)
             
             Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
+//                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Back".localized(language))
                     .foregroundColor(.white)
@@ -587,11 +591,11 @@ struct ListAllFavoriteTransactionView: View {
     func checkFreezeAccount() {
         self.profileVM.getAccountFreeze { sucess in
             
-            if sucess {
-                if (profileVM.freezeAccount) {
-                    self.showFreezeMenu = true
-                }
-            }
+//            if sucess {
+//                if (profileVM.freezeAccount) {
+//                    self.showFreezeMenu = true
+//                }
+//            }
             
         }
     }
