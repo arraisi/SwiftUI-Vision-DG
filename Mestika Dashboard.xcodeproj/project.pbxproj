@@ -289,6 +289,8 @@
 		52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */; };
 		52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF125CBEA480012DDAB /* ProfileService.swift */; };
 		52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */; };
+		52CC0A95265F637300828EFB /* FreezeAccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CC0A94265F637300828EFB /* FreezeAccountResponse.swift */; };
+		52CC0A97265F80D200828EFB /* DeviceTraceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CC0A96265F80D200828EFB /* DeviceTraceModel.swift */; };
 		52CF0C93264BE645007BDE07 /* FeeCardReplacementResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CF0C92264BE645007BDE07 /* FeeCardReplacementResponse.swift */; };
 		52D6AD0125DBA0080079B48C /* InquiryTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D6AD0025DBA0080079B48C /* InquiryTransferResponse.swift */; };
 		52D8889C258B16B100D637F2 /* JitsiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8889B258B16B100D637F2 /* JitsiView.swift */; };
@@ -799,6 +801,8 @@
 		52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseModel.swift; sourceTree = "<group>"; };
 		52CB5DF125CBEA480012DDAB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		52CB5DF625CBEBDE0012DDAB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		52CC0A94265F637300828EFB /* FreezeAccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreezeAccountResponse.swift; sourceTree = "<group>"; };
+		52CC0A96265F80D200828EFB /* DeviceTraceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTraceModel.swift; sourceTree = "<group>"; };
 		52CF0C92264BE645007BDE07 /* FeeCardReplacementResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeCardReplacementResponse.swift; sourceTree = "<group>"; };
 		52D6AD0025DBA0080079B48C /* InquiryTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryTransferResponse.swift; sourceTree = "<group>"; };
 		52D8889B258B16B100D637F2 /* JitsiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiView.swift; sourceTree = "<group>"; };
@@ -2165,6 +2169,8 @@
 				52CB5DEC25CBC09A0012DDAB /* ProfileResponseModel.swift */,
 				52FF49BA25F8789000890AE6 /* AccountBalanceResponse.swift */,
 				527646E0261C59670071C616 /* AccountBalanceListResponse.swift */,
+				52CC0A94265F637300828EFB /* FreezeAccountResponse.swift */,
+				52CC0A96265F80D200828EFB /* DeviceTraceModel.swift */,
 			);
 			name = Models;
 			path = "Mestika Dashboard/Menu/Dashboard/Models";
@@ -2720,6 +2726,7 @@
 				52AE1A75255A3E7800B011B7 /* OtpViewModel.swift in Sources */,
 				52FF49B625F7635F00890AE6 /* MyCardDashboardView.swift in Sources */,
 				523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */,
+				52CC0A97265F80D200828EFB /* DeviceTraceModel.swift in Sources */,
 				0651B1E3257758CB00E4A834 /* LoadingView.swift in Sources */,
 				065DF52325765B5200255743 /* GeneralPaginationResponse.swift in Sources */,
 				52FCDD9A263EF4F2002A76E9 /* StompClientModel.swift in Sources */,
@@ -3063,6 +3070,7 @@
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,
 				C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */,
+				52CC0A95265F637300828EFB /* FreezeAccountResponse.swift in Sources */,
 				FA42F2C325A8089D00C14A47 /* View+Extensions.swift in Sources */,
 				0658B5952563F8A2001B659D /* NotificationMonthly.swift in Sources */,
 				52468AB825412475007518AE /* Color+Extensions.swift in Sources */,

@@ -87,6 +87,8 @@ class ProfileViewModel: ObservableObject {
     @Published var hubunganPenyandang: String = ""
     @Published var pekerjaanPenyandang: String = ""
     
+    @Published var freezeAccount: Bool = false
+    
     @Published var errorMessage: String = ""
     @Published var statusCode: String = ""
 }
@@ -277,6 +279,53 @@ extension ProfileViewModel {
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - GET FREEZE ACCOUNT
+    func getAccountFreeze(completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        ProfileService.shared.checkFreeze { result in
+            switch result {
+            case .success(let response):
+                print("Success")
+                
+                self.isLoading = false
+                self.freezeAccount = response.freeze
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 404):
+                    self.errorMessage = "USER STATUS NOT FOUND"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - POST TRACE
+    func postTrace(data: DeviceTraceModel, completion: @escaping (Bool) -> Void) {
+        ProfileService.shared.trace(data: data) { result in
+            switch result {
+            case .success(_ ):
+                print("Success")
+                completion(true)
+                
+            case .failure(_ ):
+                print("ERROR-->")
                 completion(false)
             }
         }

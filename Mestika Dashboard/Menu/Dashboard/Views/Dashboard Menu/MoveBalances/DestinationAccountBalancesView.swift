@@ -132,6 +132,7 @@ struct DestinationAccountBalancesView: View {
                                 .cornerRadius(15)
                             Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
                                 .multilineTextAlignment(.center)
+                                .padding(.top, 50)
                         }
                     }
                 })

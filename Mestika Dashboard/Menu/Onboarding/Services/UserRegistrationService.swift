@@ -63,6 +63,7 @@ class UserRegistrationService {
             "companyKecamatan": registerData.kecamatan,
             "companyKelurahan": registerData.kelurahan,
             "companyPostalCode": registerData.kodePos,
+//            "companyPhoneNumber": registerData.noTeleponPerusahaan,
             "companyBusinessField": registerData.alamatPerusahaan,
             "annualGrossIncome": registerData.penghasilanKotor,
             "hasOtherSourceOfIncome": registerData.hasSumberPendapatanLainnya,

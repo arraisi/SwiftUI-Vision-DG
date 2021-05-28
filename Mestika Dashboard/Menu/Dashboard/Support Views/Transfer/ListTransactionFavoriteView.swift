@@ -57,8 +57,8 @@ struct ListTransactionFavoriteView: View {
                             .font(.custom("Montserrat-SemiBold", size: 14))
                         
                         HStack {
-                            Text("\(data.bankName) :")
-                                .font(.custom("Montserrat-Light", size: 14))
+//                            Text("\(data.bankName) :")
+//                                .font(.custom("Montserrat-Light", size: 14))
                             Text("\(data.cardNo)")
                                 .font(.custom("Montserrat-Light", size: 14))
                         }

@@ -285,6 +285,10 @@ struct WelcomeView: View {
                 )
             }
             .onAppear {
+                print(UIDevice.current.model)
+                print(UIDevice.current.name)
+                print(UIDevice.current.systemVersion)
+                print(UIDevice.current.systemName)
                 getCoreDataNewDevice()
                 getCoreDataRegister()
                 getMobileVersion()

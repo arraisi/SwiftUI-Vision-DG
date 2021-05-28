@@ -29,7 +29,7 @@ struct SuccessOpenNewSavingAccountView: View {
             VStack(alignment: .center) {
                 Image("logo_m_mestika")
                     .resizable()
-                    .frame(width: 100, height: 100, alignment: .center)
+                    .frame(width: 70, height: 70, alignment: .center)
                     .padding(.top, 30)
                     .padding()
                 
@@ -39,8 +39,9 @@ struct SuccessOpenNewSavingAccountView: View {
                     
                     Text("Savings Opening \nNew Successful".localized(language))
                         .multilineTextAlignment(.center)
-                        .font(.custom("Montserrat-Bold", size: 18))
+                        .font(.custom("Montserrat-Bold", size: 15))
                         .padding(.bottom, 30)
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     Text("Deposit Amount".localized(language))
                         .font(.custom("Montserrat-Bold", size: 10))
@@ -68,7 +69,7 @@ struct SuccessOpenNewSavingAccountView: View {
                             .font(.custom("Montserrat-Bold", size: 10))
                         
                         Text(product)
-                            .font(.custom("Montserrat-Bold", size: 20))
+                            .font(.custom("Montserrat-Bold", size: 15))
                         
                     }
                     Spacer()
@@ -79,16 +80,18 @@ struct SuccessOpenNewSavingAccountView: View {
                 if isFailedDeposit {
                     VStack(alignment: .leading) {
                         Text("Setoran Gagal")
+                            .font(.custom("Montserrat-Bold", size: 9))
                             .foregroundColor(.red)
-                            .fontWeight(.medium)
                             .padding(.leading, 20)
                             .padding(.top, 10)
                             .padding(.bottom, 2)
                         
                         Text("Pembukaan akun berhasil. Namun, setoran gagal. Silahkan melakukan deposit melalui tautan dibawah ini.")
+                            .font(.custom("Montserrat-Bold", size: 8))
                             .foregroundColor(.gray)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 10)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.white)

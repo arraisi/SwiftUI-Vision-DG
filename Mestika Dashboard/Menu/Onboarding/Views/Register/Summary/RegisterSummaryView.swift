@@ -19,6 +19,8 @@ struct RegisterSummaryView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @ObservedObject private var userRegisterVM = UserRegistrationViewModel()
+    @ObservedObject private var profileVM = ProfileViewModel()
+    @State var deviceModel: DeviceTraceModel
     
     // view variables
     @State private var isLoading = false
@@ -426,6 +428,7 @@ struct RegisterSummaryView: View {
         self.isLoading = true
         self.userRegisterVM.userRegistration(registerData: registerData) { success in
             if success {
+//                saveTraceDevice()
                 saveUserToCoreData()
                 if self.appState.nasabahIsExisting {
                     self.nextRouteNasabah = true
@@ -442,10 +445,20 @@ struct RegisterSummaryView: View {
             }
         }
     }
+    
+    func saveTraceDevice() {
+        
+        self.deviceModel.version = UIDevice.current.systemVersion
+        self.deviceModel.model = UIDevice.current.model
+        self.deviceModel.osVersion = UIDevice.current.systemVersion
+        self.deviceModel.brand = UIDevice.current.name
+        
+        self.profileVM.postTrace(data: deviceModel) { success in }
+    }
 }
 
 struct RegisterSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterSummaryView().environmentObject(RegistrasiModel())
+        RegisterSummaryView(deviceModel: DeviceTraceModel()).environmentObject(RegistrasiModel())
     }
 }

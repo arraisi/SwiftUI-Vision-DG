@@ -36,6 +36,7 @@ struct LoginScreen: View {
     @State var fingerprintFlag: Bool = false
     
     @State var routeNewPassword: Bool = false
+    @State var routeForgotPassword: Bool = false
     
     @State var isLoading: Bool = false
     
@@ -113,8 +114,7 @@ struct LoginScreen: View {
                     
                     Button(
                         action: {
-                            //                            self.showingModalForgotPassword = true
-                            self.routeNewPassword = true
+                            self.routeForgotPassword = true
                         },
                         label: {
                             Text("Forgot Password?".localized(language))
@@ -166,6 +166,14 @@ struct LoginScreen: View {
                         label: {}
                     )
                     .isDetailLink(false)
+                    
+                    NavigationLink(
+                        destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
+                        isActive: self.$routeForgotPassword,
+                        label: {}
+                    )
+                    .isDetailLink(false)
+
                     
                     if !isNewDeviceLogin {
                         if let value = device.last?.fingerprintFlag {

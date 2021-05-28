@@ -72,10 +72,12 @@ struct DashboardTabs: View {
     
     @State var isHiddenBalance: Bool = false
     @State var isHiddenInformationReStore: Bool = true
+    @State var isHiddenInformationFreezeAccount: Bool = true
     
     @State var routingManagementCard: Bool = false
     @State var routingMyCardDashboard: Bool = false
     @State var routingAccountDeposit: Bool = false
+    @State var addBalancesActive: Bool = false
     
     @State var isRouteHistoryAcc: Bool = false
     
@@ -142,6 +144,28 @@ struct DashboardTabs: View {
                                     .frame(width: itemWidth, height: itemHeight)
                             })
                         }
+                        .padding(.bottom, 10)
+                    }
+                    
+                    NavigationLink(
+                        destination: DestinationAccountAddBalanceView(),
+                        isActive: $addBalancesActive,
+                        label: { EmptyView() }
+                    )
+                    .isDetailLink(false)
+                    
+                    if isHiddenInformationFreezeAccount {
+                        EmptyView()
+                    } else {
+                        Button(action: {
+                            self.addBalancesActive = true
+                        }, label: {
+                            Image("ic_freeze_rekening")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: itemWidth, height: itemHeight)
+                        })
+                        .padding(.top, 10)
                     }
                 }
                 .padding(.bottom, 15)
@@ -203,9 +227,15 @@ struct DashboardTabs: View {
                     if value {
                         print("Move to Dashboard: \(value)")
                         
+                        self.listMyAccount.removeAll()
+                        self.listSourceNumber.removeAll()
+                        self.listSortedMyAccount.removeAll()
+                        self.tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
+                        
                         self.routingAccountDeposit = false
                         self.routingManagementCard = false
                         self.routingMyCardDashboard = false
+                        self.addBalancesActive = false
                         self.appState.moveToDashboard = false
                     }
                 }
@@ -231,16 +261,20 @@ struct DashboardTabs: View {
         }
         .onAppear {
             print("GET")
-            self.listSourceNumber.removeAll()
             self.listMyAccount.removeAll()
+            self.listSourceNumber.removeAll()
+            self.listSortedMyAccount.removeAll()
+            self.tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
             
             self.isHiddenInformationReStore = true
+            self.isHiddenInformationFreezeAccount = true
             self.isLoadingCard = true
             
             getUserInfo()
             getProfile()
             getListKartuKu()
             getAccountBalance()
+            checkFreezeAccount()
             
             self.savingAccountVM.getAccounts { success in
                 
@@ -475,6 +509,19 @@ struct DashboardTabs: View {
                     self.showAlertTimeout = true
                 }
             }
+        }
+    }
+    
+    func checkFreezeAccount() {
+        self.profileVM.getAccountFreeze { success in
+            
+            if success {
+                
+                if profileVM.freezeAccount {
+                    self.isHiddenInformationFreezeAccount = false
+                }
+            }
+            
         }
     }
     
