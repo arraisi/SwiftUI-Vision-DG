@@ -56,7 +56,7 @@ struct AddBalanceConfirmationView: View {
                 .padding(.top, 40)
                 .padding(.horizontal, 15)
             
-            Text("Konfirmasi Pindah Saldo")
+            Text("Konfirmasi Tambah Saldo")
                 .font(.title2)
                 .foregroundColor(Color(hex: "#232175"))
                 .fontWeight(.bold)
