@@ -96,7 +96,7 @@ struct ListAllFavoriteTransactionView: View {
                             
                             Button(
                                 action: {
-                                    if !self.profileVM.freezeAccount {
+                                    if self.profileVM.freezeAccount {
                                         self.showFreezeMenu = true
                                     } else {
                                         if (data.type == "TRANSFER_SESAMA") {
