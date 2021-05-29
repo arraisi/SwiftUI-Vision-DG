@@ -86,14 +86,17 @@ class FavoritViewModel : ObservableObject {
                             print("All")
                             self.favorites = response
                            return true
-                        } else if (type == "SKN" || data.type == "RTGS") {
-                            print("RTGS or SKN")
+                        } else if (type == "SKN") {
+                            print("SKN")
+                            return data.type == "TRANSFER_SKN"
+                        } else if (data.type == "RTGS") {
+                            print("RTGS")
                             print(type)
-                            return data.type == "ke Bank Lain"
+                            return data.type == "TRANSFER_RTGS"
                         } else {
                             print("Online")
                             print(type)
-                            return data.type == "Online"
+                            return data.type == "TRANSFER_ONLINE"
                         }
                         
 //                        return data.name.lowercased() == searchText.lowercased()
@@ -144,29 +147,7 @@ class FavoritViewModel : ObservableObject {
                            return true
                         }
                         
-                        if (data.type == "TRANSFER_SESAMA") {
-                            print("SESAMA")
-                            print(searchText)
-                            return data.name.lowercased() == searchText.lowercased() || data.transferOnUs!.destinationNumber == searchText
-                        } else {
-                            
-//                            if (data.transferOffUsRtgs == nil) {
-//                                print("SKN")
-//                                print(searchText)
-//                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsSkn!.accountTo == searchText
-//                            } else {
-//                                print("RTGS")
-//                                print(searchText)
-//                                return data.name.lowercased() == searchText.lowercased() || data.transferOffUsRtgs!.accountTo == searchText
-//                            }
-                            
-                            print("RTGS")
-                            print(searchText)
-                            return data.name.lowercased() == searchText.lowercased()
-                            
-                        }
-                        
-//                        return data.name.lowercased() == searchText.lowercased()
+                        return data.name.lowercased() == searchText.lowercased() || data.destinationNumber == searchText
                     })
                     self.isLoading = false
                 }

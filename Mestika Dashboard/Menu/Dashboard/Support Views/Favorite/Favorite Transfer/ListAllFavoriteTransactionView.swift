@@ -592,7 +592,8 @@ struct ListAllFavoriteTransactionView: View {
     @ObservedObject var profileVM = ProfileViewModel()
     func checkFreezeAccount() {
         self.profileVM.getAccountFreeze { sucess in
-            
+            print("FREEZEE ACCOUNT")
+            print(self.profileVM.freezeAccount)
             if sucess {
                 self.isFreezeAccount = self.profileVM.freezeAccount
             }

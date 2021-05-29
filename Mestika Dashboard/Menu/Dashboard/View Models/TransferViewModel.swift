@@ -499,7 +499,7 @@ class TransferViewModel : ObservableObject {
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Transfer Gagal"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 406):
                     self.code = "406"
                     self.message = "Nominal melebihi limit transaksi"
@@ -547,7 +547,7 @@ class TransferViewModel : ObservableObject {
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Transfer Gagal"
+                    self.message = "PIN Transaksi Salah"
                 case .custom(code: 406):
                     self.code = "406"
                     self.message = "Nominal melebihi limit transaksi"
