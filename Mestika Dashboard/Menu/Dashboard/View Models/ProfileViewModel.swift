@@ -16,6 +16,32 @@ class ProfileViewModel: ObservableObject {
     
     @Published var profileModel = ProfileResponseModel.self
     
+    // ID
+    @Published var id: String = ""
+    @Published var nik: String = ""
+    @Published var firebaseId: String = ""
+    @Published var firebaseToken: String = ""
+    @Published var deviceId: String = ""
+    @Published var cif: String = ""
+    
+    // Address
+    @Published var alamat: String = ""
+    @Published var provinsiName: String = ""
+    @Published var kabupatenName: String = ""
+    @Published var kecamatanName: String = ""
+    @Published var kelurahanName: String = ""
+    //    @Published var rt: String = ""
+    //    @Published var rw: String = ""
+    
+    @Published var alamatSuratMenyurat: String = ""
+    //    @Published var rtSuratMenyurat: String = ""
+    //    @Published var rwSuratMenyurat: String = ""
+    @Published var kodePosSuratMenyurat: String = ""
+    @Published var kelurahanSuratMenyurat: String = ""
+    @Published var kecamatanSuratMenyurat: String = ""
+    @Published var kotaSuratMenyurat: String = ""
+    @Published var provinsiSuratMenyurat: String = ""
+    
     // Limit
     @Published var maxIbftPerTrans: String = ""
     @Published var limitOnUs: String = ""
@@ -38,24 +64,6 @@ class ProfileViewModel: ObservableObject {
     @Published var cardName: String = ""
     @Published var accountNumber: String = ""
     @Published var productName: String = ""
-    
-    // Address
-    @Published var alamat: String = ""
-    @Published var provinsiName: String = ""
-    @Published var kabupatenName: String = ""
-    @Published var kecamatanName: String = ""
-    @Published var kelurahanName: String = ""
-    //    @Published var rt: String = ""
-    //    @Published var rw: String = ""
-    
-    @Published var alamatSuratMenyurat: String = ""
-    //    @Published var rtSuratMenyurat: String = ""
-    //    @Published var rwSuratMenyurat: String = ""
-    @Published var kodePosSuratMenyurat: String = ""
-    @Published var kelurahanSuratMenyurat: String = ""
-    @Published var kecamatanSuratMenyurat: String = ""
-    @Published var kotaSuratMenyurat: String = ""
-    @Published var provinsiSuratMenyurat: String = ""
     
     @Published var tujuanPembukaan: String = ""
     @Published var sumberDana: String = ""
@@ -81,6 +89,8 @@ class ProfileViewModel: ObservableObject {
     @Published var kodePosPerusahaan: String = ""
     @Published var kelurahanPerusahaan: String = ""
     @Published var kecamatanPerusahaan: String = ""
+    @Published var kotaPerusahaan: String = ""
+    @Published var provinsiPerusahaan: String = ""
     @Published var teleponPerusahaan: String = ""
     
     @Published var namaPenyandang: String = ""
@@ -97,6 +107,49 @@ class ProfileViewModel: ObservableObject {
 
 extension ProfileViewModel {
     
+    func updateCustomerPhoenix(completion: @escaping (Bool) -> Void) {
+        let bodyRequest: [String: Any] = [
+            "_id": self.id,
+            "id": [
+                "surel": self.email,
+                "telepon": self.telepon,
+                "nik": self.nik,
+                "firebaseId": self.firebaseId,
+                "firebaseToken": self.firebaseToken,
+                "deviceId": self.deviceId,
+                "cif": self.cif
+            ],
+            "personal": [
+                "gender": self.gender,
+                "dateOfBirth": self.tglLahir,
+                "placeOfBirth": self.tempatLahir,
+                "name": self.name
+            ],
+            "cdd": [
+                "penghasilanKotorTahunan": self.penghasilanKotor,
+                "sumberPendapatanLainnya": self.PendapatanLainnya,
+                "jumlahSetoranDana": self.jumlahSetoranDanaPerbulan,
+                "frequencySetoranDana": self.jumlahSetoranPerbulan,
+                "jumlahPenarikanDana": self.jumlahPenarikanDanaPerbulan,
+                "frequencyPenarikanDana": self.jumlahPenarikanPerbulan,
+                "sumberDana": self.sumberDana,
+                "tujuanPembukaanRekening": self.tujuanPembukaan,
+                "namaPerusahaan": self.namaPerusahaan,
+                "hpPerusahaan": self.teleponPerusahaan,
+                "alamatPerusahaan": self.alamatPerusahaan,
+                "kodePosPerusahaan": self.kodePosPerusahaan,
+                "kecamatanPerusahaan": self.kecamatanPerusahaan,
+                "kelurahanPerusahaan": self.kelurahanPerusahaan,
+                "teleponPerusahaan": self.teleponPerusahaan,
+                "pekerjaan": self.pekerjaan
+            ],
+        ]
+        
+        ProfileService.shared.updateCustomerPhoenix(body: bodyRequest) { result in
+            
+        }
+    }
+    
     // MARK: - GET CUSTOMER
     func getCustomerFromPhoenix(completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
@@ -110,6 +163,14 @@ extension ProfileViewModel {
                 DispatchQueue.main.async {
                     
                     self.isLoading = false
+                    
+                    // ID
+                    self.id = response.last?.id ?? ""
+                    self.nik = response.last?.customerFromPhoenixResponseID.nik ?? ""
+                    self.firebaseId = response.last?.customerFromPhoenixResponseID.firebaseID ?? ""
+                    self.firebaseToken = response.last?.customerFromPhoenixResponseID.firebaseToken ?? ""
+                    self.deviceId = response.last?.customerFromPhoenixResponseID.deviceID ?? ""
+                    self.cif = response.last?.customerFromPhoenixResponseID.cif ?? ""
                     
                     self.tujuanPembukaan = response.last?.cdd.tujuanPembukaanRekening ?? ""
                     self.sumberDana = response.last?.cdd.sumberDana ?? ""
@@ -135,18 +196,35 @@ extension ProfileViewModel {
                     self.kodePosPerusahaan = response.last?.cdd.kodePosPerusahaan ?? ""
                     self.kelurahanPerusahaan = response.last?.cdd.kelurahanPerusahaan ?? ""
                     self.kecamatanPerusahaan = response.last?.cdd.kecamatanPerusahaan ?? ""
+                    self.kotaPerusahaan = ""
+                    self.provinsiPerusahaan = ""
                     self.teleponPerusahaan = response.last?.cdd.teleponPerusahaan ?? ""
                     
                     self.namaPenyandang = ""
                     self.hubunganPenyandang = ""
                     self.pekerjaanPenyandang = ""
                     
+                    // PERSONAL DATA
                     self.email = response.last?.customerFromPhoenixResponseID.surel ?? ""
                     self.telepon = response.last?.customerFromPhoenixResponseID.telepon ?? ""
                     self.name = response.last?.personal.name ?? ""
                     self.tempatLahir = response.last?.personal.placeOfBirth ?? ""
                     self.tglLahir = response.last?.personal.dateOfBirth ?? ""
                     self.gender = response.last?.personal.gender ?? ""
+                    
+                    // ADDRESS
+                    self.alamat = response.last?.personal.address ?? ""
+                    self.provinsiName = response.last?.personal.propName ?? ""
+                    self.kabupatenName = response.last?.personal.kabName ?? ""
+                    self.kecamatanName = response.last?.personal.kecName ?? ""
+                    self.kelurahanName = response.last?.personal.kelName ?? ""
+                    
+                    // MAILING ADDRESS
+                    self.alamatSuratMenyurat = response.last?.cdd.alamatSuratMenyurat ?? ""
+                    self.kelurahanSuratMenyurat = response.last?.cdd.kelurahanSuratMenyurat ?? ""
+                    self.kecamatanSuratMenyurat = response.last?.cdd.kecamatanSuratMenyurat ?? ""
+//                    self.kotaSuratMenyurat = response.last?.cdd.sura ?? ""
+//                    self.provinsiSuratMenyurat = response.last?.cdd.provinsi ?? ""
                     
                     self.existingCustomer = response.last?.personal.existingCustomer ?? false
                     

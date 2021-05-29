@@ -28,7 +28,6 @@ struct AccountTabs: View {
     /* Data Binding */
     @ObservedObject private var authVM = AuthViewModel()
     @State private var isShowingAlert = false
-    @State private var forgotPasswordActived = false
     @State private var isLoading: Bool = true
     
     @State private var timeLogout = 300
@@ -38,7 +37,12 @@ struct AccountTabs: View {
     
     @State var leftTime: Date = Date()
     
-    @State var trxLimitActive: Bool = false
+    // Route variables
+    @State private var personalDataActive: Bool = false
+    @State private var addressDataActive: Bool = false
+    @State private var otherDataActive: Bool = false
+    @State private var trxLimitActive: Bool = false
+    @State private var forgotPasswordActived = false
     
     /* CORE DATA */
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -78,7 +82,7 @@ struct AccountTabs: View {
         }
         .gesture(tap)
         .onReceive(timer) { time in
-//            print(self.timeLogout)
+            //            print(self.timeLogout)
             
             if self.timeLogout > 0 {
                 self.timeLogout -= 1
@@ -95,6 +99,9 @@ struct AccountTabs: View {
                 print("Move to moveToDashboard: \(moveToAccountTab)")
                 //                activateWelcomeView()
                 DispatchQueue.main.async {
+                    self.addressDataActive = false
+                    self.otherDataActive = false
+                    self.personalDataActive = false
                     self.trxLimitActive = false
                     self.forgotPasswordActived = false
                     self.appState.moveToAccountTab = false
@@ -105,6 +112,13 @@ struct AccountTabs: View {
             if let value = device.last?.fingerprintFlag {
                 print("CORE DATA - Finger Print = \(value)")
                 self.isFingerprint = value
+            }
+            self.profileVM.getCustomerFromPhoenix { (isSuccess) in
+                print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
+                
+                self.isLoading = false
+                self.username = profileVM.name
+                self.phoneNumber = profileVM.telepon
             }
         })
     }
@@ -154,55 +168,85 @@ struct AccountTabs: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                     
-                    NavigationLink(destination : FormChangePersonalDataView()){
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Personal Data".localized(language))
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
-                            }
-                            
-                            Spacer()
+                    // MARK: ACCOUNT TAB
+                    Group {
+                        NavigationLink(destination : FormChangePersonalDataView(name: $profileVM.name, phone: $profileVM.telepon, email: $profileVM.email, placeOfBirth: $profileVM.tempatLahir, dateOfBirth: $profileVM.tglLahir, gender: $profileVM.gender), isActive: self.$personalDataActive){
+                            EmptyView()
                         }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 20)
+                        .isDetailLink(false)
+                        
+                        Button(action: {
+                            self.personalDataActive = true
+                        }, label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Personal Data".localized(language))
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                        })
                     }
                     
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormChangeAddressView()){
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Address".localized(language))
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
-                            }
-                            
-                            Spacer()
+                    // MARK: ADDRESS DATA
+                    Group {
+                        NavigationLink(destination : FormChangeAddressView(alamat: $profileVM.alamat, kelurahan: $profileVM.kelurahanName, kecamatan: $profileVM.kecamatanName, kabKota: $profileVM.kabupatenName, provinsi: $profileVM.provinsiName, alamatMailing: $profileVM.alamatSuratMenyurat, kodePosMailing: $profileVM.kodePosSuratMenyurat, kelurahanMailing: $profileVM.kelurahanSuratMenyurat, kecamatanMailing: $profileVM.kecamatanSuratMenyurat, kabKotaMailing: $profileVM.kotaSuratMenyurat, provinsiMailing: $profileVM.provinsiSuratMenyurat), isActive: self.$addressDataActive){
+                            EmptyView()
                         }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 20)
+                        .isDetailLink(false)
+                        
+                        Button(action: {
+                            self.addressDataActive = true
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Address".localized(language))
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                        }
                     }
                     
                     Divider()
                         .padding(.horizontal, 10)
                     
-                    NavigationLink(destination : FormChangeOtherDataView()){
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Other Data".localized(language))
-                                    .foregroundColor(Color(hex: "#1D2238"))
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
-                            }
-                            
-                            Spacer()
+                    Group {
+                        NavigationLink(destination : FormChangeOtherDataView(namaPenyandangDana: $profileVM.namaPenyandang, tujuanPembukaan: $profileVM.tujuanPembukaan, sumberDana: $profileVM.sumberDana, frekuensiPenarikanPerbulan: $profileVM.jumlahPenarikanPerbulan, jumlahPenarikanPerbulan: $profileVM.jumlahPenarikanDanaPerbulan, frekuensiSetoranPerbulan: $profileVM.jumlahSetoranPerbulan, jumlahSetoranPerbulan: $profileVM.jumlahSetoranDanaPerbulan, pekerjaan: $profileVM.pekerjaan, penghasilanKotor: $profileVM.penghasilanKotor, otherIncome: $profileVM.PendapatanLainnya, namaPerusahaan: $profileVM.namaPerusahaan, alamatPerusahaan: $profileVM.alamatPerusahaan, kodePosPerusahaan: $profileVM.kodePosPerusahaan, kelurahanPerusahaan: $profileVM.kelurahanPerusahaan, kecamatanPerusahaan: $profileVM.kecamatanPerusahaan, kabKotaPerusahaan: $profileVM.kotaPerusahaan, provinsiPerusahaan: $profileVM.provinsiPerusahaan, teleponPerusahaan: $profileVM.teleponPerusahaan), isActive: self.$otherDataActive)
+                        {
+                            EmptyView()
                         }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 20)
+                        .isDetailLink(false)
+                        
+                        Button(action: {
+                            self.otherDataActive = true
+                        }, label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Other Data".localized(language))
+                                        .foregroundColor(Color(hex: "#1D2238"))
+                                        .font(.subheadline)
+                                        .fontWeight(.bold)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
+                        })
                     }
                     
                     Divider()
@@ -222,7 +266,7 @@ struct AccountTabs: View {
                         .padding(.vertical, 5)
                         .padding(.horizontal, 20)
                     }
-
+                    
                     
                     Divider()
                         .padding(.horizontal, 10)
@@ -438,29 +482,29 @@ struct AccountTabs: View {
                 }),
                 secondaryButton: .cancel(Text("NO".localized(language))))
         }
-        .onAppear {
-            self.profileVM.getProfile { success in
-                
-                if success {
-                    print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
-                    self.isLoading = false
-                }
-                
-                if !success {
-                    self.isLoading = false
-                }
-            }
-            getUserInfo()
-        }
+        //        .onAppear {
+        //            self.profileVM.getProfile { success in
+        //
+        //                if success {
+        //                    print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+        //                    self.isLoading = false
+        //                }
+        //
+        //                if !success {
+        //                    self.isLoading = false
+        //                }
+        //            }
+        //            getUserInfo()
+        //        }
         
     }
     
-    func getUserInfo() {
-        self.user.forEach { (data) in
-            self.username = data.namaLengkapFromNik!
-            self.phoneNumber = data.noTelepon!
-        }
-    }
+    //    func getUserInfo() {
+    //        self.user.forEach { (data) in
+    //            self.username = data.namaLengkapFromNik!
+    //            self.phoneNumber = data.noTelepon!
+    //        }
+    //    }
     
     func saveDataNewDeviceToCoreData()  {
         print("------SAVE ACCOUNT TO CORE DATA-------")

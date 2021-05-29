@@ -12,6 +12,8 @@ struct PinConfirmationChangeDataView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @EnvironmentObject var appState: AppState
+    
     @AppStorage("language") private var language = LocalizationService.shared.language
     
     @AppStorage("lock_Password") var key = "123456"
@@ -66,7 +68,7 @@ struct PinConfirmationChangeDataView: View {
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
                 }, onCommit: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.appState.moveToAccountTab = true
                 })
             }
         }

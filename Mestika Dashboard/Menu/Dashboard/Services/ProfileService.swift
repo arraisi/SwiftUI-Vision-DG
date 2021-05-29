@@ -13,6 +13,15 @@ class ProfileService {
     
     static let shared = ProfileService()
     
+    func updateCustomerPhoenix(body: [String: Any], completion: @escaping(Result<CustomerFromPhoenixResponse, ErrorResult>) -> Void) {
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: body, options: [])
+        let jsonString = String(data: jsonData!, encoding: .utf8)
+        print("\n\n json update customer phoenix")
+        print(jsonString ?? "")
+        print("\n\n")
+    }
+    
     // MARK: - CHECK CUSTOMER
     func checkCustomer(completion: @escaping(Result<CustomerFromPhoenixResponse, ErrorResult>) -> Void) {
         

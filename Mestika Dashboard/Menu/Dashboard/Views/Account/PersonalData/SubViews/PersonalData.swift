@@ -12,6 +12,8 @@ struct PersonalData: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @Binding var name: String
     @Binding var phone: String
     @Binding var email: String
@@ -52,19 +54,35 @@ struct PersonalData: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$dateOfBirth, label: "Date of Birth".localized(language), placeHolder: "Date of Birth".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
+                //                LabelTextField(value: self.$dateOfBirth, label: "Date of Birth".localized(language), placeHolder: "Date of Birth".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                //                    print("on edit")
+                //                }, onCommit: {
+                //                    print("on commit")
+                //                })
                 
-//                LabelTextField(value: self.$gender, label: "Gender".localized(language), placeHolder: "Gender".localized(language), disabled: false, onEditingChanged: { (Bool) in
-//                    print("on edit")
-//                }, onCommit: {
-//                    print("on commit")
-//                })
+                //                LabelTextField(value: self.$gender, label: "Gender".localized(language), placeHolder: "Gender".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                //                    print("on edit")
+                //                }, onCommit: {
+                //                    print("on commit")
+                //                })
                 
                 LabelTextFieldMenu(value: self.$gender, label: "Gender", data: ["Laki-laki", "Perempuan"], onEditingChanged: {_ in}, onCommit: {})
+                
+//                if isExistingCustomer {
+//                    Button(action: {
+//                        presentationMode.wrappedValue.dismiss()
+//                    }) {
+//                        Text("Save".localized(language))
+//                            .foregroundColor(.white)
+//                            .font(.custom("Montserrat-SemiBold", size: 14))
+//                            .fontWeight(.bold)
+//                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+//                    }
+//                    .background(Color(hex: "#2334D0"))
+//                    .cornerRadius(12)
+//                    .padding(25)
+//                    .padding(.bottom, 10)
+//                }
             }
         }
         .padding(25)

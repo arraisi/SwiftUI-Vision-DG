@@ -15,11 +15,39 @@ struct FormChangeOtherDataView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @StateObject var profileVM = ProfileViewModel()
-    
     @State var nextRoute: Bool = false
-    
     @State private var isLoading: Bool = false
+    
+    @Binding var namaPenyandangDana: String
+    @Binding var tujuanPembukaan: String
+    @Binding var sumberDana: String
+    @Binding var frekuensiPenarikanPerbulan: String
+    @Binding var jumlahPenarikanPerbulan: String
+    @Binding var frekuensiSetoranPerbulan: String
+    @Binding var jumlahSetoranPerbulan: String
+    
+    @Binding var pekerjaan: String
+    @Binding var penghasilanKotor: String
+    @Binding var otherIncome: String
+    
+    @Binding var namaPerusahaan: String
+    @Binding var alamatPerusahaan: String
+    @Binding var kodePosPerusahaan: String
+    @Binding var kelurahanPerusahaan: String
+    @Binding var kecamatanPerusahaan: String
+    @Binding var kabKotaPerusahaan: String
+    @Binding var provinsiPerusahaan: String
+    @Binding var teleponPerusahaan: String
+    
+    let tujuanPembukaanRekeningData: [MasterModel] = load("tujuanPembukaanRekening.json")
+    let sumberDanaData: [MasterModel] = load("sumberDana.json")
+    let perkiraanPenarikanData: [MasterModel] = load("perkiraanSetoran.json")
+    let besarPerkiraanPenarikanData: [MasterModel] = load("besarPerkiraanSetoran.json")
+    let perkiraanSetoranData: [MasterModel] = load("perkiraanSetoran.json")
+    let besarPerkiraanSetoranData: [MasterModel] = load("besarPerkiraanSetoran.json")
+    let pekerjaanData: [MasterModel] = load("pekerjaan.json")
+    let penghasilanKotorData: [MasterModel] = load("penghasilanKotor.json")
+    let otherIncomeData = ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"]
     
     var body: some View {
         VStack {
@@ -32,65 +60,22 @@ struct FormChangeOtherDataView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack {
-                    VStack {
-                        
-                        Text("Data Pembuatan Rekening".localized(language))
-                            .font(.custom("Montserrat-Bold", size: 22))
-                            .foregroundColor(Color(hex: "#232175"))
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        FormPembuatanRekening
-                            .padding(.top, 20)
-                    }
-                    .padding(30)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                    .padding(.horizontal, 25)
-                    .padding(.bottom, 10)
+                    FormPembuatanRekening
                     
                     
-                    if (self.profileVM.namaPerusahaan == "") {
+                    if (self.namaPerusahaan == "") {
                         EmptyView()
                     } else {
-                        VStack {
-                            
-                            Text("Data Perusahaan".localized(language))
-                                .font(.custom("Montserrat-Bold", size: 22))
-                                .foregroundColor(Color(hex: "#232175"))
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            FormPekerjaan
-                                .padding(.top, 20)
-                        }
-                        .padding(30)
-                        .background(Color.white)
-                        .cornerRadius(15)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                        .padding(.horizontal, 25)
-                        .padding(.bottom, 10)
+                        FormPekerjaan
+                        
+                        FormPerusahaan
                     }
                     
-                    if (self.profileVM.namaPenyandang == "") {
-                        EmptyView()
-                    } else {
-                        VStack {
-                            
-                            Text("Data Penyandang Dana".localized(language))
-                                .font(.custom("Montserrat-Bold", size: 22))
-                                .foregroundColor(Color(hex: "#232175"))
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            FormPenyandangDana
-                                .padding(.top, 20)
-                        }
-                        .padding(30)
-                        .background(Color.white)
-                        .cornerRadius(15)
-                        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
-                        .padding(.horizontal, 25)
-                        .padding(.bottom, 10)
-                    }
+//                    if (self.namaPenyandangDana == "") {
+//                        EmptyView()
+//                    } else {
+//                        FormPenyandangDana
+//                    }
                     
                     VStack {
                         Button(action: {
@@ -116,173 +101,255 @@ struct FormChangeOtherDataView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .onAppear {
-            self.isLoading = true
-            profileVM.getCustomerFromPhoenix(completion: { success in
-                
-                if success {
-                    self.isLoading = false
-                }
-                
-                if !success {
-                    self.isLoading = false
-                }
-            })
-            
-        }
     }
     
+    // MARK: FORM PEMBUKAAN REKENING
     var FormPembuatanRekening: some View {
         VStack {
-            LabelTextField(value: self.$profileVM.tujuanPembukaan, label: "Tujuan Pembukaan".localized(language), placeHolder: "Tujuan Pembukaan".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
             
-            LabelTextField(value: self.$profileVM.sumberDana, label: "Sumber Dana".localized(language), placeHolder: "Sumber Dana".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
+            Text("Account Opening Data".localized(language))
+                .font(.custom("Montserrat-Bold", size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
             
-            LabelTextField(value: self.$profileVM.jumlahPenarikanPerbulan, label: "Jumlah Penarikan Perbulan".localized(language), placeHolder: "Jumlah Penarikan Perbulan".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.jumlahPenarikanDanaPerbulan, label: "Jumlah Penarikan Dana Perbulan".localized(language), placeHolder: "Jumlah Penarikan Dana Perbulan".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.jumlahSetoranPerbulan, label: "Jumlah Setoran Perbulan".localized(language), placeHolder: "Jumlah Setoran Perbulan".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "Jumlah Setoran Dana Perbulan".localized(language), placeHolder: "Jumlah Setoran Dana Perbulan".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
+            VStack {
+                LabelTextFieldMenu(value: self.$tujuanPembukaan, label: "Opening Purpose".localized(language), data: tujuanPembukaanRekeningData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextFieldMenu(value: self.$sumberDana, label: "Source of funds".localized(language), data: sumberDanaData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextFieldMenu(value: self.$frekuensiPenarikanPerbulan, label: "Monthly witdrawal".localized(language), data: perkiraanPenarikanData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextFieldMenu(value: self.$jumlahPenarikanPerbulan, label: "Monthly witdrawal amount".localized(language), data: besarPerkiraanPenarikanData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextFieldMenu(value: self.$frekuensiSetoranPerbulan, label: "Monthly deposit".localized(language), data: perkiraanSetoranData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextFieldMenu(value: self.$jumlahSetoranPerbulan, label: "Monthly deposit amount".localized(language), data: besarPerkiraanSetoranData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+            }
+            .padding(.top, 20)
         }
+        .padding(30)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+        .padding(.horizontal, 25)
+        .padding(.bottom, 10)
     }
     
-    var FormKeluargaTerdekat: some View {
-        VStack {
-            LabelTextField(value: self.$profileVM.hubunganKeluarga, label: "Hubungan Keluarga".localized(language), placeHolder: "Hubungan Keluarga".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.namaKeluarga, label: "Nama".localized(language), placeHolder: "Nama".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.alamatKeluarga, label: "Alamat".localized(language), placeHolder: "Alamat".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.kodePosKeluarga, label: "Kode Pos".localized(language), placeHolder: "Kode Pos".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.kelurahanKeluarga, label: "Kelurahan".localized(language), placeHolder: "Kelurahan".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.kecamatanKeluarga, label: "Kecamatan".localized(language), placeHolder: "Kecamatan".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.teleponKeluarga, label: "Telepon".localized(language), placeHolder: "Telepon".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-        }
-    }
-    
+    // MARK: FORM PEKERJAAN
     var FormPekerjaan: some View {
         VStack {
-            LabelTextField(value: self.$profileVM.namaPerusahaan, label: "Nama".localized(language), placeHolder: "Nama".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
             
-            LabelTextField(value: self.$profileVM.alamatPerusahaan, label: "Alamat".localized(language), placeHolder: "Alamat".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
+            Text("Occupation Data".localized(language))
+                .font(.custom("Montserrat-Bold", size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
             
-            LabelTextField(value: self.$profileVM.kodePosPerusahaan, label: "Kode Pos".localized(language), placeHolder: "Kode Pos".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.kelurahanPerusahaan, label: "Kelurahan".localized(language), placeHolder: "Kelurahan".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.kecamatanPerusahaan, label: "Kecamatan".localized(language), placeHolder: "Kecamatan".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
-            
-            LabelTextField(value: self.$profileVM.teleponPerusahaan, label: "Telepon".localized(language), placeHolder: "Telepon".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
+            VStack {
+                LabelTextFieldMenu(value: self.$pekerjaan, label: "Occupation".localized(language), data: pekerjaanData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextFieldMenu(value: self.$penghasilanKotor, label: "Gross income".localized(language), data: penghasilanKotorData.map{$0.name}, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextFieldMenu(value: self.$otherIncome, label: "Other income".localized(language), data: otherIncomeData, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+            }
+            .padding(.top, 20)
         }
+        .padding(30)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+        .padding(.horizontal, 25)
+        .padding(.bottom, 10)
     }
     
-    var FormPenyandangDana: some View {
+    // MARK: FORM PERUSHAAN
+    var FormPerusahaan: some View {
+        
         VStack {
-            LabelTextField(value: self.$profileVM.namaPenyandang, label: "Nama".localized(language), placeHolder: "Nama".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
             
-            LabelTextField(value: self.$profileVM.hubunganPenyandang, label: "Hubungan".localized(language), placeHolder: "Hubungan".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
+            Text("Company Data".localized(language))
+                .font(.custom("Montserrat-Bold", size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
             
-            LabelTextField(value: self.$profileVM.pekerjaanPenyandang, label: "Pekerjaan".localized(language), placeHolder: "Pekerjaan".localized(language), disabled: true, onEditingChanged: { (Bool) in
-                print("on edit")
-            }, onCommit: {
-                print("on commit")
-            })
+            VStack {
+                LabelTextField(value: self.$namaPerusahaan, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$alamatPerusahaan, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$kodePosPerusahaan, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$kelurahanPerusahaan, label: "Sub-distric".localized(language), placeHolder: "Sub-distric".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$kecamatanPerusahaan, label: "Distric".localized(language), placeHolder: "Distric".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$kabKotaPerusahaan, label: "City".localized(language), placeHolder: "City".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$teleponPerusahaan, label: "Phone".localized(language), placeHolder: "Phone".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+            }
+            
+            .padding(.top, 20)
         }
+        .padding(30)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+        .padding(.horizontal, 25)
+        .padding(.bottom, 10)
     }
+    
+    // MARK: FORM PEKERJAAN
+//    var FormKeluargaTerdekat: some View {
+//        VStack {
+//            LabelTextField(value: self.$profileVM.hubunganKeluarga, label: "Hubungan Keluarga".localized(language), placeHolder: "Hubungan Keluarga".localized(language), disabled: true, onEditingChanged: { (Bool) in
+//                print("on edit")
+//            }, onCommit: {
+//                print("on commit")
+//            })
+//
+//            LabelTextField(value: self.$profileVM.namaKeluarga, label: "Nama".localized(language), placeHolder: "Nama".localized(language), disabled: true, onEditingChanged: { (Bool) in
+//                print("on edit")
+//            }, onCommit: {
+//                print("on commit")
+//            })
+//
+//            LabelTextField(value: self.$profileVM.alamatKeluarga, label: "Alamat".localized(language), placeHolder: "Alamat".localized(language), disabled: true, onEditingChanged: { (Bool) in
+//                print("on edit")
+//            }, onCommit: {
+//                print("on commit")
+//            })
+//
+//            LabelTextField(value: self.$profileVM.kodePosKeluarga, label: "Kode Pos".localized(language), placeHolder: "Kode Pos".localized(language), disabled: true, onEditingChanged: { (Bool) in
+//                print("on edit")
+//            }, onCommit: {
+//                print("on commit")
+//            })
+//
+//            LabelTextField(value: self.$profileVM.kelurahanKeluarga, label: "Kelurahan".localized(language), placeHolder: "Kelurahan".localized(language), disabled: false, onEditingChanged: { (Bool) in
+//                print("on edit")
+//            }, onCommit: {
+//                print("on commit")
+//            })
+//
+//            LabelTextField(value: self.$profileVM.kecamatanKeluarga, label: "Kecamatan".localized(language), placeHolder: "Kecamatan".localized(language), disabled: false, onEditingChanged: { (Bool) in
+//                print("on edit")
+//            }, onCommit: {
+//                print("on commit")
+//            })
+//
+//            LabelTextField(value: self.$profileVM.teleponKeluarga, label: "Telepon".localized(language), placeHolder: "Telepon".localized(language), disabled: false, onEditingChanged: { (Bool) in
+//                print("on edit")
+//            }, onCommit: {
+//                print("on commit")
+//            })
+//        }
+//    }
+    
+//    var FormPenyandangDana: some View {
+//        VStack {
+//
+//            Text("Data Penyandang Dana".localized(language))
+//                .font(.custom("Montserrat-Bold", size: 22))
+//                .foregroundColor(Color(hex: "#232175"))
+//                .fixedSize(horizontal: false, vertical: true)
+//
+//            VStack {
+//                LabelTextField(value: self.$profileVM.namaPenyandang, label: "Nama".localized(language), placeHolder: "Nama".localized(language), disabled: true, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+//
+//                LabelTextField(value: self.$profileVM.hubunganPenyandang, label: "Hubungan".localized(language), placeHolder: "Hubungan".localized(language), disabled: true, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+//
+//                LabelTextField(value: self.$profileVM.pekerjaanPenyandang, label: "Pekerjaan".localized(language), placeHolder: "Pekerjaan".localized(language), disabled: true, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+//            }
+//            .padding(.top, 20)
+//        }
+//        .padding(30)
+//        .background(Color.white)
+//        .cornerRadius(15)
+//        .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
+//        .padding(.horizontal, 25)
+//        .padding(.bottom, 10)
+//    }
 }
 
 struct FormChangeOtherDataView_Previews: PreviewProvider {
     static var previews: some View {
-        FormChangeOtherDataView()
+        FormChangeOtherDataView(namaPenyandangDana: .constant(""), tujuanPembukaan: .constant(""), sumberDana: .constant(""), frekuensiPenarikanPerbulan: .constant(""), jumlahPenarikanPerbulan: .constant(""), frekuensiSetoranPerbulan: .constant(""), jumlahSetoranPerbulan: .constant(""), pekerjaan: .constant(""), penghasilanKotor: .constant(""), otherIncome: .constant(""), namaPerusahaan: .constant(""), alamatPerusahaan: .constant(""), kodePosPerusahaan: .constant(""), kelurahanPerusahaan: .constant(""), kecamatanPerusahaan: .constant(""), kabKotaPerusahaan: .constant(""), provinsiPerusahaan: .constant(""), teleponPerusahaan: .constant(""))
     }
 }

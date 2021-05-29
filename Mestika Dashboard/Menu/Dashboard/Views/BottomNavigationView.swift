@@ -181,9 +181,11 @@ struct BottomNavigationView: View {
         .navigationBarHidden(true)
         .onAppear {
             self.profileVM.getProfile { result in
-                self.cardNo = self.profileVM.cardNo
-                self.sourceNumber = self.profileVM.accountNumber
-                print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+                DispatchQueue.main.async {
+                    self.cardNo = self.profileVM.cardNo
+                    self.sourceNumber = self.profileVM.accountNumber
+                    print("\n\n\nPROFILE VM NAME : \(self.profileVM.name)\n\n\n")
+                }
             }
         }
         .onReceive(self.appState.$moveToTransfer) { moveToTransfer in
