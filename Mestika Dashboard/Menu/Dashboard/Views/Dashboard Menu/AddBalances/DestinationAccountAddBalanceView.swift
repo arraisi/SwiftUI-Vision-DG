@@ -36,13 +36,6 @@ struct DestinationAccountAddBalanceView: View {
     // Routing
     @State var nextRouting: Bool = false
     
-    func hasSubAccount() -> Bool {
-        return self.listSourceNumber.filter { item in
-            return item == "S"
-        }.count > 0
-        
-    }
-    
     var body: some View {
         ZStack {
             
@@ -133,9 +126,13 @@ struct DestinationAccountAddBalanceView: View {
                             })
                         }
                     } else {
-                        Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 50)
+                        ZStack {
+                            ShimmerView()
+                                .frame(width: UIScreen.main.bounds.width - 50, height: 170)
+                                .cornerRadius(15)
+                            Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
+                                .multilineTextAlignment(.center)
+                        }
                     }
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
