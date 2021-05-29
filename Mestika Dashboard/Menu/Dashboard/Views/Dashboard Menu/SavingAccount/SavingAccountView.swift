@@ -27,6 +27,8 @@ struct SavingAccountView: View {
     
     @State var description = ""
     
+    @State var isFreezeAccount: Bool = true
+    
     var nextBtnDisabled: Bool {
         product.count == 0
     }
@@ -92,7 +94,7 @@ struct SavingAccountView: View {
                             
                             Button(action: {
                                 
-                                if (self.profileVM.freezeAccount) {
+                                if (self.isFreezeAccount) {
                                     self.showFreezeMenu = true
                                 } else {
                                     if (self.savingAccountVM.accounts.filter{ $0.categoryProduct == "S" }.count >= 3) {
@@ -319,7 +321,11 @@ struct SavingAccountView: View {
     }
     
     func checkFreezeAccount() {
-        self.profileVM.getAccountFreeze { sucess in }
+        self.profileVM.getAccountFreeze { sucess in
+            if sucess {
+                self.isFreezeAccount = self.profileVM.freezeAccount
+            }
+        }
     }
 }
 

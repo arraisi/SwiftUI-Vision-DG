@@ -20,6 +20,11 @@ struct FormAddBalanceView: View {
     @State private var saldoAktif: String = "0"
     @State private var amountDbl: Double = 0
     
+    @State private var minTrx: String = "10000"
+    @State private var minTrxDbl: Double = 10000
+    
+    @State private var showDialogMinTransaction: Bool = false
+    
     // Variable List
     private var _listVoucher = ["Sekali Pengiriman"]
     
@@ -230,14 +235,18 @@ struct FormAddBalanceView: View {
                 
                 Button(action: {
                     
-                    self.transactionData.transactionDate = dateFormatter.string(from: self.date)
-                    self.transactionData.amount = self.amountCtrl
-                    
-                    if (notesCtrl.isEmpty) {
-                        self.transactionData.notes = "-"
+                    if (amountDbl < minTrxDbl) {
+                        self.showDialogMinTransaction = true
+                    } else {
+                        self.transactionData.transactionDate = dateFormatter.string(from: self.date)
+                        self.transactionData.amount = self.amountCtrl
+                        
+                        if (notesCtrl.isEmpty) {
+                            self.transactionData.notes = "-"
+                        }
+                        
+                        self.nextRouting = true
                     }
-                    
-                    self.nextRouting = true
                     
                 }, label: {
                     Text("KONFIRMASI TRANSAKSI")
@@ -255,6 +264,13 @@ struct FormAddBalanceView: View {
                 
             })
             .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
+            
+            if ( self.showDialogMinTransaction) {
+                ModalOverlay(tapAction: { withAnimation {
+                    self.showDialogMinTransaction = false
+                }})
+                .edgesIgnoringSafeArea(.all)
+            }
         }
         .onAppear {
             self.saldoAktif = self.transactionData.mainBalance
@@ -263,6 +279,62 @@ struct FormAddBalanceView: View {
             UIApplication.shared.endEditing()
         }
         .navigationBarTitleDisplayMode(.inline)
+        .popup(isPresented: $showDialogMinTransaction, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMinTransaction()
+        }
+    }
+    
+    func modalMinTransaction() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_limit_min")
+                .resizable()
+                .frame(width: 127, height: 81)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("There are transactions less than the minimum transaction.")
+                .font(.custom("Montserrat-SemiBold", size: 18))
+                .foregroundColor(.red)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text("Minimum transaction" + "Rp. \(self.minTrx),- . " + "Please change the transaction nominal.")
+                .font(.custom("Montserrat-Light", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("CHANGE THE NOMINAL")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 10)
+            
+            Button(
+                action: {
+                    self.showDialogMinTransaction = false
+                },
+                label: {
+                    Text("CANCEL TRANSACTION")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
     }
     
     private var selectedDate: Binding<Date> {

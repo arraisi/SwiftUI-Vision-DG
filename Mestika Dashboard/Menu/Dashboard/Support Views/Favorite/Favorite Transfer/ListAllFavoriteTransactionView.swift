@@ -54,6 +54,8 @@ struct ListAllFavoriteTransactionView: View {
     
     @State var showFreezeMenu: Bool = false
     
+    @State var isFreezeAccount: Bool = true
+    
     var body: some View {
         ZStack {
             Color(hex: "#F6F8FB")
@@ -96,7 +98,7 @@ struct ListAllFavoriteTransactionView: View {
                             
                             Button(
                                 action: {
-                                    if !self.profileVM.freezeAccount {
+                                    if isFreezeAccount {
                                         self.showFreezeMenu = true
                                     } else {
                                         if (data.type == "TRANSFER_SESAMA") {
@@ -590,12 +592,11 @@ struct ListAllFavoriteTransactionView: View {
     @ObservedObject var profileVM = ProfileViewModel()
     func checkFreezeAccount() {
         self.profileVM.getAccountFreeze { sucess in
-            
-//            if sucess {
-//                if (profileVM.freezeAccount) {
-//                    self.showFreezeMenu = true
-//                }
-//            }
+            print("FREEZEE ACCOUNT")
+            print(self.profileVM.freezeAccount)
+            if sucess {
+                self.isFreezeAccount = self.profileVM.freezeAccount
+            }
             
         }
     }

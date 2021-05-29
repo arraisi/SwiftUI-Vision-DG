@@ -11,6 +11,7 @@ struct SuccessMoveBalancesView: View {
     
     // Environtment Object
     @EnvironmentObject var transactionData: MoveBalancesModel
+    var transferData: MoveBalancesModel
     @EnvironmentObject var appState: AppState
     
     // App Storage
@@ -39,7 +40,7 @@ struct SuccessMoveBalancesView: View {
                     .padding()
                 
                 VStack(spacing: 5) {
-                    Text("\(self.tglTrx)")
+                    Text("\(self.transferData.transactionDate)")
                         .font(.custom("Montserrat-Bold", size: 12))
                     
                     Text("Pindah Saldo Berhasil")
@@ -53,7 +54,7 @@ struct SuccessMoveBalancesView: View {
                     HStack(alignment: .top, spacing: 0) {
                         Text("Rp.")
                             .font(.custom("Montserrat-Bold", size: 22))
-                        Text("\(self.amount.thousandSeparator())")
+                        Text("\(self.transferData.amount.thousandSeparator())")
                             .font(.custom("Montserrat-Bold", size: 36))
                     }
                 }
@@ -65,7 +66,7 @@ struct SuccessMoveBalancesView: View {
                         Text("Rekening Asal".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
-                        Text("\(self.sourceName)")
+                        Text("\(self.transferData.sourceAccountName)")
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
@@ -82,7 +83,7 @@ struct SuccessMoveBalancesView: View {
                         Text("Rekening Tujuan".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
-                        Text("\(self.destinationName)")
+                        Text("\(self.transferData.destinationName)")
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
@@ -99,7 +100,7 @@ struct SuccessMoveBalancesView: View {
                         Text("Catatan".localized(language))
                             .font(.custom("Montserrat-Bold", size: 10))
                         
-                        Text("\(self.notes)")
+                        Text("\(self.transferData.notes)")
                             .font(.custom("Montserrat-Bold", size: 20))
                             .padding(.bottom, 15)
                         
@@ -138,11 +139,11 @@ struct SuccessMoveBalancesView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            self.tglTrx = self.transactionData.transactionDate
-            self.sourceName = self.transactionData.sourceAccountName
-            self.destinationName = self.transactionData.destinationName
-            self.notes = self.transactionData.notes
-            self.amount = self.transactionData.amount
+//            self.tglTrx = self.transactionData.transactionDate
+//            self.sourceName = self.transactionData.sourceAccountName
+//            self.destinationName = self.transactionData.destinationName
+//            self.notes = self.transactionData.notes
+//            self.amount = self.transactionData.amount
         }
         .navigationBarItems(trailing: HStack(spacing: 30) {
             Button(action: {
@@ -164,6 +165,6 @@ struct SuccessMoveBalancesView: View {
 
 struct SuccessMoveBalancesView_Previews: PreviewProvider {
     static var previews: some View {
-        SuccessMoveBalancesView().environmentObject(MoveBalancesModel())
+        SuccessMoveBalancesView(transferData: MoveBalancesModel()).environmentObject(MoveBalancesModel())
     }
 }
