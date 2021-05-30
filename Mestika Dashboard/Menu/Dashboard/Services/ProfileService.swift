@@ -13,13 +13,58 @@ class ProfileService {
     
     static let shared = ProfileService()
     
-    func updateCustomerPhoenix(body: [String: Any], completion: @escaping(Result<CustomerFromPhoenixResponse, ErrorResult>) -> Void) {
+    func updateCustomerPhoenix(body: [String: Any], completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
-        let jsonData = try? JSONSerialization.data(withJSONObject: body, options: [])
+        let jsonData = try? JSONSerialization.data(withJSONObject: body)
         let jsonString = String(data: jsonData!, encoding: .utf8)
         print("\n\n json update customer phoenix")
         print(jsonString ?? "")
         print("\n\n")
+        
+        guard let url = URL.urlUpdateCustomerPhoenix() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+
+                if (httpResponse.statusCode == 200) {
+                    print("http status OK 200")
+                    if let responseBody = try? JSONDecoder().decode(Status.self, from: data) {
+                        print("body status \(responseBody)")
+                        completion(.success(responseBody))
+                    }
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+
+        }.resume()
     }
     
     // MARK: - CHECK CUSTOMER

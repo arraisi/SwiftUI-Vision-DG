@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftyRSA
 
 class ProfileViewModel: ObservableObject {
     @Published var isLoading: Bool = true
@@ -107,7 +108,21 @@ class ProfileViewModel: ObservableObject {
 
 extension ProfileViewModel {
     
-    func updateCustomerPhoenix(completion: @escaping (Bool) -> Void) {
+    func encryptPassword(password: String) -> String {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: password, using: .utf8)
+        
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        _ = encrypted.data
+        let base64String = encrypted.base64String
+        
+        print("Encript : \(base64String)")
+        
+        return base64String
+        //        self.registerData.password = base64String
+    }
+    
+    func updateCustomerPhoenix(pinTrx: String, completion: @escaping (Bool) -> Void) {
         let bodyRequest: [String: Any] = [
             "_id": self.id,
             "id": [
@@ -123,7 +138,12 @@ extension ProfileViewModel {
                 "gender": self.gender,
                 "dateOfBirth": self.tglLahir,
                 "placeOfBirth": self.tempatLahir,
-                "name": self.name
+                "name": self.name,
+                "address": self.alamat,
+                "kabName": self.kabupatenName,
+                "kecName": self.kecamatanName,
+                "kelName": self.kelurahanName,
+                "propName": self.provinsiName
             ],
             "cdd": [
                 "penghasilanKotorTahunan": self.penghasilanKotor,
@@ -143,10 +163,38 @@ extension ProfileViewModel {
                 "teleponPerusahaan": self.teleponPerusahaan,
                 "pekerjaan": self.pekerjaan
             ],
+            "pinTrx": encryptPassword(password: pinTrx)
         ]
         
         ProfileService.shared.updateCustomerPhoenix(body: bodyRequest) { result in
-            
+            switch result {
+            case .success(_):
+                print("Success")
+                DispatchQueue.main.async {
+                    
+                    self.isLoading = false
+                    
+                    completion(true)
+                }
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 403):
+                    self.statusCode = "403"
+                    self.errorMessage = "PIN TRANSAKSI SALAH"
+                case .custom(code: 401):
+                    self.statusCode = "401"
+                    self.errorMessage = "LOGEDOUT"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
         }
     }
     

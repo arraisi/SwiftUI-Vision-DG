@@ -238,6 +238,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/customer/fromPhoenix")
     }
     
+    static func urlUpdateCustomerPhoenix() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/customer")
+    }
+    
     static func urlGetAccountBalance() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/user/getAccountBalance")
     }

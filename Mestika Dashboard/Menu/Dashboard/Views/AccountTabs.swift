@@ -113,7 +113,7 @@ struct AccountTabs: View {
                 print("CORE DATA - Finger Print = \(value)")
                 self.isFingerprint = value
             }
-            self.profileVM.getCustomerFromPhoenix { (isSuccess) in
+            self.profileVM.getProfile { (isSuccess) in
                 print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
                 
                 self.isLoading = false
@@ -170,7 +170,7 @@ struct AccountTabs: View {
                     
                     // MARK: ACCOUNT TAB
                     Group {
-                        NavigationLink(destination : FormChangePersonalDataView(name: $profileVM.name, phone: $profileVM.telepon, email: $profileVM.email, placeOfBirth: $profileVM.tempatLahir, dateOfBirth: $profileVM.tglLahir, gender: $profileVM.gender), isActive: self.$personalDataActive){
+                        NavigationLink(destination : FormChangePersonalDataView(), isActive: self.$personalDataActive){
                             EmptyView()
                         }
                         .isDetailLink(false)
@@ -198,7 +198,7 @@ struct AccountTabs: View {
                     
                     // MARK: ADDRESS DATA
                     Group {
-                        NavigationLink(destination : FormChangeAddressView(alamat: $profileVM.alamat, kelurahan: $profileVM.kelurahanName, kecamatan: $profileVM.kecamatanName, kabKota: $profileVM.kabupatenName, provinsi: $profileVM.provinsiName, alamatMailing: $profileVM.alamatSuratMenyurat, kodePosMailing: $profileVM.kodePosSuratMenyurat, kelurahanMailing: $profileVM.kelurahanSuratMenyurat, kecamatanMailing: $profileVM.kecamatanSuratMenyurat, kabKotaMailing: $profileVM.kotaSuratMenyurat, provinsiMailing: $profileVM.provinsiSuratMenyurat), isActive: self.$addressDataActive){
+                        NavigationLink(destination : FormChangeAddressView(), isActive: self.$addressDataActive){
                             EmptyView()
                         }
                         .isDetailLink(false)
@@ -224,8 +224,9 @@ struct AccountTabs: View {
                     Divider()
                         .padding(.horizontal, 10)
                     
+                    // MARK: OTHER DATA
                     Group {
-                        NavigationLink(destination : FormChangeOtherDataView(namaPenyandangDana: $profileVM.namaPenyandang, tujuanPembukaan: $profileVM.tujuanPembukaan, sumberDana: $profileVM.sumberDana, frekuensiPenarikanPerbulan: $profileVM.jumlahPenarikanPerbulan, jumlahPenarikanPerbulan: $profileVM.jumlahPenarikanDanaPerbulan, frekuensiSetoranPerbulan: $profileVM.jumlahSetoranPerbulan, jumlahSetoranPerbulan: $profileVM.jumlahSetoranDanaPerbulan, pekerjaan: $profileVM.pekerjaan, penghasilanKotor: $profileVM.penghasilanKotor, otherIncome: $profileVM.PendapatanLainnya, namaPerusahaan: $profileVM.namaPerusahaan, alamatPerusahaan: $profileVM.alamatPerusahaan, kodePosPerusahaan: $profileVM.kodePosPerusahaan, kelurahanPerusahaan: $profileVM.kelurahanPerusahaan, kecamatanPerusahaan: $profileVM.kecamatanPerusahaan, kabKotaPerusahaan: $profileVM.kotaPerusahaan, provinsiPerusahaan: $profileVM.provinsiPerusahaan, teleponPerusahaan: $profileVM.teleponPerusahaan), isActive: self.$otherDataActive)
+                        NavigationLink(destination : FormChangeOtherDataView(), isActive: self.$otherDataActive)
                         {
                             EmptyView()
                         }

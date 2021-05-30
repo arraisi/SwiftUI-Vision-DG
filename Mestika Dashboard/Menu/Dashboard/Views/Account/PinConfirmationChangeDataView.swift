@@ -10,40 +10,40 @@ import Indicators
 
 struct PinConfirmationChangeDataView: View {
     
-    @Environment(\.presentationMode) var presentationMode
-    
     @EnvironmentObject var appState: AppState
     
+    @AppStorage("lock_Password") var key = "123456"
     @AppStorage("language") private var language = LocalizationService.shared.language
     
-    @AppStorage("lock_Password") var key = "123456"
-    
-    // Variable
-    @State var isLoading = false
-    
-    // PIN
     @State var pin = ""
-    @State var wrongPin = false
+    @Binding var wrongPin: Bool
     @State var unlocked = false
     @State var success = false
-    @State var showingAlert = false
+    
+    @State var errorMessage: String = ""
+    @State var statusError: String = ""
+    
+    @State var isShowAlert: Bool = false
+    
+    @State var pendingRoute: Bool = false
+    
+    let callback: (String)->()
     
     var body: some View {
         ZStack {
-            
             Image("bg_blue")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
                 
-                if (self.isLoading) {
-                    LinearWaitingIndicator()
-                        .animated(true)
-                        .foregroundColor(.green)
-                        .frame(height: 1)
-                }
-    
+//                if (self.qrisVM.isLoading) {
+//                    LinearWaitingIndicator()
+//                        .animated(true)
+//                        .foregroundColor(.green)
+//                        .frame(height: 1)
+//                }
+                
                 Spacer(minLength: 0)
                 
                 Text("Enter your Transaction PIN".localized(language))
@@ -68,16 +68,38 @@ struct PinConfirmationChangeDataView: View {
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
                 }, onCommit: {
-                    self.appState.moveToAccountTab = true
+                    self.callback(self.pin)
+                    
+//                    if self.pin == self.key {
+//                        print("UNLOCKED")
+//                        self.unlocked = true
+//                        self.appState.moveToAccountTab = true
+//                    } else {
+//                        print("INCORRECT")
+//                        self.wrongPin = true
+//                    }
                 })
+                .onChange(of: wrongPin) { wrong in
+                    if wrong {
+                        self.pin = ""
+                    }
+                }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Transaction Limit", displayMode: .inline)
+        .alert(isPresented: $isShowAlert) {
+            return Alert(
+                title: Text("\(self.statusError)"),
+                message: Text("\(self.errorMessage)"),
+                dismissButton: .default(Text("OK".localized(language))))
+        }
     }
 }
 
 struct PinConfirmationChangeDataView_Previews: PreviewProvider {
     static var previews: some View {
-        PinConfirmationChangeDataView()
+        PinConfirmationChangeDataView(wrongPin: .constant(false)) { (result) in
+            
+        }
     }
 }
