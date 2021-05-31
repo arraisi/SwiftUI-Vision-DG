@@ -53,7 +53,7 @@ struct AccountTabs: View {
         
         let tap = TapGesture()
             .onEnded { _ in
-                self.timeLogout = 300
+                self.getTimeoutParam()
                 print("View tapped!")
             }
         
@@ -102,6 +102,8 @@ struct AccountTabs: View {
             }
         }
         .onAppear(perform: {
+            self.getTimeoutParam()
+            
             if let value = device.last?.fingerprintFlag {
                 print("CORE DATA - Finger Print = \(value)")
                 self.isFingerprint = value
@@ -459,6 +461,15 @@ struct AccountTabs: View {
         self.user.forEach { (data) in
             self.username = data.namaLengkapFromNik!
             self.phoneNumber = data.noTelepon!
+        }
+    }
+    
+    func getTimeoutParam() {
+        print("GET PARAM")
+        self.authVM.passwordParam() { success in
+            if success {
+                self.timeLogout = self.authVM.maxIdleTime
+            }
         }
     }
     

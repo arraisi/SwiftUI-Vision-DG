@@ -24,6 +24,7 @@ class AuthViewModel: ObservableObject {
     @Published var minimumUpperCaseLetterInPassword: Int = 1
     @Published var minimumLowerCaseLetterInPassword: Int = 1
     @Published var minimumNumericInPassword: Int = 1
+    @Published var maxIdleTime: Int = 300
 }
 
 extension AuthViewModel {
@@ -603,6 +604,7 @@ extension AuthViewModel {
                 self.minimumNumericInPassword = response.minimumNumericInPassword
                 self.minimumUpperCaseLetterInPassword = response.minimumUpperCaseLetterInPassword
                 self.minimumLowerCaseLetterInPassword = response.minimumLowerCaseLetterInPassword
+                self.maxIdleTime = response.maximumUserIdleTimeOut
                 
                 completion(true)
                 

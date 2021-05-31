@@ -34,7 +34,7 @@ struct TransferTabs: View {
         
         let tap = TapGesture()
             .onEnded { _ in
-                self.timeLogout = 300
+                getTimeoutParam()
                 print("View tapped!")
             }
         
@@ -60,30 +60,33 @@ struct TransferTabs: View {
             }
         }
         .gesture(tap)
+        .onAppear {
+            getTimeoutParam()
+        }
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
-//        .onReceive(timer) { time in
-////            print(self.timeLogout)
-//            if self.timeLogout > 0 {
-//                self.timeLogout -= 1
-//            }
-//
-//            if self.timeLogout < 1 {
-//                showAlertTimeout = true
-//            }
-//        }
-//        .alert(isPresented: $showAlertTimeout) {
-//            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
-//                self.authVM.postLogout { success in
-//                    if success {
-//                        print("SUCCESS LOGOUT")
-//                        DispatchQueue.main.async {
-//                            self.appState.moveToWelcomeView = true
-//                        }
-//                    }
-//                }
-//            }))
-//        }
+        .onReceive(timer) { time in
+//            print(self.timeLogout)
+            if self.timeLogout > 0 {
+                self.timeLogout -= 1
+            }
+
+            if self.timeLogout < 1 {
+                showAlertTimeout = true
+            }
+        }
+        .alert(isPresented: $showAlertTimeout) {
+            return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
+                self.authVM.postLogout { success in
+                    if success {
+                        print("SUCCESS LOGOUT")
+                        DispatchQueue.main.async {
+                            self.appState.moveToWelcomeView = true
+                        }
+                    }
+                }
+            }))
+        }
     }
     
     // MARK: -USERNAME INFO VIEW
@@ -164,6 +167,15 @@ struct TransferTabs: View {
             .shadow(color: Color.gray.opacity(0.3), radius: 10)
         }
         .padding([.bottom, .top], 20)
+    }
+    
+    func getTimeoutParam() {
+        print("GET PARAM")
+        self.authVM.passwordParam() { success in
+            if success {
+                self.timeLogout = self.authVM.maxIdleTime
+            }
+        }
     }
 }
 
