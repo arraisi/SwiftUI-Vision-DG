@@ -23,9 +23,6 @@ extension UserRegistrationViewModel {
             self.isLoading = true
         }
         
-        let url = URL(string: "https://disdukcapil.soppengkab.go.id/wp-content/uploads/2017/03/KTPEL.jpg")
-        let data = try? Data(contentsOf: url!)
-        
         let imageKtp = registerData.fotoKTP.asUIImage()
         let imageKtpCompress = imageKtp.resized(withPercentage: 0.1)
         
@@ -45,7 +42,7 @@ extension UserRegistrationViewModel {
             imageSelfie: imageSelfieCompress!) { result in
                 
             switch result {
-            case .success(let response):
+            case .success(_ ):
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false

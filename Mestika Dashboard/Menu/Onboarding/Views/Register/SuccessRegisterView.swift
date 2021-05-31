@@ -772,7 +772,7 @@ struct SuccessRegisterView: View {
     
     func cancelRegistration() {
         self.isLoading = true
-        regVM.cancelRegistration(nik: registerData.nik ?? "", completion: { (success:Bool) in
+        regVM.cancelRegistration(nik: registerData.nik, completion: { (success:Bool) in
             
             if success {
                 self.isLoading = false

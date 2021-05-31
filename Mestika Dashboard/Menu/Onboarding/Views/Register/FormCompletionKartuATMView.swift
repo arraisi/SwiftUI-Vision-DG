@@ -756,7 +756,7 @@ struct FormCompletionKartuATMView: View {
     
     func postData() {
         ///MARK : Complete data
-        var isVideoCall = UserDefaults.standard.string(forKey: "register_nasabah_video_call") ?? ""
+        let isVideoCall = UserDefaults.standard.string(forKey: "register_nasabah_video_call") ?? ""
         
         atmData.nik = registerData.nik
         atmData.isNasabahMestika = false

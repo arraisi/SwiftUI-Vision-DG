@@ -88,7 +88,7 @@ class KartuKuService {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString!)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -149,7 +149,7 @@ class KartuKuService {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString!)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -210,7 +210,7 @@ class KartuKuService {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString!)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -265,7 +265,7 @@ class KartuKuService {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString!)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -321,7 +321,7 @@ class KartuKuService {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString!)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)

@@ -427,7 +427,7 @@ struct BottomNavigationView: View {
     
     func traceDevice() {
         
-        var deviceModel = DeviceTraceModel()
+        let deviceModel = DeviceTraceModel()
         
         deviceModel.version = UIDevice.current.systemVersion
         deviceModel.model = UIDevice.current.model

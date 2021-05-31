@@ -256,7 +256,7 @@ class TransferServices {
                 if (httpResponse.statusCode == 200) {
                     print("ASUU")
                     
-                    print("JSON String: \(String(data: data, encoding: .utf8))")
+                    print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     
                     print("ON Success")
                     let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
@@ -631,7 +631,7 @@ class TransferServices {
                 
                 if (httpResponse.statusCode == 200) {
                     print("ON Success")
-                    print("JSON String: \(String(data: data, encoding: .utf8))")
+                    print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     
                     let userLimit = try? JSONDecoder().decode(UserLimitModel.self, from: data)
                     completion(.success(userLimit!))

@@ -36,7 +36,7 @@ extension KartuKuViewModel {
                 self.listKartuKu.removeAll()
                 
                 self.listKartuKu = response.map({ (data: KartuKuResponseElement) -> KartuKuDesignViewModel in
-                    print(data.cardDesign)
+                    print(data.cardDesign!)
                     return KartuKuDesignViewModel(
                         maxIbftPerTrans: data.maxIbftPerTrans ?? "0",
                         limitOnUs: data.limitOnUs ?? "0",
@@ -96,7 +96,7 @@ extension KartuKuViewModel {
         
         KartuKuService.shared.postChangePinKartKu(cardNo: cardNo, pin: pin, newPin: newPin) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 
                 DispatchQueue.main.async {
                     self.isLoading = false
@@ -139,7 +139,7 @@ extension KartuKuViewModel {
         
         KartuKuService.shared.postActivateKartKu(data: data) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 
                 DispatchQueue.main.async {
                     self.isLoading = false
@@ -182,7 +182,7 @@ extension KartuKuViewModel {
         
         KartuKuService.shared.postBrokenKartKu(data: data) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 
                 DispatchQueue.main.async {
                     self.isLoading = false
@@ -225,7 +225,7 @@ extension KartuKuViewModel {
         
         KartuKuService.shared.postBlockKartKu(data: data) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 
                 DispatchQueue.main.async {
                     self.isLoading = false

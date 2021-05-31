@@ -43,8 +43,6 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
             switch result {
             case .success(let schedule):
                 
-                print("Length Data Schedule : \(schedule?.count)")
-                
                 if let schedule = schedule {
                     self._scheduleModels = schedule
                     
@@ -195,7 +193,7 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
             print(result)
             
             switch result {
-            case .success(let schedule):
+            case .success(_ ):
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
@@ -203,12 +201,12 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 
                 completion(true)
 
-            case .failure(let error):
-                print("ERROR-->")
+            case .failure(_ ):
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.isLoading = false
                 }
+                
                 self.message = "Internal Server Error"
                 completion(false)
             }

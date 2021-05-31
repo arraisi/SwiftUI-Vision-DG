@@ -21,7 +21,7 @@ class ATMService {
         
         print("NIK \(dataRequest.nik)")
         
-        var dataParam: [String : Any] = [
+        let dataParam: [String : Any] = [
             "nik": dataRequest.nik,
             "isNasabahMestika": dataRequest.isNasabahMestika,
             "isVcall": dataRequest.isVcall,
@@ -46,8 +46,7 @@ class ATMService {
         do {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: dataParam, options: .prettyPrinted)
-            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            _ = String(data: jsonData, encoding: String.Encoding.ascii)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)

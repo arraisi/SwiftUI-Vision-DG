@@ -310,7 +310,7 @@ struct VerifikasiPINView: View {
         let clear = try! ClearMessage(string: password, using: .utf8)
         
         let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
-        let data = encrypted.data
+        _ = encrypted.data
         let base64String = encrypted.base64String
         
         print("Encript : \(base64String)")

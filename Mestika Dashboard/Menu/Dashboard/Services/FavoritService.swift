@@ -105,7 +105,7 @@ class FavoritService {
             if let httpResponse = response as? HTTPURLResponse {
                 
                 print("\n\nGET LIST FAVORITE SERVICE RESULST : \(httpResponse.statusCode)")
-                print("JSON String: \(String(data: data!, encoding: .utf8))")
+                print("JSON String: \(String(describing: String(data: data!, encoding: .utf8)))")
                 
                 guard let data = data, error == nil else {
                     return completion(Result.failure(ErrorResult.network(string: "NO DATA")))

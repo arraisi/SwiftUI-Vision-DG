@@ -45,7 +45,7 @@ class CitizenService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    let error = try? JSONDecoder().decode(Status.self, from: data)
+                    _ = try? JSONDecoder().decode(Status.self, from: data)
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }

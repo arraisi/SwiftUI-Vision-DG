@@ -28,13 +28,13 @@ class UserRegistrationService {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
-        var deviceId = UIDevice.current.identifierForVendor?.uuidString
+        let deviceId = UIDevice.current.identifierForVendor?.uuidString
         
         let token = Messaging.messaging().fcmToken
         let indexEnd = token!.index(of: ":")
         let firebaseId = String(token![..<indexEnd!])
         
-        print("DEVICE ID \(deviceId)")
+        print("DEVICE ID \(String(describing: deviceId))")
         print(registerData.tujuanPembukaan)
         print(registerData.hasNoNpwp)
         
@@ -46,7 +46,7 @@ class UserRegistrationService {
             "imageKtp": "/storage/20201211_090631_.jpg",
             "nik": registerData.nik,
             "imageSelfie": "/storage/20201211_090631_.jpg",
-            "noNpwp": registerData.npwp ?? "",
+            "noNpwp": registerData.npwp,
             "emailAddress": registerData.email,
             "purposeOfAccountOpening": registerData.tujuanPembukaan,
             "sourceOfFund": registerData.sumberDana,
@@ -129,21 +129,21 @@ class UserRegistrationService {
             
             // Add the image KTP
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"image_ktp\"; filename=\"\(deviceId)_ktp.jpg\"\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"image_ktp\"; filename=\"\(deviceId ?? "")_ktp.jpg\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageKtp.pngData()!)
             
             if registerData.npwp != "" {
                 // Add the image NPWP
                 data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-                data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId)_npwp.jpg\"\r\n".data(using: .utf8)!)
+                data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId ?? "")_npwp.jpg\"\r\n".data(using: .utf8)!)
                 data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
                 data.append(imageNpwp.pngData()!)
             }
             
             // Add the image SELFIE
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"image_selfie\"; filename=\"\(deviceId)_selfie.jpg\"\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"image_selfie\"; filename=\"\(deviceId ?? "")_selfie.jpg\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
             data.append(imageSelfie.pngData()!)
             

@@ -375,12 +375,6 @@ struct CardLimitView: View {
                         
                         print("GET BALANCE")
                         
-                        print(card.maxIbftPerTrans)
-                        print(card.limitWd)
-                        print(card.limitPayment)
-                        print(card.limitPurchase)
-                        print(card.limitIbft)
-                        
                         self.limitPerTransaksiCtrl = card.maxIbftPerTrans ?? "0"
                         self.limitPenarikanHarianCtrl = card.limitWd ?? "0"
                         self.limitOnUsCtrl = card.limitOnUs ?? "0"

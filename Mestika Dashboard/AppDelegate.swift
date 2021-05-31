@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // [START register_for_notifications]
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+//            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             
@@ -64,9 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let userInfo = response.notification.request.content.userInfo
         let jitsiRoom = userInfo["room"]
-        print(jitsiRoom)
         
-        let dataRoom: [String: Any] = ["room_id": jitsiRoom]
+        let dataRoom: [String: Any] = ["room_id": jitsiRoom!]
         
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
@@ -104,9 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         let jitsiRoom = userInfo["room"]
-        print(jitsiRoom)
+        print(jitsiRoom ?? "")
         
-        let dataRoom: [String: Any] = ["room_id": jitsiRoom]
+        let dataRoom: [String: Any] = ["room_id": jitsiRoom ?? ""]
         
         //        UserDefaults.standard.set(jitsiRoom ?? "-", forKey: "jitsi_room")
         // Print full message.

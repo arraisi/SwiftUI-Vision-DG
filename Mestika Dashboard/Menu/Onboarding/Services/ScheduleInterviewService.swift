@@ -92,7 +92,7 @@ class ScheduleInterviewService {
         let firebaseToken = Messaging.messaging().fcmToken
         
         print(date)
-        print(firebaseToken)
+        print(firebaseToken!)
         print(atmData.nik)
         print(atmData.isNasabahMestika)
         print(endTime)
@@ -136,7 +136,7 @@ class ScheduleInterviewService {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString)
+            print(jsonString!)
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -150,10 +150,6 @@ class ScheduleInterviewService {
             }
             
             let response = try? JSONDecoder().decode(Status.self, from: data)
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                print("\(httpResponse.statusCode)")
-            }
             
             if response == nil {
                 completion(.failure(.decodingError))

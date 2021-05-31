@@ -172,7 +172,7 @@ class ProfileService {
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
-                    print("JSON String: \(String(data: data, encoding: .utf8))")
+                    print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     if let profileResponse = try? JSONDecoder().decode(FreezeAccountResponse.self, from: data) {
                         completion(.success(profileResponse))
                     }

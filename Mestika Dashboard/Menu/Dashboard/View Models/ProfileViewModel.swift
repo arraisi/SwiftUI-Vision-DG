@@ -322,15 +322,10 @@ extension ProfileViewModel {
                 self.kabupatenName = response.personal.kabName ?? ""
                 self.kecamatanName = response.personal.kecName ?? ""
                 self.kelurahanName = response.personal.kelName ?? ""
-                //                self.rt = response.personal.rt
-                //                self.rw = response.personal.rw
-                
-                print("\n\nVM PROFILE \(response.personal.name)\n\n")
-                print("\n\nVM PROFILE \(String(describing: response.chipProfileDto.last!.cardNo))\n\n")
                 self.name = response.personal.name ?? ""
                 self.telepon = response.profileResponseModelID.telepon
                 self.email = response.profileResponseModelID.surel
-                self.nameOnCard = response.products.last!.productName ?? ""
+                self.nameOnCard = response.products.last!.productName
                 self.balance = response.chipProfileDto.last!.balance ?? "0"
                 self.classCode = response.chipProfileDto.last?.classCode ?? ""
                 self.tempatLahir = response.personal.placeOfBirth ?? ""
@@ -346,8 +341,6 @@ extension ProfileViewModel {
                 
                 
                 self.alamatSuratMenyurat = response.chipProfileDto.last?.postalAddress ?? ""
-                //                self.rtSuratMenyurat = response.chipProfileDto.last?.rt ?? ""
-                //                self.rwSuratMenyurat = response.chipProfileDto.last?.rw ?? ""
                 self.kodePosSuratMenyurat = response.chipProfileDto.last?.kodepos ?? ""
                 self.kelurahanSuratMenyurat = response.chipProfileDto.last?.kelurahan ?? ""
                 self.kecamatanSuratMenyurat = response.chipProfileDto.last?.kecamatan ?? ""
@@ -358,7 +351,6 @@ extension ProfileViewModel {
                     self.cardName = _chipProfileDto.nameOnCard ?? ""
                     self.cardNo = _chipProfileDto.cardNo ?? ""
                     self.accountNumber = _chipProfileDto.accountNumber ?? ""
-                    print(_chipProfileDto.accountNumber)
                 }
                 
                 completion(true)

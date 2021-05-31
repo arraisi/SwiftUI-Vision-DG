@@ -42,7 +42,7 @@ extension AuthViewModel {
         
         AuthService.shared.login(password: encryptPassword(password: password), phoneNumber: phoneNumber, fingerCode: fingerCode) { result in
             switch result {
-            case .success(let response):
+            case .success( _):
                 print("Success")
                 self.isLoading = false
                 
@@ -84,7 +84,7 @@ extension AuthViewModel {
         
         AuthService.shared.loginNewDevice(password: encryptPassword(password: password), phoneNumber: phoneNumber) { result in
             switch result {
-            case .success(let response):
+            case .success(_ ):
                 print("Success")
                 self.isLoading = false
                 

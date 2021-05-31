@@ -652,7 +652,7 @@ struct FirstOTPLoginView: View {
         
         print("self.loginData.noTelepon \(self.loginData.noTelepon)")
         
-        var data = self.loginData.noTelepon
+        let data = self.loginData.noTelepon
         
         if (data.substring(to: 1) == "0") {
             print(data.substring(to: 1))

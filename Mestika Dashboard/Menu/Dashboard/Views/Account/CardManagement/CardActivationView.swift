@@ -116,12 +116,6 @@ struct CardActivationView: View {
             }
         })
         .navigationBarTitle("Card Activation".localized(language), displayMode: .inline)
-        .onAppear {
-//            self.noAtmCtrl = card.cardNo
-//            self.activateData.cardNo = card.cardNo
-            
-            print(card.cardNo)
-        }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

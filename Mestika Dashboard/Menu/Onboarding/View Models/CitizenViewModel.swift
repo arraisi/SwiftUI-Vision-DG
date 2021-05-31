@@ -48,7 +48,6 @@ extension CitizenViewModel {
             switch result {
             case .success(let response):
                 print("Success")
-                print(response.nik)
                 
                 self.isLoading = false
                 self.nik = response.nik ?? ""

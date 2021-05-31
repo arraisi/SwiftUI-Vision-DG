@@ -32,7 +32,7 @@ class AddressSummaryViewModel: ObservableObject {
             
             switch result {
             case .success(let addressResult):
-                print("Length Data Address : \(addressResult?.count)")
+                print("Length Data Address : \(String(describing: addressResult?.count))")
                 
                 if let addressResult = addressResult {
                     self.isLoading = false
@@ -71,7 +71,7 @@ class AddressSummaryViewModel: ObservableObject {
             
             switch result {
             case .success(let address):
-                print("Length Data Address : \(address?.count)")
+                print("Length Data Address : \(String(describing: address?.count))")
                 
                 if let address = address {
                     self.isLoading = false

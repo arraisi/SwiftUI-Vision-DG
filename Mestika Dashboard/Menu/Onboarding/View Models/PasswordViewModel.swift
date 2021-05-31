@@ -33,7 +33,7 @@ extension PasswordViewModel {
                     completion(true)
                 }
                 
-            case .failure(let error):
+            case .failure(_):
                 print("ERROR-->")
                 DispatchQueue.main.async {
                     self.isLoading = false

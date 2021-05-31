@@ -47,7 +47,7 @@ struct ListTransactionFavoriteView: View {
                             .fill(Color.secondary)
                             .frame(width: 30, height: 30)
                         
-                        Text(data.name.prefix(1) ?? "A")
+                        Text(data.name.prefix(1) )
                             .foregroundColor(.white)
                             .fontWeight(.heavy)
                     }
