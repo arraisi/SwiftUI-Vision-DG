@@ -119,37 +119,37 @@ struct FormChangeOtherDataView: View {
                 .padding(.vertical)
             
             VStack {
-                LabelTextFieldMenu(value: self.$profileVM.tujuanPembukaan, label: "Opening Purpose".localized(language), data: tujuanPembukaanRekeningData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.tujuanPembukaan, label: "Opening Purpose".localized(language), data: tujuanPembukaanRekeningData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.sumberDana, label: "Source of funds".localized(language), data: sumberDanaData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.sumberDana, label: "Source of funds".localized(language), data: sumberDanaData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.jumlahPenarikanPerbulan, label: "Monthly witdrawal".localized(language), data: perkiraanPenarikanData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.jumlahPenarikanPerbulan, label: "Monthly witdrawal".localized(language), data: perkiraanPenarikanData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "Monthly witdrawal amount".localized(language), data: besarPerkiraanPenarikanData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "Monthly witdrawal amount".localized(language), data: besarPerkiraanPenarikanData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.jumlahSetoranPerbulan, label: "Monthly deposit".localized(language), data: perkiraanSetoranData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.jumlahSetoranPerbulan, label: "Monthly deposit".localized(language), data: perkiraanSetoranData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "Monthly deposit amount".localized(language), data: besarPerkiraanSetoranData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "Monthly deposit amount".localized(language), data: besarPerkiraanSetoranData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
@@ -210,19 +210,19 @@ struct FormChangeOtherDataView: View {
                 .padding(.vertical)
             
             VStack {
-                LabelTextFieldMenu(value: self.$profileVM.pekerjaan, label: "Occupation".localized(language), data: pekerjaanData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.pekerjaan, label: "Occupation".localized(language), data: pekerjaanData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.penghasilanKotor, label: "Gross income".localized(language), data: penghasilanKotorData.map{$0.name}, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.penghasilanKotor, label: "Gross income".localized(language), data: penghasilanKotorData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.PendapatanLainnya, label: "Other income".localized(language), data: otherIncomeData, disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.PendapatanLainnya, label: "Other income".localized(language), data: otherIncomeData, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
@@ -248,43 +248,43 @@ struct FormChangeOtherDataView: View {
                 .padding(.vertical)
             
             VStack {
-                LabelTextField(value: self.$profileVM.namaPerusahaan, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.namaPerusahaan, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.alamatPerusahaan, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.alamatPerusahaan, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kodePosPerusahaan, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kodePosPerusahaan, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kelurahanPerusahaan, label: "Sub-distric".localized(language), placeHolder: "Sub-distric".localized(language), disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kelurahanPerusahaan, label: "Sub-distric".localized(language), placeHolder: "Sub-distric".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kecamatanPerusahaan, label: "Distric".localized(language), placeHolder: "Distric".localized(language), disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kecamatanPerusahaan, label: "Distric".localized(language), placeHolder: "Distric".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kotaPerusahaan, label: "City".localized(language), placeHolder: "City".localized(language), disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kotaPerusahaan, label: "City".localized(language), placeHolder: "City".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.teleponPerusahaan, label: "Phone".localized(language), placeHolder: "Phone".localized(language), disabled: !profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.teleponPerusahaan, label: "Phone".localized(language), placeHolder: "Phone".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")

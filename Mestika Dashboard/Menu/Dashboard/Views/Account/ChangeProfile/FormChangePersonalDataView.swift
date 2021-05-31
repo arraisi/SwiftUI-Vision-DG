@@ -51,7 +51,7 @@ struct FormChangePersonalDataView: View {
                                 .padding()
                             
                             VStack {
-                                LabelTextField(value: self.$profileVM.name, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                                LabelTextField(value: self.$profileVM.name, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                     print("on edit")
                                 }, onCommit: {
                                     print("on commit")
@@ -64,13 +64,13 @@ struct FormChangePersonalDataView: View {
                                 })
                                 .keyboardType(.numberPad)
                                 
-                                LabelTextField(value: self.$profileVM.email, label: "e-Mail".localized(language), placeHolder: "e-Mail".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                                LabelTextField(value: self.$profileVM.email, label: "e-Mail".localized(language), placeHolder: "e-Mail".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                     print("on edit")
                                 }, onCommit: {
                                     print("on commit")
                                 })
                                 
-                                LabelTextField(value: self.$profileVM.tempatLahir, label: "Place of Birth".localized(language), placeHolder: "Place of Birth".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                                LabelTextField(value: self.$profileVM.tempatLahir, label: "Place of Birth".localized(language), placeHolder: "Place of Birth".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                     print("on edit")
                                 }, onCommit: {
                                     print("on commit")
@@ -82,26 +82,26 @@ struct FormChangePersonalDataView: View {
                                 //                    print("on commit")
                                 //                })
                                 
-                                LabelTextFieldMenu(value: self.$profileVM.gender, label: "Gender", data: ["Laki-laki", "Perempuan"], disabled: !profileVM.existingCustomer, onEditingChanged: {_ in}, onCommit: {})
+                                LabelTextFieldMenu(value: self.$profileVM.gender, label: "Gender", data: ["Laki-laki", "Perempuan"], disabled: profileVM.existingCustomer, onEditingChanged: {_ in}, onCommit: {})
                                 
-                                VStack(spacing: 10) {
-                                    if !self.profileVM.existingCustomer {
-                                        Button(action: {
-                                            
-                                            //                                            self.pinActive = true
-                                            self.showModal = true
-                                        }) {
-                                            Text("Save".localized(language))
-                                                .foregroundColor(.white)
-                                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                                .fontWeight(.bold)
-                                                .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                                        }
-                                        .background(Color(hex: "#2334D0"))
-                                        .cornerRadius(12)
+                                
+                                if !self.profileVM.existingCustomer {
+                                    Button(action: {
+                                        
+                                        //                                            self.pinActive = true
+                                        self.showModal = true
+                                    }) {
+                                        Text("Save".localized(language))
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .fontWeight(.bold)
+                                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                                     }
+                                    .background(Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 25)
+                                    .padding(.bottom, 30)
                                 }
-                                .padding(.top, 15)
                             }
                         }
                         .padding(25)

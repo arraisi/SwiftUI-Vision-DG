@@ -40,22 +40,21 @@ struct FormChangeAddressView: View {
                             
                             FormAddressMailing
                             
-                            VStack(spacing: 10) {
-                                if !self.profileVM.existingCustomer {
-                                    Button(action: {
-                                        
-                                        self.pinActive = true
-                                        
-                                    }) {
-                                        Text("Save".localized(language))
-                                            .foregroundColor(.white)
-                                            .font(.custom("Montserrat-SemiBold", size: 14))
-                                            .fontWeight(.bold)
-                                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                                    }
-                                    .background(Color(hex: "#2334D0"))
-                                    .cornerRadius(12)
+                            
+                            if !self.profileVM.existingCustomer {
+                                Button(action: {
+                                    
+                                    self.pinActive = true
+                                    
+                                }) {
+                                    Text("Save".localized(language))
+                                        .foregroundColor(.white)
+                                        .font(.custom("Montserrat-SemiBold", size: 14))
+                                        .fontWeight(.bold)
+                                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
                                 }
+                                .background(Color(hex: "#2334D0"))
+                                .cornerRadius(12)
                             }
                         }
                         .padding(.vertical, 30)
@@ -93,31 +92,31 @@ struct FormChangeAddressView: View {
                 .foregroundColor(Color(hex: "#232175"))
             
             VStack {
-                LabelTextField(value: self.$profileVM.alamat, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.alamat, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kelurahanName, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kelurahanName, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kecamatanName, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kecamatanName, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kabupatenName, label: "City".localized(language), placeHolder: "City".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kabupatenName, label: "City".localized(language), placeHolder: "City".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.provinsiName, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.provinsiName, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
@@ -140,37 +139,37 @@ struct FormChangeAddressView: View {
                 .foregroundColor(Color(hex: "#232175"))
             
             VStack {
-                LabelTextField(value: self.$profileVM.alamatSuratMenyurat, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.alamatSuratMenyurat, label: "Address".localized(language), placeHolder: "Address".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kelurahanSuratMenyurat, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kelurahanSuratMenyurat, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kecamatanSuratMenyurat, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kecamatanSuratMenyurat, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kotaSuratMenyurat, label: "City".localized(language), placeHolder: "City".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kotaSuratMenyurat, label: "City".localized(language), placeHolder: "City".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.provinsiSuratMenyurat, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.provinsiSuratMenyurat, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
