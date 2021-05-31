@@ -35,7 +35,9 @@ struct FormChangePersonalDataView: View {
                     if result {
                         self.pinActive = false
                         self.showModal = true
-                    } else { self.wrongPin = true }
+                    } else {
+                        self.wrongPin = true
+                    }
                 }
             }
             
@@ -89,8 +91,8 @@ struct FormChangePersonalDataView: View {
                                 if !self.profileVM.existingCustomer {
                                     Button(action: {
                                         
-                                        //                                            self.pinActive = true
-                                        self.showModal = true
+                                                                                    self.pinActive = true
+
                                     }) {
                                         Text("Save".localized(language))
                                             .foregroundColor(.white)

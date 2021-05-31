@@ -308,7 +308,6 @@ struct DashboardTabs: View {
                     listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
                     
                     listSortedMyAccount.forEach { a in
-                        print(a.categoryProduct!)
                         self.listSourceNumber.append(a.sourceNumber ?? "")
                     }
 
