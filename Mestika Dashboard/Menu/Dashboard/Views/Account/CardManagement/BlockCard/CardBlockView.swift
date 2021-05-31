@@ -82,7 +82,7 @@ struct CardBlockView: View {
                 Text("Cancel")
             }))
             .onAppear {
-                self.brokenData.cardNo = card.cardNo
+                self.brokenData.cardNo = card.cardNo ?? ""
                 self.brokenData.nameOnCard = card.nameOnCard
                 self.brokenData.cardDesign = "http://eagle.visiondg.xyz:8765/image/b5fb9a649b2c3670120343eb8dd85d03.png"
             }
