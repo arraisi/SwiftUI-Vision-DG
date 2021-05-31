@@ -205,12 +205,13 @@ extension ProfileViewModel {
         }
         
         ProfileService.shared.checkCustomer { result in
-            switch result {
-            case .success(let response):
-                print("Success")
-                DispatchQueue.main.async {
-                    
-                    self.isLoading = false
+            
+            DispatchQueue.main.async {
+                self.isLoading = false
+                
+                switch result {
+                case .success(let response):
+                    print("Success")
                     
                     // ID
                     self.id = response.last?.id ?? ""
@@ -271,32 +272,33 @@ extension ProfileViewModel {
                     self.alamatSuratMenyurat = response.last?.cdd.alamatSuratMenyurat ?? ""
                     self.kelurahanSuratMenyurat = response.last?.cdd.kelurahanSuratMenyurat ?? ""
                     self.kecamatanSuratMenyurat = response.last?.cdd.kecamatanSuratMenyurat ?? ""
-//                    self.kotaSuratMenyurat = response.last?.cdd.sura ?? ""
-//                    self.provinsiSuratMenyurat = response.last?.cdd.provinsi ?? ""
+                    //                    self.kotaSuratMenyurat = response.last?.cdd.sura ?? ""
+                    //                    self.provinsiSuratMenyurat = response.last?.cdd.provinsi ?? ""
                     
                     self.existingCustomer = response.last?.personal.existingCustomer ?? false
                     
                     print("Complete fetch customer phoenix vm  ie. (email) : \(response.last?.customerFromPhoenixResponseID.surel ?? "") published email: \(self.email)")
                     completion(true)
+                    
+                case .failure(let error):
+                    print("ERROR-->")
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                    }
+                    
+                    switch error {
+                    case .custom(code: 404):
+                        self.statusCode = "404"
+                        self.errorMessage = "USER STATUS NOT FOUND"
+                    case .custom(code: 401):
+                        self.statusCode = "401"
+                        self.errorMessage = "LOGEDOUT"
+                    default:
+                        self.errorMessage = "Internal Server Error"
+                    }
+                    completion(false)
                 }
                 
-            case .failure(let error):
-                print("ERROR-->")
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
-                
-                switch error {
-                case .custom(code: 404):
-                    self.statusCode = "404"
-                    self.errorMessage = "USER STATUS NOT FOUND"
-                case .custom(code: 401):
-                    self.statusCode = "401"
-                    self.errorMessage = "LOGEDOUT"
-                default:
-                    self.errorMessage = "Internal Server Error"
-                }
-                completion(false)
             }
         }
     }

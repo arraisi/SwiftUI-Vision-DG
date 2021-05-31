@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormChangeAddressView: View {
     
@@ -22,68 +23,86 @@ struct FormChangeAddressView: View {
     @State var wrongPin: Bool = false
     @State var showModal: Bool = false
     
+    @State var kodePosSuratMenyurat: String = ""
+    
     var body: some View {
         
-        if pinActive {
-            PinConfirmationChangeDataView(wrongPin: $wrongPin) { pin in
-                profileVM.updateCustomerPhoenix(pinTrx: pin) { result in
-                    if result {
-                        self.pinActive = false
-                        self.showModal = true
-                    } else {
-                        self.wrongPin = true
-                    }
-                }
-            }
-        } else {
-            ZStack {
-                VStack {
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 20) {
-                            FormAddress
-                            
-                            
-                            FormAddressMailing
-                            
-                            
-                            if !self.profileVM.existingCustomer {
-                                Button(action: {
-                                    
-                                    self.pinActive = true
-                                    
-                                }) {
-                                    Text("Save".localized(language))
-                                        .foregroundColor(.white)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .fontWeight(.bold)
-                                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                                }
-                                .background(Color(hex: "#2334D0"))
-                                .cornerRadius(12)
-                            }
-                        }
-                        .padding(.vertical, 30)
-                        .padding(.horizontal, 25)
-                    }
+        ZStack {
+            
+            VStack(spacing: 0) {
+                
+                CustomAppBar(light: false)
+                
+                if (self.profileVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
                 }
                 
-                if self.showModal {
-                    ModalOverlay(tapAction: { withAnimation { } })
-                        .edgesIgnoringSafeArea(.all)
+                if pinActive {
+                    PinConfirmationChangeDataView(wrongPin: $wrongPin) { pin in
+                        profileVM.updateCustomerPhoenix(pinTrx: pin) { result in
+                            if result {
+                                self.pinActive = false
+                                self.showModal = true
+                            } else {
+                                self.wrongPin = true
+                            }
+                        }
+                    }
+                } else {
+                    VStack {
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 20) {
+                                FormAddress
+                                
+                                
+                                FormAddressMailing
+                                
+                                
+                                if !self.profileVM.existingCustomer {
+                                    Button(action: {
+                                        
+                                        self.profileVM.kodePosSuratMenyurat = self.kodePosSuratMenyurat
+                                        self.pinActive = true
+                                        
+                                    }) {
+                                        Text("Save".localized(language))
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .fontWeight(.bold)
+                                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                                    }
+                                    .background(Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                }
+                            }
+                            .padding(.vertical, 30)
+                            .padding(.horizontal, 25)
+                        }
+                    }
                 }
             }
-            .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
-                SuccessChangePasswordModal()
+            
+            if self.showModal {
+                ModalOverlay(tapAction: { withAnimation { } })
+                    .edgesIgnoringSafeArea(.all)
             }
-            .navigationBarTitle("Address", displayMode: .inline)
-            .onTapGesture() {
-                UIApplication.shared.endEditing()
-            }
-            .onAppear{
-                self.profileVM.getCustomerFromPhoenix { (isSuccess) in
-                    print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
-                    
-                }
+        }
+        .edgesIgnoringSafeArea(.all)
+        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            SuccessChangePasswordModal()
+        }
+        .navigationBarTitle("Address", displayMode: .inline)
+        .navigationBarHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .onAppear{
+            self.profileVM.getCustomerFromPhoenix { (isSuccess) in
+                print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
+                self.kodePosSuratMenyurat = self.profileVM.kodePosSuratMenyurat
             }
         }
         
@@ -139,7 +158,7 @@ struct FormChangeAddressView: View {
     var FormAddressMailing: some View {
         VStack {
             
-            Text("Address Data".localized(language))
+            Text("Mailing Address Data".localized(language))
                 .font(.custom("Montserrat-Bold", size: 22))
                 .foregroundColor(Color(hex: "#232175"))
             
@@ -150,11 +169,15 @@ struct FormChangeAddressView: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
+                .keyboardType(.numberPad)
+                .onReceive(self.kodePosSuratMenyurat.publisher.collect()) {
+                    self.kodePosSuratMenyurat = String($0.prefix(5))
+                }
                 
                 LabelTextField(value: self.$profileVM.kelurahanSuratMenyurat, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
@@ -227,8 +250,6 @@ struct FormChangeAddressView: View {
 
 struct FormChangeAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
-            FormChangeAddressView()
-        }
+        FormChangeAddressView()
     }
 }

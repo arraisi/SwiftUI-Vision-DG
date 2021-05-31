@@ -12,26 +12,35 @@ struct CustomAppBar: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var light: Bool = true
-    var showBack: Bool = false
-    var barItemsHidden: Bool = false
-    var barItems: AnyView
     
     var body: some View {
-        HStack(spacing: 0) {
+        VStack {
             Spacer()
-                .frame(width: UIScreen.main.bounds.width * 0.2)
-            
-            logo
-                .frame(width: UIScreen.main.bounds.width * 0.6)
-            
-            if !barItemsHidden {
-                barItems
+            HStack(spacing: 0) {
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    HStack{
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                    }
                     .frame(width: UIScreen.main.bounds.width * 0.2)
-            } else {Spacer().frame(width: UIScreen.main.bounds.width * 0.2)}
-            
+                    .foregroundColor(light ? Color("DarkStaleBlue") : Color.white)
+                })
+                
+                logo
+                    .frame(width: UIScreen.main.bounds.width * 0.6)
+                
+                Spacer().frame(width: UIScreen.main.bounds.width * 0.2)
+                
+            }
+            .padding(.vertical)
+            //        .padding(.top, 50)
+            //        .padding(.bottom, 5).
         }
-        .padding(.top, 50)
-        .padding(.bottom, 5)
+        .frame(height: 80)
+        .background(light ?  Color.white : Color("DarkStaleBlue"))
+        
     }
     
     // MARK: - LOGO
@@ -57,6 +66,6 @@ struct CustomAppBar: View {
 
 struct CustomAppBar_Previews: PreviewProvider {
     static var previews: some View {
-        CustomAppBar(barItems: AnyView(EmptyView()))
+        CustomAppBar(light: false)
     }
 }
