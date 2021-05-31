@@ -33,6 +33,7 @@ struct FormChangePersonalDataView: View {
                 profileVM.updateCustomerPhoenix(pinTrx: pin) { result in
                     print("update customer personal data is success : \(result)\n")
                     if result {
+                        self.pinActive = false
                         self.showModal = true
                     } else { self.wrongPin = true }
                 }

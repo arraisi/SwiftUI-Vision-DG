@@ -39,7 +39,13 @@ struct FormChangeOtherDataView: View {
             
             PinConfirmationChangeDataView(wrongPin: $wrongPin) { pin in
                 profileVM.updateCustomerPhoenix(pinTrx: pin) { result in
-                    if result { self.showModal = true } else { self.wrongPin = true }
+                    if result {
+                        self.pinActive = false
+                        self.showModal = true
+                    } else {
+                        self.wrongPin = true
+                        
+                    }
                 }
             }
             

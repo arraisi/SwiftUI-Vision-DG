@@ -18,7 +18,7 @@ extension URLRequest {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("2F5CD0CE-5700-4859-A54D-9E16DBAB70BC", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("FF97546A-2916-464C-AF05-EFC80A5109FE", forHTTPHeaderField: "X-Device-ID")
                 self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
