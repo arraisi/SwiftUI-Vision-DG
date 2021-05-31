@@ -85,7 +85,7 @@ struct DashboardTabs: View {
         
         let tap = TapGesture()
             .onEnded { _ in
-                self.timeLogout = 300
+                getTimeoutParam()
                 print("View tapped!")
             }
         
@@ -250,7 +250,7 @@ struct DashboardTabs: View {
         .navigationBarTitleDisplayMode(.inline)
         .edgesIgnoringSafeArea(.top)
         .onReceive(timer) { time in
-            //            print(self.timeLogout)
+            print(self.timeLogout)
             if self.timeLogout > 0 {
                 self.timeLogout -= 1
             }
@@ -270,6 +270,7 @@ struct DashboardTabs: View {
             self.isHiddenInformationFreezeAccount = true
             self.isLoadingCard = true
             
+            getTimeoutParam()
             getUserInfo()
             getProfile()
             getListKartuKu()
@@ -559,6 +560,16 @@ struct DashboardTabs: View {
             
             if !success {
                 self.isLoading = false
+            }
+        }
+    }
+    
+    func getTimeoutParam() {
+        print("GET PARAM")
+        self.authVM.passwordParam() { success in
+            if success {
+                print(self.authVM.maxIdleTime)
+                self.timeLogout = self.authVM.maxIdleTime
             }
         }
     }

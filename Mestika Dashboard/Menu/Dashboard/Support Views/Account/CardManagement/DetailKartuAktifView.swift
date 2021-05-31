@@ -166,7 +166,7 @@ struct DetailKartuAktifView: View {
             )
             
             NavigationLink(
-                destination: FormChangePinCardView(cardNo: .constant(card.cardNo)),
+                destination: FormChangePinCardView(cardNo: .constant(card.cardNo ?? "")),
                 isActive: self.$isRouteChangePin,
                 label: {EmptyView()}
             )
