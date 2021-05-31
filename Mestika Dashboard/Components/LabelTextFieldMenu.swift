@@ -12,6 +12,7 @@ struct LabelTextFieldMenu: View {
     @Binding var value: String
     var label: String
     var data: [String]
+    let disabled: Bool
     let onEditingChanged: (Bool)->Void
     let onCommit: ()->Void
     
@@ -45,6 +46,7 @@ struct LabelTextFieldMenu: View {
                 } label: {
                     Image(systemName: "chevron.right").padding()
                 }
+                .disabled(disabled)
             }
             .frame(height: 40)
             .background(Color.gray.opacity(0.1))
@@ -83,6 +85,6 @@ struct LabelTextFieldMenu: View {
 
 struct LabelTextFieldMenu_Previews: PreviewProvider {
     static var previews: some View {
-        LabelTextFieldMenu(value: .constant("Male"), label: "Gender", data: ["Male", "Female"], onEditingChanged: {_ in}, onCommit: {})
+        LabelTextFieldMenu(value: .constant("Male"), label: "Gender", data: ["Male", "Female"], disabled: false, onEditingChanged: {_ in}, onCommit: {})
     }
 }

@@ -1501,18 +1501,18 @@
 		526B657A254FB20800C13C36 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */,
+				C09387AF26609D89005DBF11 /* ChangeProfile */,
 				52DA208A25510C4200CC048A /* ChangePasswordPinMenu */,
 				C0D7B5D92552AF25009C3976 /* CardManagement */,
+				C03CA7552647ED4E005F2B6E /* Transaction Limit */,
+				C0C68E6D2558E19A0010E1EE /* PINConfirmationView.swift */,
 				526B6601254FF9FC00C13C36 /* StatementScreen.swift */,
 				526B660B254FFA7900C13C36 /* TransactionFeesScreen.swift */,
 				526B6610254FFA9B00C13C36 /* LanguageSettingScreen.swift */,
 				C043CFC125CD43B700328C91 /* FormChangeContactView.swift */,
 				526B6615254FFABD00C13C36 /* ChangePasswordOrPinSettingScreen.swift */,
 				C0AEAC2625D516B600B6A20C /* EncryptPasswordView.swift */,
-				C09387AF26609D89005DBF11 /* ChangeProfile */,
 				52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */,
-				C03CA7552647ED4E005F2B6E /* Transaction Limit */,
 			);
 			path = Account;
 			sourceTree = "<group>";

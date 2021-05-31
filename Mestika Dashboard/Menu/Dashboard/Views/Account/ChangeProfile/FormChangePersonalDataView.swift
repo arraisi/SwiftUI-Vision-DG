@@ -14,7 +14,7 @@ struct FormChangePersonalDataView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-//    @State var nextRoute: Bool = false
+    //    @State var nextRoute: Bool = false
     
     @StateObject var profileVM = ProfileViewModel()
     
@@ -22,6 +22,7 @@ struct FormChangePersonalDataView: View {
     
     @State var pinActive: Bool = false
     @State var wrongPin: Bool = false
+    @State var showModal: Bool = false
     
     var body: some View {
         
@@ -31,11 +32,14 @@ struct FormChangePersonalDataView: View {
                 print("\nupdate customer personal data")
                 profileVM.updateCustomerPhoenix(pinTrx: pin) { result in
                     print("update customer personal data is success : \(result)\n")
-                    if result { self.appState.moveToAccountTab = true } else { self.wrongPin = true }
+                    if result {
+                        self.showModal = true
+                    } else { self.wrongPin = true }
                 }
             }
             
         } else {
+            ZStack {
                 VStack {
                     
                     ScrollView(showsIndicators: false) {
@@ -47,25 +51,26 @@ struct FormChangePersonalDataView: View {
                                 .padding()
                             
                             VStack {
-                                LabelTextField(value: self.$profileVM.name, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                                LabelTextField(value: self.$profileVM.name, label: "Name".localized(language), placeHolder: "Name".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                     print("on edit")
                                 }, onCommit: {
                                     print("on commit")
                                 })
                                 
-                                LabelTextField(value: self.$profileVM.telepon, label: "Telephone".localized(language), placeHolder: "Telephone".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                                LabelTextField(value: self.$profileVM.telepon, label: "Telephone".localized(language), placeHolder: "Telephone".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                                    print("on edit")
+                                }, onCommit: {
+                                    print("on commit")
+                                })
+                                .keyboardType(.numberPad)
+                                
+                                LabelTextField(value: self.$profileVM.email, label: "e-Mail".localized(language), placeHolder: "e-Mail".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                     print("on edit")
                                 }, onCommit: {
                                     print("on commit")
                                 })
                                 
-                                LabelTextField(value: self.$profileVM.email, label: "e-Mail".localized(language), placeHolder: "e-Mail".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                                    print("on edit")
-                                }, onCommit: {
-                                    print("on commit")
-                                })
-                                
-                                LabelTextField(value: self.$profileVM.tempatLahir, label: "Place of Birth".localized(language), placeHolder: "Place of Birth".localized(language), disabled: false, onEditingChanged: { (Bool) in
+                                LabelTextField(value: self.$profileVM.tempatLahir, label: "Place of Birth".localized(language), placeHolder: "Place of Birth".localized(language), disabled: !self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                     print("on edit")
                                 }, onCommit: {
                                     print("on commit")
@@ -77,14 +82,14 @@ struct FormChangePersonalDataView: View {
                                 //                    print("on commit")
                                 //                })
                                 
-                                LabelTextFieldMenu(value: self.$profileVM.gender, label: "Gender", data: ["Laki-laki", "Perempuan"], onEditingChanged: {_ in}, onCommit: {})
+                                LabelTextFieldMenu(value: self.$profileVM.gender, label: "Gender", data: ["Laki-laki", "Perempuan"], disabled: !profileVM.existingCustomer, onEditingChanged: {_ in}, onCommit: {})
                                 
                                 VStack(spacing: 10) {
                                     if !self.profileVM.existingCustomer {
                                         Button(action: {
                                             
-                                            self.pinActive = true
-                                            
+                                            //                                            self.pinActive = true
+                                            self.showModal = true
                                         }) {
                                             Text("Save".localized(language))
                                                 .foregroundColor(.white)
@@ -107,18 +112,64 @@ struct FormChangePersonalDataView: View {
                         .padding(.top, 30)
                     }
                 }
-                .navigationBarTitle("Account", displayMode: .inline)
-                .onTapGesture() {
-                    UIApplication.shared.endEditing()
+                
+                if self.showModal {
+                    ModalOverlay(tapAction: { withAnimation { } })
+                        .edgesIgnoringSafeArea(.all)
                 }
-                .onAppear{
-                    self.profileVM.getCustomerFromPhoenix { (isSuccess) in
-                        print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
-                        
-                    }
-                }
-
+                
             }
+            .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+                SuccessChangePasswordModal()
+            }
+            .navigationBarTitle("Account", displayMode: .inline)
+            .onTapGesture() {
+                UIApplication.shared.endEditing()
+            }
+            .onAppear{
+                self.profileVM.getCustomerFromPhoenix { (isSuccess) in
+                    print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
+                    
+                }
+            }
+            
+        }
+    }
+    
+    // MARK: POPUP SUCCSESS CHANGE PASSWORD
+    func SuccessChangePasswordModal() -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Image("ic_check")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+            
+            Text("The Latest Data Has Been Successfully Saved".localized(language))
+                .font(.custom("Montserrat-ExtraBold", size: 18))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.vertical)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Button(action: {
+                
+                self.appState.moveToAccountTab = true
+                self.showModal = false
+                //                self.routeDashboard = true
+            }) {
+                Text("OK")
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+        }
+        .padding(30)
+        .background(Color.white)
+        .cornerRadius(20)
+        .padding(.bottom, 15)
+        .padding(15)
     }
 }
 
