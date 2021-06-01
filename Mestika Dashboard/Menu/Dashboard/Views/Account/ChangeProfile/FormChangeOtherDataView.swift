@@ -288,6 +288,7 @@ struct FormChangeOtherDataView: View {
                 }, onCommit: {
                     print("on commit")
                 })
+                .keyboardType(.numberPad)
                 .onReceive(self.kodePosPerusahaan.publisher.collect()) {
                     self.kodePosPerusahaan = String($0.prefix(5))
                 }
