@@ -51,11 +51,11 @@ struct ContentView: View {
                 
                 WelcomeView()
                 
-                //                NavigationView{
-                //                    VerificationAddressView()
-                //                        .environmentObject(RegistrasiModel())
-                //                        .environmentObject(AddProductATM())
-                //                }
+//                                NavigationView{
+//                                    KeluargaTerdekat()
+//                                        .environmentObject(RegistrasiModel())
+//                                        .environmentObject(AddProductATM())
+//                                }
             }
             .edgesIgnoringSafeArea(.top)
         }

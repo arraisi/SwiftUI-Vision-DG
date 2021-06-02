@@ -42,6 +42,11 @@ struct KeluargaTerdekat: View {
     @State var addressSugestion = [AddressViewModel]()
     @State var addressSugestionResult = [AddressResultViewModel]()
     
+    @State var allProvince = MasterProvinceResponse()
+    @State var allRegency = MasterRegencyResponse()
+    @State var allDistrict = MasterDistrictResponse()
+    @State var allVillage = MasterVilageResponse()
+    
     
     var body: some View {
         
@@ -207,7 +212,6 @@ struct KeluargaTerdekat: View {
             createBottomFloater()
         }
         .onAppear() {
-            self.getAllProvince()
             self.kodePos = self.registerData.kodePosKeluarga
             self.noTelepon = self.registerData.noTlpKeluarga
         }
@@ -354,12 +358,12 @@ struct KeluargaTerdekat: View {
                         .disabled(true)
                     
                     Menu {
-                        ForEach(0..<self.addressVM.provinceResult.count, id: \.self) { i in
+                        ForEach(0..<self.allProvince.count, id: \.self) { i in
                             Button(action: {
-                                registerData.provinsiKeluarga = self.addressVM.provinceResult[i].name
-                                self.getRegencyByIdProvince(idProvince: self.addressVM.provinceResult[i].id)
+                                registerData.provinsiKeluarga = self.allProvince[i].name
+                                self.getRegencyByIdProvince(idProvince: self.allProvince[i].id)
                             }) {
-                                Text(self.addressVM.provinceResult[i].name)
+                                Text(self.allProvince[i].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -392,12 +396,12 @@ struct KeluargaTerdekat: View {
                         .disabled(true)
                     
                     Menu {
-                        ForEach(0..<self.addressVM.regencyResult.count, id: \.self) { i in
+                        ForEach(0..<self.allRegency.count, id: \.self) { i in
                             Button(action: {
-                                registerData.kotaKeluarga = self.addressVM.regencyResult[i].name
-                                self.getDistrictByIdRegency(idRegency: self.addressVM.regencyResult[i].id)
+                                registerData.kotaKeluarga = self.allRegency[i].name
+                                self.getDistrictByIdRegency(idRegency: self.allRegency[i].id)
                             }) {
-                                Text(self.addressVM.regencyResult[i].name)
+                                Text(self.allRegency[i].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -430,12 +434,12 @@ struct KeluargaTerdekat: View {
                         .disabled(true)
                     
                     Menu {
-                        ForEach(0..<self.addressVM.districtResult.count, id: \.self) { i in
+                        ForEach(0..<self.allDistrict.count, id: \.self) { i in
                             Button(action: {
-                                registerData.kelurahanKeluarga = self.addressVM.districtResult[i].name
-                                self.getVilageByIdDistrict(idDistrict: self.addressVM.districtResult[i].id)
+                                registerData.kelurahanKeluarga = self.allDistrict[i].name
+                                self.getVilageByIdDistrict(idDistrict: self.allDistrict[i].id)
                             }) {
-                                Text(self.addressVM.districtResult[i].name)
+                                Text(self.allDistrict[i].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -468,13 +472,13 @@ struct KeluargaTerdekat: View {
                         .disabled(true)
                     
                     Menu {
-                        ForEach(0..<self.addressVM.vilageResult.count, id: \.self) { i in
+                        ForEach(0..<self.allVillage.count, id: \.self) { i in
                             Button(action: {
-                                registerData.kecamatanKeluarga = self.addressVM.vilageResult[i].name
-                                registerData.kodePosKeluarga = self.addressVM.vilageResult[i].postalCode ?? ""
-                                self.kodePos = self.addressVM.vilageResult[i].postalCode ?? ""
+                                registerData.kecamatanKeluarga = self.allVillage[i].name
+                                registerData.kodePosKeluarga = self.allVillage[i].postalCode ?? ""
+                                self.kodePos = self.allVillage[i].postalCode ?? ""
                             }) {
-                                Text(self.addressVM.vilageResult[i].name)
+                                Text(self.allVillage[i].name)
                                     .font(.custom("Montserrat-Regular", size: 12))
                             }
                         }
@@ -652,11 +656,14 @@ struct KeluargaTerdekat: View {
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
                     registerData.alamatKeluarga = self.addressSugestion[0].formatted_address
-//                    registerData.kodePosKeluarga = self.addressSugestion[0].postalCode
-//                    self.kodePos = self.addressSugestion[0].postalCode
-//                    registerData.kecamatanKeluarga = self.addressSugestion[0].kecamatan
-//                    registerData.kelurahanKeluarga = self.addressSugestion[0].kelurahan
+                    registerData.provinsiKeluarga = self.addressSugestion[0].province
+                    registerData.kotaKeluarga = self.addressSugestion[0].city
+                    registerData.kodePosKeluarga = self.addressSugestion[0].postalCode
+                    self.kodePos = self.addressSugestion[0].postalCode
+                    registerData.kecamatanKeluarga = self.addressSugestion[0].kelurahan
+                    registerData.kelurahanKeluarga = self.addressSugestion[0].kecamatan
                 }
+                self.getAllProvince()
                 self.showingModal = false
                 print("Success")
             }
@@ -674,7 +681,7 @@ struct KeluargaTerdekat: View {
         self.addressVM.getAllProvince { success in
             
             if success {
-                
+                self.allProvince = self.addressVM.provinceResult
             }
             
             if !success {
@@ -687,7 +694,7 @@ struct KeluargaTerdekat: View {
         self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
             
             if success {
-                
+                self.allRegency = self.addressVM.regencyResult
             }
             
             if !success {
@@ -700,7 +707,7 @@ struct KeluargaTerdekat: View {
         self.addressVM.getDistrictByIdRegency(idRegency: idRegency) { success in
             
             if success {
-                
+                self.allDistrict = self.addressVM.districtResult
             }
             
             if !success {
@@ -713,7 +720,7 @@ struct KeluargaTerdekat: View {
         self.addressVM.getVilageByIdDistrict(idDistrict: idDistrict) { success in
             
             if success {
-                
+                self.allVillage = self.addressVM.vilageResult
             }
             
             if !success {

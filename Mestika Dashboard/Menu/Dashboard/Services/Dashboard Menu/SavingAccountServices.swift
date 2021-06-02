@@ -52,9 +52,7 @@ class SavingAccountServices {
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
-                    print(data)
                     let products = try? JSONDecoder().decode(AccountBalanceListResponse.self, from: data)
-                    print("Balance \(String(describing: products?.count))\n\n")
                     if let _response = products {
                         completion(.success(_response))
                     }
