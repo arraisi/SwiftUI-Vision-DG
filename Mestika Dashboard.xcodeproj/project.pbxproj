@@ -75,6 +75,10 @@
 		522B8C3C25E4E993003D17F1 /* CardBrokenPinVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522B8C3B25E4E993003D17F1 /* CardBrokenPinVerificationView.swift */; };
 		522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E4CCB25EF6E2B009B267F /* CardBrokenModel.swift */; };
 		522E4CD125EF7585009B267F /* CardDamageDescriptionInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E4CD025EF7585009B267F /* CardDamageDescriptionInputView.swift */; };
+		522E846D2667314400291FFA /* MasterProvinceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E846C2667314400291FFA /* MasterProvinceResponse.swift */; };
+		522E846F2667319900291FFA /* MasterRegencyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E846E2667319900291FFA /* MasterRegencyResponse.swift */; };
+		522E8471266731EF00291FFA /* MasterDistrictResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E8470266731EF00291FFA /* MasterDistrictResponse.swift */; };
+		522E84732667324700291FFA /* MasterVilageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E84722667324700291FFA /* MasterVilageResponse.swift */; };
 		5233700C26298FFB00ED3E4F /* DepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233700B26298FFB00ED3E4F /* DepositAccountView.swift */; };
 		52337014262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52337013262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift */; };
 		523370192629964F00ED3E4F /* DetailTransactionDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */; };
@@ -578,6 +582,10 @@
 		522B8C3B25E4E993003D17F1 /* CardBrokenPinVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrokenPinVerificationView.swift; sourceTree = "<group>"; };
 		522E4CCB25EF6E2B009B267F /* CardBrokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBrokenModel.swift; sourceTree = "<group>"; };
 		522E4CD025EF7585009B267F /* CardDamageDescriptionInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageDescriptionInputView.swift; sourceTree = "<group>"; };
+		522E846C2667314400291FFA /* MasterProvinceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterProvinceResponse.swift; sourceTree = "<group>"; };
+		522E846E2667319900291FFA /* MasterRegencyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterRegencyResponse.swift; sourceTree = "<group>"; };
+		522E8470266731EF00291FFA /* MasterDistrictResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterDistrictResponse.swift; sourceTree = "<group>"; };
+		522E84722667324700291FFA /* MasterVilageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterVilageResponse.swift; sourceTree = "<group>"; };
 		5233700B26298FFB00ED3E4F /* DepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositAccountView.swift; sourceTree = "<group>"; };
 		52337013262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOfDepositAccountView.swift; sourceTree = "<group>"; };
 		523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionDepositAccountView.swift; sourceTree = "<group>"; };
@@ -1172,6 +1180,17 @@
 				52210C5B262D404E004A6483 /* PayQrisResponseModel.swift */,
 			);
 			path = Qris;
+			sourceTree = "<group>";
+		};
+		522E846B2667312400291FFA /* Master Alamat */ = {
+			isa = PBXGroup;
+			children = (
+				522E846C2667314400291FFA /* MasterProvinceResponse.swift */,
+				522E846E2667319900291FFA /* MasterRegencyResponse.swift */,
+				522E8470266731EF00291FFA /* MasterDistrictResponse.swift */,
+				522E84722667324700291FFA /* MasterVilageResponse.swift */,
+			);
+			path = "Master Alamat";
 			sourceTree = "<group>";
 		};
 		5233700A26298FE100ED3E4F /* DepositAccount */ = {
@@ -2003,6 +2022,7 @@
 		C01C67A0255E36F20019D06F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				522E846B2667312400291FFA /* Master Alamat */,
 				C0BFB51C2576373700676B95 /* Register */,
 				52ADFE7E2557D99F00A1001F /* CardModel.swift */,
 				52ADFE802557D99F00A1001F /* DetailJenisATMModel.swift */,
@@ -2769,6 +2789,7 @@
 				C0D274E125EF3C1500513C53 /* ConfirmationPinOfSavingAccountView.swift in Sources */,
 				0620291E256D914500A830EA /* GeneralResponse.swift in Sources */,
 				C043CFCF25CD4E5300328C91 /* FormChangeAddressView.swift in Sources */,
+				522E84732667324700291FFA /* MasterVilageResponse.swift in Sources */,
 				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
 				52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
@@ -2803,6 +2824,7 @@
 				C00702BF255525990089DBD1 /* TextFieldWithToolBarKeyBoard.swift in Sources */,
 				52ADFF882557DFDC00A1001F /* FormEmailOTPVerificationRegisterNasabahView.swift in Sources */,
 				C0436261264A8BD90024418E /* Double+Extensions.swift in Sources */,
+				522E846F2667319900291FFA /* MasterRegencyResponse.swift in Sources */,
 				52ADFF952557DFDC00A1001F /* TujuanPembukaanRekeningView.swift in Sources */,
 				52CB5DF725CBEBDE0012DDAB /* ProfileViewModel.swift in Sources */,
 				C01B84BA25FF2DF000F5BBD9 /* SavingAccountViewModel.swift in Sources */,
@@ -2824,6 +2846,7 @@
 				52ADFF172557DCE400A1001F /* LoadingIndicator.swift in Sources */,
 				C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */,
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
+				522E846D2667314400291FFA /* MasterProvinceResponse.swift in Sources */,
 				C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */,
 				52C348A22542ACF400F08F37 /* BankAccount.swift in Sources */,
 				52ADFF542557DEEA00A1001F /* TextFieldWithPickerAsInput.swift in Sources */,
@@ -3079,6 +3102,7 @@
 				52ADFEBC2557DA0700A1001F /* RecognizedText.swift in Sources */,
 				52FE9AE12637FC5E0089EBAF /* FormAddBalanceView.swift in Sources */,
 				524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */,
+				522E8471266731EF00291FFA /* MasterDistrictResponse.swift in Sources */,
 				524746102547CA51001F43C5 /* FavoriteTransferScreen.swift in Sources */,
 				525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */,
 				C02E9BAD256E814C00622E7A /* WelcomeView.swift in Sources */,

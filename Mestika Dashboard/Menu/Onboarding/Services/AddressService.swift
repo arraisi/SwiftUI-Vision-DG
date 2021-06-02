@@ -88,4 +88,136 @@ class AddressService {
             }
         }.resume()
     }
+    
+    /* GET MASTER PROVINCE */
+    func getAllProvince(completion: @escaping(Result<MasterProvinceResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlGetAllProvince() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("response: \(String(describing: response))")
+            
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let provinceResponse = try? JSONDecoder().decode(MasterProvinceResponse.self, from: data!)
+                    completion(Result.success(provinceResponse!))
+                } else {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+        }.resume()
+    }
+    
+    /* GET MASTER REGENCY BY ID PROVINCE */
+    func getAllRegencyByIdProvince(idProvince: String, completion: @escaping(Result<MasterRegencyResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlGetRegencyByIdProvince(idProvince: idProvince) else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("response: \(String(describing: response))")
+            
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let regencyResponse = try? JSONDecoder().decode(MasterRegencyResponse.self, from: data!)
+                    completion(Result.success(regencyResponse!))
+                } else {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+        }.resume()
+    }
+    
+    /* GET MASTER DISTRICT BY ID REGENCY */
+    func getAllDistrictByIdRegency(idRegency: String, completion: @escaping(Result<MasterDistrictResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlGetDistrictByIdRegency(idRegency: idRegency) else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("response: \(String(describing: response))")
+            
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let districtResponse = try? JSONDecoder().decode(MasterDistrictResponse.self, from: data!)
+                    completion(Result.success(districtResponse!))
+                } else {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+        }.resume()
+    }
+    
+    /* GET MASTER VILAGE BY ID REGENCY */
+    func getAllVilageByIdDistrict(idDistrict: String, completion: @escaping(Result<MasterVilageResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlGetVilageByIdDistrict(idDistrict: idDistrict) else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        var request = URLRequest(url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("response: \(String(describing: response))")
+            
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let vilageResponse = try? JSONDecoder().decode(MasterVilageResponse.self, from: data!)
+                    completion(Result.success(vilageResponse!))
+                } else {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+            }
+        }.resume()
+    }
 }

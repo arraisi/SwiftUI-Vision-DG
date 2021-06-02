@@ -362,5 +362,21 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/userLimit")
     }
     
-    //-------------------- FREEZE ACCOUNT SERVICE ----------------------//
+    //-------------------- MASTER ALAMAT SERVICE ----------------------//
+    
+    static func urlGetAllProvince() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/master/province")
+    }
+    
+    static func urlGetRegencyByIdProvince(idProvince: String) -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/master/regency/\(idProvince)/province")
+    }
+    
+    static func urlGetDistrictByIdRegency(idRegency: String) -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/master/district/\(idRegency)/regency")
+    }
+    
+    static func urlGetVilageByIdDistrict(idDistrict: String) -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/master/village/\(idDistrict)/district")
+    }
 }
