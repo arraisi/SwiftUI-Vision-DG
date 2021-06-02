@@ -126,13 +126,8 @@ struct DestinationAccountAddBalanceView: View {
                             })
                         }
                     } else {
-                        ZStack {
-                            ShimmerView()
-                                .frame(width: UIScreen.main.bounds.width - 50, height: 170)
-                                .cornerRadius(15)
-                            Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
-                                .multilineTextAlignment(.center)
-                        }
+                        Text("Anda Tidak Memiliki Sub Account.\nSilahkan Tambahkan Terlebih Dahulu.")
+                            .multilineTextAlignment(.center)
                     }
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
