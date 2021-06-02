@@ -24,6 +24,8 @@ struct FormChangeOtherDataView: View {
     @State var showModal: Bool = false
     @State private var isLoading: Bool = false
     
+    @State var kodePosPerusahaan: String = ""
+    
     let tujuanPembukaanRekeningData: [MasterModel] = load("tujuanPembukaanRekening.json")
     let sumberDanaData: [MasterModel] = load("sumberDana.json")
     let perkiraanPenarikanData: [MasterModel] = load("perkiraanSetoran.json")
@@ -35,81 +37,96 @@ struct FormChangeOtherDataView: View {
     let otherIncomeData = ["Online Shop", "Cathering", "Laundry pakaian", "Sosial media buzzer", "Jual aneka kue", "Lainnya"]
     
     var body: some View {
-        if pinActive {
-            
-            PinConfirmationChangeDataView(wrongPin: $wrongPin) { pin in
-                profileVM.updateCustomerPhoenix(pinTrx: pin) { result in
-                    if result {
-                        self.pinActive = false
-                        self.showModal = true
-                    } else {
-                        self.wrongPin = true
-                        
-                    }
+        ZStack {
+            VStack(spacing: 0) {
+                
+                CustomAppBar(light: false)
+                
+                if (self.profileVM.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
                 }
-            }
-            
-        } else {
-            ZStack {
-                VStack {
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 25) {
-                            FormPembuatanRekening
-                            
-                            
-                            if (self.profileVM.namaPerusahaan == "") {
-                                EmptyView()
-                            } else {
-                                FormPekerjaan
-                                
-                                FormPerusahaan
-                            }
-                            
-                            //                    if (self.namaPenyandangDana == "") {
-                            //                        EmptyView()
-                            //                    } else {
-                            //                        FormPenyandangDana
-                            //                    }
-                            
-                            if !profileVM.existingCustomer {
-                                Button(action: {
-                                    self.pinActive = true
-                                }) {
-                                    Text("Save".localized(language))
-                                        .foregroundColor(.white)
-                                        .font(.custom("Montserrat-SemiBold", size: 14))
-                                        .fontWeight(.bold)
-                                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
-                                }
-                                .background(Color(hex: "#2334D0"))
-                                .cornerRadius(12)
-                                .padding(.horizontal, 25)
-                                .padding(.bottom, 30)
-                            }
-                            
-                        }
-                        .padding(.top, 20)
-                    }
-                }
-                if self.showModal {
-                    ModalOverlay(tapAction: { withAnimation { } })
-                        .edgesIgnoringSafeArea(.all)
-                }
-            }
-            .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
-                SuccessChangePasswordModal()
-            }
-            .navigationBarTitle("Other Data", displayMode: .inline)
-            .onTapGesture() {
-                UIApplication.shared.endEditing()
-            }
-            .onAppear{
-                self.profileVM.getCustomerFromPhoenix { (isSuccess) in
-                    print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
+                
+                if pinActive {
                     
+                    PinConfirmationChangeDataView(wrongPin: $wrongPin) { pin in
+                        profileVM.updateCustomerPhoenix(pinTrx: pin) { result in
+                            if result {
+                                self.pinActive = false
+                                self.showModal = true
+                            } else {
+                                self.wrongPin = true
+                                
+                            }
+                        }
+                    }
+                    
+                } else {
+                    VStack {
+                        ScrollView(showsIndicators: false) {
+                            VStack(spacing: 25) {
+                                FormPembuatanRekening
+                                
+                                
+                                if (self.profileVM.namaPerusahaan == "") {
+                                    EmptyView()
+                                } else {
+                                    FormPekerjaan
+                                    
+                                    FormPerusahaan
+                                }
+                                
+                                //                    if (self.namaPenyandangDana == "") {
+                                //                        EmptyView()
+                                //                    } else {
+                                //                        FormPenyandangDana
+                                //                    }
+                                
+                                if !profileVM.existingCustomer {
+                                    Button(action: {
+                                        self.profileVM.kodePosPerusahaan = self.kodePosPerusahaan
+                                        self.pinActive = true
+                                    }) {
+                                        Text("Save".localized(language))
+                                            .foregroundColor(.white)
+                                            .font(.custom("Montserrat-SemiBold", size: 14))
+                                            .fontWeight(.bold)
+                                            .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
+                                    }
+                                    .background(Color(hex: "#2334D0"))
+                                    .cornerRadius(12)
+                                    .padding(.horizontal, 25)
+                                    .padding(.bottom, 30)
+                                }
+                                
+                            }
+                            .padding(.top, 20)
+                        }
+                    }
                 }
             }
             
+            if self.showModal {
+                ModalOverlay(tapAction: { withAnimation { } })
+                    .edgesIgnoringSafeArea(.all)
+            }
+        }
+        .edgesIgnoringSafeArea(.all)
+        .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            SuccessChangePasswordModal()
+        }
+        .navigationBarTitle("Other Data", displayMode: .inline)
+        .navigationBarHidden(true)
+        .onTapGesture() {
+            UIApplication.shared.endEditing()
+        }
+        .onAppear{
+            self.profileVM.getCustomerFromPhoenix { (isSuccess) in
+                print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
+                self.kodePosPerusahaan = self.profileVM.kodePosPerusahaan
+            }
         }
     }
     
@@ -266,11 +283,15 @@ struct FormChangeOtherDataView: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kodePosPerusahaan, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$kodePosPerusahaan, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
                 })
+                .keyboardType(.numberPad)
+                .onReceive(self.kodePosPerusahaan.publisher.collect()) {
+                    self.kodePosPerusahaan = String($0.prefix(5))
+                }
                 
                 LabelTextField(value: self.$profileVM.kelurahanPerusahaan, label: "Sub-distric".localized(language), placeHolder: "Sub-distric".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
