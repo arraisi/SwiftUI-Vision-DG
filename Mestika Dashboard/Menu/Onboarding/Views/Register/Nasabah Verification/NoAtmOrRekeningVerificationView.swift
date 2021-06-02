@@ -141,21 +141,39 @@ struct NoAtmOrRekeningVerificationView: View {
                         .padding(.bottom, 30)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    NavigationLink(
-                        destination: PhoneOTPRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData),
-                        isActive: self.$isActive,
-                        label: {
+                    Group {
+                        Button(action: {
+                            if (jenisKartuCtrl == "Kartu ATM") {
+                                self.registerData.atmOrRekening = "ATM"
+                                self.registerData.noAtm = self.noKartuCtrl
+                                
+                                self.registerData.accType = "ATM"
+                                self.registerData.accNo = self.noKartuCtrl
+                            } else {
+                                self.registerData.atmOrRekening = "REKENING"
+                                self.registerData.noRekening = self.noKartuCtrl
+                                
+                                self.registerData.accType = "REKENING"
+                                self.registerData.accNo = self.noKartuCtrl
+                            }
+                            self.isActive = true
+                        }, label: {
                             Text("Verification Card No.".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, maxHeight: 50)
                         })
-                        .isDetailLink(false)
                         .background(Color(hex: disableForm ? "#CBD1D9" : "#2334D0"))
                         .cornerRadius(12)
                         .padding(.bottom, 30)
                         .disabled(disableForm)
-                    
+                        
+                        NavigationLink(
+                            destination: PhoneOTPRegisterNasabahView(rootIsActive: self.$rootIsActive, root2IsActive: self.$isActive).environmentObject(registerData),
+                            isActive: self.$isActive,
+                            label: {EmptyView()})
+                            .isDetailLink(false)
+                    }
                 }
                 .padding(.horizontal,30)
                 .frame(width: UIScreen.main.bounds.width - 40)

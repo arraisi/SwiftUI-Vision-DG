@@ -225,10 +225,14 @@ extension OtpViewModel {
                 }
                 
             case .failure(let error):
-                print("ERROR-->")
+                print("\nERROR GET ACC --> \(error)")
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    self.statusMessage = "Server Error"
+                    if error == .notFound {
+                        self.statusMessage = "Account Not Found - Core Banking"
+                    } else {
+                        self.statusMessage = "Server Error"
+                    }
                 }
                 
                 completion(false)

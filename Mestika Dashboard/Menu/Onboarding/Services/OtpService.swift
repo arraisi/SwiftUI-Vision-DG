@@ -193,11 +193,17 @@ class OtpService {
             return completion(.failure(.badUrl))
         }
         
+        print("\ntry time get acc : \(otpRequest.trytime.numberString)")
+        print("accValue acc : \(otpRequest.destination)")
+        print("accType get acc : \(otpRequest.type)")
+        
         let finalUrl = url
             .appendingPathComponent("/getacc")
             .appending("trytime", value: otpRequest.trytime.numberString)
             .appending("accValue", value: otpRequest.destination)
             .appending("accType", value: otpRequest.type)
+        
+        print("URL GET ACC : \(finalUrl)")
         
         var request = URLRequest(finalUrl)
         request.httpMethod = "GET"
@@ -209,7 +215,11 @@ class OtpService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("\(httpResponse.statusCode)")
+                print("\n\n GET ACC \(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(.failure(.notFound))
+                }
             }
             
             let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
@@ -279,7 +289,7 @@ class OtpService {
         
         let body: [String: Any] = [
             "code": code,
-//            "destination": "+62" + destination.trimmingCharacters(in: .whitespacesAndNewlines),
+            //            "destination": "+62" + destination.trimmingCharacters(in: .whitespacesAndNewlines),
             "destination": destination.trimmingCharacters(in: .whitespacesAndNewlines),
             "reference": reference,
             "timeCounter": timeCounter,
