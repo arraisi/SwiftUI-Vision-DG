@@ -168,7 +168,9 @@ struct TransferRtgsScreen: View {
                                 self.showDialogMinTransaction = true
                             } else if (amount <= myCredit) {
                                 
-                                if (self.transferType == "Online") {
+                                if (amount > self.maxLimit) {
+                                    self.showDialogMaxReached = true
+                                } else if (self.transferType == "Online") {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
                                     self.transferData.typeDestination = self.destinationType
                                     self.transferData.transactionType = self.transferType
@@ -216,7 +218,6 @@ struct TransferRtgsScreen: View {
                         })
                         .disabled(disableForm)
                         .background(disableForm ? Color.gray : Color(hex: "#232175"))
-                        //                        .background(Color(hex: "#232175"))
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.bottom, 20)

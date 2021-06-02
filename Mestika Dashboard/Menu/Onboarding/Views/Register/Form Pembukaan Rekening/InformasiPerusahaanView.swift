@@ -316,6 +316,7 @@ struct InformasiPerusahaanView: View {
             createBottomFloater()
         }
         .onAppear() {
+            self.getAllProvince()
             self.noTlpPerusahaan = self.registerData.noTeleponPerusahaan
             self.kodePos = self.registerData.kodePos
         }
@@ -497,6 +498,163 @@ struct InformasiPerusahaanView: View {
             }
             .padding(.horizontal, 20)
             
+            // Label Province
+            VStack(alignment: .leading) {
+                Text("Province".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("Province".localized(language), text: $registerData.provinsiPerusahaan)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.provinceResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.provinsiPerusahaan = self.addressVM.provinceResult[i].name
+                                self.getRegencyByIdProvince(idProvince: self.addressVM.provinceResult[i].id)
+                            }) {
+                                Text(self.addressVM.provinceResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
+            .padding(.horizontal, 20)
+            
+            // Label City
+            VStack(alignment: .leading) {
+                Text("City".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("City".localized(language), text: $registerData.kotaPerusahaan)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.regencyResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.kotaPerusahaan = self.addressVM.regencyResult[i].name
+                                self.getDistrictByIdRegency(idRegency: self.addressVM.regencyResult[i].id)
+                            }) {
+                                Text(self.addressVM.regencyResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
+            .padding(.horizontal, 20)
+            
+            // Label District
+            VStack(alignment: .leading) {
+                Text("District".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("District".localized(language), text: $registerData.kelurahan)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.districtResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.kelurahan = self.addressVM.districtResult[i].name
+                                self.getVilageByIdDistrict(idDistrict: self.addressVM.districtResult[i].id)
+                            }) {
+                                Text(self.addressVM.districtResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
+            .padding(.horizontal, 20)
+            
+            // Label Village
+            VStack(alignment: .leading) {
+                Text("Sub-district".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("Sub-district".localized(language), text: $registerData.kecamatan)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.vilageResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.kecamatan = self.addressVM.vilageResult[i].name
+                                registerData.kodePos = self.addressVM.vilageResult[i].postalCode ?? ""
+                                self.kodePos = self.addressVM.vilageResult[i].postalCode ?? ""
+                            }) {
+                                Text(self.addressVM.vilageResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
+            .padding(.horizontal, 20)
+            
             VStack(alignment: .leading) {
                 
                 Text("Postal code".localized(language))
@@ -521,34 +679,6 @@ struct InformasiPerusahaanView: View {
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
                 
-            }
-            .padding(.horizontal, 20)
-            
-            LabelTextField(value: $registerData.provinsiPerusahaan, label: "Province".localized(language), placeHolder: "Province".localized(language)) { (Bool) in
-                print("on edit")
-            } onCommit: {
-                print("on commit")
-            }
-            .padding(.horizontal, 20)
-            
-            LabelTextField(value: $registerData.kotaPerusahaan, label: "City".localized(language), placeHolder: "City".localized(language)) { (Bool) in
-                print("on edit")
-            } onCommit: {
-                print("on commit")
-            }
-            .padding(.horizontal, 20)
-            
-            LabelTextField(value: $registerData.kecamatan, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language)) { (Bool) in
-                print("on edit")
-            } onCommit: {
-                print("on commit")
-            }
-            .padding(.horizontal, 20)
-            
-            LabelTextField(value: $registerData.kelurahan, label: "District".localized(language), placeHolder: "District".localized(language)) { (Bool) in
-                print("on edit")
-            } onCommit: {
-                print("on commit")
             }
             .padding(.horizontal, 20)
             
@@ -689,16 +819,12 @@ struct InformasiPerusahaanView: View {
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
                     registerData.alamatPerusahaan = self.addressSugestion[0].formatted_address
-                    registerData.kotaPerusahaan = self.addressSugestion[0].city
-                    registerData.provinsiPerusahaan = self.addressSugestion[0].province
-                    registerData.kodePos = self.addressSugestion[0].postalCode
-                    self.kodePos = self.addressSugestion[0].postalCode
-                    registerData.kecamatan = self.addressSugestion[0].kecamatan
-                    registerData.kelurahan = self.addressSugestion[0].kelurahan
-                    
-                    //                    registerData.rtrw = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
-                    //                    registerData.rtPerusahaan = self.addressSugestion[0].rt
-                    //                    registerData.rwPerusahaan = self.addressSugestion[0].rw
+//                    registerData.kotaPerusahaan = self.addressSugestion[0].city
+//                    registerData.provinsiPerusahaan = self.addressSugestion[0].province
+//                    registerData.kodePos = self.addressSugestion[0].postalCode
+//                    self.kodePos = self.addressSugestion[0].postalCode
+//                    registerData.kecamatan = self.addressSugestion[0].kecamatan
+//                    registerData.kelurahan = self.addressSugestion[0].kelurahan
                 }
                 self.showingModal = false
                 print("Success")
@@ -710,6 +836,58 @@ struct InformasiPerusahaanView: View {
                 self.isShowAlert = true
                 self.messageResponse = self.addressVM.message
                 print("Not Found")
+            }
+        }
+    }
+    
+    func getAllProvince() {
+        self.addressVM.getAllProvince { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getRegencyByIdProvince(idProvince: String) {
+        self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getDistrictByIdRegency(idRegency: String) {
+        self.addressVM.getDistrictByIdRegency(idRegency: idRegency) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getVilageByIdDistrict(idDistrict: String) {
+        self.addressVM.getVilageByIdDistrict(idDistrict: idDistrict) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
             }
         }
     }

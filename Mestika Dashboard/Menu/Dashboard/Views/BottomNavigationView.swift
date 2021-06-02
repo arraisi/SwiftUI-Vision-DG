@@ -214,9 +214,9 @@ struct BottomNavigationView: View {
                 .padding(15)
             
         }
-        .popup(isPresented: $showFreezeMenu, type: .floater(verticalPadding: 200), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+        .popup(isPresented: $showFreezeMenu, type: .toast, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             popupFreezeAccount()
-                .padding(.bottom, 40)
+                .padding(.bottom, 15)
         }
     }
     
@@ -415,6 +415,8 @@ struct BottomNavigationView: View {
     
     func checkFreezeAccount() {
         self.profileVM.getAccountFreeze { sucess in
+            
+//            self.showFreezeMenu = true
             
             if sucess {
                 if self.profileVM.freezeAccount {

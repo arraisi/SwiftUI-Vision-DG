@@ -145,49 +145,166 @@ struct VerificationAddressView: View {
                                     }
                                     .padding(.horizontal, 20)
                                     
-//                                    LabelTextField(value: $addressRtRwInput, label: "RT/RW".localized(language), placeHolder: "RT/RW".localized(language), onEditingChanged: { (Bool) in
-//                                        print("on edit")
-//                                        registerData.addressRtRwInput = self.addressRtRwInput
-//                                    }, onCommit: {
-//                                        print("on commit")
-//                                        registerData.addressRtRwInput = self.addressRtRwInput
-//                                    })
-//                                    .padding(.horizontal, 20)
-                                    
-                                    LabelTextField(value: $addressKelurahanInput, label: "District".localized(language), placeHolder: "District".localized(language), onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                        registerData.addressKelurahanInput = self.addressKelurahanInput
-                                    }, onCommit: {
-                                        print("on commit")
-                                        registerData.addressKelurahanInput = self.addressKelurahanInput
-                                    })
+                                    // Label Province
+                                    VStack(alignment: .leading) {
+                                        Text("Province".localized(language))
+                                            .font(Font.system(size: 12))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color(hex: "#707070"))
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        HStack {
+                                            
+                                            TextField("Province".localized(language), text: $registerData.addressProvinsiInput)
+                                                .font(Font.system(size: 14))
+                                                .frame(height: 50)
+                                                .padding(.leading, 15)
+                                                .disabled(true)
+                                            
+                                            Menu {
+                                                ForEach(0..<self.addressVM.provinceResult.count, id: \.self) { i in
+                                                    Button(action: {
+                                                        registerData.addressProvinsiInput = self.addressVM.provinceResult[i].name
+                                                        self.addressProvinsiInput = self.addressVM.provinceResult[i].name
+                                                        self.getRegencyByIdProvince(idProvince: self.addressVM.provinceResult[i].id)
+                                                    }) {
+                                                        Text(self.addressVM.provinceResult[i].name)
+                                                            .font(.custom("Montserrat-Regular", size: 12))
+                                                    }
+                                                }
+                                            } label: {
+                                                Image(systemName: "chevron.right").padding()
+                                            }
+                                            
+                                        }
+                                        .frame(height: 36)
+                                        .font(Font.system(size: 14))
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                    }
+                                    .frame(alignment: .leading)
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressKecamatanInput, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language), onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                        registerData.addressKecamatanInput = self.addressKecamatanInput
-                                    }, onCommit: {
-                                        print("on commit")
-                                        registerData.addressKecamatanInput = self.addressKecamatanInput
-                                    })
+                                    // Label City
+                                    VStack(alignment: .leading) {
+                                        Text("City".localized(language))
+                                            .font(Font.system(size: 12))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color(hex: "#707070"))
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        HStack {
+                                            
+                                            TextField("City".localized(language), text: $registerData.addressKotaInput)
+                                                .font(Font.system(size: 14))
+                                                .frame(height: 50)
+                                                .padding(.leading, 15)
+                                                .disabled(true)
+                                            
+                                            Menu {
+                                                ForEach(0..<self.addressVM.regencyResult.count, id: \.self) { i in
+                                                    Button(action: {
+                                                        registerData.addressKotaInput = self.addressVM.regencyResult[i].name
+                                                        self.addressKotaInput = self.addressVM.regencyResult[i].name
+                                                        self.getDistrictByIdRegency(idRegency: self.addressVM.regencyResult[i].id)
+                                                    }) {
+                                                        Text(self.addressVM.regencyResult[i].name)
+                                                            .font(.custom("Montserrat-Regular", size: 12))
+                                                    }
+                                                }
+                                            } label: {
+                                                Image(systemName: "chevron.right").padding()
+                                            }
+                                            
+                                        }
+                                        .frame(height: 36)
+                                        .font(Font.system(size: 14))
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                    }
+                                    .frame(alignment: .leading)
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressKotaInput, label: "City".localized(language), placeHolder: "City".localized(language), onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                        registerData.addressKotaInput = self.addressKotaInput
-                                    }, onCommit: {
-                                        print("on commit")
-                                        registerData.addressKotaInput = self.addressKotaInput
-                                    })
+                                    // Label District
+                                    VStack(alignment: .leading) {
+                                        Text("District".localized(language))
+                                            .font(Font.system(size: 12))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color(hex: "#707070"))
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        HStack {
+                                            
+                                            TextField("District".localized(language), text: $registerData.addressKelurahanInput)
+                                                .font(Font.system(size: 14))
+                                                .frame(height: 50)
+                                                .padding(.leading, 15)
+                                                .disabled(true)
+                                            
+                                            Menu {
+                                                ForEach(0..<self.addressVM.districtResult.count, id: \.self) { i in
+                                                    Button(action: {
+                                                        registerData.addressKelurahanInput = self.addressVM.districtResult[i].name
+                                                        self.addressKelurahanInput = self.addressVM.districtResult[i].name
+                                                        self.getVilageByIdDistrict(idDistrict: self.addressVM.districtResult[i].id)
+                                                    }) {
+                                                        Text(self.addressVM.districtResult[i].name)
+                                                            .font(.custom("Montserrat-Regular", size: 12))
+                                                    }
+                                                }
+                                            } label: {
+                                                Image(systemName: "chevron.right").padding()
+                                            }
+                                            
+                                        }
+                                        .frame(height: 36)
+                                        .font(Font.system(size: 14))
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                    }
+                                    .frame(alignment: .leading)
                                     .padding(.horizontal, 20)
                                     
-                                    LabelTextField(value: $addressProvinsiInput, label: "Province".localized(language), placeHolder: "Province".localized(language), onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                        registerData.addressProvinsiInput = self.addressProvinsiInput
-                                    }, onCommit: {
-                                        print("on commit")
-                                        registerData.addressProvinsiInput = self.addressProvinsiInput
-                                    })
+                                    // Label Village
+                                    VStack(alignment: .leading) {
+                                        Text("Sub-district".localized(language))
+                                            .font(Font.system(size: 12))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color(hex: "#707070"))
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        HStack {
+                                            
+                                            TextField("Sub-district".localized(language), text: $registerData.addressKecamatanInput)
+                                                .font(Font.system(size: 14))
+                                                .frame(height: 50)
+                                                .padding(.leading, 15)
+                                                .disabled(true)
+                                            
+                                            Menu {
+                                                ForEach(0..<self.addressVM.vilageResult.count, id: \.self) { i in
+                                                    Button(action: {
+                                                        registerData.addressKecamatanInput = self.addressVM.vilageResult[i].name
+                                                        registerData.kodePosKeluarga = self.addressVM.vilageResult[i].postalCode ?? ""
+                                                        
+                                                        self.addressKodePosInput = self.addressVM.vilageResult[i].postalCode ?? ""
+                                                        self.addressKecamatanInput = self.addressVM.vilageResult[i].name
+                                                    }) {
+                                                        Text(self.addressVM.vilageResult[i].name)
+                                                            .font(.custom("Montserrat-Regular", size: 12))
+                                                    }
+                                                }
+                                            } label: {
+                                                Image(systemName: "chevron.right").padding()
+                                            }
+                                            
+                                        }
+                                        .frame(height: 36)
+                                        .font(Font.system(size: 14))
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(10)
+                                    }
+                                    .frame(alignment: .leading)
                                     .padding(.horizontal, 20)
                                     
                                     VStack(alignment: .leading) {
@@ -240,14 +357,11 @@ struct VerificationAddressView: View {
                         if (registerData.isAddressEqualToDukcapil) {
                             
                             self.registerData.addressInput = registerData.alamatKtpFromNik
-//                            self.registerData.addressRtRwInput = registerData.rtFromNik
                             self.registerData.addressKelurahanInput = registerData.kelurahanFromNik
                             self.registerData.addressKecamatanInput = registerData.kecamatanFromNik
                             self.registerData.addressPostalCodeInput = registerData.kodePosFromNik
                             self.registerData.addressProvinsiInput = registerData.provinsiFromNik
                             self.registerData.addressKotaInput = registerData.kabupatenKotaFromNik
-//                            self.registerData.addressRtInput = registerData.rtFromNik
-//                            self.registerData.addressRwInput = registerData.rwFromNik
                             
                             self.isShowNextView = true
                             
@@ -291,6 +405,9 @@ struct VerificationAddressView: View {
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             addressSuggestionPopUp()
         }
+        .onAppear {
+            self.getAllProvince()
+        }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
@@ -312,17 +429,9 @@ struct VerificationAddressView: View {
             
             HStack {
                 
-//                TextField("Address".localized(language), text: $addressInput)
-//                    .font(Font.system(size: 14))
-//                    .frame(height: 36)
-                
-                
                     MultilineTextField("Address".localized(language), text: $addressInput, onCommit: {
                     })
                     .font(Font.system(size: 14))
-//                    .padding(.horizontal)
-//                    .background(Color.gray.opacity(0.1))
-//                    .cornerRadius(10)
                 
                 Button(action:{
                     searchAddress(keyword: addressInput)
@@ -401,21 +510,20 @@ struct VerificationAddressView: View {
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
                     registerData.addressInput = self.addressSugestion[0].formatted_address
-                    registerData.addressPostalCodeInput = self.addressSugestion[0].postalCode
-                    registerData.addressKecamatanInput = self.addressSugestion[0].kecamatan
-                    registerData.addressKelurahanInput = self.addressSugestion[0].kelurahan
-//                    registerData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
-                    
-                    registerData.addressKotaInput = self.addressSugestion[0].city
-                    registerData.addressProvinsiInput = self.addressSugestion[0].province
-                    
                     self.addressInput = self.addressSugestion[0].formatted_address
-//                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
-                    self.addressKelurahanInput = self.addressSugestion[0].kelurahan
-                    self.addressKecamatanInput = self.addressSugestion[0].kecamatan
-                    self.addressKotaInput = self.addressSugestion[0].city
-                    self.addressProvinsiInput = self.addressSugestion[0].province
-                    self.addressKodePosInput = self.addressSugestion[0].postalCode
+                    
+//                    registerData.addressPostalCodeInput = self.addressSugestion[0].postalCode
+//                    registerData.addressKecamatanInput = self.addressSugestion[0].kecamatan
+//                    registerData.addressKelurahanInput = self.addressSugestion[0].kelurahan
+                    
+//                    registerData.addressKotaInput = self.addressSugestion[0].city
+//                    registerData.addressProvinsiInput = self.addressSugestion[0].province
+                    
+//                    self.addressKelurahanInput = self.addressSugestion[0].kelurahan
+//                    self.addressKecamatanInput = self.addressSugestion[0].kecamatan
+//                    self.addressKotaInput = self.addressSugestion[0].city
+//                    self.addressProvinsiInput = self.addressSugestion[0].province
+//                    self.addressKodePosInput = self.addressSugestion[0].postalCode
                 }
                 self.showingModal = false
                 print("Success")
@@ -427,6 +535,58 @@ struct VerificationAddressView: View {
                 self.isShowAlert = true
                 self.messageResponse = self.addressVM.message
                 print("Not Found")
+            }
+        }
+    }
+    
+    func getAllProvince() {
+        self.addressVM.getAllProvince { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getRegencyByIdProvince(idProvince: String) {
+        self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getDistrictByIdRegency(idRegency: String) {
+        self.addressVM.getDistrictByIdRegency(idRegency: idRegency) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getVilageByIdDistrict(idDistrict: String) {
+        self.addressVM.getVilageByIdDistrict(idDistrict: idDistrict) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
             }
         }
     }

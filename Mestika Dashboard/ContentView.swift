@@ -37,7 +37,7 @@ struct ContentView: View {
         
         // This property is not present on the UINavigationBarAppearance
         // object for some reason and you have to leave it til the end
-         UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().tintColor = .white
         
     }
     
@@ -51,11 +51,11 @@ struct ContentView: View {
                 
                 WelcomeView()
                 
-//                                                NavigationView{
-//                                                    SuccessRegisterView()
-//                                                        .environmentObject(RegistrasiModel())
-//                                                        .environmentObject(AddProductATM())
-//                                                }
+                //                NavigationView{
+                //                    VerificationAddressView()
+                //                        .environmentObject(RegistrasiModel())
+                //                        .environmentObject(AddProductATM())
+                //                }
             }
             .edgesIgnoringSafeArea(.top)
         }

@@ -207,6 +207,7 @@ struct KeluargaTerdekat: View {
             createBottomFloater()
         }
         .onAppear() {
+            self.getAllProvince()
             self.kodePos = self.registerData.kodePosKeluarga
             self.noTelepon = self.registerData.noTlpKeluarga
         }
@@ -273,13 +274,6 @@ struct KeluargaTerdekat: View {
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
-                //                TextFieldWithPickerAsInput(data: ["Ayah", "Ibu", "Kaka", "Adik", "Saudara", "Teman"], placeholder: "Hubungan kekerabatan", selectionIndex: $selectionID, text: $registerData.hubunganKekerabatan)
-                //                    .frame(height: 36)
-                //                    .font(Font.system(size: 14))
-                //                    .padding(.horizontal)
-                //                    .background(Color.gray.opacity(0.1))
-                //                    .cornerRadius(10)
-                
                 HStack {
                     TextField("Genetic Relationship".localized(language), text: $registerData.hubunganKekerabatanKeluarga)
                         .font(Font.system(size: 14))
@@ -323,26 +317,6 @@ struct KeluargaTerdekat: View {
                     .foregroundColor(Color(hex: "#707070"))
                     .multilineTextAlignment(.leading)
                 
-                //                HStack {
-                //
-                //                    TextField("Address".localized(language), text: $registerData.alamatKeluarga) { changed in
-                //                    } onCommit: {
-                //                    }
-                //                    .font(Font.system(size: 14))
-                //                    .frame(height: 36)
-                //                    .padding(.horizontal)
-                //                    .background(Color.gray.opacity(0.1))
-                //                    .cornerRadius(10)
-                //
-                //                    Button(action:{
-                //                        searchAddress()
-                //                    }, label: {
-                //                        Image(systemName: "magnifyingglass")
-                //                            .font(Font.system(size: 20))
-                //                            .foregroundColor(Color(hex: "#707070"))
-                //                    })
-                //
-                //                }
                 HStack {
                     
                     MultilineTextField("Address".localized(language), text: $registerData.alamatKeluarga, onCommit: {
@@ -353,7 +327,6 @@ struct KeluargaTerdekat: View {
                     .cornerRadius(10)
                     
                     Button(action:{
-                        //                        showingModal.toggle()
                         searchAddress()
                     }, label: {
                         Image(systemName: "magnifyingglass")
@@ -363,6 +336,159 @@ struct KeluargaTerdekat: View {
                     
                 }
             }
+            
+            // Label Province
+            VStack(alignment: .leading) {
+                Text("Province".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("Province".localized(language), text: $registerData.provinsiKeluarga)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.provinceResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.provinsiKeluarga = self.addressVM.provinceResult[i].name
+                                self.getRegencyByIdProvince(idProvince: self.addressVM.provinceResult[i].id)
+                            }) {
+                                Text(self.addressVM.provinceResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
+            
+            // Label City
+            VStack(alignment: .leading) {
+                Text("City".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("City".localized(language), text: $registerData.kotaKeluarga)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.regencyResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.kotaKeluarga = self.addressVM.regencyResult[i].name
+                                self.getDistrictByIdRegency(idRegency: self.addressVM.regencyResult[i].id)
+                            }) {
+                                Text(self.addressVM.regencyResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
+            
+            // Label District
+            VStack(alignment: .leading) {
+                Text("District".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("District".localized(language), text: $registerData.kelurahanKeluarga)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.districtResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.kelurahanKeluarga = self.addressVM.districtResult[i].name
+                                self.getVilageByIdDistrict(idDistrict: self.addressVM.districtResult[i].id)
+                            }) {
+                                Text(self.addressVM.districtResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
+            
+            // Label Village
+            VStack(alignment: .leading) {
+                Text("Sub-district".localized(language))
+                    .font(Font.system(size: 12))
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color(hex: "#707070"))
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    
+                    TextField("Sub-district".localized(language), text: $registerData.kecamatanKeluarga)
+                        .font(Font.system(size: 14))
+                        .frame(height: 50)
+                        .padding(.leading, 15)
+                        .disabled(true)
+                    
+                    Menu {
+                        ForEach(0..<self.addressVM.vilageResult.count, id: \.self) { i in
+                            Button(action: {
+                                registerData.kecamatanKeluarga = self.addressVM.vilageResult[i].name
+                                registerData.kodePosKeluarga = self.addressVM.vilageResult[i].postalCode ?? ""
+                                self.kodePos = self.addressVM.vilageResult[i].postalCode ?? ""
+                            }) {
+                                Text(self.addressVM.vilageResult[i].name)
+                                    .font(.custom("Montserrat-Regular", size: 12))
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "chevron.right").padding()
+                    }
+                    
+                }
+                .frame(height: 36)
+                .font(Font.system(size: 14))
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .frame(alignment: .leading)
             
             VStack(alignment: .leading) {
                 
@@ -386,18 +512,6 @@ struct KeluargaTerdekat: View {
                 .padding(.horizontal)
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
-                
-            }
-            
-            LabelTextField(value: $registerData.kecamatanKeluarga, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language)) { (change) in
-                
-            } onCommit: {
-                
-            }
-            
-            LabelTextField(value: $registerData.kelurahanKeluarga, label: "District".localized(language), placeHolder: "District".localized(language)) { (change) in
-                
-            } onCommit: {
                 
             }
             
@@ -456,26 +570,6 @@ struct KeluargaTerdekat: View {
                 Spacer()
             }
             
-//            HStack {
-//
-//                TextField("Company's address".localized(language), text: $location)
-//                    .font(Font.system(size: 14))
-//                    .frame(height: 36)
-//
-//                Button(action:{
-//                    searchAddress(keyword: location)
-//                }, label: {
-//                    Image(systemName: "location.viewfinder")
-//                        .font(Font.system(size: 20))
-//                        .foregroundColor(Color(hex: "#707070"))
-//                })
-//
-//            }
-//            .padding(.horizontal)
-//            .background(Color.gray.opacity(0.1))
-//            .cornerRadius(10)
-            
-            
             HStack {
                 
                 MultilineTextField("Company's address".localized(language), text: $location, onCommit: {
@@ -494,26 +588,6 @@ struct KeluargaTerdekat: View {
                 })
                 
             }
-            
-            //            List(addressSugestionResult, id: \.formatted_address) { data in
-            //
-            //                HStack {
-            //                    Text(data.formatted_address)
-            //                        .font(Font.system(size: 14))
-            //
-            //                    Spacer()
-            //                }
-            //                .contentShape(Rectangle())
-            //                .onTapGesture(perform: {
-            //                    searchAddress(data: data.formatted_address)
-            //                    self.showingModal.toggle()
-            //                })
-            //
-            //            }
-            //            .background(Color.white)
-            //            .padding(.vertical)
-            //            .frame(height: 150)
-            //
             
             ScrollView {
                 VStack {
@@ -578,10 +652,10 @@ struct KeluargaTerdekat: View {
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
                     registerData.alamatKeluarga = self.addressSugestion[0].formatted_address
-                    registerData.kodePosKeluarga = self.addressSugestion[0].postalCode
-                    self.kodePos = self.addressSugestion[0].postalCode
-                    registerData.kecamatanKeluarga = self.addressSugestion[0].kecamatan
-                    registerData.kelurahanKeluarga = self.addressSugestion[0].kelurahan
+//                    registerData.kodePosKeluarga = self.addressSugestion[0].postalCode
+//                    self.kodePos = self.addressSugestion[0].postalCode
+//                    registerData.kecamatanKeluarga = self.addressSugestion[0].kecamatan
+//                    registerData.kelurahanKeluarga = self.addressSugestion[0].kelurahan
                 }
                 self.showingModal = false
                 print("Success")
@@ -596,6 +670,57 @@ struct KeluargaTerdekat: View {
         }
     }
     
+    func getAllProvince() {
+        self.addressVM.getAllProvince { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getRegencyByIdProvince(idProvince: String) {
+        self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getDistrictByIdRegency(idRegency: String) {
+        self.addressVM.getDistrictByIdRegency(idRegency: idRegency) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getVilageByIdDistrict(idDistrict: String) {
+        self.addressVM.getVilageByIdDistrict(idDistrict: idDistrict) { success in
+            
+            if success {
+                
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
 }
 
 struct KeluargaTerdekat_Previews: PreviewProvider {
