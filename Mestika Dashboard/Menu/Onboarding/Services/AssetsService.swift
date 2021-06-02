@@ -11,6 +11,7 @@ enum NetworkError: Error {
     case badUrl
     case decodingError
     case noData
+    case notFound
 }
 
 class AssetsService {
