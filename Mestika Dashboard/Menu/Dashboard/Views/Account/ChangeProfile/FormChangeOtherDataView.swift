@@ -311,6 +311,12 @@ struct FormChangeOtherDataView: View {
                     print("on commit")
                 })
                 
+                LabelTextField(value: self.$profileVM.provinsiPerusahaan, label: "City".localized(language), placeHolder: "City".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
                 LabelTextField(value: self.$profileVM.teleponPerusahaan, label: "Phone".localized(language), placeHolder: "Phone".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {

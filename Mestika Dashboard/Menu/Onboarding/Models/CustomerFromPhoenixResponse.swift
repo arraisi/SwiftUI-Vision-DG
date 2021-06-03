@@ -28,13 +28,13 @@ struct CustomerFromPhoenixResponseElement: Codable {
 
 // MARK: - Cdd
 struct Cdd: Codable {
-    let kecamatanSuratMenyurat, kelurahanSuratMenyurat, rwSuratMenyurat, rtSuratMenyurat: String?
+    let kecamatanSuratMenyurat, kelurahanSuratMenyurat, rwSuratMenyurat, rtSuratMenyurat, kabupatenSuratMenyurat, provinsiSuratMenyurat, kodePosSuratMenyurat: String?
     let alamatSuratMenyurat: String?
     let penghasilanKotorTahunan, sumberPendapatanLainnya: String?
     let jumlahSetoranDana, frequencySetoranDana, jumlahPenarikanDana, frequencyPenarikanDana: String?
     let sumberDana, tujuanPembukaanRekening, namaPerusahaan: String?
     let hpPerusahaan: String?
-    let alamatPerusahaan, kodePosPerusahaan, kecamatanPerusahaan, kelurahanPerusahaan: String?
+    let alamatPerusahaan, kodePosPerusahaan, kecamatanPerusahaan, kelurahanPerusahaan, provinsiPerusahaan, kabupatenPerusahaan: String?
     let teleponPerusahaan, keluargaTerdekat: String?
     let namaKeluargaTerdekat, alamatKeluargaTerdekat, kodePosKeluargaTerdekat, kelurahanKeluargaTerdekat: String?
     let kecamatanKeluargaTerdekat, teleponKeluargaTerdekat, pekerjaan: String?
