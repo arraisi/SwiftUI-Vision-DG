@@ -108,7 +108,7 @@ struct ListAllFavoriteTransactionView: View {
                                         } else {
                                             print("OFF US")
                                             if (data.transferOffUsRtgs == nil) {
-                                                self.destinationNumber = data.transferOffUsSkn!.destinationNumber
+                                                self.destinationNumber = data.transferOffUsSkn?.destinationNumber ?? ""
                                                 self.name = data.name
                                                 self.desc = ""
                                                 self.destinationBank = data.destinationBankName ?? ""
