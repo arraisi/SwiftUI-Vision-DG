@@ -36,10 +36,8 @@ class SavingAccountViewModel : ObservableObject {
                 print("COUNT")
                 print(response.count)
                 
-                DispatchQueue.main.async {
-                    self.balanceAccount = response
-                    self.isLoading = false
-                }
+                self.balanceAccount = response
+                self.isLoading = false
                 
                 completion(true)
                 

@@ -321,6 +321,7 @@ struct InformasiPerusahaanView: View {
             createBottomFloater()
         }
         .onAppear() {
+            self.getAllProvince()
             self.noTlpPerusahaan = self.registerData.noTeleponPerusahaan
             self.kodePos = self.registerData.kodePos
         }

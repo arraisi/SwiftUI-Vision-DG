@@ -45,7 +45,10 @@ struct DashboardTabs: View {
     
     @State var listSortedMyAccount: [DashboardAccountModel] = []
     @State var listMyAccount: [DashboardAccountModel] = []
+    @State var listAllMyAccount: [DashboardAllModel] = []
+    @State var listSorterAllMyAccount: [DashboardAllModel] = []
     @State var tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
+    @State var tmpAllDataAccount = DashboardAllModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "", balance: "", debitType: "")
     
     /* Loading and Data Variable */
     @State var isLoading : Bool = true
@@ -230,7 +233,6 @@ struct DashboardTabs: View {
                         self.listMyAccount.removeAll()
                         self.listSourceNumber.removeAll()
                         self.listSortedMyAccount.removeAll()
-                        self.tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
                         
                         self.routingAccountDeposit = false
                         self.routingManagementCard = false
@@ -264,7 +266,6 @@ struct DashboardTabs: View {
             self.listMyAccount.removeAll()
             self.listSourceNumber.removeAll()
             self.listSortedMyAccount.removeAll()
-            self.tmpMyAccount = DashboardAccountModel(sourceNumber: "", typeAccount: "", productName: "", description: "", categoryProduct: "")
             
             self.isHiddenInformationReStore = true
             self.isHiddenInformationFreezeAccount = true
@@ -308,13 +309,56 @@ struct DashboardTabs: View {
                     listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
                     
                     listSortedMyAccount.forEach { a in
-                        
+//                        self.listSourceNumber.append(a.sourceNumber ?? "")
                         if (a.typeAccount == "S" || a.typeAccount == "D") {
                             self.listSourceNumber.append(a.sourceNumber ?? "")
                         }
                     }
 
+                    print("COUNT MY ACCOUNT")
+                    print(self.listMyAccount.count)
                     self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+                        
+                        listMyAccount.forEach { acc in
+
+                            self.tmpAllDataAccount.sourceNumber = acc.sourceNumber
+                            self.tmpAllDataAccount.typeAccount = acc.typeAccount
+                            self.tmpAllDataAccount.productName = acc.productName
+                            self.tmpAllDataAccount.description = acc.description
+                            self.tmpAllDataAccount.categoryProduct = acc.categoryProduct
+                            
+                            self.savingAccountVM.balanceAccount.forEach { balance in
+                                if (acc.sourceNumber == balance.sourceNumber) {
+                                    print(balance.sourceNumber)
+                                    self.tmpAllDataAccount.balance = balance.balance
+                                    self.tmpAllDataAccount.debitType = balance.creditDebit ?? ""
+                                }
+                            }
+                            
+                            self.listAllMyAccount.append(tmpAllDataAccount)
+                        }
+                        
+                        print("COUNT ALL MY ACCOUNT")
+                        print(self.listAllMyAccount.count)
+                        
+                        let filterM = listAllMyAccount.filter { word in
+                            return word.categoryProduct == "M"
+                        }
+                        let filterS = listAllMyAccount.filter { word in
+                          return word.categoryProduct == "S"
+                        }
+                        let filterBlankOrNil = listAllMyAccount.filter { word in
+                          return word.categoryProduct != "M" && word.categoryProduct != "S"
+                        }
+
+                        listSorterAllMyAccount.append(contentsOf: filterM)
+                        listSorterAllMyAccount.append(contentsOf: filterS)
+                        listSorterAllMyAccount.append(contentsOf: filterBlankOrNil)
+                        
+                        self.listSorterAllMyAccount.forEach { data in
+                            print(data.sourceNumber)
+                            print(data.balance)
+                        }
                         
                         if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
                             print("ADA TYPE D")
@@ -376,7 +420,7 @@ struct DashboardTabs: View {
     // MARK: -MENU GRID VIEW
     var menuGrid: some View {
         VStack {
-            if isLoadingCard || self.savingAccountVM.accounts.isEmpty || self.listSourceNumber.count < 1 || listSortedMyAccount.isEmpty {
+            if isLoadingCard || self.listSorterAllMyAccount.isEmpty {
                 
                 ProgressView("Loading")
                     .padding(.vertical, 50)
@@ -384,7 +428,7 @@ struct DashboardTabs: View {
             } else {
                 
                 TabView {
-                    ForEach(0..<self.savingAccountVM.accounts.count) { index in
+                    ForEach(0..<self.listSorterAllMyAccount.count) { index in
                         Button(
                             action: {
                                 self.isRouteHistoryAcc = true
@@ -398,7 +442,7 @@ struct DashboardTabs: View {
                                             .padding(.trailing, 5)
                                         
                                         VStack(alignment: .leading) {
-                                            Text("\(self.savingAccountVM.accounts[index].accountTypeDescription ?? "")")
+                                            Text("\(self.listSorterAllMyAccount[index].description ?? "")")
                                                 .font(.headline)
                                                 .bold()
                                                 .padding(.bottom, 5)
@@ -406,53 +450,41 @@ struct DashboardTabs: View {
                                             
                                             VStack(alignment: .leading) {
                                                 
-                                                Text("\(self.listSortedMyAccount[index].productName ?? "Tabungan Mestika")")
+                                                Text("\(self.listSorterAllMyAccount[index].productName ?? "Tabungan Mestika")")
                                                     .font(.subheadline)
                                                     .bold()
                                                     .foregroundColor(Color(hex: "#232175"))
                                                     .fontWeight(.ultraLight)
                                                 
-                                                if (self.listSortedMyAccount[index].sourceNumber == "") {
-                                                    Text("-")
-                                                        .font(.caption)
-                                                        .fontWeight(.ultraLight)
-                                                } else {
-                                                    Text("\(self.listSortedMyAccount[index].sourceNumber ?? "")")
-                                                        .font(.caption)
-                                                        .fontWeight(.ultraLight)
-                                                }
+                                                Text("\(self.listSorterAllMyAccount[index].sourceNumber ?? "-")")
+                                                    .font(.caption)
+                                                    .fontWeight(.ultraLight)
                                                 
                                                 if isHiddenBalance {
                                                     
                                                     EmptyView()
                                                     
                                                 } else {
-                                                    
-                                                    HStack {
-                                                        if (self.savingAccountVM.balanceAccount.count < 1) {
-                                                            ProgressView()
-                                                        } else {
-                                                            
+                                                    if (self.listSorterAllMyAccount[index].typeAccount != "M" && self.listSorterAllMyAccount[index].typeAccount != "S") {
+                                                        
+                                                        HStack {
+                                                            Text("")
+                                                        }
+                                                        .padding(.top, 5)
+                                                        
+                                                    } else {
+                                                        HStack {
                                                             Text("Rp.")
                                                                 .fontWeight(.light)
-                                                                .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
+                                                                .foregroundColor(self.listSorterAllMyAccount[index].debitType == "D" ? .red : Color(hex: "#2334D0"))
                                                             
-                                                            if (self.savingAccountVM.balanceAccount[index].balance == "") {
-                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\("0")")
-                                                                    .font(.title3)
-                                                                    .bold()
-                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-                                                            } else {
-                                                                Text("\(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? "-" : "")" +  "\(self.savingAccountVM.balanceAccount[index].balance?.thousandSeparator() ?? "0")")
-                                                                    .font(.title3)
-                                                                    .bold()
-                                                                    .foregroundColor(self.savingAccountVM.balanceAccount[index].creditDebit == "D" ? .red : Color(hex: "#2334D0"))
-                                                            }
-                                                            
-                                                            
+                                                            Text("\(self.listSorterAllMyAccount[index].debitType == "D" ? "-" : "")" +  "\(self.listSorterAllMyAccount[index].balance?.thousandSeparator() ?? "0")")
+                                                                .font(.title3)
+                                                                .bold()
+                                                                .foregroundColor(self.listSorterAllMyAccount[index].debitType == "D" ? .red : Color(hex: "#2334D0"))
                                                         }
+                                                        .padding(.top, 5)
                                                     }
-                                                    .padding(.top, 5)
                                                 }
                                             }
                                         }
@@ -637,4 +669,14 @@ struct DashboardAccountModel {
     var productName: String?
     var description: String?
     var categoryProduct: String?
+}
+
+struct DashboardAllModel {
+    var sourceNumber: String?
+    var typeAccount: String?
+    var productName: String?
+    var description: String?
+    var categoryProduct: String?
+    var balance: String?
+    var debitType: String?
 }
