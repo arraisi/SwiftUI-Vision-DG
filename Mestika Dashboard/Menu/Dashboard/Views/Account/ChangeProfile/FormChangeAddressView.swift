@@ -191,7 +191,7 @@ struct FormChangeAddressView: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kotaSuratMenyurat, label: "City".localized(language), placeHolder: "City".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kabupatenSuratMenyurat, label: "City".localized(language), placeHolder: "City".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
@@ -202,6 +202,13 @@ struct FormChangeAddressView: View {
                 }, onCommit: {
                     print("on commit")
                 })
+                
+//                LabelTextField(value: self.$profileVM.kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+//                    print("on edit")
+//                }, onCommit: {
+//                    print("on commit")
+//                })
+
             }
             .padding(.top, 20)
         }

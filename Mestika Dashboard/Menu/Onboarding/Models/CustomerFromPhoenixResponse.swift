@@ -28,7 +28,7 @@ struct CustomerFromPhoenixResponseElement: Codable {
 
 // MARK: - Cdd
 struct Cdd: Codable {
-    let kecamatanSuratMenyurat, kelurahanSuratMenyurat, rwSuratMenyurat, rtSuratMenyurat: String?
+    let kecamatanSuratMenyurat, kelurahanSuratMenyurat, rwSuratMenyurat, rtSuratMenyurat, kabupatenSuratMenyurat, provinsiSuratMenyurat, kodePosSuratMenyurat: String?
     let alamatSuratMenyurat: String?
     let penghasilanKotorTahunan, sumberPendapatanLainnya: String?
     let jumlahSetoranDana, frequencySetoranDana, jumlahPenarikanDana, frequencyPenarikanDana: String?

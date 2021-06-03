@@ -40,7 +40,7 @@ class ProfileViewModel: ObservableObject {
     @Published var kodePosSuratMenyurat: String = ""
     @Published var kelurahanSuratMenyurat: String = ""
     @Published var kecamatanSuratMenyurat: String = ""
-    @Published var kotaSuratMenyurat: String = ""
+    @Published var kabupatenSuratMenyurat: String = ""
     @Published var provinsiSuratMenyurat: String = ""
     
     // Limit
@@ -272,9 +272,9 @@ extension ProfileViewModel {
                     self.alamatSuratMenyurat = response.last?.cdd.alamatSuratMenyurat ?? ""
                     self.kelurahanSuratMenyurat = response.last?.cdd.kelurahanSuratMenyurat ?? ""
                     self.kecamatanSuratMenyurat = response.last?.cdd.kecamatanSuratMenyurat ?? ""
-                    //                    self.kotaSuratMenyurat = response.last?.cdd.sura ?? ""
-                    //                    self.provinsiSuratMenyurat = response.last?.cdd.provinsi ?? ""
-                    
+                    self.kabupatenSuratMenyurat = response.last?.cdd.kabupatenSuratMenyurat ?? ""
+                    self.provinsiSuratMenyurat = response.last?.cdd.provinsiSuratMenyurat ?? ""
+                    self.kodePosSuratMenyurat = response.last?.cdd.kodePosSuratMenyurat ?? ""
                     self.existingCustomer = response.last?.personal.existingCustomer ?? false
                     
                     print("Complete fetch customer phoenix vm  ie. (email) : \(response.last?.customerFromPhoenixResponseID.surel ?? "") published email: \(self.email)")
@@ -346,7 +346,8 @@ extension ProfileViewModel {
                 self.kodePosSuratMenyurat = response.chipProfileDto.last?.kodepos ?? ""
                 self.kelurahanSuratMenyurat = response.chipProfileDto.last?.kelurahan ?? ""
                 self.kecamatanSuratMenyurat = response.chipProfileDto.last?.kecamatan ?? ""
-                self.kotaSuratMenyurat = response.chipProfileDto.last?.kabupatenKota ?? ""
+                self.kabupatenSuratMenyurat = response.chipProfileDto.last?.kabupatenKota ?? ""
+                self.kodePosSuratMenyurat = response.chipProfileDto.last?.kodepos ?? ""
                 self.provinsiSuratMenyurat = response.chipProfileDto.last?.provinsi ?? ""
                 
                 if let _chipProfileDto = response.chipProfileDto.last {
