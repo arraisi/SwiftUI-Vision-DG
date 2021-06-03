@@ -437,7 +437,7 @@ class FavoritService {
             "destinationBankName": data.bankName,
             "destinationNumber": data.destinationNumber,
             "cardNo" : data.cardNo,
-            "transferOffUsSkn": [
+            "transferOffUsRtgs": [
                 "citizenCode": "W",
                 "destinationBankName": data.bankName,
                 "destinationNumber": data.destinationNumber,
