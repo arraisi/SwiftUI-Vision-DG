@@ -161,7 +161,15 @@ extension ProfileViewModel {
                 "kecamatanPerusahaan": self.kecamatanPerusahaan,
                 "kelurahanPerusahaan": self.kelurahanPerusahaan,
                 "teleponPerusahaan": self.teleponPerusahaan,
-                "pekerjaan": self.pekerjaan
+                "kabupatenPerusahaan": self.kotaPerusahaan,
+                "provinsiPerusahaan": self.provinsiPerusahaan,
+                "pekerjaan": self.pekerjaan,
+                "kecamatanSuratMenyurat" : self.kecamatanSuratMenyurat,
+                "kelurahanSuratMenyurat" : self.kelurahanSuratMenyurat,
+                "alamatSuratMenyurat" : self.alamatSuratMenyurat,
+                "provinsiSuratMenyurat" : self.provinsiSuratMenyurat,
+                "kabupatenSuratMenyurat" : self.kabupatenSuratMenyurat,
+                "kodePosSuratMenyurat" : self.kodePosSuratMenyurat
             ],
             "pinTrx": encryptPassword(password: pinTrx)
         ]
@@ -245,8 +253,8 @@ extension ProfileViewModel {
                     self.kodePosPerusahaan = response.last?.cdd.kodePosPerusahaan ?? ""
                     self.kelurahanPerusahaan = response.last?.cdd.kelurahanPerusahaan ?? ""
                     self.kecamatanPerusahaan = response.last?.cdd.kecamatanPerusahaan ?? ""
-                    self.kotaPerusahaan = ""
-                    self.provinsiPerusahaan = ""
+                    self.kotaPerusahaan = response.last?.cdd.kabupatenPerusahaan ?? ""
+                    self.provinsiPerusahaan = response.last?.cdd.provinsiPerusahaan ?? ""
                     self.teleponPerusahaan = response.last?.cdd.teleponPerusahaan ?? ""
                     
                     self.namaPenyandang = ""

@@ -34,7 +34,7 @@ struct Cdd: Codable {
     let jumlahSetoranDana, frequencySetoranDana, jumlahPenarikanDana, frequencyPenarikanDana: String?
     let sumberDana, tujuanPembukaanRekening, namaPerusahaan: String?
     let hpPerusahaan: String?
-    let alamatPerusahaan, kodePosPerusahaan, kecamatanPerusahaan, kelurahanPerusahaan: String?
+    let alamatPerusahaan, kodePosPerusahaan, kecamatanPerusahaan, kelurahanPerusahaan, provinsiPerusahaan, kabupatenPerusahaan: String?
     let teleponPerusahaan, keluargaTerdekat: String?
     let namaKeluargaTerdekat, alamatKeluargaTerdekat, kodePosKeluargaTerdekat, kelurahanKeluargaTerdekat: String?
     let kecamatanKeluargaTerdekat, teleponKeluargaTerdekat, pekerjaan: String?
