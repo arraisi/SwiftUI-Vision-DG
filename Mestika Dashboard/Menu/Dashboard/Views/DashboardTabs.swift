@@ -468,7 +468,14 @@ struct DashboardTabs: View {
                                                     if (self.listSorterAllMyAccount[index].typeAccount != "M" && self.listSorterAllMyAccount[index].typeAccount != "S") {
                                                         
                                                         HStack {
-                                                            Text("")
+                                                            Text("Rp.")
+                                                                .fontWeight(.light)
+                                                                .foregroundColor(Color(hex: "#2334D0"))
+                                                            
+                                                            Text("-")
+                                                                .font(.title3)
+                                                                .bold()
+                                                                .foregroundColor(Color(hex: "#2334D0"))
                                                         }
                                                         .padding(.top, 5)
                                                         
