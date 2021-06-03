@@ -28,6 +28,7 @@ struct DestinationAccountBalancesView: View {
     // Bool
     @State private var isLoading: Bool = false
     @State private var isShowAlert: Bool = false
+    @State private var showFreezeMenu: Bool = false
     
     // Alert Message
     @State private var messageError: String = ""
@@ -133,6 +134,11 @@ struct DestinationAccountBalancesView: View {
                 })
                 .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
             }
+            
+            if (showFreezeMenu) {
+                ModalOverlay(tapAction: { withAnimation { } })
+                    .edgesIgnoringSafeArea(.all)
+            }
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarTitle("Pindah Saldo", displayMode: .inline)
@@ -143,7 +149,12 @@ struct DestinationAccountBalancesView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
+        .popup(isPresented: $showFreezeMenu, type: .toast, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            popupFreezeAccount()
+                .padding(.bottom, 15)
+        }
         .onAppear {
+            self.checkFreezeAccount()
             self.listSourceNumber.removeAll()
             self.listTabunganName.removeAll()
             self.listBalance.removeAll()
@@ -199,6 +210,20 @@ struct DestinationAccountBalancesView: View {
                 self.statusError = "500"
                 self.messageError = "Cannot Get Main Account Balance"
             }
+        }
+    }
+    
+    func checkFreezeAccount() {
+        self.profileVM.getAccountFreeze { sucess in
+            
+//            self.showFreezeMenu = true
+            
+            if sucess {
+                if self.profileVM.freezeAccount {
+                    self.showFreezeMenu = true
+                }
+            }
+            
         }
     }
     
@@ -258,6 +283,41 @@ struct DestinationAccountBalancesView: View {
             }
             
         }
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupFreezeAccount() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Akun anda telah dibekukan")
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.showFreezeMenu = false
+            }) {
+                Text("Back")
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

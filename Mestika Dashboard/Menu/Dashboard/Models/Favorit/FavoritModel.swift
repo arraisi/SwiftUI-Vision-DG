@@ -15,37 +15,21 @@ import Foundation
 // MARK: - FavoritModelElement
 struct FavoritModelElement: Codable {
     let id, name, sourceNumber, cardNo: String
-    let type: String?
+    let destinationNumber, destinationBankName, type: String
     let transferOnUs: TransferO?
-    let transferOffUsSkn: TransferOffUsSkn?
-    let transferOffUsRtgs: TransferOffUsRtgs?
-    let destinationNumber, destinationBankName, favoritModelType, typeOfBeneficiary: String?
-    let citizenCode: String?
+    let typeOfBeneficiary, citizenCode: String?
+    let transferOffUsRtgs, transferOffUsSkn: TransferOffUs?
     let transferOffUsOnline: TransferO?
-    
-    enum CodingKeys: String, CodingKey {
-        case id, name, sourceNumber, cardNo, type, transferOnUs, transferOffUsSkn, transferOffUsRtgs, destinationNumber, destinationBankName
-        case favoritModelType
-        case typeOfBeneficiary, citizenCode, transferOffUsOnline
-    }
 }
 
 // MARK: - TransferO
 struct TransferO: Codable {
-    let destinationNumber: String
-    let destinationBankName: String?
+    let destinationNumber, destinationBankName: String
 }
 
-// MARK: - TransferOffUsSkn
-struct TransferOffUsSkn: Codable {
-    let destinationBankCode: String?
-    let typeOfBeneficiary: String
-    let destinationNumber, destinationBankName, citizenCode: String?
-}
-
-// MARK: - TransferOffUsRtgs
-struct TransferOffUsRtgs: Codable {
-    let destinationBankCode, destinationBankName: String
+// MARK: - TransferOffUs
+struct TransferOffUs: Codable {
+    let destinationNumber, destinationBankName, typeOfBeneficiary, citizenCode: String
 }
 
 typealias FavoritModel = [FavoritModelElement]
