@@ -399,6 +399,9 @@ struct VerificationAddressView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .onAppear {
+            self.getAllProvince()
+        }
         .alert(isPresented: $isShowingAlert) {
             return Alert(
                 title: Text("Do you want to cancel registration?".localized(language)),
