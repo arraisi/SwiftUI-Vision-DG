@@ -55,7 +55,7 @@ extension OtpViewModel {
                     completion(true)
                 } else {
                     print("Failed")
-                 
+                    
                     print(response.code ?? "no code")
                     print(response.message ?? "no message")
                     
@@ -85,7 +85,6 @@ extension OtpViewModel {
                         self.statusMessage = "Internal Server Error"
                     }
                 }
-                
                 completion(false)
             }
         }
@@ -229,12 +228,13 @@ extension OtpViewModel {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     if error == .notFound {
+                        print("status message not found")
                         self.statusMessage = "Account Not Found - Core Banking"
                     } else {
                         self.statusMessage = "Server Error"
                     }
                 }
-                
+                print("status message : \(self.statusMessage)")
                 completion(false)
                 print(error.localizedDescription)
             }

@@ -203,10 +203,11 @@ class OtpService {
             .appending("accValue", value: otpRequest.destination)
             .appending("accType", value: otpRequest.type)
         
-        print("URL GET ACC : \(finalUrl)")
+        print("\n\n1. URL GET ACC : \(finalUrl)")
         
         var request = URLRequest(finalUrl)
         request.httpMethod = "GET"
+        print("2. HTTP REQUEST GET ACC : \(finalUrl)")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -215,8 +216,7 @@ class OtpService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("\n\n GET ACC \(httpResponse.statusCode)")
-                
+                print("3. GET ACC \(httpResponse.statusCode)\n\n")
                 if (httpResponse.statusCode == 404) {
                     completion(.failure(.notFound))
                 }

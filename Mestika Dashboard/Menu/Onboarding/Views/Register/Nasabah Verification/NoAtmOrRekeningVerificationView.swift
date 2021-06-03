@@ -156,6 +156,7 @@ struct NoAtmOrRekeningVerificationView: View {
                                 self.registerData.accType = "REKENING"
                                 self.registerData.accNo = self.noKartuCtrl
                             }
+                            print("type = \(registerData.atmOrRekening)")
                             self.isActive = true
                         }, label: {
                             Text("Verification Card No.".localized(language))
