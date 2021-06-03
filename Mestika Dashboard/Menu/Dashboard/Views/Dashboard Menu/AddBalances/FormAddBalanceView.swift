@@ -23,7 +23,11 @@ struct FormAddBalanceView: View {
     @State private var minTrx: String = "10000"
     @State private var minTrxDbl: Double = 10000
     
+    @State private var maxLimit: String = "0"
+    @State private var maxLimitDbl: Double = 0
+    
     @State private var showDialogMinTransaction: Bool = false
+    @State private var showDialogMaxReached: Bool = false
     
     // Variable List
     private var _listVoucher = ["Sekali Pengiriman"]
@@ -120,6 +124,27 @@ struct FormAddBalanceView: View {
                     }
                     .padding(.top, 5)
                     .padding(.bottom, 1)
+                    
+                    HStack {
+                        Text("Limit Transaksi")
+                            .font(.subheadline)
+                            .fontWeight(.ultraLight)
+                        
+                        Spacer()
+                        
+                        HStack(alignment: .top) {
+                            Text("Rp.")
+                                .foregroundColor(.red)
+                                .font(.caption2)
+                                .fontWeight(.bold)
+                            Text("\(self.maxLimit.thousandSeparator())")
+                                .foregroundColor(.red)
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                        }
+                    }
+                    .padding(.top, 5)
+                    .padding(.bottom, 2)
                     
                     Divider()
                     
@@ -237,6 +262,8 @@ struct FormAddBalanceView: View {
                     
                     if (amountDbl < minTrxDbl) {
                         self.showDialogMinTransaction = true
+                    } else if (amountDbl > maxLimitDbl) {
+                        self.showDialogMaxReached = true
                     } else {
                         self.transactionData.transactionDate = dateFormatter.string(from: self.date)
                         self.transactionData.amount = self.amountCtrl
@@ -265,7 +292,7 @@ struct FormAddBalanceView: View {
             })
             .frame(width: UIScreen.main.bounds.width - 60, alignment: .leading)
             
-            if ( self.showDialogMinTransaction) {
+            if ( self.showDialogMinTransaction || self.showDialogMaxReached) {
                 ModalOverlay(tapAction: { withAnimation {
                     self.showDialogMinTransaction = false
                 }})
@@ -273,6 +300,7 @@ struct FormAddBalanceView: View {
             }
         }
         .onAppear {
+            self.getLimit()
             self.saldoAktif = self.transactionData.mainBalance
         }
         .onTapGesture() {
@@ -281,6 +309,9 @@ struct FormAddBalanceView: View {
         .navigationBarTitleDisplayMode(.inline)
         .popup(isPresented: $showDialogMinTransaction, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
             modalMinTransaction()
+        }
+        .popup(isPresented: $showDialogMaxReached, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalMaxReached()
         }
     }
     
@@ -375,6 +406,76 @@ struct FormAddBalanceView: View {
             return false
         }
         return true
+    }
+    
+    func modalMaxReached() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_limit_max")
+                .resizable()
+                .frame(width: 74, height: 81)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Transaction limit over")
+                .font(.custom("Montserrat-SemiBold", size: 18))
+                .foregroundColor(.red)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text("Transaction Limit" + " Rp.\(maxLimit.thousandSeparator()),- " + "Over. Please reduce the nominal amount of the transaction or cancel the transaction.")
+                .font(.custom("Montserrat-Light", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogMaxReached = false
+                },
+                label: {
+                    Text("CHANGE THE NOMINAL")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogMaxReached = false
+                },
+                label: {
+                    Text("CANCEL TRANSACTION")
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
+    @ObservedObject var limitVM = TransferViewModel()
+    func getLimit() {
+        
+        self.limitVM.limitUser { success in
+            
+            if success {
+                print("GET LIMIT SUCCESS")
+                self.maxLimit = String(self.limitVM.limitCifIdr)
+                self.maxLimitDbl = Double(self.limitVM.limitCifIdr)
+            }
+            
+            if !success {
+                print("FAILED GET LIMIT")
+            }
+        }
     }
 }
 

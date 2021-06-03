@@ -120,9 +120,7 @@ struct GridMenuView: View {
         })
         .onReceive(self.appState.$moveToDashboard) { value in
             if value {
-                //                getCoreDataNewDevice()
                 print("Move to moveToDashboard: \(value)")
-                //                activateWelcomeView()
                 self.savingAccountActive = false
                 self.moveBalancesActive = false
                 self.addBalancesActive = false
