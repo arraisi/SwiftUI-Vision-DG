@@ -30,6 +30,11 @@ struct VerificationAddressView: View {
     @GestureState private var dragOffset = CGSize.zero
     @State var isShowingAlert: Bool = false
     
+    @State var allProvince = MasterProvinceResponse()
+    @State var allRegency = MasterRegencyResponse()
+    @State var allDistrict = MasterDistrictResponse()
+    @State var allVillage = MasterVilageResponse()
+    
     var disableForm: Bool {
         
         if (registerData.verificationAddressId == 0) {
@@ -162,13 +167,13 @@ struct VerificationAddressView: View {
                                                 .disabled(true)
                                             
                                             Menu {
-                                                ForEach(0..<self.addressVM.provinceResult.count, id: \.self) { i in
+                                                ForEach(0..<self.allProvince.count, id: \.self) { i in
                                                     Button(action: {
-                                                        registerData.addressProvinsiInput = self.addressVM.provinceResult[i].name
-                                                        self.addressProvinsiInput = self.addressVM.provinceResult[i].name
-                                                        self.getRegencyByIdProvince(idProvince: self.addressVM.provinceResult[i].id)
+                                                        registerData.addressProvinsiInput = self.allProvince[i].name
+                                                        self.addressProvinsiInput = self.allProvince[i].name
+                                                        self.getRegencyByIdProvince(idProvince: self.allProvince[i].id)
                                                     }) {
-                                                        Text(self.addressVM.provinceResult[i].name)
+                                                        Text(self.allProvince[i].name)
                                                             .font(.custom("Montserrat-Regular", size: 12))
                                                     }
                                                 }
@@ -202,13 +207,13 @@ struct VerificationAddressView: View {
                                                 .disabled(true)
                                             
                                             Menu {
-                                                ForEach(0..<self.addressVM.regencyResult.count, id: \.self) { i in
+                                                ForEach(0..<self.allRegency.count, id: \.self) { i in
                                                     Button(action: {
-                                                        registerData.addressKotaInput = self.addressVM.regencyResult[i].name
-                                                        self.addressKotaInput = self.addressVM.regencyResult[i].name
-                                                        self.getDistrictByIdRegency(idRegency: self.addressVM.regencyResult[i].id)
+                                                        registerData.addressKotaInput = self.allRegency[i].name
+                                                        self.addressKotaInput = self.allRegency[i].name
+                                                        self.getDistrictByIdRegency(idRegency: self.allRegency[i].id)
                                                     }) {
-                                                        Text(self.addressVM.regencyResult[i].name)
+                                                        Text(self.allRegency[i].name)
                                                             .font(.custom("Montserrat-Regular", size: 12))
                                                     }
                                                 }
@@ -242,13 +247,13 @@ struct VerificationAddressView: View {
                                                 .disabled(true)
                                             
                                             Menu {
-                                                ForEach(0..<self.addressVM.districtResult.count, id: \.self) { i in
+                                                ForEach(0..<self.allDistrict.count, id: \.self) { i in
                                                     Button(action: {
-                                                        registerData.addressKelurahanInput = self.addressVM.districtResult[i].name
-                                                        self.addressKelurahanInput = self.addressVM.districtResult[i].name
-                                                        self.getVilageByIdDistrict(idDistrict: self.addressVM.districtResult[i].id)
+                                                        registerData.addressKelurahanInput = self.allDistrict[i].name
+                                                        self.addressKelurahanInput = self.allDistrict[i].name
+                                                        self.getVilageByIdDistrict(idDistrict: self.allDistrict[i].id)
                                                     }) {
-                                                        Text(self.addressVM.districtResult[i].name)
+                                                        Text(self.allDistrict[i].name)
                                                             .font(.custom("Montserrat-Regular", size: 12))
                                                     }
                                                 }
@@ -282,15 +287,15 @@ struct VerificationAddressView: View {
                                                 .disabled(true)
                                             
                                             Menu {
-                                                ForEach(0..<self.addressVM.vilageResult.count, id: \.self) { i in
+                                                ForEach(0..<self.allVillage.count, id: \.self) { i in
                                                     Button(action: {
-                                                        registerData.addressKecamatanInput = self.addressVM.vilageResult[i].name
-                                                        registerData.kodePosKeluarga = self.addressVM.vilageResult[i].postalCode ?? ""
+                                                        registerData.addressKecamatanInput = self.allVillage[i].name
+                                                        registerData.kodePosKeluarga = self.allVillage[i].postalCode ?? ""
                                                         
-                                                        self.addressKodePosInput = self.addressVM.vilageResult[i].postalCode ?? ""
-                                                        self.addressKecamatanInput = self.addressVM.vilageResult[i].name
+                                                        self.addressKodePosInput = self.allVillage[i].postalCode ?? ""
+                                                        self.addressKecamatanInput = self.allVillage[i].name
                                                     }) {
-                                                        Text(self.addressVM.vilageResult[i].name)
+                                                        Text(self.allVillage[i].name)
                                                             .font(.custom("Montserrat-Regular", size: 12))
                                                     }
                                                 }
@@ -405,9 +410,6 @@ struct VerificationAddressView: View {
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             addressSuggestionPopUp()
         }
-        .onAppear {
-            self.getAllProvince()
-        }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
@@ -512,19 +514,19 @@ struct VerificationAddressView: View {
                     registerData.addressInput = self.addressSugestion[0].formatted_address
                     self.addressInput = self.addressSugestion[0].formatted_address
                     
-//                    registerData.addressPostalCodeInput = self.addressSugestion[0].postalCode
-//                    registerData.addressKecamatanInput = self.addressSugestion[0].kecamatan
-//                    registerData.addressKelurahanInput = self.addressSugestion[0].kelurahan
+                    registerData.addressPostalCodeInput = self.addressSugestion[0].postalCode
+                    registerData.addressKecamatanInput = self.addressSugestion[0].kelurahan
+                    registerData.addressKelurahanInput = self.addressSugestion[0].kecamatan
+                    registerData.addressKotaInput = self.addressSugestion[0].city
+                    registerData.addressProvinsiInput = self.addressSugestion[0].province
                     
-//                    registerData.addressKotaInput = self.addressSugestion[0].city
-//                    registerData.addressProvinsiInput = self.addressSugestion[0].province
-                    
-//                    self.addressKelurahanInput = self.addressSugestion[0].kelurahan
-//                    self.addressKecamatanInput = self.addressSugestion[0].kecamatan
-//                    self.addressKotaInput = self.addressSugestion[0].city
-//                    self.addressProvinsiInput = self.addressSugestion[0].province
-//                    self.addressKodePosInput = self.addressSugestion[0].postalCode
+                    self.addressKelurahanInput = self.addressSugestion[0].kecamatan
+                    self.addressKecamatanInput = self.addressSugestion[0].kelurahan
+                    self.addressKotaInput = self.addressSugestion[0].city
+                    self.addressProvinsiInput = self.addressSugestion[0].province
+                    self.addressKodePosInput = self.addressSugestion[0].postalCode
                 }
+                self.getAllProvince()
                 self.showingModal = false
                 print("Success")
                 print("self.addressSugestion[0].postalCode => \(self.addressSugestion[0].postalCode)")
@@ -543,7 +545,7 @@ struct VerificationAddressView: View {
         self.addressVM.getAllProvince { success in
             
             if success {
-                
+                self.allProvince = self.addressVM.provinceResult
             }
             
             if !success {
@@ -556,7 +558,7 @@ struct VerificationAddressView: View {
         self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
             
             if success {
-                
+                self.allRegency = self.addressVM.regencyResult
             }
             
             if !success {
@@ -569,7 +571,7 @@ struct VerificationAddressView: View {
         self.addressVM.getDistrictByIdRegency(idRegency: idRegency) { success in
             
             if success {
-                
+                self.allDistrict = self.addressVM.districtResult
             }
             
             if !success {
@@ -582,7 +584,7 @@ struct VerificationAddressView: View {
         self.addressVM.getVilageByIdDistrict(idDistrict: idDistrict) { success in
             
             if success {
-                
+                self.allVillage = self.addressVM.vilageResult
             }
             
             if !success {

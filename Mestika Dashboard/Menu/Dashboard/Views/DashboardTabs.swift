@@ -308,7 +308,10 @@ struct DashboardTabs: View {
                     listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
                     
                     listSortedMyAccount.forEach { a in
-                        self.listSourceNumber.append(a.sourceNumber ?? "")
+                        
+                        if (a.typeAccount == "S" || a.typeAccount == "D") {
+                            self.listSourceNumber.append(a.sourceNumber ?? "")
+                        }
                     }
 
                     self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
@@ -420,7 +423,9 @@ struct DashboardTabs: View {
                                                 }
                                                 
                                                 if isHiddenBalance {
+                                                    
                                                     EmptyView()
+                                                    
                                                 } else {
                                                     
                                                     HStack {

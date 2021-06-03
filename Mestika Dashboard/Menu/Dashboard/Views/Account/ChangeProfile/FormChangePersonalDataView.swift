@@ -21,7 +21,7 @@ struct FormChangePersonalDataView: View {
     
     @EnvironmentObject var appState: AppState
     
-    @State var pinActive: Bool = true
+    @State var pinActive: Bool = false
     @State var wrongPin: Bool = false
     @State var showModal: Bool = false
     
