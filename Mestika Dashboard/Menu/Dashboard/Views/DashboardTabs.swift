@@ -336,7 +336,6 @@ struct DashboardTabs: View {
                             
                             self.savingAccountVM.balanceAccount.forEach { balance in
                                 if (acc.sourceNumber == balance.sourceNumber) {
-                                    print(balance.sourceNumber)
                                     self.tmpAllDataAccount.balance = balance.balance
                                     self.tmpAllDataAccount.debitType = balance.creditDebit ?? ""
                                 }
