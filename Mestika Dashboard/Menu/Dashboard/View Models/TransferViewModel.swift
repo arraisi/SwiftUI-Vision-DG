@@ -34,6 +34,7 @@ class TransferViewModel : ObservableObject {
     
     @Published var transactionDate: String = ""
     
+    @Published var limitCifIdr: Int = 0
     @Published var limitUserOnUs: Int = 0
     @Published var limitUserSkn: Int = 0
     @Published var limitUserRtgs: Int = 0
@@ -455,6 +456,7 @@ class TransferViewModel : ObservableObject {
                         switch limit.key {
                         case "trxOnCifIdr":
                             print("Cif")
+                            self.limitCifIdr = Int(limit.value)
                         case "trxOnCifNonIdr":
                             print("Cif Non Idr")
                         case "trxOnUsIdr":

@@ -13,12 +13,6 @@ struct DestinationAccountAddBalanceView: View {
     // Observable Object
     @State var transactionData = MoveBalancesModel()
     
-    @State private var _listAccount = [
-        MoveBalanceCard(id: 1, typeTabungan: "Platinum Saver", saldo: "300000", cardNo: "98391928391", color: "#2334D0"),
-        MoveBalanceCard(id: 2, typeTabungan: "Gold Saver", saldo: "100000", cardNo: "98391928391", color: "#D0C423"),
-        MoveBalanceCard(id: 3, typeTabungan: "Silver Saver", saldo: "150000", cardNo: "98391928391", color: "#9B9B9B")
-    ]
-    
     // Local Variable
     @State private var listSourceNumber: [String] = []
     @State private var listTabunganName: [String] = []

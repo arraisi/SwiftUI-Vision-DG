@@ -233,6 +233,10 @@ struct DashboardTabs: View {
                         self.listMyAccount.removeAll()
                         self.listSourceNumber.removeAll()
                         self.listSortedMyAccount.removeAll()
+                        self.listAllMyAccount.removeAll()
+                        self.listSorterAllMyAccount.removeAll()
+                        
+                        self.checkFreezeAccount()
                         
                         self.routingAccountDeposit = false
                         self.routingManagementCard = false
@@ -266,6 +270,8 @@ struct DashboardTabs: View {
             self.listMyAccount.removeAll()
             self.listSourceNumber.removeAll()
             self.listSortedMyAccount.removeAll()
+            self.listAllMyAccount.removeAll()
+            self.listSorterAllMyAccount.removeAll()
             
             self.isHiddenInformationReStore = true
             self.isHiddenInformationFreezeAccount = true
