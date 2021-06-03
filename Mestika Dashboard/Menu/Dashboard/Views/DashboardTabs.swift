@@ -562,11 +562,15 @@ struct DashboardTabs: View {
             
             if success {
                 
-                if profileVM.freezeAccount {
-                    self.isHiddenInformationFreezeAccount = false
-                } else {
-                    self.isHiddenInformationFreezeAccount = true
-                }
+                self.isHiddenInformationFreezeAccount = !profileVM.freezeAccount
+                
+//                if profileVM.freezeAccount {
+//                    self.isHiddenInformationFreezeAccount = false
+//                }
+//
+//                if !profileVM.freezeAccount {
+//                    self.isHiddenInformationFreezeAccount = true
+//                }
             }
             
         }
