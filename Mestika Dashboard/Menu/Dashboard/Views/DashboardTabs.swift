@@ -235,6 +235,7 @@ struct DashboardTabs: View {
                         self.listSortedMyAccount.removeAll()
                         self.listAllMyAccount.removeAll()
                         self.listSorterAllMyAccount.removeAll()
+                        self.isHiddenInformationFreezeAccount = true
                         
                         self.checkFreezeAccount()
                         
@@ -360,11 +361,6 @@ struct DashboardTabs: View {
                         listSorterAllMyAccount.append(contentsOf: filterM)
                         listSorterAllMyAccount.append(contentsOf: filterS)
                         listSorterAllMyAccount.append(contentsOf: filterBlankOrNil)
-                        
-                        self.listSorterAllMyAccount.forEach { data in
-                            print(data.sourceNumber)
-                            print(data.balance)
-                        }
                         
                         if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
                             print("ADA TYPE D")
@@ -569,6 +565,8 @@ struct DashboardTabs: View {
                 
                 if profileVM.freezeAccount {
                     self.isHiddenInformationFreezeAccount = false
+                } else {
+                    self.isHiddenInformationFreezeAccount = true
                 }
             }
             
