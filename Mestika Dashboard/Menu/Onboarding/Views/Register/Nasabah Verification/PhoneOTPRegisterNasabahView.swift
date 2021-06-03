@@ -93,7 +93,7 @@ struct PhoneOTPRegisterNasabahView: View {
             VStack {
                 
                 AppBarLogo(light: false, onCancel: {})
-
+                
                 if (self.isLoading) {
                     LinearWaitingIndicator()
                         .animated(true)
@@ -206,7 +206,7 @@ struct PhoneOTPRegisterNasabahView: View {
                             } else {
                                 self.isShowAlertInternetConnection = true
                             }
-
+                            
                         }) {
                             if (self.isBtnValidationDisabled) {
                                 Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
@@ -282,16 +282,26 @@ struct PhoneOTPRegisterNasabahView: View {
             }
         }
         .alert(isPresented: $isShowAlert) {
-            return Alert(
-                title: Text("MESSAGE"),
-                message: Text(self.messageResponse),
-                dismissButton: .default(Text("OK".localized(language)), action: {
-                    self.isLoading = false
-                }))
+            if showingAlert {
+                return Alert(
+                    title: Text("Do you want to cancel registration?"),
+                    primaryButton: .default(Text("YES".localized(language)), action: {
+                        self.appState.moveToWelcomeView = true
+                    }),
+                    secondaryButton: .cancel(Text("NO".localized(language))))
+            } else {
+                return Alert(
+                    title: Text("MESSAGE"),
+                    message: Text(self.messageResponse),
+                    dismissButton: .default(Text("OK".localized(language)), action: {
+                        self.isLoading = false
+                    }))
+            }
         }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
+                self.isShowAlert = true
                 self.showingAlert = true
             }
         }))
@@ -304,14 +314,6 @@ struct PhoneOTPRegisterNasabahView: View {
             closeOnTapOutside: true) { popupMenu() }
         .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             PopupNoInternetConnection()
-        }
-        .alert(isPresented: $showingAlert) {
-            return Alert(
-                title: Text("Do you want to cancel registration?"),
-                primaryButton: .default(Text("YES".localized(language)), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text("NO".localized(language))))
         }
     }
     
@@ -492,19 +494,22 @@ struct PhoneOTPRegisterNasabahView: View {
             )
         ) { success in
             
+            print("get otp is success : \(success)\n")
+            
+            self.isLoading = false
+            
             if success {
                 print("isLoading \(self.otpVM.isLoading)")
                 print("otpRef \(self.otpVM.reference)")
                 print("status \(self.otpVM.statusMessage)")
                 
                 DispatchQueue.main.async {
-                    self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
-                    self.messageResponse = self.otpVM.statusMessage
+//                    self.messageResponse = self.otpVM.statusMessage
                     self.destinationNumber = self.otpVM.destination
                     self.registerData.noTelepon = self.otpVM.destination
-                    self.isShowAlert = false
-//                    self.timeRemainingRsnd = self.otpVM.timeCounter
+//                    self.isShowAlert = false
+                    //                    self.timeRemainingRsnd = self.otpVM.timeCounter
                     self.timeRemainingRsnd = 30
                     UserDefaults.standard.set(self.otpVM.destination, forKey: "phone_local")
                 }
@@ -518,20 +523,16 @@ struct PhoneOTPRegisterNasabahView: View {
                     print(self.otpVM.timeCounter)
                     
                     DispatchQueue.main.sync {
-                        self.isLoading = self.otpVM.isLoading
                         self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-//                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                        //                        self.timeRemainingRsnd = self.otpVM.timeCounter
                         self.timeRemainingRsnd = 30
                     }
                     self.isShowAlert = true
                 } else {
-                    DispatchQueue.main.async {
-                        self.isLoading = self.otpVM.isLoading
-                        self.isShowAlert = true
-                        self.messageResponse = self.otpVM.statusMessage
-                    }
+                    self.messageResponse = self.otpVM.statusMessage
+                    self.isShowAlert = true
                 }
             }
         }
@@ -630,22 +631,22 @@ struct PhoneOTPRegisterNasabahView: View {
         self.isLoading = true
         
         self.userVM.cancelRegistration(nik: registerData.nik, completion: { (success:Bool) in
-
+            
             if success {
                 self.isLoading = false
                 self.modalSelection = ""
-
+                
                 let domain = Bundle.main.bundleIdentifier!
                 UserDefaults.standard.removePersistentDomain(forName: domain)
                 UserDefaults.standard.synchronize()
-
+                
                 self.isCancelViewActive = true
-
+                
             } else {
                 self.isLoading = false
-
+                
                 self.messageResponse = "Failed to cancel the application. Please try again later.".localized(language)
-                self.isShowAlert.toggle()
+                self.isShowAlert = true
             }
         })
     }
