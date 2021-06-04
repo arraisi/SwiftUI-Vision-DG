@@ -102,26 +102,38 @@ struct ListAllFavoriteTransactionView: View {
                                         self.showFreezeMenu = true
                                     } else {
                                         if (data.type == "TRANSFER_SESAMA") {
+                                            
                                             print("ON US")
                                             self.destinationNumber = data.transferOnUs!.destinationNumber
                                             self.isRouteOnUs = true
-                                        } else {
-                                            print("OFF US")
-                                            if (data.transferOffUsRtgs == nil) {
-                                                self.destinationNumber = data.transferOffUsSkn?.destinationNumber ?? ""
-                                                self.name = data.name
-                                                self.desc = ""
-                                                self.destinationBank = data.destinationBankName ?? ""
-                                                self.type = "SKN"
-                                                self.isRouteOffUs = true
-                                            } else {
-                                                self.destinationNumber = data.destinationNumber ?? ""
-                                                self.destinationBank = data.destinationBankName ?? ""
-                                                self.name = data.name
-                                                self.desc = ""
-                                                self.type = "RTGS"
-                                                self.isRouteOffUs = true
-                                            }
+                                            
+                                        } else if (data.type == "TRANSFER_ONLINE") {
+                                            
+                                            self.destinationNumber = data.transferOffUsOnline?.destinationNumber ?? ""
+                                            self.name = data.name
+                                            self.desc = ""
+                                            self.destinationBank = data.transferOffUsOnline?.destinationBankName ?? ""
+                                            self.type = "Online"
+                                            self.isRouteOffUs = true
+                                            
+                                        } else if (data.type == "TRANSFER_RTGS") {
+                                            
+                                            self.destinationNumber = data.transferOffUsRtgs?.destinationNumber ?? ""
+                                            self.name = data.name
+                                            self.desc = ""
+                                            self.destinationBank = data.transferOffUsRtgs?.destinationBankName ?? ""
+                                            self.type = "RTGS"
+                                            self.isRouteOffUs = true
+                                            
+                                        } else if (data.type == "TRANSFER_SKN") {
+                                            
+                                            self.destinationNumber = data.transferOffUsSkn?.destinationNumber ?? ""
+                                            self.name = data.name
+                                            self.desc = ""
+                                            self.destinationBank = data.transferOffUsSkn?.destinationBankName ?? ""
+                                            self.type = "SKN"
+                                            self.isRouteOffUs = true
+                                            
                                         }
                                     }
                                 },

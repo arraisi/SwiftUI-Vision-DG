@@ -10,6 +10,8 @@ import JGProgressHUD_SwiftUI
 
 struct ContentView: View {
     
+    let appState = AppState()
+    
     init() {
         // this is not the same as manipulating the proxy directly
         let appearance = UINavigationBarAppearance()
@@ -50,6 +52,7 @@ struct ContentView: View {
                 Color(hex: "#F6F8FB")
                 
                 WelcomeView()
+                    .environmentObject(appState)
                 
 //                                NavigationView{
 //                                    KeluargaTerdekat()

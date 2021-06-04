@@ -16,6 +16,8 @@ struct MoveBalanceCard: Identifiable, Hashable {
 
 struct DestinationAccountBalancesView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     // Observable Object
     @State var transaksiData = MoveBalancesModel()
     
@@ -302,6 +304,7 @@ struct DestinationAccountBalancesView: View {
             
             Button(action: {
                 self.showFreezeMenu = false
+                self.appState.moveToDashboard = true
             }) {
                 Text("Back")
                     .foregroundColor(.white)

@@ -10,6 +10,8 @@ import Indicators
 
 struct DestinationAccountAddBalanceView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     // Observable Object
     @State var transactionData = MoveBalancesModel()
     
@@ -35,7 +37,7 @@ struct DestinationAccountAddBalanceView: View {
             
             // Route Link
             NavigationLink(
-                destination: FormAddBalanceView().environmentObject(transactionData),
+                destination: FormAddBalanceView().environmentObject(transactionData).environmentObject(appState),
                 isActive: self.$nextRouting,
                 label: { EmptyView() }
             )

@@ -151,7 +151,7 @@ struct DashboardTabs: View {
                     }
                     
                     NavigationLink(
-                        destination: DestinationAccountAddBalanceView(),
+                        destination: DestinationAccountAddBalanceView().environmentObject(appState),
                         isActive: $addBalancesActive,
                         label: { EmptyView() }
                     )
@@ -237,7 +237,7 @@ struct DashboardTabs: View {
                         self.listSorterAllMyAccount.removeAll()
                         self.isHiddenInformationFreezeAccount = true
                         
-                        self.checkFreezeAccount()
+                        getBalanceUser()
                         
                         self.routingAccountDeposit = false
                         self.routingManagementCard = false
@@ -283,100 +283,8 @@ struct DashboardTabs: View {
             getProfile()
             getListKartuKu()
             getAccountBalance()
-            checkFreezeAccount()
-            
-            self.savingAccountVM.getAccounts { success in
-                
-                if success {
-                    self.isLoadingCard = false
-                    self.savingAccountVM.accounts.forEach { e in
-                        
-                        self.tmpMyAccount.sourceNumber = e.accountNumber
-                        self.tmpMyAccount.typeAccount = e.accountType ?? ""
-                        self.tmpMyAccount.productName = e.productName ?? "Tabungan Mestika"
-                        self.tmpMyAccount.description = e.accountTypeDescription
-                        self.tmpMyAccount.categoryProduct = e.categoryProduct
-                        self.listMyAccount.append(tmpMyAccount)
-                        
-                    }
-                    
-                    
-                    let sourceFilteredM = listMyAccount.filter { word in
-                        return word.categoryProduct == "M"
-                    }
-                    let sourceFilteredS = listMyAccount.filter { word in
-                      return word.categoryProduct == "S"
-                    }
-                    let sourceFilteredBlankOrNil = listMyAccount.filter { word in
-                      return word.categoryProduct != "M" && word.categoryProduct != "S"
-                    }
+            getBalanceUser()
 
-                    listSortedMyAccount.append(contentsOf: sourceFilteredM)
-                    listSortedMyAccount.append(contentsOf: sourceFilteredS)
-                    listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
-                    
-                    listSortedMyAccount.forEach { a in
-//                        self.listSourceNumber.append(a.sourceNumber ?? "")
-                        if (a.typeAccount == "S" || a.typeAccount == "D") {
-                            self.listSourceNumber.append(a.sourceNumber ?? "")
-                        }
-                    }
-
-                    print("COUNT MY ACCOUNT")
-                    print(self.listMyAccount.count)
-                    self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
-                        
-                        listMyAccount.forEach { acc in
-
-                            self.tmpAllDataAccount.sourceNumber = acc.sourceNumber
-                            self.tmpAllDataAccount.typeAccount = acc.typeAccount
-                            self.tmpAllDataAccount.productName = acc.productName
-                            self.tmpAllDataAccount.description = acc.description
-                            self.tmpAllDataAccount.categoryProduct = acc.categoryProduct
-                            
-                            self.savingAccountVM.balanceAccount.forEach { balance in
-                                if (acc.sourceNumber == balance.sourceNumber) {
-                                    self.tmpAllDataAccount.balance = balance.balance
-                                    self.tmpAllDataAccount.debitType = balance.creditDebit ?? ""
-                                }
-                            }
-                            
-                            self.listAllMyAccount.append(tmpAllDataAccount)
-                        }
-                        
-                        print("COUNT ALL MY ACCOUNT")
-                        print(self.listAllMyAccount.count)
-                        
-                        let filterM = listAllMyAccount.filter { word in
-                            return word.categoryProduct == "M"
-                        }
-                        let filterS = listAllMyAccount.filter { word in
-                          return word.categoryProduct == "S"
-                        }
-                        let filterBlankOrNil = listAllMyAccount.filter { word in
-                          return word.categoryProduct != "M" && word.categoryProduct != "S"
-                        }
-
-                        listSorterAllMyAccount.append(contentsOf: filterM)
-                        listSorterAllMyAccount.append(contentsOf: filterS)
-                        listSorterAllMyAccount.append(contentsOf: filterBlankOrNil)
-                        
-                        if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
-                            print("ADA TYPE D")
-                            self.isHiddenInformationReStore = false
-                        }
-                        
-                    }
-                }
-                
-                if !success {
-                    self.isLoadingCard = false
-                    if (self.savingAccountVM.errorCode == "401") {
-                        self.showAlertTimeout = true
-                    }
-                }
-                
-            }
         }
         .alert(isPresented: $showAlertTimeout) {
             return Alert(title: Text("Session Expired"), message: Text("You have to re-login"), dismissButton: .default(Text("OK".localized(language)), action: {
@@ -392,6 +300,101 @@ struct DashboardTabs: View {
         }
         
         
+    }
+    
+    func getBalanceUser() {
+        self.savingAccountVM.getAccounts { success in
+            
+            if success {
+                self.isLoadingCard = false
+                self.savingAccountVM.accounts.forEach { e in
+                    
+                    self.tmpMyAccount.sourceNumber = e.accountNumber
+                    self.tmpMyAccount.typeAccount = e.accountType ?? ""
+                    self.tmpMyAccount.productName = e.productName ?? "Tabungan Mestika"
+                    self.tmpMyAccount.description = e.accountTypeDescription
+                    self.tmpMyAccount.categoryProduct = e.categoryProduct
+                    self.listMyAccount.append(tmpMyAccount)
+                    
+                }
+                
+                
+                let sourceFilteredM = listMyAccount.filter { word in
+                    return word.categoryProduct == "M"
+                }
+                let sourceFilteredS = listMyAccount.filter { word in
+                  return word.categoryProduct == "S"
+                }
+                let sourceFilteredBlankOrNil = listMyAccount.filter { word in
+                  return word.categoryProduct != "M" && word.categoryProduct != "S"
+                }
+
+                listSortedMyAccount.append(contentsOf: sourceFilteredM)
+                listSortedMyAccount.append(contentsOf: sourceFilteredS)
+                listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
+                
+                listSortedMyAccount.forEach { a in
+//                        self.listSourceNumber.append(a.sourceNumber ?? "")
+                    if (a.typeAccount == "S" || a.typeAccount == "D") {
+                        self.listSourceNumber.append(a.sourceNumber ?? "")
+                    }
+                }
+
+                print("COUNT MY ACCOUNT")
+                print(self.listMyAccount.count)
+                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
+                    self.checkFreezeAccount()
+                    listMyAccount.forEach { acc in
+
+                        self.tmpAllDataAccount.sourceNumber = acc.sourceNumber
+                        self.tmpAllDataAccount.typeAccount = acc.typeAccount
+                        self.tmpAllDataAccount.productName = acc.productName
+                        self.tmpAllDataAccount.description = acc.description
+                        self.tmpAllDataAccount.categoryProduct = acc.categoryProduct
+                        
+                        self.savingAccountVM.balanceAccount.forEach { balance in
+                            if (acc.sourceNumber == balance.sourceNumber) {
+                                self.tmpAllDataAccount.balance = balance.balance
+                                self.tmpAllDataAccount.debitType = balance.creditDebit ?? ""
+                            }
+                        }
+                        
+                        self.listAllMyAccount.append(tmpAllDataAccount)
+                    }
+                    
+                    print("COUNT ALL MY ACCOUNT")
+                    print(self.listAllMyAccount.count)
+                    
+                    let filterM = listAllMyAccount.filter { word in
+                        return word.categoryProduct == "M"
+                    }
+                    let filterS = listAllMyAccount.filter { word in
+                      return word.categoryProduct == "S"
+                    }
+                    let filterBlankOrNil = listAllMyAccount.filter { word in
+                      return word.categoryProduct != "M" && word.categoryProduct != "S"
+                    }
+
+                    listSorterAllMyAccount.append(contentsOf: filterM)
+                    listSorterAllMyAccount.append(contentsOf: filterS)
+                    listSorterAllMyAccount.append(contentsOf: filterBlankOrNil)
+                    
+                    if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
+                        print("ADA TYPE D")
+                        self.isHiddenInformationReStore = false
+                    }
+                    
+                }
+            }
+            
+            if !success {
+                self.isLoadingCard = false
+                if (self.savingAccountVM.errorCode == "401") {
+                    self.showAlertTimeout = true
+                }
+            }
+            
+        }
     }
     
     // MARK: -USERNAME INFO VIEW
@@ -558,19 +561,14 @@ struct DashboardTabs: View {
     }
     
     func checkFreezeAccount() {
+        self.isHiddenInformationFreezeAccount = true
         self.profileVM.getAccountFreeze { success in
             
             if success {
+                print("FREEZE ACCOUNT -->")
+                print(self.profileVM.freezeAccount)
                 
                 self.isHiddenInformationFreezeAccount = !profileVM.freezeAccount
-                
-//                if profileVM.freezeAccount {
-//                    self.isHiddenInformationFreezeAccount = false
-//                }
-//
-//                if !profileVM.freezeAccount {
-//                    self.isHiddenInformationFreezeAccount = true
-//                }
             }
             
         }

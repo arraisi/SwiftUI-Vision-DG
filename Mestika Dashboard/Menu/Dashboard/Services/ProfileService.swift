@@ -168,7 +168,7 @@ class ProfileService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("\n\n RESPONSE GET PROFILES = \(httpResponse.statusCode)\n")
+                print("\n\n RESPONSE CHECK FREEZE = \(httpResponse.statusCode)\n")
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")

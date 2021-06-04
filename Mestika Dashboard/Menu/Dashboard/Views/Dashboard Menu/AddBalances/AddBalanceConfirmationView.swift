@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddBalanceConfirmationView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     @State private var amountCtrl: String = ""
     
     // Environtment Object
@@ -21,7 +23,7 @@ struct AddBalanceConfirmationView: View {
         ZStack {
             
             NavigationLink(
-                destination: AddBalancePinView().environmentObject(transactionData),
+                destination: AddBalancePinView().environmentObject(transactionData).environmentObject(appState),
                 isActive: self.$nextRoute,
                 label: {}
             )

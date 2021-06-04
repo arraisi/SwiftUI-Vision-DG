@@ -10,7 +10,6 @@ import SwiftUI
 struct SuccessAddBalanceView: View {
     
     // Environtment Object
-    @EnvironmentObject var transactionData: MoveBalancesModel
     var transferData: MoveBalancesModel
     @EnvironmentObject var appState: AppState
     

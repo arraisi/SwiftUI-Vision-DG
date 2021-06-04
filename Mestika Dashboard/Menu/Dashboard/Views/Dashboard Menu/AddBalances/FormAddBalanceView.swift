@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FormAddBalanceView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     // Environtment Object
     @EnvironmentObject var transactionData: MoveBalancesModel
     
@@ -44,7 +46,7 @@ struct FormAddBalanceView: View {
             
             // Route Link
             NavigationLink(
-                destination: AddBalanceConfirmationView().environmentObject(transactionData),
+                destination: AddBalanceConfirmationView().environmentObject(transactionData).environmentObject(appState),
                 isActive: self.$nextRouting,
                 label: {}
             )

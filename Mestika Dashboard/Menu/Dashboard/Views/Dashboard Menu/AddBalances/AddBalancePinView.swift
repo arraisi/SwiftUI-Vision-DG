@@ -10,6 +10,8 @@ import Indicators
 
 struct AddBalancePinView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     // Environtment Object
     @EnvironmentObject var transactionData: MoveBalancesModel
     
@@ -35,7 +37,7 @@ struct AddBalancePinView: View {
         ZStack {
             
             NavigationLink(
-                destination: SuccessAddBalanceView(transferData: transactionData).environmentObject(transactionData),
+                destination: SuccessAddBalanceView(transferData: transactionData).environmentObject(appState),
                 isActive: self.$success,
                 label: {}
             )

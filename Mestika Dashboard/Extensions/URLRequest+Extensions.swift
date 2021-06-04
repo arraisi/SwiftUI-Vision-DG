@@ -10,7 +10,7 @@ extension URLRequest {
 
     init(_ url: URL) {
         self.init(url: url)
-        self.timeoutInterval = 30
+        self.timeoutInterval = 35
         self.setValue("*/*", forHTTPHeaderField: "accept")
         
         if let token = Messaging.messaging().fcmToken {
@@ -18,7 +18,7 @@ extension URLRequest {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("960186B8-DD1C-4DB0-9226-DA8A461ED882", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("43279D55-AB40-4B77-913E-1E73F9461682", forHTTPHeaderField: "X-Device-ID")
                 self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
