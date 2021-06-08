@@ -16,6 +16,7 @@ struct FormChangeAddressView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var profileVM = ProfileViewModel()
+    @StateObject var addressVM = AddressSummaryViewModel()
     
     @EnvironmentObject var appState: AppState
     
@@ -24,6 +25,11 @@ struct FormChangeAddressView: View {
     @State var showModal: Bool = false
     
     @State var kodePosSuratMenyurat: String = ""
+    
+    @State var allProvince = MasterProvinceResponse()
+    @State var allRegency = MasterRegencyResponse()
+    
+//    @State var provinsi: String = ""
     
     var body: some View {
         
@@ -104,6 +110,17 @@ struct FormChangeAddressView: View {
                 print("\nGet customer phoenix in account tab is success: \(isSuccess)\n")
                 self.kodePosSuratMenyurat = self.profileVM.kodePosSuratMenyurat
             }
+            
+            self.addressVM.getAllProvince { success in
+                
+                if success {
+                    self.allProvince = self.addressVM.provinceResult
+                }
+                
+                if !success {
+                    
+                }
+            }
         }
         
     }
@@ -122,11 +139,80 @@ struct FormChangeAddressView: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kelurahanName, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
+                // Province
+                VStack(alignment: .leading) {
+                    Text("Province".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("Province".localized(language), text: $profileVM.provinsiName)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allProvince.count, id: \.self) { i in
+                                Button(action: {
+                                    profileVM.provinsiName = self.allProvince[i].name
+                                    self.getRegencyByIdProvince(idProvince: self.allProvince[i].id)
+                                }) {
+                                    Text(self.allProvince[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
+                
+                // City
+                VStack(alignment: .leading) {
+                    Text("City".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("Province".localized(language), text: $profileVM.kabupatenName)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allRegency.count, id: \.self) { i in
+                                Button(action: {
+                                    profileVM.kabupatenName = self.allRegency[i].name
+                                }) {
+                                    Text(self.allRegency[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
                 
                 LabelTextField(value: self.$profileVM.kecamatanName, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
@@ -134,13 +220,7 @@ struct FormChangeAddressView: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$profileVM.kabupatenName, label: "City".localized(language), placeHolder: "City".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-                LabelTextField(value: self.$profileVM.provinsiName, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextField(value: self.$profileVM.kelurahanName, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
@@ -169,6 +249,94 @@ struct FormChangeAddressView: View {
                     print("on commit")
                 })
                 
+                
+                // Province
+                VStack(alignment: .leading) {
+                    Text("Province".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("Province".localized(language), text: $profileVM.provinsiSuratMenyurat)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allProvince.count, id: \.self) { i in
+                                Button(action: {
+                                    profileVM.provinsiSuratMenyurat = self.allProvince[i].name
+                                    self.getRegencyByIdProvince(idProvince: self.allProvince[i].id)
+                                }) {
+                                    Text(self.allProvince[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
+                
+                // City Mailing
+                VStack(alignment: .leading) {
+                    Text("City".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("Province".localized(language), text: $profileVM.kabupatenSuratMenyurat)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allRegency.count, id: \.self) { i in
+                                Button(action: {
+                                    profileVM.kabupatenSuratMenyurat = self.allRegency[i].name
+                                }) {
+                                    Text(self.allRegency[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
+                
+                LabelTextField(value: self.$profileVM.kecamatanSuratMenyurat, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
+                LabelTextField(value: self.$profileVM.kelurahanSuratMenyurat, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                    print("on edit")
+                }, onCommit: {
+                    print("on commit")
+                })
+                
                 LabelTextField(value: self.$kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
@@ -179,36 +347,6 @@ struct FormChangeAddressView: View {
                     self.kodePosSuratMenyurat = String($0.prefix(5))
                 }
                 
-                LabelTextField(value: self.$profileVM.kelurahanSuratMenyurat, label: "Village".localized(language), placeHolder: "Village".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-                LabelTextField(value: self.$profileVM.kecamatanSuratMenyurat, label: "Sub-District".localized(language), placeHolder: "Sub-District".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-                LabelTextField(value: self.$profileVM.kabupatenSuratMenyurat, label: "City".localized(language), placeHolder: "City".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-                LabelTextField(value: self.$profileVM.provinsiSuratMenyurat, label: "Province".localized(language), placeHolder: "Province".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                
-//                LabelTextField(value: self.$profileVM.kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-//                    print("on edit")
-//                }, onCommit: {
-//                    print("on commit")
-//                })
-
             }
             .padding(.top, 20)
         }
@@ -252,6 +390,20 @@ struct FormChangeAddressView: View {
         .cornerRadius(20)
         .padding(.bottom, 15)
         .padding(15)
+    }
+    
+    
+    func getRegencyByIdProvince(idProvince: String) {
+        self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
+            
+            if success {
+                self.allRegency = self.addressVM.regencyResult
+            }
+            
+            if !success {
+                
+            }
+        }
     }
 }
 
