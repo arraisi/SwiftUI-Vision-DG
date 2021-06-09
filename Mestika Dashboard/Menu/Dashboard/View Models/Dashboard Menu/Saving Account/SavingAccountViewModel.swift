@@ -13,6 +13,7 @@ class SavingAccountViewModel : ObservableObject {
     @Published var errorCode: String = ""
     
     @Published var accounts = SavingAccountModel()
+    @Published var savingAccounts = SavingAccountTransferResponse()
     
     @Published var balanceAccount = AccountBalanceListResponse()
     
@@ -77,7 +78,7 @@ class SavingAccountViewModel : ObservableObject {
             switch result {
             case .success(let response):
                 
-                self.accounts = response.sorted(by: { $0.categoryProduct?.lowercased() ?? "" > $1.categoryProduct?.lowercased() ?? "" })
+                self.savingAccounts = response
                 
                 DispatchQueue.main.async {
                     self.isLoading = false

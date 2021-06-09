@@ -198,7 +198,7 @@ class SavingAccountServices {
     }
     
     // MARK: - GET LIST LAST ACCOUNT
-    func getSavingAccountTransfer(data: String, completion: @escaping(Result<SavingAccountModel, ErrorResult>) -> Void) {
+    func getSavingAccountTransfer(data: String, completion: @escaping(Result<SavingAccountTransferResponse, ErrorResult>) -> Void) {
         
         // MARK: URL
         guard let url = URL.urlGetSavingAccountTransfer() else {
@@ -226,7 +226,7 @@ class SavingAccountServices {
                     
                     print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     
-                    let accounts = try? JSONDecoder().decode(SavingAccountModel.self, from: data)
+                    let accounts = try? JSONDecoder().decode(SavingAccountTransferResponse.self, from: data)
                     
                     if let _response = accounts {
                         completion(.success(_response))
