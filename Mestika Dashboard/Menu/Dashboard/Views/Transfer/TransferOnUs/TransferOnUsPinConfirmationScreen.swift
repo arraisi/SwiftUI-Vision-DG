@@ -28,9 +28,19 @@ struct TransferOnUsPinConfirmationScreen: View {
     @State var messageError: String = ""
     @State var statusError: String = ""
     
+    @State var routingForgotPassword: Bool = false
+    
     @ObservedObject var transferVM = TransferViewModel()
     
     var body: some View {
+        
+        NavigationLink(
+            destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(false)).environmentObject(RegistrasiModel()),
+            isActive: self.$routingForgotPassword,
+            label: {}
+        )
+        .isDetailLink(false)
+        
         ZStack {
             Image("bg_blue")
                 .resizable()
@@ -99,6 +109,7 @@ struct TransferOnUsPinConfirmationScreen: View {
             }
         }
         .navigationBarTitle("Transfer ONUS", displayMode: .inline)
+        .navigationBarBackButtonHidden(self.isLoading)
 //        .alert(isPresented: $showingAlert) {
 //            return Alert(
 //                title: Text("\(self.statusError)"),
@@ -158,7 +169,13 @@ struct TransferOnUsPinConfirmationScreen: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Button(action: {}) {
+            Button(action: {
+                
+                if (self.statusError == "407") {
+                    routingForgotPassword = true
+                }
+                
+            }) {
                 Text("Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)

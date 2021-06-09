@@ -67,6 +67,9 @@ struct DashboardTabs: View {
     @State var productName: String = "-"
     @State var accountNumber: String = "-"
     
+    @State var mainAccountBalance: String = ""
+    @State var mainAccountBalanceDbl: Double = 0
+    
     @Binding var cardNo: String
     @State var cardName: String = "-"
     @Binding var sourceNumber: String
@@ -314,6 +317,7 @@ struct DashboardTabs: View {
                     self.tmpMyAccount.productName = e.productName ?? "Tabungan Mestika"
                     self.tmpMyAccount.description = e.accountTypeDescription
                     self.tmpMyAccount.categoryProduct = e.categoryProduct
+                    self.tmpMyAccount.balance = e.balance
                     self.listMyAccount.append(tmpMyAccount)
                     
                 }
@@ -335,7 +339,7 @@ struct DashboardTabs: View {
                 
                 listSortedMyAccount.forEach { a in
 //                        self.listSourceNumber.append(a.sourceNumber ?? "")
-                    if (a.typeAccount == "S" || a.typeAccount == "D") {
+                    if (a.typeAccount == "S" || a.typeAccount == "D" || a.typeAccount == "M") {
                         self.listSourceNumber.append(a.sourceNumber ?? "")
                     }
                 }
@@ -343,7 +347,6 @@ struct DashboardTabs: View {
                 print("COUNT MY ACCOUNT")
                 print(self.listMyAccount.count)
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
-                    self.checkFreezeAccount()
                     listMyAccount.forEach { acc in
 
                         self.tmpAllDataAccount.sourceNumber = acc.sourceNumber
@@ -351,10 +354,11 @@ struct DashboardTabs: View {
                         self.tmpAllDataAccount.productName = acc.productName
                         self.tmpAllDataAccount.description = acc.description
                         self.tmpAllDataAccount.categoryProduct = acc.categoryProduct
+                        self.tmpAllDataAccount.balance = acc.balance
                         
                         self.savingAccountVM.balanceAccount.forEach { balance in
                             if (acc.sourceNumber == balance.sourceNumber) {
-                                self.tmpAllDataAccount.balance = balance.balance
+                                
                                 self.tmpAllDataAccount.debitType = balance.creditDebit ?? ""
                             }
                         }
@@ -374,6 +378,13 @@ struct DashboardTabs: View {
                     let filterBlankOrNil = listAllMyAccount.filter { word in
                       return word.categoryProduct != "M" && word.categoryProduct != "S"
                     }
+                    
+                    filterM.forEach { mFilter in
+                        self.mainAccountBalance = mFilter.balance ?? "0"
+                        self.mainAccountBalanceDbl = Double(mFilter.balance ?? "0") ?? 0
+                    }
+                    
+                    self.checkFreezeAccount()
 
                     listSorterAllMyAccount.append(contentsOf: filterM)
                     listSorterAllMyAccount.append(contentsOf: filterS)
@@ -383,7 +394,6 @@ struct DashboardTabs: View {
                         print("ADA TYPE D")
                         self.isHiddenInformationReStore = false
                     }
-                    
                 }
             }
             
@@ -469,7 +479,10 @@ struct DashboardTabs: View {
                                                     EmptyView()
                                                     
                                                 } else {
-                                                    if (self.listSorterAllMyAccount[index].typeAccount != "M" && self.listSorterAllMyAccount[index].typeAccount != "S") {
+                                                    if (self.listSorterAllMyAccount[index].typeAccount != "M" && self.listSorterAllMyAccount[index].typeAccount != "S" &&
+                                                            self.listSorterAllMyAccount[index].typeAccount != "L" &&
+                                                            self.listSorterAllMyAccount[index].typeAccount != "T" &&
+                                                            self.listSorterAllMyAccount[index].typeAccount != "D") {
                                                         
                                                         HStack {
                                                             Text("Rp.")
@@ -489,7 +502,7 @@ struct DashboardTabs: View {
                                                                 .fontWeight(.light)
                                                                 .foregroundColor(self.listSorterAllMyAccount[index].debitType == "D" ? .red : Color(hex: "#2334D0"))
                                                             
-                                                            Text("\(self.listSorterAllMyAccount[index].debitType == "D" ? "-" : "")" +  "\(self.listSorterAllMyAccount[index].balance?.thousandSeparator() ?? "0")")
+                                                            Text("\(self.listSorterAllMyAccount[index].debitType == "D" ? "-" : "")" +  "\(self.listSorterAllMyAccount[index].balance?.subStringRange(from: 0, to: self.listSorterAllMyAccount[index].balance!.count-3 ).thousandSeparator() ?? "0")".thousandSeparator())
                                                                 .font(.title3)
                                                                 .bold()
                                                                 .foregroundColor(self.listSorterAllMyAccount[index].debitType == "D" ? .red : Color(hex: "#2334D0"))
@@ -564,11 +577,21 @@ struct DashboardTabs: View {
         self.isHiddenInformationFreezeAccount = true
         self.profileVM.getAccountFreeze { success in
             
+            print("MAIN ACCOUNT BALANCE")
+            print(self.mainAccountBalance)
             if success {
                 print("FREEZE ACCOUNT -->")
                 print(self.profileVM.freezeAccount)
                 
-                self.isHiddenInformationFreezeAccount = !profileVM.freezeAccount
+//                var freeze: Bool = true
+                
+                if (self.profileVM.freezeAccount && (self.mainAccountBalanceDbl < 1000000)) {
+                    self.isHiddenInformationFreezeAccount = false
+                } else {
+                    self.isHiddenInformationFreezeAccount = true
+                }
+                
+//                self.isHiddenInformationFreezeAccount = !profileVM.freezeAccount
             }
             
         }
@@ -681,6 +704,7 @@ struct DashboardAccountModel {
     var productName: String?
     var description: String?
     var categoryProduct: String?
+    var balance: String?
 }
 
 struct DashboardAllModel {

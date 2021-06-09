@@ -28,9 +28,19 @@ struct TransferRtgsValidationPin: View {
     @State var messageError: String = ""
     @State var statusError: String = ""
     
+    @State var routingForgotPassword: Bool = false
+    
     @ObservedObject var transferVM = TransferViewModel()
     
     var body: some View {
+        
+        NavigationLink(
+            destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(false)).environmentObject(RegistrasiModel()),
+            isActive: self.$routingForgotPassword,
+            label: {}
+        )
+        .isDetailLink(false)
+        
         if unLocked {
             TransferRtgsSuccess(transferData: transferData)
         } else {
@@ -95,6 +105,7 @@ struct TransferRtgsValidationPin: View {
                 }
             }
             .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
+            .navigationBarBackButtonHidden(self.isLoading)
 //            .alert(isPresented: $showingAlert) {
 //                return Alert(
 //                    title: Text("\(self.statusError)"),
@@ -195,7 +206,13 @@ struct TransferRtgsValidationPin: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Button(action: {}) {
+            Button(action: {
+                
+                if (self.statusError == "407") {
+                    routingForgotPassword = true
+                }
+                
+            }) {
                 Text("Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)

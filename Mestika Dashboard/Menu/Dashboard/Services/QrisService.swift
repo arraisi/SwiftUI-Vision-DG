@@ -148,6 +148,10 @@ class QrisService {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
+                if (httpResponse.statusCode == 406) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }

@@ -548,6 +548,12 @@ struct CardLimitView: View {
                     self.messageError = self.kartKuVM.message
                     self.showingAlert = true
                 }
+                
+                if (self.kartKuVM.code == "502") {
+                    self.statusError = self.kartKuVM.code
+                    self.messageError = self.kartKuVM.message
+                    self.showingAlert = true
+                }
             }
         }
     }

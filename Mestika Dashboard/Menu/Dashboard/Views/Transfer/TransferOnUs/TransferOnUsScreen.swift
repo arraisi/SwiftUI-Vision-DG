@@ -197,15 +197,20 @@ struct TransferOnUsScreen: View {
             self.getProfile()
             self.getLimit(code: "70")
             
-            self.savingAccountVM.getAccounts { (success) in
-                self.savingAccountVM.accounts.forEach { e in
+            self.savingAccountVM.getSavingAccountTransfer(data: "on-us") { (success) in
+                self.savingAccountVM.savingAccounts.forEach { e in
                     
-                    if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
-                        print(e.accountNumber)
-                        print(e.cardNumber)
-                        self.listSourceNumber.append(e.accountNumber)
-                        self.listCardNumber.append(e.cardNumber)
-                    }
+//                    if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
+//                        print(e.accountNumber)
+//                        print(e.cardNumber)
+//                        self.listSourceNumber.append(e.accountNumber)
+//                        self.listCardNumber.append(e.cardNumber)
+//                    }
+                    
+                    print(e.accountNumber)
+                    print(e.cardNumber)
+//                    self.listSourceNumber.append(e.accountNumber)
+//                    self.listCardNumber.append(e.cardNumber)
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
@@ -366,23 +371,23 @@ struct TransferOnUsScreen: View {
             HStack {
                 
                 Menu {
-                    ForEach(0..<self.listSourceNumber.count) { index in
+                    ForEach(0..<self.savingAccountVM.savingAccounts.count) { index in
                         Button(action: {
-                            self.selectedSourceNumber = self.listSourceNumber[index]
-                            self.selectedCardNumber = self.listCardNumber[index]
+                            self.selectedSourceNumber = self.savingAccountVM.savingAccounts[index].accountNumber
+                            self.selectedCardNumber = savingAccountVM.savingAccounts[index].cardNumber
                             self.selectedAccount.noRekening = self.selectedSourceNumber
                             self.transferData.sourceNumber = self.selectedSourceNumber
                             self.transferData.cardNo = self.selectedCardNumber
                             
-                            if self.savingAccountVM.balanceAccount.count < 1 {
+                            if self.savingAccountVM.savingAccounts.count < 1 {
                                 self.selectedBalance = "0"
                                 self.selectedAccount.saldo = "0"
                             } else {
-                                self.selectedBalance = self.savingAccountVM.balanceAccount[index].balance ?? "0"
+                                self.selectedBalance = self.savingAccountVM.savingAccounts[index].balance.subStringRange(from: 0, to: self.savingAccountVM.savingAccounts[index].balance.count-3)
                                 self.selectedAccount.saldo = self.selectedBalance
                             }
                         }) {
-                            Text(self.listSourceNumber[index])
+                            Text(self.savingAccountVM.savingAccounts[index].accountNumber)
                                 .bold()
                                 .font(.custom("Montserrat-Regular", size: 12))
                                 .foregroundColor(.black)
@@ -400,7 +405,7 @@ struct TransferOnUsScreen: View {
                                 .font(.caption)
                                 .fontWeight(.ultraLight)
                             
-                            if (self.savingAccountVM.balanceAccount.count < 1) {
+                            if (self.savingAccountVM.savingAccounts.count < 1) {
                                 Text("-")
                                     .font(.caption)
                                     .foregroundColor(Color(hex: "#232175"))
