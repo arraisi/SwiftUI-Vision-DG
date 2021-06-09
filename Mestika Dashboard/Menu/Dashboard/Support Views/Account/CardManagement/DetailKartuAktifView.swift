@@ -154,7 +154,7 @@ struct DetailKartuAktifView: View {
             )
             
             NavigationLink(
-                destination: ListStatementView(),
+                destination: ListStatementView(accountNumber: card.accountNumber),
                 isActive: self.$isRouteStatement,
                 label: {EmptyView()}
             )

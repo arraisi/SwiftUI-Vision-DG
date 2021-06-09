@@ -8,6 +8,6 @@
 import Foundation
 
 struct Statement: Identifiable {
-    var id: Int
-    var bulan, tahun: String
+    var fileName, periode, email, accountNumber: String
+    var id: String
 }

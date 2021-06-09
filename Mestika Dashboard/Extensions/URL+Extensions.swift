@@ -379,4 +379,10 @@ extension URL {
     static func urlGetVilageByIdDistrict(idDistrict: String) -> URL? {
         return URL(string: AppConstants().BASE_URL + "/master/village/\(idDistrict)/district")
     }
+    
+    //-------------------- MASTER ALAMAT SERVICE ----------------------//
+    
+    static func urlGetEStateMent(accountNumber: String) -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/estatement?accountNumber=\(accountNumber)")
+    }
 }
