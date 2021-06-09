@@ -162,6 +162,9 @@ extension KartuKuViewModel {
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"
+                case .custom(code: 406):
+                    self.code = "406"
+                    self.message = "PIN Transaksi Terblokir"
                 case .custom(code: 403):
                     self.code = "400"
                     self.message = "Message parametr tidak valid"
@@ -296,9 +299,15 @@ extension KartuKuViewModel {
                 case .custom(code: 400):
                     self.code = "400"
                     self.message = "Message parametr tidak valid"
+                case .custom(code: 406):
+                    self.code = "406"
+                    self.message = "Pin Transaksi Terblokir"
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"
+                case .custom(code: 502):
+                    self.code = "502"
+                    self.message = "Gagal Update Limit"
                 default:
                     self.message = "Internal Server Error"
                 }

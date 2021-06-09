@@ -192,6 +192,9 @@ extension ProfileViewModel {
                 }
                 
                 switch error {
+                case .custom(code: 406):
+                    self.statusCode = "406"
+                    self.errorMessage = "PIN TRANSAKSI TERBLOKIR"
                 case .custom(code: 403):
                     self.statusCode = "403"
                     self.errorMessage = "PIN TRANSAKSI SALAH"

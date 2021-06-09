@@ -197,15 +197,20 @@ struct TransferOnUsScreen: View {
             self.getProfile()
             self.getLimit(code: "70")
             
-            self.savingAccountVM.getAccounts { (success) in
+            self.savingAccountVM.getSavingAccountTransfer(data: "on-us") { (success) in
                 self.savingAccountVM.accounts.forEach { e in
                     
-                    if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
-                        print(e.accountNumber)
-                        print(e.cardNumber)
-                        self.listSourceNumber.append(e.accountNumber)
-                        self.listCardNumber.append(e.cardNumber)
-                    }
+//                    if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
+//                        print(e.accountNumber)
+//                        print(e.cardNumber)
+//                        self.listSourceNumber.append(e.accountNumber)
+//                        self.listCardNumber.append(e.cardNumber)
+//                    }
+                    
+                    print(e.accountNumber)
+                    print(e.cardNumber)
+                    self.listSourceNumber.append(e.accountNumber)
+                    self.listCardNumber.append(e.cardNumber)
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in

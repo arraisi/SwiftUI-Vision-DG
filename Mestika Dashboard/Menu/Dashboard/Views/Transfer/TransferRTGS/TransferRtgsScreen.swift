@@ -287,15 +287,20 @@ struct TransferRtgsScreen: View {
             
             self.getLimit()
             
-            self.savingAccountVM.getAccounts { (success) in
+            self.savingAccountVM.getSavingAccountTransfer(data: "off-us") { (success) in
                 self.savingAccountVM.accounts.forEach { e in
                     
-                    if (e.planAllowDebitDomestic == "Y" && e.categoryProduct != "S") {
-                        print(e.accountNumber)
-                        print(e.cardNumber)
-                        self.listCardNumber.append(e.cardNumber)
-                        self.listSourceNumber.append(e.accountNumber)
-                    }
+//                    if (e.planAllowDebitDomestic == "Y" && e.categoryProduct != "S") {
+//                        print(e.accountNumber)
+//                        print(e.cardNumber)
+//                        self.listCardNumber.append(e.cardNumber)
+//                        self.listSourceNumber.append(e.accountNumber)
+//                    }
+                    
+                    print(e.accountNumber)
+                    print(e.cardNumber)
+                    self.listCardNumber.append(e.cardNumber)
+                    self.listSourceNumber.append(e.accountNumber)
                     
                 }
                 

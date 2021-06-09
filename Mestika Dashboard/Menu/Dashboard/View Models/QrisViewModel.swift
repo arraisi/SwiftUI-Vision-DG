@@ -117,6 +117,9 @@ class QrisViewModel : ObservableObject {
                 case .custom(code: 403):
                     self.code = "403"
                     self.message = "Transfer Gagal"
+                case .custom(code: 406):
+                    self.code = "406"
+                    self.message = "PIN Transaksi Terblokir"
                 default:
                     self.message = "Internal Server Error"
                 }

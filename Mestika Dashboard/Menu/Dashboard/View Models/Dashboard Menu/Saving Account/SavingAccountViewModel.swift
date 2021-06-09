@@ -66,6 +66,46 @@ class SavingAccountViewModel : ObservableObject {
         }
     }
     
+    func getSavingAccountTransfer(data: String, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+            self.accounts.removeAll()
+        }
+        
+        SavingAccountServices.shared.getSavingAccountTransfer(data: data) { result in
+            switch result {
+            case .success(let response):
+                
+                self.accounts = response.sorted(by: { $0.categoryProduct?.lowercased() ?? "" > $1.categoryProduct?.lowercased() ?? "" })
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(true)
+                
+            case .failure(let error):
+                
+                print("ERROR GET LIST PRODUCTS SAVING ACCOUNT-->")
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                completion(false)
+            }
+            
+        }
+    }
+    
     func getAccounts(completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
@@ -173,6 +213,9 @@ class SavingAccountViewModel : ObservableObject {
                 switch error {
                 case .custom(code: 500):
                     self.errorMessage = "Internal Server Error"
+                case .custom(code: 406):
+                    self.errorCode = "406"
+                    self.errorMessage = "PIN Transaksi Terblokir"
                 case .custom(code: 206):
                     self.errorCode = "206"
                     self.errorMessage = "Failed Deposit"

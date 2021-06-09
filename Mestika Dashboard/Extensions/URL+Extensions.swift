@@ -326,6 +326,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/user/accountBalance")
     }
     
+    static func urlGetSavingAccountTransfer() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/account/inquiry-main-savings-account")
+    }
+    
     static func urlGetAccountsByCif() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/channel/inquiryAccountByCif")
     }
