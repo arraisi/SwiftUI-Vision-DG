@@ -104,7 +104,7 @@ struct Term_ConditionView: View {
                             HStack(alignment: .top) {
                                 Image(systemName: isCheckedWni ? "checkmark.square": "square")
                                 Text("* I am an Indonesian citizen and do not have tax obligations in other countries".localized(language))
-                                    .font(.caption)
+                                    .font(.system(size: 14))
                                     .foregroundColor(Color(hex: "#707070"))
                             }
                             .padding(.horizontal, 20)
@@ -116,7 +116,7 @@ struct Term_ConditionView: View {
                             HStack(alignment: .top) {
                                 Image(systemName: isCheckedAgree ? "checkmark.square": "square")
                                 Text("* I agree".localized(language))
-                                    .font(.caption)
+                                    .font(.system(size: 14))
                                     .foregroundColor(Color(hex: "#707070"))
                             }
                             .padding(.horizontal, 20)
@@ -128,7 +128,7 @@ struct Term_ConditionView: View {
                             HStack(alignment: .top) {
                                 Image(systemName: isCheckedShareData ? "checkmark.square": "square")
                                 Text("I give the right to Bank Mestika to provide data to third parties that cooperate with Bank Mestika".localized(language))
-                                    .font(.caption)
+                                    .font(.system(size: 14))
                                     .foregroundColor(Color(hex: "#707070"))
                             }
                             .padding(.horizontal, 20)

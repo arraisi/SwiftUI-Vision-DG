@@ -249,7 +249,6 @@ struct FormChangeAddressView: View {
                     print("on commit")
                 })
                 
-                
                 // Province
                 VStack(alignment: .leading) {
                     Text("Province".localized(language))
@@ -298,7 +297,7 @@ struct FormChangeAddressView: View {
                     
                     HStack {
                         
-                        TextField("Province".localized(language), text: $profileVM.kabupatenSuratMenyurat)
+                        TextField("City".localized(language), text: $profileVM.kabupatenSuratMenyurat)
                             .font(Font.system(size: 14))
                             .frame(height: 50)
                             .padding(.leading, 15)

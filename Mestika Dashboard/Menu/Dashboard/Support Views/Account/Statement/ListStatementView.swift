@@ -9,13 +9,11 @@ struct ListStatementView: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @StateObject var eStatementVM = EStatementViewModel()
     
-    @State var _listStatement = [
-        Statement(id: 1, bulan: "Agustus", tahun: "2020"),
-        Statement(id: 2, bulan: "September", tahun: "2020"),
-        Statement(id: 3, bulan: "Oktober", tahun: "2020"),
-        Statement(id: 4, bulan: "November", tahun: "2020"),
-    ]
+    @State var _listStatement: [EStatementModelElement] = []
+    
+    let accountNumber: String
     
     var body: some View {
         VStack {
@@ -32,7 +30,7 @@ struct ListStatementView: View {
             
             HStack {
                 Text("Monthly financial reports".localized(language))
-                    .font(.caption)
+                    //                    .font(.caption)
                     .fontWeight(.light)
                 
                 Spacer()
@@ -44,12 +42,12 @@ struct ListStatementView: View {
                 .padding(.bottom, 20)
             
             List {
-                ForEach(_listStatement) { data in
+                ForEach(0..<_listStatement.count, id: \.self) { i in
                     HStack {
                         HStack {
-                            Text(data.bulan)
+                            Text(_listStatement[i].periode ?? "")
                                 .fontWeight(.semibold)
-                            Text(data.tahun)
+                            Text(_listStatement[i].accountNumber ?? "")
                                 .fontWeight(.semibold)
                         }
                         
@@ -71,15 +69,22 @@ struct ListStatementView: View {
         .background(Color.white)
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
+        .onAppear{
+            self.eStatementVM.getListEStatement(accountNumber: self.accountNumber) { (isSuccess) in
+                if isSuccess {
+                    self._listStatement = self.eStatementVM.listEStatement.data ?? []
+                }
+            }
+        }
     }
 }
 
 class ListStatementView_Previews: PreviewProvider {
     static var previews: some View {
-        ListStatementView()
+        ListStatementView(accountNumber: "80000000044")
     }
-
+    
     @objc class func injected() {
-        UIApplication.shared.windows.first?.rootViewController = UIHostingController(rootView: ListStatementView())
+        UIApplication.shared.windows.first?.rootViewController = UIHostingController(rootView: ListStatementView(accountNumber: "80000000044"))
     }
 }
