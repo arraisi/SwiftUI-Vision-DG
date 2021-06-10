@@ -1551,12 +1551,12 @@
 			isa = PBXGroup;
 			children = (
 				C0A4F95C2552734A00566A11 /* CardManagement */,
+				6122B5164BC001B572462BCE /* Statement */,
 				526B657F254FB70800C13C36 /* BindingModel */,
 				526B6588254FB7AA00C13C36 /* ListHistoryTransactionView.swift */,
 				526B658D254FBADC00C13C36 /* ListMySavingsView.swift */,
 				526B6597254FBF1400C13C36 /* ListHistoryTransferView.swift */,
 				526B65F7254FF1BC00C13C36 /* PopoverSettingsView.swift */,
-				6122B5164BC001B572462BCE /* Statement */,
 			);
 			path = Account;
 			sourceTree = "<group>";
