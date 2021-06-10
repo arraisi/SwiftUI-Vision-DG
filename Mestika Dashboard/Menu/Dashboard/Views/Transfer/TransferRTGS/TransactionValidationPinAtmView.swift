@@ -21,6 +21,7 @@ struct TransactionValidationPinAtmView: View {
     @State var success = false
     
     @State var isShowAlert: Bool = false
+    @State var isShowSuccess: Bool = false
     
     var password: String
     @State var cardNo: String = ""
@@ -44,7 +45,7 @@ struct TransactionValidationPinAtmView: View {
                 
                 Spacer(minLength: 0)
                 
-                Text("Enter your Transaction PIN".localized(language))
+                Text("Enter your PIN ATM".localized(language))
                     .font(.custom("Montserrat-SemiBold", size: 18))
                     .foregroundColor(Color.white)
                 
@@ -70,14 +71,17 @@ struct TransactionValidationPinAtmView: View {
                 })
             }
             
-            if self.isShowAlert {
-                ModalOverlay(tapAction: { withAnimation { self.isShowAlert = false } })
+            if self.isShowAlert || self.isShowSuccess {
+                ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
         }
         .navigationBarTitle("Pin ATM".localized(language), displayMode: .inline)
         .popup(isPresented: $isShowAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageError()
+        }
+        .popup(isPresented: $isShowSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageSuccess()
         }
         .onAppear {
             getProfile()
@@ -117,6 +121,41 @@ struct TransactionValidationPinAtmView: View {
         .cornerRadius(20)
     }
     
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageSuccess() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_check")
+                .resizable()
+                .frame(width: 69, height: 69)
+                .padding(.top, 20)
+            
+            Text("Pin Transaksi berhasil disimpan.".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                self.isShowSuccess = false
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     private func resetField() {
         self.pin = "" /// return to empty pin
     }
@@ -127,7 +166,7 @@ struct TransactionValidationPinAtmView: View {
         self.authVM.forgotPinTransaksi(cardNo: cardNo, pin: pin, newPinTrx: password) { success in
             if success {
                 self.isLoading = false
-                self.presentationMode.wrappedValue.dismiss()
+                self.isShowSuccess = true
             }
             
             if !success {

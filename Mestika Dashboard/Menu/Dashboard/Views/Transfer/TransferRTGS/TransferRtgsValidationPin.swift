@@ -207,7 +207,7 @@ struct TransferRtgsValidationPin: View {
                 }
                 
             }) {
-                Text(self.statusError == "407" ? "Forgot Pin".localized(language) : "Back".localized(language))
+                Text(self.statusError == "407" ? "Forgot Pin Transaction".localized(language) : "Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))
