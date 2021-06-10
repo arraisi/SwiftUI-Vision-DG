@@ -16,6 +16,8 @@ class AppState: ObservableObject {
     @Published var skipOTP: Bool = false
     @Published var nasabahIsExisting: Bool = false
     
+    @Published var moveToPinTransaksi: Bool = false
+    
     @Published var moveToTransfer: Bool = false
     
     var navigationController: UINavigationController?
