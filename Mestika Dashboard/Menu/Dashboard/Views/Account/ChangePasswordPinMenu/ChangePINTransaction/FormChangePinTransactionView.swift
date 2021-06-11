@@ -56,25 +56,25 @@ struct FormChangePinTransactionView: View {
                     
                     VStack {
                         
-                        Text("Change PIN Transaction".localized(language))
+                        Text("Change Transaction PIN".localized(language))
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
                         VStack(alignment: .leading) {
                             
-                            Text("Silahkan Kebebasan PIN lama dan baru Anda".localized(language))
+                            Text("Please Enter your old and new Transaction PIN".localized(language))
                                 .font(.custom("Montserrat-Regular", size: 14))
                                 .foregroundColor(Color(hex: "#002251"))
                                 .padding(.top, 5)
                             
-                            Text("Old PIN".localized(language))
+                            Text("Old Transaction PIN".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .padding(.top, 5)
                             
                             HStack {
                                 
-                                SecureField("Enter your old PIN".localized(language), text: self.$oldPinCtrl)
+                                SecureField("Enter your old Transaction PIN".localized(language), text: self.$oldPinCtrl)
                                     .keyboardType(.numberPad)
                                     .onReceive(oldPinCtrl.publisher.collect()) {
                                         self.oldPinCtrl = String($0.prefix(6))
@@ -91,14 +91,14 @@ struct FormChangePinTransactionView: View {
                         
                         VStack(alignment: .leading) {
                             
-                            Text("New PIN".localized(language))
+                            Text("New Transaction PIN".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                             
                             VStack {
                                 HStack {
                                     
-                                    SecureField("Enter your new PIN".localized(language), text: self.$pinCtrl)
+                                    SecureField("Enter your new Transaction PIN".localized(language), text: self.$pinCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinCtrl.publisher.collect()) {
                                             self.pinCtrl = String($0.prefix(6))
@@ -111,7 +111,7 @@ struct FormChangePinTransactionView: View {
                                 
                                 HStack {
                                     
-                                    SecureField("Re-enter your new PIN".localized(language), text: self.$pinConfirmCtrl)
+                                    SecureField("Re-enter your new Transaction PIN".localized(language), text: self.$pinConfirmCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinConfirmCtrl.publisher.collect()) {
                                             self.pinConfirmCtrl = String($0.prefix(6))
@@ -151,7 +151,7 @@ struct FormChangePinTransactionView: View {
                                 }
                             }
                         }, label: {
-                            Text("Save New PIN".localized(language))
+                            Text("Save New Transaction PIN".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)

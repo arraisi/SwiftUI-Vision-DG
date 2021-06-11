@@ -105,7 +105,7 @@ struct FormInputNewPinScreen: View {
                 
             }
             .padding(.top, 60)
-            .navigationBarTitle("Change PIN Transaction".localized(language), displayMode: .inline)
+            .navigationBarTitle("Change Transaction PIN".localized(language), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {}, label: {
                 Text("Cancel")
             }))

@@ -288,7 +288,7 @@
 "Company Telephone Number" = "Company Telephone Number";
 "Enter Digital Banking Application Password" = "Enter Digital Banking Application Password";
 "This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)" = "This password is used when you enter the Mestika Bank Mobile Banking Application (contains lowercase letters, numbers, capitals, special characters)";
-"Re-enter your new \nPIN Transaction" = "Re-enter your new \nPIN Transaction";
+"Re-enter your new \nTransaction PIN" = "Re-enter your new \nTransaction PIN";
 "This pin is used for every financial transaction activity" = "This pin is used for every financial transaction activity";
 "Save Transaction PIN" = "Save Transaction PIN";
 "PIN is not the same" = "PIN is not the same";

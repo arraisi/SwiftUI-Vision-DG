@@ -386,7 +386,7 @@ struct AccountTabs: View {
                     NavigationLink(destination : FormChangePinTransactionView()) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("Change PIN Transaction".localized(language))
+                                Text("Change Transaction PIN".localized(language))
                                     .foregroundColor(Color(hex: "#1D2238"))
                                     .font(.subheadline)
                                     .fontWeight(.bold)
@@ -410,7 +410,7 @@ struct AccountTabs: View {
                         Button(action : {self.forgotPasswordActived=true}){
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text("Forgot PIN Transaction".localized(language))
+                                    Text("Forgot Transaction PIN".localized(language))
                                         .foregroundColor(Color(hex: "#1D2238"))
                                         .font(.subheadline)
                                         .fontWeight(.bold)
