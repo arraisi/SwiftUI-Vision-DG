@@ -109,7 +109,24 @@ class KartuKuService {
                     completion(.success(dataResponse!))
                 }
                 
-                if (httpResponse.statusCode > 300) {
+                if (httpResponse.statusCode == 400) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 406) {
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }
@@ -124,16 +141,16 @@ class KartuKuService {
             "cardDesign": data.cardDesign,
             "cardNo": data.cardNo,
             "encryptedPin": encryptPassword(password: data.pin),
-            "kabupatenKota": "Bandung",
+            "kabupatenKota": data.addressKotaInput,
             "kecamatan": data.addressKecamatanInput,
             "kelurahan": data.addressKelurahanInput,
             "kodepos": "00000" + data.addressPostalCodeInput,
             "nameOnCard": data.nameOnCard,
             "pin": encryptPassword(password: data.pin),
             "postalAddress": data.addressInput,
-            "provinsi": "JAWA BARAT",
-            "rt": "00",
-            "rw": "00"
+            "provinsi": data.addressProvinsiInput,
+            "rt": "-",
+            "rw": "-"
         ]
         
         guard let url = URL.urlBrokenKartuKu() else {

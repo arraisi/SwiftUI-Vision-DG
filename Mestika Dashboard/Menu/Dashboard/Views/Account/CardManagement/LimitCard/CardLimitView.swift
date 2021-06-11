@@ -57,6 +57,8 @@ struct CardLimitView: View {
  
     @State private var keyboardOffset: CGFloat = 0
     
+    @State var routingForgotPassword: Bool = false
+    
     @State var isNextRoute: Bool = false
     
     var card: KartuKuDesignViewModel
@@ -70,6 +72,13 @@ struct CardLimitView: View {
     }
     
     var body: some View {
+        
+        NavigationLink(
+            destination: TransactionForgotPinView(),
+            isActive: self.$routingForgotPassword,
+            label: {}
+        )
+        
         if pinActive {
             
             CardLimitPinView(wrongPin: $wrongPin) { pin in
@@ -395,19 +404,13 @@ struct CardLimitView: View {
                     }
                     
                     // Background Color When Modal Showing
-                    if self.showingModal {
+                    if self.showingModal || self.showingAlert {
                         ModalOverlay(tapAction: { withAnimation { } })
                             .edgesIgnoringSafeArea(.all)
                     }
                     
                 }
             })
-            .alert(isPresented: $showingAlert) {
-                return Alert(
-                    title: Text("\(self.statusError)"),
-                    message: Text("\(self.messageError)"),
-                    dismissButton: .default(Text("OK".localized(language))))
-            }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LimitKartuKu"))) { obj in
                 print("ON RESUME")
                 
@@ -424,6 +427,9 @@ struct CardLimitView: View {
             }
             .popup(isPresented: $showingModal, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
                 createBottomFloater()
+            }
+            .popup(isPresented: $showingAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageError()
             }
         }
     }
@@ -543,6 +549,12 @@ struct CardLimitView: View {
                     self.showingAlert = true
                 }
                 
+                if (self.kartKuVM.code == "406") {
+                    self.statusError = self.kartKuVM.code
+                    self.messageError = self.kartKuVM.message
+                    self.showingAlert = true
+                }
+                
                 if (self.kartKuVM.code == "500") {
                     self.statusError = self.kartKuVM.code
                     self.messageError = self.kartKuVM.message
@@ -556,6 +568,45 @@ struct CardLimitView: View {
                 }
             }
         }
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("\(self.messageError)".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                
+                if (self.statusError == "406") {
+                    routingForgotPassword = true
+                }
+                
+            }) {
+                Text(self.statusError == "406" ? "Forgot Pin Transaction".localized(language) : "Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

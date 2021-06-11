@@ -165,6 +165,12 @@ extension KartuKuViewModel {
                 case .custom(code: 406):
                     self.code = "406"
                     self.message = "PIN Transaksi Terblokir"
+                case .customWithStatus(code: 406, codeStatus: "408"):
+                    self.code = "408"
+                    self.message = "CVV salah"
+                case .customWithStatus(code: 406, codeStatus: "409"):
+                    self.code = "409"
+                    self.message = "CVV salah 3 kali"
                 case .custom(code: 403):
                     self.code = "400"
                     self.message = "Message parametr tidak valid"

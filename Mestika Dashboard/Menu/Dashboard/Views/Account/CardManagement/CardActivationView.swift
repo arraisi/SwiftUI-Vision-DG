@@ -528,7 +528,10 @@ struct CardActivationView: View {
                 self.isLoading = false
                 if (self.kartKuVM.code == "400") {
                     self.isShowingWrongCvv = true
-
+                } else if (self.kartKuVM.code == "408") {
+                    self.isShowingWrongCvv = true
+                } else if (self.kartKuVM.code == "409") {
+                    self.isShowingWrong3TimeCvv = true
                 }
             }
         }

@@ -17,6 +17,8 @@ class BrokenKartuKuModel: ObservableObject {
     @Published var addressKecamatanInput = ""
     @Published var addressKodePosInput = ""
     @Published var addressPostalCodeInput = ""
+    @Published var addressKotaInput = ""
+    @Published var addressProvinsiInput = ""
     @Published var cardNo = ""
     @Published var pin = ""
     @Published var cardFee = ""

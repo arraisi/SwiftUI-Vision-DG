@@ -23,6 +23,8 @@ struct CardDamageAddressInputView: View {
     @State var addressKelurahanInput: String = ""
     @State var addressKecamatanInput: String = ""
     @State var addressKodePosInput: String = ""
+    @State var addressKotaInput: String = ""
+    @State var addressProvinsiInput: String = ""
     
     @State var addressSugestion = [AddressViewModel]()
     @State var addressSugestionResult = [AddressResultViewModel]()
@@ -108,6 +110,24 @@ struct CardDamageAddressInputView: View {
                                     }
                                     
                                 }
+                                .padding(.horizontal, 20)
+                                
+                                LabelTextField(value: $addressKotaInput, label: "City".localized(language), placeHolder: "City".localized(language), onEditingChanged: { (Bool) in
+                                    print("on edit")
+                                    cardData.addressKotaInput = self.addressKotaInput
+                                }, onCommit: {
+                                    print("on commit")
+                                    cardData.addressKotaInput = self.addressKotaInput
+                                })
+                                .padding(.horizontal, 20)
+                                
+                                LabelTextField(value: $addressProvinsiInput, label: "Province".localized(language), placeHolder: "Province".localized(language), onEditingChanged: { (Bool) in
+                                    print("on edit")
+                                    cardData.addressProvinsiInput = self.addressProvinsiInput
+                                }, onCommit: {
+                                    print("on commit")
+                                    cardData.addressProvinsiInput = self.addressProvinsiInput
+                                })
                                 .padding(.horizontal, 20)
                                 
                                 LabelTextField(value: $addressKelurahanInput, label: "Village".localized(language), placeHolder: "Village".localized(language), onEditingChanged: { (Bool) in
@@ -347,6 +367,8 @@ struct CardDamageAddressInputView: View {
                     cardData.addressPostalCodeInput = self.addressSugestion[0].postalCode
                     cardData.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     cardData.addressKelurahanInput = self.addressSugestion[0].kelurahan
+                    cardData.addressKotaInput = self.addressSugestion[0].city
+                    cardData.addressProvinsiInput = self.addressSugestion[0].province
 //                    cardData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     
                     self.addressInput = self.addressSugestion[0].formatted_address
@@ -354,6 +376,8 @@ struct CardDamageAddressInputView: View {
                     self.addressKelurahanInput = self.addressSugestion[0].kelurahan
                     self.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     self.addressKodePosInput = self.addressSugestion[0].postalCode
+                    self.addressKotaInput = self.addressSugestion[0].city
+                    self.addressProvinsiInput = self.addressSugestion[0].province
                 }
                 self.showingModal = false
                 print("Success")

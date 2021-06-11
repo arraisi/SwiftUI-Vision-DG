@@ -21,11 +21,26 @@ class PasswordService {
         guard let url = URL.urlPasswordValidation() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
+    
+        let body: [String: Any] = [
+            "pwd": password
+        ]
         
-        let finalUrl = url.appending("password", value: password)
+        var request = URLRequest(url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("URL ABSOLUTE : \(url.absoluteURL)")
         
-        var request = URLRequest(finalUrl)
-        request.httpMethod = "GET"
+        do {
+            // MARK : serialize model data
+            let jsonData = try JSONSerialization.data(withJSONObject: body)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            print(jsonString!)
+            request.httpBody = jsonData
+        } catch let error {
+            print(error.localizedDescription)
+            completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -41,7 +56,7 @@ class PasswordService {
                     completion(.success(passwordResponse!))
                 }
                 
-                if (httpResponse.statusCode == 5000) {
+                if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }
