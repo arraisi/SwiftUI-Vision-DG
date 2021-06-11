@@ -191,6 +191,7 @@
 		5294536025EF59E7009A5B83 /* CardDamageAddressInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */; };
 		529D3D9C266F32FA0057D64D /* TransactionForgotPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529D3D9B266F32F90057D64D /* TransactionForgotPinView.swift */; };
 		529D3DEF2670ADB00057D64D /* SavingAccountTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529D3DEE2670ADB00057D64D /* SavingAccountTransferResponse.swift */; };
+		52A70B332671C4FA00D8001C /* TransactionValidationPinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A70B322671C4FA00D8001C /* TransactionValidationPinAtmView.swift */; };
 		52A7970D2641170D001B9937 /* RequestOtpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7970C2641170D001B9937 /* RequestOtpResponse.swift */; };
 		52A7A36826428D1D001B9937 /* FormChangePersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */; };
 		52A7A37E26429E59001B9937 /* PinConfirmationChangeDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */; };
@@ -713,6 +714,7 @@
 		5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageAddressInputView.swift; sourceTree = "<group>"; };
 		529D3D9B266F32F90057D64D /* TransactionForgotPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionForgotPinView.swift; sourceTree = "<group>"; };
 		529D3DEE2670ADB00057D64D /* SavingAccountTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountTransferResponse.swift; sourceTree = "<group>"; };
+		52A70B322671C4FA00D8001C /* TransactionValidationPinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionValidationPinAtmView.swift; sourceTree = "<group>"; };
 		52A7970C2641170D001B9937 /* RequestOtpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOtpResponse.swift; sourceTree = "<group>"; };
 		52A7A36726428D1D001B9937 /* FormChangePersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePersonalDataView.swift; sourceTree = "<group>"; };
 		52A7A37D26429E59001B9937 /* PinConfirmationChangeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinConfirmationChangeDataView.swift; sourceTree = "<group>"; };
@@ -1789,6 +1791,7 @@
 				52C362A225D12DC0000374AA /* TransferRtgsValidationPin.swift */,
 				52C362A725D12DD8000374AA /* TransferRtgsSuccess.swift */,
 				529D3D9B266F32F90057D64D /* TransactionForgotPinView.swift */,
+				52A70B322671C4FA00D8001C /* TransactionValidationPinAtmView.swift */,
 			);
 			path = TransferRTGS;
 			sourceTree = "<group>";
@@ -2861,6 +2864,7 @@
 				0AF48AD025778C760037942D /* Formatter+Extensions.swift in Sources */,
 				52ADFF172557DCE400A1001F /* LoadingIndicator.swift in Sources */,
 				C0781C8A255B4B3F00D4F245 /* OtpChangePinAtmView.swift in Sources */,
+				52A70B332671C4FA00D8001C /* TransactionValidationPinAtmView.swift in Sources */,
 				52474D5E254026BD0094B758 /* DashboardTabs.swift in Sources */,
 				522E846D2667314400291FFA /* MasterProvinceResponse.swift in Sources */,
 				C0D7B5DB2552AF43009C3976 /* CardOTPVerificationView.swift in Sources */,

@@ -13,6 +13,7 @@ struct TransferRtgsValidationPin: View {
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
+    @EnvironmentObject var appState: AppState
     @EnvironmentObject var transferData: TransferOffUsModel
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -35,11 +36,10 @@ struct TransferRtgsValidationPin: View {
     var body: some View {
         
         NavigationLink(
-            destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(false)).environmentObject(RegistrasiModel()),
+            destination: TransactionForgotPinView(),
             isActive: self.$routingForgotPassword,
             label: {}
         )
-        .isDetailLink(false)
         
         if unLocked {
             TransferRtgsSuccess(transferData: transferData)
@@ -106,12 +106,6 @@ struct TransferRtgsValidationPin: View {
             }
             .navigationBarTitle("Transfer \(self.transferData.transactionType)", displayMode: .inline)
             .navigationBarBackButtonHidden(self.isLoading)
-//            .alert(isPresented: $showingAlert) {
-//                return Alert(
-//                    title: Text("\(self.statusError)"),
-//                    message: Text("\(self.messageError)"),
-//                    dismissButton: .default(Text("OK".localized(language))))
-//            }
             .popup(isPresented: $showingAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
                 popupMessageError()
             }
@@ -213,7 +207,7 @@ struct TransferRtgsValidationPin: View {
                 }
                 
             }) {
-                Text("Back".localized(language))
+                Text(self.statusError == "407" ? "Forgot Pin Transaction".localized(language) : "Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))

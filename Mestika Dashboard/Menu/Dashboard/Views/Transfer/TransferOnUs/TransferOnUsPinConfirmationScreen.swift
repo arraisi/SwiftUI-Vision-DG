@@ -35,11 +35,10 @@ struct TransferOnUsPinConfirmationScreen: View {
     var body: some View {
         
         NavigationLink(
-            destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(false)).environmentObject(RegistrasiModel()),
+            destination: TransactionForgotPinView(),
             isActive: self.$routingForgotPassword,
             label: {}
         )
-        .isDetailLink(false)
         
         ZStack {
             Image("bg_blue")
@@ -176,7 +175,7 @@ struct TransferOnUsPinConfirmationScreen: View {
                 }
                 
             }) {
-                Text("Back".localized(language))
+                Text(self.statusError == "407" ? "Forgot Pin".localized(language) : "Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))
