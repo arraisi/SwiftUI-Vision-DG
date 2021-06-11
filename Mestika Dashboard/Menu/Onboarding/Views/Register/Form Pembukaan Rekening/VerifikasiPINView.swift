@@ -94,7 +94,7 @@ struct VerifikasiPINView: View {
                             Spacer()
                             
                             // Sub title
-                            Text("Re-enter your new \nPIN Transaction".localized(language))
+                            Text("Re-enter your new \nTransaction PIN".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 18))
                                 .foregroundColor(Color(hex: "#232175"))
                                 .multilineTextAlignment(.center)

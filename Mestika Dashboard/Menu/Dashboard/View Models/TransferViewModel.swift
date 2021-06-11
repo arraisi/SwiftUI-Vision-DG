@@ -76,7 +76,7 @@ class TransferViewModel : ObservableObject {
                         self.message = "Data tidak ditemukan"
                     case .custom(code: 403):
                         self.code = "403"
-                        self.message = "Invalid PIN Transaction"
+                        self.message = "Invalid Transaction PIN"
                     default:
                         self.message = "Internal Server Error"
                     }
@@ -131,7 +131,7 @@ class TransferViewModel : ObservableObject {
                         self.message = "Data tidak ditemukan"
                     case .custom(code: 403):
                         self.code = "403"
-                        self.message = "Invalid PIN Transaction"
+                        self.message = "Invalid Transaction PIN"
                     default:
                         self.message = "Internal Server Error"
                     }
@@ -176,7 +176,7 @@ class TransferViewModel : ObservableObject {
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Invalid PIN Transaction"
+                    self.message = "Invalid Transaction PIN"
                 default:
                     self.message = "Internal Server Error"
                 }
@@ -229,7 +229,7 @@ class TransferViewModel : ObservableObject {
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Invalid PIN Transaction"
+                    self.message = "Invalid Transaction PIN"
                 case .custom(code: 500):
                     self.code = "500"
                     self.message = "Internal Server Error"
@@ -277,7 +277,7 @@ class TransferViewModel : ObservableObject {
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Invalid PIN Transaction"
+                    self.message = "Invalid Transaction PIN"
                 case .customWithStatus(code: 406, codeStatus: "406"):
                     self.code = "406"
                     self.message = "Nominal melebihi limit transaksi"
@@ -329,7 +329,7 @@ class TransferViewModel : ObservableObject {
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Invalid PIN Transaction"
+                    self.message = "Invalid Transaction PIN"
                 case .custom(code: 406):
                     self.code = "406"
                     self.message = "Nominal melebihi limit transaksi"
@@ -379,7 +379,7 @@ class TransferViewModel : ObservableObject {
                     self.message = "Data tidak ditemukan"
                 case .custom(code: 403):
                     self.code = "403"
-                    self.message = "Invalid PIN Transaction"
+                    self.message = "Invalid Transaction PIN"
                 case .customWithStatus(code: 406, codeStatus: "406"):
                     self.code = "406"
                     self.message = "Nominal melebihi limit transaksi"

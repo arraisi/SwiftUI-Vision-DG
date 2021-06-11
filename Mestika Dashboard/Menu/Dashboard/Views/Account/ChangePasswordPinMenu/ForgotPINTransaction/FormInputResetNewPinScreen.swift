@@ -42,18 +42,18 @@ struct FormInputResetNewPinScreen: View {
                     
                     VStack {
                         
-                        Text("FORGOT PIN".localized(language))
+                        Text("FORGOT TRANSACTION PIN".localized(language))
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
                         
-                        Text("Please enter your new PIN".localized(language))
+                        Text("Please enter your new Transaction PIN".localized(language))
                             .font(.custom("Montserrat-Regular", size: 14))
                             .foregroundColor(Color(hex: "#002251"))
                             .padding(.top, 10)
                         
                         VStack(alignment: .leading) {
                             
-                            Text("New PIN".localized(language))
+                            Text("New Transaction PIN".localized(language))
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .foregroundColor(Color(hex: "#2334D0"))
                                 .padding(.top, 10)
@@ -63,7 +63,7 @@ struct FormInputResetNewPinScreen: View {
                                     //                                    if (showPin) {
                                     //                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
                                     //                                    } else {
-                                    SecureField("Enter your new PIN".localized(language), text: self.$pinCtrl)
+                                    SecureField("Enter your new Transaction PIN".localized(language), text: self.$pinCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinCtrl.publisher.collect()) {
                                             self.pinCtrl = String($0.prefix(6))
@@ -87,7 +87,7 @@ struct FormInputResetNewPinScreen: View {
                                     //                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
                                     //                                            .keyboardType(.numberPad)
                                     //                                    } else {
-                                    SecureField("Enter your new PIN".localized(language), text: self.$pinConfirmCtrl)
+                                    SecureField("Enter your new Transaction PIN".localized(language), text: self.$pinConfirmCtrl)
                                         .keyboardType(.numberPad)
                                         .onReceive(pinConfirmCtrl.publisher.collect()) {
                                             self.pinConfirmCtrl = String($0.prefix(6))
@@ -128,7 +128,7 @@ struct FormInputResetNewPinScreen: View {
                                 }
                             }
                         }){
-                            Text("Save New PIN".localized(language))
+                            Text("Save New Transaction PIN".localized(language))
                                 .foregroundColor(.white)
                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                 .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50)
