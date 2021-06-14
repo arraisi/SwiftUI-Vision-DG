@@ -44,7 +44,7 @@ struct CardBlockView: View {
                             .lineSpacing(10)
                         
                         NavigationLink(
-                            destination: CardBlockDescriptionView().environmentObject(brokenData),
+                            destination: CardBlockAddressInputView().environmentObject(brokenData),
                             isActive: $showConfirmationPIN,
                             label: {}
                         )

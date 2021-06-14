@@ -22,6 +22,9 @@ struct ConfirmationPinOfSavingAccountView: View {
     
     @State var isFailedDeposit: Bool = false
     
+    @State var showingAlert = false
+    @State var routingForgotPassword: Bool = false
+    
     var codePlan: String
     var product: String
     @Binding var deposit: String
@@ -29,6 +32,13 @@ struct ConfirmationPinOfSavingAccountView: View {
     @State private var isLoading: Bool = false
     
     var body: some View {
+        
+        NavigationLink(
+            destination: TransactionForgotPinView(),
+            isActive: self.$routingForgotPassword,
+            label: {}
+        )
+        
         ZStack {
             Image("bg_blue")
                 .resizable()
@@ -71,24 +81,57 @@ struct ConfirmationPinOfSavingAccountView: View {
                 PinVerification(pin: $pin, onChange: {
                     self.wrongPin = false
                 }, onCommit: {
-                    //                    if self.pin == self.key {
-                    //                        print("UNLOCKED")
-                    //                        self.unlocked = true
-                    //                    } else {
-                    //                        print("INCORRECT")
-                    //                        self.wrongPin = true
-                    //                    }
-                    
                     self.saveSavingAccount()
                 })
             }
-        }
-        .onAppear{
-            print("code plan \(codePlan)")
-            print("product \(product)")
-            print("deposit \(deposit)")
+            
+            if self.showingAlert {
+                ModalOverlay(tapAction: { withAnimation { self.showingAlert = false } })
+                    .edgesIgnoringSafeArea(.all)
+            }
         }
         .navigationBarTitle("Saving Account".localized(language), displayMode: .inline)
+        .navigationBarBackButtonHidden(isLoading)
+        .popup(isPresented: $showingAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageError()
+        }
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Pin Transaksi terblokir".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                
+                routingForgotPassword = true
+                
+            }) {
+                Text("Forgot Pin Transaction".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     func saveSavingAccount() {
@@ -108,6 +151,8 @@ struct ConfirmationPinOfSavingAccountView: View {
                 if savingAccountVM.errorCode == "206" {
                     self.isFailedDeposit = true
                     self.success = true
+                } else if (savingAccountVM.errorCode == "406") {
+                    self.showingAlert = true
                 } else {
                     self.wrongPin = true
                     self.pin = ""

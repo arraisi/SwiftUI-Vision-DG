@@ -27,9 +27,18 @@ struct PinTransactionLimitView: View {
     
     @State var pendingRoute: Bool = false
     
+    @State var routingForgotPassword: Bool = false
+    
     let callback: (String)->()
     
     var body: some View {
+        
+        NavigationLink(
+            destination: TransactionForgotPinView(),
+            isActive: self.$routingForgotPassword,
+            label: {}
+        )
+        
         ZStack {
             Image("bg_blue")
                 .resizable()
@@ -85,14 +94,55 @@ struct PinTransactionLimitView: View {
                     }
                 }
             }
+            
+            if self.isShowAlert {
+                ModalOverlay(tapAction: { withAnimation { self.isShowAlert = false } })
+                    .edgesIgnoringSafeArea(.all)
+            }
         }
         .navigationBarTitle("Transaction Limit", displayMode: .inline)
-        .alert(isPresented: $isShowAlert) {
-            return Alert(
-                title: Text("\(self.statusError)"),
-                message: Text("\(self.errorMessage)"),
-                dismissButton: .default(Text("OK".localized(language))))
+        .popup(isPresented: $isShowAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageError()
         }
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("\(self.errorMessage)".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                
+                if (self.statusError == "406") {
+                    routingForgotPassword = true
+                }
+                
+            }) {
+                Text(self.statusError == "406" ? "Forgot Pin Transaction".localized(language) : "Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

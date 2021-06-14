@@ -601,7 +601,8 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 
                 if (httpResponse.statusCode == 403) {

@@ -83,6 +83,7 @@
 		52337014262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52337013262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift */; };
 		523370192629964F00ED3E4F /* DetailTransactionDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */; };
 		5233701E2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */; };
+		5235FC2C267736C3009C5CE5 /* CardBlockAddressInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235FC2B267736C3009C5CE5 /* CardBlockAddressInputView.swift */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
@@ -596,6 +597,7 @@
 		52337013262994A200ED3E4F /* ConfirmationOfDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOfDepositAccountView.swift; sourceTree = "<group>"; };
 		523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionDepositAccountView.swift; sourceTree = "<group>"; };
 		5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPinOfDepositAccountView.swift; sourceTree = "<group>"; };
+		5235FC2B267736C3009C5CE5 /* CardBlockAddressInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockAddressInputView.swift; sourceTree = "<group>"; };
 		5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mestika Dashboard.entitlements"; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1156,6 +1158,7 @@
 			children = (
 				C0B347D22559422B000754C4 /* CardBlockView.swift */,
 				521927FA25F0BB3A00822042 /* CardBlockDescriptionView.swift */,
+				5235FC2B267736C3009C5CE5 /* CardBlockAddressInputView.swift */,
 			);
 			path = BlockCard;
 			sourceTree = "<group>";
@@ -3031,6 +3034,7 @@
 				529D3D9C266F32FA0057D64D /* TransactionForgotPinView.swift in Sources */,
 				52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */,
 				528AE2CC2595B95E003AFD73 /* AddressService.swift in Sources */,
+				5235FC2C267736C3009C5CE5 /* CardBlockAddressInputView.swift in Sources */,
 				52ADFEAD2557D9A800A1001F /* Card.swift in Sources */,
 				C06AC2FF256372D200D06EE3 /* KetentuanViewModel.swift in Sources */,
 				52DA209E25511A9F00CC048A /* FormInputNewPinScreen.swift in Sources */,

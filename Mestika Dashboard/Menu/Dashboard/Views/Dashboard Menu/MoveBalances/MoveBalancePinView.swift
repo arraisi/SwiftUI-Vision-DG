@@ -20,6 +20,8 @@ struct MoveBalancePinView: View {
     // Variable
     @State var isLoading = false
     
+    @State var routingForgotPassword: Bool = false
+    
     // PIN
     @State var pin = ""
     @State var wrongPin = false
@@ -37,6 +39,12 @@ struct MoveBalancePinView: View {
             NavigationLink(
                 destination: SuccessMoveBalancesView(transferData: transactionData).environmentObject(transactionData),
                 isActive: self.$success,
+                label: {}
+            )
+            
+            NavigationLink(
+                destination: TransactionForgotPinView(),
+                isActive: self.$routingForgotPassword,
                 label: {}
             )
             
@@ -88,6 +96,7 @@ struct MoveBalancePinView: View {
             }
         }
         .navigationBarTitle("Pindah Saldo".localized(language), displayMode: .inline)
+        .navigationBarBackButtonHidden(isLoading)
 //        .alert(isPresented: $showingAlert) {
 //            return Alert(
 //                title: Text("\(self.statusError)"),
@@ -141,8 +150,13 @@ struct MoveBalancePinView: View {
                 .foregroundColor(Color(hex: "#232175"))
                 .padding([.bottom, .top], 20)
             
-            Button(action: {}) {
-                Text("Back".localized(language))
+            Button(action: {
+                if (self.statusError == "407") {
+                    routingForgotPassword = true
+                }
+                
+            }) {
+                Text(self.statusError == "407" ? "Forgot Pin Transaction".localized(language) : "Back".localized(language))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 12))

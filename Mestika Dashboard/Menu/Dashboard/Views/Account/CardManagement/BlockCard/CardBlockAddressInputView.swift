@@ -1,13 +1,13 @@
 //
-//  CardDamageAddressInputView.swift
+//  CardBlockAddressInputView.swift
 //  Mestika Dashboard
 //
-//  Created by Prima Jatnika on 03/03/21.
+//  Created by Prima Jatnika on 14/06/21.
 //
 
 import SwiftUI
 
-struct CardDamageAddressInputView: View {
+struct CardBlockAddressInputView: View {
     
     @AppStorage("language")
     private var language = LocalizationService.shared.language
@@ -203,7 +203,7 @@ struct CardDamageAddressInputView: View {
                 }
                 
                 NavigationLink(
-                    destination: CardDamageDescriptionInputView().environmentObject(cardData),
+                    destination: CardBlockDescriptionView().environmentObject(cardData),
                     isActive: self.$isRoute,
                     label: {
                         EmptyView()
@@ -212,7 +212,7 @@ struct CardDamageAddressInputView: View {
             }
             
         }
-        .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
+        .navigationBarTitle("Block Card".localized(language), displayMode: .inline)
         .onAppear {
             print("ON APPEAR")
             //            user.forEach { data in
@@ -394,8 +394,8 @@ struct CardDamageAddressInputView: View {
     }
 }
 
-struct CardDamageAddressInputView_Previews: PreviewProvider {
+struct CardBlockAddressInputView_Previews: PreviewProvider {
     static var previews: some View {
-        CardDamageAddressInputView().environmentObject(CardBrokenModel())
+        CardBlockAddressInputView().environmentObject(CardBrokenModel())
     }
 }
