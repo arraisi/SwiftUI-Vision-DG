@@ -298,6 +298,14 @@ struct RegisterSummaryView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
+        .alert(isPresented: $isShowingAlert) {
+            return Alert(
+                title: Text("Do you want to cancel registration?".localized(language)),
+                primaryButton: .default(Text("YES".localized(language)), action: {
+                    self.appState.moveToWelcomeView = true
+                }),
+                secondaryButton: .cancel(Text("NO".localized(language))))
+        }
     }
     
     // MARK:- CREATE POPUP MESSAGE
@@ -465,6 +473,6 @@ struct RegisterSummaryView: View {
 
 struct RegisterSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterSummaryView(deviceModel: DeviceTraceModel()).environmentObject(RegistrasiModel())
+        RegisterSummaryView(deviceModel: DeviceTraceModel()).environmentObject(RegistrasiModel()).environmentObject(AppState())
     }
 }

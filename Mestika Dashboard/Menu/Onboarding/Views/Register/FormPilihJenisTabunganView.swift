@@ -16,7 +16,7 @@ struct FormPilihJenisTabunganView: View {
     @EnvironmentObject var appState: AppState
     
     /* Carousel Variables */
-//    @State var data = savingTypeData
+    //    @State var data = savingTypeData
     @State var firstOffset : CGFloat = 0
     @State var offset : CGFloat = 0
     @State var count : CGFloat = 0
@@ -65,7 +65,7 @@ struct FormPilihJenisTabunganView: View {
                 }
                 
                 VStack {
-                    AppBarLogo(light: false, onCancel: {})
+                    AppBarLogo(light: false, onCancel: {self.showingAlert = true})
                     
                     Text("Choose Your Savings Type".localized(language))
                         .font(.custom("Montserrat-SemiBold", size: 15))

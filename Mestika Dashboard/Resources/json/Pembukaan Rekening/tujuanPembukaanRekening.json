@@ -1,18 +1,18 @@
 [
     {
         "id": 1,
-        "name": "Pinjaman / Angsuran Kredit"
+        "name": "Usaha"
     },
     {
         "id": 2,
-        "name": "Keperluan Usaha"
+        "name": "Simpanan/Tabungan"
     },
     {
         "id": 3,
-        "name": "Keperluan Sehari - hari"
+        "name": "Pendidikan"
     },
     {
         "id": 4,
-        "name": "Simpanan"
+        "name": "Lainnya"
     }
 ]
