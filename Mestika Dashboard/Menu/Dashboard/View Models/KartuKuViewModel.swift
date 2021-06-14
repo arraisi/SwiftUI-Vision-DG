@@ -159,6 +159,9 @@ extension KartuKuViewModel {
                 case .custom(code: 401):
                     self.code = "401"
                     self.message = "PIN Transaksi Salah"
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.message = "Input Yang dimasukkan salah"
                 case .custom(code: 404):
                     self.code = "404"
                     self.message = "Data tidak ditemukan"

@@ -26,41 +26,57 @@ struct TransactionLimitView: View {
     @State private var messageCode: String = ""
     @State private var messageStatus: String = ""
     
+    @State var routingForgotPassword: Bool = false
+    
     var body: some View {
+        
+        NavigationLink(
+            destination: TransactionForgotPinView(),
+            isActive: self.$routingForgotPassword,
+            label: {}
+        )
+        
         if pinActive {
-            PinTransactionLimitView(wrongPin: $wrongPin) { pin in
-                trxLimitVM.saveTrxUserLimit(pin: pin) { result in
-                    switch result {
-                    case .success( _):
-                        messageCode = "Successful"
-                        messageStatus = "Update limit transaction"
-                        
-                        showingAlert = true
-                        print("Success")
-                        
-                    case .failure(let error):
-                        
-                        switch error {
-                        case .custom(code: 404):
-                            messageCode = "Failed"
-                            messageStatus = "Failed to save or update user limit"
+            ZStack {
+                PinTransactionLimitView(wrongPin: $wrongPin) { pin in
+                    trxLimitVM.saveTrxUserLimit(pin: pin) { result in
+                        switch result {
+                        case .success( _):
+                            messageCode = "Successful"
+                            messageStatus = "Update limit transaction"
                             
                             showingAlert = true
-                        default:
-                            self.wrongPin = true
-                            print("ERROR FAVORITES--> \(error)")
+                            print("Success")
+                            
+                        case .failure(let error):
+                            
+                            switch error {
+                            case .custom(code: 404):
+                                messageCode = "Failed"
+                                messageStatus = "Failed to save or update user limit"
+                                
+                                showingAlert = true
+                            case .custom(code: 406):
+                                messageCode = "406"
+                                messageStatus = "Locked by Pin Transaksi"
+                                
+                                showingAlert = true
+                            default:
+                                self.wrongPin = true
+                                print("ERROR FAVORITES--> \(error)")
+                            }
                         }
+                        
                     }
-                    
+                }
+                
+                if self.showingAlert {
+                    ModalOverlay(tapAction: { withAnimation { self.showingAlert = false } })
+                        .edgesIgnoringSafeArea(.all)
                 }
             }
-            .alert(isPresented: $showingAlert) {
-                return Alert(
-                    title: Text("\(messageCode)".localized(language)),
-                    message: Text("\(messageStatus)".localized(language)),
-                    dismissButton: .default(Text("OK".localized(language)), action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }))
+            .popup(isPresented: $showingAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageError()
             }
         } else {
             ZStack {
@@ -132,6 +148,45 @@ struct TransactionLimitView: View {
             })
         }
         
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("\(self.messageStatus)".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                
+                if (self.messageCode == "406") {
+                    routingForgotPassword = true
+                }
+                
+            }) {
+                Text(self.messageCode == "406" ? "Forgot Pin Transaction".localized(language) : "Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 

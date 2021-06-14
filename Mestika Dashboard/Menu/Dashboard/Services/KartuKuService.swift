@@ -121,6 +121,10 @@ class KartuKuService {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 406) {
                     let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
@@ -202,16 +206,16 @@ class KartuKuService {
             "cardDesign": data.cardDesign,
             "cardNo": data.cardNo,
             "encryptedPin": encryptPassword(password: data.pin),
-            "kabupatenKota": "Bandung",
-            "kecamatan": "Test",
-            "kelurahan": "Test",
-            "kodepos": "123",
+            "kabupatenKota": data.addressKotaInput,
+            "kecamatan": data.addressKecamatanInput,
+            "kelurahan": data.addressKelurahanInput,
+            "kodepos": data.addressKodePosInput,
             "nameOnCard": data.nameOnCard,
             "pin": encryptPassword(password: data.pin),
             "postalAddress": data.addressInput,
-            "provinsi": "JAWA BARAT",
-            "rt": "02",
-            "rw": "03"
+            "provinsi": data.addressProvinsiInput,
+            "rt": "-",
+            "rw": "-"
         ]
         
         guard let url = URL.urlBlockKartuKu() else {

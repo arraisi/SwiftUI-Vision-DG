@@ -423,6 +423,11 @@ class AuthService {
                     completion(.success(validateResponse!))
                 }
                 
+                if (httpResponse.statusCode == 201) {
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    completion(.success(validateResponse!))
+                }
+                
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }

@@ -229,6 +229,8 @@ extension TransactionLimitViewModel {
                         completion(.success(true))
                     } else if (data.code == "404") {
                         completion(.failure(ErrorResult.custom(code: 404)))
+                    } else if (data.code == "406") {
+                        completion(.failure(ErrorResult.custom(code: 406)))
                     } else {
                         completion(.failure(ErrorResult.custom(code: Int(response?.code ?? "0") ?? 0)))
                     }
