@@ -1,22 +1,22 @@
 [
     {
         "id": 1,
-        "name": "Gaji"
-    },
-    {
-        "id": 2,
-        "name": "Hibah / Warisan / Orang Tua"
-    },
-    {
-        "id": 3,
-        "name": "Jual Harta"
-    },
-    {
-        "id": 4,
         "name": "Hasil Usaha"
     },
     {
+        "id": 2,
+        "name": "Gaji"
+    },
+    {
+        "id": 3,
+        "name": "Warisan/Hibah"
+    },
+    {
+        "id": 4,
+        "name": "Hasil Penjualan"
+    },
+    {
         "id": 5,
-        "name": "Pencairan Pinjaman"
+        "name": "Lainnya"
     }
 ]
