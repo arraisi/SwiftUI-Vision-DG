@@ -25,9 +25,12 @@ struct FormInputResetNewPinScreen: View {
     @State private var nextViewActive: Bool = false
     @State private var showPinWeakModal: Bool = false
     
+    @State private var phoneNumber: String = ""
+    
     private var simpanBtnDisabled: Bool {
         pinCtrl.count == 0 || pinConfirmCtrl.count == 0
     }
+    
     @GestureState private var dragOffset = CGSize.zero
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -113,7 +116,7 @@ struct FormInputResetNewPinScreen: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl), isActive: $nextViewActive) {EmptyView()}
+                        NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl, phoneNumber: phoneNumber), isActive: $nextViewActive) {EmptyView()}
                             .isDetailLink(false)
                         
                         Button(action: {
@@ -154,6 +157,9 @@ struct FormInputResetNewPinScreen: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
+        .onAppear() {
+            getProfile()
+        }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
@@ -174,6 +180,15 @@ struct FormInputResetNewPinScreen: View {
         }
         .popup(isPresented: $showPinWeakModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
             PinWeakModal()
+        }
+    }
+    
+    @StateObject var profileVM = ProfileViewModel()
+    func getProfile() {
+        self.profileVM.getProfile { success in
+            if success {
+                self.phoneNumber = self.profileVM.telepon
+            }
         }
     }
     

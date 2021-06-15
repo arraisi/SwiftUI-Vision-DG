@@ -739,13 +739,16 @@ class AuthService {
     }
     
     // MARK: - FORGOT PIN TRANSAKSI
-    func forgotPinTransaksi(cardNo: String, pin: String, newPinTrx: String, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
+    func forgotPinTransaksi(cardNo: String, pin: String, newPinTrx: String, phoneNmbr: String, reference: String, codeOtp: String, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
         // Body
         let body: [String: Any] = [
             "cardNo": cardNo,
             "pin": pin,
-            "newPinTrx": newPinTrx
+            "newPinTrx": newPinTrx,
+            "destination": phoneNmbr,
+            "reference": reference,
+            "code": codeOtp,
         ]
         
         print("body => \(body)")

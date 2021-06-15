@@ -269,6 +269,7 @@ struct FormMoveBalanceView: View {
                             self.transactionData.notes = "-"
                         }
                         
+                        self.transactionData.notes = self.notesCtrl
                         self.transactionData.amount = self.amountCtrl
                         
                         self.nextRouting = true

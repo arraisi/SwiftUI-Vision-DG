@@ -128,6 +128,44 @@ extension OtpViewModel {
         }
     }
     
+    // MARK:- GET OTP
+    func otpRequestUser(otpRequest: OtpRequest, completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        OtpService.shared.getRequestOtpUser(otpRequest: otpRequest) { result in
+            switch result {
+            case.success(let response):
+                
+                self.isLoading = false
+                self.destination = response.destination ?? ""
+                self.reference = response.reference
+                self.timeCounter = response.timeCounter
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    
+                    switch error {
+                    case .custom(code: 403):
+                        self.statusMessage = "Input yang dimasukkan salah"
+                    case .custom(code: 400):
+                        self.statusMessage = "Bad Request"
+                    default:
+                        self.statusMessage = "Internal Server Error"
+                    }
+                }
+                completion(false)
+            }
+            
+        }
+    }
+    
     // MARK: - POST OTP FOR ACC OR REKENING
     func otpValidationAccOrRek(
         code: String,

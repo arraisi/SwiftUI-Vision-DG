@@ -25,66 +25,74 @@ struct TransactionValidationPinAtmView: View {
     
     var password: String
     @State var cardNo: String = ""
+    @State var phoneNumber: String = ""
     
     @State private var isLoading: Bool = false
     
+    @State private var otpView: Bool = false
+    
     var body: some View {
-        ZStack {
-            Image("bg_blue")
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                
-                if (self.isLoading) {
-                    LinearWaitingIndicator()
-                        .animated(true)
-                        .foregroundColor(.green)
-                        .frame(height: 1)
-                }
-                
-                Spacer(minLength: 0)
-                
-                Text("Enter your PIN ATM".localized(language))
-                    .font(.custom("Montserrat-SemiBold", size: 18))
-                    .foregroundColor(Color.white)
-                
-                HStack(spacing: 10){
-                    ForEach(0..<6, id: \.self){index in
-                        PinView(index: index, password: $pin, emptyColor: .constant(Color(hex: "#2334D0")), fillColor: .constant(Color.white))
-                    }
-                }
-                .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
-                
-                
-                Text(wrongPin ? "Incorrect Pin".localized(language) : "")
-                    .foregroundColor(.red)
-                    .fontWeight(.heavy)
-                    .padding()
-                
-                Spacer(minLength: 0)
-                
-                PinVerification(pin: $pin, onChange: {
-                    self.wrongPin = false
-                }, onCommit: {
-                    forgotPin()
-                })
-            }
-            
-            if self.isShowAlert || self.isShowSuccess {
-                ModalOverlay(tapAction: { withAnimation { } })
+        if otpView {
+            TransactionOtpView(password: password, phoneNumber: self.phoneNumber, pinAtm: self.pin)
+        } else {
+            ZStack {
+                Image("bg_blue")
+                    .resizable()
                     .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    
+                    if (self.isLoading) {
+                        LinearWaitingIndicator()
+                            .animated(true)
+                            .foregroundColor(.green)
+                            .frame(height: 1)
+                    }
+                    
+                    Spacer(minLength: 0)
+                    
+                    Text("Enter your PIN ATM".localized(language))
+                        .font(.custom("Montserrat-SemiBold", size: 18))
+                        .foregroundColor(Color.white)
+                    
+                    HStack(spacing: 10){
+                        ForEach(0..<6, id: \.self){index in
+                            PinView(index: index, password: $pin, emptyColor: .constant(Color(hex: "#2334D0")), fillColor: .constant(Color.white))
+                        }
+                    }
+                    .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
+                    
+                    
+                    Text(wrongPin ? "Incorrect Pin".localized(language) : "")
+                        .foregroundColor(.red)
+                        .fontWeight(.heavy)
+                        .padding()
+                    
+                    Spacer(minLength: 0)
+                    
+                    PinVerification(pin: $pin, onChange: {
+                        self.wrongPin = false
+                    }, onCommit: {
+//                        forgotPin()
+                        self.otpView = true
+                    })
+                }
+                
+                if self.isShowAlert || self.isShowSuccess {
+                    ModalOverlay(tapAction: { withAnimation { } })
+                        .edgesIgnoringSafeArea(.all)
+                }
             }
-        }
-        .navigationBarTitle("Pin ATM".localized(language), displayMode: .inline)
-        .popup(isPresented: $isShowAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageError()
-        }
-        .popup(isPresented: $isShowSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageSuccess()
-        }
-        .onAppear {
-            getProfile()
+            .navigationBarTitle("Pin ATM".localized(language), displayMode: .inline)
+            .popup(isPresented: $isShowAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageError()
+            }
+            .popup(isPresented: $isShowSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageSuccess()
+            }
+            .onAppear {
+                getProfile()
+            }
         }
     }
     
@@ -163,7 +171,7 @@ struct TransactionValidationPinAtmView: View {
     @StateObject private var authVM = AuthViewModel()
     func forgotPin() {
         self.isLoading = true
-        self.authVM.forgotPinTransaksi(cardNo: cardNo, pin: pin, newPinTrx: password) { success in
+        self.authVM.forgotPinTransaksi(cardNo: cardNo, pin: pin, newPinTrx: password, phoneNmbr: "", reference: "", codeOtp: "") { success in
             if success {
                 self.isLoading = false
                 self.isShowSuccess = true
@@ -183,6 +191,7 @@ struct TransactionValidationPinAtmView: View {
         self.profileVM.getProfile { success in
             if success {
                 self.cardNo = self.profileVM.cardNo
+                self.phoneNumber = self.profileVM.telepon
             }
         }
     }

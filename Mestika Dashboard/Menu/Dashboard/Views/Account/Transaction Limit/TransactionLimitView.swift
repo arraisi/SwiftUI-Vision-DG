@@ -58,7 +58,7 @@ struct TransactionLimitView: View {
                                 showingAlert = true
                             case .custom(code: 406):
                                 messageCode = "406"
-                                messageStatus = "Locked by Pin Transaksi"
+                                messageStatus = "PIN Transaksi Terblokir"
                                 
                                 showingAlert = true
                             default:
@@ -168,6 +168,7 @@ struct TransactionLimitView: View {
             Button(action: {
                 
                 if (self.messageCode == "406") {
+                    self.showingAlert = false
                     routingForgotPassword = true
                 }
                 

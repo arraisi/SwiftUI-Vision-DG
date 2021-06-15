@@ -24,10 +24,19 @@ struct FormChangePersonalDataView: View {
     @State var pinActive: Bool = false
     @State var wrongPin: Bool = false
     @State var showModal: Bool = false
+    @State var showModalError: Bool = false
+    
+    @State var routingForgotPassword: Bool = false
     
     @State var telepon: String = ""
     
     var body: some View {
+        
+        NavigationLink(
+            destination: TransactionForgotPinView(),
+            isActive: self.$routingForgotPassword,
+            label: {}
+        )
         
         ZStack {
             
@@ -51,7 +60,13 @@ struct FormChangePersonalDataView: View {
                             if result {
                                 self.pinActive = false
                                 self.showModal = true
-                            } else { self.wrongPin = true }
+                            } else {
+                                if (profileVM.statusCode == "406") {
+                                    self.showModalError = true
+                                } else {
+                                    self.wrongPin = true
+                                }
+                            }
                         }
                     }
                     
@@ -139,7 +154,7 @@ struct FormChangePersonalDataView: View {
 //                Spacer()
             }
             
-            if self.showModal {
+            if self.showModal || self.showModalError {
                 ModalOverlay(tapAction: { withAnimation { } })
                     .edgesIgnoringSafeArea(.all)
             }
@@ -148,6 +163,9 @@ struct FormChangePersonalDataView: View {
         .edgesIgnoringSafeArea(.all)
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             SuccessChangePasswordModal()
+        }
+        .popup(isPresented: $showModalError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
+            popupMessageError()
         }
         .navigationBarTitle("Account", displayMode: .inline)
         .navigationBarHidden(true)
@@ -161,6 +179,42 @@ struct FormChangePersonalDataView: View {
             }
         }
     }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("PIN Transaksi Terblokir".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {
+                routingForgotPassword = true
+            }) {
+                Text("Forgot Pin Transaction".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     
     // MARK: POPUP SUCCSESS CHANGE PASSWORD
     func SuccessChangePasswordModal() -> some View {

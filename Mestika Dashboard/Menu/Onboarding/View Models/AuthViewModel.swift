@@ -541,13 +541,13 @@ extension AuthViewModel {
     }
     
     // MARK: - POST SET FINGER PRINT
-    func forgotPinTransaksi(cardNo: String, pin: String, newPinTrx: String, completion: @escaping (Bool) -> Void) {
+    func forgotPinTransaksi(cardNo: String, pin: String, newPinTrx: String, phoneNmbr: String, reference: String, codeOtp: String, completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        AuthService.shared.forgotPinTransaksi(cardNo: cardNo, pin: encryptPassword(password: pin), newPinTrx: encryptPassword(password: newPinTrx)) { result in
+        AuthService.shared.forgotPinTransaksi(cardNo: cardNo, pin: encryptPassword(password: pin), newPinTrx: encryptPassword(password: newPinTrx), phoneNmbr: phoneNmbr, reference: reference, codeOtp: codeOtp) { result in
             
             DispatchQueue.main.async {
                 self.isLoading = false

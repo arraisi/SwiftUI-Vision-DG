@@ -124,6 +124,56 @@ class OtpService {
         }.resume()
     }
     
+    /* GET CODE OTP */
+    func getRequestOtpUser(otpRequest: OtpRequest, completion: @escaping(Result<RequestOtpUserResponse, ErrorResult>) -> Void) {
+        
+        guard let url = URL.urlOTPUser() else {
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+        }
+        
+        let finalUrl = url
+            .appending("destination", value: otpRequest.destination)
+            .appending("trytime", value: otpRequest.trytime.numberString)
+            .appending("type", value: otpRequest.type)
+        
+        var request = URLRequest(finalUrl)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data, error == nil else {
+                return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if (httpResponse.statusCode == 200) {
+                    let otpResponse = try? JSONDecoder().decode(RequestOtpUserResponse.self, from: data)
+                    if otpResponse == nil {
+                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    } else {
+                        completion(.success(otpResponse!))
+                    }
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 400) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode > 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+            }
+            
+        }.resume()
+    }
+    
     /* VALIDATE CODE OTP FOR ACC OR REKENING */
     func validateOtpAccOrRek(
         code: String,

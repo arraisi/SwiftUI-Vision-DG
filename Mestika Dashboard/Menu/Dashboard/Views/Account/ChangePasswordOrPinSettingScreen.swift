@@ -23,7 +23,7 @@ struct ChangePasswordOrPinSettingScreen: View {
                         Text("Change Password".localized(language))
                     })
                     
-                    NavigationLink(destination: FormInputResetPinScreen(unLocked: false), label: {
+                    NavigationLink(destination: FormInputResetPinScreen(unLocked: false, phoneNumber: ""), label: {
                         Text("Reset Transaction PIN".localized(language))
                     })
                 }

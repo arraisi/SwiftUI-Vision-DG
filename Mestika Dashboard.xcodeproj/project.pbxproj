@@ -84,6 +84,9 @@
 		523370192629964F00ED3E4F /* DetailTransactionDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */; };
 		5233701E2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */; };
 		5235FC2C267736C3009C5CE5 /* CardBlockAddressInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235FC2B267736C3009C5CE5 /* CardBlockAddressInputView.swift */; };
+		5235FC2E26775F27009C5CE5 /* TransactionOtpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235FC2D26775F27009C5CE5 /* TransactionOtpView.swift */; };
+		5235FC3026783832009C5CE5 /* RequestOtpUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235FC2F26783832009C5CE5 /* RequestOtpUserResponse.swift */; };
+		5235FC3226785552009C5CE5 /* OtpConfirmationChangeDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235FC3126785552009C5CE5 /* OtpConfirmationChangeDataView.swift */; };
 		523A862A2542BE9600ADFE25 /* ModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A86292542BE9600ADFE25 /* ModalOverlay.swift */; };
 		5245F885253FE702002E8B53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F884253FE702002E8B53 /* AppDelegate.swift */; };
 		5245F887253FE702002E8B53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5245F886253FE702002E8B53 /* SceneDelegate.swift */; };
@@ -598,6 +601,9 @@
 		523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionDepositAccountView.swift; sourceTree = "<group>"; };
 		5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPinOfDepositAccountView.swift; sourceTree = "<group>"; };
 		5235FC2B267736C3009C5CE5 /* CardBlockAddressInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockAddressInputView.swift; sourceTree = "<group>"; };
+		5235FC2D26775F27009C5CE5 /* TransactionOtpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionOtpView.swift; path = ../../../../../../../../TransactionOtpView.swift; sourceTree = "<group>"; };
+		5235FC2F26783832009C5CE5 /* RequestOtpUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOtpUserResponse.swift; sourceTree = "<group>"; };
+		5235FC3126785552009C5CE5 /* OtpConfirmationChangeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpConfirmationChangeDataView.swift; sourceTree = "<group>"; };
 		5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mestika Dashboard.entitlements"; sourceTree = "<group>"; };
 		523A86292542BE9600ADFE25 /* ModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalOverlay.swift; sourceTree = "<group>"; };
 		5245F881253FE702002E8B53 /* Mestika Dashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mestika Dashboard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1795,6 +1801,7 @@
 				52C362A725D12DD8000374AA /* TransferRtgsSuccess.swift */,
 				529D3D9B266F32F90057D64D /* TransactionForgotPinView.swift */,
 				52A70B322671C4FA00D8001C /* TransactionValidationPinAtmView.swift */,
+				5235FC2D26775F27009C5CE5 /* TransactionOtpView.swift */,
 			);
 			path = TransferRTGS;
 			sourceTree = "<group>";
@@ -1836,6 +1843,7 @@
 				52DA20A225511F8600CC048A /* FormInputResetPinScreen.swift */,
 				52DA20AA2551218C00CC048A /* OtpResetPinScreen.swift */,
 				52DA20B2255134B300CC048A /* FormInputResetNewPinScreen.swift */,
+				5235FC3126785552009C5CE5 /* OtpConfirmationChangeDataView.swift */,
 			);
 			path = ForgotPINTransaction;
 			sourceTree = "<group>";
@@ -2070,6 +2078,7 @@
 				5203B245263C1E8A007174FB /* PasswordParamResponse.swift */,
 				52A7970C2641170D001B9937 /* RequestOtpResponse.swift */,
 				52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */,
+				5235FC2F26783832009C5CE5 /* RequestOtpUserResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2747,6 +2756,7 @@
 				52ADFEBF2557DA0700A1001F /* KeyboardGuardian.swift in Sources */,
 				5283AF5D25CD28E100111C75 /* UIDevice+Extensions.swift in Sources */,
 				5294536025EF59E7009A5B83 /* CardDamageAddressInputView.swift in Sources */,
+				5235FC3226785552009C5CE5 /* OtpConfirmationChangeDataView.swift in Sources */,
 				52C3BAFB2639DB070066A7A6 /* ShimmerView.swift in Sources */,
 				C0FBE56026384E180027A9DB /* RegisterSummaryView.swift in Sources */,
 				52DACF8725ECEF7600099B3C /* PopOverEditFavoriteOffUsView.swift in Sources */,
@@ -2967,6 +2977,7 @@
 				C0BC3A1E2575EDD300A981DD /* CustomAppBar.swift in Sources */,
 				52A7A36826428D1D001B9937 /* FormChangePersonalDataView.swift in Sources */,
 				0658B5942563F8A2001B659D /* ListAnnouncementView.swift in Sources */,
+				5235FC2E26775F27009C5CE5 /* TransactionOtpView.swift in Sources */,
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */,
 				52F4E3BE264673760094F320 /* FormChangeOtherDataView.swift in Sources */,
@@ -3122,6 +3133,7 @@
 				52C3629E25D12DA3000374AA /* TransferRtgsConfirmation.swift in Sources */,
 				C0AEAC2725D516B600B6A20C /* EncryptPasswordView.swift in Sources */,
 				52C34888254288D000F08F37 /* TransferOnUsScreen.swift in Sources */,
+				5235FC3026783832009C5CE5 /* RequestOtpUserResponse.swift in Sources */,
 				525DB5242546A05A00D48075 /* TransferOnUsSuccessInformationScreen.swift in Sources */,
 				C06CDABC25E8A0FB00899CC8 /* LocalizationService.swift in Sources */,
 				5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */,

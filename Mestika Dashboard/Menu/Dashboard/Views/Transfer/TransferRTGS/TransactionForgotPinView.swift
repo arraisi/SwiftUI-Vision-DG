@@ -98,7 +98,7 @@ struct TransactionForgotPinView: View {
                             
                             Spacer()
                             
-                            NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl), isActive: $nextViewActive) {EmptyView()}
+                            NavigationLink(destination: FormInputResetPinScreen(cardNo: self.cardNo, newPin: self.pinCtrl, phoneNumber: ""), isActive: $nextViewActive) {EmptyView()}
                                 .isDetailLink(false)
                             
                             Button(action: {
