@@ -78,6 +78,7 @@ struct PinConfirmationChangeDataView: View {
                     self.wrongPin = false
                 }, onCommit: {
                     self.callback(self.pin)
+                    self.pin = ""
                     
 //                    if self.pin == self.key {
 //                        print("UNLOCKED")

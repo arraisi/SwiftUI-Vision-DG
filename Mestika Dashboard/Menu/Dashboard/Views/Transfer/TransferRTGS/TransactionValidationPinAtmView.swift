@@ -73,8 +73,8 @@ struct TransactionValidationPinAtmView: View {
                     PinVerification(pin: $pin, onChange: {
                         self.wrongPin = false
                     }, onCommit: {
-//                        forgotPin()
-                        self.otpView = true
+                        forgotPin()
+//                        self.otpView = true
                     })
                 }
                 

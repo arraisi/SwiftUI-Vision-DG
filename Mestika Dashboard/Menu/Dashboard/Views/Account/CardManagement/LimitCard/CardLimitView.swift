@@ -342,7 +342,6 @@ struct CardLimitView: View {
                                 
                                 Button(action: {
                                     self.activateData.cardNo = card.cardNo ?? ""
-                                    self.activateData.maxIbftPerTrans = "0"
                                     
                                     self.pinActive = true
                                 }, label: {

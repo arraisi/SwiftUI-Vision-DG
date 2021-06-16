@@ -78,7 +78,7 @@ struct PinTransactionLimitView: View {
                     self.wrongPin = false
                 }, onCommit: {
                     self.callback(self.pin)
-                    
+                    self.pin = ""
 //                    if self.pin == self.key {
 //                        print("UNLOCKED")
 //                        self.unlocked = true
@@ -124,6 +124,7 @@ struct PinTransactionLimitView: View {
             Button(action: {
                 
                 if (self.statusError == "406") {
+                    self.isShowAlert = false
                     routingForgotPassword = true
                 }
                 

@@ -114,6 +114,7 @@ struct ConfirmationPinOfSavingAccountView: View {
             
             Button(action: {
                 
+                self.showingAlert = false
                 routingForgotPassword = true
                 
             }) {
@@ -153,6 +154,7 @@ struct ConfirmationPinOfSavingAccountView: View {
                     self.success = true
                 } else if (savingAccountVM.errorCode == "406") {
                     self.showingAlert = true
+                    self.pin = ""
                 } else {
                     self.wrongPin = true
                     self.pin = ""

@@ -170,6 +170,9 @@ struct TransactionLimitView: View {
                 if (self.messageCode == "406") {
                     self.showingAlert = false
                     routingForgotPassword = true
+                } else {
+                    self.showingAlert = false
+                    self.presentationMode.wrappedValue.dismiss()
                 }
                 
             }) {

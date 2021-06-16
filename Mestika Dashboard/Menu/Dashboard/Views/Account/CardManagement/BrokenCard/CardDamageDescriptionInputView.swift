@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct CardDamageDescriptionInputView: View {
     
@@ -33,6 +34,14 @@ struct CardDamageDescriptionInputView: View {
             }
             
             VStack {
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                        .padding(.bottom, 10)
+                }
+                
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack {
                         atmForm
@@ -127,13 +136,13 @@ struct CardDamageDescriptionInputView: View {
                 
                 HStack {
                     SecureField("Pin ATM", text: self.$pinAtm)
-                    .keyboardType(.numberPad)
-                    .font(.subheadline)
-                    .foregroundColor(.black)
-                    .padding()
-                    .onReceive(pinAtm.publisher.collect()) {
-                        self.pinAtm = String($0.prefix(6))
-                    }
+                        .keyboardType(.numberPad)
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .padding()
+                        .onReceive(pinAtm.publisher.collect()) {
+                            self.pinAtm = String($0.prefix(6))
+                        }
                 }
                 .background(Color(hex: "#F6F8FB"))
                 .cornerRadius(10)
@@ -247,7 +256,7 @@ struct CardDamageDescriptionInputView: View {
             .background(Color(hex: "#2334D0"))
             .cornerRadius(12)
             .padding(.top, 15)
-
+            
         }
         .padding(25)
         .frame(width: UIScreen.main.bounds.width - 60)

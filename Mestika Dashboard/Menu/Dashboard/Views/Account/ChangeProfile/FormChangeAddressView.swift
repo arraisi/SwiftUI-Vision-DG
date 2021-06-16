@@ -387,6 +387,7 @@ struct FormChangeAddressView: View {
                 .padding([.bottom, .top], 20)
             
             Button(action: {
+                self.showModalError = false
                 routingForgotPassword = true
             }) {
                 Text("Forgot Pin Transaction".localized(language))

@@ -116,7 +116,17 @@ struct FormInputResetPinScreen: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinForgotPinTrx"))) { obj in
                 print("SUCCESS PIN")
-                self.otpView = true
+//                self.otpView = true
+                self.authVM.forgotPinTransaksi(cardNo: cardNo, pin: pin, newPinTrx: newPin, phoneNmbr: "", reference: "", codeOtp: "") { success in
+                    if success {
+                        self.showSuccess = true
+                    }
+                    
+                    if !success {
+                        print("Error Pin TRX")
+                    }
+                }
+
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)

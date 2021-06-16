@@ -351,6 +351,10 @@ struct WelcomeView: View {
             return AnyView(ScreeningLoggedModal())
         case "NOT_APPROVED" :
             return AnyView(PopupNotApproved())
+        case "LOCKED_BY_PIN_TRX" :
+            return AnyView(ScreeningLoggedModal())
+        case "LOCKED_BY_PWD" :
+            return AnyView(ScreeningLoggedModal())
         case "LOGGED_IN" :
             return AnyView(ScreeningLoggedModal())
         case "LOGGED_OUT" :
@@ -885,9 +889,10 @@ struct WelcomeView: View {
                         
                         self.statusLogin = self.userVM.message
                         
-                        if (self.statusLogin == "LOGGED_IN") {
-                            self.isPasswordViewActive = true
-                        } else if (self.statusLogin == "LOGGED_OUT") {
+                        if (self.statusLogin == "LOGGED_IN"
+                                || self.statusLogin == "LOGGED_OUT"
+                                || self.statusLogin == "LOCKED_BY_PIN_TRX"
+                                || self.statusLogin == "LOCKED_BY_PWD") {
                             self.isPasswordViewActive = true
                         } else {
                             self.isLoginNewDevice = false

@@ -117,7 +117,7 @@ struct PopOverFavoriteTransactionOffUsView: View {
                     .padding(.horizontal)
                     
                     Button(action: {
-                        
+                        self.transferData.destinationName = self.receivedName
                         if (self.transferData.transactionType == "RTGS") {
                             self.favoritVM.transferRtgs(data: transferData) { success in
 
