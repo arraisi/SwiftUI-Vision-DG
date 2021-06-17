@@ -11,7 +11,7 @@ struct HistoryByAccountView: View {
     
     @AppStorage("language")
     private var language = LocalizationService.shared.language
-    
+    @Environment(\.presentationMode) var presentationMode
     
     @StateObject var historyVM = HistoryTransactionViewModel()
     @StateObject var savingAccountVM = SavingAccountViewModel()
@@ -28,6 +28,8 @@ struct HistoryByAccountView: View {
     
     @State private var dateFrom = Date()
     @State private var dateTo = Date()
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     var dateClosedRange: ClosedRange<Date> {
         let min = Calendar.current.date(byAdding: .month, value: -3, to: Date())!
@@ -46,37 +48,48 @@ struct HistoryByAccountView: View {
     
     var body: some View {
         ZStack {
-            if filterShowed {
+            VStack {
+                AppBarLogo(light: true, showBackgroundBlueOnStatusBar: true) {}
                 
-                FilterView
-                
-            } else {
-                
-                VStack(alignment: .leading) {
+                if filterShowed {
                     
-                    Button(action: {
-                        self.filterShowed = true
-                    }, label: {
-                        Text("Transaction Filter".localized(language))
-                            .font(.custom("Montserrat-SemiBold", size: 14))
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40)
-                            .foregroundColor(.black)
-                            .background(Color.white)
-                            .cornerRadius(15)
-                            .shadow(color: Color.gray.opacity(0.3), radius: 5)
-                    })
-                    .padding()
+                    FilterView
                     
-                    HistoryTransactionList(histories: historyVM.histories)
+                } else {
                     
-                    
+                    VStack(alignment: .leading) {
+                        
+                        Button(action: {
+                            self.filterShowed = true
+                        }, label: {
+                            Text("Transaction Filter".localized(language))
+                                .font(.custom("Montserrat-SemiBold", size: 14))
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 40)
+                                .foregroundColor(.black)
+                                .background(Color.white)
+                                .cornerRadius(15)
+                                .shadow(color: Color.gray.opacity(0.3), radius: 5)
+                        })
+                        .padding()
+                        
+                        HistoryTransactionList(histories: historyVM.histories)
+                        
+                        
+                    }
                 }
+                
+                Spacer()
+                
             }
-            
-            Spacer()
-            
         }
-        .navigationBarTitle("History", displayMode: .inline)
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 &&
+                value.translation.width > 100) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
         .onAppear {
             self.selectedSourceNumber = self.cardNo
         }
@@ -158,6 +171,7 @@ struct HistoryByAccountView: View {
             
             Spacer()
         }
+        .navigationBarTitle("History", displayMode: .inline)
     }
     
     func loadHistory() {

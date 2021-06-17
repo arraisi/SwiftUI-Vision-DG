@@ -242,6 +242,9 @@ struct LoginScreen: View {
         .popup(isPresented: $showingModalBiometricLogin, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupBiometricLogin()
         }
+        .popup(isPresented: $showingModalForgotPassword, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+            popupMessageLocked()
+        }
     }
     
     func saveDataNewDeviceToCoreData()  {
@@ -286,7 +289,7 @@ struct LoginScreen: View {
                         self.showingModalError = true
                     } else if (self.authVM.errorCode == "406") {
                         print("BLOCKED")
-                        self.showingModal = true
+                        self.showingModalForgotPassword = true
                     } else {
                         print("LOGIN FAILED")
                         self.showingModal = true
@@ -310,6 +313,9 @@ struct LoginScreen: View {
                     
                     if (self.authVM.errorCode == "206") {
                         self.routeNewPassword = true
+                    } else if (self.authVM.errorCode == "406") {
+                        print("BLOCKED")
+                        self.showingModalForgotPassword = true
                     } else if (self.authVM.errorCode == "401") {
 //                        self.appState.moveToWelcomeView = true
                         self.showingModal = true
@@ -353,6 +359,47 @@ struct LoginScreen: View {
         var error: NSError?
         
         return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+    }
+    
+    // MARK: POPUP MESSAGE
+    func popupMessageLocked() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("Your Account Has Been Blocked".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Text("Please change the Password.".localized(language))
+                .fontWeight(.bold)
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 30)
+            
+            Button(action: {
+                self.routeForgotPassword = true
+            }) {
+                Text("Change Password".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     // MARK: POPUP MESSAGE

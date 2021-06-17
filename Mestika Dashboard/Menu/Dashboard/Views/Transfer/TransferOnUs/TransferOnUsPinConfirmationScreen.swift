@@ -24,6 +24,7 @@ struct TransferOnUsPinConfirmationScreen: View {
     @State var unLocked : Bool
     @State var wrongPassword = false
     @State var showingAlert = false
+    @State var forgotView: Bool = false
     
     @State var messageError: String = ""
     @State var statusError: String = ""
@@ -40,91 +41,86 @@ struct TransferOnUsPinConfirmationScreen: View {
             label: {}
         )
         
-        ZStack {
-            Image("bg_blue")
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
-            
-            NavigationLink(
-                destination: TransferOnUsSuccessInformationScreen(transferData: transferData),
-                isActive: self.$unLocked,
-                label: {EmptyView()}
-            )
-            .isDetailLink(false)
-            
-            VStack {
-                
-                if (self.isLoading) {
-                    LinearWaitingIndicator()
-                        .animated(true)
-                        .foregroundColor(.green)
-                        .frame(height: 1)
-                }
-                
-                Spacer(minLength: 0)
-                
-                Text("Enter your Transaction PIN".localized(language))
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                
-                HStack(spacing: 10){
-                    ForEach(0..<6, id: \.self){index in
-                        PinView(index: index, password: $password, emptyColor: .constant(Color(hex: "#ADAEB0")), fillColor: .constant(Color.white))
-                    }
-                }
-                .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
-                
-                
-                Text(wrongPassword ? "Incorrect Pin" : "")
-                    .foregroundColor(.red)
-                    .fontWeight(.heavy)
-                    .padding()
-                
-                Spacer(minLength: 0)
-                
-                
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
-                    
-                    ForEach(1...9,id: \.self) { value in
-                        NumPadView(value: "\(value)",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
-                    }
-                    
-                    NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
-                        .disabled(true)
-                        .hidden()
-                    
-                    NumPadView(value: "0", password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
-                    
-                    NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
-                }
-                .padding(.bottom)
-                .padding(.horizontal, 30)
-            }
-            
-            if self.showingAlert {
-                ModalOverlay(tapAction: { withAnimation { self.showingAlert = false } })
+        if forgotView {
+            TransactionForgotPinView()
+        } else {
+            ZStack {
+                Image("bg_blue")
+                    .resizable()
                     .edgesIgnoringSafeArea(.all)
+                
+                NavigationLink(
+                    destination: TransferOnUsSuccessInformationScreen(transferData: transferData),
+                    isActive: self.$unLocked,
+                    label: {EmptyView()}
+                )
+                .isDetailLink(false)
+                
+                VStack {
+                    
+                    if (self.isLoading) {
+                        LinearWaitingIndicator()
+                            .animated(true)
+                            .foregroundColor(.green)
+                            .frame(height: 1)
+                    }
+                    
+                    Spacer(minLength: 0)
+                    
+                    Text("Enter your Transaction PIN".localized(language))
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    HStack(spacing: 10){
+                        ForEach(0..<6, id: \.self){index in
+                            PinView(index: index, password: $password, emptyColor: .constant(Color(hex: "#ADAEB0")), fillColor: .constant(Color.white))
+                        }
+                    }
+                    .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
+                    
+                    
+                    Text(wrongPassword ? "Incorrect Pin" : "")
+                        .foregroundColor(.red)
+                        .fontWeight(.heavy)
+                        .padding()
+                    
+                    Spacer(minLength: 0)
+                    
+                    
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
+                        
+                        ForEach(1...9,id: \.self) { value in
+                            NumPadView(value: "\(value)",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
+                        }
+                        
+                        NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
+                            .disabled(true)
+                            .hidden()
+                        
+                        NumPadView(value: "0", password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
+                        
+                        NumPadView(value: "delete.fill",password: $password, key: $key, unlocked: $unLocked, wrongPass: $wrongPassword, keyDeleteColor: .constant(.white), isTransferOnUs: true)
+                    }
+                    .padding(.bottom)
+                    .padding(.horizontal, 30)
+                }
+                
+                if self.showingAlert {
+                    ModalOverlay(tapAction: { withAnimation { self.showingAlert = false } })
+                        .edgesIgnoringSafeArea(.all)
+                }
             }
-        }
-        .navigationBarTitle("Transfer ONUS", displayMode: .inline)
-        .navigationBarBackButtonHidden(self.isLoading)
-//        .alert(isPresented: $showingAlert) {
-//            return Alert(
-//                title: Text("\(self.statusError)"),
-//                message: Text("\(self.messageError)"),
-//                dismissButton: .default(Text("OK".localized(language)),
-//                                        action: {
-//                                            self.showingAlert = false
-//                                        }))
-//        }
-        .popup(isPresented: $showingAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
-            popupMessageError()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOnUs"))) { obj in
-            print("SUCCESS PIN")
-            self.transferData.pin = password
-            submitTransfer()
+            .navigationBarTitle("Transfer ONUS", displayMode: .inline)
+            .navigationBarBackButtonHidden(self.isLoading)
+            .popup(isPresented: $showingAlert, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
+                popupMessageError()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOnUs"))) { obj in
+                print("SUCCESS PIN")
+                self.transferData.pin = password
+                submitTransfer()
+            }
         }
     }
     
@@ -171,7 +167,8 @@ struct TransferOnUsPinConfirmationScreen: View {
             Button(action: {
                 
                 if (self.statusError == "407") {
-                    routingForgotPassword = true
+//                    routingForgotPassword = true
+                    self.forgotView = true
                 }
                 
             }) {

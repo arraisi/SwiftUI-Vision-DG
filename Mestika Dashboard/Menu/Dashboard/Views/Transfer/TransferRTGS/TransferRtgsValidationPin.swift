@@ -22,7 +22,8 @@ struct TransferRtgsValidationPin: View {
     @State var isLoading = false
     
     @AppStorage("lock_Password") var key = "123456"
-    @State var unLocked : Bool
+    @State var unLocked: Bool
+    @State var forgotView: Bool = false
     @State var wrongPassword = false
     @State var showingAlert = false
     
@@ -43,6 +44,8 @@ struct TransferRtgsValidationPin: View {
         
         if unLocked {
             TransferRtgsSuccess(transferData: transferData)
+        } else if forgotView {
+            TransactionForgotPinView()
         } else {
             ZStack {
                 Image("bg_blue")
@@ -203,7 +206,8 @@ struct TransferRtgsValidationPin: View {
             Button(action: {
                 
                 if (self.statusError == "407") {
-                    routingForgotPassword = true
+                    self.forgotView = true
+//                    routingForgotPassword = true
                 }
                 
             }) {

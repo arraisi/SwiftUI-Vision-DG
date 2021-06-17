@@ -20,8 +20,10 @@ struct TransferOnUsScreen: View {
     @State var listCardNumber: [String] = []
     
     @State var selectedSourceNumber: String = ""
-    @State var selectedBalance: String = ""
+    @State var selectedBalance: String = "0"
     @State var selectedCardNumber: String = ""
+    
+    @State private var amountDbl: Double = 0
     
     /* Function GET USER Status */
     @ObservedObject var profileVM = ProfileViewModel()
@@ -200,6 +202,9 @@ struct TransferOnUsScreen: View {
             self.savingAccountVM.getSavingAccountTransfer(data: "on-us") { (success) in
                 self.savingAccountVM.savingAccounts.forEach { e in
                     
+                    self.selectedSourceNumber = e.accountNumber
+                    self.selectedBalance = e.balance.subStringRange(from: 0, to: e.balance.count-3)
+                    
 //                    if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
 //                        print(e.accountNumber)
 //                        print(e.cardNumber)
@@ -317,6 +322,13 @@ struct TransferOnUsScreen: View {
                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                         self.amount = cleanAmount.thousandSeparator()
                         self.transferData.amount = cleanAmount
+                        
+                        self.amountDbl = Double(cleanAmount) ?? 0
+                        
+                        if (self.amountDbl > Double(self.selectedBalance)!) {
+                            self.amount = self.selectedBalance.thousandSeparator()
+                        }
+                        
                         validateForm()
                     }
                     .foregroundColor(Color(hex: "#232175"))

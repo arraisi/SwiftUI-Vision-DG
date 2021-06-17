@@ -17,11 +17,13 @@ struct TransferRtgsScreen: View {
     @State var listCardNumber: [String] = []
     
     @State var selectedSourceNumber: String = ""
-    @State var selectedBalance: String = ""
+    @State var selectedBalance: String = "0"
     @State var selectedCardNo: String = ""
     
     @State var isShowName: Bool = false
     @State var isLoading: Bool = false
+    
+    @State private var amountDbl: Double = 0
     
     @State var messageStatusInquiry: String = ""
     
@@ -289,6 +291,9 @@ struct TransferRtgsScreen: View {
             
             self.savingAccountVM.getSavingAccountTransfer(data: "off-us") { (success) in
                 self.savingAccountVM.savingAccounts.forEach { e in
+                    
+                    self.selectedSourceNumber = e.accountNumber
+                    self.selectedBalance = e.balance.subStringRange(from: 0, to: e.balance.count-3)
                     
 //                    if (e.planAllowDebitDomestic == "Y" && e.categoryProduct != "S") {
 //                        print(e.accountNumber)
@@ -582,6 +587,12 @@ struct TransferRtgsScreen: View {
                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
                         self.amount = cleanAmount.thousandSeparator()
                         self.transferData.amount = cleanAmount
+                        
+                        self.amountDbl = Double(cleanAmount) ?? 0
+                        
+                        if (self.amountDbl > Double(self.selectedBalance)!) {
+                            self.amount = self.selectedBalance.thousandSeparator()
+                        }
                     }
                     .foregroundColor(Color(hex: "#232175"))
                     .font(.system(size: 30, weight: .bold, design: .default))

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct CardBlockDescriptionView: View {
     
@@ -26,17 +27,89 @@ struct CardBlockDescriptionView: View {
     @State var isLoading: Bool = false
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                Color(hex: "#F6F8FB")
-                    .edgesIgnoringSafeArea(.all)
-            }
+        ZStack {
+            
+            Color(hex: "#F6F8FB")
             
             VStack {
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                        .padding(.bottom, 10)
+                }
+                
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack {
-                        atmForm
-                            .padding(.top, 30)
+                        
+                        VStack {
+                            // Field Pilih Bank
+                            VStack {
+                                HStack {
+                                    Text("Insert ATM Card Number".localized(language))
+                                        .font(.subheadline)
+                                        .fontWeight(.light)
+                                    
+                                    Spacer()
+                                }
+                                .padding(.horizontal)
+                                .padding(.top, 25)
+                                
+                                HStack {
+                                    TextField("Kartu ATM", text: self.$cardNo, onEditingChanged: { changed in
+                                        self.cardData.cardNo = self.cardNo
+                                    })
+                                    .disabled(true)
+                                    .keyboardType(.numberPad)
+                                    .font(.subheadline)
+                                    .foregroundColor(.black)
+                                    .padding()
+                                    .onReceive(cardNo.publisher.collect()) {
+                                        self.cardNo = String($0.prefix(16))
+                                    }
+                                }
+                                .background(Color(hex: "#F6F8FB"))
+                                .cornerRadius(10)
+                                .padding(.horizontal, 15)
+                                .padding(.bottom, 10)
+                            }
+                            
+                            // Field No Rekening Tujuan
+                            VStack {
+                                HStack {
+                                    Text("Enter your ATM PIN".localized(language))
+                                        .font(.subheadline)
+                                        .fontWeight(.light)
+                                    
+                                    Spacer()
+                                }
+                                .padding(.horizontal)
+                                .padding(.top, 5)
+                                
+                                HStack {
+                                    SecureField("Pin ATM", text: self.$pinAtm)
+                                    .keyboardType(.numberPad)
+                                    .font(.subheadline)
+                                    .foregroundColor(.black)
+                                    .padding()
+                                    .onReceive(pinAtm.publisher.collect()) {
+                                        self.pinAtm = String($0.prefix(6))
+                                    }
+                                }
+                                .background(Color(hex: "#F6F8FB"))
+                                .cornerRadius(10)
+                                .padding(.horizontal, 15)
+                                .padding(.bottom, 25)
+                            }
+                        }
+                        .frame(width: UIScreen.main.bounds.width - 30)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                        .padding(.bottom)
+                        .padding(.top, 20)
                         
                         Button(action: {
                             UIApplication.shared.endEditing()
@@ -65,7 +138,8 @@ struct CardBlockDescriptionView: View {
             }
         }
         .navigationBarTitle("Block Card".localized(language), displayMode: .inline)
-        .edgesIgnoringSafeArea(.all)
+        .navigationBarBackButtonHidden(isLoading)
+        .edgesIgnoringSafeArea(.bottom)
         .onAppear {
             self.cardNo = cardData.cardNo
         }
@@ -78,75 +152,6 @@ struct CardBlockDescriptionView: View {
         .popup(isPresented: $showingModalError, type: .floater(verticalPadding: 60), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             popUpWrongPin()
         }
-    }
-    
-    var atmForm: some View {
-        VStack {
-            // Field Pilih Bank
-            VStack {
-                HStack {
-                    Text("Insert ATM Card Number".localized(language))
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-                .padding(.top, 25)
-                
-                HStack {
-                    TextField("Kartu ATM", text: self.$cardNo, onEditingChanged: { changed in
-                        self.cardData.cardNo = self.cardNo
-                    })
-                    .disabled(true)
-                    .keyboardType(.numberPad)
-                    .font(.subheadline)
-                    .foregroundColor(.black)
-                    .padding()
-                    .onReceive(cardNo.publisher.collect()) {
-                        self.cardNo = String($0.prefix(16))
-                    }
-                }
-                .background(Color(hex: "#F6F8FB"))
-                .cornerRadius(10)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 10)
-            }
-            
-            // Field No Rekening Tujuan
-            VStack {
-                HStack {
-                    Text("Enter your ATM PIN".localized(language))
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-                .padding(.top, 5)
-                
-                HStack {
-                    SecureField("Pin ATM", text: self.$pinAtm)
-                    .keyboardType(.numberPad)
-                    .font(.subheadline)
-                    .foregroundColor(.black)
-                    .padding()
-                    .onReceive(pinAtm.publisher.collect()) {
-                        self.pinAtm = String($0.prefix(6))
-                    }
-                }
-                .background(Color(hex: "#F6F8FB"))
-                .cornerRadius(10)
-                .padding(.horizontal, 15)
-                .padding(.bottom, 25)
-            }
-        }
-        .frame(width: UIScreen.main.bounds.width - 30)
-        .background(Color.white)
-        .cornerRadius(15)
-        .shadow(color: Color.gray.opacity(0.3), radius: 10)
-        .padding(.bottom)
-        .padding(.top, 70)
     }
     
     var disableForm: Bool {

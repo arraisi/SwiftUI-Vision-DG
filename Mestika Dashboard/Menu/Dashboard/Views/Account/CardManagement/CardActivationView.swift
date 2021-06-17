@@ -318,13 +318,13 @@ struct CardActivationView: View {
                 .foregroundColor(.red)
                 .padding(.top, 20)
             
-            Text("PIN ATM Incorrect")
+            Text("PIN Transaction Incorrect")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.custom("Montserrat-Bold", size: 20))
                 .foregroundColor(.red)
                 .padding([.bottom, .top], 20)
             
-            Text("The ATM PIN you entered does not match.".localized(language))
+            Text("Invalid input.".localized(language))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.system(size: 16))
                 .foregroundColor(Color(hex: "#232175"))

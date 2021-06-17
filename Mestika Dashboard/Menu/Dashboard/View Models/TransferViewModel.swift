@@ -461,40 +461,38 @@ class TransferViewModel : ObservableObject {
             case .success(let response):
                 print(response)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
-                    self.isLoading = false
-                    
-                    response.limits.forEach { (limit) in
-                        switch limit.key {
-                        case "trxOnCifIdr":
-                            print("Cif")
-                            self.limitCifIdr = Int(limit.value)
-                        case "trxOnCifNonIdr":
-                            print("Cif Non Idr")
-                        case "trxOnUsIdr":
-                            print("On Us")
-                            self.limitUserOnUs = Int(limit.value)
-                        case "trxOnUsNonIdr":
-                            print("On Us Non Idr")
-                        case "trxVirtualAccount":
-                            print("VA")
-                        case "trxSknTransfer":
-                            self.limitUserSkn = Int(limit.value)
-                        case "trxRtgsTransfer":
-                            self.limitUserRtgs = Int(limit.value)
-                        case "trxOnlineTransfer":
-                            self.limitUserOnline = Int(limit.value)
-                        case "trxBillPayment":
-                            print("Bill Payment")
-                        case "trxPurchase":
-                            print("Purchase")
-                        default:
-                            print("Have you done something new?")
-                        }
+                self.isLoading = false
+                
+                response.limits.forEach { (limit) in
+                    switch limit.key {
+                    case "trxOnCifIdr":
+                        print("Cif")
+                        self.limitCifIdr = Int(limit.value)
+                    case "trxOnCifNonIdr":
+                        print("Cif Non Idr")
+                    case "trxOnUsIdr":
+                        print("On Us")
+                        self.limitUserOnUs = Int(limit.value)
+                    case "trxOnUsNonIdr":
+                        print("On Us Non Idr")
+                    case "trxVirtualAccount":
+                        print("VA")
+                    case "trxSknTransfer":
+                        self.limitUserSkn = Int(limit.value)
+                    case "trxRtgsTransfer":
+                        self.limitUserRtgs = Int(limit.value)
+                    case "trxOnlineTransfer":
+                        self.limitUserOnline = Int(limit.value)
+                    case "trxBillPayment":
+                        print("Bill Payment")
+                    case "trxPurchase":
+                        print("Purchase")
+                    default:
+                        print("Have you done something new?")
                     }
-                    
-                    completion(true)
                 }
+                
+                completion(true)
                 
             case .failure(let error):
                 print("ERROR-->")

@@ -42,6 +42,7 @@ struct WelcomeView: View {
     @State var isFirstOTPLoginViewActive: Bool = false
     @State var isPasswordViewActive: Bool = false
     @State var isLoginNewDevice: Bool = false
+    @State var isForgotPassword: Bool = false
     
     var jitsiMeetView: JitsiView?
     
@@ -354,7 +355,7 @@ struct WelcomeView: View {
         case "LOCKED_BY_PIN_TRX" :
             return AnyView(ScreeningLoggedModal())
         case "LOCKED_BY_PWD" :
-            return AnyView(ScreeningLoggedModal())
+            return AnyView(ScreeningLockedModal())
         case "LOGGED_IN" :
             return AnyView(ScreeningLoggedModal())
         case "LOGGED_OUT" :
@@ -928,6 +929,53 @@ struct WelcomeView: View {
         .cornerRadius(20)
     }
     
+    // MARK: - POPUP SELECTOR LOCKED_PWD
+    func ScreeningLockedModal() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_bells")
+                .resizable()
+                .frame(width: 95, height: 95)
+                .padding(.top, 20)
+            
+            Text("Password Blocked".localized(language))
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding(.bottom, 20)
+            
+            Text("Please change password or forgot password".localized(language))
+                .font(.custom("Montserrat-Bold", size: 20))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 30)
+            
+            NavigationLink(
+                destination: FormInputNewPasswordForgotPasswordView(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
+                isActive: self.$isForgotPassword,
+                label: {}
+            )
+            .isDetailLink(false)
+            
+            Button(action: {
+                self.isForgotPassword = true
+            }) {
+                Text("FORGOT PASSWORD".localized(language))
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-SemiBold", size: 13))
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+            }
+            .padding(.bottom, 2)
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+    }
+    
     // MARK: - POPUP CHECK CONNECTION INTERNET
     func PopupNoInternetConnection() -> some View {
         VStack(alignment: .leading) {
@@ -981,6 +1029,7 @@ struct WelcomeView: View {
         self.isFormPilihScheduleAndATM = false
         self.isFormOTPForRescheduleActive = false
         self.isCancelRegister = false
+        self.isForgotPassword = false
     }
     
     /* Function Check Network Reachability */
@@ -1069,7 +1118,10 @@ struct WelcomeView: View {
                 case "LOGGED_OUT":
                     print("self.userVM.phoneNumber \(self.userVM.phoneNumber)")
                     self.isPasswordViewActive = true
-                    print("CASE LOGGED_OUT")
+                    print("CASE LOCKED_BY_PWD")
+                case "LOCKED_BY_PWD":
+                    self.isForgotPassword = true
+                    print("CASE LOCKED")
                 default:
                     print("USER NOT FOUND")
                     self.isLoginNewDevice = true

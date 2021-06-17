@@ -27,13 +27,12 @@ struct CardDamageDescriptionInputView: View {
     @State var isLoading: Bool = false
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                Color(hex: "#F6F8FB")
-                    .edgesIgnoringSafeArea(.all)
-            }
+        ZStack {
+            
+            Color(hex: "#F6F8FB")
             
             VStack {
+                
                 if (self.isLoading) {
                     LinearWaitingIndicator()
                         .animated(true)
@@ -45,7 +44,7 @@ struct CardDamageDescriptionInputView: View {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack {
                         atmForm
-                            .padding(.top, 60)
+                            .padding(.top, 20)
                         
                         Button(action: {
                             UIApplication.shared.endEditing()
@@ -74,7 +73,8 @@ struct CardDamageDescriptionInputView: View {
             }
         }
         .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
-        .edgesIgnoringSafeArea(.all)
+        .navigationBarBackButtonHidden(isLoading)
+        .edgesIgnoringSafeArea(.bottom)
         .onAppear {
             self.cardNo = cardData.cardNo
         }
@@ -155,7 +155,6 @@ struct CardDamageDescriptionInputView: View {
         .cornerRadius(15)
         .shadow(color: Color.gray.opacity(0.3), radius: 10)
         .padding(.bottom)
-        .padding(.top, 70)
     }
     
     var disableForm: Bool {
