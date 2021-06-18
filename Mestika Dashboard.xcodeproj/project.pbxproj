@@ -59,6 +59,7 @@
 		5212C668262E992D00876E3D /* PendingPaymentQrisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212C667262E992D00876E3D /* PendingPaymentQrisView.swift */; };
 		521927FB25F0BB3A00822042 /* CardBlockDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521927FA25F0BB3A00822042 /* CardBlockDescriptionView.swift */; };
 		5219280125F0D8F800822042 /* FormChangePinCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5219280025F0D8F800822042 /* FormChangePinCardView.swift */; };
+		5219DA2E267C6AC600A86438 /* CheckJailbroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5219DA2D267C6AC500A86438 /* CheckJailbroken.swift */; };
 		522101B125C9213100C9566A /* TransferOnUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522101B025C9213100C9566A /* TransferOnUsModel.swift */; };
 		52210C47262D3BBF004A6483 /* ParseQrisResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C46262D3BBF004A6483 /* ParseQrisResponseModel.swift */; };
 		52210C4F262D3C95004A6483 /* QrisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52210C4E262D3C95004A6483 /* QrisModel.swift */; };
@@ -576,6 +577,7 @@
 		5212C667262E992D00876E3D /* PendingPaymentQrisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingPaymentQrisView.swift; sourceTree = "<group>"; };
 		521927FA25F0BB3A00822042 /* CardBlockDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockDescriptionView.swift; sourceTree = "<group>"; };
 		5219280025F0D8F800822042 /* FormChangePinCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangePinCardView.swift; sourceTree = "<group>"; };
+		5219DA2D267C6AC500A86438 /* CheckJailbroken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckJailbroken.swift; sourceTree = "<group>"; };
 		522101B025C9213100C9566A /* TransferOnUsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferOnUsModel.swift; sourceTree = "<group>"; };
 		52210C46262D3BBF004A6483 /* ParseQrisResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseQrisResponseModel.swift; sourceTree = "<group>"; };
 		52210C4E262D3C95004A6483 /* QrisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrisModel.swift; sourceTree = "<group>"; };
@@ -1651,6 +1653,7 @@
 				52ADFEB82557DA0700A1001F /* KeyboardGuardian.swift */,
 				528AE2C125959B8C003AFD73 /* AppConstants.swift */,
 				52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */,
+				5219DA2D267C6AC500A86438 /* CheckJailbroken.swift */,
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
@@ -2988,6 +2991,7 @@
 				5205861025723965005DB764 /* PasswordResponse.swift in Sources */,
 				C09387C82660DBF4005DBF11 /* LabelTextFieldMenu.swift in Sources */,
 				52CB5DF225CBEA480012DDAB /* ProfileService.swift in Sources */,
+				5219DA2E267C6AC600A86438 /* CheckJailbroken.swift in Sources */,
 				C0B9A89F266FA94F009BD72B /* EStatementService.swift in Sources */,
 				C0B641802645138300C0D55A /* TransactionLimitView.swift in Sources */,
 				5219280125F0D8F800822042 /* FormChangePinCardView.swift in Sources */,

@@ -43,7 +43,7 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-			<key>eagle-dev.apps.visiondg.bankmestika.co.id</key>
+			<key>digital.bankmestika.co.id</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
