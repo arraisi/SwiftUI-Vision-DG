@@ -115,9 +115,9 @@ struct FirstLoginView: View {
                 })
                 .onReceive(phoneNumber.publisher.collect()) {
                     if String($0).hasPrefix("0") {
-                        self.phoneNumber = String(String($0).substring(with: 1..<String($0).count).prefix(12))
+                        self.phoneNumber = String(String($0).substring(with: 1..<String($0).count).prefix(13))
                     } else {
-                        self.phoneNumber = String($0.prefix(12))
+                        self.phoneNumber = String($0.prefix(13))
                     }
                 }
                 .keyboardType(.numberPad)

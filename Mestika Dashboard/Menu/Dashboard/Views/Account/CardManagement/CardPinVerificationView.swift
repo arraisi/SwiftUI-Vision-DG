@@ -29,7 +29,7 @@ struct CardPinVerificationView: View {
     
     @Binding var tryCount: Int
     @State var timeRemainingBtn: Int = 0
-    @State var isBtnValidationDisabled = true
+    @State var isBtnValidationDisabled = false
     
     // Observable Object
     @State var activateData = ActivateKartuKuModel()
@@ -58,10 +58,10 @@ struct CardPinVerificationView: View {
                 }
                 .padding(.top, UIScreen.main.bounds.width < 750 ? 20 : 30)
                 
-                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
-                    .font(.custom("Montserrat-Regular", size: 12))
-                    .foregroundColor(.red)
-                    .padding(.top)
+//                Text("(\(self.timeRemainingBtn.formatted(allowedUnits: [.minute, .second])!))")
+//                    .font(.custom("Montserrat-Regular", size: 12))
+//                    .foregroundColor(.red)
+//                    .padding(.top)
                 
                 Spacer(minLength: 0)
                 
@@ -85,6 +85,7 @@ struct CardPinVerificationView: View {
             }
         }
         .navigationBarTitle("Transaction PIN Verification".localized(language), displayMode: .inline)
+        .navigationBarBackButtonHidden(password.count > 5 ? false : true)
         .onAppear {
             print(tryCount)
             if (tryCount == 1) {
@@ -101,9 +102,9 @@ struct CardPinVerificationView: View {
                 print(timeRemainingBtn)
             }
             
-            if self.timeRemainingBtn < 1 {
-                isBtnValidationDisabled = false
-            }
+//            if self.timeRemainingBtn < 1 {
+//                isBtnValidationDisabled = false
+//            }
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PinOffUs"))) { obj in
             print("SUCCESS PIN")
