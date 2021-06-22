@@ -63,7 +63,9 @@ struct FormChangePersonalDataView: View {
                             } else {
                                 if (profileVM.statusCode == "406") {
                                     self.showModalError = true
-                                } else {
+                                } else if (profileVM.statusCode == "400") {
+                                    self.showModalError = true
+                                }else {
                                     self.wrongPin = true
                                 }
                             }
@@ -151,7 +153,7 @@ struct FormChangePersonalDataView: View {
                     
                 }
                 
-//                Spacer()
+                //                Spacer()
             }
             
             if self.showModal || self.showModalError {
