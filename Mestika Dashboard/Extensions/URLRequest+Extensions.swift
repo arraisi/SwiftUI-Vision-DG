@@ -23,6 +23,7 @@ extension URLRequest {
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")
+                self.setValue("", forHTTPHeaderField: "XSRF-TOKEN")
                 
                 print(deviceId)
                 print(firebaseId)
