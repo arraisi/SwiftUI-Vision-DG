@@ -192,6 +192,9 @@ extension ProfileViewModel {
                 }
                 
                 switch error {
+                case .custom(code: 400):
+                    self.statusCode = "400"
+                    self.errorMessage = "Phone Number cannot be used"
                 case .custom(code: 406):
                     self.statusCode = "406"
                     self.errorMessage = "PIN TRANSAKSI TERBLOKIR"

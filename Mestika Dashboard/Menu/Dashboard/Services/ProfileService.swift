@@ -47,6 +47,10 @@ class ProfileService {
                     }
                 }
                 
+                if (httpResponse.statusCode == 400) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 401) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
