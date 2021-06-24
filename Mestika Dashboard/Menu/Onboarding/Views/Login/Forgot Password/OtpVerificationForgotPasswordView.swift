@@ -173,7 +173,7 @@ struct OtpVerificationForgotPasswordView: View {
                     .disabled(disableForm)
                     
                     NavigationLink(
-                        destination: FormInputAtmForgotPasswordScreen(),
+                        destination: FormInputAtmForgotPasswordScreen(isNewDeviceLogin: .constant(true)),
                         isActive: self.$isOtpValid,
                         label: {EmptyView()}
                     )

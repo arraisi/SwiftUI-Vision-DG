@@ -268,7 +268,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
             .cornerRadius(12)
             
             NavigationLink(
-                destination: FormInputAtmForgotPasswordScreen().environmentObject(registerData),
+                destination: FormInputAtmForgotPasswordScreen(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                 isActive: self.$routeATMNumberPin) {
                 EmptyView()
             }

@@ -7,11 +7,13 @@ import SwiftUI
 import Firebase
 
 extension URLRequest {
-
+    
     init(_ url: URL) {
         self.init(url: url)
-        self.timeoutInterval = 35
+        self.timeoutInterval = 60
         self.setValue("*/*", forHTTPHeaderField: "accept")
+        
+        let preferences = UserDefaults.standard
         
         if let token = Messaging.messaging().fcmToken {
             if let indexEnd = token.index(of: ":") {
@@ -23,7 +25,15 @@ extension URLRequest {
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")
-                self.setValue("", forHTTPHeaderField: "XSRF-TOKEN")
+//                self.setValue("", forHTTPHeaderField: "X-XSRF-TOKEN")
+
+                let currentLevelKey = "X-XSRF-TOKEN"
+                if preferences.object(forKey: currentLevelKey) == nil {
+                    
+                } else {
+                    let xrsf = preferences.string(forKey: currentLevelKey)
+                    self.setValue(xrsf, forHTTPHeaderField: "X-XSRF-TOKEN")
+                }
                 
                 print(deviceId)
                 print(firebaseId)

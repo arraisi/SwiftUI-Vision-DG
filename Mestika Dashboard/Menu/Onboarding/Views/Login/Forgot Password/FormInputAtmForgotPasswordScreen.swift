@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormInputAtmForgotPasswordScreen: View {
     
@@ -20,6 +21,8 @@ struct FormInputAtmForgotPasswordScreen: View {
     @State private var pinAtmCtrl = ""
     @State private var showPassword: Bool = false
     
+    @Binding var isNewDeviceLogin: Bool
+    
     @State var errorMessage: String = ""
     
     @GestureState private var dragOffset = CGSize.zero
@@ -29,6 +32,8 @@ struct FormInputAtmForgotPasswordScreen: View {
     
     /* Route */
     @State var isNextRoute: Bool = false
+    
+    @State var isLoading: Bool = false
     
     var disableForm: Bool {
         if (atmNumberCtrl.isEmpty || pinAtmCtrl.isEmpty) {
@@ -45,6 +50,14 @@ struct FormInputAtmForgotPasswordScreen: View {
             VStack {
                 
                 AppBarLogo(light: false, onCancel: {})
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                        .padding(.bottom, 10)
+                }
                 
                 Text("INPUT ATM DATA".localized(language))
                     .font(.title2)
@@ -146,7 +159,7 @@ struct FormInputAtmForgotPasswordScreen: View {
                     .disabled(disableForm)
                     
                     NavigationLink(
-                        destination: LoginScreen(isNewDeviceLogin: .constant(false)).environmentObject(registerData),
+                        destination: LoginScreen(isNewDeviceLogin: self.$isNewDeviceLogin).environmentObject(registerData),
                         isActive: self.$isNextRoute) {}
                         .isDetailLink(false)
                 }
@@ -250,16 +263,19 @@ struct FormInputAtmForgotPasswordScreen: View {
     
     @ObservedObject private var authVM = AuthViewModel()
     func setPassword() {
+        self.isLoading = true
         self.authVM.forgotPassword(
             newPwd: registerData.password,
             cardNo: atmNumberCtrl,
             pinAtm: pinAtmCtrl) { success in
             if success {
+                self.isLoading = false
                 print("SUCCESS CHANGE PASSWORD")
                 self.showingModalSuccess = true
             }
             
             if !success {
+                self.isLoading = false
                 print("NOT SUCCESS CHANGE PASSWORD")
                 self.errorMessage = self.authVM.errorMessage
                 self.showingModalError = true
@@ -270,6 +286,6 @@ struct FormInputAtmForgotPasswordScreen: View {
 
 struct FormInputAtmForgotPasswordScreen_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputAtmForgotPasswordScreen()
+        FormInputAtmForgotPasswordScreen(isNewDeviceLogin: .constant(false))
     }
 }

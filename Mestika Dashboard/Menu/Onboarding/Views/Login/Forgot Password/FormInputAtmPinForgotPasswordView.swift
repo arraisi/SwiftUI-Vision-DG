@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Indicators
 
 struct FormInputAtmPinForgotPasswordView: View {
     
@@ -25,6 +26,8 @@ struct FormInputAtmPinForgotPasswordView: View {
     @State var showingModalSuccess: Bool = false
     
     @Binding var isNewDeviceLogin: Bool
+    
+    @State var isLoading: Bool = false
     
     @GestureState private var dragOffset = CGSize.zero
     
@@ -50,6 +53,14 @@ struct FormInputAtmPinForgotPasswordView: View {
             VStack {
                 
                 AppBarLogo(light: false, onCancel: {})
+                
+                if (self.isLoading) {
+                    LinearWaitingIndicator()
+                        .animated(true)
+                        .foregroundColor(.green)
+                        .frame(height: 1)
+                        .padding(.bottom, 10)
+                }
                 
                 Text("ENTER ID CARD DATA".localized(language))
                     .font(.title2)
@@ -242,6 +253,7 @@ struct FormInputAtmPinForgotPasswordView: View {
     
     @ObservedObject private var authVM = AuthViewModel()
     func setPassword() {
+        self.isLoading = true
         if (atmNumberCtrl.count < 16) {
             print("WITH ACCOUNT NUMBER")
             self.authVM.setPwd(
@@ -250,11 +262,13 @@ struct FormInputAtmPinForgotPasswordView: View {
                 nik: "",
                 pinTrx: pinAtmCtrl) { success in
                 if success {
+                    self.isLoading = false
                     print("SUCCESS CHANGE PASSWORD")
                     self.showingModalSuccess = true
                 }
                 
                 if !success {
+                    self.isLoading = false
                     print("NOT SUCCESS CHANGE PASSWORD")
                     self.errorMessage = self.authVM.errorMessage
                     self.showingModalError = true
@@ -268,11 +282,13 @@ struct FormInputAtmPinForgotPasswordView: View {
                 nik: atmNumberCtrl,
                 pinTrx: pinAtmCtrl) { success in
                 if success {
+                    self.isLoading = false
                     print("SUCCESS CHANGE PASSWORD")
                     self.showingModalSuccess = true
                 }
                 
                 if !success {
+                    self.isLoading = false
                     print("NOT SUCCESS CHANGE PASSWORD")
                     self.errorMessage = self.authVM.errorMessage
                     self.showingModalError = true

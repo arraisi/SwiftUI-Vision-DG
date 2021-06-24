@@ -204,6 +204,11 @@ struct TransferOnUsScreen: View {
                     
                     self.selectedSourceNumber = e.accountNumber
                     self.selectedBalance = e.balance.subStringRange(from: 0, to: e.balance.count-3)
+                    self.transferData.sourceNumber = self.selectedSourceNumber
+                    
+                    self.selectedCardNumber = e.cardNumber
+                    self.selectedAccount.noRekening = self.selectedSourceNumber
+                    self.transferData.cardNo = self.selectedCardNumber
                     
 //                    if (e.planAllowDebitInHouse == "Y" && e.categoryProduct != "S") {
 //                        print(e.accountNumber)

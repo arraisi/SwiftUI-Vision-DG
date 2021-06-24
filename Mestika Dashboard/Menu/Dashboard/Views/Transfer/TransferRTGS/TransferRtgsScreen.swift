@@ -294,6 +294,11 @@ struct TransferRtgsScreen: View {
                     
                     self.selectedSourceNumber = e.accountNumber
                     self.selectedBalance = e.balance.subStringRange(from: 0, to: e.balance.count-3)
+                    self.transferData.sourceNumber = self.selectedSourceNumber
+                    
+                    self.selectedCardNo = e.cardNumber
+                    self.selectedAccount.noRekening = self.selectedSourceNumber
+                    self.transferData.cardNo = self.selectedCardNo
                     
 //                    if (e.planAllowDebitDomestic == "Y" && e.categoryProduct != "S") {
 //                        print(e.accountNumber)

@@ -134,6 +134,7 @@
 		524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */; };
 		524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB11E256E1141006ED6F0 /* CitizenService.swift */; };
 		524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB123256E1289006ED6F0 /* CitizenViewModel.swift */; };
+		525486BC2683986E00092B33 /* SSLPinningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525486BB2683986E00092B33 /* SSLPinningManager.swift */; };
 		5256B3CC2654C5A400E38AB7 /* FormForceChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */; };
 		5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */; };
 		525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */; };
@@ -659,6 +660,8 @@
 		524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNIKResponse.swift; sourceTree = "<group>"; };
 		524CB11E256E1141006ED6F0 /* CitizenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenService.swift; sourceTree = "<group>"; };
 		524CB123256E1289006ED6F0 /* CitizenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenViewModel.swift; sourceTree = "<group>"; };
+		525486BA2683984C00092B33 /* mestika-cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mestika-cert.cer"; sourceTree = "<group>"; };
+		525486BB2683986E00092B33 /* SSLPinningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPinningManager.swift; sourceTree = "<group>"; };
 		5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormForceChangePasswordView.swift; sourceTree = "<group>"; };
 		525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordForgotPasswordView.swift; sourceTree = "<group>"; };
 		525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmPinForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -1314,6 +1317,7 @@
 				C00AC552255E52E2005D67C0 /* Menu */,
 				C092ABFD2553B51B0051CE3E /* Resources */,
 				52ADFEB22557DA0700A1001F /* Utils */,
+				525486BA2683984C00092B33 /* mestika-cert.cer */,
 				5245F884253FE702002E8B53 /* AppDelegate.swift */,
 				5245F886253FE702002E8B53 /* SceneDelegate.swift */,
 				5245F888253FE702002E8B53 /* ContentView.swift */,
@@ -1654,6 +1658,7 @@
 				528AE2C125959B8C003AFD73 /* AppConstants.swift */,
 				52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */,
 				5219DA2D267C6AC500A86438 /* CheckJailbroken.swift */,
+				525486BB2683986E00092B33 /* SSLPinningManager.swift */,
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
@@ -2750,6 +2755,7 @@
 				527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */,
 				C06A492026404F8C0046E397 /* PdfKitView.swift in Sources */,
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
+				525486BC2683986E00092B33 /* SSLPinningManager.swift in Sources */,
 				52FE9AC12637DB0B0089EBAF /* FormMoveBalanceView.swift in Sources */,
 				52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */,
 				528AE2D12595BB01003AFD73 /* AddressViewModel.swift in Sources */,

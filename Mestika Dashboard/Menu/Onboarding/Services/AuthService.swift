@@ -18,6 +18,10 @@ class AuthService {
         phoneNumber: String,
         fingerCode: String,
         completion: @escaping(Result<LoginCredentialResponse, ErrorResult>) -> Void) {
+        
+        let preferences = UserDefaults.standard
+        let token = "X-XSRF-TOKEN"
+        
         // Body
         let body: [String: Any] = [
             "pwd": password
@@ -44,6 +48,11 @@ class AuthService {
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
+                
+                if let xSrfToken = httpResponse.allHeaderFields["X-XSRF-TOKEN"] as? String {
+                   // use X-Dem-Auth here
+                    preferences.set(xSrfToken, forKey: token)
+                }
                 
                 if (httpResponse.statusCode == 200) {
                     let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
@@ -444,6 +453,10 @@ class AuthService {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
+                if (httpResponse.statusCode == 406) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
@@ -502,11 +515,20 @@ class AuthService {
                     completion(.success(validateResponse!))
                 }
                 
+                if (httpResponse.statusCode == 201) {
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    completion(.success(validateResponse!))
+                }
+                
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
                 if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 406) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 

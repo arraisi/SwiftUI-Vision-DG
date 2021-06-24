@@ -323,6 +323,8 @@ extension AuthViewModel {
                     self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 403):
                     self.errorMessage = "Password tidak berubah"
+                case .custom(code: 406):
+                    self.errorMessage = "You've reached the maximum trial limit for transaction Pin"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -367,6 +369,8 @@ extension AuthViewModel {
                     self.errorMessage = "Weak password, please change your password"
                 case .custom(code: 403):
                     self.errorMessage = "Password tidak berubah"
+                case .custom(code: 406):
+                    self.errorMessage = "Kartu tidak Aktif"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
