@@ -23,6 +23,7 @@ struct TransactionLimitView: View {
     @State private var wrongPin: Bool = false
     @State private var showingAlert: Bool = false
     
+    @State private var iconAlert: String = "xmark.octagon.fill"
     @State private var messageCode: String = ""
     @State private var messageStatus: String = ""
     
@@ -42,6 +43,7 @@ struct TransactionLimitView: View {
                     trxLimitVM.saveTrxUserLimit(pin: pin) { result in
                         switch result {
                         case .success( _):
+                            iconAlert = "ic_success"
                             messageCode = "Successful"
                             messageStatus = "Update limit transaction"
                             
@@ -153,7 +155,7 @@ struct TransactionLimitView: View {
     // MARK: POPUP MESSAGE ERROR
     func popupMessageError() -> some View {
         VStack(alignment: .leading) {
-            Image(systemName: "xmark.octagon.fill")
+            Image(systemName: self.iconAlert)
                 .resizable()
                 .frame(width: 65, height: 65)
                 .foregroundColor(.red)
