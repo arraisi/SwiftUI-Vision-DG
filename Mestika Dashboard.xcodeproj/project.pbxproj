@@ -144,6 +144,14 @@
 		525950242553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501C2553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift */; };
 		525950252553E03000C8CA5D /* FormNoRekeningPinForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501D2553E03000C8CA5D /* FormNoRekeningPinForgotPasswordScreen.swift */; };
 		525950262553E03000C8CA5D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501E2553E03000C8CA5D /* LoginScreen.swift */; };
+		525BE2402689A0240076993F /* DeviceType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE23F2689A0240076993F /* DeviceType+Extensions.swift */; };
+		525BE2422689A22C0076993F /* IpAddress+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE2412689A22C0076993F /* IpAddress+Extensions.swift */; };
+		525BE244268A2BBD0076993F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE243268A2BBD0076993F /* RSA.swift */; };
+		525BE247268A9BB60076993F /* SwCrypt in Frameworks */ = {isa = PBXBuildFile; productRef = 525BE246268A9BB60076993F /* SwCrypt */; };
+		525BE24A268AA1A40076993F /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE248268AA1A40076993F /* WebRTC.xcframework */; };
+		525BE24B268AA1A40076993F /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE248268AA1A40076993F /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		525BE24C268AA1A40076993F /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */; };
+		525BE24D268AA1A40076993F /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */; };
 		525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */; };
 		525DB51025467BAB00D48075 /* NumPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50F25467BAB00D48075 /* NumPadView.swift */; };
@@ -522,6 +530,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				525BE24B268AA1A40076993F /* WebRTC.xcframework in Embed Frameworks */,
+				525BE24D268AA1A40076993F /* JitsiMeetSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,6 +681,11 @@
 		5259501C2553E03000C8CA5D /* FormPasswordVerificationForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPasswordVerificationForgotPasswordView.swift; sourceTree = "<group>"; };
 		5259501D2553E03000C8CA5D /* FormNoRekeningPinForgotPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormNoRekeningPinForgotPasswordScreen.swift; sourceTree = "<group>"; };
 		5259501E2553E03000C8CA5D /* LoginScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		525BE23F2689A0240076993F /* DeviceType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceType+Extensions.swift"; sourceTree = "<group>"; };
+		525BE2412689A22C0076993F /* IpAddress+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IpAddress+Extensions.swift"; sourceTree = "<group>"; };
+		525BE243268A2BBD0076993F /* RSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA.swift; sourceTree = "<group>"; };
+		525BE248268AA1A40076993F /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../Downloads/jitsi-meet-ios-sdk-3.5.0/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
+		525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../Downloads/jitsi-meet-ios-sdk-3.5.0/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
 		525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsConfirmationScreen.swift; sourceTree = "<group>"; };
 		525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsPinConfirmationScreen.swift; sourceTree = "<group>"; };
 		525DB50F25467BAB00D48075 /* NumPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadView.swift; sourceTree = "<group>"; };
@@ -1047,8 +1062,11 @@
 				520585FB25721F00005DB764 /* Indicators in Frameworks */,
 				520585F525721F00005DB764 /* PopupView in Frameworks */,
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
+				525BE247268A9BB60076993F /* SwCrypt in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
+				525BE24A268AA1A40076993F /* WebRTC.xcframework in Frameworks */,
 				12478D1186E08B100E24B481 /* Pods_Mestika_Dashboard.framework in Frameworks */,
+				525BE24C268AA1A40076993F /* JitsiMeetSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,6 +1156,8 @@
 		17F53DF519E52DA5C832EEE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */,
+				525BE248268AA1A40076993F /* WebRTC.xcframework */,
 				1F652904AE43713C516FA1A2 /* Pods_Mestika_Dashboard.framework */,
 				1353BBAF555BA861CC94BF95 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */,
 				9FA4641FE3F09350872C55F6 /* Pods_Mestika_DashboardTests.framework */,
@@ -1496,6 +1516,8 @@
 				5283AF5C25CD28E100111C75 /* UIDevice+Extensions.swift */,
 				C06CDAC625E8A17700899CC8 /* String+Localisation.swift */,
 				C0436260264A8BD90024418E /* Double+Extensions.swift */,
+				525BE23F2689A0240076993F /* DeviceType+Extensions.swift */,
+				525BE2412689A22C0076993F /* IpAddress+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1659,6 +1681,7 @@
 				52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */,
 				5219DA2D267C6AC500A86438 /* CheckJailbroken.swift */,
 				525486BB2683986E00092B33 /* SSLPinningManager.swift */,
+				525BE243268A2BBD0076993F /* RSA.swift */,
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
@@ -2482,6 +2505,7 @@
 				520E46802568BEF100DE9205 /* Indicators */,
 				06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */,
 				52FCDD94263EF48B002A76E9 /* SwiftStomp */,
+				525BE246268A9BB60076993F /* SwCrypt */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -2569,6 +2593,7 @@
 				520E467F2568BEF100DE9205 /* XCRemoteSwiftPackageReference "SwiftUI-Indicators" */,
 				06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				52FCDD93263EF48B002A76E9 /* XCRemoteSwiftPackageReference "SwiftStomp" */,
+				525BE245268A9BB60076993F /* XCRemoteSwiftPackageReference "SwCrypt" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -2831,6 +2856,7 @@
 				0620291E256D914500A830EA /* GeneralResponse.swift in Sources */,
 				C043CFCF25CD4E5300328C91 /* FormChangeAddressView.swift in Sources */,
 				522E84732667324700291FFA /* MasterVilageResponse.swift in Sources */,
+				525BE244268A2BBD0076993F /* RSA.swift in Sources */,
 				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
 				52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,
@@ -2918,6 +2944,7 @@
 				525950212553E03000C8CA5D /* FormInputAtmForgotPasswordScreen.swift in Sources */,
 				C068A5A8256CED8300CE96C4 /* AppState.swift in Sources */,
 				52DACF8225ECEF5D00099B3C /* PopOverEditFavoriteOnUsView.swift in Sources */,
+				525BE2422689A22C0076993F /* IpAddress+Extensions.swift in Sources */,
 				C08758D825D2398E008ED730 /* FavoritModel.swift in Sources */,
 				52DA208C25510CB100CC048A /* FormInputOldPasswordScreen.swift in Sources */,
 				524745FF2547C588001F43C5 /* PurchasePaymentFavorite.swift in Sources */,
@@ -3010,6 +3037,7 @@
 				0AF48AE22577CC5D0037942D /* StringProtocol+Extensions.swift in Sources */,
 				C010FAD1260B0FCD0092EEDE /* InputPaymentByQrisView.swift in Sources */,
 				0AF48ADD2577AC8F0037942D /* Image+Extensions.swift in Sources */,
+				525BE2402689A0240076993F /* DeviceType+Extensions.swift in Sources */,
 				526A81682560B2B200D614CB /* FirstOTPLoginView.swift in Sources */,
 				FA486B1E25AF528D00EDBD88 /* Font+Extensions.swift in Sources */,
 				525DB51A2546829700D48075 /* Int+Extensions.swift in Sources */,
@@ -3954,6 +3982,14 @@
 				minimumVersion = 1.0.5;
 			};
 		};
+		525BE245268A9BB60076993F /* XCRemoteSwiftPackageReference "SwCrypt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soyersoyer/SwCrypt";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.4;
+			};
+		};
 		52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davbeck/MultipartForm";
@@ -4018,6 +4054,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 523A86312542CC6E00ADFE25 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
 			productName = BottomSheet;
+		};
+		525BE246268A9BB60076993F /* SwCrypt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 525BE245268A9BB60076993F /* XCRemoteSwiftPackageReference "SwCrypt" */;
+			productName = SwCrypt;
 		};
 		52FCDD94263EF48B002A76E9 /* SwiftStomp */ = {
 			isa = XCSwiftPackageProductDependency;

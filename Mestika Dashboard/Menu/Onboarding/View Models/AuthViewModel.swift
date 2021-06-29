@@ -166,6 +166,9 @@ extension AuthViewModel {
                 case .custom(code: 401):
                     self.errorCode = "401"
                     self.errorMessage = "Move to Dashboard"
+                case .custom(code: 403):
+                    self.errorCode = "403"
+                    self.errorMessage = "Invalid Card Number"
                 case .custom(code: 406):
                     self.errorCode = "406"
                     self.errorMessage = "User Locked"

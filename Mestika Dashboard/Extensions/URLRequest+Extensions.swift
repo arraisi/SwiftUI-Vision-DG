@@ -20,20 +20,20 @@ extension URLRequest {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("45119B44-2452-4B7F-B779-588DD9DF1E30", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("78590B4C-2A37-4EE9-9858-A861A020011D", forHTTPHeaderField: "X-Device-ID")
                 self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")
-//                self.setValue("", forHTTPHeaderField: "X-XSRF-TOKEN")
+                self.setValue("46e8af0d-d289-49b8-8183-b0a7d9c7e78b", forHTTPHeaderField: "X-XSRF-TOKEN")
+                self.setValue("XSRF-TOKEN=46e8af0d-d289-49b8-8183-b0a7d9c7e78b", forHTTPHeaderField: "cookie")
+//                self.setValue("812939012309123", forHTTPHeaderField: "X-ENCRYPT-ID")
 
                 let currentLevelKey = "X-XSRF-TOKEN"
-                if preferences.object(forKey: currentLevelKey) == nil {
-                    
-                } else {
-                    let xrsf = preferences.string(forKey: currentLevelKey)
-                    self.setValue(xrsf, forHTTPHeaderField: "X-XSRF-TOKEN")
-                }
+                let xrsf = preferences.string(forKey: currentLevelKey)
+                print(xrsf)
+//                self.setValue("\(xrsf)", forHTTPHeaderField: "X-XSRF-TOKEN")
+//                self.setValue("XSRF-TOKEN=\(xrsf)", forHTTPHeaderField: "cookie")
                 
                 print(deviceId)
                 print(firebaseId)

@@ -57,4 +57,14 @@ extension PasswordViewModel {
         return base64String
         //        self.registerData.password = base64String
     }
+    
+    func decrypt(data: String) -> String {
+        let publicKey = try! PrivateKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let encrypted = try! EncryptedMessage(base64Encoded: data)
+        let clear = try! encrypted.decrypted(with: publicKey, padding: .PKCS1)
+        
+        let string = try! clear.string(encoding: .utf8)
+        
+        return string
+    }
 }

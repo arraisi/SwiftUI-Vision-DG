@@ -155,6 +155,15 @@
         }
       },
       {
+        "package": "SwCrypt",
+        "repositoryURL": "https://github.com/soyersoyer/SwCrypt",
+        "state": {
+          "branch": null,
+          "revision": "d18cf90973a32dc0d28f94eec91faf14ae8b4443",
+          "version": "5.1.4"
+        }
+      },
+      {
         "package": "SwiftStomp",
         "repositoryURL": "https://github.com/Romixery/SwiftStomp",
         "state": {

@@ -9,6 +9,7 @@ import Combine
 import Foundation
 import SwiftStomp
 import SwiftUI
+import SwiftyRSA
 
 class WebSocket: NSObject, SwiftStompDelegate {
     
@@ -63,8 +64,11 @@ class WebSocket: NSObject, SwiftStompDelegate {
             print("Vcall")
             if let message = message as? String {
                 print("Message with id `\(messageId)` received at destination `\(destination)`:\n\(message)")
+                let data = decrypt(message.trimmingCharacters(in: .whitespacesAndNewlines), AppConstants().PUBLIC_KEY_RSA)
                 
-                let jsonData = Data(message.utf8)
+                print(data)
+                
+                let jsonData = Data(data?.utf8 ?? "".utf8)
 
                 let decoder = JSONDecoder()
 
@@ -126,6 +130,24 @@ class WebSocket: NSObject, SwiftStompDelegate {
     
     func onSocketEvent(eventName: String, description: String) {
         
+    }
+    
+    func decrypt(_ encryptData: String, _ privateKey: String) -> String? {
+        print("ini encryptnya")
+        print("Data" + encryptData)
+        guard let baseDecodeData = Data(base64Encoded: encryptData) else {
+            
+            print("Kosong")
+            return nil
+        }
+        let decryptedInfo = RSAUtils.decryptWithRSAPublicKey(baseDecodeData, pubkeyBase64: privateKey, keychainTag: "")
+          if ( decryptedInfo != nil ) {
+              let result = String(data: decryptedInfo!, encoding: .utf8)
+              return result
+          } else {
+              print("Error while decrypting")
+              return nil
+          }
     }
 }
 

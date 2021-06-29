@@ -334,7 +334,7 @@ class KartuKuService {
         }
         
         var request = URLRequest(url)
-        request.httpMethod = "PUT"
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         print("URL ABSOLUTE : \(url.absoluteURL)")
         

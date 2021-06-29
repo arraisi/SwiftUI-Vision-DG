@@ -87,6 +87,7 @@ class OtpService {
             .appending("type", value: otpRequest.type)
         
         var request = URLRequest(finalUrl)
+//        request.setValue("3ff0429f-a62d-47e6-81fa-df354709cd57", forHTTPHeaderField: "X-XSRF-TOKEN")
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in

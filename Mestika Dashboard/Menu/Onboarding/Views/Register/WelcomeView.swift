@@ -11,9 +11,28 @@ import PopupView
 import JitsiMeetSDK
 import Indicators
 import SystemConfiguration
+import SwiftyRSA
+import SwCrypt
 
 struct WelcomeView: View {
     
+    func rsaDecrypt(_ encryptData: String, _ privateKey: String) -> String? {
+          guard let baseDecodeData = Data(base64Encoded: encryptData, options: NSData.Base64DecodingOptions()) else { return nil }
+        
+        let secKey = RSAUtils.addRSAPublicKey(AppConstants().PUBLIC_KEY_RSA, tagName: "")!
+        
+//        let decryptedInfo = RSAUtils.decryptWithRSAKey(baseDecodeData, rsaKeyRef: secKey, padding: .PKCS1)
+        let decryptedInfo = RSAUtils.decryptWithRSAPublicKey(baseDecodeData, pubkeyBase64: privateKey, keychainTag: privateKey)
+        print("ENCRYPT")
+          if ( decryptedInfo != nil ) {
+              let result = String(data: decryptedInfo!, encoding: .utf8)
+              return result
+          } else {
+              print("Error while decrypting")
+              return nil
+          }
+    }
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @AppStorage("language")
@@ -290,6 +309,10 @@ struct WelcomeView: View {
                 print(UIDevice.current.name)
                 print(UIDevice.current.systemVersion)
                 print(UIDevice.current.systemName)
+                            
+                let data = rsaDecrypt("Sf7ON2fSUqTyCIuBSd+ThUu0MY7WDYMtJndG/UwWfIoLIE8cm5kI2LSeweVMajNxLXLKF2Eje0NtFVzut1NFMMr3TdIQIeZDFQZTRKe6VOTJ2ggac0nb2cgrpg1PVeBV9aj0Vc6EgIJ+Mw+Mekrmz8c1LZwGTpsxTbNFKPEu7f4=", AppConstants().PUBLIC_KEY_RSA)
+                print(data)
+                
                 getCoreDataNewDevice()
                 getCoreDataRegister()
                 getMobileVersion()

@@ -91,7 +91,7 @@ struct HistoryByAccountView: View {
             }
         }))
         .onAppear {
-            self.selectedSourceNumber = self.cardNo
+            self.selectedSourceNumber = self.sourceNumber
         }
         
     }

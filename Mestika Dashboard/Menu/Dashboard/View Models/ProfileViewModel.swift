@@ -229,11 +229,11 @@ extension ProfileViewModel {
                     
                     // ID
                     self.id = response.last?.id ?? ""
-                    self.nik = response.last?.customerFromPhoenixResponseID.nik ?? ""
-                    self.firebaseId = response.last?.customerFromPhoenixResponseID.firebaseID ?? ""
-                    self.firebaseToken = response.last?.customerFromPhoenixResponseID.firebaseToken ?? ""
-                    self.deviceId = response.last?.customerFromPhoenixResponseID.deviceID ?? ""
-                    self.cif = response.last?.customerFromPhoenixResponseID.cif ?? ""
+                    self.nik = ""
+                    self.firebaseId = ""
+                    self.firebaseToken = ""
+                    self.deviceId = ""
+                    self.cif = ""
                     
                     self.tujuanPembukaan = response.last?.cdd.tujuanPembukaanRekening ?? ""
                     self.sumberDana = response.last?.cdd.sumberDana ?? ""
@@ -289,7 +289,7 @@ extension ProfileViewModel {
                     self.kabupatenSuratMenyurat = response.last?.cdd.kabupatenSuratMenyurat ?? ""
                     self.provinsiSuratMenyurat = response.last?.cdd.provinsiSuratMenyurat ?? ""
                     self.kodePosSuratMenyurat = response.last?.cdd.kodePosSuratMenyurat ?? ""
-                    self.existingCustomer = response.last?.personal.existingCustomer ?? false
+                    self.existingCustomer = false
                     
                     print("Complete fetch customer phoenix vm  ie. (email) : \(response.last?.customerFromPhoenixResponseID.surel ?? "") published email: \(self.email)")
                     completion(true)

@@ -36,6 +36,7 @@ class AuthService {
         }
         
         var request = URLRequest(url)
+        request.setValue("3ff0429f-a62d-47e6-81fa-df354709cd57", forHTTPHeaderField: "X-XSRF-TOKEN")
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = finalBody
@@ -49,10 +50,10 @@ class AuthService {
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 
-                if let xSrfToken = httpResponse.allHeaderFields["X-XSRF-TOKEN"] as? String {
-                   // use X-Dem-Auth here
-                    preferences.set(xSrfToken, forKey: token)
-                }
+//                if let xSrfToken = httpResponse.allHeaderFields["X-XSRF-TOKEN"] as? String {
+//                   // use X-Dem-Auth here
+//                    preferences.set(xSrfToken, forKey: token)
+//                }
                 
                 if (httpResponse.statusCode == 200) {
                     let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)

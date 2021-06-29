@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import CoreLocation
+import CoreTelephony
+import SwiftUI
 
 class ProfileService {
     
@@ -26,7 +29,7 @@ class ProfileService {
         }
         
         var request = URLRequest(url)
-        request.httpMethod = "PUT"
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
         
@@ -205,6 +208,11 @@ class ProfileService {
     // MARK: - CHECK FREEZE ACCOUNT
     func trace(data: DeviceTraceModel, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
+        let latitude = CLLocationManager().location?.coordinate.latitude
+        let longitude = CLLocationManager().location?.coordinate.longitude
+        let networkInfo = CTTelephonyNetworkInfo()
+        let carrier = networkInfo.subscriberCellularProvider
+        
         guard let url = URL.urlPostTrace() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
@@ -213,27 +221,27 @@ class ProfileService {
         let body: [String: Any] = [
             "osVersion" : data.osVersion,
             "version": data.version,
-            "sdk": data.sdk,
+            "sdk": "Swift 5.1",
             "release": data.release,
-            "device": data.device,
+            "device": UIDevice().type.rawValue,
             "model": data.model,
             "product": data.product,
             "brand": data.brand,
             "display": data.display,
             "cpuAbi": data.cpuAbi,
-            "cpuAbi2": data.cpuAbi2,
+            "cpuAbi2": "armeabi-v7",
             "unknown": data.unknown,
             "hardware": data.hardware,
-            "id": data.id,
+            "id": UIDevice().identifierForVendor?.uuidString ?? "",
             "manufacturer": data.manufacturer,
             "serial": data.serial,
             "user": data.user,
             "host": data.host,
-            "latitude": data.latitude,
-            "longitude": data.longitude,
-            "carrier": data.carrier,
-            "ip4": data.ip4,
-            "ip6": data.ip6,
+            "latitude": latitude ?? "",
+            "longitude": longitude ?? "",
+            "carrier": carrier?.carrierName ?? "",
+            "ip4": UIDevice().ipAddress() ?? "",
+            "ip6": UIDevice().ipAddress() ?? "",
             "iccId": data.iccId
         ]
         

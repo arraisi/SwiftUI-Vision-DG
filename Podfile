@@ -8,7 +8,7 @@ target 'Mestika Dashboard' do
   # Pods for Mestika Dashboard
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
-  pod 'SwiftyRSA'
+  pod 'SwiftyRSA', '~> 1.6.0'
 
   target 'Mestika DashboardTests' do
     inherit! :search_paths
