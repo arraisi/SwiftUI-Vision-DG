@@ -165,7 +165,7 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                         label: {}
                     )
                     .isDetailLink(false)
-  
+                    
                 }
                 .padding(.horizontal, 30)
                 .frame(width: UIScreen.main.bounds.width - 40)

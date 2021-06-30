@@ -55,6 +55,16 @@ struct OtpVerificationForgotPasswordView: View {
         return false
     }
     
+    private func obscurePhoneNumber(mobileNumer: String) -> String {
+        let intLetters = mobileNumer.prefix(3)
+        let endLetters = mobileNumer.suffix(2)
+
+        let stars = String(repeating: "*", count: mobileNumer.count - 5)
+
+        let result = intLetters + stars + endLetters
+        return String(result);
+    }
+    
     var body: some View {
         ZStack {
             Image("bg_blue")
@@ -78,7 +88,7 @@ struct OtpVerificationForgotPasswordView: View {
                         .foregroundColor(.white)
                         .padding(.top, 30)
                     
-                    Text("We have sent OTP to no.\n".localized(language) + "+62\(registerData.noTelepon.trimmingCharacters(in: .whitespaces))")
+                    Text("We have sent OTP to no.\n".localized(language) + "+62\(obscurePhoneNumber(mobileNumer: registerData.noTelepon.trimmingCharacters(in: .whitespaces)))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)

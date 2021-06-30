@@ -81,6 +81,16 @@ struct PhoneOTPRegisterNasabahView: View {
         return false
     }
     
+    private func obscurePhoneNumber(mobileNumer: String) -> String {
+        let intLetters = mobileNumer.prefix(3)
+        let endLetters = mobileNumer.suffix(2)
+        
+        let stars = String(repeating: "*", count: mobileNumer.count - 5)
+        
+        let result = intLetters + stars + endLetters
+        return String(result);
+    }
+    
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
@@ -103,7 +113,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("We have sent OTP to no.\n".localized(language) + " +62\(destinationNumber)")
+                    Text("We have sent OTP to no.\n".localized(language) + " +62\(obscurePhoneNumber(mobileNumer: destinationNumber))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
@@ -505,10 +515,10 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 DispatchQueue.main.async {
                     self.referenceCode = self.otpVM.reference
-//                    self.messageResponse = self.otpVM.statusMessage
+                    //                    self.messageResponse = self.otpVM.statusMessage
                     self.destinationNumber = self.otpVM.destination
                     self.registerData.noTelepon = self.otpVM.destination
-//                    self.isShowAlert = false
+                    //                    self.isShowAlert = false
                     //                    self.timeRemainingRsnd = self.otpVM.timeCounter
                     self.timeRemainingRsnd = 30
                     UserDefaults.standard.set(self.otpVM.destination, forKey: "phone_local")
