@@ -104,7 +104,7 @@ struct FormIdentitasDiriView: View {
                             // Form KTP
                             VStack {
                                 DisclosureGroup("Photo of KTP and Identity Card Number".localized(language), isExpanded: self.$formKTP) {
-                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, confirmNik: $confirmNik, preview: $showKTPPreview,
+                                    ScanKTPView(registerData: _registerData, imageKTP: $imageKTP, nik: $nik, preview: $showKTPPreview,
                                                 onChange: {
                                                     self.actionSelection("ktp")
                                                     self.shouldPresentScannerKtp = true
@@ -113,6 +113,7 @@ struct FormIdentitasDiriView: View {
                                                     self.actionSelection("selfie")
                                                 })
                                 }
+                                .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(.black)
                                 .padding(.horizontal, 25)
                                 .padding(.vertical)
@@ -381,7 +382,7 @@ struct FormIdentitasDiriView: View {
     private func isValidForm() -> Bool {
         return imageKTP != nil
             && registerData.nik != ""
-            && confirmNik
+//            && confirmNik
             && ((registerData.npwp != "" || imageNPWP != nil || alreadyHaveNpwp) && !self.formNPWP)
             && imageSelfie != nil
     }

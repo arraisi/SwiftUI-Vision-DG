@@ -8,6 +8,18 @@ import Combine
 import SwiftUI
 
 class RegistrasiModel: ObservableObject {
+    @Published var nama = ""
+    @Published var tempatLahir = ""
+    @Published var tanggalLahir = Date()
+    @Published var jenisKelamin = ""
+    @Published var alamat = ""
+    @Published var rtRw = ""
+    @Published var kelurahan = ""
+    @Published var kecamatan = ""
+    @Published var statusPerkawinan = ""
+    @Published var kewarganegaraan = ""
+    @Published var namaIbuKandung = ""
+    
     @Published var homeRoute: Bool = false
     @Published var atmNumberReferral = ""
     @Published var noTelepon = ""
@@ -54,8 +66,8 @@ class RegistrasiModel: ObservableObject {
     @Published var kodePos = ""
 //    @Published var provinsi = ""
 //    @Published var kabKota = ""
-    @Published var kecamatan = ""
-    @Published var kelurahan = ""
+//    @Published var kecamatan = ""
+//    @Published var kelurahan = ""
     @Published var kotaPerusahaan = ""
     @Published var provinsiPerusahaan = ""
     @Published var kodePosPerusahaan = ""

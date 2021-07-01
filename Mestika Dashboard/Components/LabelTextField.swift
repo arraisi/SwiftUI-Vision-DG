@@ -23,7 +23,7 @@ struct LabelTextField: View {
             Text(label)
                 .font(Font.system(size: 12))
                 .fontWeight(.semibold)
-                .foregroundColor(Color(hex: "#707070"))
+//                .foregroundColor(Color(hex: "#707070"))
                 .multilineTextAlignment(.leading)
             
             TextField(placeHolder, text: $value, onEditingChanged: onEditingChanged, onCommit: onCommit)
