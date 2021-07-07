@@ -117,7 +117,7 @@ extension URL {
 //    }
     
     static func urlGetListJenisTabungan() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/product/mainProducts");
+        return URL(string: AppConstants().BASE_URL + "/mainProducts");
     }
     
 //    static func urlGetListJenisTabungan() -> URL? {

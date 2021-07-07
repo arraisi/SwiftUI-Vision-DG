@@ -39,7 +39,7 @@ struct JenisTabunganModelElement: Codable {
     let productName, productDescription: String
     let productImageURL: String
     let categoryProduct: String
-    let enable: String?
+    let enable: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id, kodePlan, kodeAplikasi, balType, namaPlan, currency, outgoing, continueFlag, minimumSaldo, biayaAdministrasi, minimumSetoranAwal, minimumSetoranSelanjutnya, fieldRate1, fieldRate2, fieldRate3, fieldRate4, fieldRate5, fieldRate6, fieldRate7, fieldRate8, fieldRate9, fieldSaldo1, fieldSaldo2, fieldSaldo3, fieldSaldo4, fieldSaldo5, fieldSaldo6, fieldSaldo7, fieldSaldo8, fieldSaldo9, productName, productDescription

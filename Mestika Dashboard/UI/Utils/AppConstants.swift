@@ -11,15 +11,15 @@ class AppConstants {
     
     
     #if DEBUG
-    var BASE_URL = "https://digital.bankmestika.co.id/api/v1.0"
+    var BASE_URL = "https://digital.bankmestika.co.id/api/v1.0/public"
     #elseif DEBUGQA
-    var BASE_URL = "http://eagle.visiondg.xyz:8765/api/v1.0"
+    var BASE_URL = "https://mysql.visiondg.xyz:8765/api/v1.0/public"
     #elseif DEBUGMESTIKA
     var BASE_URL = "https://digital.bankmestika.co.id/api/v1.0"
     #elseif Release
-    var BASE_URL = "https://digital.bankmestika.co.id/api/v1.0"
+    var BASE_URL = "https://digital.bankmestika.co.id/api/v1.0/public"
     #else
-    var BASE_URL = "https://digital.bankmestika.co.id/api/v1.0"
+    var BASE_URL = "https://digital.bankmestika.co.id/api/v1.0/public"
     #endif
     
 //    var JITSI_URL = "https://meet.visiondg.xyz/"
