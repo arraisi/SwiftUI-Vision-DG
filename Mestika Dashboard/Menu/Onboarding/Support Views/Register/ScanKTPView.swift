@@ -210,7 +210,7 @@ struct ScanKTPView: View {
             if (imageKTP != nil) {
                 
                 Button(action: {
-                    getCitizen(nik: self.nik)
+                    getCitizen(nik: self.nik, phone: registerData.noTelepon, isNasabah: registerData.isNasabahmestika)
                 }) {
                     Text("Save".localized(language))
                         .foregroundColor(.white)
