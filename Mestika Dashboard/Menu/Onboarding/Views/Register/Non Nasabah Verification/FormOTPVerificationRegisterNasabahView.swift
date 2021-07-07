@@ -83,6 +83,16 @@ struct FormOTPVerificationRegisterNasabahView: View {
         return false
     }
     
+    private func obscurePhoneNumber(mobileNumer: String) -> String {
+        let intLetters = mobileNumer.prefix(3)
+        let endLetters = mobileNumer.suffix(2)
+        
+        let stars = String(repeating: "*", count: mobileNumer.count - 5)
+        
+        let result = intLetters + stars + endLetters
+        return String(result);
+    }
+    
     // MARK: -MAIN CONTENT
     var body: some View {
         ZStack(alignment: .top) {
@@ -105,7 +115,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text("We have sent OTP to no.\n".localized(language) + "+62\(registerData.noTelepon.trimmingCharacters(in: .whitespaces))")
+                    Text("We have sent OTP to no.\n".localized(language) + "+62\(obscurePhoneNumber(mobileNumer:registerData.noTelepon.trimmingCharacters(in: .whitespaces)))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)
@@ -151,7 +161,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         Button(
                             action: {
                                 self.isOtpValid = true
-//                                self.isCancelViewActive = true
+                                //                                self.isCancelViewActive = true
                             },
                             label: {
                                 Text("(\(self.timeRemainingRsnd.formatted(allowedUnits: [.minute, .second])!))")
@@ -529,7 +539,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     self.isLoading = self.otpVM.isLoading
                     self.referenceCode = self.otpVM.reference
                     self.messageResponse = self.otpVM.statusMessage
-//                    self.timeRemainingRsnd = self.otpVM.timeCounter
+                    //                    self.timeRemainingRsnd = self.otpVM.timeCounter
                     self.timeRemainingRsnd = 30
                     self.isShowAlert = false
                 }
@@ -547,7 +557,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                         self.messageResponse = self.otpVM.statusMessage
                         self.pinShare = self.otpVM.code
                         self.referenceCode = self.otpVM.reference
-//                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                        //                        self.timeRemainingRsnd = self.otpVM.timeCounter
                         self.timeRemainingRsnd = 30
                         self.isShowAlert = true
                     }
@@ -662,20 +672,20 @@ struct FormOTPVerificationRegisterNasabahView: View {
         self.isLoading = true
         
         self.userVM.cancelRegistration(nik: nik_local ?? "", completion: { (success:Bool) in
-
+            
             if success {
                 self.isLoading = false
                 self.modalSelection = ""
-
+                
                 let domain = Bundle.main.bundleIdentifier!
                 UserDefaults.standard.removePersistentDomain(forName: domain)
                 UserDefaults.standard.synchronize()
-
+                
                 self.isCancelViewActive = true
-
+                
             } else {
                 self.isLoading = false
-
+                
                 self.messageResponse = "Failed to cancel the application. Please try again later.".localized(language)
                 self.isShowAlert.toggle()
             }

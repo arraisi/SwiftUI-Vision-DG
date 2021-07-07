@@ -793,3 +793,12 @@
 "Transaction Fee" = "Biaya transaksi";
 "Transaction amount" = "Jumlah transaksi";
 "Total amount" = "Jumlah total";
+
+"Name" = "Nama";
+"Place of birth" = "Tempat lahir";
+"Date of birth" = "Tanggal lahir";
+"Marital status" = "Status Perkawinan";
+"Village" = "Kelurahan";
+"Districts" = "Kecamatan";
+"Citizenship" = "Kewarganegaraan";
+"Biological mother's name" = "Nama Ibu Kandung";
