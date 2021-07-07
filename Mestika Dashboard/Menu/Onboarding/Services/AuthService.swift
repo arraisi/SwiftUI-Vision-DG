@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyRSA
 
 class AuthService {
     private init() {}
@@ -18,9 +19,6 @@ class AuthService {
         phoneNumber: String,
         fingerCode: String,
         completion: @escaping(Result<LoginCredentialResponse, ErrorResult>) -> Void) {
-        
-        let preferences = UserDefaults.standard
-        let token = "X-XSRF-TOKEN"
         
         // Body
         let body: [String: Any] = [
@@ -36,7 +34,6 @@ class AuthService {
         }
         
         var request = URLRequest(url)
-        request.setValue("3ff0429f-a62d-47e6-81fa-df354709cd57", forHTTPHeaderField: "X-XSRF-TOKEN")
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = finalBody
@@ -49,11 +46,6 @@ class AuthService {
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
-                
-//                if let xSrfToken = httpResponse.allHeaderFields["X-XSRF-TOKEN"] as? String {
-//                   // use X-Dem-Auth here
-//                    preferences.set(xSrfToken, forKey: token)
-//                }
                 
                 if (httpResponse.statusCode == 200) {
                     let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
@@ -243,7 +235,6 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //        request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -257,11 +248,6 @@ class AuthService {
                 if (httpResponse.statusCode == 200) {
                     completion(.success("Success"))
                 }
-                
-                //                if (httpResponse.statusCode == 200) {
-                //                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
-                //                    completion(.success(loginResponse!))
-                //                }
                 
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))

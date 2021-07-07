@@ -116,6 +116,8 @@ extension OtpViewModel {
                     switch error {
                     case .custom(code: 403):
                         self.statusMessage = "Phone Number Registered"
+                    case .custom(code: 429):
+                        self.statusMessage = "Server Overload, silahkan coba beberapa saat lagi"
                     case .custom(code: 400):
                         self.statusMessage = "Bad Request"
                     default:
@@ -154,6 +156,8 @@ extension OtpViewModel {
                     switch error {
                     case .custom(code: 403):
                         self.statusMessage = "Input yang dimasukkan salah"
+                    case .custom(code: 429):
+                        self.statusMessage = "Server Overload, silahkan coba beberapa saat lagi"
                     case .custom(code: 400):
                         self.statusMessage = "Bad Request"
                     default:
@@ -332,6 +336,8 @@ extension OtpViewModel {
                     switch error {
                     case .custom(code: 403):
                         self.statusMessage = "Phone Number Registered"
+                    case .custom(code: 429):
+                        self.statusMessage = "Server Overload, silahkan coba beberapa saat lagi"
                     case .custom(code: 404):
                         self.statusMessage = "USER_STATUS_NOT_FOUND"
                     default:
@@ -367,15 +373,7 @@ extension OtpViewModel {
             switch result {
             case .success(let response):
                 
-                print("response.code validateOtpLogin : \(response.code ?? "no code")")
-                print("response.message validateOtpLogin : \(response.message ?? "no message")")
-                
-                if (response.code == "200") {
-                    print("Success")
-                    
-                    self.isLoading = false
-                    completion(true)
-                } else {
+                if (response.status?.code == "401") {
                     print("Failed")
                     DispatchQueue.main.async {
                         self.timeRemaining = response.timeCounter ?? 0
@@ -383,6 +381,11 @@ extension OtpViewModel {
                         self.isLoading = false
                         completion(false)
                     }
+                } else {
+                    print("Success")
+                    
+                    self.isLoading = false
+                    completion(true)
                 }
                 
             case .failure(let error):

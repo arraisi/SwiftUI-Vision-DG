@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyRSA
 
 class CitizenService {
     
@@ -13,7 +14,7 @@ class CitizenService {
     
     static let shared = CitizenService()
     
-    func checkNIK(nik: String, completion: @escaping(Result<CheckNIKResponse, ErrorResult>) -> Void) {
+    func checkNIK(nik: String, phone: String, isNasabah: Bool, completion: @escaping(Result<CheckNIKResponse, ErrorResult>) -> Void) {
         
         guard let url = URL.urlCitizen() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
@@ -21,9 +22,11 @@ class CitizenService {
         
         print("NIK : \(nik)")
         
-        let finalUrl = url.appending("nik", value: nik)
+//        let finalUrl = url.appending("nik", value: nik)
         
-        var request = URLRequest(finalUrl)
+        let finalUrlExisting = url.appending("nik", value: nik).appending("phoneNumber", value: isNasabah ? phone : "")
+        
+        var request = URLRequest(finalUrlExisting)
         request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -53,5 +56,4 @@ class CitizenService {
         }.resume()
         
     }
-    
 }

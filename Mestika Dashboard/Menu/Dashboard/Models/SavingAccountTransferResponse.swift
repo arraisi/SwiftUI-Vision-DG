@@ -10,7 +10,8 @@ struct SavingAccountTransferResponseElement: Codable {
     let accountName, accountNumber, accountType, accountTypeDescription: String
     let accountStatus, accountStatusDescription, planAllowDebitInHouse, planAllowInquiry: String
     let planAllowDebitDomestic, planCode, planName, productName: String
-    let productDescription, cardNumber, categoryProduct, balance: String
+    let productDescription, cardNumber, balance: String
+    let categoryProduct: String?
     let digitSign: String
 }
 

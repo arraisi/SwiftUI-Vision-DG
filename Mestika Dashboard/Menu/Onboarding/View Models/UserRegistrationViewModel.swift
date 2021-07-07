@@ -44,18 +44,14 @@ extension UserRegistrationViewModel {
             switch result {
             case .success(_ ):
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.isLoading = false
-                }
+                self.isLoading = false
                 
                 completion(true)
                 
             case .failure(let error):
                 print("ERROR-->")
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.isLoading = false
-                }
+                self.isLoading = false
                 
                 switch error {
                 case .custom(code: 500):
@@ -63,8 +59,16 @@ extension UserRegistrationViewModel {
                     DispatchQueue.main.async {
                         self.message = "Something Happen With System"
                     }
+                case .custom(code: 403):
+                    print("Forbiden")
+                    DispatchQueue.main.async {
+                        self.message = "Forbiden"
+                    }
                 default:
-                    print("ERRROR")
+                    print("Something Happen With System")
+                    DispatchQueue.main.async {
+                        self.message = "Something Happen With System"
+                    }
                 }
                 completion(false)
             }

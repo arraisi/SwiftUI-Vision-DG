@@ -140,7 +140,7 @@ class WebSocket: NSObject, SwiftStompDelegate {
             print("Kosong")
             return nil
         }
-        let decryptedInfo = RSAUtils.decryptWithRSAPublicKey(baseDecodeData, pubkeyBase64: privateKey, keychainTag: "")
+        let decryptedInfo = try! RSAUtils.decryptWithRSAPublicKey(encryptedData: baseDecodeData, pubkeyBase64: privateKey, tagName: "")
           if ( decryptedInfo != nil ) {
               let result = String(data: decryptedInfo!, encoding: .utf8)
               return result

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyRSA
 
 class AddressService {
     

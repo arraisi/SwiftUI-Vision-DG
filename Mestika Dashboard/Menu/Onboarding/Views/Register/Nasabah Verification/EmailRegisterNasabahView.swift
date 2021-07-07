@@ -49,7 +49,8 @@ struct EmailRegisterNasabahView: View {
             VStack {
                 
 //                CustomAppBar(light: false, barItemsHidden: true, barItems: AnyView(EmptyView()))
-                CustomAppBar(light: false)
+//                CustomAppBar(light: false)
+                AppBarLogo(light: false, showBack: false, onCancel: {})
                 
                 VStack(alignment: .center) {
                     

@@ -146,7 +146,7 @@
 		525950262553E03000C8CA5D /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5259501E2553E03000C8CA5D /* LoginScreen.swift */; };
 		525BE2402689A0240076993F /* DeviceType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE23F2689A0240076993F /* DeviceType+Extensions.swift */; };
 		525BE2422689A22C0076993F /* IpAddress+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE2412689A22C0076993F /* IpAddress+Extensions.swift */; };
-		525BE244268A2BBD0076993F /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE243268A2BBD0076993F /* RSA.swift */; };
+		525BE244268A2BBD0076993F /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE243268A2BBD0076993F /* RSAUtils.swift */; };
 		525BE247268A9BB60076993F /* SwCrypt in Frameworks */ = {isa = PBXBuildFile; productRef = 525BE246268A9BB60076993F /* SwCrypt */; };
 		525BE24A268AA1A40076993F /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE248268AA1A40076993F /* WebRTC.xcframework */; };
 		525BE24B268AA1A40076993F /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE248268AA1A40076993F /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -614,7 +614,7 @@
 		523370182629964F00ED3E4F /* DetailTransactionDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionDepositAccountView.swift; sourceTree = "<group>"; };
 		5233701D2629AA8C00ED3E4F /* ConfirmationPinOfDepositAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPinOfDepositAccountView.swift; sourceTree = "<group>"; };
 		5235FC2B267736C3009C5CE5 /* CardBlockAddressInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBlockAddressInputView.swift; sourceTree = "<group>"; };
-		5235FC2D26775F27009C5CE5 /* TransactionOtpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionOtpView.swift; path = ../../../../../../../../TransactionOtpView.swift; sourceTree = "<group>"; };
+		5235FC2D26775F27009C5CE5 /* TransactionOtpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionOtpView.swift; path = "/Users/macbookpro/Documents/dashboard-mestika-ios 2/Mestika Dashboard/Menu/Dashboard/Views/Transfer/TransferRTGS/../../../../../../../../TransactionOtpView.swift"; sourceTree = "<absolute>"; };
 		5235FC2F26783832009C5CE5 /* RequestOtpUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOtpUserResponse.swift; sourceTree = "<group>"; };
 		5235FC3126785552009C5CE5 /* OtpConfirmationChangeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpConfirmationChangeDataView.swift; sourceTree = "<group>"; };
 		5236E38A258D9692005485FC /* Mestika Dashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mestika Dashboard.entitlements"; sourceTree = "<group>"; };
@@ -683,7 +683,7 @@
 		5259501E2553E03000C8CA5D /* LoginScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		525BE23F2689A0240076993F /* DeviceType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceType+Extensions.swift"; sourceTree = "<group>"; };
 		525BE2412689A22C0076993F /* IpAddress+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IpAddress+Extensions.swift"; sourceTree = "<group>"; };
-		525BE243268A2BBD0076993F /* RSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA.swift; sourceTree = "<group>"; };
+		525BE243268A2BBD0076993F /* RSAUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAUtils.swift; sourceTree = "<group>"; };
 		525BE248268AA1A40076993F /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../Downloads/jitsi-meet-ios-sdk-3.5.0/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
 		525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../Downloads/jitsi-meet-ios-sdk-3.5.0/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
 		525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferOnUsConfirmationScreen.swift; sourceTree = "<group>"; };
@@ -1681,7 +1681,7 @@
 				52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */,
 				5219DA2D267C6AC500A86438 /* CheckJailbroken.swift */,
 				525486BB2683986E00092B33 /* SSLPinningManager.swift */,
-				525BE243268A2BBD0076993F /* RSA.swift */,
+				525BE243268A2BBD0076993F /* RSAUtils.swift */,
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
@@ -2856,7 +2856,7 @@
 				0620291E256D914500A830EA /* GeneralResponse.swift in Sources */,
 				C043CFCF25CD4E5300328C91 /* FormChangeAddressView.swift in Sources */,
 				522E84732667324700291FFA /* MasterVilageResponse.swift in Sources */,
-				525BE244268A2BBD0076993F /* RSA.swift in Sources */,
+				525BE244268A2BBD0076993F /* RSAUtils.swift in Sources */,
 				5225637925621E3A00BCAB67 /* ScheduleInterviewViewModel.swift in Sources */,
 				52CB5DED25CBC09A0012DDAB /* ProfileResponseModel.swift in Sources */,
 				52ADFF972557DFDC00A1001F /* PINView.swift in Sources */,

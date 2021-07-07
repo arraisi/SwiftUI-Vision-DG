@@ -13,26 +13,6 @@ class MobileVersionService {
     
     static let shared = MobileVersionService()
     
-    func decrypt(_ encryptData: String, _ privateKey: String) -> String? {
-        
-        print("ini encrypt")
-        print(encryptData)
-        
-          guard let baseDecodeData = Data(base64Encoded: encryptData)
-          else {
-            print("kosong")
-            return nil
-          }
-        let decryptedInfo = RSAUtils.decryptWithRSAPublicKey(baseDecodeData, pubkeyBase64: privateKey, keychainTag: "")
-          if ( decryptedInfo != nil ) {
-              let result = String(data: decryptedInfo!, encoding: .utf8)
-              return result
-          } else {
-              print("Error while decrypting")
-              return nil
-          }
-    }
-    
     /* GET MOBILE VERSION */
     func getVersion(completion: @escaping(Result<MobileVersionResponse, NetworkError>) -> Void) {
     
@@ -65,13 +45,6 @@ class MobileVersionService {
                 print("\(httpResponse.statusCode)")
             }
             
-//            print(String(data: data, encoding: .utf8))
-//
-//            let dataDec = self.decrypt((String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines))!, AppConstants().PUBLIC_KEY_RSA)
-//
-//            print(dataDec)
-//
-//            let jsonData = Data(dataDec!.utf8)
             let versionResponse = try? JSONDecoder().decode(MobileVersionResponse.self, from: data)
             
             if versionResponse == nil {

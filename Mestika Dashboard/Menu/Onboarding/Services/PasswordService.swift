@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyRSA
 
 class PasswordService {
     
@@ -29,13 +30,12 @@ class PasswordService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("URL ABSOLUTE : \(url.absoluteURL)")
         
         do {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
-            print(jsonString!)
+            
             request.httpBody = jsonData
         } catch let error {
             print(error.localizedDescription)
@@ -62,5 +62,18 @@ class PasswordService {
             }
             
         }.resume()
+    }
+    
+    func encrypt(data: String) -> String {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: data, using: .utf8)
+        
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        _ = encrypted.data
+        let base64String = encrypted.base64String
+        
+        print("Encript : \(base64String)")
+        
+        return base64String
     }
 }

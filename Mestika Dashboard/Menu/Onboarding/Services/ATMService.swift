@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyRSA
 
 class ATMService {
     private init() {}
@@ -46,6 +47,7 @@ class ATMService {
         do {
             // MARK : serialize model data
             let jsonData = try JSONSerialization.data(withJSONObject: dataParam, options: .prettyPrinted)
+            
             _ = String(data: jsonData, encoding: String.Encoding.ascii)
             request.httpBody = jsonData
         } catch let error {
@@ -127,7 +129,7 @@ class ATMService {
             
             // MARK : change model response.
             let response = try? JSONDecoder().decode(JenisTabunganModel.self, from: data)
-            
+            print(String(data: data, encoding: .utf8))
             if response == nil {
                 print("\nError Decoding")
                 completion(.failure(.decodingError))

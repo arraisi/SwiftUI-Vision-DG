@@ -16,23 +16,6 @@ import SwCrypt
 
 struct WelcomeView: View {
     
-    func rsaDecrypt(_ encryptData: String, _ privateKey: String) -> String? {
-          guard let baseDecodeData = Data(base64Encoded: encryptData, options: NSData.Base64DecodingOptions()) else { return nil }
-        
-        let secKey = RSAUtils.addRSAPublicKey(AppConstants().PUBLIC_KEY_RSA, tagName: "")!
-        
-//        let decryptedInfo = RSAUtils.decryptWithRSAKey(baseDecodeData, rsaKeyRef: secKey, padding: .PKCS1)
-        let decryptedInfo = RSAUtils.decryptWithRSAPublicKey(baseDecodeData, pubkeyBase64: privateKey, keychainTag: privateKey)
-        print("ENCRYPT")
-          if ( decryptedInfo != nil ) {
-              let result = String(data: decryptedInfo!, encoding: .utf8)
-              return result
-          } else {
-              print("Error while decrypting")
-              return nil
-          }
-    }
-
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @AppStorage("language")
@@ -115,8 +98,8 @@ struct WelcomeView: View {
             .onEnded { _ in
                 print("View tapped!")
                 
-//                let dataRoom: [String: Any] = ["room_id": "12345"]
-//                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+                //                let dataRoom: [String: Any] = ["room_id": "12345"]
+                //                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
             }
         
         NavigationView {
@@ -309,14 +292,10 @@ struct WelcomeView: View {
                 print(UIDevice.current.name)
                 print(UIDevice.current.systemVersion)
                 print(UIDevice.current.systemName)
-                            
-                let data = rsaDecrypt("Sf7ON2fSUqTyCIuBSd+ThUu0MY7WDYMtJndG/UwWfIoLIE8cm5kI2LSeweVMajNxLXLKF2Eje0NtFVzut1NFMMr3TdIQIeZDFQZTRKe6VOTJ2ggac0nb2cgrpg1PVeBV9aj0Vc6EgIJ+Mw+Mekrmz8c1LZwGTpsxTbNFKPEu7f4=", AppConstants().PUBLIC_KEY_RSA)
-                print(data)
                 
                 getCoreDataNewDevice()
                 getCoreDataRegister()
                 getMobileVersion()
-                //                getUserStatusKyc(deviceId: deviceId!)
                 var flags = SCNetworkReachabilityFlags()
                 SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                 
@@ -1221,7 +1200,7 @@ struct WelcomeView: View {
             self.registerData.kodePos = data.kodePos!
             self.registerData.kecamatan = data.kecamatan!
             self.registerData.kelurahan = data.kelurahan!
-//            self.registerData.rtrw = data.rtrw!
+            //            self.registerData.rtrw = data.rtrw!
             
             // Data Surat Menyurat
             self.registerData.alamatKeluarga = data.alamatKeluarga!

@@ -20,20 +20,21 @@ extension URLRequest {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("78590B4C-2A37-4EE9-9858-A861A020011D", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("D9FD4DAC-E830-4F02-AD23-DE96987F4D3E", forHTTPHeaderField: "X-Device-ID")
                 self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")
-                self.setValue("46e8af0d-d289-49b8-8183-b0a7d9c7e78b", forHTTPHeaderField: "X-XSRF-TOKEN")
-                self.setValue("XSRF-TOKEN=46e8af0d-d289-49b8-8183-b0a7d9c7e78b", forHTTPHeaderField: "cookie")
+                self.setValue("cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "X-XSRF-TOKEN")
+                self.setValue("XSRF-TOKEN=cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "cookie")
 //                self.setValue("812939012309123", forHTTPHeaderField: "X-ENCRYPT-ID")
 
-                let currentLevelKey = "X-XSRF-TOKEN"
-                let xrsf = preferences.string(forKey: currentLevelKey)
-                print(xrsf)
-//                self.setValue("\(xrsf)", forHTTPHeaderField: "X-XSRF-TOKEN")
-//                self.setValue("XSRF-TOKEN=\(xrsf)", forHTTPHeaderField: "cookie")
+//                let currentLevelKey = "X-XSRF-TOKEN"
+//                let xrsf = preferences.string(forKey: currentLevelKey)
+//                print("XRSF NYA")
+//                print(xrsf)
+//                self.setValue(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines), forHTTPHeaderField: "X-XSRF-TOKEN")
+//                self.setValue("XSRF-TOKEN=\(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines))", forHTTPHeaderField: "cookie")
                 
                 print(deviceId)
                 print(firebaseId)

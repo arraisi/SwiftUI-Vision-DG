@@ -299,6 +299,12 @@ struct RegisterSummaryView: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarHidden(true)
         .alert(isPresented: $isShowingAlert) {
+            
+            if showingAlert {
+                
+                return Alert(title: Text(self.errorMessage))
+            }
+            
             return Alert(
                 title: Text("Do you want to cancel registration?".localized(language)),
                 primaryButton: .default(Text("YES".localized(language)), action: {
@@ -442,13 +448,13 @@ struct RegisterSummaryView: View {
                     self.nextRouteNasabah = true
                 } else {
                     self.nextRouteNasabah = true
-                    //                    self.nextRouteNonNasabah = true
                 }
             }
             
             if !success {
                 self.isLoading = false
                 self.errorMessage = self.userRegisterVM.message
+                self.isShowingAlert = true
                 self.showingAlert = true
             }
         }

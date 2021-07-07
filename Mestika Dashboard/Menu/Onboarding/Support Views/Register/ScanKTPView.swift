@@ -108,7 +108,7 @@ struct ScanKTPView: View {
                 if (imageKTP != nil) {
                     
                     Button(action: {
-                        getCitizen(nik: self.nik)
+                        getCitizen(nik: self.nik, phone: registerData.noTelepon, isNasabah: registerData.isNasabahmestika)
                     }) {
                         Text("Save".localized(language))
                             .foregroundColor(.white)
@@ -136,9 +136,9 @@ struct ScanKTPView: View {
     
     /* Function GET Citizen */
     @ObservedObject private var citizenVM = CitizenViewModel()
-    func getCitizen(nik: String) {
+    func getCitizen(nik: String, phone: String, isNasabah: Bool) {
         print("GET CITIZEN")
-        self.citizenVM.getCitizen(nik: nik) { success in
+        self.citizenVM.getCitizen(nik: nik, phone: phone, isNasabah: isNasabah) { success in
             if success {
                 print("isLoading \(self.citizenVM.isLoading)")
                 print("nikValid \(self.citizenVM.nik)")

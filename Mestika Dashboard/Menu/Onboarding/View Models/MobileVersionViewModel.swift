@@ -30,6 +30,8 @@ extension MobileVersionViewModel {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
+                    print("ini data versi")
+                    print(response.versionName)
                     self.isLoading = false
                     self.versionNumber = response.versionName
                     self.versionCodeMajor = response.versionCodeMajor
