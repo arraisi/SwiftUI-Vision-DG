@@ -115,7 +115,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text("We have sent OTP to no.\n".localized(language) + "+62\(obscurePhoneNumber(mobileNumer:registerData.noTelepon.trimmingCharacters(in: .whitespaces)))")
+                    Text("We have sent OTP to no.\n".localized(language) + "+62\(registerData.noTelepon.trimmingCharacters(in: .whitespaces))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)

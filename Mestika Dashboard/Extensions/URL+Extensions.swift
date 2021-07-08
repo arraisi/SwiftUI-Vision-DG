@@ -37,7 +37,7 @@ extension URL {
     }
     
     static func urlMobileVersion() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/version/mobile/find-by-osType")
+        return URL(string: AppConstants().BASE_URL + "/public/version/mobile/find-by-osType")
     }
     
     static func urlUserNew() -> URL? {
@@ -45,11 +45,11 @@ extension URL {
     }
     
     static func urlUser() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/user")
+        return URL(string: AppConstants().BASE_URL + "/public/user")
     }
     
     static func urlOTP() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/otp")
+        return URL(string: AppConstants().BASE_URL + "/public/otp")
     }
     
     static func urlOTPUser() -> URL? {
@@ -73,7 +73,7 @@ extension URL {
     }
     
     static func urlSheduleInterview() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/schedule")
+        return URL(string: AppConstants().BASE_URL + "/public/schedule")
     }
     
     static func urlSheduleInterviewNasabahExisting() -> URL? {
@@ -101,7 +101,7 @@ extension URL {
     }
     
     static func urlFindListATM() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/content/debitCardDesigns");
+        return URL(string: AppConstants().BASE_URL + "/public/debitCardDesigns");
     }
     
     static func urlGetListATMDesign(type: String) -> URL? {
@@ -109,7 +109,7 @@ extension URL {
     }
     
     static func urlFindListATMDesign() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/content/debitCardTypes");
+        return URL(string: AppConstants().BASE_URL + "/public/debitCardTypes");
     }
     
 //    static func urlGetListJenisTabungan() -> URL? {
@@ -117,7 +117,7 @@ extension URL {
 //    }
     
     static func urlGetListJenisTabungan() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/mainProducts");
+        return URL(string: AppConstants().BASE_URL + "/public/mainProducts");
     }
     
 //    static func urlGetListJenisTabungan() -> URL? {
@@ -135,11 +135,11 @@ extension URL {
     //-------------------- AUTH SERVICE ----------------------//
     
     static func urlAuthLogin() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/auth/login")
+        return URL(string: AppConstants().BASE_URL + "/public/login")
     }
     
     static func urlAuthLoginNewDevice() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/auth/login-change")
+        return URL(string: AppConstants().BASE_URL + "/public/login-change")
     }
     
     static func urlAuthLogout() -> URL? {
@@ -147,11 +147,11 @@ extension URL {
     }
     
     static func urlAuthRequestOTP() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/auth/requestOtp")
+        return URL(string: AppConstants().BASE_URL + "/public/requestOtp")
     }
     
     static func urlAuthValidationOTP() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/auth/validateOtp")
+        return URL(string: AppConstants().BASE_URL + "/public/validateOtp")
     }
     
     static func urlAuthValidationPin() -> URL? {
@@ -163,7 +163,7 @@ extension URL {
     }
     
     static func urlAuthSetPassword() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/auth/setPwd")
+        return URL(string: AppConstants().BASE_URL + "/public/setPwd")
     }
     
     static func urlAuthGenarateFingerPrint() -> URL? {
@@ -187,11 +187,11 @@ extension URL {
     }
     
     static func urlAuthForgotPassword() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/auth/forgotPwd")
+        return URL(string: AppConstants().BASE_URL + "/public/forgotPwd")
     }
     
     static func urlAuthChangeDevice() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/auth/login-change-atm-verification")
+        return URL(string: AppConstants().BASE_URL + "/public/login-change-atm-verification")
     }
     
     //-------------------- TRANSFER SERVICE ----------------------//

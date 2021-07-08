@@ -38,13 +38,44 @@ class CitizenViewModel: ObservableObject {
 extension CitizenViewModel {
     
     // MARK: - GET CITIZEN
-    func getCitizen(nik: String, phone: String, isNasabah: Bool, completion: @escaping (Bool) -> Void) {
+    func getCitizen(
+        nik: String,
+        phone: String,
+        isNasabah: Bool,
+        alamat: String,
+        jenisKelamin: String,
+        kecamatan: String,
+        kelurahan: String,
+        kewarganegaraan: String,
+        nama: String,
+        namaIbu: String,
+        rt: String,
+        rw: String,
+        statusKawin: String,
+        tanggalLahir: String,
+        tempatLahir: String, completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true
         }
         
-        CitizenService.shared.checkNIK(nik: nik, phone: phone, isNasabah: isNasabah) { result in
+        CitizenService.shared.checkNIK(
+            nik: nik,
+            phone: phone,
+            isNasabah: isNasabah,
+            alamat: alamat,
+            jenisKelamin: jenisKelamin,
+            kecamatan: kecamatan,
+            kelurahan: kelurahan,
+            kewarganegaraan: kewarganegaraan,
+            nama: nama,
+            namaIbu: namaIbu,
+            rt: rt,
+            rw: rw,
+            statusKawin: statusKawin,
+            tanggalLahir: tanggalLahir,
+            tempatLahir: tanggalLahir) { result in
+            
             switch result {
             case .success(let response):
                 print("Success")

@@ -43,7 +43,7 @@ struct ScanKTPView: View {
                 .foregroundColor(.black)
                 .padding(.vertical, 15)
             
-            
+            imageKTPScreen
             buttonTakeSelfie
             formProfile
         }
@@ -210,7 +210,22 @@ struct ScanKTPView: View {
             if (imageKTP != nil) {
                 
                 Button(action: {
-                    getCitizen(nik: self.nik, phone: registerData.noTelepon, isNasabah: registerData.isNasabahmestika)
+                    getCitizen(
+                        nik: self.nik,
+                        phone: registerData.noTelepon,
+                        isNasabah: registerData.isNasabahmestika,
+                        alamat: registerData.alamat,
+                        jenisKelamin: registerData.jenisKelamin,
+                        kecamatan: registerData.kecamatan,
+                        kelurahan: registerData.kelurahan,
+                        kewarganegaraan: registerData.kewarganegaraan,
+                        nama: registerData.nama,
+                        namaIbu: registerData.namaIbuKandung,
+                        rt: registerData.rtrw,
+                        rw: registerData.rtrw,
+                        statusKawin: registerData.statusPerkawinan,
+                        tanggalLahir: "27/12/1995",
+                        tempatLahir: registerData.tempatLahir)
                 }) {
                     Text("Save".localized(language))
                         .foregroundColor(.white)
@@ -237,9 +252,41 @@ struct ScanKTPView: View {
     
     /* Function GET Citizen */
     @ObservedObject private var citizenVM = CitizenViewModel()
-    func getCitizen(nik: String, phone: String, isNasabah: Bool) {
+    func getCitizen(
+        nik: String,
+        phone: String,
+        isNasabah: Bool,
+        alamat: String,
+        jenisKelamin: String,
+        kecamatan: String,
+        kelurahan: String,
+        kewarganegaraan: String,
+        nama: String,
+        namaIbu: String,
+        rt: String,
+        rw: String,
+        statusKawin: String,
+        tanggalLahir: String,
+        tempatLahir: String) {
+        
         print("GET CITIZEN")
-        self.citizenVM.getCitizen(nik: nik, phone: phone, isNasabah: isNasabah) { success in
+        self.citizenVM.getCitizen(
+            nik: nik,
+            phone: phone,
+            isNasabah: isNasabah,
+            alamat: alamat,
+            jenisKelamin: jenisKelamin,
+            kecamatan: kecamatan,
+            kelurahan: kelurahan,
+            kewarganegaraan: kewarganegaraan,
+            nama: nama,
+            namaIbu: namaIbu,
+            rt: rt,
+            rw: rw,
+            statusKawin: statusKawin,
+            tanggalLahir: tanggalLahir,
+            tempatLahir: tempatLahir) { success in
+            
             if success {
                 print("isLoading \(self.citizenVM.isLoading)")
                 print("nikValid \(self.citizenVM.nik)")
@@ -274,7 +321,7 @@ struct ScanKTPView: View {
     }
     
     private func isDisableButtonSimpan() -> Bool {
-        if nik.count == 16 {
+        if (nik.count == 16 || registerData.nama.isNotEmpty() || registerData.tempatLahir.isNotEmpty() || registerData.jenisKelamin.isNotEmpty() || registerData.alamat.isNotEmpty() || registerData.rtRw.isNotEmpty() || registerData.kelurahan.isNotEmpty() || registerData.kecamatan.isNotEmpty() || registerData.statusPerkawinan.isNotEmpty() || registerData.kewarganegaraan.isNotEmpty() || registerData.namaIbuKandung.isNotEmpty()) {
             return false
         }
         return true

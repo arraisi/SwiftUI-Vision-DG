@@ -14,20 +14,49 @@ class CitizenService {
     
     static let shared = CitizenService()
     
-    func checkNIK(nik: String, phone: String, isNasabah: Bool, completion: @escaping(Result<CheckNIKResponse, ErrorResult>) -> Void) {
+    func checkNIK(
+        nik: String,
+        phone: String,
+        isNasabah: Bool,
+        alamat: String,
+        jenisKelamin: String,
+        kecamatan: String,
+        kelurahan: String,
+        kewarganegaraan: String,
+        nama: String,
+        namaIbu: String,
+        rt: String,
+        rw: String,
+        statusKawin: String,
+        tanggalLahir: String,
+        tempatLahir: String, completion: @escaping(Result<CheckNIKResponse, ErrorResult>) -> Void) {
         
         guard let url = URL.urlCitizen() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
-        print("NIK : \(nik)")
+        let body: [String: Any] = [
+          "nik": nik,
+          "personalAlamat": alamat,
+          "personalJenisKelamin": jenisKelamin,
+          "personalKecamatan": kecamatan,
+          "personalKelurahan": kelurahan,
+          "personalKewarganegaraan": kewarganegaraan,
+          "personalNama": nama,
+          "personalNamaIbuKandung": namaIbu,
+          "personalRtRw": "\(rt)/\(rw)",
+          "personalStatusPerkawinan": statusKawin,
+          "personalTanggalLahir": tanggalLahir,
+          "personalTempatLahir": tempatLahir
+        ]
         
-//        let finalUrl = url.appending("nik", value: nik)
-        
-        let finalUrlExisting = url.appending("nik", value: nik).appending("phoneNumber", value: isNasabah ? phone : "")
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        let finalUrlExisting = url.appending("phoneNumber", value: isNasabah ? phone : "")
         
         var request = URLRequest(finalUrlExisting)
-        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = finalBody
+        request.httpMethod = "POST"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             

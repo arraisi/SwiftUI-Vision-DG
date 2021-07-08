@@ -25,16 +25,17 @@ extension URLRequest {
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")
-                self.setValue("cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "X-XSRF-TOKEN")
-                self.setValue("XSRF-TOKEN=cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "cookie")
 //                self.setValue("812939012309123", forHTTPHeaderField: "X-ENCRYPT-ID")
 
-//                let currentLevelKey = "X-XSRF-TOKEN"
-//                let xrsf = preferences.string(forKey: currentLevelKey)
-//                print("XRSF NYA")
-//                print(xrsf)
-//                self.setValue(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines), forHTTPHeaderField: "X-XSRF-TOKEN")
-//                self.setValue("XSRF-TOKEN=\(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines))", forHTTPHeaderField: "cookie")
+                let currentLevelKey = "X-XSRF-TOKEN"
+                let authToken = "AuthorizationToken"
+                let xrsf = preferences.string(forKey: currentLevelKey)
+                let auth = preferences.string(forKey: authToken)
+                print("XRSF NYA")
+                print(xrsf)
+                self.setValue(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines), forHTTPHeaderField: "X-XSRF-TOKEN")
+                self.setValue("XSRF-TOKEN=\(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines))", forHTTPHeaderField: "cookie")
+                self.setValue("Bearer \(auth)", forHTTPHeaderField: "Authorization")
                 
                 print(deviceId)
                 print(firebaseId)
