@@ -54,6 +54,7 @@ struct RescheduleRegisterView: View {
     @State var isLoading = false
     @State var showingAlert = false
     @State var isShowingAlert: Bool = false
+    @State var showingExpire: Bool = false
     
     @State var pilihJam: String = ""
     @State var tanggalWawancara: String = ""
@@ -327,30 +328,40 @@ struct RescheduleRegisterView: View {
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
-        .alert(isPresented: $isShowingAlert) {
-            return Alert(
-                title: Text("Do you want to cancel registration?".localized(language)),
-                primaryButton: .default(Text("YES".localized(language)), action: {
-                    self.appState.moveToWelcomeView = true
-                }),
-                secondaryButton: .cancel(Text("NO".localized(language))))
-        }
         .gesture(DragGesture().onEnded({ value in
             if(value.startLocation.x < 20 &&
                 value.translation.width > 100) {
+                self.showingAlert = true
                 self.isShowingAlert = true
             }
         }))
         .popup(isPresented: $showingModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             popupMessageCancelRegister()
         }
-//        .popup(isPresented: $showingModalInformation, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
-//            showModalInformation()
-//        }
         .popup(isPresented: $isShowAlertInternetConnection, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: true) {
             PopupNoInternetConnection()
         }
         .alert(isPresented: $showingAlert) {
+            
+            if isShowingAlert {
+                return Alert(
+                    title: Text("Do you want to cancel registration?".localized(language)),
+                    primaryButton: .default(Text("YES".localized(language)), action: {
+                        self.appState.moveToWelcomeView = true
+                    }),
+                    secondaryButton: .cancel(Text("NO".localized(language))))
+            }
+            
+            if showingExpire {
+                return Alert(
+                    title: Text("Message"),
+                    message: Text("Token has Expired"),
+                    dismissButton: .cancel({
+                        self.appState.moveToWelcomeView = true
+                    })
+                )
+            }
+            
             return Alert(
                 title: Text("Message"),
                 message: Text("\(self.scheduleVM.message)"),
@@ -656,8 +667,14 @@ struct RescheduleRegisterView: View {
             }
             
             if !success {
-                self.isLoading = false
-                self.showingAlert.toggle()
+                
+                if (self.scheduleVM.code == "401") {
+                    self.showingAlert = true
+                    self.showingExpire = true
+                } else {
+                    self.isLoading = false
+                    self.showingAlert.toggle()
+                }
             }
         }
     }

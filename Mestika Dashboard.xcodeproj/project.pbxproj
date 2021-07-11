@@ -204,6 +204,8 @@
 		5294535425EF2899009A5B83 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535325EF2899009A5B83 /* SearchBar.swift */; };
 		5294536025EF59E7009A5B83 /* CardDamageAddressInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */; };
 		5299B7A92696965A0012B241 /* Scrambler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299B7A8269696590012B241 /* Scrambler.swift */; };
+		5299B7AC269AB3FD0012B241 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5299B7AB269AB3FD0012B241 /* CryptoSwift */; };
+		5299B7AE269AB4FA0012B241 /* BlowfishEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299B7AD269AB4FA0012B241 /* BlowfishEncode.swift */; };
 		529D3D9C266F32FA0057D64D /* TransactionForgotPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529D3D9B266F32F90057D64D /* TransactionForgotPinView.swift */; };
 		529D3DEF2670ADB00057D64D /* SavingAccountTransferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529D3DEE2670ADB00057D64D /* SavingAccountTransferResponse.swift */; };
 		52A70B332671C4FA00D8001C /* TransactionValidationPinAtmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A70B322671C4FA00D8001C /* TransactionValidationPinAtmView.swift */; };
@@ -742,6 +744,7 @@
 		5294535325EF2899009A5B83 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		5294535F25EF59E7009A5B83 /* CardDamageAddressInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDamageAddressInputView.swift; sourceTree = "<group>"; };
 		5299B7A8269696590012B241 /* Scrambler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrambler.swift; sourceTree = "<group>"; };
+		5299B7AD269AB4FA0012B241 /* BlowfishEncode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlowfishEncode.swift; sourceTree = "<group>"; };
 		529D3D9B266F32F90057D64D /* TransactionForgotPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionForgotPinView.swift; sourceTree = "<group>"; };
 		529D3DEE2670ADB00057D64D /* SavingAccountTransferResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAccountTransferResponse.swift; sourceTree = "<group>"; };
 		52A70B322671C4FA00D8001C /* TransactionValidationPinAtmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionValidationPinAtmView.swift; sourceTree = "<group>"; };
@@ -1057,6 +1060,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5299B7AC269AB3FD0012B241 /* CryptoSwift in Frameworks */,
 				520585F725721F00005DB764 /* JGProgressHUD-SwiftUI in Frameworks */,
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
@@ -1685,6 +1689,7 @@
 				525486BB2683986E00092B33 /* SSLPinningManager.swift */,
 				525BE243268A2BBD0076993F /* RSAUtils.swift */,
 				5299B7A8269696590012B241 /* Scrambler.swift */,
+				5299B7AD269AB4FA0012B241 /* BlowfishEncode.swift */,
 			);
 			name = Utils;
 			path = "Mestika Dashboard/UI/Utils";
@@ -2509,6 +2514,7 @@
 				06E8A4AA2578F22400E61002 /* SDWebImageSwiftUI */,
 				52FCDD94263EF48B002A76E9 /* SwiftStomp */,
 				525BE246268A9BB60076993F /* SwCrypt */,
+				5299B7AB269AB3FD0012B241 /* CryptoSwift */,
 			);
 			productName = "Mestika Dashboard";
 			productReference = 5245F881253FE702002E8B53 /* Mestika Dashboard.app */;
@@ -2597,6 +2603,7 @@
 				06E8A4A92578F22300E61002 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				52FCDD93263EF48B002A76E9 /* XCRemoteSwiftPackageReference "SwiftStomp" */,
 				525BE245268A9BB60076993F /* XCRemoteSwiftPackageReference "SwCrypt" */,
+				5299B7AA269AB3FA0012B241 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 5245F882253FE702002E8B53 /* Products */;
 			projectDirPath = "";
@@ -3000,6 +3007,7 @@
 				525FA12A255290BF007EADCB /* ListLastPurchasePaymentTransactionView.swift in Sources */,
 				C0B38AB1263FEE1C0015B4E2 /* HistoryDetailView.swift in Sources */,
 				524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */,
+				5299B7AE269AB4FA0012B241 /* BlowfishEncode.swift in Sources */,
 				52FE9AD12637F5F30089EBAF /* MoveBalancePinView.swift in Sources */,
 				C0AD115A25DF7951003FF920 /* HistoryTransactionList.swift in Sources */,
 				52ADFF9E2557DFDC00A1001F /* VerifikasiPINView.swift in Sources */,
@@ -3994,6 +4002,14 @@
 				minimumVersion = 5.1.4;
 			};
 		};
+		5299B7AA269AB3FA0012B241 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 		52C05577255F6B9900A57400 /* XCRemoteSwiftPackageReference "MultipartForm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davbeck/MultipartForm";
@@ -4063,6 +4079,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 525BE245268A9BB60076993F /* XCRemoteSwiftPackageReference "SwCrypt" */;
 			productName = SwCrypt;
+		};
+		5299B7AB269AB3FD0012B241 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5299B7AA269AB3FA0012B241 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 		52FCDD94263EF48B002A76E9 /* SwiftStomp */ = {
 			isa = XCSwiftPackageProductDependency;

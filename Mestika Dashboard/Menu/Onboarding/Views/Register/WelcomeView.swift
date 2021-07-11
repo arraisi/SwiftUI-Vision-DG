@@ -136,7 +136,14 @@ struct WelcomeView: View {
                             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                             
                             if self.isNetworkReachability(with: flags) {
-                                getUserStatus(deviceId: deviceId!)
+                                
+                                if (isJailbroken()) {
+                                    self.messageWebsocket = "Your Device is Jailbroken"
+                                    self.isShowAlert = true
+                                } else {
+                                    getUserStatus(deviceId: deviceId!)
+                                }
+                                
                             } else {
                                 self.isShowAlertInternetConnection = true
                             }
@@ -155,8 +162,14 @@ struct WelcomeView: View {
                             var flags = SCNetworkReachabilityFlags()
                             SCNetworkReachabilityGetFlags(self.reachability!, &flags)
                             if self.isNetworkReachability(with: flags) {
-                                //                                self.isLoginViewActive = true
-                                self.getUserStatusForLogin(deviceId: deviceId!)
+                                
+                                if (isJailbroken()) {
+                                    self.messageWebsocket = "Your Device is Jailbroken"
+                                    self.isShowAlert = true
+                                } else {
+                                    self.getUserStatusForLogin(deviceId: deviceId!)
+                                }
+                                
                             } else {
                                 self.isShowAlertInternetConnection = true
                             }

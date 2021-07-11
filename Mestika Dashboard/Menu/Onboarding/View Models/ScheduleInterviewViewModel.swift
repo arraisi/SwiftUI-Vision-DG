@@ -170,8 +170,13 @@ class ScheduleInterviewSummaryViewModel: ObservableObject {
                 }
                 
                 switch error {
+                case .custom(code: 401):
+                    print("Token Expired")
+                    self.code = "401"
+                    self.message = "Token Expired"
                 case .custom(code: 500):
                     print("Internal Server Error")
+                    self.code = "501"
                     self.message = "Internal Server Error"
                 default:
                     print("ERRROR")

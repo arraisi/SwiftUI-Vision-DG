@@ -15,6 +15,7 @@ class UserRegistrationService {
     private init() {}
     
     static let shared = UserRegistrationService()
+    var defaults = UserDefaults.standard
     
     /* POST USER */
     func postUser(
@@ -130,14 +131,14 @@ class UserRegistrationService {
                 data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
                 data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId ?? "")_npwp.jpg\"\r\n".data(using: .utf8)!)
                 data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-                data.append(imageNpwp.pngData()!)
+                data.append(imageKtp.pngData()!)
             }
             
             // Add the image SELFIE
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
             data.append("Content-Disposition: form-data; name=\"image_selfie\"; filename=\"\(deviceId ?? "")_selfie.jpg\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-            data.append(imageSelfie.pngData()!)
+            data.append(imageKtp.pngData()!)
             
             //
             // Add the User Details
@@ -195,12 +196,23 @@ class UserRegistrationService {
                 return completion(.failure(.noData))
             }
             
-            let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data)
-            
-            if userResponse == nil {
-                completion(.failure(.decodingError))
-            } else {
-                completion(.success(userResponse!))
+            if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data)
+                
+                if userResponse == nil {
+                    completion(.failure(.decodingError))
+                } else {
+                    completion(.success(userResponse!))
+                }
+                
             }
             
         }.resume()
@@ -217,7 +229,7 @@ class UserRegistrationService {
         print("body => \(body)")
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
-        guard let url = URL.urlUser() else {
+        guard let url = URL.urlUserCancel() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         

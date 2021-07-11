@@ -48,6 +48,14 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/public/user")
     }
     
+    static func urlUserScheduler() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user")
+    }
+    
+    static func urlUserCancel() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/user")
+    }
+    
     static func urlOTP() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/public/otp")
     }

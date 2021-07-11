@@ -674,16 +674,36 @@ struct FirstOTPLoginView: View {
         { success in
             
             if success {
-                print("OTP VALID | code: \(otpVM.code)")
-                self.isLoading = false
-                self.isRootToPasswordLogin = true
+                
+                if (otpVM.code == "401") {
+                    print("unauthorized")
+                    
+                    print(self.otpVM.timeRemaining)
+                    self.timeRemainingBtn = self.otpVM.timeRemaining
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal = true
+                    
+                    self.isBtnValidationDisabled = true
+                    resetField()
+                }
+                
+                if otpVM.code == "404" {
+                    self.isShowModalUserNotRegister = true
+                }
+                
+                if (otpVM.code == "200") {
+                    print("OTP VALID | code: \(otpVM.code)")
+                    self.isLoading = false
+                    self.isRootToPasswordLogin = true
+                }
             }
             
             if !success {
                 print("OTP INVALID | code: \(otpVM.code)")
                 
                 self.isLoading = false
-                if self.otpVM.code == "403" {
+                if self.otpVM.code == "404" {
+                    self.isLoading = false
                     self.isShowModalUserNotRegister = true
                 } else {
                     print("unauthorized")

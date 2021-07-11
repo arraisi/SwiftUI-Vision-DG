@@ -621,7 +621,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     print(self.otpVM.timeRemaining)
                     self.timeRemainingBtn = self.otpVM.timeRemaining
                     self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
+                    self.isShowModal = true
                     self.isBtnValidationDisabled = true
                     resetField()
                 } else if (self.otpVM.errorCode == 403) {
@@ -634,7 +634,7 @@ struct FormOTPVerificationRegisterNasabahView: View {
                     print(self.otpVM.timeRemaining)
                     self.timeRemainingBtn = self.otpVM.timeRemaining
                     self.modalSelection = "OTPINCORRECT"
-                    self.isShowModal.toggle()
+                    self.isShowModal = true
                     self.isBtnValidationDisabled = true
                     resetField()
                 }
@@ -683,11 +683,19 @@ struct FormOTPVerificationRegisterNasabahView: View {
                 
                 self.isCancelViewActive = true
                 
-            } else {
+            }
+            
+            if !success {
                 self.isLoading = false
                 
-                self.messageResponse = "Failed to cancel the application. Please try again later.".localized(language)
-                self.isShowAlert.toggle()
+                if (userVM.code == "401") {
+                    self.messageResponse = "Token has Expired.".localized(language)
+                    self.isShowAlert = true
+                } else {
+                    self.messageResponse = "Failed to cancel the application. Please try again later.".localized(language)
+                    self.isShowAlert = true
+                }
+                
             }
         })
     }

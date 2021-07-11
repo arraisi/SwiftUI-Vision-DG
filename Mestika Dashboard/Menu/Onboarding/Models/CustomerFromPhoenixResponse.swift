@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - CustomerFromPhoenixResponseElement
+// MARK: - CustomerFromPhoenixResponseElementElement
 struct CustomerFromPhoenixResponseElement: Codable {
     let id: String
     let customerFromPhoenixResponseID: IDPhoenix
@@ -24,33 +24,24 @@ struct CustomerFromPhoenixResponseElement: Codable {
 
 // MARK: - Cdd
 struct Cdd: Codable {
-    let kecamatanSuratMenyurat, kelurahanSuratMenyurat, rwSuratMenyurat, rtSuratMenyurat: String?
-    let alamatSuratMenyurat: String?
-    let provinsiSuratMenyurat, kabupatenSuratMenyurat: String?
-    let kodePosSuratMenyurat, penghasilanKotorTahunan: String?
-    let sumberPendapatanLainnya: String?
-    let jumlahSetoranDana, frequencySetoranDana, jumlahPenarikanDana, frequencyPenarikanDana: String?
-    let sumberDana, tujuanPembukaanRekening: String
+    let kecamatanSuratMenyurat, kelurahanSuratMenyurat: String?
+    let rwSuratMenyurat, rtSuratMenyurat: String?
+    let alamatSuratMenyurat, provinsiSuratMenyurat, kabupatenSuratMenyurat, kodePosSuratMenyurat: String?
+    let penghasilanKotorTahunan, sumberPendapatanLainnya, jumlahSetoranDana, frequencySetoranDana: String?
+    let jumlahPenarikanDana, frequencyPenarikanDana, sumberDana: String?
+    let tujuanPembukaanRekening: String?
     let namaPerusahaan, hpPerusahaan, alamatPerusahaan, kodePosPerusahaan: String?
     let kecamatanPerusahaan, provinsiPerusahaan, kabupatenPerusahaan, kelurahanPerusahaan: String?
-    let teleponPerusahaan, keluargaTerdekat, namaKeluargaTerdekat, alamatKeluargaTerdekat: String?
-    let kodePosKeluargaTerdekat, kelurahanKeluargaTerdekat, kecamatanKeluargaTerdekat: String?
-    let teleponKeluargaTerdekat: String?
-    let pekerjaan, bidangUsahaPerusahaan: String?
-}
-
-// MARK: - Citra
-struct Citra: Codable {
-    let swafoto, ktp: String?
+    let teleponPerusahaan: String?
+    let keluargaTerdekat, namaKeluargaTerdekat, alamatKeluargaTerdekat, kodePosKeluargaTerdekat: String?
+    let kelurahanKeluargaTerdekat, kecamatanKeluargaTerdekat, teleponKeluargaTerdekat: String?
+    let pekerjaan: String?
+    let bidangUsahaPerusahaan: String?
 }
 
 // MARK: - ID
 struct IDPhoenix: Codable {
     let surel, telepon: String?
-
-    enum CodingKeys: String, CodingKey {
-        case surel, telepon
-    }
 }
 
 // MARK: - Personal

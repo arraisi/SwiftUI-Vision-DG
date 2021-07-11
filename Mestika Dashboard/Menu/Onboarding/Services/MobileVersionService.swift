@@ -12,6 +12,7 @@ class MobileVersionService {
     private init() {}
     
     static let shared = MobileVersionService()
+    var defaults = UserDefaults.standard
     
     /* GET MOBILE VERSION */
     func getVersion(completion: @escaping(Result<MobileVersionResponse, NetworkError>) -> Void) {
@@ -22,9 +23,6 @@ class MobileVersionService {
         
         let paramsUrl = url.appending("osType", value: "ios")
         
-        let preferences = UserDefaults.standard
-        let token = "X-XSRF-TOKEN"
-        
         var request = URLRequest(paramsUrl)
         request.httpMethod = "GET"
         
@@ -32,12 +30,6 @@ class MobileVersionService {
             guard let data = data, error == nil else {
                 print("RTO")
                 return completion(.failure(.noData))
-            }
-            
-            if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
-                print("VALUE XSFR")
-                print("\(cookie.value)")
-                preferences.set(cookie.value, forKey: token)
             }
             
             if let httpResponse = response as? HTTPURLResponse {

@@ -12,6 +12,7 @@ import SwiftyRSA
 class OtpService {
     
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
+    var defaults = UserDefaults.standard
     
     private init() {}
     
@@ -33,6 +34,7 @@ class OtpService {
             "reference": reference,
             "timeCounter": timeCounter,
             "tryCount": tryCount,
+            "seq": 1,
             "nik": ""
         ]
         
@@ -53,6 +55,8 @@ class OtpService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
+            print("response: \(String(describing: response))")
+            
             guard let data = data, error == nil else {
                 return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
@@ -60,13 +64,30 @@ class OtpService {
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 
-                if (httpResponse.statusCode == 200 || httpResponse.statusCode == 401) {
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
+                
+                if (httpResponse.statusCode == 200 || httpResponse.statusCode == 403) {
                     let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
                     completion(.success(otpResponse!))
                 }
                 
-                if (httpResponse.statusCode == 403) {
+                if (httpResponse.statusCode == 404) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                    completion(.success(otpResponse!))
                 }
             }
             
@@ -76,6 +97,14 @@ class OtpService {
     
     /* GET CODE OTP */
     func getRequestOtp(otpRequest: OtpRequest, completion: @escaping(Result<RequestOtpResponse, ErrorResult>) -> Void) {
+        
+        let body: [String: Any] = [
+            "seq": 0,
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
         guard let url = URL.urlOTP() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
@@ -87,7 +116,8 @@ class OtpService {
             .appending("type", value: otpRequest.type)
         
         var request = URLRequest(finalUrl)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
+        request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -161,6 +191,10 @@ class OtpService {
                     }
                 }
                 
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 403) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
@@ -191,7 +225,7 @@ class OtpService {
         tryCount: Int,
         type: String,
         accValue: String,
-        completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
+        completion: @escaping(Result<OtpResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "code": code,
@@ -199,6 +233,7 @@ class OtpService {
             "reference": reference,
             "timeCounter": timeCounter,
             "tryCount": tryCount,
+            "seq": 1,
             "nik": ""
         ]
         
@@ -207,7 +242,7 @@ class OtpService {
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
         guard let url = URL.urlOTP() else {
-            return completion(.failure(.badUrl))
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         let paramsUrl = url
@@ -223,20 +258,26 @@ class OtpService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
-            guard let data = data, error == nil else {
-                return completion(.failure(.noData))
-            }
-            
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
-            }
-            
-            let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
-            
-            if otpResponse == nil {
-                completion(.failure(.decodingError))
-            } else {
-                completion(.success(otpResponse!))
+                
+                let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data!)
+                
+                if (httpResponse.statusCode == 200) {
+                    completion(.success(otpResponse!))
+                }
+                
+                if (httpResponse.statusCode == 403) {
+                    completion(.success(otpResponse!))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 500) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
             }
             
         }.resume()
@@ -246,18 +287,27 @@ class OtpService {
     /* GET CODE OTP FOR ACC OR REKENING */
     func getRequestOtpAccOrRek(otpRequest: OtpRequest, completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
         
+        let body: [String: Any] = [
+            "seq": 0,
+        ]
+        
+        print("body => \(body)")
+        
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
         guard let url = URL.urlOTP() else {
             return completion(.failure(.badUrl))
         }
         
         let finalUrl = url
-            .appendingPathComponent("/getacc")
+            .appendingPathComponent("/postacc")
             .appending("trytime", value: otpRequest.trytime.numberString)
             .appending("accValue", value: otpRequest.destination)
             .appending("accType", value: otpRequest.type)
         
         var request = URLRequest(finalUrl)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
+        request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -290,7 +340,8 @@ class OtpService {
         }
         
         var request = URLRequest(url)
-        request.httpMethod = "POST"
+        //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -338,7 +389,7 @@ class OtpService {
         reference: String,
         timeCounter: Int,
         tryCount: Int,
-        completion: @escaping(Result<OtpResponse, NetworkError>) -> Void) {
+        completion: @escaping(Result<OtpResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
             "code": code,
@@ -353,7 +404,7 @@ class OtpService {
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
         guard let url = URL.urlAuthValidationOTP() else {
-            return completion(.failure(.badUrl))
+            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         var request = URLRequest(url)
@@ -363,25 +414,25 @@ class OtpService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
-            guard let data = data, error == nil else {
-                return completion(.failure(.noData))
-            }
-            
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 
-                let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data!)
                 
                 if (httpResponse.statusCode == 200) {
-                    completion(.success(OtpResponse(destination: "", reference: "", code: "", fingerprintFlag: false, message: "", timeCounter: 0, tryCount: 0, status: Status(code: "200", message: "OTP_VALID"), nik: "")))
-                }
-                
-                if (httpResponse.statusCode == 401) {
                     completion(.success(otpResponse!))
                 }
                 
+                if (httpResponse.statusCode == 403) {
+                    completion(.success(otpResponse!))
+                }
+                
+                if (httpResponse.statusCode == 404) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
                 if (httpResponse.statusCode == 500) {
-                    completion(.failure(.decodingError))
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }
             

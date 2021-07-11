@@ -60,6 +60,8 @@ class CitizenService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
+            print("response: \(String(describing: response))")
+            
             guard let data = data, error == nil else {
                 return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
@@ -70,6 +72,10 @@ class CitizenService {
                 if (httpResponse.statusCode == 200) {
                     let citizenResponse = try? JSONDecoder().decode(CheckNIKResponse.self, from: data)
                     completion(.success(citizenResponse!))
+                }
+                
+                if (httpResponse.statusCode == 401) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 
                 if (httpResponse.statusCode == 404) {

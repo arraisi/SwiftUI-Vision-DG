@@ -62,6 +62,7 @@ struct FormChangePinCardView: View {
                         Text("Change PIN")
                             .font(.custom("Montserrat-Bold", size: 24))
                             .foregroundColor(Color(hex: "#232175"))
+                            .padding(.top, 20)
                             .padding(.bottom, 20)
                         
                         VStack(alignment: .leading) {
@@ -189,6 +190,7 @@ struct FormChangePinCardView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("Change PIN ATM", displayMode: .inline)
+        .navigationBarHidden(isLoading)
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }

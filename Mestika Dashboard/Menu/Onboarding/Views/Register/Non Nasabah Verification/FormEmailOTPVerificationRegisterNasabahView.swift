@@ -152,6 +152,7 @@ struct FormEmailOTPVerificationRegisterNasabahView: View {
                             label: {
                                 EmptyView()
                             })
+//                            .isDetailLink(false)
                         
                         
                         Button(action: {

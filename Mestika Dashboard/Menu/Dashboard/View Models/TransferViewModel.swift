@@ -342,6 +342,9 @@ class TransferViewModel : ObservableObject {
                 case .custom(code: 503):
                     self.code = "503"
                     self.message = "Internal Server Error"
+                case .custom(code: 504):
+                    self.code = "504"
+                    self.message = "Gateway Timeout"
                 default:
                     self.message = "Internal Server Error"
                 }

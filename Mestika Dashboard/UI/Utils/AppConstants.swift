@@ -39,3 +39,8 @@ class AppConstants {
     
     var BYPASS_OTP: Bool = true
 }
+
+struct defaultsKeys {
+    static let keyToken = "tokenKey"
+    static let keyXsrf = "xsrfKey"
+}

@@ -48,25 +48,31 @@ extension OtpViewModel {
             switch result {
             case.success(let response):
                 
-                if (response.status?.message != "OTP_INVALID") {
-                    print("Success")
-                    
-                    self.isLoading = false
-                    completion(true)
-                } else {
+                if (response.status?.code == "401") {
                     print("Failed")
                     
                     print(response.code ?? "no code")
                     print(response.message ?? "no message")
                     
-                    DispatchQueue.main.async {
-                        self.timeRemaining = response.timeCounter!
-                        self.code = response.code ?? ""
-                        self.isLoading = false
-                        completion(false)
-                    }
+                    self.timeRemaining = response.timeCounter!
+                    self.errorCode = 401
+                    self.isLoading = false
+                    completion(false)
                 }
                 
+                if (response.status?.code == "403") {
+                    self.isLoading = false
+                    self.errorCode = 403
+                    self.statusMessage = "Phone Number Registered - VisionDG"
+                    completion(false)
+                }
+                
+                if (response.code == "200") {
+                    print("Success")
+                    
+                    self.isLoading = false
+                    completion(true)
+                }
             case .failure(let error):
                 print("ERROR-->")
                 
@@ -154,11 +160,17 @@ extension OtpViewModel {
                     self.isLoading = false
                     
                     switch error {
+                    case .custom(code: 401):
+                        self.code = "401"
+                        self.statusMessage = "Expired Token"
                     case .custom(code: 403):
+                        self.code = "403"
                         self.statusMessage = "Input yang dimasukkan salah"
                     case .custom(code: 429):
+                        self.code = "429"
                         self.statusMessage = "Server Overload, silahkan coba beberapa saat lagi"
                     case .custom(code: 400):
+                        self.code = "400"
                         self.statusMessage = "Bad Request"
                     default:
                         self.statusMessage = "Internal Server Error"
@@ -197,30 +209,54 @@ extension OtpViewModel {
             switch result {
             case.success(let response):
                 
-                if (response.status?.message != "OTP_INVALID") {
-                    print("Success")
-                    
-                    self.isLoading = false
-                    completion(true)
-                } else {
+                print("ini response code")
+                print(response.code)
+                print(response.status?.code)
+                
+                if (response.status?.code == "403") {
                     print("Failed")
+                    
                     print(response.code ?? "no code")
                     print(response.message ?? "no message")
                     
-                    
                     self.timeRemaining = response.timeCounter!
+                    self.errorCode = 401
                     self.isLoading = false
                     completion(false)
                 }
                 
+                if (response.status?.code == "401") {
+                    self.isLoading = false
+                    self.errorCode = 403
+                    self.statusMessage = "Phone Number Registered - VisionDG"
+                    completion(false)
+                }
+                
+                if (response.code == "200") {
+                    print("Success")
+                    
+                    self.isLoading = false
+                    completion(true)
+                }
+                
             case .failure(let error):
                 print("ERROR-->")
-                DispatchQueue.main.async {
-                    self.isLoading = false
+                
+                switch error {
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.statusMessage = "Phone Number Registered"
+                case .custom(code: 429):
+                    self.code = "429"
+                    self.statusMessage = "Server Overload, silahkan coba beberapa saat lagi"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.statusMessage = "USER_STATUS_NOT_FOUND"
+                default:
+                    self.statusMessage = "Internal Server Error"
                 }
                 
                 completion(false)
-                print(error.localizedDescription)
             }
         }
     }
@@ -373,26 +409,64 @@ extension OtpViewModel {
             switch result {
             case .success(let response):
                 
-                if (response.status?.code == "401") {
-                    print("Failed")
-                    DispatchQueue.main.async {
-                        self.timeRemaining = response.timeCounter ?? 0
-                        self.code = response.code ?? ""
-                        self.isLoading = false
-                        completion(false)
-                    }
-                } else {
-                    print("Success")
+                print(response.status?.code)
+                
+                self.isLoading = false
+                completion(true)
+                
+                if (response.code == "200") {
+                    print("OTP VALID")
                     
+                    self.code = "200"
                     self.isLoading = false
                     completion(true)
                 }
                 
+                if (response.status?.code == "401") {
+                    print("Failed 401")
+                    
+                    self.timeRemaining = response.timeCounter ?? 0
+                    self.code = "401"
+                    self.isLoading = false
+                    completion(false)
+                }
+                
+                if (response.status?.code == "404") {
+                    print("Failed 404")
+                    
+                    self.timeRemaining = response.timeCounter ?? 0
+                    self.code = "404"
+                    self.isLoading = false
+                    completion(false)
+                }
+                
+                if (response.status?.code == "403") {
+                    print("Failed 403")
+                    
+                    self.timeRemaining = response.timeCounter ?? 0
+                    self.code = "403"
+                    self.isLoading = false
+                    completion(false)
+                }
+                
             case .failure(let error):
                 print("ERROR-->")
-                DispatchQueue.main.async {
-                    self.isLoading = false
+                
+                switch error {
+                case .custom(code: 403):
+                    self.code = "403"
+                    self.statusMessage = "Phone Number Registered"
+                case .custom(code: 429):
+                    self.code = "429"
+                    self.statusMessage = "Server Overload, silahkan coba beberapa saat lagi"
+                case .custom(code: 404):
+                    self.code = "404"
+                    self.statusMessage = "USER_STATUS_NOT_FOUND"
+                default:
+                    self.statusMessage = "Internal Server Error"
                 }
+                
+                self.isLoading = false
                 
                 completion(false)
                 print(error.localizedDescription)

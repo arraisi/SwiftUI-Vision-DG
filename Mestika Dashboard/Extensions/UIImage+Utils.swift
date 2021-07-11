@@ -39,6 +39,15 @@ extension UIView {
 }
 
 extension UIImage {
+    
+    func resize(withPercentage percentage: CGFloat) -> UIImage? {
+        let newRect = CGRect(origin: .zero, size: CGSize(width: size.width*percentage, height: size.height*percentage))
+        UIGraphicsBeginImageContextWithOptions(newRect.size, true, 1)
+        self.draw(in: newRect)
+        defer {UIGraphicsEndImageContext()}
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    
     func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
         let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
         let format = imageRendererFormat
@@ -47,6 +56,7 @@ extension UIImage {
             _ in draw(in: CGRect(origin: .zero, size: canvas))
         }
     }
+    
     func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
         let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
         let format = imageRendererFormat
@@ -54,5 +64,12 @@ extension UIImage {
         return UIGraphicsImageRenderer(size: canvas, format: format).image {
             _ in draw(in: CGRect(origin: .zero, size: canvas))
         }
+    }
+    
+    func resizeTo(MB: Double) -> UIImage? {
+        guard let fileSize = self.pngData()?.count else {return nil}
+        let fileSizeInMB = CGFloat(fileSize)/(1024.0*1024.0)//form bytes to MB
+        let percentage = 1/fileSizeInMB
+        return resize(withPercentage: percentage)
     }
 }

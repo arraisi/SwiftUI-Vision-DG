@@ -13,29 +13,33 @@ extension URLRequest {
         self.timeoutInterval = 60
         self.setValue("*/*", forHTTPHeaderField: "accept")
         
-        let preferences = UserDefaults.standard
+        let defaults = UserDefaults.standard
+        let timestamp = NSDate().timeIntervalSince1970
         
         if let token = Messaging.messaging().fcmToken {
             if let indexEnd = token.index(of: ":") {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("D9FD4DAC-E830-4F02-AD23-DE96987F4D3E", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("872CBB01-E7B2-4F5C-B863-3A74D7AA136B", forHTTPHeaderField: "X-Device-ID")
                 self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")
-//                self.setValue("812939012309123", forHTTPHeaderField: "X-ENCRYPT-ID")
-
-                let currentLevelKey = "X-XSRF-TOKEN"
-                let authToken = "AuthorizationToken"
-                let xrsf = preferences.string(forKey: currentLevelKey)
-                let auth = preferences.string(forKey: authToken)
-                print("XRSF NYA")
-                print(xrsf)
-                self.setValue(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines), forHTTPHeaderField: "X-XSRF-TOKEN")
-                self.setValue("XSRF-TOKEN=\(xrsf?.trimmingCharacters(in: .whitespacesAndNewlines))", forHTTPHeaderField: "cookie")
-                self.setValue("Bearer \(auth)", forHTTPHeaderField: "Authorization")
+                self.setValue("cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "X-XSRF-TOKEN")
+                self.setValue("XSRF-TOKEN=cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "cookie")
+//                self.setValue("Bearer eyJhbGciOiJIUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWyiwuVrJSSk1Mz0lV0lHKTCxRsjI0MzK1MDIwsDTQUUqtKIAIWBqYmYAESotTi_ISc1OBmgygQNcs0SBZ19gwxVQXzE0Nzol3LMjOC0p2N4ko8c62qPRzNjTXBRpflZ8H0picn6RUCwC6S0EFewAAAA._nSlCn2c-H2OdjuAx5LnenRplIl8cBgtTRJsY1rBRVA", forHTTPHeaderField: "Authorization")
+                
+                if let stringToken = defaults.string(forKey: defaultsKeys.keyToken) {
+                    self.setValue("Bearer \(stringToken)", forHTTPHeaderField: "Authorization")
+                }
+                
+//                if let stringXsrf = defaults.string(forKey: defaultsKeys.keyXsrf) {
+//                    self.setValue(stringXsrf, forHTTPHeaderField: "X-XSRF-TOKEN")
+//                    self.setValue("XSRF-TOKEN=\(stringXsrf)", forHTTPHeaderField: "cookie")
+//                }
+                
+//                self.setValue(String(timestamp), forHTTPHeaderField: "X-ENCRYPT-ID")
                 
                 print(deviceId)
                 print(firebaseId)

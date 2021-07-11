@@ -94,6 +94,9 @@ struct CardDamageAddressInputView: View {
                                         MultilineTextField("Address".localized(language), text: $cardData.addressInput, onCommit: {
                                             self.addressInput = self.cardData.addressInput
                                         })
+                                        .onReceive(addressInput.publisher.collect()) {
+                                            self.addressInput = String($0.prefix(150))
+                                        }
                                         .font(Font.system(size: 14))
                                         .padding(.horizontal)
                                         .background(Color.gray.opacity(0.1))

@@ -12,6 +12,7 @@ class ATMService {
     private init() {}
     
     static let shared = ATMService()
+    var defaults = UserDefaults.standard
     
     // MARK : get response model of add product ATM.
     func postAddProductATM(dataRequest: AddProductATM, completion: @escaping(Result<GeneralResponse, NetworkError>) -> Void) {
@@ -119,12 +120,26 @@ class ATMService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
+            print("response: \(String(describing: response))")
+            
             guard let data = data, error == nil else {
                 return completion(.failure(.noData))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
             }
             
             // MARK : change model response.
@@ -149,12 +164,26 @@ class ATMService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
+            print("response: \(String(describing: response))")
+            
             guard let data = data, error == nil else {
                 return completion(.failure(.noData))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
             }
             
             // MARK : change model response.
@@ -185,12 +214,26 @@ class ATMService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
+            print("response: \(String(describing: response))")
+            
             guard let data = data, error == nil else {
                 return completion(.failure(.noData))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
             }
             
             // MARK : change model response.

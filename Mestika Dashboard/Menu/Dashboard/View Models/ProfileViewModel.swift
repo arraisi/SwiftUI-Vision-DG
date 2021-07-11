@@ -289,7 +289,7 @@ extension ProfileViewModel {
                     self.kabupatenSuratMenyurat = response.last?.cdd.kabupatenSuratMenyurat ?? ""
                     self.provinsiSuratMenyurat = response.last?.cdd.provinsiSuratMenyurat ?? ""
                     self.kodePosSuratMenyurat = response.last?.cdd.kodePosSuratMenyurat ?? ""
-                    self.existingCustomer = false
+                    self.existingCustomer = true
                     
                     print("Complete fetch customer phoenix vm  ie. (email) : \(response.last?.customerFromPhoenixResponseID.surel ?? "") published email: \(self.email)")
                     completion(true)
@@ -384,7 +384,7 @@ extension ProfileViewModel {
                     self.errorMessage = "USER STATUS NOT FOUND"
                 case .custom(code: 401):
                     self.statusCode = "401"
-                    self.errorMessage = "LOGEDOUT"
+                    self.errorMessage = "Token Expired"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

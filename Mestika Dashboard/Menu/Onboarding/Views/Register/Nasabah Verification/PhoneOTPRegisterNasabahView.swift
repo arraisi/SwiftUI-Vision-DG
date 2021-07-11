@@ -572,14 +572,23 @@ struct PhoneOTPRegisterNasabahView: View {
             }
             
             if !success {
-                print("OTP INVALID")
                 
                 self.isLoading = false
                 self.timeRemainingBtn = self.otpVM.timeRemaining
-                self.modalSelection = "OTPINCORRECT"
-                self.isShowModal.toggle()
                 
-                self.isBtnValidationDisabled = true
+                if (self.otpVM.errorCode == 403) {
+                    self.messageResponse = self.otpVM.statusMessage
+                    self.isShowAlert = true
+                    self.showingAlert = false
+                } else {
+                    print("OTP INVALID")
+                    
+                    self.modalSelection = "OTPINCORRECT"
+                    self.isShowModal.toggle()
+                    
+                    self.isBtnValidationDisabled = true
+                }
+
                 resetField()
             }
             
@@ -652,11 +661,19 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 self.isCancelViewActive = true
                 
-            } else {
+            }
+            
+            if !success {
                 self.isLoading = false
                 
-                self.messageResponse = "Failed to cancel the application. Please try again later.".localized(language)
-                self.isShowAlert = true
+                if (userVM.code == "401") {
+                    self.messageResponse = "Token has Expired.".localized(language)
+                    self.isShowAlert = true
+                } else {
+                    self.messageResponse = "Failed to cancel the application. Please try again later.".localized(language)
+                    self.isShowAlert = true
+                }
+                
             }
         })
     }

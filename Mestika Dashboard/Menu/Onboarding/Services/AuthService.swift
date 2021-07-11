@@ -12,6 +12,7 @@ class AuthService {
     private init() {}
     
     static let shared = AuthService()
+    var defaults = UserDefaults.standard
     
     // MARK: - LOGIN
     func login(
@@ -39,12 +40,27 @@ class AuthService {
         request.httpBody = finalBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
+            print("response: \(String(describing: response))")
             
             guard let data = data, error == nil else {
                 return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
             
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+            
             if let httpResponse = response as? HTTPURLResponse {
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
@@ -106,11 +122,26 @@ class AuthService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
+            print("response: \(String(describing: response))")
+            
             guard let data = data, error == nil else {
                 return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
+                
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
@@ -182,6 +213,19 @@ class AuthService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
+                
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
@@ -214,7 +258,8 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: loginResponse!.code)))
                 }
                 
                 if (httpResponse.statusCode == 401) {
@@ -420,6 +465,19 @@ class AuthService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
+                
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
@@ -495,6 +553,19 @@ class AuthService {
             }
             
             if let httpResponse = response as? HTTPURLResponse {
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
+                
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
@@ -804,6 +875,10 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
+                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                }
+                
+                if (httpResponse.statusCode == 406) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
                 

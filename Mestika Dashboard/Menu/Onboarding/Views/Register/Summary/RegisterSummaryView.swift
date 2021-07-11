@@ -26,6 +26,7 @@ struct RegisterSummaryView: View {
     @State private var isLoading = false
     @State private var showingAlert: Bool = false
     @State private var isShowingAlert: Bool = false
+    @State private var showingExpire: Bool = false
     @State private var showCancelAlert = false
     @State private var showingNpwpModal = false
     @State private var nextRouteNasabah: Bool = false
@@ -305,6 +306,16 @@ struct RegisterSummaryView: View {
                 return Alert(title: Text(self.errorMessage))
             }
             
+            if showingExpire {
+                return Alert(
+                    title: Text("Message"),
+                    message: Text("Token has Expired"),
+                    dismissButton: .cancel({
+                        self.appState.moveToWelcomeView = true
+                    })
+                )
+            }
+            
             return Alert(
                 title: Text("Do you want to cancel registration?".localized(language)),
                 primaryButton: .default(Text("YES".localized(language)), action: {
@@ -452,10 +463,19 @@ struct RegisterSummaryView: View {
             }
             
             if !success {
-                self.isLoading = false
-                self.errorMessage = self.userRegisterVM.message
-                self.isShowingAlert = true
-                self.showingAlert = true
+                
+                if (self.userRegisterVM.code == "401") {
+                    self.isLoading = false
+                    self.errorMessage = self.userRegisterVM.message
+                    self.isShowingAlert = true
+                    self.showingExpire = true
+                } else {
+                    self.isLoading = false
+                    self.errorMessage = self.userRegisterVM.message
+                    self.isShowingAlert = true
+                    self.showingAlert = true
+                }
+
             }
         }
     }

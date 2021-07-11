@@ -476,6 +476,12 @@ struct OtpConfirmationChangeDataView: View {
                         self.timeRemainingRsnd = 30
                         self.isShowAlert = true
                     }
+                } else if (self.otpVM.statusMessage == "Expired Token") {
+                    DispatchQueue.main.async {
+                        self.isLoading = self.otpVM.isLoading
+                        self.isShowAlert = true
+                        self.messageResponse = self.otpVM.statusMessage
+                    }
                 } else {
                     DispatchQueue.main.async {
                         self.isLoading = self.otpVM.isLoading

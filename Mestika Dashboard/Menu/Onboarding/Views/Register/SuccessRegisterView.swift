@@ -590,7 +590,6 @@ struct SuccessRegisterView: View {
                     action: {
                         print("BACK")
                         self.appState.moveToWelcomeView = true
-                        //                        reSubmitScheduleNasabahExisting()
                     },
                     label: {
                         Text("Back to Main Page".localized(language))
@@ -777,11 +776,19 @@ struct SuccessRegisterView: View {
             if success {
                 self.isLoading = false
                 removeUser()
-            } else {
+            }
+            
+            if !success {
                 self.isLoading = false
                 
-                self.scheduleVM.message = "Failed to cancel the application. Please try again later.".localized(language)
-                self.showingAlert.toggle()
+                if (regVM.code == "401") {
+                    self.scheduleVM.message = "Token has Expired.".localized(language)
+                    self.showingAlert = true
+                } else {
+                    self.scheduleVM.message = "Failed to cancel the application. Please try again later.".localized(language)
+                    self.showingAlert = true
+                }
+                
             }
         })
     }

@@ -70,7 +70,7 @@ class KartuKuService {
         
         let body: [String: Any] = [
             "cardNo": data.cardNo,
-            "cvv": encryptPassword(password: data.cvv),
+            "cvv": data.cvv,
             "pin": encryptPassword(password: data.newPin),
             "pinTrx": encryptPassword(password: data.pinTrx),
         ]
@@ -148,13 +148,13 @@ class KartuKuService {
             "kabupatenKota": data.addressKotaInput,
             "kecamatan": data.addressKecamatanInput,
             "kelurahan": data.addressKelurahanInput,
-            "kodepos": "00000" + data.addressPostalCodeInput,
+            "kodepos": data.addressPostalCodeInput,
             "nameOnCard": data.nameOnCard,
             "pin": encryptPassword(password: data.pin),
             "postalAddress": data.addressInput,
             "provinsi": data.addressProvinsiInput,
-            "rt": "-",
-            "rw": "-"
+            "rt": "0",
+            "rw": "0"
         ]
         
         guard let url = URL.urlBrokenKartuKu() else {
@@ -206,16 +206,16 @@ class KartuKuService {
             "cardDesign": data.cardDesign,
             "cardNo": data.cardNo,
             "encryptedPin": encryptPassword(password: data.pin),
-            "kabupatenKota": data.addressKotaInput,
+            "kabupatenKota": "Bandung",
             "kecamatan": data.addressKecamatanInput,
             "kelurahan": data.addressKelurahanInput,
-            "kodepos": data.addressKodePosInput,
+            "kodepos": "40287",
             "nameOnCard": data.nameOnCard,
             "pin": encryptPassword(password: data.pin),
             "postalAddress": data.addressInput,
-            "provinsi": data.addressProvinsiInput,
-            "rt": "-",
-            "rw": "-"
+            "provinsi": "Jawa Barat",
+            "rt": "0",
+            "rw": "0"
         ]
         
         guard let url = URL.urlBlockKartuKu() else {

@@ -66,6 +66,9 @@ extension AuthViewModel {
                 case .custom(code: 401):
                     self.errorCode = "401"
                     self.errorMessage = "Move to Dashboard"
+                case .custom(code: 403):
+                    self.errorCode = "403"
+                    self.errorMessage = "403"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -111,6 +114,9 @@ extension AuthViewModel {
                 case .custom(code: 401):
                     self.errorCode = "401"
                     self.errorMessage = "Move to Dashboard"
+                case .custom(code: 403):
+                    self.errorCode = "403"
+                    self.errorMessage = "403"
                 case .custom(code: 406):
                     self.errorCode = "406"
                     self.errorMessage = "User Locked"
@@ -166,15 +172,18 @@ extension AuthViewModel {
                 case .custom(code: 401):
                     self.errorCode = "401"
                     self.errorMessage = "Move to Dashboard"
+                case .customWithStatus(code: 403, codeStatus: "400"):
+                    self.errorCode = "400"
+                    self.errorMessage = "Invalid Card Number"
                 case .custom(code: 403):
                     self.errorCode = "403"
-                    self.errorMessage = "Invalid Card Number"
+                    self.errorMessage = "Forbidden"
                 case .custom(code: 406):
                     self.errorCode = "406"
                     self.errorMessage = "User Locked"
                 case .custom(code: 503):
                     self.errorCode = "503"
-                    self.errorMessage = "Error"
+                    self.errorMessage = "Something happen with system"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }
@@ -580,6 +589,8 @@ extension AuthViewModel {
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
                     self.errorMessage = "Weak password, please change your password"
+                case .custom(code: 406):
+                    self.errorMessage = "Card Not Active"
                 case .custom(code: 401):
                     DispatchQueue.main.async {
                         self.errorMessage = "Unauthorized"

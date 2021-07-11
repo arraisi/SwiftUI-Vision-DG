@@ -24,13 +24,13 @@ extension UserRegistrationViewModel {
         }
         
         let imageKtp = registerData.fotoKTP.asUIImage()
-        let imageKtpCompress = imageKtp.resized(withPercentage: 0.1)
+        let imageKtpCompress = imageKtp.resizeTo(MB: 1.0)
         
         let imageSelfie = registerData.fotoSelfie.asUIImage()
-        let imageSelfieCompress = imageSelfie.resized(withPercentage: 0.1)
+        let imageSelfieCompress = imageSelfie.resizeTo(MB: 1.0)
         
         let imageNpwp = registerData.fotoNPWP.asUIImage()
-        let imageNpwpCompress = imageNpwp.resized(withPercentage: 0.1)
+        let imageNpwpCompress = imageNpwp.resizeTo(MB: 1.0)
         
         print("registerData.perkiraanPenarikan \(registerData.perkiraanPenarikan)")
         print("registerData.besarPerkiraanPenarikan \(registerData.besarPerkiraanPenarikan)")
@@ -57,12 +57,21 @@ extension UserRegistrationViewModel {
                 case .custom(code: 500):
                     print("Something Happen With System")
                     DispatchQueue.main.async {
+                        self.code = "500"
                         self.message = "Something Happen With System"
                     }
                 case .custom(code: 403):
                     print("Forbiden")
                     DispatchQueue.main.async {
+                        self.code = "403"
                         self.message = "Forbiden"
+                    }
+                    
+                case .custom(code: 401):
+                    print("Token Expired")
+                    DispatchQueue.main.async {
+                        self.code = "401"
+                        self.message = "Token Expired"
                     }
                 default:
                     print("Something Happen With System")
@@ -139,11 +148,36 @@ extension UserRegistrationViewModel {
                 
             case .failure(let error):
                 print("ERROR-->")
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    completion(false)
+                
+                switch error {
+                case .custom(code: 500):
+                    print("Something Happen With System")
+                    DispatchQueue.main.async {
+                        self.code = "500"
+                        self.message = "Something Happen With System"
+                    }
+                case .custom(code: 403):
+                    print("Forbiden")
+                    DispatchQueue.main.async {
+                        self.code = "403"
+                        self.message = "Forbiden"
+                    }
+                    
+                case .custom(code: 401):
+                    print("Token Expired")
+                    DispatchQueue.main.async {
+                        self.code = "401"
+                        self.message = "Token Expired"
+                    }
+                default:
+                    print("Something Happen With System")
+                    DispatchQueue.main.async {
+                        self.message = "Something Happen With System"
+                    }
                 }
                 
+                self.isLoading = false
+                completion(false)
                 print(error.localizedDescription)
             }
         }

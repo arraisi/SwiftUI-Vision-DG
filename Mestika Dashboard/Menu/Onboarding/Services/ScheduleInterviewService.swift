@@ -14,6 +14,7 @@ class ScheduleInterviewService {
     private init() {}
     
     static let shared = ScheduleInterviewService()
+    var defaults = UserDefaults.standard
     
     // MARK: - API GET SCHEDULE ALL
     func getSheduleInterviewAll(completion: @escaping(Result<[ScheduleInterviewResponse]?, NetworkError>) -> Void) {
@@ -30,12 +31,27 @@ class ScheduleInterviewService {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
+            print("response: \(String(describing: response))")
+            
             guard let data = data, error == nil else {
                 return completion(.failure(.noData))
             }
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
+                
+                if let jwtToken = httpResponse.allHeaderFields["Authorization"] as? String {
+                    print("Token From POST OTP")
+                    print(jwtToken)
+                    self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
+                }
+                
+                if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == "XSRF-TOKEN" }) {
+                    print("VALUE XSFR")
+                    print("\(cookie.value)")
+                    self.defaults.set(cookie.value, forKey: defaultsKeys.keyXsrf)
+                }
+                
             }
             
             let scheduleResponse = try? JSONDecoder().decode([ScheduleInterviewResponse].self, from: data)
@@ -150,6 +166,11 @@ class ScheduleInterviewService {
                 return completion(.failure(.noData))
             }
             
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Response Code")
+                print("\(httpResponse.statusCode)")
+            }
+            
             let response = try? JSONDecoder().decode(Status.self, from: data)
             
             if response == nil {
@@ -243,7 +264,7 @@ class ScheduleInterviewService {
         print("body => \(body)")
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
         
-        guard let url = URL.urlUser() else {
+        guard let url = URL.urlUserScheduler() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         

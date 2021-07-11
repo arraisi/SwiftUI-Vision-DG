@@ -217,6 +217,9 @@ class SavingAccountViewModel : ObservableObject {
                 case .custom(code: 406):
                     self.errorCode = "406"
                     self.errorMessage = "PIN Transaksi Terblokir"
+                case .custom(code: 403):
+                    self.errorCode = "403"
+                    self.errorMessage = "Card Blocked"
                 case .custom(code: 206):
                     self.errorCode = "206"
                     self.errorMessage = "Failed Deposit"

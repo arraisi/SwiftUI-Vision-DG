@@ -336,13 +336,13 @@ struct CardBlockAddressInputView: View {
                 self.isLoading = false
                 
                 cardData.addressInput = self.profileVM.alamat
-                cardData.addressPostalCodeInput = ""
+                cardData.addressPostalCodeInput = "40287"
                 cardData.addressKecamatanInput = self.profileVM.kecamatanName
                 cardData.addressKelurahanInput = self.profileVM.kelurahanName
-//                cardData.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
+                cardData.addressKotaInput = "Bandung"
+                cardData.addressProvinsiInput = "Jawa Barat"
                 
                 self.addressInput = self.profileVM.alamat
-//                self.addressRtRwInput = "\(self.profileVM.rt) / \(self.profileVM.rw)"
                 self.addressKelurahanInput = self.profileVM.kelurahanName
                 self.addressKecamatanInput = self.profileVM.kecamatanName
                 self.addressKodePosInput = ""

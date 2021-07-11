@@ -321,7 +321,7 @@ struct ScanKTPView: View {
     }
     
     private func isDisableButtonSimpan() -> Bool {
-        if (nik.count == 16 || registerData.nama.isNotEmpty() || registerData.tempatLahir.isNotEmpty() || registerData.jenisKelamin.isNotEmpty() || registerData.alamat.isNotEmpty() || registerData.rtRw.isNotEmpty() || registerData.kelurahan.isNotEmpty() || registerData.kecamatan.isNotEmpty() || registerData.statusPerkawinan.isNotEmpty() || registerData.kewarganegaraan.isNotEmpty() || registerData.namaIbuKandung.isNotEmpty()) {
+        if (nik.count == 16 && registerData.nama != "" && registerData.tempatLahir != "" && registerData.jenisKelamin != "" && registerData.alamat != "" && registerData.rtRw != "" && registerData.kelurahan != "" && registerData.kecamatan != "" && registerData.statusPerkawinan != "" && registerData.kewarganegaraan != "" && registerData.namaIbuKandung != "") {
             return false
         }
         return true

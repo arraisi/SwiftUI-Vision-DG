@@ -174,7 +174,8 @@ struct FormIdentitasDiriView: View {
                             NavigationLink(
                                 destination: TujuanPembukaanRekeningView().environmentObject(registerData),
                                 isActive: self.$nextViewActive,
-                                label: {EmptyView()})
+                                label: {EmptyView()}
+                            )
                             
                             NavigationLink(
                                 destination: RegisterSummaryView(deviceModel: DeviceTraceModel()).environmentObject(registerData),

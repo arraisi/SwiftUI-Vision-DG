@@ -164,6 +164,7 @@ struct FormPilihJenisTabunganView: View {
                 NavigationLink(destination: FormIdentitasDiriView().environmentObject(registerData), isActive: $goToNextPage) {
                     EmptyView()
                 }
+//                .isDetailLink(false)
                 
                 NavigationLink(destination: RegisterSummaryView(deviceModel: DeviceTraceModel()).environmentObject(registerData), isActive: $backToSummary) {
                     EmptyView()
