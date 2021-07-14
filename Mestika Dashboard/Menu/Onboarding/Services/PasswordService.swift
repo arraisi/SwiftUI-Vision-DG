@@ -36,7 +36,7 @@ class PasswordService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -52,7 +52,7 @@ class PasswordService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200 || httpResponse.statusCode == 400) {
-                    let passwordResponse = try? JSONDecoder().decode(PasswordResponse.self, from: data)
+                    let passwordResponse = try? JSONDecoder().decode(PasswordResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(passwordResponse!))
                 }
                 

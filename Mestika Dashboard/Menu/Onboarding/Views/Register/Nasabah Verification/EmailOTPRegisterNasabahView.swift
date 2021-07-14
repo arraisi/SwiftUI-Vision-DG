@@ -429,8 +429,9 @@ struct EmailOTPRegisterNasabahView: View {
             if !success {
                 print("OTP RESP \(self.otpVM.statusMessage)")
                 
-                if (self.otpVM.statusMessage == "OTP_REQUESTED_FAILED") {
-                    print("OTP FAILED")
+                print(self.otpVM.errorCode)
+                if (self.otpVM.errorCode == 401) {
+                    print("OTP INVALID")
                     print(self.otpVM.timeCounter)
                     
                     DispatchQueue.main.sync {
@@ -441,12 +442,22 @@ struct EmailOTPRegisterNasabahView: View {
 //                        self.timeRemainingRsnd = self.otpVM.timeCounter
                         self.timeRemainingRsnd = 30
                     }
-                    self.isShowAlert = true
-                } else {
+                } else if (self.otpVM.errorCode == 403) {
                     DispatchQueue.main.async {
                         self.isLoading = self.otpVM.isLoading
                         self.isShowAlert = true
                         self.messageResponse = self.otpVM.statusMessage
+                    }
+                } else {
+                    print("OTP INVALID")
+                    
+                    DispatchQueue.main.sync {
+                        self.isLoading = self.otpVM.isLoading
+                        self.messageResponse = self.otpVM.statusMessage
+                        self.pinShare = self.otpVM.code
+                        self.referenceCode = self.otpVM.reference
+//                        self.timeRemainingRsnd = self.otpVM.timeCounter
+                        self.timeRemainingRsnd = 30
                     }
                 }
             }
@@ -476,7 +487,7 @@ struct EmailOTPRegisterNasabahView: View {
                 self.isLoading = false
                 self.timeRemainingBtn = self.otpVM.timeRemaining
                 self.modalSelection = "OTPINCORRECT"
-                self.isShowModal.toggle()
+                self.isShowModal = true
                 
 //                if (self.tryCount == 1) {
 //                    self.timeRemainingBtn = 0

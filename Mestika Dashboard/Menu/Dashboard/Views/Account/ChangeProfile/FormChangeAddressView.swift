@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct FormChangeAddressView: View {
     
@@ -109,7 +110,7 @@ struct FormChangeAddressView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             SuccessChangePasswordModal()
         }

@@ -37,7 +37,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             print("response: \(String(describing: response))")
@@ -64,7 +64,7 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(loginResponse!))
                 }
                 
@@ -118,7 +118,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -145,12 +145,12 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(loginResponse!))
                 }
                 
                 if (httpResponse.statusCode == 206) {
-                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: loginResponse!.code)))
                 }
                 
@@ -204,7 +204,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -229,7 +229,7 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(loginResponse!))
                 }
                 
@@ -258,7 +258,7 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let loginResponse = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: loginResponse!.code)))
                 }
                 
@@ -333,7 +333,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -345,7 +345,7 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(validateResponse!))
                 }
                 
@@ -392,7 +392,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -404,7 +404,7 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(validateResponse!))
                 }
                 
@@ -456,7 +456,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -481,12 +481,12 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(validateResponse!))
                 }
                 
                 if (httpResponse.statusCode == 201) {
-                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(validateResponse!))
                 }
                 
@@ -544,7 +544,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -569,12 +569,12 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(validateResponse!))
                 }
                 
                 if (httpResponse.statusCode == 201) {
-                    let validateResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(validateResponse!))
                 }
                 
@@ -627,7 +627,7 @@ class AuthService {
                 print("enableBiometricLogin \(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 201) {
-                    let fingerPrintResponse = try? JSONDecoder().decode(GenerateFingerPrintResponseModel.self, from: data)
+                    let fingerPrintResponse = try? JSONDecoder().decode(GenerateFingerPrintResponseModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     if let response = fingerPrintResponse {
                         print("finger print code : \(response.fingerprintCode)")
                         completion(.success(response))
@@ -714,7 +714,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -726,7 +726,7 @@ class AuthService {
                 print("\n\n\nHTTP RESPONSE CHANGE PASSWORD => \(httpResponse.statusCode)\n\n\n")
                 
                 if (httpResponse.statusCode == 201) {
-                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    let status = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     if let response = status {
                         print("\n\(String(describing: response.code))\n")
                         print("\n\(String(describing: response.message))\n")
@@ -736,7 +736,7 @@ class AuthService {
                 }
                 
                 if httpResponse.statusCode == 400 {
-                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    let status = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     if let response = status {
                         print("\n\(String(describing: response.code))\n")
                         print("\n\(String(describing: response.message))\n")
@@ -786,7 +786,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -798,7 +798,7 @@ class AuthService {
                 print("\n\n\nHTTP RESPONSE CHANGE PIN TRX => \(httpResponse.statusCode)\n\n\n")
                 
                 if (httpResponse.statusCode == 201) {
-                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    let status = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     if let response = status {
                         print("\n\(String(describing: response.code))\n")
                         print("\n\(String(describing: response.message))\n")
@@ -850,7 +850,7 @@ class AuthService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -862,7 +862,7 @@ class AuthService {
                 print("\n\n\nHTTP RESPONSE FORGOT PIN TRX => \(httpResponse.statusCode)\n\n\n")
                 
                 if (httpResponse.statusCode == 201) {
-                    let status = try? JSONDecoder().decode(Status.self, from: data)
+                    let status = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     if let response = status {
                         print("\n\(String(describing: response.code))\n")
                         print("\n\(String(describing: response.message))\n")
@@ -917,7 +917,7 @@ class AuthService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let validateResponse = try? JSONDecoder().decode(PasswordParamResponse.self, from: data)
+                    let validateResponse = try? JSONDecoder().decode(PasswordParamResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(validateResponse!))
                 }
                 

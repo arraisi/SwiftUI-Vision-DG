@@ -41,7 +41,7 @@ class AddressService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let addressResponse = try? JSONDecoder().decode([AddressSugestionResultResponse].self, from: data!)
+                    let addressResponse = try? JSONDecoder().decode([AddressSugestionResultResponse].self, from: BlowfishEncode().decrypted(data: data!)!)
                     if let address = addressResponse {
                         completion(.success(address))
                         print("Succsess")
@@ -81,7 +81,7 @@ class AddressService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let addressResponse = try? JSONDecoder().decode([AddressSugestionResponse].self, from: data!)
+                    let addressResponse = try? JSONDecoder().decode([AddressSugestionResponse].self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(.success(addressResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
@@ -114,7 +114,7 @@ class AddressService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let provinceResponse = try? JSONDecoder().decode(MasterProvinceResponse.self, from: data!)
+                    let provinceResponse = try? JSONDecoder().decode(MasterProvinceResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(Result.success(provinceResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
@@ -147,7 +147,7 @@ class AddressService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let regencyResponse = try? JSONDecoder().decode(MasterRegencyResponse.self, from: data!)
+                    let regencyResponse = try? JSONDecoder().decode(MasterRegencyResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(Result.success(regencyResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
@@ -180,7 +180,7 @@ class AddressService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let districtResponse = try? JSONDecoder().decode(MasterDistrictResponse.self, from: data!)
+                    let districtResponse = try? JSONDecoder().decode(MasterDistrictResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(Result.success(districtResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
@@ -213,7 +213,7 @@ class AddressService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let vilageResponse = try? JSONDecoder().decode(MasterVilageResponse.self, from: data!)
+                    let vilageResponse = try? JSONDecoder().decode(MasterVilageResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(Result.success(vilageResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))

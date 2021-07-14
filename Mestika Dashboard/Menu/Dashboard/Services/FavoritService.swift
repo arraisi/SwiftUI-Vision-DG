@@ -33,7 +33,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -48,7 +48,7 @@ class FavoritService {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let lastTrxResponse = try? JSONDecoder().decode(LastTransactionResponse.self, from: data)
+                    let lastTrxResponse = try? JSONDecoder().decode(LastTransactionResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     
                     if let _response = lastTrxResponse {
                         completion(.success(_response))
@@ -97,7 +97,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -105,7 +105,6 @@ class FavoritService {
             if let httpResponse = response as? HTTPURLResponse {
                 
                 print("\n\nGET LIST FAVORITE SERVICE RESULST : \(httpResponse.statusCode)")
-                print("JSON String: \(String(describing: String(data: data!, encoding: .utf8)))")
                 
                 guard let data = data, error == nil else {
                     return completion(Result.failure(ErrorResult.network(string: "NO DATA")))
@@ -113,7 +112,7 @@ class FavoritService {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let favoriteListResponse = try? JSONDecoder().decode([FavoritModelElement].self, from: data)
+                    let favoriteListResponse = try? JSONDecoder().decode([FavoritModelElement].self, from: BlowfishEncode().decrypted(data: data)!)
                     print("Favorites Count \(String(describing: favoriteListResponse?.count))\n\n")
                     
                     if let _response = favoriteListResponse {
@@ -161,7 +160,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -212,7 +211,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -259,7 +258,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -272,7 +271,7 @@ class FavoritService {
                 }
                 
                 // MARK : change model response.
-                let response = try? JSONDecoder().decode(Status.self, from: data)
+                let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 print(response?.code ?? "NO CODE")
                 
@@ -321,7 +320,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -334,7 +333,7 @@ class FavoritService {
                 }
                 
                 // MARK : change model response.
-                let response = try? JSONDecoder().decode(Status.self, from: data)
+                let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 print(response?.code ?? "NO CODE")
                 
@@ -390,7 +389,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -403,7 +402,7 @@ class FavoritService {
                 print("\nSAVE FAVORITE SERVICE RESULST : \(httpResponse.statusCode)\n")
                 
                 // MARK : change model response.
-                let response = try? JSONDecoder().decode(Status.self, from: data)
+                let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 print("HTTP RESPONSE SAVE FAVORITE \(httpResponse.statusCode)")
                 print(response?.code ?? "NO CODE")
@@ -459,7 +458,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -472,7 +471,7 @@ class FavoritService {
                 print("\nSAVE FAVORITE SERVICE RESULST : \(httpResponse.statusCode)\n")
                 
                 // MARK : change model response.
-                let response = try? JSONDecoder().decode(Status.self, from: data)
+                let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 print(response?.code ?? "NO CODE")
                 
@@ -527,7 +526,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -540,7 +539,7 @@ class FavoritService {
                 print("\nSAVE FAVORITE SERVICE RESULST : \(httpResponse.statusCode)\n")
                 
                 // MARK : change model response.
-                let response = try? JSONDecoder().decode(Status.self, from: data)
+                let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 print(response?.code ?? "NO CODE")
                 
@@ -591,7 +590,7 @@ class FavoritService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -604,7 +603,7 @@ class FavoritService {
                 print("\nSAVE FAVORITE SERVICE RESULST : \(httpResponse.statusCode)\n")
                 
                 // MARK : change model response.
-                let response = try? JSONDecoder().decode(Status.self, from: data)
+                let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 print(response?.code ?? "NO CODE")
                 

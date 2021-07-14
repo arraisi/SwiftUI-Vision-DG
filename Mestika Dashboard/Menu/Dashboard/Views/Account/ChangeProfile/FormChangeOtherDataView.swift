@@ -135,7 +135,7 @@ struct FormChangeOtherDataView: View {
                     .edgesIgnoringSafeArea(.all)
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             SuccessChangePasswordModal()
         }
@@ -197,7 +197,7 @@ struct FormChangeOtherDataView: View {
                     print("on commit")
                 })
                 
-                LabelTextFieldMenu(value: self.$profileVM.jumlahSetoranDanaPerbulan, label: "Monthly witdrawal amount".localized(language), data: besarPerkiraanPenarikanData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
+                LabelTextFieldMenu(value: self.$profileVM.jumlahPenarikanDanaPerbulan, label: "Monthly witdrawal amount".localized(language), data: besarPerkiraanPenarikanData.map{$0.name}, disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
                     print("on edit")
                 }, onCommit: {
                     print("on commit")
@@ -366,7 +366,7 @@ struct FormChangeOtherDataView: View {
                     
                     HStack {
                         
-                        TextField("Province".localized(language), text: $profileVM.provinsiSuratMenyurat)
+                        TextField("Province".localized(language), text: $profileVM.provinsiPerusahaan)
                             .font(Font.system(size: 14))
                             .frame(height: 50)
                             .padding(.leading, 15)
@@ -375,7 +375,7 @@ struct FormChangeOtherDataView: View {
                         Menu {
                             ForEach(0..<self.allProvince.count, id: \.self) { i in
                                 Button(action: {
-                                    profileVM.provinsiSuratMenyurat = self.allProvince[i].name
+                                    profileVM.provinsiPerusahaan = self.allProvince[i].name
                                     self.getRegencyByIdProvince(idProvince: self.allProvince[i].id)
                                 }) {
                                     Text(self.allProvince[i].name)

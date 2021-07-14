@@ -378,7 +378,7 @@ struct VerificationPINView: View {
                 print("PIN VALID")
                 self.isLoading = false
                 self.noAtmAndPinIsWrong = false
-                self.showingModal.toggle()
+                self.showingModal = true
                 self.isBtnValidationDisabled = true
                 
             } else {
@@ -389,9 +389,7 @@ struct VerificationPINView: View {
                 } else {
                     self.isLoading = false
                     self.noAtmAndPinIsWrong = true
-                    self.showingModal.toggle()
-                    //                self.isBtnValidationDisabled = true
-                    //                resetField()
+                    self.showingModal = true
                 }
             }
             

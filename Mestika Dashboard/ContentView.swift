@@ -55,7 +55,7 @@ struct ContentView: View {
                     .environmentObject(appState)
                 
 //                                NavigationView{
-//                                    KeluargaTerdekat()
+//                                    FormIdentitasDiriView()
 //                                        .environmentObject(RegistrasiModel())
 //                                        .environmentObject(AddProductATM())
 //                                }

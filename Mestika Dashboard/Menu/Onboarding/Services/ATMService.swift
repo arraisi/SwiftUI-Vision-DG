@@ -50,7 +50,7 @@ class ATMService {
             let jsonData = try JSONSerialization.data(withJSONObject: dataParam, options: .prettyPrinted)
             
             _ = String(data: jsonData, encoding: String.Encoding.ascii)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(.failure(.decodingError))
@@ -67,7 +67,7 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode(GeneralResponse.self, from: data)
+            let response = try? JSONDecoder().decode(GeneralResponse.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if response == nil {
                 completion(.failure(.decodingError))
@@ -98,7 +98,7 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode([ATMModel].self, from: data)
+            let response = try? JSONDecoder().decode([ATMModel].self, from: BlowfishEncode().decrypted(data: data)!)
             
             if response == nil {
                 completion(.failure(.decodingError))
@@ -143,7 +143,8 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode(JenisTabunganModel.self, from: data)
+            let response = try? JSONDecoder().decode(JenisTabunganModel.self, from: BlowfishEncode().decrypted(data: data)!)
+            
             print(String(data: data, encoding: .utf8))
             if response == nil {
                 print("\nError Decoding")
@@ -187,7 +188,7 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode(JenisATMModel.self, from: data)
+            let response = try? JSONDecoder().decode(JenisATMModel.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if response == nil {
                 print("\n get list jenis atm nil")
@@ -237,7 +238,7 @@ class ATMService {
             }
             
             // MARK : change model response.
-            let response = try? JSONDecoder().decode([DesainAtmModel].self, from: data)
+            let response = try? JSONDecoder().decode([DesainAtmModel].self, from: BlowfishEncode().decrypted(data: data)!)
             
             if response == nil {
                 print("\n get list desain atm nil\n")

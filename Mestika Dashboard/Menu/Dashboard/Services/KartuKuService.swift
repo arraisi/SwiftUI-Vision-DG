@@ -54,7 +54,7 @@ class KartuKuService {
                     
                     print("KARTU KU OK")
                     
-                    let kartuKuResponse = try? JSONDecoder().decode(KartuKuResponse.self, from: data!)
+                    let kartuKuResponse = try? JSONDecoder().decode(KartuKuResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     if let kartuKu = kartuKuResponse {
                         completion(.success(kartuKu))
                     }
@@ -69,10 +69,10 @@ class KartuKuService {
     func postActivateKartKu(data: ActivateKartuKuModel, completion: @escaping(Result<Status, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
+            "cvv": encryptPassword(password: data.cvv),
             "cardNo": data.cardNo,
-            "cvv": data.cvv,
             "pin": encryptPassword(password: data.newPin),
-            "pinTrx": encryptPassword(password: data.pinTrx),
+            "pinTrx": encryptPassword(password: data.pinTrx)
         ]
         
         guard let url = URL.urlActivateKartuKu() else {
@@ -89,7 +89,7 @@ class KartuKuService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString!)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -105,7 +105,7 @@ class KartuKuService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let dataResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let dataResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(dataResponse!))
                 }
                 
@@ -126,7 +126,7 @@ class KartuKuService {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 
@@ -171,7 +171,7 @@ class KartuKuService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString!)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -187,7 +187,7 @@ class KartuKuService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let dataResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let dataResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(dataResponse!))
                 }
                 
@@ -232,7 +232,7 @@ class KartuKuService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString!)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -248,7 +248,7 @@ class KartuKuService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let dataResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let dataResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(dataResponse!))
                 }
                 
@@ -287,7 +287,7 @@ class KartuKuService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString!)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -303,7 +303,7 @@ class KartuKuService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let dataResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let dataResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(dataResponse!))
                 }
                 
@@ -343,7 +343,7 @@ class KartuKuService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString!)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -359,7 +359,7 @@ class KartuKuService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let dataResponse = try? JSONDecoder().decode(Status.self, from: data)
+                    let dataResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(dataResponse!))
                 }
                 

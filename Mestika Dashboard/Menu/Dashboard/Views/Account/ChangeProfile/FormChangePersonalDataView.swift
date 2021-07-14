@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct FormChangePersonalDataView: View {
     
@@ -97,10 +98,6 @@ struct FormChangePersonalDataView: View {
                                     }, onCommit: {
                                         print("on commit")
                                     })
-                                    .keyboardType(.numberPad)
-                                    .onReceive(self.telepon.publisher.collect()) {
-                                        self.telepon = String($0.prefix(12))
-                                    }
                                     
                                     LabelTextField(value: self.$profileVM.email, label: "e-Mail".localized(language), placeHolder: "e-Mail".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                         print("on edit")
@@ -113,12 +110,6 @@ struct FormChangePersonalDataView: View {
                                     }, onCommit: {
                                         print("on commit")
                                     })
-                                    
-                                    //                LabelTextField(value: self.$dateOfBirth, label: "Date of Birth".localized(language), placeHolder: "Date of Birth".localized(language), disabled: false, onEditingChanged: { (Bool) in
-                                    //                    print("on edit")
-                                    //                }, onCommit: {
-                                    //                    print("on commit")
-                                    //                })
                                     
                                     LabelTextFieldMenu(value: self.$profileVM.gender, label: "Gender", data: ["Laki-laki", "Perempuan"], disabled: profileVM.existingCustomer, onEditingChanged: {_ in}, onCommit: {})
                                     
@@ -162,7 +153,7 @@ struct FormChangePersonalDataView: View {
             }
             
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.top)
         .popup(isPresented: $showModal, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: false) {
             SuccessChangePasswordModal()
         }

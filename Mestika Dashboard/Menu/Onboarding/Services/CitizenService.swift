@@ -29,33 +29,40 @@ class CitizenService {
         rw: String,
         statusKawin: String,
         tanggalLahir: String,
-        tempatLahir: String, completion: @escaping(Result<CheckNIKResponse, ErrorResult>) -> Void) {
+        tempatLahir: String,
+        provinsi: String,
+        kota: String, completion: @escaping(Result<CheckNIKResponse, ErrorResult>) -> Void) {
         
         guard let url = URL.urlCitizen() else {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
         let body: [String: Any] = [
-          "nik": nik,
-          "personalAlamat": alamat,
-          "personalJenisKelamin": jenisKelamin,
-          "personalKecamatan": kecamatan,
-          "personalKelurahan": kelurahan,
-          "personalKewarganegaraan": kewarganegaraan,
-          "personalNama": nama,
-          "personalNamaIbuKandung": namaIbu,
-          "personalRtRw": "\(rt)/\(rw)",
-          "personalStatusPerkawinan": statusKawin,
-          "personalTanggalLahir": tanggalLahir,
-          "personalTempatLahir": tempatLahir
+            "nik": nik,
+            "personalAlamat": alamat,
+            "personalJenisKelamin": jenisKelamin,
+            "personalKecamatan": kecamatan,
+            "personalKelurahan": kelurahan,
+            "personalKewarganegaraan": kewarganegaraan,
+            "personalNama": nama,
+            "personalNamaIbuKandung": namaIbu,
+            "personalRtRw": "\(rt)/\(rw)",
+            "personalStatusPerkawinan": statusKawin,
+            "personalTanggalLahir": tanggalLahir,
+            "personalTempatLahir": tempatLahir,
+            "personalProvinsi": provinsi,
+            "personalKabupaten": kota
         ]
         
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        
+        print(String(data: finalBody, encoding: .utf8))
+        
         let finalUrlExisting = url.appending("phoneNumber", value: isNasabah ? phone : "")
         
         var request = URLRequest(finalUrlExisting)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         request.httpMethod = "POST"
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -70,7 +77,7 @@ class CitizenService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let citizenResponse = try? JSONDecoder().decode(CheckNIKResponse.self, from: data)
+                    let citizenResponse = try? JSONDecoder().decode(CheckNIKResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(citizenResponse!))
                 }
                 
@@ -83,7 +90,7 @@ class CitizenService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    _ = try? JSONDecoder().decode(Status.self, from: data)
+                    _ = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 }
             }

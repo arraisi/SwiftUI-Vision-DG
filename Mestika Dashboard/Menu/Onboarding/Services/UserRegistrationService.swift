@@ -21,7 +21,7 @@ class UserRegistrationService {
     func postUser(
         registerData: RegistrasiModel,
         imageKtp: UIImage,
-        imageNpwp: UIImage,
+        imageNpwp: UIImage?,
         imageSelfie: UIImage,
         completion: @escaping(Result<UserCheckResponse, ErrorResult>) -> Void) {
         
@@ -93,7 +93,21 @@ class UserRegistrationService {
             "addressKecamatanDukcapil": registerData.kecamatanFromNik,
             "addressPostalCodeDukcapil": registerData.kodePosFromNik,
             "addressKabupatenDukcapil": registerData.kabupatenKotaFromNik,
-            "addressPropinsiDukcapil": registerData.provinsiFromNik
+            "addressPropinsiDukcapil": registerData.provinsiFromNik,
+            "personalNama": registerData.nama,
+            "personalTempatLahir": registerData.tempatLahir,
+            "personalTanggalLahir": registerData.tanggalLahir,
+            "personalJenisKelamin": registerData.jenisKelamin,
+            "personalAlamat": registerData.alamat,
+            "personalRtRw": registerData.rtrw,
+            "personalKelurahan": registerData.kelurahanFromNik,
+            "personalKecamatan": registerData.kecamatanFromNik,
+            "personalStatusPerkawinan": registerData.statusPerkawinan,
+            "personalPekerjaan": registerData.pekerjaan,
+            "personalKewarganegaraan": registerData.kewarganegaraan,
+            "personalNamaIbuKandung": registerData.namaIbuKandung,
+            "personalKabupaten": registerData.kabupatenKotaFromNik,
+            "personalProvinsi": registerData.provinsiFromNik
         ]
         
         if registerData.npwp != "" {
@@ -108,8 +122,10 @@ class UserRegistrationService {
         
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userDetailParam, options: .prettyPrinted)
+            let encrypted = BlowfishEncode().encrypted(data: jsonData)!
             
-            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
+            let jsonString = String(data: encrypted, encoding: String.Encoding.ascii)
+            
             
             // generate boundary string using a unique per-app string
             let boundary = UUID().uuidString
@@ -131,14 +147,14 @@ class UserRegistrationService {
                 data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
                 data.append("Content-Disposition: form-data; name=\"image_npwp\"; filename=\"\(deviceId ?? "")_npwp.jpg\"\r\n".data(using: .utf8)!)
                 data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-                data.append(imageKtp.pngData()!)
+                data.append((imageNpwp?.pngData()!)!)
             }
             
             // Add the image SELFIE
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
             data.append("Content-Disposition: form-data; name=\"image_selfie\"; filename=\"\(deviceId ?? "")_selfie.jpg\"\r\n".data(using: .utf8)!)
             data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-            data.append(imageKtp.pngData()!)
+            data.append(imageSelfie.pngData()!)
             
             //
             // Add the User Details
@@ -163,7 +179,7 @@ class UserRegistrationService {
                     if (httpResponse.statusCode == 500) {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                     } else if (httpResponse.statusCode == 200) {
-                        let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data!)
+                        let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                         completion(.success(userResponse!))
                     } else {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
@@ -205,7 +221,7 @@ class UserRegistrationService {
                     self.defaults.set(jwtToken, forKey: defaultsKeys.keyToken)
                 }
                 
-                let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data)
+                let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 if userResponse == nil {
                     completion(.failure(.decodingError))
@@ -239,7 +255,7 @@ class UserRegistrationService {
         var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -258,7 +274,7 @@ class UserRegistrationService {
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 } else if (httpResponse.statusCode == 200) {
-                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data!)
+                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(.success(userResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))

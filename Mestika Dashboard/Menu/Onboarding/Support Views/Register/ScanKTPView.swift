@@ -35,6 +35,22 @@ struct ScanKTPView: View {
     @State var messageResponse: String = ""
     @State var errorMessage: String = ""
     
+    @State private var tanggalLahir = Date()
+    
+    @State var addressSugestion = [AddressViewModel]()
+    @State var addressSugestionResult = [AddressResultViewModel]()
+    
+    @State var allProvince = MasterProvinceResponse()
+    @State var allRegency = MasterRegencyResponse()
+    @State var allDistrict = MasterDistrictResponse()
+    @State var allVillage = MasterVilageResponse()
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter
+    }()
+    
     var body: some View {
         VStack(alignment: .center) {
             Text("Please prepare your \nIdentity Card (KTP) in advance".localized(language))
@@ -48,6 +64,9 @@ struct ScanKTPView: View {
             formProfile
         }
         .padding(.bottom, 15)
+        .onAppear() {
+            self.getAllProvince()
+        }
         .alert(isPresented: $showingAlert) {
             return Alert(
                 title: Text("MESSAGE"),
@@ -115,18 +134,6 @@ struct ScanKTPView: View {
                         self.isValidKtp = str.count == 16
                         
                     }
-                    
-                    //                    Button(action: {self.confirmNik.toggle()}) {
-                    //                        HStack(alignment: .top) {
-                    //                            Image(systemName: confirmNik ? "checkmark.square": "square")
-                    //                            Text("* Check again and make sure your Identity Card Number (KTP) is correct".localized(language))
-                    //                                .font(.custom("Montserrat-Regular", size: 12))
-                    //                                .foregroundColor(Color(hex: "#707070"))
-                    //                        }
-                    //                        //                    .padding(.horizontal, 30)
-                    //                        .padding(.top, 5)
-                    //                        .fixedSize(horizontal: false, vertical: true)
-                    //                    }
                 }
                 
                 LabelTextField(value:  $registerData.nama, label: "Name".localized(language), placeHolder: "Name".localized(language)) { onChange in
@@ -148,7 +155,7 @@ struct ScanKTPView: View {
                         .foregroundColor(.black)
                     
                     HStack{
-                        DatePicker(selection: $registerData.tanggalLahir, displayedComponents: .date, label: {
+                        DatePicker(selection: $tanggalLahir, displayedComponents: .date, label: {
                             EmptyView()
                         })
                         .labelsHidden()
@@ -175,19 +182,159 @@ struct ScanKTPView: View {
                     .cornerRadius(10)
                 }
                 
+                // Label Province
+                VStack(alignment: .leading) {
+                    Text("Province".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("Province".localized(language), text: $registerData.provinsiFromNik)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allProvince.count, id: \.self) { i in
+                                Button(action: {
+                                    registerData.provinsiFromNik = self.allProvince[i].name
+                                    self.getRegencyByIdProvince(idProvince: self.allProvince[i].id)
+                                }) {
+                                    Text(self.allProvince[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
+                
+                // Label City
+                VStack(alignment: .leading) {
+                    Text("City".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("City".localized(language), text: $registerData.kabupatenKotaFromNik)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allRegency.count, id: \.self) { i in
+                                Button(action: {
+                                    registerData.kabupatenKotaFromNik = self.allRegency[i].name
+                                    self.getDistrictByIdRegency(idRegency: self.allRegency[i].id)
+                                }) {
+                                    Text(self.allRegency[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
+                
+                // Label District
+                VStack(alignment: .leading) {
+                    Text("District".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("District".localized(language), text: $registerData.kelurahanFromNik)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allDistrict.count, id: \.self) { i in
+                                Button(action: {
+                                    registerData.kelurahanFromNik = self.allDistrict[i].name
+                                    self.getVilageByIdDistrict(idDistrict: self.allDistrict[i].id)
+                                }) {
+                                    Text(self.allDistrict[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
+                
+                // Label Village
+                VStack(alignment: .leading) {
+                    Text("Sub-district".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(hex: "#707070"))
+                        .multilineTextAlignment(.leading)
+                    
+                    HStack {
+                        
+                        TextField("Sub-district".localized(language), text: $registerData.kecamatanFromNik)
+                            .font(Font.system(size: 14))
+                            .frame(height: 50)
+                            .padding(.leading, 15)
+                            .disabled(true)
+                        
+                        Menu {
+                            ForEach(0..<self.allVillage.count, id: \.self) { i in
+                                Button(action: {
+                                    registerData.kecamatanFromNik = self.allVillage[i].name
+                                    registerData.kodePosFromNik = self.allVillage[i].postalCode ?? ""
+                                }) {
+                                    Text(self.allVillage[i].name)
+                                        .font(.custom("Montserrat-Regular", size: 12))
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        
+                    }
+                    .frame(height: 36)
+                    .font(Font.system(size: 14))
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+                .frame(alignment: .leading)
+                
                 LabelTextField(value:  $registerData.rtRw, label: "RT/RW".localized(language), placeHolder: "RT/RW".localized(language)) { onChange in
-                    
-                } onCommit: {
-                    
-                }
-                
-                LabelTextField(value:  $registerData.kelurahan, label: "Village".localized(language), placeHolder: "Village".localized(language)) { onChange in
-                    
-                } onCommit: {
-                    
-                }
-                
-                LabelTextField(value:  $registerData.kecamatan, label: "Districts".localized(language), placeHolder: "Districts".localized(language)) { onChange in
                     
                 } onCommit: {
                     
@@ -196,7 +343,7 @@ struct ScanKTPView: View {
             
             Group {
                 
-                LabelTextFieldMenu(value: self.$registerData.statusPerkawinan, label: "Marital status".localized(language), data: ["Kawin", "Belum Kawin"], disabled: false, onEditingChanged: {_ in}, onCommit: {})
+                LabelTextFieldMenu(value: self.$registerData.statusPerkawinan, label: "Marital status".localized(language), data: ["Kawin", "Belum Kawin", "Duda", "Janda"], disabled: false, onEditingChanged: {_ in}, onCommit: {})
                 
                 LabelTextFieldMenu(value: self.$registerData.kewarganegaraan, label: "Citizenship".localized(language), data: ["WNI", "WNA"], disabled: false, onEditingChanged: {_ in}, onCommit: {})
                 
@@ -210,22 +357,27 @@ struct ScanKTPView: View {
             if (imageKTP != nil) {
                 
                 Button(action: {
+                    
+                    self.registerData.tanggalLahir = dateFormatter.string(from: tanggalLahir)
+                    
                     getCitizen(
                         nik: self.nik,
                         phone: registerData.noTelepon,
                         isNasabah: registerData.isNasabahmestika,
                         alamat: registerData.alamat,
                         jenisKelamin: registerData.jenisKelamin,
-                        kecamatan: registerData.kecamatan,
-                        kelurahan: registerData.kelurahan,
+                        kecamatan: registerData.kecamatanFromNik,
+                        kelurahan: registerData.kelurahanFromNik,
                         kewarganegaraan: registerData.kewarganegaraan,
                         nama: registerData.nama,
                         namaIbu: registerData.namaIbuKandung,
                         rt: registerData.rtrw,
                         rw: registerData.rtrw,
                         statusKawin: registerData.statusPerkawinan,
-                        tanggalLahir: "27/12/1995",
-                        tempatLahir: registerData.tempatLahir)
+                        tanggalLahir: registerData.tanggalLahir,
+                        tempatLahir: registerData.tempatLahir,
+                        provinsi: registerData.provinsiFromNik,
+                        kota: registerData.kabupatenKotaFromNik)
                 }) {
                     Text("Save".localized(language))
                         .foregroundColor(.white)
@@ -240,14 +392,6 @@ struct ScanKTPView: View {
             } else { EmptyView() }
             
         }
-    }
-    
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.locale = Locale(identifier: "in_ID")
-        return formatter
     }
     
     /* Function GET Citizen */
@@ -267,7 +411,9 @@ struct ScanKTPView: View {
         rw: String,
         statusKawin: String,
         tanggalLahir: String,
-        tempatLahir: String) {
+        tempatLahir: String,
+        provinsi: String,
+        kota: String) {
         
         print("GET CITIZEN")
         self.citizenVM.getCitizen(
@@ -285,7 +431,9 @@ struct ScanKTPView: View {
             rw: rw,
             statusKawin: statusKawin,
             tanggalLahir: tanggalLahir,
-            tempatLahir: tempatLahir) { success in
+            tempatLahir: tempatLahir,
+            provinsi: provinsi,
+            kota: kota) { success in
             
             if success {
                 print("isLoading \(self.citizenVM.isLoading)")
@@ -299,10 +447,10 @@ struct ScanKTPView: View {
                 self.registerData.alamatKtpFromNik = self.citizenVM.alamatKtp
                 self.registerData.rtFromNik = self.citizenVM.rt
                 self.registerData.rwFromNik = self.citizenVM.rw
-                self.registerData.kelurahanFromNik = self.citizenVM.kelurahan
-                self.registerData.kecamatanFromNik = self.citizenVM.kecamatan
-                self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
-                self.registerData.provinsiFromNik = self.citizenVM.provinsi
+//                self.registerData.kelurahanFromNik = self.citizenVM.kelurahan
+//                self.registerData.kecamatanFromNik = self.citizenVM.kecamatan
+//                self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
+//                self.registerData.provinsiFromNik = self.citizenVM.provinsi
                 self.registerData.kodePosFromNik = "40287"
                 self.registerData.fotoKTP = self.imageKTP!
                 
@@ -320,8 +468,61 @@ struct ScanKTPView: View {
         }
     }
     
+    @ObservedObject var addressVM = AddressSummaryViewModel()
+    func getAllProvince() {
+        self.addressVM.getAllProvince { success in
+            
+            if success {
+                self.allProvince = self.addressVM.provinceResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getRegencyByIdProvince(idProvince: String) {
+        self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
+            
+            if success {
+                self.allRegency = self.addressVM.regencyResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getDistrictByIdRegency(idRegency: String) {
+        self.addressVM.getDistrictByIdRegency(idRegency: idRegency) { success in
+            
+            if success {
+                self.allDistrict = self.addressVM.districtResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getVilageByIdDistrict(idDistrict: String) {
+        self.addressVM.getVilageByIdDistrict(idDistrict: idDistrict) { success in
+            
+            if success {
+                self.allVillage = self.addressVM.vilageResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
     private func isDisableButtonSimpan() -> Bool {
-        if (nik.count == 16 && registerData.nama != "" && registerData.tempatLahir != "" && registerData.jenisKelamin != "" && registerData.alamat != "" && registerData.rtRw != "" && registerData.kelurahan != "" && registerData.kecamatan != "" && registerData.statusPerkawinan != "" && registerData.kewarganegaraan != "" && registerData.namaIbuKandung != "") {
+        if (nik.count == 16 && registerData.nama != "" && registerData.tempatLahir != "" && registerData.jenisKelamin != "" && registerData.alamat != "" && registerData.rtRw != "" && registerData.kelurahanFromNik != "" && registerData.kecamatanFromNik != "" && registerData.provinsiFromNik != "" && registerData.kabupatenKotaFromNik != "" && registerData.statusPerkawinan != "" && registerData.kewarganegaraan != "" && registerData.namaIbuKandung != "") {
             return false
         }
         return true

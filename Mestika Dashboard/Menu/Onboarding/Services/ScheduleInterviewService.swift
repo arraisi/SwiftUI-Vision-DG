@@ -54,7 +54,7 @@ class ScheduleInterviewService {
                 
             }
             
-            let scheduleResponse = try? JSONDecoder().decode([ScheduleInterviewResponse].self, from: data)
+            let scheduleResponse = try? JSONDecoder().decode([ScheduleInterviewResponse].self, from: BlowfishEncode().decrypted(data: data)!)
             
             if scheduleResponse == nil {
                 completion(.failure(.decodingError))
@@ -86,7 +86,7 @@ class ScheduleInterviewService {
                 return completion(.failure(.noData))
             }
             
-            let scheduleResponse = try? JSONDecoder().decode(ScheduleInterviewResponse.self, from: data)
+            let scheduleResponse = try? JSONDecoder().decode(ScheduleInterviewResponse.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if scheduleResponse == nil {
                 completion(.failure(.decodingError))
@@ -154,7 +154,7 @@ class ScheduleInterviewService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString!)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(.failure(.decodingError))
@@ -171,7 +171,7 @@ class ScheduleInterviewService {
                 print("\(httpResponse.statusCode)")
             }
             
-            let response = try? JSONDecoder().decode(Status.self, from: data)
+            let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if response == nil {
                 completion(.failure(.decodingError))
@@ -211,7 +211,7 @@ class ScheduleInterviewService {
         var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -230,7 +230,7 @@ class ScheduleInterviewService {
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 } else if (httpResponse.statusCode == 200) {
-                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data!)
+                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(.success(userResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
@@ -274,7 +274,7 @@ class ScheduleInterviewService {
         var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -293,7 +293,7 @@ class ScheduleInterviewService {
                 if (httpResponse.statusCode == 500) {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                 } else if (httpResponse.statusCode == 200) {
-                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: data!)
+                    let userResponse = try? JSONDecoder().decode(UserCheckResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     completion(.success(userResponse!))
                 } else {
                     completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))

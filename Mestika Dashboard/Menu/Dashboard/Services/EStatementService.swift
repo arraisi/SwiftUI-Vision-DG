@@ -30,7 +30,7 @@ class EStatementService {
                 print("\nGET LIST ESTATEMENT HTTP RESPONSE: \(httpResponse.statusCode)")
 
                 if (httpResponse.statusCode == 200) {
-                    if let responseBody = try? JSONDecoder().decode(EStatementModel.self, from: data) {
+                    if let responseBody = try? JSONDecoder().decode(EStatementModel.self, from: BlowfishEncode().decrypted(data: data)!) {
                         print("RESPONSE BODY GET LIST ESTATEMENT \(responseBody)")
                         completion(.success(responseBody))
                     }

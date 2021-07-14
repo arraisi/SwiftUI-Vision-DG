@@ -51,6 +51,7 @@ struct PersonalPhoenix: Codable {
     let rw, rt, address, marital: String?
     let gender, dateOfBirth, placeOfBirth, name: String?
     let namaIbuKandung: String?
+    let existingCustomer: Bool?
 }
 
 // MARK: - Product

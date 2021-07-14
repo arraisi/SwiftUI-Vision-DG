@@ -73,7 +73,7 @@ extension URL {
     }
     
     static func urlPasswordValidation() -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/password/validation")
+        return URL(string: AppConstants().BASE_URL + "/public/password-validation")
     }
     
     static func urlCitizen() -> URL? {

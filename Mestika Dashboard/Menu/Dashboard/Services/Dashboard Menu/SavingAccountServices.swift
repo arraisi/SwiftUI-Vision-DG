@@ -37,7 +37,7 @@ class SavingAccountServices {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -52,7 +52,7 @@ class SavingAccountServices {
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
-                    let products = try? JSONDecoder().decode(AccountBalanceListResponse.self, from: data)
+                    let products = try? JSONDecoder().decode(AccountBalanceListResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     if let _response = products {
                         completion(.success(_response))
                     }
@@ -104,7 +104,7 @@ class SavingAccountServices {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let products = try? JSONDecoder().decode(ProductsSavingAccountModel.self, from: data)
+                    let products = try? JSONDecoder().decode(ProductsSavingAccountModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     
                     if let _response = products {
                         completion(.success(_response))
@@ -152,7 +152,7 @@ class SavingAccountServices {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -167,7 +167,7 @@ class SavingAccountServices {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let productDetails = try? JSONDecoder().decode(ProductDetailSavingAccountModel.self, from: data)
+                    let productDetails = try? JSONDecoder().decode(ProductDetailSavingAccountModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     
                     guard let _response = productDetails else {
                        return completion(Result.failure(ErrorResult.network(string: "NO DATA")))
@@ -226,7 +226,7 @@ class SavingAccountServices {
                     
                     print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     
-                    let accounts = try? JSONDecoder().decode(SavingAccountTransferResponse.self, from: data)
+                    let accounts = try? JSONDecoder().decode(SavingAccountTransferResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     
                     if let _response = accounts {
                         completion(.success(_response))
@@ -285,7 +285,7 @@ class SavingAccountServices {
                     
                     print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     
-                    let accounts = try? JSONDecoder().decode(SavingAccountModel.self, from: data)
+                    let accounts = try? JSONDecoder().decode(SavingAccountModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     
                     if let _response = accounts {
                         completion(.success(_response))
@@ -339,7 +339,7 @@ class SavingAccountServices {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -354,7 +354,7 @@ class SavingAccountServices {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let savingAccount = try? JSONDecoder().decode(NewSavingAccountResponseModel.self, from: data)
+                    let savingAccount = try? JSONDecoder().decode(NewSavingAccountResponseModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     
                     guard let _response = savingAccount else {
                        return completion(Result.failure(ErrorResult.network(string: "NO DATA")))

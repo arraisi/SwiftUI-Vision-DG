@@ -129,7 +129,7 @@ extension TransactionLimitViewModel {
                 
                 guard let data = data, error == nil else {return}
                 
-                let response = try? JSONDecoder().decode(GlobalLimitModel.self, from: data)
+                let response = try? JSONDecoder().decode(GlobalLimitModel.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 if let data = response {
                     self.mappingGlobalLimitData(data: data)
@@ -159,7 +159,7 @@ extension TransactionLimitViewModel {
                 
                 guard let data = data, error == nil else {return}
                 
-                let response = try? JSONDecoder().decode(UserLimitModel.self, from: data)
+                let response = try? JSONDecoder().decode(UserLimitModel.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 if let data = response {
                     self.mappingUserLimitData(data: data)
@@ -210,7 +210,7 @@ extension TransactionLimitViewModel {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = jsonData
+        request.httpBody = BlowfishEncode().encrypted(data: jsonData!)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -221,7 +221,7 @@ extension TransactionLimitViewModel {
                 
                 guard let data = data, error == nil else {return}
                 
-                let response = try? JSONDecoder().decode(Status.self, from: data)
+                let response = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
                 
                 if let data = response {
                     print("RESPONSE SAVE USER LIMIT \(data)")

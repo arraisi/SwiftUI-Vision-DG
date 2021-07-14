@@ -53,7 +53,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let limitResponse = try? JSONDecoder().decode(FeeCardReplacementResponse.self, from: data!)
+                    let limitResponse = try? JSONDecoder().decode(FeeCardReplacementResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     if let limit = limitResponse {
                         completion(.success(limit))
                     }
@@ -90,7 +90,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let limitResponse = try? JSONDecoder().decode(LimitTransactionResponse.self, from: data!)
+                    let limitResponse = try? JSONDecoder().decode(LimitTransactionResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                     if let limit = limitResponse {
                         completion(.success(limit))
                     }
@@ -106,7 +106,7 @@ class TransferServices {
                              completion: @escaping(Result<InquiryTransferResponse, ErrorResult>) -> Void) {
         
         let body: [String: Any] = [
-            "cardNo": " ",
+            "cardNo": transferData.cardNo,
             "nominal": "1",
             "currency": "360",
             "sourceNumber": transferData.sourceNumber,
@@ -127,7 +127,7 @@ class TransferServices {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -143,7 +143,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(InquiryTransferResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(InquiryTransferResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -182,7 +182,7 @@ class TransferServices {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -198,7 +198,7 @@ class TransferServices {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(TransferIbftInquiryResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferIbftInquiryResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -238,7 +238,7 @@ class TransferServices {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -259,7 +259,7 @@ class TransferServices {
                     print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     
                     print("ON Success")
-                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -276,7 +276,7 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 
@@ -323,7 +323,7 @@ class TransferServices {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -340,7 +340,7 @@ class TransferServices {
                 
                 if (httpResponse.statusCode == 200) {
                     print("On Success")
-                    let transferResponse = try? JSONDecoder().decode(TransferIbftExecResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferIbftExecResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -357,7 +357,7 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 
@@ -416,7 +416,7 @@ class TransferServices {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -433,7 +433,7 @@ class TransferServices {
                 
                 if (httpResponse.statusCode == 200) {
                     print("On Success")
-                    let transferResponse = try? JSONDecoder().decode(TransferRtgsExecResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferRtgsExecResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -450,7 +450,7 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 
@@ -502,7 +502,7 @@ class TransferServices {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -516,9 +516,10 @@ class TransferServices {
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
+                print(String(data: data, encoding: .utf8))
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(TransferSknExecResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferSknExecResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -535,7 +536,7 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 
@@ -575,7 +576,7 @@ class TransferServices {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -592,7 +593,7 @@ class TransferServices {
                 
                 if (httpResponse.statusCode == 200) {
                     print("ON Success")
-                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(TransferOnUsResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -605,7 +606,7 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 
@@ -640,9 +641,8 @@ class TransferServices {
                 
                 if (httpResponse.statusCode == 200) {
                     print("ON Success")
-                    print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
                     
-                    let userLimit = try? JSONDecoder().decode(UserLimitModel.self, from: data)
+                    let userLimit = try? JSONDecoder().decode(UserLimitModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(userLimit!))
                 }
                 
@@ -655,7 +655,7 @@ class TransferServices {
                 }
                 
                 if (httpResponse.statusCode == 406) {
-                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: data)
+                    let response = try? JSONDecoder().decode(LoginCredentialResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(Result.failure(ErrorResult.customWithStatus(code: httpResponse.statusCode, codeStatus: response!.code)))
                 }
                 

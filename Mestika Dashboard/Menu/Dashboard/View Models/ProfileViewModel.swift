@@ -104,9 +104,31 @@ class ProfileViewModel: ObservableObject {
     @Published var statusCode: String = ""
     
     @Published var existingCustomer: Bool = false
+    
+    @Published var marital: String = ""
+    @Published var noKec: String = ""
+    @Published var noKel: String = ""
+    @Published var rw: String = ""
+    @Published var rt: String = ""
+    @Published var namaIbuKandung: String = ""
 }
 
 extension ProfileViewModel {
+    
+    func convertSpecialCharacters(string: String) -> String {
+            var newString = string
+            let char_dictionary = [
+                "&amp;" : "&",
+                "&lt;" : "<",
+                "&gt;" : ">",
+                "&quot;" : "\"",
+                "&apos;" : "'"
+            ];
+            for (escaped_char, unescaped_char) in char_dictionary {
+                newString = newString.replacingOccurrences(of: escaped_char, with: unescaped_char, options: NSString.CompareOptions.literal, range: nil)
+            }
+            return newString
+    }
     
     func encryptPassword(password: String) -> String {
         let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
@@ -143,7 +165,16 @@ extension ProfileViewModel {
                 "kabName": self.kabupatenName,
                 "kecName": self.kecamatanName,
                 "kelName": self.kelurahanName,
-                "propName": self.provinsiName
+                "propName": self.provinsiName,
+                "marital": self.marital,
+                "namaIbuKandung": self.namaIbuKandung,
+                "noKab": "0",
+                "noKec": self.noKec,
+                "noKel": self.noKel,
+                "rt": self.rt,
+                "rw": self.rw,
+                "existingCustomer": self.existingCustomer,
+                "kodePos": "40287"
             ],
             "cdd": [
                 "penghasilanKotorTahunan": self.penghasilanKotor,
@@ -237,10 +268,10 @@ extension ProfileViewModel {
                     
                     self.tujuanPembukaan = response.last?.cdd.tujuanPembukaanRekening ?? ""
                     self.sumberDana = response.last?.cdd.sumberDana ?? ""
-                    self.jumlahPenarikanPerbulan = response.last?.cdd.frequencyPenarikanDana ?? ""
-                    self.jumlahPenarikanDanaPerbulan = response.last?.cdd.jumlahPenarikanDana ?? ""
-                    self.jumlahSetoranPerbulan = response.last?.cdd.frequencySetoranDana ?? ""
-                    self.jumlahSetoranDanaPerbulan = response.last?.cdd.jumlahSetoranDana ?? ""
+                    self.jumlahPenarikanPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.frequencyPenarikanDana ?? "")
+                    self.jumlahPenarikanDanaPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.jumlahPenarikanDana ?? "")
+                    self.jumlahSetoranPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.frequencySetoranDana ?? "")
+                    self.jumlahSetoranDanaPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.jumlahSetoranDana ?? "")
                     
                     self.hubunganKeluarga = response.last?.cdd.keluargaTerdekat ?? ""
                     self.namaKeluarga = response.last?.cdd.namaKeluargaTerdekat ?? ""
@@ -251,7 +282,7 @@ extension ProfileViewModel {
                     self.teleponKeluarga = response.last?.cdd.teleponKeluargaTerdekat ?? ""
                     
                     self.pekerjaan = response.last?.cdd.pekerjaan ?? ""
-                    self.penghasilanKotor = response.last?.cdd.penghasilanKotorTahunan ?? ""
+                    self.penghasilanKotor = self.convertSpecialCharacters(string: response.last?.cdd.penghasilanKotorTahunan ?? "")
                     self.PendapatanLainnya = response.last?.cdd.sumberPendapatanLainnya ?? "Tidak ada"
                     
                     self.namaPerusahaan = response.last?.cdd.namaPerusahaan ?? ""
@@ -289,7 +320,14 @@ extension ProfileViewModel {
                     self.kabupatenSuratMenyurat = response.last?.cdd.kabupatenSuratMenyurat ?? ""
                     self.provinsiSuratMenyurat = response.last?.cdd.provinsiSuratMenyurat ?? ""
                     self.kodePosSuratMenyurat = response.last?.cdd.kodePosSuratMenyurat ?? ""
-                    self.existingCustomer = true
+                    self.existingCustomer = response.last?.personal.existingCustomer ?? false
+                    
+                    self.marital = response.last?.personal.marital ?? ""
+                    self.noKec = response.last?.personal.noKec ?? ""
+                    self.noKel = response.last?.personal.noKel ?? ""
+                    self.rw = response.last?.personal.rw ?? ""
+                    self.rt = response.last?.personal.rt ?? ""
+                    self.namaIbuKandung = response.last?.personal.namaIbuKandung ?? ""
                     
                     print("Complete fetch customer phoenix vm  ie. (email) : \(response.last?.customerFromPhoenixResponseID.surel ?? "") published email: \(self.email)")
                     completion(true)

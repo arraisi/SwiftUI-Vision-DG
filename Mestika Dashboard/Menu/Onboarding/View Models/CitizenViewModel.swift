@@ -53,7 +53,10 @@ extension CitizenViewModel {
         rw: String,
         statusKawin: String,
         tanggalLahir: String,
-        tempatLahir: String, completion: @escaping (Bool) -> Void) {
+        tempatLahir: String,
+        provinsi: String,
+        kota: String,
+        completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
             self.isLoading = true
@@ -74,7 +77,9 @@ extension CitizenViewModel {
             rw: rw,
             statusKawin: statusKawin,
             tanggalLahir: tanggalLahir,
-            tempatLahir: tanggalLahir) { result in
+            tempatLahir: tanggalLahir,
+            provinsi: provinsi,
+            kota: kota) { result in
             
             switch result {
             case .success(let response):

@@ -10,7 +10,7 @@ import SwiftUI
 class RegistrasiModel: ObservableObject {
     @Published var nama = ""
     @Published var tempatLahir = ""
-    @Published var tanggalLahir = Date()
+    @Published var tanggalLahir = ""
     @Published var jenisKelamin = ""
     @Published var alamat = ""
     @Published var rtRw = ""

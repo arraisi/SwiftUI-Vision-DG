@@ -47,7 +47,7 @@ class HistoryTransactionServices {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // MARK: TASK
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -62,7 +62,7 @@ class HistoryTransactionServices {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let historyListResponse = try? JSONDecoder().decode(HistoryTransactionModel.self, from: data)
+                    let historyListResponse = try? JSONDecoder().decode(HistoryTransactionModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     print("HISTORY balance \(String(describing: historyListResponse?.balance))\n\n")
                     print("HISTORY Count \(String(describing: historyListResponse?.historyList?.count))\n\n")
                     
@@ -113,7 +113,7 @@ class HistoryTransactionServices {
                 
                 if (httpResponse.statusCode == 200) {
                     
-                    let history = try? JSONDecoder().decode(HistoryModel.self, from: data)
+                    let history = try? JSONDecoder().decode(HistoryModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     
                     if let _history = history {
                         print("SUCCESS FIND ALL HISTORY")

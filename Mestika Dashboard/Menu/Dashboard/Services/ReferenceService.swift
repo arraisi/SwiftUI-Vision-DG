@@ -34,7 +34,7 @@ class ReferenceService {
                 print("\(httpResponse.statusCode)")
             }
             
-            let referenceResponse = try? JSONDecoder().decode(BankReferenceResponse.self, from: data)
+            let referenceResponse = try? JSONDecoder().decode(BankReferenceResponse.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if referenceResponse == nil {
                 completion(.failure(.decodingError))

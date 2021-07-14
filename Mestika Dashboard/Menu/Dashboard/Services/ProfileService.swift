@@ -31,7 +31,7 @@ class ProfileService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = jsonData
+        request.httpBody = BlowfishEncode().encrypted(data: jsonData!)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
 
@@ -44,7 +44,7 @@ class ProfileService {
 
                 if (httpResponse.statusCode == 200) {
                     print("http status OK 200")
-                    if let responseBody = try? JSONDecoder().decode(Status.self, from: data) {
+                    if let responseBody = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!) {
                         print("body status \(responseBody)")
                         completion(.success(responseBody))
                     }
@@ -99,7 +99,7 @@ class ProfileService {
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
-                    if let profileResponse = try? JSONDecoder().decode(CustomerFromPhoenixResponse.self, from: data) {
+                    if let profileResponse = try? JSONDecoder().decode(CustomerFromPhoenixResponse.self, from: BlowfishEncode().decrypted(data: data)!) {
                         completion(.success(profileResponse))
                     }
                 }
@@ -141,7 +141,7 @@ class ProfileService {
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
-                    if let profileResponse = try? JSONDecoder().decode(ProfileResponseModel.self, from: data) {
+                    if let profileResponse = try? JSONDecoder().decode(ProfileResponseModel.self, from: BlowfishEncode().decrypted(data: data)!) {
                         completion(.success(profileResponse))
                     }
                 }
@@ -184,7 +184,7 @@ class ProfileService {
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
                     print("JSON String: \(String(describing: String(data: data, encoding: .utf8)))")
-                    if let profileResponse = try? JSONDecoder().decode(FreezeAccountResponse.self, from: data) {
+                    if let profileResponse = try? JSONDecoder().decode(FreezeAccountResponse.self, from: BlowfishEncode().decrypted(data: data)!) {
                         completion(.success(profileResponse))
                     }
                 }
@@ -252,7 +252,7 @@ class ProfileService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -265,7 +265,7 @@ class ProfileService {
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
-                    if let profileResponse = try? JSONDecoder().decode(Status.self, from: data) {
+                    if let profileResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!) {
                         completion(.success(profileResponse))
                     }
                 }
@@ -307,7 +307,7 @@ class ProfileService {
                 
                 if (httpResponse.statusCode == 200) {
                     print("OK 200")
-                    if let profileResponse = try? JSONDecoder().decode(AccountBalanceResponse.self, from: data) {
+                    if let profileResponse = try? JSONDecoder().decode(AccountBalanceResponse.self, from: BlowfishEncode().decrypted(data: data)!) {
                         completion(.success(profileResponse))
                     }
                 }

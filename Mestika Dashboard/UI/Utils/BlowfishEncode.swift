@@ -6,45 +6,94 @@
 //
 
 import Foundation
-import CryptoSwift
+import Crypto
+import SwiftyRSA
 
 class BlowfishEncode {
     
-    public func encryptedReturnData(data: Data) -> Data? {
-        
-        let encrypted = try! Blowfish(key: AppConstants().PRIVATE_KEY_RSA, iv: "drowssapdrowssap", padding: .pkcs7).encrypt(data.bytes)
-        
-        let result = Data(encrypted)
-        
-        print("ENCRYPTED RESULT")
-        print(String(data: result, encoding: .utf8))
-        
-        return Data(encrypted)
+    public func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    public func encryptedReturnString(data: Data) -> String? {
+    func encryptKeyWithRSA(data: String) -> String {
+        let publicKey = try! PublicKey(pemEncoded: AppConstants().PUBLIC_KEY_RSA)
+        let clear = try! ClearMessage(string: data, using: .utf8)
         
-        let encrypted = try! Blowfish(key: AppConstants().PRIVATE_KEY_RSA, iv: "drowssapdrowssap", padding: .pkcs7).encrypt(data.bytes)
+        let encrypted = try! clear.encrypted(with: publicKey, padding: .PKCS1)
+        _ = encrypted.data
+        let base64String = encrypted.base64String
         
-        let result = Data(encrypted)
+        print("Encript : \(base64String)")
         
-        print("ENCRYPTED RESULT")
-        print(String(data: result, encoding: .utf8))
-        
-        return String(data: result, encoding: .utf8)
+        return base64String
     }
     
-    public func decrypted(data: Data) -> String? {
+    func decryptKeyFromResponse(data: Data) -> Data {
+        print(String(data: data, encoding: .utf8))
+        guard let dataDecrypt = Data(base64Encoded: String(data: data, encoding: .utf8)!) else { return data }
         
-        let decrypted = try! Blowfish(key: AppConstants().PRIVATE_KEY_RSA, iv: "drowssapdrowssap", padding: .pkcs7).decrypt(data.bytes)
+        guard let resultDecript = try! RSAUtils.decryptWithRSAPublicKey(encryptedData: dataDecrypt, pubkeyBase64: AppConstants().PUBLIC_KEY_RSA, tagName: "PUBIC") else { return data }
         
-        let result = Data(decrypted)
+        return resultDecript
+    }
+    
+    public func encrypted(data: Data) -> Data? {
         
-        print("DECRYPTED RESULT")
-        print(String(data: result, encoding: .utf8))
+        let key = randomString(length: 20)
+        let encryptedKeyRSA = encryptKeyWithRSA(data: key)
+        let iv = try! "blowfish".data(.ascii)
         
-        return String(data: result, encoding: .utf8)
+        
+        if AppConstants().ENCRYPTED {
+            let dataStr = String(data: data, encoding: .utf8)
+            
+            let encrypt = try! dataStr?.process(.blowfish(.encrypt, key: key, iv: iv, mode: .ecb, padding: .pkcs7))
+            
+            print(encrypt)
+            
+            let resultEncrypt = "{\"data\":\"" + encryptedKeyRSA + "-" + encrypt! + "\"}"
+            
+            print(resultEncrypt)
+            
+            return try! resultEncrypt.data(.utf8)
+        }
+        
+        return data
+        
+    }
+    
+    public func decrypted(data: Data) -> Data? {
+        
+        if AppConstants().ENCRYPTED {
+            
+            let encryptResponse = try? JSONDecoder().decode(DecryptResponse.self, from: data)
+            
+            let dataStr = encryptResponse!.data
+            let splitString = dataStr.components(separatedBy: "-")
+            let key = decryptKeyFromResponse(data: splitString[0].data(using: .utf8)!)
+            let iv = try! "blowfish".data(.ascii)
+            
+            
+            print("KEY FROM RESPONSE")
+            print(splitString[0])
+            
+            print("MESSAGE FROM RESPONSE")
+            print(splitString[1])
+            
+            print("KEY DECRYPTEN RSA")
+            print(String(data: key, encoding: .utf8) as Any)
+            
+            let decrypted = try! splitString[1].process(.blowfish(.decrypt, key: key, iv: iv, mode: .ecb, padding: .pkcs7))
 
+            print(decrypted)
+            
+            return try! decrypted.data(.utf8)
+            
+        }
+        
+        return data
+        
     }
     
 }

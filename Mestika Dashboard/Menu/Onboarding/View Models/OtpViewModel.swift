@@ -213,7 +213,7 @@ extension OtpViewModel {
                 print(response.code)
                 print(response.status?.code)
                 
-                if (response.status?.code == "403") {
+                if (response.status?.code == "401") {
                     print("Failed")
                     
                     print(response.code ?? "no code")
@@ -225,7 +225,7 @@ extension OtpViewModel {
                     completion(false)
                 }
                 
-                if (response.status?.code == "401") {
+                if (response.status?.code == "403") {
                     self.isLoading = false
                     self.errorCode = 403
                     self.statusMessage = "Phone Number Registered - VisionDG"

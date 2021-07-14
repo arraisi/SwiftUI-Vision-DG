@@ -51,7 +51,7 @@ class OtpService {
         var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -77,7 +77,7 @@ class OtpService {
                 }
                 
                 if (httpResponse.statusCode == 200 || httpResponse.statusCode == 403) {
-                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(otpResponse!))
                 }
                 
@@ -86,7 +86,7 @@ class OtpService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(otpResponse!))
                 }
             }
@@ -100,6 +100,7 @@ class OtpService {
         
         let body: [String: Any] = [
             "seq": 0,
+            "destination": otpRequest.destination,
         ]
         
         print("body => \(body)")
@@ -111,13 +112,12 @@ class OtpService {
         }
         
         let finalUrl = url
-            .appending("destination", value: otpRequest.destination)
-            .appending("trytime", value: otpRequest.trytime.numberString)
             .appending("type", value: otpRequest.type)
         
         var request = URLRequest(finalUrl)
         request.httpMethod = "POST"
-        request.httpBody = finalBody
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -129,7 +129,7 @@ class OtpService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let otpResponse = try? JSONDecoder().decode(RequestOtpResponse.self, from: data)
+                    let otpResponse = try? JSONDecoder().decode(RequestOtpResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     if otpResponse == nil {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                     } else {
@@ -183,7 +183,7 @@ class OtpService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let otpResponse = try? JSONDecoder().decode(RequestOtpUserResponse.self, from: data)
+                    let otpResponse = try? JSONDecoder().decode(RequestOtpUserResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     if otpResponse == nil {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                     } else {
@@ -254,14 +254,14 @@ class OtpService {
         var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 
-                let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data!)
+                let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                 
                 if (httpResponse.statusCode == 200) {
                     completion(.success(otpResponse!))
@@ -289,6 +289,8 @@ class OtpService {
         
         let body: [String: Any] = [
             "seq": 0,
+            "accValue": otpRequest.destination,
+            "accType": otpRequest.type
         ]
         
         print("body => \(body)")
@@ -301,13 +303,11 @@ class OtpService {
         
         let finalUrl = url
             .appendingPathComponent("/postacc")
-            .appending("trytime", value: otpRequest.trytime.numberString)
-            .appending("accValue", value: otpRequest.destination)
-            .appending("accType", value: otpRequest.type)
         
         var request = URLRequest(finalUrl)
         request.httpMethod = "POST"
-        request.httpBody = finalBody
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -321,7 +321,7 @@ class OtpService {
                 }
             }
             
-            let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+            let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if otpResponse == nil {
                 completion(.failure(.decodingError))
@@ -353,7 +353,7 @@ class OtpService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data)
+                    let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: BlowfishEncode().decrypted(data: data)!)
                     if otpResponse == nil {
                         completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
                     } else {
@@ -410,14 +410,14 @@ class OtpService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 
-                let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: data!)
+                let otpResponse = try? JSONDecoder().decode(OtpResponse.self, from: BlowfishEncode().decrypted(data: data!)!)
                 
                 if (httpResponse.statusCode == 200) {
                     completion(.success(otpResponse!))

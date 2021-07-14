@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "Crypto",
+        "repositoryURL": "https://github.com/LoniQin/Crypto.git",
+        "state": {
+          "branch": null,
+          "revision": "0cfb4021c12d144e0eee89eadf4445a5d0564cc1",
+          "version": "1.3.0"
+        }
+      },
+      {
         "package": "CryptoSwift",
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {
@@ -62,6 +71,15 @@
           "branch": null,
           "revision": "91ed3d188eb95705fef3c249453b81f32dc557d1",
           "version": "1.5.0"
+        }
+      },
+      {
+        "package": "IDZSwiftCommonCrypto",
+        "repositoryURL": "https://github.com/iosdevzone/IDZSwiftCommonCrypto",
+        "state": {
+          "branch": null,
+          "revision": "d824371e670bd57eb456bbc41139b4997f7207b8",
+          "version": "0.13.1"
         }
       },
       {

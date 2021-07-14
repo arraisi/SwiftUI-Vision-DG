@@ -26,7 +26,8 @@ class MobileVersionService {
         var request = URLRequest(paramsUrl)
         request.httpMethod = "GET"
         
-        URLSession.shared.dataTask(with: request) { [self] data, response, error in
+        URLSession.shared.dataTask(with: request) {data, response, error in
+            
             guard let data = data, error == nil else {
                 print("RTO")
                 return completion(.failure(.noData))
@@ -37,7 +38,7 @@ class MobileVersionService {
                 print("\(httpResponse.statusCode)")
             }
             
-            let versionResponse = try? JSONDecoder().decode(MobileVersionResponse.self, from: data)
+            let versionResponse = try? JSONDecoder().decode(MobileVersionResponse.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if versionResponse == nil {
                 completion(.failure(.decodingError))

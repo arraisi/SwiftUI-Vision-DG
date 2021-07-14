@@ -67,7 +67,7 @@ extension UIImage {
     }
     
     func resizeTo(MB: Double) -> UIImage? {
-        guard let fileSize = self.pngData()?.count else {return nil}
+        guard let fileSize = self.pngData()?.count else { return UIImage(named: "") }
         let fileSizeInMB = CGFloat(fileSize)/(1024.0*1024.0)//form bytes to MB
         let percentage = 1/fileSizeInMB
         return resize(withPercentage: percentage)

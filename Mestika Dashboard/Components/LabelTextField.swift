@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct LabelTextField: View {
     
@@ -33,6 +34,12 @@ struct LabelTextField: View {
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
                 .disabled(disabled)
+                .onReceive(Just(value)) { newValue in
+                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                    if filtered != newValue {
+                        self.value = filtered
+                    }
+                }
         }
        
     }

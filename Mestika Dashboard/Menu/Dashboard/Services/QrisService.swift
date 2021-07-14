@@ -49,7 +49,7 @@ class QrisService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -65,7 +65,7 @@ class QrisService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(ParseQrisResponseModel.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(ParseQrisResponseModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -116,7 +116,7 @@ class QrisService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -132,7 +132,7 @@ class QrisService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(PayQrisResponseModel.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(PayQrisResponseModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 
@@ -188,7 +188,7 @@ class QrisService {
             let jsonData = try JSONSerialization.data(withJSONObject: body)
             let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)
             print(jsonString as Any)
-            request.httpBody = jsonData
+            request.httpBody = BlowfishEncode().encrypted(data: jsonData)
         } catch let error {
             print(error.localizedDescription)
             completion(Result.failure(ErrorResult.parser(string: "ERROR DECODING")))
@@ -204,7 +204,7 @@ class QrisService {
                 print("\(httpResponse.statusCode)")
                 
                 if (httpResponse.statusCode == 200) {
-                    let transferResponse = try? JSONDecoder().decode(PayQrisResponseModel.self, from: data)
+                    let transferResponse = try? JSONDecoder().decode(PayQrisResponseModel.self, from: BlowfishEncode().decrypted(data: data)!)
                     completion(.success(transferResponse!))
                 }
                 

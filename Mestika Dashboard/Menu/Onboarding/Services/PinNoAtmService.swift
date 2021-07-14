@@ -46,7 +46,7 @@ class PinNoAtmService {
         var request = URLRequest(paramsUrl)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // Execution
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -55,7 +55,7 @@ class PinNoAtmService {
                 return completion(.failure(.noData))
             }
             
-            let pinResponse = try? JSONDecoder().decode(Status.self, from: data)
+            let pinResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
@@ -114,7 +114,7 @@ class PinNoAtmService {
         var request = URLRequest(url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = finalBody
+        request.httpBody = BlowfishEncode().encrypted(data: finalBody)
         
         // Execution
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -123,7 +123,7 @@ class PinNoAtmService {
                 return completion(.failure(.noData))
             }
             
-            let pinResponse = try? JSONDecoder().decode(Status.self, from: data)
+            let pinResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")

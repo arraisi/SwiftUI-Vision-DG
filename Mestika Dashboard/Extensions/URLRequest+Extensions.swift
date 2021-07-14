@@ -21,14 +21,13 @@ extension URLRequest {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("872CBB01-E7B2-4F5C-B863-3A74D7AA136B", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("00000000-6a0c-31d5-0000-d_WqbSbuSgGve3y-WnBXoC-", forHTTPHeaderField: "X-Device-ID")
                 self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")
                 self.setValue("cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "X-XSRF-TOKEN")
                 self.setValue("XSRF-TOKEN=cf5f0cb5-5482-44e9-90e0-a59441d090a5", forHTTPHeaderField: "cookie")
-//                self.setValue("Bearer eyJhbGciOiJIUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWyiwuVrJSSk1Mz0lV0lHKTCxRsjI0MzK1MDIwsDTQUUqtKIAIWBqYmYAESotTi_ISc1OBmgygQNcs0SBZ19gwxVQXzE0Nzol3LMjOC0p2N4ko8c62qPRzNjTXBRpflZ8H0picn6RUCwC6S0EFewAAAA._nSlCn2c-H2OdjuAx5LnenRplIl8cBgtTRJsY1rBRVA", forHTTPHeaderField: "Authorization")
                 
                 if let stringToken = defaults.string(forKey: defaultsKeys.keyToken) {
                     self.setValue("Bearer \(stringToken)", forHTTPHeaderField: "Authorization")
@@ -39,7 +38,9 @@ extension URLRequest {
 //                    self.setValue("XSRF-TOKEN=\(stringXsrf)", forHTTPHeaderField: "cookie")
 //                }
                 
-//                self.setValue(String(timestamp), forHTTPHeaderField: "X-ENCRYPT-ID")
+                if AppConstants().ENCRYPTED {
+                    self.setValue("blowfish", forHTTPHeaderField: "X-ENCRYPT-ID")
+                }
                 
                 print(deviceId)
                 print(firebaseId)

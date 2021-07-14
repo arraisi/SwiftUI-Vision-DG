@@ -38,7 +38,7 @@ extension UserRegistrationViewModel {
         UserRegistrationService.shared.postUser(
             registerData: registerData,
             imageKtp: imageKtpCompress!,
-            imageNpwp: imageNpwpCompress!,
+            imageNpwp: imageNpwpCompress ?? UIImage(named: ""),
             imageSelfie: imageSelfieCompress!) { result in
                 
             switch result {
