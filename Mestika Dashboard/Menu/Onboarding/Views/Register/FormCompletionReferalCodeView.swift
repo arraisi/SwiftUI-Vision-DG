@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FormCompletionReferalCodeView: View {
     
@@ -103,6 +104,12 @@ struct FormCompletionReferalCodeView: View {
                         }
                         .font(Font.system(size: 14))
                         .frame(height: 36)
+                        .onReceive(Just(atmData.atmAddresspostalReferral)) { newValue in
+                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                            if filtered != newValue {
+                                self.atmData.atmAddresspostalReferral = filtered
+                            }
+                        }
                     }
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))

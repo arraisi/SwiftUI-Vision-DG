@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct FormChangePinTransactionView: View {
     
@@ -76,6 +77,12 @@ struct FormChangePinTransactionView: View {
                                 
                                 SecureField("Enter your old Transaction PIN".localized(language), text: self.$oldPinCtrl)
                                     .keyboardType(.numberPad)
+                                    .onReceive(Just(oldPinCtrl)) { newValue in
+                                        let filtered = newValue.filter { "0123456789".contains($0) }
+                                        if filtered != newValue {
+                                            self.oldPinCtrl = filtered
+                                        }
+                                    }
                                     .onReceive(oldPinCtrl.publisher.collect()) {
                                         self.oldPinCtrl = String($0.prefix(6))
                                     }
@@ -100,6 +107,12 @@ struct FormChangePinTransactionView: View {
                                     
                                     SecureField("Enter your new Transaction PIN".localized(language), text: self.$pinCtrl)
                                         .keyboardType(.numberPad)
+                                        .onReceive(Just(pinCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.pinCtrl = filtered
+                                            }
+                                        }
                                         .onReceive(pinCtrl.publisher.collect()) {
                                             self.pinCtrl = String($0.prefix(6))
                                         }
@@ -113,6 +126,12 @@ struct FormChangePinTransactionView: View {
                                     
                                     SecureField("Re-enter your new Transaction PIN".localized(language), text: self.$pinConfirmCtrl)
                                         .keyboardType(.numberPad)
+                                        .onReceive(Just(pinConfirmCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.pinConfirmCtrl = filtered
+                                            }
+                                        }
                                         .onReceive(pinConfirmCtrl.publisher.collect()) {
                                             self.pinConfirmCtrl = String($0.prefix(6))
                                         }

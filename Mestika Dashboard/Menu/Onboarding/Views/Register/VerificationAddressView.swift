@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct VerificationAddressView: View {
     
@@ -138,6 +139,13 @@ struct VerificationAddressView: View {
                                             .padding(.horizontal)
                                             .background(Color.gray.opacity(0.1))
                                             .cornerRadius(10)
+                                            .onReceive(Just(registerData.addressInput)) { newValue in
+                                                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                                if filtered != newValue {
+                                                    self.registerData.addressInput = filtered
+                                                }
+                                            }
+                                            
                                             Button(action:{
                                                 searchAddress()
                                             }, label: {
@@ -324,6 +332,12 @@ struct VerificationAddressView: View {
                                             } onCommit: {
                                                 print("on commit")
                                                 registerData.addressPostalCodeInput = self.addressKodePosInput
+                                            }
+                                            .onReceive(Just(addressKodePosInput)) { newValue in
+                                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                                if filtered != newValue {
+                                                    self.addressKodePosInput = filtered
+                                                }
                                             }
                                             .onReceive(addressKodePosInput.publisher.collect()) {
                                                 self.addressKodePosInput = String($0.prefix(5))

@@ -353,16 +353,30 @@ struct FormChangeAddressView: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$kodePosSuratMenyurat, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                .keyboardType(.numberPad)
-                .onReceive(self.kodePosSuratMenyurat.publisher.collect()) {
-                    self.kodePosSuratMenyurat = String($0.prefix(5))
+                VStack(alignment: .leading) {
+                    Text("Postal Code".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.leading)
+                    
+                    TextField("Postal Code".localized(language), text: self.$kodePosSuratMenyurat)
+                        .frame(height: 36)
+                        .font(Font.system(size: 14))
+                        .padding(.horizontal)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                        .disabled(self.profileVM.existingCustomer)
+                        .keyboardType(.numberPad)
+                        .onReceive(Just(kodePosSuratMenyurat)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.kodePosSuratMenyurat = filtered
+                            }
+                        }
+                        .onReceive(kodePosSuratMenyurat.publisher.collect()) {
+                            self.kodePosSuratMenyurat = String($0.prefix(5))
+                        }
                 }
-                
             }
             .padding(.top, 20)
         }

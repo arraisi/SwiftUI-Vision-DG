@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CardBlockAddressInputView: View {
     
@@ -98,6 +99,12 @@ struct CardBlockAddressInputView: View {
                                         .padding(.horizontal)
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(10)
+                                        .onReceive(Just(cardData.addressInput)) { newValue in
+                                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                            if filtered != newValue {
+                                                self.cardData.addressInput = filtered
+                                            }
+                                        }
                                         
                                         Button(action:{
                                             searchAddress()
@@ -163,6 +170,12 @@ struct CardBlockAddressInputView: View {
                                         }
                                         .onReceive(addressKodePosInput.publisher.collect()) {
                                             self.addressKodePosInput = String($0.prefix(5))
+                                        }
+                                        .onReceive(Just(addressKodePosInput)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.addressKodePosInput = filtered
+                                            }
                                         }
                                         .keyboardType(.numberPad)
                                         .font(Font.system(size: 14))

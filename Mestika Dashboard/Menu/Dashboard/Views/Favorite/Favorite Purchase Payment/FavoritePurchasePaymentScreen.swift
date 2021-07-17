@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FavoritePurchasePaymentScreen: View {
     
@@ -44,6 +45,12 @@ struct FavoritePurchasePaymentScreen: View {
                 TextField("Search for Transfer contacts".localized(language), text: $searchCtrl, onEditingChanged: { changed in
                     print("\($searchCtrl)")
                 })
+                .onReceive(Just(searchCtrl)) { newValue in
+                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                    if filtered != newValue {
+                        self.searchCtrl = filtered
+                    }
+                }
                 
                 Image("ic_search")
                     .renderingMode(.template)

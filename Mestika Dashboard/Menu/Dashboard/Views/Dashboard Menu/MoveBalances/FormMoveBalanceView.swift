@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FormMoveBalanceView: View {
     
@@ -104,6 +105,12 @@ struct FormMoveBalanceView: View {
                             .fontWeight(.bold)
                         
                         TextField("0", text: self.$amountCtrl, onEditingChanged: {_ in })
+                            .onReceive(Just(amountCtrl)) { newValue in
+                                let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                if filtered != newValue {
+                                    self.amountCtrl = filtered
+                                }
+                            }
                             .onReceive(amountCtrl.publisher.collect()) {
                                 let amountString = String($0.prefix(13))
                                 let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")

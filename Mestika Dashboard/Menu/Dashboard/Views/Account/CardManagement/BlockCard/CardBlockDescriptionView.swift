@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct CardBlockDescriptionView: View {
     
@@ -66,6 +67,12 @@ struct CardBlockDescriptionView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.black)
                                     .padding()
+                                    .onReceive(Just(cardNo)) { newValue in
+                                        let filtered = newValue.filter { "0123456789".contains($0) }
+                                        if filtered != newValue {
+                                            self.cardNo = filtered
+                                        }
+                                    }
                                     .onReceive(cardNo.publisher.collect()) {
                                         self.cardNo = String($0.prefix(16))
                                     }
@@ -94,6 +101,12 @@ struct CardBlockDescriptionView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.black)
                                     .padding()
+                                        .onReceive(Just(pinAtm)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.pinAtm = filtered
+                                            }
+                                        }
                                     .onReceive(pinAtm.publisher.collect()) {
                                         self.pinAtm = String($0.prefix(6))
                                     }

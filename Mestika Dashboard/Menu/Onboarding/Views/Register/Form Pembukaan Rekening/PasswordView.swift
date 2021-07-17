@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftyRSA
 import Indicators
+import Combine
 
 struct PasswordView: View {
     
@@ -75,7 +76,7 @@ struct PasswordView: View {
     
     func isHaveSpecialChar(_ string: String) -> Bool {
         
-        let format = ".*[!@#$&]+.*"
+        let format = ".*[!@#$&?]+.*"
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", format)
         return predicate.evaluate(with: string)
@@ -195,6 +196,12 @@ struct PasswordView: View {
                                                     .padding()
                                                     .frame(width: 200, height: 50)
                                                     .foregroundColor(Color(hex: "#232175"))
+                                                    .onReceive(Just(password)) { newValue in
+                                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
+                                                        if filtered != newValue {
+                                                            self.password = filtered
+                                                        }
+                                                    }
                                                 
                                                 Button(action: {
                                                     self.securedPassword.toggle()
@@ -212,13 +219,17 @@ struct PasswordView: View {
                                             HStack (spacing: 0) {
                                                 TextField("Enter Password".localized(language), text: $password, onEditingChanged: { changed in
                                                     print("\($password)")
-                                                    
-                                                    //                                                    self.registerData.password = password
                                                 })
                                                 .font(.custom("Montserrat-SemiBold", size: 14))
                                                 .padding()
                                                 .frame(width: 200, height: 50)
                                                 .foregroundColor(Color(hex: "#232175"))
+                                                .onReceive(Just(password)) { newValue in
+                                                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
+                                                    if filtered != newValue {
+                                                        self.password = filtered
+                                                    }
+                                                }
                                                 .onReceive(password.publisher.collect()) { it in
                                                     self.isPasswordValid = self.textFieldValidatorPassword(String(it))
                                                     self.haveUppercase = self.isHaveUppercase(String(it))
@@ -252,6 +263,12 @@ struct PasswordView: View {
                                                     .padding()
                                                     .frame(width: 200, height: 50)
                                                     .foregroundColor(Color(hex: "#232175"))
+                                                    .onReceive(Just(confirmationPassword)) { newValue in
+                                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
+                                                        if filtered != newValue {
+                                                            self.confirmationPassword = filtered
+                                                        }
+                                                    }
                                                     .onReceive(password.publisher.collect()) { it in
                                                         self.isPasswordValid = self.textFieldValidatorPassword(String(it))
                                                         self.haveUppercase = self.isHaveUppercase(String(it))
@@ -280,6 +297,12 @@ struct PasswordView: View {
                                                     .padding()
                                                     .frame(width: 200, height: 50)
                                                     .foregroundColor(Color(hex: "#232175"))
+                                                    .onReceive(Just(confirmationPassword)) { newValue in
+                                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
+                                                        if filtered != newValue {
+                                                            self.confirmationPassword = filtered
+                                                        }
+                                                    }
                                                 
                                                 Button(action: {
                                                     self.securedConfirmation.toggle()

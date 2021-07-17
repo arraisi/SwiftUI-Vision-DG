@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct BidangUsaha {
     var nama: String
@@ -387,6 +388,12 @@ struct InformasiPerusahaanView: View {
             } onCommit: {
                 print("on commit")
             }
+            .onReceive(Just(registerData.namaPerusahaan)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.registerData.namaPerusahaan = filtered
+                }
+            }
             .padding(.horizontal, 20)
             
             Group {
@@ -489,6 +496,12 @@ struct InformasiPerusahaanView: View {
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .onReceive(Just(registerData.alamatPerusahaan)) { newValue in
+                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                        if filtered != newValue {
+                            self.registerData.alamatPerusahaan = filtered
+                        }
+                    }
                     
                     Button(action:{
                         searchAddress()
@@ -673,6 +686,12 @@ struct InformasiPerusahaanView: View {
                     } onCommit: {
                         self.registerData.kodePos = self.kodePos
                     }
+                    .onReceive(Just(kodePos)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.kodePos = filtered
+                        }
+                    }
                     .onReceive(kodePos.publisher.collect()) {
                         self.kodePos = String($0.prefix(5))
                     }
@@ -708,6 +727,12 @@ struct InformasiPerusahaanView: View {
                     TextField("Company Telephone Number".localized(language), text: $noTlpPerusahaan) {change in
                     } onCommit: {
                         self.registerData.noTeleponPerusahaan = self.noTlpPerusahaan
+                    }
+                    .onReceive(Just(noTlpPerusahaan)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.noTlpPerusahaan = filtered
+                        }
                     }
                     .onReceive(noTlpPerusahaan.publisher.collect()) {
                         if String($0).hasPrefix("0") {

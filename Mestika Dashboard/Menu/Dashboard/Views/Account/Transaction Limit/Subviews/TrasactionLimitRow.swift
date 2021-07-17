@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TrasactionLimitRow: View {
     
@@ -23,15 +24,15 @@ struct TrasactionLimitRow: View {
                 Spacer()
             }
             
-            //            TextField(String(format: "%.0f", min), value: $value, formatter: formatter)
-            //                .multilineTextAlignment(.center)
-            //                .textFieldStyle(RoundedBorderTextFieldStyle())
-            //                .keyboardType(.numberPad)
-            //                .padding(.horizontal, 30)
-            
             TextField(String(format: "%.0f", min), text: $txtValue)
                 .multilineTextAlignment(.center)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .onReceive(Just(txtValue)) { newValue in
+                    let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                    if filtered != newValue {
+                        self.txtValue = filtered
+                    }
+                }
                 .onChange(of: txtValue, perform: { value in
                     self.txtValue = value.thousandSeparator()
                     self.value = Double(value.replacingOccurrences(of: ".", with: "")) ?? 0

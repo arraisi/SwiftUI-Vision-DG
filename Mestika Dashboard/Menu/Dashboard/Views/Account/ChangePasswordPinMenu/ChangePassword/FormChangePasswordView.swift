@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct FormChangePasswordView: View {
     
@@ -72,9 +73,22 @@ struct FormChangePasswordView: View {
                                 if (showOldPassword) {
                                     TextField("Enter your old password".localized(language), text: self.$oldPasswordCtrl)
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .onReceive(Just(oldPasswordCtrl)) { newValue in
+                                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                            if filtered != newValue {
+                                                self.oldPasswordCtrl = filtered
+                                            }
+                                        }
+                                    
                                 } else {
                                     SecureField("Enter your old password".localized(language), text: self.$oldPasswordCtrl)
                                         .font(.custom("Montserrat-Regular", size: 12))
+                                        .onReceive(Just(oldPasswordCtrl)) { newValue in
+                                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                            if filtered != newValue {
+                                                self.oldPasswordCtrl = filtered
+                                            }
+                                        }
                                 }
                                 
                                 Button(action: {
@@ -103,9 +117,21 @@ struct FormChangePasswordView: View {
                                     if (showPassword) {
                                         TextField("Enter your new password".localized(language), text: self.$passwordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
+                                            .onReceive(Just(passwordCtrl)) { newValue in
+                                                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                                if filtered != newValue {
+                                                    self.passwordCtrl = filtered
+                                                }
+                                            }
                                     } else {
                                         SecureField("Enter your new password".localized(language), text: self.$passwordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
+                                            .onReceive(Just(passwordCtrl)) { newValue in
+                                                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                                if filtered != newValue {
+                                                    self.passwordCtrl = filtered
+                                                }
+                                            }
                                     }
                                     
                                     Button(action: {
@@ -124,9 +150,21 @@ struct FormChangePasswordView: View {
                                     if (showConfirmPassword) {
                                         TextField("Re-enter your new password".localized(language), text: self.$confirmPasswordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
+                                            .onReceive(Just(confirmPasswordCtrl)) { newValue in
+                                                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                                if filtered != newValue {
+                                                    self.confirmPasswordCtrl = filtered
+                                                }
+                                            }
                                     } else {
                                         SecureField("Re-enter your new password".localized(language), text: self.$confirmPasswordCtrl)
                                             .font(.custom("Montserrat-Regular", size: 12))
+                                            .onReceive(Just(confirmPasswordCtrl)) { newValue in
+                                                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                                if filtered != newValue {
+                                                    self.confirmPasswordCtrl = filtered
+                                                }
+                                            }
                                     }
                                     
                                     Button(action: {

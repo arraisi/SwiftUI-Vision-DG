@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SystemConfiguration
+import Combine
 
 struct FormCompletionKartuATMView: View {
     
@@ -325,6 +326,12 @@ struct FormCompletionKartuATMView: View {
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .onReceive(Just(atmData.atmAddressInput)) { newValue in
+                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                        if filtered != newValue {
+                            self.atmData.atmAddressInput = filtered
+                        }
+                    }
                     
                     if addressOptionId == 4 {
                         Button(action:{
@@ -351,11 +358,23 @@ struct FormCompletionKartuATMView: View {
                 } onCommit: {
                     
                 }
+                .onReceive(Just(atmData.atmAddressRtInput)) { newValue in
+                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                    if filtered != newValue {
+                        self.atmData.atmAddressRtInput = filtered
+                    }
+                }
                 
                 LabelTextField(value: $atmData.atmAddressRwInput, label: "", placeHolder: "RW".localized(language), disabled:addressOptionId != 4 ) { (change) in
                     
                 } onCommit: {
                     
+                }
+                .onReceive(Just(atmData.atmAddressRwInput)) { newValue in
+                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                    if filtered != newValue {
+                        self.atmData.atmAddressRwInput = filtered
+                    }
                 }
             }
             
@@ -364,11 +383,23 @@ struct FormCompletionKartuATMView: View {
             } onCommit: {
                 
             }
+            .onReceive(Just(atmData.atmAddressKelurahanInput)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.atmData.atmAddressKelurahanInput = filtered
+                }
+            }
             
             LabelTextField(value: $atmData.atmAddressKecamatanInput, label: "", placeHolder: "Sub-district".localized(language), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
+            }
+            .onReceive(Just(atmData.atmAddressKecamatanInput)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.atmData.atmAddressKecamatanInput = filtered
+                }
             }
             
             LabelTextField(value: $atmData.atmAddressKotaInput, label: "", placeHolder: "City".localized(language), disabled:addressOptionId != 4) { (change) in
@@ -376,17 +407,35 @@ struct FormCompletionKartuATMView: View {
             } onCommit: {
                 
             }
+            .onReceive(Just(atmData.atmAddressKotaInput)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.atmData.atmAddressKotaInput = filtered
+                }
+            }
             
             LabelTextField(value: $atmData.atmAddressPropinsiInput, label: "", placeHolder: "Province".localized(language), disabled:addressOptionId != 4) { (change) in
                 
             } onCommit: {
                 
             }
+            .onReceive(Just(atmData.atmAddressPropinsiInput)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.atmData.atmAddressPropinsiInput = filtered
+                }
+            }
             
             HStack {
                 TextField("Postal code".localized(language), text: $kodePos) {change in
                 } onCommit: {
                     self.atmData.atmAddressPostalCodeInput = self.kodePos
+                }
+                .onReceive(Just(kodePos)) { newValue in
+                    let filtered = newValue.filter { "0123456789".contains($0) }
+                    if filtered != newValue {
+                        self.kodePos = filtered
+                    }
                 }
                 .onReceive(kodePos.publisher.collect()) {
                     self.kodePos = String($0.prefix(5))
@@ -423,6 +472,12 @@ struct FormCompletionKartuATMView: View {
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .onReceive(Just(registerData.alamatPerusahaan)) { newValue in
+                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                        if filtered != newValue {
+                            self.registerData.alamatPerusahaan = filtered
+                        }
+                    }
                 }
                 
             }
@@ -432,17 +487,35 @@ struct FormCompletionKartuATMView: View {
             } onCommit: {
                 
             }
+            .onReceive(Just(registerData.provinsiPerusahaan)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.registerData.provinsiPerusahaan = filtered
+                }
+            }
             
             LabelTextField(value: $registerData.kotaPerusahaan, label: "", placeHolder: "City".localized(language), disabled: true) { (change) in
                 
             } onCommit: {
                 
             }
+            .onReceive(Just(registerData.kotaPerusahaan)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.registerData.kotaPerusahaan = filtered
+                }
+            }
             
             LabelTextField(value: $registerData.kelurahan, label: "", placeHolder: "District".localized(language), disabled: true) { (change) in
                 
             } onCommit: {
                 
+            }
+            .onReceive(Just(registerData.kelurahan)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.registerData.kelurahan = filtered
+                }
             }
             
             LabelTextField(value: $registerData.kecamatan, label: "", placeHolder: "Sub-district".localized(language), disabled: true
@@ -451,11 +524,23 @@ struct FormCompletionKartuATMView: View {
             } onCommit: {
                 
             }
+            .onReceive(Just(registerData.kecamatan)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.registerData.kecamatan = filtered
+                }
+            }
             
             HStack {
                 TextField("Postal code".localized(language), text: $registerData.kodePos) {change in
                 } onCommit: {
                     self.registerData.kodePos = self.kodePos
+                }
+                .onReceive(Just(registerData.kodePos)) { newValue in
+                    let filtered = newValue.filter { "0123456789".contains($0) }
+                    if filtered != newValue {
+                        self.registerData.kodePos = filtered
+                    }
                 }
                 .onReceive(kodePos.publisher.collect()) {
                     self.kodePos = String($0.prefix(5))
@@ -501,6 +586,13 @@ struct FormCompletionKartuATMView: View {
                         TextField("Enter the referral code".localized(language), text: $atmData.atmAddresspostalReferral) { changed in
                             
                         } onCommit: {
+                            
+                        }
+                        .onReceive(Just(atmData.atmAddresspostalReferral)) { newValue in
+                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                            if filtered != newValue {
+                                self.atmData.atmAddresspostalReferral = filtered
+                            }
                         }
                         .font(Font.system(size: 14))
                         .frame(height: 36)

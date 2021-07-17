@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ConfirmationOfOpeningSavingAccountView: View {
     
@@ -86,6 +87,12 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                                 
                                 TextField("0", text: $depositBalance)
                                     .font(.custom("Montserrat-Bold", size: 34))
+                                    .onReceive(Just(depositBalance)) { newValue in
+                                        let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                        if filtered != newValue {
+                                            self.depositBalance = filtered
+                                        }
+                                    }
                                     .onReceive(depositBalance.publisher.collect()) {
                                         let amountString = String($0.prefix(13))
                                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
@@ -102,32 +109,7 @@ struct ConfirmationOfOpeningSavingAccountView: View {
                             }
                             .foregroundColor(Color("DarkStaleBlue"))
                             
-                            //                            if Double(depositBalance)! > Double(currency)! {
-                            //                                HStack {
-                            //                                    Text("Deposit Exceeds Active Balance".localized(language))
-                            //                                        .font(.custom("Montserrat-Bold", size: 10))
-                            //                                    Spacer()
-                            //                                }
-                            //                                .foregroundColor(.red)
-                            //                            }
-                            
                             Divider()
-                            
-                            //                            HStack {
-                            //                                Text("Total Active Balance".localized(language))
-                            //                                    .font(.custom("Montserrat-Bold", size: 10))
-                            //                                    .foregroundColor(.gray)
-                            //
-                            //                                Spacer()
-                            //
-                            //                                HStack(alignment: .top, spacing: 0) {
-                            //                                    Text("Rp.")
-                            //                                        .font(.custom("Montserrat-Bold", size: 10))
-                            //                                    Text(currency.thousandSeparator())
-                            //                                        .font(.custom("Montserrat-Bold", size: 14))
-                            //                                }
-                            //                                .foregroundColor(Color("StaleBlue"))
-                            //                            }
                         }
                     }
                     .padding(25) // padding content

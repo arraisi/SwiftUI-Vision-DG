@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct EmailRegisterNasabahView: View {
     
@@ -48,8 +49,6 @@ struct EmailRegisterNasabahView: View {
             
             VStack {
                 
-//                CustomAppBar(light: false, barItemsHidden: true, barItems: AnyView(EmptyView()))
-//                CustomAppBar(light: false)
                 AppBarLogo(light: false, showBack: false, onCancel: {})
                 
                 VStack(alignment: .center) {
@@ -91,6 +90,12 @@ struct EmailRegisterNasabahView: View {
                     .addBorder(self.isEmailValid ? Color.blue : Color.red, width: self.email.count > 0 ? 1 : 0 , cornerRadius: 15)
                     .shadow(color: Color(hex: "#3756DF").opacity(0.2), radius: 15, x: 0, y: 4)
                     .padding(.top, 20)
+                    .onReceive(Just(email)) { newValue in
+                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                        if filtered != newValue {
+                            self.email = filtered
+                        }
+                    }
                     .onReceive(email.publisher.collect()) { it in
                         self.isEmailValid = self.textFieldValidatorEmail(String(it)) && it.count > 8
                     }

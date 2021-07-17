@@ -307,7 +307,7 @@ extension OtpViewModel {
                     self.isLoading = false
                     if error == .notFound {
                         print("status message not found")
-                        self.statusMessage = "Account Not Found - Core Banking"
+                        self.statusMessage = "Account Not Found"
                     } else {
                         self.statusMessage = "Server Error"
                     }

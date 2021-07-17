@@ -16,11 +16,23 @@ class WebSocket: NSObject, SwiftStompDelegate {
     // Device ID
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     
+    let newDeviceId = "ios" +
+        ":" + "\(UIDevice.current.identifierForVendor!.uuidString.replacingOccurrences(of: "-", with: ""))" +
+        ":" + "\(UIDevice().type.rawValue)" +
+        ":" + "\(UIDevice.current.model)" +
+        ":" + "\(UIDevice.current.name.replacingOccurrences(of: "'", with: ""))" +
+        ":" + "release-keys" +
+        ":" + "user" +
+        ":" + "retina" +
+        ":" + "1626332354954"
+    
     func onConnect(swiftStomp: SwiftStomp, connectType: StompConnectType) {
         print("Connected")
         
-        swiftStomp.subscribe(to: "/open/changes/\(deviceId!)")
-        swiftStomp.subscribe(to: "/close/changes/\(deviceId!)")
+        let encryptDeviceId = try! BlowfishEncode().encryptedWithKey(data: newDeviceId.data(.utf8), key: AppConstants().KEY_ENCRYPT_DEVICE_ID)
+        
+        swiftStomp.subscribe(to: "/open/changes/\(encryptDeviceId!)")
+        swiftStomp.subscribe(to: "/close/changes/\(encryptDeviceId!)")
         swiftStomp.subscribe(to: "/websocket-notification")
         
         NotificationCenter.default.post(name: NSNotification.Name("CheckWebsocket"), object: nil, userInfo: nil)
@@ -29,8 +41,10 @@ class WebSocket: NSObject, SwiftStompDelegate {
     func onDisconnect(swiftStomp: SwiftStomp, disconnectType: StompDisconnectType) {
         print("Disconnected")
         
-        swiftStomp.unsubscribe(from: "/open/changes/\(deviceId!)")
-        swiftStomp.unsubscribe(from: "/close/changes/\(deviceId!)")
+        let encryptDeviceId = try! BlowfishEncode().encryptedWithKey(data: newDeviceId.data(.utf8), key: AppConstants().KEY_ENCRYPT_DEVICE_ID)
+        
+        swiftStomp.unsubscribe(from: "/open/changes/\(encryptDeviceId!)")
+        swiftStomp.unsubscribe(from: "/close/changes/\(encryptDeviceId!)")
         swiftStomp.unsubscribe(from: "/websocket-notification")
     }
     

@@ -287,11 +287,11 @@ struct WelcomeView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("CheckWebsocket"))) { obj in
                 self.messageWebsocket = "Websocket Connect"
-                self.isShowAlert = true
+                self.isShowAlert = false
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ErrorWebsocket"))) { obj in
                 self.messageWebsocket = "Websocket Error"
-                self.isShowAlert = true
+                self.isShowAlert = false
             }
             .alert(isPresented: $isShowAlert) {
                 return Alert(
@@ -301,10 +301,30 @@ struct WelcomeView: View {
                 )
             }
             .onAppear {
+                print(UIDevice.current.identifierForVendor?.uuidString)
                 print(UIDevice.current.model)
                 print(UIDevice.current.name)
                 print(UIDevice.current.systemVersion)
                 print(UIDevice.current.systemName)
+                
+                print("------ START NEW DEVICE ID FORMAT -------")
+                
+                let newDeviceId = "ios" +
+                    ":" + "\(UIDevice.current.identifierForVendor!.uuidString.replacingOccurrences(of: "-", with: ""))" +
+                    ":" + "\(UIDevice().type.rawValue)" +
+                    ":" + "\(UIDevice.current.model)" +
+                    ":" + "\(UIDevice.current.name)" +
+                    ":" + "release-keys" +
+                    ":" + "user" +
+                    ":" + "retina" +
+                    ":" + "1626332354954"
+                
+                let encryptDeviceId = try! BlowfishEncode().encryptedWithKey(data: newDeviceId.data(.utf8), key: AppConstants().KEY_ENCRYPT_DEVICE_ID)
+                
+                print(newDeviceId)
+                print(encryptDeviceId)
+                
+                print("------ END NEW DEVICE ID FORMAT -------")
                 
                 getCoreDataNewDevice()
                 getCoreDataRegister()

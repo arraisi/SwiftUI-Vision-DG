@@ -347,6 +347,7 @@
 		52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */ = {isa = PBXBuildFile; productRef = 52FCDD94263EF48B002A76E9 /* SwiftStomp */; };
 		52FCDD9A263EF4F2002A76E9 /* StompClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */; };
 		52FE96AB269CBDCE00C95649 /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 52FE96AA269CBDCE00C95649 /* Crypto */; };
+		52FE96AF269F685300C95649 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE96AE269F684D00C95649 /* Date+Extensions.swift */; };
 		52FE9ABC2637CCD90089EBAF /* DestinationAccountBalancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */; };
 		52FE9AC12637DB0B0089EBAF /* FormMoveBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AC02637DB0B0089EBAF /* FormMoveBalanceView.swift */; };
 		52FE9AC62637E5570089EBAF /* MoveBalanceConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE9AC52637E5570089EBAF /* MoveBalanceConfirmationView.swift */; };
@@ -885,6 +886,7 @@
 		52F4E3BD264673760094F320 /* FormChangeOtherDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormChangeOtherDataView.swift; sourceTree = "<group>"; };
 		52F4E3C1264682390094F320 /* CustomerFromPhoenixResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerFromPhoenixResponse.swift; sourceTree = "<group>"; };
 		52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClientModel.swift; sourceTree = "<group>"; };
+		52FE96AE269F684D00C95649 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		52FE9ABB2637CCD90089EBAF /* DestinationAccountBalancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationAccountBalancesView.swift; sourceTree = "<group>"; };
 		52FE9AC02637DB0B0089EBAF /* FormMoveBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormMoveBalanceView.swift; sourceTree = "<group>"; };
 		52FE9AC52637E5570089EBAF /* MoveBalanceConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveBalanceConfirmationView.swift; sourceTree = "<group>"; };
@@ -1528,6 +1530,7 @@
 				C0436260264A8BD90024418E /* Double+Extensions.swift */,
 				525BE23F2689A0240076993F /* DeviceType+Extensions.swift */,
 				525BE2412689A22C0076993F /* IpAddress+Extensions.swift */,
+				52FE96AE269F684D00C95649 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3147,6 +3150,7 @@
 				C0D274D225EF099300513C53 /* RoundedIcon.swift in Sources */,
 				52D8DC0E25D62415004DF85E /* TransferSknExecResponse.swift in Sources */,
 				C0C68E6E2558E19A0010E1EE /* PINConfirmationView.swift in Sources */,
+				52FE96AF269F685300C95649 /* Date+Extensions.swift in Sources */,
 				C0D7B5E32552B1B7009C3976 /* CardCVVVerificationView.swift in Sources */,
 				52BF57E32558E81F00F009B5 /* SavingType.swift in Sources */,
 				52210C66262D83BD004A6483 /* HistoryByAccountView.swift in Sources */,

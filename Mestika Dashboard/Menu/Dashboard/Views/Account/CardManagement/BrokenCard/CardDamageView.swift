@@ -56,10 +56,16 @@ struct CardDamageView: View {
                                         .frame(width: 18, height: 18)
                                     
                                     HStack {
-                                        Text("Replacement fee of".localized(language))
-                                            .font(.custom("Montserrat-Regular", size: 10))
-                                        Text("\(self.cardFee)".thousandSeparator())
-                                            .font(.custom("Montserrat-Bold", size: 10))
+                                        
+                                        if (language == .english_us) {
+                                            Text("The old card will be blocked, and the balance will be deducted by \(self.cardFee.thousandSeparator()) for the new card.")
+                                                .font(.custom("Montserrat-Regular", size: 10))
+                                                .fixedSize(horizontal: false, vertical: true)
+                                        } else {
+                                            Text("Kartu lama akan di blokir, dan saldo akan terpotong \(self.cardFee.thousandSeparator()) untuk kartu baru.")
+                                                .font(.custom("Montserrat-Regular", size: 10))
+                                                .fixedSize(horizontal: false, vertical: true)
+                                        }
                                     }
                                     
                                     Spacer()

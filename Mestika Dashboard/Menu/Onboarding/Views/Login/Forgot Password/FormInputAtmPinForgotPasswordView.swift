@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct FormInputAtmPinForgotPasswordView: View {
     
@@ -80,6 +81,12 @@ struct FormInputAtmPinForgotPasswordView: View {
                     HStack {
                         TextField("Enter your account number / ID CARD".localized(language), text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
+                            .onReceive(Just(atmNumberCtrl)) { newValue in
+                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                if filtered != newValue {
+                                    self.atmNumberCtrl = filtered
+                                }
+                            }
                             .onReceive(atmNumberCtrl.publisher.collect()) {
                                 self.atmNumberCtrl = String($0.prefix(16))
                             }
@@ -95,32 +102,17 @@ struct FormInputAtmPinForgotPasswordView: View {
                 VStack {
                     HStack {
                         
-//                        if (showPassword) {
-//                            TextField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
-//                                .keyboardType(.numberPad)
-//                                .onReceive(pinAtmCtrl.publisher.collect()) {
-//                                    self.pinAtmCtrl = String($0.prefix(6))
-//                                }
-//                        } else {
-//                            SecureField("Masukkan PIN Transaksi Anda", text: self.$pinAtmCtrl)
-//                                .keyboardType(.numberPad)
-//                                .onReceive(pinAtmCtrl.publisher.collect()) {
-//                                    self.pinAtmCtrl = String($0.prefix(6))
-//                                }
-//                        }
-                        
                         SecureField("Enter your Transaction PIN".localized(language), text: self.$pinAtmCtrl)
                             .keyboardType(.numberPad)
+                            .onReceive(Just(pinAtmCtrl)) { newValue in
+                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                if filtered != newValue {
+                                    self.pinAtmCtrl = filtered
+                                }
+                            }
                             .onReceive(pinAtmCtrl.publisher.collect()) {
                                 self.pinAtmCtrl = String($0.prefix(6))
                             }
-                        
-//                        Button(action: {
-//                            self.showPassword.toggle()
-//                        }, label: {
-//                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
-//                                .foregroundColor(Color(hex: "#3756DF"))
-//                        })
                     }
                     .frame(height: 25)
                     .padding()

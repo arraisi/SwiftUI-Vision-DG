@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FormInputResetNewPinScreen: View {
     
@@ -63,22 +64,17 @@ struct FormInputResetNewPinScreen: View {
                             
                             VStack {
                                 HStack {
-                                    //                                    if (showPin) {
-                                    //                                        TextField("Input PIN baru Anda", text: self.$pinCtrl)
-                                    //                                    } else {
                                     SecureField("Enter your new Transaction PIN".localized(language), text: self.$pinCtrl)
                                         .keyboardType(.numberPad)
+                                        .onReceive(Just(pinCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.pinCtrl = filtered
+                                            }
+                                        }
                                         .onReceive(pinCtrl.publisher.collect()) {
                                             self.pinCtrl = String($0.prefix(6))
                                         }
-                                    //                                    }
-                                    
-                                    //                                    Button(action: {
-                                    //                                        self.showPin.toggle()
-                                    //                                    }, label: {
-                                    //                                        Image(systemName: showPin ? "eye.fill" : "eye.slash")
-                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    //                                    })
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)
@@ -86,23 +82,17 @@ struct FormInputResetNewPinScreen: View {
                                 Divider()
                                 
                                 HStack {
-                                    //                                    if (showPinConfirm) {
-                                    //                                        TextField("Input Ulang PIN baru Anda", text: self.$pinConfirmCtrl)
-                                    //                                            .keyboardType(.numberPad)
-                                    //                                    } else {
                                     SecureField("Enter your new Transaction PIN".localized(language), text: self.$pinConfirmCtrl)
                                         .keyboardType(.numberPad)
+                                        .onReceive(Just(pinConfirmCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.pinConfirmCtrl = filtered
+                                            }
+                                        }
                                         .onReceive(pinConfirmCtrl.publisher.collect()) {
                                             self.pinConfirmCtrl = String($0.prefix(6))
                                         }
-                                    //                                    }
-                                    
-                                    //                                    Button(action: {
-                                    //                                        self.showPinConfirm.toggle()
-                                    //                                    }, label: {
-                                    //                                        Image(systemName: showPinConfirm ? "eye.fill" : "eye.slash")
-                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    //                                    })
                                 }
                                 .frame(height: 25)
                                 .padding(.vertical, 10)

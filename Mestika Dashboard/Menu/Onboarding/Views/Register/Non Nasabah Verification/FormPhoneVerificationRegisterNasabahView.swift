@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FormPhoneVerificationRegisterNasabahView: View {
     
@@ -79,6 +80,12 @@ struct FormPhoneVerificationRegisterNasabahView: View {
                             UserDefaults.standard.set(self.registerData.noTelepon, forKey: "phone_local")
                         })
                         .foregroundColor(.black)
+                        .onReceive(Just(phoneNumber)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.phoneNumber = filtered
+                            }
+                        }
                         .onReceive(phoneNumber.publisher.collect()) {
                             
                             if String($0).hasPrefix("1") {

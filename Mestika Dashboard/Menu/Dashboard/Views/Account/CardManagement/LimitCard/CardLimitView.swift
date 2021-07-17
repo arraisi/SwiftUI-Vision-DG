@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CardLimitView: View {
     
@@ -54,7 +55,7 @@ struct CardLimitView: View {
     @State var maxLimitPembayaran: String = ""
     @State var maxLimitPembelian: String = ""
     @State var maxLimitIbft: String = ""
- 
+    
     @State private var keyboardOffset: CGFloat = 0
     
     @State var routingForgotPassword: Bool = false
@@ -111,22 +112,28 @@ struct CardLimitView: View {
                                         
                                         TextField("0", text: self.$limitPerTransaksiCtrl, onEditingChanged: {_ in
                                         })
-                                            .onReceive(limitPerTransaksiCtrl.publisher.collect()) {
-                                                let amountString = String($0.prefix(13))
-                                                let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                                self.limitPerTransaksiCtrl = cleanAmount.thousandSeparator()
-                                                self.limitPerTransaksi = Double(cleanAmount) ?? 0
-                                                self.activateData.maxIbftPerTrans = cleanAmount
-                                                
-                                                self.activateData.maxIbftPerTrans = cleanAmount
-                                                
-                                                if (limitPerTransaksi > maxTransaksi) {
-                                                    self.limitPerTransaksiCtrl = self.maxLimitPerTransaksi.thousandSeparator()
-                                                }
+                                        .onReceive(Just(limitPerTransaksiCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                            if filtered != newValue {
+                                                self.limitPerTransaksiCtrl = filtered
                                             }
-                                            .keyboardType(.decimalPad)
-                                            .font(.custom("Montserrat-Bold", size: 30))
-                                            .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
+                                        }
+                                        .onReceive(limitPerTransaksiCtrl.publisher.collect()) {
+                                            let amountString = String($0.prefix(13))
+                                            let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                            self.limitPerTransaksiCtrl = cleanAmount.thousandSeparator()
+                                            self.limitPerTransaksi = Double(cleanAmount) ?? 0
+                                            self.activateData.maxIbftPerTrans = cleanAmount
+                                            
+                                            self.activateData.maxIbftPerTrans = cleanAmount
+                                            
+                                            if (limitPerTransaksi > maxTransaksi) {
+                                                self.limitPerTransaksiCtrl = self.maxLimitPerTransaksi.thousandSeparator()
+                                            }
+                                        }
+                                        .keyboardType(.decimalPad)
+                                        .font(.custom("Montserrat-Bold", size: 30))
+                                        .foregroundColor(limitPerTransaksi > maxTransaksi ? Color.red : Color(hex: "#232175"))
                                         
                                     }
                                     Divider()
@@ -150,6 +157,12 @@ struct CardLimitView: View {
                                         
                                         TextField("0", text: self.$limitPenarikanHarianCtrl, onEditingChanged: {_ in
                                         })
+                                        .onReceive(Just(limitPenarikanHarianCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                            if filtered != newValue {
+                                                self.limitPenarikanHarianCtrl = filtered
+                                            }
+                                        }
                                         .onChange(of: limitPenarikanHarianCtrl) {
                                             print($0)
                                             
@@ -164,9 +177,9 @@ struct CardLimitView: View {
                                                 self.limitPenarikanHarianCtrl = self.maxLimitPenarikan.thousandSeparator()
                                             }
                                         }
-                                            .keyboardType(.decimalPad)
-                                            .font(.custom("Montserrat-Bold", size: 30))
-                                            .foregroundColor(limitPenarikanHarian > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
+                                        .keyboardType(.decimalPad)
+                                        .font(.custom("Montserrat-Bold", size: 30))
+                                        .foregroundColor(limitPenarikanHarian > maxPenarikanHarian ? Color.red : Color(hex: "#232175"))
                                         
                                     }
                                     Divider()
@@ -190,22 +203,28 @@ struct CardLimitView: View {
                                         
                                         TextField("0", text: self.$limitOnUsCtrl, onEditingChanged: {_ in
                                         })
-                                            .onReceive(limitOnUsCtrl.publisher.collect()) {
-                                                let amountString = String($0.prefix(13))
-                                                let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                                self.limitOnUsCtrl = cleanAmount.thousandSeparator()
-                                                self.limitTransferOnUs = Double(cleanAmount) ?? 0
-                                                self.activateData.limitOnUs = cleanAmount
-                                                
-                                                self.activateData.limitOnUs = cleanAmount
-                                                
-                                                if (limitTransferOnUs > maxTransferOnUs) {
-                                                    self.limitOnUsCtrl = self.maxLimitOnUs.thousandSeparator()
-                                                }
+                                        .onReceive(Just(limitOnUsCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                            if filtered != newValue {
+                                                self.limitOnUsCtrl = filtered
                                             }
-                                            .keyboardType(.decimalPad)
-                                            .font(.custom("Montserrat-Bold", size: 30))
-                                            .foregroundColor(limitTransferOnUs > maxTransferOnUs ? Color.red : Color(hex: "#232175"))
+                                        }
+                                        .onReceive(limitOnUsCtrl.publisher.collect()) {
+                                            let amountString = String($0.prefix(13))
+                                            let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                            self.limitOnUsCtrl = cleanAmount.thousandSeparator()
+                                            self.limitTransferOnUs = Double(cleanAmount) ?? 0
+                                            self.activateData.limitOnUs = cleanAmount
+                                            
+                                            self.activateData.limitOnUs = cleanAmount
+                                            
+                                            if (limitTransferOnUs > maxTransferOnUs) {
+                                                self.limitOnUsCtrl = self.maxLimitOnUs.thousandSeparator()
+                                            }
+                                        }
+                                        .keyboardType(.decimalPad)
+                                        .font(.custom("Montserrat-Bold", size: 30))
+                                        .foregroundColor(limitTransferOnUs > maxTransferOnUs ? Color.red : Color(hex: "#232175"))
                                         
                                     }
                                     Divider()
@@ -229,27 +248,33 @@ struct CardLimitView: View {
                                         
                                         TextField("0", text: self.$limitPembayaranCtrl, onEditingChanged: {_ in
                                         })
-                                            .onReceive(limitPembayaranCtrl.publisher.collect()) {
-                                                let amountString = String($0.prefix(13))
-                                                let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                                self.limitPembayaranCtrl = cleanAmount.thousandSeparator()
-                                                self.limitPembayaran = Double(cleanAmount) ?? 0
-                                                
-                                                
-                                                if (cleanAmount == "") {
-                                                    self.activateData.limitPayment = "0"
-                                                } else {
-                                                    self.activateData.limitPayment = cleanAmount
-                                                }
-                                            
-                                                
-                                                if (limitPembayaran > maxPembayaran) {
-                                                    self.limitPembayaranCtrl = self.maxLimitPembayaran.thousandSeparator()
-                                                }
+                                        .onReceive(Just(limitPembayaranCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                            if filtered != newValue {
+                                                self.limitPembayaranCtrl = filtered
                                             }
-                                            .keyboardType(.decimalPad)
-                                            .font(.custom("Montserrat-Bold", size: 30))
-                                            .foregroundColor(limitPembayaran > maxPembayaran ? Color.red : Color(hex: "#232175"))
+                                        }
+                                        .onReceive(limitPembayaranCtrl.publisher.collect()) {
+                                            let amountString = String($0.prefix(13))
+                                            let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                            self.limitPembayaranCtrl = cleanAmount.thousandSeparator()
+                                            self.limitPembayaran = Double(cleanAmount) ?? 0
+                                            
+                                            
+                                            if (cleanAmount == "") {
+                                                self.activateData.limitPayment = "0"
+                                            } else {
+                                                self.activateData.limitPayment = cleanAmount
+                                            }
+                                            
+                                            
+                                            if (limitPembayaran > maxPembayaran) {
+                                                self.limitPembayaranCtrl = self.maxLimitPembayaran.thousandSeparator()
+                                            }
+                                        }
+                                        .keyboardType(.decimalPad)
+                                        .font(.custom("Montserrat-Bold", size: 30))
+                                        .foregroundColor(limitPembayaran > maxPembayaran ? Color.red : Color(hex: "#232175"))
                                         
                                     }
                                     Divider()
@@ -273,22 +298,28 @@ struct CardLimitView: View {
                                         
                                         TextField("0", text: self.$limitPembelianCtrl, onEditingChanged: {_ in
                                         })
-                                            .onReceive(limitPembelianCtrl.publisher.collect()) {
-                                                let amountString = String($0.prefix(13))
-                                                let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                                self.limitPembelianCtrl = cleanAmount.thousandSeparator()
-                                                self.limitPembelian = Double(cleanAmount) ?? 0
-                                                self.activateData.limitPurchase = cleanAmount
-                                                
-                                                self.activateData.limitPurchase = cleanAmount
-                                                
-                                                if (limitPembelian > maxPembelian) {
-                                                    self.limitPembelianCtrl = self.maxLimitPembelian.thousandSeparator()
-                                                }
+                                        .onReceive(Just(limitPembelianCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                            if filtered != newValue {
+                                                self.limitPembelianCtrl = filtered
                                             }
-                                            .keyboardType(.decimalPad)
-                                            .font(.custom("Montserrat-Bold", size: 30))
-                                            .foregroundColor(limitPembelian > maxPembelian ? Color.red : Color(hex: "#232175"))
+                                        }
+                                        .onReceive(limitPembelianCtrl.publisher.collect()) {
+                                            let amountString = String($0.prefix(13))
+                                            let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                            self.limitPembelianCtrl = cleanAmount.thousandSeparator()
+                                            self.limitPembelian = Double(cleanAmount) ?? 0
+                                            self.activateData.limitPurchase = cleanAmount
+                                            
+                                            self.activateData.limitPurchase = cleanAmount
+                                            
+                                            if (limitPembelian > maxPembelian) {
+                                                self.limitPembelianCtrl = self.maxLimitPembelian.thousandSeparator()
+                                            }
+                                        }
+                                        .keyboardType(.decimalPad)
+                                        .font(.custom("Montserrat-Bold", size: 30))
+                                        .foregroundColor(limitPembelian > maxPembelian ? Color.red : Color(hex: "#232175"))
                                         
                                     }
                                     Divider()
@@ -312,22 +343,28 @@ struct CardLimitView: View {
                                         
                                         TextField("0", text: self.$limitIbftCtrl, onEditingChanged: {_ in
                                         })
-                                            .onReceive(limitIbftCtrl.publisher.collect()) {
-                                                let amountString = String($0.prefix(13))
-                                                let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
-                                                self.limitIbftCtrl = cleanAmount.thousandSeparator()
-                                                self.limitIbft = Double(cleanAmount) ?? 0
-                                                self.activateData.limitIbft = cleanAmount
-                                                
-                                                self.activateData.limitIbft = cleanAmount
-                                                
-                                                if (limitIbft > maxIbft) {
-                                                    self.limitIbftCtrl = self.maxLimitIbft.thousandSeparator()
-                                                }
+                                        .onReceive(Just(limitIbftCtrl)) { newValue in
+                                            let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                            if filtered != newValue {
+                                                self.limitIbftCtrl = filtered
                                             }
-                                            .keyboardType(.decimalPad)
-                                            .font(.custom("Montserrat-Bold", size: 30))
-                                            .foregroundColor(limitPembelian > maxPembelian ? Color.red : Color(hex: "#232175"))
+                                        }
+                                        .onReceive(limitIbftCtrl.publisher.collect()) {
+                                            let amountString = String($0.prefix(13))
+                                            let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
+                                            self.limitIbftCtrl = cleanAmount.thousandSeparator()
+                                            self.limitIbft = Double(cleanAmount) ?? 0
+                                            self.activateData.limitIbft = cleanAmount
+                                            
+                                            self.activateData.limitIbft = cleanAmount
+                                            
+                                            if (limitIbft > maxIbft) {
+                                                self.limitIbftCtrl = self.maxLimitIbft.thousandSeparator()
+                                            }
+                                        }
+                                        .keyboardType(.decimalPad)
+                                        .font(.custom("Montserrat-Bold", size: 30))
+                                        .foregroundColor(limitPembelian > maxPembelian ? Color.red : Color(hex: "#232175"))
                                         
                                     }
                                     Divider()

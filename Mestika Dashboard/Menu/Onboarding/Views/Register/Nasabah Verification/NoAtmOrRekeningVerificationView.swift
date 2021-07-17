@@ -8,6 +8,7 @@
 import SwiftUI
 import PopupView
 import SystemConfiguration
+import Combine
 
 struct JenisNoKartu {
     var jenis: String
@@ -104,7 +105,6 @@ struct NoAtmOrRekeningVerificationView: View {
                     .padding(.vertical, 5)
                     
                     TextField("Enter card no.".localized(language), text: $noKartuCtrl, onEditingChanged: { changed in
-                        //                        self.registerData.accNo = self.noKartuCtrl
                         if (jenisKartuCtrl == "Kartu ATM") {
                             self.registerData.atmOrRekening = "ATM"
                             self.registerData.noAtm = self.noKartuCtrl
@@ -126,6 +126,12 @@ struct NoAtmOrRekeningVerificationView: View {
                     .background(Color.gray.opacity(0.1))
                     .frame(height: 50)
                     .cornerRadius(20)
+                    .onReceive(Just(noKartuCtrl)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.noKartuCtrl = filtered
+                        }
+                    }
                     .onReceive(noKartuCtrl.publisher.collect()) {
                         if (jenisKartuCtrl == "Kartu ATM") {
                             self.noKartuCtrl = String($0.prefix(16))

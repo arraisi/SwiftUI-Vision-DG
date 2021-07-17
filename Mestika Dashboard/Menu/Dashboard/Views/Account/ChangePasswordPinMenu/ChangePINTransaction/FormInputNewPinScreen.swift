@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FormInputNewPinScreen: View {
     
@@ -39,9 +40,21 @@ struct FormInputNewPinScreen: View {
                             if (showPassword) {
                                 TextField("Your new PIN".localized(language), text: self.$passwordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
+                                    .onReceive(Just(passwordCtrl)) { newValue in
+                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                        if filtered != newValue {
+                                            self.passwordCtrl = filtered
+                                        }
+                                    }
                             } else {
                                 SecureField("Your new PIN".localized(language), text: self.$passwordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
+                                    .onReceive(Just(passwordCtrl)) { newValue in
+                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                        if filtered != newValue {
+                                            self.passwordCtrl = filtered
+                                        }
+                                    }
                             }
                             
                             Button(action: {
@@ -61,9 +74,21 @@ struct FormInputNewPinScreen: View {
                             if (showConfirmPassword) {
                                 TextField("Confirm PIN".localized(language), text: self.$confirmPasswordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
+                                    .onReceive(Just(confirmPasswordCtrl)) { newValue in
+                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                        if filtered != newValue {
+                                            self.confirmPasswordCtrl = filtered
+                                        }
+                                    }
                             } else {
                                 SecureField("Confirm PIN".localized(language), text: self.$confirmPasswordCtrl)
                                     .font(.custom("Montserrat-Light", size: 14))
+                                    .onReceive(Just(confirmPasswordCtrl)) { newValue in
+                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                        if filtered != newValue {
+                                            self.confirmPasswordCtrl = filtered
+                                        }
+                                    }
                             }
                             
                             Button(action: {

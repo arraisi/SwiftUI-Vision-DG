@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct KeluargaTerdekat: View {
     
@@ -313,6 +314,12 @@ struct KeluargaTerdekat: View {
             } onCommit: {
                 
             }
+            .onReceive(Just(registerData.namaKeluarga)) { newValue in
+                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                if filtered != newValue {
+                    self.registerData.namaKeluarga = filtered
+                }
+            }
             
             Group {
                 
@@ -330,6 +337,12 @@ struct KeluargaTerdekat: View {
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .onReceive(Just(registerData.alamatKeluarga)) { newValue in
+                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                        if filtered != newValue {
+                            self.registerData.alamatKeluarga = filtered
+                        }
+                    }
                     
                     Button(action:{
                         searchAddress()
@@ -507,6 +520,12 @@ struct KeluargaTerdekat: View {
                     TextField("Postal code".localized(language), text: $kodePos) {change in
                     } onCommit: {
                     }
+                    .onReceive(Just(kodePos)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.kodePos = filtered
+                        }
+                    }
                     .onReceive(kodePos.publisher.collect()) {
                         self.kodePos = String($0.prefix(5))
                     }
@@ -541,6 +560,12 @@ struct KeluargaTerdekat: View {
                     TextField("Phone number".localized(language), text: $noTelepon) {change in
                     } onCommit: {
                         self.registerData.noTlpKeluarga = self.noTelepon
+                    }
+                    .onReceive(Just(noTelepon)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.noTelepon = filtered
+                        }
                     }
                     .onReceive(noTelepon.publisher.collect()) {
                         if String($0).hasPrefix("0") {

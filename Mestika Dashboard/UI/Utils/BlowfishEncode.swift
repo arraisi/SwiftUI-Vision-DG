@@ -38,6 +38,24 @@ class BlowfishEncode {
         return resultDecript
     }
     
+    public func encryptedWithKey(data: Data, key: String) -> String? {
+        
+        let iv = try! "blowfish".data(.ascii)
+        
+        if AppConstants().ENCRYPTED {
+            let dataStr = String(data: data, encoding: .utf8)
+            
+            let encrypt = try! dataStr?.process(.blowfish(.encrypt, key: key, iv: iv, mode: .ecb, padding: .pkcs7))
+            
+            print(encrypt)
+            
+            return encrypt
+        }
+        
+        return "No Device ID"
+        
+    }
+    
     public func encrypted(data: Data) -> Data? {
         
         let key = randomString(length: 20)

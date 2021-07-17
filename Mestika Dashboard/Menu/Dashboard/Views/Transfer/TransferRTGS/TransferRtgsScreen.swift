@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct TransferRtgsScreen: View {
     
@@ -300,18 +301,6 @@ struct TransferRtgsScreen: View {
                     self.selectedAccount.noRekening = self.selectedSourceNumber
                     self.transferData.cardNo = self.selectedCardNo
                     
-//                    if (e.planAllowDebitDomestic == "Y" && e.categoryProduct != "S") {
-//                        print(e.accountNumber)
-//                        print(e.cardNumber)
-//                        self.listCardNumber.append(e.cardNumber)
-//                        self.listSourceNumber.append(e.accountNumber)
-//                    }
-                    
-//                    print(e.accountNumber)
-//                    print(e.cardNumber)
-//                    self.listCardNumber.append(e.cardNumber)
-//                    self.listSourceNumber.append(e.accountNumber)
-                    
                 }
                 
                 self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { (success) in
@@ -440,6 +429,12 @@ struct TransferRtgsScreen: View {
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .padding()
+                    .onReceive(Just(noRekeningCtrl)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.noRekeningCtrl = filtered
+                        }
+                    }
                     .onReceive(noRekeningCtrl.publisher.collect()) {
                         if (transferType == "Online") {
                             self.noRekeningCtrl = String($0.prefix(16))
@@ -455,20 +450,6 @@ struct TransferRtgsScreen: View {
             }
             
             if transferType == "Online" {
-                
-                //                if isShowName {
-                //                    HStack {
-                //                        Text(self.limitVM.destinationName)
-                //                            .font(.subheadline)
-                //                            .fontWeight(.light)
-                //
-                //                        Spacer()
-                //                    }
-                //                    .padding(.horizontal, 25)
-                //                    .padding(.bottom, 10)
-                //                } else {
-                //                    EmptyView()
-                //                }
                 
             } else {
                 // Field Type Destination
@@ -587,6 +568,12 @@ struct TransferRtgsScreen: View {
                     .fontWeight(.bold)
                 
                 TextField("0", text: self.$amount, onEditingChanged: {_ in })
+                    .onReceive(Just(amount)) { newValue in
+                        let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                        if filtered != newValue {
+                            self.amount = filtered
+                        }
+                    }
                     .onReceive(amount.publisher.collect()) {
                         let amountString = String($0.prefix(13))
                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")

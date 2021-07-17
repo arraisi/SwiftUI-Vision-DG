@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct FormInputAtmForgotPasswordScreen: View {
     
@@ -77,6 +78,12 @@ struct FormInputAtmForgotPasswordScreen: View {
                     HStack {
                         TextField("Enter your ATM number".localized(language), text: self.$atmNumberCtrl)
                             .keyboardType(.numberPad)
+                            .onReceive(Just(atmNumberCtrl)) { newValue in
+                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                if filtered != newValue {
+                                    self.atmNumberCtrl = filtered
+                                }
+                            }
                             .onReceive(atmNumberCtrl.publisher.collect()) {
                                 self.atmNumberCtrl = String($0.prefix(16))
                             }
@@ -94,23 +101,28 @@ struct FormInputAtmForgotPasswordScreen: View {
                         if (showPassword) {
                             TextField("Enter your ATM PIN".localized(language), text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
+                                .onReceive(Just(pinAtmCtrl)) { newValue in
+                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                    if filtered != newValue {
+                                        self.pinAtmCtrl = filtered
+                                    }
+                                }
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))
                                 }
                         } else {
                             SecureField("Enter your ATM PIN".localized(language), text: self.$pinAtmCtrl)
                                 .keyboardType(.numberPad)
+                                .onReceive(Just(pinAtmCtrl)) { newValue in
+                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                    if filtered != newValue {
+                                        self.pinAtmCtrl = filtered
+                                    }
+                                }
                                 .onReceive(pinAtmCtrl.publisher.collect()) {
                                     self.pinAtmCtrl = String($0.prefix(6))
                                 }
                         }
-                        
-//                        Button(action: {
-//                            self.showPassword.toggle()
-//                        }, label: {
-//                            Image(systemName: showPassword ? "eye.slash" : "eye.fill")
-//                                .foregroundColor(Color(hex: "#3756DF"))
-//                        })
                     }
                     .frame(height: 25)
                     .padding()
@@ -121,22 +133,6 @@ struct FormInputAtmForgotPasswordScreen: View {
                 .padding(.horizontal)
                 
                 Spacer()
-                
-//                VStack {
-//                    NavigationLink(destination: FormInputAtmPinForgotPasswordView(), label: {
-//                        Text("AKTIVASI KARTU ATM BARU")
-//                            .foregroundColor(Color(hex: "#232175"))
-//                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-//                            .font(.system(size: 13))
-//                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-//
-//                    })
-//                    .background(Color.white)
-//                    .cornerRadius(12)
-//                    .padding(.leading, 20)
-//                    .padding(.trailing, 10)
-//                }
-//                .padding(.bottom, 10)
                 
                 VStack {
                     

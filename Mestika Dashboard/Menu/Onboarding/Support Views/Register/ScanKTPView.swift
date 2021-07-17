@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ScanKTPView: View {
     
@@ -129,10 +130,16 @@ struct ScanKTPView: View {
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.black)
                     
-                    TextFieldValidation(data: $nik, title: "Identity Card/(KTP) Number".localized(language), disable: false, isValid: isValidKtp, keyboardType: .numberPad) { (str: Array<Character>) in
+                    TextFieldValidation(data: $nik, title: "Identity Card/(KTP) Number".localized(language), disable: false, isValid: isValidKtp, keyboardType: .numberPad){ (str: Array<Character>) in
                         self.nik = String(str.prefix(16))
                         self.isValidKtp = str.count == 16
                         
+                    }
+                    .onReceive(Just(nik)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.nik = filtered
+                        }
                     }
                 }
                 
@@ -180,6 +187,12 @@ struct ScanKTPView: View {
                     .padding(.horizontal)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(10)
+                    .onReceive(Just(registerData.alamat)) { newValue in
+                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                        if filtered != newValue {
+                            self.registerData.alamat = filtered
+                        }
+                    }
                 }
                 
                 // Label Province

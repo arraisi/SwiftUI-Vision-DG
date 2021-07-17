@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct DepositAccountView: View {
     
@@ -133,6 +134,12 @@ struct DepositAccountView: View {
                                     
                                     TextField("0", text: $depositBalance)
                                         .font(.custom("Montserrat-Bold", size: 34))
+                                        .onReceive(Just(depositBalance)) { newValue in
+                                            let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                                            if filtered != newValue {
+                                                self.depositBalance = filtered
+                                            }
+                                        }
                                         .onReceive(depositBalance.publisher.collect()) {
                                             let amountString = String($0.prefix(13))
                                             let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")
@@ -145,6 +152,7 @@ struct DepositAccountView: View {
 //                                            }
                                         }
                                         .keyboardType(.numberPad)
+                                    
                                     Spacer()
                                 }
                                 .foregroundColor(Color("DarkStaleBlue"))

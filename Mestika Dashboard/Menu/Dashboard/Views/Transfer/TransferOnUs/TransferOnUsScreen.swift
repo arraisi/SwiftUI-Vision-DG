@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BottomSheet
+import Combine
 
 struct TransferOnUsScreen: View {
     
@@ -266,6 +267,12 @@ struct TransferOnUsScreen: View {
                 }, onCommit: {
                     
                 })
+                .onReceive(Just(destinationNumber)) { newValue in
+                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                    if filtered != newValue {
+                        self.destinationNumber = filtered
+                    }
+                }
                 .onReceive(destinationNumber.publisher.collect()) {
                     self.destinationNumber = String($0.prefix(11))
                     self.transferData.destinationNumber = destinationNumber
@@ -322,6 +329,12 @@ struct TransferOnUsScreen: View {
                     .fontWeight(.bold)
                 
                 TextField("0", text: self.$amount, onEditingChanged: {_ in })
+                    .onReceive(Just(amount)) { newValue in
+                        let filtered = newValue.filter { "0123456789 .,".contains($0) }
+                        if filtered != newValue {
+                            self.amount = filtered
+                        }
+                    }
                     .onReceive(amount.publisher.collect()) {
                         let amountString = String($0.prefix(13))
                         let cleanAmount = amountString.replacingOccurrences(of: ".", with: "")

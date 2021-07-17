@@ -396,9 +396,13 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/master/village/\(idDistrict)/district")
     }
     
-    //-------------------- MASTER ALAMAT SERVICE ----------------------//
+    //-------------------- ESTATEMENT ----------------------//
     
-    static func urlGetEStateMent(accountNumber: String) -> URL? {
-        return URL(string: AppConstants().BASE_URL + "/estatement?accountNumber=\(accountNumber)")
+    static func urlGetEStateMent() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/estatement")
+    }
+    
+    static func urlGetFileEstatement(fileName: String) -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/estatement/file/\(fileName)")
     }
 }

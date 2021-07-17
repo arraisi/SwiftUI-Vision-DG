@@ -8,6 +8,7 @@
 import LocalAuthentication
 import SwiftUI
 import Indicators
+import Combine
 
 struct LoginScreen: View {
     
@@ -95,8 +96,21 @@ struct LoginScreen: View {
                     HStack {
                         if (showPassword) {
                             TextField("Your account password".localized(language), text: self.$passwordCtrl)
+//                                .onReceive(Just(passwordCtrl)) { newValue in
+//                                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
+//                                    if filtered != newValue {
+//                                        self.passwordCtrl = filtered
+//                                    }
+//                                }
+                            
                         } else {
                             SecureField("Your account password".localized(language), text: self.$passwordCtrl)
+//                                .onReceive(Just(passwordCtrl)) { newValue in
+//                                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
+//                                    if filtered != newValue {
+//                                        self.passwordCtrl = filtered
+//                                    }
+//                                }
                         }
                         
                         Button(action: {
@@ -130,7 +144,7 @@ struct LoginScreen: View {
                     
                     Button(
                         action: {
-//                            self.isActiveRoute = true
+                            //                            self.isActiveRoute = true
                             login()
                             UIApplication.shared.endEditing()
                         },
@@ -173,7 +187,7 @@ struct LoginScreen: View {
                         label: {}
                     )
                     .isDetailLink(false)
-
+                    
                     
                     if !isNewDeviceLogin {
                         if let value = device.last?.fingerprintFlag {
@@ -273,7 +287,7 @@ struct LoginScreen: View {
                     self.isLoading = false
                     
                     print("LOGIN SUCCESS")
-//                    self.isActiveRoute = true
+                    //                    self.isActiveRoute = true
                     self.routeAtmInputLogin = true
                 }
                 
@@ -317,7 +331,7 @@ struct LoginScreen: View {
                         print("BLOCKED")
                         self.showingModalForgotPassword = true
                     } else if (self.authVM.errorCode == "401") {
-//                        self.appState.moveToWelcomeView = true
+                        //                        self.appState.moveToWelcomeView = true
                         self.showingModal = true
                     } else {
                         print("LOGIN FAILED")

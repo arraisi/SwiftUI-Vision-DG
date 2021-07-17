@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CardActivationView: View {
     
@@ -170,16 +171,20 @@ struct CardActivationView: View {
                 HStack {
                     TextField("ATM Card No.".localized(language), text: self.$noAtmCtrl, onEditingChanged: { changed in
                     })
-//                    .disabled(true)
                     .keyboardType(.numberPad)
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .padding()
+                    .onReceive(Just(noAtmCtrl)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.noAtmCtrl = filtered
+                        }
+                    }
                     .onReceive(noAtmCtrl.publisher.collect()) {
                         self.noAtmCtrl = String($0.prefix(16))
                     }
                 }
-//                .background(Color.gray.opacity(0.2))
                 .background(Color(hex: "#F6F8FB"))
                 .cornerRadius(10)
                 .padding(.horizontal, 15)
@@ -205,6 +210,12 @@ struct CardActivationView: View {
                         .padding(.horizontal, 20)
                         .padding(.top, 15)
                         .padding(.bottom, 10)
+                        .onReceive(Just(noCvvCtrl)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.noCvvCtrl = filtered
+                            }
+                        }
                         .onReceive(noCvvCtrl.publisher.collect()) {
                             self.noCvvCtrl = String($0.prefix(3))
                         }
@@ -251,6 +262,12 @@ struct CardActivationView: View {
                         .font(.subheadline)
                         .foregroundColor(.black)
                         .padding()
+                        .onReceive(Just(pinCtrl)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.pinCtrl = filtered
+                            }
+                        }
                         .onReceive(pinCtrl.publisher.collect()) {
                             self.pinCtrl = String($0.prefix(6))
                         }
@@ -278,6 +295,12 @@ struct CardActivationView: View {
                         .font(.subheadline)
                         .foregroundColor(.black)
                         .padding()
+                        .onReceive(Just(cPinCtrl)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.cPinCtrl = filtered
+                            }
+                        }
                         .onReceive(cPinCtrl.publisher.collect()) {
                             self.cPinCtrl = String($0.prefix(6))
                         }

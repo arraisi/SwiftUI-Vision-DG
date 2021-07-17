@@ -93,11 +93,31 @@ struct FormChangePersonalDataView: View {
                                         print("on commit")
                                     })
                                     
-                                    LabelTextField(value: self.$telepon, label: "Telephone".localized(language), placeHolder: "Telephone".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                                        print("on edit")
-                                    }, onCommit: {
-                                        print("on commit")
-                                    })
+                                    VStack (alignment: .leading) {
+                                        
+                                        Text("Telephone".localized(language))
+                                            .font(Font.system(size: 12))
+                                            .fontWeight(.semibold)
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        TextField("Telephone".localized(language), text: self.$telepon)
+                                            .frame(height: 36)
+                                            .font(Font.system(size: 14))
+                                            .padding(.horizontal)
+                                            .background(Color.gray.opacity(0.1))
+                                            .cornerRadius(10)
+                                            .disabled(self.profileVM.existingCustomer)
+                                            .keyboardType(.numberPad)
+                                            .onReceive(Just(telepon)) { newValue in
+                                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                                if filtered != newValue {
+                                                    self.telepon = filtered
+                                                }
+                                            }
+                                            .onReceive(telepon.publisher.collect()) {
+                                                self.telepon = String($0.prefix(14))
+                                            }
+                                    }
                                     
                                     LabelTextField(value: self.$profileVM.email, label: "e-Mail".localized(language), placeHolder: "e-Mail".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
                                         print("on edit")
@@ -120,7 +140,6 @@ struct FormChangePersonalDataView: View {
                                         
                                         self.profileVM.telepon = self.telepon
                                         self.pinActive = true
-                                        //                                        self.showModal = true
                                     }) {
                                         Text("Save".localized(language))
                                             .foregroundColor(.white)
@@ -141,10 +160,7 @@ struct FormChangePersonalDataView: View {
                         }
                         
                     }
-                    
                 }
-                
-                //                Spacer()
             }
             
             if self.showModal || self.showModalError {

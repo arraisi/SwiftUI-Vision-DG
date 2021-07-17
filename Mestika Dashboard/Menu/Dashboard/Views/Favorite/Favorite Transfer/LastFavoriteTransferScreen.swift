@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Introspect
+import Combine
 
 struct LastFavoriteTransferScreen: View {
     
@@ -44,13 +45,14 @@ struct LastFavoriteTransferScreen: View {
                             .textCase(.uppercase)
                             .lineLimit(2)
                             .disabled(nameTextFieldDisabled)
+                            .onReceive(Just(name)) { newValue in
+                                let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                if filtered != newValue {
+                                    self.name = filtered
+                                }
+                            }
                             
                             HStack {
-//                                Text("\(data.bankName) :")
-//                                    .foregroundColor(.white)
-//                                    .font(.caption)
-//                                    .fontWeight(.light)
-                                
                                 Text("\(data.cardNo)")
                                     .foregroundColor(.white)
                                     .font(.caption)

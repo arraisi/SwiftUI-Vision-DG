@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Combine
 
 struct SavingSelectionModalView: View {
     
@@ -80,6 +81,12 @@ struct SavingSelectionModalView: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
                 .multilineTextAlignment(TextAlignment.center)
+                .onReceive(Just(referralCode)) { newValue in
+                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                    if filtered != newValue {
+                        self.referralCode = filtered
+                    }
+                }
                 
                 Text("Make sure you enter the referral code correctly.".localized(language))
                     .font(.custom("Montserrat-Regular", size: 14))

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CardDamageAddressInputView: View {
     
@@ -97,6 +98,12 @@ struct CardDamageAddressInputView: View {
                                         .onReceive(addressInput.publisher.collect()) {
                                             self.addressInput = String($0.prefix(150))
                                         }
+                                        .onReceive(Just(cardData.addressInput)) { newValue in
+                                            let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+                                            if filtered != newValue {
+                                                self.cardData.addressInput = filtered
+                                            }
+                                        }
                                         .font(Font.system(size: 14))
                                         .padding(.horizontal)
                                         .background(Color.gray.opacity(0.1))
@@ -163,6 +170,12 @@ struct CardDamageAddressInputView: View {
                                         } onCommit: {
                                             print("on commit")
                                             cardData.addressPostalCodeInput = self.addressKodePosInput
+                                        }
+                                        .onReceive(Just(addressKodePosInput)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.addressKodePosInput = filtered
+                                            }
                                         }
                                         .onReceive(addressKodePosInput.publisher.collect()) {
                                             self.addressKodePosInput = String($0.prefix(5))

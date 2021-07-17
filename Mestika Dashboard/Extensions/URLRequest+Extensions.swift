@@ -14,15 +14,26 @@ extension URLRequest {
         self.setValue("*/*", forHTTPHeaderField: "accept")
         
         let defaults = UserDefaults.standard
-        let timestamp = NSDate().timeIntervalSince1970
+        
+        let newDeviceId = "ios" +
+            ":" + "\(UIDevice.current.identifierForVendor!.uuidString.replacingOccurrences(of: "-", with: ""))" +
+            ":" + "\(UIDevice().type.rawValue)" +
+            ":" + "\(UIDevice.current.model)" +
+            ":" + "\(UIDevice.current.name.replacingOccurrences(of: "'", with: ""))" +
+            ":" + "release-keys" +
+            ":" + "user" +
+            ":" + "retina" +
+            ":" + "1626332354954"
+        
+        let encryptDeviceId = try! BlowfishEncode().encryptedWithKey(data: newDeviceId.data(.utf8), key: AppConstants().KEY_ENCRYPT_DEVICE_ID)
         
         if let token = Messaging.messaging().fcmToken {
             if let indexEnd = token.index(of: ":") {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("00000000-6a0c-31d5-0000-d_WqbSbuSgGve3y-WnBXoC-", forHTTPHeaderField: "X-Device-ID")
-                self.setValue("\(deviceId)", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("F20016E3-644E-4F25-B1AB-6AEDAF4BB9A6", forHTTPHeaderField: "X-Device-ID")
+                self.setValue(encryptDeviceId, forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")
                 self.setValue("id", forHTTPHeaderField: "Accept-Language")

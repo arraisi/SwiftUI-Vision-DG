@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FormInputNewPasswordForgotPasswordView: View {
     
@@ -62,6 +63,7 @@ struct FormInputNewPasswordForgotPasswordView: View {
                     .fontWeight(.light)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
+                    .padding(.horizontal, 10)
                     .padding(.top, 5)
                 
                 VStack {
@@ -69,8 +71,20 @@ struct FormInputNewPasswordForgotPasswordView: View {
                         HStack {
                             if (showPassword) {
                                 TextField("Your new password".localized(language), text: self.$passwordCtrl)
+//                                    .onReceive(Just(passwordCtrl)) { newValue in
+//                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+//                                        if filtered != newValue {
+//                                            self.passwordCtrl = filtered
+//                                        }
+//                                    }
                             } else {
                                 SecureField("Your new password".localized(language), text: self.$passwordCtrl)
+//                                    .onReceive(Just(passwordCtrl)) { newValue in
+//                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+//                                        if filtered != newValue {
+//                                            self.passwordCtrl = filtered
+//                                        }
+//                                    }
                             }
                             
                             Button(action: {
@@ -91,8 +105,20 @@ struct FormInputNewPasswordForgotPasswordView: View {
                         HStack {
                             if (showConfirmPassword) {
                                 TextField("Confirm password".localized(language), text: self.$confirmPasswordCtrl)
+//                                    .onReceive(Just(confirmPasswordCtrl)) { newValue in
+//                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+//                                        if filtered != newValue {
+//                                            self.confirmPasswordCtrl = filtered
+//                                        }
+//                                    }
                             } else {
                                 SecureField("Confirm password".localized(language), text: self.$confirmPasswordCtrl)
+//                                    .onReceive(Just(confirmPasswordCtrl)) { newValue in
+//                                        let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
+//                                        if filtered != newValue {
+//                                            self.confirmPasswordCtrl = filtered
+//                                        }
+//                                    }
                             }
                             
                             Button(action: {

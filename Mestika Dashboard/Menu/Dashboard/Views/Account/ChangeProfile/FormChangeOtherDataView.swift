@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Indicators
+import Combine
 
 struct FormChangeOtherDataView: View {
     
@@ -90,19 +91,13 @@ struct FormChangeOtherDataView: View {
                                 FormPembuatanRekening
                                 
                                 
-                                if (self.profileVM.namaPerusahaan == "") {
+                                if (self.profileVM.namaPerusahaan == "" && self.profileVM.provinsiPerusahaan == "") {
                                     EmptyView()
                                 } else {
                                     FormPekerjaan
                                     
                                     FormPerusahaan
                                 }
-                                
-                                //                    if (self.namaPenyandangDana == "") {
-                                //                        EmptyView()
-                                //                    } else {
-                                //                        FormPenyandangDana
-                                //                    }
                                 
                                 if !profileVM.existingCustomer {
                                     Button(action: {
@@ -125,7 +120,6 @@ struct FormChangeOtherDataView: View {
                             }
                             .padding(.top, 20)
                         }
-                        .KeyboardAwarePadding()
                     }
                 }
             }
@@ -445,45 +439,55 @@ struct FormChangeOtherDataView: View {
                     print("on commit")
                 })
                 
-                LabelTextField(value: self.$kodePosPerusahaan, label: "Postal Code".localized(language), placeHolder: "Postal Code".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                .keyboardType(.numberPad)
-                .onReceive(self.kodePosPerusahaan.publisher.collect()) {
-                    self.kodePosPerusahaan = String($0.prefix(5))
+                VStack(alignment: .leading) {
+                    Text("Postal Code".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.leading)
+                    
+                    TextField("Postal Code".localized(language), text: self.$kodePosPerusahaan)
+                        .frame(height: 36)
+                        .font(Font.system(size: 14))
+                        .padding(.horizontal)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                        .disabled(self.profileVM.existingCustomer)
+                        .keyboardType(.numberPad)
+                        .onReceive(Just(kodePosPerusahaan)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.kodePosPerusahaan = filtered
+                            }
+                        }
+                        .onReceive(kodePosPerusahaan.publisher.collect()) {
+                            self.kodePosPerusahaan = String($0.prefix(5))
+                        }
                 }
                 
-//                LabelTextField(value: self.$profileVM.kotaPerusahaan, label: "City".localized(language), placeHolder: "City".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
-//                    print("on edit")
-//                }, onCommit: {
-//                    print("on commit")
-//                })
-//
-//                LabelTextField(value: self.$profileVM.provinsiPerusahaan, label: "Provinsi".localized(language), placeHolder: "Provinsi".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
-//                    print("on edit")
-//                }, onCommit: {
-//                    print("on commit")
-//                })
-                
-//                LabelTextField(value: self.$profileVM.teleponPerusahaan, label: "Phone".localized(language), placeHolder: "Phone".localized(language), disabled: profileVM.existingCustomer, onEditingChanged: { (Bool) in
-//                    print("on edit")
-//                }, onCommit: {
-//                    print("on commit")
-//                })
-//                .keyboardType(.numberPad)
-                
-                LabelTextField(value: self.$telepon, label: "Phone".localized(language), placeHolder: "Telephone".localized(language), disabled: self.profileVM.existingCustomer, onEditingChanged: { (Bool) in
-                    print("on edit")
-                }, onCommit: {
-                    print("on commit")
-                })
-                .keyboardType(.numberPad)
-                .onReceive(self.telepon.publisher.collect()) {
-                    self.telepon = String($0.prefix(12))
+                VStack(alignment: .leading) {
+                    Text("Telephone".localized(language))
+                        .font(Font.system(size: 12))
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.leading)
+                    
+                    TextField("Telephone".localized(language), text: self.$telepon)
+                        .frame(height: 36)
+                        .font(Font.system(size: 14))
+                        .padding(.horizontal)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                        .disabled(self.profileVM.existingCustomer)
+                        .keyboardType(.numberPad)
+                        .onReceive(Just(telepon)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.telepon = filtered
+                            }
+                        }
+                        .onReceive(telepon.publisher.collect()) {
+                            self.telepon = String($0.prefix(14))
+                        }
                 }
-                
             }
         }
         .padding(25)

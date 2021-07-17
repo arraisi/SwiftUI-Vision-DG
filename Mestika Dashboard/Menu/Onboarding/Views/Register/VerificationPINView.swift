@@ -8,6 +8,7 @@
 import SwiftUI
 import PopupView
 import Indicators
+import Combine
 
 struct VerificationPINView: View {
     
@@ -112,6 +113,12 @@ struct VerificationPINView: View {
                         .cornerRadius(10)
                         .padding(.horizontal, 30)
                         .padding(.top, 15)
+                        .onReceive(Just(noKartuCtrl)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.noKartuCtrl = filtered
+                            }
+                        }
                         .onReceive(noKartuCtrl.publisher.collect()) {
                             self.noKartuCtrl = String($0.prefix(16))
                         }
@@ -128,31 +135,20 @@ struct VerificationPINView: View {
                                     SecureField("Enter the ATM PIN".localized(language), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
-                                        //                                        .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
+                                        .onReceive(Just(pin)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.pin = filtered
+                                            }
+                                        }
                                         .onReceive(pin.publisher.collect()) {
-                                            //                                            if String($0).hasPrefix("0") {
-                                            //                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
-                                            //                                            } else {
-                                            //                                                self.pin = String($0.prefix(6))
-                                            //                                            }
-                                            
                                             self.pin = String($0.prefix(6))
                                         }
                                     
                                     Spacer()
-                                    
-                                    //                                    Button(action: {
-                                    //                                        self.secured.toggle()
-                                    //                                    }) {
-                                    //                                        Image(systemName: "eye.slash")
-                                    //                                            .font(.custom("Montserrat-Light", size: 14))
-                                    //                                            .frame(width: 80, height: 50)
-                                    //                                            .cornerRadius(10)
-                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    //                                    }
                                 }
                             }
                             .background(Color.gray.opacity(0.1))
@@ -167,31 +163,20 @@ struct VerificationPINView: View {
                                     TextField("Enter the ATM PIN".localized(language), text: $pin)
                                         .font(.custom("Montserrat-SemiBold", size: 14))
                                         .padding()
-                                        //                                        .frame(width: 200, height: 50)
                                         .foregroundColor(Color(hex: "#232175"))
                                         .disabled(shouldVerificationWithVC)
                                         .keyboardType(.numberPad)
+                                        .onReceive(Just(pin)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                self.pin = filtered
+                                            }
+                                        }
                                         .onReceive(pin.publisher.collect()) {
-                                            //                                            if String($0).hasPrefix("0") {
-                                            //                                                self.pin = String(String($0).substring(with: 1..<String($0).count).prefix(6))
-                                            //                                            } else {
-                                            //                                                self.pin = String($0.prefix(6))
-                                            //                                            }
-                                            
                                             self.pin = String($0.prefix(6))
                                         }
                                     
                                     Spacer()
-                                    
-                                    //                                    Button(action: {
-                                    //                                        self.secured.toggle()
-                                    //                                    }) {
-                                    //                                        Image(systemName: "eye.fill")
-                                    //                                            .font(.custom("Montserrat-Light", size: 14))
-                                    //                                            .frame(width: 80, height: 50)
-                                    //                                            .cornerRadius(10)
-                                    //                                            .foregroundColor(Color(hex: "#3756DF"))
-                                    //                                    }
                                 }
                             }
                             .background(Color.gray.opacity(0.1))
@@ -247,11 +232,9 @@ struct VerificationPINView: View {
                             
                             self.tryCount += 1
                             if self.shouldVerificationWithVC {
-                                //                                UserDefaults.standard.set("true", forKey: "register_nasabah_video_call")
                                 self.nextToFormVideoCall = true
                             } else {
                                 UIApplication.shared.endEditing()
-                                //                                UserDefaults.standard.set("false", forKey: "register_nasabah_video_call")
                                 validatePINBackEnd()
                             }
                         }) {
