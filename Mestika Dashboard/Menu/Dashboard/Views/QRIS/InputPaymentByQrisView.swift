@@ -224,28 +224,16 @@ struct InputPaymentByQrisView: View {
                 self.nominalTips = self.qrisData.transactionFee
             }
             
-            self.savingAccountVM.getAccounts { (success) in
-                self.savingAccountVM.accounts.forEach { e in
+            self.savingAccountVM.getSavingAccountTransfer(data: "off-us") { (success) in
+                self.isLoading = false
+                self.savingAccountVM.savingAccounts.forEach { e in
                     
-                    if (e.accountType == "S") {
-                        print(e.accountNumber)
-                        self.listSourceNumber.append(e.accountNumber)
-                    }
-                }
-                
-                self.savingAccountVM.getBalanceAccounts(listSourceNumber: listSourceNumber) { success in
+                    self.selectedSourceNumber = e.accountNumber
+                    self.selectedBalance = e.balance.subStringRange(from: 0, to: e.balance.count-3)
                     
-                    if success {
-                        self.isLoading = false
-                        
-                        self.savingAccountVM.balanceAccount.forEach { b in
-                            if b.creditDebit == "D" {
-                                self.listBalance.append("0")
-                            } else {
-                                self.listBalance.append(b.balance ?? "0")
-                            }
-                        }
-                    }
+                    self.listSourceNumber.append(e.accountNumber)
+                    self.listBalance.append(e.balance.subStringRange(from: 0, to: e.balance.count-3))
+                    
                 }
             }
         }

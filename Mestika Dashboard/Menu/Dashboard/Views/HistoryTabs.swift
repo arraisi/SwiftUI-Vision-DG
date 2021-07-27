@@ -50,6 +50,8 @@ struct HistoryTabs: View {
         return formatter
     }()
     
+    @State var isLoading: Bool = false
+    
     @Binding var cardNo: String
     @Binding var sourceNumber: String
     
@@ -64,7 +66,9 @@ struct HistoryTabs: View {
         ZStack {
             if filterShowed {
                 
-                FilterView
+                LoadingView(isShowing: self.$isLoading) {
+                    FilterView
+                }
                 
             } else {
                 
@@ -114,7 +118,9 @@ struct HistoryTabs: View {
             }))
         }
         .onAppear {
+            self.isLoading = true
             self.savingAccountVM.getAccounts { (success) in
+                self.isLoading = false
                 self.savingAccountVM.accounts.forEach { e in
                     print(e.accountNumber)
                     

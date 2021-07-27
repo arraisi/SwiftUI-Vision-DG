@@ -23,7 +23,8 @@ class AuthService {
         
         // Body
         let body: [String: Any] = [
-            "pwd": password
+            "pwd": password,
+            "fingerCode": fingerCode
         ]
         
         print("body => \(body)")
@@ -184,14 +185,20 @@ class AuthService {
         phoneNumber: String,
         atmPin: String,
         cardNo: String,
+        status: String,
         completion: @escaping(Result<LoginCredentialResponse, ErrorResult>) -> Void) {
         // Body
-        let body: [String: Any] = [
+        var body: [String: Any] = [
             "pwd": password,
             "phoneNumber": phoneNumber,
-            "atmPin": atmPin,
             "cardNo": cardNo
         ]
+        
+        if (status == "INACTIVE") {
+            body["pinTrx"] = atmPin
+        } else {
+            body["atmPin"] = atmPin
+        }
         
         print("body => \(body)")
         
@@ -201,7 +208,7 @@ class AuthService {
             return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
         }
         
-        var request = URLRequest(url)
+        var request = URLRequest(url.appending("status", value: status.lowercased()))
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = BlowfishEncode().encrypted(data: finalBody)
@@ -503,7 +510,8 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
+                    completion(.failure(ErrorResult.customWithStatus(code: 403, codeStatus: (validateResponse?.code)!)))
                 }
                 
                 if (httpResponse.statusCode == 400) {
@@ -591,7 +599,8 @@ class AuthService {
                 }
                 
                 if (httpResponse.statusCode == 403) {
-                    completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
+                    let validateResponse = try? JSONDecoder().decode(Status.self, from: BlowfishEncode().decrypted(data: data)!)
+                    completion(.failure(ErrorResult.customWithStatus(code: 403, codeStatus: (validateResponse?.code)!)))
                 }
                 
                 if (httpResponse.statusCode == 400) {

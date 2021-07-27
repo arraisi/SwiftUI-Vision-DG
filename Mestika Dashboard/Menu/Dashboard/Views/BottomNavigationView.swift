@@ -11,6 +11,7 @@ import LocalAuthentication
 
 struct BottomNavigationView: View {
     
+    var defaults = UserDefaults.standard
     
     @AppStorage("language")
     private var language = LocalizationService.shared.language
@@ -322,6 +323,10 @@ struct BottomNavigationView: View {
             self.authVM.enableBiometricLogin { result in
                 print("result : \(result)")
                 if result {
+                    
+                    let decCode = BlowfishEncode().decryptKeyFromResponse(data: self.authVM.biometricCode.data(using: .utf8)!)
+                    
+                    self.defaults.set(String(data: decCode, encoding: .utf8), forKey: defaultsKeys.biometricCode)
                     print("ENABLE FINGER PRINT SUCCESS")
                     self.isFingerprint = true
                     saveDataNewDeviceToCoreData()

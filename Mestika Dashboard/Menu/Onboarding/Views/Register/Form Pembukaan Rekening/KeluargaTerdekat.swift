@@ -681,7 +681,7 @@ struct KeluargaTerdekat: View {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
-                    registerData.alamatKeluarga = self.addressSugestion[0].formatted_address
+                    registerData.alamatKeluarga = self.addressSugestion[0].street
                     registerData.provinsiKeluarga = self.addressSugestion[0].province
                     registerData.kotaKeluarga = self.addressSugestion[0].city
                     registerData.kodePosKeluarga = self.addressSugestion[0].postalCode

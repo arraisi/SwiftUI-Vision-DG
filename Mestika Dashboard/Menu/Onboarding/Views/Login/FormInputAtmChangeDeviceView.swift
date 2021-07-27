@@ -35,6 +35,8 @@ struct FormInputAtmChangeDeviceView: View {
     @Binding var pwd: String
     @Binding var phoneNmbr: String
     
+    @Binding var cardStatus: String
+    
     var disableForm: Bool {
         if (cardNoCtrl.isEmpty || pinCtrl.isEmpty || isLoading) {
             return true
@@ -79,13 +81,22 @@ struct FormInputAtmChangeDeviceView: View {
                     .foregroundColor(.white)
                     .padding(.top, 30)
                 
-                Text("Masukkan nomor kartu ATM dan PIN ATM anda yang sudah terdaftar")
-                    .font(.subheadline)
-                    .fontWeight(.light)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 5)
-                
+                if (cardStatus == "INACTIVE") {
+                    Text("Masukkan nomor kartu ATM dan PIN Transaksi anda yang sudah terdaftar")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 5)
+                } else {
+                    Text("Masukkan nomor kartu ATM dan PIN ATM anda yang sudah terdaftar")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 5)
+                }
+            
                 VStack {
                     HStack {
                         TextField("Masukkan nomor ATM Anda", text: self.$cardNoCtrl)
@@ -105,13 +116,13 @@ struct FormInputAtmChangeDeviceView: View {
                 VStack {
                     HStack {
                         if (isShowPwd) {
-                            TextField("Masukkan PIN ATM Anda", text: self.$pinCtrl)
+                            TextField(cardStatus == "ACTIVE" ? "Masukkan PIN ATM Anda" : "Masukkan PIN Transaksi Anda", text: self.$pinCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinCtrl.publisher.collect()) {
                                     self.pinCtrl = String($0.prefix(6))
                                 }
                         } else {
-                            SecureField("Masukkan PIN ATM Anda", text: self.$pinCtrl)
+                            SecureField(cardStatus == "ACTIVE" ? "Masukkan PIN ATM Anda" : "Masukkan PIN Transaksi Anda", text: self.$pinCtrl)
                                 .keyboardType(.numberPad)
                                 .onReceive(pinCtrl.publisher.collect()) {
                                     self.pinCtrl = String($0.prefix(6))
@@ -170,7 +181,7 @@ struct FormInputAtmChangeDeviceView: View {
     func login() {
         self.isLoading = true
         
-        self.authVM.postLoginChangeDevice(password: self.pwd, phoneNumber: self.phoneNmbr, atmPin: self.pinCtrl, cardNo: self.cardNoCtrl) { success in
+        self.authVM.postLoginChangeDevice(password: self.pwd, phoneNumber: self.phoneNmbr, atmPin: self.pinCtrl, cardNo: self.cardNoCtrl, status: cardStatus) { success in
             
             DispatchQueue.main.async {
                 if success {
@@ -232,6 +243,6 @@ struct FormInputAtmChangeDeviceView: View {
 
 struct FormInputAtmChangeDeviceView_Previews: PreviewProvider {
     static var previews: some View {
-        FormInputAtmChangeDeviceView(pwd: .constant(""), phoneNmbr: .constant(""))
+        FormInputAtmChangeDeviceView(pwd: .constant(""), phoneNmbr: .constant(""), cardStatus: .constant("INACTIVE"))
     }
 }

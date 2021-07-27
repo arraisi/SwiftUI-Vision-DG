@@ -20,7 +20,6 @@ class WebSocket: NSObject, SwiftStompDelegate {
         ":" + "\(UIDevice.current.identifierForVendor!.uuidString.replacingOccurrences(of: "-", with: ""))" +
         ":" + "\(UIDevice().type.rawValue)" +
         ":" + "\(UIDevice.current.model)" +
-        ":" + "\(UIDevice.current.name.replacingOccurrences(of: "'", with: ""))" +
         ":" + "release-keys" +
         ":" + "user" +
         ":" + "retina" +

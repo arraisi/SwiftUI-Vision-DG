@@ -46,4 +46,5 @@ class AppConstants {
 struct defaultsKeys {
     static let keyToken = "tokenKey"
     static let keyXsrf = "xsrfKey"
+    static let biometricCode = "biometricCode"
 }

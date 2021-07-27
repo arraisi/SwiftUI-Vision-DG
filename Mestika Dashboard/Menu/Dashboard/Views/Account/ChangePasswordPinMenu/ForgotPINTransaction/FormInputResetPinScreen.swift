@@ -10,6 +10,8 @@ import Indicators
 
 struct FormInputResetPinScreen: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @AppStorage("language")
     private var language = LocalizationService.shared.language
     
@@ -18,6 +20,7 @@ struct FormInputResetPinScreen: View {
     @EnvironmentObject var appState: AppState
     
     @State private var showSuccess: Bool = false
+    @State private var showError: Bool = false
     
     var cardNo = ""
     var newPin = ""
@@ -28,7 +31,11 @@ struct FormInputResetPinScreen: View {
     @State var unLocked : Bool = false
     @State var wrongPin = false
     
+    @State var errorMessage: String = ""
+    
     var phoneNumber: String
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     @State var otpView: Bool = false
     
@@ -109,7 +116,7 @@ struct FormInputResetPinScreen: View {
                     
                 }
                 
-                if self.showSuccess{
+                if self.showSuccess || self.showError {
                     ModalOverlay(tapAction: { withAnimation { } })
                         .edgesIgnoringSafeArea(.all)
                 }
@@ -123,6 +130,9 @@ struct FormInputResetPinScreen: View {
                     }
                     
                     if !success {
+                        self.errorMessage = self.authVM.errorMessage
+                        self.showError = true
+                        resetField()
                         print("Error Pin TRX")
                     }
                 }
@@ -130,10 +140,56 @@ struct FormInputResetPinScreen: View {
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarHidden(true)
+            .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+                if(value.startLocation.x < 20 &&
+                    value.translation.width > 100) {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }))
             .popup(isPresented: $showSuccess, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
                 SuccessChangePasswordModal()
             }
+            .popup(isPresented: $showError, type: .floater(), position: .bottom, animation: Animation.spring(), closeOnTapOutside: false) {
+                popupMessageError()
+            }
         }
+    }
+    
+    private func resetField() {
+        self.pin = "" /// return to empty pin
+    }
+    
+    // MARK: POPUP MESSAGE ERROR
+    func popupMessageError() -> some View {
+        VStack(alignment: .leading) {
+            Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .frame(width: 65, height: 65)
+                .foregroundColor(.red)
+                .padding(.top, 20)
+            
+            Text("\(self.errorMessage)")
+                .fontWeight(.bold)
+                .font(.system(size: 22))
+                .foregroundColor(Color(hex: "#232175"))
+                .padding([.bottom, .top], 20)
+            
+            Button(action: {}) {
+                Text("Back".localized(language))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
+            }
+            .background(Color(hex: "#2334D0"))
+            .cornerRadius(12)
+            
+            Text("")
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
     }
     
     // MARK: POPUP SUCCSESS CHANGE PASSWORD

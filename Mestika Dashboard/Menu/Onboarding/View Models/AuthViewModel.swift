@@ -25,6 +25,8 @@ class AuthViewModel: ObservableObject {
     @Published var minimumLowerCaseLetterInPassword: Int = 1
     @Published var minimumNumericInPassword: Int = 1
     @Published var maxIdleTime: Int = 300
+    
+    @Published var biometricCode: String = ""
 }
 
 extension AuthViewModel {
@@ -41,6 +43,55 @@ extension AuthViewModel {
         }
         
         AuthService.shared.login(password: encryptPassword(password: password), phoneNumber: phoneNumber, fingerCode: fingerCode) { result in
+            switch result {
+            case .success( _):
+                print("Success")
+                self.isLoading = false
+                
+                completion(true)
+                
+            case .failure(let error):
+                print("ERROR-->")
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                
+                switch error {
+                case .custom(code: 500):
+                    self.errorMessage = "Internal Server Error"
+                case .custom(code: 206):
+                    self.errorCode = "206"
+                    self.errorMessage = "Change Password"
+                case .custom(code: 406):
+                    self.errorCode = "406"
+                    self.errorMessage = "User Locked"
+                case .custom(code: 401):
+                    self.errorCode = "401"
+                    self.errorMessage = "Move to Dashboard"
+                case .custom(code: 403):
+                    self.errorCode = "403"
+                    self.errorMessage = "403"
+                default:
+                    self.errorMessage = "Internal Server Error"
+                }
+                completion(false)
+            }
+        }
+        
+    }
+    
+    // MARK: - POST LOGIN BIOMETRIC
+    func postLoginBiometric(
+        password: String,
+        phoneNumber: String,
+        fingerCode: String,
+        completion: @escaping (Bool) -> Void) {
+        
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        AuthService.shared.login(password: password, phoneNumber: phoneNumber, fingerCode: encryptPassword(password: fingerCode)) { result in
             switch result {
             case .success( _):
                 print("Success")
@@ -135,6 +186,7 @@ extension AuthViewModel {
         phoneNumber: String,
         atmPin: String,
         cardNo: String,
+        status: String,
         completion: @escaping (Bool) -> Void) {
         
         DispatchQueue.main.async {
@@ -145,7 +197,8 @@ extension AuthViewModel {
             password: encryptPassword(password: password),
             phoneNumber: phoneNumber,
             atmPin: encryptPassword(password: atmPin),
-            cardNo: cardNo
+            cardNo: cardNo,
+            status: status
         ) { result in
             switch result {
             case .success( _):
@@ -185,7 +238,7 @@ extension AuthViewModel {
                     self.errorCode = "503"
                     self.errorMessage = "Something happen with system"
                 default:
-                    self.errorMessage = "Internal Server Error"
+                    self.errorMessage = "Invalid Pin Transaction"
                 }
                 completion(false)
             }
@@ -333,8 +386,10 @@ extension AuthViewModel {
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
                     self.errorMessage = "Weak password, please change your password"
-                case .custom(code: 403):
-                    self.errorMessage = "Password tidak berubah"
+                case .customWithStatus(code: 403, codeStatus: "403"):
+                    self.errorMessage = "Password not changed"
+                case .customWithStatus(code: 403, codeStatus: "406"):
+                    self.errorMessage = "Pilih password yang belum pernah digunakan"
                 case .custom(code: 406):
                     self.errorMessage = "You've reached the maximum trial limit for transaction Pin"
                 default:
@@ -379,8 +434,10 @@ extension AuthViewModel {
                     self.errorMessage = "Internal Server Error"
                 case .custom(code: 400):
                     self.errorMessage = "Weak password, please change your password"
-                case .custom(code: 403):
-                    self.errorMessage = "Password tidak berubah"
+                case .customWithStatus(code: 403, codeStatus: "403"):
+                    self.errorMessage = "Password not changed"
+                case .customWithStatus(code: 403, codeStatus: "406"):
+                    self.errorMessage = "Pilih password yang belum pernah digunakan"
                 case .custom(code: 406):
                     self.errorMessage = "Kartu tidak Aktif"
                 default:
@@ -406,6 +463,7 @@ extension AuthViewModel {
             case .success(let response):
                 print("Success \(response)")
                 
+                self.biometricCode = response.fingerprintCode
                 completion(true)
                 
             case .failure(let error):
@@ -500,7 +558,7 @@ extension AuthViewModel {
                             self.errorMessage = "Unauthorized"
                         }
                     case .custom(code: 403):
-                        self.errorMessage = "Password tidak berubah"
+                        self.errorMessage = "Pilih password yang belum pernah digunakan"
                     case .custom(code: 406):
                         self.errorMessage = "Weak password, please change your password"
                     case .custom(code: 500):
@@ -596,7 +654,7 @@ extension AuthViewModel {
                         self.errorMessage = "Unauthorized"
                     }
                 case .custom(code: 403):
-                    self.errorMessage = "Password tidak berubah"
+                    self.errorMessage = "Input yang dimasukkan salah"
                 default:
                     self.errorMessage = "Internal Server Error"
                 }

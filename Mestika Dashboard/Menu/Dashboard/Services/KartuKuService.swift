@@ -206,14 +206,14 @@ class KartuKuService {
             "cardDesign": data.cardDesign,
             "cardNo": data.cardNo,
             "encryptedPin": encryptPassword(password: data.pin),
-            "kabupatenKota": "Bandung",
+            "kabupatenKota": data.addressKotaInput,
             "kecamatan": data.addressKecamatanInput,
             "kelurahan": data.addressKelurahanInput,
-            "kodepos": "40287",
+            "kodepos": data.addressKodePosInput,
             "nameOnCard": data.nameOnCard,
             "pin": encryptPassword(password: data.pin),
             "postalAddress": data.addressInput,
-            "provinsi": "Jawa Barat",
+            "provinsi": data.addressProvinsiInput,
             "rt": "0",
             "rw": "0"
         ]

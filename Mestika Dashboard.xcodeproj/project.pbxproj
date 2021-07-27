@@ -134,7 +134,7 @@
 		524CB11A256E10BD006ED6F0 /* CheckNIKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */; };
 		524CB11F256E1141006ED6F0 /* CitizenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB11E256E1141006ED6F0 /* CitizenService.swift */; };
 		524CB124256E1289006ED6F0 /* CitizenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524CB123256E1289006ED6F0 /* CitizenViewModel.swift */; };
-		525486BC2683986E00092B33 /* SSLPinningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525486BB2683986E00092B33 /* SSLPinningManager.swift */; };
+		525486BC2683986E00092B33 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525486BB2683986E00092B33 /* ServiceManager.swift */; };
 		5256B3CC2654C5A400E38AB7 /* FormForceChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */; };
 		5259501F2553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */; };
 		525950202553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */; };
@@ -148,10 +148,6 @@
 		525BE2422689A22C0076993F /* IpAddress+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE2412689A22C0076993F /* IpAddress+Extensions.swift */; };
 		525BE244268A2BBD0076993F /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525BE243268A2BBD0076993F /* RSAUtils.swift */; };
 		525BE247268A9BB60076993F /* SwCrypt in Frameworks */ = {isa = PBXBuildFile; productRef = 525BE246268A9BB60076993F /* SwCrypt */; };
-		525BE24A268AA1A40076993F /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE248268AA1A40076993F /* WebRTC.xcframework */; };
-		525BE24B268AA1A40076993F /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE248268AA1A40076993F /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		525BE24C268AA1A40076993F /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */; };
-		525BE24D268AA1A40076993F /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		525DB50325466B5C00D48075 /* TransferOnUsConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50225466B5C00D48075 /* TransferOnUsConfirmationScreen.swift */; };
 		525DB50B2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50A2546795400D48075 /* TransferOnUsPinConfirmationScreen.swift */; };
 		525DB51025467BAB00D48075 /* NumPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525DB50F25467BAB00D48075 /* NumPadView.swift */; };
@@ -295,6 +291,11 @@
 		52BF57EB2558F06A00F009B5 /* DetailsTypeSavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57EA2558F06A00F009B5 /* DetailsTypeSavingView.swift */; };
 		52BF57F7255927E300F009B5 /* PaymentPLNScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF57F6255927E300F009B5 /* PaymentPLNScreen.swift */; };
 		52BF58032559346B00F009B5 /* ListLastPaymentPlnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF58022559346B00F009B5 /* ListLastPaymentPlnView.swift */; };
+		52BF750926A525E800394560 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BF750726A525E800394560 /* WebRTC.xcframework */; };
+		52BF750A26A525E800394560 /* WebRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52BF750726A525E800394560 /* WebRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52BF750B26A525E900394560 /* JitsiMeetSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BF750826A525E800394560 /* JitsiMeetSDK.xcframework */; };
+		52BF750C26A525E900394560 /* JitsiMeetSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52BF750826A525E800394560 /* JitsiMeetSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52BF750F26A5427D00394560 /* CustomerAddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF750E26A5427D00394560 /* CustomerAddressResponse.swift */; };
 		52C05570255F687300A57400 /* UserRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C0556F255F687300A57400 /* UserRegistrationService.swift */; };
 		52C2FA2325D1A6F900AC3CF7 /* FavoriteAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2FA2225D1A6F900AC3CF7 /* FavoriteAppBar.swift */; };
 		52C3485825426D6800F08F37 /* SideMenuContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C3485725426D6800F08F37 /* SideMenuContent.swift */; };
@@ -530,14 +531,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C0B8AD2526564F4200BCE21F /* Embed Frameworks */ = {
+		52BF750D26A525E900394560 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				525BE24B268AA1A40076993F /* WebRTC.xcframework in Embed Frameworks */,
-				525BE24D268AA1A40076993F /* JitsiMeetSDK.xcframework in Embed Frameworks */,
+				52BF750A26A525E800394560 /* WebRTC.xcframework in Embed Frameworks */,
+				52BF750C26A525E900394560 /* JitsiMeetSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -676,8 +677,8 @@
 		524CB119256E10BD006ED6F0 /* CheckNIKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNIKResponse.swift; sourceTree = "<group>"; };
 		524CB11E256E1141006ED6F0 /* CitizenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenService.swift; sourceTree = "<group>"; };
 		524CB123256E1289006ED6F0 /* CitizenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenViewModel.swift; sourceTree = "<group>"; };
-		525486BA2683984C00092B33 /* mestika-cert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mestika-cert.cer"; sourceTree = "<group>"; };
-		525486BB2683986E00092B33 /* SSLPinningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPinningManager.swift; sourceTree = "<group>"; };
+		525486BA2683984C00092B33 /* mestika.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = mestika.cer; sourceTree = "<group>"; };
+		525486BB2683986E00092B33 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		5256B3CB2654C5A400E38AB7 /* FormForceChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormForceChangePasswordView.swift; sourceTree = "<group>"; };
 		525950172553E03000C8CA5D /* FormInputNewPasswordForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputNewPasswordForgotPasswordView.swift; sourceTree = "<group>"; };
 		525950182553E03000C8CA5D /* FormInputAtmPinForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputAtmPinForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -836,6 +837,11 @@
 		52BF57EA2558F06A00F009B5 /* DetailsTypeSavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTypeSavingView.swift; sourceTree = "<group>"; };
 		52BF57F6255927E300F009B5 /* PaymentPLNScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPLNScreen.swift; sourceTree = "<group>"; };
 		52BF58022559346B00F009B5 /* ListLastPaymentPlnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListLastPaymentPlnView.swift; sourceTree = "<group>"; };
+		52BF750026A5254800394560 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../Downloads/jitsi-meet-custom-old/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
+		52BF750126A5254900394560 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../Downloads/jitsi-meet-custom-old/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
+		52BF750726A525E800394560 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../../Downloads/jitsi-meet-ios-sdk-3.5.0/ios/sdk/out/WebRTC.xcframework"; sourceTree = "<group>"; };
+		52BF750826A525E800394560 /* JitsiMeetSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JitsiMeetSDK.xcframework; path = "../../../Downloads/jitsi-meet-ios-sdk-3.5.0/ios/sdk/out/JitsiMeetSDK.xcframework"; sourceTree = "<group>"; };
+		52BF750E26A5427D00394560 /* CustomerAddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAddressResponse.swift; sourceTree = "<group>"; };
 		52C0556F255F687300A57400 /* UserRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationService.swift; sourceTree = "<group>"; };
 		52C2FA2225D1A6F900AC3CF7 /* FavoriteAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteAppBar.swift; sourceTree = "<group>"; };
 		52C3485725426D6800F08F37 /* SideMenuContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContent.swift; sourceTree = "<group>"; };
@@ -1070,15 +1076,15 @@
 				520585FA25721F00005DB764 /* Introspect in Frameworks */,
 				06E8A4AB2578F22400E61002 /* SDWebImageSwiftUI in Frameworks */,
 				52FCDD95263EF48B002A76E9 /* SwiftStomp in Frameworks */,
+				52BF750926A525E800394560 /* WebRTC.xcframework in Frameworks */,
 				520585FB25721F00005DB764 /* Indicators in Frameworks */,
 				520585F525721F00005DB764 /* PopupView in Frameworks */,
 				520585F625721F00005DB764 /* BottomSheet in Frameworks */,
 				525BE247268A9BB60076993F /* SwCrypt in Frameworks */,
 				520585F825721F00005DB764 /* SwiftUIX in Frameworks */,
 				5299B7B8269C446F0012B241 /* IDZSwiftCommonCrypto in Frameworks */,
-				525BE24A268AA1A40076993F /* WebRTC.xcframework in Frameworks */,
 				12478D1186E08B100E24B481 /* Pods_Mestika_Dashboard.framework in Frameworks */,
-				525BE24C268AA1A40076993F /* JitsiMeetSDK.xcframework in Frameworks */,
+				52BF750B26A525E900394560 /* JitsiMeetSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1169,7 +1175,11 @@
 			isa = PBXGroup;
 			children = (
 				525BE249268AA1A40076993F /* JitsiMeetSDK.xcframework */,
+				52BF750126A5254900394560 /* JitsiMeetSDK.xcframework */,
+				52BF750826A525E800394560 /* JitsiMeetSDK.xcframework */,
 				525BE248268AA1A40076993F /* WebRTC.xcframework */,
+				52BF750026A5254800394560 /* WebRTC.xcframework */,
+				52BF750726A525E800394560 /* WebRTC.xcframework */,
 				1F652904AE43713C516FA1A2 /* Pods_Mestika_Dashboard.framework */,
 				1353BBAF555BA861CC94BF95 /* Pods_Mestika_Dashboard_Mestika_DashboardUITests.framework */,
 				9FA4641FE3F09350872C55F6 /* Pods_Mestika_DashboardTests.framework */,
@@ -1349,7 +1359,7 @@
 				C00AC552255E52E2005D67C0 /* Menu */,
 				C092ABFD2553B51B0051CE3E /* Resources */,
 				52ADFEB22557DA0700A1001F /* Utils */,
-				525486BA2683984C00092B33 /* mestika-cert.cer */,
+				525486BA2683984C00092B33 /* mestika.cer */,
 				5245F884253FE702002E8B53 /* AppDelegate.swift */,
 				5245F886253FE702002E8B53 /* SceneDelegate.swift */,
 				5245F888253FE702002E8B53 /* ContentView.swift */,
@@ -1693,7 +1703,7 @@
 				528AE2C125959B8C003AFD73 /* AppConstants.swift */,
 				52FCDD99263EF4F2002A76E9 /* StompClientModel.swift */,
 				5219DA2D267C6AC500A86438 /* CheckJailbroken.swift */,
-				525486BB2683986E00092B33 /* SSLPinningManager.swift */,
+				525486BB2683986E00092B33 /* ServiceManager.swift */,
 				525BE243268A2BBD0076993F /* RSAUtils.swift */,
 				5299B7AD269AB4FA0012B241 /* BlowfishEncode.swift */,
 			);
@@ -2266,6 +2276,7 @@
 				52CC0A94265F637300828EFB /* FreezeAccountResponse.swift */,
 				52CC0A96265F80D200828EFB /* DeviceTraceModel.swift */,
 				529D3DEE2670ADB00057D64D /* SavingAccountTransferResponse.swift */,
+				52BF750E26A5427D00394560 /* CustomerAddressResponse.swift */,
 			);
 			name = Models;
 			path = "Mestika Dashboard/Menu/Dashboard/Models";
@@ -2504,7 +2515,7 @@
 				5245F87E253FE702002E8B53 /* Frameworks */,
 				5245F87F253FE702002E8B53 /* Resources */,
 				B64A1E7D1582B1355F4D21B4 /* [CP] Embed Pods Frameworks */,
-				C0B8AD2526564F4200BCE21F /* Embed Frameworks */,
+				52BF750D26A525E900394560 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2801,7 +2812,7 @@
 				527E3125256613EB004FF5ED /* MobileVersionService.swift in Sources */,
 				C06A492026404F8C0046E397 /* PdfKitView.swift in Sources */,
 				52ADFF2B2557DD2E00A1001F /* ScanningView.swift in Sources */,
-				525486BC2683986E00092B33 /* SSLPinningManager.swift in Sources */,
+				525486BC2683986E00092B33 /* ServiceManager.swift in Sources */,
 				52FE9AC12637DB0B0089EBAF /* FormMoveBalanceView.swift in Sources */,
 				52DEC7AD256F9BF100A680C6 /* ErrorResult.swift in Sources */,
 				528AE2D12595BB01003AFD73 /* AddressViewModel.swift in Sources */,
@@ -3039,6 +3050,7 @@
 				5245F889253FE702002E8B53 /* ContentView.swift in Sources */,
 				522E4CCC25EF6E2B009B267F /* CardBrokenModel.swift in Sources */,
 				52F4E3BE264673760094F320 /* FormChangeOtherDataView.swift in Sources */,
+				52BF750F26A5427D00394560 /* CustomerAddressResponse.swift in Sources */,
 				52FE9AE62637FC6F0089EBAF /* AddBalanceConfirmationView.swift in Sources */,
 				5233700C26298FFB00ED3E4F /* DepositAccountView.swift in Sources */,
 				C043CFB525CD34BD00328C91 /* FormChangePinTransactionView.swift in Sources */,

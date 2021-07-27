@@ -90,9 +90,11 @@ struct TransferRtgsScreen: View {
     @State private var showDialogConfirmation: Bool = false
     @State private var showDialogSelectAccount: Bool = false
     @State private var showDialogErrorInquiry: Bool = false
+    @State private var showDialogNoDestinationName: Bool = false
     
     // Variable Disable
     @State private var disabledButton = true
+    @State private var isManualInputDestinationName = false
     
     // Variable Route
     @State private var isRouteTransaction: Bool = false
@@ -186,7 +188,11 @@ struct TransferRtgsScreen: View {
                                     self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     print("OKE")
                                     
-                                    inquiryTransfer()
+                                    if self.isManualInputDestinationName {
+                                        self.isRouteTransaction = true
+                                    } else {
+                                        inquiryTransfer()
+                                    }
                                     
                                 } else {
                                     self.transferData.destinationNumber = self.noRekeningCtrl
@@ -202,7 +208,11 @@ struct TransferRtgsScreen: View {
                                     self.transferData.transactionDate = dateFormatter.string(from: self.date)
                                     print("OKE")
                                     
-                                    inquiryTransfer()
+                                    if self.isManualInputDestinationName {
+                                        self.isRouteTransaction = true
+                                    } else {
+                                        inquiryTransfer()
+                                    }
                                 }
                                 
                             } else if (amount > myCredit ) {
@@ -228,13 +238,14 @@ struct TransferRtgsScreen: View {
                 })
             }
             
-            if (self.showDialogMinReached || self.showDialogMaxReached || self.showDialogSelectAccount || self.showDialogMinTransaction || self.showDialogErrorInquiry) {
+            if (self.showDialogMinReached || self.showDialogMaxReached || self.showDialogSelectAccount || self.showDialogMinTransaction || self.showDialogErrorInquiry || self.showDialogNoDestinationName) {
                 ModalOverlay(tapAction: { withAnimation {
                     self.showDialogMaxReached = false
                     self.showDialogMinReached = false
                     self.showDialogSelectAccount = false
                     self.showDialogMinTransaction = false
                     self.showDialogErrorInquiry = false
+                    self.showDialogNoDestinationName = false
                 }})
                 .edgesIgnoringSafeArea(.all)
             }
@@ -269,10 +280,12 @@ struct TransferRtgsScreen: View {
         .popup(isPresented: $showDialogErrorInquiry, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
             modalErrorInquiry()
         }
+        .popup(isPresented: $showDialogNoDestinationName, type: .floater(), position: .bottom, animation: Animation.spring(),closeOnTap: false, closeOnTapOutside: false) {
+            modalErrorNoDestinationName()
+        }
         .onAppear {
             self.isRouteTransaction = false
             self.transferData = TransferOffUsModel()
-            //            self.transferType = _listTransferType[0]
             if (dest != "") {
                 print(desc)
                 self.noRekeningCtrl = self.dest
@@ -318,6 +331,8 @@ struct TransferRtgsScreen: View {
                         self.transferType = data
                         self.transferData.transactionType = data
                         
+                        print("INI TRANSFER TYPE")
+                        print(self.transferType)
                         if (self.transferType == "RTGS") {
                             print(limitVM.limitUserRtgs)
                             self.maxLimit = limitVM.limitUserRtgs
@@ -447,6 +462,34 @@ struct TransferRtgsScreen: View {
                 .cornerRadius(10)
                 .padding(.horizontal, 15)
                 .padding(.bottom, 10)
+            }
+            
+            // Field Nama Tujuan
+            if isManualInputDestinationName {
+                VStack {
+                    HStack {
+                        Text("Destination Name".localized(language))
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 5)
+                    
+                    HStack {
+                        TextField("Name".localized(language), text: self.$destinationNameCtrl, onEditingChanged: { changed in
+                            self.transferData.destinationName = self.destinationNameCtrl
+                        })
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .padding()
+                    }
+                    .background(Color(hex: "#F6F8FB"))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 10)
+                }
             }
             
             if transferType == "Online" {
@@ -1089,6 +1132,47 @@ struct TransferRtgsScreen: View {
         .shadow(radius: 20)
     }
     
+    func modalErrorNoDestinationName() -> some View {
+        VStack(alignment: .leading) {
+            Image("ic_title_warning")
+                .resizable()
+                .frame(width: 74, height: 81)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
+            
+            Text("Destination Name not Found, please input manual.".localized(language))
+                .font(.custom("Montserrat-SemiBold", size: 18))
+                .foregroundColor(.red)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Text("\(self.messageStatusInquiry)")
+                .font(.custom("Montserrat-Light", size: 14))
+                .foregroundColor(Color(hex: "#232175"))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 20)
+            
+            Button(
+                action: {
+                    self.showDialogNoDestinationName = false
+                },
+                label: {
+                    Text("OK")
+                        .foregroundColor(.white)
+                        .font(.custom("Montserrat-SemiBold", size: 14))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                })
+                .background(Color(hex: "#2334D0"))
+                .cornerRadius(12)
+                .padding(.bottom, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 60)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 20)
+    }
+    
     func modalSelectBankAccount() -> some View {
         VStack {
             HStack {
@@ -1182,14 +1266,18 @@ struct TransferRtgsScreen: View {
         }
     }
     
-    @ObservedObject var referenceVM = ReferenceSummaryViewModel()
+    @StateObject var referenceVM = ReferenceSummaryViewModel()
     func getListBank() {
         self.referenceVM.getAllSchedule { success in
             
             if success {
                 print("SUCCESS")
-                self.transferData.bankName = self.referenceVM._listBank[0].name
-                self.transferData.destinationBankCode = self.referenceVM._listBank[0].code
+                
+                self.referenceVM._listBank.forEach { data in
+                    self.transferData.bankName = data.name
+                    self.transferData.destinationBankCode = data.code
+                }
+                
                 self.transferData.combinationBankName = ""
                 print(self.referenceVM._listBank.count)
             }
@@ -1200,13 +1288,27 @@ struct TransferRtgsScreen: View {
         }
     }
     
-    @ObservedObject var limitVM = TransferViewModel()
+    @StateObject var limitVM = TransferViewModel()
     func getLimit() {
         
         self.limitVM.limitUser { success in
             
             if success {
                 print("GET LIMIT SUCCESS")
+                
+                if (self.transferType == "RTGS") {
+                    print(limitVM.limitUserRtgs)
+                    self.maxLimit = limitVM.limitUserRtgs
+                    self.limitTrx = String(maxLimit)
+                } else if (self.transferType == "SKN") {
+                    print(limitVM.limitUserSkn)
+                    self.maxLimit = limitVM.limitUserSkn
+                    self.limitTrx = String(maxLimit)
+                } else {
+                    print(limitVM.limitUserOnline)
+                    self.maxLimit = limitVM.limitUserOnline
+                    self.limitTrx = String(maxLimit)
+                }
             }
             
             if !success {
@@ -1229,13 +1331,24 @@ struct TransferRtgsScreen: View {
                         print("\nSUCCESS DESTINATION NAME : \(self.limitVM.destinationName)\n")
                         self.destinationNameCtrl = self.limitVM.destinationName
                         
-                        self.transferData.ref = self.limitVM.reffNumber
-                        self.transferData.destinationNumber = self.limitVM.destinationNumber
-                        self.transferData.destinationName = self.limitVM.destinationName
-                        self.transferData.adminFee = self.limitVM.fee
-                        self.transferData.trxDateResp = self.limitVM.transactionDate
-                        
-                        self.isRouteTransaction = true
+                        if (destinationNameCtrl == "" || destinationNameCtrl.isEmpty) {
+                            self.isManualInputDestinationName = true
+                            self.transferData.ref = self.limitVM.reffNumber
+                            self.transferData.destinationNumber = self.limitVM.destinationNumber
+                            self.transferData.adminFee = self.limitVM.fee
+                            self.transferData.trxDateResp = self.limitVM.transactionDate
+                            
+                            self.showDialogNoDestinationName = true
+                        } else {
+                            self.transferData.ref = self.limitVM.reffNumber
+                            self.transferData.destinationNumber = self.limitVM.destinationNumber
+                            self.transferData.destinationName = self.limitVM.destinationName
+                            self.transferData.adminFee = self.limitVM.fee
+                            self.transferData.trxDateResp = self.limitVM.transactionDate
+                            
+                            
+                            self.isRouteTransaction = true
+                        }
                     } else {
                         
                         self.messageStatusInquiry = self.limitVM.messageStatus

@@ -848,7 +848,7 @@ struct InformasiPerusahaanView: View {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
-                    registerData.alamatPerusahaan = self.addressSugestion[0].formatted_address
+                    registerData.alamatPerusahaan = self.addressSugestion[0].street
                     registerData.kotaPerusahaan = self.addressSugestion[0].city
                     registerData.provinsiPerusahaan = self.addressSugestion[0].province
                     registerData.kodePos = self.addressSugestion[0].postalCode

@@ -113,7 +113,7 @@ struct PhoneOTPRegisterNasabahView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Text("We have sent OTP to no.\n".localized(language) + " +62\(destinationNumber)")
+                    Text("We have sent OTP to no.\n".localized(language) + " +62\(replace(myString: destinationNumber, [3,4,5,6], "*"))")
                         .font(.custom("Montserrat-SemiBold", size: 18))
                         .foregroundColor(Color(hex: "#232175"))
                         .multilineTextAlignment(.center)

@@ -35,13 +35,18 @@ class ReferenceSummaryViewModel: ObservableObject {
             case .success(let response):
                 print("Length Data Bank : \(response.count)")
                 
-                self._listBank = response
-                self.isLoading = false
+                DispatchQueue.main.async {
+                    self._listBank = response
+                    self.isLoading = false
+                }
                 completion(true)
                 
             case.failure(let error):
                 print("Error Get Schedule")
-                self.isLoading = false
+                
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
                 print(error.localizedDescription)
                 
                 completion(false)

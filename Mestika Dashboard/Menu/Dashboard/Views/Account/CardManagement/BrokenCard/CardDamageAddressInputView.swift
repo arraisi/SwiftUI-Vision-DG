@@ -19,6 +19,19 @@ struct CardDamageAddressInputView: View {
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
     var user: FetchedResults<Registration>
     
+    @State var addressOptions: [MasterModel] = [
+        MasterModel(id: 1, name: "Address according to Identity Card/(KTP)".localized(LocalizationService.shared.language)),
+        MasterModel(id: 2, name: "Mailing address".localized(LocalizationService.shared.language)),
+        MasterModel(id: 3, name: "Company's address".localized(LocalizationService.shared.language)),
+    ]
+    
+    @State var addressOptionId = 0
+    
+    @State var allProvince = MasterProvinceResponse()
+    @State var allRegency = MasterRegencyResponse()
+    @State var allDistrict = MasterDistrictResponse()
+    @State var allVillage = MasterVilageResponse()
+    
     @State var addressInput: String = ""
 //    @State var addressRtRwInput: String = ""
     @State var addressKelurahanInput: String = ""
@@ -42,7 +55,7 @@ struct CardDamageAddressInputView: View {
     @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)
     
     var disableForm: Bool {
-        if cardData.addressInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
+        if addressOptionId == 0 || addressInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty {
             return true
         }
         
@@ -65,6 +78,9 @@ struct CardDamageAddressInputView: View {
                             .padding(.vertical, 25)
                             .padding(.horizontal, 20)
                             .fixedSize(horizontal: false, vertical: true)
+                        
+                        addressCard
+                            .padding(.bottom, 10)
                         
                         VStack(alignment: .center) {
                             Text("Make sure your correspondence address is correct".localized(language))
@@ -92,16 +108,13 @@ struct CardDamageAddressInputView: View {
                                     }
                                     
                                     HStack {
-                                        MultilineTextField("Address".localized(language), text: $cardData.addressInput, onCommit: {
-                                            self.addressInput = self.cardData.addressInput
+                                        MultilineTextField("Address".localized(language), text: $addressInput, onCommit: {
+                                             self.cardData.addressInput = self.addressInput
                                         })
-                                        .onReceive(addressInput.publisher.collect()) {
-                                            self.addressInput = String($0.prefix(150))
-                                        }
-                                        .onReceive(Just(cardData.addressInput)) { newValue in
+                                        .onReceive(Just(addressInput)) { newValue in
                                             let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.".contains($0) }
                                             if filtered != newValue {
-                                                self.cardData.addressInput = filtered
+                                                self.addressInput = filtered
                                             }
                                         }
                                         .font(Font.system(size: 14))
@@ -129,6 +142,9 @@ struct CardDamageAddressInputView: View {
                                     print("on commit")
                                     cardData.addressKotaInput = self.addressKotaInput
                                 })
+                                .onReceive(addressKotaInput.publisher.collect()) {
+                                    self.addressKotaInput = String($0.prefix(20))
+                                }
                                 .padding(.horizontal, 20)
                                 
                                 LabelTextField(value: $addressProvinsiInput, label: "Province".localized(language), placeHolder: "Province".localized(language), onEditingChanged: { (Bool) in
@@ -138,6 +154,9 @@ struct CardDamageAddressInputView: View {
                                     print("on commit")
                                     cardData.addressProvinsiInput = self.addressProvinsiInput
                                 })
+                                .onReceive(addressProvinsiInput.publisher.collect()) {
+                                    self.addressProvinsiInput = String($0.prefix(15))
+                                }
                                 .padding(.horizontal, 20)
                                 
                                 LabelTextField(value: $addressKelurahanInput, label: "Village".localized(language), placeHolder: "Village".localized(language), onEditingChanged: { (Bool) in
@@ -147,6 +166,9 @@ struct CardDamageAddressInputView: View {
                                     print("on commit")
                                     cardData.addressKelurahanInput = self.addressKelurahanInput
                                 })
+                                .onReceive(addressKelurahanInput.publisher.collect()) {
+                                    self.addressKelurahanInput = String($0.prefix(50))
+                                }
                                 .padding(.horizontal, 20)
                                 
                                 LabelTextField(value: $addressKecamatanInput, label: "Sub-district".localized(language), placeHolder: "Sub-district".localized(language), onEditingChanged: { (Bool) in
@@ -156,6 +178,9 @@ struct CardDamageAddressInputView: View {
                                     print("on commit")
                                     cardData.addressKecamatanInput = self.addressKecamatanInput
                                 })
+                                .onReceive(addressKecamatanInput.publisher.collect()) {
+                                    self.addressKecamatanInput = String($0.prefix(50))
+                                }
                                 .padding(.horizontal, 20)
                                 
                                 VStack(alignment: .leading) {
@@ -231,27 +256,101 @@ struct CardDamageAddressInputView: View {
         .navigationBarTitle("Broken Card".localized(language), displayMode: .inline)
         .onAppear {
             print("ON APPEAR")
-            //            user.forEach { data in
-            //                print(data.addressInput!)
-            //                cardData.addressInput = data.addressInput!
-            //                cardData.addressPostalCodeInput = data.kodePosKeluarga!
-            //                cardData.addressKecamatanInput = data.addressKecamatanInput!
-            //                cardData.addressKelurahanInput = data.addressKelurahanInput!
-            //                cardData.addressRtRwInput = "02 / 03"
-            //
-            //                self.addressInput = data.addressInput!
-            //                self.addressRtRwInput = "02 / 03"
-            //                self.addressKelurahanInput = data.addressKelurahanInput!
-            //                self.addressKecamatanInput = data.addressKecamatanInput!
-            //                self.addressKodePosInput = data.kodePosKeluarga!
-            //            }
-            //            getProfile()
+            getCustomerAddress()
         }
         .onTapGesture() {
             UIApplication.shared.endEditing()
         }
         .popup(isPresented: $showingModal, type: .default, position: .bottom, animation: Animation.spring(), closeOnTap: false, closeOnTapOutside: true) {
             addressSuggestionPopUp()
+        }
+    }
+    
+    var addressCard: some View {
+        VStack {
+            Text("Card Block Address".localized(language))
+                .multilineTextAlignment(.center)
+                .font(.custom("Montserrat-Bold", size: 18))
+                .foregroundColor(Color("DarkStaleBlue"))
+                .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
+        
+            RadioButtonGroup(
+                items: addressOptions,
+                selectedId: $addressOptionId) { selected in
+                fetchAddressOption()
+            }
+            .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+            
+            VStack { Divider() }.padding(.horizontal, 20)
+        }
+        .frame(width: UIScreen.main.bounds.width - 50)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
+        .padding(.top, 20)
+    }
+    
+    func fetchAddressOption() {
+        switch addressOptionId {
+        case 1: /// Sesuai KTP
+            print("Case Sesuai KTP")
+            cardData.addressInput = self.profileVM.alamat
+            cardData.addressKodePosInput = "40287"
+            cardData.addressKecamatanInput = self.profileVM.kecamatanName
+            cardData.addressKelurahanInput = self.profileVM.kelurahanName
+            cardData.addressKotaInput = self.profileVM.kabupatenName
+            cardData.addressProvinsiInput = self.profileVM.provinsiName
+            
+            self.addressInput = self.profileVM.alamat
+            self.addressKelurahanInput = self.profileVM.kelurahanName
+            self.addressKecamatanInput = self.profileVM.kecamatanName
+            self.addressKodePosInput = "40287"
+            self.addressKotaInput = self.profileVM.kabupatenName
+            self.addressProvinsiInput = self.profileVM.provinsiName
+        case 2: /// Sesuai Surat Menyurat
+            print("Case Sesuai Surat Menyurat")
+            cardData.addressInput = self.profileVM.alamatSuratMenyurat
+            cardData.addressKodePosInput = self.profileVM.kodePosSuratMenyurat
+            cardData.addressKecamatanInput = self.profileVM.kecamatanSuratMenyurat
+            cardData.addressKelurahanInput = self.profileVM.kelurahanSuratMenyurat
+            cardData.addressKotaInput = self.profileVM.kabupatenSuratMenyurat
+            cardData.addressProvinsiInput = self.profileVM.provinsiSuratMenyurat
+            
+            self.addressInput = self.profileVM.alamatSuratMenyurat
+            self.addressKelurahanInput = self.profileVM.kelurahanSuratMenyurat
+            self.addressKecamatanInput = self.profileVM.kecamatanSuratMenyurat
+            self.addressKodePosInput = self.profileVM.kodePosSuratMenyurat
+            self.addressKotaInput = self.profileVM.kabupatenSuratMenyurat
+            self.addressProvinsiInput = self.profileVM.provinsiSuratMenyurat
+        case 3: /// Sesuai Perusahaan
+            print("Case Sesuai Perusahaan")
+            cardData.addressInput = self.profileVM.alamatPerusahaan
+            cardData.addressKodePosInput = self.profileVM.kodePosPerusahaan
+            cardData.addressKecamatanInput = self.profileVM.kecamatanPerusahaan
+            cardData.addressKelurahanInput = self.profileVM.kelurahanPerusahaan
+            cardData.addressKotaInput = self.profileVM.kotaPerusahaan
+            cardData.addressProvinsiInput = self.profileVM.provinsiPerusahaan
+            
+            self.addressInput = self.profileVM.alamatPerusahaan
+            self.addressKelurahanInput = self.profileVM.kelurahanPerusahaan
+            self.addressKecamatanInput = self.profileVM.kecamatanPerusahaan
+            self.addressKodePosInput = self.profileVM.kodePosPerusahaan
+            self.addressKotaInput = self.profileVM.kotaPerusahaan
+            self.addressProvinsiInput = self.profileVM.provinsiPerusahaan
+        default:
+            cardData.addressInput = ""
+            cardData.addressPostalCodeInput = ""
+            cardData.addressKecamatanInput = ""
+            cardData.addressKelurahanInput = ""
+            cardData.addressKotaInput = ""
+            cardData.addressProvinsiInput = ""
+            
+            self.addressInput = ""
+            self.addressKelurahanInput = ""
+            self.addressKecamatanInput = ""
+            self.addressKodePosInput = ""
+            self.addressKotaInput = ""
+            self.addressProvinsiInput = ""
         }
     }
     
@@ -325,7 +424,7 @@ struct CardDamageAddressInputView: View {
     func searchAddress(keyword: String? = nil) {
         self.isLoading = true
         
-        self.addressVM.getAddressSugestionResult(addressInput: keyword ?? cardData.addressInput) { success in
+        self.addressVM.getAddressSugestionResult(addressInput: keyword ?? addressInput) { success in
             if success {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestionResult = self.addressVM.addressResult
@@ -343,7 +442,7 @@ struct CardDamageAddressInputView: View {
         }
     }
     
-    @ObservedObject var profileVM = ProfileViewModel()
+    @StateObject var profileVM = ProfileViewModel()
     func getProfile() {
         self.isLoading = true
         self.profileVM.getProfile { success in
@@ -379,7 +478,7 @@ struct CardDamageAddressInputView: View {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
-                    cardData.addressInput = self.addressSugestion[0].formatted_address
+                    cardData.addressInput = self.addressSugestion[0].street
                     cardData.addressPostalCodeInput = self.addressSugestion[0].postalCode
                     cardData.addressKecamatanInput = self.addressSugestion[0].kecamatan
                     cardData.addressKelurahanInput = self.addressSugestion[0].kelurahan
@@ -387,7 +486,7 @@ struct CardDamageAddressInputView: View {
                     cardData.addressProvinsiInput = self.addressSugestion[0].province
 //                    cardData.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     
-                    self.addressInput = self.addressSugestion[0].formatted_address
+                    self.addressInput = self.addressSugestion[0].street
 //                    self.addressRtRwInput = "\(self.addressSugestion[0].rt) / \(self.addressSugestion[0].rw)"
                     self.addressKelurahanInput = self.addressSugestion[0].kelurahan
                     self.addressKecamatanInput = self.addressSugestion[0].kecamatan
@@ -405,6 +504,71 @@ struct CardDamageAddressInputView: View {
                 self.isShowAlert = true
                 self.messageResponse = self.addressVM.message
                 print("Not Found")
+            }
+        }
+    }
+    
+    func getAllProvince() {
+        self.addressVM.getAllProvince { success in
+            
+            if success {
+                self.allProvince = self.addressVM.provinceResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getRegencyByIdProvince(idProvince: String) {
+        self.addressVM.getRegencyByIdProvince(idProvince: idProvince) { success in
+            
+            if success {
+                self.allRegency = self.addressVM.regencyResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getDistrictByIdRegency(idRegency: String) {
+        self.addressVM.getDistrictByIdRegency(idRegency: idRegency) { success in
+            
+            if success {
+                self.allDistrict = self.addressVM.districtResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getVilageByIdDistrict(idDistrict: String) {
+        self.addressVM.getVilageByIdDistrict(idDistrict: idDistrict) { success in
+            
+            if success {
+                self.allVillage = self.addressVM.vilageResult
+            }
+            
+            if !success {
+                
+            }
+        }
+    }
+    
+    func getCustomerAddress() {
+        self.isLoading = true
+        self.profileVM.getCustomerAddress { success in
+            if success {
+                self.isLoading = false
+            }
+            
+            if !success {
+                self.isLoading = false
             }
         }
     }

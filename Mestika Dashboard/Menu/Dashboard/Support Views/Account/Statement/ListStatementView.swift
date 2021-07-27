@@ -20,139 +20,142 @@ struct ListStatementView: View {
     let accountNumber: String
     
     @State var showAlert: Bool = false
+    @State var isLoading: Bool = false
     
     var body: some View {
         VStack {
             
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack {
-                    VStack(alignment: .center, spacing: 20){
-                        HStack {
-                            Text("Rekening Sumber".localized(language))
-                                .font(.custom("Montserrat-SemiBold", size: 14))
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            Menu {
-                                ForEach(0..<self.listSourceNumber.count) { index in
-                                    Button(action: {
-                                        self.selectedSourceNumber = self.listSourceNumber[index]
-                                    }) {
-                                        Text(self.listSourceNumber[index])
-                                            .bold()
-                                            .font(.custom("Montserrat-Regular", size: 12))
-                                            .foregroundColor(.black)
-                                    }
-                                }
-                            } label: {
-                                VStack(alignment: .leading) {
-                                    Text(selectedSourceNumber)
-                                        .font(.subheadline)
-                                        .foregroundColor(.black)
-                                        .fontWeight(.bold)
-                                }
-                                .padding()
-                                
+            LoadingView(isShowing: self.$isLoading) {
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack {
+                        VStack(alignment: .center, spacing: 20){
+                            HStack {
+                                Text("Rekening Sumber".localized(language))
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
                                 Spacer()
-                                
-                                Image("ic_expand").padding()
                             }
-                        }
-                        .background(Color.white)
-                        .cornerRadius(15)
-                        .shadow(color: Color.gray.opacity(0.3), radius: 10)
-                        
-                        Button(action: {
-                            self._listStatement.removeAll()
-                            self.eStatementVM.getListEStatement(accountNumber: selectedSourceNumber) { (isSuccess) in
-                                if isSuccess {
-                                    self._listStatement = self.eStatementVM.listEStatement.data ?? []
-                                }
-                            }
-                        }, label: {
-                            Text("View Search Results".localized(language))
-                                .font(.custom("Montserrat-SemiBold", size: 14))
-                                .foregroundColor(.white)
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
-                                .background(Color(hex: selectedSourceNumber == "" ? "#CBD1D9" : "#232175"))
-                                .cornerRadius(15)
-                        })
-                        .disabled(selectedSourceNumber == "" ? true : false)
-                        
-                    }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color: Color.gray.opacity(0.3), radius: 5)
-                    .padding()
-                    
-                    Spacer()
-                }
-                
-                VStack {
-                    HStack {
-                        Text("E-Statement")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .fontWeight(.light)
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                    
-                    HStack {
-                        Text("Monthly financial reports".localized(language))
-                            .fontWeight(.light)
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal, 20)
-                    
-                    Divider()
-                        .padding(.horizontal, 10)
-                        .padding(.bottom, 20)
-                    
-                    if (_listStatement.isEmpty) {
-                        
-                    } else {
-                        List {
-                            ForEach(0..<_listStatement.count, id: \.self) { i in
-                                HStack {
-                                    HStack {
-                                        Text(_listStatement[i].periode ?? "")
-                                            .fontWeight(.semibold)
-                                        Text(_listStatement[i].accountNumber ?? "")
-                                            .fontWeight(.semibold)
+                            
+                            HStack {
+                                Menu {
+                                    ForEach(0..<self.listSourceNumber.count) { index in
+                                        Button(action: {
+                                            self.selectedSourceNumber = self.listSourceNumber[index]
+                                        }) {
+                                            Text(self.listSourceNumber[index])
+                                                .bold()
+                                                .font(.custom("Montserrat-Regular", size: 12))
+                                                .foregroundColor(.black)
+                                        }
                                     }
+                                } label: {
+                                    VStack(alignment: .leading) {
+                                        Text(selectedSourceNumber)
+                                            .font(.subheadline)
+                                            .foregroundColor(.black)
+                                            .fontWeight(.bold)
+                                    }
+                                    .padding()
                                     
                                     Spacer()
                                     
-                                    Button(action: {
-                                        self.eStatementVM.getFileEstatement(fileName: _listStatement[i].fileName!, accountNumber: selectedSourceNumber) { success in
-                                            
-                                            if success {
-                                                self.showAlert = true
-                                            }
-                                            
-                                        }
-                                    }, label: {
-                                        Image("ic_download")
-                                    })
-                                    
-                                    
-                                }.padding(.vertical, 5)
+                                    Image("ic_expand").padding()
+                                }
                             }
-                        }.frame(height: 200)
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .shadow(color: Color.gray.opacity(0.3), radius: 10)
+                            
+                            Button(action: {
+                                self._listStatement.removeAll()
+                                self.eStatementVM.getListEStatement(accountNumber: selectedSourceNumber) { (isSuccess) in
+                                    if isSuccess {
+                                        self._listStatement = self.eStatementVM.listEStatement.data ?? []
+                                    }
+                                }
+                            }, label: {
+                                Text("View Search Results".localized(language))
+                                    .font(.custom("Montserrat-SemiBold", size: 14))
+                                    .foregroundColor(.white)
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
+                                    .background(Color(hex: selectedSourceNumber == "" ? "#CBD1D9" : "#232175"))
+                                    .cornerRadius(15)
+                            })
+                            .disabled(selectedSourceNumber == "" ? true : false)
+                            
+                        }
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .shadow(color: Color.gray.opacity(0.3), radius: 5)
+                        .padding()
+                        
+                        Spacer()
                     }
                     
-                    Spacer()
+                    VStack {
+                        HStack {
+                            Text("E-Statement")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .fontWeight(.light)
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 20)
+                        
+                        HStack {
+                            Text("Monthly financial reports".localized(language))
+                                .fontWeight(.light)
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        Divider()
+                            .padding(.horizontal, 10)
+                            .padding(.bottom, 20)
+                        
+                        if (_listStatement.isEmpty) {
+                            
+                        } else {
+                            List {
+                                ForEach(0..<_listStatement.count, id: \.self) { i in
+                                    HStack {
+                                        HStack {
+                                            Text(_listStatement[i].periode ?? "")
+                                                .fontWeight(.semibold)
+                                            Text(_listStatement[i].accountNumber ?? "")
+                                                .fontWeight(.semibold)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        Button(action: {
+                                            self.eStatementVM.getFileEstatement(fileName: _listStatement[i].fileName!, accountNumber: selectedSourceNumber) { success in
+                                                
+                                                if success {
+                                                    self.showAlert = true
+                                                }
+                                                
+                                            }
+                                        }, label: {
+                                            Image("ic_download")
+                                        })
+                                        
+                                        
+                                    }.padding(.vertical, 5)
+                                }
+                            }.frame(height: 200)
+                        }
+                        
+                        Spacer()
+                    }
+                    .frame(width: UIScreen.main.bounds.width - 30)
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: Color.gray.opacity(0.3), radius: 10)
                 }
-                .frame(width: UIScreen.main.bounds.width - 30)
-                .background(Color.white)
-                .cornerRadius(15)
-                .shadow(color: Color.gray.opacity(0.3), radius: 10)
             }
 
         }
@@ -165,7 +168,9 @@ struct ListStatementView: View {
             )
         }
         .onAppear{
+            self.isLoading = true
             self.savingAccountVM.getAccounts { (success) in
+                self.isLoading = false
                 self.savingAccountVM.accounts.forEach { e in
                     print(e.accountNumber)
                     

@@ -43,7 +43,7 @@ struct VerificationAddressView: View {
         }
         
         if (registerData.verificationAddressId != 1) {
-            if addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty || addressKotaInput.isEmpty || addressProvinsiInput.isEmpty {
+            if addressInput.isEmpty || registerData.addressInput.isEmpty || addressKelurahanInput.isEmpty || addressKecamatanInput.isEmpty || addressKodePosInput.isEmpty || addressKotaInput.isEmpty || addressProvinsiInput.isEmpty {
                 return true
             }
         } 
@@ -528,8 +528,8 @@ struct VerificationAddressView: View {
                 self.isLoading = self.addressVM.isLoading
                 self.addressSugestion = self.addressVM.address
                 DispatchQueue.main.async {
-                    registerData.addressInput = self.addressSugestion[0].formatted_address
-                    self.addressInput = self.addressSugestion[0].formatted_address
+                    registerData.addressInput = self.addressSugestion[0].street
+                    self.addressInput = self.addressSugestion[0].street
                     
                     registerData.addressPostalCodeInput = self.addressSugestion[0].postalCode
                     registerData.addressKecamatanInput = self.addressSugestion[0].kelurahan

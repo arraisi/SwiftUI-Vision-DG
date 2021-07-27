@@ -268,11 +268,64 @@ extension ProfileViewModel {
                     
                     self.tujuanPembukaan = response.last?.cdd.tujuanPembukaanRekening ?? ""
                     self.sumberDana = response.last?.cdd.sumberDana ?? ""
-                    self.jumlahPenarikanPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.frequencyPenarikanDana ?? "")
-                    self.jumlahPenarikanDanaPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.jumlahPenarikanDana ?? "")
-                    self.jumlahSetoranPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.frequencySetoranDana ?? "")
-                    self.jumlahSetoranDanaPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.jumlahSetoranDana ?? "")
+//                    self.jumlahPenarikanPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.frequencyPenarikanDana ?? "")
+//                    self.jumlahPenarikanDanaPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.jumlahPenarikanDana ?? "")
+//                    self.jumlahSetoranPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.frequencySetoranDana ?? "")
+//                    self.jumlahSetoranDanaPerbulan = self.convertSpecialCharacters(string: response.last?.cdd.jumlahSetoranDana ?? "")
                     
+                    let jmlStrData = self.convertSpecialCharacters(string: response.last?.cdd.jumlahSetoranDana ?? "")
+                    
+                    let frqStrData = self.convertSpecialCharacters(string: response.last?.cdd.frequencySetoranDana ?? "")
+                    
+                    let jmlPenDana = self.convertSpecialCharacters(string: response.last?.cdd.jumlahPenarikanDana ?? "")
+                    
+                    let frqPenDana = self.convertSpecialCharacters(string: response.last?.cdd.frequencyPenarikanDana ?? "")
+                    
+                    self.jumlahSetoranDanaPerbulan = jmlStrData
+                    self.jumlahSetoranPerbulan = frqStrData
+                    self.jumlahPenarikanDanaPerbulan = frqPenDana
+                    self.jumlahPenarikanPerbulan = jmlPenDana
+                    
+//                    if (jmlStrData == "<=30_JUTA") {
+//                        self.jumlahSetoranDanaPerbulan = "<= 30 Juta"
+//                    } else if (jmlStrData == ">30-60_JUTA") {
+//                        self.jumlahSetoranDanaPerbulan = "> 30 - 60 Juta"
+//                    } else if (jmlStrData == ">60_JUTA") {
+//                        self.jumlahSetoranDanaPerbulan = "> 60 Juta"
+//                    } else {
+//                        self.jumlahSetoranDanaPerbulan = jmlStrData
+//                    }
+//
+//                    if (frqStrData == "0–10_KALI") {
+//                        self.jumlahSetoranPerbulan = "0 – 10 Kali"
+//                    } else if (frqStrData == ">10-25_KALI") {
+//                        self.jumlahSetoranPerbulan = "> 10 - 25 Kali"
+//                    } else if (frqStrData == ">25_KALI") {
+//                        self.jumlahSetoranDanaPerbulan = "> 25 Kali"
+//                    } else {
+//                        self.jumlahSetoranDanaPerbulan = frqStrData
+//                    }
+//
+//                    if (jmlPenDana == "<=30_JUTA") {
+//                        self.jumlahPenarikanDanaPerbulan = "<= 30 Juta"
+//                    } else if (jmlPenDana == ">30-60_JUTA") {
+//                        self.jumlahPenarikanDanaPerbulan = "> 30 - 60 Juta"
+//                    } else if (jmlPenDana == ">60_JUTA") {
+//                        self.jumlahPenarikanDanaPerbulan = "> 60 Juta"
+//                    } else {
+//                        self.jumlahPenarikanDanaPerbulan = jmlPenDana
+//                    }
+//
+//                    if (frqPenDana == "0–10_KALI") {
+//                        self.jumlahPenarikanPerbulan = "0 – 10 Kali"
+//                    } else if (frqPenDana == ">10-25_KALI") {
+//                        self.jumlahPenarikanPerbulan = "> 10 - 25 Kali"
+//                    } else if (frqPenDana == ">25_KALI") {
+//                        self.jumlahPenarikanPerbulan = "> 25 Kali"
+//                    } else {
+//                        self.jumlahPenarikanPerbulan = frqPenDana
+//                    }
+
                     self.hubunganKeluarga = response.last?.cdd.keluargaTerdekat ?? ""
                     self.namaKeluarga = response.last?.cdd.namaKeluargaTerdekat ?? ""
                     self.alamatKeluarga = response.last?.cdd.alamatKeluargaTerdekat ?? ""
@@ -282,7 +335,25 @@ extension ProfileViewModel {
                     self.teleponKeluarga = response.last?.cdd.teleponKeluargaTerdekat ?? ""
                     
                     self.pekerjaan = response.last?.cdd.pekerjaan ?? ""
-                    self.penghasilanKotor = self.convertSpecialCharacters(string: response.last?.cdd.penghasilanKotorTahunan ?? "")
+                    
+
+                    
+                    let penghasilanKtr = self.convertSpecialCharacters(string: response.last?.cdd.penghasilanKotorTahunan ?? "")
+                    
+                    if (penghasilanKtr == "<RP_50_JUTA") {
+                        self.penghasilanKotor = "< Rp 50 Juta"
+                    } else if (penghasilanKtr == "RP_50_JUTA-RP_100_JUTA") {
+                        self.penghasilanKotor = "Rp 50 Juta - Rp 100 Juta"
+                    } else if (penghasilanKtr == "RP_100_JUTA-RP_250_JUTA") {
+                        self.penghasilanKotor = "Rp 100 Juta - Rp 250 Juta"
+                    } else if (penghasilanKtr == "RP_250_JUTA-RP_500_JUTA") {
+                        self.penghasilanKotor = "Rp 250 Juta - Rp 500 Juta"
+                    } else if (penghasilanKtr == ">RP_500_Juta") {
+                        self.penghasilanKotor = "> Rp 500 Juta"
+                    } else {
+                        self.penghasilanKotor = penghasilanKtr
+                    }
+                    
                     self.PendapatanLainnya = response.last?.cdd.sumberPendapatanLainnya ?? "Tidak ada"
                     
                     self.namaPerusahaan = response.last?.cdd.namaPerusahaan ?? ""
@@ -330,6 +401,75 @@ extension ProfileViewModel {
                     self.namaIbuKandung = response.last?.personal.namaIbuKandung ?? ""
                     
                     print("Complete fetch customer phoenix vm  ie. (email) : \(response.last?.customerFromPhoenixResponseID.surel ?? "") published email: \(self.email)")
+                    completion(true)
+                    
+                case .failure(let error):
+                    print("ERROR-->")
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                    }
+                    
+                    switch error {
+                    case .custom(code: 404):
+                        self.statusCode = "404"
+                        self.errorMessage = "USER STATUS NOT FOUND"
+                    case .custom(code: 401):
+                        self.statusCode = "401"
+                        self.errorMessage = "LOGEDOUT"
+                    default:
+                        self.errorMessage = "Internal Server Error"
+                    }
+                    completion(false)
+                }
+                
+            }
+        }
+    }
+    
+    // MARK: - GET CUSTOMER ADDRESS
+    func getCustomerAddress(completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        ProfileService.shared.customerAddress { result in
+            
+            DispatchQueue.main.async {
+                self.isLoading = false
+                
+                switch result {
+                case .success(let response):
+                    print("Success")
+                    
+                    response.forEach { data in
+                        
+                        // ALAMAT PERUSAHAAN
+                        self.namaPerusahaan = data.companyAddress.namaPerusahaan ?? ""
+                        self.alamatPerusahaan = data.companyAddress.alamatPerusahaan ?? ""
+                        self.kodePosPerusahaan = data.companyAddress.kodePosPerusahaan ?? ""
+                        self.kelurahanPerusahaan = data.companyAddress.kelurahanPerusahaan ?? ""
+                        self.kecamatanPerusahaan = data.companyAddress.kecamatanPerusahaan ?? ""
+                        self.kotaPerusahaan = data.companyAddress.kabupatenPerusahaan ?? ""
+                        self.provinsiPerusahaan = data.companyAddress.provinsiPerusahaan ?? ""
+                        self.teleponPerusahaan = data.companyAddress.teleponPerusahaan ?? ""
+                        
+                        // ALAMAT KTP
+                        self.alamat = data.ktpAddress.address ?? ""
+                        self.provinsiName = data.ktpAddress.propName ?? ""
+                        self.kabupatenName = data.ktpAddress.kabName ?? ""
+                        self.kecamatanName = data.ktpAddress.kecName ?? ""
+                        self.kelurahanName = data.ktpAddress.kelName ?? ""
+                        
+                        // MAILING ADDRESS
+                        self.alamatSuratMenyurat = data.mailingAddress.alamatSuratMenyurat ?? ""
+                        self.kelurahanSuratMenyurat = data.mailingAddress.kelurahanSuratMenyurat ?? ""
+                        self.kecamatanSuratMenyurat = data.mailingAddress.kecamatanSuratMenyurat ?? ""
+                        self.kabupatenSuratMenyurat = data.mailingAddress.kabupatenSuratMenyurat ?? ""
+                        self.provinsiSuratMenyurat = data.mailingAddress.provinsiSuratMenyurat ?? ""
+                        self.kodePosSuratMenyurat = data.mailingAddress.kodePosSuratMenyurat ?? ""
+                    }
+                    
+                    print("Complete fetch Customer Address")
                     completion(true)
                     
                 case .failure(let error):

@@ -46,6 +46,12 @@ struct ScanKTPView: View {
     @State var allDistrict = MasterDistrictResponse()
     @State var allVillage = MasterVilageResponse()
     
+    var dateClosedRange: ClosedRange<Date> {
+        let min = Calendar.current.date(byAdding: .year, value: -100, to: Date())!
+        let max = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
+        return min...max
+    }
+    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
@@ -162,7 +168,7 @@ struct ScanKTPView: View {
                         .foregroundColor(.black)
                     
                     HStack{
-                        DatePicker(selection: $tanggalLahir, displayedComponents: .date, label: {
+                        DatePicker(selection: $tanggalLahir, in: dateClosedRange, displayedComponents: .date, label: {
                             EmptyView()
                         })
                         .labelsHidden()
@@ -181,6 +187,7 @@ struct ScanKTPView: View {
                         .multilineTextAlignment(.leading)
                         .font(.custom("Montserrat-SemiBold", size: 12))
                         .foregroundColor(.black)
+                    
                     MultilineTextField("Address".localized(language), text: $registerData.alamat, onCommit: {
                     })
                     .font(Font.system(size: 14))
@@ -329,7 +336,7 @@ struct ScanKTPView: View {
                             ForEach(0..<self.allVillage.count, id: \.self) { i in
                                 Button(action: {
                                     registerData.kecamatanFromNik = self.allVillage[i].name
-                                    registerData.kodePosFromNik = self.allVillage[i].postalCode ?? ""
+//                                    registerData.kodePosFromNik = self.allVillage[i].postalCode ?? ""
                                 }) {
                                     Text(self.allVillage[i].name)
                                         .font(.custom("Montserrat-Regular", size: 12))
@@ -346,12 +353,6 @@ struct ScanKTPView: View {
                     .cornerRadius(10)
                 }
                 .frame(alignment: .leading)
-                
-                LabelTextField(value:  $registerData.rtRw, label: "RT/RW".localized(language), placeHolder: "RT/RW".localized(language)) { onChange in
-                    
-                } onCommit: {
-                    
-                }
             }
             
             Group {
@@ -384,8 +385,8 @@ struct ScanKTPView: View {
                         kewarganegaraan: registerData.kewarganegaraan,
                         nama: registerData.nama,
                         namaIbu: registerData.namaIbuKandung,
-                        rt: registerData.rtrw,
-                        rw: registerData.rtrw,
+                        rt: "00",
+                        rw: "00",
                         statusKawin: registerData.statusPerkawinan,
                         tanggalLahir: registerData.tanggalLahir,
                         tempatLahir: registerData.tempatLahir,
@@ -459,12 +460,8 @@ struct ScanKTPView: View {
                 self.registerData.tempatLahirFromNik = self.citizenVM.tempatLahir
                 self.registerData.alamatKtpFromNik = self.citizenVM.alamatKtp
                 self.registerData.rtFromNik = self.citizenVM.rt
+                self.registerData.kodePosFromNik = "00000"
                 self.registerData.rwFromNik = self.citizenVM.rw
-//                self.registerData.kelurahanFromNik = self.citizenVM.kelurahan
-//                self.registerData.kecamatanFromNik = self.citizenVM.kecamatan
-//                self.registerData.kabupatenKotaFromNik = self.citizenVM.kabupatenKota
-//                self.registerData.provinsiFromNik = self.citizenVM.provinsi
-                self.registerData.kodePosFromNik = "40287"
                 self.registerData.fotoKTP = self.imageKTP!
                 
                 print(self.registerData.nik)
@@ -535,7 +532,7 @@ struct ScanKTPView: View {
     }
     
     private func isDisableButtonSimpan() -> Bool {
-        if (nik.count == 16 && registerData.nama != "" && registerData.tempatLahir != "" && registerData.jenisKelamin != "" && registerData.alamat != "" && registerData.rtRw != "" && registerData.kelurahanFromNik != "" && registerData.kecamatanFromNik != "" && registerData.provinsiFromNik != "" && registerData.kabupatenKotaFromNik != "" && registerData.statusPerkawinan != "" && registerData.kewarganegaraan != "" && registerData.namaIbuKandung != "") {
+        if (nik.count == 16 && registerData.nama != "" && registerData.tempatLahir != "" && registerData.jenisKelamin != "" && registerData.alamat != "" && registerData.kelurahanFromNik != "" && registerData.kecamatanFromNik != "" && registerData.provinsiFromNik != "" && registerData.kabupatenKotaFromNik != "" && registerData.statusPerkawinan != "" && registerData.kewarganegaraan != "" && registerData.namaIbuKandung != "") {
             return false
         }
         return true

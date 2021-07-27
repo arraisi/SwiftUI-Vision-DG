@@ -12,6 +12,8 @@ import Combine
 
 struct LoginScreen: View {
     
+    var defaults = UserDefaults.standard
+    
     // Device ID
     var deviceId = UIDevice.current.identifierForVendor?.uuidString
     
@@ -42,6 +44,8 @@ struct LoginScreen: View {
     @State var isLoading: Bool = false
     
     @State var routeAtmInputLogin: Bool = false
+    
+    @State var cardStatus: String = ""
     
     /* CORE DATA */
     @FetchRequest(entity: Registration.entity(), sortDescriptors: [])
@@ -96,21 +100,9 @@ struct LoginScreen: View {
                     HStack {
                         if (showPassword) {
                             TextField("Your account password".localized(language), text: self.$passwordCtrl)
-//                                .onReceive(Just(passwordCtrl)) { newValue in
-//                                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
-//                                    if filtered != newValue {
-//                                        self.passwordCtrl = filtered
-//                                    }
-//                                }
                             
                         } else {
                             SecureField("Your account password".localized(language), text: self.$passwordCtrl)
-//                                .onReceive(Just(passwordCtrl)) { newValue in
-//                                    let filtered = newValue.filter { "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -@.$!&?*".contains($0) }
-//                                    if filtered != newValue {
-//                                        self.passwordCtrl = filtered
-//                                    }
-//                                }
                         }
                         
                         Button(action: {
@@ -144,7 +136,6 @@ struct LoginScreen: View {
                     
                     Button(
                         action: {
-                            //                            self.isActiveRoute = true
                             login()
                             UIApplication.shared.endEditing()
                         },
@@ -168,7 +159,7 @@ struct LoginScreen: View {
                     .isDetailLink(false)
                     
                     NavigationLink(
-                        destination: FormInputAtmChangeDeviceView(pwd: self.$passwordCtrl, phoneNmbr: self.$phoneNumber).environmentObject(registerData),
+                        destination: FormInputAtmChangeDeviceView(pwd: self.$passwordCtrl, phoneNmbr: self.$phoneNumber, cardStatus: self.$cardStatus).environmentObject(registerData),
                         isActive: self.$routeAtmInputLogin,
                         label: {}
                     )
@@ -287,7 +278,7 @@ struct LoginScreen: View {
                     self.isLoading = false
                     
                     print("LOGIN SUCCESS")
-                    //                    self.isActiveRoute = true
+                    self.cardStatus = "ACTIVE"
                     self.routeAtmInputLogin = true
                 }
                 
@@ -300,7 +291,8 @@ struct LoginScreen: View {
                         self.showingModal = true
                     } else if (self.authVM.errorCode == "302") {
                         print("ERROR")
-                        self.showingModalError = true
+                        self.cardStatus = "INACTIVE"
+                        self.routeAtmInputLogin = true
                     } else if (self.authVM.errorCode == "406") {
                         print("BLOCKED")
                         self.showingModalForgotPassword = true
@@ -342,6 +334,36 @@ struct LoginScreen: View {
         }
     }
     
+    func biometrikLogin(code: String) {
+        authVM.postLoginBiometric(password: "", phoneNumber: "", fingerCode: code) { success in
+            
+            if success {
+                self.isLoading = false
+                
+                print("LOGIN SUCCESS")
+                self.isUnlocked = true
+                self.isActiveRoute = true
+            }
+            
+            if !success {
+                self.isLoading = false
+                
+                if (self.authVM.errorCode == "206") {
+                    self.routeNewPassword = true
+                } else if (self.authVM.errorCode == "406") {
+                    print("BLOCKED")
+                    self.showingModalForgotPassword = true
+                } else if (self.authVM.errorCode == "401") {
+                    //                        self.appState.moveToWelcomeView = true
+                    self.showingModal = true
+                } else {
+                    print("LOGIN FAILED")
+                    self.showingModal = true
+                }
+            }
+        }
+    }
+    
     // MARK: -Function Authentication
     func authenticate() {
         let context = LAContext()
@@ -355,9 +377,14 @@ struct LoginScreen: View {
                 
                 DispatchQueue.main.async {
                     if success {
-                        self.isUnlocked = true
-                        self.isActiveRoute = true
-                        print("YES U CAN UNLOCK")
+                        
+                        if let code = defaults.string(forKey: defaultsKeys.biometricCode) {
+                            print("CODE BIOMETRIC")
+                            print(code)
+                            biometrikLogin(code: code)
+                            print("YES U CAN UNLOCK")
+                        }
+  
                     } else {
                         print("NO U CAN'T UNLOCK")
                         

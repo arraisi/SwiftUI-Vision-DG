@@ -19,7 +19,6 @@ extension URLRequest {
             ":" + "\(UIDevice.current.identifierForVendor!.uuidString.replacingOccurrences(of: "-", with: ""))" +
             ":" + "\(UIDevice().type.rawValue)" +
             ":" + "\(UIDevice.current.model)" +
-            ":" + "\(UIDevice.current.name.replacingOccurrences(of: "'", with: ""))" +
             ":" + "release-keys" +
             ":" + "user" +
             ":" + "retina" +
@@ -32,7 +31,7 @@ extension URLRequest {
                 let firebaseId = String(token[..<indexEnd])
                 let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
                 
-//                self.setValue("F20016E3-644E-4F25-B1AB-6AEDAF4BB9A6", forHTTPHeaderField: "X-Device-ID")
+//                self.setValue("cazUvkRAYYg7eYezlfzfaZWSUw7WMj5qCvK7CnXZa1vclSPbGnmCaniHDLz9osFdCcfUQ9icGmdJeySfXhiOjU7s2DJausyDETW0dRbSt71fUvbq/5dKPu4BqhB/clUd", forHTTPHeaderField: "X-Device-ID")
                 self.setValue(encryptDeviceId, forHTTPHeaderField: "X-Device-ID")
                 self.setValue(firebaseId, forHTTPHeaderField: "X-Firebase-ID")
                 self.setValue(token, forHTTPHeaderField: "X-Firebase-Token")

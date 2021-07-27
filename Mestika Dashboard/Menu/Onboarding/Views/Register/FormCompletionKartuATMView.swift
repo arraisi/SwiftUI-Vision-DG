@@ -923,7 +923,7 @@ struct FormCompletionKartuATMView: View {
                     self.kodePos = self.addressSugestion[0].postalCode
                     atmData.atmAddressKotaInput = self.addressSugestion[0].city
                     atmData.atmAddressPropinsiInput = self.addressSugestion[0].province
-                    atmData.atmAddressInput = self.addressSugestion[0].formatted_address
+                    atmData.atmAddressInput = self.addressSugestion[0].street
                     atmData.atmAddressPostalCodeInput = self.addressSugestion[0].postalCode
                     atmData.atmAddressKecamatanInput = self.addressSugestion[0].kecamatan
                     atmData.atmAddressKelurahanInput = self.addressSugestion[0].kelurahan

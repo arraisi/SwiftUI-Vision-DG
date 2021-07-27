@@ -43,10 +43,15 @@ class TransactionLimitViewModel: ObservableObject {
     @Published var trxPurchaseTxt: String = "10000".thousandSeparator()
     
     @Published var nik: String = ""
+    
+    @Published var isLoading: Bool = false
 }
 
 extension TransactionLimitViewModel {
     func mappingGlobalLimitData(data: GlobalLimitModel) {
+        
+        self.isLoading = false
+        
         data.forEach { (limit) in
             switch limit.key {
             case "trxOnCifIdr":
@@ -112,6 +117,8 @@ extension TransactionLimitViewModel {
 // MARK: Servives
 extension TransactionLimitViewModel {
     func findTrxGlobalLimit() {
+        
+        self.isLoading = true
         
         // MARK: URL
         guard let url = URL.urlGlobalLimit() else { return }

@@ -1,18 +1,22 @@
 //
-//  MobileVersionService.swift
-//  Mestika Dashboard
+//  SSLPinningManager.swift
+//  SSL Pinning Example
 //
-//  Created by Prima Jatnika on 19/11/20.
+//  Created by Prima Jatnika on 26/06/21.
 //
 
+//
+//  ServiceManager.swift
+//  SSLPinning
+//
+//  Created by Anuj Rai on 26/01/20.
+//  Copyright © 2020 Anuj Rai. All rights reserved.
+//
 import Foundation
 import Security
 import CommonCrypto
 
-class MobileVersionService: NSObject {
-    
-    static let shared = MobileVersionService()
-    var defaults = UserDefaults.standard
+class ServiceManager: NSObject {
     
     static let publicKeyHash = "Gdbmf0GLeR880mGN9WSW1XOL6v7xsVmWO6ks0LxybzU="
     
@@ -36,53 +40,36 @@ class MobileVersionService: NSObject {
         return Data(hash).base64EncodedString()
     }
     
-    /* GET MOBILE VERSION */
-    func getVersion(isCertificatePinning: Bool, completion: @escaping(Result<MobileVersionResponse, ErrorResult>) -> Void) {
-        
+    func callAPI(withURL url: URLRequest, isCertificatePinning: Bool, completion: @escaping (String) -> Void) {
         self.isCertificatePinning = isCertificatePinning
-    
-        guard let url = URL.urlMobileVersion() else {
-            return completion(Result.failure(ErrorResult.network(string: "Bad URL")))
-        }
-        
-        let paramsUrl = url.appending("osType", value: "ios")
-        
-        var request = URLRequest(paramsUrl)
-        request.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: request) {data, response, error in
-            
-            guard let data = data, error == nil else {
-                print("Failed Pinning")
-                return completion(Result.failure(ErrorResult.customWithStatus(code: 600, codeStatus: "Failed Pinning")))
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                print("VALUE VERSION")
-                print("\(httpResponse.statusCode)")
-                
+        var responseMessage = ""
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print("error: \(error!.localizedDescription): \(error!)")
+                responseMessage = "Pinning failed"
+            } else if data != nil {
+                let str = String(decoding: data!, as: UTF8.self)
+                print("Received data:\n\(str)")
                 if isCertificatePinning {
-                    
-                    print("Certificate pinning is successfully completed")
-                    if (httpResponse.statusCode == 200) {
-                        let versionResponse = try? JSONDecoder().decode(MobileVersionResponse.self, from: BlowfishEncode().decrypted(data: data)!)
-                        completion(.success(versionResponse!))
-                    }
-                    
-                    if (httpResponse.statusCode > 200) {
-                        completion(Result.failure(ErrorResult.custom(code: httpResponse.statusCode)))
-                    }
-                    
-                } else {
-                    print("Certificate pinning not completed")
-                    return completion(Result.failure(ErrorResult.customWithStatus(code: 700, codeStatus: "Certificate pinning not completed")))
+                    responseMessage = "Certificate pinning is successfully completed"
+                }else {
+                    responseMessage = "Public key pinning is successfully completed"
                 }
             }
-        }.resume()
+            
+            DispatchQueue.main.async {
+                completion(responseMessage)
+            }
+            
+        }
+        task.resume()
+        
     }
+    
 }
 
-extension MobileVersionService: URLSessionDelegate {
+extension ServiceManager: URLSessionDelegate {
+    
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         
         guard let serverTrust = challenge.protectionSpace.serverTrust else {

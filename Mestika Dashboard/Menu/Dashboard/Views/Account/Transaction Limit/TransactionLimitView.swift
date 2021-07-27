@@ -81,63 +81,65 @@ struct TransactionLimitView: View {
                 popupMessageError()
             }
         } else {
-            ZStack {
-                
-                VStack(alignment: .center) {
+            LoadingView(isShowing: self.$trxLimitVM.isLoading, content: {
+                ZStack {
                     
-                    ScrollView(showsIndicators: false) {
+                    VStack(alignment: .center) {
                         
-                        VStack(spacing: 20) {
+                        ScrollView(showsIndicators: false) {
                             
-                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifIdr, txtValue: $trxLimitVM.trxOnCifIdrTxt, max: $trxLimitVM.maxTrxOnCifIdr)
-                            
-                            TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifNonIdr, txtValue: $trxLimitVM.trxOnCifNonIdrTxt, max: $trxLimitVM.maxTrxOnCifNonIdr)
-                            
-                            TrasactionLimitRow(lable: "Limit transaksi on us (Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsIdr, txtValue: $trxLimitVM.trxOnUsIdrTxt, max: $trxLimitVM.maxTrxOnUsIdr)
-                            
-                            TrasactionLimitRow(lable: "Limit transaksi on us (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsNonIdr, txtValue: $trxLimitVM.trxOnUsNonIdrTxt, max: $trxLimitVM.maxTrxOnUsNonIdr)
-                            
-                            TrasactionLimitRow(lable: "Limit transaksi virtual akun", min: 10000, value: $trxLimitVM.trxVirtualAccount, txtValue: $trxLimitVM.trxVirtualAccountTxt, max: $trxLimitVM.maxTrxVirtualAccount)
-                            
-                            TrasactionLimitRow(lable: "Limit transaksi SKN", min: 10000, value: $trxLimitVM.trxSknTransfer, txtValue: $trxLimitVM.trxSknTransferTxt, max: $trxLimitVM.maxTrxSknTransfer)
-                            
-                            TrasactionLimitRow(lable: "Limit transaksi RTGS", min: 10000, value: $trxLimitVM.trxRtgsTransfer, txtValue: $trxLimitVM.trxRtgsTransferTxt, max: $trxLimitVM.maxTrxRtgsTransfer)
-                            
-                            TrasactionLimitRow(lable: "Limit transaksi IBFT", min: 10000, value: $trxLimitVM.trxOnlineTransfer, txtValue: $trxLimitVM.trxOnlineTransferTxt, max: $trxLimitVM.maxTrxOnlineTransfer)
-                            
-                            TrasactionLimitRow(lable: "Limit pembayaran tagihan", min: 10000, value: $trxLimitVM.trxBillPayment, txtValue: $trxLimitVM.trxBillPaymentTxt, max: $trxLimitVM.maxTrxBillPayment)
-                            
-                            TrasactionLimitRow(lable: "Limit pembelian", min: 10000, value: $trxLimitVM.trxPurchase, txtValue: $trxLimitVM.trxPurchaseTxt, max: $trxLimitVM.maxTrxPurchase)
+                            VStack(spacing: 20) {
+                                
+                                TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifIdr, txtValue: $trxLimitVM.trxOnCifIdrTxt, max: $trxLimitVM.maxTrxOnCifIdr)
+                                
+                                TrasactionLimitRow(lable: "Transfer internal rekening milik sendiri (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnCifNonIdr, txtValue: $trxLimitVM.trxOnCifNonIdrTxt, max: $trxLimitVM.maxTrxOnCifNonIdr)
+                                
+                                TrasactionLimitRow(lable: "Limit transaksi on us (Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsIdr, txtValue: $trxLimitVM.trxOnUsIdrTxt, max: $trxLimitVM.maxTrxOnUsIdr)
+                                
+                                TrasactionLimitRow(lable: "Limit transaksi on us (Non Rupiah)", min: 10000, value: $trxLimitVM.trxOnUsNonIdr, txtValue: $trxLimitVM.trxOnUsNonIdrTxt, max: $trxLimitVM.maxTrxOnUsNonIdr)
+                                
+                                TrasactionLimitRow(lable: "Limit transaksi virtual akun", min: 10000, value: $trxLimitVM.trxVirtualAccount, txtValue: $trxLimitVM.trxVirtualAccountTxt, max: $trxLimitVM.maxTrxVirtualAccount)
+                                
+                                TrasactionLimitRow(lable: "Limit transaksi SKN", min: 10000, value: $trxLimitVM.trxSknTransfer, txtValue: $trxLimitVM.trxSknTransferTxt, max: $trxLimitVM.maxTrxSknTransfer)
+                                
+                                TrasactionLimitRow(lable: "Limit transaksi RTGS", min: 10000, value: $trxLimitVM.trxRtgsTransfer, txtValue: $trxLimitVM.trxRtgsTransferTxt, max: $trxLimitVM.maxTrxRtgsTransfer)
+                                
+                                TrasactionLimitRow(lable: "Limit transaksi IBFT", min: 10000, value: $trxLimitVM.trxOnlineTransfer, txtValue: $trxLimitVM.trxOnlineTransferTxt, max: $trxLimitVM.maxTrxOnlineTransfer)
+                                
+                                TrasactionLimitRow(lable: "Limit pembayaran tagihan", min: 10000, value: $trxLimitVM.trxBillPayment, txtValue: $trxLimitVM.trxBillPaymentTxt, max: $trxLimitVM.maxTrxBillPayment)
+                                
+                                TrasactionLimitRow(lable: "Limit pembelian", min: 10000, value: $trxLimitVM.trxPurchase, txtValue: $trxLimitVM.trxPurchaseTxt, max: $trxLimitVM.maxTrxPurchase)
+                                
+                            }
+                            .padding()
+                            .padding(.top, 20)
+                        }
+                        
+                        
+                        Spacer()
+                        
+                        VStack {
+                            HStack(alignment: .center) {
+                                Button(action: {
+                                    self.pinActive = true
+                                }, label: {
+                                    Text("SIMPAN")
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(width: 300, height: 40)
+                                })
+                                .background(Color("StaleBlue"))
+                                .cornerRadius(10)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
                             
                         }
-                        .padding()
-                        .padding(.top, 20)
+                        .padding(5)
+                        .background(Color.white)
                     }
-                    
-                    
-                    Spacer()
-                    
-                    VStack {
-                        HStack(alignment: .center) {
-                            Button(action: {
-                                self.pinActive = true
-                            }, label: {
-                                Text("SIMPAN")
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .frame(width: 300, height: 40)
-                            })
-                            .background(Color("StaleBlue"))
-                            .cornerRadius(10)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 40, maxHeight: 40)
-                        
-                    }
-                    .padding(5)
-                    .background(Color.white)
                 }
-            }
+            })
             .navigationBarTitle("Transaction Limit", displayMode: .inline)
             .onTapGesture() {
                 UIApplication.shared.endEditing()

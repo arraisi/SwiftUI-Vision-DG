@@ -25,11 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appState = AppState()
         
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "bank.mestika", using: nil) { task in
-            print("BG Task Scheduler")
-            self.handleAppRefresh(task: task as! BGAppRefreshTask)
-            print("App: BackgroundTask registered.")
-        }
+//        BGTaskScheduler.shared.register(forTaskWithIdentifier: "bank.mestika", using: nil) { task in
+//            print("BG Task Scheduler")
+//            self.handleAppRefresh(task: task as! BGAppRefreshTask)
+//            print("App: BackgroundTask registered.")
+//        }
 
 //        registerNotifications()
 

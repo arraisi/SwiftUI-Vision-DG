@@ -306,6 +306,9 @@ struct DashboardTabs: View {
     }
     
     func getBalanceUser() {
+        self.listMyAccount.removeAll()
+        self.listAllMyAccount.removeAll()
+        self.listSortedMyAccount.removeAll()
         self.savingAccountVM.getAccounts { success in
             
             if success {
@@ -333,9 +336,11 @@ struct DashboardTabs: View {
                   return word.categoryProduct != "M" && word.categoryProduct != "S"
                 }
 
-                listSortedMyAccount.append(contentsOf: sourceFilteredM)
-                listSortedMyAccount.append(contentsOf: sourceFilteredS)
-                listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
+                DispatchQueue.main.async {
+                    listSortedMyAccount.append(contentsOf: sourceFilteredM)
+                    listSortedMyAccount.append(contentsOf: sourceFilteredS)
+                    listSortedMyAccount.append(contentsOf: sourceFilteredBlankOrNil)
+                }
                 
                 listSortedMyAccount.forEach { a in
 //                        self.listSourceNumber.append(a.sourceNumber ?? "")
@@ -385,10 +390,12 @@ struct DashboardTabs: View {
                     }
                     
                     self.checkFreezeAccount()
-
-                    listSorterAllMyAccount.append(contentsOf: filterM)
-                    listSorterAllMyAccount.append(contentsOf: filterS)
-                    listSorterAllMyAccount.append(contentsOf: filterBlankOrNil)
+                    
+                    DispatchQueue.main.async {
+                        listSorterAllMyAccount.append(contentsOf: filterM)
+                        listSorterAllMyAccount.append(contentsOf: filterS)
+                        listSorterAllMyAccount.append(contentsOf: filterBlankOrNil)
+                    }
                     
                     if self.savingAccountVM.balanceAccount.contains(where: { $0.creditDebit == "D" }) {
                         print("ADA TYPE D")

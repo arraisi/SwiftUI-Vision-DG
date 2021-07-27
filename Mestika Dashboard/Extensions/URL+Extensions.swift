@@ -250,6 +250,10 @@ extension URL {
         return URL(string: AppConstants().BASE_URL + "/customer/fromPhoenix")
     }
     
+    static func urlGetCustomerAddress() -> URL? {
+        return URL(string: AppConstants().BASE_URL + "/customer/customer-addresses")
+    }
+    
     static func urlUpdateCustomerPhoenix() -> URL? {
         return URL(string: AppConstants().BASE_URL + "/customer")
     }

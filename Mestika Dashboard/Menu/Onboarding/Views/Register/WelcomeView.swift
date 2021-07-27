@@ -268,7 +268,7 @@ struct WelcomeView: View {
                     let foo: String? = info as? String
                     let bar = foo as Any
                     
-                    if bar as? String == nil {
+                    if bar as? String == "" {
                         print("INFO DOANG")
                     } else {
                         self.jitsiRoom = info as! String
@@ -278,6 +278,9 @@ struct WelcomeView: View {
                         print("VCALL")
                     }
                 }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("WillBeCalled"))) { obj in
+                print("RECEIVED WILL BE CALLED")
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("JitsiEnd"))) { obj in
                 print("RECEIVED JITSI END")
@@ -309,11 +312,13 @@ struct WelcomeView: View {
                 
                 print("------ START NEW DEVICE ID FORMAT -------")
                 
+                var nameDevice = UIDevice.current.name
+                
                 let newDeviceId = "ios" +
                     ":" + "\(UIDevice.current.identifierForVendor!.uuidString.replacingOccurrences(of: "-", with: ""))" +
                     ":" + "\(UIDevice().type.rawValue)" +
                     ":" + "\(UIDevice.current.model)" +
-                    ":" + "\(UIDevice.current.name)" +
+                    ":" + nameDevice.replacingOccurrences(of: "’", with: "") +
                     ":" + "release-keys" +
                     ":" + "user" +
                     ":" + "retina" +
@@ -1084,7 +1089,7 @@ struct WelcomeView: View {
         print("GET VERSION MOBILE")
         
         DispatchQueue.main.async {
-            self.mobileVersionVM.getMobileVersion { success in
+            self.mobileVersionVM.getMobileVersion(isCertificatePinning: true) { success in
                 
                 if success {
                     print("LOADING : \(self.mobileVersionVM.isLoading)")
@@ -1092,6 +1097,11 @@ struct WelcomeView: View {
                     print("INI VERSION NAME : \(self.mobileVersionVM.versionName)")
                     print("INI VERSION PATCH : \(self.mobileVersionVM.versionCodePatch)")
                     print("INI VERSION MINOR : \(self.mobileVersionVM.versionCodeMinor)")
+                }
+                
+                if !success {
+                    self.messageWebsocket = self.mobileVersionVM.responseMsg
+                    self.isShowAlert = true
                 }
             }
         }

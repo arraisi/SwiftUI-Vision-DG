@@ -64,12 +64,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let userInfo = response.notification.request.content.userInfo
         let jitsiRoom = userInfo["room"]
+        let typeCall = userInfo["data_type"]
         
-        let dataRoom: [String: Any] = ["room_id": jitsiRoom!]
+        let dataRoom: [String: Any] = ["room_id": jitsiRoom ?? ""]
         
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+        if (typeCall as! String == "WILL_BE_CALLED") {
+            print("WILL_BE_CALLED")
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("WillBeCalled"), object: nil, userInfo: dataRoom)
+            }
+        } else if (typeCall as! String == "ENDVCALL") {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("JitsiEnd"), object: nil, userInfo: dataRoom)
+            }
+        }else {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+            }
         }
+        
     }
     
     // [START receive_message]
@@ -103,16 +116,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         let jitsiRoom = userInfo["room"]
+        let typeCall = userInfo["data_type"]
         print(jitsiRoom ?? "")
         
         let dataRoom: [String: Any] = ["room_id": jitsiRoom ?? ""]
         
-        //        UserDefaults.standard.set(jitsiRoom ?? "-", forKey: "jitsi_room")
-        // Print full message.
         print(userInfo)
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+        
+        if (typeCall as! String == "ENDVCALL") {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("JitsiEnd"), object: nil, userInfo: dataRoom)
+            }
+        } else {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.Name("Detail"), object: nil, userInfo: dataRoom)
+            }
         }
+        
         completionHandler(UIBackgroundFetchResult.newData)
     }
     // [END receive_message]

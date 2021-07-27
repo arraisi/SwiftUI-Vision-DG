@@ -99,7 +99,7 @@ class UserRegistrationService {
             "personalTanggalLahir": registerData.tanggalLahir,
             "personalJenisKelamin": registerData.jenisKelamin,
             "personalAlamat": registerData.alamat,
-            "personalRtRw": registerData.rtrw,
+            "personalRtRw": "00",
             "personalKelurahan": registerData.kelurahanFromNik,
             "personalKecamatan": registerData.kecamatanFromNik,
             "personalStatusPerkawinan": registerData.statusPerkawinan,
